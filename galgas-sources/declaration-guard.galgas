@@ -437,8 +437,8 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-      let typeOmnibusName = @lstring.new {!currentType.omnibusTypeDescriptionName !propertyName.location}
-      [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
+#      let typeOmnibusName = @lstring.new {!currentType.omnibusTypeDescriptionName !propertyName.location}
+      let propertyGetterMap = [inContext propertyGetterMap !currentType]
 #      let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMapp
       [propertyGetterMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess

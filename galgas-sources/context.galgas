@@ -26,8 +26,8 @@ struct @semanticContext {
   @unifiedTypeMap mTypeMap
   @typeConstantMap mTypeConstantMap
   @typeConstructorMap mTypeConstructorMap
-  @typePropertySetterMap mTypePropertySetterMap
-  @typePropertyGetterMap mTypePropertyGetterMap
+  private @typePropertySetterMap mTypePropertySetterMap
+  private @typePropertyGetterMap mTypePropertyGetterMap
 
 #--- Interrupts
   @availableInterruptMap mAvailableInterruptMap
@@ -126,27 +126,27 @@ map @typePropertyGetterMap {
 
 #·······················································································································
 
-setter @typePropertyGetterMap insertProperty ?omnibusTypeName: let @lstring inTypeName
-                                             ?let @lstring inGetterName
-                                             ?let @bool inIsPublic
-                                             ?let @propertyGetterKind inAccess {
-  if [self hasKey !inTypeName.string] then
-    [self searchKey !inTypeName ?var getterMap]
-    [!?getterMap insertKey !inGetterName !inIsPublic !inAccess]
-    [!?self insertOrReplace !inTypeName !getterMap]
+setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
+                                     ?let @lstring inGetterName
+                                     ?let @propertyVisibility inVisibility
+                                     ?let @propertyGetterKind inAccess {
+  if [mTypePropertyGetterMap hasKey !inTypeName.string] then
+    [mTypePropertyGetterMap searchKey !inTypeName ?var getterMap]
+    [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
+    [!?mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
   else
     @propertyGetterMap getterMap = {}
-    [!?getterMap insertKey !inGetterName !inIsPublic !inAccess]
-    [!?self insertKey !inTypeName !getterMap]
+    [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
+    [!?mTypePropertyGetterMap insertKey !inTypeName !getterMap]
   end
 }
 
 #·······················································································································
 
-getter @typePropertyGetterMap propertyMap ?let @omnibusType inType-> @propertyGetterMap {
+getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
   let omnibusTypeName = inType.omnibusTypeDescriptionName
-  if [self hasKey !omnibusTypeName] then
-    [self searchKey ![omnibusTypeName nowhere] ?result]
+  if [mTypePropertyGetterMap hasKey !omnibusTypeName] then
+    [mTypePropertyGetterMap searchKey ![omnibusTypeName nowhere] ?result]
   else
     result = {}
   end
@@ -154,18 +154,18 @@ getter @typePropertyGetterMap propertyMap ?let @omnibusType inType-> @propertyGe
 
 #·······················································································································
 
-setter @typePropertyGetterMap addComputedPropertyGetter
+setter @semanticContext addComputedPropertyGetter
   ?omnibusTypeName: let @lstring inTypeName
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?propertyName:let @lstring inPropertyName
   ?mode:let @mode inMode
-  ?public:let @bool inPublic
+  ?visibility:let @propertyVisibility inVisibility
   ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   @propertyGetterMap getterMap
-  if [self hasKey !inTypeName.string] then
-    [self searchKey !inTypeName ?getterMap]
+  if [mTypePropertyGetterMap hasKey !inTypeName.string] then
+    [mTypePropertyGetterMap searchKey !inTypeName ?getterMap]
   else
     getterMap = {}
   end
@@ -173,10 +173,10 @@ setter @typePropertyGetterMap addComputedPropertyGetter
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?getterMap insertKey
     !inPropertyName
-    !inPublic
+    !inVisibility
     !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
   ]
-  [!?self insertOrReplace !inTypeName !getterMap]
+  [!?mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
 }
 
 #·······················································································································
@@ -189,30 +189,18 @@ enum @propertyGetterKind {
 
 #·······················································································································
 
-map @propertyGetterMap {
-  @bool mIsPublic
-  @propertyGetterKind mAccess
-  insert insertKey error message "the '%K' property is already declared"
-  search searchKey error message "there is no '%K' property"
+enum @propertyVisibility {
+  case isPublic
+  case isPrivate
 }
 
 #·······················································································································
 
-setter @propertyGetterMap addComputedPropertyGetterEx
-  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?propertyName:let @lstring inPropertyName
-  ?mode:let @mode inMode
-  ?public:let @bool inPublic
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
-  !routineLLVMName:@lstring outRoutineLLVMName
-{
-  outRoutineLLVMName = .new {!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
-  let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
-  [!?self insertKey
-    !inPropertyName
-    !inPublic
-    !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
-  ]
+map @propertyGetterMap {
+  @propertyVisibility mVisibility
+  @propertyGetterKind mAccess
+  insert insertKey error message "the '%K' property is already declared"
+  search searchKey error message "there is no '%K' property"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -228,25 +216,36 @@ map @typePropertySetterMap {
 
 #·······················································································································
 
-setter @typePropertySetterMap insertProperty ?let @lstring inTypeName
+setter @semanticContext insertPropertySetter ?let @lstring inTypeName
                                              ?let @lstring inSetterName
-                                             ?let @bool inIsPublic
+                                             ?let @propertyVisibility inVisibility
                                              ?let @propertySetterKind inAccess {
-  if [self hasKey !inTypeName.string] then
-    [self searchKey !inTypeName ?var setterMap]
-    [!?setterMap insertKey !inSetterName !inIsPublic !inAccess]
-    [!?self insertOrReplace !inTypeName !setterMap]
+  if [mTypePropertySetterMap hasKey !inTypeName.string] then
+    [mTypePropertySetterMap searchKey !inTypeName ?var setterMap]
+    [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
+    [!?mTypePropertySetterMap insertOrReplace !inTypeName !setterMap]
   else
     @propertySetterMap setterMap = {}
-    [!?setterMap insertKey !inSetterName !inIsPublic !inAccess]
-    [!?self insertKey !inTypeName !setterMap]
+    [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
+    [!?mTypePropertySetterMap insertKey !inTypeName !setterMap]
+  end
+}
+
+#·······················································································································
+
+getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
+  let omnibusTypeName = inType.omnibusTypeDescriptionName
+  if [mTypePropertySetterMap hasKey !omnibusTypeName] then
+    [mTypePropertySetterMap searchKey ![omnibusTypeName nowhere] ?result]
+  else
+    result = {}
   end
 }
 
 #·······················································································································
 
 map @propertySetterMap {
-  @bool mIsPublic
+  @propertyVisibility mVisibility
   @propertySetterKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"

@@ -117,12 +117,12 @@ override method @enumerationDeclarationAST enterInContext
     !ioContext.mTypeMap
     !.new {!"uint" + representationBitCount !mEnumerationName}
   }
-  [!?ioContext.mTypePropertyGetterMap addComputedPropertyGetter
+  [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: mEnumerationName
     !llvmBaseTypeName:mEnumerationName
     !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
     !mode:.anySafeMode
-    !public: true
+    !visibility: .isPublic
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: let conversionToUIntN
   ]

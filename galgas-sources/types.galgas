@@ -5,7 +5,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 shared class @omnibusType {
-#  @propertyGetterMap propertyGetterMap %selector
   @subscript subscript %selector
   @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
   @string omnibusTypeDescriptionName %selector # used for type checking and type display
@@ -130,7 +129,6 @@ getter @omnibusType isCompileTimeType -> @bool {
 
 func %once compileTimeIntegerType -> @omnibusType {
   result = .new {
-#    !propertyGetterMap:{}
     !subscript:.noSubscript
     !attributes: .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
@@ -143,7 +141,6 @@ func %once compileTimeIntegerType -> @omnibusType {
 
 func %once compileTimeBoolType -> @omnibusType {
   result = .new {
-#    !propertyGetterMap:{}
     !subscript:.noSubscript
     !attributes: .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()

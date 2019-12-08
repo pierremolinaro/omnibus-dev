@@ -10,6 +10,73 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                  Extension setter '@semanticContext insertGetter'                                   *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_insertGetter (class GALGAS_semanticContext & ioObject,
+                                   const class GALGAS_lstring constin_inTypeName,
+                                   const class GALGAS_lstring constin_inGetterName,
+                                   const class GALGAS_propertyVisibility constin_inVisibility,
+                                   const class GALGAS_propertyGetterKind constin_inAccess,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                            Extension setter '@semanticContext addComputedPropertyGetter'                            *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_addComputedPropertyGetter (class GALGAS_semanticContext & ioObject,
+                                                const class GALGAS_lstring constin_inTypeName,
+                                                const class GALGAS_string constin_inLLVMBaseTypeName,
+                                                const class GALGAS_lstring constin_inPropertyName,
+                                                const class GALGAS_mode constin_inMode,
+                                                const class GALGAS_propertyVisibility constin_inVisibility,
+                                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultTypeProxy,
+                                                class GALGAS_lstring & out_outRoutineLLVMName,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                                              Function 'getterLLVMName'                                              *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_string function_getterLLVMName (class GALGAS_string inArgument0,
+                                             const class GALGAS_string & constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                              Extension setter '@semanticContext insertPropertySetter'                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void extensionSetter_insertPropertySetter (class GALGAS_semanticContext & ioObject,
+                                           const class GALGAS_lstring constin_inTypeName,
+                                           const class GALGAS_lstring constin_inSetterName,
+                                           const class GALGAS_propertyVisibility constin_inVisibility,
+                                           const class GALGAS_propertySetterKind constin_inAccess,
+                                           class C_Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
+//                         Extension getter '@semanticContext propertySetterMap' (as function)                         *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_propertySetterMap extensionGetter_propertySetterMap (const class GALGAS_semanticContext & inObject,
+                                                                  const class GALGAS_omnibusType & constinArgument0,
+                                                                  class C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                            Extension getter '@semanticContext booleanType' (as function)                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -70,6 +137,15 @@ class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GALG
   public : typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMArraySize (class GALGAS_uint inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMElementType (class GALGAS_omnibusType inArgument0
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (class GALGAS_omnibusType inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -118,8 +194,11 @@ class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_a
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElementType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMArraySize (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -377,6 +456,12 @@ class GALGAS_addressofInstructionIR : public GALGAS_abstractInstructionIR {
   public : typeComparisonResult objectCompare (const GALGAS_addressofInstructionIR & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueRepresentation inArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTarget (class GALGAS_objectIR inArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -418,7 +503,9 @@ class cPtr_addressofInstructionIR : public cPtr_abstractInstructionIR {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTarget (GALGAS_objectIR inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueRepresentation inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -758,48 +845,4 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       const class GALGAS_location constinArgument2,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Function 'assignmentOperatorFuncName'                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_assignmentOperatorFuncName (const class GALGAS_omnibusType & constinArgument0,
-                                                         const class GALGAS_omnibusType & constinArgument1,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                             Function 'assignValueToFixedSizeArrayElements_functionName'                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
-                                                                                  class C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                          Routine 'addIntegerInfixOperator'                                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-void routine_addIntegerInfixOperator (const class GALGAS_omnibusInfixOperator constinArgument0,
-                                      const class GALGAS_omnibusType constinArgument1,
-                                      const class GALGAS_string constinArgument2,
-                                      class GALGAS_infixOperatorMap & ioArgument3,
-                                      const class GALGAS_omnibusType constinArgument4,
-                                      class C_Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                            Function 'copyableAttribute'                                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-
-class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
 

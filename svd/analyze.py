@@ -213,7 +213,7 @@ def writeInterruptionNumbers (root, stringArray) :
 def writeSinglePeripheral (peripheral, stringArray) :
   peripheralName = peripheral.find('name').text
   baseAddress = peripheral.find ('baseAddress').text
-  # print ("Group '" + peripheralName + "' at " + baseAddress)
+  print ("Group '" + peripheralName + "' at " + baseAddress)
   stringArray[0] += cppComment ()
   stringArray[0] += "// Peripheral " + peripheralName + "\n"
   stringArray[0] += cppComment () + "\n"
@@ -231,7 +231,7 @@ def writeSinglePeripheral (peripheral, stringArray) :
       registerAccess = "read-only"
     else:
       registerAccess = register.find ('access').text
-    # print ("  Register '" + registerName + "', offset " + registerOffset + ", size " + str (registerSize) + ", access " + registerAccess)
+      print ("  Register '" + registerName + "', offset " + registerOffset + ", size " + str (registerSize) + ", access " + registerAccess)
     constAttribute = "const " if registerAccess == "read-only" else ""
     registerType = constAttribute + "volatile uint" + str (registerSize) + "_t"
     if register.find ('dim') != None :
@@ -357,7 +357,10 @@ def analyzeSVDfile (svdFile, stringArray) :
         registerPropertyDictionary = {}
         registerPropertyDictionary ["description"] = register.find ('description').text
         registerPropertyDictionary ["addressOffset"] = register.find ('addressOffset').text
-        registerPropertyDictionary ["size"] = int (register.find ('size').text)
+        if register.find ('size').text.startswith ("0x") :
+          registerPropertyDictionary ["size"] = int (register.find ('size').text, 16)
+        else:
+          registerPropertyDictionary ["size"] = int (register.find ('size').text)
         if register.find ('access') == None :
           print (BOLD_MAGENTA () + "*** Warning: no 'access' for " + registerName + " register"+ ENDC ())
           registerPropertyDictionary ["access"] = "read-only"

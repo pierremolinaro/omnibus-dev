@@ -3434,19 +3434,19 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i6_parse (C_L
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                                          GALGAS_structurePropertyListAST & ioArgument_ioPropertyListAST,
                                                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
-  GALGAS_bool var_public_2529 ;
+  GALGAS_propertyVisibility var_visibility_2563 ;
   switch (select_omnibus_5F_syntax_2 (inCompiler)) {
   case 1: {
-    var_public_2529 = GALGAS_bool (false) ;
+    var_visibility_2563 = GALGAS_propertyVisibility::constructor_isPrivate (SOURCE_FILE ("type-structure-declaration.galgas", 57)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_public COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 59)) ;
-    var_public_2529 = GALGAS_bool (true) ;
+    var_visibility_2563 = GALGAS_propertyVisibility::constructor_isPublic (SOURCE_FILE ("type-structure-declaration.galgas", 60)) ;
   } break ;
   default:
     break ;
   }
-  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_public_2529, ioArgument_ioPropertyListAST, inCompiler) ;
+  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_visibility_2563, ioArgument_ioPropertyListAST, inCompiler) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3470,7 +3470,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_private_5F_or_5F_public_5
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                          GALGAS_structurePropertyListAST & ioArgument_ioPropertyListAST,
                                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
-  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_bool (false), ioArgument_ioPropertyListAST, inCompiler) ;
+  nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_propertyVisibility::constructor_isPrivate (SOURCE_FILE ("type-structure-declaration.galgas", 71)), ioArgument_ioPropertyListAST, inCompiler) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -3483,19 +3483,19 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_private_5F_struct_5F_prop
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument_ioAST,
-                                                                                              const GALGAS_bool constinArgument_isPublic,
+                                                                                              const GALGAS_propertyVisibility constinArgument_inVisibility,
                                                                                               GALGAS_structurePropertyListAST & ioArgument_ioPropertyListAST,
                                                                                               C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_let COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 81)) ;
-  GALGAS_lstring var_propertyName_3299 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_propertyName_3378 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 82)) ;
-  GALGAS_lstring var_typeName_3321 ;
+  GALGAS_lstring var_typeName_3400 ;
   switch (select_omnibus_5F_syntax_3 (inCompiler)) {
   case 1: {
-    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3321, inCompiler) ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3400, inCompiler) ;
   } break ;
   case 2: {
-    var_typeName_3321 = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 87)) ;
+    var_typeName_3400 = GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 87)) ;
   } break ;
   default:
     break ;
@@ -3503,12 +3503,12 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_dec
   switch (select_omnibus_5F_syntax_4 (inCompiler)) {
   case 1: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 90)) ;
-    GALGAS_expressionAST var_initExpression_3487 ;
-    nt_expression_ (ioArgument_ioAST, var_initExpression_3487, inCompiler) ;
-    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_3299, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 94)), constinArgument_isPublic, var_typeName_3321, GALGAS_propertyKindAST::constructor_initializedConstantProperty (var_initExpression_3487  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 97))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 92)) ;
+    GALGAS_expressionAST var_initExpression_3566 ;
+    nt_expression_ (ioArgument_ioAST, var_initExpression_3566, inCompiler) ;
+    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_3378, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 94)), constinArgument_inVisibility, var_typeName_3400, GALGAS_propertyKindAST::constructor_initializedConstantProperty (var_initExpression_3566  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 97))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 92)) ;
   } break ;
   case 2: {
-    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_3299, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 101)), constinArgument_isPublic, var_typeName_3321, GALGAS_propertyKindAST::constructor_uninitializedConstantProperty (SOURCE_FILE ("type-structure-declaration.galgas", 104))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 99)) ;
+    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_3378, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 101)), constinArgument_inVisibility, var_typeName_3400, GALGAS_propertyKindAST::constructor_uninitializedConstantProperty (SOURCE_FILE ("type-structure-declaration.galgas", 104))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 99)) ;
   } break ;
   default:
     break ;
@@ -3545,22 +3545,22 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_dec
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i10_ (GALGAS_ast & ioArgument_ioAST,
-                                                                                               const GALGAS_bool constinArgument_isPublic,
+                                                                                               const GALGAS_propertyVisibility constinArgument_inVisibility,
                                                                                                GALGAS_structurePropertyListAST & ioArgument_ioPropertyListAST,
                                                                                                C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_var COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 115)) ;
-  GALGAS_lstring var_propertyName_4112 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_propertyName_4217 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 116)) ;
-  GALGAS_propertyAttributeList var_propertyAttributeList_4161 = GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 117)) ;
+  GALGAS_propertyAttributeList var_propertyAttributeList_4266 = GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 117)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_5 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_4221 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_4326 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 120)) ;
-      GALGAS_lbigint var_value_4248 = inCompiler->synthetizedAttribute_bigInteger () ;
+      GALGAS_lbigint var_value_4353 = inCompiler->synthetizedAttribute_bigInteger () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 121)) ;
-      var_propertyAttributeList_4161.addAssign_operation (var_attribute_4221, var_value_4248  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 122)) ;
+      var_propertyAttributeList_4266.addAssign_operation (var_attribute_4326, var_value_4353  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 122)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -3569,20 +3569,20 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_dec
   }
   switch (select_omnibus_5F_syntax_6 (inCompiler)) {
   case 1: {
-    GALGAS_lstring var_typeName_4363 ;
-    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_4363, inCompiler) ;
+    GALGAS_lstring var_typeName_4468 ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_4468, inCompiler) ;
     switch (select_omnibus_5F_syntax_7 (inCompiler)) {
     case 1: {
-      ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4112, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 127)), constinArgument_isPublic, var_typeName_4363, GALGAS_propertyKindAST::constructor_uninitializedStoredProperty (SOURCE_FILE ("type-structure-declaration.galgas", 127))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 127)) ;
+      ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4217, GALGAS_propertyAttributeList::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 127)), constinArgument_inVisibility, var_typeName_4468, GALGAS_propertyKindAST::constructor_uninitializedStoredProperty (SOURCE_FILE ("type-structure-declaration.galgas", 127))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 127)) ;
     } break ;
     case 2: {
-      nt_propertyGetterSetter_ (ioArgument_ioAST, constinArgument_isPublic, var_propertyName_4112, var_propertyAttributeList_4161, var_typeName_4363, ioArgument_ioPropertyListAST, inCompiler) ;
+      nt_propertyGetterSetter_ (ioArgument_ioAST, constinArgument_inVisibility, var_propertyName_4217, var_propertyAttributeList_4266, var_typeName_4468, ioArgument_ioPropertyListAST, inCompiler) ;
     } break ;
     case 3: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 137)) ;
-      GALGAS_expressionAST var_initExpression_4722 ;
-      nt_expression_ (ioArgument_ioAST, var_initExpression_4722, inCompiler) ;
-      ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4112, var_propertyAttributeList_4161, constinArgument_isPublic, var_typeName_4363, GALGAS_propertyKindAST::constructor_initializedStoredProperty (var_initExpression_4722  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 144))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 139)) ;
+      GALGAS_expressionAST var_initExpression_4835 ;
+      nt_expression_ (ioArgument_ioAST, var_initExpression_4835, inCompiler) ;
+      ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4217, var_propertyAttributeList_4266, constinArgument_inVisibility, var_typeName_4468, GALGAS_propertyKindAST::constructor_initializedStoredProperty (var_initExpression_4835  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 144))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 139)) ;
     } break ;
     default:
       break ;
@@ -3590,9 +3590,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_dec
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 147)) ;
-    GALGAS_expressionAST var_initExpression_4993 ;
-    nt_expression_ (ioArgument_ioAST, var_initExpression_4993, inCompiler) ;
-    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4112, var_propertyAttributeList_4161, constinArgument_isPublic, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 153)), GALGAS_propertyKindAST::constructor_initializedStoredProperty (var_initExpression_4993  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 154))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 149)) ;
+    GALGAS_expressionAST var_initExpression_5110 ;
+    nt_expression_ (ioArgument_ioAST, var_initExpression_5110, inCompiler) ;
+    ioArgument_ioPropertyListAST.addAssign_operation (var_propertyName_4217, var_propertyAttributeList_4266, constinArgument_inVisibility, GALGAS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("type-structure-declaration.galgas", 153)), GALGAS_propertyKindAST::constructor_initializedStoredProperty (var_initExpression_5110  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 154))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 149)) ;
   } break ;
   default:
     break ;
@@ -3646,7 +3646,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_struct_5F_property_5F_dec
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_ (GALGAS_ast & ioArgument_ioAST,
-                                                                                  const GALGAS_bool constinArgument_inIsPublic,
+                                                                                  const GALGAS_propertyVisibility constinArgument_inVisibility,
                                                                                   const GALGAS_lstring constinArgument_inPropertyName,
                                                                                   const GALGAS_propertyAttributeList constinArgument_inPropertyAttributeList,
                                                                                   const GALGAS_lstring constinArgument_inTypeName,
@@ -3655,48 +3655,48 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 168)) ;
   switch (select_omnibus_5F_syntax_8 (inCompiler)) {
   case 1: {
-    GALGAS_bool var_getterDefined_5606 = GALGAS_bool (false) ;
-    GALGAS_bool var_setterDefined_5638 = GALGAS_bool (false) ;
+    GALGAS_bool var_getterDefined_5743 = GALGAS_bool (false) ;
+    GALGAS_bool var_setterDefined_5775 = GALGAS_bool (false) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
-      GALGAS_lstring var_getterOrSetter_5700 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_getterOrSetter_5837 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 173)) ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 174)) ;
-      GALGAS_instructionListAST var_instructionList_5767 ;
-      nt_instructionList_ (ioArgument_ioAST, var_instructionList_5767, inCompiler) ;
-      GALGAS_location var_endOfInstructionList_5800 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 176)) ;
+      GALGAS_instructionListAST var_instructionList_5904 ;
+      nt_instructionList_ (ioArgument_ioAST, var_instructionList_5904, inCompiler) ;
+      GALGAS_location var_endOfInstructionList_5937 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 176)) ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 177)) ;
       enumGalgasBool test_1 = kBoolTrue ;
       if (kBoolTrue == test_1) {
-        test_1 = GALGAS_bool (kIsEqual, var_getterOrSetter_5700.getter_string (HERE).objectCompare (GALGAS_string ("get"))).boolEnum () ;
+        test_1 = GALGAS_bool (kIsEqual, var_getterOrSetter_5837.getter_string (HERE).objectCompare (GALGAS_string ("get"))).boolEnum () ;
         if (kBoolTrue == test_1) {
-          ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_instructionList_5767, var_endOfInstructionList_5800  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 184))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 179)) ;
+          ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inVisibility, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_instructionList_5904, var_endOfInstructionList_5937  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 184))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 179)) ;
           enumGalgasBool test_2 = kBoolTrue ;
           if (kBoolTrue == test_2) {
-            test_2 = var_getterDefined_5606.boolEnum () ;
+            test_2 = var_getterDefined_5743.boolEnum () ;
             if (kBoolTrue == test_2) {
               TC_Array <C_FixItDescription> fixItArray3 ;
-              inCompiler->emitSemanticError (var_getterOrSetter_5700.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 189)), GALGAS_string ("duplicate getter definition"), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 189)) ;
+              inCompiler->emitSemanticError (var_getterOrSetter_5837.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 189)), GALGAS_string ("duplicate getter definition"), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 189)) ;
             }
           }
-          var_getterDefined_5606 = GALGAS_bool (true) ;
+          var_getterDefined_5743 = GALGAS_bool (true) ;
         }
       }
       if (kBoolFalse == test_1) {
         enumGalgasBool test_4 = kBoolTrue ;
         if (kBoolTrue == test_4) {
-          test_4 = GALGAS_bool (kIsEqual, var_getterOrSetter_5700.getter_string (HERE).objectCompare (GALGAS_string ("set"))).boolEnum () ;
+          test_4 = GALGAS_bool (kIsEqual, var_getterOrSetter_5837.getter_string (HERE).objectCompare (GALGAS_string ("set"))).boolEnum () ;
           if (kBoolTrue == test_4) {
-            ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_writeComputedProperty (var_instructionList_5767, var_endOfInstructionList_5800  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 198))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 193)) ;
+            ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inVisibility, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_writeComputedProperty (var_instructionList_5904, var_endOfInstructionList_5937  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 198))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 193)) ;
             enumGalgasBool test_5 = kBoolTrue ;
             if (kBoolTrue == test_5) {
-              test_5 = var_setterDefined_5638.boolEnum () ;
+              test_5 = var_setterDefined_5775.boolEnum () ;
               if (kBoolTrue == test_5) {
                 TC_Array <C_FixItDescription> fixItArray6 ;
-                inCompiler->emitSemanticError (var_getterOrSetter_5700.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 203)), GALGAS_string ("duplicate setter definition"), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 203)) ;
+                inCompiler->emitSemanticError (var_getterOrSetter_5837.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 203)), GALGAS_string ("duplicate setter definition"), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 203)) ;
               }
             }
-            var_setterDefined_5638 = GALGAS_bool (true) ;
+            var_setterDefined_5775 = GALGAS_bool (true) ;
           }
         }
         if (kBoolFalse == test_4) {
@@ -3704,7 +3704,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
           fixItArray7.appendObject (C_FixItDescription (kFixItRemove, "")) ;
           appendFixItActions (fixItArray7, kFixItReplace, GALGAS_string ("@set")) ;
           appendFixItActions (fixItArray7, kFixItReplace, GALGAS_string ("@get")) ;
-          inCompiler->emitSemanticError (var_getterOrSetter_5700.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 207)), GALGAS_string ("invalid attribute"), fixItArray7  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 207)) ;
+          inCompiler->emitSemanticError (var_getterOrSetter_5837.getter_location (SOURCE_FILE ("type-structure-declaration.galgas", 207)), GALGAS_string ("invalid attribute"), fixItArray7  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 207)) ;
         }
       }
       switch (select_omnibus_5F_syntax_9 (inCompiler)) {
@@ -3717,9 +3717,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
     }
     enumGalgasBool test_8 = kBoolTrue ;
     if (kBoolTrue == test_8) {
-      GALGAS_bool test_9 = var_setterDefined_5638 ;
+      GALGAS_bool test_9 = var_setterDefined_5775 ;
       if (kBoolTrue == test_9.boolEnum ()) {
-        test_9 = var_getterDefined_5606.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 211)) ;
+        test_9 = var_getterDefined_5743.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 211)) ;
       }
       test_8 = test_9.boolEnum () ;
       if (kBoolTrue == test_8) {
@@ -3730,9 +3730,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
     if (kBoolFalse == test_8) {
       enumGalgasBool test_11 = kBoolTrue ;
       if (kBoolTrue == test_11) {
-        GALGAS_bool test_12 = var_setterDefined_5638.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 213)) ;
+        GALGAS_bool test_12 = var_setterDefined_5775.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 213)) ;
         if (kBoolTrue == test_12.boolEnum ()) {
-          test_12 = var_getterDefined_5606.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 213)) ;
+          test_12 = var_getterDefined_5743.operator_not (SOURCE_FILE ("type-structure-declaration.galgas", 213)) ;
         }
         test_11 = test_12.boolEnum () ;
         if (kBoolTrue == test_11) {
@@ -3743,10 +3743,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
     }
   } break ;
   case 2: {
-    GALGAS_instructionListAST var_readInstructionList_7283 ;
-    nt_instructionList_ (ioArgument_ioAST, var_readInstructionList_7283, inCompiler) ;
-    GALGAS_location var_endOfReadInstructionList_7318 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 218)) ;
-    ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inIsPublic, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_readInstructionList_7283, var_endOfReadInstructionList_7318  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 224))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 219)) ;
+    GALGAS_instructionListAST var_readInstructionList_7424 ;
+    nt_instructionList_ (ioArgument_ioAST, var_readInstructionList_7424, inCompiler) ;
+    GALGAS_location var_endOfReadInstructionList_7459 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 218)) ;
+    ioArgument_ioPropertyListAST.addAssign_operation (constinArgument_inPropertyName, constinArgument_inPropertyAttributeList, constinArgument_inVisibility, constinArgument_inTypeName, GALGAS_propertyKindAST::constructor_readOnlyComputedProperty (var_readInstructionList_7424, var_endOfReadInstructionList_7459  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 224))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 219)) ;
   } break ;
   default:
     break ;
@@ -3790,16 +3790,16 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_propertyGetterSetter_i11_
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i12_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_struct COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 235)) ;
-  GALGAS_lstring var_structureName_7838 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_structureName_7981 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 236)) ;
-  GALGAS_lstringlist var_attributeList_7869 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 237)) ;
+  GALGAS_lstringlist var_attributeList_8012 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 237)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_10 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_attribute_7929 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_8072 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 240)) ;
-      var_attributeList_7869.addAssign_operation (var_attribute_7929  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 241)) ;
+      var_attributeList_8012.addAssign_operation (var_attribute_8072  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 241)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -3807,15 +3807,15 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i12_ (GALGAS_
     }
   }
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 243)) ;
-  GALGAS_structurePropertyListAST var_fieldList_8020 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 244)) ;
+  GALGAS_structurePropertyListAST var_fieldList_8163 = GALGAS_structurePropertyListAST::constructor_emptyList (SOURCE_FILE ("type-structure-declaration.galgas", 244)) ;
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     switch (select_omnibus_5F_syntax_11 (inCompiler)) {
     case 2: {
-      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_8020, inCompiler) ;
+      nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (ioArgument_ioAST, var_fieldList_8163, inCompiler) ;
     } break ;
     case 3: {
-      nt_function_5F_declaration_ (ioArgument_ioAST, var_structureName_7838, inCompiler) ;
+      nt_function_5F_declaration_ (ioArgument_ioAST, var_structureName_7981, inCompiler) ;
     } break ;
     default:
       repeatFlag_1 = false ;
@@ -3823,7 +3823,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i12_ (GALGAS_
     }
   }
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 251)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclarationAST::constructor_new (var_structureName_7838, var_structureName_7838, var_structureName_7838, var_attributeList_7869, GALGAS_bool (true), var_fieldList_8020, GALGAS_bool (true)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 252))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 252)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_structureDeclarationAST::constructor_new (var_structureName_7981, var_structureName_7981, var_structureName_7981, var_attributeList_8012, GALGAS_bool (true), var_fieldList_8163, GALGAS_bool (true)  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 252))  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 252)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -4647,7 +4647,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i20_ (GALGAS_
       nt_isr_5F_in_5F_driver_ (ioArgument_ioAST, var_driverName_2485, inCompiler) ;
     } break ;
     case 5: {
-      nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_bool (false), var_propertyListAST_2761, inCompiler) ;
+      nt_struct_5F_property_5F_declaration_ (ioArgument_ioAST, GALGAS_propertyVisibility::constructor_isPrivate (SOURCE_FILE ("declaration-driver.galgas", 113)), var_propertyListAST_2761, inCompiler) ;
     } break ;
     case 6: {
       nt_function_5F_declaration_ (ioArgument_ioAST, function_omnibusTypeSpecificNameForDriver (var_driverName_2485, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 115)), inCompiler) ;
@@ -4738,19 +4738,19 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i20_parse (C_
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i21_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_driver COMMA_SOURCE_FILE ("declaration-driver.galgas", 142)) ;
-  GALGAS_lstring var_driverName_4816 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_driverName_4821 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-driver.galgas", 143)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("declaration-driver.galgas", 144)) ;
-  GALGAS_driverInstanciationArgumentListAST var_driverInstanciationArgumentList_4896 = GALGAS_driverInstanciationArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 145)) ;
+  GALGAS_driverInstanciationArgumentListAST var_driverInstanciationArgumentList_4901 = GALGAS_driverInstanciationArgumentListAST::constructor_emptyList (SOURCE_FILE ("declaration-driver.galgas", 145)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_syntax_33 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_selector_4955 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_4960 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21_selector_3A_ COMMA_SOURCE_FILE ("declaration-driver.galgas", 148)) ;
-      GALGAS_expressionAST var_expression_4998 ;
-      nt_expression_ (ioArgument_ioAST, var_expression_4998, inCompiler) ;
-      var_driverInstanciationArgumentList_4896.addAssign_operation (var_selector_4955, var_expression_4998  COMMA_SOURCE_FILE ("declaration-driver.galgas", 150)) ;
+      GALGAS_expressionAST var_expression_5003 ;
+      nt_expression_ (ioArgument_ioAST, var_expression_5003, inCompiler) ;
+      var_driverInstanciationArgumentList_4901.addAssign_operation (var_selector_4960, var_expression_5003  COMMA_SOURCE_FILE ("declaration-driver.galgas", 150)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -4758,7 +4758,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i21_ (GALGAS_
     }
   }
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__29_ COMMA_SOURCE_FILE ("declaration-driver.galgas", 152)) ;
-  ioArgument_ioAST.mProperty_mRequiredDriverListAST.addAssign_operation (var_driverName_4816, var_driverInstanciationArgumentList_4896  COMMA_SOURCE_FILE ("declaration-driver.galgas", 153)) ;
+  ioArgument_ioAST.mProperty_mRequiredDriverListAST.addAssign_operation (var_driverName_4821, var_driverInstanciationArgumentList_4901  COMMA_SOURCE_FILE ("declaration-driver.galgas", 153)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11934,6 +11934,20 @@ void GALGAS_interruptionConfigurationList::plusAssign_operation (const GALGAS_in
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
+void GALGAS_interruptionConfigurationList::setter_setMInterruptNameAtIndex (GALGAS_lstring inOperand,
+                                                                            GALGAS_uint inIndex,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  cCollectionElement_interruptionConfigurationList * p = (cCollectionElement_interruptionConfigurationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mInterruptName = inOperand ;
+  }
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
 GALGAS_lstring GALGAS_interruptionConfigurationList::getter_mInterruptNameAtIndex (const GALGAS_uint & inIndex,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const {
@@ -11945,6 +11959,20 @@ GALGAS_lstring GALGAS_interruptionConfigurationList::getter_mInterruptNameAtInde
     result = p->mObject.mProperty_mInterruptName ;
   }
   return result ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_interruptionConfigurationList::setter_setMInterruptionPanicCodeAtIndex (GALGAS_interruptionPanicCode inOperand,
+                                                                                    GALGAS_uint inIndex,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cCollectionElement_interruptionConfigurationList * p = (cCollectionElement_interruptionConfigurationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_interruptionConfigurationList) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mInterruptionPanicCode = inOperand ;
+  }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -12423,6 +12451,20 @@ void GALGAS_declarationListAST::plusAssign_operation (const GALGAS_declarationLi
                                                       C_Compiler * /* inCompiler */
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
+}
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+void GALGAS_declarationListAST::setter_setMDeclarationAtIndex (GALGAS_abstractDeclarationAST inOperand,
+                                                               GALGAS_uint inIndex,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+  cCollectionElement_declarationListAST * p = (cCollectionElement_declarationListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (NULL != p) {
+    macroValidSharedObject (p, cCollectionElement_declarationListAST) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mDeclaration = inOperand ;
+  }
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

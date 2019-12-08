@@ -115,18 +115,12 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !constantMap
       ]
     #-------------------------------------------- Property map
-     [!?ioContext.mTypePropertyGetterMap insertProperty
+     [!?ioContext insertGetter
        !omnibusTypeName: omnibusTypeDescriptionName
        !.new {!"count" !omnibusTypeDescriptionName.location}
-        !true # public
+        !.isPublic
         !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
-#      @propertyGetterMap arrayTypePropertyMap = {}
-#      [!?arrayTypePropertyMap insertKey # "count" property
-#        !.new {!"count" !omnibusTypeDescriptionName.location}
-#        !true # public
-#        !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
-#      ]
     #-------------------------------------------- Constructor map
       @constructorMap constructorMap = {}
     #--- Constructor (!repeated)

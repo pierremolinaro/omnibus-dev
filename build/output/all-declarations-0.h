@@ -530,7 +530,7 @@ class cParser_omnibus_5F_syntax {
   protected : virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_propertyGetterSetter_ (class GALGAS_ast & ioArgument0,
-                                                     const class GALGAS_bool constinArgument1,
+                                                     const class GALGAS_propertyVisibility constinArgument1,
                                                      const class GALGAS_lstring constinArgument2,
                                                      const class GALGAS_propertyAttributeList constinArgument3,
                                                      const class GALGAS_lstring constinArgument4,
@@ -565,7 +565,7 @@ class cParser_omnibus_5F_syntax {
   protected : virtual void nt_staticArray_5F_exp_parse (class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected : virtual void nt_struct_5F_property_5F_declaration_ (class GALGAS_ast & ioArgument0,
-                                                                  const class GALGAS_bool constinArgument1,
+                                                                  const class GALGAS_propertyVisibility constinArgument1,
                                                                   class GALGAS_structurePropertyListAST & ioArgument2,
                                                                   class C_Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -647,21 +647,21 @@ class cParser_omnibus_5F_syntax {
   protected : void rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i9_ (GALGAS_ast & ioArgument0,
-                                                                                 const GALGAS_bool constinArgument1,
+                                                                                 const GALGAS_propertyVisibility constinArgument1,
                                                                                  GALGAS_structurePropertyListAST & ioArgument2,
                                                                                  C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i9_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i10_ (GALGAS_ast & ioArgument0,
-                                                                                  const GALGAS_bool constinArgument1,
+                                                                                  const GALGAS_propertyVisibility constinArgument1,
                                                                                   GALGAS_structurePropertyListAST & ioArgument2,
                                                                                   C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i10_parse (C_Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected : void rule_omnibus_5F_syntax_propertyGetterSetter_i11_ (GALGAS_ast & ioArgument0,
-                                                                     const GALGAS_bool constinArgument1,
+                                                                     const GALGAS_propertyVisibility constinArgument1,
                                                                      const GALGAS_lstring constinArgument2,
                                                                      const GALGAS_propertyAttributeList constinArgument3,
                                                                      const GALGAS_lstring constinArgument4,
@@ -1882,6 +1882,9 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_addressofControlRegisterAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2161,6 +2164,7 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2205,6 +2209,9 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_addressofExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueAST inArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2405,6 +2412,7 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2445,6 +2453,9 @@ class GALGAS_instructionAST : public AC_GALGAS_class {
   public : typeComparisonResult objectCompare (const GALGAS_instructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionLocation (class GALGAS_location inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2479,6 +2490,7 @@ class cPtr_instructionAST : public acPtr_class {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInstructionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const = 0 ;
@@ -2524,6 +2536,9 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_assertInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2562,6 +2577,7 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2608,6 +2624,12 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_assignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetAST (class GALGAS_LValueAST inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2650,7 +2672,9 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mTargetAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetAST (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2700,6 +2724,21 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_bitbandInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMBitExpression (class GALGAS_expressionAST inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMBitExpressionLocation (class GALGAS_location inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2754,10 +2793,15 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mBitExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMBitExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mBitExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMBitExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2804,6 +2848,15 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
   public : typeComparisonResult objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (class GALGAS_expressionAST inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2849,8 +2902,11 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -2891,6 +2947,12 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_callInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMArguments (class GALGAS_effectiveArgumentListAST inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (class GALGAS_location inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -2989,6 +3051,16 @@ class GALGAS_effectiveArgumentListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMEffectiveParameterKindAtIndex (class GALGAS_effectiveArgumentPassingModeAST constinArgument0,
+                                                                           class GALGAS_uint constinArgument1,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSelectorAtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_effectiveArgumentPassingModeAST & outArgument0,
@@ -3071,7 +3143,9 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMArguments (GALGAS_effectiveArgumentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const = 0 ;
@@ -3118,6 +3192,12 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_checkInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMCheckMessage (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -3160,7 +3240,9 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mCheckMessage (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMCheckMessage (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3277,6 +3359,18 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
   public : typeComparisonResult objectCompare (const GALGAS_compileTimeConvertToBooleanAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMConverterName (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -3395,9 +3489,13 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConverterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3449,6 +3547,30 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
   public : typeComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_compileTimeInfixOperatorEnumeration inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (class GALGAS_location inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightOperandName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightTypeName (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -3641,13 +3763,21 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_compileTimeInfixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3697,6 +3827,24 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
   public : typeComparisonResult objectCompare (const GALGAS_compiletimePrefixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (class GALGAS_compileTimePrefixOperatorEnumeration inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (class GALGAS_location inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -3821,11 +3969,17 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_compileTimePrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -3875,6 +4029,15 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_constructorCallAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMErrorLocation (class GALGAS_location inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMParameterList (class GALGAS_functionCallEffectiveParameterListAST inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -3975,6 +4138,16 @@ class GALGAS_functionCallEffectiveParameterListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionAtIndex (class GALGAS_expressionAST constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSelectorAtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -4061,8 +4234,11 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_functionCallEffectiveParameterListAST getter_mParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMParameterList (GALGAS_functionCallEffectiveParameterListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMErrorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -4110,6 +4286,15 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
   public : typeComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAssignmentKind (class GALGAS_controlRegisterAssignmentOperatorKind inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -4404,8 +4589,11 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterAssignmentOperatorKind getter_mAssignmentKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAssignmentKind (GALGAS_controlRegisterAssignmentOperatorKind inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -4454,6 +4642,12 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
   public : typeComparisonResult objectCompare (const GALGAS_controlRegisterGroupDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterGroupList (class GALGAS_registerGroupListAST inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisters (class GALGAS_controlRegisterDeclarationList inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -4565,6 +4759,26 @@ class GALGAS_controlRegisterDeclarationList : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument4,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterArrayListAtIndex (class GALGAS_controlRegisterNameListAST constinArgument0,
+                                                                      class GALGAS_uint constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitSliceListAtIndex (class GALGAS_controlRegisterBitSliceList constinArgument0,
+                                                                         class GALGAS_uint constinArgument1,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitSliceListLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                                 class GALGAS_uint constinArgument1,
+                                                                                 C_Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterTypeNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                     class GALGAS_uint constinArgument1,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -4721,6 +4935,16 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterGroupKindAtIndex (class GALGAS_controlRegisterGroupKindAST constinArgument0,
+                                                                             class GALGAS_uint constinArgument1,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterGroupNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                      class GALGAS_uint constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -4805,7 +5029,9 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_registerGroupListAST getter_mRegisterGroupList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterGroupList (GALGAS_registerGroupListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisters (GALGAS_controlRegisterDeclarationList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -4852,6 +5078,15 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_convertExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -4897,8 +5132,11 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5024,6 +5262,9 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ctIdentifierExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMIdentifier (class GALGAS_lstring inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5061,6 +5302,7 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIdentifier (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5108,6 +5350,18 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ctInfixExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_compileTimeInfixOperatorEnumeration inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (class GALGAS_ctExpressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (class GALGAS_ctExpressionAST inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5157,9 +5411,13 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_compileTimeInfixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mRightExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5207,6 +5465,9 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ctIntExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMValue (class GALGAS_lbigint inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5244,6 +5505,7 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMValue (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5290,6 +5552,15 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ctPrefixExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (class GALGAS_compileTimePrefixOperatorEnumeration inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5335,8 +5606,11 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_compileTimePrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5463,6 +5737,12 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_enumerationDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMCaseNameList (class GALGAS_enumerationConstantList inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEnumerationName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5561,6 +5841,16 @@ class GALGAS_enumerationConstantList : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantValueAtIndex (class GALGAS_bigint constinArgument0,
+                                                                  class GALGAS_uint constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -5645,7 +5935,9 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mEnumerationName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEnumerationName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_enumerationConstantList getter_mCaseNameList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMCaseNameList (GALGAS_enumerationConstantList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5692,6 +5984,15 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_extendExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5737,8 +6038,11 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5786,6 +6090,18 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
   public : typeComparisonResult objectCompare (const GALGAS_fixedSizeArrayTypeDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMElementTypeName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (class GALGAS_lstring inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (class GALGAS_location inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5835,9 +6151,13 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElementTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -5889,6 +6209,27 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_forInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (class GALGAS_instructionListAST inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_for_5F_instruction (class GALGAS_location inArgument0
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_whileExpression (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIteratedObject (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticWhileExpression (class GALGAS_bool inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (class GALGAS_lstring inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMWhileExpression (class GALGAS_expressionAST inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -5990,6 +6331,11 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionAtIndex (class GALGAS_instructionAST constinArgument0,
+                                                                class GALGAS_uint constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_instructionAST & outArgument0,
@@ -6078,12 +6424,19 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIteratedObject (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIteratedObject (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMWhileExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_whileExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticWhileExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticWhileExpression (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_for_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_for_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -6136,6 +6489,30 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_forLowerUpperBoundInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (class GALGAS_instructionListAST inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_do_5F_instruction (class GALGAS_location inArgument0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_lowerBoundExpression_5F_instruction (class GALGAS_location inArgument0
+                                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_upperBoundExpression_5F_instruction (class GALGAS_location inArgument0
+                                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLowerBoundExpression (class GALGAS_expressionAST inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMUpperBoundExpression (class GALGAS_expressionAST inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (class GALGAS_lstring inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -6202,13 +6579,21 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLowerBoundExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLowerBoundExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_lowerBoundExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_lowerBoundExpression_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mUpperBoundExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMUpperBoundExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_upperBoundExpression_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_upperBoundExpression_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_do_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -6261,6 +6646,33 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_functionDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfFunctionDeclaration (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionAttributeList (class GALGAS_lstringlist inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionFormalArgumentList (class GALGAS_routineFormalArgumentListAST inArgument0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionReturnTypeName (class GALGAS_lstring inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (class GALGAS_mode inArgument0
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPublicFunction (class GALGAS_bool inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -6519,6 +6931,26 @@ class GALGAS_routineFormalArgumentListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentPassingModeAtIndex (class GALGAS_procFormalArgumentPassingMode constinArgument0,
+                                                                              class GALGAS_uint constinArgument1,
+                                                                              C_Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentTypeNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                           class GALGAS_uint constinArgument1,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSelectorAtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_procFormalArgumentPassingMode & outArgument0,
@@ -6631,14 +7063,23 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPublicFunction (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionReturnTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFunctionInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfFunctionDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -6686,6 +7127,18 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
   public : typeComparisonResult objectCompare (const GALGAS_globalConstantDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -6735,9 +7188,13 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -6790,6 +7247,33 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_guardDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfGuardDeclaration (class GALGAS_location inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardAttributeList (class GALGAS_lstringlist inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardFormalArgumentList (class GALGAS_routineFormalArgumentListAST inArgument0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardKind (class GALGAS_guardKind inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardName (class GALGAS_lstring inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsPublic (class GALGAS_bool inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverLLVMBaseTypeName (class GALGAS_string inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -6956,14 +7440,23 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mReceiverLLVMBaseTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverLLVMBaseTypeName (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIsPublic (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mGuardAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mGuardFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_guardKind getter_mGuardKind (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardKind (GALGAS_guardKind inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mGuardInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfGuardDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfGuardDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7013,6 +7506,24 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ifExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMElseExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMElseExpressionEndLocation (class GALGAS_location inArgument0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIfExpression (class GALGAS_expressionAST inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIfExpressionEndLocation (class GALGAS_location inArgument0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMThenExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMThenExpressionEndLocation (class GALGAS_location inArgument0
+                                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7070,11 +7581,17 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mIfExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIfExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mIfExpressionEndLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIfExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mThenExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMThenExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mThenExpressionEndLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMThenExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mElseExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElseExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mElseExpressionEndLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElseExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7127,6 +7644,30 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_ifInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMElseInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfElseInstructionList (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfThenInstructionList (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_if_5F_instruction (class GALGAS_location inArgument0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticIfExpression (class GALGAS_bool inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTestExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTestExpressionEndLocation (class GALGAS_location inArgument0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMThenInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7193,13 +7734,21 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mTestExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTestExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mTestExpressionEndLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTestExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticIfExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticIfExpression (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mThenInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMThenInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfThenInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfThenInstructionList (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mElseInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElseInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfElseInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfElseInstructionList (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_if_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_if_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7249,6 +7798,15 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_integerSliceExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLocation (class GALGAS_location inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceValues (class GALGAS_integerSliceFieldListAST inArgument0
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7356,6 +7914,21 @@ class GALGAS_integerSliceFieldListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionAtIndex (class GALGAS_expressionAST constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceWidthAtIndex (class GALGAS_lstring constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -7449,8 +8022,11 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_integerSliceFieldListAST getter_mSliceValues (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceValues (GALGAS_integerSliceFieldListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7499,6 +8075,21 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_isrDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMDriverName (class GALGAS_lstring inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfISRDeclaration (class GALGAS_location inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMISRInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMISRName (class GALGAS_lstring inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (class GALGAS_mode inArgument0
+                                                  COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7552,10 +8143,15 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mISRName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMISRName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMDriverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mISRInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMISRInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfISRDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfISRDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7603,6 +8199,15 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_letInstructionWithAssignmentAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7649,8 +8254,11 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConstantName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7698,6 +8306,9 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMValue (class GALGAS_bool inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7735,6 +8346,7 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMValue (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7782,6 +8394,9 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_literalIntegerInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLiteralInteger (class GALGAS_lbigint inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7819,6 +8434,7 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mLiteralInteger (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLiteralInteger (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7866,6 +8482,9 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_literalStringInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLiteralString (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -7903,6 +8522,7 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLiteralString (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLiteralString (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -7955,6 +8575,33 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
   public : typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLLVMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceVariableName (class GALGAS_lstring inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetVariableName (class GALGAS_lstring inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMWhereClause (class GALGAS_ctExpressionAST inArgument0
+                                                         COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -8059,6 +8706,11 @@ class GALGAS_genericFormalParameterList : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMParameterAtIndex (class GALGAS_genericFormalParameter constinArgument0,
+                                                              class GALGAS_uint constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -8187,6 +8839,11 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionAtIndex (class GALGAS_abstractLLVMInstruction constinArgument0,
+                                                                class GALGAS_uint constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_abstractLLVMInstruction & outArgument0,
@@ -8278,14 +8935,23 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetVariableName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mTargetGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSourceVariableName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSourceTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mSourceGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMWhereClause (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mLLVMInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLLVMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8336,6 +9002,18 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_llvmConvertToBooleanAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMConverterName (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -8385,9 +9063,13 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConverterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8435,6 +9117,9 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
   public : typeComparisonResult objectCompare (const GALGAS_llvmGenerationInstruction & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMGenerationList (class GALGAS_llvmGenerationInstructionElementList inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -8524,6 +9209,11 @@ class GALGAS_llvmGenerationInstructionElementList : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMElementAtIndex (class GALGAS_llvmGenerationInstructionElement constinArgument0,
+                                                            class GALGAS_uint constinArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_llvmGenerationInstructionElement & outArgument0,
@@ -8599,6 +9289,7 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionElementList getter_mGenerationList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGenerationList (GALGAS_llvmGenerationInstructionElementList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8646,6 +9337,18 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_llvmGenericType & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMBitSize (class GALGAS_bigint inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMWhereClause (class GALGAS_ctExpressionAST inArgument0
+                                                         COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -8695,9 +9398,13 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMWhereClause (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bigint getter_mBitSize (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMBitSize (GALGAS_bigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8752,6 +9459,39 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_llvmInfixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_omnibusInfixOperator inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (class GALGAS_location inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMResultGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightGenericFormalParameterList (class GALGAS_genericFormalParameterList inArgument0
+                                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightOperandName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightTypeName (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -8829,16 +9569,27 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_omnibusInfixOperator inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mLeftGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mRightGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mResultGenericFormalParameterList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMResultGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -8888,6 +9639,24 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (class GALGAS_llvmPrefixOperatorEnumeration inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (class GALGAS_location inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9022,11 +9791,17 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_llvmPrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_llvmPrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9074,6 +9849,9 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
   public : typeComparisonResult objectCompare (const GALGAS_llvmVarInstruction & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMVariableName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9111,6 +9889,7 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVariableName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9158,6 +9937,18 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_omnibusInfixOperator inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (class GALGAS_expressionAST inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9207,9 +9998,13 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_omnibusInfixOperator inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9260,6 +10055,18 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_panicAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfPanicInstructions (class GALGAS_location inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsSetup (class GALGAS_bool inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPriority (class GALGAS_lbigint inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9309,9 +10116,13 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSetup (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIsSetup (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfPanicInstructions (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPriority (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9357,6 +10168,9 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_panicInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMCodeExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9395,6 +10209,7 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mCodeExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMCodeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9441,6 +10256,15 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_prefixOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOp (class GALGAS_prefixOperator inArgument0
+                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (class GALGAS_location inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9563,8 +10387,11 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_prefixOperator getter_mOp (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOp (GALGAS_prefixOperator inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9613,6 +10440,12 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_primaryInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_primaryInExpressionAccessListAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9704,6 +10537,11 @@ class GALGAS_primaryInExpressionAccessListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessAtIndex (class GALGAS_primaryInExpressionAccessAST constinArgument0,
+                                                           class GALGAS_uint constinArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_primaryInExpressionAccessAST & outArgument0,
@@ -9781,7 +10619,9 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_primaryInExpressionAccessListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -9833,6 +10673,12 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_procedureCallInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_accessInAssignmentListAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIdentifier (class GALGAS_lstring inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -9924,6 +10770,11 @@ class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessAtIndex (class GALGAS_accessInAssignmentAST constinArgument0,
+                                                           class GALGAS_uint constinArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_accessInAssignmentAST & outArgument0,
@@ -10004,7 +10855,9 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMIdentifier (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_accessInAssignmentListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10054,6 +10907,15 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_registerConstantExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMFieldValues (class GALGAS_registerIntegerFieldListAST inArgument0
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterGroupName (class GALGAS_lstring inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10161,6 +11023,21 @@ class GALGAS_registerIntegerFieldListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionAtIndex (class GALGAS_expressionAST constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFieldNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                              class GALGAS_uint constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -10254,8 +11131,11 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterGroupName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFieldValues (GALGAS_registerIntegerFieldListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10301,6 +11181,12 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_registerInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFieldName (class GALGAS_lstring inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10342,7 +11228,9 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFieldName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10387,6 +11275,9 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_sizeofExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueAST inArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10424,6 +11315,7 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10471,6 +11363,9 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_sizeofTypeAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10508,6 +11403,7 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10556,6 +11452,18 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_sliceAssignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceAssignmentList (class GALGAS_sliceAssignmentListAST inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (class GALGAS_location inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10658,6 +11566,16 @@ class GALGAS_sliceAssignmentListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceKindAtIndex (class GALGAS_sliceTargetAST constinArgument0,
+                                                              class GALGAS_uint constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceWidthAtIndex (class GALGAS_lstring constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -10747,9 +11665,13 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_sliceAssignmentListAST getter_mSliceAssignmentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSliceAssignmentList (GALGAS_sliceAssignmentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10800,6 +11722,9 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
   public : typeComparisonResult objectCompare (const GALGAS_standAloneProcedureCallInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMSandAloneRoutineName (class GALGAS_lstring inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10840,6 +11765,7 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSandAloneRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSandAloneRoutineName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10889,6 +11815,15 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_standaloneFunctionInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMArguments (class GALGAS_effectiveArgumentListAST inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (class GALGAS_location inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStandaloneFunctionName (class GALGAS_lstring inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -10934,8 +11869,11 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStandaloneFunctionName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStandaloneFunctionName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMArguments (GALGAS_effectiveArgumentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -10985,6 +11923,15 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_staticListAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyList (class GALGAS_staticListPropertyListAST inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticListName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMValueList (class GALGAS_staticListValueListAST inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -11084,6 +12031,16 @@ class GALGAS_staticListPropertyListAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyTypeAtIndex (class GALGAS_staticListPropertyTypeAST constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -11226,6 +12183,16 @@ class GALGAS_staticListValueListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMElementAtIndex (class GALGAS_extendStaticListElementAST constinArgument0,
+                                                            class GALGAS_uint constinArgument1,
+                                                            C_Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLocationAtIndex (class GALGAS_location constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_extendStaticListElementAST & outArgument0,
@@ -11312,8 +12279,11 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStaticListName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStaticListName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_staticListPropertyListAST getter_mPropertyList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyList (GALGAS_staticListPropertyListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_staticListValueListAST getter_mValueList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMValueList (GALGAS_staticListValueListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -11367,6 +12337,27 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_structureDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeListAST (class GALGAS_lstringlist inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGenerateAssignmentRoutine (class GALGAS_bool inArgument0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLLVMBaseTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMMayImplementDeinit (class GALGAS_bool inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOmnibusTypeSpecificName (class GALGAS_lstring inArgument0
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (class GALGAS_structurePropertyListAST inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -11414,7 +12405,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
   public : static void makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                   const class GALGAS_lstring & in_mPropertyName,
                                                   const class GALGAS_propertyAttributeList & in_mPropertyAttributeList,
-                                                  const class GALGAS_bool & in_mIsPublic,
+                                                  const class GALGAS_propertyVisibility & in_mVisibility,
                                                   const class GALGAS_lstring & in_mPropertyTypeName,
                                                   const class GALGAS_propertyKindAST & in_mPropertyKind
                                                   COMMA_LOCATION_ARGS) ;
@@ -11434,7 +12425,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : static class GALGAS_structurePropertyListAST constructor_listWithValue (const class GALGAS_lstring & inOperand0,
                                                                                    const class GALGAS_propertyAttributeList & inOperand1,
-                                                                                   const class GALGAS_bool & inOperand2,
+                                                                                   const class GALGAS_propertyVisibility & inOperand2,
                                                                                    const class GALGAS_lstring & inOperand3,
                                                                                    const class GALGAS_propertyKindAST & inOperand4
                                                                                    COMMA_LOCATION_ARGS) ;
@@ -11447,7 +12438,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 //--------------------------------- += operator (with list of field expressions)
   public : VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                       const class GALGAS_propertyAttributeList & inOperand1,
-                                                      const class GALGAS_bool & inOperand2,
+                                                      const class GALGAS_propertyVisibility & inOperand2,
                                                       const class GALGAS_lstring & inOperand3,
                                                       const class GALGAS_propertyKindAST & inOperand4
                                                       COMMA_LOCATION_ARGS) ;
@@ -11464,7 +12455,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void setter_insertAtIndex (class GALGAS_lstring constinArgument0,
                                                        class GALGAS_propertyAttributeList constinArgument1,
-                                                       class GALGAS_bool constinArgument2,
+                                                       class GALGAS_propertyVisibility constinArgument2,
                                                        class GALGAS_lstring constinArgument3,
                                                        class GALGAS_propertyKindAST constinArgument4,
                                                        class GALGAS_uint constinArgument5,
@@ -11473,7 +12464,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void setter_popFirst (class GALGAS_lstring & outArgument0,
                                                   class GALGAS_propertyAttributeList & outArgument1,
-                                                  class GALGAS_bool & outArgument2,
+                                                  class GALGAS_propertyVisibility & outArgument2,
                                                   class GALGAS_lstring & outArgument3,
                                                   class GALGAS_propertyKindAST & outArgument4,
                                                   C_Compiler * inCompiler
@@ -11481,7 +12472,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void setter_popLast (class GALGAS_lstring & outArgument0,
                                                  class GALGAS_propertyAttributeList & outArgument1,
-                                                 class GALGAS_bool & outArgument2,
+                                                 class GALGAS_propertyVisibility & outArgument2,
                                                  class GALGAS_lstring & outArgument3,
                                                  class GALGAS_propertyKindAST & outArgument4,
                                                  C_Compiler * inCompiler
@@ -11489,18 +12480,43 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void setter_removeAtIndex (class GALGAS_lstring & outArgument0,
                                                        class GALGAS_propertyAttributeList & outArgument1,
-                                                       class GALGAS_bool & outArgument2,
+                                                       class GALGAS_propertyVisibility & outArgument2,
                                                        class GALGAS_lstring & outArgument3,
                                                        class GALGAS_propertyKindAST & outArgument4,
                                                        class GALGAS_uint constinArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyAttributeListAtIndex (class GALGAS_propertyAttributeList constinArgument0,
+                                                                          class GALGAS_uint constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyKindAtIndex (class GALGAS_propertyKindAST constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPropertyTypeNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                     class GALGAS_uint constinArgument1,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMVisibilityAtIndex (class GALGAS_propertyVisibility constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
                                                class GALGAS_propertyAttributeList & outArgument1,
-                                               class GALGAS_bool & outArgument2,
+                                               class GALGAS_propertyVisibility & outArgument2,
                                                class GALGAS_lstring & outArgument3,
                                                class GALGAS_propertyKindAST & outArgument4,
                                                C_Compiler * inCompiler
@@ -11508,7 +12524,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
   public : VIRTUAL_IN_DEBUG void method_last (class GALGAS_lstring & outArgument0,
                                               class GALGAS_propertyAttributeList & outArgument1,
-                                              class GALGAS_bool & outArgument2,
+                                              class GALGAS_propertyVisibility & outArgument2,
                                               class GALGAS_lstring & outArgument3,
                                               class GALGAS_propertyKindAST & outArgument4,
                                               C_Compiler * inCompiler
@@ -11517,10 +12533,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublicAtIndex (const class GALGAS_uint & constinOperand0,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const ;
-
   public : VIRTUAL_IN_DEBUG class GALGAS_propertyAttributeList getter_mPropertyAttributeListAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                                      C_Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) const ;
@@ -11536,6 +12548,10 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPropertyTypeNameAtIndex (const class GALGAS_uint & constinOperand0,
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_propertyVisibility getter_mVisibilityAtIndex (const class GALGAS_uint & constinOperand0,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const ;
 
   public : VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_subListFromIndex (const class GALGAS_uint & constinOperand0,
                                                                                            C_Compiler * inCompiler
@@ -11569,7 +12585,7 @@ class cEnumerator_structurePropertyListAST : public cGenericAbstractEnumerator {
 //--- Current element access
   public : class GALGAS_lstring current_mPropertyName (LOCATION_ARGS) const ;
   public : class GALGAS_propertyAttributeList current_mPropertyAttributeList (LOCATION_ARGS) const ;
-  public : class GALGAS_bool current_mIsPublic (LOCATION_ARGS) const ;
+  public : class GALGAS_propertyVisibility current_mVisibility (LOCATION_ARGS) const ;
   public : class GALGAS_lstring current_mPropertyTypeName (LOCATION_ARGS) const ;
   public : class GALGAS_propertyKindAST current_mPropertyKind (LOCATION_ARGS) const ;
 //--- Current element access
@@ -11611,12 +12627,19 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOmnibusTypeSpecificName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOmnibusTypeSpecificName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMLLVMBaseTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeListAST (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMGenerateAssignmentRoutine (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (GALGAS_structurePropertyListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMMayImplementDeinit (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -11665,6 +12688,18 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_switchInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_switch_5F_instruction (class GALGAS_location inArgument0
+                                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (class GALGAS_location inArgument0
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSwitchCaseList (class GALGAS_switchCaseListAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSwitchExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -11767,6 +12802,16 @@ class GALGAS_switchCaseListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMCaseIdentifiersAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                                    class GALGAS_uint constinArgument1,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMCaseInstructionListAtIndex (class GALGAS_instructionListAST constinArgument0,
+                                                                        class GALGAS_uint constinArgument1,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstringlist & outArgument0,
@@ -11856,9 +12901,13 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSwitchExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSwitchExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_switchCaseListAST getter_mSwitchCaseList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSwitchCaseList (GALGAS_switchCaseListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_switch_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_switch_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -11907,6 +12956,12 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_syncDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (class GALGAS_structurePropertyListAST inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncToolName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -11948,7 +13003,9 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncToolName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (GALGAS_structurePropertyListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -11998,6 +13055,12 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_syncInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMBranchList (class GALGAS_syncInstructionBranchListAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_on_5F_instruction (class GALGAS_location inArgument0
+                                                                        COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12103,6 +13166,21 @@ class GALGAS_syncInstructionBranchListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfBranchAtIndex (class GALGAS_location constinArgument0,
+                                                                class GALGAS_uint constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardedCommandAtIndex (class GALGAS_guardedCommandAST constinArgument0,
+                                                                   class GALGAS_uint constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionListAtIndex (class GALGAS_instructionListAST constinArgument0,
+                                                                    class GALGAS_uint constinArgument1,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_guardedCommandAST & outArgument0,
@@ -12195,7 +13273,9 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_syncInstructionBranchListAST getter_mBranchList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMBranchList (GALGAS_syncInstructionBranchListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_on_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12242,6 +13322,15 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
   public : typeComparisonResult objectCompare (const GALGAS_syncToolInstanceDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncInstanceName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncTypeName (class GALGAS_lstring inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12287,8 +13376,11 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncInstanceName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSyncInstanceName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12341,6 +13433,33 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
   public : typeComparisonResult objectCompare (const GALGAS_systemRoutineDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfInstructionListLocation (class GALGAS_location inArgument0
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentList (class GALGAS_routineFormalArgumentListAST inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_instructionListAST inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (class GALGAS_mode inArgument0
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPublic (class GALGAS_bool inArgument0
+                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSystemRoutineName (class GALGAS_lstring inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12410,14 +13529,23 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSystemRoutineName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPublic (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInstructionListLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfInstructionListLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12470,6 +13598,24 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_taskSetupDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMDependanceList (class GALGAS_lstringlist inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfTaskSetupDeclaration (class GALGAS_location inArgument0
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMQualifier (class GALGAS_string inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSetupName (class GALGAS_lstring inArgument0
+                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskSetupInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12527,11 +13673,17 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTaskName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_string getter_mQualifier (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMQualifier (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSetupName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSetupName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDependanceList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMDependanceList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mTaskSetupInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskSetupInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfTaskSetupDeclaration (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfTaskSetupDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12578,6 +13730,15 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_truncateExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12623,8 +13784,11 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12673,6 +13837,12 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_typeAliasDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAliasTypeName (class GALGAS_lstring inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOriginalTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12714,7 +13884,9 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAliasTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOriginalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12763,6 +13935,12 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
   public : typeComparisonResult objectCompare (const GALGAS_typeDynamicArrayDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMDynamicArrayTypeName (class GALGAS_lstring inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMElementTypeName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12804,7 +13982,9 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDynamicArrayTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMDynamicArrayTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMElementTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12852,6 +14032,18 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
   public : typeComparisonResult objectCompare (const GALGAS_typeOpaqueDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
+                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOpaqueTypeName (class GALGAS_lstring inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpression (class GALGAS_expressionAST inArgument0
+                                                            COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (class GALGAS_location inArgument0
+                                                                    COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12901,9 +14093,13 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOpaqueTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -12953,6 +14149,15 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
   public : typeComparisonResult objectCompare (const GALGAS_typedConstantCallAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_primaryInExpressionAccessListAST inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMConstructorName (class GALGAS_lstring inArgument0
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -12998,8 +14203,11 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstructorName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMConstructorName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_primaryInExpressionAccessListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -13049,6 +14257,12 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_varDeclarationInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (class GALGAS_lstring inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -13091,7 +14305,9 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -13139,6 +14355,15 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_varInstructionWithAssignmentAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (class GALGAS_lstring inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (class GALGAS_lstring inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -13185,8 +14410,11 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -13235,6 +14463,18 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
   public : typeComparisonResult objectCompare (const GALGAS_whileInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (class GALGAS_location inArgument0
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_while_5F_instruction (class GALGAS_location inArgument0
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMWhileInstructionList (class GALGAS_instructionListAST inArgument0
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setM_5F_while_5F_Expression (class GALGAS_expressionAST inArgument0
+                                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -13285,9 +14525,13 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_m_5F_while_5F_Expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setM_5F_while_5F_Expression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mWhileInstructionList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMWhileInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_while_5F_instruction (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_while_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;
@@ -15011,6 +16255,73 @@ class cEnumAssociatedValues_propertyKindAST_writeComputedProperty : public cEnum
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
+//                                              @propertyVisibility enum                                               *
+//                                                                                                                     *
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+class GALGAS_propertyVisibility : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public : GALGAS_propertyVisibility (void) ;
+
+//--------------------------------- Enumeration
+  public : typedef enum {
+    kNotBuilt,
+    kEnum_isPublic,
+    kEnum_isPrivate
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private : enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public : VIRTUAL_IN_DEBUG inline bool isValid (void) const { return kNotBuilt != mEnum ; }
+  public : VIRTUAL_IN_DEBUG inline void drop (void) { mEnum = kNotBuilt ; }
+  public : inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public : static GALGAS_propertyVisibility extractObject (const GALGAS_object & inObject,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public : static class GALGAS_propertyVisibility constructor_isPrivate (LOCATION_ARGS) ;
+
+  public : static class GALGAS_propertyVisibility constructor_isPublic (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const ;
+//--------------------------------- Comparison
+  public : typeComparisonResult objectCompare (const GALGAS_propertyVisibility & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIsPrivate (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIsPublic (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Introspection
+  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_propertyVisibility class
+
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyVisibility ;
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//                                                                                                                     *
 //                                   @registerGroupIndexAST enum, associated values                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -15467,6 +16778,16 @@ class GALGAS_checkTargetListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAcceptedTargetListAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetConstructLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                            class GALGAS_uint constinArgument1,
+                                                                            C_Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_location & outArgument0,
@@ -15600,6 +16921,11 @@ class GALGAS_controlRegisterBitSliceList : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterBitSliceAtIndex (class GALGAS_controlRegisterBitSlice constinArgument0,
+                                                                     class GALGAS_uint constinArgument1,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -15756,6 +17082,31 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMControlRegisterKindAtIndex (class GALGAS_controlRegisterKind constinArgument0,
+                                                                        class GALGAS_uint constinArgument1,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsReadOnlyAtIndex (class GALGAS_bool constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                 class GALGAS_uint constinArgument1,
+                                                                 C_Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterOffsetAtIndex (class GALGAS_expressionAST constinArgument0,
+                                                                   class GALGAS_uint constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRegisterOffsetLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                           class GALGAS_uint constinArgument1,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -15911,6 +17262,11 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMDeclarationAtIndex (class GALGAS_abstractDeclarationAST constinArgument0,
+                                                                class GALGAS_uint constinArgument1,
+                                                                C_Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_abstractDeclarationAST & outArgument0,
@@ -16037,6 +17393,11 @@ class GALGAS_driverDeclarationListAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMDriverAtIndex (class GALGAS_driverDeclarationAST constinArgument0,
+                                                           class GALGAS_uint constinArgument1,
+                                                           C_Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -16171,6 +17532,16 @@ class GALGAS_driverInstanciationArgumentListAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionAtIndex (class GALGAS_expressionAST constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMSelectorAtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -16313,6 +17684,16 @@ class GALGAS_driverInstanciationListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMDriverInstanciationArgumentListAtIndex (class GALGAS_driverInstanciationArgumentListAST constinArgument0,
+                                                                                    class GALGAS_uint constinArgument1,
+                                                                                    C_Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMDriverNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -16453,6 +17834,16 @@ class GALGAS_extendStaticListElementAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfExpressionAtIndex (class GALGAS_location constinArgument0,
+                                                                    class GALGAS_uint constinArgument1,
+                                                                    C_Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExpressionAtIndex (class GALGAS_extendStaticListExpressionAST constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -16630,6 +18021,41 @@ class GALGAS_externFunctionDeclarationListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeListAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                                  class GALGAS_uint constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfProcLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                      class GALGAS_uint constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExternProcedureNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                        class GALGAS_uint constinArgument1,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMModeAtIndex (class GALGAS_mode constinArgument0,
+                                                         class GALGAS_uint constinArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMProcFormalArgumentListAtIndex (class GALGAS_routineFormalArgumentListAST constinArgument0,
+                                                                           class GALGAS_uint constinArgument1,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMReturnTypeNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                   class GALGAS_uint constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMRoutineNameForGenerationAtIndex (class GALGAS_lstring constinArgument0,
+                                                                             class GALGAS_uint constinArgument1,
+                                                                             C_Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -16806,6 +18232,16 @@ class GALGAS_propertyAttributeList : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                  class GALGAS_uint constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMAttributeValueAtIndex (class GALGAS_lbigint constinArgument0,
+                                                                   class GALGAS_uint constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -16967,6 +18403,31 @@ class GALGAS_requiredFunctionDeclarationListAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument5,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfProcLocationAtIndex (class GALGAS_location constinArgument0,
+                                                                      class GALGAS_uint constinArgument1,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMExecutionModeAtIndex (class GALGAS_mode constinArgument0,
+                                                                  class GALGAS_uint constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMFormalArgumentListAtIndex (class GALGAS_routineFormalArgumentListAST constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMIsExportedAtIndex (class GALGAS_bool constinArgument0,
+                                                               class GALGAS_uint constinArgument1,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                         class GALGAS_uint constinArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -17179,6 +18640,51 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
+  public : VIRTUAL_IN_DEBUG void setter_setMAutoStartAtIndex (class GALGAS_bool constinArgument0,
+                                                              class GALGAS_uint constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMEndOfTaskDeclarationAtIndex (class GALGAS_location constinArgument0,
+                                                                         class GALGAS_uint constinArgument1,
+                                                                         C_Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMGuardedCommandListAtIndex (class GALGAS_syncInstructionBranchListAST constinArgument0,
+                                                                       class GALGAS_uint constinArgument1,
+                                                                       C_Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMLowerPriorityTaskListAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                                          class GALGAS_uint constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMStackSizeAtIndex (class GALGAS_lbigint constinArgument0,
+                                                              class GALGAS_uint constinArgument1,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskActivateListASTAtIndex (class GALGAS_taskSetupListAST constinArgument0,
+                                                                        class GALGAS_uint constinArgument1,
+                                                                        C_Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskDeactivateListASTAtIndex (class GALGAS_taskSetupListAST constinArgument0,
+                                                                          class GALGAS_uint constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                             class GALGAS_uint constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTaskSetupListASTAtIndex (class GALGAS_taskSetupListAST constinArgument0,
+                                                                     class GALGAS_uint constinArgument1,
+                                                                     C_Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
   public : VIRTUAL_IN_DEBUG void method_first (class GALGAS_lstring & outArgument0,
@@ -17368,6 +18874,16 @@ class GALGAS_taskSetupListAST : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMDependanceListAtIndex (class GALGAS_lstringlist constinArgument0,
+                                                                   class GALGAS_uint constinArgument1,
+                                                                   C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                         class GALGAS_uint constinArgument1,
+                                                         C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -17928,6 +19444,18 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclarationAST 
   public : typeComparisonResult objectCompare (const GALGAS_configurationDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
+  public : VIRTUAL_IN_DEBUG void setter_setMInterruptionConfigurationList (class GALGAS_interruptionConfigurationList inArgument0
+                                                                           COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicCodeTypeName (class GALGAS_lstring inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicLineTypeName (class GALGAS_lstring inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetParameters (class GALGAS_targetParameters inArgument0
+                                                              COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -18029,6 +19557,16 @@ class GALGAS_interruptionConfigurationList : public AC_GALGAS_list {
                                                        class GALGAS_uint constinArgument2,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInterruptNameAtIndex (class GALGAS_lstring constinArgument0,
+                                                                  class GALGAS_uint constinArgument1,
+                                                                  C_Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+  public : VIRTUAL_IN_DEBUG void setter_setMInterruptionPanicCodeAtIndex (class GALGAS_interruptionPanicCode constinArgument0,
+                                                                          class GALGAS_uint constinArgument1,
+                                                                          C_Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
@@ -18363,9 +19901,13 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Attribute accessors
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicCodeTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMPanicLineTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMTargetParameters (GALGAS_targetParameters inValue COMMA_LOCATION_ARGS) ;
   public : VIRTUAL_IN_DEBUG GALGAS_interruptionConfigurationList getter_mInterruptionConfigurationList (LOCATION_ARGS) const ;
+  public : VIRTUAL_IN_DEBUG void setter_setMInterruptionConfigurationList (GALGAS_interruptionConfigurationList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public : virtual void description (C_String & ioString,
                                      const int32_t inIndentation) const ;

@@ -49,12 +49,12 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #--- Add structure type name as node
   [!?ioGraph addNode !mSyncToolName !self]
 #--- Add property types
-  for (propertyName * public fieldTypeName propertyKind) in mStructurePropertyListAST do
+  for (propertyName * visibility fieldTypeName propertyKind) in mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       [!?ioGraph addEdge !mSyncToolName !fieldTypeName]
     end
-    if public then
-      error propertyName : "a sync tool property cannot be public (should be private)"
+    if visibility != .isPrivate then
+      error propertyName : "a sync tool property should be private"
     end
     switch propertyKind
     case uninitializedStoredProperty, uninitializedConstantProperty :

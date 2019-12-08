@@ -256,8 +256,9 @@ private proc handlePropertyAccessInAssignment
   ?let @lstring inPropertyName
   ?let @LValueOperandAST inNextOperand
 {
-  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
-  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
+#  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
+  let propertySetterMap = [inContext propertySetterMap !ioCurrentType]
+#  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
 #  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess

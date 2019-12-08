@@ -110,7 +110,7 @@ syntax extension omnibus_syntax {
     while
       <isr_in_driver> !?ioAST !driverName
     while
-      <struct_property_declaration> !?ioAST !false !?propertyListAST
+      <struct_property_declaration> !?ioAST !.isPrivate !?propertyListAST
     while
       <function_declaration> !?ioAST !receiverTypeName: omnibusTypeSpecificNameForDriver (!driverName)
     while
@@ -284,7 +284,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
         driverPropertyListAST += 
          !propertyName
          !propertyAttributeList
-         !false
+         !.isPrivate
          !optionalPropertyTypeName
          !driverPropertyKind
       end

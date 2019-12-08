@@ -528,9 +528,8 @@ proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
-  [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
-#  let @propertyGetterMap propertyGetterMap = type.propertyGetterMapp
+#  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
+  let propertyGetterMap = [inContext propertyGetterMap !type]
   [propertyGetterMap searchKey !inPropertyName ?* ?let @propertyGetterKind accessKind]
   switch accessKind
   case constantProperty (@objectIR value) :

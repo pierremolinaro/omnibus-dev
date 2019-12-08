@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF4476B3239C2804008A78BE /* XMLStackParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B0239C2804008A78BE /* XMLStackParser.swift */; };
+		CF4476B4239C2804008A78BE /* ISO8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B1239C2804008A78BE /* ISO8601DateFormatter.swift */; };
+		CF4476B5239C2804008A78BE /* XMLKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B2239C2804008A78BE /* XMLKey.swift */; };
+		CF4476BC239C2822008A78BE /* DecodingErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B7239C2822008A78BE /* DecodingErrorExtension.swift */; };
+		CF4476BD239C2822008A78BE /* XMLDecodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B8239C2822008A78BE /* XMLDecodingStorage.swift */; };
+		CF4476BE239C2822008A78BE /* XMLKeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B9239C2822008A78BE /* XMLKeyedDecodingContainer.swift */; };
+		CF4476BF239C2822008A78BE /* XMLUnkeyedDecodingContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476BA239C2822008A78BE /* XMLUnkeyedDecodingContainer.swift */; };
+		CF4476C0239C2822008A78BE /* XMLDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476BB239C2822008A78BE /* XMLDecoder.swift */; };
+		CF4476C6239C2892008A78BE /* XMLEncodingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476C2239C2892008A78BE /* XMLEncodingStorage.swift */; };
+		CF4476C7239C2892008A78BE /* EncodingErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476C3239C2892008A78BE /* EncodingErrorExtension.swift */; };
+		CF4476C8239C2892008A78BE /* XMLReferencingEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476C4239C2892008A78BE /* XMLReferencingEncoder.swift */; };
+		CF4476C9239C2892008A78BE /* XMLEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476C5239C2892008A78BE /* XMLEncoder.swift */; };
+		CF4476CB239C2AD6008A78BE /* analyze-svd.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476CA239C2AD6008A78BE /* analyze-svd.swift */; };
+		CF4476CF239D01D1008A78BE /* generate-c-header.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476CE239D01D1008A78BE /* generate-c-header.swift */; };
+		CF4476D1239D0213008A78BE /* generate-s-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476D0239D0213008A78BE /* generate-s-file.swift */; };
+		CF4476D3239D023D008A78BE /* generate-py-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476D2239D023D008A78BE /* generate-py-file.swift */; };
+		CFC1B995239C23F40050B84D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1B994239C23F40050B84D /* main.swift */; };
+		CFC1B99D239C24AA0050B84D /* svd-descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CFC1B98F239C23F30050B84D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CF4476B0239C2804008A78BE /* XMLStackParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLStackParser.swift; sourceTree = "<group>"; };
+		CF4476B1239C2804008A78BE /* ISO8601DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatter.swift; sourceTree = "<group>"; };
+		CF4476B2239C2804008A78BE /* XMLKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLKey.swift; sourceTree = "<group>"; };
+		CF4476B7239C2822008A78BE /* DecodingErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodingErrorExtension.swift; sourceTree = "<group>"; };
+		CF4476B8239C2822008A78BE /* XMLDecodingStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLDecodingStorage.swift; sourceTree = "<group>"; };
+		CF4476B9239C2822008A78BE /* XMLKeyedDecodingContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLKeyedDecodingContainer.swift; sourceTree = "<group>"; };
+		CF4476BA239C2822008A78BE /* XMLUnkeyedDecodingContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLUnkeyedDecodingContainer.swift; sourceTree = "<group>"; };
+		CF4476BB239C2822008A78BE /* XMLDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLDecoder.swift; sourceTree = "<group>"; };
+		CF4476C2239C2892008A78BE /* XMLEncodingStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLEncodingStorage.swift; sourceTree = "<group>"; };
+		CF4476C3239C2892008A78BE /* EncodingErrorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodingErrorExtension.swift; sourceTree = "<group>"; };
+		CF4476C4239C2892008A78BE /* XMLReferencingEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLReferencingEncoder.swift; sourceTree = "<group>"; };
+		CF4476C5239C2892008A78BE /* XMLEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLEncoder.swift; sourceTree = "<group>"; };
+		CF4476CA239C2AD6008A78BE /* analyze-svd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "analyze-svd.swift"; sourceTree = "<group>"; };
+		CF4476CE239D01D1008A78BE /* generate-c-header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-c-header.swift"; sourceTree = "<group>"; };
+		CF4476D0239D0213008A78BE /* generate-s-file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-s-file.swift"; sourceTree = "<group>"; };
+		CF4476D2239D023D008A78BE /* generate-py-file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-py-file.swift"; sourceTree = "<group>"; };
+		CFC1B991239C23F40050B84D /* svd-decoder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "svd-decoder"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFC1B994239C23F40050B84D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "svd-descriptor.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFC1B98E239C23F30050B84D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF4476AF239C27C8008A78BE /* XML parsing */ = {
+			isa = PBXGroup;
+			children = (
+				CF4476C1239C2880008A78BE /* Encoder */,
+				CF4476B6239C280E008A78BE /* Decoder */,
+				CF4476B1239C2804008A78BE /* ISO8601DateFormatter.swift */,
+				CF4476B2239C2804008A78BE /* XMLKey.swift */,
+				CF4476B0239C2804008A78BE /* XMLStackParser.swift */,
+			);
+			name = "XML parsing";
+			path = XMLParsing;
+			sourceTree = "<group>";
+		};
+		CF4476B6239C280E008A78BE /* Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				CF4476B7239C2822008A78BE /* DecodingErrorExtension.swift */,
+				CF4476BB239C2822008A78BE /* XMLDecoder.swift */,
+				CF4476B8239C2822008A78BE /* XMLDecodingStorage.swift */,
+				CF4476B9239C2822008A78BE /* XMLKeyedDecodingContainer.swift */,
+				CF4476BA239C2822008A78BE /* XMLUnkeyedDecodingContainer.swift */,
+			);
+			path = Decoder;
+			sourceTree = "<group>";
+		};
+		CF4476C1239C2880008A78BE /* Encoder */ = {
+			isa = PBXGroup;
+			children = (
+				CF4476C3239C2892008A78BE /* EncodingErrorExtension.swift */,
+				CF4476C5239C2892008A78BE /* XMLEncoder.swift */,
+				CF4476C2239C2892008A78BE /* XMLEncodingStorage.swift */,
+				CF4476C4239C2892008A78BE /* XMLReferencingEncoder.swift */,
+			);
+			path = Encoder;
+			sourceTree = "<group>";
+		};
+		CFC1B988239C23F30050B84D = {
+			isa = PBXGroup;
+			children = (
+				CFC1B993239C23F40050B84D /* svd-decoder */,
+				CFC1B992239C23F40050B84D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFC1B992239C23F40050B84D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFC1B991239C23F40050B84D /* svd-decoder */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFC1B993239C23F40050B84D /* svd-decoder */ = {
+			isa = PBXGroup;
+			children = (
+				CF4476CA239C2AD6008A78BE /* analyze-svd.swift */,
+				CF4476CE239D01D1008A78BE /* generate-c-header.swift */,
+				CF4476D2239D023D008A78BE /* generate-py-file.swift */,
+				CF4476D0239D0213008A78BE /* generate-s-file.swift */,
+				CFC1B994239C23F40050B84D /* main.swift */,
+				CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */,
+				CF4476AF239C27C8008A78BE /* XML parsing */,
+			);
+			path = "svd-decoder";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFC1B990239C23F30050B84D /* svd-decoder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFC1B998239C23F40050B84D /* Build configuration list for PBXNativeTarget "svd-decoder" */;
+			buildPhases = (
+				CFC1B98D239C23F30050B84D /* Sources */,
+				CFC1B98E239C23F30050B84D /* Frameworks */,
+				CFC1B98F239C23F30050B84D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "svd-decoder";
+			productName = "svd-decoder";
+			productReference = CFC1B991239C23F40050B84D /* svd-decoder */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFC1B989239C23F30050B84D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Pierre Molinaro";
+				TargetAttributes = {
+					CFC1B990239C23F30050B84D = {
+						CreatedOnToolsVersion = 11.3;
+					};
+				};
+			};
+			buildConfigurationList = CFC1B98C239C23F30050B84D /* Build configuration list for PBXProject "svd-decoder" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFC1B988239C23F30050B84D;
+			productRefGroup = CFC1B992239C23F40050B84D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFC1B990239C23F30050B84D /* svd-decoder */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFC1B98D239C23F30050B84D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF4476CB239C2AD6008A78BE /* analyze-svd.swift in Sources */,
+				CFC1B99D239C24AA0050B84D /* svd-descriptor.swift in Sources */,
+				CF4476C8239C2892008A78BE /* XMLReferencingEncoder.swift in Sources */,
+				CF4476CF239D01D1008A78BE /* generate-c-header.swift in Sources */,
+				CF4476BF239C2822008A78BE /* XMLUnkeyedDecodingContainer.swift in Sources */,
+				CF4476C0239C2822008A78BE /* XMLDecoder.swift in Sources */,
+				CF4476BC239C2822008A78BE /* DecodingErrorExtension.swift in Sources */,
+				CF4476C6239C2892008A78BE /* XMLEncodingStorage.swift in Sources */,
+				CF4476D1239D0213008A78BE /* generate-s-file.swift in Sources */,
+				CF4476C7239C2892008A78BE /* EncodingErrorExtension.swift in Sources */,
+				CF4476BD239C2822008A78BE /* XMLDecodingStorage.swift in Sources */,
+				CF4476B4239C2804008A78BE /* ISO8601DateFormatter.swift in Sources */,
+				CF4476B5239C2804008A78BE /* XMLKey.swift in Sources */,
+				CF4476C9239C2892008A78BE /* XMLEncoder.swift in Sources */,
+				CF4476BE239C2822008A78BE /* XMLKeyedDecodingContainer.swift in Sources */,
+				CF4476B3239C2804008A78BE /* XMLStackParser.swift in Sources */,
+				CFC1B995239C23F40050B84D /* main.swift in Sources */,
+				CF4476D3239D023D008A78BE /* generate-py-file.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CFC1B996239C23F40050B84D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFC1B997239C23F40050B84D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		CFC1B999239C23F40050B84D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		CFC1B99A239C23F40050B84D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFC1B98C239C23F30050B84D /* Build configuration list for PBXProject "svd-decoder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFC1B996239C23F40050B84D /* Debug */,
+				CFC1B997239C23F40050B84D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFC1B998239C23F40050B84D /* Build configuration list for PBXNativeTarget "svd-decoder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFC1B999239C23F40050B84D /* Debug */,
+				CFC1B99A239C23F40050B84D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFC1B989239C23F30050B84D /* Project object */;
+}

@@ -35,7 +35,7 @@ enum @propertyKindAST {
 list @structurePropertyListAST {
   @lstring mPropertyName
   @propertyAttributeList mPropertyAttributeList
-  @bool mIsPublic
+  @propertyVisibility mVisibility
   @lstring mPropertyTypeName
   @propertyKindAST mPropertyKind
 }
@@ -52,14 +52,14 @@ syntax extension omnibus_syntax {
     ?!@ast ioAST
     ?!@structurePropertyListAST ioPropertyListAST
   {
-    @bool public
+    @propertyVisibility visibility
     select
-      public = false
+      visibility = .isPrivate
     or
       $public$
-      public = true
+      visibility = .isPublic
     end
-    <struct_property_declaration> !?ioAST !public !?ioPropertyListAST
+    <struct_property_declaration> !?ioAST !visibility !?ioPropertyListAST
   }
   
   #·····················································································································
@@ -68,14 +68,14 @@ syntax extension omnibus_syntax {
     ?!@ast ioAST
     ?!@structurePropertyListAST ioPropertyListAST
   {
-    <struct_property_declaration> !?ioAST !false !?ioPropertyListAST
+    <struct_property_declaration> !?ioAST !.isPrivate !?ioPropertyListAST
   }
 
   #·····················································································································
 
   rule <struct_property_declaration>
     ?!@ast ioAST
-    ?let @bool isPublic
+    ?let @propertyVisibility inVisibility
     ?!@structurePropertyListAST ioPropertyListAST
   {
     $let$
@@ -92,14 +92,14 @@ syntax extension omnibus_syntax {
       ioPropertyListAST +=
         !propertyName
         !{}
-        !isPublic
+        !inVisibility
         !typeName 
         !.initializedConstantProperty{!initExpression:initExpression}
     or
       ioPropertyListAST +=
         !propertyName
         !{}
-        !isPublic
+        !inVisibility
         !typeName 
         !.uninitializedConstantProperty
     end
@@ -109,7 +109,7 @@ syntax extension omnibus_syntax {
 
   rule <struct_property_declaration>
     ?!@ast ioAST
-    ?let @bool isPublic
+    ?let @propertyVisibility inVisibility
     ?!@structurePropertyListAST ioPropertyListAST
   {
     $var$
@@ -124,11 +124,11 @@ syntax extension omnibus_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioPropertyListAST += !propertyName !{} !isPublic !typeName !.uninitializedStoredProperty
+        ioPropertyListAST += !propertyName !{} !inVisibility !typeName !.uninitializedStoredProperty
       or
        <propertyGetterSetter>
          !?ioAST
-         !isPublic
+         !inVisibility
          !propertyName
          !propertyAttributeList
          !typeName 
@@ -139,7 +139,7 @@ syntax extension omnibus_syntax {
         ioPropertyListAST +=
           !propertyName
           !propertyAttributeList
-          !isPublic
+          !inVisibility
           !typeName 
           !.initializedStoredProperty{!initExpression:initExpression}
       end
@@ -149,7 +149,7 @@ syntax extension omnibus_syntax {
       ioPropertyListAST +=
         !propertyName
         !propertyAttributeList
-        !isPublic
+        !inVisibility
         !["" nowhere]
         !.initializedStoredProperty{!initExpression:initExpression}
     end
@@ -159,7 +159,7 @@ syntax extension omnibus_syntax {
 
   rule <propertyGetterSetter>
     ?!@ast ioAST
-    ?let @bool inIsPublic
+    ?let @propertyVisibility inVisibility
     ?let @lstring inPropertyName
     ?let @propertyAttributeList inPropertyAttributeList
     ?let @lstring inTypeName
@@ -179,7 +179,7 @@ syntax extension omnibus_syntax {
           ioPropertyListAST +=
             !inPropertyName
             !inPropertyAttributeList
-            !inIsPublic
+            !inVisibility
             !inTypeName 
             !.readOnlyComputedProperty{
               !instructionList: instructionList
@@ -193,7 +193,7 @@ syntax extension omnibus_syntax {
           ioPropertyListAST +=
             !inPropertyName
             !inPropertyAttributeList
-            !inIsPublic
+            !inVisibility
             !inTypeName 
             !.writeComputedProperty{
               !instructionList: instructionList
@@ -219,7 +219,7 @@ syntax extension omnibus_syntax {
       ioPropertyListAST +=
         !inPropertyName
         !inPropertyAttributeList
-        !inIsPublic
+        !inVisibility
         !inTypeName 
         !.readOnlyComputedProperty{
           !instructionList: readInstructionList
@@ -330,7 +330,6 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
   ?!@propertyList ioPropertyList
-#  ?!@propertyGetterMap ioPropertyGetterMap
   ?!@sortedOperandIRList sortedOperandIRList
   ?!@constructorSignature constructorSignature
   ?!@string ioConstructorKey
@@ -382,17 +381,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
-    [!?ioContext.mTypePropertyGetterMap insertProperty
+    [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
     ]
-#    [!?ioPropertyGetterMap insertKey
-#      !mPropertyName
-#      !mIsPublic
-#      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
-#    ]
   case initializedStoredProperty (initExpression) :
     computeStaticExpression (
       !?context: ioContext
@@ -421,21 +415,16 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !actualPropertyType
-    [!?ioContext.mTypePropertyGetterMap insertProperty
+    [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
-#    [!?ioPropertyGetterMap insertKey
-#      !mPropertyName
-#      !mIsPublic
-#      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-#    ]
-    [!?ioContext.mTypePropertySetterMap insertProperty
+    [!?ioContext insertPropertySetter
       !inReceiverTypeName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
@@ -445,21 +434,16 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
-    [!?ioContext.mTypePropertyGetterMap insertProperty
+    [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
-#    [!?ioPropertyGetterMap insertKey
-#      !mPropertyName
-#      !mIsPublic
-#      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-#    ]
-    [!?ioContext.mTypePropertySetterMap insertProperty
+    [!?ioContext insertPropertySetter
       !inReceiverTypeName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
     ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
@@ -470,17 +454,12 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let propertyIndex = [ioPropertyList length]
     ioPropertyList += !mPropertyName.string !optionalPropertyType
-    [!?ioContext.mTypePropertyGetterMap insertProperty
+    [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
-#    [!?ioPropertyGetterMap insertKey
-#      !mPropertyName
-#      !mIsPublic
-#      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-#    ]
     constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
@@ -489,23 +468,15 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
-    [!?ioContext.mTypePropertyGetterMap insertProperty
+    [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.computedProperty{
         !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
         !modeDictionary:modeDictionary
       }
     ]
-#    [!?ioPropertyGetterMap insertKey
-#      !mPropertyName
-#      !mIsPublic
-#      !.computedProperty{
-#        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
-#        !modeDictionary:modeDictionary
-#      }
-#    ]
     let functionLLVMName = @lstring.new {
       !llvmRoutineName
       !mPropertyName.location
@@ -532,10 +503,10 @@ method @structurePropertyListAST-element enterPropertyInContext
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
     let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
     let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
-    [!?ioContext.mTypePropertySetterMap insertProperty
+    [!?ioContext insertPropertySetter
       !inReceiverTypeName
       !mPropertyName
-      !mIsPublic
+      !mVisibility
       !.computedProperty {
         !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
         !getterModeDictionary: getterModeDictionary

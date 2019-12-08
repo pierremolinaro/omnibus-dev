@@ -231,9 +231,11 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
 {
 #--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
 #    If identifier is empty string, the receiver is "self"
+  var receiverIsSelf = false
   @omnibusType currentType
   @string currentLLVMAddressVar
   if mIdentifier.string == "" then # Receiver is self
+    receiverIsSelf = true
     if inSelfType.kind == .void then
       error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
@@ -269,8 +271,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     end
   end
 #--- Get current object property map
-  var currentObjectPropertyMap = [inContext.mTypePropertyGetterMap propertyMap !currentType]
-#  @propertyGetterMap currentObjectPropertyMap = currentType.propertyGetterMapp
+  var currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
 #--- Insulate last access (should be a "property", used as routine name
   var accessList = mAccessList
   [!?accessList popLast ?let lastAccess]
@@ -280,9 +281,17 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     case property (@lstring propertyName) :
       [currentObjectPropertyMap searchKey
         !propertyName
-        ?let @bool unused isPublic
+        ?let visibility
         ?let @propertyGetterKind propertyAccess
       ]
+      switch visibility
+      case isPublic :
+      case isPrivate :
+        if not receiverIsSelf then
+          error propertyName : "inaccessible property, is private"
+        end
+      end
+      receiverIsSelf = false
       switch propertyAccess
       case constantProperty (*) :
         error propertyName
@@ -299,8 +308,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         ]
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
-        currentObjectPropertyMap = [inContext.mTypePropertyGetterMap propertyMap !currentType]
-#        currentObjectPropertyMap = currentType.propertyGetterMapp
+        currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
       case computedProperty (propertyTypeProxy modeDictionary) :
         let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!modeDictionary !inMode !propertyName)
         [!?ioInstructionGenerationList appendGetComputedPropertyValue
@@ -312,8 +320,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         ]
         currentType = [resultValueIR type]
         currentLLVMAddressVar = [resultValueIR llvmName]
-        currentObjectPropertyMap = [inContext.mTypePropertyGetterMap propertyMap !currentType]
-#        currentObjectPropertyMap = currentType.propertyGetterMapp # ????
+        currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
       end
     case arrayAccess (* @location endOfIndex *) :
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar

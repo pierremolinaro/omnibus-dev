@@ -331,8 +331,7 @@ method @LValueOperandAST getValuedObjectType
   case noOperand :
   case property (@lstring propertyName @LValueOperandAST next) :
     
-    let @propertyGetterMap propertyGetterMap = [inContext.mTypePropertyGetterMap propertyMap !ioType]
-#    let @propertyGetterMap propertyGetterMap = ioType.propertyGetterMapp
+    let @propertyGetterMap propertyGetterMap = [inContext propertyGetterMap !ioType]
     [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
     switch accessKind
     case constantProperty (value) :

@@ -290,17 +290,12 @@ override method @staticListAST enterInContext
       else
         propertyNameSet += !propertyName
         propertyList += !propertyName !propertyType
-        [!?ioContext.mTypePropertyGetterMap insertProperty
+        [!?ioContext insertGetter
           !omnibusTypeName: omnibusNameForStaticListElementType (!mStaticListName)
           !propertyName
-          !true # Public
+          !.isPublic
           !.storedProperty{!type:propertyType !index:propertyIndex}
         ]
-#        [!?propertyGetterMap insertKey
-#          !propertyName
-#          !true # Public
-#          !.storedProperty{!type:propertyType !index:propertyIndex}
-#        ]
       end
     case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
     #--- Routine LLVM name
@@ -447,16 +442,10 @@ override method @staticListAST enterInContext
   end
   [!?ioStaticListValueMap insertKey !mStaticListName !stringValueList]
 #-------------------------------------------------------------------- List type property map
-#  @propertyGetterMap listTypePropertyMap = {}
-#  [!?listTypePropertyMap insertKey # "count" property
-#    !.new {!"count" !mStaticListName.location}
-#    !true # public
-#    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
-#  ]
-  [!?ioContext.mTypePropertyGetterMap insertProperty
+  [!?ioContext insertGetter
     !omnibusTypeName: omnibusNameForStaticListType (!mStaticListName)
     !.new {!"count" !mStaticListName.location}
-    !true # public
+    !.isPublic
     !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[mValueList length]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
