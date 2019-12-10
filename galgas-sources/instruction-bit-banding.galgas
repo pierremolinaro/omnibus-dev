@@ -26,7 +26,6 @@ syntax extension omnibus_syntax {
     end
     <expression> !?ioAST ?let bitExpression
     let bitExpressionLocation = @location.here
-#    $)$
     $=$
     <expression> !?ioAST ?let sourceExpression
   #--- AST
@@ -50,7 +49,7 @@ syntax extension omnibus_syntax {
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [!?ioGraph noteNode !["uint1" nowhere]]
+  [!?ioGraph noteNode !["u1" nowhere]]
   [mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -73,7 +72,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Source Expression
 #--- Inferred source expression type
   [inContext.mTypeMap searchKey
-    !lkey:.new {!"uint1" !mSourceExpressionLocation}
+    !lkey:.new {!"u1" !mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
   ]
 #--- Compute source expression
@@ -127,7 +126,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Bit Expression
 #--- Inferred bit expression type
   [inContext.mTypeMap searchKey
-    !lkey:.new {!"uint" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
+    !lkey:.new {!"u" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 #--- Compute bit expression

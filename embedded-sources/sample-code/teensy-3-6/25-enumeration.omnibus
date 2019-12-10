@@ -14,7 +14,7 @@ enum $monEnum {
 //——————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @autostart {
-  var tick = $uint32 ()
+  var tick = $u32 ()
   var énumération = $monEnum.zéro
 
   event time.wait (!until: self.tick) {

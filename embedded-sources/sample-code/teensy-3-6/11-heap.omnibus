@@ -20,19 +20,19 @@ driver project > digital {
 
 driver project ()
 
-typealias $Array8 = [$uint8]
+typealias $Array8 = [$u8]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $StructWithARC {
-  public var unEntierQuelconque $uint32 = 0
+  public var unEntierQuelconque $u32 = 0
   public var donnée = $Array8 ()
 }
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct $AutreStructWithARC {
-  public var autreEntierQuelconque $uint32 = 0
+  public var autreEntierQuelconque $u32 = 0
   public var structure = $StructWithARC ()
   public var autreDonnée = $Array8 ()
 }
@@ -40,12 +40,12 @@ struct $AutreStructWithARC {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 > T2 @stacksize 512 @autostart {
-  var échéance $uint32 = 0
-  var freeRam $uint32 = 0
-  var start $uint32 = 0
-  var maxAllocationParSeconde $uint32 = 0
-  var alloc $uint32 = 0
-  var current $uint32 = 0
+  var échéance $u32 = 0
+  var freeRam $u32 = 0
+  var start $u32 = 0
+  var maxAllocationParSeconde $u32 = 0
+  var alloc $u32 = 0
+  var current $u32 = 0
 
   event @onSetup first {
     lcd.print (!string:"Free:")
@@ -94,13 +94,13 @@ task T1 > T2 @stacksize 512 @autostart {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T2 > backgroundTask @stacksize 512 @autostart {
-  var échéance1 $uint32 = 2001
-  var échéance2 $uint32 = 2001
-  var échéance3 $uint32 = 2001
+  var échéance1 $u32 = 2001
+  var échéance2 $u32 = 2001
+  var échéance3 $u32 = 2001
   var data1 = $Array8 ()
   var data2 = $Array8 ()
   var structure = $AutreStructWithARC ()
-  var b $uint8 = 0
+  var b $u8 = 0
 
   event time.wait (!until:self.échéance1) {
     self.échéance1 +%= 71
@@ -156,8 +156,8 @@ task backgroundTask @stacksize 512 @autostart {
 
   func testReleaseLocalVar (?in: inData $Array8) {
     externalSection (!in:inData)
-    var d $uint32 = 143
-    var x $uint3 = d [3 ... 5]
+    var d $u32 = 143
+    var x $u3 = d [3 ... 5]
   }
 
 }

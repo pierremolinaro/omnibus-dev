@@ -15,7 +15,7 @@ service emptyService () {
 
 //——————————————————————————————————————————————————————————————————————————————
 
-section getSysTick () -> $uint32 {
+section getSysTick () -> $u32 {
   result = ©SYST.CVR
 }
 
@@ -30,9 +30,9 @@ task T @stacksize 512 @autostart {
   //············································································
 
   event @onSetup first {
-    var cumul $uint32 = 0
+    var cumul $u32 = 0
   //--- Compute getSysTick duration
-    for _ $uint32 in 0 ..< ITERATIONS {
+    for _ $u32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
       let t0 = getSysTick ()
       let t1 = getSysTick ()
@@ -43,7 +43,7 @@ task T @stacksize 512 @autostart {
     let systickDuration = cumul / ITERATIONS
   //--- Compute emptySection duration
     lcd.goto (!line:1 !column:0)
-    for _ $uint32 in 0 ..< ITERATIONS {
+    for _ $u32 in 0 ..< ITERATIONS {
       time.wait (!during:1)
       let t0 = getSysTick ()
       emptySection ()
@@ -53,7 +53,7 @@ task T @stacksize 512 @autostart {
     }
   //--- Compute emptyService duration
     lcd.goto (!line:2 !column:0)
-    for _ $uint32 in 0 ..< 4 {
+    for _ $u32 in 0 ..< 4 {
       time.wait (!during:1)
       let t0 = getSysTick ()
       emptyService ()

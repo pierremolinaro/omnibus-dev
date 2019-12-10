@@ -16,7 +16,7 @@ override getter @integerDeclarationAST locationForErrorSignaling -> @location ou
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
-  outName = if mIsSigned then "int" else "uint" end + mSize
+  outName = if mIsSigned then "i" else "u" end + mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -112,7 +112,7 @@ override method @integerDeclarationAST enterInContext
 #      !resultTypeProxy:boolTypeProxy
 #      ?routineLLVMName: let routineLLVMName
 #    ]
-#    ioRoutineListIR += !@uint1ToBoolFunctionIR.new {
+#    ioRoutineListIR += !@$iXXToBoolFunctionIR.new {
 #      !routineLLVMName
 #      !isRequired:false
 #      !warnsIfUnused:false
@@ -846,13 +846,13 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #! CODE GENERATION: UINT1 TO BOOL FUNCTION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#class @uint1ToBoolFunctionIR : @abstractRoutineIR {
+#class @$iXXToBoolFunctionIR : @abstractRoutineIR {
 #  @string mLLVMTypeName
 #}
 
 #·······················································································································
 
-#override method @uint1ToBoolFunctionIR llvmCodeGeneration 
+#override method @$iXXToBoolFunctionIR llvmCodeGeneration 
 #  ?!@string ioLLVMcode
 #  ?let @generationContext unused inGenerationContext
 #  ?!@generationAdds unused ioGenerationAdds

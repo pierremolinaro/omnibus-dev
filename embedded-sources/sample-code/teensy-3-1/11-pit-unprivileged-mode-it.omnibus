@@ -14,7 +14,7 @@ section setupPIT () {
 //------------------------------------------------*
 
 driver pit > digital {
-  var gPITValue $uint32 = 0
+  var gPITValue $u32 = 0
 
   startup {
     digital.set (!mode:.output !toPort:.D13)
@@ -22,7 +22,7 @@ driver pit > digital {
     ©SIM.SCGC6 |= SIM_SCGC6_PIT
   }
 
-  section getPITValue (!outValue $uint32) {
+  section getPITValue (!outValue $u32) {
     outValue = self.gPITValue
   }
 
@@ -39,7 +39,7 @@ driver pit ()
 //------------------------------------------------*
 
 task T @stacksize 512 @autostart {
-  var deadline $uint32 = 0
+  var deadline $u32 = 0
 
   event @onSetup first {
     setupPIT ()
@@ -54,7 +54,7 @@ task T @stacksize 512 @autostart {
     lcd.goto (!line:1 !column:0)
     lcd.print (!spaces:10)
     lcd.goto (!line:1 !column:0)
-    var value $uint32
+    var value $u32
     pit.getPITValue (?value)
     lcd.print (!u32:value)
   }

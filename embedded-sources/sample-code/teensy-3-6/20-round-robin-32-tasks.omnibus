@@ -20,13 +20,13 @@ driver myDriver > digital {
     digital.set (!mode:.output !toPort:LED_L0)
   }
 
-  var tick = $uint32 ()
+  var tick = $u32 ()
 
   public section noteTick () {
     self.tick = ©SYST.CVR
   }
 
-  public section getDuration () -> $uint32 {
+  public section getDuration () -> $u32 {
     result = self.tick - ©SYST.CVR
   }
 
@@ -75,7 +75,7 @@ sync sémaphore30 = $Semaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T0 @stacksize 512 @autostart {
-  var échéance $uint32 = 0
+  var échéance $u32 = 0
 
   event time.wait (!until:self.échéance) {
     self.échéance +%= 500

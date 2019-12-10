@@ -6,7 +6,7 @@ import "carte-tp-teensy-3-6.omnibus-import"
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @autostart {
-  var tick $uint32 = 0
+  var tick $u32 = 0
 
   event time.wait (!until: self.tick) {
     self.tick += 500

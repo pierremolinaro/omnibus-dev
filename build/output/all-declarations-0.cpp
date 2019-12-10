@@ -8667,10 +8667,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_instruction_i95_ (GALGAS_
   GALGAS_expressionAST var_bitExpression_1458 ;
   nt_expression_ (ioArgument_ioAST, var_bitExpression_1458, inCompiler) ;
   GALGAS_location var_bitExpressionLocation_1488 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 28)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 30)) ;
-  GALGAS_expressionAST var_sourceExpression_1569 ;
-  nt_expression_ (ioArgument_ioAST, var_sourceExpression_1569, inCompiler) ;
-  ioArgument_ioInstructionList.addAssign_operation (GALGAS_bitbandInstructionAST::constructor_new (var_registerLValue_1260.getter_mRegisterGroupName (HERE).getter_location (HERE), var_registerLValue_1260, var_bitExpression_1458, var_bitExpressionLocation_1488, var_sourceExpression_1569, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 39))  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 33))  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 33)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 29)) ;
+  GALGAS_expressionAST var_sourceExpression_1560 ;
+  nt_expression_ (ioArgument_ioAST, var_sourceExpression_1560, inCompiler) ;
+  ioArgument_ioInstructionList.addAssign_operation (GALGAS_bitbandInstructionAST::constructor_new (var_registerLValue_1260.getter_mRegisterGroupName (HERE).getter_location (HERE), var_registerLValue_1260, var_bitExpression_1458, var_bitExpressionLocation_1488, var_sourceExpression_1560, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 38))  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 32))  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 32)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -8679,7 +8679,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_instruction_i95_parse (C_
   nt_control_5F_register_5F_lvalue_parse (inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 23)) ;
   nt_expression_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 30)) ;
+  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3D_ COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 29)) ;
   nt_expression_parse (inCompiler) ;
   inCompiler->resetTemplateString () ;
 }

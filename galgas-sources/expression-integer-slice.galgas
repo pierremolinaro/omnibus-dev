@@ -125,7 +125,7 @@ override method @integerSliceExpressionAST analyzeExpression
           error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+          expressionTypeName = .new {!"u" + sliceWidth !mTypeName.location}
           if sliceWidth == 0 then
             error sliceWidthStr : "the bit slice width should be > 0"
           end

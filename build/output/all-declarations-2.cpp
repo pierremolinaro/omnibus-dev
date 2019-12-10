@@ -12848,9 +12848,9 @@ static GALGAS_string extensionGetter_integerDeclarationAST_typeName (const cPtr_
   GALGAS_string temp_0 ;
   const enumGalgasBool test_1 = object->mProperty_mIsSigned.boolEnum () ;
   if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_string ("int") ;
+    temp_0 = GALGAS_string ("i") ;
   }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_string ("uint") ;
+    temp_0 = GALGAS_string ("u") ;
   }
   result_outName = temp_0.add_operation (object->mProperty_mSize.getter_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
 //---

@@ -8,15 +8,15 @@ import "carte-tp-teensy-3-6.omnibus-import"
 let SIZE = 10
 
 sync $SynchronizationBuffer {
-  var data = [SIZE : $uint32] (!repeated:$uint32 ())
-  var readIndex $uint32 = 0
-  var writeIndex $uint32 = 0
+  var data = [SIZE : $u32] (!repeated:$u32 ())
+  var readIndex $u32 = 0
+  var writeIndex $u32 = 0
   var readSemaphore = $Semaphore (!value:0)
   var writeSemaphore = $Semaphore (!value:SIZE)
 
   //············································································
 
-  public func write user @mutating @noUnusedWarning (? value $uint32) {
+  public func write user @mutating @noUnusedWarning (? value $u32) {
     self.writeSemaphore.wait ()
     self.data [self.writeIndex] = value
     self.writeIndex += 1
@@ -28,7 +28,7 @@ sync $SynchronizationBuffer {
 
   //············································································
 
-  public func read user @mutating @noUnusedWarning (! value $uint32) {
+  public func read user @mutating @noUnusedWarning (! value $u32) {
     self.readSemaphore.wait ()
     value = self.data [self.readIndex]
     self.readIndex += 1
@@ -40,7 +40,7 @@ sync $SynchronizationBuffer {
 
   //············································································
 
-  public guard read @noUnusedWarning (! value $uint32) : self.readSemaphore.wait () {
+  public guard read @noUnusedWarning (! value $u32) : self.readSemaphore.wait () {
     value = self.data [self.readIndex]
     self.readIndex += 1
     if self.readIndex == SIZE {
@@ -60,8 +60,8 @@ sync buffer = $SynchronizationBuffer ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche1 @stacksize 512 {
-  var compteur $uint32 = 0
-  var index $uint32 = 0
+  var compteur $u32 = 0
+  var index $u32 = 0
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:LED_L0)
@@ -79,7 +79,7 @@ task Tâche1 @stacksize 512 {
 
 task Tâche2 @stacksize 512 @autostart {
 
-  event buffer.read (?var value $uint32) {
+  event buffer.read (?var value $u32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:value)
   }

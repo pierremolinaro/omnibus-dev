@@ -63,7 +63,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-  [!?ioGraph addEdge !mEnumerationName !["uint" + representationBitCount nowhere]]
+  [!?ioGraph addEdge !mEnumerationName !["u" + representationBitCount nowhere]]
 }
 
 #·······················································································································
@@ -112,28 +112,19 @@ override method @enumerationDeclarationAST enterInContext
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
-#  @propertyGetterMap propertyGetterMap = {}
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
-    !.new {!"uint" + representationBitCount !mEnumerationName}
+    !.new {!"u" + representationBitCount !mEnumerationName}
   }
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: mEnumerationName
     !llvmBaseTypeName:mEnumerationName
-    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
+    !propertyName: .new {!"u" + representationBitCount !mEnumerationName}
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: let conversionToUIntN
   ]
-#  [!?propertyGetterMap addComputedPropertyGetterEx
-#    !llvmBaseTypeName:mEnumerationName
-#    !propertyName: .new {!"uint" + representationBitCount !mEnumerationName}
-#    !mode:.anySafeMode
-#    !public: true
-#    !resultTypeProxy:integerTypeProxy
-#    ?routineLLVMName: *
-#  ]
   ioRoutineListIR += !@enumToUintRoutineIR.new {
     !conversionToUIntN
     !isRequired:false

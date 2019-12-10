@@ -89,8 +89,8 @@ driver digital > root {
   public func set safe @noUnusedWarning (?mode:mode $DigitalMode
                                          ?toPort:port $DigitalPort) {
   //--- Set config and dir to apply
-   var config $uint32
-    var dir $uint1
+   var config $u32
+    var dir $u1
     switch mode {
     case output :
       config = {©PORTC.PCR !MUX:1}

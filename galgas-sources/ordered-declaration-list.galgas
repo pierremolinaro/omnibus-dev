@@ -11,7 +11,7 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
 #·······················································································································
 
 setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @location inErrorLocation {
-  let typeName = @lstring.new {!"uint" + inBitSize !inErrorLocation}
+  let typeName = @lstring.new {!"u" + inBitSize !inErrorLocation}
   [!?self noteNode !typeName]
 }
 
@@ -155,18 +155,20 @@ proc buildOrderedDeclarationList
 #--------------------------------------- Add needed UIntXX and IntXX types
   var addintegerTypeCount = 0
   for () in [precedenceGraph undefinedNodeKeyList] do
-    let split = [mValue componentsSeparatedByString !"int"]
-    if ([split length] == 2) && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
-      if [split mValueAtIndex !0] == "u" then
-        let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
-        let declaration = @integerDeclarationAST.new {!false !n}
-        [declaration enterInPrecedenceGraph !?precedenceGraph]
-      #--- Add assignment operator declaration
-        appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
-      #---
-        addintegerTypeCount ++
-      elsif [split mValueAtIndex !0] == "" then 
-        let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
+  #--- Detect uXX types
+    let Uxx = [mValue componentsSeparatedByString !"u"]
+    if ([Uxx length] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
+      let n = [[Uxx mValueAtIndex !1] decimalUnsignedNumber]
+      let declaration = @integerDeclarationAST.new {!false !n}
+      [declaration enterInPrecedenceGraph !?precedenceGraph]
+    #--- Add assignment operator declaration
+      appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
+    #---
+      addintegerTypeCount ++
+    else
+      let Ixx = [mValue componentsSeparatedByString !"i"]
+      if ([Ixx length] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
+        let n = [[Ixx mValueAtIndex !1] decimalUnsignedNumber]
         let declaration = @integerDeclarationAST.new {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration

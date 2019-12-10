@@ -11,7 +11,7 @@ sync sémaphore = $Sémaphore (!value:0)
 //——————————————————————————————————————————————————————————————————————————————
 
 task T1 @stacksize 512 @autostart {
-  var top $uint32 = 0
+  var top $u32 = 0
 
   event @onSetup first {
     digital.set (!mode: .output !toPort: .D13)

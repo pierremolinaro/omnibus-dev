@@ -163,7 +163,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = .new {!"uint" + sliceWidth !mTypeName.location}
+      sliceTypeName = .new {!"u" + sliceWidth !mTypeName.location}
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       end

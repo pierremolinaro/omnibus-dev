@@ -9,7 +9,7 @@ driver time ()
 //——————————————————————————————————————————————————————————————————————————————
 
 driver time > root {
-  var mUptime $uint32 = 0
+  var mUptime $u32 = 0
 
   //············································································
 
@@ -33,22 +33,22 @@ driver time > root {
 
   //············································································
 
-  public section now safe @noUnusedWarning () -> $uint32 {
+  public section now safe @noUnusedWarning () -> $u32 {
     result = self.mUptime
   }
 
   //············································································
 
-  public func busyWaitingDuringMS startup @noUnusedWarning @mutating (?inDelay $uint32) {
-    for _ $uint32 in 0 ..< inDelay {
+  public func busyWaitingDuringMS startup @noUnusedWarning @mutating (?inDelay $u32) {
+    for _ $u32 in 0 ..< inDelay {
       self.oneMillisecondBusyWait ()
     }
   }
 
   //············································································
 
-  public func panicBusyWaitingDuringMS panic @noUnusedWarning @mutating (?inDelay $uint32) {
-    for _ $uint32 in 0 ..< inDelay {
+  public func panicBusyWaitingDuringMS panic @noUnusedWarning @mutating (?inDelay $u32) {
+    for _ $u32 in 0 ..< inDelay {
       self.panicOneMillisecondBusyWait ()
     }
   }
@@ -64,7 +64,7 @@ driver time > root {
 
   //············································································
 
-  public primitive wait safe @noUnusedWarning (?until: inDate $uint32) {
+  public primitive wait safe @noUnusedWarning (?until: inDate $u32) {
     if inDate > self.mUptime {
       block (!onDeadline:inDate)
     }
@@ -72,7 +72,7 @@ driver time > root {
 
   //············································································
 
-  public primitive wait @noUnusedWarning (?during: inDelay $uint32) {
+  public primitive wait @noUnusedWarning (?during: inDelay $u32) {
     if inDelay > 0 {
       block (!onDeadline:self.mUptime +% inDelay)
     }
@@ -80,7 +80,7 @@ driver time > root {
 
   //············································································
 
-  public guard wait @noUnusedWarning (?until:inDeadline $uint32) {
+  public guard wait @noUnusedWarning (?until:inDeadline $u32) {
     accept = (inDeadline) ≤ self.mUptime
     if not accept {
       handle (!guardedDeadline:inDeadline)

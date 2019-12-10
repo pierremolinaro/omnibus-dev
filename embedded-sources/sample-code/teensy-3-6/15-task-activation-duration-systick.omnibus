@@ -8,13 +8,13 @@ driver myDriver ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 //
 driver myDriver > time {
-  var tick $uint32 = 0
+  var tick $u32 = 0
 
   public section noteTick () {
     self.tick = ©SYST.CVR
   }
 
-  public section getDuration () -> $uint32 {
+  public section getDuration () -> $u32 {
     result = self.tick - ©SYST.CVR
   }
 }

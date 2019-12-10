@@ -52,7 +52,7 @@ extend staticArray kPATTERN ( // Morse code example: output "S S S ..."
 
 let PATTERN_LENGTH = kPATTERN.count
 
-typealias $PatternArray = [PATTERN_LENGTH : $uint32]
+typealias $PatternArray = [PATTERN_LENGTH : $u32]
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -63,7 +63,7 @@ driver pit > root {
   section initializeDMA (?!pattern $PatternArray) {
   //--- Transform pattern for encoding level changes
     var current = no
-    var index $uint32 = 0
+    var index $u32 = 0
     for élément in kPATTERN {
       let b = élément.x
       pattern [index] = if current ≠ b { 0 } else { 1 << 2 }
@@ -179,7 +179,7 @@ driver pit ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @autostart {
-  var compteur $uint32 = 0
+  var compteur $u32 = 0
   var pattern = $PatternArray (!repeated:0)
 
   event @onSetup first {
@@ -198,7 +198,7 @@ task Tâche @stacksize 512 @autostart {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32: self.pattern.count)
     lcd.print (!string:" ")
-    let cc = $ISRSlot.PITChannel3.uint7
+    let cc = $ISRSlot.PITChannel3.u7
     lcd.print (!u32: extend (cc))
   }
 }

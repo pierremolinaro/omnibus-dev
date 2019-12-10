@@ -74,7 +74,7 @@ driver myDriver ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task T1 @stacksize 512 @autostart {
-  var échéance $uint32 = 0
+  var échéance $u32 = 0
 
   event time.wait (!until:self.échéance) {
     self.échéance +%= 1_000

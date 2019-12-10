@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-1.omnibus-import"
 //——————————————————————————————————————————————————————————————————————————————
 
 task T @stacksize 512 @autostart {
-  var compteur $uint32 = 0
+  var compteur $u32 = 0
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:LED_L0)

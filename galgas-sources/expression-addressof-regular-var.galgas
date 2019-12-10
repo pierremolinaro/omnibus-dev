@@ -82,7 +82,7 @@ override method @addressofExpressionAST analyzeExpression
     ]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
-      !["uint" + [inContext.mTargetParameters.mPointerSize string] nowhere]
+      !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
     }
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)

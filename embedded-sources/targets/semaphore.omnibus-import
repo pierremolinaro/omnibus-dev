@@ -1,7 +1,7 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sync $Semaphore {
-  var value $uint32
+  var value $u32
   var list = $TaskList ()
   var guardList = $GuardList ()
 
@@ -27,7 +27,7 @@ sync $Semaphore {
 
   //····················································································································
 
-  public func wait @noUnusedWarning @mutating (?until: inDeadline $uint32) -> $bool {
+  public func wait @noUnusedWarning @mutating (?until: inDeadline $u32) -> $bool {
      event self.wait () exit {
        result = yes
      }else event time.wait (!until: inDeadline) exit {

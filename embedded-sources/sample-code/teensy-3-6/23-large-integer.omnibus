@@ -5,7 +5,7 @@ import "carte-tp-teensy-3-6.omnibus-import"
 
 let largeConstant = 123_456_789_123_456_789_123_456_789_123
 
-typealias $LargeInt = $uint97
+typealias $LargeInt = $u97
 
 func getLargeConstant () -> $LargeInt {
   result = largeConstant
@@ -18,7 +18,7 @@ func getLargeAddition (? inA $LargeInt ?inB $LargeInt) -> $LargeInt {
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche0 @stacksize 512 @autostart {
-  var tick = $uint32 ()
+  var tick = $u32 ()
   var largeInteger = $LargeInt ()
   var otherLargeInteger = $LargeInt ()
 

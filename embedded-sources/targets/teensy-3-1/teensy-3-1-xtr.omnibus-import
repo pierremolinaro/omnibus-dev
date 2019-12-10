@@ -12,7 +12,7 @@ extern func
 block safe primitive (?!inList:ioWaitingList $TaskList) : "blockInList"
 
 extern func
-block safe primitive (?onDeadline:inDeadline $uint32) : "blockOnDeadline"
+block safe primitive (?onDeadline:inDeadline $u32) : "blockOnDeadline"
 
 //--- Make task Ready
 extern func
@@ -20,7 +20,7 @@ makeTaskReady safe service (?!fromList:ioWaitingList $TaskList
                             !found: outFound $bool) : "makeTaskReady"
 
 extern func
-makeTasksReady safe service (?fromCurrentDate:inCurrentDate $uint32) : "makeTasksReadyFromCurrentDate"
+makeTasksReady safe service (?fromCurrentDate:inCurrentDate $u32) : "makeTasksReadyFromCurrentDate"
 
 //——————————————————————————————————————————————————————————————————————————————
 //   GUARD
@@ -32,13 +32,13 @@ extern func
 handle safe guard (?!guard:ioGuard $GuardList) : "handleGuardedCommand"
 
 extern func
-handle safe guard (?guardedDeadline:inDeadlineMS $uint32) : "guard.handle.wait.until"
+handle safe guard (?guardedDeadline:inDeadlineMS $u32) : "guard.handle.wait.until"
 
 extern func
 notifyChange safe service (?!forGuard:ioGuard $GuardList) : "notify.change.from.guard.list"
 
 extern func
-notifyChangeForGuardedWaitUntil safe service (?withCurrentDate:inCurrentDate $uint32)
+notifyChangeForGuardedWaitUntil safe service (?withCurrentDate:inCurrentDate $u32)
 : "notify.change.for.guarded.wait.until"
 
 //——————————————————————————————————————————————————————————————————————————————

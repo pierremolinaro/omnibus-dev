@@ -6,8 +6,8 @@ import "carte-tp-teensy-3-6.omnibus-import"
 //——————————————————————————————————————————————————————————————————————————————
 
 sync $PeriodicTimer {
-  var deadline $uint32 = 0
-  let period $uint32
+  var deadline $u32 = 0
+  let period $u32
   var guardList = $GuardList ()
 
   //············································································
@@ -30,7 +30,7 @@ sync $PeriodicTimer {
     }
   }
 
-  public section deadline @noUnusedWarning () -> $uint32 {
+  public section deadline @noUnusedWarning () -> $u32 {
     result = self.deadline
   }
 }
@@ -38,7 +38,7 @@ sync $PeriodicTimer {
 //——————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @autostart {
-  var compteur $uint32 = 0
+  var compteur $u32 = 0
   var deadline = $PeriodicTimer (!period:500)
 
   event @onSetup first {

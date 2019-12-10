@@ -7,26 +7,26 @@ import "carte-tp-teensy-3-1.omnibus-import"
 sync $RendezVousData {
   var readBarrier  = $Semaphore (!value:0)
   var writeBarrier = $Semaphore (!value:1)
-  var data $uint32 = 0
+  var data $u32 = 0
 
-  public func output user @mutating @noUnusedWarning (?data:inData $uint32) {
+  public func output user @mutating @noUnusedWarning (?data:inData $u32) {
     self.writeBarrier.wait ()
     self.data = inData
     self.readBarrier.signal ()
   }
 
-  public guard output @noUnusedWarning (?data:inData $uint32) : self.writeBarrier.wait () {
+  public guard output @noUnusedWarning (?data:inData $u32) : self.writeBarrier.wait () {
     self.data = inData
     self.readBarrier.signal ()
   }
 
-  public func input user @mutating @noUnusedWarning (!data:outData $uint32) {
+  public func input user @mutating @noUnusedWarning (!data:outData $u32) {
     self.readBarrier.wait ()
     outData = self.data
     self.writeBarrier.signal ()
   }
 
-  public guard input @noUnusedWarning (!data:outData $uint32) : self.readBarrier.wait () {
+  public guard input @noUnusedWarning (!data:outData $u32) : self.readBarrier.wait () {
     outData = self.data
     self.writeBarrier.signal ()
   }
@@ -42,7 +42,7 @@ sync rdvs2 = $RendezVousData ()
 //-----------------------------------------------------------------------------*
 
 task T0 @stacksize 512 @autostart {
-  var top $uint32 = 0
+  var top $u32 = 0
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:.D13)
@@ -75,8 +75,8 @@ task T1 @stacksize 1024 @autostart {
 //-----------------------------------------------------------------------------*
 
 task T2 @stacksize 1024 @autostart {
-  var deadline $uint32 = 0
-  var n $uint32 = 0
+  var deadline $u32 = 0
+  var n $u32 = 0
 
   event rdvs2.output (!data:self.n) {
     digital.toggle (!port:LED_L2)

@@ -7,15 +7,15 @@ import "carte-tp-teensy-3-6.omnibus-import"
 
 driver RegisterRead > root {
 
-  public section SIM_CLKDIV1 () -> $uint32 {
+  public section SIM_CLKDIV1 () -> $u32 {
     result = ©SIM.CLKDIV1
   }
 
-  public section MCG_C5 () -> $uint8 {
+  public section MCG_C5 () -> $u8 {
     result = ©MCG.C5
   }
 
-  public section MCG_C6 () -> $uint8 {
+  public section MCG_C6 () -> $u8 {
     result = ©MCG.C6
   }
 }
@@ -25,7 +25,7 @@ driver RegisterRead ()
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 task Tâche @stacksize 512 @autostart {
-  var compteur $uint32 = 0
+  var compteur $u32 = 0
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:LED_L0)

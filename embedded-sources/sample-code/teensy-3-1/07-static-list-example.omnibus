@@ -5,39 +5,39 @@ import "carte-tp-teensy-3-1.omnibus-import"
 //-----------------------------------------------------------------------------*
 
 staticArray maListeStatique {
-  let a $uint32
-  let b $uint32
-  let p func user (?!par: y $uint32)
-  let f func user (?arg: x $uint32) -> $uint32
+  let a $u32
+  let b $u32
+  let p func user (?!par: y $u32)
+  let f func user (?arg: x $u32) -> $u32
 }
 
-func toggleL2 user (?!par: y $uint32) {
+func toggleL2 user (?!par: y $u32) {
   digital.toggle (!port:LED_L2)
   y += 1
 }
 
-func p2 user (?arg: x $uint32) -> $uint32 {
+func p2 user (?arg: x $u32) -> $u32 {
   result = 10 + x
 }
 
-func toggleL3 user (?!par: y $uint32) {
+func toggleL3 user (?!par: y $u32) {
   digital.toggle (!port:LED_L3)
   y += 1
 }
 
-func p3 user (?arg: x $uint32) -> $uint32 {
+func p3 user (?arg: x $u32) -> $u32 {
   result = 15 + x
 }
 
 extend staticArray maListeStatique (
-  !5 !9 !func toggleL2 (?!par: y $uint32) !func p2 (?arg: x $uint32),
-  !15 !29 !func toggleL3 (?!par: y $uint32) !func p3 (?arg: x $uint32)
+  !5 !9 !func toggleL2 (?!par: y $u32) !func p2 (?arg: x $u32),
+  !15 !29 !func toggleL3 (?!par: y $u32) !func p3 (?arg: x $u32)
 )
 
 //-----------------------------------------------------------------------------*
 
 task T @stacksize 512 @autostart {
-  var deadline $uint32 = 0
+  var deadline $u32 = 0
 
   event @onSetup first {
     digital.set (!mode:.output !toPort:.D13)
@@ -49,7 +49,7 @@ task T @stacksize 512 @autostart {
   event time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.toggle (!port:LED_L1)
-    var total $uint32 = 0
+    var total $u32 = 0
     for élément in maListeStatique {
       total = total + élément.a
       total += élément.a
