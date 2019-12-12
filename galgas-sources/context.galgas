@@ -130,10 +130,8 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
                                      ?let @lstring inGetterName
                                      ?let @propertyVisibility inVisibility
                                      ?let @propertyGetterKind inAccess {
-  if [mTypePropertyGetterMap hasKey !inTypeName.string] then
-    [mTypePropertyGetterMap searchKey !inTypeName ?var getterMap]
-    [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
-    [!?mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
+  with inTypeName.string in !?mTypePropertyGetterMap do
+    [!?mGetterMap insertKey !inGetterName !inVisibility !inAccess]
   else
     @propertyGetterMap getterMap = {}
     [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
@@ -144,9 +142,8 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
 #·······················································································································
 
 getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
-  let omnibusTypeName = inType.omnibusTypeDescriptionName
-  if [mTypePropertyGetterMap hasKey !omnibusTypeName] then
-    [mTypePropertyGetterMap searchKey ![omnibusTypeName nowhere] ?result]
+  with inType.omnibusTypeDescriptionName in mTypePropertyGetterMap do
+    result = mGetterMap
   else
     result = {}
   end
@@ -220,10 +217,8 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
                                              ?let @lstring inSetterName
                                              ?let @propertyVisibility inVisibility
                                              ?let @propertySetterKind inAccess {
-  if [mTypePropertySetterMap hasKey !inTypeName.string] then
-    [mTypePropertySetterMap searchKey !inTypeName ?var setterMap]
-    [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
-    [!?mTypePropertySetterMap insertOrReplace !inTypeName !setterMap]
+  with inTypeName.string in !?mTypePropertySetterMap do
+    [!?mSetterMap insertKey !inSetterName !inVisibility !inAccess]
   else
     @propertySetterMap setterMap = {}
     [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
@@ -234,9 +229,8 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
 #·······················································································································
 
 getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
-  let omnibusTypeName = inType.omnibusTypeDescriptionName
-  if [mTypePropertySetterMap hasKey !omnibusTypeName] then
-    [mTypePropertySetterMap searchKey ![omnibusTypeName nowhere] ?result]
+  with inType.omnibusTypeDescriptionName in mTypePropertySetterMap do
+    result = mSetterMap
   else
     result = {}
   end
