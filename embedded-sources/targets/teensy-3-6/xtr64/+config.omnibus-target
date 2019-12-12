@@ -75,6 +75,7 @@ LL_FILES:
 
 OMNIBUS_FILES:
   "../registers-mk66fx1m0.omnibus-import"
+  "../../registers-cortex-m4.omnibus-import"
   "../teensy-3-6-nvic-interrupts.omnibus-import"
   "../driver-root-teensy-3-6.omnibus-import"
   "../teensy-3-6-time.omnibus-import"

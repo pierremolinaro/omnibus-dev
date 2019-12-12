@@ -23,6 +23,11 @@ build/*
 
 arm-clang-llvm-binutils-openocd/+archives-for-cross-compilation/**
 
+svd/svd-decoder/build/**
+svd/svd-decoder/*.xcodeproj/xcuserdata/**
+svd/svd-decoder/*.xcodeproj/xcshareddata/xcschemes/**
+svd/svd-decoder/*.xcodeproj/project.xcworkspace/**
+
 xcode-project/build/**
 xcode-project/*.xcodeproj/xcuserdata/**
 xcode-project/*.xcodeproj/xcshareddata/xcschemes/**

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF2A061623A2B48700F52ED0 /* generate-omnibus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A061523A2B48700F52ED0 /* generate-omnibus.swift */; };
 		CF4476B3239C2804008A78BE /* XMLStackParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B0239C2804008A78BE /* XMLStackParser.swift */; };
 		CF4476B4239C2804008A78BE /* ISO8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B1239C2804008A78BE /* ISO8601DateFormatter.swift */; };
 		CF4476B5239C2804008A78BE /* XMLKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476B2239C2804008A78BE /* XMLKey.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF2A061523A2B48700F52ED0 /* generate-omnibus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-omnibus.swift"; sourceTree = "<group>"; };
 		CF4476B0239C2804008A78BE /* XMLStackParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLStackParser.swift; sourceTree = "<group>"; };
 		CF4476B1239C2804008A78BE /* ISO8601DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatter.swift; sourceTree = "<group>"; };
 		CF4476B2239C2804008A78BE /* XMLKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLKey.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			children = (
 				CF4476CA239C2AD6008A78BE /* analyze-svd.swift */,
 				CF4476CE239D01D1008A78BE /* generate-c-header.swift */,
+				CF2A061523A2B48700F52ED0 /* generate-omnibus.swift */,
 				CF4476D2239D023D008A78BE /* generate-py-file.swift */,
 				CF4476D0239D0213008A78BE /* generate-s-file.swift */,
 				CFC1B994239C23F40050B84D /* main.swift */,
@@ -205,6 +208,7 @@
 				CF4476BC239C2822008A78BE /* DecodingErrorExtension.swift in Sources */,
 				CF4476C6239C2892008A78BE /* XMLEncodingStorage.swift in Sources */,
 				CF4476D1239D0213008A78BE /* generate-s-file.swift in Sources */,
+				CF2A061623A2B48700F52ED0 /* generate-omnibus.swift in Sources */,
 				CF4476C7239C2892008A78BE /* EncodingErrorExtension.swift in Sources */,
 				CF4476BD239C2822008A78BE /* XMLDecodingStorage.swift in Sources */,
 				CF4476B4239C2804008A78BE /* ISO8601DateFormatter.swift in Sources */,

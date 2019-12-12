@@ -309,7 +309,7 @@ registers ©BCF @at 0xFFE0_0000 {
 // CAN Controllers
 registers ©CAN @at 0xE004_4000 {
   CMR [4 @offset 0x4 @inc 1 << 14] $u8 {
-    STB3, STB2, STB1, SRR, CDO, RRB, AT, TR
+    STB3 STB2 STB1 SRR CDO RRB AT TR
   }
 //  AMFR          @offset 0xE003_C000 $u32
 //  SFF_SA        @offset 0xE003_C004 $u32

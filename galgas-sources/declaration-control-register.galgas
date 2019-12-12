@@ -106,7 +106,7 @@ syntax extension omnibus_syntax {
           $integer$ ?let @lbigint baseAddress
           groupBaseAddresses += !baseAddress
         while
-          $,$
+#          $,$
         end
         $]$
         let groupKind = @controlRegisterGroupKindAST.groupArray {
@@ -117,7 +117,7 @@ syntax extension omnibus_syntax {
         registerGroupListAST += !registerGroupName !groupKind
       end
     while
-      $,$
+#      $,$
     end
     ${$
     @controlRegisterDeclarationList controlRegisterDeclarationList = {}
@@ -126,7 +126,7 @@ syntax extension omnibus_syntax {
       repeat
         <registerDeclaration> !?ioAST !?registerDeclarationList
       while
-        $,$
+#        $,$
       end
       $\$type$ ?let registerTypeName
       @controlRegisterBitSliceList registerBitSliceList = {}
@@ -150,7 +150,7 @@ syntax extension omnibus_syntax {
           end
           registerBitSliceList += !registerBitSlice
         while
-          $,$
+#          $,$
         end
         $}$
       end

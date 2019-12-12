@@ -1,0 +1,87 @@
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! Nested Vectored $interrupt Controller Table 3-4 & ARMv7 ref appendix B3.4 (page 750)
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers ©NVIC @at 0xE000_E000 {
+  ISER [4 @offset 0x100 @inc 4] $u32 // $interrupt Set-enable Registers
+
+  ICER [4 @offset 0x180 @inc 4] $u32 //Interrupt Clear-enable Registers
+
+  // 0 = highest priority
+  // Cortex-M4: 0163248648096112128144160176192208224240
+  IPR [128 @offset 0x400 @inc 1] $u8 // $interrupt priority
+//}
+//
+//registers ©NVIC @at 0xE000_E000 {
+//  ISER [4 @offset  0x100 @inc 4] $u32 // $interrupt Set-enable Registers
+//  ICER [4 @offset  0x180 @inc 4] $u32 //Interrupt Clear-enable Registers
+//  IPR [128 @offset 0x400 @inc 1] $u8 // $interrupt priority
+
+  ICSR @offset 0xD04 $u32 { // $interrupt Control and State
+    NMIPENDSET 2 PENDSVSET PENDSVCLR PENDSTSET PENDSTCLR 1 ISRPREEMPT
+    ISRPENDING 1 VECTPENDING:9 RETTOBASE 2 VECTACTIVE:9
+  }
+
+  VTOR @offset 0xD08 $u32 // Vector Table Offset
+
+  AIRCR @offset 0xD0C $u32 { // Application $interrupt and Reset Control
+    VECTKEY:16 ENDIANNESS 4 PRIGROUP:3
+    5 SYSRESETREQ VECTCLRACTIVE VECTRESET
+  }
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SCB System Control Space (SCS) ARMv7 ref manual B3.2 page 708
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers ©SCB @at 0xE000_E000 {
+  CPUID @offset 0xD00 $u32 // CPUID Base Register
+
+  ICSR @offset 0xD04 $u32 { // $interrupt Control and State
+    NMIPENDSET 2 PENDSVSET PENDSVCLR PENDSTSET PENDSTCLR 1 ISRPREEMPT
+    ISRPENDING 1 VECTPENDING:9 RETTOBASE 2 VECTACTIVE:9
+  }
+
+  VTOR @offset 0xD08 $u32 // Vector Table Offset
+
+  AIRCR @offset 0xD0C $u32 { // Application $interrupt and Reset Control
+    VECTKEY:16 ENDIANNESS 4 PRIGROUP:3
+    5 SYSRESETREQ VECTCLRACTIVE VECTRESET
+  }
+
+  CPACR @offset 0xD88 $u32 // Coprocessor Access Control
+
+  FPCCR @offset 0xF34 $u32 // FP Context Control
+
+  SCR @offset 0xD10 $u32 // System Control Register
+  CCR @offset 0xD14 $u32 // Configuration and Control
+  SHPR1 @offset 0xD18 $u32 // System Handler Priority registers 1
+  SHPR2 @offset 0xD1C $u32 // System Handler Priority registers 2
+  SHPR3 @offset 0xD20 $u32 // System Handler Priority registers 3
+  SHCSR @offset 0xD24 $u32 // System Handler Control and State
+  CFSR @offset 0xD28 $u32 // Configurable Fault Status Register
+  HFSR @offset 0xD2C $u32 // HardFault Status
+  DFSR @offset 0xD30 $u32 // Debug Fault Status
+  MMFAR @offset 0xD34 $u32 // MemManage Fault Address
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYSTICK
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+registers ©SYST @at 0xE000_E000 {
+//--- SysTick Control and Status Register
+  CSR @offset 0x010 $u32 {15 COUNTFLAG 13 CLKSOURCE TICKINT ENABLE}
+
+//--- SysTick Reload Value Register
+  RVR @offset 0x014 $u32
+
+//--- SysTick Current Value Register
+  CVR @offset 0x018 $u32
+
+//--- SysTick Calibration Value Register
+  CALIB @offset 0x01C @ro $u32
+}
+
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

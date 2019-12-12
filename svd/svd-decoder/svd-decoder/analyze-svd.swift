@@ -60,6 +60,7 @@ for peripheral in device.peripherals.peripheral {
   generateHeader (device: device, path: inPath)
   generateAssembly (device: device, path: inPath)
   generatePython (device: device, path: inPath)
+  generateOmnibus (device: device, path: inPath)
 }
 
 //------------------------------------------------------------------------------
