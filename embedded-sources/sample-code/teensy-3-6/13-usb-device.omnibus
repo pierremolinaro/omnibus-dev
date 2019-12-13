@@ -178,14 +178,14 @@ driver usb_device > digital {
     ©USB0.OTGISTAT = 0xFF
     ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1} // | 0x40
   //-- Enable USB
-    ©USB0.CTL = {©USB0.CTL !USBENOFEN:1}
+    ©USB0.CTL = {©USB0.CTL !USBENSOFEN:1}
     ©USB0.USBCTRL = 0
   //-- Enable reset interrupt
     ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1}
   //-- Enable interrupt in NVIC
     enable (!interrupt: .USBFS_OTG)
   //--- Enable d+ pullup
-    ©USB0.CONTROL = {©USB0.CONTROL !DPPULLNONOTG:1} // Page 1515
+    ©USB0.CONTROL = {©USB0.CONTROL !DPPULLUPNONOTG:1} // Page 1515
   }
 
   //····················································································································
@@ -315,7 +315,7 @@ driver usb_device > digital {
        }else if bmRequestType == 2 { // setup end point
 
        }
-       ©USB0.CTL = {©USB0.CTL !USBENOFEN:1}
+       ©USB0.CTL = {©USB0.CTL !USBENSOFEN:1}
      }
    //---
     if endPoint == 0 {

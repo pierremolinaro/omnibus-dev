@@ -138,12 +138,14 @@ class Field : Codable, Equatable {
   var description : String
   var bitOffset : UInt
   var bitWidth : UInt
+  var enumeratedValues : EnumeratedValues?
 
   enum CodingKeys: String, CodingKey {
     case name = "name"
     case description = "description"
     case bitOffset = "bitOffset"
     case bitWidth = "bitWidth"
+    case enumeratedValues = "enumeratedValues"
   }
 
   static func == (lhs: Field, rhs: Field) -> Bool {
@@ -152,6 +154,30 @@ class Field : Codable, Equatable {
         && (lhs.bitOffset == rhs.bitOffset)
         && (lhs.bitWidth == rhs.bitWidth)
 
+  }
+}
+
+//------------------------------------------------------------------------------
+
+struct EnumeratedValues : Codable, Equatable {
+  var enumeratedValue : [EnumeratedValue]
+
+  enum CodingKeys: String, CodingKey {
+    case enumeratedValue = "enumeratedValue"
+  }
+}
+
+//------------------------------------------------------------------------------
+
+struct EnumeratedValue : Codable, Equatable {
+  let name : String
+  let description : String
+  let value : UInt32
+
+  enum CodingKeys : String, CodingKey {
+    case name = "name"
+    case description = "description"
+    case value = "value"
   }
 }
 

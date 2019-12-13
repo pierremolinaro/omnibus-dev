@@ -327,6 +327,9 @@ let SIM_CLKDIV2_USBDIV =
 //  DRIVER ROOT
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
+let WDOG_UNLOCK_SEQ1 $u16 = 0xC520
+let WDOG_UNLOCK_SEQ2 $u16 = 0xD928
+
 driver root {
   boot {
   //--------------------------------------------------- Static checks
@@ -404,7 +407,7 @@ driver root {
   //--- Enable capacitors for crystal
     ©OSC.CR = {©OSC.CR !SC8P:1 !SC2P:1 !ERCLKEN:1}
   //--- Enable osc, 8-32 MHz range, low power mode
-    ©MCG.C2 = {©MCG.C2 !RANGE0:2 !EREFS:1}
+    ©MCG.C2 = {©MCG.C2 !RANGE:2 !EREFS:1}
   //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
     ©MCG.C1 = {©MCG.C1 !CLKS:2 !FRDIV:4}
   //--- Wait for crystal oscillator to begin
@@ -417,7 +420,8 @@ driver root {
   //--- If we need faster than crystal, turn on the PLL
     if @static F_CPU_MHZ > 120 {
       ©SMC.PMCTRL = {©SMC.PMCTRL !RUNM:3} // enter HSRUN mode
-      while ©SMC.PMSTAT ≠ {©SMC.PMSTAT !HSRUN:1} {}
+      let HSRUN $u8 = 0x80
+      while ©SMC.PMSTAT ≠ HSRUN {}
     }
   //--- Configure CPU clock
     ©MCG.C5 = {©MCG.C5 !PRDIV:MCG_C5_PRDIV}
