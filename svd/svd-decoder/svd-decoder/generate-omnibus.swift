@@ -257,10 +257,11 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
             }
             s += "  let \(peripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
             if field.bitWidth == 1 {
-              s += "$bool = \((enumValue.value == 0) ? "no" : "yes") // \(enumValue.description)\n"
+              s += "$bool = \((enumValue.value == 0) ? "no" : "yes")"
             }else{
-              s += "$u\(field.bitWidth) = \(enumValue.value) // \(enumValue.description)\n"
+              s += "$u\(field.bitWidth) = \(enumValue.value)"
             }
+            s += " // \(enumValue.description)\n"
           }
           s += "\n"
         }

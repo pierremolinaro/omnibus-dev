@@ -10948,34 +10948,6 @@ static const uint32_t kBaseAddress_SPI [3] = {0x4002c000, 0x4002d000, 0x400ac000
     inline uint32_t SPI_RXFR_RXDATA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral SYST: System Timer
-//------------------------------------------------------------------------------
-
-//---  Register CSR: SysTick Control and Status
-  #define SYST_CSR (* ((volatile uint32_t *) (0xe000e000 + 16)))
-
-  // Field ENABLE: Enable the Counter
-    const uint32_t SYST_CSR_ENABLE = 1U << 0 ;
-
-  // Field TICKINT: Enables SysTick exception request
-    const uint32_t SYST_CSR_TICKINT = 1U << 1 ;
-
-  // Field CLKSOURCE: Clock Source Selection
-    const uint32_t SYST_CSR_CLKSOURCE = 1U << 2 ;
-
-  // Field COUNTFLAG: Returns 1 if timer counted to 0 since last time this was read
-    const uint32_t SYST_CSR_COUNTFLAG = 1U << 16 ;
-
-//---  Register RVR: SysTick Reload Value Register
-  #define SYST_RVR (* ((volatile uint32_t *) (0xe000e000 + 20)))
-
-//---  Register CVR: SysTick Current Value Register
-  #define SYST_CVR (* ((volatile uint32_t *) (0xe000e000 + 24)))
-
-//---  Register CALIB: SysTick Calibration Value Register
-  #define SYST_CALIB (* ((const volatile uint32_t *) (0xe000e000 + 28)))
-
-//------------------------------------------------------------------------------
 // PERIPHERAL GROUP: UART
 //        UART0 at 0x4006a000
 //        UART1 at 0x4006b000

@@ -101,14 +101,14 @@ driver usb_device > digital {
     ©USB0.OTGISTAT = 0xFF
     ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1} // | 0x40
   //-- Enable USB
-    ©USB0.CTL = {©USB0.CTL !USBENOFEN:1}
+    ©USB0.CTL = {©USB0.CTL !USBENSOFEN:1}
     ©USB0.USBCTRL = 0
   //-- Enable reset interrupt
     ©USB0.INTEN = {©USB0.INTEN !USBRSTEN:1}
   //-- Enable interrupt in NVIC
     enable (!interrupt: .USBOTG)
   //--- Enable d+ pullup
-    ©USB0.CONTROL = {©USB0.CONTROL !DPPULLNONOTG:1} // Page 1515
+    ©USB0.CONTROL = {©USB0.CONTROL !DPPULLUPNONOTG:1} // Page 1515
   }
 
   //····················································································································
@@ -189,7 +189,7 @@ driver usb_device > digital {
       ©USB0.ERREN = 0xFF
       ©USB0.INTEN = {©USB0.INTEN !STALLEN:1 !SLEEPEN:1 !TOKDNEEN:1 !SOFTOKEN:1 !ERROREN:1 !USBRSTEN:1}
     //--- is this necessary?
-   //   USB0.CTL = {USB0.CTL !USBENOFEN:1) // Page 1507
+   //   USB0.CTL = {USB0.CTL !USBENSOFEN:1) // Page 1507
   }
 
   //····················································································································
@@ -229,7 +229,7 @@ driver usb_device > digital {
 //    if pid == 0x0D { // Setup received from host
 //      self.usb_setup ()
 //    //--- Unfreeze the USB, now that we're ready
-//      USB0:CTL = {USB0:CTL !USBENOFEN:1)// clear TXSUSPENDTOKENBUSY bit
+//      USB0:CTL = {USB0:CTL !USBENSOFEN:1)// clear TXSUSPENDTOKENBUSY bit
 //    }else if pid == 0x09 { // IN transaction completed to host
 //    }else if (pid == 0x01) || (pid == 0x02) { // OUT transaction received from host
 //

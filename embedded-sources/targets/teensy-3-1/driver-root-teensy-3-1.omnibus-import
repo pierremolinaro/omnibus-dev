@@ -2,6 +2,12 @@
 ctAssert target "teensy-3-1/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————
+
+let WDOG_UNLOCK_SEQ1 $u16 = 0xC520
+let WDOG_UNLOCK_SEQ2 $u16 = 0xD928
+
+//——————————————————————————————————————————————————————————————————————————————
+
 driver root {
   boot {
   //---------1- Inhiber le chien de garde
@@ -9,9 +15,9 @@ driver root {
     ©WDOG.UNLOCK = WDOG_UNLOCK_SEQ2
     ©WDOG.STCTRLH = 0x0010
   //--- Enable clocks to always-used peripherals
-    ©SIM.SCGC3 = SIM_SCGC3_ADC1 | SIM_SCGC3_FTM2
+    ©SIM.SCGC3 = {©SIM.SCGC3 !ADC1:1 !FTM2:1}
     ©SIM.SCGC5 = 0x00043F82    // clocks active to all GPIO
-    ©SIM.SCGC6 = SIM_SCGC6_RTC | SIM_SCGC6_FTM0 | SIM_SCGC6_FTM1 | SIM_SCGC6_ADC0 | SIM_SCGC6_FTFL
+    ©SIM.SCGC6 = {©SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}
   //--- If the RTC oscillator isn't enabled, get it started early
     if ©RTC.CR.OSCE == 0 {
       ©RTC.SR = 0
@@ -27,7 +33,7 @@ driver root {
   //--- Enable capacitors for crystal
     ©OSC.CR = {©OSC.CR !SC8P:1 !SC2P:1}
   //--- Enable osc, 8-32 MHz range, low power mode
-    ©MCG.C2 = {©MCG.C2 !RANGE0:2 !EREFS:1}
+    ©MCG.C2 = {©MCG.C2 !RANGE:2 !EREFS:1}
   //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
     ©MCG.C1 = {©MCG.C1 !CLKS:2 !FRDIV:4}
   //--- Wait for crystal oscillator to begin

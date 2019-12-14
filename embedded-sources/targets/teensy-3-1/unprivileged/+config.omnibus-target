@@ -74,7 +74,7 @@ LL_FILES:
   "../../ll-configuration-on-boot.ll"
 
 OMNIBUS_FILES:
-  "../registers-mk20dx256.omnibus-import"
+  "../MK64F12-pm.svd.omnibus-import"
   "../../registers-cortex-m4.omnibus-import"
   "../driver-root-teensy-3-1.omnibus-import"
   "../teensy-3-1-nvic-interrupts.omnibus-import"

@@ -19,7 +19,7 @@ driver pit > digital {
   startup {
     digital.set (!mode:.output !toPort:.D13)
     digital.set (!mode:.output !toPort:LED_L1)
-    ©SIM.SCGC6 |= SIM_SCGC6_PIT
+    ©SIM.SCGC6 |= {©SIM.SCGC6 !PIT:1}
   }
 
   section getPITValue (!outValue $u32) {
