@@ -75,6 +75,7 @@ LL_FILES:
 
 OMNIBUS_FILES:
   "../MK64F12-pm.svd.omnibus-import"
+  "../registers-mk20dx256-complement.omnibus-import"
   "../../registers-cortex-m4.omnibus-import"
   "../driver-root-teensy-3-1.omnibus-import"
   "../teensy-3-1-nvic-interrupts.omnibus-import"

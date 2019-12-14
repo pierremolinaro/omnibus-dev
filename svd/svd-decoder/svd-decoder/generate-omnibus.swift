@@ -101,39 +101,39 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
     s += "\n"
   }
   s += "}\n\n"
-  for register in inPeripheral.registers?.register ?? [] {
-    for field in register.fields?.field ?? [] {
-      if let enumeratedValues = field.enumeratedValues {
-        let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-        s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
-        for enumValue in enumeratedValues.enumeratedValue {
-          let descriptionArray = enumValue.description.components (separatedBy: " ")
-          let enumName : String
-          if descriptionArray.count > 0 {
-            var name = "_"
-            for character in descriptionArray [0].unicodeScalars {
-              let prop = character.properties
-              if prop.isAlphabetic || prop.isASCIIHexDigit {
-                name += "\(character)"
-              }else{
-                name += "_"
-              }
-            }
-            enumName = name
-          }else{
-            enumName = ""
-          }
-          s += "  let \(inPeripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
-          if field.bitWidth == 1 {
-            s += "$bool = \((enumValue.value == 0) ? "no" : "yes") // \(enumValue.description)\n"
-          }else{
-            s += "$u\(field.bitWidth) = \(enumValue.value) // \(enumValue.description)\n"
-          }
-        }
-        s += "\n"
-      }
-    }
-  }
+//  for register in inPeripheral.registers?.register ?? [] {
+//    for field in register.fields?.field ?? [] {
+//      if let enumeratedValues = field.enumeratedValues {
+//        let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
+//        s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
+//        for enumValue in enumeratedValues.enumeratedValue {
+//          let descriptionArray = enumValue.description.components (separatedBy: " ")
+//          let enumName : String
+//          if descriptionArray.count > 0 {
+//            var name = "_"
+//            for character in descriptionArray [0].unicodeScalars {
+//              let prop = character.properties
+//              if prop.isAlphabetic || prop.isASCIIHexDigit {
+//                name += "\(character)"
+//              }else{
+//                name += "_"
+//              }
+//            }
+//            enumName = name
+//          }else{
+//            enumName = ""
+//          }
+//          s += "  let \(inPeripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
+//          if field.bitWidth == 1 {
+//            s += "$bool = \((enumValue.value == 0) ? "no" : "yes") // \(enumValue.description)\n"
+//          }else{
+//            s += "$u\(field.bitWidth) = \(enumValue.value) // \(enumValue.description)\n"
+//          }
+//        }
+//        s += "\n"
+//      }
+//    }
+//  }
   ioGenerationDict [inPeripheral.name] = s
 }
 
@@ -232,42 +232,42 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
     s += "\n"
   }
   s += "}\n\n"
-  for peripheral in inPeripheralArray {
-    for register in peripheral.registers?.register ?? [] {
-      for field in register.fields?.field ?? [] {
-        if let enumeratedValues = field.enumeratedValues {
-          let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-          s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
-          for enumValue in enumeratedValues.enumeratedValue {
-            let descriptionArray = enumValue.description.components (separatedBy: " ")
-            let enumName : String
-            if descriptionArray.count > 0 {
-              var name = "_"
-              for character in descriptionArray [0].unicodeScalars {
-                let prop = character.properties
-                if prop.isAlphabetic || prop.isASCIIHexDigit {
-                  name += "\(character)"
-                }else{
-                  name += "_"
-                }
-              }
-              enumName = name
-            }else{
-              enumName = ""
-            }
-            s += "  let \(peripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
-            if field.bitWidth == 1 {
-              s += "$bool = \((enumValue.value == 0) ? "no" : "yes")"
-            }else{
-              s += "$u\(field.bitWidth) = \(enumValue.value)"
-            }
-            s += " // \(enumValue.description)\n"
-          }
-          s += "\n"
-        }
-      }
-    }
-  }
+//  for peripheral in inPeripheralArray {
+//    for register in peripheral.registers?.register ?? [] {
+//      for field in register.fields?.field ?? [] {
+//        if let enumeratedValues = field.enumeratedValues {
+//          let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
+//          s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
+//          for enumValue in enumeratedValues.enumeratedValue {
+//            let descriptionArray = enumValue.description.components (separatedBy: " ")
+//            let enumName : String
+//            if descriptionArray.count > 0 {
+//              var name = "_"
+//              for character in descriptionArray [0].unicodeScalars {
+//                let prop = character.properties
+//                if prop.isAlphabetic || prop.isASCIIHexDigit {
+//                  name += "\(character)"
+//                }else{
+//                  name += "_"
+//                }
+//              }
+//              enumName = name
+//            }else{
+//              enumName = ""
+//            }
+//            s += "  let \(peripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
+//            if field.bitWidth == 1 {
+//              s += "$bool = \((enumValue.value == 0) ? "no" : "yes")"
+//            }else{
+//              s += "$u\(field.bitWidth) = \(enumValue.value)"
+//            }
+//            s += " // \(enumValue.description)\n"
+//          }
+//          s += "\n"
+//        }
+//      }
+//    }
+//  }
   return s
 }
 

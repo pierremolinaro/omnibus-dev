@@ -3,11 +3,6 @@ ctAssert target "teensy-3-1/unprivileged"
 
 //——————————————————————————————————————————————————————————————————————————————
 
-let WDOG_UNLOCK_SEQ1 $u16 = 0xC520
-let WDOG_UNLOCK_SEQ2 $u16 = 0xD928
-
-//——————————————————————————————————————————————————————————————————————————————
-
 driver root {
   boot {
   //---------1- Inhiber le chien de garde
