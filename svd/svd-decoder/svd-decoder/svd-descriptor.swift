@@ -119,6 +119,37 @@ struct Register : Codable, Equatable {
     case dimIncrement = "dimIncrement"
     case dimIndex = "dimIndex"
   }
+
+  func printIncompatibility (with inTestedRegister : Register) {
+    if self.name != inTestedRegister.name {
+      print ("        Name error: \(self.name) :: \(inTestedRegister.name)")
+    }
+    if self.description != inTestedRegister.description {
+      print ("        Description error: \(self.description) :: \(inTestedRegister.description)")
+    }
+    if self.addressOffset != inTestedRegister.addressOffset {
+      print ("        Address offset error: \(self.addressOffset) :: \(inTestedRegister.addressOffset)")
+    }
+    if self.size != inTestedRegister.size {
+      print ("        Size error: \(self.size) :: \(inTestedRegister.size)")
+    }
+    if self.access != inTestedRegister.access {
+      print ("        Access error: \(String(describing: self.access)) :: \(String(describing: inTestedRegister.access))")
+    }
+    if self.dim != inTestedRegister.dim {
+      print ("        Dim error: \(String(describing: self.dim)) :: \(String(describing: inTestedRegister.dim))")
+    }
+    if self.dimIncrement != inTestedRegister.dimIncrement {
+      print ("        Dim increment error: \(String(describing: self.dimIncrement)) :: \(String(describing: inTestedRegister.dimIncrement))")
+    }
+    if self.dimIndex != inTestedRegister.dimIndex {
+      print ("        Dim index error: \(String(describing: self.dimIndex)) :: \(String(describing: inTestedRegister.dimIndex))")
+    }
+    if self.fields != inTestedRegister.fields {
+      print ("        Fields error: \(String(describing: self.fields)) :: \(String(describing: inTestedRegister.fields))")
+    }
+  }
+
 }
 
 //------------------------------------------------------------------------------

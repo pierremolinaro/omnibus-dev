@@ -81,7 +81,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
   var s = separator
   s += "// Peripheral " + inPeripheral.name
   if let d = inPeripheral.description {
-    s += ": " + d
+    s += ": " + d.replacingOccurrences(of: "\n", with: " ")
   }
   s += "\n"
   s += separator + "\n"
@@ -105,7 +105,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
         s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (0x\(String (inPeripheral.baseAddress, radix: 16)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
       }
     }else{
-      s += "//---  Register " + register.name + ": " + register.description + "\n"
+      s += "//---  Register " + register.name + ": " + register.description.replacingOccurrences(of: "\n", with: " ") + "\n"
       s += "  #define " + inPeripheral.name + "_" + register.name
       let qualifier : String
       if let access = register.access, access == "read-only" {
@@ -117,16 +117,18 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
     }
     s += "\n"
     for field in register.fields?.field ?? [] {
-      s += "  // Field " + field.name + ": " + field.description + "\n"
-      if field.bitWidth == 1 {
-        s += "    const uint\(register.size)_t "
-        s += inPeripheral.name + "_" + registerBaseName + "_" + field.name
-        s += " = 1U << \(field.bitOffset) ;\n\n"
-      }else{
-        s += "    inline uint\(register.size)_t "
-        s += inPeripheral.name + "_" + registerBaseName + "_" + field.name + " ("
-        let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
-        s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
+      if field.name != "RESERVED" {
+        s += "  // Field " + field.name + ": " + field.description + "\n"
+        if field.bitWidth == 1 {
+          s += "    const uint\(register.size)_t "
+          s += inPeripheral.name + "_" + registerBaseName + "_" + field.name
+          s += " = 1U << \(field.bitOffset) ;\n\n"
+        }else{
+          s += "    inline uint\(register.size)_t "
+          s += inPeripheral.name + "_" + registerBaseName + "_" + field.name + " ("
+          let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
+          s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
+        }
       }
     }
   }
@@ -162,18 +164,37 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
       print ("  *** Error for group \(inGroupName) ***")
       print ("      Peripheral \(inPeripheralArray.first!.name) has \(referenceRegisterArray.count) registers")
       print ("      Peripheral \(peripheral.name) has \(testedRegisterArray.count) registers")
+      var referenceRegisterNameSet = Set <String> ()
+      for register in referenceRegisterArray {
+        referenceRegisterNameSet.insert (register.name)
+      }
+      var testedRegisterNameSet = Set <String> ()
+      for register in testedRegisterArray {
+        testedRegisterNameSet.insert (register.name)
+      }
+      var s = "        Peripheral \(peripheral.name) does not define:"
+      for name in referenceRegisterNameSet.subtracting (testedRegisterNameSet) {
+        s += " " + name
+      }
+      print (s)
+      s = "        Peripheral \(inPeripheralArray.first!.name) does not define:"
+      for name in testedRegisterNameSet.subtracting (referenceRegisterNameSet) {
+        s += " " + name
+      }
+      print (s)
     }else{
   //--- Check registers
-    var regIndex = 0
-    while regIndex < referenceRegisterArray.count {
-      let referenceRegister = referenceRegisterArray [regIndex]
-      let testedRegister = testedRegisterArray [regIndex]
-      if referenceRegister != testedRegister {
-        print ("  *** Error for group \(inGroupName) ***")
-        print ("      Peripheral \(inPeripheralArray.first!.name), register named '\(referenceRegister.name)'")
-        print ("      Peripheral \(peripheral.name), incompatible register named '\(testedRegister.name)'")
-      }
-      regIndex += 1
+      var regIndex = 0
+      while regIndex < referenceRegisterArray.count {
+        let referenceRegister = referenceRegisterArray [regIndex]
+        let testedRegister = testedRegisterArray [regIndex]
+        if referenceRegister != testedRegister {
+          print ("  *** Error for group \(inGroupName) ***")
+          print ("      Peripheral \(inPeripheralArray.first!.name), register named '\(referenceRegister.name)'")
+          print ("      Peripheral \(peripheral.name), incompatible register named '\(testedRegister.name)'")
+          referenceRegister.printIncompatibility (with: testedRegister)
+        }
+        regIndex += 1
       }
     }
   }
@@ -219,16 +240,18 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
     }
     s += "\n"
     for field in register.fields?.field ?? [] {
-      s += "  // Field " + field.name + ": " + field.description + "\n"
-      if field.bitWidth == 1 {
-        s += "    const uint\(register.size)_t "
-        s += inGroupName + "_" + registerBaseName + "_" + field.name
-        s += " = 1U << \(field.bitOffset) ;\n\n"
-      }else{
-        s += "    inline uint\(register.size)_t "
-        s += inGroupName + "_" + registerBaseName + "_" + field.name + " ("
-        let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
-        s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
+      if field.name != "RESERVED" {
+        s += "  // Field " + field.name + ": " + field.description + "\n"
+        if field.bitWidth == 1 {
+          s += "    const uint\(register.size)_t "
+          s += inGroupName + "_" + registerBaseName + "_" + field.name
+          s += " = 1U << \(field.bitOffset) ;\n\n"
+        }else{
+          s += "    inline uint\(register.size)_t "
+          s += inGroupName + "_" + registerBaseName + "_" + field.name + " ("
+          let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
+          s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
+        }
       }
     }
   }

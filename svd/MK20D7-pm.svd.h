@@ -37,9 +37,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field COCO: Conversion complete flag
     const uint32_t ADC_SC1_COCO = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_SC1_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register CFG1: ADC configuration register 1
   #define ADC_CFG1(group) (* ((volatile uint32_t *) (kBaseAddress_CFG1 [group] + 0x8)))
   #define ADC0_CFG1 (* ((volatile uint32_t *) (0x4003b000 + 0x8)))
@@ -60,9 +57,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field ADLPC: Low-power configuration
     const uint32_t ADC_CFG1_ADLPC = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CFG1_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register CFG2: Configuration register 2
   #define ADC_CFG2(group) (* ((volatile uint32_t *) (kBaseAddress_CFG2 [group] + 0xc)))
   #define ADC0_CFG2 (* ((volatile uint32_t *) (0x4003b000 + 0xc)))
@@ -80,12 +74,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field MUXSEL: ADC Mux select
     const uint32_t ADC_CFG2_MUXSEL = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CFG2_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CFG2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Registers R(A,B): ADC data result register
   #define ADC_R(group,idx) (* ((volatile uint32_t *) (kBaseAddress_R [group] + 0x10 + (idx) * 0x4)))
   #define ADC0_R(idx) (* ((volatile uint32_t *) (0x4003b000 + 0x10 + (idx) * 0x4)))
@@ -98,9 +86,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field D: Data result
     inline uint32_t ADC_R_D (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_R_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Registers CV(1,2): Compare value registers
   #define ADC_CV(group,idx) (* ((volatile uint32_t *) (kBaseAddress_CV [group] + 0x18 + (idx) * 0x4)))
   #define ADC0_CV(idx) (* ((volatile uint32_t *) (0x4003b000 + 0x18 + (idx) * 0x4)))
@@ -112,9 +97,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CV: Compare value
     inline uint32_t ADC_CV_CV (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CV_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register SC2: Status and control register 2
   #define ADC_SC2(group) (* ((volatile uint32_t *) (kBaseAddress_SC2 [group] + 0x20)))
@@ -142,9 +124,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field ADACT: Conversion active
     const uint32_t ADC_SC2_ADACT = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_SC2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register SC3: Status and control register 3
   #define ADC_SC3(group) (* ((volatile uint32_t *) (kBaseAddress_SC3 [group] + 0x24)))
   #define ADC0_SC3 (* ((volatile uint32_t *) (0x4003b000 + 0x24)))
@@ -159,17 +138,11 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field ADCO: Continuous conversion enable
     const uint32_t ADC_SC3_ADCO = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_SC3_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field CALF: Calibration failed flag
     const uint32_t ADC_SC3_CALF = 1U << 6 ;
 
   // Field CAL: Calibration
     const uint32_t ADC_SC3_CAL = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_SC3_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register OFS: ADC offset correction register
   #define ADC_OFS(group) (* ((volatile uint32_t *) (kBaseAddress_OFS [group] + 0x28)))
@@ -179,9 +152,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field OFS: Offset error correction value
     inline uint32_t ADC_OFS_OFS (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_OFS_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register PG: ADC plus-side gain register
   #define ADC_PG(group) (* ((volatile uint32_t *) (kBaseAddress_PG [group] + 0x2c)))
   #define ADC0_PG (* ((volatile uint32_t *) (0x4003b000 + 0x2c)))
@@ -189,9 +159,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field PG: Plus-side gain
     inline uint32_t ADC_PG_PG (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_PG_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register MG: ADC minus-side gain register
   #define ADC_MG(group) (* ((volatile uint32_t *) (kBaseAddress_MG [group] + 0x30)))
@@ -201,9 +168,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field MG: Minus-side gain
     inline uint32_t ADC_MG_MG (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_MG_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register CLPD: ADC plus-side general calibration value register
   #define ADC_CLPD(group) (* ((volatile uint32_t *) (kBaseAddress_CLPD [group] + 0x34)))
   #define ADC0_CLPD (* ((volatile uint32_t *) (0x4003b000 + 0x34)))
@@ -211,9 +175,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLPD: no description available
     inline uint32_t ADC_CLPD_CLPD (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLPD_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
 
 //---  Register CLPS: ADC plus-side general calibration value register
   #define ADC_CLPS(group) (* ((volatile uint32_t *) (kBaseAddress_CLPS [group] + 0x38)))
@@ -223,9 +184,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLPS: no description available
     inline uint32_t ADC_CLPS_CLPS (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLPS_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
-
 //---  Register CLP4: ADC plus-side general calibration value register
   #define ADC_CLP4(group) (* ((volatile uint32_t *) (kBaseAddress_CLP4 [group] + 0x3c)))
   #define ADC0_CLP4 (* ((volatile uint32_t *) (0x4003b000 + 0x3c)))
@@ -233,9 +191,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLP4: no description available
     inline uint32_t ADC_CLP4_CLP4 (const uint32_t inValue) {return (inValue & 0x3ffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLP4_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffU) << 10 ; }
 
 //---  Register CLP3: ADC plus-side general calibration value register
   #define ADC_CLP3(group) (* ((volatile uint32_t *) (kBaseAddress_CLP3 [group] + 0x40)))
@@ -245,9 +200,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLP3: no description available
     inline uint32_t ADC_CLP3_CLP3 (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLP3_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffU) << 9 ; }
-
 //---  Register CLP2: ADC plus-side general calibration value register
   #define ADC_CLP2(group) (* ((volatile uint32_t *) (kBaseAddress_CLP2 [group] + 0x44)))
   #define ADC0_CLP2 (* ((volatile uint32_t *) (0x4003b000 + 0x44)))
@@ -255,9 +207,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLP2: no description available
     inline uint32_t ADC_CLP2_CLP2 (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLP2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register CLP1: ADC plus-side general calibration value register
   #define ADC_CLP1(group) (* ((volatile uint32_t *) (kBaseAddress_CLP1 [group] + 0x48)))
@@ -267,9 +216,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLP1: no description available
     inline uint32_t ADC_CLP1_CLP1 (const uint32_t inValue) {return (inValue & 0x7fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLP1_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffffffU) << 7 ; }
-
 //---  Register CLP0: ADC plus-side general calibration value register
   #define ADC_CLP0(group) (* ((volatile uint32_t *) (kBaseAddress_CLP0 [group] + 0x4c)))
   #define ADC0_CLP0 (* ((volatile uint32_t *) (0x4003b000 + 0x4c)))
@@ -278,16 +224,10 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLP0: no description available
     inline uint32_t ADC_CLP0_CLP0 (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLP0_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
-
 //---  Register PGA: ADC PGA register
   #define ADC_PGA(group) (* ((volatile uint32_t *) (kBaseAddress_PGA [group] + 0x50)))
   #define ADC0_PGA (* ((volatile uint32_t *) (0x4003b000 + 0x50)))
   #define ADC1_PGA (* ((volatile uint32_t *) (0x400bb000 + 0x50)))
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_PGA_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
   // Field PGAG: PGA gain setting
     inline uint32_t ADC_PGA_PGAG (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
@@ -295,17 +235,8 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field PGALPb: PGA low-power mode control
     const uint32_t ADC_PGA_PGALPb = 1U << 20 ;
 
-  // Field RESERVED: no description available
-    const uint32_t ADC_PGA_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    const uint32_t ADC_PGA_RESERVED = 1U << 22 ;
-
   // Field PGAEN: PGA enable
     const uint32_t ADC_PGA_PGAEN = 1U << 23 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_PGA_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
 
 //---  Register CLMD: ADC minus-side general calibration value register
   #define ADC_CLMD(group) (* ((volatile uint32_t *) (kBaseAddress_CLMD [group] + 0x54)))
@@ -315,9 +246,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLMD: no description available
     inline uint32_t ADC_CLMD_CLMD (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLMD_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
-
 //---  Register CLMS: ADC minus-side general calibration value register
   #define ADC_CLMS(group) (* ((volatile uint32_t *) (kBaseAddress_CLMS [group] + 0x58)))
   #define ADC0_CLMS (* ((volatile uint32_t *) (0x4003b000 + 0x58)))
@@ -325,9 +253,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLMS: no description available
     inline uint32_t ADC_CLMS_CLMS (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLMS_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
 
 //---  Register CLM4: ADC minus-side general calibration value register
   #define ADC_CLM4(group) (* ((volatile uint32_t *) (kBaseAddress_CLM4 [group] + 0x5c)))
@@ -337,9 +262,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLM4: no description available
     inline uint32_t ADC_CLM4_CLM4 (const uint32_t inValue) {return (inValue & 0x3ffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLM4_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffU) << 10 ; }
-
 //---  Register CLM3: ADC minus-side general calibration value register
   #define ADC_CLM3(group) (* ((volatile uint32_t *) (kBaseAddress_CLM3 [group] + 0x60)))
   #define ADC0_CLM3 (* ((volatile uint32_t *) (0x4003b000 + 0x60)))
@@ -347,9 +269,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLM3: no description available
     inline uint32_t ADC_CLM3_CLM3 (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLM3_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffU) << 9 ; }
 
 //---  Register CLM2: ADC minus-side general calibration value register
   #define ADC_CLM2(group) (* ((volatile uint32_t *) (kBaseAddress_CLM2 [group] + 0x64)))
@@ -359,9 +278,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLM2: no description available
     inline uint32_t ADC_CLM2_CLM2 (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLM2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register CLM1: ADC minus-side general calibration value register
   #define ADC_CLM1(group) (* ((volatile uint32_t *) (kBaseAddress_CLM1 [group] + 0x68)))
   #define ADC0_CLM1 (* ((volatile uint32_t *) (0x4003b000 + 0x68)))
@@ -370,9 +286,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
   // Field CLM1: no description available
     inline uint32_t ADC_CLM1_CLM1 (const uint32_t inValue) {return (inValue & 0x7fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLM1_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffffffU) << 7 ; }
-
 //---  Register CLM0: ADC minus-side general calibration value register
   #define ADC_CLM0(group) (* ((volatile uint32_t *) (kBaseAddress_CLM0 [group] + 0x6c)))
   #define ADC0_CLM0 (* ((volatile uint32_t *) (0x4003b000 + 0x6c)))
@@ -380,9 +293,6 @@ static const uint32_t kBaseAddress_ADC [2] = {0x4003b000, 0x400bb000} ;
 
   // Field CLM0: no description available
     inline uint32_t ADC_CLM0_CLM0 (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t ADC_CLM0_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffffU) << 6 ; }
 
 //------------------------------------------------------------------------------
 // PERIPHERAL GROUP: AIPS
@@ -399,18 +309,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   #define AIPS0_MPRA (* ((volatile uint32_t *) (0x40000000 + 0x0)))
   #define AIPS1_MPRA (* ((volatile uint32_t *) (0x40080000 + 0x0)))
 
-  // Field RESERVED: no description available
-    inline uint32_t AIPS_MPRA_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t AIPS_MPRA_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 4 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t AIPS_MPRA_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t AIPS_MPRA_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
-
   // Field MPL3: Master privilege level
     const uint32_t AIPS_MPRA_MPL3 = 1U << 16 ;
 
@@ -419,9 +317,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field MTR3: Master trusted for read
     const uint32_t AIPS_MPRA_MTR3 = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_MPRA_RESERVED = 1U << 19 ;
 
   // Field MPL2: Master privilege level
     const uint32_t AIPS_MPRA_MPL2 = 1U << 20 ;
@@ -432,9 +327,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field MTR2: Master trusted for read
     const uint32_t AIPS_MPRA_MTR2 = 1U << 22 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_MPRA_RESERVED = 1U << 23 ;
-
   // Field MPL1: Master privilege level
     const uint32_t AIPS_MPRA_MPL1 = 1U << 24 ;
 
@@ -444,9 +336,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field MTR1: Master trusted for read
     const uint32_t AIPS_MPRA_MTR1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_MPRA_RESERVED = 1U << 27 ;
-
   // Field MPL0: Master privilege level
     const uint32_t AIPS_MPRA_MPL0 = 1U << 28 ;
 
@@ -455,9 +344,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field MTR0: Master trusted for read
     const uint32_t AIPS_MPRA_MTR0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_MPRA_RESERVED = 1U << 31 ;
 
 //---  Register PACRA: Peripheral Access Control Register
   #define AIPS_PACRA(group) (* ((volatile uint32_t *) (kBaseAddress_PACRA [group] + 0x20)))
@@ -473,9 +359,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRA_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRA_TP6 = 1U << 4 ;
 
@@ -484,9 +367,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRA_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRA_TP5 = 1U << 8 ;
@@ -497,9 +377,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRA_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRA_TP4 = 1U << 12 ;
 
@@ -508,9 +385,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRA_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRA_TP3 = 1U << 16 ;
@@ -521,9 +395,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRA_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRA_TP2 = 1U << 20 ;
 
@@ -532,9 +403,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRA_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRA_TP1 = 1U << 24 ;
@@ -545,9 +413,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRA_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRA_TP0 = 1U << 28 ;
 
@@ -556,9 +421,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRA_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRA_RESERVED = 1U << 31 ;
 
 //---  Register PACRB: Peripheral Access Control Register
   #define AIPS_PACRB(group) (* ((volatile uint32_t *) (kBaseAddress_PACRB [group] + 0x24)))
@@ -574,9 +436,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRB_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRB_TP6 = 1U << 4 ;
 
@@ -585,9 +444,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRB_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRB_TP5 = 1U << 8 ;
@@ -598,9 +454,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRB_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRB_TP4 = 1U << 12 ;
 
@@ -609,9 +462,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRB_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRB_TP3 = 1U << 16 ;
@@ -622,9 +472,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRB_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRB_TP2 = 1U << 20 ;
 
@@ -633,9 +480,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRB_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRB_TP1 = 1U << 24 ;
@@ -646,9 +490,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRB_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRB_TP0 = 1U << 28 ;
 
@@ -657,9 +498,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRB_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRB_RESERVED = 1U << 31 ;
 
 //---  Register PACRC: Peripheral Access Control Register
   #define AIPS_PACRC(group) (* ((volatile uint32_t *) (kBaseAddress_PACRC [group] + 0x28)))
@@ -675,9 +513,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRC_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRC_TP6 = 1U << 4 ;
 
@@ -686,9 +521,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRC_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRC_TP5 = 1U << 8 ;
@@ -699,9 +531,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRC_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRC_TP4 = 1U << 12 ;
 
@@ -710,9 +539,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRC_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRC_TP3 = 1U << 16 ;
@@ -723,9 +549,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRC_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRC_TP2 = 1U << 20 ;
 
@@ -734,9 +557,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRC_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRC_TP1 = 1U << 24 ;
@@ -747,9 +567,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRC_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRC_TP0 = 1U << 28 ;
 
@@ -758,9 +575,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRC_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRC_RESERVED = 1U << 31 ;
 
 //---  Register PACRD: Peripheral Access Control Register
   #define AIPS_PACRD(group) (* ((volatile uint32_t *) (kBaseAddress_PACRD [group] + 0x2c)))
@@ -776,9 +590,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRD_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRD_TP6 = 1U << 4 ;
 
@@ -787,9 +598,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRD_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRD_TP5 = 1U << 8 ;
@@ -800,9 +608,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRD_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRD_TP4 = 1U << 12 ;
 
@@ -811,9 +616,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRD_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRD_TP3 = 1U << 16 ;
@@ -824,9 +626,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRD_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRD_TP2 = 1U << 20 ;
 
@@ -835,9 +634,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRD_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRD_TP1 = 1U << 24 ;
@@ -848,9 +644,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRD_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRD_TP0 = 1U << 28 ;
 
@@ -859,9 +652,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRD_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRD_RESERVED = 1U << 31 ;
 
 //---  Register PACRE: Peripheral Access Control Register
   #define AIPS_PACRE(group) (* ((volatile uint32_t *) (kBaseAddress_PACRE [group] + 0x40)))
@@ -877,9 +667,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRE_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRE_TP6 = 1U << 4 ;
 
@@ -888,9 +675,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRE_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRE_TP5 = 1U << 8 ;
@@ -901,9 +685,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRE_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRE_TP4 = 1U << 12 ;
 
@@ -912,9 +693,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRE_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRE_TP3 = 1U << 16 ;
@@ -925,9 +703,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRE_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRE_TP2 = 1U << 20 ;
 
@@ -936,9 +711,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRE_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRE_TP1 = 1U << 24 ;
@@ -949,9 +721,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRE_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRE_TP0 = 1U << 28 ;
 
@@ -960,9 +729,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRE_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRE_RESERVED = 1U << 31 ;
 
 //---  Register PACRF: Peripheral Access Control Register
   #define AIPS_PACRF(group) (* ((volatile uint32_t *) (kBaseAddress_PACRF [group] + 0x44)))
@@ -978,9 +744,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRF_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRF_TP6 = 1U << 4 ;
 
@@ -989,9 +752,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRF_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRF_TP5 = 1U << 8 ;
@@ -1002,9 +762,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRF_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRF_TP4 = 1U << 12 ;
 
@@ -1013,9 +770,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRF_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRF_TP3 = 1U << 16 ;
@@ -1026,9 +780,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRF_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRF_TP2 = 1U << 20 ;
 
@@ -1037,9 +788,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRF_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRF_TP1 = 1U << 24 ;
@@ -1050,9 +798,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRF_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRF_TP0 = 1U << 28 ;
 
@@ -1061,9 +806,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRF_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRF_RESERVED = 1U << 31 ;
 
 //---  Register PACRG: Peripheral Access Control Register
   #define AIPS_PACRG(group) (* ((volatile uint32_t *) (kBaseAddress_PACRG [group] + 0x48)))
@@ -1079,9 +821,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRG_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRG_TP6 = 1U << 4 ;
 
@@ -1090,9 +829,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRG_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRG_TP5 = 1U << 8 ;
@@ -1103,9 +839,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRG_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRG_TP4 = 1U << 12 ;
 
@@ -1114,9 +847,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRG_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRG_TP3 = 1U << 16 ;
@@ -1127,9 +857,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRG_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRG_TP2 = 1U << 20 ;
 
@@ -1138,9 +865,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRG_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRG_TP1 = 1U << 24 ;
@@ -1151,9 +875,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRG_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRG_TP0 = 1U << 28 ;
 
@@ -1162,9 +883,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRG_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRG_RESERVED = 1U << 31 ;
 
 //---  Register PACRH: Peripheral Access Control Register
   #define AIPS_PACRH(group) (* ((volatile uint32_t *) (kBaseAddress_PACRH [group] + 0x4c)))
@@ -1180,9 +898,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRH_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRH_TP6 = 1U << 4 ;
 
@@ -1191,9 +906,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRH_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRH_TP5 = 1U << 8 ;
@@ -1204,9 +916,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRH_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRH_TP4 = 1U << 12 ;
 
@@ -1215,9 +924,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRH_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRH_TP3 = 1U << 16 ;
@@ -1228,9 +934,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRH_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRH_TP2 = 1U << 20 ;
 
@@ -1239,9 +942,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRH_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRH_TP1 = 1U << 24 ;
@@ -1252,9 +952,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRH_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRH_TP0 = 1U << 28 ;
 
@@ -1263,9 +960,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRH_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRH_RESERVED = 1U << 31 ;
 
 //---  Register PACRI: Peripheral Access Control Register
   #define AIPS_PACRI(group) (* ((volatile uint32_t *) (kBaseAddress_PACRI [group] + 0x50)))
@@ -1281,9 +975,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRI_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRI_TP6 = 1U << 4 ;
 
@@ -1292,9 +983,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRI_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRI_TP5 = 1U << 8 ;
@@ -1305,9 +993,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRI_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRI_TP4 = 1U << 12 ;
 
@@ -1316,9 +1001,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRI_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRI_TP3 = 1U << 16 ;
@@ -1329,9 +1011,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRI_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRI_TP2 = 1U << 20 ;
 
@@ -1340,9 +1019,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRI_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRI_TP1 = 1U << 24 ;
@@ -1353,9 +1029,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRI_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRI_TP0 = 1U << 28 ;
 
@@ -1364,9 +1037,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRI_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRI_RESERVED = 1U << 31 ;
 
 //---  Register PACRJ: Peripheral Access Control Register
   #define AIPS_PACRJ(group) (* ((volatile uint32_t *) (kBaseAddress_PACRJ [group] + 0x54)))
@@ -1382,9 +1052,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRJ_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRJ_TP6 = 1U << 4 ;
 
@@ -1393,9 +1060,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRJ_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRJ_TP5 = 1U << 8 ;
@@ -1406,9 +1070,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRJ_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRJ_TP4 = 1U << 12 ;
 
@@ -1417,9 +1078,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRJ_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRJ_TP3 = 1U << 16 ;
@@ -1430,9 +1088,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRJ_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRJ_TP2 = 1U << 20 ;
 
@@ -1441,9 +1096,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRJ_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRJ_TP1 = 1U << 24 ;
@@ -1454,9 +1106,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRJ_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRJ_TP0 = 1U << 28 ;
 
@@ -1465,9 +1114,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRJ_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRJ_RESERVED = 1U << 31 ;
 
 //---  Register PACRK: Peripheral Access Control Register
   #define AIPS_PACRK(group) (* ((volatile uint32_t *) (kBaseAddress_PACRK [group] + 0x58)))
@@ -1483,9 +1129,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRK_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRK_TP6 = 1U << 4 ;
 
@@ -1494,9 +1137,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRK_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRK_TP5 = 1U << 8 ;
@@ -1507,9 +1147,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRK_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRK_TP4 = 1U << 12 ;
 
@@ -1518,9 +1155,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRK_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRK_TP3 = 1U << 16 ;
@@ -1531,9 +1165,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRK_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRK_TP2 = 1U << 20 ;
 
@@ -1542,9 +1173,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRK_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRK_TP1 = 1U << 24 ;
@@ -1555,9 +1183,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRK_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRK_TP0 = 1U << 28 ;
 
@@ -1566,9 +1191,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRK_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRK_RESERVED = 1U << 31 ;
 
 //---  Register PACRL: Peripheral Access Control Register
   #define AIPS_PACRL(group) (* ((volatile uint32_t *) (kBaseAddress_PACRL [group] + 0x5c)))
@@ -1584,9 +1206,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRL_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRL_TP6 = 1U << 4 ;
 
@@ -1595,9 +1214,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRL_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRL_TP5 = 1U << 8 ;
@@ -1608,9 +1224,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRL_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRL_TP4 = 1U << 12 ;
 
@@ -1619,9 +1232,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRL_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRL_TP3 = 1U << 16 ;
@@ -1632,9 +1242,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRL_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRL_TP2 = 1U << 20 ;
 
@@ -1643,9 +1250,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRL_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRL_TP1 = 1U << 24 ;
@@ -1656,9 +1260,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRL_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRL_TP0 = 1U << 28 ;
 
@@ -1667,9 +1268,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRL_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRL_RESERVED = 1U << 31 ;
 
 //---  Register PACRM: Peripheral Access Control Register
   #define AIPS_PACRM(group) (* ((volatile uint32_t *) (kBaseAddress_PACRM [group] + 0x60)))
@@ -1685,9 +1283,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRM_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRM_TP6 = 1U << 4 ;
 
@@ -1696,9 +1291,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRM_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRM_TP5 = 1U << 8 ;
@@ -1709,9 +1301,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRM_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRM_TP4 = 1U << 12 ;
 
@@ -1720,9 +1309,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRM_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRM_TP3 = 1U << 16 ;
@@ -1733,9 +1319,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRM_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRM_TP2 = 1U << 20 ;
 
@@ -1744,9 +1327,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRM_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRM_TP1 = 1U << 24 ;
@@ -1757,9 +1337,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRM_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRM_TP0 = 1U << 28 ;
 
@@ -1768,9 +1345,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRM_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRM_RESERVED = 1U << 31 ;
 
 //---  Register PACRN: Peripheral Access Control Register
   #define AIPS_PACRN(group) (* ((volatile uint32_t *) (kBaseAddress_PACRN [group] + 0x64)))
@@ -1786,9 +1360,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRN_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRN_TP6 = 1U << 4 ;
 
@@ -1797,9 +1368,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRN_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRN_TP5 = 1U << 8 ;
@@ -1810,9 +1378,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRN_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRN_TP4 = 1U << 12 ;
 
@@ -1821,9 +1386,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRN_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRN_TP3 = 1U << 16 ;
@@ -1834,9 +1396,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRN_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRN_TP2 = 1U << 20 ;
 
@@ -1845,9 +1404,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRN_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRN_TP1 = 1U << 24 ;
@@ -1858,9 +1414,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRN_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRN_TP0 = 1U << 28 ;
 
@@ -1869,9 +1422,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRN_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRN_RESERVED = 1U << 31 ;
 
 //---  Register PACRO: Peripheral Access Control Register
   #define AIPS_PACRO(group) (* ((volatile uint32_t *) (kBaseAddress_PACRO [group] + 0x68)))
@@ -1887,9 +1437,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRO_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRO_TP6 = 1U << 4 ;
 
@@ -1898,9 +1445,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRO_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRO_TP5 = 1U << 8 ;
@@ -1911,9 +1455,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRO_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRO_TP4 = 1U << 12 ;
 
@@ -1922,9 +1463,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRO_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRO_TP3 = 1U << 16 ;
@@ -1935,9 +1473,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRO_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRO_TP2 = 1U << 20 ;
 
@@ -1946,9 +1481,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRO_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRO_TP1 = 1U << 24 ;
@@ -1959,9 +1491,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRO_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRO_TP0 = 1U << 28 ;
 
@@ -1970,9 +1499,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRO_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRO_RESERVED = 1U << 31 ;
 
 //---  Register PACRP: Peripheral Access Control Register
   #define AIPS_PACRP(group) (* ((volatile uint32_t *) (kBaseAddress_PACRP [group] + 0x6c)))
@@ -1988,9 +1514,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP7: Supervisor protect
     const uint32_t AIPS_PACRP_SP7 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 3 ;
-
   // Field TP6: Trusted protect
     const uint32_t AIPS_PACRP_TP6 = 1U << 4 ;
 
@@ -1999,9 +1522,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP6: Supervisor protect
     const uint32_t AIPS_PACRP_SP6 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 7 ;
 
   // Field TP5: Trusted protect
     const uint32_t AIPS_PACRP_TP5 = 1U << 8 ;
@@ -2012,9 +1532,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP5: Supervisor protect
     const uint32_t AIPS_PACRP_SP5 = 1U << 10 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 11 ;
-
   // Field TP4: Trusted protect
     const uint32_t AIPS_PACRP_TP4 = 1U << 12 ;
 
@@ -2023,9 +1540,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP4: Supervisor protect
     const uint32_t AIPS_PACRP_SP4 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 15 ;
 
   // Field TP3: Trusted protect
     const uint32_t AIPS_PACRP_TP3 = 1U << 16 ;
@@ -2036,9 +1550,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP3: Supervisor protect
     const uint32_t AIPS_PACRP_SP3 = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 19 ;
-
   // Field TP2: Trusted protect
     const uint32_t AIPS_PACRP_TP2 = 1U << 20 ;
 
@@ -2047,9 +1558,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP2: Supervisor protect
     const uint32_t AIPS_PACRP_SP2 = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 23 ;
 
   // Field TP1: Trusted protect
     const uint32_t AIPS_PACRP_TP1 = 1U << 24 ;
@@ -2060,9 +1568,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SP1: Supervisor protect
     const uint32_t AIPS_PACRP_SP1 = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 27 ;
-
   // Field TP0: Trusted protect
     const uint32_t AIPS_PACRP_TP0 = 1U << 28 ;
 
@@ -2071,9 +1576,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field SP0: Supervisor protect
     const uint32_t AIPS_PACRP_SP0 = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t AIPS_PACRP_RESERVED = 1U << 31 ;
 
 //------------------------------------------------------------------------------
 // Peripheral AXBS: Crossbar switch
@@ -2089,44 +1591,20 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field M0: Master 0 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M0 (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 3 ;
-
   // Field M1: Master 1 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M1 (const uint32_t inValue) {return (inValue & 0x7U) << 4 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 7 ;
 
   // Field M2: Master 2 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M2 (const uint32_t inValue) {return (inValue & 0x7U) << 8 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 11 ;
-
   // Field M3: Master 3 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M3 (const uint32_t inValue) {return (inValue & 0x7U) << 12 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 15 ;
 
   // Field M4: Master 4 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M4 (const uint32_t inValue) {return (inValue & 0x7U) << 16 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 19 ;
-
   // Field M5: Master 5 priority. Sets the arbitration priority for this port on the associated slave port.
     inline uint32_t AXBS_PRS_M5 (const uint32_t inValue) {return (inValue & 0x7U) << 20 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t AXBS_PRS_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t AXBS_PRS_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t AXBS_PRS_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 28 ; }
 
 //---  Registers CRS(0,1,2,3): Control Register
   #define AXBS_CRS(idx) (* ((volatile uint32_t *) (0x40004000 + 0x10 + (idx) * 0x100)))
@@ -2138,20 +1616,11 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field PARK: Park
     inline uint32_t AXBS_CRS_PARK (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t AXBS_CRS_RESERVED = 1U << 3 ;
-
   // Field PCTL: Parking control
     inline uint32_t AXBS_CRS_PCTL (const uint32_t inValue) {return (inValue & 0x3U) << 4 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t AXBS_CRS_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 6 ; }
-
   // Field ARB: Arbitration mode
     inline uint32_t AXBS_CRS_ARB (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t AXBS_CRS_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffU) << 10 ; }
 
   // Field HLP: Halt low priority
     const uint32_t AXBS_CRS_HLP = 1U << 30 ;
@@ -2169,9 +1638,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field AULB: Arbitrates on undefined length bursts
     inline uint32_t AXBS_MGPCR_AULB (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t AXBS_MGPCR_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffffffU) << 3 ; }
-
 //------------------------------------------------------------------------------
 // Peripheral CAN0: Flex Controller Area Network module
 //------------------------------------------------------------------------------
@@ -2182,14 +1648,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field MAXMB: Number of the Last Message Buffer
     inline uint32_t CAN0_MCR_MAXMB (const uint32_t inValue) {return (inValue & 0x7fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t CAN0_MCR_RESERVED = 1U << 7 ;
-
   // Field IDAM: ID Acceptance Mode
     inline uint32_t CAN0_MCR_IDAM (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 10 ; }
 
   // Field AEN: Abort Enable
     const uint32_t CAN0_MCR_AEN = 1U << 12 ;
@@ -2197,20 +1657,11 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field LPRIOEN: Local Priority Enable
     const uint32_t CAN0_MCR_LPRIOEN = 1U << 13 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 14 ; }
-
   // Field IRMQ: Individual Rx Masking and Queue Enable
     const uint32_t CAN0_MCR_IRMQ = 1U << 16 ;
 
   // Field SRXDIS: Self Reception Disable
     const uint32_t CAN0_MCR_SRXDIS = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    const uint32_t CAN0_MCR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    const uint32_t CAN0_MCR_RESERVED = 1U << 19 ;
 
   // Field LPMACK: Low Power Mode Acknowledge
     const uint32_t CAN0_MCR_LPMACK = 1U << 20 ;
@@ -2269,9 +1720,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SMP: CAN Bit Sampling
     const uint32_t CAN0_CTRL1_SMP = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_CTRL1_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
-
   // Field RWRNMSK: Rx Warning Interrupt Mask
     const uint32_t CAN0_CTRL1_RWRNMSK = 1U << 10 ;
 
@@ -2308,9 +1756,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field TIMER: Timer value
     inline uint32_t CAN0_TIMER_TIMER (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_TIMER_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register RXMGMASK: Rx Mailboxes Global Mask Register
   #define CAN0_RXMGMASK (* ((volatile uint32_t *) (0x40024000 + 16)))
 
@@ -2337,9 +1782,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field RXERRCNT: Receive Error Counter
     inline uint32_t CAN0_ECR_RXERRCNT (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_ECR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register ESR1: Error and Status 1 Register
   #define CAN0_ESR1 (* ((volatile uint32_t *) (0x40024000 + 32)))
@@ -2398,9 +1840,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SYNCH: CAN Synchronization Status
     const uint32_t CAN0_ESR1_SYNCH = 1U << 18 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_ESR1_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
-
 //---  Register IMASK2: Interrupt Masks 2 Register
   #define CAN0_IMASK2 (* ((volatile uint32_t *) (0x40024000 + 36)))
 
@@ -2440,9 +1879,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 //---  Register CTRL2: Control 2 Register
   #define CAN0_CTRL2 (* ((volatile uint32_t *) (0x40024000 + 52)))
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_CTRL2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
   // Field EACEN: Entire Frame Arbitration Field Comparison Enable for Rx Mailboxes
     const uint32_t CAN0_CTRL2_EACEN = 1U << 16 ;
 
@@ -2461,17 +1897,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field WRMFRZ: Write-Access to Memory in Freeze mode
     const uint32_t CAN0_CTRL2_WRMFRZ = 1U << 28 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_CTRL2_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 29 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t CAN0_CTRL2_RESERVED = 1U << 31 ;
-
 //---  Register ESR2: Error and Status 2 Register
   #define CAN0_ESR2 (* ((volatile uint32_t *) (0x40024000 + 56)))
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_ESR2_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 0 ; }
 
   // Field IMB: Inactive Mailbox
     const uint32_t CAN0_ESR2_IMB = 1U << 13 ;
@@ -2479,14 +1906,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field VPS: Valid Priority Status
     const uint32_t CAN0_ESR2_VPS = 1U << 14 ;
 
-  // Field RESERVED: no description available
-    const uint32_t CAN0_ESR2_RESERVED = 1U << 15 ;
-
   // Field LPTM: Lowest Priority Tx Mailbox
     inline uint32_t CAN0_ESR2_LPTM (const uint32_t inValue) {return (inValue & 0x7fU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_ESR2_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 23 ; }
 
 //---  Register CRCR: CRC Register
   #define CAN0_CRCR (* ((volatile uint32_t *) (0x40024000 + 68)))
@@ -2494,14 +1915,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field TXCRC: CRC Transmitted
     inline uint32_t CAN0_CRCR_TXCRC (const uint32_t inValue) {return (inValue & 0x7fffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t CAN0_CRCR_RESERVED = 1U << 15 ;
-
   // Field MBCRC: CRC Mailbox
     inline uint32_t CAN0_CRCR_MBCRC (const uint32_t inValue) {return (inValue & 0x7fU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_CRCR_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 23 ; }
 
 //---  Register RXFGMASK: Rx FIFO Global Mask Register
   #define CAN0_RXFGMASK (* ((volatile uint32_t *) (0x40024000 + 72)))
@@ -2514,9 +1929,6 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
 
   // Field IDHIT: Identifier Acceptance Filter Hit Indicator
     inline uint32_t CAN0_RXFIR_IDHIT (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t CAN0_RXFIR_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffU) << 9 ; }
 
 //---  Register CS0: Message Buffer 0 CS Register
   #define CAN0_CS0 (* ((volatile uint32_t *) (0x40024000 + 128)))
@@ -2536,23 +1948,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS0_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS0_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS0_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS0_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS0_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS0_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS0_RESERVED = 1U << 31 ;
 
 //---  Register ID0: Message Buffer 0 ID Register
   #define CAN0_ID0 (* ((volatile uint32_t *) (0x40024000 + 132)))
@@ -2614,23 +2011,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS1_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS1_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS1_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS1_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS1_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS1_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS1_RESERVED = 1U << 31 ;
 
 //---  Register ID1: Message Buffer 1 ID Register
   #define CAN0_ID1 (* ((volatile uint32_t *) (0x40024000 + 148)))
@@ -2692,23 +2074,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS2_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS2_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS2_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS2_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS2_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS2_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS2_RESERVED = 1U << 31 ;
 
 //---  Register ID2: Message Buffer 2 ID Register
   #define CAN0_ID2 (* ((volatile uint32_t *) (0x40024000 + 164)))
@@ -2770,23 +2137,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS3_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS3_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS3_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS3_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS3_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS3_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS3_RESERVED = 1U << 31 ;
 
 //---  Register ID3: Message Buffer 3 ID Register
   #define CAN0_ID3 (* ((volatile uint32_t *) (0x40024000 + 180)))
@@ -2848,23 +2200,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS4_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS4_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS4_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS4_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS4_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS4_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS4_RESERVED = 1U << 31 ;
 
 //---  Register ID4: Message Buffer 4 ID Register
   #define CAN0_ID4 (* ((volatile uint32_t *) (0x40024000 + 196)))
@@ -2926,23 +2263,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS5_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS5_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS5_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS5_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS5_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS5_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS5_RESERVED = 1U << 31 ;
 
 //---  Register ID5: Message Buffer 5 ID Register
   #define CAN0_ID5 (* ((volatile uint32_t *) (0x40024000 + 212)))
@@ -3004,23 +2326,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS6_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS6_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS6_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS6_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS6_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS6_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS6_RESERVED = 1U << 31 ;
 
 //---  Register ID6: Message Buffer 6 ID Register
   #define CAN0_ID6 (* ((volatile uint32_t *) (0x40024000 + 228)))
@@ -3082,23 +2389,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS7_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS7_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS7_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS7_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS7_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS7_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS7_RESERVED = 1U << 31 ;
 
 //---  Register ID7: Message Buffer 7 ID Register
   #define CAN0_ID7 (* ((volatile uint32_t *) (0x40024000 + 244)))
@@ -3160,23 +2452,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS8_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS8_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS8_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS8_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS8_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS8_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS8_RESERVED = 1U << 31 ;
 
 //---  Register ID8: Message Buffer 8 ID Register
   #define CAN0_ID8 (* ((volatile uint32_t *) (0x40024000 + 260)))
@@ -3238,23 +2515,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS9_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS9_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS9_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS9_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS9_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS9_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS9_RESERVED = 1U << 31 ;
 
 //---  Register ID9: Message Buffer 9 ID Register
   #define CAN0_ID9 (* ((volatile uint32_t *) (0x40024000 + 276)))
@@ -3316,23 +2578,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS10_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS10_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS10_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS10_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS10_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS10_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS10_RESERVED = 1U << 31 ;
 
 //---  Register ID10: Message Buffer 10 ID Register
   #define CAN0_ID10 (* ((volatile uint32_t *) (0x40024000 + 292)))
@@ -3394,23 +2641,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS11_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS11_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS11_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS11_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS11_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS11_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS11_RESERVED = 1U << 31 ;
 
 //---  Register ID11: Message Buffer 11 ID Register
   #define CAN0_ID11 (* ((volatile uint32_t *) (0x40024000 + 308)))
@@ -3472,23 +2704,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS12_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS12_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS12_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS12_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS12_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS12_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS12_RESERVED = 1U << 31 ;
 
 //---  Register ID12: Message Buffer 12 ID Register
   #define CAN0_ID12 (* ((volatile uint32_t *) (0x40024000 + 324)))
@@ -3550,23 +2767,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS13_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS13_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS13_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS13_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS13_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS13_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS13_RESERVED = 1U << 31 ;
 
 //---  Register ID13: Message Buffer 13 ID Register
   #define CAN0_ID13 (* ((volatile uint32_t *) (0x40024000 + 340)))
@@ -3628,23 +2830,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS14_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS14_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS14_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS14_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS14_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS14_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS14_RESERVED = 1U << 31 ;
 
 //---  Register ID14: Message Buffer 14 ID Register
   #define CAN0_ID14 (* ((volatile uint32_t *) (0x40024000 + 356)))
@@ -3706,23 +2893,8 @@ static const uint32_t kBaseAddress_AIPS [2] = {0x40000000, 0x40080000} ;
   // Field SRR: Substitute Remote Request. Contains a fixed recessive bit.
     const uint32_t CAN0_CS15_SRR = 1U << 22 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS15_RESERVED = 1U << 23 ;
-
   // Field CODE: Reserved
     inline uint32_t CAN0_CS15_CODE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS15_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS15_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS15_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t CAN0_CS15_RESERVED = 1U << 31 ;
 
 //---  Register ID15: Message Buffer 15 ID Register
   #define CAN0_ID15 (* ((volatile uint32_t *) (0x40024000 + 372)))
@@ -3808,17 +2980,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field HYSTCTR: Comparator hard block hysteresis control
     inline uint8_t CMP_CR0_HYSTCTR (const uint8_t inValue) {return (inValue & 0x3U) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint8_t CMP_CR0_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t CMP_CR0_RESERVED = 1U << 3 ;
-
   // Field FILTER_CNT: Filter Sample Count
     inline uint8_t CMP_CR0_FILTER_CNT (const uint8_t inValue) {return (inValue & 0x7U) << 4 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t CMP_CR0_RESERVED = 1U << 7 ;
 
 //---  Register CR1: CMP Control Register 1
   #define CMP_CR1(group) (* ((volatile uint8_t *) (kBaseAddress_CR1 [group] + 0x1)))
@@ -3840,9 +3003,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field PMODE: Power Mode Select
     const uint8_t CMP_CR1_PMODE = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint8_t CMP_CR1_RESERVED = 1U << 5 ;
 
   // Field WE: Windowing Enable
     const uint8_t CMP_CR1_WE = 1U << 6 ;
@@ -3880,14 +3040,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field IER: Comparator Interrupt Enable Rising
     const uint8_t CMP_SCR_IER = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    const uint8_t CMP_SCR_RESERVED = 1U << 5 ;
-
   // Field DMAEN: DMA Enable Control
     const uint8_t CMP_SCR_DMAEN = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint8_t CMP_SCR_RESERVED = 1U << 7 ;
 
 //---  Register DACCR: DAC Control Register
   #define CMP_DACCR(group) (* ((volatile uint8_t *) (kBaseAddress_DACCR [group] + 0x4)))
@@ -3915,9 +3069,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field PSEL: Plus Input MUX Control
     inline uint8_t CMP_MUXCR_PSEL (const uint8_t inValue) {return (inValue & 0x7U) << 3 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t CMP_MUXCR_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 6 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral CMT: Carrier Modulator Transmitter
@@ -3949,9 +3100,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
 //---  Register OC: CMT Output Control Register
   #define CMT_OC (* ((volatile uint8_t *) (0x40062000 + 4)))
-
-  // Field RESERVED: no description available
-    inline uint8_t CMT_OC_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
   // Field IROPEN: IRO Pin Enable
     const uint8_t CMT_OC_IROPEN = 1U << 5 ;
@@ -4016,17 +3164,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field PPSDIV: Primary Prescaler Divider
     inline uint8_t CMT_PPS_PPSDIV (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t CMT_PPS_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
 //---  Register DMA: CMT Direct Memory Access
   #define CMT_DMA (* ((volatile uint8_t *) (0x40062000 + 11)))
 
   // Field DMA: DMA Enable
     const uint8_t CMT_DMA_DMA = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t CMT_DMA_RESERVED (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral CRC: Cyclic Redundancy Check
@@ -4131,9 +3273,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 //---  Register CTRL: CRC Control Register
   #define CRC_CTRL (* ((volatile uint32_t *) (0x40032000 + 8)))
 
-  // Field RESERVED: no description available
-    inline uint32_t CRC_CTRL_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 0 ; }
-
   // Field TCRC: no description available
     const uint32_t CRC_CTRL_TCRC = 1U << 24 ;
 
@@ -4142,9 +3281,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field FXOR: Complement Read of CRC data register
     const uint32_t CRC_CTRL_FXOR = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t CRC_CTRL_RESERVED = 1U << 27 ;
 
   // Field TOTR: Type of Transpose for Read
     inline uint32_t CRC_CTRL_TOTR (const uint32_t inValue) {return (inValue & 0x3U) << 28 ; }
@@ -4163,9 +3299,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field FXOR: no description available
     const uint8_t CRC_CTRLHU_FXOR = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t CRC_CTRLHU_RESERVED = 1U << 3 ;
 
   // Field TOTR: no description available
     inline uint8_t CRC_CTRLHU_TOTR (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
@@ -4221,9 +3354,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field DATA: no description available
     inline uint8_t DAC0_DATH_DATA (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DAC0_DATH_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
 //---  Register SR: DAC Status Register
   #define DAC0_SR (* ((volatile uint8_t *) (0x400cc000 + 32)))
 
@@ -4235,9 +3365,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field DACBFWMF: DAC buffer watermark flag
     const uint8_t DAC0_SR_DACBFWMF = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t DAC0_SR_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 3 ; }
 
 //---  Register C0: DAC Control Register
   #define DAC0_C0 (* ((volatile uint8_t *) (0x400cc000 + 33)))
@@ -4278,9 +3405,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field DACBFWM: DAC buffer watermark select
     inline uint8_t DAC0_C1_DACBFWM (const uint8_t inValue) {return (inValue & 0x3U) << 3 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DAC0_C1_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 5 ; }
-
   // Field DMAEN: DMA enable select
     const uint8_t DAC0_C1_DMAEN = 1U << 7 ;
 
@@ -4300,17 +3424,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 //---  Register CR: Control Register
   #define DMA_CR (* ((volatile uint32_t *) (0x40008000 + 0)))
 
-  // Field RESERVED: no description available
-    const uint32_t DMA_CR_RESERVED = 1U << 0 ;
-
   // Field EDBG: Enable Debug
     const uint32_t DMA_CR_EDBG = 1U << 1 ;
 
   // Field ERCA: Enable Round Robin Channel Arbitration
     const uint32_t DMA_CR_ERCA = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint32_t DMA_CR_RESERVED = 1U << 3 ;
 
   // Field HOE: Halt On Error
     const uint32_t DMA_CR_HOE = 1U << 4 ;
@@ -4324,17 +3442,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field EMLM: Enable Minor Loop Mapping
     const uint32_t DMA_CR_EMLM = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_CR_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
-
   // Field ECX: Error Cancel Transfer
     const uint32_t DMA_CR_ECX = 1U << 16 ;
 
   // Field CX: Cancel Transfer
     const uint32_t DMA_CR_CX = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t DMA_CR_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 18 ; }
 
 //---  Register ES: Error Status Register
   #define DMA_ES (* ((volatile uint32_t *) (0x40008000 + 4)))
@@ -4366,20 +3478,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field ERRCHN: Error Channel Number or Cancelled Channel Number
     inline uint32_t DMA_ES_ERRCHN (const uint32_t inValue) {return (inValue & 0xfU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_ES_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 12 ; }
-
   // Field CPE: Channel Priority Error
     const uint32_t DMA_ES_CPE = 1U << 14 ;
 
-  // Field RESERVED: no description available
-    const uint32_t DMA_ES_RESERVED = 1U << 15 ;
-
   // Field ECX: Transfer Cancelled
     const uint32_t DMA_ES_ECX = 1U << 16 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t DMA_ES_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 17 ; }
 
   // Field VLD: no description available
     const uint32_t DMA_ES_VLD = 1U << 31 ;
@@ -4435,9 +3538,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field ERQ15: Enable DMA Request 15
     const uint32_t DMA_ERQ_ERQ15 = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_ERQ_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register EEI: Enable Error Interrupt Register
   #define DMA_EEI (* ((volatile uint32_t *) (0x40008000 + 20)))
 
@@ -4489,17 +3589,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field EEI15: Enable Error Interrupt 15
     const uint32_t DMA_EEI_EEI15 = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_EEI_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register CEEI: Clear Enable Error Interrupt Register
   #define DMA_CEEI (* ((volatile uint8_t *) (0x40008000 + 24)))
 
   // Field CEEI: Clear Enable Error Interrupt
     inline uint8_t DMA_CEEI_CEEI (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t DMA_CEEI_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
   // Field CAEE: Clear All Enable Error Interrupts
     const uint8_t DMA_CEEI_CAEE = 1U << 6 ;
@@ -4513,9 +3607,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field SEEI: Set Enable Error Interrupt
     inline uint8_t DMA_SEEI_SEEI (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DMA_SEEI_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field SAEE: Sets All Enable Error Interrupts
     const uint8_t DMA_SEEI_SAEE = 1U << 6 ;
 
@@ -4527,9 +3618,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field CERQ: Clear Enable Request
     inline uint8_t DMA_CERQ_CERQ (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t DMA_CERQ_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
   // Field CAER: Clear All Enable Requests
     const uint8_t DMA_CERQ_CAER = 1U << 6 ;
@@ -4543,9 +3631,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field SERQ: Set enable request
     inline uint8_t DMA_SERQ_SERQ (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DMA_SERQ_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field SAER: Set All Enable Requests
     const uint8_t DMA_SERQ_SAER = 1U << 6 ;
 
@@ -4557,9 +3642,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field CDNE: Clear DONE Bit
     inline uint8_t DMA_CDNE_CDNE (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t DMA_CDNE_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
   // Field CADN: Clears All DONE Bits
     const uint8_t DMA_CDNE_CADN = 1U << 6 ;
@@ -4573,9 +3655,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field SSRT: Set START Bit
     inline uint8_t DMA_SSRT_SSRT (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DMA_SSRT_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field SAST: Set All START Bits (activates all channels)
     const uint8_t DMA_SSRT_SAST = 1U << 6 ;
 
@@ -4588,9 +3667,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field CERR: Clear Error Indicator
     inline uint8_t DMA_CERR_CERR (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t DMA_CERR_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field CAEI: Clear All Error Indicators
     const uint8_t DMA_CERR_CAEI = 1U << 6 ;
 
@@ -4602,9 +3678,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field CINT: Clear Interrupt Request
     inline uint8_t DMA_CINT_CINT (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t DMA_CINT_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
   // Field CAIR: Clear All Interrupt Requests
     const uint8_t DMA_CINT_CAIR = 1U << 6 ;
@@ -4663,9 +3736,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field INT15: Interrupt Request 15
     const uint32_t DMA_INT_INT15 = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_INT_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register ERR: Error Register
   #define DMA_ERR (* ((volatile uint32_t *) (0x40008000 + 44)))
 
@@ -4716,9 +3786,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field ERR15: Error In Channel 15
     const uint32_t DMA_ERR_ERR15 = 1U << 15 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t DMA_ERR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register HRS: Hardware Request Status Register
   #define DMA_HRS (* ((volatile uint32_t *) (0x40008000 + 52)))
@@ -4771,9 +3838,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field HRS15: Hardware Request Status Channel 15
     const uint32_t DMA_HRS_HRS15 = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t DMA_HRS_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Registers DCHPRI(3,2,1,0,7,6,5,4,11,10,9,8,15,14,13,12): Channel n Priority Register
   #define DMA_DCHPRI(idx) (* ((volatile uint8_t *) (0x40008000 + 0x100 + (idx) * 0x1)))
   #define DMA_DCHPRI3 (* ((volatile uint8_t *) (0x40008000 + 0x100 + 0 * 0x1)))
@@ -4795,9 +3859,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field CHPRI: Channel n Arbitration Priority
     inline uint8_t DMA_DCHPRI_CHPRI (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t DMA_DCHPRI_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
   // Field DPA: Disable Preempt Ability
     const uint8_t DMA_DCHPRI_DPA = 1U << 6 ;
@@ -5052,9 +4113,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field LINKCH: Link Channel Number
     inline uint16_t DMA_TCD_CITER_ELINKYES_LINKCH (const uint16_t inValue) {return (inValue & 0xfU) << 9 ; }
 
-  // Field RESERVED: no description available
-    inline uint16_t DMA_TCD_CITER_ELINKYES_RESERVED (const uint16_t inValue) {return (inValue & 0x3U) << 13 ; }
-
   // Field ELINK: Enable channel-to-channel linking on minor-loop complete
     const uint16_t DMA_TCD_CITER_ELINKYES_ELINK = 1U << 15 ;
 
@@ -5151,9 +4209,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field MAJORLINKCH: Link Channel Number
     inline uint16_t DMA_TCD_CSR_MAJORLINKCH (const uint16_t inValue) {return (inValue & 0xfU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint16_t DMA_TCD_CSR_RESERVED (const uint16_t inValue) {return (inValue & 0x3U) << 12 ; }
-
   // Field BWC: Bandwidth Control
     inline uint16_t DMA_TCD_CSR_BWC (const uint16_t inValue) {return (inValue & 0x3U) << 14 ; }
 
@@ -5181,9 +4236,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field LINKCH: Link Channel Number
     inline uint16_t DMA_TCD_BITER_ELINKYES_LINKCH (const uint16_t inValue) {return (inValue & 0xfU) << 9 ; }
-
-  // Field RESERVED: no description available
-    inline uint16_t DMA_TCD_BITER_ELINKYES_RESERVED (const uint16_t inValue) {return (inValue & 0x3U) << 13 ; }
 
   // Field ELINK: Enables channel-to-channel linking on minor loop complete
     const uint16_t DMA_TCD_BITER_ELINKYES_ELINK = 1U << 15 ;
@@ -5264,9 +4316,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field INTEN: Interrupt Enable.
     const uint8_t EWM_CTRL_INTEN = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t EWM_CTRL_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
 //---  Register SERV: Service Register
   #define EWM_SERV (* ((volatile uint8_t *) (0x40061000 + 1)))
 
@@ -5298,9 +4347,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   #define FB_CSAR4 (* ((volatile uint32_t *) (0x4000c000 + 0x0 + 4 * 0xc)))
   #define FB_CSAR5 (* ((volatile uint32_t *) (0x4000c000 + 0x0 + 5 * 0xc)))
 
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSAR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
   // Field BA: Base address
     inline uint32_t FB_CSAR_BA (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
@@ -5316,14 +4362,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field V: Valid
     const uint32_t FB_CSMR_V = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSMR_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 1 ; }
-
   // Field WP: Write protect
     const uint32_t FB_CSMR_WP = 1U << 8 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSMR_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 9 ; }
 
   // Field BAM: Base address mask
     inline uint32_t FB_CSMR_BAM (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
@@ -5336,9 +4376,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   #define FB_CSCR3 (* ((volatile uint32_t *) (0x4000c000 + 0x8 + 3 * 0xc)))
   #define FB_CSCR4 (* ((volatile uint32_t *) (0x4000c000 + 0x8 + 4 * 0xc)))
   #define FB_CSCR5 (* ((volatile uint32_t *) (0x4000c000 + 0x8 + 5 * 0xc)))
-
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSCR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
   // Field BSTW: Burst-write enable
     const uint32_t FB_CSCR_BSTW = 1U << 3 ;
@@ -5376,17 +4413,11 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field SWSEN: Secondary wait state enable
     const uint32_t FB_CSCR_SWSEN = 1U << 23 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 24 ; }
-
   // Field SWS: Secondary wait states
     inline uint32_t FB_CSCR_SWS (const uint32_t inValue) {return (inValue & 0x3fU) << 26 ; }
 
 //---  Register CSPMCR: Chip select port multiplexing control register
   #define FB_CSPMCR (* ((volatile uint32_t *) (0x4000c000 + 96)))
-
-  // Field RESERVED: no description available
-    inline uint32_t FB_CSPMCR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 0 ; }
 
   // Field GROUP5: FlexBus signal group 5 multiplex control
     inline uint32_t FB_CSPMCR_GROUP5 (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
@@ -5458,9 +4489,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field M7PFD: Master 7 Prefetch Disable
     const uint32_t FMC_PFAPR_M7PFD = 1U << 23 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_PFAPR_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
-
 //---  Register PFB0CR: Flash Bank 0 Control Register
   #define FMC_PFB0CR (* ((volatile uint32_t *) (0x4001f000 + 4)))
 
@@ -5481,12 +4509,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field CRC: Cache Replacement Control
     inline uint32_t FMC_PFB0CR_CRC (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_PFB0CR_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t FMC_PFB0CR_RESERVED = 1U << 16 ;
 
   // Field B0MW: Bank 0 Memory Width
     inline uint32_t FMC_PFB0CR_B0MW (const uint32_t inValue) {return (inValue & 0x3U) << 17 ; }
@@ -5521,20 +4543,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field B1DCE: Bank 1 Data Cache Enable
     const uint32_t FMC_PFB1CR_B1DCE = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_PFB1CR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_PFB1CR_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t FMC_PFB1CR_RESERVED = 1U << 16 ;
-
   // Field B1MW: Bank 1 Memory Width
     inline uint32_t FMC_PFB1CR_B1MW (const uint32_t inValue) {return (inValue & 0x3U) << 17 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_PFB1CR_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 19 ; }
 
   // Field B1RWSC: Bank 1 Read Wait State Control
     inline uint32_t FMC_PFB1CR_B1RWSC (const uint32_t inValue) {return (inValue & 0xfU) << 28 ; }
@@ -5553,14 +4563,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field valid: 1-bit valid for cache entry
     const uint32_t FMC_TAGVDW0S_valid = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW0S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fU) << 1 ; }
-
   // Field tag: 13-bit tag for cache entry
     inline uint32_t FMC_TAGVDW0S_tag (const uint32_t inValue) {return (inValue & 0x1fffU) << 6 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW0S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
 
 //---  Registers TAGVDW1S(0,1,2,3,4,5,6,7): Cache Tag Storage
   #define FMC_TAGVDW1S(idx) (* ((volatile uint32_t *) (0x4001f000 + 0x120 + (idx) * 0x4)))
@@ -5576,14 +4580,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field valid: 1-bit valid for cache entry
     const uint32_t FMC_TAGVDW1S_valid = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW1S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fU) << 1 ; }
-
   // Field tag: 13-bit tag for cache entry
     inline uint32_t FMC_TAGVDW1S_tag (const uint32_t inValue) {return (inValue & 0x1fffU) << 6 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW1S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
 
 //---  Registers TAGVDW2S(0,1,2,3,4,5,6,7): Cache Tag Storage
   #define FMC_TAGVDW2S(idx) (* ((volatile uint32_t *) (0x4001f000 + 0x140 + (idx) * 0x4)))
@@ -5599,14 +4597,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field valid: 1-bit valid for cache entry
     const uint32_t FMC_TAGVDW2S_valid = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW2S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fU) << 1 ; }
-
   // Field tag: 13-bit tag for cache entry
     inline uint32_t FMC_TAGVDW2S_tag (const uint32_t inValue) {return (inValue & 0x1fffU) << 6 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW2S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
 
 //---  Registers TAGVDW3S(0,1,2,3,4,5,6,7): Cache Tag Storage
   #define FMC_TAGVDW3S(idx) (* ((volatile uint32_t *) (0x4001f000 + 0x160 + (idx) * 0x4)))
@@ -5622,14 +4614,8 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field valid: 1-bit valid for cache entry
     const uint32_t FMC_TAGVDW3S_valid = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW3S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fU) << 1 ; }
-
   // Field tag: 13-bit tag for cache entry
     inline uint32_t FMC_TAGVDW3S_tag (const uint32_t inValue) {return (inValue & 0x1fffU) << 6 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FMC_TAGVDW3S_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
 
 //---  Registers DATAW0SU(0,1,2,3,4,5,6,7): Cache Data Storage (upper word)
   #define FMC_DATAW0SU(idx) (* ((volatile uint32_t *) (0x4001f000 + 0x200 + (idx) * 0x8)))
@@ -5752,9 +4738,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
 
   // Field MGSTAT0: Memory Controller Command Completion Status Flag
     const uint8_t FTFL_FSTAT_MGSTAT0 = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t FTFL_FSTAT_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 1 ; }
 
   // Field FPVIOL: Flash Protection Violation Flag
     const uint8_t FTFL_FSTAT_FPVIOL = 1U << 4 ;
@@ -5956,24 +4939,6 @@ static const uint32_t kBaseAddress_CMP [3] = {0x40073000, 0x40073008, 0x40073010
   // Field EZPORT_DIS: no description available
     const uint8_t FTFL_FlashConfig_FOPT_EZPORT_DIS = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint8_t FTFL_FlashConfig_FOPT_RESERVED = 1U << 7 ;
-
 //---  Register FEPROT: Non-volatile EERAM Protection Register
   #define FTFL_FlashConfig_FEPROT (* ((volatile uint8_t *) (0x400 + 14)))
 
@@ -6018,9 +4983,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field TOF: Timer Overflow Flag
     const uint32_t FTM_SC_TOF = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_SC_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register CNT: Counter
   #define FTM_CNT(group) (* ((volatile uint32_t *) (kBaseAddress_CNT [group] + 0x4)))
   #define FTM0_CNT (* ((volatile uint32_t *) (0x40038000 + 0x4)))
@@ -6030,9 +4992,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field COUNT: Counter value
     inline uint32_t FTM_CNT_COUNT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_CNT_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register MOD: Modulo
   #define FTM_MOD(group) (* ((volatile uint32_t *) (kBaseAddress_MOD [group] + 0x8)))
   #define FTM0_MOD (* ((volatile uint32_t *) (0x40038000 + 0x8)))
@@ -6041,9 +5000,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field MOD: no description available
     inline uint32_t FTM_MOD_MOD (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_MOD_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Registers CSC(0,1,2,3,4,5,6,7): Channel (n) Status and Control
   #define FTM_CSC(group,idx) (* ((volatile uint32_t *) (kBaseAddress_CSC [group] + 0xc + (idx) * 0x8)))
@@ -6078,9 +5034,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field DMA: DMA Enable
     const uint32_t FTM_CSC_DMA = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_CSC_RESERVED = 1U << 1 ;
-
   // Field ELSA: Edge or Level Select
     const uint32_t FTM_CSC_ELSA = 1U << 2 ;
 
@@ -6098,9 +5051,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field CHF: Channel Flag
     const uint32_t FTM_CSC_CHF = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_CSC_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Registers CV(0,1,2,3,4,5,6,7): Channel (n) Value
   #define FTM_CV(group,idx) (* ((volatile uint32_t *) (kBaseAddress_CV [group] + 0x10 + (idx) * 0x8)))
@@ -6135,9 +5085,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field VAL: Channel Value
     inline uint32_t FTM_CV_VAL (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_CV_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register CNTIN: Counter Initial Value
   #define FTM_CNTIN(group) (* ((volatile uint32_t *) (kBaseAddress_CNTIN [group] + 0x4c)))
   #define FTM0_CNTIN (* ((volatile uint32_t *) (0x40038000 + 0x4c)))
@@ -6146,9 +5093,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field INIT: no description available
     inline uint32_t FTM_CNTIN_INIT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_CNTIN_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register STATUS: Capture and Compare Status
   #define FTM_STATUS(group) (* ((volatile uint32_t *) (kBaseAddress_STATUS [group] + 0x50)))
@@ -6180,9 +5124,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field CH7F: Channel 7 Flag
     const uint32_t FTM_STATUS_CH7F = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_STATUS_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register MODE: Features Mode Selection
   #define FTM_MODE(group) (* ((volatile uint32_t *) (kBaseAddress_MODE [group] + 0x54)))
   #define FTM0_MODE (* ((volatile uint32_t *) (0x40038000 + 0x54)))
@@ -6209,9 +5150,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field FAULTIE: Fault Interrupt Enable
     const uint32_t FTM_MODE_FAULTIE = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_MODE_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register SYNC: Synchronization
   #define FTM_SYNC(group) (* ((volatile uint32_t *) (kBaseAddress_SYNC [group] + 0x58)))
@@ -6243,9 +5181,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field SWSYNC: PWM Synchronization Software Trigger
     const uint32_t FTM_SYNC_SWSYNC = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_SYNC_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register OUTINIT: Initial State for Channels Output
   #define FTM_OUTINIT(group) (* ((volatile uint32_t *) (kBaseAddress_OUTINIT [group] + 0x5c)))
   #define FTM0_OUTINIT (* ((volatile uint32_t *) (0x40038000 + 0x5c)))
@@ -6275,9 +5210,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field CH7OI: Channel 7 Output Initialization Value
     const uint32_t FTM_OUTINIT_CH7OI = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_OUTINIT_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register OUTMASK: Output Mask
   #define FTM_OUTMASK(group) (* ((volatile uint32_t *) (kBaseAddress_OUTMASK [group] + 0x60)))
@@ -6309,9 +5241,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field CH7OM: Channel 7 Output Mask
     const uint32_t FTM_OUTMASK_CH7OM = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_OUTMASK_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register COMBINE: Function for Linked Channels
   #define FTM_COMBINE(group) (* ((volatile uint32_t *) (kBaseAddress_COMBINE [group] + 0x64)))
   #define FTM0_COMBINE (* ((volatile uint32_t *) (0x40038000 + 0x64)))
@@ -6339,9 +5268,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FAULTEN0: Fault Control Enable for n = 0
     const uint32_t FTM_COMBINE_FAULTEN0 = 1U << 6 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_COMBINE_RESERVED = 1U << 7 ;
-
   // Field COMBINE1: Combine Channels for n = 2
     const uint32_t FTM_COMBINE_COMBINE1 = 1U << 8 ;
 
@@ -6362,9 +5288,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field FAULTEN1: Fault Control Enable for n = 2
     const uint32_t FTM_COMBINE_FAULTEN1 = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t FTM_COMBINE_RESERVED = 1U << 15 ;
 
   // Field COMBINE2: Combine Channels for n = 4
     const uint32_t FTM_COMBINE_COMBINE2 = 1U << 16 ;
@@ -6387,9 +5310,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FAULTEN2: Fault Control Enable for n = 4
     const uint32_t FTM_COMBINE_FAULTEN2 = 1U << 22 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_COMBINE_RESERVED = 1U << 23 ;
-
   // Field COMBINE3: Combine Channels for n = 6
     const uint32_t FTM_COMBINE_COMBINE3 = 1U << 24 ;
 
@@ -6411,9 +5331,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FAULTEN3: Fault Control Enable for n = 6
     const uint32_t FTM_COMBINE_FAULTEN3 = 1U << 30 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_COMBINE_RESERVED = 1U << 31 ;
-
 //---  Register DEADTIME: Deadtime Insertion Control
   #define FTM_DEADTIME(group) (* ((volatile uint32_t *) (kBaseAddress_DEADTIME [group] + 0x68)))
   #define FTM0_DEADTIME (* ((volatile uint32_t *) (0x40038000 + 0x68)))
@@ -6425,9 +5342,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field DTPS: Deadtime Prescaler Value
     inline uint32_t FTM_DEADTIME_DTPS (const uint32_t inValue) {return (inValue & 0x3U) << 6 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_DEADTIME_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register EXTTRIG: FTM External Trigger
   #define FTM_EXTTRIG(group) (* ((volatile uint32_t *) (kBaseAddress_EXTTRIG [group] + 0x6c)))
@@ -6459,9 +5373,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field TRIGF: Channel Trigger Flag
     const uint32_t FTM_EXTTRIG_TRIGF = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_EXTTRIG_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register POL: Channels Polarity
   #define FTM_POL(group) (* ((volatile uint32_t *) (kBaseAddress_POL [group] + 0x70)))
   #define FTM0_POL (* ((volatile uint32_t *) (0x40038000 + 0x70)))
@@ -6492,9 +5403,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field POL7: Channel 7 Polarity
     const uint32_t FTM_POL_POL7 = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_POL_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register FMS: Fault Mode Status
   #define FTM_FMS(group) (* ((volatile uint32_t *) (kBaseAddress_FMS [group] + 0x74)))
   #define FTM0_FMS (* ((volatile uint32_t *) (0x40038000 + 0x74)))
@@ -6513,9 +5421,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FAULTF3: Fault Detection Flag 3
     const uint32_t FTM_FMS_FAULTF3 = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_FMS_RESERVED = 1U << 4 ;
-
   // Field FAULTIN: Fault Inputs
     const uint32_t FTM_FMS_FAULTIN = 1U << 5 ;
 
@@ -6524,9 +5429,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field FAULTF: Fault Detection Flag
     const uint32_t FTM_FMS_FAULTF = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_FMS_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register FILTER: Input Capture Filter Control
   #define FTM_FILTER(group) (* ((volatile uint32_t *) (kBaseAddress_FILTER [group] + 0x78)))
@@ -6545,9 +5447,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field CH3FVAL: Channel 3 Input Filter
     inline uint32_t FTM_FILTER_CH3FVAL (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_FILTER_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register FLTCTRL: Fault Control
   #define FTM_FLTCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_FLTCTRL [group] + 0x7c)))
@@ -6582,9 +5481,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FFVAL: Fault Input Filter
     inline uint32_t FTM_FLTCTRL_FFVAL (const uint32_t inValue) {return (inValue & 0xfU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_FLTCTRL_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffU) << 12 ; }
-
 //---  Register QDCTRL: Quadrature Decoder Control and Status
   #define FTM_QDCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_QDCTRL [group] + 0x80)))
   #define FTM0_QDCTRL (* ((volatile uint32_t *) (0x40038000 + 0x80)))
@@ -6615,9 +5511,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field PHAFLTREN: Phase A Input Filter Enable
     const uint32_t FTM_QDCTRL_PHAFLTREN = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_QDCTRL_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register CONF: Configuration
   #define FTM_CONF(group) (* ((volatile uint32_t *) (kBaseAddress_CONF [group] + 0x84)))
   #define FTM0_CONF (* ((volatile uint32_t *) (0x40038000 + 0x84)))
@@ -6627,23 +5520,14 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field NUMTOF: TOF Frequency
     inline uint32_t FTM_CONF_NUMTOF (const uint32_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_CONF_RESERVED = 1U << 5 ;
-
   // Field BDMMODE: BDM Mode
     inline uint32_t FTM_CONF_BDMMODE (const uint32_t inValue) {return (inValue & 0x3U) << 6 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t FTM_CONF_RESERVED = 1U << 8 ;
 
   // Field GTBEEN: Global time base enable
     const uint32_t FTM_CONF_GTBEEN = 1U << 9 ;
 
   // Field GTBEOUT: Global time base output
     const uint32_t FTM_CONF_GTBEOUT = 1U << 10 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_CONF_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffffU) << 11 ; }
 
 //---  Register FLTPOL: FTM Fault Input Polarity
   #define FTM_FLTPOL(group) (* ((volatile uint32_t *) (kBaseAddress_FLTPOL [group] + 0x88)))
@@ -6663,9 +5547,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field FLT3POL: Fault Input 3 Polarity
     const uint32_t FTM_FLTPOL_FLT3POL = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_FLTPOL_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffffU) << 4 ; }
-
 //---  Register SYNCONF: Synchronization Configuration
   #define FTM_SYNCONF(group) (* ((volatile uint32_t *) (kBaseAddress_SYNCONF [group] + 0x8c)))
   #define FTM0_SYNCONF (* ((volatile uint32_t *) (0x40038000 + 0x8c)))
@@ -6675,23 +5556,14 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field HWTRIGMODE: Hardware Trigger Mode
     const uint32_t FTM_SYNCONF_HWTRIGMODE = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_SYNCONF_RESERVED = 1U << 1 ;
-
   // Field CNTINC: CNTIN register synchronization
     const uint32_t FTM_SYNCONF_CNTINC = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint32_t FTM_SYNCONF_RESERVED = 1U << 3 ;
 
   // Field INVC: INVCTRL register synchronization
     const uint32_t FTM_SYNCONF_INVC = 1U << 4 ;
 
   // Field SWOC: SWOCTRL register synchronization
     const uint32_t FTM_SYNCONF_SWOC = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint32_t FTM_SYNCONF_RESERVED = 1U << 6 ;
 
   // Field SYNCMODE: Synchronization Mode
     const uint32_t FTM_SYNCONF_SYNCMODE = 1U << 7 ;
@@ -6711,9 +5583,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field SWSOC: no description available
     const uint32_t FTM_SYNCONF_SWSOC = 1U << 12 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_SYNCONF_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
-
   // Field HWRSTCNT: no description available
     const uint32_t FTM_SYNCONF_HWRSTCNT = 1U << 16 ;
 
@@ -6728,9 +5597,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field HWSOC: no description available
     const uint32_t FTM_SYNCONF_HWSOC = 1U << 20 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_SYNCONF_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 21 ; }
 
 //---  Register INVCTRL: FTM Inverting Control
   #define FTM_INVCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_INVCTRL [group] + 0x90)))
@@ -6749,9 +5615,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
 
   // Field INV3EN: Pair Channels 3 Inverting Enable
     const uint32_t FTM_INVCTRL_INV3EN = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t FTM_INVCTRL_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffffU) << 4 ; }
 
 //---  Register SWOCTRL: FTM Software Output Control
   #define FTM_SWOCTRL(group) (* ((volatile uint32_t *) (kBaseAddress_SWOCTRL [group] + 0x94)))
@@ -6807,9 +5670,6 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field CH7OCV: Channel 7 Software Output Control Value
     const uint32_t FTM_SWOCTRL_CH7OCV = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_SWOCTRL_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register PWMLOAD: FTM PWM Load
   #define FTM_PWMLOAD(group) (* ((volatile uint32_t *) (kBaseAddress_PWMLOAD [group] + 0x98)))
   #define FTM0_PWMLOAD (* ((volatile uint32_t *) (0x40038000 + 0x98)))
@@ -6840,22 +5700,16 @@ static const uint32_t kBaseAddress_FTM [3] = {0x40038000, 0x40039000, 0x400b8000
   // Field CH7SEL: Channel 7 Select
     const uint32_t FTM_PWMLOAD_CH7SEL = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    const uint32_t FTM_PWMLOAD_RESERVED = 1U << 8 ;
-
   // Field LDOK: Load Enable
     const uint32_t FTM_PWMLOAD_LDOK = 1U << 9 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t FTM_PWMLOAD_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffU) << 10 ; }
-
 //------------------------------------------------------------------------------
 // PERIPHERAL GROUP: GPIO
-//        PTA at 0x400ff000
-//        PTB at 0x400ff040
-//        PTC at 0x400ff080
-//        PTD at 0x400ff0c0
-//        PTE at 0x400ff100
+//        GPIOA at 0x400ff000
+//        GPIOB at 0x400ff040
+//        GPIOC at 0x400ff080
+//        GPIOD at 0x400ff0c0
+//        GPIOE at 0x400ff100
 //------------------------------------------------------------------------------
 
 static const uint32_t kBaseAddress_GPIO [5] = {0x400ff000, 0x400ff040, 0x400ff080, 0x400ff0c0, 0x400ff100} ;
@@ -6864,66 +5718,66 @@ static const uint32_t kBaseAddress_GPIO [5] = {0x400ff000, 0x400ff040, 0x400ff08
 
 //---  Register PDOR: Port Data Output Register
   #define GPIO_PDOR(group) (* ((volatile uint32_t *) (kBaseAddress_PDOR [group] + 0x0)))
-  #define PTA_PDOR (* ((volatile uint32_t *) (0x400ff000 + 0x0)))
-  #define PTB_PDOR (* ((volatile uint32_t *) (0x400ff040 + 0x0)))
-  #define PTC_PDOR (* ((volatile uint32_t *) (0x400ff080 + 0x0)))
-  #define PTD_PDOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x0)))
-  #define PTE_PDOR (* ((volatile uint32_t *) (0x400ff100 + 0x0)))
+  #define GPIOA_PDOR (* ((volatile uint32_t *) (0x400ff000 + 0x0)))
+  #define GPIOB_PDOR (* ((volatile uint32_t *) (0x400ff040 + 0x0)))
+  #define GPIOC_PDOR (* ((volatile uint32_t *) (0x400ff080 + 0x0)))
+  #define GPIOD_PDOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x0)))
+  #define GPIOE_PDOR (* ((volatile uint32_t *) (0x400ff100 + 0x0)))
 
   // Field PDO: Port Data Output
     inline uint32_t GPIO_PDOR_PDO (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //---  Register PSOR: Port Set Output Register
   #define GPIO_PSOR(group) (* ((volatile uint32_t *) (kBaseAddress_PSOR [group] + 0x4)))
-  #define PTA_PSOR (* ((volatile uint32_t *) (0x400ff000 + 0x4)))
-  #define PTB_PSOR (* ((volatile uint32_t *) (0x400ff040 + 0x4)))
-  #define PTC_PSOR (* ((volatile uint32_t *) (0x400ff080 + 0x4)))
-  #define PTD_PSOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x4)))
-  #define PTE_PSOR (* ((volatile uint32_t *) (0x400ff100 + 0x4)))
+  #define GPIOA_PSOR (* ((volatile uint32_t *) (0x400ff000 + 0x4)))
+  #define GPIOB_PSOR (* ((volatile uint32_t *) (0x400ff040 + 0x4)))
+  #define GPIOC_PSOR (* ((volatile uint32_t *) (0x400ff080 + 0x4)))
+  #define GPIOD_PSOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x4)))
+  #define GPIOE_PSOR (* ((volatile uint32_t *) (0x400ff100 + 0x4)))
 
   // Field PTSO: Port Set Output
     inline uint32_t GPIO_PSOR_PTSO (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //---  Register PCOR: Port Clear Output Register
   #define GPIO_PCOR(group) (* ((volatile uint32_t *) (kBaseAddress_PCOR [group] + 0x8)))
-  #define PTA_PCOR (* ((volatile uint32_t *) (0x400ff000 + 0x8)))
-  #define PTB_PCOR (* ((volatile uint32_t *) (0x400ff040 + 0x8)))
-  #define PTC_PCOR (* ((volatile uint32_t *) (0x400ff080 + 0x8)))
-  #define PTD_PCOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x8)))
-  #define PTE_PCOR (* ((volatile uint32_t *) (0x400ff100 + 0x8)))
+  #define GPIOA_PCOR (* ((volatile uint32_t *) (0x400ff000 + 0x8)))
+  #define GPIOB_PCOR (* ((volatile uint32_t *) (0x400ff040 + 0x8)))
+  #define GPIOC_PCOR (* ((volatile uint32_t *) (0x400ff080 + 0x8)))
+  #define GPIOD_PCOR (* ((volatile uint32_t *) (0x400ff0c0 + 0x8)))
+  #define GPIOE_PCOR (* ((volatile uint32_t *) (0x400ff100 + 0x8)))
 
   // Field PTCO: Port Clear Output
     inline uint32_t GPIO_PCOR_PTCO (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //---  Register PTOR: Port Toggle Output Register
   #define GPIO_PTOR(group) (* ((volatile uint32_t *) (kBaseAddress_PTOR [group] + 0xc)))
-  #define PTA_PTOR (* ((volatile uint32_t *) (0x400ff000 + 0xc)))
-  #define PTB_PTOR (* ((volatile uint32_t *) (0x400ff040 + 0xc)))
-  #define PTC_PTOR (* ((volatile uint32_t *) (0x400ff080 + 0xc)))
-  #define PTD_PTOR (* ((volatile uint32_t *) (0x400ff0c0 + 0xc)))
-  #define PTE_PTOR (* ((volatile uint32_t *) (0x400ff100 + 0xc)))
+  #define GPIOA_PTOR (* ((volatile uint32_t *) (0x400ff000 + 0xc)))
+  #define GPIOB_PTOR (* ((volatile uint32_t *) (0x400ff040 + 0xc)))
+  #define GPIOC_PTOR (* ((volatile uint32_t *) (0x400ff080 + 0xc)))
+  #define GPIOD_PTOR (* ((volatile uint32_t *) (0x400ff0c0 + 0xc)))
+  #define GPIOE_PTOR (* ((volatile uint32_t *) (0x400ff100 + 0xc)))
 
   // Field PTTO: Port Toggle Output
     inline uint32_t GPIO_PTOR_PTTO (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //---  Register PDIR: Port Data Input Register
   #define GPIO_PDIR(group) (* ((volatile uint32_t *) (kBaseAddress_PDIR [group] + 0x10)))
-  #define PTA_PDIR (* ((volatile uint32_t *) (0x400ff000 + 0x10)))
-  #define PTB_PDIR (* ((volatile uint32_t *) (0x400ff040 + 0x10)))
-  #define PTC_PDIR (* ((volatile uint32_t *) (0x400ff080 + 0x10)))
-  #define PTD_PDIR (* ((volatile uint32_t *) (0x400ff0c0 + 0x10)))
-  #define PTE_PDIR (* ((volatile uint32_t *) (0x400ff100 + 0x10)))
+  #define GPIOA_PDIR (* ((volatile uint32_t *) (0x400ff000 + 0x10)))
+  #define GPIOB_PDIR (* ((volatile uint32_t *) (0x400ff040 + 0x10)))
+  #define GPIOC_PDIR (* ((volatile uint32_t *) (0x400ff080 + 0x10)))
+  #define GPIOD_PDIR (* ((volatile uint32_t *) (0x400ff0c0 + 0x10)))
+  #define GPIOE_PDIR (* ((volatile uint32_t *) (0x400ff100 + 0x10)))
 
   // Field PDI: Port Data Input
     inline uint32_t GPIO_PDIR_PDI (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //---  Register PDDR: Port Data Direction Register
   #define GPIO_PDDR(group) (* ((volatile uint32_t *) (kBaseAddress_PDDR [group] + 0x14)))
-  #define PTA_PDDR (* ((volatile uint32_t *) (0x400ff000 + 0x14)))
-  #define PTB_PDDR (* ((volatile uint32_t *) (0x400ff040 + 0x14)))
-  #define PTC_PDDR (* ((volatile uint32_t *) (0x400ff080 + 0x14)))
-  #define PTD_PDDR (* ((volatile uint32_t *) (0x400ff0c0 + 0x14)))
-  #define PTE_PDDR (* ((volatile uint32_t *) (0x400ff100 + 0x14)))
+  #define GPIOA_PDDR (* ((volatile uint32_t *) (0x400ff000 + 0x14)))
+  #define GPIOB_PDDR (* ((volatile uint32_t *) (0x400ff040 + 0x14)))
+  #define GPIOC_PDDR (* ((volatile uint32_t *) (0x400ff080 + 0x14)))
+  #define GPIOD_PDDR (* ((volatile uint32_t *) (0x400ff0c0 + 0x14)))
+  #define GPIOE_PDDR (* ((volatile uint32_t *) (0x400ff100 + 0x14)))
 
   // Field PDD: Port data direction
     inline uint32_t GPIO_PDDR_PDD (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
@@ -6942,9 +5796,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   #define I2C_A1(group) (* ((volatile uint8_t *) (kBaseAddress_A1 [group] + 0x0)))
   #define I2C0_A1 (* ((volatile uint8_t *) (0x40066000 + 0x0)))
   #define I2C1_A1 (* ((volatile uint8_t *) (0x40067000 + 0x0)))
-
-  // Field RESERVED: no description available
-    const uint8_t I2C_A1_RESERVED = 1U << 0 ;
 
   // Field AD: Address
     inline uint8_t I2C_A1_AD (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
@@ -7057,19 +5908,10 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FLT: I2C programmable filter factor
     inline uint8_t I2C_FLT_FLT (const uint8_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t I2C_FLT_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 5 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t I2C_FLT_RESERVED = 1U << 7 ;
-
 //---  Register RA: I2C Range Address register
   #define I2C_RA(group) (* ((volatile uint8_t *) (kBaseAddress_RA [group] + 0x7)))
   #define I2C0_RA (* ((volatile uint8_t *) (0x40066000 + 0x7)))
   #define I2C1_RA (* ((volatile uint8_t *) (0x40067000 + 0x7)))
-
-  // Field RESERVED: no description available
-    const uint8_t I2C_RA_RESERVED = 1U << 0 ;
 
   // Field RAD: Range slave address
     inline uint8_t I2C_RA_RAD (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
@@ -7108,9 +5950,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   #define I2C0_A2 (* ((volatile uint8_t *) (0x40066000 + 0x9)))
   #define I2C1_A2 (* ((volatile uint8_t *) (0x40067000 + 0x9)))
 
-  // Field RESERVED: no description available
-    const uint8_t I2C_A2_RESERVED = 1U << 0 ;
-
   // Field SAD: SMBus address
     inline uint8_t I2C_A2_SAD (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
 
@@ -7143,12 +5982,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FWDE: FIFO warning DMA enable
     const uint32_t I2S0_TCSR_FWDE = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 2 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
   // Field FRIE: FIFO request interrupt enable
     const uint32_t I2S0_TCSR_FRIE = 1U << 8 ;
 
@@ -7163,9 +5996,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field WSIE: Word start interrupt enable
     const uint32_t I2S0_TCSR_WSIE = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
 
   // Field FRF: FIFO request flag
     const uint32_t I2S0_TCSR_FRF = 1U << 16 ;
@@ -7182,17 +6012,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field WSF: Word start flag
     const uint32_t I2S0_TCSR_WSF = 1U << 20 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 21 ; }
-
   // Field SR: Software reset
     const uint32_t I2S0_TCSR_SR = 1U << 24 ;
 
   // Field FR: FIFO reset
     const uint32_t I2S0_TCSR_FR = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 26 ; }
 
   // Field BCE: Bit Clock Enable
     const uint32_t I2S0_TCSR_BCE = 1U << 28 ;
@@ -7212,17 +6036,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field TFW: Transmit FIFO watermark
     inline uint32_t I2S0_TCR1_TFW (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR1_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffffffU) << 3 ; }
-
 //---  Register TCR2: SAI Transmit Configuration 2 Register
   #define I2S0_TCR2 (* ((volatile uint32_t *) (0x4002f000 + 8)))
 
   // Field DIV: Bit clock divide
     inline uint32_t I2S0_TCR2_DIV (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 8 ; }
 
   // Field BCD: Bit clock direction
     const uint32_t I2S0_TCR2_BCD = 1U << 24 ;
@@ -7248,14 +6066,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field WDFL: Word flag configuration
     inline uint32_t I2S0_TCR3_WDFL (const uint32_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR3_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 5 ; }
-
   // Field TCE: Transmit channel enable
     inline uint32_t I2S0_TCR3_TCE (const uint32_t inValue) {return (inValue & 0x3U) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR3_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 18 ; }
 
 //---  Register TCR4: SAI Transmit Configuration 4 Register
   #define I2S0_TCR4 (* ((volatile uint32_t *) (0x4002f000 + 16)))
@@ -7266,53 +6078,29 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FSP: Frame sync polarity
     const uint32_t I2S0_TCR4_FSP = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    const uint32_t I2S0_TCR4_RESERVED = 1U << 2 ;
-
   // Field FSE: Frame sync early
     const uint32_t I2S0_TCR4_FSE = 1U << 3 ;
 
   // Field MF: MSB first
     const uint32_t I2S0_TCR4_MF = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
   // Field SYWD: Sync width
     inline uint32_t I2S0_TCR4_SYWD (const uint32_t inValue) {return (inValue & 0x1fU) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
 
   // Field FRSZ: Frame size
     inline uint32_t I2S0_TCR4_FRSZ (const uint32_t inValue) {return (inValue & 0x1fU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 21 ; }
-
 //---  Register TCR5: SAI Transmit Configuration 5 Register
   #define I2S0_TCR5 (* ((volatile uint32_t *) (0x4002f000 + 20)))
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR5_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
 
   // Field FBT: First bit shifted
     inline uint32_t I2S0_TCR5_FBT (const uint32_t inValue) {return (inValue & 0x1fU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
-
   // Field W0W: Word 0 width
     inline uint32_t I2S0_TCR5_W0W (const uint32_t inValue) {return (inValue & 0x1fU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 21 ; }
-
   // Field WNW: Word N width
     inline uint32_t I2S0_TCR5_WNW (const uint32_t inValue) {return (inValue & 0x1fU) << 24 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 29 ; }
 
 //---  Registers TDR(0,1): SAI Transmit Data Register
   #define I2S0_TDR(idx) (* ((volatile uint32_t *) (0x4002f000 + 0x20 + (idx) * 0x4)))
@@ -7330,14 +6118,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field RFP: Read FIFO pointer
     inline uint32_t I2S0_TFR_RFP (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TFR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 4 ; }
-
   // Field WFP: Write FIFO pointer
     inline uint32_t I2S0_TFR_WFP (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_TFR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 20 ; }
 
 //---  Register TMR: SAI Transmit Mask Register
   #define I2S0_TMR (* ((volatile uint32_t *) (0x4002f000 + 96)))
@@ -7354,12 +6136,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FWDE: FIFO warning DMA enable
     const uint32_t I2S0_RCSR_FWDE = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 2 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
   // Field FRIE: FIFO request interrupt enable
     const uint32_t I2S0_RCSR_FRIE = 1U << 8 ;
 
@@ -7374,9 +6150,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field WSIE: Word start interrupt enable
     const uint32_t I2S0_RCSR_WSIE = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
 
   // Field FRF: FIFO request flag
     const uint32_t I2S0_RCSR_FRF = 1U << 16 ;
@@ -7393,17 +6166,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field WSF: Word start flag
     const uint32_t I2S0_RCSR_WSF = 1U << 20 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 21 ; }
-
   // Field SR: Software reset
     const uint32_t I2S0_RCSR_SR = 1U << 24 ;
 
   // Field FR: FIFO reset
     const uint32_t I2S0_RCSR_FR = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCSR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 26 ; }
 
   // Field BCE: Bit Clock enable
     const uint32_t I2S0_RCSR_BCE = 1U << 28 ;
@@ -7423,17 +6190,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field RFW: Receive FIFO watermark
     inline uint32_t I2S0_RCR1_RFW (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR1_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffffffU) << 3 ; }
-
 //---  Register RCR2: SAI Receive Configuration 2 Register
   #define I2S0_RCR2 (* ((volatile uint32_t *) (0x4002f000 + 136)))
 
   // Field DIV: Bit clock divide
     inline uint32_t I2S0_RCR2_DIV (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 8 ; }
 
   // Field BCD: Bit clock direction
     const uint32_t I2S0_RCR2_BCD = 1U << 24 ;
@@ -7459,14 +6220,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field WDFL: Word flag configuration
     inline uint32_t I2S0_RCR3_WDFL (const uint32_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR3_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 5 ; }
-
   // Field RCE: Receive channel enable
     inline uint32_t I2S0_RCR3_RCE (const uint32_t inValue) {return (inValue & 0x3U) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR3_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 18 ; }
 
 //---  Register RCR4: SAI Receive Configuration 4 Register
   #define I2S0_RCR4 (* ((volatile uint32_t *) (0x4002f000 + 144)))
@@ -7477,53 +6232,29 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FSP: Frame sync polarity
     const uint32_t I2S0_RCR4_FSP = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    const uint32_t I2S0_RCR4_RESERVED = 1U << 2 ;
-
   // Field FSE: Frame sync early
     const uint32_t I2S0_RCR4_FSE = 1U << 3 ;
 
   // Field MF: MSB first
     const uint32_t I2S0_RCR4_MF = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
   // Field SYWD: Sync width
     inline uint32_t I2S0_RCR4_SYWD (const uint32_t inValue) {return (inValue & 0x1fU) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
 
   // Field FRSZ: Frame size
     inline uint32_t I2S0_RCR4_FRSZ (const uint32_t inValue) {return (inValue & 0x1fU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR4_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 21 ; }
-
 //---  Register RCR5: SAI Receive Configuration 5 Register
   #define I2S0_RCR5 (* ((volatile uint32_t *) (0x4002f000 + 148)))
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR5_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
 
   // Field FBT: First bit shifted
     inline uint32_t I2S0_RCR5_FBT (const uint32_t inValue) {return (inValue & 0x1fU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
-
   // Field W0W: Word 0 width
     inline uint32_t I2S0_RCR5_W0W (const uint32_t inValue) {return (inValue & 0x1fU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 21 ; }
-
   // Field WNW: Word N width
     inline uint32_t I2S0_RCR5_WNW (const uint32_t inValue) {return (inValue & 0x1fU) << 24 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RCR5_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 29 ; }
 
 //---  Registers RDR(0,1): SAI Receive Data Register
   #define I2S0_RDR(idx) (* ((volatile uint32_t *) (0x4002f000 + 0xa0 + (idx) * 0x4)))
@@ -7541,14 +6272,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field RFP: Read FIFO pointer
     inline uint32_t I2S0_RFR_RFP (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RFR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 4 ; }
-
   // Field WFP: Write FIFO pointer
     inline uint32_t I2S0_RFR_WFP (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_RFR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 20 ; }
 
 //---  Register RMR: SAI Receive Mask Register
   #define I2S0_RMR (* ((volatile uint32_t *) (0x4002f000 + 224)))
@@ -7559,14 +6284,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 //---  Register MCR: SAI MCLK Control Register
   #define I2S0_MCR (* ((volatile uint32_t *) (0x4002f000 + 256)))
 
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 0 ; }
-
   // Field MICS: MCLK Input Clock Select
     inline uint32_t I2S0_MCR_MICS (const uint32_t inValue) {return (inValue & 0x3U) << 24 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 26 ; }
 
   // Field MOE: MCLK Output Enable
     const uint32_t I2S0_MCR_MOE = 1U << 30 ;
@@ -7582,9 +6301,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field FRACT: MCLK Fraction
     inline uint32_t I2S0_MDR_FRACT (const uint32_t inValue) {return (inValue & 0xffU) << 12 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t I2S0_MDR_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 20 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral LLWU: Low leakage wakeup unit
@@ -7764,9 +6480,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field FILTSEL: Filter pin select
     inline uint8_t LLWU_FILT1_FILTSEL (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint8_t LLWU_FILT1_RESERVED = 1U << 4 ;
-
   // Field FILTE: Digital Filter on External Pin
     inline uint8_t LLWU_FILT1_FILTE (const uint8_t inValue) {return (inValue & 0x3U) << 5 ; }
 
@@ -7778,9 +6491,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field FILTSEL: Filter pin select
     inline uint8_t LLWU_FILT2_FILTSEL (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t LLWU_FILT2_RESERVED = 1U << 4 ;
 
   // Field FILTE: Digital Filter on External Pin
     inline uint8_t LLWU_FILT2_FILTE (const uint8_t inValue) {return (inValue & 0x3U) << 5 ; }
@@ -7796,9 +6506,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field LLRSTE: Low Leakage mode RESET enable
     const uint8_t LLWU_RST_LLRSTE = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t LLWU_RST_RESERVED (const uint8_t inValue) {return (inValue & 0x3fU) << 2 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral LPTMR0: Low Power Timer
@@ -7828,9 +6535,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field TCF: Timer Compare Flag
     const uint32_t LPTMR0_CSR_TCF = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t LPTMR0_CSR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register PSR: Low Power Timer Prescale Register
   #define LPTMR0_PSR (* ((volatile uint32_t *) (0x40040000 + 4)))
 
@@ -7843,26 +6547,17 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field PRESCALE: Prescale Value
     inline uint32_t LPTMR0_PSR_PRESCALE (const uint32_t inValue) {return (inValue & 0xfU) << 3 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t LPTMR0_PSR_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffffffU) << 7 ; }
-
 //---  Register CMR: Low Power Timer Compare Register
   #define LPTMR0_CMR (* ((volatile uint32_t *) (0x40040000 + 8)))
 
   // Field COMPARE: Compare Value
     inline uint32_t LPTMR0_CMR_COMPARE (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t LPTMR0_CMR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register CNR: Low Power Timer Counter Register
   #define LPTMR0_CNR (* ((volatile uint32_t *) (0x40040000 + 12)))
 
   // Field COUNTER: Counter Value
     inline uint32_t LPTMR0_CNR_COUNTER (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t LPTMR0_CNR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral MCG: Multipurpose Clock Generator module
@@ -7904,9 +6599,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field RANGE0: Frequency Range Select
     inline uint8_t MCG_C2_RANGE0 (const uint8_t inValue) {return (inValue & 0x3U) << 4 ; }
 
-  // Field RESERVED: no description available
-    const uint8_t MCG_C2_RESERVED = 1U << 6 ;
-
   // Field LOCRE0: Loss of Clock Reset Enable
     const uint8_t MCG_C2_LOCRE0 = 1U << 7 ;
 
@@ -7942,9 +6634,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field PLLCLKEN0: PLL Clock Enable
     const uint8_t MCG_C5_PLLCLKEN0 = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint8_t MCG_C5_RESERVED = 1U << 7 ;
 
 //---  Register C6: MCG Control 6 Register
   #define MCG_C6 (* ((volatile uint8_t *) (0x40064000 + 5)))
@@ -8024,17 +6713,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field OSCSEL: MCG OSC Clock Select
     const uint8_t MCG_C7_OSCSEL = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t MCG_C7_RESERVED (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
-
 //---  Register C8: MCG Control 8 Register
   #define MCG_C8 (* ((volatile uint8_t *) (0x40064000 + 13)))
 
   // Field LOCS1: RTC Loss of Clock Status
     const uint8_t MCG_C8_LOCS1 = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t MCG_C8_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 1 ; }
 
   // Field CME1: Clock Monitor Enable1
     const uint8_t MCG_C8_CME1 = 1U << 5 ;
@@ -8055,29 +6738,14 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field ASC: Each bit in the ASC field indicates if there is a corresponding connection to the crossbar switch's slave input port.
     inline uint16_t MCM_PLASC_ASC (const uint16_t inValue) {return (inValue & 0xffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint16_t MCM_PLASC_RESERVED (const uint16_t inValue) {return (inValue & 0xffU) << 8 ; }
-
 //---  Register PLAMC: Crossbar switch (AXBS) master configuration
   #define MCM_PLAMC (* ((volatile uint16_t *) (0xe0080000 + 10)))
 
   // Field AMC: Each bit in the AMC field indicates if there is a corresponding connection to the AXBS master input port.
     inline uint16_t MCM_PLAMC_AMC (const uint16_t inValue) {return (inValue & 0xffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint16_t MCM_PLAMC_RESERVED (const uint16_t inValue) {return (inValue & 0xffU) << 8 ; }
-
 //---  Register CR: Control register
   #define MCM_CR (* ((volatile uint32_t *) (0xe0080000 + 12)))
-
-  // Field RESERVED: no description available
-    inline uint32_t MCM_CR_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t MCM_CR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t MCM_CR_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 10 ; }
 
   // Field SRAMUAP: SRAM_U arbitration priority
     inline uint32_t MCM_CR_SRAMUAP (const uint32_t inValue) {return (inValue & 0x3U) << 24 ; }
@@ -8085,852 +6753,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field SRAMUWP: SRAM_U write protect
     const uint32_t MCM_CR_SRAMUWP = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t MCM_CR_RESERVED = 1U << 27 ;
-
   // Field SRAMLAP: SRAM_L arbitration priority
     inline uint32_t MCM_CR_SRAMLAP (const uint32_t inValue) {return (inValue & 0x3U) << 28 ; }
 
   // Field SRAMLWP: SRAM_L write protect
     const uint32_t MCM_CR_SRAMLWP = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t MCM_CR_RESERVED = 1U << 31 ;
-
-//------------------------------------------------------------------------------
-// Peripheral NVIC: Nested Vectored Interrupt Controller
-//------------------------------------------------------------------------------
-
-//---  Register NVICISER0: Interrupt Set Enable Register n
-  #define NVIC_NVICISER0 (* ((volatile uint32_t *) (0xe000e100 + 0)))
-
-  // Field SETENA: Interrupt set enable bits
-    inline uint32_t NVIC_NVICISER0_SETENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISER1: Interrupt Set Enable Register n
-  #define NVIC_NVICISER1 (* ((volatile uint32_t *) (0xe000e100 + 4)))
-
-  // Field SETENA: Interrupt set enable bits
-    inline uint32_t NVIC_NVICISER1_SETENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISER2: Interrupt Set Enable Register n
-  #define NVIC_NVICISER2 (* ((volatile uint32_t *) (0xe000e100 + 8)))
-
-  // Field SETENA: Interrupt set enable bits
-    inline uint32_t NVIC_NVICISER2_SETENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISER3: Interrupt Set Enable Register n
-  #define NVIC_NVICISER3 (* ((volatile uint32_t *) (0xe000e100 + 12)))
-
-  // Field SETENA: Interrupt set enable bits
-    inline uint32_t NVIC_NVICISER3_SETENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICER0: Interrupt Clear Enable Register n
-  #define NVIC_NVICICER0 (* ((volatile uint32_t *) (0xe000e100 + 128)))
-
-  // Field CLRENA: Interrupt clear-enable bits
-    inline uint32_t NVIC_NVICICER0_CLRENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICER1: Interrupt Clear Enable Register n
-  #define NVIC_NVICICER1 (* ((volatile uint32_t *) (0xe000e100 + 132)))
-
-  // Field CLRENA: Interrupt clear-enable bits
-    inline uint32_t NVIC_NVICICER1_CLRENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICER2: Interrupt Clear Enable Register n
-  #define NVIC_NVICICER2 (* ((volatile uint32_t *) (0xe000e100 + 136)))
-
-  // Field CLRENA: Interrupt clear-enable bits
-    inline uint32_t NVIC_NVICICER2_CLRENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICER3: Interrupt Clear Enable Register n
-  #define NVIC_NVICICER3 (* ((volatile uint32_t *) (0xe000e100 + 140)))
-
-  // Field CLRENA: Interrupt clear-enable bits
-    inline uint32_t NVIC_NVICICER3_CLRENA (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISPR0: Interrupt Set Pending Register n
-  #define NVIC_NVICISPR0 (* ((volatile uint32_t *) (0xe000e100 + 256)))
-
-  // Field SETPEND: Interrupt set-pending bits
-    inline uint32_t NVIC_NVICISPR0_SETPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISPR1: Interrupt Set Pending Register n
-  #define NVIC_NVICISPR1 (* ((volatile uint32_t *) (0xe000e100 + 260)))
-
-  // Field SETPEND: Interrupt set-pending bits
-    inline uint32_t NVIC_NVICISPR1_SETPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISPR2: Interrupt Set Pending Register n
-  #define NVIC_NVICISPR2 (* ((volatile uint32_t *) (0xe000e100 + 264)))
-
-  // Field SETPEND: Interrupt set-pending bits
-    inline uint32_t NVIC_NVICISPR2_SETPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICISPR3: Interrupt Set Pending Register n
-  #define NVIC_NVICISPR3 (* ((volatile uint32_t *) (0xe000e100 + 268)))
-
-  // Field SETPEND: Interrupt set-pending bits
-    inline uint32_t NVIC_NVICISPR3_SETPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICPR0: Interrupt Clear Pending Register n
-  #define NVIC_NVICICPR0 (* ((volatile uint32_t *) (0xe000e100 + 384)))
-
-  // Field CLRPEND: Interrupt clear-pending bits
-    inline uint32_t NVIC_NVICICPR0_CLRPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICPR1: Interrupt Clear Pending Register n
-  #define NVIC_NVICICPR1 (* ((volatile uint32_t *) (0xe000e100 + 388)))
-
-  // Field CLRPEND: Interrupt clear-pending bits
-    inline uint32_t NVIC_NVICICPR1_CLRPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICPR2: Interrupt Clear Pending Register n
-  #define NVIC_NVICICPR2 (* ((volatile uint32_t *) (0xe000e100 + 392)))
-
-  // Field CLRPEND: Interrupt clear-pending bits
-    inline uint32_t NVIC_NVICICPR2_CLRPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICICPR3: Interrupt Clear Pending Register n
-  #define NVIC_NVICICPR3 (* ((volatile uint32_t *) (0xe000e100 + 396)))
-
-  // Field CLRPEND: Interrupt clear-pending bits
-    inline uint32_t NVIC_NVICICPR3_CLRPEND (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICIABR0: Interrupt Active bit Register n
-  #define NVIC_NVICIABR0 (* ((volatile uint32_t *) (0xe000e100 + 512)))
-
-  // Field ACTIVE: Interrupt active flags
-    inline uint32_t NVIC_NVICIABR0_ACTIVE (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICIABR1: Interrupt Active bit Register n
-  #define NVIC_NVICIABR1 (* ((volatile uint32_t *) (0xe000e100 + 516)))
-
-  // Field ACTIVE: Interrupt active flags
-    inline uint32_t NVIC_NVICIABR1_ACTIVE (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICIABR2: Interrupt Active bit Register n
-  #define NVIC_NVICIABR2 (* ((volatile uint32_t *) (0xe000e100 + 520)))
-
-  // Field ACTIVE: Interrupt active flags
-    inline uint32_t NVIC_NVICIABR2_ACTIVE (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICIABR3: Interrupt Active bit Register n
-  #define NVIC_NVICIABR3 (* ((volatile uint32_t *) (0xe000e100 + 524)))
-
-  // Field ACTIVE: Interrupt active flags
-    inline uint32_t NVIC_NVICIABR3_ACTIVE (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
-
-//---  Register NVICIP0: Interrupt Priority Register n
-  #define NVIC_NVICIP0 (* ((volatile uint8_t *) (0xe000e100 + 768)))
-
-  // Field PRI0: Priority of interrupt 0
-    inline uint8_t NVIC_NVICIP0_PRI0 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP1: Interrupt Priority Register n
-  #define NVIC_NVICIP1 (* ((volatile uint8_t *) (0xe000e100 + 769)))
-
-  // Field PRI1: Priority of interrupt 1
-    inline uint8_t NVIC_NVICIP1_PRI1 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP2: Interrupt Priority Register n
-  #define NVIC_NVICIP2 (* ((volatile uint8_t *) (0xe000e100 + 770)))
-
-  // Field PRI2: Priority of interrupt 2
-    inline uint8_t NVIC_NVICIP2_PRI2 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP3: Interrupt Priority Register n
-  #define NVIC_NVICIP3 (* ((volatile uint8_t *) (0xe000e100 + 771)))
-
-  // Field PRI3: Priority of interrupt 3
-    inline uint8_t NVIC_NVICIP3_PRI3 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP4: Interrupt Priority Register n
-  #define NVIC_NVICIP4 (* ((volatile uint8_t *) (0xe000e100 + 772)))
-
-  // Field PRI4: Priority of interrupt 4
-    inline uint8_t NVIC_NVICIP4_PRI4 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP5: Interrupt Priority Register n
-  #define NVIC_NVICIP5 (* ((volatile uint8_t *) (0xe000e100 + 773)))
-
-  // Field PRI5: Priority of interrupt 5
-    inline uint8_t NVIC_NVICIP5_PRI5 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP6: Interrupt Priority Register n
-  #define NVIC_NVICIP6 (* ((volatile uint8_t *) (0xe000e100 + 774)))
-
-  // Field PRI6: Priority of interrupt 6
-    inline uint8_t NVIC_NVICIP6_PRI6 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP7: Interrupt Priority Register n
-  #define NVIC_NVICIP7 (* ((volatile uint8_t *) (0xe000e100 + 775)))
-
-  // Field PRI7: Priority of interrupt 7
-    inline uint8_t NVIC_NVICIP7_PRI7 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP8: Interrupt Priority Register n
-  #define NVIC_NVICIP8 (* ((volatile uint8_t *) (0xe000e100 + 776)))
-
-  // Field PRI8: Priority of interrupt 8
-    inline uint8_t NVIC_NVICIP8_PRI8 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP9: Interrupt Priority Register n
-  #define NVIC_NVICIP9 (* ((volatile uint8_t *) (0xe000e100 + 777)))
-
-  // Field PRI9: Priority of interrupt 9
-    inline uint8_t NVIC_NVICIP9_PRI9 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP10: Interrupt Priority Register n
-  #define NVIC_NVICIP10 (* ((volatile uint8_t *) (0xe000e100 + 778)))
-
-  // Field PRI10: Priority of interrupt 10
-    inline uint8_t NVIC_NVICIP10_PRI10 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP11: Interrupt Priority Register n
-  #define NVIC_NVICIP11 (* ((volatile uint8_t *) (0xe000e100 + 779)))
-
-  // Field PRI11: Priority of interrupt 11
-    inline uint8_t NVIC_NVICIP11_PRI11 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP12: Interrupt Priority Register n
-  #define NVIC_NVICIP12 (* ((volatile uint8_t *) (0xe000e100 + 780)))
-
-  // Field PRI12: Priority of interrupt 12
-    inline uint8_t NVIC_NVICIP12_PRI12 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP13: Interrupt Priority Register n
-  #define NVIC_NVICIP13 (* ((volatile uint8_t *) (0xe000e100 + 781)))
-
-  // Field PRI13: Priority of interrupt 13
-    inline uint8_t NVIC_NVICIP13_PRI13 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP14: Interrupt Priority Register n
-  #define NVIC_NVICIP14 (* ((volatile uint8_t *) (0xe000e100 + 782)))
-
-  // Field PRI14: Priority of interrupt 14
-    inline uint8_t NVIC_NVICIP14_PRI14 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP15: Interrupt Priority Register n
-  #define NVIC_NVICIP15 (* ((volatile uint8_t *) (0xe000e100 + 783)))
-
-  // Field PRI15: Priority of interrupt 15
-    inline uint8_t NVIC_NVICIP15_PRI15 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP16: Interrupt Priority Register n
-  #define NVIC_NVICIP16 (* ((volatile uint8_t *) (0xe000e100 + 784)))
-
-  // Field PRI16: Priority of interrupt 16
-    inline uint8_t NVIC_NVICIP16_PRI16 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP17: Interrupt Priority Register n
-  #define NVIC_NVICIP17 (* ((volatile uint8_t *) (0xe000e100 + 785)))
-
-  // Field PRI17: Priority of interrupt 17
-    inline uint8_t NVIC_NVICIP17_PRI17 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP18: Interrupt Priority Register n
-  #define NVIC_NVICIP18 (* ((volatile uint8_t *) (0xe000e100 + 786)))
-
-  // Field PRI18: Priority of interrupt 18
-    inline uint8_t NVIC_NVICIP18_PRI18 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP19: Interrupt Priority Register n
-  #define NVIC_NVICIP19 (* ((volatile uint8_t *) (0xe000e100 + 787)))
-
-  // Field PRI19: Priority of interrupt 19
-    inline uint8_t NVIC_NVICIP19_PRI19 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP20: Interrupt Priority Register n
-  #define NVIC_NVICIP20 (* ((volatile uint8_t *) (0xe000e100 + 788)))
-
-  // Field PRI20: Priority of interrupt 20
-    inline uint8_t NVIC_NVICIP20_PRI20 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP21: Interrupt Priority Register n
-  #define NVIC_NVICIP21 (* ((volatile uint8_t *) (0xe000e100 + 789)))
-
-  // Field PRI21: Priority of interrupt 21
-    inline uint8_t NVIC_NVICIP21_PRI21 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP22: Interrupt Priority Register n
-  #define NVIC_NVICIP22 (* ((volatile uint8_t *) (0xe000e100 + 790)))
-
-  // Field PRI22: Priority of interrupt 22
-    inline uint8_t NVIC_NVICIP22_PRI22 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP23: Interrupt Priority Register n
-  #define NVIC_NVICIP23 (* ((volatile uint8_t *) (0xe000e100 + 791)))
-
-  // Field PRI23: Priority of interrupt 23
-    inline uint8_t NVIC_NVICIP23_PRI23 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP24: Interrupt Priority Register n
-  #define NVIC_NVICIP24 (* ((volatile uint8_t *) (0xe000e100 + 792)))
-
-  // Field PRI24: Priority of interrupt 24
-    inline uint8_t NVIC_NVICIP24_PRI24 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP25: Interrupt Priority Register n
-  #define NVIC_NVICIP25 (* ((volatile uint8_t *) (0xe000e100 + 793)))
-
-  // Field PRI25: Priority of interrupt 25
-    inline uint8_t NVIC_NVICIP25_PRI25 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP26: Interrupt Priority Register n
-  #define NVIC_NVICIP26 (* ((volatile uint8_t *) (0xe000e100 + 794)))
-
-  // Field PRI26: Priority of interrupt 26
-    inline uint8_t NVIC_NVICIP26_PRI26 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP27: Interrupt Priority Register n
-  #define NVIC_NVICIP27 (* ((volatile uint8_t *) (0xe000e100 + 795)))
-
-  // Field PRI27: Priority of interrupt 27
-    inline uint8_t NVIC_NVICIP27_PRI27 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP28: Interrupt Priority Register n
-  #define NVIC_NVICIP28 (* ((volatile uint8_t *) (0xe000e100 + 796)))
-
-  // Field PRI28: Priority of interrupt 28
-    inline uint8_t NVIC_NVICIP28_PRI28 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP29: Interrupt Priority Register n
-  #define NVIC_NVICIP29 (* ((volatile uint8_t *) (0xe000e100 + 797)))
-
-  // Field PRI29: Priority of interrupt 29
-    inline uint8_t NVIC_NVICIP29_PRI29 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP30: Interrupt Priority Register n
-  #define NVIC_NVICIP30 (* ((volatile uint8_t *) (0xe000e100 + 798)))
-
-  // Field PRI30: Priority of interrupt 30
-    inline uint8_t NVIC_NVICIP30_PRI30 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP31: Interrupt Priority Register n
-  #define NVIC_NVICIP31 (* ((volatile uint8_t *) (0xe000e100 + 799)))
-
-  // Field PRI31: Priority of interrupt 31
-    inline uint8_t NVIC_NVICIP31_PRI31 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP32: Interrupt Priority Register n
-  #define NVIC_NVICIP32 (* ((volatile uint8_t *) (0xe000e100 + 800)))
-
-  // Field PRI32: Priority of interrupt 32
-    inline uint8_t NVIC_NVICIP32_PRI32 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP33: Interrupt Priority Register n
-  #define NVIC_NVICIP33 (* ((volatile uint8_t *) (0xe000e100 + 801)))
-
-  // Field PRI33: Priority of interrupt 33
-    inline uint8_t NVIC_NVICIP33_PRI33 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP34: Interrupt Priority Register n
-  #define NVIC_NVICIP34 (* ((volatile uint8_t *) (0xe000e100 + 802)))
-
-  // Field PRI34: Priority of interrupt 34
-    inline uint8_t NVIC_NVICIP34_PRI34 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP35: Interrupt Priority Register n
-  #define NVIC_NVICIP35 (* ((volatile uint8_t *) (0xe000e100 + 803)))
-
-  // Field PRI35: Priority of interrupt 35
-    inline uint8_t NVIC_NVICIP35_PRI35 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP36: Interrupt Priority Register n
-  #define NVIC_NVICIP36 (* ((volatile uint8_t *) (0xe000e100 + 804)))
-
-  // Field PRI36: Priority of interrupt 36
-    inline uint8_t NVIC_NVICIP36_PRI36 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP37: Interrupt Priority Register n
-  #define NVIC_NVICIP37 (* ((volatile uint8_t *) (0xe000e100 + 805)))
-
-  // Field PRI37: Priority of interrupt 37
-    inline uint8_t NVIC_NVICIP37_PRI37 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP38: Interrupt Priority Register n
-  #define NVIC_NVICIP38 (* ((volatile uint8_t *) (0xe000e100 + 806)))
-
-  // Field PRI38: Priority of interrupt 38
-    inline uint8_t NVIC_NVICIP38_PRI38 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP39: Interrupt Priority Register n
-  #define NVIC_NVICIP39 (* ((volatile uint8_t *) (0xe000e100 + 807)))
-
-  // Field PRI39: Priority of interrupt 39
-    inline uint8_t NVIC_NVICIP39_PRI39 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP40: Interrupt Priority Register n
-  #define NVIC_NVICIP40 (* ((volatile uint8_t *) (0xe000e100 + 808)))
-
-  // Field PRI40: Priority of interrupt 40
-    inline uint8_t NVIC_NVICIP40_PRI40 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP41: Interrupt Priority Register n
-  #define NVIC_NVICIP41 (* ((volatile uint8_t *) (0xe000e100 + 809)))
-
-  // Field PRI41: Priority of interrupt 41
-    inline uint8_t NVIC_NVICIP41_PRI41 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP42: Interrupt Priority Register n
-  #define NVIC_NVICIP42 (* ((volatile uint8_t *) (0xe000e100 + 810)))
-
-  // Field PRI42: Priority of interrupt 42
-    inline uint8_t NVIC_NVICIP42_PRI42 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP43: Interrupt Priority Register n
-  #define NVIC_NVICIP43 (* ((volatile uint8_t *) (0xe000e100 + 811)))
-
-  // Field PRI43: Priority of interrupt 43
-    inline uint8_t NVIC_NVICIP43_PRI43 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP44: Interrupt Priority Register n
-  #define NVIC_NVICIP44 (* ((volatile uint8_t *) (0xe000e100 + 812)))
-
-  // Field PRI44: Priority of interrupt 44
-    inline uint8_t NVIC_NVICIP44_PRI44 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP45: Interrupt Priority Register n
-  #define NVIC_NVICIP45 (* ((volatile uint8_t *) (0xe000e100 + 813)))
-
-  // Field PRI45: Priority of interrupt 45
-    inline uint8_t NVIC_NVICIP45_PRI45 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP46: Interrupt Priority Register n
-  #define NVIC_NVICIP46 (* ((volatile uint8_t *) (0xe000e100 + 814)))
-
-  // Field PRI46: Priority of interrupt 46
-    inline uint8_t NVIC_NVICIP46_PRI46 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP47: Interrupt Priority Register n
-  #define NVIC_NVICIP47 (* ((volatile uint8_t *) (0xe000e100 + 815)))
-
-  // Field PRI47: Priority of interrupt 47
-    inline uint8_t NVIC_NVICIP47_PRI47 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP48: Interrupt Priority Register n
-  #define NVIC_NVICIP48 (* ((volatile uint8_t *) (0xe000e100 + 816)))
-
-  // Field PRI48: Priority of interrupt 48
-    inline uint8_t NVIC_NVICIP48_PRI48 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP49: Interrupt Priority Register n
-  #define NVIC_NVICIP49 (* ((volatile uint8_t *) (0xe000e100 + 817)))
-
-  // Field PRI49: Priority of interrupt 49
-    inline uint8_t NVIC_NVICIP49_PRI49 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP50: Interrupt Priority Register n
-  #define NVIC_NVICIP50 (* ((volatile uint8_t *) (0xe000e100 + 818)))
-
-  // Field PRI50: Priority of interrupt 50
-    inline uint8_t NVIC_NVICIP50_PRI50 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP51: Interrupt Priority Register n
-  #define NVIC_NVICIP51 (* ((volatile uint8_t *) (0xe000e100 + 819)))
-
-  // Field PRI51: Priority of interrupt 51
-    inline uint8_t NVIC_NVICIP51_PRI51 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP52: Interrupt Priority Register n
-  #define NVIC_NVICIP52 (* ((volatile uint8_t *) (0xe000e100 + 820)))
-
-  // Field PRI52: Priority of interrupt 52
-    inline uint8_t NVIC_NVICIP52_PRI52 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP53: Interrupt Priority Register n
-  #define NVIC_NVICIP53 (* ((volatile uint8_t *) (0xe000e100 + 821)))
-
-  // Field PRI53: Priority of interrupt 53
-    inline uint8_t NVIC_NVICIP53_PRI53 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP54: Interrupt Priority Register n
-  #define NVIC_NVICIP54 (* ((volatile uint8_t *) (0xe000e100 + 822)))
-
-  // Field PRI54: Priority of interrupt 54
-    inline uint8_t NVIC_NVICIP54_PRI54 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP55: Interrupt Priority Register n
-  #define NVIC_NVICIP55 (* ((volatile uint8_t *) (0xe000e100 + 823)))
-
-  // Field PRI55: Priority of interrupt 55
-    inline uint8_t NVIC_NVICIP55_PRI55 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP56: Interrupt Priority Register n
-  #define NVIC_NVICIP56 (* ((volatile uint8_t *) (0xe000e100 + 824)))
-
-  // Field PRI56: Priority of interrupt 56
-    inline uint8_t NVIC_NVICIP56_PRI56 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP57: Interrupt Priority Register n
-  #define NVIC_NVICIP57 (* ((volatile uint8_t *) (0xe000e100 + 825)))
-
-  // Field PRI57: Priority of interrupt 57
-    inline uint8_t NVIC_NVICIP57_PRI57 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP58: Interrupt Priority Register n
-  #define NVIC_NVICIP58 (* ((volatile uint8_t *) (0xe000e100 + 826)))
-
-  // Field PRI58: Priority of interrupt 58
-    inline uint8_t NVIC_NVICIP58_PRI58 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP59: Interrupt Priority Register n
-  #define NVIC_NVICIP59 (* ((volatile uint8_t *) (0xe000e100 + 827)))
-
-  // Field PRI59: Priority of interrupt 59
-    inline uint8_t NVIC_NVICIP59_PRI59 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP60: Interrupt Priority Register n
-  #define NVIC_NVICIP60 (* ((volatile uint8_t *) (0xe000e100 + 828)))
-
-  // Field PRI60: Priority of interrupt 60
-    inline uint8_t NVIC_NVICIP60_PRI60 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP61: Interrupt Priority Register n
-  #define NVIC_NVICIP61 (* ((volatile uint8_t *) (0xe000e100 + 829)))
-
-  // Field PRI61: Priority of interrupt 61
-    inline uint8_t NVIC_NVICIP61_PRI61 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP62: Interrupt Priority Register n
-  #define NVIC_NVICIP62 (* ((volatile uint8_t *) (0xe000e100 + 830)))
-
-  // Field PRI62: Priority of interrupt 62
-    inline uint8_t NVIC_NVICIP62_PRI62 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP63: Interrupt Priority Register n
-  #define NVIC_NVICIP63 (* ((volatile uint8_t *) (0xe000e100 + 831)))
-
-  // Field PRI63: Priority of interrupt 63
-    inline uint8_t NVIC_NVICIP63_PRI63 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP64: Interrupt Priority Register n
-  #define NVIC_NVICIP64 (* ((volatile uint8_t *) (0xe000e100 + 832)))
-
-  // Field PRI64: Priority of interrupt 64
-    inline uint8_t NVIC_NVICIP64_PRI64 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP65: Interrupt Priority Register n
-  #define NVIC_NVICIP65 (* ((volatile uint8_t *) (0xe000e100 + 833)))
-
-  // Field PRI65: Priority of interrupt 65
-    inline uint8_t NVIC_NVICIP65_PRI65 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP66: Interrupt Priority Register n
-  #define NVIC_NVICIP66 (* ((volatile uint8_t *) (0xe000e100 + 834)))
-
-  // Field PRI66: Priority of interrupt 66
-    inline uint8_t NVIC_NVICIP66_PRI66 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP67: Interrupt Priority Register n
-  #define NVIC_NVICIP67 (* ((volatile uint8_t *) (0xe000e100 + 835)))
-
-  // Field PRI67: Priority of interrupt 67
-    inline uint8_t NVIC_NVICIP67_PRI67 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP68: Interrupt Priority Register n
-  #define NVIC_NVICIP68 (* ((volatile uint8_t *) (0xe000e100 + 836)))
-
-  // Field PRI68: Priority of interrupt 68
-    inline uint8_t NVIC_NVICIP68_PRI68 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP69: Interrupt Priority Register n
-  #define NVIC_NVICIP69 (* ((volatile uint8_t *) (0xe000e100 + 837)))
-
-  // Field PRI69: Priority of interrupt 69
-    inline uint8_t NVIC_NVICIP69_PRI69 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP70: Interrupt Priority Register n
-  #define NVIC_NVICIP70 (* ((volatile uint8_t *) (0xe000e100 + 838)))
-
-  // Field PRI70: Priority of interrupt 70
-    inline uint8_t NVIC_NVICIP70_PRI70 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP71: Interrupt Priority Register n
-  #define NVIC_NVICIP71 (* ((volatile uint8_t *) (0xe000e100 + 839)))
-
-  // Field PRI71: Priority of interrupt 71
-    inline uint8_t NVIC_NVICIP71_PRI71 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP72: Interrupt Priority Register n
-  #define NVIC_NVICIP72 (* ((volatile uint8_t *) (0xe000e100 + 840)))
-
-  // Field PRI72: Priority of interrupt 72
-    inline uint8_t NVIC_NVICIP72_PRI72 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP73: Interrupt Priority Register n
-  #define NVIC_NVICIP73 (* ((volatile uint8_t *) (0xe000e100 + 841)))
-
-  // Field PRI73: Priority of interrupt 73
-    inline uint8_t NVIC_NVICIP73_PRI73 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP74: Interrupt Priority Register n
-  #define NVIC_NVICIP74 (* ((volatile uint8_t *) (0xe000e100 + 842)))
-
-  // Field PRI74: Priority of interrupt 74
-    inline uint8_t NVIC_NVICIP74_PRI74 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP75: Interrupt Priority Register n
-  #define NVIC_NVICIP75 (* ((volatile uint8_t *) (0xe000e100 + 843)))
-
-  // Field PRI75: Priority of interrupt 75
-    inline uint8_t NVIC_NVICIP75_PRI75 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP76: Interrupt Priority Register n
-  #define NVIC_NVICIP76 (* ((volatile uint8_t *) (0xe000e100 + 844)))
-
-  // Field PRI76: Priority of interrupt 76
-    inline uint8_t NVIC_NVICIP76_PRI76 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP77: Interrupt Priority Register n
-  #define NVIC_NVICIP77 (* ((volatile uint8_t *) (0xe000e100 + 845)))
-
-  // Field PRI77: Priority of interrupt 77
-    inline uint8_t NVIC_NVICIP77_PRI77 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP78: Interrupt Priority Register n
-  #define NVIC_NVICIP78 (* ((volatile uint8_t *) (0xe000e100 + 846)))
-
-  // Field PRI78: Priority of interrupt 78
-    inline uint8_t NVIC_NVICIP78_PRI78 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP79: Interrupt Priority Register n
-  #define NVIC_NVICIP79 (* ((volatile uint8_t *) (0xe000e100 + 847)))
-
-  // Field PRI79: Priority of interrupt 79
-    inline uint8_t NVIC_NVICIP79_PRI79 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP80: Interrupt Priority Register n
-  #define NVIC_NVICIP80 (* ((volatile uint8_t *) (0xe000e100 + 848)))
-
-  // Field PRI80: Priority of interrupt 80
-    inline uint8_t NVIC_NVICIP80_PRI80 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP81: Interrupt Priority Register n
-  #define NVIC_NVICIP81 (* ((volatile uint8_t *) (0xe000e100 + 849)))
-
-  // Field PRI81: Priority of interrupt 81
-    inline uint8_t NVIC_NVICIP81_PRI81 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP82: Interrupt Priority Register n
-  #define NVIC_NVICIP82 (* ((volatile uint8_t *) (0xe000e100 + 850)))
-
-  // Field PRI82: Priority of interrupt 82
-    inline uint8_t NVIC_NVICIP82_PRI82 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP83: Interrupt Priority Register n
-  #define NVIC_NVICIP83 (* ((volatile uint8_t *) (0xe000e100 + 851)))
-
-  // Field PRI83: Priority of interrupt 83
-    inline uint8_t NVIC_NVICIP83_PRI83 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP84: Interrupt Priority Register n
-  #define NVIC_NVICIP84 (* ((volatile uint8_t *) (0xe000e100 + 852)))
-
-  // Field PRI84: Priority of interrupt 84
-    inline uint8_t NVIC_NVICIP84_PRI84 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP85: Interrupt Priority Register n
-  #define NVIC_NVICIP85 (* ((volatile uint8_t *) (0xe000e100 + 853)))
-
-  // Field PRI85: Priority of interrupt 85
-    inline uint8_t NVIC_NVICIP85_PRI85 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP86: Interrupt Priority Register n
-  #define NVIC_NVICIP86 (* ((volatile uint8_t *) (0xe000e100 + 854)))
-
-  // Field PRI86: Priority of interrupt 86
-    inline uint8_t NVIC_NVICIP86_PRI86 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP87: Interrupt Priority Register n
-  #define NVIC_NVICIP87 (* ((volatile uint8_t *) (0xe000e100 + 855)))
-
-  // Field PRI87: Priority of interrupt 87
-    inline uint8_t NVIC_NVICIP87_PRI87 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP88: Interrupt Priority Register n
-  #define NVIC_NVICIP88 (* ((volatile uint8_t *) (0xe000e100 + 856)))
-
-  // Field PRI88: Priority of interrupt 88
-    inline uint8_t NVIC_NVICIP88_PRI88 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP89: Interrupt Priority Register n
-  #define NVIC_NVICIP89 (* ((volatile uint8_t *) (0xe000e100 + 857)))
-
-  // Field PRI89: Priority of interrupt 89
-    inline uint8_t NVIC_NVICIP89_PRI89 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP90: Interrupt Priority Register n
-  #define NVIC_NVICIP90 (* ((volatile uint8_t *) (0xe000e100 + 858)))
-
-  // Field PRI90: Priority of interrupt 90
-    inline uint8_t NVIC_NVICIP90_PRI90 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP91: Interrupt Priority Register n
-  #define NVIC_NVICIP91 (* ((volatile uint8_t *) (0xe000e100 + 859)))
-
-  // Field PRI91: Priority of interrupt 91
-    inline uint8_t NVIC_NVICIP91_PRI91 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP92: Interrupt Priority Register n
-  #define NVIC_NVICIP92 (* ((volatile uint8_t *) (0xe000e100 + 860)))
-
-  // Field PRI92: Priority of interrupt 92
-    inline uint8_t NVIC_NVICIP92_PRI92 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP93: Interrupt Priority Register n
-  #define NVIC_NVICIP93 (* ((volatile uint8_t *) (0xe000e100 + 861)))
-
-  // Field PRI93: Priority of interrupt 93
-    inline uint8_t NVIC_NVICIP93_PRI93 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP94: Interrupt Priority Register n
-  #define NVIC_NVICIP94 (* ((volatile uint8_t *) (0xe000e100 + 862)))
-
-  // Field PRI94: Priority of interrupt 94
-    inline uint8_t NVIC_NVICIP94_PRI94 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP95: Interrupt Priority Register n
-  #define NVIC_NVICIP95 (* ((volatile uint8_t *) (0xe000e100 + 863)))
-
-  // Field PRI95: Priority of interrupt 95
-    inline uint8_t NVIC_NVICIP95_PRI95 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP96: Interrupt Priority Register n
-  #define NVIC_NVICIP96 (* ((volatile uint8_t *) (0xe000e100 + 864)))
-
-  // Field PRI96: Priority of interrupt 96
-    inline uint8_t NVIC_NVICIP96_PRI96 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP97: Interrupt Priority Register n
-  #define NVIC_NVICIP97 (* ((volatile uint8_t *) (0xe000e100 + 865)))
-
-  // Field PRI97: Priority of interrupt 97
-    inline uint8_t NVIC_NVICIP97_PRI97 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP98: Interrupt Priority Register n
-  #define NVIC_NVICIP98 (* ((volatile uint8_t *) (0xe000e100 + 866)))
-
-  // Field PRI98: Priority of interrupt 98
-    inline uint8_t NVIC_NVICIP98_PRI98 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP99: Interrupt Priority Register n
-  #define NVIC_NVICIP99 (* ((volatile uint8_t *) (0xe000e100 + 867)))
-
-  // Field PRI99: Priority of interrupt 99
-    inline uint8_t NVIC_NVICIP99_PRI99 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP100: Interrupt Priority Register n
-  #define NVIC_NVICIP100 (* ((volatile uint8_t *) (0xe000e100 + 868)))
-
-  // Field PRI100: Priority of interrupt 100
-    inline uint8_t NVIC_NVICIP100_PRI100 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP101: Interrupt Priority Register n
-  #define NVIC_NVICIP101 (* ((volatile uint8_t *) (0xe000e100 + 869)))
-
-  // Field PRI101: Priority of interrupt 101
-    inline uint8_t NVIC_NVICIP101_PRI101 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP102: Interrupt Priority Register n
-  #define NVIC_NVICIP102 (* ((volatile uint8_t *) (0xe000e100 + 870)))
-
-  // Field PRI102: Priority of interrupt 102
-    inline uint8_t NVIC_NVICIP102_PRI102 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP103: Interrupt Priority Register n
-  #define NVIC_NVICIP103 (* ((volatile uint8_t *) (0xe000e100 + 871)))
-
-  // Field PRI103: Priority of interrupt 103
-    inline uint8_t NVIC_NVICIP103_PRI103 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP104: Interrupt Priority Register n
-  #define NVIC_NVICIP104 (* ((volatile uint8_t *) (0xe000e100 + 872)))
-
-  // Field PRI104: Priority of interrupt 104
-    inline uint8_t NVIC_NVICIP104_PRI104 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICIP105: Interrupt Priority Register n
-  #define NVIC_NVICIP105 (* ((volatile uint8_t *) (0xe000e100 + 873)))
-
-  // Field PRI105: Priority of interrupt 105
-    inline uint8_t NVIC_NVICIP105_PRI105 (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register NVICSTIR: Software Trigger Interrupt Register
-  #define NVIC_NVICSTIR (* ((volatile uint32_t *) (0xe000e100 + 3584)))
-
-  // Field INTID: Interrupt ID of the interrupt to trigger, in the range 0-239. For example, a value of 0x03 specifies interrupt IRQ3.
-    inline uint32_t NVIC_NVICSTIR_INTID (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t NVIC_NVICSTIR_RESERVED = 1U << 31 ;
 
 //------------------------------------------------------------------------------
 // Peripheral OSC: Oscillator
@@ -8951,14 +6778,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field SC2P: Oscillator 2 pF Capacitor Load Configure
     const uint8_t OSC_CR_SC2P = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    const uint8_t OSC_CR_RESERVED = 1U << 4 ;
-
   // Field EREFSTEN: External Reference Stop Enable
     const uint8_t OSC_CR_EREFSTEN = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint8_t OSC_CR_RESERVED = 1U << 6 ;
 
   // Field ERCLKEN: External Reference Enable
     const uint8_t OSC_CR_ERCLKEN = 1U << 7 ;
@@ -8978,9 +6799,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field MULT: Multiplication Factor Select for Prescaler
     inline uint32_t PDB0_SC_MULT (const uint32_t inValue) {return (inValue & 0x3U) << 2 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t PDB0_SC_RESERVED = 1U << 4 ;
 
   // Field PDBIE: PDB Interrupt Enable.
     const uint32_t PDB0_SC_PDBIE = 1U << 5 ;
@@ -9009,17 +6827,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field LDMOD: Load Mode Select
     inline uint32_t PDB0_SC_LDMOD (const uint32_t inValue) {return (inValue & 0x3U) << 18 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_SC_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 20 ; }
-
 //---  Register MOD: Modulus Register
   #define PDB0_MOD (* ((volatile uint32_t *) (0x40036000 + 4)))
 
   // Field MOD: PDB Modulus.
     inline uint32_t PDB0_MOD_MOD (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_MOD_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register CNT: Counter Register
   #define PDB0_CNT (* ((volatile uint32_t *) (0x40036000 + 8)))
@@ -9027,17 +6839,11 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field CNT: PDB Counter
     inline uint32_t PDB0_CNT_CNT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CNT_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register IDLY: Interrupt Delay Register
   #define PDB0_IDLY (* ((volatile uint32_t *) (0x40036000 + 12)))
 
   // Field IDLY: PDB Interrupt Delay
     inline uint32_t PDB0_IDLY_IDLY (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_IDLY_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Registers CHC1(0,1): Channel n Control Register 1
   #define PDB0_CHC1(idx) (* ((volatile uint32_t *) (0x40036000 + 0x10 + (idx) * 0x28)))
@@ -9053,9 +6859,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field BB: PDB Channel Pre-Trigger Back-to-Back Operation Enable
     inline uint32_t PDB0_CHC1_BB (const uint32_t inValue) {return (inValue & 0xffU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CHC1_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
-
 //---  Registers CHS(0,1): Channel n Status Register
   #define PDB0_CHS(idx) (* ((volatile uint32_t *) (0x40036000 + 0x14 + (idx) * 0x28)))
   #define PDB0_CH0S (* ((volatile uint32_t *) (0x40036000 + 0x14 + 0 * 0x28)))
@@ -9064,14 +6867,8 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field ERR: PDB Channel Sequence Error Flags
     inline uint32_t PDB0_CHS_ERR (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CHS_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
-
   // Field CF: PDB Channel Flags
     inline uint32_t PDB0_CHS_CF (const uint32_t inValue) {return (inValue & 0xffU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CHS_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
 
 //---  Registers CHDLY0(0,1): Channel n Delay 0 Register
   #define PDB0_CHDLY0(idx) (* ((volatile uint32_t *) (0x40036000 + 0x18 + (idx) * 0x28)))
@@ -9081,9 +6878,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field DLY: PDB Channel Delay
     inline uint32_t PDB0_CHDLY0_DLY (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CHDLY0_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Registers CHDLY1(0,1): Channel n Delay 1 Register
   #define PDB0_CHDLY1(idx) (* ((volatile uint32_t *) (0x40036000 + 0x1c + (idx) * 0x28)))
   #define PDB0_CH0DLY1 (* ((volatile uint32_t *) (0x40036000 + 0x1c + 0 * 0x28)))
@@ -9091,9 +6885,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field DLY: PDB Channel Delay
     inline uint32_t PDB0_CHDLY1_DLY (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_CHDLY1_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register DACINTC: DAC Interval Trigger n Control Register
   #define PDB0_DACINTC (* ((volatile uint32_t *) (0x40036000 + 336)))
@@ -9104,26 +6895,17 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field EXT: DAC External Trigger Input Enable
     const uint32_t PDB0_DACINTC_EXT = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_DACINTC_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffffU) << 2 ; }
-
 //---  Register DACINT: DAC Interval n Register
   #define PDB0_DACINT (* ((volatile uint32_t *) (0x40036000 + 340)))
 
   // Field INT: DAC Interval
     inline uint32_t PDB0_DACINT_INT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_DACINT_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register POEN: Pulse-Out n Enable Register
   #define PDB0_POEN (* ((volatile uint32_t *) (0x40036000 + 400)))
 
   // Field POEN: PDB Pulse-Out Enable
     inline uint32_t PDB0_POEN_POEN (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PDB0_POEN_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Registers PODLY(0,1,2): Pulse-Out n Delay Register
   #define PDB0_PODLY(idx) (* ((volatile uint32_t *) (0x40036000 + 0x194 + (idx) * 0x4)))
@@ -9149,9 +6931,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field MDIS: Module Disable
     const uint32_t PIT_MCR_MDIS = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t PIT_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffffU) << 2 ; }
 
 //---  Registers LDVAL(0,1,2,3): Timer Load Value Register
   #define PIT_LDVAL(idx) (* ((volatile uint32_t *) (0x40037000 + 0x100 + (idx) * 0x10)))
@@ -9186,9 +6965,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field TIE: Timer Interrupt Enable Bit.
     const uint32_t PIT_TCTRL_TIE = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t PIT_TCTRL_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffffffU) << 2 ; }
-
 //---  Registers TFLG(0,1,2,3): Timer Flag Register
   #define PIT_TFLG(idx) (* ((volatile uint32_t *) (0x40037000 + 0x10c + (idx) * 0x10)))
   #define PIT_TFLG0 (* ((volatile uint32_t *) (0x40037000 + 0x10c + 0 * 0x10)))
@@ -9199,9 +6975,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field TIF: Timer Interrupt Flag.
     const uint32_t PIT_TFLG_TIF = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t PIT_TFLG_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffffU) << 1 ; }
-
 //------------------------------------------------------------------------------
 // Peripheral PMC: Power Management Controller
 //------------------------------------------------------------------------------
@@ -9211,9 +6984,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field LVDV: Low-Voltage Detect Voltage Select
     inline uint8_t PMC_LVDSC1_LVDV (const uint8_t inValue) {return (inValue & 0x3U) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t PMC_LVDSC1_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 2 ; }
 
   // Field LVDRE: Low-Voltage Detect Reset Enable
     const uint8_t PMC_LVDSC1_LVDRE = 1U << 4 ;
@@ -9233,9 +7003,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field LVWV: Low-Voltage Warning Voltage Select
     inline uint8_t PMC_LVDSC2_LVWV (const uint8_t inValue) {return (inValue & 0x3U) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t PMC_LVDSC2_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 2 ; }
-
   // Field LVWIE: Low-Voltage Warning Interrupt Enable
     const uint8_t PMC_LVDSC2_LVWIE = 1U << 5 ;
 
@@ -9251,9 +7018,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
   // Field BGBE: Bandgap Buffer Enable
     const uint8_t PMC_REGSC_BGBE = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint8_t PMC_REGSC_RESERVED = 1U << 1 ;
-
   // Field REGONS: Regulator in Run Regulation Status
     const uint8_t PMC_REGSC_REGONS = 1U << 2 ;
 
@@ -9262,9 +7026,6 @@ static const uint32_t kBaseAddress_I2C [2] = {0x40066000, 0x40067000} ;
 
   // Field BGEN: Bandgap enable in VLPx operation
     const uint8_t PMC_REGSC_BGEN = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t PMC_REGSC_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 5 ; }
 
 //------------------------------------------------------------------------------
 // PERIPHERAL GROUP: PORT
@@ -9456,9 +7217,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field SRE: Slew Rate Enable
     const uint32_t PORT_PCR_SRE = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t PORT_PCR_RESERVED = 1U << 3 ;
-
   // Field PFE: Passive Filter Enable
     const uint32_t PORT_PCR_PFE = 1U << 4 ;
 
@@ -9468,14 +7226,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field DSE: Drive Strength Enable
     const uint32_t PORT_PCR_DSE = 1U << 6 ;
 
-  // Field RESERVED: no description available
-    const uint32_t PORT_PCR_RESERVED = 1U << 7 ;
-
   // Field MUX: Pin Mux Control
     inline uint32_t PORT_PCR_MUX (const uint32_t inValue) {return (inValue & 0x7U) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PORT_PCR_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 11 ; }
 
   // Field LK: Lock Register
     const uint32_t PORT_PCR_LK = 1U << 15 ;
@@ -9483,14 +7235,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field IRQC: Interrupt Configuration
     inline uint32_t PORT_PCR_IRQC (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t PORT_PCR_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 20 ; }
-
   // Field ISF: Interrupt Status Flag
     const uint32_t PORT_PCR_ISF = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t PORT_PCR_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 25 ; }
 
 //---  Register GPCLR: Global Pin Control Low Register
   #define PORT_GPCLR(group) (* ((volatile uint32_t *) (kBaseAddress_GPCLR [group] + 0x80)))
@@ -9553,9 +7299,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field CS: Clock Source
     const uint32_t PORT_DFCR_CS = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t PORT_DFCR_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffffU) << 1 ; }
-
 //---  Register DFWR: Digital Filter Width Register
   #define PORT_DFWR(group) (* ((volatile uint32_t *) (kBaseAddress_DFWR [group] + 0xc8)))
   #define PORTA_DFWR (* ((volatile uint32_t *) (0x40049000 + 0xc8)))
@@ -9566,9 +7309,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 
   // Field FILT: Filter Length
     inline uint32_t PORT_DFWR_FILT (const uint32_t inValue) {return (inValue & 0x1fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t PORT_DFWR_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffffffU) << 5 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral RCM: Reset Control Module
@@ -9588,9 +7328,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 
   // Field LOL: Loss-of-lock reset
     const uint8_t RCM_SRS0_LOL = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t RCM_SRS0_RESERVED = 1U << 4 ;
 
   // Field WDOG: Watchdog
     const uint8_t RCM_SRS0_WDOG = 1U << 5 ;
@@ -9622,12 +7359,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field SACKERR: Stop Mode Acknowledge Error Reset
     const uint8_t RCM_SRS1_SACKERR = 1U << 5 ;
 
-  // Field RESERVED: no description available
-    const uint8_t RCM_SRS1_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint8_t RCM_SRS1_RESERVED = 1U << 7 ;
-
 //---  Register RPFC: Reset Pin Filter Control Register
   #define RCM_RPFC (* ((volatile uint8_t *) (0x4007f000 + 4)))
 
@@ -9637,29 +7368,17 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field RSTFLTSS: Reset pin filter select in stop mode
     const uint8_t RCM_RPFC_RSTFLTSS = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t RCM_RPFC_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 3 ; }
-
 //---  Register RPFW: Reset Pin Filter Width Register
   #define RCM_RPFW (* ((volatile uint8_t *) (0x4007f000 + 5)))
 
   // Field RSTFLTSEL: Reset pin filter bus clock select
     inline uint8_t RCM_RPFW_RSTFLTSEL (const uint8_t inValue) {return (inValue & 0x1fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t RCM_RPFW_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 5 ; }
-
 //---  Register MR: Mode Register
   #define RCM_MR (* ((volatile uint8_t *) (0x4007f000 + 7)))
 
-  // Field RESERVED: no description available
-    const uint8_t RCM_MR_RESERVED = 1U << 0 ;
-
   // Field EZP_MS: EZP_MS_B pin state
     const uint8_t RCM_MR_EZP_MS = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t RCM_MR_RESERVED (const uint8_t inValue) {return (inValue & 0x3fU) << 2 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral RFSYS: System register file
@@ -9731,9 +7450,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field TPR: Time Prescaler Register
     inline uint32_t RTC_TPR_TPR (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t RTC_TPR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
-
 //---  Register TAR: RTC Time Alarm Register
   #define RTC_TAR (* ((volatile uint32_t *) (0x4003d000 + 8)))
 
@@ -9770,9 +7486,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field UM: Update Mode
     const uint32_t RTC_CR_UM = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t RTC_CR_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 4 ; }
-
   // Field OSCE: Oscillator Enable
     const uint32_t RTC_CR_OSCE = 1U << 8 ;
 
@@ -9791,12 +7504,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field SC2P: Oscillator 2pF load configure
     const uint32_t RTC_CR_SC2P = 1U << 13 ;
 
-  // Field RESERVED: no description available
-    const uint32_t RTC_CR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t RTC_CR_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffffU) << 15 ; }
-
 //---  Register SR: RTC Status Register
   #define RTC_SR (* ((volatile uint32_t *) (0x4003d000 + 20)))
 
@@ -9809,20 +7516,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field TAF: Time Alarm Flag
     const uint32_t RTC_SR_TAF = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t RTC_SR_RESERVED = 1U << 3 ;
-
   // Field TCE: Time Counter Enable
     const uint32_t RTC_SR_TCE = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t RTC_SR_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffffffU) << 5 ; }
-
 //---  Register LR: RTC Lock Register
   #define RTC_LR (* ((volatile uint32_t *) (0x4003d000 + 24)))
-
-  // Field RESERVED: no description available
-    inline uint32_t RTC_LR_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 0 ; }
 
   // Field TCL: Time Compensation Lock
     const uint32_t RTC_LR_TCL = 1U << 3 ;
@@ -9836,12 +7534,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field LRL: Lock Register Lock
     const uint32_t RTC_LR_LRL = 1U << 6 ;
 
-  // Field RESERVED: no description available
-    const uint32_t RTC_LR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t RTC_LR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register IER: RTC Interrupt Enable Register
   #define RTC_IER (* ((volatile uint32_t *) (0x4003d000 + 28)))
 
@@ -9854,17 +7546,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field TAIE: Time Alarm Interrupt Enable
     const uint32_t RTC_IER_TAIE = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t RTC_IER_RESERVED = 1U << 3 ;
-
   // Field TSIE: Time Seconds Interrupt Enable
     const uint32_t RTC_IER_TSIE = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t RTC_IER_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t RTC_IER_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
 
 //---  Register WAR: RTC Write Access Register
   #define RTC_WAR (* ((volatile uint32_t *) (0x4003d000 + 2048)))
@@ -9893,9 +7576,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field IERW: Interrupt Enable Register Write
     const uint32_t RTC_WAR_IERW = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t RTC_WAR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register RAR: RTC Read Access Register
   #define RTC_RAR (* ((volatile uint32_t *) (0x4003d000 + 2052)))
 
@@ -9923,9 +7603,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field IERR: Interrupt Enable Register Read
     const uint32_t RTC_RAR_IERR = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t RTC_RAR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //------------------------------------------------------------------------------
 // Peripheral SIM: System Integration Module
 //------------------------------------------------------------------------------
@@ -9933,23 +7610,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 //---  Register SOPT1: System Options Register 1
   #define SIM_SOPT1 (* ((volatile uint32_t *) (0x40047000 + 0)))
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 6 ; }
-
   // Field RAMSIZE: RAM size
     inline uint32_t SIM_SOPT1_RAMSIZE (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 16 ; }
-
   // Field OSC32KSEL: 32K oscillator clock select
     inline uint32_t SIM_SOPT1_OSC32KSEL (const uint32_t inValue) {return (inValue & 0x3U) << 18 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 20 ; }
 
   // Field USBVSTBY: USB voltage regulator in standby mode during VLPR and VLPW modes
     const uint32_t SIM_SOPT1_USBVSTBY = 1U << 29 ;
@@ -9963,15 +7628,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 //---  Register SOPT1CFG: SOPT1 Configuration Register
   #define SIM_SOPT1CFG (* ((volatile uint32_t *) (0x40047000 + 4)))
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1CFG_RESERVED (const uint32_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1CFG_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1CFG_RESERVED (const uint32_t inValue) {return (inValue & 0x3fffU) << 10 ; }
-
   // Field URWE: USB voltage regulator enable write enable
     const uint32_t SIM_SOPT1CFG_URWE = 1U << 24 ;
 
@@ -9981,14 +7637,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field USSWE: USB voltage regulator stop standby write enable
     const uint32_t SIM_SOPT1CFG_USSWE = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT1CFG_RESERVED (const uint32_t inValue) {return (inValue & 0x1fU) << 27 ; }
-
 //---  Register SOPT2: System Options Register 2
   #define SIM_SOPT2 (* ((volatile uint32_t *) (0x40047000 + 4100)))
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
 
   // Field RTCCLKOUTSEL: RTC clock out select
     const uint32_t SIM_SOPT2_RTCCLKOUTSEL = 1U << 4 ;
@@ -9999,38 +7649,17 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FBSL: FlexBus security level
     inline uint32_t SIM_SOPT2_FBSL (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SOPT2_RESERVED = 1U << 10 ;
-
   // Field PTD7PAD: PTD7 pad drive strength
     const uint32_t SIM_SOPT2_PTD7PAD = 1U << 11 ;
 
   // Field TRACECLKSEL: Debug trace clock select
     const uint32_t SIM_SOPT2_TRACECLKSEL = 1U << 12 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 13 ; }
-
   // Field PLLFLLSEL: PLL/FLL clock select
     const uint32_t SIM_SOPT2_PLLFLLSEL = 1U << 16 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SOPT2_RESERVED = 1U << 17 ;
-
   // Field USBSRC: USB clock source select
     const uint32_t SIM_SOPT2_USBSRC = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 19 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 22 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 28 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT2_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 30 ; }
 
 //---  Register SOPT4: System Options Register 4
   #define SIM_SOPT4 (* ((volatile uint32_t *) (0x40047000 + 4108)))
@@ -10044,29 +7673,17 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FTM0FLT2: FTM0 Fault 2 Select
     const uint32_t SIM_SOPT4_FTM0FLT2 = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SOPT4_RESERVED = 1U << 3 ;
-
   // Field FTM1FLT0: FTM1 Fault 0 Select
     const uint32_t SIM_SOPT4_FTM1FLT0 = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT4_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 5 ; }
-
   // Field FTM2FLT0: FTM2 Fault 0 Select
     const uint32_t SIM_SOPT4_FTM2FLT0 = 1U << 8 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT4_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 9 ; }
 
   // Field FTM1CH0SRC: FTM1 channel 0 input capture source select
     inline uint32_t SIM_SOPT4_FTM1CH0SRC (const uint32_t inValue) {return (inValue & 0x3U) << 18 ; }
 
   // Field FTM2CH0SRC: FTM2 channel 0 input capture source select
     inline uint32_t SIM_SOPT4_FTM2CH0SRC (const uint32_t inValue) {return (inValue & 0x3U) << 20 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT4_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 22 ; }
 
   // Field FTM0CLKSEL: FlexTimer 0 External Clock Pin Select
     const uint32_t SIM_SOPT4_FTM0CLKSEL = 1U << 24 ;
@@ -10077,17 +7694,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FTM2CLKSEL: FlexTimer 2 External Clock Pin Select
     const uint32_t SIM_SOPT4_FTM2CLKSEL = 1U << 26 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SOPT4_RESERVED = 1U << 27 ;
-
   // Field FTM0TRG0SRC: FlexTimer 0 Hardware Trigger 0 Source Select
     const uint32_t SIM_SOPT4_FTM0TRG0SRC = 1U << 28 ;
 
   // Field FTM0TRG1SRC: FlexTimer 0 Hardware Trigger 1 Source Select
     const uint32_t SIM_SOPT4_FTM0TRG1SRC = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT4_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 30 ; }
 
 //---  Register SOPT5: System Options Register 5
   #define SIM_SOPT5 (* ((volatile uint32_t *) (0x40047000 + 4112)))
@@ -10104,9 +7715,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field UART1RXSRC: UART 1 receive data source select
     inline uint32_t SIM_SOPT5_UART1RXSRC (const uint32_t inValue) {return (inValue & 0x3U) << 6 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT5_RESERVED (const uint32_t inValue) {return (inValue & 0xffffffU) << 8 ; }
-
 //---  Register SOPT7: System Options Register 7
   #define SIM_SOPT7 (* ((volatile uint32_t *) (0x40047000 + 4120)))
 
@@ -10115,9 +7723,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 
   // Field ADC0PRETRGSEL: ADC0 pretrigger select
     const uint32_t SIM_SOPT7_ADC0PRETRGSEL = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT7_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 5 ; }
 
   // Field ADC0ALTTRGEN: ADC0 alternate trigger enable
     const uint32_t SIM_SOPT7_ADC0ALTTRGEN = 1U << 7 ;
@@ -10128,14 +7733,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field ADC1PRETRGSEL: ADC1 pre-trigger select
     const uint32_t SIM_SOPT7_ADC1PRETRGSEL = 1U << 12 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT7_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 13 ; }
-
   // Field ADC1ALTTRGEN: ADC1 alternate trigger enable
     const uint32_t SIM_SOPT7_ADC1ALTTRGEN = 1U << 15 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SOPT7_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register SDID: System Device Identification Register
   #define SIM_SDID (* ((volatile uint32_t *) (0x40047000 + 4132)))
@@ -10146,131 +7745,32 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FAMID: Kinetis family identification
     inline uint32_t SIM_SDID_FAMID (const uint32_t inValue) {return (inValue & 0x7U) << 4 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SDID_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SDID_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SDID_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SDID_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SDID_RESERVED = 1U << 11 ;
-
   // Field REVID: Device revision number
     inline uint32_t SIM_SDID_REVID (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SDID_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Register SCGC1: System Clock Gating Control Register 1
   #define SIM_SCGC1 (* ((volatile uint32_t *) (0x40047000 + 4136)))
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC1_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC1_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC1_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
-
   // Field UART4: UART4 Clock Gate Control
     const uint32_t SIM_SCGC1_UART4 = 1U << 10 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC1_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC1_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 12 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC1_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC1_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 22 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC1_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC1_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 25 ; }
 
 //---  Register SCGC2: System Clock Gating Control Register 2
   #define SIM_SCGC2 (* ((volatile uint32_t *) (0x40047000 + 4140)))
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC2_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC2_RESERVED (const uint32_t inValue) {return (inValue & 0x7ffU) << 1 ; }
-
   // Field DAC0: DAC0 Clock Gate Control
     const uint32_t SIM_SCGC2_DAC0 = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC2_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC2_RESERVED (const uint32_t inValue) {return (inValue & 0x3ffffU) << 14 ; }
 
 //---  Register SCGC3: System Clock Gating Control Register 3
   #define SIM_SCGC3 (* ((volatile uint32_t *) (0x40047000 + 4144)))
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 1 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 5 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 13 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 18 ; }
-
   // Field FTM2: FTM2 Clock Gate Control
     const uint32_t SIM_SCGC3_FTM2 = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 25 ; }
 
   // Field ADC1: ADC1 Clock Gate Control
     const uint32_t SIM_SCGC3_ADC1 = 1U << 27 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC3_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 28 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC3_RESERVED = 1U << 31 ;
-
 //---  Register SCGC4: System Clock Gating Control Register 4
   #define SIM_SCGC4 (* ((volatile uint32_t *) (0x40047000 + 4148)))
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC4_RESERVED = 1U << 0 ;
 
   // Field EWM: EWM Clock Gate Control
     const uint32_t SIM_SCGC4_EWM = 1U << 1 ;
@@ -10278,20 +7778,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field CMT: CMT Clock Gate Control
     const uint32_t SIM_SCGC4_CMT = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC4_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC4_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 4 ; }
-
   // Field I2C0: I2C0 Clock Gate Control
     const uint32_t SIM_SCGC4_I2C0 = 1U << 6 ;
 
   // Field I2C1: I2C1 Clock Gate Control
     const uint32_t SIM_SCGC4_I2C1 = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC4_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
 
   // Field UART0: UART0 Clock Gate Control
     const uint32_t SIM_SCGC4_UART0 = 1U << 10 ;
@@ -10305,9 +7796,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field UART3: UART3 Clock Gate Control
     const uint32_t SIM_SCGC4_UART3 = 1U << 13 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC4_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 14 ; }
-
   // Field USBOTG: USB Clock Gate Control
     const uint32_t SIM_SCGC4_USBOTG = 1U << 18 ;
 
@@ -10317,35 +7805,14 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field VREF: VREF Clock Gate Control
     const uint32_t SIM_SCGC4_VREF = 1U << 20 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC4_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 21 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC4_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 28 ; }
-
 //---  Register SCGC5: System Clock Gating Control Register 5
   #define SIM_SCGC5 (* ((volatile uint32_t *) (0x40047000 + 4152)))
 
   // Field LPTIMER: Low Power Timer Access Control
     const uint32_t SIM_SCGC5_LPTIMER = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC5_RESERVED = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC5_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 2 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC5_RESERVED = 1U << 4 ;
-
   // Field TSI: TSI Clock Gate Control
     const uint32_t SIM_SCGC5_TSI = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC5_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC5_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 7 ; }
 
   // Field PORTA: Port A Clock Gate Control
     const uint32_t SIM_SCGC5_PORTA = 1U << 9 ;
@@ -10362,15 +7829,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field PORTE: Port E Clock Gate Control
     const uint32_t SIM_SCGC5_PORTE = 1U << 13 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC5_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 14 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC5_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC5_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffU) << 19 ; }
-
 //---  Register SCGC6: System Clock Gating Control Register 6
   #define SIM_SCGC6 (* ((volatile uint32_t *) (0x40047000 + 4156)))
 
@@ -10380,20 +7838,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field DMAMUX: DMA Mux Clock Gate Control
     const uint32_t SIM_SCGC6_DMAMUX = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC6_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 2 ; }
-
   // Field FLEXCAN0: FlexCAN0 Clock Gate Control
     const uint32_t SIM_SCGC6_FLEXCAN0 = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC6_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 5 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC6_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 10 ; }
 
   // Field SPI0: SPI0 Clock Gate Control
     const uint32_t SIM_SCGC6_SPI0 = 1U << 12 ;
@@ -10401,20 +7847,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field SPI1: SPI1 Clock Gate Control
     const uint32_t SIM_SCGC6_SPI1 = 1U << 13 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 14 ;
-
   // Field I2S: I2S Clock Gate Control
     const uint32_t SIM_SCGC6_I2S = 1U << 15 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC6_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 16 ; }
-
   // Field CRC: CRC Clock Gate Control
     const uint32_t SIM_SCGC6_CRC = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC6_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 19 ; }
 
   // Field USBDCD: USB DCD Clock Gate Control
     const uint32_t SIM_SCGC6_USBDCD = 1U << 21 ;
@@ -10431,23 +7868,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FTM1: FTM1 Clock Gate Control
     const uint32_t SIM_SCGC6_FTM1 = 1U << 25 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 26 ;
-
   // Field ADC0: ADC0 Clock Gate Control
     const uint32_t SIM_SCGC6_ADC0 = 1U << 27 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 28 ;
-
   // Field RTC: RTC Access Control
     const uint32_t SIM_SCGC6_RTC = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC6_RESERVED = 1U << 31 ;
 
 //---  Register SCGC7: System Clock Gating Control Register 7
   #define SIM_SCGC7 (* ((volatile uint32_t *) (0x40047000 + 4160)))
@@ -10458,17 +7883,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field DMA: DMA Clock Gate Control
     const uint32_t SIM_SCGC7_DMA = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SIM_SCGC7_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_SCGC7_RESERVED (const uint32_t inValue) {return (inValue & 0x1fffffffU) << 3 ; }
-
 //---  Register CLKDIV1: System Clock Divider Register 1
   #define SIM_CLKDIV1 (* ((volatile uint32_t *) (0x40047000 + 4164)))
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_CLKDIV1_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
   // Field OUTDIV4: Clock 4 output divider value
     inline uint32_t SIM_CLKDIV1_OUTDIV4 (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
@@ -10491,9 +7907,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field USBDIV: USB clock divider divisor
     inline uint32_t SIM_CLKDIV2_USBDIV (const uint32_t inValue) {return (inValue & 0x7U) << 1 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_CLKDIV2_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffffU) << 4 ; }
-
 //---  Register FCFG1: Flash Configuration Register 1
   #define SIM_FCFG1 (* ((volatile uint32_t *) (0x40047000 + 4172)))
 
@@ -10503,20 +7916,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field FLASHDOZE: Flash Doze
     const uint32_t SIM_FCFG1_FLASHDOZE = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_FCFG1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 2 ; }
-
   // Field DEPART: FlexNVM partition
     inline uint32_t SIM_FCFG1_DEPART (const uint32_t inValue) {return (inValue & 0xfU) << 8 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t SIM_FCFG1_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
-
   // Field EESIZE: EEPROM size
     inline uint32_t SIM_FCFG1_EESIZE (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_FCFG1_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 20 ; }
 
   // Field PFSIZE: Program flash size
     inline uint32_t SIM_FCFG1_PFSIZE (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
@@ -10526,9 +7930,6 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 
 //---  Register FCFG2: Flash Configuration Register 2
   #define SIM_FCFG2 (* ((volatile uint32_t *) (0x40047000 + 4176)))
-
-  // Field RESERVED: no description available
-    inline uint32_t SIM_FCFG2_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
   // Field MAXADDR1: Max address block 1
     inline uint32_t SIM_FCFG2_MAXADDR1 (const uint32_t inValue) {return (inValue & 0x7fU) << 16 ; }
@@ -10573,26 +7974,14 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
 //---  Register PMPROT: Power Mode Protection Register
   #define SMC_PMPROT (* ((volatile uint8_t *) (0x4007e000 + 0)))
 
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMPROT_RESERVED = 1U << 0 ;
-
   // Field AVLLS: Allow very low leakage stop mode
     const uint8_t SMC_PMPROT_AVLLS = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMPROT_RESERVED = 1U << 2 ;
 
   // Field ALLS: Allow low leakage stop mode
     const uint8_t SMC_PMPROT_ALLS = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMPROT_RESERVED = 1U << 4 ;
-
   // Field AVLP: Allow very low power modes
     const uint8_t SMC_PMPROT_AVLP = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t SMC_PMPROT_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 6 ; }
 
 //---  Register PMCTRL: Power Mode Control Register
   #define SMC_PMCTRL (* ((volatile uint8_t *) (0x4007e000 + 1)))
@@ -10603,14 +7992,8 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field STOPA: Stop Aborted
     const uint8_t SMC_PMCTRL_STOPA = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMCTRL_RESERVED = 1U << 4 ;
-
   // Field RUNM: Run Mode Control
     inline uint8_t SMC_PMCTRL_RUNM (const uint8_t inValue) {return (inValue & 0x3U) << 5 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMCTRL_RESERVED = 1U << 7 ;
 
 //---  Register VLLSCTRL: VLLS Control Register
   #define SMC_VLLSCTRL (* ((volatile uint8_t *) (0x4007e000 + 2)))
@@ -10618,26 +8001,11 @@ static const uint32_t kBaseAddress_PORT [5] = {0x40049000, 0x4004a000, 0x4004b00
   // Field VLLSM: VLLS Mode Control
     inline uint8_t SMC_VLLSCTRL_VLLSM (const uint8_t inValue) {return (inValue & 0x7U) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint8_t SMC_VLLSCTRL_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t SMC_VLLSCTRL_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint8_t SMC_VLLSCTRL_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t SMC_VLLSCTRL_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 6 ; }
-
 //---  Register PMSTAT: Power Mode Status Register
   #define SMC_PMSTAT (* ((volatile uint8_t *) (0x4007e000 + 3)))
 
   // Field PMSTAT: no description available
     inline uint8_t SMC_PMSTAT_PMSTAT (const uint8_t inValue) {return (inValue & 0x7fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t SMC_PMSTAT_RESERVED = 1U << 7 ;
 
 //------------------------------------------------------------------------------
 // PERIPHERAL GROUP: SPI
@@ -10656,12 +8024,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field HALT: Halt
     const uint32_t SPI_MCR_HALT = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_MCR_RESERVED = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 2 ; }
 
   // Field SMPL_PT: Sample Point
     inline uint32_t SPI_MCR_SMPL_PT (const uint32_t inValue) {return (inValue & 0x3U) << 8 ; }
@@ -10686,9 +8048,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field PCSIS: Peripheral Chip Select x Inactive State
     inline uint32_t SPI_MCR_PCSIS (const uint32_t inValue) {return (inValue & 0x3fU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_MCR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 22 ; }
 
   // Field ROOE: Receive FIFO Overflow Overwrite Enable
     const uint32_t SPI_MCR_ROOE = 1U << 24 ;
@@ -10716,9 +8075,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   #define SPI0_TCR (* ((volatile uint32_t *) (0x4002c000 + 0x8)))
   #define SPI1_TCR (* ((volatile uint32_t *) (0x4002d000 + 0x8)))
 
-  // Field RESERVED: no description available
-    inline uint32_t SPI_TCR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
   // Field SPI_TCNT: SPI Transfer Counter
     inline uint32_t SPI_TCR_SPI_TCNT (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
@@ -10726,12 +8082,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   #define SPI_CTAR_SLAVE(group) (* ((volatile uint32_t *) (kBaseAddress_CTAR_SLAVE [group] + 0xc)))
   #define SPI0_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002c000 + 0xc)))
   #define SPI1_CTAR_SLAVE (* ((volatile uint32_t *) (0x4002d000 + 0xc)))
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_CTAR_SLAVE_RESERVED (const uint32_t inValue) {return (inValue & 0x7fffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_CTAR_SLAVE_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 23 ; }
 
   // Field CPHA: Clock Phase
     const uint32_t SPI_CTAR_SLAVE_CPHA = 1U << 25 ;
@@ -10807,47 +8157,20 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field TXCTR: TX FIFO Counter
     inline uint32_t SPI_SR_TXCTR (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 16 ;
-
   // Field RFDF: Receive FIFO Drain Flag
     const uint32_t SPI_SR_RFDF = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 18 ;
 
   // Field RFOF: Receive FIFO Overflow Flag
     const uint32_t SPI_SR_RFOF = 1U << 19 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 24 ;
-
   // Field TFFF: Transmit FIFO Fill Flag
     const uint32_t SPI_SR_TFFF = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 26 ;
 
   // Field TFUF: Transmit FIFO Underflow Flag
     const uint32_t SPI_SR_TFUF = 1U << 27 ;
 
   // Field EOQF: End of Queue Flag
     const uint32_t SPI_SR_EOQF = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_SR_RESERVED = 1U << 29 ;
 
   // Field TXRXS: TX and RX Status
     const uint32_t SPI_SR_TXRXS = 1U << 30 ;
@@ -10860,32 +8183,14 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   #define SPI0_RSER (* ((volatile uint32_t *) (0x4002c000 + 0x30)))
   #define SPI1_RSER (* ((volatile uint32_t *) (0x4002d000 + 0x30)))
 
-  // Field RESERVED: no description available
-    inline uint32_t SPI_RSER_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
   // Field RFDF_DIRS: Receive FIFO Drain DMA or Interrupt Request Select.
     const uint32_t SPI_RSER_RFDF_DIRS = 1U << 16 ;
 
   // Field RFDF_RE: Receive FIFO Drain Request Enable
     const uint32_t SPI_RSER_RFDF_RE = 1U << 17 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 18 ;
-
   // Field RFOF_RE: Receive FIFO Overflow Request Enable
     const uint32_t SPI_RSER_RFOF_RE = 1U << 19 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 23 ;
 
   // Field TFFF_DIRS: Transmit FIFO Fill DMA or Interrupt Request Select
     const uint32_t SPI_RSER_TFFF_DIRS = 1U << 24 ;
@@ -10893,20 +8198,11 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field TFFF_RE: Transmit FIFO Fill Request Enable
     const uint32_t SPI_RSER_TFFF_RE = 1U << 25 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 26 ;
-
   // Field TFUF_RE: Transmit FIFO Underflow Request Enable
     const uint32_t SPI_RSER_TFUF_RE = 1U << 27 ;
 
   // Field EOQF_RE: DSPI Finished Request Enable
     const uint32_t SPI_RSER_EOQF_RE = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SPI_RSER_RESERVED = 1U << 30 ;
 
   // Field TCF_RE: Transmission Complete Request Enable
     const uint32_t SPI_RSER_TCF_RE = 1U << 31 ;
@@ -10921,12 +8217,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field PCS: no description available
     inline uint32_t SPI_PUSHR_PCS (const uint32_t inValue) {return (inValue & 0x3fU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_PUSHR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 22 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t SPI_PUSHR_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 24 ; }
 
   // Field CTCNT: Clear Transfer Counter.
     const uint32_t SPI_PUSHR_CTCNT = 1U << 26 ;
@@ -11007,92 +8297,8 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field CLKSOURCE: no description available
     const uint32_t SysTick_CSR_CLKSOURCE = 1U << 2 ;
 
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 15 ;
-
   // Field COUNTFLAG: no description available
     const uint32_t SysTick_CSR_COUNTFLAG = 1U << 16 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CSR_RESERVED = 1U << 31 ;
 
 //---  Register RVR: SysTick Reload Value Register
   #define SysTick_RVR (* ((volatile uint32_t *) (0xe000e010 + 4)))
@@ -11100,83 +8306,17 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field RELOAD: Value to load into the SysTick Current Value Register when the counter reaches 0
     inline uint32_t SysTick_RVR_RELOAD (const uint32_t inValue) {return (inValue & 0xffffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_RVR_RESERVED = 1U << 31 ;
-
 //---  Register CVR: SysTick Current Value Register
   #define SysTick_CVR (* ((volatile uint32_t *) (0xe000e010 + 8)))
 
   // Field CURRENT: Current value at the time the register is accessed
     inline uint32_t SysTick_CVR_CURRENT (const uint32_t inValue) {return (inValue & 0xffffffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CVR_RESERVED = 1U << 31 ;
-
 //---  Register CALIB: SysTick Calibration Value Register
   #define SysTick_CALIB (* ((volatile uint32_t *) (0xe000e010 + 12)))
 
   // Field TENMS: Reload value to use for 10ms timing
     inline uint32_t SysTick_CALIB_TENMS (const uint32_t inValue) {return (inValue & 0xffffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: no description available
-    const uint32_t SysTick_CALIB_RESERVED = 1U << 29 ;
 
   // Field SKEW: no description available
     const uint32_t SysTick_CALIB_SKEW = 1U << 30 ;
@@ -11200,93 +8340,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field DISFOLD: Disables folding of IT instructions.
     const uint32_t SystemControl_ACTLR_DISFOLD = 1U << 2 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ACTLR_RESERVED = 1U << 31 ;
-
 //---  Register CPUID: CPUID Base Register
   #define SystemControl_CPUID (* ((volatile uint32_t *) (0xe000e000 + 3328)))
 
@@ -11295,18 +8348,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field PARTNO: Indicates part number
     inline uint32_t SystemControl_CPUID_PARTNO (const uint32_t inValue) {return (inValue & 0xfffU) << 4 ; }
-
-  // Field RESERVED: (Constant) Reads as 1
-    const uint32_t SystemControl_CPUID_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: (Constant) Reads as 1
-    const uint32_t SystemControl_CPUID_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: (Constant) Reads as 1
-    const uint32_t SystemControl_CPUID_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: (Constant) Reads as 1
-    const uint32_t SystemControl_CPUID_RESERVED = 1U << 19 ;
 
   // Field VARIANT: Indicates processor revision: 0x2 = Revision 2
     inline uint32_t SystemControl_CPUID_VARIANT (const uint32_t inValue) {return (inValue & 0xfU) << 20 ; }
@@ -11320,38 +8361,17 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field VECTACTIVE: Active exception number
     inline uint32_t SystemControl_ICSR_VECTACTIVE (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 10 ;
-
   // Field RETTOBASE: no description available
     const uint32_t SystemControl_ICSR_RETTOBASE = 1U << 11 ;
 
   // Field VECTPENDING: Exception number of the highest priority pending enabled exception
     inline uint32_t SystemControl_ICSR_VECTPENDING (const uint32_t inValue) {return (inValue & 0x3fU) << 12 ; }
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 21 ;
-
   // Field ISRPENDING: no description available
     const uint32_t SystemControl_ICSR_ISRPENDING = 1U << 22 ;
 
   // Field ISRPREEMPT: no description available
     const uint32_t SystemControl_ICSR_ISRPREEMPT = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 24 ;
 
   // Field PENDSTCLR: no description available
     const uint32_t SystemControl_ICSR_PENDSTCLR = 1U << 25 ;
@@ -11365,38 +8385,11 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field PENDSVSET: no description available
     const uint32_t SystemControl_ICSR_PENDSVSET = 1U << 28 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_ICSR_RESERVED = 1U << 30 ;
-
   // Field NMIPENDSET: no description available
     const uint32_t SystemControl_ICSR_NMIPENDSET = 1U << 31 ;
 
 //---  Register VTOR: Vector Table Offset Register
   #define SystemControl_VTOR (* ((volatile uint32_t *) (0xe000e000 + 3336)))
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 1 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_VTOR_RESERVED = 1U << 6 ;
 
   // Field TBLOFF: Vector table base offset
     inline uint32_t SystemControl_VTOR_TBLOFF (const uint32_t inValue) {return (inValue & 0x1ffffffU) << 7 ; }
@@ -11413,35 +8406,8 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field SYSRESETREQ: no description available
     const uint32_t SystemControl_AIRCR_SYSRESETREQ = 1U << 2 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 7 ;
-
   // Field PRIGROUP: Interrupt priority grouping field. This field determines the split of group priority from subpriority.
     inline uint32_t SystemControl_AIRCR_PRIGROUP (const uint32_t inValue) {return (inValue & 0x7U) << 8 ; }
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_AIRCR_RESERVED = 1U << 14 ;
 
   // Field ENDIANNESS: no description available
     const uint32_t SystemControl_AIRCR_ENDIANNESS = 1U << 15 ;
@@ -11452,101 +8418,14 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 //---  Register SCR: System Control Register
   #define SystemControl_SCR (* ((volatile uint32_t *) (0xe000e000 + 3344)))
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 0 ;
-
   // Field SLEEPONEXIT: no description available
     const uint32_t SystemControl_SCR_SLEEPONEXIT = 1U << 1 ;
 
   // Field SLEEPDEEP: no description available
     const uint32_t SystemControl_SCR_SLEEPDEEP = 1U << 2 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 3 ;
-
   // Field SEVONPEND: no description available
     const uint32_t SystemControl_SCR_SEVONPEND = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SCR_RESERVED = 1U << 31 ;
 
 //---  Register CCR: Configuration and Control Register
   #define SystemControl_CCR (* ((volatile uint32_t *) (0xe000e000 + 3348)))
@@ -11557,95 +8436,17 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field USERSETMPEND: Enables unprivileged software access to the STIR
     const uint32_t SystemControl_CCR_USERSETMPEND = 1U << 1 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 2 ;
-
   // Field UNALIGN_TRP: Enables unaligned access traps
     const uint32_t SystemControl_CCR_UNALIGN_TRP = 1U << 3 ;
 
   // Field DIV_0_TRP: Enables faulting or halting when the processor executes an SDIV or UDIV instruction with a divisor of 0
     const uint32_t SystemControl_CCR_DIV_0_TRP = 1U << 4 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 7 ;
-
   // Field BFHFNMIGN: Enables handlers with priority -1 or -2 to ignore data BusFaults caused by load and store instructions.
     const uint32_t SystemControl_CCR_BFHFNMIGN = 1U << 8 ;
 
   // Field STKALIGN: Indicates stack alignment on exception entry
     const uint32_t SystemControl_CCR_STKALIGN = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CCR_RESERVED = 1U << 31 ;
 
 //---  Register SHPR1: System Handler Priority Register 1
   #define SystemControl_SHPR1 (* ((volatile uint32_t *) (0xe000e000 + 3352)))
@@ -11659,158 +8460,14 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field PRI_6: Priority of system handler 6, UsageFault
     inline uint32_t SystemControl_SHPR1_PRI_6 (const uint32_t inValue) {return (inValue & 0xffU) << 16 ; }
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR1_RESERVED = 1U << 31 ;
-
 //---  Register SHPR2: System Handler Priority Register 2
   #define SystemControl_SHPR2 (* ((volatile uint32_t *) (0xe000e000 + 3356)))
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 1 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR2_RESERVED = 1U << 23 ;
 
   // Field PRI_11: Priority of system handler 11, SVCall
     inline uint32_t SystemControl_SHPR2_PRI_11 (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
 
 //---  Register SHPR3: System Handler Priority Register 3
   #define SystemControl_SHPR3 (* ((volatile uint32_t *) (0xe000e000 + 3360)))
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 1 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHPR3_RESERVED = 1U << 15 ;
 
   // Field PRI_14: Priority of system handler 14, PendSV
     inline uint32_t SystemControl_SHPR3_PRI_14 (const uint32_t inValue) {return (inValue & 0xffU) << 16 ; }
@@ -11827,29 +8484,14 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field BUSFAULTACT: no description available
     const uint32_t SystemControl_SHCSR_BUSFAULTACT = 1U << 1 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 2 ;
-
   // Field USGFAULTACT: no description available
     const uint32_t SystemControl_SHCSR_USGFAULTACT = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 6 ;
 
   // Field SVCALLACT: no description available
     const uint32_t SystemControl_SHCSR_SVCALLACT = 1U << 7 ;
 
   // Field MONITORACT: no description available
     const uint32_t SystemControl_SHCSR_MONITORACT = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 9 ;
 
   // Field PENDSVACT: no description available
     const uint32_t SystemControl_SHCSR_PENDSVACT = 1U << 10 ;
@@ -11878,45 +8520,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field USGFAULTENA: no description available
     const uint32_t SystemControl_SHCSR_USGFAULTENA = 1U << 18 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_SHCSR_RESERVED = 1U << 31 ;
-
 //---  Register CFSR: Configurable Fault Status Registers
   #define SystemControl_CFSR (* ((volatile uint32_t *) (0xe000e000 + 3368)))
 
@@ -11926,9 +8529,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field DACCVIOL: no description available
     const uint32_t SystemControl_CFSR_DACCVIOL = 1U << 1 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 2 ;
-
   // Field MUNSTKERR: no description available
     const uint32_t SystemControl_CFSR_MUNSTKERR = 1U << 3 ;
 
@@ -11937,9 +8537,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field MLSPERR: no description available
     const uint32_t SystemControl_CFSR_MLSPERR = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 6 ;
 
   // Field MMARVALID: no description available
     const uint32_t SystemControl_CFSR_MMARVALID = 1U << 7 ;
@@ -11962,9 +8559,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field LSPERR: no description available
     const uint32_t SystemControl_CFSR_LSPERR = 1U << 13 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 14 ;
-
   // Field BFARVALID: no description available
     const uint32_t SystemControl_CFSR_BFARVALID = 1U << 15 ;
 
@@ -11980,134 +8574,17 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field NOCP: no description available
     const uint32_t SystemControl_CFSR_NOCP = 1U << 19 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 23 ;
-
   // Field UNALIGNED: no description available
     const uint32_t SystemControl_CFSR_UNALIGNED = 1U << 24 ;
 
   // Field DIVBYZERO: no description available
     const uint32_t SystemControl_CFSR_DIVBYZERO = 1U << 25 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_CFSR_RESERVED = 1U << 31 ;
-
 //---  Register HFSR: HardFault Status register
   #define SystemControl_HFSR (* ((volatile uint32_t *) (0xe000e000 + 3372)))
 
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 0 ;
-
   // Field VECTTBL: no description available
     const uint32_t SystemControl_HFSR_VECTTBL = 1U << 1 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_HFSR_RESERVED = 1U << 29 ;
 
   // Field FORCED: no description available
     const uint32_t SystemControl_HFSR_FORCED = 1U << 30 ;
@@ -12132,87 +8609,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field EXTERNAL: no description available
     const uint32_t SystemControl_DFSR_EXTERNAL = 1U << 4 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 6 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 7 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 9 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 10 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 11 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 12 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 13 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 14 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 15 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 16 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 17 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 18 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 19 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 20 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 21 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 22 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 23 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 24 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 25 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 26 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 27 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 28 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 29 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 30 ;
-
-  // Field RESERVED: Reserved
-    const uint32_t SystemControl_DFSR_RESERVED = 1U << 31 ;
 
 //---  Register MMFAR: MemManage Address Register
   #define SystemControl_MMFAR (* ((volatile uint32_t *) (0xe000e000 + 3380)))
@@ -12245,12 +8641,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field STM: Scan Trigger Mode. This bit-field can only be changed if the TSI module is disabled (TSIEN bit = 0).
     const uint32_t TSI0_GENCS_STM = 1U << 1 ;
 
-  // Field RESERVED: Reserved
-    const uint32_t TSI0_GENCS_RESERVED = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint32_t TSI0_GENCS_RESERVED = 1U << 3 ;
-
   // Field ESOR: End-of-Scan or Out-of-Range Interrupt select
     const uint32_t TSI0_GENCS_ESOR = 1U << 4 ;
 
@@ -12268,9 +8658,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
 
   // Field SCNIP: Scan In Progress status
     const uint32_t TSI0_GENCS_SCNIP = 1U << 9 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_GENCS_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 10 ; }
 
   // Field OVRF: Overrun error Flag. This flag is set when a scan trigger occurs while a scan is still in progress. Write "1", when this flag is set, to clear it.
     const uint32_t TSI0_GENCS_OVRF = 1U << 12 ;
@@ -12296,9 +8683,6 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field LPCLKS: Low Power Mode Clock Source Selection.
     const uint32_t TSI0_GENCS_LPCLKS = 1U << 28 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_GENCS_RESERVED (const uint32_t inValue) {return (inValue & 0x7U) << 29 ; }
-
 //---  Register SCANC: SCAN Control Register
   #define TSI0_SCANC (* ((volatile uint32_t *) (0x40045000 + 4)))
 
@@ -12308,26 +8692,14 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field AMCLKS: Active Mode Clock Source
     inline uint32_t TSI0_SCANC_AMCLKS (const uint32_t inValue) {return (inValue & 0x3U) << 3 ; }
 
-  // Field RESERVED: no description available
-    const uint32_t TSI0_SCANC_RESERVED = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_SCANC_RESERVED (const uint32_t inValue) {return (inValue & 0x3U) << 6 ; }
-
   // Field SMOD: Scan Module
     inline uint32_t TSI0_SCANC_SMOD (const uint32_t inValue) {return (inValue & 0xffU) << 8 ; }
 
   // Field EXTCHRG: External OSC Charge Current select
     inline uint32_t TSI0_SCANC_EXTCHRG (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_SCANC_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 20 ; }
-
   // Field REFCHRG: Ref OSC Charge Current select
     inline uint32_t TSI0_SCANC_REFCHRG (const uint32_t inValue) {return (inValue & 0xfU) << 24 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_SCANC_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 28 ; }
 
 //---  Register PEN: Pin Enable Register
   #define TSI0_PEN (* ((volatile uint32_t *) (0x40045000 + 8)))
@@ -12383,17 +8755,11 @@ static const uint32_t kBaseAddress_SPI [2] = {0x4002c000, 0x4002d000} ;
   // Field LPSP: Low Power Scan Pin
     inline uint32_t TSI0_PEN_LPSP (const uint32_t inValue) {return (inValue & 0xfU) << 16 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_PEN_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 20 ; }
-
 //---  Register WUCNTR: Wake-Up Channel Counter Register
   #define TSI0_WUCNTR (* ((volatile uint32_t *) (0x40045000 + 12)))
 
   // Field WUCNT: TouchSensing wake-up Channel 16bit counter value
     inline uint32_t TSI0_WUCNTR_WUCNT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t TSI0_WUCNTR_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 16 ; }
 
 //---  Registers CNTR(1,3,5,7,9,11,13,15): Counter Register
   #define TSI0_CNTR(idx) (* ((volatile uint32_t *) (0x40045000 + 0x100 + (idx) * 0x4)))
@@ -12444,9 +8810,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
   // Field SBR: UART Baud Rate Bits
     inline uint8_t UART_BDH_SBR (const uint8_t inValue) {return (inValue & 0x1fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    const uint8_t UART_BDH_RESERVED = 1U << 5 ;
 
   // Field RXEDGIE: RxD Input Active Edge Interrupt Enable
     const uint8_t UART_BDH_RXEDGIE = 1U << 6 ;
@@ -12686,14 +9049,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   #define UART3_C5 (* ((volatile uint8_t *) (0x4006d000 + 0xb)))
   #define UART4_C5 (* ((volatile uint8_t *) (0x400ea000 + 0xb)))
 
-  // Field RESERVED: no description available
-    inline uint8_t UART_C5_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 0 ; }
-
   // Field RDMAS: Receiver Full DMA Select
     const uint8_t UART_C5_RDMAS = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint8_t UART_C5_RESERVED = 1U << 6 ;
 
   // Field TDMAS: Transmitter DMA Select
     const uint8_t UART_C5_TDMAS = 1U << 7 ;
@@ -12705,9 +9062,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   #define UART2_ED (* ((volatile uint8_t *) (0x4006c000 + 0xc)))
   #define UART3_ED (* ((volatile uint8_t *) (0x4006d000 + 0xc)))
   #define UART4_ED (* ((volatile uint8_t *) (0x400ea000 + 0xc)))
-
-  // Field RESERVED: no description available
-    inline uint8_t UART_ED_RESERVED (const uint8_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
   // Field PARITYE: no description available
     const uint8_t UART_ED_PARITYE = 1U << 6 ;
@@ -12735,9 +9089,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field RXRTSE: Receiver request-to-send enable
     const uint8_t UART_MODEM_RXRTSE = 1U << 3 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t UART_MODEM_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
 //---  Register IR: UART Infrared Register
   #define UART_IR(group) (* ((volatile uint8_t *) (kBaseAddress_IR [group] + 0xe)))
   #define UART0_IR (* ((volatile uint8_t *) (0x4006a000 + 0xe)))
@@ -12751,9 +9102,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
   // Field IREN: Infrared enable
     const uint8_t UART_IR_IREN = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t UART_IR_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 3 ; }
 
 //---  Register PFIFO: UART FIFO Parameters
   #define UART_PFIFO(group) (* ((volatile uint8_t *) (kBaseAddress_PFIFO [group] + 0x10)))
@@ -12789,9 +9137,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field TXOFE: Transmit FIFO Overflow Interrupt Enable
     const uint8_t UART_CFIFO_TXOFE = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t UART_CFIFO_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 2 ; }
-
   // Field RXFLUSH: Receive FIFO/Buffer Flush
     const uint8_t UART_CFIFO_RXFLUSH = 1U << 6 ;
 
@@ -12811,9 +9156,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
   // Field TXOF: Transmitter Buffer Overflow Flag
     const uint8_t UART_SFIFO_TXOF = 1U << 1 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t UART_SFIFO_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 2 ; }
 
   // Field RXEMPT: Receive Buffer/FIFO Empty
     const uint8_t UART_SFIFO_RXEMPT = 1U << 6 ;
@@ -12865,168 +9207,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field RXCOUNT: Receive Counter
     inline uint8_t UART_RCFIFO_RXCOUNT (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
 
-//---  Register C7816: UART 7816 Control Register
-  #define UART_C7816(group) (* ((volatile uint8_t *) (kBaseAddress_C7816 [group] + 0x18)))
-  #define UART0_C7816 (* ((volatile uint8_t *) (0x4006a000 + 0x18)))
-  #define UART1_C7816 (* ((volatile uint8_t *) (0x4006b000 + 0x18)))
-  #define UART2_C7816 (* ((volatile uint8_t *) (0x4006c000 + 0x18)))
-  #define UART3_C7816 (* ((volatile uint8_t *) (0x4006d000 + 0x18)))
-  #define UART4_C7816 (* ((volatile uint8_t *) (0x400ea000 + 0x18)))
-
-  // Field ISO_7816E: ISO-7816 Functionality Enabled
-    const uint8_t UART_C7816_ISO_7816E = 1U << 0 ;
-
-  // Field TTYPE: Transfer Type
-    const uint8_t UART_C7816_TTYPE = 1U << 1 ;
-
-  // Field INIT: Detect Initial Character
-    const uint8_t UART_C7816_INIT = 1U << 2 ;
-
-  // Field ANACK: Generate NACK on Error
-    const uint8_t UART_C7816_ANACK = 1U << 3 ;
-
-  // Field ONACK: Generate NACK on Overflow
-    const uint8_t UART_C7816_ONACK = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t UART_C7816_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 5 ; }
-
-//---  Register IE7816: UART 7816 Interrupt Enable Register
-  #define UART_IE7816(group) (* ((volatile uint8_t *) (kBaseAddress_IE7816 [group] + 0x19)))
-  #define UART0_IE7816 (* ((volatile uint8_t *) (0x4006a000 + 0x19)))
-  #define UART1_IE7816 (* ((volatile uint8_t *) (0x4006b000 + 0x19)))
-  #define UART2_IE7816 (* ((volatile uint8_t *) (0x4006c000 + 0x19)))
-  #define UART3_IE7816 (* ((volatile uint8_t *) (0x4006d000 + 0x19)))
-  #define UART4_IE7816 (* ((volatile uint8_t *) (0x400ea000 + 0x19)))
-
-  // Field RXTE: Receive Threshold Exceeded Interrupt Enable
-    const uint8_t UART_IE7816_RXTE = 1U << 0 ;
-
-  // Field TXTE: Transmit Threshold Exceeded Interrupt Enable
-    const uint8_t UART_IE7816_TXTE = 1U << 1 ;
-
-  // Field GTVE: Guard Timer Violated Interrupt Enable
-    const uint8_t UART_IE7816_GTVE = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t UART_IE7816_RESERVED = 1U << 3 ;
-
-  // Field INITDE: Initial Character Detected Interrupt Enable
-    const uint8_t UART_IE7816_INITDE = 1U << 4 ;
-
-  // Field BWTE: Block Wait Timer Interrupt Enable
-    const uint8_t UART_IE7816_BWTE = 1U << 5 ;
-
-  // Field CWTE: Character Wait Timer Interrupt Enable
-    const uint8_t UART_IE7816_CWTE = 1U << 6 ;
-
-  // Field WTE: Wait Timer Interrupt Enable
-    const uint8_t UART_IE7816_WTE = 1U << 7 ;
-
-//---  Register IS7816: UART 7816 Interrupt Status Register
-  #define UART_IS7816(group) (* ((volatile uint8_t *) (kBaseAddress_IS7816 [group] + 0x1a)))
-  #define UART0_IS7816 (* ((volatile uint8_t *) (0x4006a000 + 0x1a)))
-  #define UART1_IS7816 (* ((volatile uint8_t *) (0x4006b000 + 0x1a)))
-  #define UART2_IS7816 (* ((volatile uint8_t *) (0x4006c000 + 0x1a)))
-  #define UART3_IS7816 (* ((volatile uint8_t *) (0x4006d000 + 0x1a)))
-  #define UART4_IS7816 (* ((volatile uint8_t *) (0x400ea000 + 0x1a)))
-
-  // Field RXT: Receive Threshold Exceeded Interrupt
-    const uint8_t UART_IS7816_RXT = 1U << 0 ;
-
-  // Field TXT: Transmit Threshold Exceeded Interrupt
-    const uint8_t UART_IS7816_TXT = 1U << 1 ;
-
-  // Field GTV: Guard Timer Violated Interrupt
-    const uint8_t UART_IS7816_GTV = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t UART_IS7816_RESERVED = 1U << 3 ;
-
-  // Field INITD: Initial Character Detected Interrupt
-    const uint8_t UART_IS7816_INITD = 1U << 4 ;
-
-  // Field BWT: Block Wait Timer Interrupt
-    const uint8_t UART_IS7816_BWT = 1U << 5 ;
-
-  // Field CWT: Character Wait Timer Interrupt
-    const uint8_t UART_IS7816_CWT = 1U << 6 ;
-
-  // Field WT: Wait Timer Interrupt
-    const uint8_t UART_IS7816_WT = 1U << 7 ;
-
-//---  Register WP7816T1: UART 7816 Wait Parameter Register
-  #define UART_WP7816T1(group) (* ((volatile uint8_t *) (kBaseAddress_WP7816T1 [group] + 0x1b)))
-  #define UART0_WP7816T1 (* ((volatile uint8_t *) (0x4006a000 + 0x1b)))
-  #define UART1_WP7816T1 (* ((volatile uint8_t *) (0x4006b000 + 0x1b)))
-  #define UART2_WP7816T1 (* ((volatile uint8_t *) (0x4006c000 + 0x1b)))
-  #define UART3_WP7816T1 (* ((volatile uint8_t *) (0x4006d000 + 0x1b)))
-  #define UART4_WP7816T1 (* ((volatile uint8_t *) (0x400ea000 + 0x1b)))
-
-  // Field BWI: Block Wait Time Integer(C7816[TTYPE] = 1)
-    inline uint8_t UART_WP7816T1_BWI (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field CWI: Character Wait Time Integer (C7816[TTYPE] = 1)
-    inline uint8_t UART_WP7816T1_CWI (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
-//---  Register WP7816T0: UART 7816 Wait Parameter Register
-  #define UART_WP7816T0(group) (* ((volatile uint8_t *) (kBaseAddress_WP7816T0 [group] + 0x1b)))
-  #define UART0_WP7816T0 (* ((volatile uint8_t *) (0x4006a000 + 0x1b)))
-  #define UART1_WP7816T0 (* ((volatile uint8_t *) (0x4006b000 + 0x1b)))
-  #define UART2_WP7816T0 (* ((volatile uint8_t *) (0x4006c000 + 0x1b)))
-  #define UART3_WP7816T0 (* ((volatile uint8_t *) (0x4006d000 + 0x1b)))
-  #define UART4_WP7816T0 (* ((volatile uint8_t *) (0x400ea000 + 0x1b)))
-
-  // Field WI: Wait Timer Interrupt (C7816[TTYPE] = 0)
-    inline uint8_t UART_WP7816T0_WI (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register WN7816: UART 7816 Wait N Register
-  #define UART_WN7816(group) (* ((volatile uint8_t *) (kBaseAddress_WN7816 [group] + 0x1c)))
-  #define UART0_WN7816 (* ((volatile uint8_t *) (0x4006a000 + 0x1c)))
-  #define UART1_WN7816 (* ((volatile uint8_t *) (0x4006b000 + 0x1c)))
-  #define UART2_WN7816 (* ((volatile uint8_t *) (0x4006c000 + 0x1c)))
-  #define UART3_WN7816 (* ((volatile uint8_t *) (0x4006d000 + 0x1c)))
-  #define UART4_WN7816 (* ((volatile uint8_t *) (0x400ea000 + 0x1c)))
-
-  // Field GTN: Guard Band N
-    inline uint8_t UART_WN7816_GTN (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register WF7816: UART 7816 Wait FD Register
-  #define UART_WF7816(group) (* ((volatile uint8_t *) (kBaseAddress_WF7816 [group] + 0x1d)))
-  #define UART0_WF7816 (* ((volatile uint8_t *) (0x4006a000 + 0x1d)))
-  #define UART1_WF7816 (* ((volatile uint8_t *) (0x4006b000 + 0x1d)))
-  #define UART2_WF7816 (* ((volatile uint8_t *) (0x4006c000 + 0x1d)))
-  #define UART3_WF7816 (* ((volatile uint8_t *) (0x4006d000 + 0x1d)))
-  #define UART4_WF7816 (* ((volatile uint8_t *) (0x400ea000 + 0x1d)))
-
-  // Field GTFD: FD Multiplier
-    inline uint8_t UART_WF7816_GTFD (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
-//---  Register ET7816: UART 7816 Error Threshold Register
-  #define UART_ET7816(group) (* ((volatile uint8_t *) (kBaseAddress_ET7816 [group] + 0x1e)))
-  #define UART0_ET7816 (* ((volatile uint8_t *) (0x4006a000 + 0x1e)))
-  #define UART1_ET7816 (* ((volatile uint8_t *) (0x4006b000 + 0x1e)))
-  #define UART2_ET7816 (* ((volatile uint8_t *) (0x4006c000 + 0x1e)))
-  #define UART3_ET7816 (* ((volatile uint8_t *) (0x4006d000 + 0x1e)))
-  #define UART4_ET7816 (* ((volatile uint8_t *) (0x400ea000 + 0x1e)))
-
-  // Field RXTHRESHOLD: Receive NACK Threshold
-    inline uint8_t UART_ET7816_RXTHRESHOLD (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
-  // Field TXTHRESHOLD: Transmit NACK Threshold
-    inline uint8_t UART_ET7816_TXTHRESHOLD (const uint8_t inValue) {return (inValue & 0xfU) << 4 ; }
-
-//---  Register TL7816: UART 7816 Transmit Length Register
-  #define UART_TL7816(group) (* ((volatile uint8_t *) (kBaseAddress_TL7816 [group] + 0x1f)))
-  #define UART0_TL7816 (* ((volatile uint8_t *) (0x4006a000 + 0x1f)))
-  #define UART1_TL7816 (* ((volatile uint8_t *) (0x4006b000 + 0x1f)))
-  #define UART2_TL7816 (* ((volatile uint8_t *) (0x4006c000 + 0x1f)))
-  #define UART3_TL7816 (* ((volatile uint8_t *) (0x4006d000 + 0x1f)))
-  #define UART4_TL7816 (* ((volatile uint8_t *) (0x400ea000 + 0x1f)))
-
-  // Field TLEN: Transmit Length
-    inline uint8_t UART_TL7816_TLEN (const uint8_t inValue) {return (inValue & 0xffU) << 0 ; }
-
 //------------------------------------------------------------------------------
 // Peripheral USB0: Universal Serial Bus, OTG Capable Controller
 //------------------------------------------------------------------------------
@@ -13037,17 +9217,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field ID: Peripheral identification bits
     inline uint8_t USB0_PERID_ID (const uint8_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint8_t USB0_PERID_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 6 ; }
-
 //---  Register IDCOMP: Peripheral ID Complement Register
   #define USB0_IDCOMP (* ((volatile uint8_t *) (0x40072000 + 4)))
 
   // Field NID: no description available
     inline uint8_t USB0_IDCOMP_NID (const uint8_t inValue) {return (inValue & 0x3fU) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_IDCOMP_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 6 ; }
 
 //---  Register REV: Peripheral Revision Register
   #define USB0_REV (* ((volatile uint8_t *) (0x40072000 + 8)))
@@ -13061,9 +9235,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field IEHOST: no description available
     const uint8_t USB0_ADDINFO_IEHOST = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t USB0_ADDINFO_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 1 ; }
-
   // Field IRQNUM: Assigned Interrupt Request Number
     inline uint8_t USB0_ADDINFO_IRQNUM (const uint8_t inValue) {return (inValue & 0x1fU) << 3 ; }
 
@@ -13073,17 +9244,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field AVBUSCHG: no description available
     const uint8_t USB0_OTGISTAT_AVBUSCHG = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGISTAT_RESERVED = 1U << 1 ;
-
   // Field B_SESS_CHG: no description available
     const uint8_t USB0_OTGISTAT_B_SESS_CHG = 1U << 2 ;
 
   // Field SESSVLDCHG: no description available
     const uint8_t USB0_OTGISTAT_SESSVLDCHG = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGISTAT_RESERVED = 1U << 4 ;
 
   // Field LINE_STATE_CHG: no description available
     const uint8_t USB0_OTGISTAT_LINE_STATE_CHG = 1U << 5 ;
@@ -13100,17 +9265,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field AVBUSEN: A VBUS Valid interrupt enable
     const uint8_t USB0_OTGICR_AVBUSEN = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGICR_RESERVED = 1U << 1 ;
-
   // Field BSESSEN: B Session END interrupt enable
     const uint8_t USB0_OTGICR_BSESSEN = 1U << 2 ;
 
   // Field SESSVLDEN: Session valid interrupt enable
     const uint8_t USB0_OTGICR_SESSVLDEN = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGICR_RESERVED = 1U << 4 ;
 
   // Field LINESTATEEN: Line State change interrupt enable
     const uint8_t USB0_OTGICR_LINESTATEEN = 1U << 5 ;
@@ -13127,17 +9286,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field AVBUSVLD: A VBUS Valid
     const uint8_t USB0_OTGSTAT_AVBUSVLD = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGSTAT_RESERVED = 1U << 1 ;
-
   // Field BSESSEND: B Session END
     const uint8_t USB0_OTGSTAT_BSESSEND = 1U << 2 ;
 
   // Field SESS_VLD: Session valid
     const uint8_t USB0_OTGSTAT_SESS_VLD = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGSTAT_RESERVED = 1U << 4 ;
 
   // Field LINESTATESTABLE: no description available
     const uint8_t USB0_OTGSTAT_LINESTATESTABLE = 1U << 5 ;
@@ -13151,23 +9304,14 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 //---  Register OTGCTL: OTG Control Register
   #define USB0_OTGCTL (* ((volatile uint8_t *) (0x40072000 + 28)))
 
-  // Field RESERVED: no description available
-    inline uint8_t USB0_OTGCTL_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 0 ; }
-
   // Field OTGEN: On-The-Go pullup/pulldown resistor enable
     const uint8_t USB0_OTGCTL_OTGEN = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGCTL_RESERVED = 1U << 3 ;
 
   // Field DMLOW: D- Data Line pull-down resistor enable
     const uint8_t USB0_OTGCTL_DMLOW = 1U << 4 ;
 
   // Field DPLOW: D+ Data Line pull-down resistor enable
     const uint8_t USB0_OTGCTL_DPLOW = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OTGCTL_RESERVED = 1U << 6 ;
 
   // Field DPHIGH: D+ Data Line pullup resistor enable
     const uint8_t USB0_OTGCTL_DPHIGH = 1U << 7 ;
@@ -13247,9 +9391,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field DMAERR: no description available
     const uint8_t USB0_ERRSTAT_DMAERR = 1U << 5 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_ERRSTAT_RESERVED = 1U << 6 ;
-
   // Field BTSERR: no description available
     const uint8_t USB0_ERRSTAT_BTSERR = 1U << 7 ;
 
@@ -13274,17 +9415,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field DMAERREN: DMAERR Interrupt Enable
     const uint8_t USB0_ERREN_DMAERREN = 1U << 5 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_ERREN_RESERVED = 1U << 6 ;
-
   // Field BTSERREN: BTSERR Interrupt Enable
     const uint8_t USB0_ERREN_BTSERREN = 1U << 7 ;
 
 //---  Register STAT: Status Register
   #define USB0_STAT (* ((volatile uint8_t *) (0x40072000 + 144)))
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_STAT_RESERVED (const uint8_t inValue) {return (inValue & 0x3U) << 0 ; }
 
   // Field ODD: no description available
     const uint8_t USB0_STAT_ODD = 1U << 2 ;
@@ -13334,9 +9469,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 //---  Register BDTPAGE1: BDT Page Register 1
   #define USB0_BDTPAGE1 (* ((volatile uint8_t *) (0x40072000 + 156)))
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_BDTPAGE1_RESERVED = 1U << 0 ;
-
   // Field BDTBA: no description available
     inline uint8_t USB0_BDTPAGE1_BDTBA (const uint8_t inValue) {return (inValue & 0x7fU) << 1 ; }
 
@@ -13351,9 +9483,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
   // Field FRM: no description available
     inline uint8_t USB0_FRMNUMH_FRM (const uint8_t inValue) {return (inValue & 0x7U) << 0 ; }
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_FRMNUMH_RESERVED (const uint8_t inValue) {return (inValue & 0x1fU) << 3 ; }
 
 //---  Register TOKEN: Token Register
   #define USB0_TOKEN (* ((volatile uint8_t *) (0x40072000 + 168)))
@@ -13416,9 +9545,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field EPCTLDIS: no description available
     const uint8_t USB0_ENDPT_EPCTLDIS = 1U << 4 ;
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_ENDPT_RESERVED = 1U << 5 ;
-
   // Field RETRYDIS: no description available
     const uint8_t USB0_ENDPT_RETRYDIS = 1U << 6 ;
 
@@ -13427,9 +9553,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
 //---  Register USBCTRL: USB Control Register
   #define USB0_USBCTRL (* ((volatile uint8_t *) (0x40072000 + 256)))
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_USBCTRL_RESERVED (const uint8_t inValue) {return (inValue & 0x3fU) << 0 ; }
 
   // Field PDE: no description available
     const uint8_t USB0_USBCTRL_PDE = 1U << 6 ;
@@ -13440,17 +9563,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 //---  Register OBSERVE: USB OTG Observe Register
   #define USB0_OBSERVE (* ((volatile uint8_t *) (0x40072000 + 260)))
 
-  // Field RESERVED: no description available
-    const uint8_t USB0_OBSERVE_RESERVED = 1U << 0 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_OBSERVE_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 1 ; }
-
   // Field DMPD: no description available
     const uint8_t USB0_OBSERVE_DMPD = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_OBSERVE_RESERVED = 1U << 5 ;
 
   // Field DPPD: no description available
     const uint8_t USB0_OBSERVE_DPPD = 1U << 6 ;
@@ -13461,14 +9575,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 //---  Register CONTROL: USB OTG Control Register
   #define USB0_CONTROL (* ((volatile uint8_t *) (0x40072000 + 264)))
 
-  // Field RESERVED: no description available
-    inline uint8_t USB0_CONTROL_RESERVED (const uint8_t inValue) {return (inValue & 0xfU) << 0 ; }
-
   // Field DPPULLUPNONOTG: no description available
     const uint8_t USB0_CONTROL_DPPULLUPNONOTG = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    inline uint8_t USB0_CONTROL_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 5 ; }
 
 //---  Register USBTRC0: USB Transceiver Control Register 0
   #define USB0_USBTRC0 (* ((volatile uint8_t *) (0x40072000 + 268)))
@@ -13479,14 +9587,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field SYNC_DET: Synchronous USB Interrupt Detect
     const uint8_t USB0_USBTRC0_SYNC_DET = 1U << 1 ;
 
-  // Field RESERVED: no description available
-    inline uint8_t USB0_USBTRC0_RESERVED (const uint8_t inValue) {return (inValue & 0x7U) << 2 ; }
-
   // Field USBRESMEN: Asynchronous Resume Interrupt Enable
     const uint8_t USB0_USBTRC0_USBRESMEN = 1U << 5 ;
-
-  // Field RESERVED: no description available
-    const uint8_t USB0_USBTRC0_RESERVED = 1U << 6 ;
 
   // Field USBRESET: USB reset
     const uint8_t USB0_USBTRC0_USBRESET = 1U << 7 ;
@@ -13507,20 +9609,11 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field IACK: Interrupt Acknowledge
     const uint32_t USBDCD_CONTROL_IACK = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_CONTROL_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 1 ; }
-
   // Field IF: Interrupt Flag
     const uint32_t USBDCD_CONTROL_IF = 1U << 8 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_CONTROL_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 9 ; }
-
   // Field IE: Interrupt Enable
     const uint32_t USBDCD_CONTROL_IE = 1U << 16 ;
-
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_CONTROL_RESERVED (const uint32_t inValue) {return (inValue & 0x7fU) << 17 ; }
 
   // Field START: Start Change Detection Sequence
     const uint32_t USBDCD_CONTROL_START = 1U << 24 ;
@@ -13528,29 +9621,17 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field SR: Software Reset
     const uint32_t USBDCD_CONTROL_SR = 1U << 25 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_CONTROL_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 26 ; }
-
 //---  Register CLOCK: Clock Register
   #define USBDCD_CLOCK (* ((volatile uint32_t *) (0x40035000 + 4)))
 
   // Field CLOCK_UNIT: Unit of measurement encoding for Clock Speed
     const uint32_t USBDCD_CLOCK_CLOCK_UNIT = 1U << 0 ;
 
-  // Field RESERVED: no description available
-    const uint32_t USBDCD_CLOCK_RESERVED = 1U << 1 ;
-
   // Field CLOCK_SPEED: Numerical Value of Clock Speed in Binary
     inline uint32_t USBDCD_CLOCK_CLOCK_SPEED (const uint32_t inValue) {return (inValue & 0x3ffU) << 2 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_CLOCK_RESERVED (const uint32_t inValue) {return (inValue & 0xfffffU) << 12 ; }
-
 //---  Register STATUS: Status Register
   #define USBDCD_STATUS (* ((volatile uint32_t *) (0x40035000 + 8)))
-
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_STATUS_RESERVED (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
   // Field SEQ_RES: Charger Detection Sequence Results
     inline uint32_t USBDCD_STATUS_SEQ_RES (const uint32_t inValue) {return (inValue & 0x3U) << 16 ; }
@@ -13567,23 +9648,14 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field ACTIVE: Active Status Indicator
     const uint32_t USBDCD_STATUS_ACTIVE = 1U << 22 ;
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_STATUS_RESERVED (const uint32_t inValue) {return (inValue & 0x1ffU) << 23 ; }
-
 //---  Register TIMER0: TIMER0 Register
   #define USBDCD_TIMER0 (* ((volatile uint32_t *) (0x40035000 + 16)))
 
   // Field TUNITCON: Unit Connection Timer Elapse (in ms)
     inline uint32_t USBDCD_TIMER0_TUNITCON (const uint32_t inValue) {return (inValue & 0xfffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER0_RESERVED (const uint32_t inValue) {return (inValue & 0xfU) << 12 ; }
-
   // Field TSEQ_INIT: Sequence Initiation Time
     inline uint32_t USBDCD_TIMER0_TSEQ_INIT (const uint32_t inValue) {return (inValue & 0x3ffU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER0_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 26 ; }
 
 //---  Register TIMER1: no description available
   #define USBDCD_TIMER1 (* ((volatile uint32_t *) (0x40035000 + 20)))
@@ -13591,14 +9663,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field TVDPSRC_ON: Time Period Comparator Enabled
     inline uint32_t USBDCD_TIMER1_TVDPSRC_ON (const uint32_t inValue) {return (inValue & 0x3ffU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 10 ; }
-
   // Field TDCD_DBNC: Time Period to Debounce D+ Signal
     inline uint32_t USBDCD_TIMER1_TDCD_DBNC (const uint32_t inValue) {return (inValue & 0x3ffU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER1_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 26 ; }
 
 //---  Register TIMER2: no description available
   #define USBDCD_TIMER2 (* ((volatile uint32_t *) (0x40035000 + 24)))
@@ -13606,14 +9672,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field CHECK_DM: Time Before Check of D- Line
     inline uint32_t USBDCD_TIMER2_CHECK_DM (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
 
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER2_RESERVED (const uint32_t inValue) {return (inValue & 0xfffU) << 4 ; }
-
   // Field TVDPSRC_CON: Time Period Before Enabling D+ Pullup
     inline uint32_t USBDCD_TIMER2_TVDPSRC_CON (const uint32_t inValue) {return (inValue & 0x3ffU) << 16 ; }
-
-  // Field RESERVED: no description available
-    inline uint32_t USBDCD_TIMER2_RESERVED (const uint32_t inValue) {return (inValue & 0x3fU) << 26 ; }
 
 //------------------------------------------------------------------------------
 // Peripheral VREF: Voltage Reference
@@ -13628,9 +9688,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field CHOPEN: Chop oscillator enable. When set, internal chopping operation is enabled and the internal analog offset will be minimized.
     const uint8_t VREF_TRM_CHOPEN = 1U << 6 ;
 
-  // Field RESERVED: no description available
-    const uint8_t VREF_TRM_RESERVED = 1U << 7 ;
-
 //---  Register SC: VREF Status and Control Register
   #define VREF_SC (* ((volatile uint8_t *) (0x40074000 + 1)))
 
@@ -13639,15 +9696,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 
   // Field VREFST: Internal Voltage Reference stable
     const uint8_t VREF_SC_VREFST = 1U << 2 ;
-
-  // Field RESERVED: no description available
-    const uint8_t VREF_SC_RESERVED = 1U << 3 ;
-
-  // Field RESERVED: no description available
-    const uint8_t VREF_SC_RESERVED = 1U << 4 ;
-
-  // Field RESERVED: no description available
-    const uint8_t VREF_SC_RESERVED = 1U << 5 ;
 
   // Field REGEN: Regulator enable
     const uint8_t VREF_SC_REGEN = 1U << 6 ;
@@ -13686,12 +9734,6 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field WAITEN: no description available
     const uint16_t WDOG_STCTRLH_WAITEN = 1U << 7 ;
 
-  // Field RESERVED: no description available
-    const uint16_t WDOG_STCTRLH_RESERVED = 1U << 8 ;
-
-  // Field RESERVED: no description available
-    const uint16_t WDOG_STCTRLH_RESERVED = 1U << 9 ;
-
   // Field TESTWDOG: no description available
     const uint16_t WDOG_STCTRLH_TESTWDOG = 1U << 10 ;
 
@@ -13704,14 +9746,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
   // Field DISTESTWDOG: no description available
     const uint16_t WDOG_STCTRLH_DISTESTWDOG = 1U << 14 ;
 
-  // Field RESERVED: no description available
-    const uint16_t WDOG_STCTRLH_RESERVED = 1U << 15 ;
-
 //---  Register STCTRLL: Watchdog Status and Control Register Low
   #define WDOG_STCTRLL (* ((volatile uint16_t *) (0x40052000 + 2)))
-
-  // Field RESERVED: no description available
-    inline uint16_t WDOG_STCTRLL_RESERVED (const uint16_t inValue) {return (inValue & 0x7fffU) << 0 ; }
 
   // Field INTFLG: no description available
     const uint16_t WDOG_STCTRLL_INTFLG = 1U << 15 ;
@@ -13773,14 +9809,8 @@ static const uint32_t kBaseAddress_UART [5] = {0x4006a000, 0x4006b000, 0x4006c00
 //---  Register PRESC: Watchdog Prescaler Register
   #define WDOG_PRESC (* ((volatile uint16_t *) (0x40052000 + 22)))
 
-  // Field RESERVED: no description available
-    inline uint16_t WDOG_PRESC_RESERVED (const uint16_t inValue) {return (inValue & 0xffU) << 0 ; }
-
   // Field PRESCVAL: no description available
     inline uint16_t WDOG_PRESC_PRESCVAL (const uint16_t inValue) {return (inValue & 0x7U) << 8 ; }
-
-  // Field RESERVED: no description available
-    inline uint16_t WDOG_PRESC_RESERVED (const uint16_t inValue) {return (inValue & 0x1fU) << 11 ; }
 
 //------------------------------------------------------------------------------
 // INTERRUPTS

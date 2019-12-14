@@ -1563,8 +1563,7 @@
     inline uint32_t ADC3_CALFACT_CALFACT_S (const uint32_t inValue) {return (inValue & 0x7fU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral AES: Advanced encryption standard hardware
-      accelerator
+// Peripheral AES: Advanced encryption standard hardware       accelerator
 //------------------------------------------------------------------------------
 
 //---  Register CR: control register
@@ -8047,8 +8046,7 @@
     const uint32_t COMP_COMP2_CSR_COMP2_LOCK = 1U << 31 ;
 
 //------------------------------------------------------------------------------
-// Peripheral CRC: Cyclic redundancy check calculation
-      unit
+// Peripheral CRC: Cyclic redundancy check calculation       unit
 //------------------------------------------------------------------------------
 
 //---  Register DR: Data register
@@ -8494,8 +8492,7 @@
     const uint32_t DBGMCU_APB2FZR_DBG_TIM16_STOP = 1U << 17 ;
 
 //------------------------------------------------------------------------------
-// Peripheral DFSDM: Digital filter for sigma delta
-      modulators
+// Peripheral DFSDM: Digital filter for sigma delta       modulators
 //------------------------------------------------------------------------------
 
 //---  Register CHCFG0R1: channel configuration y
@@ -11210,8 +11207,7 @@
     inline uint32_t DMA2_CSELR_C1S (const uint32_t inValue) {return (inValue & 0xfU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral EXTI: External interrupt/event
-      controller
+// Peripheral EXTI: External interrupt/event       controller
 //------------------------------------------------------------------------------
 
 //---  Register IMR1: Interrupt mask register
@@ -17644,8 +17640,7 @@
     inline uint32_t LPTIM2_CNT_CNT (const uint32_t inValue) {return (inValue & 0xffffU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral LPUART1: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral LPUART1: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 //---  Register CR1: Control register 1
@@ -17998,8 +17993,7 @@
     const uint32_t MPU_MPU_RASR_XN = 1U << 28 ;
 
 //------------------------------------------------------------------------------
-// Peripheral NVIC: Nested Vectored Interrupt
-      Controller
+// Peripheral NVIC: Nested Vectored Interrupt       Controller
 //------------------------------------------------------------------------------
 
 //---  Register ISER0: Interrupt Set-Enable Register
@@ -18414,8 +18408,7 @@
     inline uint32_t NVIC_IPR20_IPR_N3 (const uint32_t inValue) {return (inValue & 0xffU) << 24 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral NVIC_STIR: Nested vectored interrupt
-      controller
+// Peripheral NVIC_STIR: Nested vectored interrupt       controller
 //------------------------------------------------------------------------------
 
 //---  Register STIR: Software trigger interrupt
@@ -21887,8 +21880,7 @@
     const uint32_t SCB_ACTRL_ACTRL_DISOOFP = 1U << 9 ;
 
 //------------------------------------------------------------------------------
-// Peripheral SDMMC: Secure digital input/output
-      interface
+// Peripheral SDMMC: Secure digital input/output       interface
 //------------------------------------------------------------------------------
 
 //---  Register POWER: power control register
@@ -22240,8 +22232,7 @@
     inline uint32_t SDMMC_FIFO_FIFOData (const uint32_t inValue) {return (inValue & 0xffffffffU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral SPI1: Serial peripheral interface/Inter-IC
-      sound
+// Peripheral SPI1: Serial peripheral interface/Inter-IC       sound
 //------------------------------------------------------------------------------
 
 //---  Register CR1: control register 1
@@ -22712,8 +22703,7 @@
     const uint32_t STK_CALIB_NOREF = 1U << 31 ;
 
 //------------------------------------------------------------------------------
-// Peripheral SWPMI1: Single Wire Protocol Master
-      Interface
+// Peripheral SWPMI1: Single Wire Protocol Master       Interface
 //------------------------------------------------------------------------------
 
 //---  Register CR: SWPMI Configuration/Control
@@ -26128,8 +26118,7 @@
     inline uint32_t UART4_TDR_TDR (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral USART1: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral USART1: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 //---  Register CR1: Control register 1
@@ -26897,8 +26886,7 @@
     inline uint32_t USART2_TDR_TDR (const uint32_t inValue) {return (inValue & 0x1ffU) << 0 ; }
 
 //------------------------------------------------------------------------------
-// Peripheral USART3: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral USART3: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 //---  Register CR1: Control register 1
@@ -27719,8 +27707,7 @@
     const uint32_t USB_FS_BCDR_DPPU = 1U << 15 ;
 
 //------------------------------------------------------------------------------
-// Peripheral USB_SRAM: Universal serial bus full-speed device
-      interface
+// Peripheral USB_SRAM: Universal serial bus full-speed device       interface
 //------------------------------------------------------------------------------
 
 //---  Register EP0R: endpoint 0 register

@@ -15,12 +15,12 @@ func analyzeSVDFile (path inPath : String) {
   print ("File \(inPath)")
   let data = try! Data (contentsOf: URL.init (fileURLWithPath: inPath))
   let decoder = XMLDecoder ()
-  let formatter: DateFormatter = {
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd"
-      return formatter
-  }()
-  decoder.dateDecodingStrategy = .formatted(formatter)
+//  let formatter: DateFormatter = {
+//      let formatter = DateFormatter()
+//      formatter.dateFormat = "yyyy-MM-dd"
+//      return formatter
+//  }()
+//  decoder.dateDecodingStrategy = .formatted(formatter)
   let device: Device = try! decoder.decode (Device.self, from: data)
 //--- Normalize field descriptions (can contains carriage returns and several consecutive spaces)
   for peripheral in device.peripherals.peripheral {

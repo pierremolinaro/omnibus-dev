@@ -270,22 +270,19 @@ registers ©ADC1 @at 0x50040000 {
     JDATA4:16 // at 0: JDATA4
   }
 
-//---  Register AWD2CR: Analog Watchdog 2 Configuration
-          Register
+//---  Register AWD2CR: Analog Watchdog 2 Configuration           Register
   AWD2CR @offset 0xa0 $u32 {
     13
     AWD2CH:19 // at 0: AWD2CH
   }
 
-//---  Register AWD3CR: Analog Watchdog 3 Configuration
-          Register
+//---  Register AWD3CR: Analog Watchdog 3 Configuration           Register
   AWD3CR @offset 0xa4 $u32 {
     13
     AWD3CH:19 // at 0: AWD3CH
   }
 
-//---  Register DIFSEL: Differential Mode Selection Register
-          2
+//---  Register DIFSEL: Differential Mode Selection Register           2
   DIFSEL @offset 0xb0 $u32 {
     13
     DIFSEL_16_18:3 // at 16: Differential mode for channels 18 to 16
@@ -352,8 +349,7 @@ registers ©ADC123_Common @at 0x50040300 {
     DUAL:5 // at 0: Dual ADC mode selection
   }
 
-//---  Register CDR: ADC common regular data register for dual
-          and triple modes
+//---  Register CDR: ADC common regular data register for dual           and triple modes
   CDR @offset 0xc @ro $u32 {
     RDATA_SLV:16 // at 16: Regular data of the slave ADC
     RDATA_MST:16 // at 0: Regular data of the master ADC
@@ -629,22 +625,19 @@ registers ©ADC2 @at 0x50040100 {
     JDATA4:16 // at 0: JDATA4
   }
 
-//---  Register AWD2CR: Analog Watchdog 2 Configuration
-          Register
+//---  Register AWD2CR: Analog Watchdog 2 Configuration           Register
   AWD2CR @offset 0xa0 $u32 {
     13
     AWD2CH:19 // at 0: AWD2CH
   }
 
-//---  Register AWD3CR: Analog Watchdog 3 Configuration
-          Register
+//---  Register AWD3CR: Analog Watchdog 3 Configuration           Register
   AWD3CR @offset 0xa4 $u32 {
     13
     AWD3CH:19 // at 0: AWD3CH
   }
 
-//---  Register DIFSEL: Differential Mode Selection Register
-          2
+//---  Register DIFSEL: Differential Mode Selection Register           2
   DIFSEL @offset 0xb0 $u32 {
     13
     DIFSEL_16_18:3 // at 16: Differential mode for channels 18 to 16
@@ -930,22 +923,19 @@ registers ©ADC3 @at 0x50040200 {
     JDATA4:16 // at 0: JDATA4
   }
 
-//---  Register AWD2CR: Analog Watchdog 2 Configuration
-          Register
+//---  Register AWD2CR: Analog Watchdog 2 Configuration           Register
   AWD2CR @offset 0xa0 $u32 {
     13
     AWD2CH:19 // at 0: AWD2CH
   }
 
-//---  Register AWD3CR: Analog Watchdog 3 Configuration
-          Register
+//---  Register AWD3CR: Analog Watchdog 3 Configuration           Register
   AWD3CR @offset 0xa4 $u32 {
     13
     AWD3CH:19 // at 0: AWD3CH
   }
 
-//---  Register DIFSEL: Differential Mode Selection Register
-          2
+//---  Register DIFSEL: Differential Mode Selection Register           2
   DIFSEL @offset 0xb0 $u32 {
     13
     DIFSEL_16_18:3 // at 16: Differential mode for channels 18 to 16
@@ -964,8 +954,7 @@ registers ©ADC3 @at 0x50040200 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral AES: Advanced encryption standard hardware
-      accelerator
+// Peripheral AES: Advanced encryption standard hardware       accelerator
 //------------------------------------------------------------------------------
 
 registers ©AES @at 0x50060000 {
@@ -1022,26 +1011,22 @@ registers ©AES @at 0x50060000 {
     AES_KEYR3:32 // at 0: AES key register (MSB key [127:96])
   }
 
-//---  Register IVR0: initialization vector register
-          0
+//---  Register IVR0: initialization vector register           0
   IVR0 @offset 0x20 $u32 {
     AES_IVR0:32 // at 0: initialization vector register (LSB IVR [31:0])
   }
 
-//---  Register IVR1: initialization vector register
-          1
+//---  Register IVR1: initialization vector register           1
   IVR1 @offset 0x24 $u32 {
     AES_IVR1:32 // at 0: Initialization Vector Register (IVR [63:32])
   }
 
-//---  Register IVR2: initialization vector register
-          2
+//---  Register IVR2: initialization vector register           2
   IVR2 @offset 0x28 $u32 {
     AES_IVR2:32 // at 0: Initialization Vector Register (IVR [95:64])
   }
 
-//---  Register IVR3: initialization vector register
-          3
+//---  Register IVR3: initialization vector register           3
   IVR3 @offset 0x2c $u32 {
     AES_IVR3:32 // at 0: Initialization Vector Register (MSB IVR [127:96])
   }
@@ -1188,8 +1173,7 @@ registers ©CAN1 @at 0x40006400 {
     TXRQ // at 0: TXRQ
   }
 
-//---  Register TDT0R: mailbox data length control and time stamp
-          register
+//---  Register TDT0R: mailbox data length control and time stamp           register
   TDT0R @offset 0x184 $u32 {
     TIME:16 // at 16: TIME
     7
@@ -1223,8 +1207,7 @@ registers ©CAN1 @at 0x40006400 {
     TXRQ // at 0: TXRQ
   }
 
-//---  Register TDT1R: mailbox data length control and time stamp
-          register
+//---  Register TDT1R: mailbox data length control and time stamp           register
   TDT1R @offset 0x194 $u32 {
     TIME:16 // at 16: TIME
     7
@@ -1258,8 +1241,7 @@ registers ©CAN1 @at 0x40006400 {
     TXRQ // at 0: TXRQ
   }
 
-//---  Register TDT2R: mailbox data length control and time stamp
-          register
+//---  Register TDT2R: mailbox data length control and time stamp           register
   TDT2R @offset 0x1a4 $u32 {
     TIME:16 // at 16: TIME
     7
@@ -1284,8 +1266,7 @@ registers ©CAN1 @at 0x40006400 {
     DATA4:8 // at 0: DATA4
   }
 
-//---  Register RI0R: receive FIFO mailbox identifier
-          register
+//---  Register RI0R: receive FIFO mailbox identifier           register
   RI0R @offset 0x1b0 @ro $u32 {
     STID:11 // at 21: STID
     EXID:18 // at 3: EXID
@@ -1310,8 +1291,7 @@ registers ©CAN1 @at 0x40006400 {
     DATA0:8 // at 0: DATA0
   }
 
-//---  Register RDH0R: receive FIFO mailbox data high
-          register
+//---  Register RDH0R: receive FIFO mailbox data high           register
   RDH0R @offset 0x1bc @ro $u32 {
     DATA7:8 // at 24: DATA7
     DATA6:8 // at 16: DATA6
@@ -1396,8 +1376,7 @@ registers ©CAN1 @at 0x40006400 {
     FSC0 // at 0: Filter scale configuration
   }
 
-//---  Register FFA1R: filter FIFO assignment
-          register
+//---  Register FFA1R: filter FIFO assignment           register
   FFA1R @offset 0x214 $u32 {
     18
     FFA13 // at 13: Filter FIFO assignment for filter 13
@@ -3458,8 +3437,7 @@ registers ©CAN1 @at 0x40006400 {
 //------------------------------------------------------------------------------
 
 registers ©COMP @at 0x40010200 {
-//---  Register COMP1_CSR: Comparator 1 control and status
-          register
+//---  Register COMP1_CSR: Comparator 1 control and status           register
   COMP1_CSR @offset 0x0 $u32 {
     COMP1_LOCK // at 31: COMP1_CSR register lock bit
     COMP1_VALUE // at 30: Comparator 1 output status bit
@@ -3480,8 +3458,7 @@ registers ©COMP @at 0x40010200 {
     COMP1_EN // at 0: Comparator 1 enable bit
   }
 
-//---  Register COMP2_CSR: Comparator 2 control and status
-          register
+//---  Register COMP2_CSR: Comparator 2 control and status           register
   COMP2_CSR @offset 0x4 $u32 {
     COMP2_LOCK // at 31: COMP2_CSR register lock bit
     COMP2_VALUE // at 30: Comparator 2 output status bit
@@ -3506,8 +3483,7 @@ registers ©COMP @at 0x40010200 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral CRC: Cyclic redundancy check calculation
-      unit
+// Peripheral CRC: Cyclic redundancy check calculation       unit
 //------------------------------------------------------------------------------
 
 registers ©CRC @at 0x40023000 {
@@ -3636,52 +3612,45 @@ registers ©DAC1 @at 0x40007400 {
     SWTRIG1 // at 0: DAC channel1 software trigger
   }
 
-//---  Register DHR12R1: channel1 12-bit right-aligned data holding
-          register
+//---  Register DHR12R1: channel1 12-bit right-aligned data holding           register
   DHR12R1 @offset 0x8 $u32 {
     20
     DACC1DHR:12 // at 0: DAC channel1 12-bit right-aligned data
   }
 
-//---  Register DHR12L1: channel1 12-bit left-aligned data holding
-          register
+//---  Register DHR12L1: channel1 12-bit left-aligned data holding           register
   DHR12L1 @offset 0xc $u32 {
     16
     DACC1DHR:12 // at 4: DAC channel1 12-bit left-aligned data
     4
   }
 
-//---  Register DHR8R1: channel1 8-bit right-aligned data holding
-          register
+//---  Register DHR8R1: channel1 8-bit right-aligned data holding           register
   DHR8R1 @offset 0x10 $u32 {
     24
     DACC1DHR:8 // at 0: DAC channel1 8-bit right-aligned data
   }
 
-//---  Register DHR12R2: channel2 12-bit right aligned data holding
-          register
+//---  Register DHR12R2: channel2 12-bit right aligned data holding           register
   DHR12R2 @offset 0x14 $u32 {
     20
     DACC2DHR:12 // at 0: DAC channel2 12-bit right-aligned data
   }
 
-//---  Register DHR12L2: channel2 12-bit left aligned data holding
-          register
+//---  Register DHR12L2: channel2 12-bit left aligned data holding           register
   DHR12L2 @offset 0x18 $u32 {
     16
     DACC2DHR:12 // at 4: DAC channel2 12-bit left-aligned data
     4
   }
 
-//---  Register DHR8R2: channel2 8-bit right-aligned data holding
-          register
+//---  Register DHR8R2: channel2 8-bit right-aligned data holding           register
   DHR8R2 @offset 0x1c $u32 {
     24
     DACC2DHR:8 // at 0: DAC channel2 8-bit right-aligned data
   }
 
-//---  Register DHR12RD: Dual DAC 12-bit right-aligned data holding
-          register
+//---  Register DHR12RD: Dual DAC 12-bit right-aligned data holding           register
   DHR12RD @offset 0x20 $u32 {
     4
     DACC2DHR:12 // at 16: DAC channel2 12-bit right-aligned data
@@ -3689,8 +3658,7 @@ registers ©DAC1 @at 0x40007400 {
     DACC1DHR:12 // at 0: DAC channel1 12-bit right-aligned data
   }
 
-//---  Register DHR12LD: DUAL DAC 12-bit left aligned data holding
-          register
+//---  Register DHR12LD: DUAL DAC 12-bit left aligned data holding           register
   DHR12LD @offset 0x24 $u32 {
     DACC2DHR:12 // at 20: DAC channel2 12-bit left-aligned data
     4
@@ -3698,8 +3666,7 @@ registers ©DAC1 @at 0x40007400 {
     4
   }
 
-//---  Register DHR8RD: DUAL DAC 8-bit right aligned data holding
-          register
+//---  Register DHR8RD: DUAL DAC 8-bit right aligned data holding           register
   DHR8RD @offset 0x28 $u32 {
     16
     DACC2DHR:8 // at 8: DAC channel2 8-bit right-aligned data
@@ -3746,22 +3713,19 @@ registers ©DAC1 @at 0x40007400 {
     MODE1:3 // at 0: DAC Channel 1 mode
   }
 
-//---  Register SHSR1: Sample and Hold sample time register
-          1
+//---  Register SHSR1: Sample and Hold sample time register           1
   SHSR1 @offset 0x40 $u32 {
     22
     TSAMPLE1:10 // at 0: DAC Channel 1 sample Time
   }
 
-//---  Register SHSR2: Sample and Hold sample time register
-          2
+//---  Register SHSR2: Sample and Hold sample time register           2
   SHSR2 @offset 0x44 $u32 {
     22
     TSAMPLE2:10 // at 0: DAC Channel 2 sample Time
   }
 
-//---  Register SHHR: Sample and Hold hold time
-          register
+//---  Register SHHR: Sample and Hold hold time           register
   SHHR @offset 0x48 $u32 {
     6
     THOLD2:10 // at 16: DAC Channel 2 hold time
@@ -3769,8 +3733,7 @@ registers ©DAC1 @at 0x40007400 {
     THOLD1:10 // at 0: DAC Channel 1 hold Time
   }
 
-//---  Register SHRR: Sample and Hold refresh time
-          register
+//---  Register SHRR: Sample and Hold refresh time           register
   SHRR @offset 0x4c $u32 {
     8
     TREFRESH2:8 // at 16: DAC Channel 2 refresh Time
@@ -3792,8 +3755,7 @@ registers ©DBGMCU @at 0xe0042000 {
     DEV_ID:12 // at 0: Device identifier
   }
 
-//---  Register CR: Debug MCU configuration
-          register
+//---  Register CR: Debug MCU configuration           register
   CR @offset 0x4 $u32 {
     24
     TRACE_MODE:2 // at 6: Trace pin assignment control
@@ -3804,8 +3766,7 @@ registers ©DBGMCU @at 0xe0042000 {
     DBG_SLEEP // at 0: Debug Sleep mode
   }
 
-//---  Register APB1FZR1: Debug MCU APB1 freeze
-          register1
+//---  Register APB1FZR1: Debug MCU APB1 freeze           register1
   APB1FZR1 @offset 0x8 $u32 {
     DBG_LPTIM1_STOP // at 31: LPTIM1 counter stopped when core is halted
     5
@@ -3825,8 +3786,7 @@ registers ©DBGMCU @at 0xe0042000 {
     DBG_TIM2_STOP // at 0: TIM2 counter stopped when core is halted
   }
 
-//---  Register APB1FZR2: Debug MCU APB1 freeze register
-          2
+//---  Register APB1FZR2: Debug MCU APB1 freeze register           2
   APB1FZR2 @offset 0xc $u32 {
     26
     DBG_LPTIM2_STOP // at 5: LPTIM2 counter stopped when core is halted
@@ -3846,13 +3806,11 @@ registers ©DBGMCU @at 0xe0042000 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral DFSDM: Digital filter for sigma delta
-      modulators
+// Peripheral DFSDM: Digital filter for sigma delta       modulators
 //------------------------------------------------------------------------------
 
 registers ©DFSDM @at 0x40016000 {
-//---  Register CHCFG0R1: channel configuration y
-          register
+//---  Register CHCFG0R1: channel configuration y           register
   CHCFG0R1 @offset 0x0 $u32 {
     DFSDMEN // at 31: DFSDMEN
     CKOUTSRC // at 30: CKOUTSRC
@@ -3870,16 +3828,14 @@ registers ©DFSDM @at 0x40016000 {
     SITP:2 // at 0: SITP
   }
 
-//---  Register CHCFG0R2: channel configuration y
-          register
+//---  Register CHCFG0R2: channel configuration y           register
   CHCFG0R2 @offset 0x4 $u32 {
     OFFSET:24 // at 8: OFFSET
     DTRBS:5 // at 3: DTRBS
     3
   }
 
-//---  Register AWSCD0R: analog watchdog and short-circuit detector
-          register
+//---  Register AWSCD0R: analog watchdog and short-circuit detector           register
   AWSCD0R @offset 0x8 $u32 {
     8
     AWFORD:2 // at 22: AWFORD
@@ -3890,8 +3846,7 @@ registers ©DFSDM @at 0x40016000 {
     SCDT:8 // at 0: SCDT
   }
 
-//---  Register CHWDAT0R: channel watchdog filter data
-          register
+//---  Register CHWDAT0R: channel watchdog filter data           register
   CHWDAT0R @offset 0xc $u32 {
     16
     WDATA:16 // at 0: WDATA
@@ -4284,8 +4239,7 @@ registers ©DFSDM @at 0x40016000 {
     2
   }
 
-//---  Register DFSDM0_JCHGR: injected channel group selection
-          register
+//---  Register DFSDM0_JCHGR: injected channel group selection           register
   DFSDM0_JCHGR @offset 0x110 $u32 {
     24
     JCHG:8 // at 0: Injected channel group selection
@@ -4300,16 +4254,14 @@ registers ©DFSDM @at 0x40016000 {
     IOSR:8 // at 0: Integrator oversampling ratio (averaging length)
   }
 
-//---  Register DFSDM0_JDATAR: data register for injected
-          group
+//---  Register DFSDM0_JDATAR: data register for injected           group
   DFSDM0_JDATAR @offset 0x118 @ro $u32 {
     JDATA:24 // at 8: Injected group conversion data
     5
     JDATACH:3 // at 0: Injected channel most recently converted
   }
 
-//---  Register DFSDM0_RDATAR: data register for the regular
-          channel
+//---  Register DFSDM0_RDATAR: data register for the regular           channel
   DFSDM0_RDATAR @offset 0x11c @ro $u32 {
     RDATA:24 // at 8: Regular channel conversion data
     3
@@ -4318,48 +4270,42 @@ registers ©DFSDM @at 0x40016000 {
     RDATACH:3 // at 0: Regular channel most recently converted
   }
 
-//---  Register DFSDM0_AWHTR: analog watchdog high threshold
-          register
+//---  Register DFSDM0_AWHTR: analog watchdog high threshold           register
   DFSDM0_AWHTR @offset 0x120 $u32 {
     AWHT:24 // at 8: Analog watchdog high threshold
     4
     BKAWH:4 // at 0: Break signal assignment to analog watchdog high threshold event
   }
 
-//---  Register DFSDM0_AWLTR: analog watchdog low threshold
-          register
+//---  Register DFSDM0_AWLTR: analog watchdog low threshold           register
   DFSDM0_AWLTR @offset 0x124 $u32 {
     AWLT:24 // at 8: Analog watchdog low threshold
     4
     BKAWL:4 // at 0: Break signal assignment to analog watchdog low threshold event
   }
 
-//---  Register DFSDM0_AWSR: analog watchdog status
-          register
+//---  Register DFSDM0_AWSR: analog watchdog status           register
   DFSDM0_AWSR @offset 0x128 @ro $u32 {
     16
     AWHTF:8 // at 8: Analog watchdog high threshold flag
     AWLTF:8 // at 0: Analog watchdog low threshold flag
   }
 
-//---  Register DFSDM0_AWCFR: analog watchdog clear flag
-          register
+//---  Register DFSDM0_AWCFR: analog watchdog clear flag           register
   DFSDM0_AWCFR @offset 0x12c $u32 {
     16
     CLRAWHTF:8 // at 8: Clear the analog watchdog high threshold flag
     CLRAWLTF:8 // at 0: Clear the analog watchdog low threshold flag
   }
 
-//---  Register DFSDM0_EXMAX: Extremes detector maximum
-          register
+//---  Register DFSDM0_EXMAX: Extremes detector maximum           register
   DFSDM0_EXMAX @offset 0x130 @ro $u32 {
     EXMAX:24 // at 8: Extremes detector maximum value
     5
     EXMAXCH:3 // at 0: Extremes detector maximum data channel
   }
 
-//---  Register DFSDM0_EXMIN: Extremes detector minimum
-          register
+//---  Register DFSDM0_EXMIN: Extremes detector minimum           register
   DFSDM0_EXMIN @offset 0x134 @ro $u32 {
     EXMIN:24 // at 8: EXMIN
     5
@@ -4438,8 +4384,7 @@ registers ©DFSDM @at 0x40016000 {
     2
   }
 
-//---  Register DFSDM1_JCHGR: injected channel group selection
-          register
+//---  Register DFSDM1_JCHGR: injected channel group selection           register
   DFSDM1_JCHGR @offset 0x210 $u32 {
     24
     JCHG:8 // at 0: Injected channel group selection
@@ -4454,16 +4399,14 @@ registers ©DFSDM @at 0x40016000 {
     IOSR:8 // at 0: Integrator oversampling ratio (averaging length)
   }
 
-//---  Register DFSDM1_JDATAR: data register for injected
-          group
+//---  Register DFSDM1_JDATAR: data register for injected           group
   DFSDM1_JDATAR @offset 0x218 @ro $u32 {
     JDATA:24 // at 8: Injected group conversion data
     5
     JDATACH:3 // at 0: Injected channel most recently converted
   }
 
-//---  Register DFSDM1_RDATAR: data register for the regular
-          channel
+//---  Register DFSDM1_RDATAR: data register for the regular           channel
   DFSDM1_RDATAR @offset 0x21c @ro $u32 {
     RDATA:24 // at 8: Regular channel conversion data
     3
@@ -4472,48 +4415,42 @@ registers ©DFSDM @at 0x40016000 {
     RDATACH:3 // at 0: Regular channel most recently converted
   }
 
-//---  Register DFSDM1_AWHTR: analog watchdog high threshold
-          register
+//---  Register DFSDM1_AWHTR: analog watchdog high threshold           register
   DFSDM1_AWHTR @offset 0x220 $u32 {
     AWHT:24 // at 8: Analog watchdog high threshold
     4
     BKAWH:4 // at 0: Break signal assignment to analog watchdog high threshold event
   }
 
-//---  Register DFSDM1_AWLTR: analog watchdog low threshold
-          register
+//---  Register DFSDM1_AWLTR: analog watchdog low threshold           register
   DFSDM1_AWLTR @offset 0x224 $u32 {
     AWLT:24 // at 8: Analog watchdog low threshold
     4
     BKAWL:4 // at 0: Break signal assignment to analog watchdog low threshold event
   }
 
-//---  Register DFSDM1_AWSR: analog watchdog status
-          register
+//---  Register DFSDM1_AWSR: analog watchdog status           register
   DFSDM1_AWSR @offset 0x228 @ro $u32 {
     16
     AWHTF:8 // at 8: Analog watchdog high threshold flag
     AWLTF:8 // at 0: Analog watchdog low threshold flag
   }
 
-//---  Register DFSDM1_AWCFR: analog watchdog clear flag
-          register
+//---  Register DFSDM1_AWCFR: analog watchdog clear flag           register
   DFSDM1_AWCFR @offset 0x22c $u32 {
     16
     CLRAWHTF:8 // at 8: Clear the analog watchdog high threshold flag
     CLRAWLTF:8 // at 0: Clear the analog watchdog low threshold flag
   }
 
-//---  Register DFSDM1_EXMAX: Extremes detector maximum
-          register
+//---  Register DFSDM1_EXMAX: Extremes detector maximum           register
   DFSDM1_EXMAX @offset 0x230 @ro $u32 {
     EXMAX:24 // at 8: Extremes detector maximum value
     5
     EXMAXCH:3 // at 0: Extremes detector maximum data channel
   }
 
-//---  Register DFSDM1_EXMIN: Extremes detector minimum
-          register
+//---  Register DFSDM1_EXMIN: Extremes detector minimum           register
   DFSDM1_EXMIN @offset 0x234 @ro $u32 {
     EXMIN:24 // at 8: EXMIN
     5
@@ -4592,8 +4529,7 @@ registers ©DFSDM @at 0x40016000 {
     2
   }
 
-//---  Register DFSDM2_JCHGR: injected channel group selection
-          register
+//---  Register DFSDM2_JCHGR: injected channel group selection           register
   DFSDM2_JCHGR @offset 0x310 $u32 {
     24
     JCHG:8 // at 0: Injected channel group selection
@@ -4608,16 +4544,14 @@ registers ©DFSDM @at 0x40016000 {
     IOSR:8 // at 0: Integrator oversampling ratio (averaging length)
   }
 
-//---  Register DFSDM2_JDATAR: data register for injected
-          group
+//---  Register DFSDM2_JDATAR: data register for injected           group
   DFSDM2_JDATAR @offset 0x318 @ro $u32 {
     JDATA:24 // at 8: Injected group conversion data
     5
     JDATACH:3 // at 0: Injected channel most recently converted
   }
 
-//---  Register DFSDM2_RDATAR: data register for the regular
-          channel
+//---  Register DFSDM2_RDATAR: data register for the regular           channel
   DFSDM2_RDATAR @offset 0x31c @ro $u32 {
     RDATA:24 // at 8: Regular channel conversion data
     3
@@ -4626,48 +4560,42 @@ registers ©DFSDM @at 0x40016000 {
     RDATACH:3 // at 0: Regular channel most recently converted
   }
 
-//---  Register DFSDM2_AWHTR: analog watchdog high threshold
-          register
+//---  Register DFSDM2_AWHTR: analog watchdog high threshold           register
   DFSDM2_AWHTR @offset 0x320 $u32 {
     AWHT:24 // at 8: Analog watchdog high threshold
     4
     BKAWH:4 // at 0: Break signal assignment to analog watchdog high threshold event
   }
 
-//---  Register DFSDM2_AWLTR: analog watchdog low threshold
-          register
+//---  Register DFSDM2_AWLTR: analog watchdog low threshold           register
   DFSDM2_AWLTR @offset 0x324 $u32 {
     AWLT:24 // at 8: Analog watchdog low threshold
     4
     BKAWL:4 // at 0: Break signal assignment to analog watchdog low threshold event
   }
 
-//---  Register DFSDM2_AWSR: analog watchdog status
-          register
+//---  Register DFSDM2_AWSR: analog watchdog status           register
   DFSDM2_AWSR @offset 0x328 @ro $u32 {
     16
     AWHTF:8 // at 8: Analog watchdog high threshold flag
     AWLTF:8 // at 0: Analog watchdog low threshold flag
   }
 
-//---  Register DFSDM2_AWCFR: analog watchdog clear flag
-          register
+//---  Register DFSDM2_AWCFR: analog watchdog clear flag           register
   DFSDM2_AWCFR @offset 0x32c $u32 {
     16
     CLRAWHTF:8 // at 8: Clear the analog watchdog high threshold flag
     CLRAWLTF:8 // at 0: Clear the analog watchdog low threshold flag
   }
 
-//---  Register DFSDM2_EXMAX: Extremes detector maximum
-          register
+//---  Register DFSDM2_EXMAX: Extremes detector maximum           register
   DFSDM2_EXMAX @offset 0x330 @ro $u32 {
     EXMAX:24 // at 8: Extremes detector maximum value
     5
     EXMAXCH:3 // at 0: Extremes detector maximum data channel
   }
 
-//---  Register DFSDM2_EXMIN: Extremes detector minimum
-          register
+//---  Register DFSDM2_EXMIN: Extremes detector minimum           register
   DFSDM2_EXMIN @offset 0x334 @ro $u32 {
     EXMIN:24 // at 8: EXMIN
     5
@@ -4746,8 +4674,7 @@ registers ©DFSDM @at 0x40016000 {
     2
   }
 
-//---  Register DFSDM3_JCHGR: injected channel group selection
-          register
+//---  Register DFSDM3_JCHGR: injected channel group selection           register
   DFSDM3_JCHGR @offset 0x410 $u32 {
     24
     JCHG:8 // at 0: Injected channel group selection
@@ -4762,16 +4689,14 @@ registers ©DFSDM @at 0x40016000 {
     IOSR:8 // at 0: Integrator oversampling ratio (averaging length)
   }
 
-//---  Register DFSDM3_JDATAR: data register for injected
-          group
+//---  Register DFSDM3_JDATAR: data register for injected           group
   DFSDM3_JDATAR @offset 0x418 @ro $u32 {
     JDATA:24 // at 8: Injected group conversion data
     5
     JDATACH:3 // at 0: Injected channel most recently converted
   }
 
-//---  Register DFSDM3_RDATAR: data register for the regular
-          channel
+//---  Register DFSDM3_RDATAR: data register for the regular           channel
   DFSDM3_RDATAR @offset 0x41c @ro $u32 {
     RDATA:24 // at 8: Regular channel conversion data
     3
@@ -4780,48 +4705,42 @@ registers ©DFSDM @at 0x40016000 {
     RDATACH:3 // at 0: Regular channel most recently converted
   }
 
-//---  Register DFSDM3_AWHTR: analog watchdog high threshold
-          register
+//---  Register DFSDM3_AWHTR: analog watchdog high threshold           register
   DFSDM3_AWHTR @offset 0x420 $u32 {
     AWHT:24 // at 8: Analog watchdog high threshold
     4
     BKAWH:4 // at 0: Break signal assignment to analog watchdog high threshold event
   }
 
-//---  Register DFSDM3_AWLTR: analog watchdog low threshold
-          register
+//---  Register DFSDM3_AWLTR: analog watchdog low threshold           register
   DFSDM3_AWLTR @offset 0x424 $u32 {
     AWLT:24 // at 8: Analog watchdog low threshold
     4
     BKAWL:4 // at 0: Break signal assignment to analog watchdog low threshold event
   }
 
-//---  Register DFSDM3_AWSR: analog watchdog status
-          register
+//---  Register DFSDM3_AWSR: analog watchdog status           register
   DFSDM3_AWSR @offset 0x428 @ro $u32 {
     16
     AWHTF:8 // at 8: Analog watchdog high threshold flag
     AWLTF:8 // at 0: Analog watchdog low threshold flag
   }
 
-//---  Register DFSDM3_AWCFR: analog watchdog clear flag
-          register
+//---  Register DFSDM3_AWCFR: analog watchdog clear flag           register
   DFSDM3_AWCFR @offset 0x42c $u32 {
     16
     CLRAWHTF:8 // at 8: Clear the analog watchdog high threshold flag
     CLRAWLTF:8 // at 0: Clear the analog watchdog low threshold flag
   }
 
-//---  Register DFSDM3_EXMAX: Extremes detector maximum
-          register
+//---  Register DFSDM3_EXMAX: Extremes detector maximum           register
   DFSDM3_EXMAX @offset 0x430 @ro $u32 {
     EXMAX:24 // at 8: Extremes detector maximum value
     5
     EXMAXCH:3 // at 0: Extremes detector maximum data channel
   }
 
-//---  Register DFSDM3_EXMIN: Extremes detector minimum
-          register
+//---  Register DFSDM3_EXMIN: Extremes detector minimum           register
   DFSDM3_EXMIN @offset 0x434 @ro $u32 {
     EXMIN:24 // at 8: EXMIN
     5
@@ -4907,8 +4826,7 @@ registers ©DMA1 @at 0x40020000 {
     CGIF1 // at 0: Channel x global interrupt clear (x = 1 ..7)
   }
 
-//---  Register CCR1: channel x configuration
-          register
+//---  Register CCR1: channel x configuration           register
   CCR1 @offset 0x8 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -4925,27 +4843,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR1: channel x number of data
-          register
+//---  Register CNDTR1: channel x number of data           register
   CNDTR1 @offset 0xc $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR1: channel x peripheral address
-          register
+//---  Register CPAR1: channel x peripheral address           register
   CPAR1 @offset 0x10 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR1: channel x memory address
-          register
+//---  Register CMAR1: channel x memory address           register
   CMAR1 @offset 0x14 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR2: channel x configuration
-          register
+//---  Register CCR2: channel x configuration           register
   CCR2 @offset 0x1c $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -4962,27 +4876,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR2: channel x number of data
-          register
+//---  Register CNDTR2: channel x number of data           register
   CNDTR2 @offset 0x20 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR2: channel x peripheral address
-          register
+//---  Register CPAR2: channel x peripheral address           register
   CPAR2 @offset 0x24 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR2: channel x memory address
-          register
+//---  Register CMAR2: channel x memory address           register
   CMAR2 @offset 0x28 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR3: channel x configuration
-          register
+//---  Register CCR3: channel x configuration           register
   CCR3 @offset 0x30 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -4999,27 +4909,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR3: channel x number of data
-          register
+//---  Register CNDTR3: channel x number of data           register
   CNDTR3 @offset 0x34 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR3: channel x peripheral address
-          register
+//---  Register CPAR3: channel x peripheral address           register
   CPAR3 @offset 0x38 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR3: channel x memory address
-          register
+//---  Register CMAR3: channel x memory address           register
   CMAR3 @offset 0x3c $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR4: channel x configuration
-          register
+//---  Register CCR4: channel x configuration           register
   CCR4 @offset 0x44 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5036,27 +4942,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR4: channel x number of data
-          register
+//---  Register CNDTR4: channel x number of data           register
   CNDTR4 @offset 0x48 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR4: channel x peripheral address
-          register
+//---  Register CPAR4: channel x peripheral address           register
   CPAR4 @offset 0x4c $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR4: channel x memory address
-          register
+//---  Register CMAR4: channel x memory address           register
   CMAR4 @offset 0x50 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR5: channel x configuration
-          register
+//---  Register CCR5: channel x configuration           register
   CCR5 @offset 0x58 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5073,27 +4975,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR5: channel x number of data
-          register
+//---  Register CNDTR5: channel x number of data           register
   CNDTR5 @offset 0x5c $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR5: channel x peripheral address
-          register
+//---  Register CPAR5: channel x peripheral address           register
   CPAR5 @offset 0x60 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR5: channel x memory address
-          register
+//---  Register CMAR5: channel x memory address           register
   CMAR5 @offset 0x64 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR6: channel x configuration
-          register
+//---  Register CCR6: channel x configuration           register
   CCR6 @offset 0x6c $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5110,27 +5008,23 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR6: channel x number of data
-          register
+//---  Register CNDTR6: channel x number of data           register
   CNDTR6 @offset 0x70 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR6: channel x peripheral address
-          register
+//---  Register CPAR6: channel x peripheral address           register
   CPAR6 @offset 0x74 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR6: channel x memory address
-          register
+//---  Register CMAR6: channel x memory address           register
   CMAR6 @offset 0x78 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR7: channel x configuration
-          register
+//---  Register CCR7: channel x configuration           register
   CCR7 @offset 0x80 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5147,21 +5041,18 @@ registers ©DMA1 @at 0x40020000 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR7: channel x number of data
-          register
+//---  Register CNDTR7: channel x number of data           register
   CNDTR7 @offset 0x84 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR7: channel x peripheral address
-          register
+//---  Register CPAR7: channel x peripheral address           register
   CPAR7 @offset 0x88 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR7: channel x memory address
-          register
+//---  Register CMAR7: channel x memory address           register
   CMAR7 @offset 0x8c $u32 {
     MA:32 // at 0: Memory address
   }
@@ -5251,8 +5142,7 @@ registers ©DMA2 @at 0x40020400 {
     CGIF1 // at 0: Channel x global interrupt clear (x = 1 ..7)
   }
 
-//---  Register CCR1: channel x configuration
-          register
+//---  Register CCR1: channel x configuration           register
   CCR1 @offset 0x8 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5269,27 +5159,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR1: channel x number of data
-          register
+//---  Register CNDTR1: channel x number of data           register
   CNDTR1 @offset 0xc $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR1: channel x peripheral address
-          register
+//---  Register CPAR1: channel x peripheral address           register
   CPAR1 @offset 0x10 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR1: channel x memory address
-          register
+//---  Register CMAR1: channel x memory address           register
   CMAR1 @offset 0x14 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR2: channel x configuration
-          register
+//---  Register CCR2: channel x configuration           register
   CCR2 @offset 0x1c $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5306,27 +5192,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR2: channel x number of data
-          register
+//---  Register CNDTR2: channel x number of data           register
   CNDTR2 @offset 0x20 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR2: channel x peripheral address
-          register
+//---  Register CPAR2: channel x peripheral address           register
   CPAR2 @offset 0x24 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR2: channel x memory address
-          register
+//---  Register CMAR2: channel x memory address           register
   CMAR2 @offset 0x28 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR3: channel x configuration
-          register
+//---  Register CCR3: channel x configuration           register
   CCR3 @offset 0x30 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5343,27 +5225,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR3: channel x number of data
-          register
+//---  Register CNDTR3: channel x number of data           register
   CNDTR3 @offset 0x34 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR3: channel x peripheral address
-          register
+//---  Register CPAR3: channel x peripheral address           register
   CPAR3 @offset 0x38 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR3: channel x memory address
-          register
+//---  Register CMAR3: channel x memory address           register
   CMAR3 @offset 0x3c $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR4: channel x configuration
-          register
+//---  Register CCR4: channel x configuration           register
   CCR4 @offset 0x44 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5380,27 +5258,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR4: channel x number of data
-          register
+//---  Register CNDTR4: channel x number of data           register
   CNDTR4 @offset 0x48 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR4: channel x peripheral address
-          register
+//---  Register CPAR4: channel x peripheral address           register
   CPAR4 @offset 0x4c $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR4: channel x memory address
-          register
+//---  Register CMAR4: channel x memory address           register
   CMAR4 @offset 0x50 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR5: channel x configuration
-          register
+//---  Register CCR5: channel x configuration           register
   CCR5 @offset 0x58 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5417,27 +5291,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR5: channel x number of data
-          register
+//---  Register CNDTR5: channel x number of data           register
   CNDTR5 @offset 0x5c $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR5: channel x peripheral address
-          register
+//---  Register CPAR5: channel x peripheral address           register
   CPAR5 @offset 0x60 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR5: channel x memory address
-          register
+//---  Register CMAR5: channel x memory address           register
   CMAR5 @offset 0x64 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR6: channel x configuration
-          register
+//---  Register CCR6: channel x configuration           register
   CCR6 @offset 0x6c $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5454,27 +5324,23 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR6: channel x number of data
-          register
+//---  Register CNDTR6: channel x number of data           register
   CNDTR6 @offset 0x70 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR6: channel x peripheral address
-          register
+//---  Register CPAR6: channel x peripheral address           register
   CPAR6 @offset 0x74 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR6: channel x memory address
-          register
+//---  Register CMAR6: channel x memory address           register
   CMAR6 @offset 0x78 $u32 {
     MA:32 // at 0: Memory address
   }
 
-//---  Register CCR7: channel x configuration
-          register
+//---  Register CCR7: channel x configuration           register
   CCR7 @offset 0x80 $u32 {
     17
     MEM2MEM // at 14: Memory to memory mode
@@ -5491,21 +5357,18 @@ registers ©DMA2 @at 0x40020400 {
     EN // at 0: Channel enable
   }
 
-//---  Register CNDTR7: channel x number of data
-          register
+//---  Register CNDTR7: channel x number of data           register
   CNDTR7 @offset 0x84 $u32 {
     16
     NDT:16 // at 0: Number of data to transfer
   }
 
-//---  Register CPAR7: channel x peripheral address
-          register
+//---  Register CPAR7: channel x peripheral address           register
   CPAR7 @offset 0x88 $u32 {
     PA:32 // at 0: Peripheral address
   }
 
-//---  Register CMAR7: channel x memory address
-          register
+//---  Register CMAR7: channel x memory address           register
   CMAR7 @offset 0x8c $u32 {
     MA:32 // at 0: Memory address
   }
@@ -5525,8 +5388,7 @@ registers ©DMA2 @at 0x40020400 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral EXTI: External interrupt/event
-      controller
+// Peripheral EXTI: External interrupt/event       controller
 //------------------------------------------------------------------------------
 
 registers ©EXTI @at 0x40010400 {
@@ -5602,8 +5464,7 @@ registers ©EXTI @at 0x40010400 {
     MR0 // at 0: Event Mask on line 0
   }
 
-//---  Register RTSR1: Rising Trigger selection
-          register
+//---  Register RTSR1: Rising Trigger selection           register
   RTSR1 @offset 0x8 $u32 {
     9
     TR22 // at 22: Rising trigger event configuration of line 22
@@ -5631,8 +5492,7 @@ registers ©EXTI @at 0x40010400 {
     TR0 // at 0: Rising trigger event configuration of line 0
   }
 
-//---  Register FTSR1: Falling Trigger selection
-          register
+//---  Register FTSR1: Falling Trigger selection           register
   FTSR1 @offset 0xc $u32 {
     9
     TR22 // at 22: Falling trigger event configuration of line 22
@@ -5660,8 +5520,7 @@ registers ©EXTI @at 0x40010400 {
     TR0 // at 0: Falling trigger event configuration of line 0
   }
 
-//---  Register SWIER1: Software interrupt event
-          register
+//---  Register SWIER1: Software interrupt event           register
   SWIER1 @offset 0x10 $u32 {
     9
     SWIER22 // at 22: Software Interrupt on line 22
@@ -5743,8 +5602,7 @@ registers ©EXTI @at 0x40010400 {
     MR32 // at 0: Event mask on external/internal line 32
   }
 
-//---  Register RTSR2: Rising Trigger selection
-          register
+//---  Register RTSR2: Rising Trigger selection           register
   RTSR2 @offset 0x28 $u32 {
     25
     RT38 // at 6: Rising trigger event configuration bit of line 38
@@ -5754,8 +5612,7 @@ registers ©EXTI @at 0x40010400 {
     3
   }
 
-//---  Register FTSR2: Falling Trigger selection
-          register
+//---  Register FTSR2: Falling Trigger selection           register
   FTSR2 @offset 0x2c $u32 {
     25
     FT38 // at 6: Falling trigger event configuration bit of line 38
@@ -5765,8 +5622,7 @@ registers ©EXTI @at 0x40010400 {
     3
   }
 
-//---  Register SWIER2: Software interrupt event
-          register
+//---  Register SWIER2: Software interrupt event           register
   SWIER2 @offset 0x30 $u32 {
     25
     SWI38 // at 6: Software interrupt on line 38
@@ -5807,24 +5663,21 @@ registers ©FIREWALL @at 0x40011c00 {
     8
   }
 
-//---  Register NVDSSA: Non-volatile data segment start
-          address
+//---  Register NVDSSA: Non-volatile data segment start           address
   NVDSSA @offset 0x8 $u32 {
     8
     ADD:16 // at 8: Non-volatile data segment start address
     8
   }
 
-//---  Register NVDSL: Non-volatile data segment
-          length
+//---  Register NVDSL: Non-volatile data segment           length
   NVDSL @offset 0xc $u32 {
     10
     LENG:14 // at 8: Non-volatile data segment length
     8
   }
 
-//---  Register VDSSA: Volatile data segment start
-          address
+//---  Register VDSSA: Volatile data segment start           address
   VDSSA @offset 0x10 $u32 {
     16
     ADD:10 // at 6: Volatile data segment start address
@@ -5956,23 +5809,20 @@ registers ©FLASH @at 0x40022000 {
     RDP:8 // at 0: Read protection level
   }
 
-//---  Register PCROP1SR: Flash Bank 1 PCROP Start address
-          register
+//---  Register PCROP1SR: Flash Bank 1 PCROP Start address           register
   PCROP1SR @offset 0x24 $u32 {
     16
     PCROP1_STRT:16 // at 0: Bank 1 PCROP area start offset
   }
 
-//---  Register PCROP1ER: Flash Bank 1 PCROP End address
-          register
+//---  Register PCROP1ER: Flash Bank 1 PCROP End address           register
   PCROP1ER @offset 0x28 $u32 {
     PCROP_RDP // at 31: PCROP area preserved when RDP level decreased
     15
     PCROP1_END:16 // at 0: Bank 1 PCROP area end offset
   }
 
-//---  Register WRP1AR: Flash Bank 1 WRP area A address
-          register
+//---  Register WRP1AR: Flash Bank 1 WRP area A address           register
   WRP1AR @offset 0x2c $u32 {
     8
     WRP1A_END:8 // at 16: Bank 1 WRP first area A end offset
@@ -5980,8 +5830,7 @@ registers ©FLASH @at 0x40022000 {
     WRP1A_STRT:8 // at 0: Bank 1 WRP first area tart offset
   }
 
-//---  Register WRP1BR: Flash Bank 1 WRP area B address
-          register
+//---  Register WRP1BR: Flash Bank 1 WRP area B address           register
   WRP1BR @offset 0x30 $u32 {
     8
     WRP1B_STRT:8 // at 16: Bank 1 WRP second area B end offset
@@ -5989,22 +5838,19 @@ registers ©FLASH @at 0x40022000 {
     WRP1B_END:8 // at 0: Bank 1 WRP second area B start offset
   }
 
-//---  Register PCROP2SR: Flash Bank 2 PCROP Start address
-          register
+//---  Register PCROP2SR: Flash Bank 2 PCROP Start address           register
   PCROP2SR @offset 0x44 $u32 {
     16
     PCROP2_STRT:16 // at 0: Bank 2 PCROP area start offset
   }
 
-//---  Register PCROP2ER: Flash Bank 2 PCROP End address
-          register
+//---  Register PCROP2ER: Flash Bank 2 PCROP End address           register
   PCROP2ER @offset 0x48 $u32 {
     16
     PCROP2_END:16 // at 0: Bank 2 PCROP area end offset
   }
 
-//---  Register WRP2AR: Flash Bank 2 WRP area A address
-          register
+//---  Register WRP2AR: Flash Bank 2 WRP area A address           register
   WRP2AR @offset 0x4c $u32 {
     8
     WRP2A_END:8 // at 16: Bank 2 WRP first area A end offset
@@ -6012,8 +5858,7 @@ registers ©FLASH @at 0x40022000 {
     WRP2A_STRT:8 // at 0: Bank 2 WRP first area A start offset
   }
 
-//---  Register WRP2BR: Flash Bank 2 WRP area B address
-          register
+//---  Register WRP2BR: Flash Bank 2 WRP area B address           register
   WRP2BR @offset 0x50 $u32 {
     8
     WRP2B_END:8 // at 16: Bank 2 WRP second area B end offset
@@ -6028,8 +5873,7 @@ registers ©FLASH @at 0x40022000 {
 //------------------------------------------------------------------------------
 
 registers ©FPU @at 0xe000ef34 {
-//---  Register FPCCR: Floating-point context control
-          register
+//---  Register FPCCR: Floating-point context control           register
   FPCCR @offset 0x0 $u32 {
     ASPEN // at 31: ASPEN
     LSPEN // at 30: LSPEN
@@ -6045,15 +5889,13 @@ registers ©FPU @at 0xe000ef34 {
     LSPACT // at 0: LSPACT
   }
 
-//---  Register FPCAR: Floating-point context address
-          register
+//---  Register FPCAR: Floating-point context address           register
   FPCAR @offset 0x4 $u32 {
     ADDRESS:29 // at 3: Location of unpopulated floating-point
     3
   }
 
-//---  Register FPSCR: Floating-point status control
-          register
+//---  Register FPSCR: Floating-point status control           register
   FPSCR @offset 0x8 $u32 {
     N // at 31: Negative condition code flag
     Z // at 30: Zero condition code flag
@@ -6081,8 +5923,7 @@ registers ©FPU @at 0xe000ef34 {
 //------------------------------------------------------------------------------
 
 registers ©FPU_CPACR @at 0xe000ed88 {
-//---  Register CPACR: Coprocessor access control
-          register
+//---  Register CPACR: Coprocessor access control           register
   CPACR @offset 0x0 $u32 {
     8
     CP:4 // at 20: CP
@@ -6137,8 +5978,7 @@ registers ©GPIOA @at 0x48000000 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6158,8 +5998,7 @@ registers ©GPIOA @at 0x48000000 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6221,8 +6060,7 @@ registers ©GPIOA @at 0x48000000 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -6258,8 +6096,7 @@ registers ©GPIOA @at 0x48000000 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -6281,8 +6118,7 @@ registers ©GPIOA @at 0x48000000 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -6294,8 +6130,7 @@ registers ©GPIOA @at 0x48000000 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -6355,8 +6190,7 @@ registers ©GPIOB @at 0x48000400 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6376,8 +6210,7 @@ registers ©GPIOB @at 0x48000400 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6439,8 +6272,7 @@ registers ©GPIOB @at 0x48000400 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -6476,8 +6308,7 @@ registers ©GPIOB @at 0x48000400 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -6499,8 +6330,7 @@ registers ©GPIOB @at 0x48000400 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -6512,8 +6342,7 @@ registers ©GPIOB @at 0x48000400 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -6573,8 +6402,7 @@ registers ©GPIOC @at 0x48000800 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6594,8 +6422,7 @@ registers ©GPIOC @at 0x48000800 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6657,8 +6484,7 @@ registers ©GPIOC @at 0x48000800 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -6694,8 +6520,7 @@ registers ©GPIOC @at 0x48000800 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -6717,8 +6542,7 @@ registers ©GPIOC @at 0x48000800 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -6730,8 +6554,7 @@ registers ©GPIOC @at 0x48000800 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -6791,8 +6614,7 @@ registers ©GPIOD @at 0x48000c00 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6812,8 +6634,7 @@ registers ©GPIOD @at 0x48000c00 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -6875,8 +6696,7 @@ registers ©GPIOD @at 0x48000c00 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -6912,8 +6732,7 @@ registers ©GPIOD @at 0x48000c00 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -6935,8 +6754,7 @@ registers ©GPIOD @at 0x48000c00 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -6948,8 +6766,7 @@ registers ©GPIOD @at 0x48000c00 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -7009,8 +6826,7 @@ registers ©GPIOE @at 0x48001000 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -7030,8 +6846,7 @@ registers ©GPIOE @at 0x48001000 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -7093,8 +6908,7 @@ registers ©GPIOE @at 0x48001000 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -7130,8 +6944,7 @@ registers ©GPIOE @at 0x48001000 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -7153,8 +6966,7 @@ registers ©GPIOE @at 0x48001000 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -7166,8 +6978,7 @@ registers ©GPIOE @at 0x48001000 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -7227,8 +7038,7 @@ registers ©GPIOH @at 0x48001c00 {
     OT0 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register OSPEEDR: GPIO port output speed
-          register
+//---  Register OSPEEDR: GPIO port output speed           register
   OSPEEDR @offset 0x8 $u32 {
     OSPEEDR15:2 // at 30: Port x configuration bits (y = 0..15)
     OSPEEDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -7248,8 +7058,7 @@ registers ©GPIOH @at 0x48001c00 {
     OSPEEDR0:2 // at 0: Port x configuration bits (y = 0..15)
   }
 
-//---  Register PUPDR: GPIO port pull-up/pull-down
-          register
+//---  Register PUPDR: GPIO port pull-up/pull-down           register
   PUPDR @offset 0xc $u32 {
     PUPDR15:2 // at 30: Port x configuration bits (y = 0..15)
     PUPDR14:2 // at 28: Port x configuration bits (y = 0..15)
@@ -7311,8 +7120,7 @@ registers ©GPIOH @at 0x48001c00 {
     ODR0 // at 0: Port output data (y = 0..15)
   }
 
-//---  Register BSRR: GPIO port bit set/reset
-          register
+//---  Register BSRR: GPIO port bit set/reset           register
   BSRR @offset 0x18 $u32 {
     BR15 // at 31: Port x reset bit y (y = 0..15)
     BR14 // at 30: Port x reset bit y (y = 0..15)
@@ -7348,8 +7156,7 @@ registers ©GPIOH @at 0x48001c00 {
     BS0 // at 0: Port x set bit y (y= 0..15)
   }
 
-//---  Register LCKR: GPIO port configuration lock
-          register
+//---  Register LCKR: GPIO port configuration lock           register
   LCKR @offset 0x1c $u32 {
     15
     LCKK // at 16: Port x lock bit y (y= 0..15)
@@ -7371,8 +7178,7 @@ registers ©GPIOH @at 0x48001c00 {
     LCK0 // at 0: Port x lock bit y (y= 0..15)
   }
 
-//---  Register AFRL: GPIO alternate function low
-          register
+//---  Register AFRL: GPIO alternate function low           register
   AFRL @offset 0x20 $u32 {
     AFRL7:4 // at 28: Alternate function selection for port x bit y (y = 0..7)
     AFRL6:4 // at 24: Alternate function selection for port x bit y (y = 0..7)
@@ -7384,8 +7190,7 @@ registers ©GPIOH @at 0x48001c00 {
     AFRL0:4 // at 0: Alternate function selection for port x bit y (y = 0..7)
   }
 
-//---  Register AFRH: GPIO alternate function high
-          register
+//---  Register AFRH: GPIO alternate function high           register
   AFRH @offset 0x24 $u32 {
     AFRH15:4 // at 28: Alternate function selection for port x bit y (y = 8..15)
     AFRH14:4 // at 24: Alternate function selection for port x bit y (y = 8..15)
@@ -8547,8 +8352,7 @@ registers ©LPTIM2 @at 0x40009400 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral LPUART1: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral LPUART1: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 registers ©LPUART1 @at 0x40008000 {
@@ -8640,8 +8444,7 @@ registers ©LPUART1 @at 0x40008000 {
     1
   }
 
-//---  Register ISR: Interrupt & status
-          register
+//---  Register ISR: Interrupt & status           register
   ISR @offset 0x1c @ro $u32 {
     9
     REACK // at 22: REACK
@@ -8725,16 +8528,14 @@ registers ©MPU @at 0xe000ed90 {
     REGION:8 // at 0: MPU region
   }
 
-//---  Register MPU_RBAR: MPU region base address
-          register
+//---  Register MPU_RBAR: MPU region base address           register
   MPU_RBAR @offset 0xc $u32 {
     ADDR:27 // at 5: Region base address field
     VALID // at 4: MPU region number valid
     REGION:4 // at 0: MPU region field
   }
 
-//---  Register MPU_RASR: MPU region attribute and size
-          register
+//---  Register MPU_RASR: MPU region attribute and size           register
   MPU_RASR @offset 0x10 $u32 {
     3
     XN // at 28: Instruction access disable bit
@@ -8754,8 +8555,7 @@ registers ©MPU @at 0xe000ed90 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral NVIC: Nested Vectored Interrupt
-      Controller
+// Peripheral NVIC: Nested Vectored Interrupt       Controller
 //------------------------------------------------------------------------------
 
 registers ©NVIC @at 0xe000e100 {
@@ -8774,20 +8574,17 @@ registers ©NVIC @at 0xe000e100 {
     SETENA:32 // at 0: SETENA
   }
 
-//---  Register ICER0: Interrupt Clear-Enable
-          Register
+//---  Register ICER0: Interrupt Clear-Enable           Register
   ICER0 @offset 0x80 $u32 {
     CLRENA:32 // at 0: CLRENA
   }
 
-//---  Register ICER1: Interrupt Clear-Enable
-          Register
+//---  Register ICER1: Interrupt Clear-Enable           Register
   ICER1 @offset 0x84 $u32 {
     CLRENA:32 // at 0: CLRENA
   }
 
-//---  Register ICER2: Interrupt Clear-Enable
-          Register
+//---  Register ICER2: Interrupt Clear-Enable           Register
   ICER2 @offset 0x88 $u32 {
     CLRENA:32 // at 0: CLRENA
   }
@@ -8807,20 +8604,17 @@ registers ©NVIC @at 0xe000e100 {
     SETPEND:32 // at 0: SETPEND
   }
 
-//---  Register ICPR0: Interrupt Clear-Pending
-          Register
+//---  Register ICPR0: Interrupt Clear-Pending           Register
   ICPR0 @offset 0x180 $u32 {
     CLRPEND:32 // at 0: CLRPEND
   }
 
-//---  Register ICPR1: Interrupt Clear-Pending
-          Register
+//---  Register ICPR1: Interrupt Clear-Pending           Register
   ICPR1 @offset 0x184 $u32 {
     CLRPEND:32 // at 0: CLRPEND
   }
 
-//---  Register ICPR2: Interrupt Clear-Pending
-          Register
+//---  Register ICPR2: Interrupt Clear-Pending           Register
   ICPR2 @offset 0x188 $u32 {
     CLRPEND:32 // at 0: CLRPEND
   }
@@ -9011,13 +8805,11 @@ registers ©NVIC @at 0xe000e100 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral NVIC_STIR: Nested vectored interrupt
-      controller
+// Peripheral NVIC_STIR: Nested vectored interrupt       controller
 //------------------------------------------------------------------------------
 
 registers ©NVIC_STIR @at 0xe000ef00 {
-//---  Register STIR: Software trigger interrupt
-          register
+//---  Register STIR: Software trigger interrupt           register
   STIR @offset 0x0 $u32 {
     23
     INTID:9 // at 0: Software generated interrupt ID
@@ -9048,8 +8840,7 @@ registers ©OPAMP @at 0x40007800 {
     OPAEN // at 0: Operational amplifier Enable
   }
 
-//---  Register OPAMP1_OTR: OPAMP1 offset trimming register in normal
-          mode
+//---  Register OPAMP1_OTR: OPAMP1 offset trimming register in normal           mode
   OPAMP1_OTR @offset 0x4 $u32 {
     19
     TRIMOFFSETP:5 // at 8: Trim for PMOS differential pairs
@@ -9057,8 +8848,7 @@ registers ©OPAMP @at 0x40007800 {
     TRIMOFFSETN:5 // at 0: Trim for NMOS differential pairs
   }
 
-//---  Register OPAMP1_LPOTR: OPAMP1 offset trimming register in low-power
-          mode
+//---  Register OPAMP1_LPOTR: OPAMP1 offset trimming register in low-power           mode
   OPAMP1_LPOTR @offset 0x8 $u32 {
     19
     TRIMLPOFFSETP:5 // at 8: Trim for PMOS differential pairs
@@ -9083,8 +8873,7 @@ registers ©OPAMP @at 0x40007800 {
     OPAEN // at 0: Operational amplifier Enable
   }
 
-//---  Register OPAMP2_OTR: OPAMP2 offset trimming register in normal
-          mode
+//---  Register OPAMP2_OTR: OPAMP2 offset trimming register in normal           mode
   OPAMP2_OTR @offset 0x14 $u32 {
     19
     TRIMOFFSETP:5 // at 8: Trim for PMOS differential pairs
@@ -9092,8 +8881,7 @@ registers ©OPAMP @at 0x40007800 {
     TRIMOFFSETN:5 // at 0: Trim for NMOS differential pairs
   }
 
-//---  Register OPAMP2_LPOTR: OPAMP2 offset trimming register in low-power
-          mode
+//---  Register OPAMP2_LPOTR: OPAMP2 offset trimming register in low-power           mode
   OPAMP2_LPOTR @offset 0x18 $u32 {
     19
     TRIMLPOFFSETP:5 // at 8: Trim for PMOS differential pairs
@@ -9202,8 +8990,7 @@ registers ©PWR @at 0x40007000 {
     WUF1 // at 0: Clear wakeup flag 1
   }
 
-//---  Register PUCRA: Power Port A pull-up control
-          register
+//---  Register PUCRA: Power Port A pull-up control           register
   PUCRA @offset 0x20 $u32 {
     16
     PU15 // at 15: Port A pull-up bit y (y=0..15)
@@ -9224,8 +9011,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port A pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRA: Power Port A pull-down control
-          register
+//---  Register PDCRA: Power Port A pull-down control           register
   PDCRA @offset 0x24 $u32 {
     16
     PD15 // at 15: Port A pull-down bit y (y=0..15)
@@ -9246,8 +9032,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port A pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRB: Power Port B pull-up control
-          register
+//---  Register PUCRB: Power Port B pull-up control           register
   PUCRB @offset 0x28 $u32 {
     16
     PU15 // at 15: Port B pull-up bit y (y=0..15)
@@ -9268,8 +9053,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port B pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRB: Power Port B pull-down control
-          register
+//---  Register PDCRB: Power Port B pull-down control           register
   PDCRB @offset 0x2c $u32 {
     16
     PD15 // at 15: Port B pull-down bit y (y=0..15)
@@ -9290,8 +9074,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port B pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRC: Power Port C pull-up control
-          register
+//---  Register PUCRC: Power Port C pull-up control           register
   PUCRC @offset 0x30 $u32 {
     16
     PU15 // at 15: Port C pull-up bit y (y=0..15)
@@ -9312,8 +9095,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port C pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRC: Power Port C pull-down control
-          register
+//---  Register PDCRC: Power Port C pull-down control           register
   PDCRC @offset 0x34 $u32 {
     16
     PD15 // at 15: Port C pull-down bit y (y=0..15)
@@ -9334,8 +9116,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port C pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRD: Power Port D pull-up control
-          register
+//---  Register PUCRD: Power Port D pull-up control           register
   PUCRD @offset 0x38 $u32 {
     16
     PU15 // at 15: Port D pull-up bit y (y=0..15)
@@ -9356,8 +9137,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port D pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRD: Power Port D pull-down control
-          register
+//---  Register PDCRD: Power Port D pull-down control           register
   PDCRD @offset 0x3c $u32 {
     16
     PD15 // at 15: Port D pull-down bit y (y=0..15)
@@ -9378,8 +9158,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port D pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRE: Power Port E pull-up control
-          register
+//---  Register PUCRE: Power Port E pull-up control           register
   PUCRE @offset 0x40 $u32 {
     16
     PU15 // at 15: Port E pull-up bit y (y=0..15)
@@ -9400,8 +9179,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port E pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRE: Power Port E pull-down control
-          register
+//---  Register PDCRE: Power Port E pull-down control           register
   PDCRE @offset 0x44 $u32 {
     16
     PD15 // at 15: Port E pull-down bit y (y=0..15)
@@ -9422,8 +9200,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port E pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRF: Power Port F pull-up control
-          register
+//---  Register PUCRF: Power Port F pull-up control           register
   PUCRF @offset 0x48 $u32 {
     16
     PU15 // at 15: Port F pull-up bit y (y=0..15)
@@ -9444,8 +9221,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port F pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRF: Power Port F pull-down control
-          register
+//---  Register PDCRF: Power Port F pull-down control           register
   PDCRF @offset 0x4c $u32 {
     16
     PD15 // at 15: Port F pull-down bit y (y=0..15)
@@ -9466,8 +9242,7 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port F pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRG: Power Port G pull-up control
-          register
+//---  Register PUCRG: Power Port G pull-up control           register
   PUCRG @offset 0x50 $u32 {
     16
     PU15 // at 15: Port G pull-up bit y (y=0..15)
@@ -9488,8 +9263,7 @@ registers ©PWR @at 0x40007000 {
     PU0 // at 0: Port G pull-up bit y (y=0..15)
   }
 
-//---  Register PDCRG: Power Port G pull-down control
-          register
+//---  Register PDCRG: Power Port G pull-down control           register
   PDCRG @offset 0x54 $u32 {
     16
     PD15 // at 15: Port G pull-down bit y (y=0..15)
@@ -9510,16 +9284,14 @@ registers ©PWR @at 0x40007000 {
     PD0 // at 0: Port G pull-down bit y (y=0..15)
   }
 
-//---  Register PUCRH: Power Port H pull-up control
-          register
+//---  Register PUCRH: Power Port H pull-up control           register
   PUCRH @offset 0x58 $u32 {
     30
     PU1 // at 1: Port H pull-up bit y (y=0..1)
     PU0 // at 0: Port H pull-up bit y (y=0..1)
   }
 
-//---  Register PDCRH: Power Port H pull-down control
-          register
+//---  Register PDCRH: Power Port H pull-down control           register
   PDCRH @offset 0x5c $u32 {
     30
     PD1 // at 1: Port H pull-down bit y (y=0..1)
@@ -9594,8 +9366,7 @@ registers ©QUADSPI @at 0xa0001000 {
     DL:32 // at 0: Data length
   }
 
-//---  Register CCR: communication configuration
-          register
+//---  Register CCR: communication configuration           register
   CCR @offset 0x14 $u32 {
     DDRM // at 31: Double data rate mode
     DHHC // at 30: DDR hold half cycle
@@ -9681,8 +9452,7 @@ registers ©RCC @at 0x40021000 {
     MSION // at 0: MSI clock enable
   }
 
-//---  Register ICSCR: Internal clock sources calibration
-          register
+//---  Register ICSCR: Internal clock sources calibration           register
   ICSCR @offset 0x4 $u32 {
     3
     HSITRIM:5 // at 24: HSI clock trimming
@@ -9742,8 +9512,7 @@ registers ©RCC @at 0x40021000 {
     8
   }
 
-//---  Register CIER: Clock interrupt enable
-          register
+//---  Register CIER: Clock interrupt enable           register
   CIER @offset 0x18 $u32 {
     21
     HSI48RDYIE // at 10: HSI48 ready interrupt enable
@@ -9828,8 +9597,7 @@ registers ©RCC @at 0x40021000 {
     8
   }
 
-//---  Register APB1RSTR1: APB1 peripheral reset register
-          1
+//---  Register APB1RSTR1: APB1 peripheral reset register           1
   APB1RSTR1 @offset 0x38 $u32 {
     LPTIM1RST // at 31: Low Power Timer 1 reset
     OPAMPRST // at 30: OPAMP interface reset
@@ -9858,8 +9626,7 @@ registers ©RCC @at 0x40021000 {
     TIM2RST // at 0: TIM2 timer reset
   }
 
-//---  Register APB1RSTR2: APB1 peripheral reset register
-          2
+//---  Register APB1RSTR2: APB1 peripheral reset register           2
   APB1RSTR2 @offset 0x3c $u32 {
     26
     LPTIM2RST // at 5: Low-power timer 2 reset
@@ -9888,8 +9655,7 @@ registers ©RCC @at 0x40021000 {
     SYSCFGRST // at 0: System configuration (SYSCFG) reset
   }
 
-//---  Register AHB1ENR: AHB1 peripheral clock enable
-          register
+//---  Register AHB1ENR: AHB1 peripheral clock enable           register
   AHB1ENR @offset 0x48 $u32 {
     15
     TSCEN // at 16: Touch Sensing Controller clock enable
@@ -9902,8 +9668,7 @@ registers ©RCC @at 0x40021000 {
     DMA1EN // at 0: DMA1 clock enable
   }
 
-//---  Register AHB2ENR: AHB2 peripheral clock enable
-          register
+//---  Register AHB2ENR: AHB2 peripheral clock enable           register
   AHB2ENR @offset 0x4c $u32 {
     13
     RNGEN // at 18: Random Number Generator clock enable
@@ -9921,8 +9686,7 @@ registers ©RCC @at 0x40021000 {
     GPIOAEN // at 0: IO port A clock enable
   }
 
-//---  Register AHB3ENR: AHB3 peripheral clock enable
-          register
+//---  Register AHB3ENR: AHB3 peripheral clock enable           register
   AHB3ENR @offset 0x50 $u32 {
     23
     QSPIEN // at 8: QSPIEN
@@ -9961,8 +9725,7 @@ registers ©RCC @at 0x40021000 {
     TIM2EN // at 0: TIM2 timer clock enable
   }
 
-//---  Register APB1ENR2: APB1 peripheral clock enable register
-          2
+//---  Register APB1ENR2: APB1 peripheral clock enable register           2
   APB1ENR2 @offset 0x5c $u32 {
     7
     DFSDMEN // at 24: DFSDMEN enable
@@ -9993,8 +9756,7 @@ registers ©RCC @at 0x40021000 {
     SYSCFGEN // at 0: SYSCFG clock enable
   }
 
-//---  Register AHB1SMENR: AHB1 peripheral clocks enable in Sleep and
-          Stop modes register
+//---  Register AHB1SMENR: AHB1 peripheral clocks enable in Sleep and           Stop modes register
   AHB1SMENR @offset 0x68 $u32 {
     15
     TSCSMEN // at 16: Touch Sensing Controller clocks enable during Sleep and Stop modes
@@ -10008,8 +9770,7 @@ registers ©RCC @at 0x40021000 {
     DMA1SMEN // at 0: DMA1 clocks enable during Sleep and Stop modes
   }
 
-//---  Register AHB2SMENR: AHB2 peripheral clocks enable in Sleep and
-          Stop modes register
+//---  Register AHB2SMENR: AHB2 peripheral clocks enable in Sleep and           Stop modes register
   AHB2SMENR @offset 0x6c $u32 {
     13
     RNGSMEN // at 18: Random Number Generator clocks enable during Sleep and Stop modes
@@ -10029,8 +9790,7 @@ registers ©RCC @at 0x40021000 {
     GPIOASMEN // at 0: IO port A clocks enable during Sleep and Stop modes
   }
 
-//---  Register AHB3SMENR: AHB3 peripheral clocks enable in Sleep and
-          Stop modes register
+//---  Register AHB3SMENR: AHB3 peripheral clocks enable in Sleep and           Stop modes register
   AHB3SMENR @offset 0x70 $u32 {
     23
     QSPISMEN // at 8: QSPISMEN
@@ -10067,8 +9827,7 @@ registers ©RCC @at 0x40021000 {
     TIM2SMEN // at 0: TIM2 timer clocks enable during Sleep and Stop modes
   }
 
-//---  Register APB1SMENR2: APB1 peripheral clocks enable in Sleep and
-          Stop modes register 2
+//---  Register APB1SMENR2: APB1 peripheral clocks enable in Sleep and           Stop modes register 2
   APB1SMENR2 @offset 0x7c $u32 {
     26
     LPTIM2SMEN // at 5: LPTIM2SMEN
@@ -10254,8 +10013,7 @@ registers ©RTC @at 0x40002800 {
     WCKSEL:3 // at 0: Wakeup clock selection
   }
 
-//---  Register ISR: initialization and status
-          register
+//---  Register ISR: initialization and status           register
   ISR @offset 0xc $u32 {
     15
     RECALPF // at 16: Recalibration pending Flag
@@ -10813,8 +10571,7 @@ registers ©SCB @at 0xe000ed00 {
     Revision:4 // at 0: Revision number
   }
 
-//---  Register ICSR: Interrupt control and state
-          register
+//---  Register ICSR: Interrupt control and state           register
   ICSR @offset 0x4 $u32 {
     NMIPENDSET // at 31: NMI set-pending bit.
     2
@@ -10838,8 +10595,7 @@ registers ©SCB @at 0xe000ed00 {
     9
   }
 
-//---  Register AIRCR: Application interrupt and reset control
-          register
+//---  Register AIRCR: Application interrupt and reset control           register
   AIRCR @offset 0xc $u32 {
     VECTKEYSTAT:16 // at 16: Register key
     ENDIANESS // at 15: ENDIANESS
@@ -10861,8 +10617,7 @@ registers ©SCB @at 0xe000ed00 {
     1
   }
 
-//---  Register CCR: Configuration and control
-          register
+//---  Register CCR: Configuration and control           register
   CCR @offset 0x14 $u32 {
     22
     STKALIGN // at 9: STKALIGN
@@ -10875,8 +10630,7 @@ registers ©SCB @at 0xe000ed00 {
     NONBASETHRDENA // at 0: Configures how the processor enters Thread mode
   }
 
-//---  Register SHPR1: System handler priority
-          registers
+//---  Register SHPR1: System handler priority           registers
   SHPR1 @offset 0x18 $u32 {
     8
     PRI_6:8 // at 16: Priority of system handler 6
@@ -10884,23 +10638,20 @@ registers ©SCB @at 0xe000ed00 {
     PRI_4:8 // at 0: Priority of system handler 4
   }
 
-//---  Register SHPR2: System handler priority
-          registers
+//---  Register SHPR2: System handler priority           registers
   SHPR2 @offset 0x1c $u32 {
     PRI_11:8 // at 24: Priority of system handler 11
     24
   }
 
-//---  Register SHPR3: System handler priority
-          registers
+//---  Register SHPR3: System handler priority           registers
   SHPR3 @offset 0x20 $u32 {
     PRI_15:8 // at 24: Priority of system handler 15
     PRI_14:8 // at 16: Priority of system handler 14
     16
   }
 
-//---  Register SHCRS: System handler control and state
-          register
+//---  Register SHCRS: System handler control and state           register
   SHCRS @offset 0x24 $u32 {
     13
     USGFAULTENA // at 18: Usage fault enable bit
@@ -10922,8 +10673,7 @@ registers ©SCB @at 0xe000ed00 {
     MEMFAULTACT // at 0: Memory management fault exception active bit
   }
 
-//---  Register CFSR_UFSR_BFSR_MMFSR: Configurable fault status
-          register
+//---  Register CFSR_UFSR_BFSR_MMFSR: Configurable fault status           register
   CFSR_UFSR_BFSR_MMFSR @offset 0x28 $u32 {
     6
     DIVBYZERO // at 25: Divide by zero usage fault
@@ -10960,8 +10710,7 @@ registers ©SCB @at 0xe000ed00 {
     1
   }
 
-//---  Register MMFAR: Memory management fault address
-          register
+//---  Register MMFAR: Memory management fault address           register
   MMFAR @offset 0x34 $u32 {
     MMFAR:32 // at 0: Memory management fault address
   }
@@ -10971,8 +10720,7 @@ registers ©SCB @at 0xe000ed00 {
     BFAR:32 // at 0: Bus fault address
   }
 
-//---  Register AFSR: Auxiliary fault status
-          register
+//---  Register AFSR: Auxiliary fault status           register
   AFSR @offset 0x3c $u32 {
     IMPDEF:32 // at 0: Implementation defined
   }
@@ -10998,8 +10746,7 @@ registers ©SCB_ACTRL @at 0xe000e008 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral SDMMC: Secure digital input/output
-      interface
+// Peripheral SDMMC: Secure digital input/output       interface
 //------------------------------------------------------------------------------
 
 registers ©SDMMC @at 0x40012800 {
@@ -11188,8 +10935,7 @@ registers ©SDMMC @at 0x40012800 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral SPI1: Serial peripheral interface/Inter-IC
-      sound
+// Peripheral SPI1: Serial peripheral interface/Inter-IC       sound
 //------------------------------------------------------------------------------
 
 registers ©SPI1 @at 0x40013000 {
@@ -11439,8 +11185,7 @@ registers ©SPI3 @at 0x40003c00 {
 //------------------------------------------------------------------------------
 
 registers ©STK @at 0xe000e010 {
-//---  Register CTRL: SysTick control and status
-          register
+//---  Register CTRL: SysTick control and status           register
   CTRL @offset 0x0 $u32 {
     15
     COUNTFLAG // at 16: COUNTFLAG
@@ -11462,8 +11207,7 @@ registers ©STK @at 0xe000e010 {
     CURRENT:24 // at 0: Current counter value
   }
 
-//---  Register CALIB: SysTick calibration value
-          register
+//---  Register CALIB: SysTick calibration value           register
   CALIB @offset 0xc $u32 {
     NOREF // at 31: NOREF flag. Reads as zero
     SKEW // at 30: SKEW flag: Indicates whether the TENMS value is exact
@@ -11474,13 +11218,11 @@ registers ©STK @at 0xe000e010 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral SWPMI1: Single Wire Protocol Master
-      Interface
+// Peripheral SWPMI1: Single Wire Protocol Master       Interface
 //------------------------------------------------------------------------------
 
 registers ©SWPMI1 @at 0x40008800 {
-//---  Register CR: SWPMI Configuration/Control
-          register
+//---  Register CR: SWPMI Configuration/Control           register
   CR @offset 0x0 $u32 {
     21
     DEACT // at 10: Single wire protocol master interface deactivate
@@ -11499,8 +11241,7 @@ registers ©SWPMI1 @at 0x40008800 {
     BR:6 // at 0: Bitrate prescaler
   }
 
-//---  Register ISR: SWPMI Interrupt and Status
-          register
+//---  Register ISR: SWPMI Interrupt and Status           register
   ISR @offset 0xc @ro $u32 {
     21
     DEACTF // at 10: DEACTIVATED flag
@@ -11516,8 +11257,7 @@ registers ©SWPMI1 @at 0x40008800 {
     RXBFF // at 0: Receive buffer full flag
   }
 
-//---  Register ICR: SWPMI Interrupt Flag Clear
-          register
+//---  Register ICR: SWPMI Interrupt Flag Clear           register
   ICR @offset 0x10 $u32 {
     23
     CSRF // at 8: Clear slave resume flag
@@ -11530,8 +11270,7 @@ registers ©SWPMI1 @at 0x40008800 {
     CRXBFF // at 0: Clear receive buffer full flag
   }
 
-//---  Register IER: SWPMI Interrupt Enable
-          register
+//---  Register IER: SWPMI Interrupt Enable           register
   IER @offset 0x14 $u32 {
     23
     SRIE // at 8: Slave resume interrupt enable
@@ -11545,8 +11284,7 @@ registers ©SWPMI1 @at 0x40008800 {
     RXBFIE // at 0: Receive buffer full interrupt enable
   }
 
-//---  Register RFL: SWPMI Receive Frame Length
-          register
+//---  Register RFL: SWPMI Receive Frame Length           register
   RFL @offset 0x18 @ro $u32 {
     27
     RFL:5 // at 0: Receive frame length
@@ -11595,8 +11333,7 @@ registers ©SYSCFG @at 0x40010000 {
     FWDIS // at 0: Firewall disable
   }
 
-//---  Register EXTICR1: external interrupt configuration register
-          1
+//---  Register EXTICR1: external interrupt configuration register           1
   EXTICR1 @offset 0x8 $u32 {
     17
     EXTI3:3 // at 12: EXTI 3 configuration bits
@@ -11608,8 +11345,7 @@ registers ©SYSCFG @at 0x40010000 {
     EXTI0:3 // at 0: EXTI 0 configuration bits
   }
 
-//---  Register EXTICR2: external interrupt configuration register
-          2
+//---  Register EXTICR2: external interrupt configuration register           2
   EXTICR2 @offset 0xc $u32 {
     17
     EXTI7:3 // at 12: EXTI 7 configuration bits
@@ -11621,8 +11357,7 @@ registers ©SYSCFG @at 0x40010000 {
     EXTI4:3 // at 0: EXTI 4 configuration bits
   }
 
-//---  Register EXTICR3: external interrupt configuration register
-          3
+//---  Register EXTICR3: external interrupt configuration register           3
   EXTICR3 @offset 0x10 $u32 {
     17
     EXTI11:3 // at 12: EXTI 11 configuration bits
@@ -11634,8 +11369,7 @@ registers ©SYSCFG @at 0x40010000 {
     EXTI8:3 // at 0: EXTI 8 configuration bits
   }
 
-//---  Register EXTICR4: external interrupt configuration register
-          4
+//---  Register EXTICR4: external interrupt configuration register           4
   EXTICR4 @offset 0x14 $u32 {
     17
     EXTI15:3 // at 12: EXTI15 configuration bits
@@ -11809,8 +11543,7 @@ registers ©TIM1 @at 0x40012c00 {
     UG // at 0: Update generation
   }
 
-//---  Register CCMR1_Output: capture/compare mode register 1 (output
-          mode)
+//---  Register CCMR1_Output: capture/compare mode register 1 (output           mode)
   CCMR1_Output @offset 0x18 $u32 {
     16
     OC2CE // at 15: Output Compare 2 clear enable
@@ -11825,8 +11558,7 @@ registers ©TIM1 @at 0x40012c00 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR1_Input: capture/compare mode register 1 (input
-          mode)
+//---  Register CCMR1_Input: capture/compare mode register 1 (input           mode)
   CCMR1_Input @offset 0x18 $u32 {
     16
     IC2F:4 // at 12: Input capture 2 filter
@@ -11837,8 +11569,7 @@ registers ©TIM1 @at 0x40012c00 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR2_Output: capture/compare mode register 2 (output
-          mode)
+//---  Register CCMR2_Output: capture/compare mode register 2 (output           mode)
   CCMR2_Output @offset 0x1c $u32 {
     16
     OC4CE // at 15: Output compare 4 clear enable
@@ -11853,8 +11584,7 @@ registers ©TIM1 @at 0x40012c00 {
     CC3S:2 // at 0: Capture/Compare 3 selection
   }
 
-//---  Register CCMR2_Input: capture/compare mode register 2 (input
-          mode)
+//---  Register CCMR2_Input: capture/compare mode register 2 (input           mode)
   CCMR2_Input @offset 0x1c $u32 {
     16
     IC4F:4 // at 12: Input capture 4 filter
@@ -11865,8 +11595,7 @@ registers ©TIM1 @at 0x40012c00 {
     CC3S:2 // at 0: Capture/compare 3 selection
   }
 
-//---  Register CCER: capture/compare enable
-          register
+//---  Register CCER: capture/compare enable           register
   CCER @offset 0x20 $u32 {
     18
     CC4P // at 13: Capture/Compare 3 output Polarity
@@ -11968,8 +11697,7 @@ registers ©TIM1 @at 0x40012c00 {
     ETR_ADC1_RMP:2 // at 0: External trigger remap on ADC1 analog watchdog
   }
 
-//---  Register CCMR3_Output: capture/compare mode register 2 (output
-          mode)
+//---  Register CCMR3_Output: capture/compare mode register 2 (output           mode)
   CCMR3_Output @offset 0x54 $u32 {
     7
     OC6M_bit3 // at 24: Output Compare 6 mode bit 3
@@ -12103,8 +11831,7 @@ registers ©TIM15 @at 0x40014000 {
     UG // at 0: Update generation
   }
 
-//---  Register CCMR1_Output: capture/compare mode register (output
-          mode)
+//---  Register CCMR1_Output: capture/compare mode register (output           mode)
   CCMR1_Output @offset 0x18 $u32 {
     15
     OC1M_2 // at 16: Output Compare 1 mode
@@ -12115,8 +11842,7 @@ registers ©TIM15 @at 0x40014000 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR1_Input: capture/compare mode register 1 (input
-          mode)
+//---  Register CCMR1_Input: capture/compare mode register 1 (input           mode)
   CCMR1_Input @offset 0x18 $u32 {
     24
     IC1F:4 // at 4: Input capture 1 filter
@@ -12124,8 +11850,7 @@ registers ©TIM15 @at 0x40014000 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCER: capture/compare enable
-          register
+//---  Register CCER: capture/compare enable           register
   CCER @offset 0x20 $u32 {
     28
     CC1NP // at 3: Capture/Compare 1 output Polarity
@@ -12193,8 +11918,7 @@ registers ©TIM15 @at 0x40014000 {
     DMAB:16 // at 0: DMA register for burst accesses
   }
 
-//---  Register CCR2: TIM15 capture/compare register
-          2
+//---  Register CCR2: TIM15 capture/compare register           2
   CCR2 @offset 0x38 $u32 {
     16
     CCR2:16 // at 0: Capture/Compare 2 value
@@ -12219,8 +11943,7 @@ registers ©TIM15 @at 0x40014000 {
     BKINE // at 0: BRK BKIN input enable
   }
 
-//---  Register SMCR: TIM15 slave mode control
-          register
+//---  Register SMCR: TIM15 slave mode control           register
   SMCR @offset 0x8 $u32 {
     15
     SMS_16 // at 16: SMS bit 16
@@ -12304,8 +12027,7 @@ registers ©TIM16 @at 0x40014400 {
     UG // at 0: Update generation
   }
 
-//---  Register CCMR1_Output: capture/compare mode register (output
-          mode)
+//---  Register CCMR1_Output: capture/compare mode register (output           mode)
   CCMR1_Output @offset 0x18 $u32 {
     15
     OC1M_2 // at 16: Output Compare 1 mode
@@ -12316,8 +12038,7 @@ registers ©TIM16 @at 0x40014400 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR1_Input: capture/compare mode register 1 (input
-          mode)
+//---  Register CCMR1_Input: capture/compare mode register 1 (input           mode)
   CCMR1_Input @offset 0x18 $u32 {
     24
     IC1F:4 // at 4: Input capture 1 filter
@@ -12325,8 +12046,7 @@ registers ©TIM16 @at 0x40014400 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCER: capture/compare enable
-          register
+//---  Register CCER: capture/compare enable           register
   CCER @offset 0x20 $u32 {
     28
     CC1NP // at 3: Capture/Compare 1 output Polarity
@@ -12504,8 +12224,7 @@ registers ©TIM2 @at 0x40000000 {
     UG // at 0: Update generation
   }
 
-//---  Register CCMR1_Output: capture/compare mode register 1 (output
-          mode)
+//---  Register CCMR1_Output: capture/compare mode register 1 (output           mode)
   CCMR1_Output @offset 0x18 $u32 {
     16
     OC2CE // at 15: Output compare 2 clear enable
@@ -12520,8 +12239,7 @@ registers ©TIM2 @at 0x40000000 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR1_Input: capture/compare mode register 1 (input
-          mode)
+//---  Register CCMR1_Input: capture/compare mode register 1 (input           mode)
   CCMR1_Input @offset 0x18 $u32 {
     16
     IC2F:4 // at 12: Input capture 2 filter
@@ -12532,8 +12250,7 @@ registers ©TIM2 @at 0x40000000 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR2_Output: capture/compare mode register 2 (output
-          mode)
+//---  Register CCMR2_Output: capture/compare mode register 2 (output           mode)
   CCMR2_Output @offset 0x1c $u32 {
     16
     OC4CE // at 15: Output compare 4 clear enable
@@ -12548,8 +12265,7 @@ registers ©TIM2 @at 0x40000000 {
     CC3S:2 // at 0: Capture/Compare 3 selection
   }
 
-//---  Register CCMR2_Input: capture/compare mode register 2 (input
-          mode)
+//---  Register CCMR2_Input: capture/compare mode register 2 (input           mode)
   CCMR2_Input @offset 0x1c $u32 {
     16
     IC4F:4 // at 12: Input capture 4 filter
@@ -12560,8 +12276,7 @@ registers ©TIM2 @at 0x40000000 {
     CC3S:2 // at 0: Capture/Compare 3 selection
   }
 
-//---  Register CCER: capture/compare enable
-          register
+//---  Register CCER: capture/compare enable           register
   CCER @offset 0x20 $u32 {
     16
     CC4NP // at 15: Capture/Compare 4 output Polarity
@@ -12736,8 +12451,7 @@ registers ©TIM3 @at 0x40000400 {
     UG // at 0: Update generation
   }
 
-//---  Register CCMR1_Output: capture/compare mode register 1 (output
-          mode)
+//---  Register CCMR1_Output: capture/compare mode register 1 (output           mode)
   CCMR1_Output @offset 0x18 $u32 {
     16
     OC2CE // at 15: Output compare 2 clear enable
@@ -12752,8 +12466,7 @@ registers ©TIM3 @at 0x40000400 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR1_Input: capture/compare mode register 1 (input
-          mode)
+//---  Register CCMR1_Input: capture/compare mode register 1 (input           mode)
   CCMR1_Input @offset 0x18 $u32 {
     16
     IC2F:4 // at 12: Input capture 2 filter
@@ -12764,8 +12477,7 @@ registers ©TIM3 @at 0x40000400 {
     CC1S:2 // at 0: Capture/Compare 1 selection
   }
 
-//---  Register CCMR2_Output: capture/compare mode register 2 (output
-          mode)
+//---  Register CCMR2_Output: capture/compare mode register 2 (output           mode)
   CCMR2_Output @offset 0x1c $u32 {
     16
     OC4CE // at 15: Output compare 4 clear enable
@@ -12780,8 +12492,7 @@ registers ©TIM3 @at 0x40000400 {
     CC3S:2 // at 0: Capture/Compare 3 selection
   }
 
-//---  Register CCMR2_Input: capture/compare mode register 2 (input
-          mode)
+//---  Register CCMR2_Input: capture/compare mode register 2 (input           mode)
   CCMR2_Input @offset 0x1c $u32 {
     16
     IC4F:4 // at 12: Input capture 4 filter
@@ -12792,8 +12503,7 @@ registers ©TIM3 @at 0x40000400 {
     CC3S:2 // at 0: Capture/Compare 3 selection
   }
 
-//---  Register CCER: capture/compare enable
-          register
+//---  Register CCER: capture/compare enable           register
   CCER @offset 0x20 $u32 {
     16
     CC4NP // at 15: Capture/Compare 4 output Polarity
@@ -13048,8 +12758,7 @@ registers ©TSC @at 0x40024000 {
     EOAF // at 0: End of acquisition flag
   }
 
-//---  Register IOHCR: I/O hysteresis control
-          register
+//---  Register IOHCR: I/O hysteresis control           register
   IOHCR @offset 0x10 $u32 {
     G8_IO4 // at 31: G8_IO4
     G8_IO3 // at 30: G8_IO3
@@ -13085,8 +12794,7 @@ registers ©TSC @at 0x40024000 {
     G1_IO1 // at 0: G1_IO1
   }
 
-//---  Register IOASCR: I/O analog switch control
-          register
+//---  Register IOASCR: I/O analog switch control           register
   IOASCR @offset 0x18 $u32 {
     G8_IO4 // at 31: G8_IO4
     G8_IO3 // at 30: G8_IO3
@@ -13194,8 +12902,7 @@ registers ©TSC @at 0x40024000 {
     G1_IO1 // at 0: G1_IO1
   }
 
-//---  Register IOGCSR: I/O group control status
-          register
+//---  Register IOGCSR: I/O group control status           register
   IOGCSR @offset 0x30 $u32 {
     8
     G8S // at 23: Analog I/O group x status
@@ -13364,8 +13071,7 @@ registers ©UART4 @at 0x40004c00 {
     DIV_Fraction:4 // at 0: DIV_Fraction
   }
 
-//---  Register GTPR: Guard time and prescaler
-          register
+//---  Register GTPR: Guard time and prescaler           register
   GTPR @offset 0x10 $u32 {
     16
     GT:8 // at 8: Guard time value
@@ -13388,8 +13094,7 @@ registers ©UART4 @at 0x40004c00 {
     ABRRQ // at 0: Auto baud rate request
   }
 
-//---  Register ISR: Interrupt & status
-          register
+//---  Register ISR: Interrupt & status           register
   ISR @offset 0x1c @ro $u32 {
     9
     REACK // at 22: REACK
@@ -13454,8 +13159,7 @@ registers ©UART4 @at 0x40004c00 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral USART1: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral USART1: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 registers ©USART1 @at 0x40013800 {
@@ -13551,8 +13255,7 @@ registers ©USART1 @at 0x40013800 {
     DIV_Fraction:4 // at 0: DIV_Fraction
   }
 
-//---  Register GTPR: Guard time and prescaler
-          register
+//---  Register GTPR: Guard time and prescaler           register
   GTPR @offset 0x10 $u32 {
     16
     GT:8 // at 8: Guard time value
@@ -13575,8 +13278,7 @@ registers ©USART1 @at 0x40013800 {
     ABRRQ // at 0: Auto baud rate request
   }
 
-//---  Register ISR: Interrupt & status
-          register
+//---  Register ISR: Interrupt & status           register
   ISR @offset 0x1c @ro $u32 {
     9
     REACK // at 22: REACK
@@ -13737,8 +13439,7 @@ registers ©USART2 @at 0x40004400 {
     DIV_Fraction:4 // at 0: DIV_Fraction
   }
 
-//---  Register GTPR: Guard time and prescaler
-          register
+//---  Register GTPR: Guard time and prescaler           register
   GTPR @offset 0x10 $u32 {
     16
     GT:8 // at 8: Guard time value
@@ -13761,8 +13462,7 @@ registers ©USART2 @at 0x40004400 {
     ABRRQ // at 0: Auto baud rate request
   }
 
-//---  Register ISR: Interrupt & status
-          register
+//---  Register ISR: Interrupt & status           register
   ISR @offset 0x1c @ro $u32 {
     9
     REACK // at 22: REACK
@@ -13827,8 +13527,7 @@ registers ©USART2 @at 0x40004400 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral USART3: Universal synchronous asynchronous receiver
-      transmitter
+// Peripheral USART3: Universal synchronous asynchronous receiver       transmitter
 //------------------------------------------------------------------------------
 
 registers ©USART3 @at 0x40004800 {
@@ -13925,8 +13624,7 @@ registers ©USART3 @at 0x40004800 {
     BRR:12 // at 0: USARTDIV
   }
 
-//---  Register GTPR: Guard time and prescaler
-          register
+//---  Register GTPR: Guard time and prescaler           register
   GTPR @offset 0x10 $u32 {
     16
     GT:8 // at 8: Guard time value
@@ -13949,8 +13647,7 @@ registers ©USART3 @at 0x40004800 {
     ABRRQ // at 0: Auto baud rate request
   }
 
-//---  Register ISR: Interrupt & status
-          register
+//---  Register ISR: Interrupt & status           register
   ISR @offset 0x1c @ro $u32 {
     6
     TCBGT // at 25: Transmission complete before guard time completion
@@ -14203,8 +13900,7 @@ registers ©USB_FS @at 0x40006800 {
     3
   }
 
-//---  Register LPMCSR: LPM control and status
-          register
+//---  Register LPMCSR: LPM control and status           register
   LPMCSR @offset 0x54 $u32 {
     24
     BESL:4 // at 4: BESL value
@@ -14232,8 +13928,7 @@ registers ©USB_FS @at 0x40006800 {
 }
 
 //------------------------------------------------------------------------------
-// Peripheral USB_SRAM: Universal serial bus full-speed device
-      interface
+// Peripheral USB_SRAM: Universal serial bus full-speed device       interface
 //------------------------------------------------------------------------------
 
 registers ©USB_SRAM @at 0x40006c00 {
@@ -14419,8 +14114,7 @@ registers ©USB_SRAM @at 0x40006c00 {
     3
   }
 
-//---  Register LPMCSR: LPM control and status
-          register
+//---  Register LPMCSR: LPM control and status           register
   LPMCSR @offset 0x54 $u32 {
     24
     BESL:4 // at 4: BESL value
@@ -14452,8 +14146,7 @@ registers ©USB_SRAM @at 0x40006c00 {
 //------------------------------------------------------------------------------
 
 registers ©VREFBUF @at 0x40010030 {
-//---  Register CSR: VREF control and status
-          register
+//---  Register CSR: VREF control and status           register
   CSR @offset 0x0 $u32 {
     28
     VRR // at 3: Voltage reference buffer ready

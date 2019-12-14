@@ -47,7 +47,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
   var s = separator
   s += "// Peripheral " + inPeripheral.name
   if let d = inPeripheral.description {
-    s += ": " + d
+    s += ": " + d.replacingOccurrences(of: "\n", with: " ")
   }
   s += "\n"
   s += separator + "\n"
@@ -68,7 +68,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
         s += "\n  \(registerName) @offset 0x\(String (address, radix: 16))"
       }
     }else{
-      s += "//---  Register " + register.name + ": " + register.description + "\n"
+      s += "//---  Register " + register.name + ": " + register.description.replacingOccurrences(of: "\n", with: " ") + "\n"
       s += "  \(register.name) @offset 0x\(String (register.addressOffset, radix: 16))"
     }
     if let access = register.access, access == "read-only" {
@@ -80,7 +80,9 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
       s += " {\n"
       var bitFieldDictionary = [UInt : (UInt, String, String)] ()
       for field in fields {
-        bitFieldDictionary [field.bitOffset] = (field.bitWidth, field.name, field.description)
+        if field.name != "RESERVED" {
+          bitFieldDictionary [field.bitOffset] = (field.bitWidth, field.name, field.description)
+        }
       }
       var fieldOffset = register.size
       for offset in bitFieldDictionary.keys.sorted ().reversed () {
@@ -101,39 +103,6 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
     s += "\n"
   }
   s += "}\n\n"
-//  for register in inPeripheral.registers?.register ?? [] {
-//    for field in register.fields?.field ?? [] {
-//      if let enumeratedValues = field.enumeratedValues {
-//        let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-//        s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
-//        for enumValue in enumeratedValues.enumeratedValue {
-//          let descriptionArray = enumValue.description.components (separatedBy: " ")
-//          let enumName : String
-//          if descriptionArray.count > 0 {
-//            var name = "_"
-//            for character in descriptionArray [0].unicodeScalars {
-//              let prop = character.properties
-//              if prop.isAlphabetic || prop.isASCIIHexDigit {
-//                name += "\(character)"
-//              }else{
-//                name += "_"
-//              }
-//            }
-//            enumName = name
-//          }else{
-//            enumName = ""
-//          }
-//          s += "  let \(inPeripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
-//          if field.bitWidth == 1 {
-//            s += "$bool = \((enumValue.value == 0) ? "no" : "yes") // \(enumValue.description)\n"
-//          }else{
-//            s += "$u\(field.bitWidth) = \(enumValue.value) // \(enumValue.description)\n"
-//          }
-//        }
-//        s += "\n"
-//      }
-//    }
-//  }
   ioGenerationDict [inPeripheral.name] = s
 }
 
@@ -164,18 +133,37 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
       print ("  *** Error for group \(inGroupName) ***")
       print ("      Peripheral \(inPeripheralArray.first!.name) has \(referenceRegisterArray.count) registers")
       print ("      Peripheral \(peripheral.name) has \(testedRegisterArray.count) registers")
+      var referenceRegisterNameSet = Set <String> ()
+      for register in referenceRegisterArray {
+        referenceRegisterNameSet.insert (register.name)
+      }
+      var testedRegisterNameSet = Set <String> ()
+      for register in testedRegisterArray {
+        testedRegisterNameSet.insert (register.name)
+      }
+      var s = "        Peripheral \(peripheral.name) does not define:"
+      for name in referenceRegisterNameSet.subtracting (testedRegisterNameSet) {
+        s += " " + name
+      }
+      print (s)
+      s = "        Peripheral \(inPeripheralArray.first!.name) does not define:"
+      for name in testedRegisterNameSet.subtracting (referenceRegisterNameSet) {
+        s += " " + name
+      }
+      print (s)
     }else{
   //--- Check registers
-    var regIndex = 0
-    while regIndex < referenceRegisterArray.count {
-      let referenceRegister = referenceRegisterArray [regIndex]
-      let testedRegister = testedRegisterArray [regIndex]
-      if referenceRegister != testedRegister {
-        print ("  *** Error for group \(inGroupName) ***")
-        print ("      Peripheral \(inPeripheralArray.first!.name), register named '\(referenceRegister.name)'")
-        print ("      Peripheral \(peripheral.name), incompatible register named '\(testedRegister.name)'")
-      }
-      regIndex += 1
+      var regIndex = 0
+      while regIndex < referenceRegisterArray.count {
+        let referenceRegister = referenceRegisterArray [regIndex]
+        let testedRegister = testedRegisterArray [regIndex]
+        if referenceRegister != testedRegister {
+          print ("  *** Error for group \(inGroupName) ***")
+          print ("      Peripheral \(inPeripheralArray.first!.name), register named '\(referenceRegister.name)'")
+          print ("      Peripheral \(peripheral.name), incompatible register named '\(testedRegister.name)'")
+          referenceRegister.printIncompatibility (with: testedRegister)
+        }
+        regIndex += 1
       }
     }
   }
@@ -211,7 +199,9 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
       s += " {\n"
       var bitFieldDictionary = [UInt : (UInt, String, String)] ()
       for field in fields {
-        bitFieldDictionary [field.bitOffset] = (field.bitWidth, field.name, field.description)
+        if field.name != "RESERVED" {
+          bitFieldDictionary [field.bitOffset] = (field.bitWidth, field.name, field.description)
+        }
       }
       var fieldOffset = register.size
       for offset in bitFieldDictionary.keys.sorted ().reversed () {
@@ -232,42 +222,6 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
     s += "\n"
   }
   s += "}\n\n"
-//  for peripheral in inPeripheralArray {
-//    for register in peripheral.registers?.register ?? [] {
-//      for field in register.fields?.field ?? [] {
-//        if let enumeratedValues = field.enumeratedValues {
-//          let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-//          s += "//--- Enumerated values for register \(register.name), field \(field.name)\n"
-//          for enumValue in enumeratedValues.enumeratedValue {
-//            let descriptionArray = enumValue.description.components (separatedBy: " ")
-//            let enumName : String
-//            if descriptionArray.count > 0 {
-//              var name = "_"
-//              for character in descriptionArray [0].unicodeScalars {
-//                let prop = character.properties
-//                if prop.isAlphabetic || prop.isASCIIHexDigit {
-//                  name += "\(character)"
-//                }else{
-//                  name += "_"
-//                }
-//              }
-//              enumName = name
-//            }else{
-//              enumName = ""
-//            }
-//            s += "  let \(peripheral.name)_\(registerBaseName)_\(field.name)\(enumName)_\(enumValue.name) "
-//            if field.bitWidth == 1 {
-//              s += "$bool = \((enumValue.value == 0) ? "no" : "yes")"
-//            }else{
-//              s += "$u\(field.bitWidth) = \(enumValue.value)"
-//            }
-//            s += " // \(enumValue.description)\n"
-//          }
-//          s += "\n"
-//        }
-//      }
-//    }
-//  }
   return s
 }
 

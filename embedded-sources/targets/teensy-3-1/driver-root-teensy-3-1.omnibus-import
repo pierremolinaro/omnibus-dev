@@ -12,7 +12,7 @@ driver root {
   //--- Enable clocks to always-used peripherals
     ©SIM.SCGC3 = {©SIM.SCGC3 !ADC1:1 !FTM2:1}
     ©SIM.SCGC5 = 0x00043F82    // clocks active to all GPIO
-    ©SIM.SCGC6 = {©SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTF:1}
+    ©SIM.SCGC6 = {©SIM.SCGC6 !RTC:1 !FTM0:1 !FTM1:1 !ADC0:1 !FTFL:1}
   //--- If the RTC oscillator isn't enabled, get it started early
     if ©RTC.CR.OSCE == 0 {
       ©RTC.SR = 0
@@ -28,7 +28,7 @@ driver root {
   //--- Enable capacitors for crystal
     ©OSC.CR = {©OSC.CR !SC8P:1 !SC2P:1}
   //--- Enable osc, 8-32 MHz range, low power mode
-    ©MCG.C2 = {©MCG.C2 !RANGE:2 !EREFS:1}
+    ©MCG.C2 = {©MCG.C2 !RANGE0:2 !EREFS0:1}
   //--- Switch to crystal as clock source, FLL input = 16 MHz / 512
     ©MCG.C1 = {©MCG.C1 !CLKS:2 !FRDIV:4}
   //--- Wait for crystal oscillator to begin

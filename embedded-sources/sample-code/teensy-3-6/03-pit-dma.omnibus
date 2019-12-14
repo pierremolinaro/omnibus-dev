@@ -73,80 +73,80 @@ driver pit > root {
   //--- Set up LED_BUILTIN digital output at LOW level
     digital.set (!mode:.output !toPort:LED_L4)
     digital.write (!no !toPort:LED_L4)
-  
+
   //--- Power on DMA:MUX, PIT, DMA
     ©SIM.SCGC6 |= {©SIM.SCGC6 !DMAMUX:1 !PIT:1}
     ©SIM.SCGC7 |= {©SIM.SCGC7 !DMA:1}
-  
+
   //--- Unmask PIT0 interrupt
     enable (!interrupt:.PITChannel3)
-  
+
   //--- Unmask DMAChannel0TransferComplete interrupt
     enable (!interrupt:.DMAChannel0TransferComplete)
-  
+
   //--- Enable PIT module
     ©PIT.MCR = 0
-  
+
   //--- Disable #PIT3
     ©PIT.TCTRL [3] = 0
-  
+
   //--- #PIT0 clock frequency is BUS (in Hertz): #PIT:LDVAL3 sets the request period of DMA 0
     ©PIT.LDVAL [3] = ((BUS_MHZ * 1_000_000) / PATTERN_FREQUENCY) - 1
-  
+
   //--- Clear #PIT3 interrupt flag
     ©PIT.TFLG [3] = 1
-  
+
   //--- Disable DMA Channel 0: it is required for configuring it
     ©DMAMUX.CHCFG [3] = 0
-  
+
   //--- Initial source address: the pattern array address
     ©DMA.TCD_SADDR [3] = addressof (pattern)
-  
+
   //--- After every request, source address is incremented by 4
     ©DMA.TCD_SOFF [3] = 4
-  
+
   //--- At the end of a major loop, source address is decremented to pattern array address
     ©DMA.TCD_SLAST [3] = - 4 * PATTERN_LENGTH // - transfert_size * major_loop_count
-  
+
   //--- Destination address: the address of the GPIOC_PTOR control register
     ©DMA.TCD_DADDR [3] = addressof ©GPIOD.PTOR
-  
+
   //--- After every request, destination address is not modified
     ©DMA.TCD_DOFF [3] = 0
-  
+
   //--- At the end of a major loop, destination address is not modified
     ©DMA.TCD_DLASTSGA [3] = 0
-  
+
   //--- Set major loop count
     ©DMA.TCD_CITER_ELINKNO [3] = PATTERN_LENGTH
     ©DMA.TCD_BITER_ELINKNO [3] = PATTERN_LENGTH
-  
+
   //--- Source and destination are 32-bit
     ©DMA.TCD_ATTR [3] = {©DMA.TCD_ATTR
       !SSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer source size is 32-bit
       !DSIZE: DMA_TCD_ATTR_SIZE_32BIT // Transfer destination size is 32-bit
     }
-  
+
   //--- Number of bytes to transfer per request: 4
     ©DMA.TCD_NBYTES_MLNO [3] = 4
-  
+
   //--- Set repetition and DMA interrupt
   // if DREQ bit is set, the DMA performs PATTERN_LENGTH transfers and stops)
   // Otherwise, the DMA performs PATTERN_LENGTH transfers repetitively
     ©DMA.TCD_CSR [3] = {©DMA.TCD_CSR
       !INTMAJOR:1 // Generate an interrupt at the end of major loop count transfert (for toggling D4)
     }
-  
+
   //--- Configure DMA Channel
     ©DMAMUX.CHCFG [3] = {©DMAMUX.CHCFG
       !ENBL: 1 // DMA Channel 0 is enabled
       !TRIG: 1 // DMA Channel 0 is triggered by #PIT 0
       !SOURCE: DMAMUX_SOURCE_ALWAYS0 // Trigger is always active
     }
-  
+
   //--- Start DMA Channel 0
     ©DMA.SERQ = 3
-  
+
   //--- Enable #PIT 0 : it starts counting, enable interrupt
     ©PIT.TCTRL [3] = {©PIT.TCTRL !TEN:1 !TIE:1}
   }
@@ -168,7 +168,7 @@ driver pit > root {
   //--- Toggle LED_L2
     digital.toggle (!port:LED_L2)
   }
-  
+
   //····················································································································
 }
 
