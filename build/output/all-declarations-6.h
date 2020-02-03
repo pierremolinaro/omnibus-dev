@@ -1897,7 +1897,7 @@ class GALGAS_ctCheckMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_ctCheckMap (const GALGAS_ctCheckMap & inSource) ;
   public : GALGAS_ctCheckMap & operator = (const GALGAS_ctCheckMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -2102,7 +2102,7 @@ class GALGAS_ctMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_ctMap (const GALGAS_ctMap & inSource) ;
   public : GALGAS_ctMap & operator = (const GALGAS_ctMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -2785,7 +2785,7 @@ class GALGAS_assignmentGenerationVarMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_assignmentGenerationVarMap (const GALGAS_assignmentGenerationVarMap & inSource) ;
   public : GALGAS_assignmentGenerationVarMap & operator = (const GALGAS_assignmentGenerationVarMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning

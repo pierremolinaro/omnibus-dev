@@ -11,7 +11,7 @@ import Foundation
 
 //------------------------------------------------------------------------------
 
-func generatePython (device inDevice : Device, path inBasePath : String) {
+func generatePython (device inDevice : Device, baseURL inBaseURL : URL) {
   let separator = "#" + String (repeating: "-", count: 79) + "\n"
   var s = "#!/usr/bin/python\n"
   s += "# -*- coding: utf-8 -*-\n\n"
@@ -43,7 +43,7 @@ func generatePython (device inDevice : Device, path inBasePath : String) {
   s += "  return result\n\n"
   s += separator + "\n"
 //---
-  try! s.write(to: URL.init (fileURLWithPath: inBasePath + ".py"), atomically: true, encoding: .utf8)
+  try! s.write(to: inBaseURL.appendingPathExtension ("py"), atomically: true, encoding: .utf8)
 }
 
 //------------------------------------------------------------------------------

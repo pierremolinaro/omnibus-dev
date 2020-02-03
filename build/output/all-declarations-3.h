@@ -319,7 +319,7 @@ class GALGAS_controlRegisterFieldMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_controlRegisterFieldMap (const GALGAS_controlRegisterFieldMap & inSource) ;
   public : GALGAS_controlRegisterFieldMap & operator = (const GALGAS_controlRegisterFieldMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -543,7 +543,7 @@ class GALGAS_sliceMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_sliceMap (const GALGAS_sliceMap & inSource) ;
   public : GALGAS_sliceMap & operator = (const GALGAS_sliceMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1880,7 +1880,7 @@ class GALGAS_driverInstanciationArgumentMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_driverInstanciationArgumentMap (const GALGAS_driverInstanciationArgumentMap & inSource) ;
   public : GALGAS_driverInstanciationArgumentMap & operator = (const GALGAS_driverInstanciationArgumentMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -2080,7 +2080,7 @@ class GALGAS_instanciedDriverMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_instanciedDriverMap (const GALGAS_instanciedDriverMap & inSource) ;
   public : GALGAS_instanciedDriverMap & operator = (const GALGAS_instanciedDriverMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning

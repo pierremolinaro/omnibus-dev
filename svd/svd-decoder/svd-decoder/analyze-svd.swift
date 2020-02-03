@@ -13,14 +13,9 @@ import Foundation
 
 func analyzeSVDFile (path inPath : String) {
   print ("File \(inPath)")
-  let data = try! Data (contentsOf: URL.init (fileURLWithPath: inPath))
+  let url = URL (fileURLWithPath: inPath)
+  let data = try! Data (contentsOf: url)
   let decoder = XMLDecoder ()
-//  let formatter: DateFormatter = {
-//      let formatter = DateFormatter()
-//      formatter.dateFormat = "yyyy-MM-dd"
-//      return formatter
-//  }()
-//  decoder.dateDecodingStrategy = .formatted(formatter)
   let device: Device = try! decoder.decode (Device.self, from: data)
 //--- Normalize field descriptions (can contains carriage returns and several consecutive spaces)
   for peripheral in device.peripherals.peripheral {
@@ -55,12 +50,22 @@ for peripheral in device.peripherals.peripheral {
   }
 }
 //---
-//  print (device: device)
+  let baseName = url.deletingPathExtension ().lastPathComponent
+//  print (baseName)
+  let productDirectory = url.deletingLastPathComponent().appendingPathComponent (baseName)
+//  print (productDirectory)
+//--- Create product directory
+  let fm = FileManager ()
+  if !fm.fileExists(atPath: productDirectory.path) {
+    try! fm.createDirectory(at: productDirectory, withIntermediateDirectories: false, attributes: nil)
+  }
+  let productBaseURL = productDirectory.appendingPathComponent (baseName)
+//  print (productBaseURL)
 //---
-  generateHeader (device: device, path: inPath)
-  generateAssembly (device: device, path: inPath)
-  generatePython (device: device, path: inPath)
-  generateOmnibus (device: device, path: inPath)
+  generateHeader (device: device, baseURL: productBaseURL)
+  generateAssembly (device: device, baseURL: productBaseURL)
+  generatePython (device: device, baseURL: productBaseURL)
+  generateOmnibus (device: device, baseURL: productBaseURL)
 }
 
 //------------------------------------------------------------------------------

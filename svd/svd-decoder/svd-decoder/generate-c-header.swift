@@ -13,7 +13,7 @@ fileprivate let separator = "//" + String (repeating: "-", count: 78) + "\n"
 
 //------------------------------------------------------------------------------
 
-func generateHeader (device inDevice : Device, path inBasePath : String) {
+func generateHeader (device inDevice : Device, baseURL inBaseURL : URL) {
   var s = "#pragma once\n\n"
   s += separator
   s += "// " + inDevice.name + ": " + inDevice.description + "\n"
@@ -71,7 +71,7 @@ func generateHeader (device inDevice : Device, path inBasePath : String) {
   s += "}\n\n"
   s += separator
 //---
-  try! s.write(to: URL.init (fileURLWithPath: inBasePath + ".h"), atomically: true, encoding: .utf8)
+  try! s.write(to: inBaseURL.appendingPathExtension ("h"), atomically: true, encoding: .utf8)
 }
 
 //------------------------------------------------------------------------------

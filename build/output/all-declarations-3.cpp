@@ -1664,7 +1664,7 @@ typeComparisonResult cMapElement_controlRegisterFieldMap::compare (const cCollec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_controlRegisterFieldMap::GALGAS_controlRegisterFieldMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -1982,7 +1982,7 @@ typeComparisonResult cMapElement_sliceMap::compare (const cCollectionElement * i
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_sliceMap::GALGAS_sliceMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2988,7 +2988,7 @@ typeComparisonResult cMapElement_controlRegisterMap::compare (const cCollectionE
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_controlRegisterMap::GALGAS_controlRegisterMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4974,7 +4974,7 @@ typeComparisonResult cMapElement_globalSyncInstanceMapIR::compare (const cCollec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_globalSyncInstanceMapIR::GALGAS_globalSyncInstanceMapIR (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6067,7 +6067,7 @@ typeComparisonResult cMapElement_driverInstanciationArgumentMap::compare (const 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_driverInstanciationArgumentMap::GALGAS_driverInstanciationArgumentMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6325,7 +6325,7 @@ typeComparisonResult cMapElement_instanciedDriverMap::compare (const cCollection
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_instanciedDriverMap::GALGAS_instanciedDriverMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8985,7 +8985,7 @@ typeComparisonResult cMapElement_staticListInitializationMap::compare (const cCo
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_staticListInitializationMap::GALGAS_staticListInitializationMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -12037,7 +12037,7 @@ typeComparisonResult cMapElement_taskMapIR::compare (const cCollectionElement * 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_taskMapIR::GALGAS_taskMapIR (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

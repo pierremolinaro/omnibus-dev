@@ -4183,7 +4183,7 @@ typeComparisonResult cMapElement_ctCheckMap::compare (const cCollectionElement *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_ctCheckMap::GALGAS_ctCheckMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4459,7 +4459,7 @@ typeComparisonResult cMapElement_ctMap::compare (const cCollectionElement * inOp
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_ctMap::GALGAS_ctMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6934,7 +6934,7 @@ typeComparisonResult cMapElement_assignmentGenerationVarMap::compare (const cCol
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_assignmentGenerationVarMap::GALGAS_assignmentGenerationVarMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

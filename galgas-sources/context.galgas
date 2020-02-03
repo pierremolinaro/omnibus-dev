@@ -117,7 +117,7 @@ map @constructorMap { # Key is (!selector!selector)
 # PROPERTY GETTER MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @typePropertyGetterMap {
+map @typePropertyGetterMap %noSuggestion {
   @propertyGetterMap mGetterMap
   insert insertKey error message "the $%K type is already declared"
   search searchKey error message "there is no $%K type"
@@ -204,7 +204,7 @@ map @propertyGetterMap {
 # PROPERTY SETTER MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @typePropertySetterMap {
+map @typePropertySetterMap %noSuggestion {
   @propertySetterMap mSetterMap
   insert insertKey error message "the $%K type is already declared"
   search searchKey error message "there is no $%K type"

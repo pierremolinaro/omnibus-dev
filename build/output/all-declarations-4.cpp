@@ -2562,7 +2562,7 @@ typeComparisonResult cMapElement_externProcedureMapIR::compare (const cCollectio
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_externProcedureMapIR::GALGAS_externProcedureMapIR (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -2868,7 +2868,7 @@ typeComparisonResult cMapElement_interruptMapIR::compare (const cCollectionEleme
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_interruptMapIR::GALGAS_interruptMapIR (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

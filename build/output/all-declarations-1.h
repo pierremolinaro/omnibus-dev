@@ -721,7 +721,7 @@ class GALGAS_flatValuedObjectMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_flatValuedObjectMap (const GALGAS_flatValuedObjectMap & inSource) ;
   public : GALGAS_flatValuedObjectMap & operator = (const GALGAS_flatValuedObjectMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1449,7 +1449,7 @@ class GALGAS_referenceStateMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_referenceStateMap (const GALGAS_referenceStateMap & inSource) ;
   public : GALGAS_referenceStateMap & operator = (const GALGAS_referenceStateMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3932,7 +3932,7 @@ class GALGAS_panicRoutinePriorityMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_panicRoutinePriorityMap (const GALGAS_panicRoutinePriorityMap & inSource) ;
   public : GALGAS_panicRoutinePriorityMap & operator = (const GALGAS_panicRoutinePriorityMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -4122,7 +4122,7 @@ class GALGAS_routineMapForContext : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_routineMapForContext (const GALGAS_routineMapForContext & inSource) ;
   public : GALGAS_routineMapForContext & operator = (const GALGAS_routineMapForContext & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -4545,7 +4545,7 @@ class GALGAS_guardMapForContext : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_guardMapForContext (const GALGAS_guardMapForContext & inSource) ;
   public : GALGAS_guardMapForContext & operator = (const GALGAS_guardMapForContext & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -4811,7 +4811,7 @@ class GALGAS_controlRegisterGroupMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_controlRegisterGroupMap (const GALGAS_controlRegisterGroupMap & inSource) ;
   public : GALGAS_controlRegisterGroupMap & operator = (const GALGAS_controlRegisterGroupMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5010,7 +5010,7 @@ class GALGAS_controlRegisterMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_controlRegisterMap (const GALGAS_controlRegisterMap & inSource) ;
   public : GALGAS_controlRegisterMap & operator = (const GALGAS_controlRegisterMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5335,7 +5335,7 @@ class GALGAS_globalConstantMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_globalConstantMap (const GALGAS_globalConstantMap & inSource) ;
   public : GALGAS_globalConstantMap & operator = (const GALGAS_globalConstantMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5535,7 +5535,7 @@ class GALGAS_globalSyncInstanceMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_globalSyncInstanceMap (const GALGAS_globalSyncInstanceMap & inSource) ;
   public : GALGAS_globalSyncInstanceMap & operator = (const GALGAS_globalSyncInstanceMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5752,7 +5752,7 @@ class GALGAS_staticlistMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_staticlistMap (const GALGAS_staticlistMap & inSource) ;
   public : GALGAS_staticlistMap & operator = (const GALGAS_staticlistMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6069,7 +6069,7 @@ class GALGAS_typeConstantMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_typeConstantMap (const GALGAS_typeConstantMap & inSource) ;
   public : GALGAS_typeConstantMap & operator = (const GALGAS_typeConstantMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6173,7 +6173,7 @@ class GALGAS_constantMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_constantMap (const GALGAS_constantMap & inSource) ;
   public : GALGAS_constantMap & operator = (const GALGAS_constantMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6389,7 +6389,7 @@ class GALGAS_typeConstructorMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_typeConstructorMap (const GALGAS_typeConstructorMap & inSource) ;
   public : GALGAS_typeConstructorMap & operator = (const GALGAS_typeConstructorMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6493,7 +6493,7 @@ class GALGAS_constructorMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_constructorMap (const GALGAS_constructorMap & inSource) ;
   public : GALGAS_constructorMap & operator = (const GALGAS_constructorMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6709,7 +6709,7 @@ class GALGAS_typePropertySetterMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_typePropertySetterMap (const GALGAS_typePropertySetterMap & inSource) ;
   public : GALGAS_typePropertySetterMap & operator = (const GALGAS_typePropertySetterMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -6817,7 +6817,7 @@ class GALGAS_propertySetterMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_propertySetterMap (const GALGAS_propertySetterMap & inSource) ;
   public : GALGAS_propertySetterMap & operator = (const GALGAS_propertySetterMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -7033,7 +7033,7 @@ class GALGAS_typePropertyGetterMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_typePropertyGetterMap (const GALGAS_typePropertyGetterMap & inSource) ;
   public : GALGAS_typePropertyGetterMap & operator = (const GALGAS_typePropertyGetterMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -7141,7 +7141,7 @@ class GALGAS_propertyGetterMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_propertyGetterMap (const GALGAS_propertyGetterMap & inSource) ;
   public : GALGAS_propertyGetterMap & operator = (const GALGAS_propertyGetterMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -7357,7 +7357,7 @@ class GALGAS_availableInterruptMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_availableInterruptMap (const GALGAS_availableInterruptMap & inSource) ;
   public : GALGAS_availableInterruptMap & operator = (const GALGAS_availableInterruptMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -7557,7 +7557,7 @@ class GALGAS_infixOperatorMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_infixOperatorMap (const GALGAS_infixOperatorMap & inSource) ;
   public : GALGAS_infixOperatorMap & operator = (const GALGAS_infixOperatorMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -7824,7 +7824,7 @@ class GALGAS_prefixOperatorMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_prefixOperatorMap (const GALGAS_prefixOperatorMap & inSource) ;
   public : GALGAS_prefixOperatorMap & operator = (const GALGAS_prefixOperatorMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -8112,7 +8112,7 @@ class GALGAS_assignmentOperatorMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_assignmentOperatorMap (const GALGAS_assignmentOperatorMap & inSource) ;
   public : GALGAS_assignmentOperatorMap & operator = (const GALGAS_assignmentOperatorMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -8358,7 +8358,7 @@ class GALGAS_implicitConversionToBooleanMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_implicitConversionToBooleanMap (const GALGAS_implicitConversionToBooleanMap & inSource) ;
   public : GALGAS_implicitConversionToBooleanMap & operator = (const GALGAS_implicitConversionToBooleanMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -8604,7 +8604,7 @@ class GALGAS_taskMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_taskMap (const GALGAS_taskMap & inSource) ;
   public : GALGAS_taskMap & operator = (const GALGAS_taskMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning

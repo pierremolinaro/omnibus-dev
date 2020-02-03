@@ -11,7 +11,7 @@ import Foundation
 
 //------------------------------------------------------------------------------
 
-func generateAssembly (device inDevice : Device, path inBasePath : String) {
+func generateAssembly (device inDevice : Device, baseURL inBaseURL : URL) {
   let separator = "@" + String (repeating: "-", count: 79) + "\n"
   var s = separator
   s += "@ INTERRUPT VECTORS, " + inDevice.name + ": " + inDevice.description + "\n"
@@ -56,7 +56,7 @@ func generateAssembly (device inDevice : Device, path inBasePath : String) {
   s += "\n"
   s += separator + "\n"
 //---
-  try! s.write(to: URL.init (fileURLWithPath: inBasePath + ".s"), atomically: true, encoding: .utf8)
+  try! s.write(to: inBaseURL.appendingPathExtension ("s"), atomically: true, encoding: .utf8)
 }
 
 //------------------------------------------------------------------------------

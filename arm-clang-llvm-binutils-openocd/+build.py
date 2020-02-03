@@ -8,12 +8,12 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "9.0.0"
+LLVM_VERSION = "9.0.1"
 LLVM_SUFFIX = ""
 
 BINUTILS_VERSION = "2.33.1"
 
-LIBUSB_VERSION   = "1.0.23"
+LIBUSB_VERSION   = "1.0.23" # https://github.com/libusb/libusb/releases
 
 OPENOCD_VERSION = "0.10.0"
 
@@ -195,7 +195,7 @@ downloadArchive ("https://sourceforge.net/projects/lzmautils/files/" + XZ + ".ta
 #--------------------------------------------------------------------------- LLVM archives
 LLVM = "llvm-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 LLVM_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLVM + ".tar.xz"
-CLANG = "cfe-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
+CLANG = "clang-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 CLANG_ARCHIVE_PATH = ARCHIVE_DIR + "/" + CLANG + ".tar.xz"
 # LLD = "lld-" + LLVM_VERSION + LLVM_SUFFIX + ".src"
 # LLD_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LLD + ".tar.xz"
@@ -204,7 +204,7 @@ CLANG_ARCHIVE_PATH = ARCHIVE_DIR + "/" + CLANG + ".tar.xz"
 #--- Téléchargement : la base des URL des archives LLVM change régulièrement !
 if (LLVM_VERSION == "8.0.1") or (LLVM_VERSION == "7.1.0") :
   BASE_URL = "https://github.com/llvm/llvm-project/releases/download/llvmorg-"
-elif (LLVM_VERSION == "9.0.0") or (LLVM_VERSION == "8.0.0") or (LLVM_VERSION == "7.0.1") or (LLVM_VERSION == "7.0.0") :
+elif (LLVM_VERSION == "9.0.1") or (LLVM_VERSION == "9.0.0") or (LLVM_VERSION == "8.0.0") or (LLVM_VERSION == "7.0.1") or (LLVM_VERSION == "7.0.0") :
   BASE_URL = "http://releases.llvm.org/"
 else:
   print (bcolors.BOLD_RED + "LLVM Version " + LLVM_VERSION + " non prise en charge par le script" + bcolors.ENDC)

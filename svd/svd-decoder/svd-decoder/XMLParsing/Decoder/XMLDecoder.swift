@@ -600,6 +600,8 @@ extension _XMLDecoder {
         if let string = value as? String {
           if string.starts (with: "0x"), let uint32 = UInt32 (string.dropFirst (2), radix: 16) {
             return uint32
+          }else if string.starts (with: "0X"), let uint32 = UInt32 (string.dropFirst (2), radix: 16) {
+              return uint32
           }else if string.starts (with: "#"), let uint32 = UInt32 (string.dropFirst (1).replacingOccurrences(of: "x", with: "0"), radix: 2) {
             return uint32
           }else if let uint32 = UInt32 (string) { // Decimal

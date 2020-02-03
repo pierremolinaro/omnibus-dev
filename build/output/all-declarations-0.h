@@ -18965,7 +18965,7 @@ class GALGAS_controlRegisterUserAccesMapAST : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_controlRegisterUserAccesMapAST (const GALGAS_controlRegisterUserAccesMapAST & inSource) ;
   public : GALGAS_controlRegisterUserAccesMapAST & operator = (const GALGAS_controlRegisterUserAccesMapAST & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning

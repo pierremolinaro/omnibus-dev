@@ -3686,7 +3686,7 @@ typeComparisonResult cMapElement_controlRegisterUserAccesMapAST::compare (const 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_controlRegisterUserAccesMapAST::GALGAS_controlRegisterUserAccesMapAST (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -4194,7 +4194,7 @@ typeComparisonResult cMapElement_flatValuedObjectMap::compare (const cCollection
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_flatValuedObjectMap::GALGAS_flatValuedObjectMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6245,7 +6245,7 @@ typeComparisonResult cMapElement_referenceStateMap::compare (const cCollectionEl
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_referenceStateMap::GALGAS_referenceStateMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -6967,7 +6967,7 @@ typeComparisonResult cMapElement_panicRoutinePriorityMap::compare (const cCollec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_panicRoutinePriorityMap::GALGAS_panicRoutinePriorityMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7262,7 +7262,7 @@ typeComparisonResult cMapElement_routineMapForContext::compare (const cCollectio
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_routineMapForContext::GALGAS_routineMapForContext (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -7757,7 +7757,7 @@ typeComparisonResult cMapElement_guardMapForContext::compare (const cCollectionE
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_guardMapForContext::GALGAS_guardMapForContext (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8150,7 +8150,7 @@ typeComparisonResult cMapElement_controlRegisterGroupMap::compare (const cCollec
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_controlRegisterGroupMap::GALGAS_controlRegisterGroupMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8450,7 +8450,7 @@ typeComparisonResult cMapElement_globalConstantMap::compare (const cCollectionEl
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_globalConstantMap::GALGAS_globalConstantMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -8717,7 +8717,7 @@ typeComparisonResult cMapElement_globalSyncInstanceMap::compare (const cCollecti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_globalSyncInstanceMap::GALGAS_globalSyncInstanceMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9017,7 +9017,7 @@ typeComparisonResult cMapElement_staticlistMap::compare (const cCollectionElemen
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_staticlistMap::GALGAS_staticlistMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9498,7 +9498,7 @@ typeComparisonResult cMapElement_typeConstantMap::compare (const cCollectionElem
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_typeConstantMap::GALGAS_typeConstantMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -9756,7 +9756,7 @@ typeComparisonResult cMapElement_typeConstructorMap::compare (const cCollectionE
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_typeConstructorMap::GALGAS_typeConstructorMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10014,7 +10014,7 @@ typeComparisonResult cMapElement_typePropertySetterMap::compare (const cCollecti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_typePropertySetterMap::GALGAS_typePropertySetterMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (false) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10285,7 +10285,7 @@ typeComparisonResult cMapElement_typePropertyGetterMap::compare (const cCollecti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_typePropertyGetterMap::GALGAS_typePropertyGetterMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (false) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10556,7 +10556,7 @@ typeComparisonResult cMapElement_availableInterruptMap::compare (const cCollecti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_availableInterruptMap::GALGAS_availableInterruptMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -10823,7 +10823,7 @@ typeComparisonResult cMapElement_infixOperatorMap::compare (const cCollectionEle
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_infixOperatorMap::GALGAS_infixOperatorMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11141,7 +11141,7 @@ typeComparisonResult cMapElement_prefixOperatorMap::compare (const cCollectionEl
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_prefixOperatorMap::GALGAS_prefixOperatorMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11483,7 +11483,7 @@ typeComparisonResult cMapElement_assignmentOperatorMap::compare (const cCollecti
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_assignmentOperatorMap::GALGAS_assignmentOperatorMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11741,7 +11741,7 @@ typeComparisonResult cMapElement_implicitConversionToBooleanMap::compare (const 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_implicitConversionToBooleanMap::GALGAS_implicitConversionToBooleanMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -11999,7 +11999,7 @@ typeComparisonResult cMapElement_taskMap::compare (const cCollectionElement * in
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_taskMap::GALGAS_taskMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13273,7 +13273,7 @@ typeComparisonResult cMapElement_constantMap::compare (const cCollectionElement 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_constantMap::GALGAS_constantMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -13582,7 +13582,7 @@ typeComparisonResult cMapElement_constructorMap::compare (const cCollectionEleme
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 GALGAS_constructorMap::GALGAS_constructorMap (void) :
-AC_GALGAS_map () {
+AC_GALGAS_map (true) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

@@ -15,7 +15,7 @@ fileprivate let separator = "//" + String (repeating: "-", count: 78) + "\n"
 
 //------------------------------------------------------------------------------
 
-func generateOmnibus (device inDevice : Device, path inBasePath : String) {
+func generateOmnibus (device inDevice : Device, baseURL inBaseURL : URL) {
   var s = separator
   s += "// " + inDevice.name + ": " + inDevice.description + "\n"
   s += separator + "\n"
@@ -37,7 +37,7 @@ func generateOmnibus (device inDevice : Device, path inBasePath : String) {
     s += generationDict [name]!
   }
 //---
-  try! s.write(to: URL.init (fileURLWithPath: inBasePath + ".omnibus-import"), atomically: true, encoding: .utf8)
+  try! s.write(to: inBaseURL.appendingPathExtension ("omnibus-import"), atomically: true, encoding: .utf8)
 }
 
 //------------------------------------------------------------------------------

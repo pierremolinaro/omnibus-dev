@@ -519,7 +519,7 @@ class GALGAS_staticStringMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_staticStringMap (const GALGAS_staticStringMap & inSource) ;
   public : GALGAS_staticStringMap & operator = (const GALGAS_staticStringMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1663,7 +1663,7 @@ class GALGAS_staticListInitializationMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_staticListInitializationMap (const GALGAS_staticListInitializationMap & inSource) ;
   public : GALGAS_staticListInitializationMap & operator = (const GALGAS_staticListInitializationMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -2981,7 +2981,7 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_externProcedureMapIR (const GALGAS_externProcedureMapIR & inSource) ;
   public : GALGAS_externProcedureMapIR & operator = (const GALGAS_externProcedureMapIR & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3088,7 +3088,7 @@ class GALGAS_globalSyncInstanceMapIR : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_globalSyncInstanceMapIR (const GALGAS_globalSyncInstanceMapIR & inSource) ;
   public : GALGAS_globalSyncInstanceMapIR & operator = (const GALGAS_globalSyncInstanceMapIR & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3183,7 +3183,7 @@ class GALGAS_interruptMapIR : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_interruptMapIR (const GALGAS_interruptMapIR & inSource) ;
   public : GALGAS_interruptMapIR & operator = (const GALGAS_interruptMapIR & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3306,7 +3306,7 @@ class GALGAS_staticListInvokedFunctionSetMap : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_staticListInvokedFunctionSetMap (const GALGAS_staticListInvokedFunctionSetMap & inSource) ;
   public : GALGAS_staticListInvokedFunctionSetMap & operator = (const GALGAS_staticListInvokedFunctionSetMap & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3410,7 +3410,7 @@ class GALGAS_taskMapIR : public AC_GALGAS_map {
 //--------------------------------- Handle copy
   public : GALGAS_taskMapIR (const GALGAS_taskMapIR & inSource) ;
   public : GALGAS_taskMapIR & operator = (const GALGAS_taskMapIR & inSource) ;
-
+  
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
