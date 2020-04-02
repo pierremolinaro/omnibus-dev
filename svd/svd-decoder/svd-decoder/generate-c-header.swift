@@ -84,8 +84,8 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
     s += ": " + d.replacingOccurrences(of: "\n", with: " ")
   }
   s += "\n"
-  s += separator + "\n"
   for register in inPeripheral.registers?.register ?? [] {
+    s += separator + "\n"
     let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
     let registerAddressOffset = "0x\(String (register.addressOffset, radix: 16))"
     if let dimension = register.dim {

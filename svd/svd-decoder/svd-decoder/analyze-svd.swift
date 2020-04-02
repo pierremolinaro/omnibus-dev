@@ -11,6 +11,24 @@ import Foundation
 
 //------------------------------------------------------------------------------
 
+func removeCarriageReturnAndConsecutiveSpaces (_ ioString : inout String) {
+   let array = ioString.components (separatedBy: ["\n", " "])
+   ioString = ""
+   var addSeparator = false
+   for string in array {
+     if string != "" {
+       if addSeparator {
+         ioString += " "
+       }
+       ioString += string
+       addSeparator = true
+     }
+   }
+  // print ("DESCRIPTION: \"\(ioString)\"")
+}
+
+//------------------------------------------------------------------------------
+
 func analyzeSVDFile (path inPath : String) {
   print ("File \(inPath)")
   let url = URL (fileURLWithPath: inPath)
@@ -20,19 +38,9 @@ func analyzeSVDFile (path inPath : String) {
 //--- Normalize field descriptions (can contains carriage returns and several consecutive spaces)
   for peripheral in device.peripherals.peripheral {
     for register in peripheral.registers?.register ?? [] {
+      removeCarriageReturnAndConsecutiveSpaces (&register.description)
       for field in register.fields?.field ?? [] {
-        let array = field.description.components(separatedBy: ["\n", " "])
-        field.description = ""
-        var addSeparator = false
-        for string in array {
-          if string != "" {
-            if addSeparator {
-              field.description += " "
-            }
-            field.description += string
-            addSeparator = true
-          }
-        }
+        removeCarriageReturnAndConsecutiveSpaces (&field.description)
       }
     }
   }
@@ -64,7 +72,8 @@ for peripheral in device.peripherals.peripheral {
 //---
   generateHeader (device: device, baseURL: productBaseURL)
   generateAssembly (device: device, baseURL: productBaseURL)
-  generatePython (device: device, baseURL: productBaseURL)
+  generateInterruptDictionaryInPython (device: device, baseURL: productBaseURL)
+  generateInterruptDictionaryInJSON (device: device, baseURL: productBaseURL)
   generateOmnibus (device: device, baseURL: productBaseURL)
 }
 

@@ -84,7 +84,7 @@ struct Interrupt : Codable {
 
 //------------------------------------------------------------------------------
 
-struct Register : Codable, Equatable {
+class Register : Codable, Equatable {
 
   static func == (lhs: Register, rhs: Register) -> Bool {
     return (lhs.name == rhs.name)

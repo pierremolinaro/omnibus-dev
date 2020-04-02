@@ -23,7 +23,7 @@
 		CF4476CB239C2AD6008A78BE /* analyze-svd.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476CA239C2AD6008A78BE /* analyze-svd.swift */; };
 		CF4476CF239D01D1008A78BE /* generate-c-header.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476CE239D01D1008A78BE /* generate-c-header.swift */; };
 		CF4476D1239D0213008A78BE /* generate-s-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476D0239D0213008A78BE /* generate-s-file.swift */; };
-		CF4476D3239D023D008A78BE /* generate-py-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476D2239D023D008A78BE /* generate-py-file.swift */; };
+		CF4476D3239D023D008A78BE /* generate-interrupt-name-files.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4476D2239D023D008A78BE /* generate-interrupt-name-files.swift */; };
 		CFC1B995239C23F40050B84D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1B994239C23F40050B84D /* main.swift */; };
 		CFC1B99D239C24AA0050B84D /* svd-descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 		CF4476CA239C2AD6008A78BE /* analyze-svd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "analyze-svd.swift"; sourceTree = "<group>"; };
 		CF4476CE239D01D1008A78BE /* generate-c-header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-c-header.swift"; sourceTree = "<group>"; };
 		CF4476D0239D0213008A78BE /* generate-s-file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-s-file.swift"; sourceTree = "<group>"; };
-		CF4476D2239D023D008A78BE /* generate-py-file.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-py-file.swift"; sourceTree = "<group>"; };
+		CF4476D2239D023D008A78BE /* generate-interrupt-name-files.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "generate-interrupt-name-files.swift"; sourceTree = "<group>"; };
 		CFC1B991239C23F40050B84D /* svd-decoder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "svd-decoder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC1B994239C23F40050B84D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "svd-descriptor.swift"; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 				CF4476CA239C2AD6008A78BE /* analyze-svd.swift */,
 				CF4476CE239D01D1008A78BE /* generate-c-header.swift */,
 				CF2A061523A2B48700F52ED0 /* generate-omnibus.swift */,
-				CF4476D2239D023D008A78BE /* generate-py-file.swift */,
+				CF4476D2239D023D008A78BE /* generate-interrupt-name-files.swift */,
 				CF4476D0239D0213008A78BE /* generate-s-file.swift */,
 				CFC1B994239C23F40050B84D /* main.swift */,
 				CFC1B99C239C24AA0050B84D /* svd-descriptor.swift */,
@@ -217,7 +217,7 @@
 				CF4476BE239C2822008A78BE /* XMLKeyedDecodingContainer.swift in Sources */,
 				CF4476B3239C2804008A78BE /* XMLStackParser.swift in Sources */,
 				CFC1B995239C23F40050B84D /* main.swift in Sources */,
-				CF4476D3239D023D008A78BE /* generate-py-file.swift in Sources */,
+				CF4476D3239D023D008A78BE /* generate-interrupt-name-files.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,36 @@ import Foundation
 
 //------------------------------------------------------------------------------
 
-func generatePython (device inDevice : Device, baseURL inBaseURL : URL) {
+func generateInterruptDictionaryInJSON (device inDevice : Device, baseURL inBaseURL : URL) {
+  var s = "{\n"
+  var interruptDictionary = [UInt : String] ()
+  for peripheral in inDevice.peripherals.peripheral {
+    for interrupt in peripheral.interrupt ?? [] {
+      interruptDictionary [interrupt.value] = interrupt.name
+    }
+  }
+  for i : UInt in 0 ..< 240 {
+    if let name = interruptDictionary [i] {
+      s += "  \"\(name)\" : \(i + 16),\n"
+    }
+  }
+  s += "  \"NMI\" : 2,\n"
+  s += "  \"HardFault\" : 3,\n"
+  s += "  \"MemManage\" : 4,\n"
+  s += "  \"BusFault\" : 5,\n"
+  s += "  \"UsageFault\" : 6,\n"
+  s += "  \"SVC\" : 11,\n"
+  s += "  \"DebugMonitor\" : 12,\n"
+  s += "  \"PendSV\" : 14,\n"
+  s += "  \"SysTick\" : 15\n"
+  s += "}\n"
+//---
+  try! s.write(to: inBaseURL.appendingPathExtension ("json"), atomically: true, encoding: .utf8)
+}
+
+//------------------------------------------------------------------------------
+
+func generateInterruptDictionaryInPython (device inDevice : Device, baseURL inBaseURL : URL) {
   let separator = "#" + String (repeating: "-", count: 79) + "\n"
   var s = "#!/usr/bin/python\n"
   s += "# -*- coding: utf-8 -*-\n\n"
