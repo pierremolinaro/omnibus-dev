@@ -19,7 +19,7 @@ task T1 @stacksize 512 @autostart {
     digital.set (!mode: .output !toPort: LED_L2)
   }
 
-  event time.wait (!until: self.top) {
+  while event time.wait (!until: self.top) {
     sémaphore.signal ()
     self.top += 250
     digital.write (!yes !toPort: LED_L1)
@@ -35,7 +35,7 @@ task T1 @stacksize 512 @autostart {
 
 task T2 @stacksize 512 @autostart {
 
-  event sémaphore.wait () {
+  while event sémaphore.wait () {
     digital.write (!yes !toPort: LED_L2)
     sémaphore.wait ()
     digital.write (!no !toPort: LED_L2)

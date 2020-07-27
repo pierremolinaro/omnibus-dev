@@ -7599,12 +7599,12 @@ static void extensionMethod_decoratedTaskListDeclaration_semanticAnalysis (const
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_decoratedTaskListDeclaration * object = (const cPtr_decoratedTaskListDeclaration *) inObject ;
   macroValidSharedObject (object, cPtr_decoratedTaskListDeclaration) ;
-  cEnumerator_decoratedTaskList enumerator_11627 (object->mProperty_mTaskList, kENUMERATION_UP) ;
-  GALGAS_uint index_11609 ((uint32_t) 0) ;
-  while (enumerator_11627.hasCurrentObject ()) {
-    extensionMethod_taskSemanticAnalysis (enumerator_11627.current (HERE), constinArgument_inContext, index_11609, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 312)) ;
-    enumerator_11627.gotoNextObject () ;
-    index_11609.increment_operation (inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 311)) ;
+  cEnumerator_decoratedTaskList enumerator_11933 (object->mProperty_mTaskList, kENUMERATION_UP) ;
+  GALGAS_uint index_11915 ((uint32_t) 0) ;
+  while (enumerator_11933.hasCurrentObject ()) {
+    extensionMethod_taskSemanticAnalysis (enumerator_11933.current (HERE), constinArgument_inContext, index_11915, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 320)) ;
+    enumerator_11933.gotoNextObject () ;
+    index_11915.increment_operation (inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 319)) ;
   }
 }
 
@@ -7630,119 +7630,119 @@ void routine_analyzeOrderedTaskRoutines (const GALGAS_taskSetupListAST constinAr
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outSetupOrderedList.drop () ; // Release 'out' argument
-  outArgument_outSetupOrderedList = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 327)) ;
+  outArgument_outSetupOrderedList = GALGAS_stringlist::constructor_emptyList (SOURCE_FILE ("task-declaration.galgas", 335)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (kIsStrictSup, constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 328)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_0 = GALGAS_bool (kIsStrictSup, constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 336)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_uint var_numberOfEntriesWithoutAnyPrecedence_12244 = GALGAS_uint ((uint32_t) 0U) ;
-      cEnumerator_taskSetupListAST enumerator_12299 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
-      while (enumerator_12299.hasCurrentObject ()) {
+      GALGAS_uint var_numberOfEntriesWithoutAnyPrecedence_12550 = GALGAS_uint ((uint32_t) 0U) ;
+      cEnumerator_taskSetupListAST enumerator_12605 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
+      while (enumerator_12605.hasCurrentObject ()) {
         enumGalgasBool test_1 = kBoolTrue ;
         if (kBoolTrue == test_1) {
-          test_1 = GALGAS_bool (kIsEqual, enumerator_12299.current_mDependanceList (HERE).getter_length (SOURCE_FILE ("task-declaration.galgas", 332)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+          test_1 = GALGAS_bool (kIsEqual, enumerator_12605.current_mDependanceList (HERE).getter_length (SOURCE_FILE ("task-declaration.galgas", 340)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
           if (kBoolTrue == test_1) {
-            var_numberOfEntriesWithoutAnyPrecedence_12244.plusAssign_operation(var_numberOfEntriesWithoutAnyPrecedence_12244.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 333)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 333)) ;
+            var_numberOfEntriesWithoutAnyPrecedence_12550.plusAssign_operation(var_numberOfEntriesWithoutAnyPrecedence_12550.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 341)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 341)) ;
           }
         }
-        enumerator_12299.gotoNextObject () ;
+        enumerator_12605.gotoNextObject () ;
       }
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        test_2 = GALGAS_bool (kIsEqual, var_numberOfEntriesWithoutAnyPrecedence_12244.objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        test_2 = GALGAS_bool (kIsEqual, var_numberOfEntriesWithoutAnyPrecedence_12550.objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
         if (kBoolTrue == test_2) {
-          cEnumerator_taskSetupListAST enumerator_12546 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
-          while (enumerator_12546.hasCurrentObject ()) {
+          cEnumerator_taskSetupListAST enumerator_12852 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
+          while (enumerator_12852.hasCurrentObject ()) {
             TC_Array <C_FixItDescription> fixItArray3 ;
-            inCompiler->emitSemanticError (enumerator_12546.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 338)), GALGAS_string ("Exactly one routine should have no precedence"), fixItArray3  COMMA_SOURCE_FILE ("task-declaration.galgas", 338)) ;
-            enumerator_12546.gotoNextObject () ;
+            inCompiler->emitSemanticError (enumerator_12852.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 346)), GALGAS_string ("Exactly one routine should have no precedence"), fixItArray3  COMMA_SOURCE_FILE ("task-declaration.galgas", 346)) ;
+            enumerator_12852.gotoNextObject () ;
           }
         }
       }
       if (kBoolFalse == test_2) {
         enumGalgasBool test_4 = kBoolTrue ;
         if (kBoolTrue == test_4) {
-          test_4 = GALGAS_bool (kIsStrictSup, var_numberOfEntriesWithoutAnyPrecedence_12244.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+          test_4 = GALGAS_bool (kIsStrictSup, var_numberOfEntriesWithoutAnyPrecedence_12550.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
           if (kBoolTrue == test_4) {
-            cEnumerator_taskSetupListAST enumerator_12739 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
-            while (enumerator_12739.hasCurrentObject ()) {
+            cEnumerator_taskSetupListAST enumerator_13045 (constinArgument_inTaskRoutineLISTAST, kENUMERATION_UP) ;
+            while (enumerator_13045.hasCurrentObject ()) {
               enumGalgasBool test_5 = kBoolTrue ;
               if (kBoolTrue == test_5) {
-                test_5 = GALGAS_bool (kIsEqual, enumerator_12739.current_mDependanceList (HERE).getter_length (SOURCE_FILE ("task-declaration.galgas", 342)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+                test_5 = GALGAS_bool (kIsEqual, enumerator_13045.current_mDependanceList (HERE).getter_length (SOURCE_FILE ("task-declaration.galgas", 350)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
                 if (kBoolTrue == test_5) {
                   TC_Array <C_FixItDescription> fixItArray6 ;
-                  inCompiler->emitSemanticError (enumerator_12739.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 343)), GALGAS_string ("Exactly one routine should have no precedence"), fixItArray6  COMMA_SOURCE_FILE ("task-declaration.galgas", 343)) ;
+                  inCompiler->emitSemanticError (enumerator_13045.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 351)), GALGAS_string ("Exactly one routine should have no precedence"), fixItArray6  COMMA_SOURCE_FILE ("task-declaration.galgas", 351)) ;
                 }
               }
-              enumerator_12739.gotoNextObject () ;
+              enumerator_13045.gotoNextObject () ;
             }
           }
         }
       }
-      GALGAS_taskSetupListAST var_taskSetupListAST_12971 = constinArgument_inTaskRoutineLISTAST ;
-      GALGAS_stringset var_precedenceSet_13023 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("task-declaration.galgas", 349)) ;
-      GALGAS_bool var_continue_13045 = GALGAS_bool (true) ;
-      if (constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 351)).isValid ()) {
-        uint32_t variant_13061 = constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 351)).uintValue () ;
-        bool loop_13061 = true ;
-        while (loop_13061) {
-          GALGAS_bool test_7 = var_continue_13045 ;
+      GALGAS_taskSetupListAST var_taskSetupListAST_13277 = constinArgument_inTaskRoutineLISTAST ;
+      GALGAS_stringset var_precedenceSet_13329 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("task-declaration.galgas", 357)) ;
+      GALGAS_bool var_continue_13351 = GALGAS_bool (true) ;
+      if (constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 359)).isValid ()) {
+        uint32_t variant_13367 = constinArgument_inTaskRoutineLISTAST.getter_length (SOURCE_FILE ("task-declaration.galgas", 359)).uintValue () ;
+        bool loop_13367 = true ;
+        while (loop_13367) {
+          GALGAS_bool test_7 = var_continue_13351 ;
           if (kBoolTrue == test_7.boolEnum ()) {
-            test_7 = GALGAS_bool (kIsStrictSup, var_taskSetupListAST_12971.getter_length (SOURCE_FILE ("task-declaration.galgas", 351)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
+            test_7 = GALGAS_bool (kIsStrictSup, var_taskSetupListAST_13277.getter_length (SOURCE_FILE ("task-declaration.galgas", 359)).objectCompare (GALGAS_uint ((uint32_t) 0U))) ;
           }
-          loop_13061 = test_7.isValid () ;
-          if (loop_13061) {
-            loop_13061 = test_7.boolValue () ;
+          loop_13367 = test_7.isValid () ;
+          if (loop_13367) {
+            loop_13367 = test_7.boolValue () ;
           }
-          if (loop_13061 && (0 == variant_13061)) {
-            loop_13061 = false ;
-            inCompiler->loopRunTimeVariantError (SOURCE_FILE ("task-declaration.galgas", 351)) ;
+          if (loop_13367 && (0 == variant_13367)) {
+            loop_13367 = false ;
+            inCompiler->loopRunTimeVariantError (SOURCE_FILE ("task-declaration.galgas", 359)) ;
           }
-          if (loop_13061) {
-            variant_13061 -- ;
-            var_continue_13045 = GALGAS_bool (false) ;
-            GALGAS_uint var_idx_13183 = GALGAS_uint ((uint32_t) 0U) ;
-            cEnumerator_taskSetupListAST enumerator_13239 (var_taskSetupListAST_12971, kENUMERATION_UP) ;
-            while (enumerator_13239.hasCurrentObject ()) {
-              GALGAS_bool var_allPrecedenceDefined_13275 = GALGAS_bool (true) ;
-              cEnumerator_lstringlist enumerator_13329 (enumerator_13239.current_mDependanceList (HERE), kENUMERATION_UP) ;
-              bool bool_8 = var_allPrecedenceDefined_13275.isValidAndTrue () ;
-              if (enumerator_13329.hasCurrentObject () && bool_8) {
-                while (enumerator_13329.hasCurrentObject () && bool_8) {
-                  var_allPrecedenceDefined_13275 = var_precedenceSet_13023.getter_hasKey (enumerator_13329.current_mValue (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("task-declaration.galgas", 357)) ;
-                  enumerator_13329.gotoNextObject () ;
-                  if (enumerator_13329.hasCurrentObject ()) {
-                    bool_8 = var_allPrecedenceDefined_13275.isValidAndTrue () ;
+          if (loop_13367) {
+            variant_13367 -- ;
+            var_continue_13351 = GALGAS_bool (false) ;
+            GALGAS_uint var_idx_13489 = GALGAS_uint ((uint32_t) 0U) ;
+            cEnumerator_taskSetupListAST enumerator_13545 (var_taskSetupListAST_13277, kENUMERATION_UP) ;
+            while (enumerator_13545.hasCurrentObject ()) {
+              GALGAS_bool var_allPrecedenceDefined_13581 = GALGAS_bool (true) ;
+              cEnumerator_lstringlist enumerator_13635 (enumerator_13545.current_mDependanceList (HERE), kENUMERATION_UP) ;
+              bool bool_8 = var_allPrecedenceDefined_13581.isValidAndTrue () ;
+              if (enumerator_13635.hasCurrentObject () && bool_8) {
+                while (enumerator_13635.hasCurrentObject () && bool_8) {
+                  var_allPrecedenceDefined_13581 = var_precedenceSet_13329.getter_hasKey (enumerator_13635.current_mValue (HERE).getter_string (HERE) COMMA_SOURCE_FILE ("task-declaration.galgas", 365)) ;
+                  enumerator_13635.gotoNextObject () ;
+                  if (enumerator_13635.hasCurrentObject ()) {
+                    bool_8 = var_allPrecedenceDefined_13581.isValidAndTrue () ;
                   }
                 }
               }
               enumGalgasBool test_9 = kBoolTrue ;
               if (kBoolTrue == test_9) {
-                test_9 = var_allPrecedenceDefined_13275.boolEnum () ;
+                test_9 = var_allPrecedenceDefined_13581.boolEnum () ;
                 if (kBoolTrue == test_9) {
-                  outArgument_outSetupOrderedList.addAssign_operation (enumerator_13239.current_mName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 360)) ;
-                  var_precedenceSet_13023.addAssign_operation (enumerator_13239.current_mName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 361)) ;
-                  var_continue_13045 = GALGAS_bool (true) ;
+                  outArgument_outSetupOrderedList.addAssign_operation (enumerator_13545.current_mName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 368)) ;
+                  var_precedenceSet_13329.addAssign_operation (enumerator_13545.current_mName (HERE).getter_string (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 369)) ;
+                  var_continue_13351 = GALGAS_bool (true) ;
                   {
-                  GALGAS_lstring joker_13645_2 ; // Joker input parameter
-                  GALGAS_lstringlist joker_13645_1 ; // Joker input parameter
-                  var_taskSetupListAST_12971.setter_removeAtIndex (joker_13645_2, joker_13645_1, var_idx_13183, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 363)) ;
+                  GALGAS_lstring joker_13951_2 ; // Joker input parameter
+                  GALGAS_lstringlist joker_13951_1 ; // Joker input parameter
+                  var_taskSetupListAST_13277.setter_removeAtIndex (joker_13951_2, joker_13951_1, var_idx_13489, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 371)) ;
                   }
                 }
               }
               if (kBoolFalse == test_9) {
-                var_idx_13183 = var_idx_13183.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 365)) ;
+                var_idx_13489 = var_idx_13489.add_operation (GALGAS_uint ((uint32_t) 1U), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 373)) ;
               }
-              enumerator_13239.gotoNextObject () ;
+              enumerator_13545.gotoNextObject () ;
             }
           }
         }
       }
-      cEnumerator_taskSetupListAST enumerator_13797 (var_taskSetupListAST_12971, kENUMERATION_UP) ;
-      while (enumerator_13797.hasCurrentObject ()) {
+      cEnumerator_taskSetupListAST enumerator_14103 (var_taskSetupListAST_13277, kENUMERATION_UP) ;
+      while (enumerator_14103.hasCurrentObject ()) {
         TC_Array <C_FixItDescription> fixItArray10 ;
-        inCompiler->emitSemanticError (enumerator_13797.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 371)), GALGAS_string ("this routine is out of execution order"), fixItArray10  COMMA_SOURCE_FILE ("task-declaration.galgas", 371)) ;
-        enumerator_13797.gotoNextObject () ;
+        inCompiler->emitSemanticError (enumerator_14103.current_mName (HERE).getter_location (SOURCE_FILE ("task-declaration.galgas", 379)), GALGAS_string ("this routine is out of execution order"), fixItArray10  COMMA_SOURCE_FILE ("task-declaration.galgas", 379)) ;
+        enumerator_14103.gotoNextObject () ;
       }
     }
   }
@@ -7763,14 +7763,14 @@ static void extensionMethod_taskActivateFunctionIR_llvmCodeGeneration (const cPt
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   const cPtr_taskActivateFunctionIR * object = (const cPtr_taskActivateFunctionIR *) inObject ;
   macroValidSharedObject (object, cPtr_taskActivateFunctionIR) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @").add_operation (object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("task-declaration.galgas", 603)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 603)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 603)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 603)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("(%").add_operation (object->mProperty_mAssemblerTaskName, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)).add_operation (function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 604)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 604)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (object->mProperty_mActivateServiceInvocationName, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 605)).add_operation (GALGAS_string (" (i8 "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 605)).add_operation (object->mProperty_mTaskIndex.getter_string (SOURCE_FILE ("task-declaration.galgas", 605)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 605)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 605)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 605)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 606)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("define internal void @").add_operation (object->mProperty_mRoutineMangledName.getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("task-declaration.galgas", 611)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 611)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 611)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 611)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("(%").add_operation (object->mProperty_mAssemblerTaskName, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)).add_operation (GALGAS_string ("* "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)).add_operation (function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)).add_operation (GALGAS_string (")"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)).add_operation (GALGAS_string ("{\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 612)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 612)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (object->mProperty_mActivateServiceInvocationName, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 613)).add_operation (GALGAS_string (" (i8 "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 613)).add_operation (object->mProperty_mTaskIndex.getter_string (SOURCE_FILE ("task-declaration.galgas", 613)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 613)).add_operation (GALGAS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 613)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 613)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 614)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 607)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 608)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 608)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 609)) ;
+    "\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 615)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(function_llvmSeparatorLine (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 616)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 616)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("\n"), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 617)) ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*

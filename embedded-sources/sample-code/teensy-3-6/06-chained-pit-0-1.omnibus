@@ -68,7 +68,7 @@ task Tâche @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L0)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     let tick = chronomètre.now ()
     digital.toggle (!port:LED_L0)
     lcd.goto (!line:0 !column:0)

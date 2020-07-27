@@ -95,13 +95,21 @@ syntax extension omnibus_syntax {
     while
       <task_event> !?ioAST !taskName: taskName !?setup: taskSetupList !?activate: taskActivateList !?deactivate: taskDeactivateList
     while
-      $event$
-      <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
+      $while$
+      <guarded_command> !?ioAST !false ?let @guardedCommandAST guardedCommand
       ${$
       <instructionList> !?ioAST ?let instructionList
       let endOfInstructions = @location.here
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
+#    while
+#      $until$
+#      <guarded_command> !?ioAST !true ?let @guardedCommandAST guardedCommand
+#      ${$
+#      <instructionList> !?ioAST ?let instructionList
+#      let endOfInstructions = @location.here
+#      $}$
+#      branchList += !guardedCommand !instructionList !endOfInstructions
     end
     let endOfTask = @location.here
     $}$

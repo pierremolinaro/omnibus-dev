@@ -61,7 +61,7 @@ task T0 @stacksize 512 @autostart {
   }
 
 
-  event time.wait (!until:self.top) {
+  while event time.wait (!until:self.top) {
     rdvs.output ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
@@ -76,7 +76,7 @@ task T0 @stacksize 512 @autostart {
 
 task T1 @stacksize 512 @autostart {
 
-  event rdvs.input () {
+  while event rdvs.input () {
     digital.write (!yes !toPort:LED_L1)
     rdvs.input ()
     digital.write (!no !toPort:LED_L1)

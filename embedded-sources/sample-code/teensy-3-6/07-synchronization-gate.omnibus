@@ -65,7 +65,7 @@ task Tâche1 @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L2)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
     gate.open ()
@@ -81,7 +81,7 @@ task Tâche1 @stacksize 512 @autostart {
 
 task Tâche2 @stacksize 512 @autostart {
 
-  event gate.wait () {
+  while event gate.wait () {
     digital.toggle (!port:LED_L1)
     s1.signal ()
     s2.wait ()
@@ -92,7 +92,7 @@ task Tâche2 @stacksize 512 @autostart {
 
 task Tâche3 @stacksize 512 @autostart {
 
-  event gate.wait () {
+  while event gate.wait () {
     digital.toggle (!port:LED_L2)
     s1.signal ()
     s2.wait ()

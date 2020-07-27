@@ -17,7 +17,7 @@ task Tâche0 @stacksize 512 @autostart {
   var tick = $u32 ()
   var énumération = $monEnum.zéro
 
-  event time.wait (!until: self.tick) {
+  while event time.wait (!until: self.tick) {
     self.tick += 500
     self.énumération = .un
     var autre2num = self.énumération

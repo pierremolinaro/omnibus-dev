@@ -9819,6 +9819,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
+              <name>CAN3RST</name>
+              <description>CAN3 reset</description>
+              <bitOffset>13</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>SPI2RST</name>
               <description>SPI 2 reset</description>
               <bitOffset>14</bitOffset>

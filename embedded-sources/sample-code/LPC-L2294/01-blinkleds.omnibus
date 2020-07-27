@@ -17,7 +17,7 @@ section ledOff () {
 task T1 @stacksize 512 @autostart {
   var compteur $u32 = 0
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     ledOn ()
     self.compteur +%= 500
     time.wait (!until:self.compteur)

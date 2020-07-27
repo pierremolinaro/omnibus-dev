@@ -25,6 +25,7 @@ syntax extension omnibus_syntax {
     repeat
     while
       <instruction> !?ioAST !?outInstructionList
+#      $;$
 #     select
 #        $;$
 #      or

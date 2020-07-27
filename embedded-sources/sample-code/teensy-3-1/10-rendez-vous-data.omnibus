@@ -52,7 +52,7 @@ task T0 @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L4)
   }
 
-  event time.wait (!until:self.top) {
+  while event time.wait (!until:self.top) {
     rdvs2.input (?data:let n)
     rdvs.output (!data:n)
     digital.toggle (!port:LED_L0)
@@ -63,7 +63,7 @@ task T0 @stacksize 512 @autostart {
 //-----------------------------------------------------------------------------*
 
 task T1 @stacksize 1024 @autostart {
-  event rdvs.input (?data:let x) {
+  while event rdvs.input (?data:let x) {
     digital.toggle (!port:LED_L1)
     s.wait ()
       lcd.goto (!line:0 !column:0)
@@ -78,7 +78,7 @@ task T2 @stacksize 1024 @autostart {
   var deadline $u32 = 0
   var n $u32 = 0
 
-  event rdvs2.output (!data:self.n) {
+  while event rdvs2.output (!data:self.n) {
     digital.toggle (!port:LED_L2)
     s.wait ()
       lcd.goto (!line:1 !column:0)
@@ -87,7 +87,7 @@ task T2 @stacksize 1024 @autostart {
     self.n += 1
   }
 
-  event time.wait (!until:self.deadline) {
+  while event time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L4)
   }

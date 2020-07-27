@@ -45,7 +45,7 @@ task T @stacksize 512 @autostart {
     setupPIT ()
   }
 
-  event time.wait (!until:self.deadline) {
+  while event time.wait (!until:self.deadline) {
     self.deadline +%= 250
     digital.write (!yes !toPort:LED_L1) // Allumer la led
     time.wait (!until:self.deadline)

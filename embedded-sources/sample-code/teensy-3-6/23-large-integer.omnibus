@@ -22,7 +22,7 @@ task Tâche0 @stacksize 512 @autostart {
   var largeInteger = $LargeInt ()
   var otherLargeInteger = $LargeInt ()
 
-  event time.wait (!until: self.tick) {
+  while event time.wait (!until: self.tick) {
     self.otherLargeInteger += self.largeInteger
     self.tick += 500
     self.largeInteger = getLargeAddition (!self.largeInteger !getLargeConstant ())

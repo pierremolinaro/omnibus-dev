@@ -39,21 +39,9 @@ syntax extension omnibus_syntax {
 
   #·····················································································································
 
-  rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
-    @expressionAST expression
-    @location endOfExp
-    @bool warnsOnStaticExpression
-    select
-      $($
-      <expression> !?ioAST ?expression
-      endOfExp = .here
-      $)$
-      warnsOnStaticExpression = true
-    or
-      expression = @literalBooleanInExpressionAST.new {!true}
-      endOfExp = .here
-      warnsOnStaticExpression = false
-    end
+  rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
+    let endOfExp = @location.here
+    $event$
     @lbool usesSelf
     select
       usesSelf = .new {!false !.here}
@@ -70,17 +58,10 @@ syntax extension omnibus_syntax {
       $.$
     end
     <effective_parameters> !?ioAST ?let effectiveParameterList ?*
-    @bool isExitCommand
-    select
-      $exit$
-      isExitCommand = false
-    or
-      isExitCommand = true
-    end
     outGuardedCommand = .boolAndSync {
-      !isExitCommand:isExitCommand
-      !expression:expression
-      !warnsOnStaticExpression:warnsOnStaticExpression
+      !isExitCommand:inIsExitCommand
+      !expression:@literalBooleanInExpressionAST.new {!true}
+      !warnsOnStaticExpression:false
       !endOfExpression:endOfExp
       !usesSelf:usesSelf
       !nameList:nameList
@@ -90,41 +71,67 @@ syntax extension omnibus_syntax {
   
   #·····················································································································
 
-  rule <guarded_command> ?!@ast ioAST !@guardedCommandAST outGuardedCommand {
-    $($
+  rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
     <expression> !?ioAST ?let expression
     let endOfExp = @location.here
-    $)$
-    @bool isExitCommand
     select
-      $exit$
-      isExitCommand = false
+      outGuardedCommand = .boolean {
+        !isExitCommand:inIsExitCommand
+        !expression:expression
+        !endOfExpression:endOfExp
+      }
     or
-      isExitCommand = true
+      $event$
+      @lbool usesSelf
+      select
+        usesSelf = .new {!false !.here}
+      or
+        $self$
+        usesSelf = .new {!true !.here}
+        $.$
+      end
+      @lstringlist nameList = {}
+      repeat
+        $identifier$ ?var name
+        nameList += !name
+      while
+        $.$
+      end
+      <effective_parameters> !?ioAST ?let effectiveParameterList ?*
+      outGuardedCommand = .boolAndSync {
+        !isExitCommand:inIsExitCommand
+        !expression:expression
+        !warnsOnStaticExpression: true
+        !endOfExpression:endOfExp
+        !usesSelf:usesSelf
+        !nameList:nameList
+        !effectiveParameterListAST:effectiveParameterList
+      }
     end
-    outGuardedCommand = .boolean {
-      !isExitCommand:isExitCommand
-      !expression:expression
-      !endOfExpression:endOfExp
-    }
   }
-  
+
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    $event$
+    $sync$
+    ${$
     let startLocation = @location.here
     @syncInstructionBranchListAST instructionBranchList = {}
     repeat
-      <guarded_command> !?ioAST ?let @guardedCommandAST guardedCommand
-      ${$
+    while
+      $when$
+      <guarded_command> !?ioAST !true ?let @guardedCommandAST guardedCommand
+      $:$
       <instructionList> !?ioAST ?let instructionList
       instructionBranchList += !guardedCommand !instructionList !.here
-      $}$
-    while
-      $else$
-      $event$
+#    while
+#      $until$
+#      <guarded_command> !?ioAST !true ?let @guardedCommandAST guardedCommand
+#      $:$
+#      <instructionList> !?ioAST ?let instructionList
+#      instructionBranchList += !guardedCommand !instructionList !.here
     end
+    $}$
     ioInstructionList += !@syncInstructionAST.new {!startLocation !instructionBranchList !.here}
   }
   

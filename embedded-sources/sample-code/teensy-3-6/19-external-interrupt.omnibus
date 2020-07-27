@@ -76,7 +76,7 @@ driver myDriver ()
 task T1 @stacksize 512 @autostart {
   var échéance $u32 = 0
 
-  event time.wait (!until:self.échéance) {
+  while event time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L0)
   }

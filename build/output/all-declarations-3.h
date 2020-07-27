@@ -10,7 +10,7 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @registerGroupListAST_2D_element struct                                       *
+//                                   Phase 1: @registerGroupListAST_2D_element struct                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -78,7 +78,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupListAS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @controlRegisterFieldList list                                            *
+//                                       Phase 1: @controlRegisterFieldList list                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -229,7 +229,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @controlRegisterFieldList_2D_element struct                                     *
+//                                 Phase 1: @controlRegisterFieldList_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -300,7 +300,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @controlRegisterFieldMap map                                             *
+//                                        Phase 1: @controlRegisterFieldMap map                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -417,7 +417,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Class for element of '@controlRegisterFieldMap' map                                 *
+//                             Phase 2: class for element of '@controlRegisterFieldMap' map                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -447,7 +447,7 @@ class cMapElement_controlRegisterFieldMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @controlRegisterFieldMap_2D_element struct                                      *
+//                                 Phase 1: @controlRegisterFieldMap_2D_element struct                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -524,7 +524,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFiel
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                    @sliceMap map                                                    *
+//                                                Phase 1: @sliceMap map                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -654,7 +654,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @llvmBinaryOperation enum                                              *
+//                                          Phase 1: @llvmBinaryOperation enum                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -851,7 +851,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmBinaryOperation
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Class for element of '@sliceMap' map                                         *
+//                                    Phase 2: class for element of '@sliceMap' map                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -883,7 +883,7 @@ class cMapElement_sliceMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @sliceMap_2D_element struct                                             *
+//                                         Phase 1: @sliceMap_2D_element struct                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -995,7 +995,7 @@ class GALGAS_lstring function_compileTimeDeclarationBarrier (class C_Compiler * 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Class for element of '@controlRegisterMap' map                                    *
+//                               Phase 2: class for element of '@controlRegisterMap' map                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1041,7 +1041,7 @@ class cMapElement_controlRegisterMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @controlRegisterMap_2D_element struct                                        *
+//                                    Phase 1: @controlRegisterMap_2D_element struct                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1166,7 +1166,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @registerGroupKind enum, associated values                                      *
+//                                 Phase 2: @registerGroupKind enum, associated values                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1202,7 +1202,7 @@ class cEnumAssociatedValues_registerGroupKind_arrayGroup : public cEnumAssociate
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @controlRegisterGroupArrayList_2D_element struct                                   *
+//                              Phase 1: @controlRegisterGroupArrayList_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1273,7 +1273,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGrou
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @controlRegisterByAddress sorted list                                        *
+//                                    Phase 1: @controlRegisterByAddress sorted list                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1364,7 +1364,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterByAd
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @controlRegisterByAddress_2D_element struct                                     *
+//                                 Phase 1: @controlRegisterByAddress_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1435,7 +1435,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterByAd
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @controlRegisterByName sorted list                                          *
+//                                     Phase 1: @controlRegisterByName sorted list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1533,7 +1533,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterByNa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @controlRegisterByName_2D_element struct                                       *
+//                                  Phase 1: @controlRegisterByName_2D_element struct                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1635,7 +1635,7 @@ void callExtensionMethod_addDependenceEdgeForStaticExpression (const class cPtr_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Class for element of '@globalSyncInstanceMapIR' map                                 *
+//                             Phase 2: class for element of '@globalSyncInstanceMapIR' map                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1663,7 +1663,7 @@ class cMapElement_globalSyncInstanceMapIR : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @globalSyncInstanceMapIR_2D_element struct                                      *
+//                                 Phase 1: @globalSyncInstanceMapIR_2D_element struct                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1731,7 +1731,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceM
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @instructionListAST_2D_element struct                                        *
+//                                    Phase 1: @instructionListAST_2D_element struct                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1793,7 +1793,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListAST_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                @driverInstanciationArgumentListAST_2D_element struct                                *
+//                            Phase 1: @driverInstanciationArgumentListAST_2D_element struct                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1861,7 +1861,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciation
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @driverInstanciationArgumentMap map                                         *
+//                                     Phase 1: @driverInstanciationArgumentMap map                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1965,7 +1965,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciation
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Class for element of '@driverInstanciationArgumentMap' map                              *
+//                         Phase 2: class for element of '@driverInstanciationArgumentMap' map                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1993,7 +1993,7 @@ class cMapElement_driverInstanciationArgumentMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @driverInstanciationArgumentMap_2D_element struct                                  *
+//                              Phase 1: @driverInstanciationArgumentMap_2D_element struct                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2061,7 +2061,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciation
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @instanciedDriverMap map                                               *
+//                                          Phase 1: @instanciedDriverMap map                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2165,7 +2165,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instanciedDriverMap
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Class for element of '@instanciedDriverMap' map                                   *
+//                               Phase 2: class for element of '@instanciedDriverMap' map                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2193,7 +2193,7 @@ class cMapElement_instanciedDriverMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @instanciedDriverMap_2D_element struct                                        *
+//                                   Phase 1: @instanciedDriverMap_2D_element struct                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2264,7 +2264,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instanciedDriverMap
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @driverListIR_2D_element struct                                           *
+//                                       Phase 1: @driverListIR_2D_element struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2422,7 +2422,7 @@ class GALGAS_string callExtensionGetter_llvmTypeName (const cPtr_omnibusType * i
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @staticListPropertyListAST_2D_element struct                                     *
+//                                Phase 1: @staticListPropertyListAST_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2490,7 +2490,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyL
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @staticListValueListAST_2D_element struct                                      *
+//                                  Phase 1: @staticListValueListAST_2D_element struct                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2561,7 +2561,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListValueList
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @extendStaticListElementAST_2D_element struct                                    *
+//                                Phase 1: @extendStaticListElementAST_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2629,7 +2629,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticListEle
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @staticListInitializationMap_2D_element struct                                    *
+//                               Phase 1: @staticListInitializationMap_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2722,7 +2722,7 @@ class GALGAS_lstring function_llvmNameForStaticListElementType (const class GALG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @routineTypedSignature_2D_element struct                                       *
+//                                  Phase 1: @routineTypedSignature_2D_element struct                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2802,7 +2802,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineTypedSignatu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @taskSetupListAST_2D_element struct                                         *
+//                                     Phase 1: @taskSetupListAST_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2873,7 +2873,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSetupListAST_2D
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @syncInstructionBranchListAST_2D_element struct                                   *
+//                               Phase 1: @syncInstructionBranchListAST_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2985,7 +2985,7 @@ void extensionMethod_enterInContext (const class GALGAS_taskListAST inObject,
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                     *
-//                                              @routineAttributes struct                                              *
+//                                          Phase 1: @routineAttributes struct                                         *
 //                                                                                                                     *
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -3076,7 +3076,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineAttributes ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @decoratedTaskListDeclaration class                                         *
+//                                     Phase 1: @decoratedTaskListDeclaration class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3134,7 +3134,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskListDe
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @decoratedTaskList list                                               *
+//                                           Phase 1: @decoratedTaskList list                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3380,7 +3380,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @decoratedTaskListDeclaration class                                *
+//                            Phase 2: pointer class for @decoratedTaskListDeclaration class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3410,7 +3410,7 @@ class cPtr_decoratedTaskListDeclaration : public cPtr_abstractDecoratedDeclarati
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @abstractRoutineIR class                                               *
+//                                          Phase 1: @abstractRoutineIR class                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3471,7 +3471,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractRoutineIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Pointer class for @abstractRoutineIR class                                      *
+//                                 Phase 2: pointer class for @abstractRoutineIR class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3506,7 +3506,7 @@ class cPtr_abstractRoutineIR : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @taskActivateFunctionIR class                                            *
+//                                        Phase 1: @taskActivateFunctionIR class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3579,7 +3579,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskActivateFunctio
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @taskActivateFunctionIR class                                   *
+//                               Phase 2: pointer class for @taskActivateFunctionIR class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3757,7 +3757,7 @@ void extensionSetter_insertTask (class GALGAS_universalValuedObjectMap & ioObjec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @decoratedTaskList_2D_element struct                                         *
+//                                    Phase 1: @decoratedTaskList_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3858,7 +3858,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Class for element of '@taskMapIR' map                                        *
+//                                    Phase 2: class for element of '@taskMapIR' map                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3900,7 +3900,7 @@ class cMapElement_taskMapIR : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @taskMapIR_2D_element struct                                             *
+//                                        Phase 1: @taskMapIR_2D_element struct                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4013,7 +4013,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR_2D_elemen
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @taskSortedListIR sorted list                                            *
+//                                        Phase 1: @taskSortedListIR sorted list                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4146,7 +4146,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSortedListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @taskSortedListIR_2D_element struct                                         *
+//                                     Phase 1: @taskSortedListIR_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4394,7 +4394,7 @@ class GALGAS_string extensionGetter_llvmValue (const class GALGAS_objectIR & inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @primitiveAndServiceIRlist list                                           *
+//                                       Phase 1: @primitiveAndServiceIRlist list                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4564,7 +4564,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primitiveAndService
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @generationAdds struct                                                *
+//                                           Phase 1: @generationAdds struct                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4653,7 +4653,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationAdds ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @generationContext struct                                              *
+//                                          Phase 1: @generationContext struct                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4742,7 +4742,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_generationContext ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @routineFormalArgumentListAST_2D_element struct                                   *
+//                               Phase 1: @routineFormalArgumentListAST_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

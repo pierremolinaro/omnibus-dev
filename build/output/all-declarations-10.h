@@ -97,7 +97,7 @@ class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class                             *
+//                        Phase 1: @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -170,7 +170,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValue
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                   Pointer class for @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class                    *
+//               Phase 2: pointer class for @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -423,7 +423,7 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @addressofInstructionIR class                                            *
+//                                        Phase 1: @addressofInstructionIR class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -484,7 +484,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofInstructio
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @addressofInstructionIR class                                   *
+//                               Phase 2: pointer class for @addressofInstructionIR class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

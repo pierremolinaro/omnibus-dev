@@ -20,7 +20,7 @@ task Tâche @stacksize 5512 @autostart {
     digital.set (!mode:.output !toPort:LED_L0)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     self.y = self.x
     for i $u32 in 0 ..< self.x.count {
       self.y [i] += self.compteur

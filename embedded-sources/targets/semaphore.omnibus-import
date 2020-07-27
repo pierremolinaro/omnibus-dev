@@ -28,9 +28,10 @@ sync $Semaphore {
   //····················································································································
 
   public func wait @noUnusedWarning @mutating (?until: inDeadline $u32) -> $bool {
-     event self.wait () exit {
+     sync{
+     when event self.wait () :
        result = yes
-     }else event time.wait (!until: inDeadline) exit {
+     when event time.wait (!until: inDeadline) :
        result = no
      }
    }

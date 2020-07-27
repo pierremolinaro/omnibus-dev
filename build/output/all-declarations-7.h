@@ -607,7 +607,7 @@ class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_omnibusType * inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @compileTimeBoolImplicitConverterToBoolean class                                   *
+//                              Phase 1: @compileTimeBoolImplicitConverterToBoolean class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -659,7 +659,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImpl
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                         Pointer class for @compileTimeBoolImplicitConverterToBoolean class                          *
+//                     Phase 2: pointer class for @compileTimeBoolImplicitConverterToBoolean class                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -685,7 +685,7 @@ class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImpli
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @compileTimeBoolNotOperator class                                          *
+//                                      Phase 1: @compileTimeBoolNotOperator class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -737,7 +737,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @compileTimeBoolNotOperator class                                 *
+//                             Phase 2: pointer class for @compileTimeBoolNotOperator class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -763,7 +763,7 @@ class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @compileTimeBoolEqualOperator class                                         *
+//                                     Phase 1: @compileTimeBoolEqualOperator class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -815,7 +815,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqua
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @compileTimeBoolEqualOperator class                                *
+//                            Phase 2: pointer class for @compileTimeBoolEqualOperator class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -841,7 +841,7 @@ class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @userLLVMStaticArrayTypeDefinitionIR class                                      *
+//                                 Phase 1: @userLLVMStaticArrayTypeDefinitionIR class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -906,7 +906,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMStaticArray
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                            Pointer class for @userLLVMStaticArrayTypeDefinitionIR class                             *
+//                        Phase 2: pointer class for @userLLVMStaticArrayTypeDefinitionIR class                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -941,7 +941,7 @@ class cPtr_userLLVMStaticArrayTypeDefinitionIR : public cPtr_userLLVMTypeDefinit
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @fixedSizeArrayAssignmentOperatorUsage class                                     *
+//                                Phase 1: @fixedSizeArrayAssignmentOperatorUsage class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1011,7 +1011,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssig
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                           Pointer class for @fixedSizeArrayAssignmentOperatorUsage class                            *
+//                       Phase 2: pointer class for @fixedSizeArrayAssignmentOperatorUsage class                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1049,7 +1049,7 @@ class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmen
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @staticArrayTypeAssignFunctionIR class                                        *
+//                                   Phase 1: @staticArrayTypeAssignFunctionIR class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1110,7 +1110,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeAssi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @staticArrayTypeAssignFunctionIR class                               *
+//                          Phase 2: pointer class for @staticArrayTypeAssignFunctionIR class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1143,7 +1143,7 @@ class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @dynArrayRemoveAllFunctionIR class                                          *
+//                                     Phase 1: @dynArrayRemoveAllFunctionIR class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1198,7 +1198,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayRemoveAllFu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @dynArrayRemoveAllFunctionIR class                                 *
+//                            Phase 2: pointer class for @dynArrayRemoveAllFunctionIR class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1227,7 +1227,7 @@ class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @dynArrayLengthFunctionIR class                                           *
+//                                       Phase 1: @dynArrayLengthFunctionIR class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1282,7 +1282,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayLengthFunct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @dynArrayLengthFunctionIR class                                  *
+//                              Phase 2: pointer class for @dynArrayLengthFunctionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1311,7 +1311,7 @@ class cPtr_dynArrayLengthFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @dynArrayAppendFunctionIR class                                           *
+//                                       Phase 1: @dynArrayAppendFunctionIR class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1384,7 +1384,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @dynArrayAppendFunctionIR class                                  *
+//                              Phase 2: pointer class for @dynArrayAppendFunctionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1425,7 +1425,7 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @dynArrayInsertFunctionIR class                                           *
+//                                       Phase 1: @dynArrayInsertFunctionIR class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1486,7 +1486,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayInsertFunct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @dynArrayInsertFunctionIR class                                  *
+//                              Phase 2: pointer class for @dynArrayInsertFunctionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1519,7 +1519,7 @@ class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @dynamicArrayTypeAssignUsage class                                          *
+//                                     Phase 1: @dynamicArrayTypeAssignUsage class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1583,7 +1583,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAss
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @dynamicArrayTypeAssignUsage class                                 *
+//                            Phase 2: pointer class for @dynamicArrayTypeAssignUsage class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1617,7 +1617,7 @@ class cPtr_dynamicArrayTypeAssignUsage : public cPtr_abstractAssignmentOperatorU
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @dynamicArrayTypeAssignGenericFunctionIR class                                    *
+//                               Phase 1: @dynamicArrayTypeAssignGenericFunctionIR class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1672,7 +1672,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAss
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          Pointer class for @dynamicArrayTypeAssignGenericFunctionIR class                           *
+//                      Phase 2: pointer class for @dynamicArrayTypeAssignGenericFunctionIR class                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1701,7 +1701,7 @@ class cPtr_dynamicArrayTypeAssignGenericFunctionIR : public cPtr_abstractRoutine
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @enumToUintRoutineIR class                                              *
+//                                         Phase 1: @enumToUintRoutineIR class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1762,7 +1762,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumToUintRoutineIR
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @enumToUintRoutineIR class                                     *
+//                                Phase 2: pointer class for @enumToUintRoutineIR class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1795,7 +1795,7 @@ class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @structureAssignmentOperatorUsage class                                       *
+//                                   Phase 1: @structureAssignmentOperatorUsage class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1853,7 +1853,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureAssignment
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @structureAssignmentOperatorUsage class                              *
+//                          Phase 2: pointer class for @structureAssignmentOperatorUsage class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1883,7 +1883,7 @@ class cPtr_structureAssignmentOperatorUsage : public cPtr_abstractAssignmentOper
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @structureTypeAssignFunctionIR class                                         *
+//                                    Phase 1: @structureTypeAssignFunctionIR class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1944,7 +1944,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureTypeAssign
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @structureTypeAssignFunctionIR class                                *
+//                           Phase 2: pointer class for @structureTypeAssignFunctionIR class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1977,7 +1977,7 @@ class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @integerBuiltinFunctionIR class                                           *
+//                                       Phase 1: @integerBuiltinFunctionIR class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2044,7 +2044,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerBuiltinFunct
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @integerBuiltinFunctionIR class                                  *
+//                              Phase 2: pointer class for @integerBuiltinFunctionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2104,7 +2104,7 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_typeOpaque
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                @decoratedControlRegisterArrayGroupDeclaration class                                 *
+//                            Phase 1: @decoratedControlRegisterArrayGroupDeclaration class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2168,7 +2168,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedControlReg
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                       Pointer class for @decoratedControlRegisterArrayGroupDeclaration class                        *
+//                   Phase 2: pointer class for @decoratedControlRegisterArrayGroupDeclaration class                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2224,7 +2224,7 @@ class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALG
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @decoratedSyncInstance class                                             *
+//                                        Phase 1: @decoratedSyncInstance class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2285,7 +2285,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedSyncInstan
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @decoratedSyncInstance class                                    *
+//                               Phase 2: pointer class for @decoratedSyncInstance class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2319,7 +2319,7 @@ class cPtr_decoratedSyncInstance : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @implementedDriverAST class                                             *
+//                                         Phase 1: @implementedDriverAST class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2425,7 +2425,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAS
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @implementedDriverAST class                                    *
+//                                Phase 2: pointer class for @implementedDriverAST class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2487,7 +2487,7 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @decoratedRequiredDriver class                                            *
+//                                       Phase 1: @decoratedRequiredDriver class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2545,7 +2545,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRequiredDr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @decoratedRequiredDriver class                                   *
+//                              Phase 2: pointer class for @decoratedRequiredDriver class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2575,7 +2575,7 @@ class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @decoratedStaticList class                                              *
+//                                         Phase 1: @decoratedStaticList class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2639,7 +2639,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStaticList
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @decoratedStaticList class                                     *
+//                                Phase 2: pointer class for @decoratedStaticList class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2673,7 +2673,7 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @staticListIndirectRoutineIR class                                          *
+//                                     Phase 1: @staticListIndirectRoutineIR class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2752,7 +2752,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListIndirectR
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @staticListIndirectRoutineIR class                                 *
+//                            Phase 2: pointer class for @staticListIndirectRoutineIR class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

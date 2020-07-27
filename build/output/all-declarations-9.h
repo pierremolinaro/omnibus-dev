@@ -10,7 +10,7 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @compileTimePrefixOperatorUsage class                                        *
+//                                    Phase 1: @compileTimePrefixOperatorUsage class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -77,7 +77,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimePrefixOp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @compileTimePrefixOperatorUsage class                               *
+//                           Phase 2: pointer class for @compileTimePrefixOperatorUsage class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -115,7 +115,7 @@ class cPtr_compileTimePrefixOperatorUsage : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @llvmPrefixOperatorUsage class                                            *
+//                                       Phase 1: @llvmPrefixOperatorUsage class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -185,7 +185,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorU
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @llvmPrefixOperatorUsage class                                   *
+//                              Phase 2: pointer class for @llvmPrefixOperatorUsage class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -223,7 +223,7 @@ class cPtr_llvmPrefixOperatorUsage : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @prefixOperatorRoutineIR class                                            *
+//                                       Phase 1: @prefixOperatorRoutineIR class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -308,7 +308,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorRouti
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @prefixOperatorRoutineIR class                                   *
+//                              Phase 2: pointer class for @prefixOperatorRoutineIR class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -423,7 +423,7 @@ void routine_analyzeVariableInLValueInAssignment (const class GALGAS_omnibusType
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @forInstructionOnArrayIR class                                            *
+//                                       Phase 1: @forInstructionOnArrayIR class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -526,7 +526,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @forInstructionOnArrayIR class                                   *
+//                              Phase 2: pointer class for @forInstructionOnArrayIR class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -588,7 +588,7 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @forInstructionOnLiteralStringIR class                                        *
+//                                   Phase 1: @forInstructionOnLiteralStringIR class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -679,7 +679,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnLit
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @forInstructionOnLiteralStringIR class                               *
+//                          Phase 2: pointer class for @forInstructionOnLiteralStringIR class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -733,7 +733,7 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @forLowerUpperBoundInstructionIR class                                        *
+//                                   Phase 1: @forLowerUpperBoundInstructionIR class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -824,7 +824,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @forLowerUpperBoundInstructionIR class                               *
+//                          Phase 2: pointer class for @forLowerUpperBoundInstructionIR class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1169,7 +1169,7 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class c
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @standaloneRoutineCallIR class                                            *
+//                                       Phase 1: @standaloneRoutineCallIR class                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1242,7 +1242,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneRoutineCa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @standaloneRoutineCallIR class                                   *
+//                              Phase 2: pointer class for @standaloneRoutineCallIR class                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1284,7 +1284,7 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @llvmAssignmentOperatorUsage class                                          *
+//                                     Phase 1: @llvmAssignmentOperatorUsage class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1381,7 +1381,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOpera
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @llvmAssignmentOperatorUsage class                                 *
+//                            Phase 2: pointer class for @llvmAssignmentOperatorUsage class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1439,7 +1439,7 @@ class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorU
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @assignmentRoutineIR class                                              *
+//                                         Phase 1: @assignmentRoutineIR class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1530,7 +1530,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentRoutineIR
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @assignmentRoutineIR class                                     *
+//                                Phase 2: pointer class for @assignmentRoutineIR class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1583,7 +1583,7 @@ class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @simpleAssignmentCopyRoutineIR class                                         *
+//                                    Phase 1: @simpleAssignmentCopyRoutineIR class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1644,7 +1644,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleAssignmentCop
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @simpleAssignmentCopyRoutineIR class                                *
+//                           Phase 2: pointer class for @simpleAssignmentCopyRoutineIR class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

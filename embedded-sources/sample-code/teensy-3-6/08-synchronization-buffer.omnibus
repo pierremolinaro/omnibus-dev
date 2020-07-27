@@ -69,7 +69,7 @@ task Tâche1 @stacksize 512 {
     digital.set (!mode:.output !toPort:LED_L2)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
     self.index += 1
@@ -79,7 +79,7 @@ task Tâche1 @stacksize 512 {
 
 task Tâche2 @stacksize 512 @autostart {
 
-  event buffer.read (?var value $u32) {
+  while event buffer.read (?var value $u32) {
     lcd.goto (!line:0 !column:0)
     lcd.print (!u32:value)
   }

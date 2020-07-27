@@ -55,7 +55,7 @@ task T1 > T2 @stacksize 512 @autostart {
     lcd.print (!string:"Max:")
   }
 
-  event time.wait (!until:self.échéance) {
+  while event time.wait (!until:self.échéance) {
     self.échéance +%= 1_000
     digital.toggle (!port:LED_L3)
     let freeRam = freeByteCount ()
@@ -102,7 +102,7 @@ task T2 > backgroundTask @stacksize 512 @autostart {
   var structure = $AutreStructWithARC ()
   var b $u8 = 0
 
-  event time.wait (!until:self.échéance1) {
+  while event time.wait (!until:self.échéance1) {
     self.échéance1 +%= 71
     digital.toggle (!port:LED_L4)
     if digital.read (!port:BUTTON_P0) {
@@ -118,12 +118,12 @@ task T2 > backgroundTask @stacksize 512 @autostart {
     }
   }
 
-  event time.wait (!until:self.échéance2) {
+  while event time.wait (!until:self.échéance2) {
     self.échéance2 +%= 97
     self.data2 = self.data1
   }
 
-  event time.wait (!until:self.échéance3) {
+  while event time.wait (!until:self.échéance3) {
     self.échéance3 +%= 511
     self.structure.structure.donnée = self.data2
     self.testReleaseLocalVar (!in:self.structure.structure.donnée)
@@ -140,7 +140,7 @@ task T2 > backgroundTask @stacksize 512 @autostart {
 task backgroundTask @stacksize 512 @autostart {
   var data = $Array8 ()
 
-  event time.wait (!until:0) {
+  while event time.wait (!until:0) {
     digital.toggle (!port:LED_L0)
     if digital.read (!port:BUTTON_P0) {
       if self.data.length () == 0 {

@@ -23,7 +23,7 @@ task T @stacksize 512 @autostart {
 
   //············································································
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     self.compteur +%= 50
     digital.write (!not digital.read (!port:BUTTON_P0) !toPort:LED_L0)
     digital.write (!not digital.read (!port:BUTTON_P1) !toPort:LED_L1)

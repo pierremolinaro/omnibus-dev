@@ -10,7 +10,7 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @routineLLVMNameDict_2D_element struct                                        *
+//                                   Phase 1: @routineLLVMNameDict_2D_element struct                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -155,7 +155,7 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_routineMapFo
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @sectionIRlist list                                                 *
+//                                             Phase 1: @sectionIRlist list                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -325,7 +325,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionIRlist ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @sectionIRlist_2D_element struct                                           *
+//                                      Phase 1: @sectionIRlist_2D_element struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -402,7 +402,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionIRlist_2D_el
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @primitiveAndServiceIRlist_2D_element struct                                     *
+//                                Phase 1: @primitiveAndServiceIRlist_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -538,7 +538,7 @@ void extensionMethod_externProcedureSemanticAnalysis (const class GALGAS_externF
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @routineFormalArgumentListIR list                                          *
+//                                      Phase 1: @routineFormalArgumentListIR list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -708,7 +708,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @routineFormalArgumentListIR_2D_element struct                                    *
+//                               Phase 1: @routineFormalArgumentListIR_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -782,7 +782,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Class for element of '@externProcedureMapIR' map                                   *
+//                              Phase 2: class for element of '@externProcedureMapIR' map                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -812,7 +812,7 @@ class cMapElement_externProcedureMapIR : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @externProcedureMapIR_2D_element struct                                       *
+//                                   Phase 1: @externProcedureMapIR_2D_element struct                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -900,7 +900,7 @@ void extensionMethod_llvmPrototypeGeneration (const class GALGAS_externProcedure
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Class for element of '@interruptMapIR' map                                      *
+//                                 Phase 2: class for element of '@interruptMapIR' map                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -932,7 +932,7 @@ class cMapElement_interruptMapIR : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @interruptMapIR_2D_element struct                                          *
+//                                      Phase 1: @interruptMapIR_2D_element struct                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1048,7 +1048,7 @@ class GALGAS_lstring function_llvmNameForServiceInterrupt (const class GALGAS_ls
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                             @guardKindGenerationIR enum                                             *
+//                                         Phase 1: @guardKindGenerationIR enum                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1131,7 +1131,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardKindGeneration
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                  @allocaList list                                                   *
+//                                              Phase 1: @allocaList list                                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1301,7 +1301,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allocaList ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @instructionListIR list                                               *
+//                                           Phase 1: @instructionListIR list                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1433,7 +1433,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @procCallEffectiveParameterListIR list                                        *
+//                                   Phase 1: @procCallEffectiveParameterListIR list                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1584,7 +1584,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procCallEffectivePa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @guardKindGenerationIR enum, associated values                                    *
+//                               Phase 2: @guardKindGenerationIR enum, associated values                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1610,7 +1610,7 @@ class cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard : public cEnu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @allocaList_2D_element struct                                            *
+//                                        Phase 1: @allocaList_2D_element struct                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1687,7 +1687,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allocaList_2D_eleme
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @abstractInstructionIR class                                             *
+//                                        Phase 1: @abstractInstructionIR class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1733,7 +1733,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractInstruction
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @abstractInstructionIR class                                    *
+//                               Phase 2: pointer class for @abstractInstructionIR class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1756,7 +1756,7 @@ class cPtr_abstractInstructionIR : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @instructionListIR_2D_element struct                                         *
+//                                    Phase 1: @instructionListIR_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1861,7 +1861,7 @@ class GALGAS_lstring extensionGetter_mangledName (const class GALGAS_routineType
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @effectiveArgumentListAST_2D_element struct                                     *
+//                                 Phase 1: @effectiveArgumentListAST_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1929,7 +1929,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentLi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @decoratedRegularRoutineList_2D_element struct                                    *
+//                               Phase 1: @decoratedRegularRoutineList_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2132,7 +2132,7 @@ class GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemR
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @panicSortedListIR_2D_element struct                                         *
+//                                    Phase 1: @panicSortedListIR_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2197,7 +2197,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicSortedListIR_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @llvmGenerationInstructionList_2D_element struct                                   *
+//                              Phase 1: @llvmGenerationInstructionList_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2259,7 +2259,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @implicitBooleanConversionResult enum                                        *
+//                                    Phase 1: @implicitBooleanConversionResult enum                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2341,7 +2341,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implicitBooleanConv
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              @implicitBooleanConversionResult enum, associated values                               *
+//                          Phase 2: @implicitBooleanConversionResult enum, associated values                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2512,7 +2512,7 @@ void callExtensionMethod_analyzeExpression (const class cPtr_expressionAST * inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @truncateInstructionIR class                                             *
+//                                        Phase 1: @truncateInstructionIR class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2573,7 +2573,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateInstruction
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @truncateInstructionIR class                                    *
+//                               Phase 2: pointer class for @truncateInstructionIR class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2607,7 +2607,7 @@ class cPtr_truncateInstructionIR : public cPtr_abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 @primaryInExpressionAccessListAST_2D_element struct                                 *
+//                             Phase 1: @primaryInExpressionAccessListAST_2D_element struct                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2669,7 +2669,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpression
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @integerSliceFieldListAST_2D_element struct                                     *
+//                                 Phase 1: @integerSliceFieldListAST_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2743,7 +2743,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerSliceFieldLi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @registerIntegerFieldListAST_2D_element struct                                    *
+//                               Phase 1: @registerIntegerFieldListAST_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2817,7 +2817,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              @functionCallEffectiveParameterListAST_2D_element struct                               *
+//                          Phase 1: @functionCallEffectiveParameterListAST_2D_element struct                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2895,7 +2895,7 @@ class GALGAS_string extensionGetter_string (const class GALGAS_compileTimeInfixO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @genericFormalParameterList_2D_element struct                                    *
+//                                Phase 1: @genericFormalParameterList_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3035,7 +3035,7 @@ class GALGAS_omnibusType extensionGetter_type (const class GALGAS_objectIR & inO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @inlineInfixOperatorUsage class                                           *
+//                                       Phase 1: @inlineInfixOperatorUsage class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3093,7 +3093,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfixOperator
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @inlineInfixOperatorUsage class                                  *
+//                              Phase 2: pointer class for @inlineInfixOperatorUsage class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

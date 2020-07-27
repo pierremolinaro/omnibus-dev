@@ -189,7 +189,7 @@ task Tâche @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L2)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!until: self.compteur)

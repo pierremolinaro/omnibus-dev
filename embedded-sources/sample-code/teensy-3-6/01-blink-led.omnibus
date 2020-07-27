@@ -40,7 +40,7 @@ task Tâche @stacksize 512 @autostart {
     lcd.print (!u32:extend (RegisterRead.MCG_C6 () & 0x1F))
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!until: self.compteur)

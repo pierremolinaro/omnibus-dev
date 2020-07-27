@@ -10,7 +10,7 @@
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @propertyGetterKind enum                                               *
+//                                          Phase 1: @propertyGetterKind enum                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -106,7 +106,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyGetterKind 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Class for element of '@propertyGetterMap' map                                    *
+//                                Phase 2: class for element of '@propertyGetterMap' map                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -136,7 +136,7 @@ class cMapElement_propertyGetterMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @propertyGetterMap_2D_element struct                                         *
+//                                    Phase 1: @propertyGetterMap_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -210,7 +210,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyGetterMap_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @propertyGetterKind enum, associated values                                     *
+//                                 Phase 2: @propertyGetterKind enum, associated values                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -266,7 +266,7 @@ class cEnumAssociatedValues_propertyGetterKind_constantProperty : public cEnumAs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @propertySetterKind enum                                               *
+//                                          Phase 1: @propertySetterKind enum                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -354,7 +354,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertySetterKind 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Class for element of '@propertySetterMap' map                                    *
+//                                Phase 2: class for element of '@propertySetterMap' map                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -384,7 +384,7 @@ class cMapElement_propertySetterMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @propertySetterMap_2D_element struct                                         *
+//                                    Phase 1: @propertySetterMap_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -458,7 +458,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertySetterMap_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @propertySetterKind enum, associated values                                     *
+//                                 Phase 2: @propertySetterKind enum, associated values                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -500,7 +500,7 @@ class cEnumAssociatedValues_propertySetterKind_computedProperty : public cEnumAs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                @staticStringMap map                                                 *
+//                                            Phase 1: @staticStringMap map                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -604,7 +604,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticStringMap ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Class for element of '@staticStringMap' map                                     *
+//                                 Phase 2: class for element of '@staticStringMap' map                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -632,7 +632,7 @@ class cMapElement_staticStringMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @staticStringMap_2D_element struct                                          *
+//                                     Phase 1: @staticStringMap_2D_element struct                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -703,7 +703,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticStringMap_2D_
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @globalStructuredConstantList list                                          *
+//                                     Phase 1: @globalStructuredConstantList list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -854,7 +854,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalStructuredCon
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @globalStructuredConstantList_2D_element struct                                   *
+//                               Phase 1: @globalStructuredConstantList_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -925,7 +925,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalStructuredCon
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @operandIRList_2D_element struct                                           *
+//                                      Phase 1: @operandIRList_2D_element struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1024,7 +1024,7 @@ void callExtensionMethod_enterInContext (const class cPtr_abstractDeclarationAST
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @decoratedRegularRoutineList list                                          *
+//                                      Phase 1: @decoratedRegularRoutineList list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1384,7 +1384,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRegularRou
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @routineListIR list                                                 *
+//                                             Phase 1: @routineListIR list                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1516,7 +1516,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @userLLVMTypeDefinitionListIR list                                          *
+//                                     Phase 1: @userLLVMTypeDefinitionListIR list                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1648,7 +1648,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMTypeDefinit
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @staticListInitializationMap map                                           *
+//                                      Phase 1: @staticListInitializationMap map                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1743,7 +1743,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInitializ
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Class for element of '@staticListInitializationMap' map                               *
+//                           Phase 2: class for element of '@staticListInitializationMap' map                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1771,7 +1771,7 @@ class cMapElement_staticListInitializationMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @universalValuedObjectMap struct                                           *
+//                                      Phase 1: @universalValuedObjectMap struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -1848,7 +1848,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalValuedObje
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @semanticContext struct                                               *
+//                                           Phase 1: @semanticContext struct                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2053,7 +2053,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @staticEntityMap struct                                               *
+//                                           Phase 1: @staticEntityMap struct                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2124,7 +2124,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticEntityMap ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @arcAssignmentList list                                               *
+//                                           Phase 1: @arcAssignmentList list                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2294,7 +2294,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_arcAssignmentList ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @arcAssignmentList_2D_element struct                                         *
+//                                    Phase 1: @arcAssignmentList_2D_element struct                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2371,7 +2371,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_arcAssignmentList_2
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @userLLVMTypeDefinitionIR class                                           *
+//                                       Phase 1: @userLLVMTypeDefinitionIR class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2422,7 +2422,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMTypeDefinit
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  Pointer class for @userLLVMTypeDefinitionIR class                                  *
+//                              Phase 2: pointer class for @userLLVMTypeDefinitionIR class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2472,7 +2472,7 @@ void callExtensionMethod_generateLLVMType (const class cPtr_userLLVMTypeDefiniti
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @userLLVMTypeDefinitionListIR_2D_element struct                                   *
+//                               Phase 1: @userLLVMTypeDefinitionListIR_2D_element struct                              *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2561,7 +2561,7 @@ void callExtensionMethod_semanticAnalysis (const class cPtr_abstractDecoratedDec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @panicSortedListIR sorted list                                            *
+//                                       Phase 1: @panicSortedListIR sorted list                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2645,7 +2645,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicSortedListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @controlRegisterGroupArrayList list                                         *
+//                                     Phase 1: @controlRegisterGroupArrayList list                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2796,7 +2796,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGrou
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @driverListIR list                                                  *
+//                                             Phase 1: @driverListIR list                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -2966,7 +2966,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverListIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @externProcedureMapIR map                                              *
+//                                          Phase 1: @externProcedureMapIR map                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3073,7 +3073,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureMapI
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @globalSyncInstanceMapIR map                                             *
+//                                        Phase 1: @globalSyncInstanceMapIR map                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3168,7 +3168,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceM
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @interruptMapIR map                                                 *
+//                                             Phase 1: @interruptMapIR map                                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3287,7 +3287,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptMapIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @staticListInvokedFunctionSetMap map                                         *
+//                                    Phase 1: @staticListInvokedFunctionSetMap map                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3391,7 +3391,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInvokedFu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                   @taskMapIR map                                                    *
+//                                               Phase 1: @taskMapIR map                                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3598,7 +3598,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @intermediateCodeStruct struct                                            *
+//                                       Phase 1: @intermediateCodeStruct struct                                       *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3741,7 +3741,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_intermediateCodeStr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @semanticTemporariesStruct struct                                          *
+//                                      Phase 1: @semanticTemporariesStruct struct                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3830,7 +3830,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTemporaries
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Class for element of '@staticListInvokedFunctionSetMap' map                             *
+//                         Phase 2: class for element of '@staticListInvokedFunctionSetMap' map                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3858,7 +3858,7 @@ class cMapElement_staticListInvokedFunctionSetMap : public cMapElement {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 @staticListInvokedFunctionSetMap_2D_element struct                                  *
+//                             Phase 1: @staticListInvokedFunctionSetMap_2D_element struct                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3929,7 +3929,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInvokedFu
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @compiletimeBoolAST class                                              *
+//                                          Phase 1: @compiletimeBoolAST class                                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -3981,7 +3981,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compiletimeBoolAST 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Pointer class for @compiletimeBoolAST class                                     *
+//                                 Phase 2: pointer class for @compiletimeBoolAST class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4007,7 +4007,7 @@ class cPtr_compiletimeBoolAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Pointer class for @abstractImplicitConverterToBoolean class                             *
+//                         Phase 2: pointer class for @abstractImplicitConverterToBoolean class                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4030,7 +4030,7 @@ class cPtr_abstractImplicitConverterToBoolean : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    Pointer class for @prefixOperatorUsage class                                     *
+//                                Phase 2: pointer class for @prefixOperatorUsage class                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4053,7 +4053,7 @@ class cPtr_prefixOperatorUsage : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @omnibusInfixOperatorUsage class                                  *
+//                             Phase 2: pointer class for @omnibusInfixOperatorUsage class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4076,7 +4076,7 @@ class cPtr_omnibusInfixOperatorUsage : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @compileTimeBoolXorOperator class                                          *
+//                                      Phase 1: @compileTimeBoolXorOperator class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4128,7 +4128,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolXorO
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @compileTimeBoolXorOperator class                                 *
+//                             Phase 2: pointer class for @compileTimeBoolXorOperator class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4154,7 +4154,7 @@ class cPtr_compileTimeBoolXorOperator : public cPtr_omnibusInfixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @compileTimeBoolOrOperator class                                           *
+//                                      Phase 1: @compileTimeBoolOrOperator class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4206,7 +4206,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolOrOp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @compileTimeBoolOrOperator class                                  *
+//                             Phase 2: pointer class for @compileTimeBoolOrOperator class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4232,7 +4232,7 @@ class cPtr_compileTimeBoolOrOperator : public cPtr_omnibusInfixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                              @compileTimeIntAST class                                               *
+//                                          Phase 1: @compileTimeIntAST class                                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4284,7 +4284,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     Pointer class for @compileTimeIntAST class                                      *
+//                                 Phase 2: pointer class for @compileTimeIntAST class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4310,7 +4310,7 @@ class cPtr_compileTimeIntAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @compileTimeIntModuloOperator class                                         *
+//                                     Phase 1: @compileTimeIntModuloOperator class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4362,7 +4362,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntModul
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @compileTimeIntModuloOperator class                                *
+//                            Phase 2: pointer class for @compileTimeIntModuloOperator class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4388,7 +4388,7 @@ class cPtr_compileTimeIntModuloOperator : public cPtr_omnibusInfixOperatorUsage 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntModuloZeroOperator class                                       *
+//                                   Phase 1: @compileTimeIntModuloZeroOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4440,7 +4440,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntModul
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntModuloZeroOperator class                              *
+//                          Phase 2: pointer class for @compileTimeIntModuloZeroOperator class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4466,7 +4466,7 @@ class cPtr_compileTimeIntModuloZeroOperator : public cPtr_omnibusInfixOperatorUs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @compileTimeIntDivideOperator class                                         *
+//                                     Phase 1: @compileTimeIntDivideOperator class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4518,7 +4518,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntDivid
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @compileTimeIntDivideOperator class                                *
+//                            Phase 2: pointer class for @compileTimeIntDivideOperator class                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4544,7 +4544,7 @@ class cPtr_compileTimeIntDivideOperator : public cPtr_omnibusInfixOperatorUsage 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntDivideZeroOperator class                                       *
+//                                   Phase 1: @compileTimeIntDivideZeroOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4596,7 +4596,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntDivid
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntDivideZeroOperator class                              *
+//                          Phase 2: pointer class for @compileTimeIntDivideZeroOperator class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4622,7 +4622,7 @@ class cPtr_compileTimeIntDivideZeroOperator : public cPtr_omnibusInfixOperatorUs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @compileTimeIntMultiplyOperator class                                        *
+//                                    Phase 1: @compileTimeIntMultiplyOperator class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4674,7 +4674,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMulti
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @compileTimeIntMultiplyOperator class                               *
+//                           Phase 2: pointer class for @compileTimeIntMultiplyOperator class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4700,7 +4700,7 @@ class cPtr_compileTimeIntMultiplyOperator : public cPtr_omnibusInfixOperatorUsag
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @compileTimeIntSubtractOperator class                                        *
+//                                    Phase 1: @compileTimeIntSubtractOperator class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4752,7 +4752,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntSubtr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @compileTimeIntSubtractOperator class                               *
+//                           Phase 2: pointer class for @compileTimeIntSubtractOperator class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4778,7 +4778,7 @@ class cPtr_compileTimeIntSubtractOperator : public cPtr_omnibusInfixOperatorUsag
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @compileTimeIntEqualOperator class                                          *
+//                                     Phase 1: @compileTimeIntEqualOperator class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4830,7 +4830,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntEqual
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @compileTimeIntEqualOperator class                                 *
+//                            Phase 2: pointer class for @compileTimeIntEqualOperator class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4856,7 +4856,7 @@ class cPtr_compileTimeIntEqualOperator : public cPtr_omnibusInfixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @compileTimeIntAddOperator class                                           *
+//                                      Phase 1: @compileTimeIntAddOperator class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4908,7 +4908,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntAddOp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @compileTimeIntAddOperator class                                  *
+//                             Phase 2: pointer class for @compileTimeIntAddOperator class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4934,7 +4934,7 @@ class cPtr_compileTimeIntAddOperator : public cPtr_omnibusInfixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntBitWiseAndOperator class                                       *
+//                                   Phase 1: @compileTimeIntBitWiseAndOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -4986,7 +4986,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntBitWiseAndOperator class                              *
+//                          Phase 2: pointer class for @compileTimeIntBitWiseAndOperator class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5012,7 +5012,7 @@ class cPtr_compileTimeIntBitWiseAndOperator : public cPtr_omnibusInfixOperatorUs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntShiftLeftOperator class                                        *
+//                                   Phase 1: @compileTimeIntShiftLeftOperator class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5064,7 +5064,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntShift
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntShiftLeftOperator class                               *
+//                          Phase 2: pointer class for @compileTimeIntShiftLeftOperator class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5090,7 +5090,7 @@ class cPtr_compileTimeIntShiftLeftOperator : public cPtr_omnibusInfixOperatorUsa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntShiftRightOperator class                                       *
+//                                   Phase 1: @compileTimeIntShiftRightOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5142,7 +5142,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntShift
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntShiftRightOperator class                              *
+//                          Phase 2: pointer class for @compileTimeIntShiftRightOperator class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5168,7 +5168,7 @@ class cPtr_compileTimeIntShiftRightOperator : public cPtr_omnibusInfixOperatorUs
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @compileTimeIntLessThanOperator class                                        *
+//                                    Phase 1: @compileTimeIntLessThanOperator class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5220,7 +5220,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntLessT
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @compileTimeIntLessThanOperator class                               *
+//                           Phase 2: pointer class for @compileTimeIntLessThanOperator class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5246,7 +5246,7 @@ class cPtr_compileTimeIntLessThanOperator : public cPtr_omnibusInfixOperatorUsag
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @compileTimeIntLowerOrEqualOperator class                                      *
+//                                  Phase 1: @compileTimeIntLowerOrEqualOperator class                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5298,7 +5298,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntLower
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                             Pointer class for @compileTimeIntLowerOrEqualOperator class                             *
+//                         Phase 2: pointer class for @compileTimeIntLowerOrEqualOperator class                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5324,7 +5324,7 @@ class cPtr_compileTimeIntLowerOrEqualOperator : public cPtr_omnibusInfixOperator
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                          @compileTimeIntXorOperator class                                           *
+//                                      Phase 1: @compileTimeIntXorOperator class                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5376,7 +5376,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntXorOp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                 Pointer class for @compileTimeIntXorOperator class                                  *
+//                             Phase 2: pointer class for @compileTimeIntXorOperator class                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5402,7 +5402,7 @@ class cPtr_compileTimeIntXorOperator : public cPtr_omnibusInfixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntBitWiseOrOperator class                                        *
+//                                   Phase 1: @compileTimeIntBitWiseOrOperator class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5454,7 +5454,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntBitWiseOrOperator class                               *
+//                          Phase 2: pointer class for @compileTimeIntBitWiseOrOperator class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5480,7 +5480,7 @@ class cPtr_compileTimeIntBitWiseOrOperator : public cPtr_omnibusInfixOperatorUsa
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @compileTimeIntMinusOperator class                                          *
+//                                     Phase 1: @compileTimeIntMinusOperator class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5532,7 +5532,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMinus
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @compileTimeIntMinusOperator class                                 *
+//                            Phase 2: pointer class for @compileTimeIntMinusOperator class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5558,7 +5558,7 @@ class cPtr_compileTimeIntMinusOperator : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @compileTimeIntComplementOperator class                                       *
+//                                   Phase 1: @compileTimeIntComplementOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5610,7 +5610,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntCompl
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @compileTimeIntComplementOperator class                              *
+//                          Phase 2: pointer class for @compileTimeIntComplementOperator class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5636,7 +5636,7 @@ class cPtr_compileTimeIntComplementOperator : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                                 @boolTypeAST class                                                  *
+//                                             Phase 1: @boolTypeAST class                                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5688,7 +5688,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolTypeAST ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        Pointer class for @boolTypeAST class                                         *
+//                                    Phase 2: pointer class for @boolTypeAST class                                    *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5714,7 +5714,7 @@ class cPtr_boolTypeAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                        @boolImplicitConverterToBoolean class                                        *
+//                                    Phase 1: @boolImplicitConverterToBoolean class                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5766,7 +5766,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConvert
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                               Pointer class for @boolImplicitConverterToBoolean class                               *
+//                           Phase 2: pointer class for @boolImplicitConverterToBoolean class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5792,7 +5792,7 @@ class cPtr_boolImplicitConverterToBoolean : public cPtr_abstractImplicitConverte
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                               @boolNotOperator class                                                *
+//                                           Phase 1: @boolNotOperator class                                           *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5844,7 +5844,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolNotOperator ;
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      Pointer class for @boolNotOperator class                                       *
+//                                  Phase 2: pointer class for @boolNotOperator class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5870,7 +5870,7 @@ class cPtr_boolNotOperator : public cPtr_prefixOperatorUsage {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @abstractAssignmentOperatorUsage class                               *
+//                          Phase 2: pointer class for @abstractAssignmentOperatorUsage class                          *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5893,7 +5893,7 @@ class cPtr_abstractAssignmentOperatorUsage : public acPtr_class {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @enumerationConstantList_2D_element struct                                      *
+//                                 Phase 1: @enumerationConstantList_2D_element struct                                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -5964,7 +5964,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumerationConstant
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                     @structurePropertyListAST_2D_element struct                                     *
+//                                 Phase 1: @structurePropertyListAST_2D_element struct                                *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6050,7 +6050,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structurePropertyLi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                      @propertyAttributeList_2D_element struct                                       *
+//                                  Phase 1: @propertyAttributeList_2D_element struct                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6121,7 +6121,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyAttributeLi
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                           @propertyList_2D_element struct                                           *
+//                                       Phase 1: @propertyList_2D_element struct                                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6192,7 +6192,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyList_2D_ele
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @sortedOperandIRList_2D_element struct                                        *
+//                                   Phase 1: @sortedOperandIRList_2D_element struct                                   *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6260,7 +6260,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sortedOperandIRList
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                       @userLLVMSructureTypeDefinitionIR class                                       *
+//                                   Phase 1: @userLLVMSructureTypeDefinitionIR class                                  *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6319,7 +6319,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMSructureTyp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                              Pointer class for @userLLVMSructureTypeDefinitionIR class                              *
+//                          Phase 2: pointer class for @userLLVMSructureTypeDefinitionIR class                         *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6350,7 +6350,7 @@ class cPtr_userLLVMSructureTypeDefinitionIR : public cPtr_userLLVMTypeDefinition
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                            @integerDeclarationAST class                                             *
+//                                        Phase 1: @integerDeclarationAST class                                        *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6414,7 +6414,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerDeclarationA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   Pointer class for @integerDeclarationAST class                                    *
+//                               Phase 2: pointer class for @integerDeclarationAST class                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6469,7 +6469,7 @@ class GALGAS_string callExtensionGetter_typeName (const cPtr_integerDeclarationA
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          @inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage class                           *
+//                      Phase 1: @inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage class                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6527,7 +6527,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfix_5F_inte
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                      Pointer class for @inlineInfix_integer_compileTimeInt_operatorUsage class                      *
+//                  Phase 2: pointer class for @inlineInfix_integer_compileTimeInt_operatorUsage class                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6557,7 +6557,7 @@ class cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage : public cP
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                          @inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage class                           *
+//                      Phase 1: @inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage class                      *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6615,7 +6615,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfix_5F_comp
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                      Pointer class for @inlineInfix_compileTimeInt_integer_operatorUsage class                      *
+//                  Phase 2: pointer class for @inlineInfix_compileTimeInt_integer_operatorUsage class                 *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6645,7 +6645,7 @@ class cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage : public cP
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                         @literalStringDeclarationAST class                                          *
+//                                     Phase 1: @literalStringDeclarationAST class                                     *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6697,7 +6697,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringDeclar
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                Pointer class for @literalStringDeclarationAST class                                 *
+//                            Phase 2: pointer class for @literalStringDeclarationAST class                            *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6723,7 +6723,7 @@ class cPtr_literalStringDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                    @controlRegisterNameListAST_2D_element struct                                    *
+//                                Phase 1: @controlRegisterNameListAST_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6809,7 +6809,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterName
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                  @controlRegisterDeclarationList_2D_element struct                                  *
+//                              Phase 1: @controlRegisterDeclarationList_2D_element struct                             *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -6892,7 +6892,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterDecl
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 //                                                                                                                     *
-//                                   @controlRegisterBitSliceList_2D_element struct                                    *
+//                               Phase 1: @controlRegisterBitSliceList_2D_element struct                               *
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 

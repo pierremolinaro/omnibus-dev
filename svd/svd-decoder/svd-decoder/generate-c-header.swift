@@ -13,6 +13,31 @@ fileprivate let separator = "//" + String (repeating: "-", count: 78) + "\n"
 
 //------------------------------------------------------------------------------
 
+func hexString (_ inValue : UInt32) -> String {
+  let s = String (inValue, radix: 16, uppercase: true)
+  return "0x\(s)"
+}
+
+//------------------------------------------------------------------------------
+
+func hexString (_ inValue : UInt) -> String {
+  return hexString (UInt32 (inValue))
+}
+
+//------------------------------------------------------------------------------
+
+func hexString (_ inValue : UInt64) -> String {
+  return hexString (UInt32 (inValue))
+}
+
+//------------------------------------------------------------------------------
+
+func hexString (_ inValue : Int) -> String {
+  return hexString (UInt32 (inValue))
+}
+
+//------------------------------------------------------------------------------
+
 func generateHeader (device inDevice : Device, baseURL inBaseURL : URL) {
   var s = "#pragma once\n\n"
   s += separator
@@ -22,7 +47,6 @@ func generateHeader (device inDevice : Device, baseURL inBaseURL : URL) {
   var groupDictionary = [String : [Peripheral]] ()
   var generationDict = [String : String] ()
   for peripheral in inDevice.peripherals.peripheral {
-    // print ("  \(peripheral.name) -> 0x\(String (peripheral.baseAddress, radix: 16))")
     if let groupName = peripheral.groupName, peripheral.prependToName != nil {
       groupDictionary [groupName] = (groupDictionary [groupName] ?? []) + [peripheral]
     }else{
@@ -87,12 +111,12 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
   for register in inPeripheral.registers?.register ?? [] {
     s += separator + "\n"
     let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-    let registerAddressOffset = "0x\(String (register.addressOffset, radix: 16))"
+    let registerAddressOffset = hexString (register.addressOffset)
     if let dimension = register.dim {
       s += "//---  Registers \(registerBaseName)(\(register.dimIndex!)): \(register.description)\n"
-      let dimensionIncrement = "0x\(String (register.dimIncrement!, radix: 16))"
+      let dimensionIncrement = hexString (register.dimIncrement!)
       let suffixArray = register.dimIndex!.components (separatedBy: ",")
-      s += "  #define \(inPeripheral.name)_\(registerBaseName)(idx) (* ((volatile uint\(register.size)_t *) (0x\(String (inPeripheral.baseAddress, radix: 16)) + \(registerAddressOffset) + (idx) * \(dimensionIncrement))))\n"
+      s += "  #define \(inPeripheral.name)_\(registerBaseName)(idx) (* ((volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(registerAddressOffset) + (idx) * \(dimensionIncrement))))\n"
       for dim in 0 ..< dimension {
         let registerName = register.name.replacingOccurrences (of: "%s", with: suffixArray [dim])
         s += "  #define " + inPeripheral.name + "_" + registerName
@@ -102,7 +126,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
         }else{
           qualifier = ""
         }
-        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (0x\(String (inPeripheral.baseAddress, radix: 16)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
       }
     }else{
       s += "//---  Register " + register.name + ": " + register.description.replacingOccurrences(of: "\n", with: " ") + "\n"
@@ -113,7 +137,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
       }else{
         qualifier = ""
       }
-      s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (0x\(String (inPeripheral.baseAddress, radix: 16)) + \(register.addressOffset))))\n"
+      s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(register.addressOffset))))\n"
     }
     s += "\n"
     for field in register.fields?.field ?? [] {
@@ -126,7 +150,7 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
         }else{
           s += "    inline uint\(register.size)_t "
           s += inPeripheral.name + "_" + registerBaseName + "_" + field.name + " ("
-          let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
+          let w = hexString ((1 << field.bitWidth) - 1) + "U"
           s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
         }
       }
@@ -144,7 +168,7 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
   var a = "static const uint32_t kBaseAddress_\(inGroupName) [\(inPeripheralArray.count)] = {"
   var first = true
   for peripheral in inPeripheralArray {
-   let address = "0x\(String (peripheral.baseAddress, radix: 16))"
+   let address = hexString (peripheral.baseAddress)
    s += "//        \(peripheral.name) at \(address)\n"
    if first {
      first = false
@@ -201,14 +225,14 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
   //--- Generate register definition
   for register in referenceRegisterArray {
     let registerBaseName : String = register.name.replacingOccurrences (of: "%s", with: "")
-    let registerAddressOffset = "0x\(String (register.addressOffset, radix: 16))"
+    let registerAddressOffset = hexString (register.addressOffset)
     if let dimension = register.dim {
       s += "//---  Registers \(registerBaseName)(\(register.dimIndex!)): \(register.description)\n"
-      let dimensionIncrement = "0x\(String (register.dimIncrement!, radix: 16))"
+      let dimensionIncrement = hexString (register.dimIncrement!)
       let suffixArray = register.dimIndex!.components (separatedBy: ",")
       s += "  #define \(inGroupName)_\(registerBaseName)(group,idx) (* ((volatile uint\(register.size)_t *) (kBaseAddress_\(registerBaseName) [group] + \(registerAddressOffset) + (idx) * \(dimensionIncrement))))\n"
       for peripheral in inPeripheralArray {
-        let baseAddress = "0x\(String (peripheral.baseAddress, radix: 16))"
+        let baseAddress = hexString (peripheral.baseAddress)
         s += "  #define \(peripheral.name)_\(registerBaseName)(idx) (* ((volatile uint\(register.size)_t *) (\(baseAddress) + \(registerAddressOffset) + (idx) * \(dimensionIncrement))))\n"
       }
       for dim in 0 ..< dimension {
@@ -221,7 +245,7 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
           }else{
             qualifier = ""
           }
-          s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (0x\(String (peripheral.baseAddress, radix: 16)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+          s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
         }
       }
     }else{
@@ -235,7 +259,7 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
         }else{
           qualifier = ""
         }
-        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (0x\(String (peripheral.baseAddress, radix: 16)) + \(registerAddressOffset))))\n"
+        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset))))\n"
       }
     }
     s += "\n"
@@ -249,7 +273,7 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
         }else{
           s += "    inline uint\(register.size)_t "
           s += inGroupName + "_" + registerBaseName + "_" + field.name + " ("
-          let w = "0x\(String ((UInt64 (1) << field.bitWidth) - 1, radix: 16))U"
+          let w = hexString ((UInt64 (1) << field.bitWidth) - 1) + "U"
           s += "const uint\(register.size)_t inValue) {return (inValue & \(w)) << \(field.bitOffset) ; }\n\n"
         }
       }

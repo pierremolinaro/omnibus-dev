@@ -46,12 +46,12 @@ task Tâche @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L1)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.toggle (!port:LED_L0)
     self.compteur +%= 500
   }
 
-  event self.deadline.wait () {
+  while event self.deadline.wait () {
     digital.toggle (!port: LED_L1)
   }
 }

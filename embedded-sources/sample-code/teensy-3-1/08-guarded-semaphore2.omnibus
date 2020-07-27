@@ -21,7 +21,7 @@ task T0 @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L4)
   }
 
-  event time.wait (!until:self.top) {
+  while event time.wait (!until:self.top) {
     s0.signal ()
     self.top += 250
     digital.write (!yes !toPort:LED_L0)
@@ -37,7 +37,7 @@ task T0 @stacksize 512 @autostart {
 task T1 @stacksize 512 @autostart {
   var top $u32 = 0
 
-  event time.wait (!until:self.top) {
+  while event time.wait (!until:self.top) {
     s1.signal ()
     self.top += 249
     digital.write (!yes !toPort:LED_L4)
@@ -54,20 +54,20 @@ task T2 @stacksize 512 @autostart {
   var deadline $u32 = 0
   var toggleD3 = no
 
-  event s0.wait () {
+  while event s0.wait () {
     self.toggleD3 = yes // Just for having a boolean guard
   }
 
-  event (self.toggleD3) {
+  while self.toggleD3 {
     digital.toggle (!port:LED_L1)
     self.toggleD3 = no
   }
 
-  event s1.wait () {
+  while event s1.wait () {
     digital.toggle (!port:LED_L3)
   }
 
-  event time.wait (!until:self.deadline) {
+  while event time.wait (!until:self.deadline) {
     self.deadline += 200
     digital.toggle (!port:LED_L2)
   }

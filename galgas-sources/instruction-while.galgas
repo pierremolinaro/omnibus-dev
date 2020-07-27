@@ -18,12 +18,13 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
+#    $do$
     $while$
     let instructionLocation = @location.here
     <expression> !?ioAST ?let @expressionAST testExpression
     let testExpressionEndLocation = @location.here
     ${$
-    <instructionList> !?ioAST  ?let instructionList
+    <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
     ioInstructionList += !@whileInstructionAST.new {

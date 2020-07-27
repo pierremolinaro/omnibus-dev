@@ -32,7 +32,7 @@ task T @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:LED_L1)
   }
 
-  event time.wait (!until:self.deadline) {
+  while event time.wait (!until:self.deadline) {
     self.deadline +%= 1000
 //    digital.toggle (!port:LED_L1)
     self.array [self.index] = 0

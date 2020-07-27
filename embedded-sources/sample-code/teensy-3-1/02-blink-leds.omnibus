@@ -16,7 +16,7 @@ task T1 @stacksize 512 @autostart {
     digital.set (!mode:.output !toPort:.D13)
   }
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L0)
     self.compteur +%= 500
     time.wait (!until:self.compteur)
@@ -32,7 +32,7 @@ task T1 @stacksize 512 @autostart {
 task T2 @stacksize 512 @autostart {
   var compteur $u32 = 0
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L1)
     self.compteur +%= 499
     time.wait (!until:self.compteur)
@@ -46,7 +46,7 @@ task T2 @stacksize 512 @autostart {
 task T3 @stacksize 512 @autostart {
   var compteur $u32 = 0
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L2)
     self.compteur +%= 498
     time.wait (!until:self.compteur)
@@ -60,7 +60,7 @@ task T3 @stacksize 512 @autostart {
 task T4 @stacksize 512 @autostart {
   var compteur $u32 = 0
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L3)
     self.compteur +%= 497
     time.wait (!until:self.compteur)
@@ -74,7 +74,7 @@ task T4 @stacksize 512 @autostart {
 task T5 @stacksize 512 @autostart {
   var compteur $u32 = 0
 
-  event time.wait (!until:self.compteur) {
+  while event time.wait (!until:self.compteur) {
     digital.write (!yes !toPort:LED_L4)
     self.compteur +%= 496
     time.wait (!until:self.compteur)
