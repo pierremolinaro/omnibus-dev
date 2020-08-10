@@ -8,18 +8,18 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "10.0.0"
+LLVM_VERSION = "10.0.1"
 LLVM_SUFFIX = ""
 
-BINUTILS_VERSION = "2.34"
+BINUTILS_VERSION = "2.35" # https://www.gnu.org/software/binutils/
 
 LIBUSB_VERSION   = "1.0.23" # https://github.com/libusb/libusb/releases
 
 OPENOCD_VERSION = "0.10.0"
 
-XZ_VERSION = "5.2.4"
+XZ_VERSION = "5.2.5" # https://tukaani.org/xz/
 
-CMAKE_VERSION = "3.15.5" # "3.11.4" # "3.9.0"
+CMAKE_VERSION = "3.18.1" # https://cmake.org/download/
 
 #--------------------------------------- Target
 TARGET = "arm-eabi"
@@ -211,7 +211,7 @@ elif LLVM_VERSION in Set(["9.0.1", "9.0.0", "8.0.0", "7.0.1", "7.0.0"]) :
   BASE_URL = "http://releases.llvm.org/"
   LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"
   CLANG_URL = BASE_URL + LLVM_VERSION + "/" + CLANG + ".tar.xz"
-elif (LLVM_VERSION == "10.0.0") :
+elif LLVM_VERSION in Set(["10.0.0", "10.0.1"]) :
   BASE_URL = "https://github.com/llvm/llvm-project/releases/download/llvmorg-"
   #  https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang-10.0.0.src.tar.xz
   LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"

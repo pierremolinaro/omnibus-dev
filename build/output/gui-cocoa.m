@@ -67,14 +67,14 @@ void enterOptions (NSMutableArray * ioBoolOptionArray,
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-static const UInt16 gPopUpData_omnibus_5F_lexique_252 [4] = {
+static const UInt16 gPopUpData_0_omnibus_5F_lexique_252 [4] = {
   1, // Leading character count to strip
   omnibus_lexique_1_commentMark, 48,
   0
 } ;
 
-static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
-  gPopUpData_omnibus_5F_lexique_252,
+static const UInt16 * gPopUpData_0_omnibus_5F_lexique [2] = {
+  gPopUpData_0_omnibus_5F_lexique_252,
   NULL
 } ;
 
@@ -84,7 +84,7 @@ static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
 //                                                                                                                     *
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-@interface OC_Tokenizer_omnibus_lexique : OC_Lexique_omnibus_lexique {
+@interface OC_Tokenizer_0_omnibus_lexique : OC_Lexique_omnibus_lexique {
 
 }
 
@@ -104,7 +104,7 @@ static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
-@implementation OC_Tokenizer_omnibus_lexique
+@implementation OC_Tokenizer_0_omnibus_lexique
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
@@ -115,7 +115,7 @@ static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 
 - (const UInt16 * *) popupListData {
-  return gPopUpData_omnibus_5F_lexique ;
+  return gPopUpData_0_omnibus_5F_lexique ;
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -159,11 +159,11 @@ static const UInt16 * gPopUpData_omnibus_5F_lexique [2] = {
 OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
   OC_Lexique * result = nil ;
   if ([inExtension isEqualToString:@"omnibus"]) {
-    result = [OC_Tokenizer_omnibus_lexique new] ;
+    result = [OC_Tokenizer_0_omnibus_lexique new] ;
   }else if ([inExtension isEqualToString:@"omnibus-import"]) {
-    result = [OC_Tokenizer_omnibus_lexique new] ;
+    result = [OC_Tokenizer_0_omnibus_lexique new] ;
   }else if ([inExtension isEqualToString:@"omnibus-target"]) {
-    result = [OC_Tokenizer_omnibus_lexique new] ;
+    result = [OC_Tokenizer_0_omnibus_lexique new] ;
   }
   return result ;
 }
@@ -172,7 +172,7 @@ OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
 
 NSArray * tokenizers (void) {
   return [NSArray arrayWithObjects:
-    [OC_Tokenizer_omnibus_lexique new],
+    [OC_Tokenizer_0_omnibus_lexique new],
     nil
   ] ;
 }

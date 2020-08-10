@@ -13,6 +13,6 @@ def toolDir ():
   (SYSTEM_NAME, MODE_NAME, RELEASE, VERSION, MACHINE) = os.uname ()
   if SYSTEM_NAME == "Darwin":
     MACHINE = "i386"
-  return os.path.expanduser ("~/omnibus-tools/omnibus-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-10.0.0-binutils-2.34-openocd-0.10.0-libusb-1.0.23")
+  return os.path.expanduser ("~/omnibus-tools/omnibus-" + SYSTEM_NAME + "-" + MACHINE + "-llvm-10.0.1-binutils-2.35-openocd-0.10.0-libusb-1.0.23")
 
 #----------------------------------------------------------------------------------------------------------------------*
