@@ -1,16 +1,16 @@
 #pragma once
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 #include "all-predefined-types.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 #include "all-declarations-6.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 //  GRAMMAR omnibus_target_grammar
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5F_specific_5F_syntax {
 //------------------------------------- 'configuration_key' non terminal
@@ -95,12 +95,12 @@ class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5
   public : virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (C_Lexique_omnibus_5F_lexique *) ;
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension setter '@universalValuedObjectMap insertDriver'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertDriver'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObject,
                                    const class GALGAS_lstring constin_inDriverName,
@@ -109,11 +109,11 @@ void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObj
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMap insertGlobalConstant'                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertGlobalConstant'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                            const class GALGAS_lstring constin_inConstantName,
@@ -121,11 +121,11 @@ void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap
                                            class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                        Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjectMap & ioObject,
                                                const class GALGAS_lstring constin_inSyncInstanceName,
@@ -133,11 +133,11 @@ void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjec
                                                class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMap insertLocalConstant'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertLocalConstant'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalConstantName,
@@ -147,11 +147,11 @@ void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap 
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                        Extension setter '@universalValuedObjectMap insertUsedLocalConstant'                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertUsedLocalConstant'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
                                               const class GALGAS_lstring constin_inLocalConstantName,
@@ -161,11 +161,11 @@ void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObject
                                               class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Extension setter '@universalValuedObjectMap insertLocalVariable'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap insertLocalVariable'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap & ioObject,
                                           const class GALGAS_lstring constin_inLocalVariableName,
@@ -176,11 +176,11 @@ void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap 
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension method '@universalValuedObjectMap searchEntity'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@universalValuedObjectMap searchEntity'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap inObject,
                                    const class GALGAS_lstring constin_inValuedObjectName,
@@ -188,11 +188,11 @@ void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap i
                                    class C_Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                           Extension method '@universalValuedObjectMap searchValuedObject'                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@universalValuedObjectMap searchValuedObject'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
                                          const class GALGAS_lstring constin_inValuedObjectName,
@@ -202,32 +202,32 @@ void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjec
                                          class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Function 'llvmNameForGlobalSyncInstance'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'llvmNameForGlobalSyncInstance'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_string function_llvmNameForGlobalSyncInstance (const class GALGAS_string & constinArgument0,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Extension setter '@universalValuedObjectMap readAccess'                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap readAccess'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_readAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                  const class GALGAS_lstring constin_inValuedObjectName,
                                  class C_Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                    Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                       const class GALGAS_lstring constin_inValuedObjectName,
@@ -235,11 +235,11 @@ void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValu
                                                       class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                    Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                        const class GALGAS_lstring constin_inValuedObjectName,
@@ -247,11 +247,11 @@ void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalVal
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                  Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
                                                            const class GALGAS_lstring constin_inValuedObjectName,
@@ -259,11 +259,11 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universa
                                                            class C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                         Extension method '@universalValuedObjectMap searchValuedObjectType'                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@universalValuedObjectMap searchValuedObjectType'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
                                              const class GALGAS_semanticContext constin_inContext,
@@ -273,11 +273,11 @@ void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedO
                                              class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension method '@LValueOperandAST getValuedObjectType'                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@LValueOperandAST getValuedObjectType'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST inObject,
                                           const class GALGAS_semanticContext constin_inContext,
@@ -285,64 +285,64 @@ void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST in
                                           class C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                         Extension getter '@semanticContext propertyGetterMap' (as function)                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@semanticContext propertyGetterMap' (as function)
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_propertyGetterMap extensionGetter_propertyGetterMap (const class GALGAS_semanticContext & inObject,
                                                                   const class GALGAS_omnibusType & constinArgument0,
                                                                   class C_Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                      Extension method '@universalValuedObjectMap checkLocalVariableFinalState'                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@universalValuedObjectMap checkLocalVariableFinalState'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalValuedObjectMap inObject,
                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_openOverrideForSelectBlock (class GALGAS_universalValuedObjectMap & ioObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_openOverrideForRepeatBlock (class GALGAS_universalValuedObjectMap & ioObject,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                             Extension setter '@universalValuedObjectMap closeOverride'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap closeOverride'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_closeOverride (class GALGAS_universalValuedObjectMap & ioObject,
                                     const class GALGAS_location constin_inErrorLocation,
                                     class C_Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension setter '@staticEntityMap findOrAddStaticString'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@staticEntityMap findOrAddStaticString'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObject,
                                             class GALGAS_string in_inString,
@@ -350,120 +350,120 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObj
                                             class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Extension method '@omnibusType checkIsCompileTimeType'                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@omnibusType checkIsCompileTimeType'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_omnibusType_checkIsCompileTimeType) (const class cPtr_omnibusType * inObject,
                                                                              const class GALGAS_location constinArgument0,
                                                                              class C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_checkIsCompileTimeType (const int32_t inClassIndex,
                                                   extensionMethodSignature_omnibusType_checkIsCompileTimeType inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkIsCompileTimeType (const class cPtr_omnibusType * inObject,
                                                  const GALGAS_location constin_inErrorLocation,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Extension method '@omnibusType checkIsNotCompileTimeType'                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@omnibusType checkIsNotCompileTimeType'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_omnibusType_checkIsNotCompileTimeType) (const class cPtr_omnibusType * inObject,
                                                                                 const class GALGAS_location constinArgument0,
                                                                                 class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_checkIsNotCompileTimeType (const int32_t inClassIndex,
                                                      extensionMethodSignature_omnibusType_checkIsNotCompileTimeType inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkIsNotCompileTimeType (const class cPtr_omnibusType * inObject,
                                                     const GALGAS_location constin_inErrorLocation,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Extension getter '@omnibusType isCompileTimeType'                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType isCompileTimeType'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_isCompileTimeType) (const class cPtr_omnibusType * inObject,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_isCompileTimeType (const int32_t inClassIndex,
                                              enterExtensionGetter_omnibusType_isCompileTimeType inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_bool callExtensionGetter_isCompileTimeType (const cPtr_omnibusType * inObject,
                                                          class C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Extension getter '@omnibusType instanciable'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType instanciable'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_instanciable) (const class cPtr_omnibusType * inObject,
                                                                             C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_instanciable (const int32_t inClassIndex,
                                         enterExtensionGetter_omnibusType_instanciable inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_bool callExtensionGetter_instanciable (const cPtr_omnibusType * inObject,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Extension getter '@omnibusType copyable'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType copyable'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_copyable) (const class cPtr_omnibusType * inObject,
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_copyable (const int32_t inClassIndex,
                                     enterExtensionGetter_omnibusType_copyable inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_bool callExtensionGetter_copyable (const cPtr_omnibusType * inObject,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Extension method '@omnibusType generateRetain'                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@omnibusType generateRetain'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_omnibusType_generateRetain) (const class cPtr_omnibusType * inObject,
                                                                      const class GALGAS_string constinArgument0,
@@ -472,12 +472,12 @@ typedef void (*extensionMethodSignature_omnibusType_generateRetain) (const class
                                                                      class C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_generateRetain (const int32_t inClassIndex,
                                           extensionMethodSignature_omnibusType_generateRetain inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateRetain (const class cPtr_omnibusType * inObject,
                                          const GALGAS_string constin_inOmnibusName,
@@ -486,34 +486,34 @@ void callExtensionMethod_generateRetain (const class cPtr_omnibusType * inObject
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Extension getter '@omnibusType arcList'                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType arcList'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_arcAssignmentList (*enterExtensionGetter_omnibusType_arcList) (const class cPtr_omnibusType * inObject,
                                                                                     const class GALGAS_uintlist constinArgument0,
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_arcList (const int32_t inClassIndex,
                                    enterExtensionGetter_omnibusType_arcList inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusType * inObject,
                                                             const GALGAS_uintlist constin_inPropertyIndexPath,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                  Extension method '@omnibusType generateInsulate'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@omnibusType generateInsulate'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_omnibusType_generateInsulate) (const class cPtr_omnibusType * inObject,
                                                                        const class GALGAS_string constinArgument0,
@@ -522,12 +522,12 @@ typedef void (*extensionMethodSignature_omnibusType_generateInsulate) (const cla
                                                                        class C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_generateInsulate (const int32_t inClassIndex,
                                             extensionMethodSignature_omnibusType_generateInsulate inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateInsulate (const class cPtr_omnibusType * inObject,
                                            const GALGAS_string constin_inOmnibusName,
@@ -536,11 +536,11 @@ void callExtensionMethod_generateInsulate (const class cPtr_omnibusType * inObje
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Extension method '@omnibusType generateRelease'                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@omnibusType generateRelease'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_omnibusType_generateRelease) (const class cPtr_omnibusType * inObject,
                                                                       const class GALGAS_string constinArgument0,
@@ -549,12 +549,12 @@ typedef void (*extensionMethodSignature_omnibusType_generateRelease) (const clas
                                                                       class C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_generateRelease (const int32_t inClassIndex,
                                            extensionMethodSignature_omnibusType_generateRelease inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateRelease (const class cPtr_omnibusType * inObject,
                                           const GALGAS_string constin_inOmnibusName,
@@ -563,53 +563,53 @@ void callExtensionMethod_generateRelease (const class cPtr_omnibusType * inObjec
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Extension getter '@omnibusType descriptionForHTMLFile'                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType descriptionForHTMLFile'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_string (*enterExtensionGetter_omnibusType_descriptionForHTMLFile) (const class cPtr_omnibusType * inObject,
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_descriptionForHTMLFile (const int32_t inClassIndex,
                                                   enterExtensionGetter_omnibusType_descriptionForHTMLFile inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_omnibusType * inObject,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Extension getter '@omnibusType deinitNeeded'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension getter '@omnibusType deinitNeeded'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef class GALGAS_bool (*enterExtensionGetter_omnibusType_deinitNeeded) (const class cPtr_omnibusType * inObject,
                                                                             C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+ 
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionGetter_deinitNeeded (const int32_t inClassIndex,
                                         enterExtensionGetter_omnibusType_deinitNeeded inGetter) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_omnibusType * inObject,
                                                     class C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 1: @compileTimeBoolImplicitConverterToBoolean class                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @compileTimeBoolImplicitConverterToBoolean class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeBoolImplicitConverterToBoolean : public GALGAS_abstractImplicitConverterToBoolean {
 //--- Constructor
@@ -647,21 +647,23 @@ class GALGAS_compileTimeBoolImplicitConverterToBoolean : public GALGAS_abstractI
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_compileTimeBoolImplicitConverterToBoolean class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImplicitConverterToBoolean ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                     Phase 2: pointer class for @compileTimeBoolImplicitConverterToBoolean class                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @compileTimeBoolImplicitConverterToBoolean class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
 //--- Attributes
@@ -683,11 +685,11 @@ class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImpli
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                      Phase 1: @compileTimeBoolNotOperator class                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @compileTimeBoolNotOperator class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeBoolNotOperator : public GALGAS_prefixOperatorUsage {
 //--- Constructor
@@ -725,21 +727,23 @@ class GALGAS_compileTimeBoolNotOperator : public GALGAS_prefixOperatorUsage {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_compileTimeBoolNotOperator class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotOperator ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                             Phase 2: pointer class for @compileTimeBoolNotOperator class                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @compileTimeBoolNotOperator class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
 //--- Attributes
@@ -761,11 +765,11 @@ class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Phase 1: @compileTimeBoolEqualOperator class                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @compileTimeBoolEqualOperator class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeBoolEqualOperator : public GALGAS_omnibusInfixOperatorUsage {
 //--- Constructor
@@ -803,21 +807,23 @@ class GALGAS_compileTimeBoolEqualOperator : public GALGAS_omnibusInfixOperatorUs
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_compileTimeBoolEqualOperator class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqualOperator ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Phase 2: pointer class for @compileTimeBoolEqualOperator class                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @compileTimeBoolEqualOperator class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage {
 //--- Attributes
@@ -839,11 +845,11 @@ class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage 
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                 Phase 1: @userLLVMStaticArrayTypeDefinitionIR class                                 *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @userLLVMStaticArrayTypeDefinitionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_userLLVMStaticArrayTypeDefinitionIR : public GALGAS_userLLVMTypeDefinitionIR {
 //--- Constructor
@@ -894,21 +900,23 @@ class GALGAS_userLLVMStaticArrayTypeDefinitionIR : public GALGAS_userLLVMTypeDef
   public : VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mSize (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_userLLVMStaticArrayTypeDefinitionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMStaticArrayTypeDefinitionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                        Phase 2: pointer class for @userLLVMStaticArrayTypeDefinitionIR class                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @userLLVMStaticArrayTypeDefinitionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_userLLVMStaticArrayTypeDefinitionIR : public cPtr_userLLVMTypeDefinitionIR {
 //--- Attributes
@@ -939,11 +947,11 @@ class cPtr_userLLVMStaticArrayTypeDefinitionIR : public cPtr_userLLVMTypeDefinit
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                Phase 1: @fixedSizeArrayAssignmentOperatorUsage class                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @fixedSizeArrayAssignmentOperatorUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_fixedSizeArrayAssignmentOperatorUsage : public GALGAS_abstractAssignmentOperatorUsage {
 //--- Constructor
@@ -999,21 +1007,23 @@ class GALGAS_fixedSizeArrayAssignmentOperatorUsage : public GALGAS_abstractAssig
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_fixedSizeArrayAssignmentOperatorUsage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssignmentOperatorUsage ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Phase 2: pointer class for @fixedSizeArrayAssignmentOperatorUsage class                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @fixedSizeArrayAssignmentOperatorUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
 //--- Attributes
@@ -1047,11 +1057,11 @@ class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmen
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Phase 1: @staticArrayTypeAssignFunctionIR class                                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @staticArrayTypeAssignFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1098,21 +1108,23 @@ class GALGAS_staticArrayTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_staticArrayTypeAssignFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeAssignFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Phase 2: pointer class for @staticArrayTypeAssignFunctionIR class                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @staticArrayTypeAssignFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1141,11 +1153,11 @@ class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Phase 1: @dynArrayRemoveAllFunctionIR class                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayRemoveAllFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynArrayRemoveAllFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1186,21 +1198,23 @@ class GALGAS_dynArrayRemoveAllFunctionIR : public GALGAS_abstractRoutineIR {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynArrayRemoveAllFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayRemoveAllFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Phase 2: pointer class for @dynArrayRemoveAllFunctionIR class                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynArrayRemoveAllFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1225,11 +1239,11 @@ class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Phase 1: @dynArrayLengthFunctionIR class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayLengthFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynArrayLengthFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1270,21 +1284,23 @@ class GALGAS_dynArrayLengthFunctionIR : public GALGAS_abstractRoutineIR {
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynArrayLengthFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayLengthFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 2: pointer class for @dynArrayLengthFunctionIR class                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynArrayLengthFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayLengthFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1309,11 +1325,11 @@ class cPtr_dynArrayLengthFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Phase 1: @dynArrayAppendFunctionIR class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayAppendFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1372,21 +1388,23 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynArrayAppendFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 2: pointer class for @dynArrayAppendFunctionIR class                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynArrayAppendFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1423,11 +1441,11 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Phase 1: @dynArrayInsertFunctionIR class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayInsertFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynArrayInsertFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1474,21 +1492,23 @@ class GALGAS_dynArrayInsertFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynArrayInsertFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayInsertFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 2: pointer class for @dynArrayInsertFunctionIR class                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynArrayInsertFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1517,11 +1537,11 @@ class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Phase 1: @dynamicArrayTypeAssignUsage class                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynamicArrayTypeAssignUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynamicArrayTypeAssignUsage : public GALGAS_abstractAssignmentOperatorUsage {
 //--- Constructor
@@ -1571,21 +1591,23 @@ class GALGAS_dynamicArrayTypeAssignUsage : public GALGAS_abstractAssignmentOpera
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mDynamicArrayType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynamicArrayTypeAssignUsage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAssignUsage ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Phase 2: pointer class for @dynamicArrayTypeAssignUsage class                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynamicArrayTypeAssignUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynamicArrayTypeAssignUsage : public cPtr_abstractAssignmentOperatorUsage {
 //--- Attributes
@@ -1615,11 +1637,11 @@ class cPtr_dynamicArrayTypeAssignUsage : public cPtr_abstractAssignmentOperatorU
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Phase 1: @dynamicArrayTypeAssignGenericFunctionIR class                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynamicArrayTypeAssignGenericFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_dynamicArrayTypeAssignGenericFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1660,21 +1682,23 @@ class GALGAS_dynamicArrayTypeAssignGenericFunctionIR : public GALGAS_abstractRou
 
 //--------------------------------- Getters
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_dynamicArrayTypeAssignGenericFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAssignGenericFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                      Phase 2: pointer class for @dynamicArrayTypeAssignGenericFunctionIR class                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynamicArrayTypeAssignGenericFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynamicArrayTypeAssignGenericFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1699,11 +1723,11 @@ class cPtr_dynamicArrayTypeAssignGenericFunctionIR : public cPtr_abstractRoutine
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         Phase 1: @enumToUintRoutineIR class                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @enumToUintRoutineIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_enumToUintRoutineIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1750,21 +1774,23 @@ class GALGAS_enumToUintRoutineIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mEnumerationLLVMTypeName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_enumToUintRoutineIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumToUintRoutineIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                Phase 2: pointer class for @enumToUintRoutineIR class                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @enumToUintRoutineIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1793,11 +1819,11 @@ class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                   Phase 1: @structureAssignmentOperatorUsage class                                  *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @structureAssignmentOperatorUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_structureAssignmentOperatorUsage : public GALGAS_abstractAssignmentOperatorUsage {
 //--- Constructor
@@ -1841,21 +1867,23 @@ class GALGAS_structureAssignmentOperatorUsage : public GALGAS_abstractAssignment
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mStructureType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_structureAssignmentOperatorUsage class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureAssignmentOperatorUsage ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                          Phase 2: pointer class for @structureAssignmentOperatorUsage class                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @structureAssignmentOperatorUsage class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
 //--- Attributes
@@ -1881,11 +1909,11 @@ class cPtr_structureAssignmentOperatorUsage : public cPtr_abstractAssignmentOper
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Phase 1: @structureTypeAssignFunctionIR class                                    *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @structureTypeAssignFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_structureTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -1932,21 +1960,23 @@ class GALGAS_structureTypeAssignFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mStructureType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_structureTypeAssignFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureTypeAssignFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                           Phase 2: pointer class for @structureTypeAssignFunctionIR class                           *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @structureTypeAssignFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -1975,11 +2005,11 @@ class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Phase 1: @integerBuiltinFunctionIR class                                      *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @integerBuiltinFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_integerBuiltinFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -2032,21 +2062,23 @@ class GALGAS_integerBuiltinFunctionIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mLLVMTypeName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_integerBuiltinFunctionIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerBuiltinFunctionIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 2: pointer class for @integerBuiltinFunctionIR class                             *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @integerBuiltinFunctionIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
@@ -2079,34 +2111,34 @@ class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                       Extension method '@typeOpaqueDeclarationAST noteTypesInPrecedenceGraph'                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@typeOpaqueDeclarationAST noteTypesInPrecedenceGraph'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 typedef void (*extensionMethodSignature_typeOpaqueDeclarationAST_noteTypesInPrecedenceGraph) (const class cPtr_typeOpaqueDeclarationAST * inObject,
                                                                                               class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
                                                                                               class C_Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
                                                       extensionMethodSignature_typeOpaqueDeclarationAST_noteTypesInPrecedenceGraph inMethod) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_typeOpaqueDeclarationAST * inObject,
                                                      GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Phase 1: @decoratedControlRegisterArrayGroupDeclaration class                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @decoratedControlRegisterArrayGroupDeclaration class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_decoratedControlRegisterArrayGroupDeclaration : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
@@ -2156,21 +2188,23 @@ class GALGAS_decoratedControlRegisterArrayGroupDeclaration : public GALGAS_abstr
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGroupName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_decoratedControlRegisterArrayGroupDeclaration class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedControlRegisterArrayGroupDeclaration ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                   Phase 2: pointer class for @decoratedControlRegisterArrayGroupDeclaration class                   *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @decoratedControlRegisterArrayGroupDeclaration class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
@@ -2200,11 +2234,11 @@ class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractD
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                         Extension method '@controlRegisterGroupArrayList generateLLVMcode'                          *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension method '@controlRegisterGroupArrayList generateLLVMcode'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 void extensionMethod_generateLLVMcode (const class GALGAS_controlRegisterGroupArrayList inObject,
                                        class GALGAS_string & io_ioLLVMcode,
@@ -2212,21 +2246,21 @@ void extensionMethod_generateLLVMcode (const class GALGAS_controlRegisterGroupAr
                                        class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                    Function 'registerGroupAddressArrayLLVMname'                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'registerGroupAddressArrayLLVMname'
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALGAS_string & constinArgument0,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                        Phase 1: @decoratedSyncInstance class                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @decoratedSyncInstance class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_decoratedSyncInstance : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
@@ -2273,21 +2307,23 @@ class GALGAS_decoratedSyncInstance : public GALGAS_abstractDecoratedDeclaration 
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSyncInstanceName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_decoratedSyncInstance class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedSyncInstance ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                               Phase 2: pointer class for @decoratedSyncInstance class                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @decoratedSyncInstance class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedSyncInstance : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
@@ -2317,11 +2353,11 @@ class cPtr_decoratedSyncInstance : public cPtr_abstractDecoratedDeclaration {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         Phase 1: @implementedDriverAST class                                        *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @implementedDriverAST class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
 //--- Constructor
@@ -2413,21 +2449,23 @@ class GALGAS_implementedDriverAST : public GALGAS_abstractDeclarationAST {
   public : VIRTUAL_IN_DEBUG class GALGAS_location getter_mStartupLocation (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_implementedDriverAST class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAST ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                Phase 2: pointer class for @implementedDriverAST class                               *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @implementedDriverAST class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 //--- Attributes
@@ -2485,11 +2523,11 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                       Phase 1: @decoratedRequiredDriver class                                       *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @decoratedRequiredDriver class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_decoratedRequiredDriver : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
@@ -2533,21 +2571,23 @@ class GALGAS_decoratedRequiredDriver : public GALGAS_abstractDecoratedDeclaratio
   public : VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_decoratedRequiredDriver class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRequiredDriver ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                              Phase 2: pointer class for @decoratedRequiredDriver class                              *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @decoratedRequiredDriver class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
@@ -2573,11 +2613,11 @@ class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                         Phase 1: @decoratedStaticList class                                         *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @decoratedStaticList class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_decoratedStaticList : public GALGAS_abstractDecoratedDeclaration {
 //--- Constructor
@@ -2627,21 +2667,23 @@ class GALGAS_decoratedStaticList : public GALGAS_abstractDecoratedDeclaration {
   public : VIRTUAL_IN_DEBUG class GALGAS_staticListValueListAST getter_mValueList (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_decoratedStaticList class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStaticList ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                Phase 2: pointer class for @decoratedStaticList class                                *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @decoratedStaticList class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 //--- Attributes
@@ -2671,11 +2713,11 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 } ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                                     Phase 1: @staticListIndirectRoutineIR class                                     *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @staticListIndirectRoutineIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_staticListIndirectRoutineIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
@@ -2740,21 +2782,23 @@ class GALGAS_staticListIndirectRoutineIR : public GALGAS_abstractRoutineIR {
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mStaticListElementType (LOCATION_ARGS) const ;
 
 
+//--------------------------------- Optional Methods
+
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_staticListIndirectRoutineIR class
 
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListIndirectRoutineIR ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
-//                                                                                                                     *
-//                            Phase 2: pointer class for @staticListIndirectRoutineIR class                            *
-//                                                                                                                     *
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @staticListIndirectRoutineIR class
+//
+//----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes

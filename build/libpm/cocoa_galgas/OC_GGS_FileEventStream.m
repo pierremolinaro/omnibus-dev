@@ -3,22 +3,20 @@
 //  galgas-developer-v3
 //
 //  Created by Pierre Molinaro on 14/07/2015.
-//  LS2N, Laboratoire des Sciences du Numérique de Nantes, ECN, École Centrale de Nantes (France)                      *
-//
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 // https://stackoverflow.com/questions/22981497/fseventstream-filter-events-generated-from-my-own-application
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 #import "OC_GGS_DocumentData.h"
 #import "OC_GGS_FileEventStream.h"
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 static NSMutableArray * gFileEventStreamArray = nil ;
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 @interface OC_GGS_FileEventStream : NSObject {
   @private FSEventStreamRef mFSEventStream ;
@@ -29,7 +27,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
 @end
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 @implementation OC_GGS_FileEventStream
 
@@ -37,7 +35,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
   - (void) callbackMethodForPath: (NSString *) inPath
            flag: (FSEventStreamEventFlags) inEventFlag {
-    NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ; // §
+   // NSLog (@"path '%@' flag:%X", inPath, inEventFlag) ; // §
     for (OC_GGS_DocumentData * document in mDocuments) {
       if ([document.fileURL.path isEqualToString: inPath]) {
         [document fileDidChangeInFileSystem] ;
@@ -80,19 +78,23 @@ static NSMutableArray * gFileEventStreamArray = nil ;
         CFRelease,
         CFCopyDescription
       } ;
-      mFSEventStream = FSEventStreamCreate (
+      const FSEventStreamCreateFlags creationFlags =
+          kFSEventStreamCreateFlagNoDefer
+        | kFSEventStreamCreateFlagUseCFTypes
+        | kFSEventStreamCreateFlagWatchRoot
+        | kFSEventStreamCreateFlagFileEvents
+        | kFSEventStreamCreateFlagMarkSelf // §§
+        | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
+      ;
+//      const FSEventStreamCreateFlags creationFlags = kFSEventStreamCreateFlagNone ;
+       mFSEventStream = FSEventStreamCreate (
         NULL,
         mycallback,
         & context,
         (__bridge CFArrayRef) pathsToWatch,
         kFSEventStreamEventIdSinceNow,
         latency,
-        kFSEventStreamCreateFlagNoDefer
-        | kFSEventStreamCreateFlagUseCFTypes
-        | kFSEventStreamCreateFlagWatchRoot
-        | kFSEventStreamCreateFlagFileEvents
-        | kFSEventStreamCreateFlagMarkSelf // §§
-        | kFSEventStreamCreateFlagIgnoreSelf // Do not report events from current application
+        creationFlags
       ) ;
       FSEventStreamScheduleWithRunLoop (mFSEventStream, CFRunLoopGetMain(), kCFRunLoopDefaultMode);
       FSEventStreamStart (mFSEventStream) ;
@@ -104,11 +106,11 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
   - (BOOL) tryToAddDocument: (OC_GGS_DocumentData *) inDocument {
     NSString * path = inDocument.fileURL.path.stringByDeletingLastPathComponent ;
-    OC_GGS_DocumentData * firstDocument = [mDocuments objectAtIndex:0] ;
+    OC_GGS_DocumentData * firstDocument = [mDocuments objectAtIndex: 0] ;
     NSString * referencePath = firstDocument.fileURL.path.stringByDeletingLastPathComponent ;
-    const BOOL result = [path isEqualToString:referencePath] ;
+    const BOOL result = [path isEqualToString: referencePath] ;
     if (result) {
-      [mDocuments addObject:inDocument] ;
+      [mDocuments addObject: inDocument] ;
     }
     return result ;
   }
@@ -136,7 +138,7 @@ static NSMutableArray * gFileEventStreamArray = nil ;
 
 @end
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void addFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   if (nil == gFileEventStreamArray) {
@@ -155,7 +157,7 @@ void addFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   }
 }
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------
 
 void removeFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   OC_GGS_FileEventStream * objectToRemove = nil ;
@@ -170,4 +172,4 @@ void removeFileEventStreamForDocument (OC_GGS_DocumentData * inDocument) {
   }
 }
 
-//—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+//----------------------------------------------------------------------------------------------------------------------

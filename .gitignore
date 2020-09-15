@@ -269,3 +269,6 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+-projets-auxiliaires/property-as-inout-argument/build/**
+
+arm-stack-computations/build/**
