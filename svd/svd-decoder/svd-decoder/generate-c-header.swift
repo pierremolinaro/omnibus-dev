@@ -119,25 +119,29 @@ fileprivate func generatePeripheral (_ inPeripheral : Peripheral,
       s += "  #define \(inPeripheral.name)_\(registerBaseName)(idx) (* ((volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(registerAddressOffset) + (idx) * \(dimensionIncrement))))\n"
       for dim in 0 ..< dimension {
         let registerName = register.name.replacingOccurrences (of: "%s", with: suffixArray [dim])
-        s += "  #define " + inPeripheral.name + "_" + registerName
         let qualifier : String
         if let access = register.access, access == "read-only" {
           qualifier = "const "
         }else{
           qualifier = ""
         }
-        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+//        s += "  // #define " + inPeripheral.name + "_" + registerName
+//        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+        s += "  static volatile uint\(register.size)_t \(qualifier)& " + inPeripheral.name + "_" + registerName
+        s += " __attribute__((unused)) = * ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(register.addressOffset))) ;\n"
       }
     }else{
       s += "//---  Register " + register.name + ": " + register.description.replacingOccurrences(of: "\n", with: " ") + "\n"
-      s += "  #define " + inPeripheral.name + "_" + register.name
       let qualifier : String
       if let access = register.access, access == "read-only" {
         qualifier = "const "
       }else{
         qualifier = ""
       }
-      s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(register.addressOffset))))\n"
+//      s += "  // #define " + inPeripheral.name + "_" + register.name
+//      s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(register.addressOffset))))\n"
+      s += "  static volatile uint\(register.size)_t \(qualifier)& " + inPeripheral.name + "_" + register.name
+      s += " __attribute__((unused)) = * ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (inPeripheral.baseAddress)) + \(register.addressOffset))) ;\n"
     }
     s += "\n"
     for field in register.fields?.field ?? [] {
@@ -238,28 +242,32 @@ fileprivate func generateGroup (_ inGroupName : String, _ inPeripheralArray : [P
       for dim in 0 ..< dimension {
         for peripheral in inPeripheralArray {
           let registerName = register.name.replacingOccurrences (of: "%s", with: suffixArray [dim])
-          s += "  #define " + peripheral.name + "_" + registerName
           let qualifier : String
           if let access = register.access, access == "read-only" {
             qualifier = "const "
           }else{
             qualifier = ""
           }
-          s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+//          s += "  // #define " + peripheral.name + "_" + registerName
+//          s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset) + \(dim) * \(dimensionIncrement))))\n"
+          s += "  static volatile uint\(register.size)_t \(qualifier)& " + peripheral.name + "_" + registerName
+          s += " __attribute__((unused)) = * ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(register.addressOffset))) ;\n"
         }
       }
     }else{
       s += "//---  Register " + register.name + ": " + register.description + "\n"
       s += "  #define \(inGroupName)_\(register.name)(group) (* ((volatile uint\(register.size)_t *) (kBaseAddress_\(register.name) [group] + \(registerAddressOffset))))\n"
       for peripheral in inPeripheralArray {
-        s += "  #define " + peripheral.name + "_" + register.name
         let qualifier : String
         if let access = register.access, access == "read-only" {
           qualifier = "const "
         }else{
           qualifier = ""
         }
-        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset))))\n"
+//        s += "  // #define " + peripheral.name + "_" + register.name
+//        s += " (* ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(registerAddressOffset))))\n"
+        s += "  static volatile uint\(register.size)_t \(qualifier)& " + peripheral.name + "_" + register.name
+        s += " __attribute__((unused)) = * ((\(qualifier)volatile uint\(register.size)_t *) (\(hexString (peripheral.baseAddress)) + \(register.addressOffset))) ;\n"
       }
     }
     s += "\n"

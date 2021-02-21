@@ -1,0 +1,301 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "_XMLEncodingStorage"
+provides-nominal:
+- "24extract_stm32_gpio_modes19_XMLEncodingStorageV"
+provides-member:
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "!"
+- "Int"
+- "NSMutableArray"
+- "NSMutableDictionary"
+- "NSObject"
+- !private "StringLiteralType"
+- "_XMLEncodingStorage"
+- !private "precondition"
+depends-member:
+- !private ["Sa", "append"]
+- !private ["Sa", "count"]
+- !private ["Sa", "isEmpty"]
+- !private ["Sa", "popLast"]
+- !private ["SK", ""]
+- !private ["SK", "append"]
+- !private ["SK", "count"]
+- !private ["SK", "isEmpty"]
+- !private ["SK", "popLast"]
+- !private ["s7CVarArgP", "append"]
+- !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "isEmpty"]
+- !private ["s7CVarArgP", "popLast"]
+- !private ["Sl", ""]
+- !private ["Sl", "append"]
+- !private ["Sl", "count"]
+- !private ["Sl", "isEmpty"]
+- !private ["Sl", "popLast"]
+- !private ["10Foundation15ContiguousBytesP", "append"]
+- !private ["10Foundation15ContiguousBytesP", "count"]
+- !private ["10Foundation15ContiguousBytesP", "isEmpty"]
+- !private ["10Foundation15ContiguousBytesP", "popLast"]
+- !private ["s28CustomDebugStringConvertibleP", "append"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- !private ["s28CustomDebugStringConvertibleP", "init"]
+- !private ["s28CustomDebugStringConvertibleP", "isEmpty"]
+- !private ["s28CustomDebugStringConvertibleP", "popLast"]
+- !private ["s17CustomReflectableP", "append"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "isEmpty"]
+- !private ["s17CustomReflectableP", "popLast"]
+- !private ["s23CustomStringConvertibleP", "append"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- !private ["s23CustomStringConvertibleP", "init"]
+- !private ["s23CustomStringConvertibleP", "isEmpty"]
+- !private ["s23CustomStringConvertibleP", "popLast"]
+- !private ["10Foundation12DataProtocolP", ""]
+- !private ["10Foundation12DataProtocolP", "append"]
+- !private ["10Foundation12DataProtocolP", "count"]
+- !private ["10Foundation12DataProtocolP", "isEmpty"]
+- !private ["10Foundation12DataProtocolP", "popLast"]
+- !private ["Se", "append"]
+- !private ["Se", "count"]
+- !private ["Se", "isEmpty"]
+- !private ["Se", "popLast"]
+- !private ["SE", "append"]
+- !private ["SE", "count"]
+- !private ["SE", "isEmpty"]
+- !private ["SE", "popLast"]
+- !private ["SQ", ""]
+- !private ["SQ", "append"]
+- !private ["SQ", "count"]
+- !private ["SQ", "init"]
+- !private ["SQ", "isEmpty"]
+- !private ["SQ", "popLast"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "append"]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "isEmpty"]
+- !private ["s25ExpressibleByArrayLiteralP", "popLast"]
+- !private ["s30ExpressibleByDictionaryLiteralP", "init"]
+- !private ["SH", "append"]
+- !private ["SH", "count"]
+- !private ["SH", "init"]
+- !private ["SH", "isEmpty"]
+- !private ["SH", "popLast"]
+- !private ["SM", ""]
+- !private ["SM", "append"]
+- !private ["SM", "count"]
+- !private ["SM", "isEmpty"]
+- !private ["SM", "popLast"]
+- !private ["10Foundation19MutableDataProtocolP", "append"]
+- !private ["10Foundation19MutableDataProtocolP", "count"]
+- !private ["10Foundation19MutableDataProtocolP", "isEmpty"]
+- !private ["10Foundation19MutableDataProtocolP", "popLast"]
+- ["So7NSArrayC", ""]
+- !private ["So7NSArrayC", "arrayWithCapacity"]
+- !private ["So7NSArrayC", "arrayWithContentsOfFile"]
+- !private ["So7NSArrayC", "arrayWithContentsOfURL"]
+- !private ["So7NSArrayC", "init"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "arrayWithCapacity"]
+- !private ["So8NSCodingP", "arrayWithContentsOfFile"]
+- !private ["So8NSCodingP", "arrayWithContentsOfURL"]
+- !private ["So8NSCodingP", "dictionaryWithCapacity"]
+- !private ["So8NSCodingP", "dictionaryWithContentsOfFile"]
+- !private ["So8NSCodingP", "dictionaryWithContentsOfURL"]
+- !private ["So8NSCodingP", "dictionaryWithSharedKeySet"]
+- !private ["So8NSCodingP", "init"]
+- !private ["So9NSCopyingP", "arrayWithCapacity"]
+- !private ["So9NSCopyingP", "arrayWithContentsOfFile"]
+- !private ["So9NSCopyingP", "arrayWithContentsOfURL"]
+- !private ["So9NSCopyingP", "dictionaryWithCapacity"]
+- !private ["So9NSCopyingP", "dictionaryWithContentsOfFile"]
+- !private ["So9NSCopyingP", "dictionaryWithContentsOfURL"]
+- !private ["So9NSCopyingP", "dictionaryWithSharedKeySet"]
+- !private ["So9NSCopyingP", "init"]
+- ["So12NSDictionaryC", ""]
+- !private ["So12NSDictionaryC", "dictionaryWithCapacity"]
+- !private ["So12NSDictionaryC", "dictionaryWithContentsOfFile"]
+- !private ["So12NSDictionaryC", "dictionaryWithContentsOfURL"]
+- !private ["So12NSDictionaryC", "dictionaryWithSharedKeySet"]
+- !private ["So12NSDictionaryC", "init"]
+- !private ["So17NSFastEnumerationP", "arrayWithCapacity"]
+- !private ["So17NSFastEnumerationP", "arrayWithContentsOfFile"]
+- !private ["So17NSFastEnumerationP", "arrayWithContentsOfURL"]
+- !private ["So17NSFastEnumerationP", "dictionaryWithCapacity"]
+- !private ["So17NSFastEnumerationP", "dictionaryWithContentsOfFile"]
+- !private ["So17NSFastEnumerationP", "dictionaryWithContentsOfURL"]
+- !private ["So17NSFastEnumerationP", "dictionaryWithSharedKeySet"]
+- !private ["So17NSFastEnumerationP", "init"]
+- !private ["So14NSMutableArrayC", "init"]
+- !private ["So16NSMutableCopyingP", "arrayWithCapacity"]
+- !private ["So16NSMutableCopyingP", "arrayWithContentsOfFile"]
+- !private ["So16NSMutableCopyingP", "arrayWithContentsOfURL"]
+- !private ["So16NSMutableCopyingP", "dictionaryWithCapacity"]
+- !private ["So16NSMutableCopyingP", "dictionaryWithContentsOfFile"]
+- !private ["So16NSMutableCopyingP", "dictionaryWithContentsOfURL"]
+- !private ["So16NSMutableCopyingP", "dictionaryWithSharedKeySet"]
+- !private ["So16NSMutableCopyingP", "init"]
+- !private ["So19NSMutableDictionaryC", "init"]
+- ["So8NSObjectC", ""]
+- !private ["So8NSObjectC", "array"]
+- !private ["So8NSObjectC", "arrayWithArray"]
+- !private ["So8NSObjectC", "arrayWithCapacity"]
+- !private ["So8NSObjectC", "arrayWithContentsOfFile"]
+- !private ["So8NSObjectC", "arrayWithContentsOfURL"]
+- !private ["So8NSObjectC", "arrayWithObject"]
+- !private ["So8NSObjectC", "arrayWithObjects"]
+- !private ["So8NSObjectC", "dictionary"]
+- !private ["So8NSObjectC", "dictionaryWithCapacity"]
+- !private ["So8NSObjectC", "dictionaryWithContentsOfFile"]
+- !private ["So8NSObjectC", "dictionaryWithContentsOfURL"]
+- !private ["So8NSObjectC", "dictionaryWithDictionary"]
+- !private ["So8NSObjectC", "dictionaryWithObject"]
+- !private ["So8NSObjectC", "dictionaryWithObjects"]
+- !private ["So8NSObjectC", "dictionaryWithSharedKeySet"]
+- !private ["So8NSObjectC", "init"]
+- !private ["So8NSObjectP", "array"]
+- !private ["So8NSObjectP", "arrayWithArray"]
+- !private ["So8NSObjectP", "arrayWithCapacity"]
+- !private ["So8NSObjectP", "arrayWithContentsOfFile"]
+- !private ["So8NSObjectP", "arrayWithContentsOfURL"]
+- !private ["So8NSObjectP", "arrayWithObject"]
+- !private ["So8NSObjectP", "arrayWithObjects"]
+- !private ["So8NSObjectP", "dictionary"]
+- !private ["So8NSObjectP", "dictionaryWithCapacity"]
+- !private ["So8NSObjectP", "dictionaryWithContentsOfFile"]
+- !private ["So8NSObjectP", "dictionaryWithContentsOfURL"]
+- !private ["So8NSObjectP", "dictionaryWithDictionary"]
+- !private ["So8NSObjectP", "dictionaryWithObject"]
+- !private ["So8NSObjectP", "dictionaryWithObjects"]
+- !private ["So8NSObjectP", "dictionaryWithSharedKeySet"]
+- !private ["So8NSObjectP", "init"]
+- !private ["So14NSSecureCodingP", "arrayWithCapacity"]
+- !private ["So14NSSecureCodingP", "arrayWithContentsOfFile"]
+- !private ["So14NSSecureCodingP", "arrayWithContentsOfURL"]
+- !private ["So14NSSecureCodingP", "dictionaryWithCapacity"]
+- !private ["So14NSSecureCodingP", "dictionaryWithContentsOfFile"]
+- !private ["So14NSSecureCodingP", "dictionaryWithContentsOfURL"]
+- !private ["So14NSSecureCodingP", "dictionaryWithSharedKeySet"]
+- !private ["So14NSSecureCodingP", "init"]
+- !private ["Sk", ""]
+- !private ["Sk", "append"]
+- !private ["Sk", "count"]
+- !private ["Sk", "isEmpty"]
+- !private ["Sk", "popLast"]
+- !private ["Sm", ""]
+- !private ["Sm", "append"]
+- !private ["Sm", "count"]
+- !private ["Sm", "isEmpty"]
+- !private ["Sm", "popLast"]
+- !private ["ST", ""]
+- !private ["ST", "append"]
+- !private ["ST", "count"]
+- !private ["ST", "init"]
+- !private ["ST", "isEmpty"]
+- !private ["ST", "popLast"]
+- !private ["s14_ArrayProtocolP", "append"]
+- !private ["s14_ArrayProtocolP", "count"]
+- !private ["s14_ArrayProtocolP", "isEmpty"]
+- !private ["s14_ArrayProtocolP", "popLast"]
+- !private ["s24_DestructorSafeContainerP", "append"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- !private ["s24_DestructorSafeContainerP", "isEmpty"]
+- !private ["s24_DestructorSafeContainerP", "popLast"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s19_HasContiguousBytesP", "append"]
+- !private ["s19_HasContiguousBytesP", "count"]
+- !private ["s19_HasContiguousBytesP", "isEmpty"]
+- !private ["s19_HasContiguousBytesP", "popLast"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "append"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "isEmpty"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "popLast"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "init"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "append"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "isEmpty"]
+- !private ["s21_ObjectiveCBridgeableP", "popLast"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "Int"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "NSMutableArray"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "NSMutableDictionary"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "NSObject"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "containers"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "count"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "init"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "popContainer"]
+- !private ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "precondition"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "push"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "pushKeyedContainer"]
+- ["24extract_stm32_gpio_modes19_XMLEncodingStorageV", "pushUnkeyedContainer"]
+depends-nominal:
+- !private "Sa"
+- !private "SK"
+- !private "s7CVarArgP"
+- !private "Sl"
+- !private "10Foundation15ContiguousBytesP"
+- !private "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- !private "s23CustomStringConvertibleP"
+- !private "10Foundation12DataProtocolP"
+- !private "Se"
+- !private "SE"
+- !private "SQ"
+- "s25ExpressibleByArrayLiteralP"
+- !private "s30ExpressibleByDictionaryLiteralP"
+- !private "SH"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
+- "So7NSArrayC"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- "So12NSDictionaryC"
+- !private "So17NSFastEnumerationP"
+- !private "So14NSMutableArrayC"
+- !private "So16NSMutableCopyingP"
+- !private "So19NSMutableDictionaryC"
+- "So8NSObjectC"
+- !private "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "Sk"
+- !private "Sm"
+- !private "ST"
+- !private "s14_ArrayProtocolP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+- "24extract_stm32_gpio_modes19_XMLEncodingStorageV"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "3c58c9a156a108ceb28b040694d6566b"

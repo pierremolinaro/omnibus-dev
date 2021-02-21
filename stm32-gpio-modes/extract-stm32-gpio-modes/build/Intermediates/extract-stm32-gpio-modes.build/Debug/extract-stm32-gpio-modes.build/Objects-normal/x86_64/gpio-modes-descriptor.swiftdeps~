@@ -1,0 +1,715 @@
+### Swift dependencies file v0 ###
+provides-top-level:
+- "GPIOModes"
+- "GPIOPin"
+- "PinSignal"
+- "SpecificParameter"
+provides-nominal:
+- "24extract_stm32_gpio_modes9GPIOModesV"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+provides-member:
+- ["24extract_stm32_gpio_modes9GPIOModesV", ""]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes7GPIOPinV", ""]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes9PinSignalV", ""]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", ""]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", ""]
+provides-dynamic-lookup:
+depends-top-level:
+- !private "!="
+- !private "<"
+- "=="
+- !private ">"
+- !private "Array"
+- "AssignmentPrecedence"
+- "Codable"
+- "CodingKey"
+- !private "FloatLiteralType"
+- "GPIOModes"
+- "GPIOPin"
+- "Int"
+- !private "IntegerLiteralType"
+- "PinSignal"
+- "SpecificParameter"
+- "String"
+- "StringLiteralType"
+- !private "Swift"
+- !private "UnicodeScalarType"
+- !private "_findStringSwitchCase"
+- !private "exit"
+- !private "~="
+depends-member:
+- !private ["s18AdditiveArithmeticP", ""]
+- !private ["s18AdditiveArithmeticP", "init"]
+- !private ["Sa", "count"]
+- !private ["Sa", "subscript"]
+- !private ["SK", ""]
+- !private ["SK", "components"]
+- !private ["SK", "count"]
+- !private ["SK", "hasPrefix"]
+- !private ["SK", "removeFirst"]
+- !private ["SK", "subscript"]
+- !private ["Sz", ""]
+- !private ["Sz", "init"]
+- !private ["s7CVarArgP", "components"]
+- !private ["s7CVarArgP", "count"]
+- !private ["s7CVarArgP", "hasPrefix"]
+- !private ["s7CVarArgP", "init"]
+- !private ["s7CVarArgP", "removeFirst"]
+- !private ["s7CVarArgP", "subscript"]
+- ["s9CodingKeyP", "=="]
+- ["s9CodingKeyP", "Default_RawValue"]
+- ["s9CodingKeyP", "RawValue"]
+- ["s9CodingKeyP", ""]
+- ["s9CodingKeyP", "_Default_RawValue"]
+- !private ["s9CodingKeyP", "_findStringSwitchCase"]
+- ["s9CodingKeyP", "_rawHashValue"]
+- ["s9CodingKeyP", "debugDescription"]
+- ["s9CodingKeyP", "description"]
+- !private ["s9CodingKeyP", "findStringSwitchCase"]
+- ["s9CodingKeyP", "hash"]
+- ["s9CodingKeyP", "hashValue"]
+- ["s9CodingKeyP", "init"]
+- ["s9CodingKeyP", "intValue"]
+- ["s9CodingKeyP", "rawValue"]
+- ["s9CodingKeyP", "stringValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "=="]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "=="]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "=="]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "=="]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "Default_RawValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "Default_RawValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "Default_RawValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "Default_RawValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "RawValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "RawValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "RawValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "RawValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", ""]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "_Default_RawValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "_Default_RawValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "_Default_RawValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "_Default_RawValue"]
+- !private ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "_findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "_findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "_findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "_findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "_rawHashValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "_rawHashValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "_rawHashValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "_rawHashValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "debugDescription"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "debugDescription"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "debugDescription"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "debugDescription"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "description"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "description"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "description"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "description"]
+- !private ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "findStringSwitchCase"]
+- !private ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "hash"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "hash"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "hash"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "hash"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "hashValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "hashValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "hashValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "hashValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "init"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "init"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "init"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "init"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "intValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "intValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "intValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "intValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "mName"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "mName"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "mName"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "mPinSignals"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "mPins"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "mPossibleValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "mSpecificParameter"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "rawValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "rawValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "rawValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "rawValue"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO", "stringValue"]
+- ["24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO", "stringValue"]
+- ["24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO", "stringValue"]
+- ["24extract_stm32_gpio_modes9PinSignalV10CodingKeysO", "stringValue"]
+- !private ["Sl", ""]
+- !private ["Sl", "components"]
+- !private ["Sl", "count"]
+- !private ["Sl", "hasPrefix"]
+- !private ["Sl", "removeFirst"]
+- !private ["Sl", "subscript"]
+- !private ["SL", ""]
+- !private ["SL", "components"]
+- !private ["SL", "hasPrefix"]
+- !private ["SL", "init"]
+- !private ["SL", "removeFirst"]
+- !private ["10Foundation15ContiguousBytesP", "count"]
+- !private ["10Foundation15ContiguousBytesP", "subscript"]
+- ["s28CustomDebugStringConvertibleP", "=="]
+- ["s28CustomDebugStringConvertibleP", "Default_RawValue"]
+- ["s28CustomDebugStringConvertibleP", "RawValue"]
+- ["s28CustomDebugStringConvertibleP", ""]
+- ["s28CustomDebugStringConvertibleP", "_Default_RawValue"]
+- !private ["s28CustomDebugStringConvertibleP", "_findStringSwitchCase"]
+- ["s28CustomDebugStringConvertibleP", "_rawHashValue"]
+- !private ["s28CustomDebugStringConvertibleP", "components"]
+- !private ["s28CustomDebugStringConvertibleP", "count"]
+- ["s28CustomDebugStringConvertibleP", "debugDescription"]
+- ["s28CustomDebugStringConvertibleP", "description"]
+- !private ["s28CustomDebugStringConvertibleP", "findStringSwitchCase"]
+- !private ["s28CustomDebugStringConvertibleP", "hasPrefix"]
+- ["s28CustomDebugStringConvertibleP", "hash"]
+- ["s28CustomDebugStringConvertibleP", "hashValue"]
+- ["s28CustomDebugStringConvertibleP", "init"]
+- ["s28CustomDebugStringConvertibleP", "intValue"]
+- ["s28CustomDebugStringConvertibleP", "rawValue"]
+- !private ["s28CustomDebugStringConvertibleP", "removeFirst"]
+- ["s28CustomDebugStringConvertibleP", "stringValue"]
+- !private ["s28CustomDebugStringConvertibleP", "subscript"]
+- !private ["s17CustomReflectableP", "components"]
+- !private ["s17CustomReflectableP", "count"]
+- !private ["s17CustomReflectableP", "hasPrefix"]
+- !private ["s17CustomReflectableP", "init"]
+- !private ["s17CustomReflectableP", "removeFirst"]
+- !private ["s17CustomReflectableP", "subscript"]
+- ["s23CustomStringConvertibleP", "=="]
+- ["s23CustomStringConvertibleP", "Default_RawValue"]
+- ["s23CustomStringConvertibleP", "RawValue"]
+- ["s23CustomStringConvertibleP", ""]
+- ["s23CustomStringConvertibleP", "_Default_RawValue"]
+- !private ["s23CustomStringConvertibleP", "_findStringSwitchCase"]
+- ["s23CustomStringConvertibleP", "_rawHashValue"]
+- !private ["s23CustomStringConvertibleP", "appendInterpolation"]
+- !private ["s23CustomStringConvertibleP", "appendLiteral"]
+- !private ["s23CustomStringConvertibleP", "components"]
+- !private ["s23CustomStringConvertibleP", "count"]
+- ["s23CustomStringConvertibleP", "debugDescription"]
+- ["s23CustomStringConvertibleP", "description"]
+- !private ["s23CustomStringConvertibleP", "findStringSwitchCase"]
+- !private ["s23CustomStringConvertibleP", "hasPrefix"]
+- ["s23CustomStringConvertibleP", "hash"]
+- ["s23CustomStringConvertibleP", "hashValue"]
+- ["s23CustomStringConvertibleP", "init"]
+- ["s23CustomStringConvertibleP", "intValue"]
+- ["s23CustomStringConvertibleP", "rawValue"]
+- !private ["s23CustomStringConvertibleP", "removeFirst"]
+- ["s23CustomStringConvertibleP", "stringValue"]
+- !private ["s23CustomStringConvertibleP", "subscript"]
+- !private ["10Foundation12DataProtocolP", ""]
+- !private ["10Foundation12DataProtocolP", "count"]
+- !private ["10Foundation12DataProtocolP", "subscript"]
+- ["Se", "CodingKey"]
+- !private ["Se", "Int"]
+- !private ["Se", "Swift"]
+- ["Se", ""]
+- !private ["Se", "_findStringSwitchCase"]
+- !private ["Se", "components"]
+- !private ["Se", "count"]
+- ["Se", "encode"]
+- !private ["Se", "exit"]
+- !private ["Se", "findStringSwitchCase"]
+- !private ["Se", "hasPrefix"]
+- ["Se", "init"]
+- !private ["Se", "mName"]
+- !private ["Se", "mPinSignals"]
+- !private ["Se", "mPins"]
+- !private ["Se", "mPossibleValue"]
+- !private ["Se", "mSpecificParameter"]
+- !private ["Se", "print"]
+- !private ["Se", "removeFirst"]
+- !private ["Se", "subscript"]
+- !private ["s7DecoderP", "container"]
+- !private ["s26DefaultStringInterpolationV", "appendInterpolation"]
+- !private ["s26DefaultStringInterpolationV", "appendLiteral"]
+- ["SE", "CodingKey"]
+- !private ["SE", "Int"]
+- !private ["SE", "Swift"]
+- ["SE", ""]
+- !private ["SE", "_findStringSwitchCase"]
+- !private ["SE", "components"]
+- !private ["SE", "count"]
+- ["SE", "encode"]
+- !private ["SE", "exit"]
+- !private ["SE", "findStringSwitchCase"]
+- !private ["SE", "hasPrefix"]
+- ["SE", "init"]
+- !private ["SE", "mName"]
+- !private ["SE", "mPinSignals"]
+- !private ["SE", "mPins"]
+- !private ["SE", "mPossibleValue"]
+- !private ["SE", "mSpecificParameter"]
+- !private ["SE", "print"]
+- !private ["SE", "removeFirst"]
+- !private ["SE", "subscript"]
+- !private ["s7EncoderP", "container"]
+- ["SQ", "=="]
+- ["SQ", "Default_RawValue"]
+- ["SQ", "RawValue"]
+- ["SQ", ""]
+- ["SQ", "_Default_RawValue"]
+- !private ["SQ", "_findStringSwitchCase"]
+- ["SQ", "_rawHashValue"]
+- !private ["SQ", "components"]
+- !private ["SQ", "count"]
+- ["SQ", "debugDescription"]
+- ["SQ", "description"]
+- !private ["SQ", "findStringSwitchCase"]
+- !private ["SQ", "hasPrefix"]
+- ["SQ", "hash"]
+- ["SQ", "hashValue"]
+- ["SQ", "init"]
+- ["SQ", "intValue"]
+- ["SQ", "rawValue"]
+- !private ["SQ", "removeFirst"]
+- ["SQ", "stringValue"]
+- !private ["SQ", "subscript"]
+- !private ["s25ExpressibleByArrayLiteralP", ""]
+- !private ["s25ExpressibleByArrayLiteralP", "count"]
+- !private ["s25ExpressibleByArrayLiteralP", "init"]
+- !private ["s25ExpressibleByArrayLiteralP", "subscript"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", ""]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "components"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "hasPrefix"]
+- !private ["s43ExpressibleByExtendedGraphemeClusterLiteralP", "removeFirst"]
+- !private ["s27ExpressibleByIntegerLiteralP", ""]
+- !private ["s27ExpressibleByIntegerLiteralP", "init"]
+- !private ["s32ExpressibleByStringInterpolationP", "StringInterpolation"]
+- !private ["s32ExpressibleByStringInterpolationP", ""]
+- !private ["s32ExpressibleByStringInterpolationP", "components"]
+- !private ["s32ExpressibleByStringInterpolationP", "hasPrefix"]
+- !private ["s32ExpressibleByStringInterpolationP", "init"]
+- !private ["s32ExpressibleByStringInterpolationP", "removeFirst"]
+- !private ["s26ExpressibleByStringLiteralP", ""]
+- !private ["s26ExpressibleByStringLiteralP", "components"]
+- !private ["s26ExpressibleByStringLiteralP", "hasPrefix"]
+- !private ["s26ExpressibleByStringLiteralP", "removeFirst"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", ""]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "components"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "hasPrefix"]
+- !private ["s33ExpressibleByUnicodeScalarLiteralP", "removeFirst"]
+- !private ["s17FixedWidthIntegerP", "init"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "CodingKey"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "CodingKeys"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "GPIOPin"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV", "Int"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "String"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV", "Swift"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", ""]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV", "_findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "encode"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV", "exit"]
+- !private ["24extract_stm32_gpio_modes9GPIOModesV", "findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "init"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "mPins"]
+- ["24extract_stm32_gpio_modes9GPIOModesV", "print"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "CodingKey"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "CodingKeys"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "PinSignal"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "String"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", ""]
+- !private ["24extract_stm32_gpio_modes7GPIOPinV", "_findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "encode"]
+- !private ["24extract_stm32_gpio_modes7GPIOPinV", "findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "init"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "mName"]
+- ["24extract_stm32_gpio_modes7GPIOPinV", "mPinSignals"]
+- ["SH", "=="]
+- ["SH", "Default_RawValue"]
+- ["SH", "RawValue"]
+- ["SH", ""]
+- ["SH", "_Default_RawValue"]
+- !private ["SH", "_findStringSwitchCase"]
+- ["SH", "_rawHashValue"]
+- !private ["SH", "components"]
+- !private ["SH", "count"]
+- ["SH", "debugDescription"]
+- ["SH", "description"]
+- !private ["SH", "findStringSwitchCase"]
+- !private ["SH", "hasPrefix"]
+- ["SH", "hash"]
+- ["SH", "hashValue"]
+- ["SH", "init"]
+- ["SH", "intValue"]
+- ["SH", "rawValue"]
+- !private ["SH", "removeFirst"]
+- ["SH", "stringValue"]
+- !private ["SH", "subscript"]
+- !private ["Si", "init"]
+- !private ["s22KeyedDecodingContainerV", "decode"]
+- !private ["s22KeyedDecodingContainerV", "decodeIfPresent"]
+- !private ["s30KeyedDecodingContainerProtocolP", "decode"]
+- !private ["s30KeyedDecodingContainerProtocolP", "decodeIfPresent"]
+- !private ["s22KeyedEncodingContainerV", "encode"]
+- !private ["s22KeyedEncodingContainerV", "encodeIfPresent"]
+- !private ["s30KeyedEncodingContainerProtocolP", "encode"]
+- !private ["s30KeyedEncodingContainerProtocolP", "encodeIfPresent"]
+- !private ["s25LosslessStringConvertibleP", ""]
+- !private ["s25LosslessStringConvertibleP", "components"]
+- !private ["s25LosslessStringConvertibleP", "hasPrefix"]
+- !private ["s25LosslessStringConvertibleP", "init"]
+- !private ["s25LosslessStringConvertibleP", "removeFirst"]
+- !private ["s10MirrorPathP", "components"]
+- !private ["s10MirrorPathP", "hasPrefix"]
+- !private ["s10MirrorPathP", "init"]
+- !private ["s10MirrorPathP", "removeFirst"]
+- !private ["SM", ""]
+- !private ["SM", "count"]
+- !private ["SM", "subscript"]
+- !private ["10Foundation19MutableDataProtocolP", "count"]
+- !private ["10Foundation19MutableDataProtocolP", "subscript"]
+- ["So8NSCodingP", ""]
+- !private ["So8NSCodingP", "components"]
+- !private ["So8NSCodingP", "hasPrefix"]
+- !private ["So8NSCodingP", "removeFirst"]
+- !private ["So9NSCopyingP", "components"]
+- !private ["So9NSCopyingP", "hasPrefix"]
+- !private ["So9NSCopyingP", "removeFirst"]
+- !private ["So21NSItemProviderReadingP", "components"]
+- !private ["So21NSItemProviderReadingP", "hasPrefix"]
+- !private ["So21NSItemProviderReadingP", "removeFirst"]
+- !private ["So21NSItemProviderWritingP", "components"]
+- !private ["So21NSItemProviderWritingP", "hasPrefix"]
+- !private ["So21NSItemProviderWritingP", "removeFirst"]
+- !private ["So16NSMutableCopyingP", "components"]
+- !private ["So16NSMutableCopyingP", "hasPrefix"]
+- !private ["So16NSMutableCopyingP", "removeFirst"]
+- !private ["So8NSObjectC", "components"]
+- !private ["So8NSObjectC", "componentsSeparatedByCharactersInSet"]
+- !private ["So8NSObjectC", "componentsSeparatedByString"]
+- !private ["So8NSObjectC", "hasPrefix"]
+- !private ["So8NSObjectC", "removeFirst"]
+- ["So8NSObjectP", ""]
+- !private ["So8NSObjectP", "components"]
+- !private ["So8NSObjectP", "componentsSeparatedByCharactersInSet"]
+- !private ["So8NSObjectP", "componentsSeparatedByString"]
+- !private ["So8NSObjectP", "hasPrefix"]
+- !private ["So8NSObjectP", "removeFirst"]
+- !private ["So14NSSecureCodingP", "components"]
+- !private ["So14NSSecureCodingP", "hasPrefix"]
+- !private ["So14NSSecureCodingP", "removeFirst"]
+- !private ["So8NSStringC", "components"]
+- !private ["So8NSStringC", "hasPrefix"]
+- !private ["So8NSStringC", "removeFirst"]
+- !private ["Sj", ""]
+- !private ["Sj", "init"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "CodingKey"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "CodingKeys"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "SpecificParameter"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "String"]
+- ["24extract_stm32_gpio_modes9PinSignalV", ""]
+- !private ["24extract_stm32_gpio_modes9PinSignalV", "_findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "encode"]
+- !private ["24extract_stm32_gpio_modes9PinSignalV", "findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "init"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "mName"]
+- ["24extract_stm32_gpio_modes9PinSignalV", "mSpecificParameter"]
+- !private ["Sk", ""]
+- !private ["Sk", "count"]
+- !private ["Sk", "subscript"]
+- !private ["Sm", ""]
+- !private ["Sm", "components"]
+- !private ["Sm", "count"]
+- !private ["Sm", "hasPrefix"]
+- !private ["Sm", "removeFirst"]
+- !private ["Sm", "subscript"]
+- ["SY", "=="]
+- ["SY", "Default_RawValue"]
+- ["SY", "RawValue"]
+- ["SY", ""]
+- ["SY", "_Default_RawValue"]
+- !private ["SY", "_findStringSwitchCase"]
+- ["SY", "_rawHashValue"]
+- ["SY", "debugDescription"]
+- ["SY", "description"]
+- !private ["SY", "findStringSwitchCase"]
+- ["SY", "hash"]
+- ["SY", "hashValue"]
+- ["SY", "init"]
+- ["SY", "intValue"]
+- ["SY", "rawValue"]
+- ["SY", "stringValue"]
+- !private ["s10SIMDScalarP", "init"]
+- !private ["ST", "Element"]
+- !private ["ST", "Iterator"]
+- !private ["ST", ""]
+- !private ["ST", "components"]
+- !private ["ST", "count"]
+- !private ["ST", "hasPrefix"]
+- !private ["ST", "makeIterator"]
+- !private ["ST", "removeFirst"]
+- !private ["ST", "subscript"]
+- !private ["SZ", "init"]
+- !private ["s13SignedNumericP", ""]
+- !private ["s13SignedNumericP", "init"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "CodingKey"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "CodingKeys"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "String"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", ""]
+- !private ["24extract_stm32_gpio_modes17SpecificParameterV", "_findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "encode"]
+- !private ["24extract_stm32_gpio_modes17SpecificParameterV", "findStringSwitchCase"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "init"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "mName"]
+- ["24extract_stm32_gpio_modes17SpecificParameterV", "mPossibleValue"]
+- !private ["Sx", ""]
+- !private ["Sx", "init"]
+- !private ["SS", "components"]
+- !private ["SS", "hasPrefix"]
+- !private ["SS", "removeFirst"]
+- !private ["s27StringInterpolationProtocolP", "appendInterpolation"]
+- !private ["s27StringInterpolationProtocolP", "appendLiteral"]
+- !private ["s27StringInterpolationProtocolP", "init"]
+- !private ["Sy", "components"]
+- !private ["Sy", "hasPrefix"]
+- !private ["Sy", "removeFirst"]
+- !private ["s16TextOutputStreamP", ""]
+- !private ["s16TextOutputStreamP", "appendInterpolation"]
+- !private ["s16TextOutputStreamP", "appendLiteral"]
+- !private ["s16TextOutputStreamP", "components"]
+- !private ["s16TextOutputStreamP", "hasPrefix"]
+- !private ["s16TextOutputStreamP", "removeFirst"]
+- !private ["s20TextOutputStreamableP", ""]
+- !private ["s20TextOutputStreamableP", "components"]
+- !private ["s20TextOutputStreamableP", "hasPrefix"]
+- !private ["s20TextOutputStreamableP", "removeFirst"]
+- !private ["s14_ArrayProtocolP", "count"]
+- !private ["s14_ArrayProtocolP", "subscript"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "components"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "hasPrefix"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "init"]
+- !private ["s30_CustomPlaygroundQuickLookableP", "removeFirst"]
+- !private ["s24_DestructorSafeContainerP", "count"]
+- !private ["s24_DestructorSafeContainerP", "subscript"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", ""]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "components"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "hasPrefix"]
+- !private ["s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP", "removeFirst"]
+- !private ["s35_ExpressibleByBuiltinIntegerLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "components"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "hasPrefix"]
+- ["s34_ExpressibleByBuiltinStringLiteralP", "init"]
+- !private ["s34_ExpressibleByBuiltinStringLiteralP", "removeFirst"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", ""]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "components"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "hasPrefix"]
+- !private ["s41_ExpressibleByBuiltinUnicodeScalarLiteralP", "removeFirst"]
+- !private ["s19_HasContiguousBytesP", "components"]
+- !private ["s19_HasContiguousBytesP", "count"]
+- !private ["s19_HasContiguousBytesP", "hasPrefix"]
+- !private ["s19_HasContiguousBytesP", "removeFirst"]
+- !private ["s19_HasContiguousBytesP", "subscript"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "components"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "count"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "hasPrefix"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "init"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "removeFirst"]
+- !private ["s35_HasCustomAnyHashableRepresentationP", "subscript"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "components"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "hasPrefix"]
+- !private ["10Foundation27_KeyValueCodingAndObservingP", "removeFirst"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "components"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "hasPrefix"]
+- !private ["10Foundation37_KeyValueCodingAndObservingPublishingP", "removeFirst"]
+- !private ["s21_ObjectiveCBridgeableP", "_ObjectiveCType"]
+- !private ["s21_ObjectiveCBridgeableP", "_bridgeToObjectiveC"]
+- !private ["s21_ObjectiveCBridgeableP", "_conditionallyBridgeFromObjectiveC"]
+- !private ["s21_ObjectiveCBridgeableP", "_forceBridgeFromObjectiveC"]
+- !private ["s21_ObjectiveCBridgeableP", "_unconditionallyBridgeFromObjectiveC"]
+- !private ["s21_ObjectiveCBridgeableP", "components"]
+- !private ["s21_ObjectiveCBridgeableP", "count"]
+- !private ["s21_ObjectiveCBridgeableP", "hasPrefix"]
+- !private ["s21_ObjectiveCBridgeableP", "init"]
+- !private ["s21_ObjectiveCBridgeableP", "removeFirst"]
+- !private ["s21_ObjectiveCBridgeableP", "subscript"]
+depends-nominal:
+- !private "s18AdditiveArithmeticP"
+- !private "Sa"
+- !private "SK"
+- !private "Sz"
+- !private "s7CVarArgP"
+- "s9CodingKeyP"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- !private "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- "24extract_stm32_gpio_modes17SpecificParameterV10CodingKeysO"
+- "24extract_stm32_gpio_modes7GPIOPinV10CodingKeysO"
+- "24extract_stm32_gpio_modes9GPIOModesV10CodingKeysO"
+- "24extract_stm32_gpio_modes9PinSignalV10CodingKeysO"
+- !private "Sl"
+- !private "SL"
+- !private "10Foundation15ContiguousBytesP"
+- "s28CustomDebugStringConvertibleP"
+- !private "s17CustomReflectableP"
+- "s23CustomStringConvertibleP"
+- !private "10Foundation12DataProtocolP"
+- "Se"
+- !private "s7DecoderP"
+- !private "s26DefaultStringInterpolationV"
+- "SE"
+- !private "s7EncoderP"
+- "SQ"
+- !private "s25ExpressibleByArrayLiteralP"
+- !private "s43ExpressibleByExtendedGraphemeClusterLiteralP"
+- !private "s27ExpressibleByIntegerLiteralP"
+- !private "s32ExpressibleByStringInterpolationP"
+- !private "s26ExpressibleByStringLiteralP"
+- !private "s33ExpressibleByUnicodeScalarLiteralP"
+- !private "s17FixedWidthIntegerP"
+- "24extract_stm32_gpio_modes9GPIOModesV"
+- "24extract_stm32_gpio_modes7GPIOPinV"
+- "SH"
+- !private "Si"
+- !private "s22KeyedDecodingContainerV"
+- !private "s30KeyedDecodingContainerProtocolP"
+- !private "s22KeyedEncodingContainerV"
+- !private "s30KeyedEncodingContainerProtocolP"
+- !private "s25LosslessStringConvertibleP"
+- !private "s10MirrorPathP"
+- !private "SM"
+- !private "10Foundation19MutableDataProtocolP"
+- "So8NSCodingP"
+- !private "So9NSCopyingP"
+- !private "So21NSItemProviderReadingP"
+- !private "So21NSItemProviderWritingP"
+- !private "So16NSMutableCopyingP"
+- !private "So8NSObjectC"
+- "So8NSObjectP"
+- !private "So14NSSecureCodingP"
+- !private "So8NSStringC"
+- !private "Sj"
+- "24extract_stm32_gpio_modes9PinSignalV"
+- !private "Sk"
+- !private "Sm"
+- "SY"
+- !private "s10SIMDScalarP"
+- !private "ST"
+- !private "SZ"
+- !private "s13SignedNumericP"
+- "24extract_stm32_gpio_modes17SpecificParameterV"
+- !private "Sx"
+- !private "SS"
+- !private "s27StringInterpolationProtocolP"
+- !private "Sy"
+- !private "s16TextOutputStreamP"
+- !private "s20TextOutputStreamableP"
+- !private "s14_ArrayProtocolP"
+- !private "s30_CustomPlaygroundQuickLookableP"
+- !private "s24_DestructorSafeContainerP"
+- !private "s51_ExpressibleByBuiltinExtendedGraphemeClusterLiteralP"
+- !private "s35_ExpressibleByBuiltinIntegerLiteralP"
+- "s34_ExpressibleByBuiltinStringLiteralP"
+- !private "s41_ExpressibleByBuiltinUnicodeScalarLiteralP"
+- !private "s19_HasContiguousBytesP"
+- !private "s35_HasCustomAnyHashableRepresentationP"
+- !private "10Foundation27_KeyValueCodingAndObservingP"
+- !private "10Foundation37_KeyValueCodingAndObservingPublishingP"
+- !private "s21_ObjectiveCBridgeableP"
+depends-dynamic-lookup:
+depends-external:
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/XPC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/ObjectiveC.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Combine.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Dispatch.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Darwin.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Foundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreFoundation.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/CoreGraphics.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/Swift.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/IOKit.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/macosx/prebuilt-modules/SwiftOnoneSupport.swiftmodule/x86_64-apple-macos.swiftmodule"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach-o/dyld.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/mach-o/compact_unwind_encoding.modulemap"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/xpc/XPC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/objc/ObjectiveC.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/apinotes/Dispatch.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/Darwin.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/CoreGraphics.framework/Headers/CoreGraphics.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/ApplicationServices.framework/Headers/ApplicationServices.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/CoreText.framework/Headers/CoreText.apinotes"
+- "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/System/Library/Frameworks/Security.framework/Headers/Security.apinotes"
+interface-hash: "004b12bbab6ca4cf80c15abed0e490cc"

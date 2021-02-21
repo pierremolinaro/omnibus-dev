@@ -12,6 +12,7 @@ import Foundation
 //------------------------------------------------------------------------------
 
 analyzeSVDFile (path: "/Volumes/dev-svn/omnibus-dev/svd/STM32F767.svd")
+analyzeSVDFile (path: "/Volumes/dev-svn/omnibus-dev/svd/STM32H743.svd")
 
 //analyzeSVDFile (path: "/Volumes/dev-svn/omnibus-dev/svd/MK64F12-pm.svd")
 //analyzeSVDFile (path: "/Volumes/dev-svn/omnibus-dev/svd/MK66F18-pm.svd")
