@@ -1,0 +1,19 @@
+version: "Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)"
+options: "9262520dbf8077e2a11f732a1789caa5"
+build_time: [1614689926, 910851000]
+inputs:
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Encoder/XMLEncodingStorage.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Decoder/XMLUnkeyedDecodingContainer.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Encoder/XMLEncoder.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/ISO8601DateFormatter.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Encoder/XMLReferencingEncoder.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/XMLKey.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Decoder/XMLDecodingStorage.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/analyze-stm32-gpio-modes.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Decoder/DecodingErrorExtension.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/XMLStackParser.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Decoder/XMLDecoder.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Decoder/XMLKeyedDecodingContainer.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/XMLParsing/Encoder/EncodingErrorExtension.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/gpio-modes-descriptor.swift": [9223372036, 854775807]
+  "/Volumes/dev-svn/omnibus-dev/stm32-gpio-modes/extract-stm32-gpio-modes/extract-stm32-gpio-modes/main.swift": [9223372036, 854775807]

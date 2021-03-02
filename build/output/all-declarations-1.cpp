@@ -4041,6 +4041,34 @@ GALGAS_routineKind GALGAS_routineKind::constructor_primitive (UNUSED_LOCATION_AR
 
 //----------------------------------------------------------------------------------------------------------------------
 
+bool GALGAS_routineKind::optional_function () const {
+  const bool ok = mEnum == kEnum_function ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_routineKind::optional_section () const {
+  const bool ok = mEnum == kEnum_section ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_routineKind::optional_service () const {
+  const bool ok = mEnum == kEnum_service ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_routineKind::optional_primitive () const {
+  const bool ok = mEnum == kEnum_primitive ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 static const char * gEnumNameArrayFor_routineKind [5] = {
   "(not built)",
   "function",
@@ -5369,6 +5397,45 @@ void GALGAS_LValueOperandAST::method_arrayAccess (GALGAS_expressionAST & outAsso
 
 //----------------------------------------------------------------------------------------------------------------------
 
+bool GALGAS_LValueOperandAST::optional_noOperand () const {
+  const bool ok = mEnum == kEnum_noOperand ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_LValueOperandAST::optional_property (GALGAS_lstring & outAssociatedValue0,
+                                                 GALGAS_LValueOperandAST & outAssociatedValue1) const {
+  const bool ok = mEnum == kEnum_property ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_LValueOperandAST_property *) unsafePointer () ;
+    // const cEnumAssociatedValues_LValueOperandAST_property * ptr = (const cEnumAssociatedValues_LValueOperandAST_property *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_LValueOperandAST::optional_arrayAccess (GALGAS_expressionAST & outAssociatedValue0,
+                                                    GALGAS_location & outAssociatedValue1,
+                                                    GALGAS_bool & outAssociatedValue2,
+                                                    GALGAS_LValueOperandAST & outAssociatedValue3) const {
+  const bool ok = mEnum == kEnum_arrayAccess ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_LValueOperandAST_arrayAccess *) unsafePointer () ;
+    // const cEnumAssociatedValues_LValueOperandAST_arrayAccess * ptr = (const cEnumAssociatedValues_LValueOperandAST_arrayAccess *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+    outAssociatedValue3 = ptr->mAssociatedValue3 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 static const char * gEnumNameArrayFor_LValueOperandAST [4] = {
   "(not built)",
   "noOperand",
@@ -5490,6 +5557,27 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_hasReadValue (UNU
   GALGAS_valuedObjectState result ;
   result.mEnum = kEnum_hasReadValue ;
   return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObjectState::optional_noValue () const {
+  const bool ok = mEnum == kEnum_noValue ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObjectState::optional_hasUnreadValue () const {
+  const bool ok = mEnum == kEnum_hasUnreadValue ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObjectState::optional_hasReadValue () const {
+  const bool ok = mEnum == kEnum_hasReadValue ;
+  return ok ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6005,6 +6093,88 @@ void GALGAS_valuedObject::method_globalSyncInstance (GALGAS_omnibusType & outAss
 
 //----------------------------------------------------------------------------------------------------------------------
 
+bool GALGAS_valuedObject::optional_driver (GALGAS_omnibusType & outAssociatedValue0,
+                                           GALGAS_bool & outAssociatedValue1) const {
+  const bool ok = mEnum == kEnum_driver ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_driver *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_driver * ptr = (const cEnumAssociatedValues_valuedObject_driver *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObject::optional_task (GALGAS_omnibusType & outAssociatedValue0) const {
+  const bool ok = mEnum == kEnum_task ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_task *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_task * ptr = (const cEnumAssociatedValues_valuedObject_task *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObject::optional_globalConstant (GALGAS_objectIR & outAssociatedValue0) const {
+  const bool ok = mEnum == kEnum_globalConstant ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_globalConstant *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_globalConstant * ptr = (const cEnumAssociatedValues_valuedObject_globalConstant *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObject::optional_localConstant (GALGAS_omnibusType & outAssociatedValue0,
+                                                  GALGAS_lstring & outAssociatedValue1,
+                                                  GALGAS_bool & outAssociatedValue2) const {
+  const bool ok = mEnum == kEnum_localConstant ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_localConstant *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_localConstant * ptr = (const cEnumAssociatedValues_valuedObject_localConstant *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+    outAssociatedValue2 = ptr->mAssociatedValue2 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObject::optional_localVariable (GALGAS_omnibusType & outAssociatedValue0,
+                                                  GALGAS_lstring & outAssociatedValue1) const {
+  const bool ok = mEnum == kEnum_localVariable ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_localVariable *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_localVariable * ptr = (const cEnumAssociatedValues_valuedObject_localVariable *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_valuedObject::optional_globalSyncInstance (GALGAS_omnibusType & outAssociatedValue0,
+                                                       GALGAS_lstring & outAssociatedValue1) const {
+  const bool ok = mEnum == kEnum_globalSyncInstance ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_valuedObject_globalSyncInstance *) unsafePointer () ;
+    // const cEnumAssociatedValues_valuedObject_globalSyncInstance * ptr = (const cEnumAssociatedValues_valuedObject_globalSyncInstance *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 static const char * gEnumNameArrayFor_valuedObject [7] = {
   "(not built)",
   "driver",
@@ -6139,6 +6309,20 @@ GALGAS_scopeKind GALGAS_scopeKind::constructor_repeatScope (UNUSED_LOCATION_ARGS
   GALGAS_scopeKind result ;
   result.mEnum = kEnum_repeatScope ;
   return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_scopeKind::optional_selectScope () const {
+  const bool ok = mEnum == kEnum_selectScope ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_scopeKind::optional_repeatScope () const {
+  const bool ok = mEnum == kEnum_repeatScope ;
+  return ok ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14370,6 +14554,51 @@ void GALGAS_constructorValue::method_arrayValue (GALGAS_omnibusType & outAssocia
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_constructorValue::optional_null () const {
+  const bool ok = mEnum == kEnum_null ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_constructorValue::optional_simple (GALGAS_bigint & outAssociatedValue0) const {
+  const bool ok = mEnum == kEnum_simple ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_constructorValue_simple *) unsafePointer () ;
+    // const cEnumAssociatedValues_constructorValue_simple * ptr = (const cEnumAssociatedValues_constructorValue_simple *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_constructorValue::optional_structure (GALGAS_sortedOperandIRList & outAssociatedValue0) const {
+  const bool ok = mEnum == kEnum_structure ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_constructorValue_structure *) unsafePointer () ;
+    // const cEnumAssociatedValues_constructorValue_structure * ptr = (const cEnumAssociatedValues_constructorValue_structure *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_constructorValue::optional_arrayValue (GALGAS_omnibusType & outAssociatedValue0,
+                                                   GALGAS_uint & outAssociatedValue1) const {
+  const bool ok = mEnum == kEnum_arrayValue ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_constructorValue_arrayValue *) unsafePointer () ;
+    // const cEnumAssociatedValues_constructorValue_arrayValue * ptr = (const cEnumAssociatedValues_constructorValue_arrayValue *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+    outAssociatedValue1 = ptr->mAssociatedValue1 ;
+  }
+  return ok ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

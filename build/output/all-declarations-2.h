@@ -95,6 +95,14 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                                            class GALGAS_routineLLVMNameDict & outOperand1) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_constantProperty (class GALGAS_objectIR & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_storedProperty (class GALGAS_omnibusType & outOperand0,
+                                                          class GALGAS_uint & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -347,6 +355,13 @@ class GALGAS_propertySetterKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+                                                            class GALGAS_routineLLVMNameDict & outOperand1,
+                                                            class GALGAS_routineLLVMNameDict & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_storedProperty (class GALGAS_omnibusType & outOperand0,
+                                                          class GALGAS_uint & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;

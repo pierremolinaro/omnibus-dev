@@ -861,6 +861,62 @@ class GALGAS_llvmBinaryOperation : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_addNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_and () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_ashr () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_icmp_5F_eq () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_icmp_5F_sle () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_icmp_5F_slt () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_icmp_5F_ule () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_icmp_5F_ult () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_ior () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_lshr () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_mulNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_saddOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_sdivNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_sdivOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_shl () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_smulOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_sremNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_sremOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_ssubOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_subNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_uaddOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_udivNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_udivOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_umulOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_uremNoOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_uremOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_usubOVF () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_xor () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -4918,74 +4974,4 @@ class GALGAS_routineFormalArgumentListAST_2D_element : public AC_GALGAS_root {
 //----------------------------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgumentListAST_2D_element ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-// Phase 1: @routineLLVMNameDict_2D_element struct
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_routineLLVMNameDict_2D_element : public AC_GALGAS_root {
-//--------------------------------- Properties
-  public : GALGAS_mode mProperty_key ;
-
-  public : GALGAS_string mProperty_mRoutineLLVMName ;
-
-//--------------------------------- Accessors
-  public : VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public : VIRTUAL_IN_DEBUG void drop (void) ;
-
-//--------------------------------- Default constructor
-  public : GALGAS_routineLLVMNameDict_2D_element (void) ;
-
-//--------------------------------- Virtual destructor (in debug mode)
-  public : virtual ~ GALGAS_routineLLVMNameDict_2D_element (void) ;
-
-//--------------------------------- Native constructor
-  public : GALGAS_routineLLVMNameDict_2D_element (const GALGAS_mode & in_key,
-                                                  const GALGAS_string & in_mRoutineLLVMName) ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public : static GALGAS_routineLLVMNameDict_2D_element extractObject (const GALGAS_object & inObject,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public : static class GALGAS_routineLLVMNameDict_2D_element constructor_new (const class GALGAS_mode & inOperand0,
-                                                                               const class GALGAS_string & inOperand1
-                                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public : VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const ;
-//--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_routineLLVMNameDict_2D_element & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_mode getter_key (LOCATION_ARGS) const ;
-
-  public : VIRTUAL_IN_DEBUG class GALGAS_string getter_mRoutineLLVMName (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_routineLLVMNameDict_2D_element class
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineLLVMNameDict_2D_element ;
 

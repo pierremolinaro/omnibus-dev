@@ -11543,6 +11543,25 @@ void GALGAS_interruptionPanicCode::method_code (GALGAS_lbigint & outAssociatedVa
 
 //----------------------------------------------------------------------------------------------------------------------
 
+bool GALGAS_interruptionPanicCode::optional_noCode () const {
+  const bool ok = mEnum == kEnum_noCode ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_interruptionPanicCode::optional_code (GALGAS_lbigint & outAssociatedValue0) const {
+  const bool ok = mEnum == kEnum_code ;
+  if (ok) {
+    const auto * ptr = (const cEnumAssociatedValues_interruptionPanicCode_code *) unsafePointer () ;
+    // const cEnumAssociatedValues_interruptionPanicCode_code * ptr = (const cEnumAssociatedValues_interruptionPanicCode_code *) unsafePointer () ;
+    outAssociatedValue0 = ptr->mAssociatedValue0 ;
+  }
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 static const char * gEnumNameArrayFor_interruptionPanicCode [3] = {
   "(not built)",
   "noCode",

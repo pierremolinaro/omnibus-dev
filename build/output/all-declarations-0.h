@@ -1985,6 +1985,12 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_index (class GALGAS_expressionAST & outOperand0,
+                                                 class GALGAS_location & outOperand1,
+                                                 class GALGAS_bool & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_noIndex () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -2068,6 +2074,12 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_index (class GALGAS_expressionAST & outOperand0,
+                                                 class GALGAS_location & outOperand1,
+                                                 class GALGAS_bool & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_noIndex () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -2334,6 +2346,16 @@ class GALGAS_LValueOperandAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_arrayAccess (class GALGAS_expressionAST & outOperand0,
+                                                       class GALGAS_location & outOperand1,
+                                                       class GALGAS_bool & outOperand2,
+                                                       class GALGAS_LValueOperandAST & outOperand3) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_noOperand () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_property (class GALGAS_lstring & outOperand0,
+                                                    class GALGAS_LValueOperandAST & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -3767,6 +3789,34 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_addOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseAndOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseOrOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseXorOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_divNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_divOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_equal () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_leftShift () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_lessThan () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_modOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_moduloNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_mulOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_rightShift () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_subOp () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -3981,6 +4031,10 @@ class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_notOp () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -4445,6 +4499,11 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_assignment () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_assignmentWithOperator (class GALGAS_omnibusInfixOperator & outOperand0,
+                                                                  class GALGAS_location & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -4594,6 +4653,42 @@ class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_addOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_addOpNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseAndOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseOrOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseXorOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_divOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_divOpNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_equal () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_infEqual () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_leftShiftOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_lessThan () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_modOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_modOpNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_mulOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_mulOpNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_rightShiftOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_subOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_subOpNoOvf () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -6928,6 +7023,36 @@ class GALGAS_mode : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_anyMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_anySafeMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_bootMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_guardMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_panicMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_primitiveMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_safeGuardMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_safePrimitiveMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_safeSectionMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_safeServiceMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_safeUserMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_sectionMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_serviceMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_startupMode () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_userMode () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -7482,6 +7607,10 @@ class GALGAS_guardKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_baseGuard () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_convenienceGuard (class GALGAS_callInstructionAST & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -9897,6 +10026,14 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseComplement () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_minusOpNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_notOp () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -10511,6 +10648,14 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_bitWiseComplement () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_minusNoOvf () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_notOp () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15010,6 +15155,11 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_namedBit (class GALGAS_lstring & outOperand0,
+                                                    class GALGAS_lbigint & outOperand1) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_unusedBits (class GALGAS_lbigint & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15136,6 +15286,12 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_groupArray (class GALGAS_expressionAST & outOperand0,
+                                                      class GALGAS_location & outOperand1,
+                                                      class GALGAS_lbigintlist & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_single (class GALGAS_lbigint & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15261,6 +15417,13 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_registerArray (class GALGAS_expressionAST & outOperand0,
+                                                         class GALGAS_location & outOperand1,
+                                                         class GALGAS_expressionAST & outOperand2,
+                                                         class GALGAS_location & outOperand3) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_scalar () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15407,6 +15570,19 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_input (class GALGAS_lstring & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_inputWithType (class GALGAS_bool & outOperand0,
+                                                         class GALGAS_lstring & outOperand1,
+                                                         class GALGAS_lstring & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_output (class GALGAS_expressionAST & outOperand0,
+                                                  class GALGAS_location & outOperand1) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_outputInput (class GALGAS_lstring & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_outputInputSelfVariable (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15583,6 +15759,11 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_expression (class GALGAS_expressionAST & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_function (class GALGAS_lstring & outOperand0,
+                                                    class GALGAS_routineFormalArgumentListAST & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15705,6 +15886,10 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_constant (class GALGAS_lstring & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_type (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15841,6 +16026,18 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_boolAndSync (class GALGAS_bool & outOperand0,
+                                                       class GALGAS_expressionAST & outOperand1,
+                                                       class GALGAS_bool & outOperand2,
+                                                       class GALGAS_location & outOperand3,
+                                                       class GALGAS_lbool & outOperand4,
+                                                       class GALGAS_lstringlist & outOperand5,
+                                                       class GALGAS_effectiveArgumentListAST & outOperand6) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_boolean (class GALGAS_bool & outOperand0,
+                                                   class GALGAS_expressionAST & outOperand1,
+                                                   class GALGAS_location & outOperand2) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -15987,6 +16184,12 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_string (class GALGAS_string & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_symbol (class GALGAS_lstring & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_type (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16153,6 +16356,19 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_arrayAccess (class GALGAS_expressionAST & outOperand0,
+                                                       class GALGAS_location & outOperand1,
+                                                       class GALGAS_bool & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_funcCall (class GALGAS_lstring & outOperand0,
+                                                    class GALGAS_effectiveArgumentListAST & outOperand1,
+                                                    class GALGAS_location & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_integerSlice (class GALGAS_lbigint & outOperand0,
+                                                        class GALGAS_lbigint & outOperand1) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_property (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16305,6 +16521,12 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_input () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_inputOutput () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_output () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16423,6 +16645,20 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_initializedConstantProperty (class GALGAS_expressionAST & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_initializedStoredProperty (class GALGAS_expressionAST & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_readOnlyComputedProperty (class GALGAS_instructionListAST & outOperand0,
+                                                                    class GALGAS_location & outOperand1) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_uninitializedConstantProperty () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_uninitializedStoredProperty () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_writeComputedProperty (class GALGAS_instructionListAST & outOperand0,
+                                                                 class GALGAS_location & outOperand1) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16564,6 +16800,10 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_isPrivate () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_isPublic () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16711,6 +16951,14 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_discarded () const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_lValue (class GALGAS_LValueAST & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_letDeclaration (class GALGAS_lstring & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_varDeclaration (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -16851,6 +17099,12 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_function (class GALGAS_mode & outOperand0,
+                                                    class GALGAS_routineFormalArgumentListAST & outOperand1,
+                                                    class GALGAS_lstring & outOperand2) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_valueType (class GALGAS_lstring & outOperand0) const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
@@ -20285,6 +20539,10 @@ class GALGAS_interruptionPanicCode : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
+  public : VIRTUAL_IN_DEBUG bool optional_code (class GALGAS_lbigint & outOperand0) const ;
+
+  public : VIRTUAL_IN_DEBUG bool optional_noCode () const ;
+
 
 //--------------------------------- Introspection
   public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
