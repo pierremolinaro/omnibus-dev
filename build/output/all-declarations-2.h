@@ -2087,6 +2087,10 @@ class GALGAS_semanticContext : public AC_GALGAS_root {
 
   public : VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap getter_mTypeMap (LOCATION_ARGS) const ;
 
+  public : VIRTUAL_IN_DEBUG class GALGAS_typePropertyGetterMap getter_mTypePropertyGetterMap (LOCATION_ARGS) const ;
+
+  public : VIRTUAL_IN_DEBUG class GALGAS_typePropertySetterMap getter_mTypePropertySetterMap (LOCATION_ARGS) const ;
+
   public : VIRTUAL_IN_DEBUG class GALGAS_universalValuedObjectMap getter_mValuedObjectMap (LOCATION_ARGS) const ;
 
 

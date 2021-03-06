@@ -19,7 +19,7 @@
 -projets-auxiliaires/computed-property-analysis/computed-property-analysis.xcodeproj/xcuserdata/*
 -projets-auxiliaires/computed-property-analysis/computed-property-analysis.xcodeproj/project.xcworkspace/*
 
-build/*
+*/build/**
 
 arm-clang-llvm-binutils-openocd/+archives-for-cross-compilation/**
 

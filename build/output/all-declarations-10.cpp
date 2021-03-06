@@ -6890,6 +6890,18 @@ GALGAS_typeConstructorMap GALGAS_semanticContext::getter_mTypeConstructorMap (UN
 
 //----------------------------------------------------------------------------------------------------------------------
 
+GALGAS_typePropertySetterMap GALGAS_semanticContext::getter_mTypePropertySetterMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTypePropertySetterMap ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_typePropertyGetterMap GALGAS_semanticContext::getter_mTypePropertyGetterMap (UNUSED_LOCATION_ARGS) const {
+  return mProperty_mTypePropertyGetterMap ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 GALGAS_availableInterruptMap GALGAS_semanticContext::getter_mAvailableInterruptMap (UNUSED_LOCATION_ARGS) const {
   return mProperty_mAvailableInterruptMap ;
 }
