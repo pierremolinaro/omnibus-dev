@@ -16,8 +16,8 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -25,8 +25,8 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -48,7 +48,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
 {
 #--- Analyze left expression
   @instructionListIR leftInstructionGenerationList = {}
-  [mLeftExpression analyzeExpression
+  [self.mLeftExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -67,7 +67,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ]  
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !leftOperand
-    !mOperatorLocation
+    !self.mOperatorLocation
     !?ioTemporaries
     !?leftInstructionGenerationList
     !?alloca: ioAllocaList
@@ -75,7 +75,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ]
 #--- Analyze right expression
   @instructionListIR rightInstructionGenerationList = {}
-  [mRightExpression analyzeExpression
+  [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:[leftOperand type]
@@ -94,7 +94,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ]  
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !rightOperand
-    !mOperatorLocation
+    !self.mOperatorLocation
     !?ioTemporaries
     !?rightInstructionGenerationList
     !?alloca: ioAllocaList
@@ -107,7 +107,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     outResult = .literalInteger {!type: [leftOperand type] !value: leftStaticValue & rightStaticValue}
   else
   #--- Result type : bool 
-    getNewTempValue (![inContext booleanType !mOperatorLocation] !?ioTemporaries ?outResult)
+    getNewTempValue (![inContext booleanType !self.mOperatorLocation] !?ioTemporaries ?outResult)
   #--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult
@@ -115,7 +115,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
       !leftInstructionGenerationList
       ![rightBooleanOperand llvmName]
       !rightInstructionGenerationList
-      !mOperatorLocation
+      !self.mOperatorLocation
     ]
   end
 }

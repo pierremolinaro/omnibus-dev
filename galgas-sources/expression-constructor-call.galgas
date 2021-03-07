@@ -46,9 +46,9 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mTypeName]
+  [!?ioGraph addEdge !inConstantName !self.mTypeName]
   
-  for () in mParameterList do
+  for () in self.mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
@@ -58,8 +58,8 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !mTypeName]
-  for () in mParameterList do
+  [!?ioGraph noteNode !self.mTypeName]
+  for () in self.mParameterList do
     [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -83,21 +83,21 @@ override method @constructorCallAST analyzeExpression
 {
 #--- Analyze effective argument list
   var constructorKey = "("
-  for (selector *) in mParameterList do
+  for (selector *) in self.mParameterList do
     constructorKey += "!" + selector
   end
   constructorKey += ")"
 #--- Analyze constructor signature and init value
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
-  let typeName = @lstring.new {!resultType.omnibusTypeDescriptionName !mErrorLocation}
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let typeName = @lstring.new {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
 #  let constructorMap = resultType.constructorMap2
-  [constructorMap searchKey !.new {!constructorKey !mErrorLocation} ?let constructorSignature ?let initValue]
+  [constructorMap searchKey !.new {!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue
   case arrayValue (elementType size) :
     if constructorKey == "(!repeated)" then
-      let expression = [mParameterList mExpressionAtIndex !0]
+      let expression = [self.mParameterList mExpressionAtIndex !0]
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
@@ -115,7 +115,7 @@ override method @constructorCallAST analyzeExpression
         !inContext.mAssignmentOperatorMap
         !source:expressionResult
         !targetAnnotationType:elementType
-        !errorLocation:[mParameterList mSelectorAtIndex !0].location
+        !errorLocation:[self.mParameterList mSelectorAtIndex !0].location
         !staticTypeAllowed:false
       )
       if [result isStatic] then
@@ -138,7 +138,7 @@ override method @constructorCallAST analyzeExpression
       if constructorKey == individualConstructor then
         @operandIRList operandIRList = {}
         var resultIsStatic = true
-        for () in mParameterList do
+        for () in self.mParameterList do
           [mExpression analyzeExpression
             !self:inSelfType
             !routineAttributes:inRoutineAttributes
@@ -170,26 +170,26 @@ override method @constructorCallAST analyzeExpression
           outResult = .llvmArrayDynamicValues {!type:resultType !values:operandIRList}
         end
       else
-        error mErrorLocation : "invalid constructor" : outResult
+        error self.mErrorLocation : "invalid constructor" : outResult
       end
     end
   case null :
     outResult = .null {!type: resultType}
   case simple (value) :
-    if [mParameterList length] != 0 then
-      error mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
+    if [self.mParameterList length] != 0 then
+      error self.mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end
   case structure (sortedOperandList) :
     var sortedOperandIRList = sortedOperandList
-    if [mParameterList length] != [constructorSignature length] then
-      error mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
+    if [self.mParameterList length] != [constructorSignature length] then
+      error self.mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
         + if [constructorSignature length] > 1 then "s" else "" end
-        + " instead of " + [mParameterList length]
+        + " instead of " + [self.mParameterList length]
       : outResult
     else
-      for () formal_ in constructorSignature, () effective_ in mParameterList do
+      for () formal_ in constructorSignature, () effective_ in self.mParameterList do
         if effective_mSelector.string != formal_mSelector  then
           error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
         end

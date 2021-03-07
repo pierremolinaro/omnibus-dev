@@ -47,29 +47,29 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @typeOpaqueDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !mOpaqueTypeName]
-  [mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [!?ioGraph noteNode !self.mOpaqueTypeName]
+  [self.mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #·······················································································································
 
 override method @typeOpaqueDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add structure type name as node
-  [!?ioGraph addNode !mOpaqueTypeName !self]
+  [!?ioGraph addNode !self.mOpaqueTypeName !self]
 #--- Add size expression
-  [mSizeExpression addDependenceEdgeForStaticExpression !mOpaqueTypeName !?ioGraph]
+  [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mOpaqueTypeName !?ioGraph]
 }
 
 #·······················································································································
 
 override getter @typeOpaqueDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "opaque " + mOpaqueTypeName 
+  outRepresentation = "opaque " + self.mOpaqueTypeName 
 }
 
 #·······················································································································
 
 override getter @typeOpaqueDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mOpaqueTypeName.location
+  outLocation = self.mOpaqueTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -88,7 +88,7 @@ override method @typeOpaqueDeclarationAST enterInContext
 {
   @omnibusTypeAttributes opaqueTypeAttributes = .none
   var copyable = false
-  for (attribute) in mAttributeList do
+  for (attribute) in self.mAttributeList do
     if attribute.string == instantiableAttribute () then
       if [opaqueTypeAttributes instanciable] then
         error attribute : "duplicated attribute"
@@ -112,36 +112,36 @@ override method @typeOpaqueDeclarationAST enterInContext
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
-    !expression:mSizeExpression
-    !errorLocation:mSizeExpressionLocation
+    !expression:self.mSizeExpression
+    !errorLocation:self.mSizeExpressionLocation
     !optionalContextualTypeName:["" nowhere]
     ?result:let @objectIR sizeExpressionIR
   )
   if not [sizeExpressionIR isLiteralInteger] then
-    error mSizeExpressionLocation : "array size expression is not a literal integer"
+    error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
     @constructorMap constructorMap = {}
     if [opaqueTypeAttributes instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
-      [!?ioContext.mTypeConstructorMap insertKey !mOpaqueTypeName !constructorMap]
+      [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @omnibusType.new {
 #      !propertyGetterMap:{}
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
-      !omnibusTypeDescriptionName:mOpaqueTypeName
+      !omnibusTypeDescriptionName:self.mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
-      !llvmBaseTypeName:mOpaqueTypeName
+      !llvmBaseTypeName:self.mOpaqueTypeName
     }
     [!?ioContext.mTypeMap insertType
-      !lkey:mOpaqueTypeName
+      !lkey:self.mOpaqueTypeName
       !type:opaqueType
     ]
   end
 #--- Add Assignment ?
   if copyable then
-    message "OPAQUE " + mOpaqueTypeName + " is copyable\n"
+    message "OPAQUE " + self.mOpaqueTypeName + " is copyable\n"
   end
 }
 

@@ -48,10 +48,10 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [!?ioGraph noteNode !["u1" nowhere]]
-  [mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -72,11 +72,11 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Source Expression
 #--- Inferred source expression type
   [inContext.mTypeMap searchKey
-    !lkey:.new {!"u1" !mSourceExpressionLocation}
+    !lkey:.new {!"u1" !self.mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
   ]
 #--- Compute source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:requiredSourceExpressionType
@@ -98,15 +98,15 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   if ([sourceExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
     [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
     if (value < 0G) || (value > 1G) then
-      error mSourceExpressionLocation : "static value should be 0 or 1"
+      error self.mSourceExpressionLocation : "static value should be 0 or 1"
     else
       sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
     end
   elsif [sourceExpressionOperand type].omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
-    error mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
+    error self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
   end
 #-------------------- Control register LValue
-  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:false
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
@@ -126,11 +126,11 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Bit Expression
 #--- Inferred bit expression type
   [inContext.mTypeMap searchKey
-    !lkey:.new {!"u" + [registerBitCount-1G significantBitCount] !mBitExpressionLocation}
+    !lkey:.new {!"u" + [registerBitCount-1G significantBitCount] !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 #--- Compute bit expression
-  [mBitExpression analyzeExpression
+  [self.mBitExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:requiredBitExpressionType
@@ -152,12 +152,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   if ([bitExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
     [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
     if (value < 0G) || (value >= registerBitCount) then
-      error mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
+      error self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
     else
       bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
     end
   elsif [bitExpressionOperand type].omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
-    error mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
+    error self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
   end
 #-------------------- Generate code
   ioInstructionGenerationList += !@bitbandInstructionIR.new {
@@ -205,13 +205,13 @@ override method @bitbandInstructionIR llvmInstructionCode
   let idx = [ioGenerationAdds.mUniqueIndex string]
   ioGenerationAdds.mUniqueIndex ++
   ioLLVMcode += ";--- Bit band\n"
-  ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + mRegisterAddressLLVMname + ", " + mBitbandRegisterBaseAddress + "\n"
-  ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + mBitbandRegisterOffsetMultiplier + "\n"
-  ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + [mBitExpressionOperand llvmName] + ", " + mBitbandRegisterBitMultiplier + "\n"
+  ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + self.mRegisterAddressLLVMname + ", " + self.mBitbandRegisterBaseAddress + "\n"
+  ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + self.mBitbandRegisterOffsetMultiplier + "\n"
+  ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + [self.mBitExpressionOperand llvmName] + ", " + self.mBitbandRegisterBitMultiplier + "\n"
   ioLLVMcode += "  %offset." + idx + " = add i32 %byte.offset." + idx + ".mul, %bit.offset." + idx + ".mul\n"
-  ioLLVMcode += "  %bit.word.addr." + idx + " = add i32 %offset." + idx + ", " + mBitbandRegisterRelocationAddress + "\n"
+  ioLLVMcode += "  %bit.word.addr." + idx + " = add i32 %offset." + idx + ", " + self.mBitbandRegisterRelocationAddress + "\n"
   ioLLVMcode += "  %ptr." + idx + " = inttoptr i32 %bit.word.addr." + idx + " to i32*\n"
-  ioLLVMcode += "  %value." + idx + " = zext i1 " + [mSourceExpressionOperand llvmName] + " to i32\n"
+  ioLLVMcode += "  %value." + idx + " = zext i1 " + [self.mSourceExpressionOperand llvmName] + " to i32\n"
   ioLLVMcode += "  store i32 %value." + idx + ", i32* %ptr." + idx + "\n"
 }
 

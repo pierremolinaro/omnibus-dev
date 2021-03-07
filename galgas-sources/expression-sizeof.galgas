@@ -72,7 +72,7 @@ override method @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
 override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph noteNode !mTypeName]
+  [!?ioGraph noteNode !self.mTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -95,10 +95,10 @@ override method @sizeofExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes guard] then
-    error mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
+    error self.mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue
-    [ioUniversalMap searchValuedObjectType !context:inContext !selfType:inSelfType !mLValue ?let type]
+    [ioUniversalMap searchValuedObjectType !context:inContext !selfType:inSelfType !self.mLValue ?let type]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
       !["u" + inContext.mTargetParameters.mPointerSize nowhere]
@@ -130,9 +130,9 @@ override method @sizeofTypeAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes guard] then
-    error mTypeName : "sizeof () cannot be used in guard" : outResult
+    error self.mTypeName : "sizeof () cannot be used in guard" : outResult
   else
-    let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+    let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
     let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
       !inContext.mTypeMap
       !["u" + inContext.mTargetParameters.mPointerSize nowhere]
@@ -161,9 +161,9 @@ override method @sizeofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let typeName = [mSourceType llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + ".asPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
-  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + typeName + "* " + [mTarget llvmName] + ".asPtr to i32\n"
+  let typeName = [self.mSourceType llvmTypeName]
+  ioLLVMcode += "  " + [self.mTarget llvmName] + ".asPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
+  ioLLVMcode += "  " + [self.mTarget llvmName] + " = ptrtoint " + typeName + "* " + [self.mTarget llvmName] + ".asPtr to i32\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

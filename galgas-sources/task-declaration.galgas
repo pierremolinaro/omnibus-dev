@@ -316,7 +316,7 @@ override method @decoratedTaskListDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  for task in mTaskList do (priority)
+  for task in self.mTaskList do (priority)
     [task taskSemanticAnalysis
       !context:inContext
       !priority:priority
@@ -389,40 +389,40 @@ method @decoratedTaskList-element taskSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inContext.mTypeMap searchKey !lkey:mTaskName ?type:let taskType]
+  [inContext.mTypeMap searchKey !lkey:self.mTaskName ?type:let taskType]
 #------------------------------------------- Check stack size is >= 64, and a multiple of 8
-  let stackSize = mStackSize.bigint
+  let stackSize = self.mStackSize.bigint
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
-    error mStackSize : "stack size should be a multiple of 8, and >= 64"
+    error self.mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
 #------------------------------------------- Analyze task setup routines
   analyzeOrderedTaskRoutines (
-    !mTaskSetupListAST
+    !self.mTaskSetupListAST
     ?let setupOrderedList
   )
 #------------------------------------------- Analyze task activate routines
   analyzeOrderedTaskRoutines (
-    !mTaskActivateListAST
+    !self.mTaskActivateListAST
     ?let activateOrderedList
   )
 #------------------------------------------- Analyze task deactivate routines
   analyzeOrderedTaskRoutines (
-    !mTaskDeactivateListAST
+    !self.mTaskDeactivateListAST
     ?let deactivateOrderedList
   )
 #------------------------------------------- Task Name string constant index
-  [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !mTaskName.string ?let taskNameStringIndex]
+  [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !self.mTaskName.string ?let taskNameStringIndex]
 #------------------------------------------- Generate task
   [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
-    !mTaskName
+    !self.mTaskName
     !taskType
     !inPriority
-    !mStackSize.bigint
+    !self.mStackSize.bigint
     !setupOrderedList
     !activateOrderedList
     !deactivateOrderedList
     !taskNameStringIndex
-    !mAutoStart
+    !self.mAutoStart
   ]
 }
 
@@ -608,9 +608,9 @@ override method @taskActivateFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " "
-  ioLLVMcode += "(%" + mAssemblerTaskName + "* " + llvmNameForSelf () + ")" + llvmAttributeFunction () + "{\n"
-  ioLLVMcode += "  call void @" + mActivateServiceInvocationName + " (i8 " + mTaskIndex + ")\n"
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation] + " "
+  ioLLVMcode += "(%" + self.mAssemblerTaskName + "* " + llvmNameForSelf () + ")" + llvmAttributeFunction () + "{\n"
+  ioLLVMcode += "  call void @" + self.mActivateServiceInvocationName + " (i8 " + self.mTaskIndex + ")\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
   ioLLVMcode += llvmSeparatorLine ()

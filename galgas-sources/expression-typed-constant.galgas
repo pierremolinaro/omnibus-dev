@@ -42,10 +42,10 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !inConstantName !mOptionalTypeName]
+  if self.mOptionalTypeName.string != "" then
+    [!?ioGraph addEdge !inConstantName !self.mOptionalTypeName]
   end
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case integerSlice (2*) :
     case property (*) :
@@ -73,10 +73,10 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !mOptionalTypeName]
+  if self.mOptionalTypeName.string != "" then
+    [!?ioGraph noteNode !self.mOptionalTypeName]
   end
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case integerSlice (2*) :
     case property (*) :
@@ -118,23 +118,23 @@ override method @typedConstantCallAST analyzeExpression
 {
 #--- Analyze constructor source type
   @omnibusType inferredResultType
-  if mOptionalTypeName.string == "" then
+  if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else
-    inferredResultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
+    inferredResultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end
   if inferredResultType.kind == .void then
-    error mConstructorName : "cannot infer type" : outResult
+    error self.mConstructorName : "cannot infer type" : outResult
   else
-    let typeName = @lstring.new {!inferredResultType.omnibusTypeDescriptionName !mConstructorName.location}
+    let typeName = @lstring.new {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
 #    let classConstantMap = inferredResultType.classConstantMap
-    [classConstantMap searchKey !mConstructorName ?let @bigint value ?let classTypeName]
+    [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
     let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !classTypeName} type]
     outResult = .literalInteger {!type:resultType !value:value}
   end
 #--- Analyze access list
-  if [mAccessList length] > 0 then
+  if [self.mAccessList length] > 0 then
   #--- procAnalyzeAccesListInExpression works on reference, not value
   #    So we create articially a temporary reference for resulting value
     getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)
@@ -159,7 +159,7 @@ override method @typedConstantCallAST analyzeExpression
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   end

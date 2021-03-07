@@ -20,7 +20,7 @@ class @llvmInfixOperatorAST : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mInfixOperatorLocation
+  outLocation = self.mInfixOperatorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -158,17 +158,17 @@ syntax extension omnibus_syntax {
 override method @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mInfixOperator string] + "." + mLeftTypeName + "." + mRightTypeName !mInfixOperatorLocation}
+  let nodeName = @lstring.new {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mLeftTypeName]
-  [!?ioGraph addEdge !nodeName !mRightTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
+  [!?ioGraph addEdge !nodeName !self.mLeftTypeName]
+  [!?ioGraph addEdge !nodeName !self.mRightTypeName]
+  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
 }
 
 #·······················································································································
 
 override getter @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mLeftTypeName.string + " " + mInfixOperator + " " + mRightTypeName
+  outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -186,54 +186,54 @@ override method @llvmInfixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mLeftTypeName ?let leftTypeProxy]
   let leftType = [leftTypeProxy type]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mRightTypeName ?let rightTypeProxy]
   let rightType = [rightTypeProxy type]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   if [leftType isCompileTimeType] & [rightType isCompileTimeType] then
-    error mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
+    error self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
   end
-  [resultType checkIsNotCompileTimeType !mResultTypeName.location]
+  [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
 #--- Enter in infix operator map  
-  let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
+  let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
 #--- Generate function
   if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
     let definition = @llvmInfixOperatorUsage.new {
-      !infixOperatorFunctionName (!leftType !mInfixOperator !rightType)
-      !mLeftOperandName
-      !mRightOperandName
-      !mInstructionList
+      !infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType)
+      !self.mLeftOperandName
+      !self.mRightOperandName
+      !self.mInstructionList
     }
     [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
     @assignmentGenerationVarMap varMap = {}
-    [!?varMap insertKey !mLeftOperandName !"%" + mLeftOperandName]
-    [!?varMap insertKey !mRightOperandName !"%" + mRightOperandName]
+    [!?varMap insertKey !self.mLeftOperandName !"%" + self.mLeftOperandName]
+    [!?varMap insertKey !self.mRightOperandName !"%" + self.mRightOperandName]
     @assignmentGenerationVarMap typeMap = {}
     if not [leftType isCompileTimeType] then
-      [!?typeMap insertKey !mLeftOperandName ![leftType llvmTypeName]]
+      [!?typeMap insertKey !self.mLeftOperandName ![leftType llvmTypeName]]
     end
     if not [rightType isCompileTimeType] then
-      [!?typeMap insertKey !mRightOperandName ![rightType llvmTypeName]]
+      [!?typeMap insertKey !self.mRightOperandName ![rightType llvmTypeName]]
     end
     [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
     @llvmGenerationInstructionList instructionList = {}
     instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
-    instructionList += mInstructionList
+    instructionList += self.mInstructionList
     [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
     @stringlist generatedInstructions = {}
     @allocaList allocaList = {}
     @uint temporaryIndex = 0
     [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @infixOperatorRoutineIR.new {
-      !.new {!infixOperatorFunctionName (!leftType !mInfixOperator !rightType) !mInfixOperatorLocation}
+      !.new {!infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType) !self.mInfixOperatorLocation}
       !isRequired: true
       !warnsIfUnused: false
       !leftType
-      !mLeftOperandName.string
+      !self.mLeftOperandName.string
       !rightType
-      !mRightOperandName.string
+      !self.mRightOperandName.string
       !resultType
       !generatedInstructions
       !allocaList
@@ -241,9 +241,9 @@ override method @llvmInfixOperatorAST enterInContext
     ioRoutineListIR += !routine
   else # One argument is a compile time type
     let definition = @llvmInlineInfixOperatorUsage.new {
-      !mLeftOperandName
-      !mRightOperandName
-      !mInstructionList
+      !self.mLeftOperandName
+      !self.mRightOperandName
+      !self.mInstructionList
     }
     [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
   end
@@ -290,8 +290,8 @@ override method @llvmInfixOperatorUsage generateCode
   argumentList += !.output !rightOperand
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
     !outResultValue
-    !.new {!mInfixMangledFunctionName !inOperatorLocation}
-    !mInfixMangledFunctionName
+    !.new {!self.mInfixMangledFunctionName !inOperatorLocation}
+    !self.mInfixMangledFunctionName
     !argumentList
   }
 }
@@ -330,18 +330,18 @@ override method @llvmInlineInfixOperatorUsage generateCode
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   @assignmentGenerationVarMap varMap = {}
-  [!?varMap insertKey !mLeftOperandName ![leftOperand llvmName]]
-  [!?varMap insertKey !mRightOperandName ![rightOperand llvmName]]
+  [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
+  [!?varMap insertKey !self.mRightOperandName ![rightOperand llvmName]]
   [!?varMap insertKey !["result" nowhere] ![outResultValue llvmName]]
   @assignmentGenerationVarMap typeMap = {}
   if not [[leftOperand type] isCompileTimeType] then
-    [!?typeMap insertKey !mLeftOperandName ![[leftOperand type] llvmTypeName]]
+    [!?typeMap insertKey !self.mLeftOperandName ![[leftOperand type] llvmTypeName]]
   end
   if not [[rightOperand type] isCompileTimeType] then
-    [!?typeMap insertKey !mRightOperandName ![[rightOperand type] llvmTypeName]]
+    [!?typeMap insertKey !self.mRightOperandName ![[rightOperand type] llvmTypeName]]
   end
   @stringlist generatedInstructions = {}
-  [mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+  [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
   for (str) in generatedInstructions do
     [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
   end
@@ -368,11 +368,11 @@ override method @infixOperatorRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal " + [mResultType llvmTypeName] + " @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + [mTargetType llvmTypeName] + " %" + mTargetVarName
-             + ", " + [mSourceType llvmTypeName] + " %" + mSourceVarName + ") nounwind {\n"
-  [mAllocaList generateAllocaList !?ioLLVMcode]
-  for (instruction) in mGeneratedInstructions do
+  ioLLVMcode += "define internal " + [self.mResultType llvmTypeName] + " @" + [self.mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + [self.mTargetType llvmTypeName] + " %" + self.mTargetVarName
+             + ", " + [self.mSourceType llvmTypeName] + " %" + self.mSourceVarName + ") nounwind {\n"
+  [self.mAllocaList generateAllocaList !?ioLLVMcode]
+  for (instruction) in self.mGeneratedInstructions do
     ioLLVMcode += "  " + instruction + "\n"
   end
   ioLLVMcode += "}\n\n"

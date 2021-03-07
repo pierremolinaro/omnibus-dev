@@ -415,14 +415,14 @@ abstract method @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inM
 #·······················································································································
 
 override method @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [mLeftExpression checkCompileTimeExpression  !inMap]
-  [mRightExpression checkCompileTimeExpression !inMap]
+  [self.mLeftExpression checkCompileTimeExpression  !inMap]
+  [self.mRightExpression checkCompileTimeExpression !inMap]
 }
 
 #·······················································································································
 
 override method @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [mExpression checkCompileTimeExpression !inMap]
+  [self.mExpression checkCompileTimeExpression !inMap]
 }
 
 #·······················································································································
@@ -443,7 +443,7 @@ override method @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap 
 #·······················································································································
 
 override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [inMap searchKey !mIdentifier]
+  [inMap searchKey !self.mIdentifier]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -468,9 +468,9 @@ override method @ctInfixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {
-  [mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
-  [mRightExpression computeCompileTimeExpression !inMap ?result: let right]
-  switch mInfixOperator
+  [self.mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
+  [self.mRightExpression computeCompileTimeExpression !inMap ?result: let right]
+  switch self.mInfixOperator
    case equal     : outValue = if left == right then 1G else 0G end
    case lessThan  : outValue = if left <  right then 1G else 0G end
    case bitWiseAndOp: outValue = left & right
@@ -494,8 +494,8 @@ override method @ctPrefixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {
-  [mExpression computeCompileTimeExpression !inMap ?result: let exp]
-  switch mPrefixOperator
+  [self.mExpression computeCompileTimeExpression !inMap ?result: let exp]
+  switch self.mPrefixOperator
    case minusOp  : outValue = - exp
    case notOp  : outValue = if exp == 0G then 1G else 0G end
   end
@@ -525,7 +525,7 @@ override method @ctIntExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
-  outValue = [mValue bigint]
+  outValue = [self.mValue bigint]
 }
 
 #·······················································································································
@@ -534,7 +534,7 @@ override method @ctIdentifierExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {
-  [inMap searchKey !mIdentifier ?outValue]
+  [inMap searchKey !self.mIdentifier ?outValue]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

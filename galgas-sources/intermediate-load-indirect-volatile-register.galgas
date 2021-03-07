@@ -20,11 +20,11 @@ override method @loadIndirectVolatileIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mTargetValue llvmTypeName]
+  let llvmType = [self.mTargetValue llvmTypeName]
   let ptr = "%registerPointer." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
-  ioLLVMcode += "  " + ptr + " = inttoptr i32 " + mLLVMName + " to " + llvmType + "* ;\n"
-  ioLLVMcode += "  " + [mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
+  ioLLVMcode += "  " + ptr + " = inttoptr i32 " + self.mLLVMName + " to " + llvmType + "* ;\n"
+  ioLLVMcode += "  " + [self.mTargetValue llvmName] + " = load volatile " + llvmType + ", " + llvmType
          + "* " + ptr + "\n"
 }
 

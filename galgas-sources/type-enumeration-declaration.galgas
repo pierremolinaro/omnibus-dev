@@ -50,10 +50,10 @@ syntax extension omnibus_syntax {
 override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mEnumerationName !self]
+  [!?ioGraph addNode !self.mEnumerationName !self]
 #--- Mark dependance from $uintN used for value property
   @bigint maxValue = 0G
-  for (* value) in mCaseNameList do
+  for (* value) in self.mCaseNameList do
     if maxValue < value then
       maxValue = value
     end
@@ -63,19 +63,19 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount ++ ;
     maxValue = maxValue / 2G
   end
-  [!?ioGraph addEdge !mEnumerationName !["u" + representationBitCount nowhere]]
+  [!?ioGraph addEdge !self.mEnumerationName !["u" + representationBitCount nowhere]]
 }
 
 #·······················································································································
 
 override getter @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mEnumerationName.location
+  outLocation = self.mEnumerationName.location
 }
 
 #·······················································································································
 
 override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "enum " + mEnumerationName 
+  outRepresentation = "enum " + self.mEnumerationName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -95,14 +95,14 @@ override method @enumerationDeclarationAST enterInContext
 #---------------- Build constant map
   @constantMap enumConstantMap = {}
   @bigint maxValue = 0G
-  for (name value) in mCaseNameList do
-    [!?enumConstantMap insertKey !name !value !mEnumerationName]
+  for (name value) in self.mCaseNameList do
+    [!?enumConstantMap insertKey !name !value !self.mEnumerationName]
     if maxValue < value then
       maxValue = value
     end
   end
   [!?ioContext.mTypeConstantMap insertKey
-    !mEnumerationName
+    !self.mEnumerationName
     !enumConstantMap
   ]
 #---------------- Compute representation bit count
@@ -114,12 +114,12 @@ override method @enumerationDeclarationAST enterInContext
 #---------------- Property map: add uintN() accessor
   let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
     !ioContext.mTypeMap
-    !.new {!"u" + representationBitCount !mEnumerationName}
+    !.new {!"u" + representationBitCount !self.mEnumerationName}
   }
   [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: mEnumerationName
-    !llvmBaseTypeName:mEnumerationName
-    !propertyName: .new {!"u" + representationBitCount !mEnumerationName}
+    !omnibusTypeName: self.mEnumerationName
+    !llvmBaseTypeName:self.mEnumerationName
+    !propertyName: .new {!"u" + representationBitCount !self.mEnumerationName}
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:integerTypeProxy
@@ -136,13 +136,13 @@ override method @enumerationDeclarationAST enterInContext
 #    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
-    !omnibusTypeDescriptionName: mEnumerationName
+    !omnibusTypeDescriptionName: self.mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
-    !llvmBaseTypeName: mEnumerationName
+    !llvmBaseTypeName: self.mEnumerationName
   }
-  [!?ioContext.mTypeMap insertType !lkey:mEnumerationName !type:enumerationType]
+  [!?ioContext.mTypeMap insertType !lkey:self.mEnumerationName !type:enumerationType]
 #--- Enter assignment operator
-  let key = assignmentOperatorKey (!enumerationType !mEnumerationName.location !enumerationType)
+  let key = assignmentOperatorKey (!enumerationType !self.mEnumerationName.location !enumerationType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
 #---------------- Infix operators
 #  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
@@ -207,11 +207,11 @@ override method @enumToUintRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let routineLLVMName = llvmNameForFunction (!mRoutineMangledName.string)
-  ioLLVMcode += "define internal " + mEnumerationLLVMTypeName + " @" + routineLLVMName
-  ioLLVMcode += " (" + mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"
-  ioLLVMcode += "  %r = load " + mEnumerationLLVMTypeName + ", " + mEnumerationLLVMTypeName + "* %inValue\n"
-  ioLLVMcode += "  ret " + mEnumerationLLVMTypeName + " %r\n"
+  let routineLLVMName = llvmNameForFunction (!self.mRoutineMangledName.string)
+  ioLLVMcode += "define internal " + self.mEnumerationLLVMTypeName + " @" + routineLLVMName
+  ioLLVMcode += " (" + self.mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"
+  ioLLVMcode += "  %r = load " + self.mEnumerationLLVMTypeName + ", " + self.mEnumerationLLVMTypeName + "* %inValue\n"
+  ioLLVMcode += "  ret " + self.mEnumerationLLVMTypeName + " %r\n"
   ioLLVMcode += "}\n\n"
 }
 

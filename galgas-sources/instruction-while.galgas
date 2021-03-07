@@ -45,8 +45,8 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -66,7 +66,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 {
 #--- Analyze test expression
   @instructionListIR testInstructionGenerationList = {}
-  [m_while_Expression analyzeExpression
+  [self.m_while_Expression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -86,7 +86,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testValue
-    !mEndOf_test_expression
+    !self.mEndOf_test_expression
     !?ioTemporaries
     !?testInstructionGenerationList
     !?alloca: ioAllocaList
@@ -94,7 +94,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ]
   switch booleanResult 
   case compileTime (*) :
-    error mEndOf_test_expression : "test expression type should not be a compile time expression"
+    error self.mEndOf_test_expression : "test expression type should not be a compile time expression"
   case llvmVariable (*) :
   end
 
@@ -107,10 +107,10 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #--- Analyze instruction list
   @instructionListIR instructionGenerationList = {}
   [!?ioUniversalMap openOverrideForRepeatBlock]
-  [mWhileInstructionList analyzeBranchInstructionList
+  [self.mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:mEndOf_while_instruction
+    !endOfInstructionList:self.mEndOf_while_instruction
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
@@ -119,10 +119,10 @@ override method @whileInstructionAST instructionSemanticAnalysis
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
   ]
-  [!?ioUniversalMap closeOverride !mEndOf_while_instruction]
+  [!?ioUniversalMap closeOverride !self.mEndOf_while_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR.new {
-    ![mEndOf_test_expression locationIndex]
+    ![self.mEndOf_test_expression locationIndex]
     !testInstructionGenerationList
     ![booleanResult llvmName]
     !instructionGenerationList
@@ -147,15 +147,15 @@ override method @whileInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let labelTest = "while." + mLabelIndex + ".test"
-  let labelLoop = "while." + mLabelIndex + ".loop"
-  let labelEnd  = "while." + mLabelIndex + ".end"
+  let labelTest = "while." + self.mLabelIndex + ".test"
+  let labelLoop = "while." + self.mLabelIndex + ".loop"
+  let labelEnd  = "while." + self.mLabelIndex + ".end"
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
-  [mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + m_while_llvmName + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
+  [self.mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + self.m_while_llvmName + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
-  [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelEnd + ":\n"
 }
@@ -166,8 +166,8 @@ override method @whileInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mTestInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mTestInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

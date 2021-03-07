@@ -44,10 +44,10 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !mOptionalTypeName]
+  if self.mOptionalTypeName.string != "" then
+    [!?ioGraph noteNode !self.mOptionalTypeName]
   end
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -65,12 +65,12 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  let @omnibusType targetType = if mOptionalTypeName.string == ""
+  let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:targetType
@@ -92,16 +92,16 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !inContext.mAssignmentOperatorMap
     !source:expressionResult
     !targetAnnotationType:targetType
-    !errorLocation:mConstantName.location
+    !errorLocation:self.mConstantName.location
     !staticTypeAllowed:true
   )
   drop targetType
 #---
   if not [[result type] instanciable] then
-    error mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
+    error self.mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
-  let omnibusName = @lstring.new {!mConstantName.string + "." + ioTemporaries.mTemporaryIndex !mConstantName}
+  let omnibusName = @lstring.new {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}
   ioTemporaries.mTemporaryIndex ++
   if [result omnibusTypeDescriptionName] != ctIntegerTypeName () then
     ioAllocaList += !llvmNameForLocalVariable (!omnibusName) ![result type] !false
@@ -111,7 +111,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
       !result
     ]
   end
-  [!?ioUniversalMap insertLocalConstant !mConstantName !false ![result type] !omnibusName]
+  [!?ioUniversalMap insertLocalConstant !self.mConstantName !false ![result type] !omnibusName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

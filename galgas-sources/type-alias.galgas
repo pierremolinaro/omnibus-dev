@@ -10,7 +10,7 @@ class @typeAliasDeclarationAST : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location {
-  result = mAliasTypeName.location
+  result = self.mAliasTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,14 +46,14 @@ syntax extension omnibus_syntax {
 override method @typeAliasDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addNode !mAliasTypeName !self]
-  [!?ioGraph addEdge !mAliasTypeName !mOriginalTypeName]
+  [!?ioGraph addNode !self.mAliasTypeName !self]
+  [!?ioGraph addEdge !self.mAliasTypeName !self.mOriginalTypeName]
 }
 
 #·······················································································································
 
 override getter @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  result = "typealias " + mAliasTypeName 
+  result = "typealias " + self.mAliasTypeName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -71,10 +71,10 @@ override method @typeAliasDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:mOriginalTypeName ?type:var type]
+  [ioContext.mTypeMap searchKey !lkey:self.mOriginalTypeName ?type:var type]
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType
-    !lkey:mAliasTypeName
+    !lkey:self.mAliasTypeName
     !type:type
   ]
 }

@@ -26,9 +26,9 @@ override method @enterRegisterAddressIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + mLLVMName + " = add i32 " + mBaseAddress
-             + ", " + mAddressOffset + " ; " + mRegisterName
-             + " at " + [mBaseAddress hexString] + " = " + [mAddressOffset hexString] + "\n"
+  ioLLVMcode += "  " + self.mLLVMName + " = add i32 " + self.mBaseAddress
+             + ", " + self.mAddressOffset + " ; " + self.mRegisterName
+             + " at " + [self.mBaseAddress hexString] + " = " + [self.mAddressOffset hexString] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

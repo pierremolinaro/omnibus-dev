@@ -13592,14 +13592,16 @@ static GALGAS_string extensionGetter_integerDeclarationAST_typeName (const cPtr_
   GALGAS_string result_outName ; // Returned variable
   const cPtr_integerDeclarationAST * object = inObject ;
   macroValidSharedObject (object, cPtr_integerDeclarationAST) ;
-  GALGAS_string temp_0 ;
-  const enumGalgasBool test_1 = object->mProperty_mIsSigned.boolEnum () ;
-  if (kBoolTrue == test_1) {
-    temp_0 = GALGAS_string ("i") ;
-  }else if (kBoolFalse == test_1) {
-    temp_0 = GALGAS_string ("u") ;
+  const GALGAS_integerDeclarationAST temp_0 = object ;
+  GALGAS_string temp_1 ;
+  const enumGalgasBool test_2 = temp_0.getter_mIsSigned (HERE).boolEnum () ;
+  if (kBoolTrue == test_2) {
+    temp_1 = GALGAS_string ("i") ;
+  }else if (kBoolFalse == test_2) {
+    temp_1 = GALGAS_string ("u") ;
   }
-  result_outName = temp_0.add_operation (object->mProperty_mSize.getter_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
+  const GALGAS_integerDeclarationAST temp_3 = object ;
+  result_outName = temp_1.add_operation (temp_3.getter_mSize (HERE).getter_string (SOURCE_FILE ("type-integer.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 19)) ;
 //---
   return result_outName ;
 }

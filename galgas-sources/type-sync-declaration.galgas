@@ -47,11 +47,11 @@ syntax extension omnibus_syntax {
 
 override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add structure type name as node
-  [!?ioGraph addNode !mSyncToolName !self]
+  [!?ioGraph addNode !self.mSyncToolName !self]
 #--- Add property types
-  for (propertyName * visibility fieldTypeName propertyKind) in mStructurePropertyListAST do
+  for (propertyName * visibility fieldTypeName propertyKind) in self.mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      [!?ioGraph addEdge !mSyncToolName !fieldTypeName]
+      [!?ioGraph addEdge !self.mSyncToolName !fieldTypeName]
     end
     if visibility != .isPrivate then
       error propertyName : "a sync tool property should be private"
@@ -59,9 +59,9 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
     switch propertyKind
     case uninitializedStoredProperty, uninitializedConstantProperty :
     case initializedStoredProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !self.mSyncToolName !?ioGraph]
     case initializedConstantProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !mSyncToolName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !self.mSyncToolName !?ioGraph]
     case readOnlyComputedProperty (instructionList *) :
       [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     case writeComputedProperty (writeInstructionList *) :
@@ -73,13 +73,13 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 #·······················································································································
 
 override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "sync " + mSyncToolName 
+  outRepresentation = "sync " + self.mSyncToolName 
 }
 
 #·······················································································································
 
 override getter @syncDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mSyncToolName.location
+  outLocation = self.mSyncToolName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -102,13 +102,13 @@ override method @syncDeclarationAST enterInContext
   @sortedOperandIRList sortedOperandIRList = {}
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
-  for property in mStructurePropertyListAST do
+  for property in self.mStructurePropertyListAST do
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
-      !receiverTypeName: mSyncToolName
-      !omnibusTypeName: mSyncToolName
-      !receiverLLVMBaseTypeName: mSyncToolName
+      !receiverTypeName: self.mSyncToolName
+      !omnibusTypeName: self.mSyncToolName
+      !receiverLLVMBaseTypeName: self.mSyncToolName
       !?ioDecoratedRoutineList
       !?propertyList
 #      !?propertyGetterMap
@@ -122,22 +122,22 @@ override method @syncDeclarationAST enterInContext
 #---------------------------------------- Constructor map
   @constructorMap constructorMap = {}
   [!?constructorMap insertKey
-    !.new {!constructorKey !mSyncToolName.location}
+    !.new {!constructorKey !self.mSyncToolName.location}
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
-  [!?ioContext.mTypeConstructorMap insertKey !mSyncToolName !constructorMap]
+  [!?ioContext.mTypeConstructorMap insertKey !self.mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
 #    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable
-    !omnibusTypeDescriptionName: mSyncToolName
+    !omnibusTypeDescriptionName: self.mSyncToolName
     !kind: .syncTool
-    !llvmBaseTypeName:mSyncToolName
+    !llvmBaseTypeName:self.mSyncToolName
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:mSyncToolName
+    !lkey:self.mSyncToolName
     !type:structureType
   ]
 #-------------------------------------------- GenerateLLVM type definitions

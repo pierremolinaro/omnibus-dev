@@ -25,7 +25,7 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -33,7 +33,7 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -54,7 +54,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpression
+  [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -72,8 +72,8 @@ override method @prefixOperatorExpressionAST analyzeExpression
   let @bool noPanicGeneration = [option omnibus_options.noPanicGeneration value]
   [inContext.mPrefixOperatorMap generatePrefixOperatorCode
     !expressionResult
-    !mOp
-    !mOperatorLocation
+    !self.mOp
+    !self.mOperatorLocation
     !safeMode: currentlyInSafeMode
     !noPanicCode: noPanicGeneration
     !?ioTemporaries

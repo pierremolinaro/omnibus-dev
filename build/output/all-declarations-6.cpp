@@ -5490,9 +5490,9 @@ void extensionMethod_buildFormalGenericConstantMap (const GALGAS_genericFormalPa
                                                     C_Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_genericFormalParameterList temp_0 = inObject ;
-  cEnumerator_genericFormalParameterList enumerator_6600 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6600.hasCurrentObject ()) {
-    switch (enumerator_6600.current_mParameter (HERE).enumValue ()) {
+  cEnumerator_genericFormalParameterList enumerator_6615 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6615.hasCurrentObject ()) {
+    switch (enumerator_6615.current_mParameter (HERE).enumValue ()) {
     case GALGAS_genericFormalParameter::kNotBuilt:
       break ;
     case GALGAS_genericFormalParameter::kEnum_type:
@@ -5501,15 +5501,15 @@ void extensionMethod_buildFormalGenericConstantMap (const GALGAS_genericFormalPa
       break ;
     case GALGAS_genericFormalParameter::kEnum_constant:
       {
-        const cEnumAssociatedValues_genericFormalParameter_constant * extractPtr_6718 = (const cEnumAssociatedValues_genericFormalParameter_constant *) (enumerator_6600.current_mParameter (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_constantName = extractPtr_6718->mAssociatedValue0 ;
+        const cEnumAssociatedValues_genericFormalParameter_constant * extractPtr_6733 = (const cEnumAssociatedValues_genericFormalParameter_constant *) (enumerator_6615.current_mParameter (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_constantName = extractPtr_6733->mAssociatedValue0 ;
         {
         ioArgument_ioMap.setter_insertKey (extractedValue_constantName, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 187)) ;
         }
       }
       break ;
     }
-    enumerator_6600.gotoNextObject () ;
+    enumerator_6615.gotoNextObject () ;
   }
 }
 
@@ -5525,9 +5525,9 @@ void extensionMethod_checkCompileTimeExpression (const GALGAS_llvmStringDefiniti
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_llvmStringDefinition temp_0 = inObject ;
-  cEnumerator_llvmStringDefinition enumerator_6962 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6962.hasCurrentObject ()) {
-    switch (enumerator_6962.current_mElement (HERE).enumValue ()) {
+  cEnumerator_llvmStringDefinition enumerator_6977 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6977.hasCurrentObject ()) {
+    switch (enumerator_6977.current_mElement (HERE).enumValue ()) {
     case GALGAS_llvmStringDefinitionElement::kNotBuilt:
       break ;
     case GALGAS_llvmStringDefinitionElement::kEnum_string:
@@ -5536,13 +5536,13 @@ void extensionMethod_checkCompileTimeExpression (const GALGAS_llvmStringDefiniti
       break ;
     case GALGAS_llvmStringDefinitionElement::kEnum_variable:
       {
-        const cEnumAssociatedValues_llvmStringDefinitionElement_variable * extractPtr_7064 = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) (enumerator_6962.current_mElement (HERE).unsafePointer ()) ;
-        const GALGAS_lstring extractedValue_name = extractPtr_7064->mAssociatedValue0 ;
+        const cEnumAssociatedValues_llvmStringDefinitionElement_variable * extractPtr_7079 = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) (enumerator_6977.current_mElement (HERE).unsafePointer ()) ;
+        const GALGAS_lstring extractedValue_name = extractPtr_7079->mAssociatedValue0 ;
         constinArgument_inMap.method_searchKey (extractedValue_name, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 199)) ;
       }
       break ;
     }
-    enumerator_6962.gotoNextObject () ;
+    enumerator_6977.gotoNextObject () ;
   }
 }
 
@@ -5631,12 +5631,12 @@ void extensionSetter_appendAssignmentIR (GALGAS_instructionListIR & ioObject,
                                          const GALGAS_bool constinArgument_inTargetIsInitialized,
                                          C_Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring var_key_15652 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
-  GALGAS_abstractAssignmentOperatorUsage var_operatorUsage_15804 ;
-  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15652, var_operatorUsage_15804, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
-  GALGAS_instructionListIR var_instructions_15839 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 347)) ;
-  callExtensionMethod_generateCode ((const cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15804.ptr (), ioArgument_ioTemporaries, var_instructions_15839, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
-  ioObject.plusAssign_operation(var_instructions_15839, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
+  GALGAS_lstring var_key_15862 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
+  GALGAS_abstractAssignmentOperatorUsage var_operatorUsage_16014 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15862, var_operatorUsage_16014, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
+  GALGAS_instructionListIR var_instructions_16049 = GALGAS_instructionListIR::constructor_emptyList (SOURCE_FILE ("assignment-operator-definition.galgas", 347)) ;
+  callExtensionMethod_generateCode ((const cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_16014.ptr (), ioArgument_ioTemporaries, var_instructions_16049, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
+  ioObject.plusAssign_operation(var_instructions_16049, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
 }
 
 
@@ -7148,13 +7148,13 @@ void extensionMethod_generateIRCode (const GALGAS_llvmGenerationInstructionList 
                                      GALGAS_allocaList & ioArgument_ioAllocaList,
                                      C_Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_assignmentGenerationVarMap var_varMap_6084 = constinArgument_inVarMap ;
-  GALGAS_assignmentGenerationVarMap var_typeMap_6109 = constinArgument_inTypeMap ;
+  GALGAS_assignmentGenerationVarMap var_varMap_6094 = constinArgument_inVarMap ;
+  GALGAS_assignmentGenerationVarMap var_typeMap_6119 = constinArgument_inTypeMap ;
   const GALGAS_llvmGenerationInstructionList temp_0 = inObject ;
-  cEnumerator_llvmGenerationInstructionList enumerator_6149 (temp_0, kENUMERATION_UP) ;
-  while (enumerator_6149.hasCurrentObject ()) {
-    callExtensionMethod_generateIRCode ((const cPtr_abstractLLVMInstruction *) enumerator_6149.current_mInstruction (HERE).ptr (), var_varMap_6084, var_typeMap_6109, ioArgument_ioInstructionAsStringListIR, ioArgument_ioTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 159)) ;
-    enumerator_6149.gotoNextObject () ;
+  cEnumerator_llvmGenerationInstructionList enumerator_6159 (temp_0, kENUMERATION_UP) ;
+  while (enumerator_6159.hasCurrentObject ()) {
+    callExtensionMethod_generateIRCode ((const cPtr_abstractLLVMInstruction *) enumerator_6159.current_mInstruction (HERE).ptr (), var_varMap_6094, var_typeMap_6119, ioArgument_ioInstructionAsStringListIR, ioArgument_ioTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 159)) ;
+    enumerator_6159.gotoNextObject () ;
   }
 }
 

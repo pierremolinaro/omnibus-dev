@@ -144,7 +144,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (* instructionList *) in mBranchList do
+  for (* instructionList *) in self.mBranchList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -166,7 +166,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
 {
 #-------------------- Guards
   @guardedCommandIRList guardedCommandIRList = {}
-  for (guardedCommand instructionList endOfBranch) in mBranchList do
+  for (guardedCommand instructionList endOfBranch) in self.mBranchList do
     switch guardedCommand
     case boolean (isContinue expression endOfExpression) :
       @instructionListIR guardInstructionGenerationList = {}
@@ -376,7 +376,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
 #-------------------- Instruction lists
   [!?ioUniversalMap openOverrideForSelectBlock]
   @syncInstructionBranchListIR syncInstructionBranchListIR = {}
-  for (* instructionList endOfBranch) in mBranchList, (guardedCommandIR) in guardedCommandIRList do
+  for (* instructionList endOfBranch) in self.mBranchList, (guardedCommandIR) in guardedCommandIRList do
     @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
@@ -392,9 +392,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
     ]
     syncInstructionBranchListIR += !guardedCommandIR !branchInstructionGenerationList
   end
-  [!?ioUniversalMap closeOverride !mEndOf_on_instruction]
+  [!?ioUniversalMap closeOverride !self.mEndOf_on_instruction]
 #-------------------- Code generation
-  ioInstructionGenerationList += !@syncInstructionIR.new {!mInstructionLocation !syncInstructionBranchListIR}
+  ioInstructionGenerationList += !@syncInstructionIR.new {!self.mInstructionLocation !syncInstructionBranchListIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -503,7 +503,7 @@ override method @syncInstructionIR llvmInstructionCode
   let selectLabelName = startLabel + ".select"
   let errorLabelName = startLabel + ".error"
   var currentStartBranchLabel = startLabelName
-  for branch in mOnInstructionBranchListIR do (idx)
+  for branch in self.mOnInstructionBranchListIR do (idx)
     let acceptanceVarName = "%" + startLabel + ".accept." + idx
     @bool isWhileGuardedCommand
     switch branch.mGuardedCommand
@@ -581,8 +581,8 @@ override method @syncInstructionIR llvmInstructionCode
   if [option omnibus_options.noPanicGeneration value] then
     ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
   else
-    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mSelectInstructionLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mSelectInstructionLocation line] + ", "
+    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mSelectInstructionLocation) assemblerRepresentation] + " ("
+    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mSelectInstructionLocation line] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForClosedSync () + ")\n"
     ioLLVMcode += "  unreachable\n\n"
   end
@@ -595,11 +595,11 @@ override method @syncInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  let branchCount = [mOnInstructionBranchListIR length]
+  let branchCount = [self.mOnInstructionBranchListIR length]
   if ioMaxBranchOfOnInstructions < branchCount then
     ioMaxBranchOfOnInstructions = branchCount
   end
-  for branch in mOnInstructionBranchListIR do
+  for branch in self.mOnInstructionBranchListIR do
     [branch.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
     switch branch.mGuardedCommand
     case booleanGuard (* instructionGenerationList *) :
@@ -614,7 +614,7 @@ override method @syncInstructionIR enterAccessibleEntities
     end
   end
   if not [option omnibus_options.noPanicGeneration value] then
-    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mSelectInstructionLocation)
+    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mSelectInstructionLocation)
   end
 }
 

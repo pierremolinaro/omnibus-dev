@@ -23,7 +23,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  switch mSourceValue
+  switch self.mSourceValue
   case void :
   case null (*) :
   case reference (* *) :
@@ -54,24 +54,24 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  switch mSourceValue
+  let llvmType = [self.mTargetVarType llvmTypeName]
+  switch self.mSourceValue
   case void :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode void >>\n"
   case null (*) :
-    ioLLVMcode += "  store " +  llvmType + " null, " + llvmType + "* " + mLLVMTargetVarName + "\n"
+    ioLLVMcode += "  store " +  llvmType + " null, " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   case reference (* *) :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"
   case llvmValue (* @string llvmName) :
-    ioLLVMcode += "  store " +  llvmType + " " + llvmName + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+    ioLLVMcode += "  store " +  llvmType + " " + llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   case literalInteger  (* @bigint value) :
-    ioLLVMcode += "  store " +  llvmType + " " + value + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+    ioLLVMcode += "  store " +  llvmType + " " + value + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   case llvmStructureValue (* @sortedOperandIRList operands) :
     for (value index) in operands do
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
-                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+                 + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
       ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
     end
@@ -90,7 +90,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += loopLabel + ":\n"
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
     ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
-               + [type llvmTypeName] + " * " + mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
+               + [type llvmTypeName] + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
     let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
     ioLLVMcode += "  call void @" +[llvmAssignRoutineName assemblerRepresentation]
     ioLLVMcode += " (" + [value llvmTypeName] + "* " + ptrVarName + ", " + [value llvmTypeName] + "* " + [value llvmName] + ")\n"
@@ -113,7 +113,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += loopLabel + ":\n"
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
     ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
-               + [type llvmTypeName] + " * " + mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
+               + [type llvmTypeName] + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
     ioLLVMcode += "  store " + [value llvmTypeName] + " " + [value llvmName] + ", " + [value llvmTypeName] + "* " + ptrVarName + "\n"
     ioLLVMcode += "  " + nextIndexVarName + " = add i32 " + indexVarName + ", 1\n"
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
@@ -125,7 +125,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
-                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+                 + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
       ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
     end
@@ -135,7 +135,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex ++
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
-                 + llvmType + " * " + mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
+                 + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
       if [value isStatic] then
         ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
@@ -147,7 +147,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     end
   case literalString  (* *) :
   case zero (*) :
-    ioLLVMcode += "  store " +  llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+    ioLLVMcode += "  store " +  llvmType + " " + [self.mSourceValue llvmName] + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   end
 }
 

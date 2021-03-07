@@ -47,9 +47,9 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  if mTypeName.string != "" then
-    [!?ioGraph noteNode !mTypeName]
+  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  if self.mTypeName.string != "" then
+    [!?ioGraph noteNode !self.mTypeName]
   end
 }
 
@@ -58,9 +58,9 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  if mTypeName.string != "" then
-    [!?ioGraph noteNode !mTypeName]
+  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  if self.mTypeName.string != "" then
+    [!?ioGraph noteNode !self.mTypeName]
   end
 }
 
@@ -84,7 +84,7 @@ override method @truncateExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpression
+  [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -102,21 +102,21 @@ override method @truncateExpressionAST analyzeExpression
     !?expressionResult
   ]  
 #--- Analyze type
-  let @omnibusType resultType = if mTypeName.string == ""
+  let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
   end
 #--- Check types
   if not [resultType.kind isInteger] then
-    error mTypeName : "this type is not an integer type" : outResult
+    error self.mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult type].kind isInteger] then
-    error mEndOfExpression : "expression type is not an integer type" : outResult
+    error self.mEndOfExpression : "expression type is not an integer type" : outResult
   else
     [[expressionResult type].kind integer ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
     [resultType.kind integer ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
-      error mTypeName:"useless explicit conversion"
+      error self.mTypeName:"useless explicit conversion"
     end
     if resultSize < expSize then
       getNewTempValue (!resultType !?ioTemporaries ?outResult)
@@ -148,9 +148,9 @@ override method @truncateInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let operandType = [mOperand llvmTypeName]
-  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName]
-     + " to " + [mTarget llvmTypeName] + "\n"
+  let operandType = [self.mOperand llvmTypeName]
+  ioLLVMcode += "  " + [self.mTarget llvmName] + " = trunc " + operandType + " " + [self.mOperand llvmName]
+     + " to " + [self.mTarget llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

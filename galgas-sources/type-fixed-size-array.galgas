@@ -43,23 +43,23 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph addNode !mFixedSizeArrayType !self]
-  [!?ioGraph addEdge !mFixedSizeArrayType !mElementTypeName]
-  [mSizeExpression addDependenceEdgeForStaticExpression !mFixedSizeArrayType !?ioGraph]
-  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mFixedSizeArrayType.location}
-  [!?ioGraph addEdge !mFixedSizeArrayType !rootNode]
+  [!?ioGraph addNode !self.mFixedSizeArrayType !self]
+  [!?ioGraph addEdge !self.mFixedSizeArrayType !self.mElementTypeName]
+  [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mFixedSizeArrayType !?ioGraph]
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !self.mFixedSizeArrayType.location}
+  [!?ioGraph addEdge !self.mFixedSizeArrayType !rootNode]
 }
 
 #·······················································································································
 
 override getter @fixedSizeArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous $" + mFixedSizeArrayType 
+  outRepresentation = "anonymous $" + self.mFixedSizeArrayType 
 }
 
 #·······················································································································
 
 override getter @fixedSizeArrayTypeDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mFixedSizeArrayType.location
+  outLocation = self.mFixedSizeArrayType.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -77,39 +77,39 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #--- Get element type
-  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType]
+  [ioContext.mTypeMap searchKey !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
-    error mElementTypeName : "an array element should be copyable"
+    error self.mElementTypeName : "an array element should be copyable"
   end
   if not [elementType instanciable] then
-    error mElementTypeName : "an array element should be instanciable"
+    error self.mElementTypeName : "an array element should be instanciable"
   end
 #--- Compute array size
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
-    !expression:mSizeExpression
-    !errorLocation:mSizeExpressionLocation
+    !expression:self.mSizeExpression
+    !errorLocation:self.mSizeExpressionLocation
     !optionalContextualTypeName:["" nowhere]
     ?result:let @objectIR sizeExpressionIR
   )
   if not [sizeExpressionIR isLiteralInteger] then
-    error mSizeExpressionLocation : "array size expression is a literal interger expression"
+    error self.mSizeExpressionLocation : "array size expression is a literal interger expression"
   else
     [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
-    let omnibusTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !mFixedSizeArrayType}
-    let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !mFixedSizeArrayType}
+    let omnibusTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !self.mFixedSizeArrayType}
+    let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !self.mFixedSizeArrayType}
     if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
       [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: var type]
       [!?ioContext.mTypeMap insertType
-        !lkey:mFixedSizeArrayType
+        !lkey:self.mFixedSizeArrayType
         !type:type
       ]
     else
     #-------------------------------------------- Class method map : add "count" constructor
       @constantMap constantMap = {}
-      [!?constantMap insertKey !.new {!"count" !mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
+      [!?constantMap insertKey !.new {!"count" !self.mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
       [!?ioContext.mTypeConstantMap insertKey
         !omnibusTypeDescriptionName
         !constantMap
@@ -145,7 +145,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !llvmBaseTypeName:llvmBaseTypeName
       }
       [!?ioContext.mTypeMap insertType
-        !lkey:mFixedSizeArrayType
+        !lkey:self.mFixedSizeArrayType
         !type:arrayType
       ]
       [!?ioContext.mTypeMap insertType
@@ -176,7 +176,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !arrayType
       }
    #--- Enter assignment operator
-      let key = assignmentOperatorKey (!arrayType !mFixedSizeArrayType.location !arrayType)
+      let key = assignmentOperatorKey (!arrayType !self.mFixedSizeArrayType.location !arrayType)
       [!?ioContext.mAssignmentOperatorMap insertKey !key !@fixedSizeArrayAssignmentOperatorUsage.new {!elementType !arraySize !assignValueToElements_functionName}]
     end
   end
@@ -200,7 +200,7 @@ class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
-  ioLLVMcode += mLLVMDefinedTypeName + " = type [" + mSize + " x " + [mElementType llvmTypeName] + "]\n"
+  ioLLVMcode += self.mLLVMDefinedTypeName + " = type [" + self.mSize + " x " + [self.mElementType llvmTypeName] + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -226,15 +226,15 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     ?initializedTarget: let @bool unused inTargetIsInitialized
 {
   let arrayTypeName = [inTargetType llvmTypeName]
-  let elementTypeName = [mElementType llvmTypeName]
+  let elementTypeName = [self.mElementType llvmTypeName]
   switch inSourcePossibleReference
   case llvmArrayRepeatedDynamicValue (2* @objectIR sourceValuePossibleReference) :
     @objectIR sourceValue = sourceValuePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
-    var s = "call void @" + [mAssignValueToElements_functionName assemblerRepresentation]
+    var s = "call void @" + [self.mAssignValueToElements_functionName assemblerRepresentation]
     s += " (" + arrayTypeName + "* " + inTargetLLVMName
     s += ", " + elementTypeName + " " + [sourceValue llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!mAssignValueToElements_functionName}]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!self.mAssignValueToElements_functionName}]
   case llvmArrayDynamicValues (1* @operandIRList values) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex ++
@@ -301,9 +301,9 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let arrayTypeName = [mFixedSizeArrayType llvmTypeName]
-  let elementTypeName = [mElementType llvmTypeName]
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  let arrayTypeName = [self.mFixedSizeArrayType llvmTypeName]
+  let elementTypeName = [self.mElementType llvmTypeName]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (" + arrayTypeName + " * %inTarget, " + elementTypeName + " %inRepeatedValue) nounwind optsize {\n"
   ioLLVMcode += "  %idx = alloca i32\n"
   ioLLVMcode += "  store i32 0, i32* %idx\n"
@@ -314,7 +314,7 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
   ioLLVMcode += "  store " + elementTypeName + " %inRepeatedValue, " + elementTypeName + "* %ptr\n"
   ioLLVMcode += "  %nextIdxValue = add i32 %idxValue, 1\n"
   ioLLVMcode += "  store i32 %nextIdxValue, i32* %idx\n"
-  ioLLVMcode += "  %continue = icmp ult i32 %nextIdxValue, " + mArraySize + "\n"
+  ioLLVMcode += "  %continue = icmp ult i32 %nextIdxValue, " + self.mArraySize + "\n"
   ioLLVMcode += "  br i1 %continue, label %loop, label %exit\n"
   ioLLVMcode += "exit:\n"
   ioLLVMcode += "  ret void\n"
@@ -334,9 +334,9 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmTypeName = [mFixedSizeArrayType llvmTypeName]
-  let arcAssignmentList = [mFixedSizeArrayType arcList !{}]
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  let llvmTypeName = [self.mFixedSizeArrayType llvmTypeName]
+  let arcAssignmentList = [self.mFixedSizeArrayType arcList !{}]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (" + llvmTypeName + " * %inTarget, " + llvmTypeName + "* %inSource) nounwind optsize {\n"
   ioLLVMcode += ";--- Handle ARC properties\n"
   for (propertyName propertyType indexPath) in arcAssignmentList do

@@ -162,24 +162,24 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph addNode !mDriverName !self]
-  [!?ioGraph addEdge !mDriverName !omnibusTypeSpecificNameForDriver (!mDriverName)]
-  for (driver) in mDriverDependanceList do
-    [!?ioGraph addEdge !mDriverName !driver]
+  [!?ioGraph addNode !self.mDriverName !self]
+  [!?ioGraph addEdge !self.mDriverName !omnibusTypeSpecificNameForDriver (!self.mDriverName)]
+  for (driver) in self.mDriverDependanceList do
+    [!?ioGraph addEdge !self.mDriverName !driver]
   end
-  [!?ioGraph addEdge !mDriverName !compileTimeDeclarationBarrier ()]
+  [!?ioGraph addEdge !self.mDriverName !compileTimeDeclarationBarrier ()]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @implementedDriverAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "driver " + mDriverName 
+  outRepresentation = "driver " + self.mDriverName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @implementedDriverAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mDriverName.location
+  outLocation = self.mDriverName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -337,42 +337,42 @@ override method @implementedDriverAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   [ioContext.mTypeMap searchKey
-    !lkey:omnibusTypeSpecificNameForDriver (!mDriverName)
+    !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName)
     ?type:let driverType
   ]
-  [!?ioContext.mValuedObjectMap insertDriver !mDriverName !mIsInstancied !driverType]
+  [!?ioContext.mValuedObjectMap insertDriver !self.mDriverName !self.mIsInstancied !driverType]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!mDriverName}
+  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!self.mDriverName}
 #---------------- Add boot routine
   ioDecoratedRoutineList +=
-    !receiverTypeName: omnibusTypeSpecificNameForDriver (!mDriverName)
+    !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     !mode:.bootMode
     !isRequired:true
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
     !routineAttributes: .none
-    !routineMangledLLVMName: llvmBootRoutineNameFromDriver (!mDriverName)
+    !routineMangledLLVMName: llvmBootRoutineNameFromDriver (!self.mDriverName)
     !formalArgumentList: {}
     !warningOnUnusedArgs: true
-    !mBootInstructionList
-    !mBootEndLocation
-    !returnTypeName:.new {!"" !mBootLocation}  # Empty string if no returned value
+    !self.mBootInstructionList
+    !self.mBootEndLocation
+    !returnTypeName:.new {!"" !self.mBootLocation}  # Empty string if no returned value
 #---------------- Add startup routine
   ioDecoratedRoutineList +=
-    !receiverTypeName: omnibusTypeSpecificNameForDriver (!mDriverName)
+    !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     !mode:.startupMode
     !isRequired:true
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
     !routineAttributes: .none
-    !routineMangledLLVMName: llvmStartupRoutineNameFromDriver (!mDriverName)
+    !routineMangledLLVMName: llvmStartupRoutineNameFromDriver (!self.mDriverName)
     !formalArgumentList: {}
     !warningOnUnusedArgs: true
-    !mStartupInstructionList
-    !mStartupEndLocation
-    !returnTypeName: .new {!"" !mStartupLocation}  # Empty string if no returned value
+    !self.mStartupInstructionList
+    !self.mStartupEndLocation
+    !returnTypeName: .new {!"" !self.mStartupLocation}  # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -391,23 +391,23 @@ override method @decoratedRequiredDriver semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   [inContext.mTypeMap searchKey
-    !lkey: omnibusTypeSpecificNameForDriver (!mDriverName)
+    !lkey: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     ?type:let driverType
   ]
-  let typeName = @lstring.new {!driverType.omnibusTypeDescriptionName !mDriverName}
+  let typeName = @lstring.new {!driverType.omnibusTypeDescriptionName !self.mDriverName}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
-  [constructorMap searchKey !.new {!"()" !mDriverName.location} ?* ?let constructorValue]
+  [constructorMap searchKey !.new {!"()" !self.mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
   @operandIRList initialValueList = {}
   for (initialValue *) in sortedOperandList do
     initialValueList += !initialValue
   end
   ioIntermediateCodeStruct.mDriverList += 
-    !mDriverName
+    !self.mDriverName
     !driverType
     !initialValueList
 #--- Build initialized driver set
-  ioTemporaries.mInitializedDriverSet += !mDriverName.string
+  ioTemporaries.mInitializedDriverSet += !self.mDriverName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -423,9 +423,9 @@ list @driverListIR {
 #·······················································································································
 
 method @driverListIR-element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
-  ioLLVMcode += llvmNameForGlobalVariable (!mDriverName) + " = internal global "
-  ioLLVMcode += [mType llvmTypeName] + " {"
-  for (value) in mInitialValueList
+  ioLLVMcode += llvmNameForGlobalVariable (!self.mDriverName) + " = internal global "
+  ioLLVMcode += [self.mType llvmTypeName] + " {"
+  for (value) in self.mInitialValueList
     do ioLLVMcode += [value llvmTypeName] + " " + [value llvmValue]
     between ioLLVMcode += ", "  
   end

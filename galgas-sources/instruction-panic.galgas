@@ -30,7 +30,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,11 +50,11 @@ override method @panicInstructionAST instructionSemanticAnalysis
 {
 #--- Panic allowed ?
   if inMode == .panicMode then
-    error mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
+    error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR unusedInstructionListIR = {}
-  [mCodeExpression analyzeExpression
+  [self.mCodeExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
     !optionalTargetType:inContext.mPanicCodeType
@@ -72,16 +72,16 @@ override method @panicInstructionAST instructionSemanticAnalysis
   if ([unusedInstructionListIR length] > 0)
      || not [result isLiteralInteger]
      || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
-    error mInstructionLocation : "throw expression should be a literal integer"
+    error self.mInstructionLocation : "throw expression should be a literal integer"
   else
     [inContext.mPanicCodeType.kind integer ?min:let min ?max:let max ?2*]
     [result literalInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error mInstructionLocation
+      error self.mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName
     elsif not [option omnibus_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR.new {
-        !mInstructionLocation
+        !self.mInstructionLocation
         !throwValue
       }
     end
@@ -104,9 +104,9 @@ override method @panicInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mThrowLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mThrowLocation line] + ", "
-  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + mPanicCode + ")\n"
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mThrowLocation) assemblerRepresentation] + " ("
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mThrowLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + self.mPanicCode + ")\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -115,7 +115,7 @@ override method @panicInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mThrowLocation)
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mThrowLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

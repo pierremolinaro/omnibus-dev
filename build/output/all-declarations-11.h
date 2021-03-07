@@ -10,6 +10,27 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
+//Function 'assignmentOperatorFuncName'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_assignmentOperatorFuncName (const class GALGAS_omnibusType & constinArgument0,
+                                                         const class GALGAS_omnibusType & constinArgument1,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'assignValueToFixedSizeArrayElements_functionName'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
+                                                                                  class C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
 //Routine 'addIntegerInfixOperator'
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -362,35 +383,4 @@ class GALGAS_lstring function_guardUserLLVMName (const class GALGAS_string & con
                                                  const class GALGAS_routineFormalArgumentListAST & constinArgument2,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Function 'acceptVariableOmnibusName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Routine 'analyzeEffectiveParameters'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_routineTypedSignature constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_location constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
 

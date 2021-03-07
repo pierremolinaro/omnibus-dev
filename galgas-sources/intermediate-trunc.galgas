@@ -29,8 +29,8 @@ override method @truncIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult llvmName] + " = trunc "
-  ioLLVMcode += [mSource  llvmTypeName] + " " + [mSource llvmName] + " to " + [mResult llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [self.mResult llvmName] + " = trunc "
+  ioLLVMcode += [self.mSource  llvmTypeName] + " " + [self.mSource llvmName] + " to " + [self.mResult llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

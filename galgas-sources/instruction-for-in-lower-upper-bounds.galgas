@@ -63,12 +63,12 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  if mTypeName.string != "" then
-    [!?ioGraph noteNode !mTypeName]
+  if self.mTypeName.string != "" then
+    [!?ioGraph noteNode !self.mTypeName]
   end
-  [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [mLowerBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mUpperBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.mLowerBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mUpperBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -87,36 +87,36 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get iterated element type
-  let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let type = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
   switch type.kind
   case boolean, void :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case staticArrayType (* *) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case dynamicArrayType (*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case enumeration (*) :
   case literalString :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case opaque (*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case compileTimeBool :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case llvmType (*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case generic (3*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case compileTimeInteger :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case structure (*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case syncTool :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case function (3*) :
-    error mTypeName : "an integer type is required here"
+    error self.mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   #--- Analyze expressions
-    [mLowerBoundExpression analyzeExpression
+    [self.mLowerBoundExpression analyzeExpression
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !optionalTargetType:type
@@ -133,7 +133,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?ioTemporaries
       !?lowerBoundExpressionResult
     ]  
-    [mUpperBoundExpression analyzeExpression
+    [self.mUpperBoundExpression analyzeExpression
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !optionalTargetType:type
@@ -155,31 +155,31 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !inContext.mAssignmentOperatorMap
       !source:lowerBoundExpressionResult
       !targetAnnotationType:type
-      !errorLocation:mEndOf_lowerBoundExpression_instruction
+      !errorLocation:self.mEndOf_lowerBoundExpression_instruction
       !staticTypeAllowed:false
     )
     let upperBound = checkAssignmentCompatibility (
       !inContext.mAssignmentOperatorMap
       !source:upperBoundExpressionResult
       !targetAnnotationType:type
-      !errorLocation:mEndOf_upperBoundExpression_instruction
+      !errorLocation:self.mEndOf_upperBoundExpression_instruction
       !staticTypeAllowed:false
     )
   #---
     [!?ioUniversalMap openOverrideForRepeatBlock]
   #--- Enter iteration variable name
-    let enumeratedVarName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+    let enumeratedVarName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
     ioTemporaries.mTemporaryIndex ++
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
-    if mVarName.string != "" then
-     [!?ioUniversalMap insertLocalConstant !mVarName !false !type !enumeratedVarName]
+    if self.mVarName.string != "" then
+     [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
     end
   #--- Analyze instruction list
     @instructionListIR instructionGenerationList = {}
-    [mDoInstructionList analyzeBranchInstructionList
+    [self.mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !endOfInstructionList:mEndOf_do_instruction
+      !endOfInstructionList:self.mEndOf_do_instruction
       !context:inContext
       !mode:inMode
       !?temporary:ioTemporaries
@@ -188,13 +188,13 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?alloca:ioAllocaList
       !?instructionListIR:instructionGenerationList
     ]
-    [!?ioUniversalMap closeOverride !mEndOf_do_instruction]
+    [!?ioUniversalMap closeOverride !self.mEndOf_do_instruction]
   #--- Code generation
     ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
       !enumeratedVarName
       !type
       !unsigned
-      !mEndOf_do_instruction
+      !self.mEndOf_do_instruction
       !lowerBound
       !upperBound
       !instructionGenerationList
@@ -226,28 +226,28 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [mType llvmTypeName]
-  let llvmVarName = llvmNameForLocalVariable (!mVarName)
-  let testLabel = "for." + [mLocation locationIndex] + ".test"
-  let loopLabel = "for." + [mLocation locationIndex] + ".loop"
-  let endLabel  = "for." + [mLocation locationIndex] + ".end"
-  let testResult = "%for." + [mLocation locationIndex] + ".test.result"
-  let loadedVarName = "" + llvmNameForLocalVariable (!mVarName + ".loaded")
-  let currentVarName = "" + llvmNameForLocalVariable (!mVarName + ".current")
-  let nextVarName = "" + llvmNameForLocalVariable (!mVarName + ".next")
+  let llvmType = [self.mType llvmTypeName]
+  let llvmVarName = llvmNameForLocalVariable (!self.mVarName)
+  let testLabel = "for." + [self.mLocation locationIndex] + ".test"
+  let loopLabel = "for." + [self.mLocation locationIndex] + ".loop"
+  let endLabel  = "for." + [self.mLocation locationIndex] + ".end"
+  let testResult = "%for." + [self.mLocation locationIndex] + ".test.result"
+  let loadedVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".loaded")
+  let currentVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".current")
+  let nextVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".next")
 #--- Store LOW in x
-  ioLLVMcode += "  store " + llvmType + " " + [mLowerExpressionResult llvmName] + ", " + llvmType + " * " + llvmVarName + "\n"
+  ioLLVMcode += "  store " + llvmType + " " + [self.mLowerExpressionResult llvmName] + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
 #--- Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + testResult + " = icmp "
-  ioLLVMcode += if mUnsigned then "ult" else "slt" end
-  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [mUpperExpressionResult llvmName] + "\n"
+  ioLLVMcode += if self.mUnsigned then "ult" else "slt" end
+  ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [self.mUpperExpressionResult llvmName] + "\n"
   ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 #--- Loop  
   ioLLVMcode += loopLabel + ":\n"
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
   ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * " + llvmVarName + "\n"
@@ -262,7 +262,7 @@ override method @forLowerUpperBoundInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

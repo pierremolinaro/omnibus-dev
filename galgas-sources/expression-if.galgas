@@ -64,9 +64,9 @@ override method @ifExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mIfExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [mThenExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [mElseExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mIfExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mThenExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mElseExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -74,9 +74,9 @@ override method @ifExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mIfExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mThenExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mElseExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mIfExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mThenExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mElseExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,7 +97,7 @@ override method @ifExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze if expression
-  [mIfExpression analyzeExpression
+  [self.mIfExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -114,7 +114,7 @@ override method @ifExpressionAST analyzeExpression
 #--- Check "if" expression type is boolean
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !ifExpressionResult
-    !mIfExpressionEndLocation
+    !self.mIfExpressionEndLocation
     !?ioTemporaries
     !?ioInstructionGenerationList
     !?alloca: ioAllocaList
@@ -125,7 +125,7 @@ override method @ifExpressionAST analyzeExpression
 #    error mIfExpressionEndLocation : "'if' expression should be boolean"
 #  end
 #--- Analyze 'then' expression
-  [mThenExpression analyzeExpression
+  [self.mThenExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -146,11 +146,11 @@ override method @ifExpressionAST analyzeExpression
     !inContext.mAssignmentOperatorMap
     !source:thenExpressionTempResult
     !targetAnnotationType:inOptionalTargetType
-    !errorLocation:mThenExpressionEndLocation
+    !errorLocation:self.mThenExpressionEndLocation
     !staticTypeAllowed:true
   )
 #--- Analyze 'else' expression
-  [mElseExpression analyzeExpression
+  [self.mElseExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -171,7 +171,7 @@ override method @ifExpressionAST analyzeExpression
     !inContext.mAssignmentOperatorMap
     !source:elseExpressionTempResult
     !targetAnnotationType:[thenExpressionResult type]
-    !errorLocation:mElseExpressionEndLocation
+    !errorLocation:self.mElseExpressionEndLocation
     !staticTypeAllowed:true
   )
 #--- 'if' expression is static ?

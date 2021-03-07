@@ -80,7 +80,7 @@ class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mInfixOperatorLocation
+  outLocation = self.mInfixOperatorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -180,18 +180,18 @@ syntax extension omnibus_syntax {
 override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mInfixOperator string] + "." + mLeftTypeName + "." + mRightTypeName !mInfixOperatorLocation}
+  let nodeName = @lstring.new {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mLeftTypeName]
-  [!?ioGraph addEdge !nodeName !mRightTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
+  [!?ioGraph addEdge !nodeName !self.mLeftTypeName]
+  [!?ioGraph addEdge !nodeName !self.mRightTypeName]
+  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
   [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
 }
 
 #·······················································································································
 
 override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mLeftTypeName.string + " " + mInfixOperator + " " + mRightTypeName
+  outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -209,46 +209,46 @@ override method @compileTimeInfixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mLeftTypeName ?let leftTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mLeftTypeName ?let leftTypeProxy]
   let leftType = [leftTypeProxy type]
-  [leftType checkIsCompileTimeType !mLeftTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mRightTypeName ?let rightTypeProxy]
+  [leftType checkIsCompileTimeType !self.mLeftTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mRightTypeName ?let rightTypeProxy]
   let rightType = [rightTypeProxy type]
-  [rightType checkIsCompileTimeType !mRightTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
+  [rightType checkIsCompileTimeType !self.mRightTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
-  [resultType checkIsCompileTimeType !mResultTypeName.location]
+  [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
   @ctCheckMap ctCheckMap = {}
-  [!?ctCheckMap insertKey !mLeftOperandName]
-  [!?ctCheckMap insertKey !mRightOperandName]
-  [mExpression checkCompileTimeExpression !ctCheckMap]
+  [!?ctCheckMap insertKey !self.mLeftOperandName]
+  [!?ctCheckMap insertKey !self.mRightOperandName]
+  [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
-  let key = infixOperatorMapKey (!leftType !mInfixOperator !mInfixOperatorLocation !rightType)
+  let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
   let definition = @compileTimeInfixOperatorUsage.new {
-    !mLeftOperandName
-    !mRightOperandName
-    !mExpression
+    !self.mLeftOperandName
+    !self.mRightOperandName
+    !self.mExpression
   }
   [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
 #--- Define '≤' operator ?
-  if (mInfixOperator == .equal) || (mInfixOperator == .lessThan) then
-    let equal_key = infixOperatorMapKey (!leftType !.equal !mInfixOperatorLocation !rightType)
-    let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !mInfixOperatorLocation !rightType)
+  if (self.mInfixOperator == .equal) || (self.mInfixOperator == .lessThan) then
+    let equal_key = infixOperatorMapKey (!leftType !.equal !self.mInfixOperatorLocation !rightType)
+    let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !self.mInfixOperatorLocation !rightType)
   if [ioContext.mInfixOperatorMap hasKey !equal_key] & [ioContext.mInfixOperatorMap hasKey !lessThan_key] then
     [ioContext.mInfixOperatorMap searchKey !equal_key ?* ?let equalOperatorUsage]
     [ioContext.mInfixOperatorMap searchKey !lessThan_key ?* ?let lessThanOperatorUsage]
     if let eou = equalOperatorUsage as @compileTimeInfixOperatorUsage,
        let ltou = lessThanOperatorUsage as @compileTimeInfixOperatorUsage then
       let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage.new {!eou !ltou}
-      let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !mInfixOperatorLocation !rightType)
+      let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !self.mInfixOperatorLocation !rightType)
       [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition] 
       end  
     end
   end
 #--- Define '+%' operator ?
-  if mInfixOperator == .addOp then
-    let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !mInfixOperatorLocation !rightType)
+  if self.mInfixOperator == .addOp then
+    let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !self.mInfixOperatorLocation !rightType)
     [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition] 
   end
 }
@@ -273,9 +273,9 @@ method @compileTimeInfixOperatorUsage eval
   [inLeftOperand literalInteger ?1* ?value: let leftValue]
   [inRightOperand literalInteger ?1* ?value: let rightValue]
   @ctMap varMap = {}
-  [!?varMap insertKey !mLeftOperandName !leftValue]
-  [!?varMap insertKey !mRightOperandName !rightValue]
-  [mExpression computeCompileTimeExpression !varMap ?result: outResult]
+  [!?varMap insertKey !self.mLeftOperandName !leftValue]
+  [!?varMap insertKey !self.mRightOperandName !rightValue]
+  [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]
 }
 
 #·······················································································································
@@ -313,9 +313,9 @@ override method @compileTimeInfixInfEqualOperatorUsage generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [mEqualOperatorUsage eval !inLeftOperand !inRightOperand ?var result]
+  [self.mEqualOperatorUsage eval !inLeftOperand !inRightOperand ?var result]
   if result == 0G then
-    [mLessThanOperatorUsage eval !inLeftOperand !inRightOperand ?result]
+    [self.mLessThanOperatorUsage eval !inLeftOperand !inRightOperand ?result]
   end
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }

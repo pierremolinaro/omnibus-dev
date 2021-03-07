@@ -37,8 +37,8 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,9 +56,9 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  [ioUniversalMap searchValuedObjectType !context: inContext !selfType:inSelfType !mTargetAST ?let targetType]
+  [ioUniversalMap searchValuedObjectType !context: inContext !selfType:inSelfType !self.mTargetAST ?let targetType]
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:targetType
@@ -73,7 +73,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ]
 #--- Analyze LValue
   @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = {}
-  [mTargetAST analyzeLValueInAssignment
+  [self.mTargetAST analyzeLValueInAssignment
     !self: inSelfType
     !routineAttributes:inRoutineAttributes
     !context: inContext
@@ -94,7 +94,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !lvalueIR.type
     !lvalueIR.llvmName
     !sourceOperandPossibleReference
-    !mInstructionLocation
+    !self.mInstructionLocation
     !initializedTarget: true
   ]
 #--- Append pending computed property store (in reverse order)
@@ -118,9 +118,9 @@ method @LValueAST analyzeLValueInAssignment
   ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
   !@LValueRepresentation outInternalRepresentation
 {
-  if mIdentifier.string == "" then # Receiver is "self"
+  if self.mIdentifier.string == "" then # Receiver is "self"
     if inSelfType.kind == .void then
-      error mIdentifier : "self is not available in this context" : outInternalRepresentation
+      error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
     else
       analyzeSelfLValueInAssignment (
         !self:inSelfType
@@ -133,23 +133,23 @@ method @LValueAST analyzeLValueInAssignment
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-        !mOperand
+        !self.mOperand
         ?outInternalRepresentation
       )
     end
   else
-    [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
+    [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
     switch entity
     case task (*) :
-      error mIdentifier : "a task has no value" : outInternalRepresentation
+      error self.mIdentifier : "a task has no value" : outInternalRepresentation
     case driver (* *) :
-      error mIdentifier : "a driver has no value" : outInternalRepresentation
+      error self.mIdentifier : "a driver has no value" : outInternalRepresentation
     case globalConstant (*) :
-      error mIdentifier : "a global constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a global constant cannot be written" : outInternalRepresentation
     case localConstant (3*) :
-      error mIdentifier : "a local constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a local constant cannot be written" : outInternalRepresentation
     case globalSyncInstance (2*) :
-      error mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
+      error self.mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
     case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValueInAssignment (
         !self: inSelfType
@@ -162,10 +162,10 @@ method @LValueAST analyzeLValueInAssignment
         !?alloca: ioAllocaList
         !?instructionListIR: ioInstructionGenerationList
         !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-        !variableName: mIdentifier
+        !variableName: self.mIdentifier
         !llvmName:llvmNameForLocalVariable (!omnibusName)
         !type: variableType
-        !mOperand
+        !self.mOperand
         ?outInternalRepresentation
       )
     end

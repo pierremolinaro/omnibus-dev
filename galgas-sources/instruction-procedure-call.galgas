@@ -85,14 +85,14 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
   ?!@semanticTypePrecedenceGraph ioGraph
 {
 #  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case property (*) :
     case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
-  for () in mArguments do
+  for () in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -111,7 +111,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
 override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in mArguments do
+  for () in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -164,12 +164,12 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Called routine signature
-  let calledRoutineSignature = [mArguments routineSignature !mSandAloneRoutineName.location]
+  let calledRoutineSignature = [self.mArguments routineSignature !self.mSandAloneRoutineName.location]
 #--- Search routine in map
-  let requiredFunctionMangledName = mSandAloneRoutineName.string + calledRoutineSignature
+  let requiredFunctionMangledName = self.mSandAloneRoutineName.string + calledRoutineSignature
 #   log "keys " : [inContext.mRoutineMap keyList]
   [inContext.mRoutineMap searchKey
-    !.new {!requiredFunctionMangledName !mSandAloneRoutineName}
+    !.new {!requiredFunctionMangledName !self.mSandAloneRoutineName}
     ?let unused implementedPublic
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
@@ -179,18 +179,18 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   ]
 #--- Check return type proxy is null
   if formalReturnTypeProxy != .null then
-    error mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
+    error self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
   end
 #--- Check modes
-    let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !mSandAloneRoutineName)
+    let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !self.mSandAloneRoutineName)
 #--- Analyze effective parameters
   @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !formal:formalSignature
-    !effective:mArguments
-    !errorLocation:mSandAloneRoutineName.location
+    !effective:self.mArguments
+    !errorLocation:self.mSandAloneRoutineName.location
     !context:inContext
     !requiredMode:inMode
     !?temporary:ioTemporaries
@@ -204,8 +204,8 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #--- Routine name for invocation graph
   let routineMangledName = routineMangledNameFromCall (
     !""
-    !mSandAloneRoutineName
-    !mArguments
+    !self.mSandAloneRoutineName
+    !self.mArguments
   )
 #--- Code generation
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
@@ -234,29 +234,29 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   var receiverIsSelf = false
   @omnibusType currentType
   @string currentLLVMAddressVar
-  if mIdentifier.string == "" then # Receiver is self
+  if self.mIdentifier.string == "" then # Receiver is self
     receiverIsSelf = true
     if inSelfType.kind == .void then
-      error mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
+      error self.mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
     else
       currentType = inSelfType
       currentLLVMAddressVar = llvmNameForSelf ()
     end
   else
-    [ioUniversalMap searchEntity !mIdentifier ?let @valuedObject entity]
+    [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
     switch entity
     case task (@omnibusType type) :
       currentType = type
-      currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
+      currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
     case driver (@omnibusType type instancied) :
       if instancied then
         currentType = type
-        currentLLVMAddressVar = llvmNameForGlobalVariable (!mIdentifier)
+        currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
       else
-        error mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
+        error self.mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
       end
     case globalConstant (*) :
-      error mIdentifier
+      error self.mIdentifier
         : "a global constant cannot be used in this context"
         : currentType, currentLLVMAddressVar
     case localConstant (@omnibusType type @lstring omnibusName *) :
@@ -273,7 +273,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
 #--- Get current object property map
   var currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
 #--- Insulate last access (should be a "property", used as routine name
-  var accessList = mAccessList
+  var accessList = self.mAccessList
   [!?accessList popLast ?let lastAccess]
 #--- loop on access list
   for (access) in accessList do
@@ -331,7 +331,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :
-    let methodMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
+    let methodMangledName = [self.mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
     [inContext.mRoutineMap searchKey
       !methodMangledName
       ?let unused implementedPublic
@@ -357,7 +357,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !formal:formalSignature
-      !effective:mArguments
+      !effective:self.mArguments
       !errorLocation:methodName.location
       !context:inContext
       !requiredMode:inMode

@@ -33,22 +33,22 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph addNode !mDynamicArrayTypeName !self]
-  [!?ioGraph addEdge !mDynamicArrayTypeName !mElementTypeName]
-  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !mDynamicArrayTypeName.location}
-  [!?ioGraph addEdge !mDynamicArrayTypeName !rootNode]
+  [!?ioGraph addNode !self.mDynamicArrayTypeName !self]
+  [!?ioGraph addEdge !self.mDynamicArrayTypeName !self.mElementTypeName]
+  let rootNode = @lstring.new {!configurationNodeNameForPrecedenceGraph () !self.mDynamicArrayTypeName.location}
+  [!?ioGraph addEdge !self.mDynamicArrayTypeName !rootNode]
 }
 
 #·······················································································································
 
 override getter @typeDynamicArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous " + mDynamicArrayTypeName 
+  outRepresentation = "anonymous " + self.mDynamicArrayTypeName 
 }
 
 #·······················································································································
 
 override getter @typeDynamicArrayDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mDynamicArrayTypeName.location
+  outLocation = self.mDynamicArrayTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -66,36 +66,36 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   if not ioContext.mTargetParameters.mHandleDynamicArray then
-    error mElementTypeName : "this target does not handle dynamic array"
+    error self.mElementTypeName : "this target does not handle dynamic array"
   end
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mDynamicArrayTypeName ?let arrayTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mDynamicArrayTypeName ?let arrayTypeProxy]
 #-------------------------------------------- Get element type
-  [ioContext.mTypeMap searchKey !lkey:mElementTypeName ?type:let elementType]
+  [ioContext.mTypeMap searchKey !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
-    error mElementTypeName : "an array element should be copyable"
+    error self.mElementTypeName : "an array element should be copyable"
   end
   if not [elementType instanciable] then
-    error mElementTypeName : "an array element should be instanciable"
+    error self.mElementTypeName : "an array element should be instanciable"
   end
 #-------------------------------------------- Original type name
-  let omnibusTypeDescriptionName = @lstring.new {!"[" + elementType.omnibusTypeDescriptionName + "]" !mDynamicArrayTypeName}
-  let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !mDynamicArrayTypeName}
+  let omnibusTypeDescriptionName = @lstring.new {!"[" + elementType.omnibusTypeDescriptionName + "]" !self.mDynamicArrayTypeName}
+  let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !self.mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
     [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type:var type]
     [!?ioContext.mTypeMap insertType
-      !lkey:mDynamicArrayTypeName
+      !lkey:self.mDynamicArrayTypeName
       !type:type
     ]
   else
     [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["u32" nowhere] ?let uint32TypeProxy]
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mElementTypeName ?let elementTypeProxy]
+    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
   #--- Method 'removeAll()'
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:.new {!"removeAll" !mDynamicArrayTypeName}
+      !methodName:.new {!"removeAll" !self.mDynamicArrayTypeName}
       !mode:.anySafeMode
       !resultTypeProxy: .null
       ?routineLLVMName:var routineLLVMName
@@ -109,7 +109,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:. new {!"length" !mDynamicArrayTypeName}
+      !methodName:. new {!"length" !self.mDynamicArrayTypeName}
       !mode:.anySafeMode
       !resultTypeProxy: uint32TypeProxy
       ?routineLLVMName:routineLLVMName
@@ -124,7 +124,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName:. new {!"insert" !mDynamicArrayTypeName}
+      !methodName:. new {!"insert" !self.mDynamicArrayTypeName}
       !mode:.anySafeMode
       !inputArgumentSelector1:""
       !inputArgumentTypeProxy1:elementTypeProxy
@@ -146,7 +146,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !omnibusTypeDescriptionName: omnibusTypeDescriptionName
       !?context:ioContext
       !llvmBaseTypeName:llvmBaseTypeName
-      !methodName: .new {!"append" !mDynamicArrayTypeName}
+      !methodName: .new {!"append" !self.mDynamicArrayTypeName}
       !mode: .anySafeMode
       !inputArgumentSelector: ""
       !inputArgumentTypeProxy: elementTypeProxy
@@ -178,13 +178,13 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !llvmBaseTypeName:llvmBaseTypeName
     }
     [!?ioContext.mTypeMap insertType
-      !lkey:mDynamicArrayTypeName
+      !lkey:self.mDynamicArrayTypeName
       !type:dynamicArrayType
     ]
   #-------------------------------------------- Assignment
   let assignmentFunctionName = assignmentOperatorFuncName (!dynamicArrayType !dynamicArrayType)
    let routine = @dynamicArrayTypeAssignGenericFunctionIR.new {
-      !.new {!assignmentFunctionName !mDynamicArrayTypeName.location}
+      !.new {!assignmentFunctionName !self.mDynamicArrayTypeName.location}
       !isRequired: false
       !warnsIfUnused: false
     }
@@ -193,7 +193,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !dynamicArrayType
       !assignmentFunctionName
     }
-    let key = assignmentOperatorKey (!dynamicArrayType !mDynamicArrayTypeName.location !dynamicArrayType)
+    let key = assignmentOperatorKey (!dynamicArrayType !self.mDynamicArrayTypeName.location !dynamicArrayType)
     [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
 
 
@@ -292,7 +292,7 @@ override method @dynArrayRemoveAllFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  call void @arc.release (%ptrtype %buffer.pointer)\n"
@@ -316,7 +316,7 @@ override method @dynArrayLengthFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  ioLLVMcode += "define internal i32 @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal i32 @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (%ptrtype* %ioArray)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
   ioLLVMcode += "  %length = call i32 @arc.length (%ptrtype %buffer.pointer)\n"
@@ -340,7 +340,7 @@ override method @dynArrayAppendFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !mInsertFunctionMangledName
+  ioInvokedRoutineSet += !self.mInsertFunctionMangledName
 }
 
 #·······················································································································
@@ -351,7 +351,7 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  let elementType = [mElementTypeProxy type]
+  let elementType = [self.mElementTypeProxy type]
   let @routineFormalArgumentListAST argumentList = {
     !.input
     !["" nowhere]
@@ -364,12 +364,12 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
     !["inIndex" nowhere]
   }
   let insertRoutineMangledName = routineMangledNameFromAST (
-    ![mArrayTypeProxy type].llvmBaseTypeName
+    ![self.mArrayTypeProxy type].llvmBaseTypeName
     !["insert" nowhere]
     !argumentList
   )
   let insertRoutineLLVMName = llvmNameForFunction (!insertRoutineMangledName.string)
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
              + " (%ptrtype* %ioArray, " + [elementType llvmTypeName] + " %inValue)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Get buffer length\n"
   ioLLVMcode += "  %current.buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"
@@ -396,7 +396,7 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  let assignRoutineLLVMName = assignmentOperatorFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
+  let assignRoutineLLVMName = assignmentOperatorFuncName (![self.mElementTypeProxy type] ![self.mElementTypeProxy type])
   ioInvokedRoutineSet += !assignRoutineLLVMName
 }
 
@@ -408,8 +408,8 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
-  let elementLLVMTypeName = [[mElementTypeProxy type] llvmTypeName]
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
+  let elementLLVMTypeName = [[self.mElementTypeProxy type] llvmTypeName]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation] + " (%ptrtype* %ioArray"
   ioLLVMcode += ", " + elementLLVMTypeName + " %inValue, i32 %inIndex)" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += ";--- Inserted element pointer\n"
   ioLLVMcode += "  %insert.address = alloca %ptrtype\n"
@@ -425,7 +425,7 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
   ioLLVMcode += "(%ptrtype %current.buffer.pointer, i32 %inIndex, i32 %element.byte.size, %ptrtype* %insert.address)\n"
   ioLLVMcode += ";--- Perform copy\n"
   ioLLVMcode += "  %typed.insert.address = bitcast %ptrtype* %insert.address to " + elementLLVMTypeName + "*\n"
-  let assignRoutineLLVMName = assignmentOperatorFuncName (![mElementTypeProxy type] ![mElementTypeProxy type])
+  let assignRoutineLLVMName = assignmentOperatorFuncName (![self.mElementTypeProxy type] ![self.mElementTypeProxy type])
   ioLLVMcode += "  call void @" + [assignRoutineLLVMName assemblerRepresentation]
   ioLLVMcode += " (" + elementLLVMTypeName + "* %typed.insert.address, " + elementLLVMTypeName + "* %value.pointer)\n"
   ioLLVMcode += ";--- Store new buffer pointer\n"
@@ -458,10 +458,10 @@ override method @dynamicArrayTypeAssignUsage generateCode
 {
   let targetTypeName = [inTargetType llvmTypeName]
   if inTargetIsInitialized then
-    let s = " call void  @" + [mAssignFunctionName assemblerRepresentation] 
+    let s = " call void  @" + [self.mAssignFunctionName assemblerRepresentation] 
         + " (" + targetTypeName + "* " + inTargetLLVMName 
           + ", " + targetTypeName + "* " + [inSourcePossibleReference llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!mAssignFunctionName}]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !{!self.mAssignFunctionName}]
   else # Not initialized, perform a store  
     @objectIR sourceValue = inSourcePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
@@ -484,7 +484,7 @@ override method @dynamicArrayTypeAssignGenericFunctionIR llvmCodeGeneration
 {
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
 #--- Assignment
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
   ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
   ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 

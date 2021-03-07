@@ -850,24 +850,3 @@ void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
                                       class C_Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Function 'assignmentOperatorFuncName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_assignmentOperatorFuncName (const class GALGAS_omnibusType & constinArgument0,
-                                                         const class GALGAS_omnibusType & constinArgument1,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Function 'assignValueToFixedSizeArrayElements_functionName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
-                                                                                  class C_Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) ;
-

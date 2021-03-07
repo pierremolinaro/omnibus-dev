@@ -24,10 +24,10 @@ override method @selectInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mTargetValue llvmName] + " = select "
-  ioLLVMcode += "i1 " + m_if_variableLLVMName + ", "
-  ioLLVMcode += [[m_then_variable type] llvmTypeName] + " " + [m_then_variable llvmName] + ", "
-  ioLLVMcode += [[m_else_variable type] llvmTypeName] + " " + [m_else_variable llvmName] + "\n"
+  ioLLVMcode += "  " + [self.mTargetValue llvmName] + " = select "
+  ioLLVMcode += "i1 " + self.m_if_variableLLVMName + ", "
+  ioLLVMcode += [[self.m_then_variable type] llvmTypeName] + " " + [self.m_then_variable llvmName] + ", "
+  ioLLVMcode += [[self.m_else_variable type] llvmTypeName] + " " + [self.m_else_variable llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

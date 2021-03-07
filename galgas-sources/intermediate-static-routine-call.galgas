@@ -15,13 +15,13 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  "
-  if mResult == .void then
+  if self.mResult == .void then
     ioLLVMcode += "call void"
   else
-    ioLLVMcode += [mResult llvmName] + " = call " + [mResult llvmTypeName]
+    ioLLVMcode += [self.mResult llvmName] + " = call " + [self.mResult llvmTypeName]
   end
-  ioLLVMcode += " @" + [mFunctionNameForGeneration assemblerRepresentation] + " ("
-  for () in mArgumentList do
+  ioLLVMcode += " @" + [self.mFunctionNameForGeneration assemblerRepresentation] + " ("
+  for () in self.mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:
       ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]
@@ -42,7 +42,7 @@ override method @standaloneRoutineCallIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  ioInvokedRoutineSet += !mFunctionNameForGeneration
+  ioInvokedRoutineSet += !self.mFunctionNameForGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

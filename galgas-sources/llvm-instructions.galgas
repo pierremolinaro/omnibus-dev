@@ -117,13 +117,13 @@ abstract method @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMa
 #·······················································································································
 
 override method @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
-  [!?ioMap insertKey !mVariableName]
+  [!?ioMap insertKey !self.mVariableName]
 }
 
 #·······················································································································
 
 override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
-  for (element) in mGenerationList do
+  for (element) in self.mGenerationList do
     switch element
     case string (*) :
     case symbol (name) :
@@ -179,7 +179,7 @@ override method @llvmGenerationInstruction generateIRCode
     ?!@allocaList unused ioAllocaList
 {
    var s = ""
-   for (element) in mGenerationList do
+   for (element) in self.mGenerationList do
      switch element 
      case string (value) :
        s += value
@@ -205,7 +205,7 @@ override method @llvmVarInstruction generateIRCode
 {
   let newTemporaryVariable = "%temp" + ioTemporaryIndex
   ioTemporaryIndex ++
-  [!?ioVarMap insertKey !mVariableName !newTemporaryVariable]
+  [!?ioVarMap insertKey !self.mVariableName !newTemporaryVariable]
 }
 
 

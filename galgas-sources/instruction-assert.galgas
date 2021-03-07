@@ -33,7 +33,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assertInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,11 +52,11 @@ override method @assertInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inMode == .panicMode then
-    error mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
+    error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
-  [mExpression analyzeExpression
+  [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -71,16 +71,16 @@ override method @assertInstructionAST instructionSemanticAnalysis
   ]
 #--- Check inferred type
   if not [[expressionValue type].kind isBoolean] then
-    error mInstructionLocation : "expression is not boolean"
+    error self.mInstructionLocation : "expression is not boolean"
   end
 #--- Check expression is not static
   if [expressionValue isStatic] then
-    error mInstructionLocation : "expression is static: use check directive"
+    error self.mInstructionLocation : "expression is static: use check directive"
   end
 #--- Code generation
   if not [option omnibus_options.noPanicGeneration value] then
     ioInstructionGenerationList += !@assertInstructionIR.new {
-      !mInstructionLocation
+      !self.mInstructionLocation
       !instructionGenerationList
       !expressionValue
     }
@@ -104,14 +104,14 @@ override method @assertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
+  [self.mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
   let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
   let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex ++
-  ioLLVMcode += "  br i1 " + [mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
+  ioLLVMcode += "  br i1 " + [self.mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
   ioLLVMcode += labelAssertEr + ":\n"
-  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mAssertInstructionLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mAssertInstructionLocation line] + ", "
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mAssertInstructionLocation) assemblerRepresentation] + " ("
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mAssertInstructionLocation line] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelAssertOk + ":\n"
@@ -123,8 +123,8 @@ override method @assertInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mAssertInstructionLocation)
+  [self.mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mAssertInstructionLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

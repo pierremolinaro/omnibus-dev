@@ -26,9 +26,9 @@ override method @getUniversalArrayElementReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  " + mElementLLVMName + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + mLLVMName + ", i32 0, " + [mIndexIR llvmTypeName] + " " + [mIndexIR llvmName] + "\n"
+  let llvmType = [self.mType llvmTypeName]
+  ioLLVMcode += "  " + self.mElementLLVMName + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + self.mLLVMName + ", i32 0, " + [self.mIndexIR llvmTypeName] + " " + [self.mIndexIR llvmName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

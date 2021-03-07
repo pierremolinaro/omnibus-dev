@@ -41,7 +41,7 @@ override method @addressofControlRegisterAST addDependenceEdgeForStaticExpressio
 override method @addressofControlRegisterAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -61,7 +61,7 @@ override method @addressofControlRegisterAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:false
     !self: inSelfType
     !routineAttributes: inRoutineAttributes

@@ -65,8 +65,8 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mSwitchExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  for (* instructionList) in mSwitchCaseList do
+  [self.mSwitchExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (* instructionList) in self.mSwitchCaseList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -88,7 +88,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
 {
 #--- Analyze test expression
   @instructionListIR switchExpressionGenerationList = {}
-  [mSwitchExpression analyzeExpression
+  [self.mSwitchExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
     !optionalTargetType:voidType ()
@@ -106,21 +106,21 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?switchValueIR
   ]  
 #--- Check inferred type
-  let switchTypeName = @lstring.new {![switchValueIR type].omnibusTypeDescriptionName !mEndOf_test_expression}
+  let switchTypeName = @lstring.new {![switchValueIR type].omnibusTypeDescriptionName !self.mEndOf_test_expression}
   [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
 #  let enumConstantMap = [switchValueIR type].classConstantMap
   if not [[switchValueIR type].kind isEnumeration] then
-    error mEndOf_test_expression
+    error self.mEndOf_test_expression
       : "test expression type is '" + [switchValueIR omnibusTypeDescriptionName] + "', it should be boolean"
   end
   if [switchValueIR isStatic] then
-    error mEndOf_test_expression : "test expression type should not be static"
+    error self.mEndOf_test_expression : "test expression type should not be static"
   end
 #--- Analyse case list
   [!?ioUniversalMap openOverrideForSelectBlock]
   @stringset usedEnumerationValues = {}
   @switchCaseListIR switchCaseListIR = {}
-  for (caseIdentifiers instructionList) in mSwitchCaseList do
+  for (caseIdentifiers instructionList) in self.mSwitchCaseList do
     @uintlist caseIdentifierIndexList = {}
     for (caseIdf) in caseIdentifiers do
       [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
@@ -134,7 +134,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
-      !endOfInstructionList:mEndOf_switch_instruction
+      !endOfInstructionList:self.mEndOf_switch_instruction
       !context:inContext
       !mode:inMode
       !?temporary:ioTemporaries
@@ -145,16 +145,16 @@ override method @switchInstructionAST instructionSemanticAnalysis
     ]
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end  
-  [!?ioUniversalMap closeOverride !mEndOf_switch_instruction]
+  [!?ioUniversalMap closeOverride !self.mEndOf_switch_instruction]
 #--- Check all enumeration values are named in switch instructions
   for (lkey 2*) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
-      error mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
+      error self.mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
     end  
   end 
 #--- Code generation
   ioInstructionGenerationList += !@switchInstructionIR.new {
-    ![mEndOf_test_expression locationIndex]
+    ![self.mEndOf_test_expression locationIndex]
     !switchExpressionGenerationList
     !switchValueIR
     !switchCaseListIR
@@ -187,21 +187,21 @@ override method @switchInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
 #--- Generate instructions that compute switch expression
-  [mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 #--- Generate switch instruction
-  let labelOtherwise = "switch." + mLabelIndex + ".otherwise"
-  ioLLVMcode += "  switch " + [mSwitchExpression llvmTypeName] + " " + [mSwitchExpression llvmName]
+  let labelOtherwise = "switch." + self.mLabelIndex + ".otherwise"
+  ioLLVMcode += "  switch " + [self.mSwitchExpression llvmTypeName] + " " + [self.mSwitchExpression llvmName]
   ioLLVMcode += ", label %" + labelOtherwise + " [\n"
-  for (caseIdentifierIndexes *) in mCaseGenerationList do (branchIdx)
+  for (caseIdentifierIndexes *) in self.mCaseGenerationList do (branchIdx)
     for (caseIdfIndex) in caseIdentifierIndexes do
-      ioLLVMcode += "    " + [mSwitchExpression llvmTypeName] + " " + caseIdfIndex
-      ioLLVMcode += ", label %switch." + mLabelIndex + ".branch." + branchIdx + "\n"
+      ioLLVMcode += "    " + [self.mSwitchExpression llvmTypeName] + " " + caseIdfIndex
+      ioLLVMcode += ", label %switch." + self.mLabelIndex + ".branch." + branchIdx + "\n"
     end
   end
   ioLLVMcode += "  ]\n\n"
 #--- Generate branches
-  for (* instructionList) in mCaseGenerationList do (branchIdx)
-    ioLLVMcode += "switch." + mLabelIndex + ".branch." + branchIdx + ":\n"
+  for (* instructionList) in self.mCaseGenerationList do (branchIdx)
+    ioLLVMcode += "switch." + self.mLabelIndex + ".branch." + branchIdx + ":\n"
     [instructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  br label %" + labelOtherwise + "\n\n"
   end
@@ -215,8 +215,8 @@ override method @switchInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mSwitchExpressionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  for (* instructionList) in mCaseGenerationList do
+  [self.mSwitchExpressionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  for (* instructionList) in self.mCaseGenerationList do
     [instructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   end
 }

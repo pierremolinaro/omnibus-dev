@@ -10,6 +10,99 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
+//Routine 'codeOptimization'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_codeOptimization (const class GALGAS_string constinArgument0,
+                               class GALGAS_intermediateCodeStruct & ioArgument1,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'displayInvocationGraph'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_displayInvocationGraph (const class GALGAS_routineListIR constinArgument0,
+                                     const class GALGAS_string constinArgument1,
+                                     class C_Compiler * inCompiler
+                                     COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'asSeparatorLine'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_asSeparatorLine (class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'asTitleComment'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_asTitleComment (const class GALGAS_string & constinArgument0,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'codeGeneration'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_codeGeneration (const class GALGAS_string constinArgument0,
+                             const class GALGAS_string constinArgument1,
+                             const class GALGAS_location constinArgument2,
+                             const class GALGAS_intermediateCodeStruct constinArgument3,
+                             const class GALGAS_userLLVMTypeDefinitionListIR constinArgument4,
+                             const class GALGAS_lstring constinArgument5,
+                             const class GALGAS_omnibusType constinArgument6,
+                             const class GALGAS_omnibusType constinArgument7,
+                             const class GALGAS_availableInterruptMap constinArgument8,
+                             const class GALGAS_staticListInitializationMap constinArgument9,
+                             const class GALGAS_targetParameters constinArgument10,
+                             class C_Compiler * inCompiler
+                             COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'generateCodeFiles'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
+                                const class GALGAS_string constinArgument1,
+                                const class GALGAS_intermediateCodeStruct constinArgument2,
+                                const class GALGAS_userLLVMTypeDefinitionListIR constinArgument3,
+                                const class GALGAS_lstring constinArgument4,
+                                const class GALGAS_omnibusType constinArgument5,
+                                const class GALGAS_omnibusType constinArgument6,
+                                const class GALGAS_availableInterruptMap constinArgument7,
+                                const class GALGAS_staticListInitializationMap constinArgument8,
+                                const class GALGAS_targetParameters constinArgument9,
+                                class C_Compiler * inCompiler
+                                COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'generateTarget'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_generateTarget (const class GALGAS_string constinArgument0,
+                             const class GALGAS_string constinArgument1,
+                             const class GALGAS_lstring constinArgument2,
+                             const class GALGAS_targetParameters constinArgument3,
+                             class C_Compiler * inCompiler
+                             COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
 //Filewrapper 'targetTemplates'
 //
 //----------------------------------------------------------------------------------------------------------------------

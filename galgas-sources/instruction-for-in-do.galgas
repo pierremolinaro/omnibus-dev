@@ -70,7 +70,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -89,29 +89,29 @@ override method @forInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze iterated expression
-  [!?ioUniversalMap searchValuedObjectForReadAccess !mIteratedObject ?let @objectIR iteratedObjectPointer]
+  [!?ioUniversalMap searchValuedObjectForReadAccess !self.mIteratedObject ?let @objectIR iteratedObjectPointer]
 #--- Type kind
   let iteratedType = [iteratedObjectPointer type]
 #--- Get iterated element type
   @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
-    error mIteratedObject : "this object is not enumerable" : iteratedElementType
+    error self.mIteratedObject : "this object is not enumerable" : iteratedElementType
   case literalString :
     iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["u8" nowhere]} type]
   case staticSubscript (elementType *) :
     iteratedElementType = elementType
   end
 #---
-  let omnibusName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex ++
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !iteratedElementType !false
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioUniversalMap insertLocalConstant !mVarName !false !iteratedElementType !omnibusName]
+  [!?ioUniversalMap insertLocalConstant !self.mVarName !false !iteratedElementType !omnibusName]
 #------------------------------------ Analyze while expression
   @instructionListIR whileExpression_GenerationList = {}
-  [mWhileExpression analyzeExpression
+  [self.mWhileExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -127,7 +127,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Check "while" expression type is boolean
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !whileExpressionResult
-    !mEndOf_whileExpression
+    !self.mEndOf_whileExpression
     !?ioTemporaries
     !?whileExpression_GenerationList
     !?alloca: ioAllocaList
@@ -136,7 +136,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   switch whileExpressionBooleanResult 
   case compileTime (boolValue) :
     if not boolValue then
-      error mEndOf_whileExpression : "test expression is always false"
+      error self.mEndOf_whileExpression : "test expression is always false"
     end
   case llvmVariable (*) :
   end
@@ -151,10 +151,10 @@ override method @forInstructionAST instructionSemanticAnalysis
 #  end
 #------------------------------------ "DO" instruction list
   @instructionListIR doInstructionList_GenerationList = {}
-  [mDoInstructionList analyzeBranchInstructionList
+  [self.mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:mEndOf_for_instruction
+    !endOfInstructionList:self.mEndOf_for_instruction
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
@@ -163,14 +163,14 @@ override method @forInstructionAST instructionSemanticAnalysis
     !?alloca:ioAllocaList
     !?instructionListIR:doInstructionList_GenerationList
   ]
-  [!?ioUniversalMap closeOverride !mEndOf_for_instruction]
+  [!?ioUniversalMap closeOverride !self.mEndOf_for_instruction]
 #------------------------------------ Code generation
   switch iteratedType.subscript
   case noSubscript :
   case literalString :
     ioInstructionGenerationList += !@forInstructionOnLiteralStringIR.new {
       !omnibusName
-      !mIteratedObject.location
+      !self.mIteratedObject.location
       !iteratedObjectPointer
       !iteratedType
       !whileExpression_GenerationList
@@ -180,12 +180,12 @@ override method @forInstructionAST instructionSemanticAnalysis
   case staticSubscript (elementType size) :
   #--- Static array map ? If yes, enter invoked function set
     @stringset invokedFunctionSet = {}
-    if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !mIteratedObject] then
-      [ioTemporaries.mStaticArrayMapForTemporaries searchKey !mIteratedObject ?invokedFunctionSet]
+    if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !self.mIteratedObject] then
+      [ioTemporaries.mStaticArrayMapForTemporaries searchKey !self.mIteratedObject ?invokedFunctionSet]
     end
     ioInstructionGenerationList += !@forInstructionOnArrayIR.new {
       !omnibusName
-      !mIteratedObject
+      !self.mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList
       ![whileExpressionBooleanResult llvmName]
@@ -250,9 +250,9 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let elementTypeLLVMName = [mElementType llvmTypeName]
-  let listTypeLLVMName = "[" + mArraySize + " x " + elementTypeLLVMName + "]"
-  let locationIndex = [[mIteratedObjectName.location locationIndex] string]
+  let elementTypeLLVMName = [self.mElementType llvmTypeName]
+  let listTypeLLVMName = "[" + self.mArraySize + " x " + elementTypeLLVMName + "]"
+  let locationIndex = [[self.mIteratedObjectName.location locationIndex] string]
   
   let startLabel = "for.label.start." + locationIndex
   let testLabel = "for.label.test." + locationIndex
@@ -273,7 +273,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += startLabel + ":\n"
 #--- Init pointer
   ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
-  ioLLVMcode += ", " + listTypeLLVMName + "* " + [mIteratedObject llvmName]
+  ioLLVMcode += ", " + listTypeLLVMName + "* " + [self.mIteratedObject llvmName]
   ioLLVMcode += ", i32 0, i32 0\n"
 #--- Init index
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
@@ -284,7 +284,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += "  %" + ptrVar + " = phi " + elementTypeLLVMName + "* [%" + ptrVar + ".start, %" + startLabel
               + "], [%" + ptrVar + ".next, %" + nextLabel + "]\n"
 #--- Index var
-  ioLLVMcode += "  %" + indexVar + " = phi i32 [" + mArraySize + ", %" + startLabel
+  ioLLVMcode += "  %" + indexVar + " = phi i32 [" + self.mArraySize + ", %" + startLabel
               + "], [%" + indexVar + ".next, %" + nextLabel + "]\n"
   ioLLVMcode += "  %" + loopVar + " = icmp ugt i32 %" + indexVar + ", 0\n"
 #--- Ptr var
@@ -293,8 +293,8 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 #------------ While
   ioLLVMcode += whileLabel + ":\n"
 #--- While instructions
-  [mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + mWhileExpressionBooleanResult_llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
+  [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + self.mWhileExpressionBooleanResult_llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 #------------ Loop  
   ioLLVMcode += loopLabel + ":\n"
@@ -302,9 +302,9 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += "  %" + currentValue + " = load " + elementTypeLLVMName + ", "
   ioLLVMcode += elementTypeLLVMName + "* %" + ptrVar + "\n"
   ioLLVMcode += "  store " + elementTypeLLVMName + " %" + currentValue + ", " + elementTypeLLVMName
-             + "* " + llvmNameForLocalVariable (!mEnumeratedValueName) + "\n"
+             + "* " + llvmNameForLocalVariable (!self.mEnumeratedValueName) + "\n"
 #--- Loop instructions
-  [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 
   ioLLVMcode += nextLabel + ":\n"
@@ -325,9 +325,9 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  ioInvokedRoutineSet += mInvokedFunctionSet
+  [self.mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  ioInvokedRoutineSet += self.mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -351,20 +351,20 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel = "for.label.start." + [mLocation locationIndex]
-  let testLabel = "for.label.test." + [mLocation locationIndex]
-  let loopLabel = "for.label.loop." + [mLocation locationIndex]
-  let whileLabel = "for.label.while." + [mLocation locationIndex]
-  let nextLabel = "for.label.next." + [mLocation locationIndex]
-  let endLabel  = "for.label.end." + [mLocation locationIndex]
-  let ptrVar    = "for.ptr." + [mLocation locationIndex]
-  let currentVar = "for.current." + [mLocation locationIndex]
-  let stringLLVMTypeName = [mLiteralStringType llvmTypeName]
+  let startLabel = "for.label.start." + [self.mLocation locationIndex]
+  let testLabel = "for.label.test." + [self.mLocation locationIndex]
+  let loopLabel = "for.label.loop." + [self.mLocation locationIndex]
+  let whileLabel = "for.label.while." + [self.mLocation locationIndex]
+  let nextLabel = "for.label.next." + [self.mLocation locationIndex]
+  let endLabel  = "for.label.end." + [self.mLocation locationIndex]
+  let ptrVar    = "for.ptr." + [self.mLocation locationIndex]
+  let currentVar = "for.current." + [self.mLocation locationIndex]
+  let stringLLVMTypeName = [self.mLiteralStringType llvmTypeName]
 #--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
   ioLLVMcode += startLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [mStringElementIteratedObject llvmName] + "\n"
+  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [self.mStringElementIteratedObject llvmName] + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 #------------ Test
@@ -378,16 +378,16 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
 #------------ While
   ioLLVMcode += whileLabel + ":\n"
 #--- While instructions
-  [mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
+  [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + [self.mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 #--------------------- Loop  
   ioLLVMcode += loopLabel + ":\n"
 #--- Get current value
   ioLLVMcode += "  store i8 %" + currentVar + ", "
-  ioLLVMcode += "i8 * " + llvmNameForLocalVariable (!mVarName) + "\n"
+  ioLLVMcode += "i8 * " + llvmNameForLocalVariable (!self.mVarName) + "\n"
 #--- Loop body
-  [mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 #--- Next value
   ioLLVMcode += nextLabel + ":\n"
@@ -405,8 +405,8 @@ override method @forInstructionOnLiteralStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

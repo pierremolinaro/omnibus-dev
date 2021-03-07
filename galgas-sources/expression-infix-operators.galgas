@@ -65,8 +65,8 @@ override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExp
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -74,8 +74,8 @@ override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExp
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -115,7 +115,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #------------------- Analyze left expression
-  [mLeftExpression analyzeExpression
+  [self.mLeftExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -129,7 +129,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     ?result:@objectIR leftOperand
   ]
 #------------------- Analyze right expression
-  [mRightExpression analyzeExpression
+  [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:[leftOperand type]
@@ -145,8 +145,8 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 #------------------- Generate code
   [inContext.mInfixOperatorMap generateInfixOperatorCode
     !leftOperand
-    !mInfixOperator
-    !mOperatorLocation
+    !self.mInfixOperator
+    !self.mOperatorLocation
     !rightOperand
     !?ioTemporaries
     !?ioAllocaList

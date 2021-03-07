@@ -43,7 +43,7 @@ override method @addressofExpressionAST addDependenceEdgeForStaticExpression
 override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mLValue noteInstructionTypesInPrecedenceGraph !?ioGraph]
+  [self.mLValue noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,10 +64,10 @@ override method @addressofExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes guard] then
-    error mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
+    error self.mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue
-    [mLValue analyzeLValue
+    [self.mLValue analyzeLValue
       !self: inSelfType
       !forAddressOf:true
       !routineAttributes:inRoutineAttributes
@@ -109,8 +109,8 @@ override method @addressofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mTarget llvmName] + " = ptrtoint " + [mLValue.type llvmTypeName] + "* " + mLValue.llvmName
-             + " to " + [mTarget llvmTypeName] + " ; addressof\n"
+  ioLLVMcode += "  " + [self.mTarget llvmName] + " = ptrtoint " + [self.mLValue.type llvmTypeName] + "* " + self.mLValue.llvmName
+             + " to " + [self.mTarget llvmTypeName] + " ; addressof\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

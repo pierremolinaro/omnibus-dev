@@ -17,7 +17,7 @@ override method @releaseIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [mType generateRelease !mOmnibusName !?ioLLVMcode !?ioGenerationAdds]
+  [self.mType generateRelease !self.mOmnibusName !?ioLLVMcode !?ioGenerationAdds]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

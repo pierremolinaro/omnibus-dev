@@ -30,8 +30,8 @@ override method @logicalRightShiftIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mResult llvmName] + " = "
-  ioLLVMcode += "lshr " + [mResult  llvmTypeName] + " " + [mSource llvmName] + ", " + mShiftAmount + "\n"
+  ioLLVMcode += "  " + [self.mResult llvmName] + " = "
+  ioLLVMcode += "lshr " + [self.mResult  llvmTypeName] + " " + [self.mSource llvmName] + ", " + self.mShiftAmount + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

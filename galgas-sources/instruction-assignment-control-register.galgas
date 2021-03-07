@@ -56,8 +56,8 @@ syntax extension omnibus_syntax {
 override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -76,7 +76,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #-------------------- Analyze control register LValue
-  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:true
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
@@ -93,7 +93,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     ?llvmRegisterAddressName:let llvmRegAddressName
   ]
 #-------------------- Analyze source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:registerType
@@ -114,9 +114,9 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
 #-------------------- Perform assignment
   let t = [sourceIR type]
   if not [t copyable] then
-    error mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
+    error self.mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
   else
-    switch mAssignmentKind
+    switch self.mAssignmentKind
     case assignment :
       [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !sourceIR]
     case assignmentWithOperator (infixOperator operatorLocation) :

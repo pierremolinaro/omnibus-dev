@@ -54,7 +54,7 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for (sliceWidthStr expression expressionLocation) in mSliceValues do
+  for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
     [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
@@ -66,8 +66,8 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
 override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph noteNode !mTypeName]
-  for (sliceWidthStr expression expressionLocation) in mSliceValues do
+  [!?ioGraph noteNode !self.mTypeName]
+  for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
     [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     if [sliceWidthStr.string isDecimalUnsignedNumber] then
       let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
@@ -100,32 +100,32 @@ override method @integerSliceExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Search Type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #--- Check type is an unsigned integer type
   if not [resultType.kind isInteger] then
-    error mTypeName: "this type should be an unsigned integer type" :outResult
+    error self.mTypeName: "this type should be an unsigned integer type" :outResult
   else
     [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
     if not unsigned then
-      error mTypeName: "this type should be an unsigned integer type" :outResult
+      error self.mTypeName: "this type should be an unsigned integer type" :outResult
     else
     #------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
       @bigint accumulatedFieldStaticValues = 0G
       @operandIRList operandList = {}
-      for (sliceWidthStr expression expressionLocation) in mSliceValues do
+      for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
         @uint sliceWidth
         @lstring expressionTypeName
         if sliceWidthStr.string == "" then
           error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
         elsif sliceWidthStr.string == "b" then
           sliceWidth = 1
-          expressionTypeName = .new {!boolTypeName () !mTypeName.location}
+          expressionTypeName = .new {!boolTypeName () !self.mTypeName.location}
         elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
           error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"u" + sliceWidth !mTypeName.location}
+          expressionTypeName = .new {!"u" + sliceWidth !self.mTypeName.location}
           if sliceWidth == 0 then
             error sliceWidthStr : "the bit slice width should be > 0"
           end
@@ -228,7 +228,7 @@ override method @integerSliceExpressionAST analyzeExpression
         end
       end
       if leftShiftAmount != 0 then
-        error mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
+        error self.mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
       end
     #------------------------------------------------------ Result
       outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}

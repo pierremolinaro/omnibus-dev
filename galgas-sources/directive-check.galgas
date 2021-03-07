@@ -38,7 +38,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -58,7 +58,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
 {
 #--- Analyze expression
   @instructionListIR instructionGenerationList = {}
-  [mExpression analyzeExpression
+  [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -73,7 +73,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
   ]
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !expressionResult
-    !mCheckMessage.location
+    !self.mCheckMessage.location
     !?ioTemporaries
     !?instructionGenerationList
     !?alloca: ioAllocaList
@@ -83,14 +83,14 @@ override method @checkInstructionAST instructionSemanticAnalysis
   switch booleanOperand 
   case compileTime (boolValue) :
     if not boolValue then
-      if mCheckMessage.string != "" then
-        error mCheckMessage : "check failure: " + mCheckMessage
+      if self.mCheckMessage.string != "" then
+        error self.mCheckMessage : "check failure: " + self.mCheckMessage
       else
-        error mCheckMessage : "check failure"
+        error self.mCheckMessage : "check failure"
       end
     end
   case llvmVariable (*) :
-    error mInstructionLocation : "expression is not static: use assert instruction"
+    error self.mInstructionLocation : "expression is not static: use assert instruction"
   end
 #--- Check inferred type
 #  if not [[expressionResult type].kind isBoolean] then

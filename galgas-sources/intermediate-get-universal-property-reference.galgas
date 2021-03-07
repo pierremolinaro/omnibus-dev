@@ -26,10 +26,10 @@ override method @getUniversalPropertyReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mType llvmTypeName]
-  ioLLVMcode += "  " + mElementLLVMName + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + mLLVMName + ", i32 0, i32 " + mPropertyIndex
-  ioLLVMcode += " ; " + mPropertyName + "\n"
+  let llvmType = [self.mType llvmTypeName]
+  ioLLVMcode += "  " + self.mElementLLVMName + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + self.mLLVMName + ", i32 0, i32 " + self.mPropertyIndex
+  ioLLVMcode += " ; " + self.mPropertyName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

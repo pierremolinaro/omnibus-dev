@@ -23,8 +23,8 @@ override method @storeFromTemporaryReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [mTargetVarType llvmTypeName]
-  ioLLVMcode += "  store " + llvmType + " " + [mSourceValue llvmName] + ", " + llvmType + "* " + mLLVMTargetVarName + "\n"
+  let llvmType = [self.mTargetVarType llvmTypeName]
+  ioLLVMcode += "  store " + llvmType + " " + [self.mSourceValue llvmName] + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -130,19 +130,19 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
                                      ?let @lstring inGetterName
                                      ?let @propertyVisibility inVisibility
                                      ?let @propertyGetterKind inAccess {
-  with inTypeName.string in !?mTypePropertyGetterMap do
+  with inTypeName.string in !?self.mTypePropertyGetterMap do
     [!?mGetterMap insertKey !inGetterName !inVisibility !inAccess]
   else
     @propertyGetterMap getterMap = {}
     [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
-    [!?mTypePropertyGetterMap insertKey !inTypeName !getterMap]
+    [!?self.mTypePropertyGetterMap insertKey !inTypeName !getterMap]
   end
 }
 
 #·······················································································································
 
 getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
-  with inType.omnibusTypeDescriptionName in mTypePropertyGetterMap do
+  with inType.omnibusTypeDescriptionName in self.mTypePropertyGetterMap do
     result = mGetterMap
   else
     result = {}
@@ -161,8 +161,8 @@ setter @semanticContext addComputedPropertyGetter
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   @propertyGetterMap getterMap
-  if [mTypePropertyGetterMap hasKey !inTypeName.string] then
-    [mTypePropertyGetterMap searchKey !inTypeName ?getterMap]
+  if [self.mTypePropertyGetterMap hasKey !inTypeName.string] then
+    [self.mTypePropertyGetterMap searchKey !inTypeName ?getterMap]
   else
     getterMap = {}
   end
@@ -173,7 +173,7 @@ setter @semanticContext addComputedPropertyGetter
     !inVisibility
     !.computedProperty {!typeProxy:inResultTypeProxy !modeDictionary:modeDictionary}
   ]
-  [!?mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
+  [!?self.mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
 }
 
 #·······················································································································
@@ -217,19 +217,19 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
                                              ?let @lstring inSetterName
                                              ?let @propertyVisibility inVisibility
                                              ?let @propertySetterKind inAccess {
-  with inTypeName.string in !?mTypePropertySetterMap do
+  with inTypeName.string in !?self.mTypePropertySetterMap do
     [!?mSetterMap insertKey !inSetterName !inVisibility !inAccess]
   else
     @propertySetterMap setterMap = {}
     [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
-    [!?mTypePropertySetterMap insertKey !inTypeName !setterMap]
+    [!?self.mTypePropertySetterMap insertKey !inTypeName !setterMap]
   end
 }
 
 #·······················································································································
 
 getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
-  with inType.omnibusTypeDescriptionName in mTypePropertySetterMap do
+  with inType.omnibusTypeDescriptionName in self.mTypePropertySetterMap do
     result = mSetterMap
   else
     result = {}
@@ -281,11 +281,11 @@ map @staticStringMap {
 #·······················································································································
 
 setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex {
-  if [mStaticStringMap hasKey !inString]  then
-    [mStaticStringMap searchKey ![inString nowhere] ?outIndex]
+  if [self.mStaticStringMap hasKey !inString]  then
+    [self.mStaticStringMap searchKey ![inString nowhere] ?outIndex]
   else
-    outIndex = [mStaticStringMap count]
-    [!?mStaticStringMap insertKey ![inString nowhere] !outIndex]
+    outIndex = [self.mStaticStringMap count]
+    [!?self.mStaticStringMap insertKey ![inString nowhere] !outIndex]
   end
 }
 
@@ -314,7 +314,7 @@ map @availableInterruptMap {
 #·······················································································································
 
 getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
-  [mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
+  [self.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
 }
 
 #·······················································································································

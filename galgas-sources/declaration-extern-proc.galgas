@@ -84,12 +84,12 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
 #--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !mProcFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !self.mProcFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mReturnTypeName ?let returnTypeProxy]
 #--- Enter in context
-  let @routineLLVMNameDict routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !mRoutineNameForGeneration]
-  let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: mExternProcedureName]
+  let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !self.mRoutineNameForGeneration]
+  let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: self.mExternProcedureName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
     !true
@@ -97,7 +97,7 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
     !returnTypeProxy
     !routineLLVMNameDict
     !false
-    !mMode
+    !self.mMode
   ]
 }
 
@@ -130,25 +130,25 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
-    !mProcFormalArgumentList
+    !self.mProcFormalArgumentList
     !?* # universalMap
     !?formalArguments
     !warningOnUnusedArgs: true
   )
 #--- Return type
-  let returnType = if mReturnTypeName.string == "" then
+  let returnType = if self.mReturnTypeName.string == "" then
     @unifiedTypeMap-proxy.null
   else
-    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReturnTypeName}
+    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mReturnTypeName}
   end
 #--- Routine name for generation
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-    !mRoutineNameForGeneration
+    !self.mRoutineNameForGeneration
     !formalArguments
     !returnType
   ]  
   ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR.new {
-    !mRoutineNameForGeneration
+    !self.mRoutineNameForGeneration
     !isRequired:false # Is not root
     !warnsIfUnused:false
     !formalArguments
@@ -173,13 +173,13 @@ override method @externRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare"
-  if mReturnType == .null then
+  if self.mReturnType == .null then
     ioLLVMcode += " void"
   else
-      ioLLVMcode += " " + [[mReturnType type] llvmTypeName]
+      ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
   end
-  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
-  for () in mFormalArgumentListForGeneration
+  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
+  for () in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
@@ -211,15 +211,15 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcod
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
-  let procName = llvmNameForFunction (!lkey.string)
+  let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
-  if mReturnType == .null then
+  if self.mReturnType == .null then
     ioLLVMcode += " void"
   else
-      ioLLVMcode += " " + [[mReturnType type] llvmTypeName]
+      ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
   end
   ioLLVMcode += " @" + procName + " ("
-  for () in mFormalArgumentListForGeneration
+  for () in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :

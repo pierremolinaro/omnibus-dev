@@ -86,9 +86,9 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mThenInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [mElseInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mThenInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.mElseInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -107,7 +107,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
-  [mTestExpression analyzeExpression
+  [self.mTestExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:voidType ()
@@ -127,7 +127,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testResult
-    !mTestExpressionEndLocation
+    !self.mTestExpressionEndLocation
     !?ioTemporaries
     !?ioInstructionGenerationList
     !?alloca: ioAllocaList
@@ -136,21 +136,21 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #----  
   switch booleanResult 
   case compileTime (*) :
-    if not mStaticIfExpression then
-      warning mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
+    if not self.mStaticIfExpression then
+      warning self.mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
     end
   case llvmVariable (*) :
-    if mStaticIfExpression then
-      error mTestExpressionEndLocation : "'if' expression is not static"
+    if self.mStaticIfExpression then
+      error self.mTestExpressionEndLocation : "'if' expression is not static"
     end 
   end
   [!?ioUniversalMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
   @instructionListIR thenInstructionGenerationList = {}
-  [mThenInstructionList analyzeBranchInstructionList
+  [self.mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:mEndOfThenInstructionList
+    !endOfInstructionList:self.mEndOfThenInstructionList
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
@@ -161,10 +161,10 @@ override method @ifInstructionAST instructionSemanticAnalysis
   ]
 #--- Analyze 'else' instruction list
   @instructionListIR elseInstructionGenerationList = {}
-  [mElseInstructionList analyzeBranchInstructionList
+  [self.mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:mEndOfElseInstructionList
+    !endOfInstructionList:self.mEndOfElseInstructionList
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
@@ -173,11 +173,11 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?alloca:ioAllocaList
     !?instructionListIR:elseInstructionGenerationList
   ]
-  [!?ioUniversalMap closeOverride !mEndOf_if_instruction]
+  [!?ioUniversalMap closeOverride !self.mEndOf_if_instruction]
 #--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR.new {
     ![booleanResult llvmName]
-    !mTestExpressionEndLocation
+    !self.mTestExpressionEndLocation
     !thenInstructionGenerationList
     !elseInstructionGenerationList
  }
@@ -206,14 +206,14 @@ override method @ifInstructionIR llvmInstructionCode
   let labelFalse = "if." + ioGenerationAdds.mUniqueIndex + ".false"
   let labelEnd = "if." + ioGenerationAdds.mUniqueIndex + ".end"
   ioGenerationAdds.mUniqueIndex ++
-  ioLLVMcode += "  br i1 " + mLLVMTestName + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
+  ioLLVMcode += "  br i1 " + self.mLLVMTestName + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioLLVMcode += labelTrue + ":\n"
-  [mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 #--- false branch
   ioLLVMcode += labelFalse + ":\n"
-  [mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 #--- end
   ioLLVMcode += labelEnd + ":\n"
@@ -225,8 +225,8 @@ override method @ifInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mThenInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [mElseInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mThenInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mElseInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

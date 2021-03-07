@@ -41,8 +41,8 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mControlRegisterLValue.mRegisterGroupName]
-  [mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  [!?ioGraph addEdge !inConstantName !self.mControlRegisterLValue.mRegisterGroupName]
+  [self.mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -50,7 +50,7 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -70,7 +70,7 @@ override method @registerInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [mControlRegisterLValue controlRegisterLValueSemanticAnalysis
+  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:false
     !self: inSelfType
     !routineAttributes: inRoutineAttributes
@@ -90,9 +90,9 @@ override method @registerInExpressionAST analyzeExpression
   getNewTempValue (!registerType !?ioTemporaries ?outResult)
   [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !outResult !llvmRegisterAddressName]
 #-------------------- Field access
-  if mFieldName.string != "" then
+  if self.mFieldName.string != "" then
     [sliceMap searchKey
-      !mFieldName
+      !self.mFieldName
       ?let @llvmBinaryOperation accessOperator
       ?let @bigint accessRightOperand
       ?let @omnibusType resultType
@@ -101,7 +101,7 @@ override method @registerInExpressionAST analyzeExpression
     [!?ioInstructionGenerationList appendBinaryOperation
       !resultIR
       ![outResult type]
-      !mFieldName.location
+      !self.mFieldName.location
       !outResult
       !accessOperator
       !.literalInteger {!type: compileTimeIntegerType () !value:accessRightOperand}

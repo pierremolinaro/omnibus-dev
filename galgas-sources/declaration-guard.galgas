@@ -83,35 +83,35 @@ syntax extension omnibus_syntax {
 
 override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = "guard."
-  if mReceiverTypeName.string != "" then
-    s += mReceiverTypeName.string + "."
+  if self.mReceiverTypeName.string != "" then
+    s += self.mReceiverTypeName.string + "."
   end
-  s += mGuardName.string + "("
-  for (formalArgumentPassingMode selector * *) in mGuardFormalArgumentList do
+  s += self.mGuardName.string + "("
+  for (formalArgumentPassingMode selector * *) in self.mGuardFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  [!?ioGraph addNode !.new {!s !mGuardName.location} !self]
+  [!?ioGraph addNode !.new {!s !self.mGuardName.location} !self]
 #---
-  for (* * formalArgumentTypeName *) in mGuardFormalArgumentList do
+  for (* * formalArgumentTypeName *) in self.mGuardFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
-  [mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  if mReceiverTypeName.string != "" then
-    [!?ioGraph noteNode !mReceiverTypeName]
+  [self.mGuardInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if self.mReceiverTypeName.string != "" then
+    [!?ioGraph noteNode !self.mReceiverTypeName]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @guardDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  result = "guard " + mReceiverTypeName + "." + mGuardName
+  result = "guard " + self.mReceiverTypeName + "." + self.mGuardName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @guardDeclarationAST locationForErrorSignaling -> @location {
-  result = mGuardName.location
+  result = self.mGuardName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -129,37 +129,37 @@ override method @guardDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !mGuardFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !self.mGuardFormalArgumentList ?let signature)
 #--- Guard mangled name
-  let guardMangledName = [signature mangledName !receiverTypeName: mReceiverTypeName !functionName: mGuardName]
+  let guardMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName !functionName: self.mGuardName]
 #--- Guard user routine LLVM name
   let guardUserLLVMName = guardUserLLVMName (
-    !mReceiverLLVMBaseTypeName
-    !mGuardName
-    !mGuardFormalArgumentList
+    !self.mReceiverLLVMBaseTypeName
+    !self.mGuardName
+    !self.mGuardFormalArgumentList
   )
 #--- Guard implementation routine LLVM name
   let guardImplementationLLVMName = guardImplementationLLVMName (
-    !mReceiverLLVMBaseTypeName
-    !mGuardName
-    !mGuardFormalArgumentList
+    !self.mReceiverLLVMBaseTypeName
+    !self.mGuardName
+    !self.mGuardFormalArgumentList
   )
   [!?ioContext.mGuardMap insertKey
     !guardMangledName
-    !mIsPublic
+    !self.mIsPublic
     !signature
     !guardUserLLVMName
     !guardImplementationLLVMName
   ]
   ioDecoratedDeclarationList += !@decoratedGuardDeclaration.new {
-    !mReceiverTypeName
-    !mGuardName
-    !mIsPublic
-    !mGuardAttributeList
-    !mGuardFormalArgumentList
-    !mGuardKind
-    !mGuardInstructionList
-    !mEndOfGuardDeclaration
+    !self.mReceiverTypeName
+    !self.mGuardName
+    !self.mIsPublic
+    !self.mGuardAttributeList
+    !self.mGuardFormalArgumentList
+    !self.mGuardKind
+    !self.mGuardInstructionList
+    !self.mEndOfGuardDeclaration
   }
 }
 
@@ -235,10 +235,10 @@ override method @decoratedGuardDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let receiverType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mReceiverTypeName} type]
+  let receiverType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mReceiverTypeName} type]
 #----------- 
   var warnIfUnused = true
-  for (attribute) in mGuardAttributeList do
+  for (attribute) in self.mGuardAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if not warnIfUnused then
         error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
@@ -256,10 +256,10 @@ override method @decoratedGuardDeclaration semanticAnalysis
   @guardKindGenerationIR convenienceGuardGenerationIR
   @allocaList allocaList = {}
   @instructionListIR instructionGenerationList = {}
-  switch mGuardKind
+  switch self.mGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
-    let resultVarName = @lstring.new {!acceptVariableOmnibusName() !mGuardName.location}
+    let resultVarName = @lstring.new {!acceptVariableOmnibusName() !self.mGuardName.location}
 #    let acceptableTypeList = [inContext.mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
     let resultType = [inContext booleanType !resultVarName.location]
 #    if [acceptableTypeList length] == 0 then
@@ -281,14 +281,14 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
-      !mGuardFormalArgumentList
+      !self.mGuardFormalArgumentList
       !?universalMap
       !?formalArguments
       !warningOnUnusedArgs: true
     )
     convenienceGuardGenerationIR = .baseGuard
   #--- Analyze instruction list
-    [mGuardInstructionList analyzeRoutineInstructionList
+    [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
       !routineAttributes:.mutating
       !context:inContext
@@ -303,7 +303,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
-      !mGuardFormalArgumentList
+      !self.mGuardFormalArgumentList
       !?universalMap
       !?formalArguments
       !warningOnUnusedArgs: true
@@ -320,7 +320,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       ?convenienceGuardGenerationIR
     ]
   #--- Analyze instruction list
-    [mGuardInstructionList analyzeRoutineInstructionList
+    [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
       !routineAttributes: .mutating
       !context:inContext
@@ -334,18 +334,18 @@ override method @decoratedGuardDeclaration semanticAnalysis
   end 
 #--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
-  [!?universalMap closeBranch !mEndOfGuardDeclaration]
-  [!?universalMap closeOverride !mEndOfGuardDeclaration]
+  [!?universalMap closeBranch !self.mEndOfGuardDeclaration]
+  [!?universalMap closeOverride !self.mEndOfGuardDeclaration]
 #--- Guard mangled name
   let guardUserLLVMName = guardUserLLVMName (
     !receiverType.llvmBaseTypeName
-    !mGuardName
-    !mGuardFormalArgumentList
+    !self.mGuardName
+    !self.mGuardFormalArgumentList
   )
   let guardImplementationLLVMName = guardImplementationLLVMName (
     !receiverType.llvmBaseTypeName
-    !mGuardName
-    !mGuardFormalArgumentList
+    !self.mGuardName
+    !self.mGuardFormalArgumentList
   )
 #--- Code generation
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR.new {
@@ -395,7 +395,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
+  error self.mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -414,23 +414,23 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   @instructionListIR baseGuardInstructionGenerationList = {}
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
   @objectIR currentObject
-  if mIdentifier.string == "" then # Receiver is self
+  if self.mIdentifier.string == "" then # Receiver is self
     if inSelfType.kind == .void then
-      error mIdentifier : "self is not available in this context" : currentObject
+      error self.mIdentifier : "self is not available in this context" : currentObject
     else
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
     end
   else
     [ioUniversalMap searchValuedObject
-      !mIdentifier
+      !self.mIdentifier
       !inMode
       !ioTemporaries.mInitializedDriverSet
       ?currentObject
     ]
   end
-  var currentErrorLocation = mIdentifier.location
+  var currentErrorLocation = self.mIdentifier.location
 #--- Insulate last access
-  var accessList = mAccessList
+  var accessList = self.mAccessList
   [!?accessList popLast ?let lastAccess]
 #---- Loop on access list
   for (access) in accessList do
@@ -465,7 +465,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let guardMangledName = [mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
+    let guardMangledName = [self.mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
     [inContext.mGuardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
     @procCallEffectiveParameterListIR effectiveParameterListIR = {
@@ -477,7 +477,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !formal:formalSignature
-      !effective:mArguments
+      !effective:self.mArguments
       !errorLocation:methodName.location
       !context:inContext
       !requiredMode:inMode
@@ -527,7 +527,7 @@ override method @guardUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !mMangledImplementationGuardName
+  ioInvokedRoutineSet += !self.mMangledImplementationGuardName
 }
 
 #·······················································································································
@@ -537,9 +537,9 @@ override method @guardUserRoutineIR svcDeclarationGeneration
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
-  let userMangledName = [mRoutineMangledName assemblerRepresentation]
-  let implementationMangledName = [mMangledImplementationGuardName assemblerRepresentation]
-  switch mGuardKindGenerationIR
+  let userMangledName = [self.mRoutineMangledName assemblerRepresentation]
+  let implementationMangledName = [self.mMangledImplementationGuardName assemblerRepresentation]
+  switch self.mGuardKindGenerationIR
   case convenienceGuard (* * * *) :
     ioPrimitiveAndServiceList += !userMangledName !implementationMangledName !false
   case baseGuard :
@@ -559,9 +559,9 @@ override method @guardUserRoutineIR llvmCodeGeneration
 {
   let prototype = llvmFunctionPrototype (
     !"i1" # Boolean
-    ![mRoutineMangledName assemblerRepresentation]
-    !mReceiverType
-    !mFormalArgumentListForGeneration
+    ![self.mRoutineMangledName assemblerRepresentation]
+    !self.mReceiverType
+    !self.mFormalArgumentListForGeneration
   )
   ioLLVMcode += "declare " + prototype + "\n\n"
 }
@@ -583,19 +583,19 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let guardRoutineName = [mRoutineMangledName assemblerRepresentation]
+  let guardRoutineName = [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += "define i1 @" + guardRoutineName + " ("
-  let receiverLLVMTypeName = if mReceiverType.kind == .void then
+  let receiverLLVMTypeName = if self.mReceiverType.kind == .void then
     ""
   else
-    [mReceiverType llvmTypeName]
+    [self.mReceiverType llvmTypeName]
   end
   var first = true
   if receiverLLVMTypeName != "" then
     ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
     first = false
   end
-  for () in mFormalArgumentListForGeneration do
+  for () in self.mFormalArgumentListForGeneration do
     if first then
       first = false
     else
@@ -612,9 +612,9 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Allocate local variables 
-  var allocaList = mAllocaList
+  var allocaList = self.mAllocaList
 #--- Store input arguments in memory
-  for () in mFormalArgumentListForGeneration do
+  for () in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       allocaList += !llvmNameForLocalVariable (!mFormalArgumentName) !mFormalArgumentType !true
@@ -624,7 +624,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
 #--- Allocate local variables 
   [allocaList generateAllocaList !?ioLLVMcode]
 #---
-  for () in mFormalArgumentListForGeneration do
+  for () in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
@@ -637,11 +637,11 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableOmnibusName ())
   let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableOmnibusName () + ".loaded")
 #--- Base guard or convenience guard ?
-  switch mGuardKindGenerationIR
+  switch self.mGuardKindGenerationIR
   case baseGuard :
     let accepted_label = acceptVariableOmnibusName () + ".guard.accepted"
     let rejected_label = acceptVariableOmnibusName () + ".guard.rejected"
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  " + accepted_llvmName_loaded + " = load i1, i1* " + accepted_llvmName + "\n"
     ioLLVMcode += "  br i1 " + accepted_llvmName_loaded + ", label %" + accepted_label + ", label %" + rejected_label + "\n\n"
     ioLLVMcode += accepted_label + ":\n"
@@ -670,7 +670,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     ioLLVMcode += ")\n"
     ioLLVMcode += "  br i1 %invoked.guard.result, label %invoked.guard.acceptation, label %invoked.guard.rejection\n\n"
     ioLLVMcode += "invoked.guard.acceptation:\n"
-    [mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  ret i1 true\n\n"
     ioLLVMcode += "invoked.guard.rejection:\n"
     ioLLVMcode += "  ret i1 false\n"
@@ -686,8 +686,8 @@ override method @guardImplementationRoutineIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  switch mGuardKindGenerationIR
+  [self.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  switch self.mGuardKindGenerationIR
   case baseGuard :
   case convenienceGuard (* baseGuardInstructionGenerationList baseGuardImplementationMangledName *) :
     ioInvokedRoutineSet += !baseGuardImplementationMangledName

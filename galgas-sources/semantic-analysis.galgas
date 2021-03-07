@@ -87,8 +87,8 @@ struct @semanticTemporariesStruct {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
-  outTempLLVMVar = "%temp." + mTemporaryIndex
-  mTemporaryIndex ++
+  outTempLLVMVar = "%temp." + self.mTemporaryIndex
+  self.mTemporaryIndex ++
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

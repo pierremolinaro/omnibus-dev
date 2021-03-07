@@ -18,7 +18,7 @@ override method @freeStringIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + mString + "\n"
+  ioLLVMcode += "  " + self.mString + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -27,7 +27,7 @@ override method @freeStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  ioInvokedRoutineSet += mInvokedFunctionSet
+  ioInvokedRoutineSet += self.mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

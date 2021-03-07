@@ -16,7 +16,7 @@ override method @freeCommentIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += ";--------- " + mComment + "\n"
+  ioLLVMcode += ";--------- " + self.mComment + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

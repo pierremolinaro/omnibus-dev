@@ -50,11 +50,11 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let receiverTypeName = omnibusTypeSpecificNameForDriver (!mDriverName)
-  let s = receiverTypeName.string + "." + mISRName.string + "()"
-  [!?ioGraph addNode !.new {!s !mISRName.location} !self]
+  let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
+  let s = receiverTypeName.string + "." + self.mISRName.string + "()"
+  [!?ioGraph addNode !.new {!s !self.mISRName.location} !self]
 #---
-  [mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  [self.mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   if receiverTypeName.string != "" then
     [!?ioGraph noteNode !receiverTypeName]
   end
@@ -63,14 +63,14 @@ override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecede
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @isrDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  let receiverTypeName = omnibusTypeSpecificNameForDriver (!mDriverName)
-  result = "function " + receiverTypeName + "." + mISRName
+  let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
+  result = "function " + receiverTypeName + "." + self.mISRName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @isrDeclarationAST locationForErrorSignaling -> @location {
-  result = mISRName.location
+  result = self.mISRName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -88,13 +88,13 @@ override method @isrDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
-  ioDecoratedDeclarationList += !@decoratedISRDeclaration.new {!mISRName !mMode !mDriverName}
+  ioDecoratedDeclarationList += !@decoratedISRDeclaration.new {!self.mISRName !self.mMode !self.mDriverName}
 #----------------
-  let driverLLVMBaseTypeName = llvmDriverNameFromName (!mDriverName)
-  let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !mISRName !{})
+  let driverLLVMBaseTypeName = llvmDriverNameFromName (!self.mDriverName)
+  let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !self.mISRName !{})
   ioDecoratedRoutineList +=
-    !receiverTypeName: omnibusTypeSpecificNameForDriver (!mDriverName)
-    !mode: mMode
+    !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
+    !mode: self.mMode
     !isRequired:true
     !routineKind: .function
     !warnIfUnused: true
@@ -103,8 +103,8 @@ override method @isrDeclarationAST enterInContext
     !routineMangledLLVMName: isrRoutineMangledName
     !formalArgumentList: {}
     !warningOnUnusedArgs: true
-    ! mISRInstructionList
-    ! mEndOfISRDeclaration
+    ! self.mISRInstructionList
+    ! self.mEndOfISRDeclaration
     !returnTypeName: ["" nowhere]  # Empty string if no returned value
 }
 
@@ -126,14 +126,14 @@ override method @decoratedISRDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Self type
-  [inContext.mTypeMap searchKey !lkey:omnibusTypeSpecificNameForDriver (!mDriverName) ?type:let selfType]
+  [inContext.mTypeMap searchKey !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName) ?type:let selfType]
 #--- Code generation
-  [inContext.mAvailableInterruptMap searchKey !mISRName ?*]
+  [inContext.mAvailableInterruptMap searchKey !self.mISRName ?*]
   [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
-    !mISRName
+    !self.mISRName
     !selfType
-    !mDriverName
-    !mMode
+    !self.mDriverName
+    !self.mMode
   ]  
 }
 

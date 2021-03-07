@@ -93,16 +93,16 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  if mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !mOptionalTypeName]
+  if self.mOptionalTypeName.string != "" then
+    [!?ioGraph noteNode !self.mOptionalTypeName]
   end
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @varDeclarationInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !mTypeName]
+  [!?ioGraph noteNode !self.mTypeName]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -120,12 +120,12 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @omnibusType targetType = if mOptionalTypeName.string == ""
+  @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mOptionalTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:targetType
@@ -142,13 +142,13 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !inContext.mAssignmentOperatorMap
     !source:sourcePossibleReference
     !targetAnnotationType:targetType
-    !errorLocation:mVarName.location
+    !errorLocation:self.mVarName.location
     !staticTypeAllowed:false
   )
 #--- Declare local variable
-  let omnibusLocalVariableName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusLocalVariableName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex ++
-  [!?ioUniversalMap insertLocalVariable !mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
+  [!?ioUniversalMap insertLocalVariable !self.mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
 #--- Assignment generation
@@ -159,7 +159,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     ![result type]
     !llvmNameForLocalVariable (!omnibusLocalVariableName)
     !sourcePossibleReference
-    !mVarName
+    !self.mVarName
     !initializedTarget: false
   ]
 }
@@ -177,17 +177,17 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-  let targetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let targetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #---
   if [targetType isCompileTimeType] then
-    error mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
+    error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
   elsif not [targetType instanciable] then
-    error mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable"
+    error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable"
   end
 #--- Declare local variable
-  let omnibusName = @lstring.new {!mVarName.string + "." + ioTemporaries.mTemporaryIndex !mVarName}
+  let omnibusName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex ++
-  [!?ioUniversalMap insertLocalVariable !mVarName !targetType !omnibusName !.noValue !true]
+  [!?ioUniversalMap insertLocalVariable !self.mVarName !targetType !omnibusName !.noValue !true]
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !targetType !false
 }

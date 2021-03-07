@@ -293,7 +293,7 @@ map @sliceMap {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for reg in mRegisters do
+  for reg in self.mRegisters do
     [!?ioGraph noteNode !reg.mRegisterTypeName]
     [!?ioGraph addEdge !compileTimeDeclarationBarrier () !reg.mRegisterTypeName]
   end
@@ -302,23 +302,23 @@ method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanti
 #·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = registerGroupNameFromOmnibusName (![mRegisterGroupList mRegisterGroupNameAtIndex !0])
+  outRepresentation = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 }
 
 #·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
-  result = [mRegisterGroupList mRegisterGroupNameAtIndex !0]
+  result = [self.mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 
 #·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let nodeName = registerGroupNameFromOmnibusName (![mRegisterGroupList mRegisterGroupNameAtIndex !0])
+  let nodeName = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 #--- Add node
   [!?ioGraph addNode !nodeName !self]
 #--- Add dependence definitions
-  for reg in mRegisters do
+  for reg in self.mRegisters do
   #--- Add dependency from type name
     [!?ioGraph addEdge !nodeName !reg.mRegisterTypeName]
     [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
@@ -489,11 +489,11 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
-  controlRegisterType (!mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
+  controlRegisterType (!self.mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
 #--- Build bit slice map
   buildControlRegisterSliceMap (
-    !mRegisterBitSliceList
-    !mRegisterBitSliceListLocation
+    !self.mRegisterBitSliceList
+    !self.mRegisterBitSliceListLocation
     !?context:ioContext
     !?type:registerType
     !bitCount:registerBitCount
@@ -502,7 +502,7 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
     ?let controlRegisterFieldList  # Used for HTML file
   )
 #---  
-  for register in mRegisterArrayList do
+  for register in self.mRegisterArrayList do
   #--- Analyse register address expression
     computeStaticExpression (
       !?context: ioContext
@@ -594,14 +594,14 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   @controlRegisterMap regMap = {}
-  for reg in mRegisters do
+  for reg in self.mRegisters do
     [reg buildControlRegisterMapForGroup
       !?context:ioContext
       !?regMap
       !?staticEntityMap:ioStaticEntityMap
     ]
   end
-  for group in mRegisterGroupList do
+  for group in self.mRegisterGroupList do
     @controlRegisterMap registerMap = regMap # {}
   #--- Check for user access
     for aRegister in regMap do
@@ -663,7 +663,7 @@ override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  ioIntermediateCodeStruct.mControlRegisterGroupArrayList += !mGroupName !mBaseAddresses
+  ioIntermediateCodeStruct.mControlRegisterGroupArrayList += !self.mGroupName !self.mBaseAddresses
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

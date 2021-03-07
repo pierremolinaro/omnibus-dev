@@ -270,18 +270,18 @@ syntax extension omnibus_syntax {
 
 override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add structure type name as node
-  [!?ioGraph addNode !mReceiverTypeName !self]
+  [!?ioGraph addNode !self.mReceiverTypeName !self]
 #--- Add property types
-  for (3* fieldTypeName propertyKind) in mStructurePropertyListAST do
+  for (3* fieldTypeName propertyKind) in self.mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      [!?ioGraph addEdge !mReceiverTypeName !fieldTypeName]
+      [!?ioGraph addEdge !self.mReceiverTypeName !fieldTypeName]
     end
     switch propertyKind
     case uninitializedStoredProperty, uninitializedConstantProperty :
     case initializedStoredProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !self.mReceiverTypeName !?ioGraph]
     case initializedConstantProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !mReceiverTypeName !?ioGraph]
+      [initExpression addDependenceEdgeForStaticExpression !self.mReceiverTypeName !?ioGraph]
     case readOnlyComputedProperty (instructionList *) :
       [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
     case writeComputedProperty (writeInstructionList *) :
@@ -293,13 +293,13 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
 #·······················································································································
 
 override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = mReceiverTypeName 
+  outRepresentation = self.mReceiverTypeName 
 }
 
 #·······················································································································
 
 override getter @structureDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mReceiverTypeName.location
+  outLocation = self.mReceiverTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -338,7 +338,7 @@ method @structurePropertyListAST-element enterPropertyInContext
 #---------- Attributes
   @lbigint explicitAlignment = .new {!0G !.nowhere}
   var alignmentDefined = false
-  for (attribute align) in mPropertyAttributeList do
+  for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
       error attribute : "only the @align attribute is allowed here"
     elsif alignmentDefined then
@@ -354,19 +354,19 @@ method @structurePropertyListAST-element enterPropertyInContext
     end
   end
 #---------- Property type
-  let @omnibusType optionalPropertyType = if mPropertyTypeName.string == ""
+  let @omnibusType optionalPropertyType = if self.mPropertyTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName} type]
   end
 #---------- Init expression
-  switch mPropertyKind
+  switch self.mPropertyKind
   case initializedConstantProperty (initExpression) :
     computeStaticExpression (
       !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
       !expression: initExpression
-      !errorLocation: mPropertyName.location
-      !optionalContextualTypeName: mPropertyTypeName
+      !errorLocation: self.mPropertyName.location
+      !optionalContextualTypeName: self.mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
     @omnibusType actualPropertyType
@@ -376,15 +376,15 @@ method @structurePropertyListAST-element enterPropertyInContext
       actualPropertyType = [expressionIR type]
     end
     if not [actualPropertyType instanciable] then
-      error mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
     ]
   case initializedStoredProperty (initExpression) :
@@ -392,8 +392,8 @@ method @structurePropertyListAST-element enterPropertyInContext
       !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
       !expression: initExpression
-      !errorLocation: mPropertyName.location
-      !optionalContextualTypeName: mPropertyTypeName
+      !errorLocation: self.mPropertyName.location
+      !optionalContextualTypeName: self.mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
     @omnibusType actualPropertyType
@@ -405,81 +405,81 @@ method @structurePropertyListAST-element enterPropertyInContext
     if [actualPropertyType.kind isCompileTimeBool] then
       actualPropertyType = boolType ()
     elsif [actualPropertyType.kind isCompileTimeInteger] then
-      error mPropertyName
+      error self.mPropertyName
       : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
     elsif not [actualPropertyType instanciable] then
-      error mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     if not [actualPropertyType copyable] then
       canBeCopied = false
     end
     let propertyIndex = [ioPropertyList length]
-    ioPropertyList += !mPropertyName.string !actualPropertyType
+    ioPropertyList += !self.mPropertyName.string !actualPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
     [!?ioContext insertPropertySetter
       !inReceiverTypeName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.storedProperty{!type:actualPropertyType !index:propertyIndex}
     ]
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
-    ioPropertyList += !mPropertyName.string !optionalPropertyType
+    ioPropertyList += !self.mPropertyName.string !optionalPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
     [!?ioContext insertPropertySetter
       !inReceiverTypeName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
     ]
-    constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
-    ioConstructorKey += "!" + mPropertyName
+    constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
+    ioConstructorKey += "!" + self.mPropertyName
   case uninitializedConstantProperty :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let propertyIndex = [ioPropertyList length]
-    ioPropertyList += !mPropertyName.string !optionalPropertyType
+    ioPropertyList += !self.mPropertyName.string !optionalPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
     ]
-    constructorSignature += !mPropertyName.string !optionalPropertyType !propertyIndex
-    ioConstructorKey += "!" + mPropertyName
+    constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
+    ioConstructorKey += "!" + self.mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.computedProperty{
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
         !modeDictionary:modeDictionary
       }
     ]
     let functionLLVMName = @lstring.new {
       !llvmRoutineName
-      !mPropertyName.location
+      !self.mPropertyName.location
     }
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
@@ -494,33 +494,33 @@ method @structurePropertyListAST-element enterPropertyInContext
       !warningOnUnusedArgs: false 
       !instructionList
       !endOfInstructionList
-      !returnTypeName: mPropertyTypeName
+      !returnTypeName: self.mPropertyTypeName
   case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
     if not [optionalPropertyType instanciable] then
-      error mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
-    let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !mPropertyName)
+    let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
     [!?ioContext insertPropertySetter
       !inReceiverTypeName
-      !mPropertyName
-      !mVisibility
+      !self.mPropertyName
+      !self.mVisibility
       !.computedProperty {
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !mPropertyTypeName}
+        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
         !getterModeDictionary: getterModeDictionary
         !setterModeDictionary: setterModeDictionary
       }
     ]
     let functionLLVMName = @lstring.new {
       !llvmSetterRoutineName
-      !mPropertyName.location
+      !self.mPropertyName.location
     }
     let @routineFormalArgumentListAST formalArgumentList = {
       !.input
       !["" nowhere]
-      !mPropertyTypeName
+      !self.mPropertyTypeName
       !.new {!"newValue" !endOfWriteInstructionList}
     }
     ioDecoratedRoutineList +=
@@ -559,13 +559,13 @@ override method @structureDeclarationAST enterInContext
   @constructorSignature constructorSignature = {}
   @string constructorKey = "("
   var canBeCopied = true
-  for property in mStructurePropertyListAST do
+  for property in self.mStructurePropertyListAST do
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
-      !receiverTypeName:mReceiverTypeName
-      !omnibusTypeName: mOmnibusTypeSpecificName
-      !receiverLLVMBaseTypeName: mLLVMBaseTypeName
+      !receiverTypeName:self.mReceiverTypeName
+      !omnibusTypeName: self.mOmnibusTypeSpecificName
+      !receiverLLVMBaseTypeName: self.mLLVMBaseTypeName
       !?ioDecoratedRoutineList
       !?propertyList
 #      !?propertyGetterMap
@@ -579,26 +579,26 @@ override method @structureDeclarationAST enterInContext
 #---------------------------------------- Constructor map
   @constructorMap constructorMap = {}
   [!?constructorMap insertKey
-    !.new {!constructorKey !mReceiverTypeName.location}
+    !.new {!constructorKey !self.mReceiverTypeName.location}
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
-  [!?ioContext.mTypeConstructorMap insertKey !mOmnibusTypeSpecificName !constructorMap]
+  [!?ioContext.mTypeConstructorMap insertKey !self.mOmnibusTypeSpecificName !constructorMap]
 #---------------------------------------- Attribute instanciable, copyable
   var typeAttributes = @omnibusTypeAttributes.instanciable
 #---------------------------------------- Check structure is copyable
-  for (s) in mAttributeListAST do
+  for (s) in self.mAttributeListAST do
     if s.string == copyableAttribute () then
       if [typeAttributes copyable] then
         error s : "duplicated attribute"
       elsif not canBeCopied then
-        error mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
+        error self.mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
       end
     else
       error s : "only @copyable attribute is allowed here"
     end
   end
-  if mGenerateAssignmentRoutine & canBeCopied then
+  if self.mGenerateAssignmentRoutine & canBeCopied then
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter in type map
@@ -606,12 +606,12 @@ override method @structureDeclarationAST enterInContext
 #    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
-    !omnibusTypeDescriptionName:mOmnibusTypeSpecificName
+    !omnibusTypeDescriptionName:self.mOmnibusTypeSpecificName
     !kind:.structure {!propertyList:propertyList}
-    !llvmBaseTypeName:mLLVMBaseTypeName
+    !llvmBaseTypeName:self.mLLVMBaseTypeName
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:mReceiverTypeName
+    !lkey:self.mReceiverTypeName
     !type:structureType
   ]
 #-------------------------------------------- GenerateLLVM type definition
@@ -645,8 +645,8 @@ class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 #·······················································································································
 
 override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
-  ioLLVMcode += mLLVMDefinedTypeName + " = type {"
-  for () in mPropertyList
+  ioLLVMcode += self.mLLVMDefinedTypeName + " = type {"
+  for () in self.mPropertyList
     do ioLLVMcode += [mType llvmTypeName]
     between ioLLVMcode += ", "
   end
@@ -745,9 +745,9 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let arcAssignmentList = [mStructureType arcList !{}]
-  let structureTypeLLVMTypeName = [mStructureType llvmTypeName]
-  ioLLVMcode += "define internal void @" + [mRoutineMangledName assemblerRepresentation]
+  let arcAssignmentList = [self.mStructureType arcList !{}]
+  let structureTypeLLVMTypeName = [self.mStructureType llvmTypeName]
+  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (" + structureTypeLLVMTypeName + " * %inTarget, "
   ioLLVMcode += structureTypeLLVMTypeName + "* %inSource) nounwind optsize {\n"
   ioLLVMcode += ";--- Handle ARC properties\n"

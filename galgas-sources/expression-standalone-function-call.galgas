@@ -34,8 +34,8 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mStandaloneFunctionName]
-  for () in mArguments do
+  [!?ioGraph addEdge !inConstantName !self.mStandaloneFunctionName]
+  for () in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -56,7 +56,7 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
 override method @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in mArguments do
+  for () in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -89,14 +89,14 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 {
 #--- Cannot call a function in guard
   if [inRoutineAttributes guard] then
-    error mStandaloneFunctionName.location : "a routine cannot be called in guard"
+    error self.mStandaloneFunctionName.location : "a routine cannot be called in guard"
   end
 #--- Get function name and map containing the function definition
-  let routineLLVMName = routineMangledNameFromCall (!"" !mStandaloneFunctionName !mArguments)
+  let routineLLVMName = routineMangledNameFromCall (!"" !self.mStandaloneFunctionName !self.mArguments)
 #--- Get called function signature
-  let signature = [mArguments routineSignature !mStandaloneFunctionName.location]
+  let signature = [self.mArguments routineSignature !self.mStandaloneFunctionName.location]
 #--- Search function in map
-  let requiredFunctionMangledName = @lstring.new {!mStandaloneFunctionName.string + signature !mStandaloneFunctionName}
+  let requiredFunctionMangledName = @lstring.new {!self.mStandaloneFunctionName.string + signature !self.mStandaloneFunctionName}
 #--- Cannot call a function in guard
   [inContext.mRoutineMap searchKey
     !requiredFunctionMangledName
@@ -119,7 +119,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !formal:formalSignature
-      !effective: mArguments
+      !effective: self.mArguments
       !errorLocation:requiredFunctionMangledName.location
       !context:inContext
       !requiredMode:inMode

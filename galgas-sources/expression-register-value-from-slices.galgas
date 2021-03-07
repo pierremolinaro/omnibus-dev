@@ -61,7 +61,7 @@ override method @registerConstantExpressionAST addDependenceEdgeForStaticExpress
 override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for (* expression *) in mFieldValues do
+  for (* expression *) in self.mFieldValues do
     [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -85,13 +85,13 @@ override method @registerConstantExpressionAST analyzeExpression
 {
 #------------------------------------------------------ Search Control register Group
   [inContext.mControlRegisterGroupMap searchKey
-    !mRegisterGroupName
+    !self.mRegisterGroupName
     ?*
     ?let controlRegisterMap
   ]
 #------------------------------------------------------ Search Control register
   [controlRegisterMap searchKey
-    !mRegisterName
+    !self.mRegisterName
     ?let registerType
     ?2*
     ?let @sliceMap unused registerBitSliceMap
@@ -104,7 +104,7 @@ override method @registerConstantExpressionAST analyzeExpression
 #------------------------------------------------------ Valuated fields
   @bigint accumulatedFieldStaticValues = 0G
   @operandIRList operandList = {}
-  for (fieldName expression expressionLocation) in mFieldValues do
+  for (fieldName expression expressionLocation) in self.mFieldValues do
     if fieldName.string == "" then
       error fieldName : "anonymous selector not allowed here" : operandList
     else

@@ -165,41 +165,41 @@ syntax extension omnibus_syntax {
 
 override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
-  if mReceiverTypeName.string != "" then
-    s += mReceiverTypeName.string + "."
+  if self.mReceiverTypeName.string != "" then
+    s += self.mReceiverTypeName.string + "."
   end
-  s += mSystemRoutineName.string + "("
-  for (formalArgumentPassingMode selector * *) in mFormalArgumentList do
+  s += self.mSystemRoutineName.string + "("
+  for (formalArgumentPassingMode selector * *) in self.mFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  let nodeKey = @lstring.new {!s !mSystemRoutineName.location}
+  let nodeKey = @lstring.new {!s !self.mSystemRoutineName.location}
   [!?ioGraph addNode !nodeKey !self]
 
-  for (* * formalArgumentTypeName *) in mFormalArgumentList do
+  for (* * formalArgumentTypeName *) in self.mFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
-  [mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  if mReceiverTypeName.string != "" then
-    [!?ioGraph noteNode !mReceiverTypeName]
-    [!?ioGraph addEdge !nodeKey !mReceiverTypeName]
+  [self.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if self.mReceiverTypeName.string != "" then
+    [!?ioGraph noteNode !self.mReceiverTypeName]
+    [!?ioGraph addEdge !nodeKey !self.mReceiverTypeName]
   end
-  if mReturnTypeName.string != "" then
-    [!?ioGraph noteNode !mReturnTypeName]
-    [!?ioGraph addEdge !nodeKey !mReturnTypeName]
+  if self.mReturnTypeName.string != "" then
+    [!?ioGraph noteNode !self.mReturnTypeName]
+    [!?ioGraph addEdge !nodeKey !self.mReturnTypeName]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @systemRoutineDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  result = "system " + mReceiverTypeName + "." + mSystemRoutineName
+  result = "system " + self.mReceiverTypeName + "." + self.mSystemRoutineName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @systemRoutineDeclarationAST locationForErrorSignaling -> @location {
-  result = mSystemRoutineName.location
+  result = self.mSystemRoutineName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -281,17 +281,17 @@ override method @systemRoutineDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Self type proxy
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReceiverTypeName ?let selfTypeProxy]
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mReceiverTypeName ?let selfTypeProxy]
 #  log mReceiverTypeName
   let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [[selfTypeProxy type] llvmBaseTypeName] end
 #--- Attributes
   @stringset attributeSet = {}
-  for attribute in mAttributeList do
+  for attribute in self.mAttributeList do
     attributeSet += !attribute.mValue.string
   end
 #---
   @routineKind routineKind
-  switch mMode
+  switch self.mMode
   case sectionMode, safeSectionMode :
     routineKind = .section
   case serviceMode, safeServiceMode :
@@ -299,29 +299,29 @@ override method @systemRoutineDeclarationAST enterInContext
   case primitiveMode, safePrimitiveMode :
     routineKind = .primitive
   case userMode, safeUserMode, anyMode, anySafeMode, bootMode, guardMode, panicMode, safeGuardMode, startupMode :
-    error mSystemRoutineName : "internal error" : routineKind
+    error self.mSystemRoutineName : "internal error" : routineKind
   end
 #--- Routine mangled names
   let userRoutineMangledName = systemUserMangledNameFromAST (
     !receiverLLVMBaseTypeName
     !routineKind
-    !mSystemRoutineName
-    !mFormalArgumentList
+    !self.mSystemRoutineName
+    !self.mFormalArgumentList
   )
   let implementationRoutineMangledName = systemImplementationMangledNameFromAST (
     !receiverLLVMBaseTypeName
     !routineKind
-    !mSystemRoutineName
-    !mFormalArgumentList
+    !self.mSystemRoutineName
+    !self.mFormalArgumentList
   )
 #--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !mFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !self.mFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mReturnTypeName ?let returnTypeProxy]
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mReturnTypeName ?let returnTypeProxy]
 #--- Attributes
   var mutating = false
   var noUnusedWarning = false
-  for (attribute) in mAttributeList do
+  for (attribute) in self.mAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if noUnusedWarning then
         error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
@@ -340,35 +340,35 @@ override method @systemRoutineDeclarationAST enterInContext
   end
   let @routineAttributes attributes = .mutating
 #--- Enter in routine map
-  let @routineLLVMNameDict routineLLVMNameDict = [mMode routineLLVMDictionaryForSystemRoutine
+  let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForSystemRoutine
     !userRoutineMangledName
     !implementationRoutineMangledName
   ]
-  let routineMangledName = [signature mangledName !receiverTypeName: mReceiverTypeName !functionName: mSystemRoutineName]
+  let routineMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName !functionName: self.mSystemRoutineName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
-    !mPublic
+    !self.mPublic
     !signature
     !returnTypeProxy
     !routineLLVMNameDict
     !true
-    !mMode
+    !self.mMode
   ]
 #--- Prepare semantic analysis
   ioDecoratedRoutineList +=
-    !receiverTypeName: mReceiverTypeName
-    !mode: mMode
+    !receiverTypeName: self.mReceiverTypeName
+    !mode: self.mMode
     !isRequired:false
     !routineKind: routineKind
     !warnIfUnused: not noUnusedWarning
     !exportedRoutine: true
     !routineAttributes: attributes
     !routineMangledLLVMName: implementationRoutineMangledName
-    !formalArgumentList: mFormalArgumentList
+    !formalArgumentList: self.mFormalArgumentList
     !warningOnUnusedArgs: noUnusedWarning
-    !mInstructionList
-    !mEndOfInstructionListLocation
-    !returnTypeName: mReturnTypeName  # Empty string if no returned value
+    !self.mInstructionList
+    !self.mEndOfInstructionListLocation
+    !returnTypeName: self.mReturnTypeName  # Empty string if no returned value
 #--- 
   ioRoutineListIR += !@systemUserRoutineIR.new {
     !userRoutineMangledName
@@ -554,7 +554,7 @@ override method @systemUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !mMangledImplementationName
+  ioInvokedRoutineSet += !self.mMangledImplementationName
 }
 
 #·······················································································································
@@ -564,9 +564,9 @@ override method @systemUserRoutineIR svcDeclarationGeneration
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
-  let userMangledName = [mRoutineMangledName assemblerRepresentation]
-  let implementationMangledName = [mMangledImplementationName assemblerRepresentation]
-  if mIsSection then
+  let userMangledName = [self.mRoutineMangledName assemblerRepresentation]
+  let implementationMangledName = [self.mMangledImplementationName assemblerRepresentation]
+  if self.mIsSection then
     ioSectionList += !userMangledName !implementationMangledName !invocationFromAnyMode: false
   else
     ioPrimitiveAndServiceList += !userMangledName !implementationMangledName !false
@@ -581,18 +581,18 @@ override method @systemUserRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare "
-  if mReturnTypeProxy == .null then
+  if self.mReturnTypeProxy == .null then
     ioLLVMcode += "void"
   else
-    ioLLVMcode += [[mReturnTypeProxy type] llvmTypeName]
+    ioLLVMcode += [[self.mReturnTypeProxy type] llvmTypeName]
   end
-  ioLLVMcode += " @" + [mRoutineMangledName assemblerRepresentation] + " ("
+  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
   var first = true
-  if mReceiverTypeProxy != .null then
-    ioLLVMcode += [[mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
+  if self.mReceiverTypeProxy != .null then
+    ioLLVMcode += [[self.mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
     first = false
   end
-  for () in mFormalArgumentList do
+  for () in self.mFormalArgumentList do
     if first then
       first = false
     else

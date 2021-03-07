@@ -45,7 +45,7 @@ class @llvmPrefixOperatorAST : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @llvmPrefixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mPrefixOperatorLocation
+  outLocation = self.mPrefixOperatorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -171,16 +171,16 @@ syntax extension omnibus_syntax {
 override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mPrefixOperator string] + "." + mReceiverTypeName !mPrefixOperatorLocation}
+  let nodeName = @lstring.new {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
+  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
+  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
 }
 
 #·······················································································································
 
 override getter @llvmPrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = [mPrefixOperator string] + " " + mReceiverTypeName
+  outRepresentation = [self.mPrefixOperator string] + " " + self.mReceiverTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -198,41 +198,41 @@ override method @llvmPrefixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
-  [receiverType checkIsNotCompileTimeType !mReceiverTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
+  [receiverType checkIsNotCompileTimeType !self.mReceiverTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
-  [resultType checkIsNotCompileTimeType !mResultTypeName.location]
+  [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
 #--- Enter in infix operator map
-  let prefixMangledFunctionName = prefixOperatorFunctionName (!receiverType !mPrefixOperator)
-  let key = prefixOperatorMapKey (!receiverType !mPrefixOperator !mPrefixOperatorLocation)
+  let prefixMangledFunctionName = prefixOperatorFunctionName (!receiverType !self.mPrefixOperator)
+  let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
   let definition = @llvmPrefixOperatorUsage.new {
     !prefixMangledFunctionName
-    !mReceiverName
-    !mInstructionList
+    !self.mReceiverName
+    !self.mInstructionList
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
 #--- Generation routine
   @assignmentGenerationVarMap varMap = {}
-  [!?varMap insertKey !mReceiverName !"%" + mReceiverName]
+  [!?varMap insertKey !self.mReceiverName !"%" + self.mReceiverName]
   @assignmentGenerationVarMap typeMap = {}
-  [!?typeMap insertKey !mReceiverName ![receiverType llvmTypeName]]
+  [!?typeMap insertKey !self.mReceiverName ![receiverType llvmTypeName]]
   [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
   @llvmGenerationInstructionList instructionList = {}
   instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
-  instructionList += mInstructionList
+  instructionList += self.mInstructionList
   [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
   @stringlist generatedInstructions = {}
   @allocaList allocaList = {}
   @uint temporaryIndex = 0
   [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
   let routine = @prefixOperatorRoutineIR.new {
-    !.new {!prefixMangledFunctionName !mPrefixOperatorLocation}
+    !.new {!prefixMangledFunctionName !self.mPrefixOperatorLocation}
     !isRequired: true
     !warnsIfUnused: false
     !receiverType
-    !mReceiverName.string
+    !self.mReceiverName.string
     !resultType
     !generatedInstructions
     !allocaList
@@ -274,8 +274,8 @@ override method @llvmPrefixOperatorUsage generateCode
   argumentList += !.output !receiverOperand
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
     !outResultValue
-    !.new {!mPrefixMangledFunctionName !inOperatorLocation}
-    !mPrefixMangledFunctionName
+    !.new {!self.mPrefixMangledFunctionName !inOperatorLocation}
+    !self.mPrefixMangledFunctionName
     !argumentList
   }
 }
@@ -299,10 +299,10 @@ override method @prefixOperatorRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal " + [mResultType llvmTypeName] + " @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + [mReceiverType llvmTypeName] + " %" + mReceiverVarName + ") nounwind {\n"
-  [mAllocaList generateAllocaList !?ioLLVMcode]
-  for (instruction) in mGeneratedInstructions do
+  ioLLVMcode += "define internal " + [self.mResultType llvmTypeName] + " @" + [self.mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + [self.mReceiverType llvmTypeName] + " %" + self.mReceiverVarName + ") nounwind {\n"
+  [self.mAllocaList generateAllocaList !?ioLLVMcode]
+  for (instruction) in self.mGeneratedInstructions do
     ioLLVMcode += "  " + instruction + "\n"
   end
   ioLLVMcode += "}\n\n"

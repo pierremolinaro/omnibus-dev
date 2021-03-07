@@ -12,7 +12,7 @@ class @globalConstantDeclarationAST : @abstractDeclarationAST {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mConstantName.location
+  outLocation = self.mConstantName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,20 +64,20 @@ abstract method @expressionAST addDependenceEdgeForStaticExpression
 
 override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add 'constant name' node
-  [!?ioGraph addNode !mConstantName !self]
+  [!?ioGraph addNode !self.mConstantName !self]
 #--- Add dependency from constant type name
-  if mConstantTypeName.string != "" then
-    [!?ioGraph addEdge !mConstantName !mConstantTypeName]
+  if self.mConstantTypeName.string != "" then
+    [!?ioGraph addEdge !self.mConstantName !self.mConstantTypeName]
   end
 #--- Add dependency from source expression
-  [mSourceExpression addDependenceEdgeForStaticExpression !mConstantName !?ioGraph]
-  [!?ioGraph addEdge !mConstantName !compileTimeDeclarationBarrier ()]
+  [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mConstantName !?ioGraph]
+  [!?ioGraph addEdge !self.mConstantName !compileTimeDeclarationBarrier ()]
 }
 
 #·······················································································································
 
 override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "global constant " + mConstantName 
+  outRepresentation = "global constant " + self.mConstantName 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -95,7 +95,7 @@ override method @globalConstantDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   var displayValue = false
-  for (attribute) in mAttributeList do
+  for (attribute) in self.mAttributeList do
     if attribute.string != "display" then
       error attribute : "attribute should be @display"
     elsif displayValue then
@@ -108,17 +108,17 @@ override method @globalConstantDeclarationAST enterInContext
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
-    !expression:mSourceExpression
-    !errorLocation:mConstantName.location
-    !optionalContextualTypeName:mConstantTypeName
+    !expression:self.mSourceExpression
+    !errorLocation:self.mConstantName.location
+    !optionalContextualTypeName:self.mConstantTypeName
     ?result:let @objectIR expressionResult
   )
 #--- Enter in context
-  [!?ioContext.mGlobalConstantMap insertKey !mConstantName !expressionResult]
-  [!?ioContext.mValuedObjectMap insertGlobalConstant !mConstantName !expressionResult]
+  [!?ioContext.mGlobalConstantMap insertKey !self.mConstantName !expressionResult]
+  [!?ioContext.mValuedObjectMap insertGlobalConstant !self.mConstantName !expressionResult]
 #--- Display ?
   if displayValue then
-    message "Global constant '" + mConstantName + "' = " + [expressionResult llvmValue] + "\n"
+    message "Global constant '" + self.mConstantName + "' = " + [expressionResult llvmValue] + "\n"
   end
 }
 

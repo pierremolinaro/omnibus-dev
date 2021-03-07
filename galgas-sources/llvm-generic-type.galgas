@@ -61,7 +61,7 @@ class @llvmGenericType : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @llvmGenericType locationForErrorSignaling -> @location outLocation {
-  outLocation = mTypeName.location
+  outLocation = self.mTypeName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -165,14 +165,14 @@ syntax extension omnibus_syntax {
 override method @llvmGenericType enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = mTypeName
+  let nodeName = self.mTypeName
   [!?ioGraph addNode !nodeName !self]
 }
 
 #·······················································································································
 
 override getter @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "Generic type " + mTypeName.string
+  outRepresentation = "Generic type " + self.mTypeName.string
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -215,23 +215,23 @@ override method @llvmGenericType enterInContext
 {
 #--- Build formal generic constant parameter map
   @ctCheckMap formalGenericConstantParameterMap = {}
-  [mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
+  [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
-  [mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
+  [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
 #--- Check native LLVM type expression
 #  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 #---
-  if [mGenericFormalParameterList length] == 0 then
+  if [self.mGenericFormalParameterList length] == 0 then
     let llvmType = @omnibusType.new {
 #      !propertyGetterMap: {}
       !subscript:.noSubscript
       !attributes: .instanciable | .copyable
-      !omnibusTypeDescriptionName: mTypeName
-      !kind: .llvmType {!bitSize: mBitSize}
-      !llvmBaseTypeName: "i" + mBitSize
+      !omnibusTypeDescriptionName: self.mTypeName
+      !kind: .llvmType {!bitSize: self.mBitSize}
+      !llvmBaseTypeName: "i" + self.mBitSize
     }
     [!?ioContext.mTypeMap insertType
-      !lkey: mTypeName
+      !lkey: self.mTypeName
       !type: llvmType
     ]
   else

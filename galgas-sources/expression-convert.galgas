@@ -47,9 +47,9 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  if mTypeName.string != "" then
-    [!?ioGraph noteNode !mTypeName]
+  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+  if self.mTypeName.string != "" then
+    [!?ioGraph noteNode !self.mTypeName]
   end
 }
 
@@ -58,9 +58,9 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  if mTypeName.string != "" then
-    [!?ioGraph noteNode !mTypeName]
+  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  if self.mTypeName.string != "" then
+    [!?ioGraph noteNode !self.mTypeName]
   end
 }
 
@@ -84,7 +84,7 @@ override method @convertExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze expression
-  [mExpression analyzeExpression
+  [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:inOptionalTargetType
@@ -103,24 +103,24 @@ override method @convertExpressionAST analyzeExpression
   ]  
 #--- 
   if [inMode isSafe] then
-    error mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
+    error self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze type
-  let @omnibusType resultType = if mTypeName.string == ""
+  let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
   end
 #--- Check types
   if not [resultType.kind isInteger] then
-    error mTypeName : "this type is not an integer type" : outResult
+    error self.mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult type].kind isInteger] then
-    error mEndOfExpression : "expression type is not an integer type" : outResult
+    error self.mEndOfExpression : "expression type is not an integer type" : outResult
   else
     [[expressionResult type].kind integer ?min:let minSource ?max:let maxSource ?2*]
     [resultType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
-      error mTypeName:"useless explicit conversion"
+      error self.mTypeName:"useless explicit conversion"
     end
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     if [option omnibus_options.noPanicGeneration value] then
@@ -132,7 +132,7 @@ override method @convertExpressionAST analyzeExpression
       ioInstructionGenerationList += !@convertInstructionIR.new {
         !outResult
         !expressionResult
-        !mTypeName.location
+        !self.mTypeName.location
       }
     end
   end
@@ -156,7 +156,7 @@ override method @convertInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!mLocation)
+  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mLocation)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -166,33 +166,33 @@ override method @convertInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let lbl = [[mLocation locationIndex] string]
+  let lbl = [[self.mLocation locationIndex] string]
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"
   let convertFailLabel  = "fail." + lbl
   let compareMinVar     = "cmp." + lbl + ".min"
   let compareMaxVar     = "cmp." + lbl + ".max"
-  [[mTarget type].kind integer ?min:let minTarget ?max:let maxTarget ?2*]
-  [[mOperand type].kind integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
-  let operandType = [mOperand llvmTypeName]
+  [[self.mTarget type].kind integer ?min:let minTarget ?max:let maxTarget ?2*]
+  [[self.mOperand type].kind integer ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
+  let operandType = [self.mOperand llvmTypeName]
   if minTarget != minSource then
     ioLLVMcode += "  %" + compareMinVar + " = icmp "
     ioLLVMcode += if operandIsUnsigned then "uge" else "sge" end
-    ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + minTarget + "\n"
+    ioLLVMcode += " " + operandType + " " + [self.mOperand llvmName] + ", " + minTarget + "\n"
     ioLLVMcode += "  br i1 %" + compareMinVar + ", label %" + convertMinOkLabel + ", label %" + convertFailLabel + "\n\n"
     ioLLVMcode += convertMinOkLabel + ":\n"
   end
   ioLLVMcode += "  %" + compareMaxVar + " = icmp "
   ioLLVMcode += if operandIsUnsigned then "ule" else "sle" end
-  ioLLVMcode += " " + operandType + " " + [mOperand llvmName] + ", " + maxTarget + "\n"
+  ioLLVMcode += " " + operandType + " " + [self.mOperand llvmName] + ", " + maxTarget + "\n"
   ioLLVMcode += "  br i1 %" + compareMaxVar + ", label %" + convertMaxOkLabel + ", label %" + convertFailLabel + "\n\n"
   ioLLVMcode += convertFailLabel + ":\n"
-  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!mLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [mLocation line] + ", "
-  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForConvertOverflow () + ") ; File '" + [[mLocation file] lastPathComponent] + "'\n"
+  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mLocation) assemblerRepresentation] + " ("
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForConvertOverflow () + ") ; File '" + [[self.mLocation file] lastPathComponent] + "'\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += convertMaxOkLabel + ":\n"
-  ioLLVMcode += "  " + [mTarget llvmName] + " = trunc " + operandType + " " + [mOperand llvmName] + " to " + [mTarget llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [self.mTarget llvmName] + " = trunc " + operandType + " " + [self.mOperand llvmName] + " to " + [self.mTarget llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

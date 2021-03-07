@@ -59,8 +59,8 @@ override method @literalStringInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [!?ioStaticEntityMap findOrAddStaticString !mLiteralString.string ?let staticStringIndex]
-  outResult = .literalString {!utf8Size:[mLiteralString.string utf8Length] + 1 !index:staticStringIndex}
+  [!?ioStaticEntityMap findOrAddStaticString !self.mLiteralString.string ?let staticStringIndex]
+  outResult = .literalString {!utf8Size:[self.mLiteralString.string utf8Length] + 1 !index:staticStringIndex}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

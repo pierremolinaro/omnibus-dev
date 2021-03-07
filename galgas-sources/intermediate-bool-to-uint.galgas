@@ -20,9 +20,9 @@ override method @boolToUIntIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [mUIntResult llvmName]
-             +  " = zext " + [mBoolSource  llvmTypeName] + " " + [mBoolSource llvmName]
-             + " to " + [mUIntResult llvmTypeName] + "\n"
+  ioLLVMcode += "  " + [self.mUIntResult llvmName]
+             +  " = zext " + [self.mBoolSource  llvmTypeName] + " " + [self.mBoolSource llvmName]
+             + " to " + [self.mUIntResult llvmTypeName] + "\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -22,9 +22,9 @@ override method @storeComputedPropertyValueIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + [mLLVMSetterName assemblerRepresentation] 
-  ioLLVMcode += " (" + [[mReceiverIR type] llvmTypeName] + "* " + [mReceiverIR llvmName] + ", "
-  ioLLVMcode += [[mValueIR type] llvmTypeName] + " " + [mValueIR llvmName] + ")\n"
+  ioLLVMcode += "  call void @" + [self.mLLVMSetterName assemblerRepresentation] 
+  ioLLVMcode += " (" + [[self.mReceiverIR type] llvmTypeName] + "* " + [self.mReceiverIR llvmName] + ", "
+  ioLLVMcode += [[self.mValueIR type] llvmTypeName] + " " + [self.mValueIR llvmName] + ")\n"
 }
 
 #·······················································································································
@@ -33,7 +33,7 @@ override method @storeComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !mLLVMSetterName
+  ioInvokedRoutineSet += !self.mLLVMSetterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

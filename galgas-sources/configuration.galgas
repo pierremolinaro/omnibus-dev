@@ -309,17 +309,17 @@ func %once isrSlotTypeName -> @string {
 #·······················································································································
 
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !mPanicCodeTypeName.location}
+  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
-  [!?ioGraph addEdge !rootNode !mPanicCodeTypeName]
-  [!?ioGraph addEdge !rootNode !mPanicCodeTypeName]
+  [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
+  [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
   [!?ioGraph addEdge !rootNode ![ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································
 
 override getter @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mPanicCodeTypeName.location
+  outLocation = self.mPanicCodeTypeName.location
 }
 
 #·······················································································································
@@ -345,40 +345,40 @@ override method @configurationDeclarationAST enterInContext
 {
 #---
   if ioContext.mTargetParameters.mPointerSize != 0 then
-    error mTargetParameters.mConfigurationLocation : "duplicate configuration"
+    error self.mTargetParameters.mConfigurationLocation : "duplicate configuration"
   end
-  ioContext.mTargetParameters = mTargetParameters
+  ioContext.mTargetParameters = self.mTargetParameters
 #--- Panic code type
   [ioContext.mTypeMap searchKey
-    !lkey:mPanicCodeTypeName
+    !lkey:self.mPanicCodeTypeName
     ?type:let panicCodeType
   ]
   ioContext.mPanicCodeType = panicCodeType
   if [ioContext.mPanicCodeType.kind isInteger] then
     [ioContext.mPanicCodeType.kind integer ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
-      error mPanicCodeTypeName : "this type should be an unsigned integer type"
+      error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
     end
   else
-    error mPanicCodeTypeName : "this type should be an unsigned integer type"
+    error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
   end
 #--- Panic line type
   [ioContext.mTypeMap searchKey
-    !lkey:mPanicLineTypeName
+    !lkey:self.mPanicLineTypeName
     ?type:let panicLineType
   ]
   ioContext.mPanicLineType = panicLineType
   if [ioContext.mPanicLineType.kind isInteger] then
     [ioContext.mPanicLineType.kind integer ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
-      error mPanicLineTypeName : "this type should be an unsigned integer type"
+      error self.mPanicLineTypeName : "this type should be an unsigned integer type"
     end
   else
-    error mPanicLineTypeName : "this type should be an unsigned integer type"
+    error self.mPanicLineTypeName : "this type should be an unsigned integer type"
   end
 #--------------------------------- Interrupt panic codes
   @stringset panicCodeSet = {}
-  for (name panicCode) in mInterruptionConfigurationList do
+  for (name panicCode) in self.mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode
     case noCode :

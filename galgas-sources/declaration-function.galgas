@@ -149,40 +149,40 @@ syntax extension omnibus_syntax {
 
 override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
-  if mReceiverTypeName.string != "" then
-    s += mReceiverTypeName.string + "."
+  if self.mReceiverTypeName.string != "" then
+    s += self.mReceiverTypeName.string + "."
   end
-  s += mFunctionName.string + "("
-  for (formalArgumentPassingMode selector * *) in mFunctionFormalArgumentList do
+  s += self.mFunctionName.string + "("
+  for (formalArgumentPassingMode selector * *) in self.mFunctionFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  let nodeName = @lstring.new {!s !mFunctionName.location}
+  let nodeName = @lstring.new {!s !self.mFunctionName.location}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
 #---
-  for (* * formalArgumentTypeName *) in mFunctionFormalArgumentList do
+  for (* * formalArgumentTypeName *) in self.mFunctionFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
-  [mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  if mReceiverTypeName.string != "" then
-    [!?ioGraph noteNode !mReceiverTypeName]
+  [self.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  if self.mReceiverTypeName.string != "" then
+    [!?ioGraph noteNode !self.mReceiverTypeName]
   end
-  if mFunctionReturnTypeName.string != "" then
-    [!?ioGraph noteNode !mFunctionReturnTypeName]
+  if self.mFunctionReturnTypeName.string != "" then
+    [!?ioGraph noteNode !self.mFunctionReturnTypeName]
   end
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  result = "function " + mReceiverTypeName + "." + mFunctionName
+  result = "function " + self.mReceiverTypeName + "." + self.mFunctionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @functionDeclarationAST locationForErrorSignaling -> @location {
-  result = mFunctionName.location
+  result = self.mFunctionName.location
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -200,14 +200,14 @@ override method @functionDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !mFunctionFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap !self.mFunctionFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !mFunctionReturnTypeName ?let returnTypeProxy]
+  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mFunctionReturnTypeName ?let returnTypeProxy]
 #--- Attributes
   var warnIfUnused = true
   var exportedFunction = false
   var canMutateProperties = false
-  for (attribute) in mFunctionAttributeList do
+  for (attribute) in self.mFunctionAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if not warnIfUnused then
         error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute"
@@ -230,37 +230,37 @@ override method @functionDeclarationAST enterInContext
   end
 #--- Routine mangled name
   let functionLLVMName = routineMangledNameFromAST (
-    !mReceiverTypeName.string
-    !mFunctionName
-    !mFunctionFormalArgumentList
+    !self.mReceiverTypeName.string
+    !self.mFunctionName
+    !self.mFunctionFormalArgumentList
   )
 #---------------- Enter in routine map (for function availability)
-  let routineLLVMNameDict = [mMode routineLLVMDictionaryForFunction !functionLLVMName]
-  let routineMangledName = [signature mangledName !receiverTypeName: mReceiverTypeName.string !functionName: mFunctionName]
+  let routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !functionLLVMName]
+  let routineMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName.string !functionName: self.mFunctionName]
   [!?ioContext.mRoutineMap insertKey
     !routineMangledName
-    !mPublicFunction
+    !self.mPublicFunction
     !signature
     !returnTypeProxy
     !routineLLVMNameDict
     !exportedFunction
-    !mMode
+    !self.mMode
   ]
 #---------------- Add decorated declaration (for function semantic analysis)
   ioDecoratedRoutineList +=
-    !receiverTypeName: mReceiverTypeName
-    !mode:mMode
+    !receiverTypeName: self.mReceiverTypeName
+    !mode:self.mMode
     !isRequired:[ioContext.mRequiredRoutineSet hasKey !functionLLVMName.string]
     !routineKind: .function
     !warnIfUnused: warnIfUnused
     !exportedRoutine: exportedFunction
     !routineAttributes: .none
     !routineMangledLLVMName: functionLLVMName
-    !formalArgumentList: mFunctionFormalArgumentList
+    !formalArgumentList: self.mFunctionFormalArgumentList
     !warningOnUnusedArgs: true
-    !mFunctionInstructionList
-    !mEndOfFunctionDeclaration
-    !returnTypeName: mFunctionReturnTypeName
+    !self.mFunctionInstructionList
+    !self.mEndOfFunctionDeclaration
+    !returnTypeName: self.mFunctionReturnTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

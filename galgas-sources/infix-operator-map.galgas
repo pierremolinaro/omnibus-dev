@@ -77,7 +77,7 @@ override method @inlineInfixOperatorUsage generateCode
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
+  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
         + " " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }

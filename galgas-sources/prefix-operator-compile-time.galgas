@@ -39,7 +39,7 @@ class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
 #·······················································································································
 
 override getter @compiletimePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
-  outLocation = mPrefixOperatorLocation
+  outLocation = self.mPrefixOperatorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,17 +97,17 @@ syntax extension omnibus_syntax {
 override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![mPrefixOperator string] + "." + mReceiverTypeName !mPrefixOperatorLocation}
+  let nodeName = @lstring.new {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !mReceiverTypeName]
-  [!?ioGraph addEdge !nodeName !mResultTypeName]
+  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
+  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
   [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName ]
 }
 
 #·······················································································································
 
 override getter @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = [mPrefixOperator string] + " " + mReceiverTypeName
+  outRepresentation = [self.mPrefixOperator string] + " " + self.mReceiverTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -125,27 +125,27 @@ override method @compiletimePrefixOperatorAST enterInContext
   ?!userDefinedTypes: @userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mReceiverTypeName ?let receiverTypeProxy]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
-  [receiverType checkIsCompileTimeType !mReceiverTypeName.location]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !mResultTypeName ?let resultTypeProxy]
+  [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
+  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
-  [resultType checkIsCompileTimeType !mResultTypeName.location]
+  [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
   @ctCheckMap ctCheckMap = {}
-  [!?ctCheckMap insertKey !mReceiverName]
-  [mExpression checkCompileTimeExpression !ctCheckMap]
+  [!?ctCheckMap insertKey !self.mReceiverName]
+  [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
-  let key = prefixOperatorMapKey (!receiverType !mPrefixOperator !mPrefixOperatorLocation)
+  let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
   let definition = @compileTimePrefixOperatorUsage.new {
-    !mPrefixOperatorLocation
-    !mReceiverName
-    !mExpression
+    !self.mPrefixOperatorLocation
+    !self.mReceiverName
+    !self.mExpression
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
 #--- Enter derived operators ?
-  if mPrefixOperator == .minusOp then
-    let minusNoOvf_key = prefixOperatorMapKey (!receiverType !.minusNoOvf !mPrefixOperatorLocation)
+  if self.mPrefixOperator == .minusOp then
+    let minusNoOvf_key = prefixOperatorMapKey (!receiverType !.minusNoOvf !self.mPrefixOperatorLocation)
     [!?ioContext.mPrefixOperatorMap insertKey !minusNoOvf_key !receiverType !resultType !definition]
   end
 }
@@ -174,8 +174,8 @@ override method @compileTimePrefixOperatorUsage generateCode
 {
   [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
   @ctMap varMap = {}
-  [!?varMap insertKey !mReceiverOperandName !receiverValue]
-  [mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
+  [!?varMap insertKey !self.mReceiverOperandName !receiverValue]
+  [self.mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }
 

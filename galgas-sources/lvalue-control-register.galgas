@@ -87,12 +87,12 @@ syntax extension omnibus_syntax {
 method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  switch mGroupIndex
+  switch self.mGroupIndex
   case noIndex :
   case index (indexExpression * *) :
     [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
-  switch mRegisterIndex
+  switch self.mRegisterIndex
   case noIndex :
   case index (indexExpression * *) :
     [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -107,13 +107,13 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !mRegisterGroupName]
-  switch mGroupIndex
+  [!?ioGraph addEdge !inConstantName !self.mRegisterGroupName]
+  switch self.mGroupIndex
   case noIndex :
   case index (@expressionAST indexExpression * *) :
     [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
-  switch mRegisterIndex
+  switch self.mRegisterIndex
   case noIndex :
   case index (@expressionAST indexExpression * *) :
     [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
@@ -141,10 +141,10 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   !llvmRegisterAddressName:@string outllvmRegisterAddressName
 {
 #-------------------- Search register group name in entity map
-  [inContext.mControlRegisterGroupMap searchKey !mRegisterGroupName ?let groupKind ?let controlRegisterMap]
+  [inContext.mControlRegisterGroupMap searchKey !self.mRegisterGroupName ?let groupKind ?let controlRegisterMap]
 #-------------------- Search register name
   [controlRegisterMap searchKey
-    !mRegisterName
+    !self.mRegisterName
     ?outRegisterType
     ?let @bool readOnly
     ?let @bool userAccess
@@ -158,19 +158,19 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ]
 #-------------------- Check access
   if inWriteAccess & readOnly then
-    error mRegisterName
+    error self.mRegisterName
       : "this control register cannot be modified (declared with @ro attribute)"
   elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
-    error mRegisterName : "this control register is not accessible in user mode"
+    error self.mRegisterName : "this control register is not accessible in user mode"
   end
 #-------------------- Group index ?
   @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
-    if [mGroupIndex isIndex] then
-      error mRegisterGroupName : "subscripting not allowed, group is not an array" : registerAddress
+    if [self.mGroupIndex isIndex] then
+      error self.mRegisterGroupName : "subscripting not allowed, group is not an array" : registerAddress
     else
-      let regName = mRegisterGroupName.string + ":" + mRegisterName
+      let regName = self.mRegisterGroupName.string + ":" + self.mRegisterName
       [!?ioInstructionGenerationList appendEnterRegisterAddress
          !?ioTemporaries
          ?registerAddress
@@ -180,9 +180,9 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       ]
     end
   case arrayGroup (@lbigintlist baseAddresses) :
-    switch mGroupIndex
+    switch self.mGroupIndex
     case noIndex :
-      error mRegisterGroupName : "subscripting required, group is an array" : registerAddress
+      error self.mRegisterGroupName : "subscripting required, group is an array" : registerAddress
     case index (indexExpression endOfIndex checkIndexExpression) :
       handleArraySubscriptNew (
         !self: inSelfType
@@ -204,19 +204,19 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       [!?ioInstructionGenerationList appendEnterRegisterGroupSubscriptedAddress
         !?ioTemporaries
         ?registerAddress
-        !mRegisterGroupName.string
+        !self.mRegisterGroupName.string
         ![baseAddresses length]
         !groupIndexIR
       ]
     end
   end
 #-------------------- Analyze control register target
-  switch mRegisterIndex
+  switch self.mRegisterIndex
   case noIndex :
     if registerArraySize == 0 then
       outllvmRegisterAddressName = registerAddress
     else
-      error mRegisterName : "the control register is an array" : outllvmRegisterAddressName
+      error self.mRegisterName : "the control register is an array" : outllvmRegisterAddressName
     end
   case index (indexExpression endOfIndex checkIndexExpression) :
     handleArraySubscriptNew (

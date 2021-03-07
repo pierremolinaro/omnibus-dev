@@ -81,9 +81,9 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !mTypeName]
-  [mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  for (sliceWidthStr sliceKind) in mSliceAssignmentList do
+  [!?ioGraph noteNode !self.mTypeName]
+  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     switch sliceKind
     case discarded :
     case varDeclaration (*) :
@@ -110,19 +110,19 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Search Type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !mTypeName} type]
+  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #--- Check type is an unsigned integer type
   @uint bitCount
   if not [resultType.kind isInteger] then
-    error mTypeName: "this type should be an unsigned integer type" : bitCount
+    error self.mTypeName: "this type should be an unsigned integer type" : bitCount
   else
     [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:bitCount]
     if not unsigned then
-      error mTypeName: "this type should be an unsigned integer type" : bitCount
+      error self.mTypeName: "this type should be an unsigned integer type" : bitCount
     end
   end
 #--- Analyze source expression
-  [mSourceExpression analyzeExpression
+  [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
     !optionalTargetType:resultType
@@ -141,7 +141,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   if [sourceOperand isLiteralInteger] then
     [sourceOperand literalInteger ?1* ?value:let @bigint value]
     if value >= (1G << bitCount) then
-      error mSourceExpressionLocation : "static value too large" : sourceOperand
+      error self.mSourceExpressionLocation : "static value too large" : sourceOperand
     else
       sourceOperand = .literalInteger {!type:resultType !value:value}
     end
@@ -149,7 +149,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
 #--- Analyze slices
   var rightShiftAmount = bitCount
   @bigint accumulatedFieldStaticValues = 0G
-  for (sliceWidthStr sliceKind) in mSliceAssignmentList do
+  for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     var sourceOperandForSlicing = sourceOperand
   #--- Analyze selector
     @lstring sliceTypeName
@@ -158,12 +158,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
-      sliceTypeName = .new {!boolTypeName () !mTypeName.location}
+      sliceTypeName = .new {!boolTypeName () !self.mTypeName.location}
     elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
       error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = .new {!"u" + sliceWidth !mTypeName.location}
+      sliceTypeName = .new {!"u" + sliceWidth !self.mTypeName.location}
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       end

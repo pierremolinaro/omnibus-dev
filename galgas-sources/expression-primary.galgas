@@ -102,10 +102,10 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  if mReceiverName.string != "" then
-    [!?ioGraph addEdge !inConstantName !mReceiverName]
+  if self.mReceiverName.string != "" then
+    [!?ioGraph addEdge !inConstantName !self.mReceiverName]
   end
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case integerSlice (2*) :
     case property (*) :
@@ -133,7 +133,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case integerSlice (@lbigint low @lbigint high) :
       if high.bigint >= low.bigint then
@@ -177,9 +177,9 @@ override method @primaryInExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- object access, with ou without self
-  if mReceiverName.string != "" then
+  if self.mReceiverName.string != "" then
     if [inRoutineAttributes guard] then
-      error mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
+      error self.mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
     else 
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
@@ -196,7 +196,7 @@ override method @primaryInExpressionAST analyzeExpression
       ]
     end
   elsif inSelfType.kind == .void then
-    error mReceiverName : "'self' is not available in this context" : outResult
+    error self.mReceiverName : "'self' is not available in this context" : outResult
   else
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
@@ -229,10 +229,10 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  [ioUniversalMap searchEntity !mReceiverName ?let entity]
+  [ioUniversalMap searchEntity !self.mReceiverName ?let entity]
   switch entity
   case task (type) :
-    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
+    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!self.mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -244,14 +244,14 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   case driver (type instancied) :
     if not instancied then
-      error mReceiverName : "the driver should be instancied"
+      error self.mReceiverName : "the driver should be instancied"
     end
-    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!mReceiverName)}
+    outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!self.mReceiverName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -263,7 +263,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   case globalConstant (@objectIR objectIR) :
@@ -279,11 +279,11 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   case localConstant (@omnibusType type @lstring omnibusName *) :
-    [!?ioUniversalMap readAccess !mReceiverName]
+    [!?ioUniversalMap readAccess !self.mReceiverName]
     outResult = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     procAnalyzeAccesListInExpression (
       !self: inSelfType
@@ -296,12 +296,12 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   case localVariable (@omnibusType type @lstring omnibusName) :
     outResult = .reference {!type: type !llvmName:llvmNameForLocalVariable (!omnibusName)}
-    [!?ioUniversalMap readAccess !mReceiverName]
+    [!?ioUniversalMap readAccess !self.mReceiverName]
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -313,7 +313,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   case globalSyncInstance (@omnibusType type @lstring omnibusName) :
@@ -329,7 +329,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
       !?instructionListIR: ioInstructionGenerationList
-      !mAccessList
+      !self.mAccessList
       !?result: outResult
     )
   end
@@ -431,7 +431,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
 #--- object access, with self
   outResult = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
 #--- Access list
-  for (access) in mAccessList do
+  for (access) in self.mAccessList do
     switch access
     case integerSlice (@lbigint low @lbigint high) :
       handleSliceInExpression (

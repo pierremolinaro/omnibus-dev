@@ -16,7 +16,7 @@ override getter @integerDeclarationAST locationForErrorSignaling -> @location ou
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
-  outName = if mIsSigned then "i" else "u" end + mSize
+  outName = if self.mIsSigned then "i" else "u" end + self.mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -79,12 +79,12 @@ override method @integerDeclarationAST enterInContext
   [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
 #  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
-  let min = minValueForInteger (!not mIsSigned !mSize)
-  let max = maxValueForInteger (!not mIsSigned !mSize)
+  let min = minValueForInteger (!not self.mIsSigned !self.mSize)
+  let max = maxValueForInteger (!not self.mIsSigned !self.mSize)
 #--------------------------------------- Property map
-  let llvmTypeName = "i" + mSize
+  let llvmTypeName = "i" + self.mSize
 #--------------------------------------- byteSwapped
-  if (mSize mod 16) == 0 then
+  if (self.mSize mod 16) == 0 then
     [!?ioContext addComputedPropertyGetter
       !omnibusTypeName: integerTypeName
       !llvmBaseTypeName:integerTypeName
@@ -204,7 +204,7 @@ override method @integerDeclarationAST enterInContext
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:integerTypeName
-    !kind:.integer {!min:min !max:max !unsigned:not mIsSigned !bitCount:mSize}
+    !kind:.integer {!min:min !max:max !unsigned:not self.mIsSigned !bitCount:self.mSize}
     !llvmBaseTypeName: integerTypeName
   }
   [!?ioContext.mTypeMap insertType
@@ -250,7 +250,7 @@ override method @integerDeclarationAST enterInContext
   addIntegerInfixOperator (
     !.infEqual
     !integerType
-    !if mIsSigned then "icmp sle" else "icmp ule" end
+    !if self.mIsSigned then "icmp sle" else "icmp ule" end
     !?ioContext.mInfixOperatorMap
     !boolType
   )
@@ -258,7 +258,7 @@ override method @integerDeclarationAST enterInContext
   addIntegerInfixOperator (
     !.lessThan
     !integerType
-    !if mIsSigned then "icmp slt" else "icmp ult" end
+    !if self.mIsSigned then "icmp slt" else "icmp ult" end
     !?ioContext.mInfixOperatorMap
     !boolType
   )
@@ -268,7 +268,7 @@ override method @integerDeclarationAST enterInContext
   addIntegerInfixOperator (
     !.rightShiftOp
     !integerType
-    !if mIsSigned then "ashr" else "lshr" end
+    !if self.mIsSigned then "ashr" else "lshr" end
     !?ioContext.mInfixOperatorMap
     !integerType
   )
@@ -340,7 +340,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
+  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
         + " " + [leftOperand llvmName] + ", " + [inRightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
@@ -381,7 +381,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + mLLVMOperation + " " + [[rightOperand type] llvmTypeName]
+  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[rightOperand type] llvmTypeName]
         + " " + [inLeftOperand llvmName] + ", " + [rightOperand llvmName]
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
 }
@@ -880,15 +880,15 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += "define internal " + mLLVMTypeName + " @" + [mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + mLLVMTypeName + "* %inValue) {\n"
-  ioLLVMcode += "  %value = load " + mLLVMTypeName + ", " + mLLVMTypeName + "* %inValue\n"
-  ioLLVMcode += "  %result = call " + mLLVMTypeName + " @llvm." + mIntrinsicName + "." + mLLVMTypeName
-  ioLLVMcode += " (" + mLLVMTypeName + " %value)\n"
-  ioLLVMcode += "  ret " + mLLVMTypeName + " %result\n"
+  ioLLVMcode += "define internal " + self.mLLVMTypeName + " @" + [self.mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += " (" + self.mLLVMTypeName + "* %inValue) {\n"
+  ioLLVMcode += "  %value = load " + self.mLLVMTypeName + ", " + self.mLLVMTypeName + "* %inValue\n"
+  ioLLVMcode += "  %result = call " + self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName
+  ioLLVMcode += " (" + self.mLLVMTypeName + " %value)\n"
+  ioLLVMcode += "  ret " + self.mLLVMTypeName + " %result\n"
   ioLLVMcode += "}\n\n"
   ioGenerationAdds.mExternFunctionDeclarationSet +=
-    !mLLVMTypeName + " @llvm." + mIntrinsicName + "." + mLLVMTypeName + " (" + mLLVMTypeName + ")"
+    !self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName + " (" + self.mLLVMTypeName + ")"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

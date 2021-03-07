@@ -35,8 +35,8 @@ override method @shortCircuitAndOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  [mLeftInstructionList  enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [mRightInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mLeftInstructionList  enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+  [self.mRightInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,19 +46,19 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel  = "and." + [mLocation locationIndex] + ".start"
-  let trueLabel  = "and." + [mLocation locationIndex] + ".true"
-  let falseLabel = "and." + [mLocation locationIndex] + ".false"
+  let startLabel  = "and." + [self.mLocation locationIndex] + ".start"
+  let trueLabel  = "and." + [self.mLocation locationIndex] + ".true"
+  let falseLabel = "and." + [self.mLocation locationIndex] + ".false"
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
-  [mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + mLeftOperandLLVMName + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
+  [self.mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  ioLLVMcode += "  br i1 " + self.mLeftOperandLLVMName + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioLLVMcode += trueLabel + ":\n"
-  [mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  [self.mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
-  ioLLVMcode += "  " + [mTargetOperand llvmName]
-             + " = phi i1 [" + mRightOperandLLVMName + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
+  ioLLVMcode += "  " + [self.mTargetOperand llvmName]
+             + " = phi i1 [" + self.mRightOperandLLVMName + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
