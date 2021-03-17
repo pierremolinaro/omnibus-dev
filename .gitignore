@@ -274,3 +274,4 @@ TSWLatexianTemp*
 arm-stack-computations/build/**
 arm-clang-llvm-binutils-openocd/libusb-product/**
 arm-clang-llvm-binutils-openocd/PRODUCT/**
+build/indexes/**
