@@ -23,7 +23,7 @@ CMAKE_VERSION = "3.18.1" # https://cmake.org/download/
 
 #--------------------------------------- Target
 TARGET = "arm-eabi"
-LLVM_TARGET_TO_BUILD = "ARM"
+# LLVM_TARGET_TO_BUILD = "ARM"
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 #   Imports
@@ -186,7 +186,7 @@ elif LIBUSB_VERSION == "1.0.23" :
   LIBUSB_URL = "https://github.com/libusb/libusb/releases/download/v" + LIBUSB_VERSION
   LIBUSB_URL += "/libusb-" + LIBUSB_VERSION + ".tar.bz2"
 else :
-  print (bcolors.BOLD_RED + "LIBUSB version " + LLVM_VERSION + " non prise en charge par le script" + bcolors.ENDC)
+  print (bcolors.BOLD_RED + "LIBUSB version " + LIBUSB_VERSION + " non prise en charge par le script" + bcolors.ENDC)
   sys.exit (1)
 downloadArchive (LIBUSB_URL, LIBUSB_ARCHIVE_PATH, startTime)
 #--------------------------------------------------------------------------- XZ archives
@@ -362,8 +362,8 @@ if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
   LLVM_CMAKE_COMMAND = [UTILITY_DIR + "/bin/cmake",
     "-G", "Unix Makefiles",
     "-DCMAKE_INSTALL_PREFIX=" + INSTALL_DIR,
-    "-DLLVM_TARGETS_TO_BUILD=" + LLVM_TARGET_TO_BUILD,
-    "-DLLVM_DEFAULT_TARGET_TRIPLE=" + TARGET,
+#     "-DLLVM_TARGETS_TO_BUILD=" + LLVM_TARGET_TO_BUILD,
+#     "-DLLVM_DEFAULT_TARGET_TRIPLE=" + TARGET,
     "-DCMAKE_BUILD_TYPE=Release",
     "-DLLVM_BUILD_RUNTIME=Off",
     "-DLLVM_INCLUDE_TESTS=Off",
