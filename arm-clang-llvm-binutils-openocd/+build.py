@@ -8,18 +8,18 @@
 #  SETTINGS
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 
-LLVM_VERSION = "10.0.1"
+LLVM_VERSION = "12.0.1"
 LLVM_SUFFIX = ""
 
-BINUTILS_VERSION = "2.35" # https://www.gnu.org/software/binutils/
+BINUTILS_VERSION = "2.37" # https://www.gnu.org/software/binutils/
 
-LIBUSB_VERSION   = "1.0.23" # https://github.com/libusb/libusb/releases
+LIBUSB_VERSION   = "1.0.24" # https://github.com/libusb/libusb/releases
 
 OPENOCD_VERSION = "0.10.0"
 
 XZ_VERSION = "5.2.5" # https://tukaani.org/xz/
 
-CMAKE_VERSION = "3.18.1" # https://cmake.org/download/
+CMAKE_VERSION = "3.21.2" # https://cmake.org/download/
 
 #--------------------------------------- Target
 TARGET = "arm-eabi"
@@ -34,6 +34,7 @@ import subprocess, sys, os
 import shutil
 import subprocess
 import platform
+import multiprocessing
 from sets import Set
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,12 +50,7 @@ UTILITY_DIR = os.path.abspath (scriptDir + "/utilities")
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 
 def processorCount () :
-  if sys.version_info >= (2, 6) :
-    import multiprocessing
-    coreCount = str (multiprocessing.cpu_count () + 1)
-  else:
-    coreCount = "1"
-  return coreCount
+  return str (multiprocessing.cpu_count () + 1)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 #   FOR PRINTING IN COLOR
@@ -182,7 +178,7 @@ LIBUSB_ARCHIVE_PATH = ARCHIVE_DIR + "/" + LIBUSB + ".tar.bz2"
 if LIBUSB_VERSION == "1.0.22" :
   LIBUSB_URL = "http://sourceforge.net/projects/libusb/files/libusb-1.0/" + LIBUSB
   LIBUSB_URL += "/" + LIBUSB + ".tar.bz2"
-elif LIBUSB_VERSION == "1.0.23" :
+elif LIBUSB_VERSION in Set(["1.0.23", "1.0.24"]) :
   LIBUSB_URL = "https://github.com/libusb/libusb/releases/download/v" + LIBUSB_VERSION
   LIBUSB_URL += "/libusb-" + LIBUSB_VERSION + ".tar.bz2"
 else :
@@ -211,7 +207,7 @@ elif LLVM_VERSION in Set(["9.0.1", "9.0.0", "8.0.0", "7.0.1", "7.0.0"]) :
   BASE_URL = "http://releases.llvm.org/"
   LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"
   CLANG_URL = BASE_URL + LLVM_VERSION + "/" + CLANG + ".tar.xz"
-elif LLVM_VERSION in Set(["10.0.0", "10.0.1"]) :
+elif LLVM_VERSION in Set(["10.0.0", "10.0.1", "12.0.1"]) :
   BASE_URL = "https://github.com/llvm/llvm-project/releases/download/llvmorg-"
   #  https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.0/clang-10.0.0.src.tar.xz
   LLVM_URL = BASE_URL + LLVM_VERSION + "/" + LLVM + ".tar.xz"
