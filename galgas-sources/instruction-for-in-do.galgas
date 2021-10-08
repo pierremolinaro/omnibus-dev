@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionAST : @instructionAST {
+shared class @forInstructionAST : @instructionAST {
   @lstring mVarName
   @lstring mIteratedObject
   @expressionAST mWhileExpression
@@ -201,7 +201,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION (ON ARRAY)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionOnArrayIR : @abstractInstructionIR {
+shared class @forInstructionOnArrayIR : @abstractInstructionIR {
   @string mEnumeratedValueName
   @lstring mIteratedObjectName
   @objectIR mIteratedObject
@@ -334,7 +334,7 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
 #  CODE GENERATION (ON STRING)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
+shared class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
   @string mVarName
   @location mLocation
   @objectIR mStringElementIteratedObject

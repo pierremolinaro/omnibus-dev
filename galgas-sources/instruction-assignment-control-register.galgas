@@ -9,7 +9,7 @@ enum @controlRegisterAssignmentOperatorKind {
 
 #·······················································································································
 
-class @controlRegisterAssignmentInstructionAST : @instructionAST {
+shared class @controlRegisterAssignmentInstructionAST : @instructionAST {
   @controlRegisterLValueAST mControlRegisterLValue
   @controlRegisterAssignmentOperatorKind mAssignmentKind
   @expressionAST mSourceExpression

@@ -470,7 +470,7 @@ proc declareLLVMTypes
 #! USER LLVM TYPE DEFINITION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @userLLVMTypeDefinitionIR {
+abstract shared class @userLLVMTypeDefinitionIR {
   @string mLLVMDefinedTypeName
 }
 

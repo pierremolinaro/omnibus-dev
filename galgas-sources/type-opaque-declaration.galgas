@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
+shared class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
   @lstring mOpaqueTypeName
   @expressionAST mSizeExpression
   @location mSizeExpressionLocation

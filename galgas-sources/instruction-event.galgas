@@ -26,7 +26,7 @@ list @syncInstructionBranchListAST {
 
 #·······················································································································
 
-class @syncInstructionAST : @instructionAST {
+shared class @syncInstructionAST : @instructionAST {
   @syncInstructionBranchListAST mBranchList
   @location mEndOf_on_instruction
 }
@@ -480,7 +480,7 @@ list @guardedCommandIRList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @syncInstructionIR : @abstractInstructionIR {
+shared class @syncInstructionIR : @abstractInstructionIR {
   @location mSelectInstructionLocation
   @syncInstructionBranchListIR mOnInstructionBranchListIR
 }

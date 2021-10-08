@@ -27,7 +27,7 @@ abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @s
 #  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
+shared class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
 }
 
 #·······················································································································

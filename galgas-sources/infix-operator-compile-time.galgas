@@ -66,7 +66,7 @@ getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfi
 
 #·······················································································································
 
-class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
+shared class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
   @compileTimeInfixOperatorEnumeration mInfixOperator
   @location mInfixOperatorLocation
   @lstring mLeftOperandName
@@ -257,7 +257,7 @@ override method @compileTimeInfixOperatorAST enterInContext
 #!  GENERATE CODE                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
+shared class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
   @lstring mLeftOperandName
   @lstring mRightOperandName
   @ctExpressionAST mExpression
@@ -296,7 +296,7 @@ override method @compileTimeInfixOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
+shared class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
   @compileTimeInfixOperatorUsage mEqualOperatorUsage
   @compileTimeInfixOperatorUsage mLessThanOperatorUsage
 }

@@ -2,20 +2,20 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @callInstructionAST : @instructionAST {
+abstract shared class @callInstructionAST : @instructionAST {
   @effectiveArgumentListAST mArguments
   @location mEndOfArguments
 }
 
 #·······················································································································
 
-class @standAloneProcedureCallInstructionAST : @callInstructionAST {
+shared class @standAloneProcedureCallInstructionAST : @callInstructionAST {
   @lstring mSandAloneRoutineName
 }
 
 #·······················································································································
 
-class @procedureCallInstructionAST : @callInstructionAST {
+shared class @procedureCallInstructionAST : @callInstructionAST {
   @lstring mIdentifier
   @accessInAssignmentListAST mAccessList
 }

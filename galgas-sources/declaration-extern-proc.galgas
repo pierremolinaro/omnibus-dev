@@ -160,7 +160,7 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @externRoutineIR : @abstractRoutineIR {
+shared class @externRoutineIR : @abstractRoutineIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
   @unifiedTypeMap-proxy mReturnType
 }

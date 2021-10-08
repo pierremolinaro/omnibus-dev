@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @bitbandInstructionAST : @instructionAST {
+shared class @bitbandInstructionAST : @instructionAST {
   @controlRegisterLValueAST mControlRegisterLValue
   @expressionAST mBitExpression
   @location mBitExpressionLocation
@@ -175,7 +175,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @bitbandInstructionIR : @abstractInstructionIR {
+shared class @bitbandInstructionIR : @abstractInstructionIR {
   @string mRegisterAddressLLVMname
   @objectIR mBitExpressionOperand
   @objectIR mSourceExpressionOperand

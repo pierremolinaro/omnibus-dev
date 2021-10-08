@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @extendExpressionAST : @expressionAST {
+shared class @extendExpressionAST : @expressionAST {
   @expressionAST mExpression
   @lstring mTypeName
   @location mEndOfExpression

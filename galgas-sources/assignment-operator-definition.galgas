@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
+shared class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
   @location mOperatorLocation
   @lstring mTargetVariableName
   @lstring mTargetTypeName
@@ -180,7 +180,7 @@ func assignmentOperatorKey ?let @omnibusType inTargetType
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractAssignmentOperatorUsage {
+abstract shared class @abstractAssignmentOperatorUsage {
 }
 
 #·······················································································································
@@ -282,7 +282,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+shared class @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   @omnibusType mTargetType
   @lstring mTargetVarName
   @genericFormalParameterList mTargetGenericFormalParameterList
@@ -360,7 +360,7 @@ setter @instructionListIR appendAssignmentIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @assignmentRoutineIR : @abstractRoutineIR {
+shared class @assignmentRoutineIR : @abstractRoutineIR {
   @omnibusType mTargetType
   @string mTargetVarName
   @omnibusType mSourceType
@@ -389,7 +389,7 @@ override method @assignmentRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
+shared class @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
   @omnibusType mTargetType
 }
 
@@ -414,7 +414,7 @@ override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+shared class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 }
 
 #·······················································································································

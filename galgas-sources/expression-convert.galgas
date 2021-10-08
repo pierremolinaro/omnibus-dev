@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @convertExpressionAST : @expressionAST {
+shared class @convertExpressionAST : @expressionAST {
   @expressionAST mExpression
   @lstring mTypeName
   @location mEndOfExpression
@@ -144,7 +144,7 @@ override method @convertExpressionAST analyzeExpression
 #! @convertInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @convertInstructionIR : @abstractInstructionIR {
+shared class @convertInstructionIR : @abstractInstructionIR {
   @objectIR mTarget
   @objectIR mOperand
   @location mLocation

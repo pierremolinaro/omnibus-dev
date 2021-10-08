@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @panicInstructionAST : @instructionAST {
+shared class @panicInstructionAST : @instructionAST {
   @expressionAST mCodeExpression
 }
 
@@ -92,7 +92,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @panicInstructionIR : @abstractInstructionIR {
+shared class @panicInstructionIR : @abstractInstructionIR {
   @location mThrowLocation
   @bigint mPanicCode
 }

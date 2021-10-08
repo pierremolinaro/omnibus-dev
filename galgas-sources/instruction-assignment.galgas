@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @assignmentInstructionAST : @instructionAST {
+shared class @assignmentInstructionAST : @instructionAST {
   @LValueAST mTargetAST
   @expressionAST mSourceExpression
 }

@@ -16,7 +16,7 @@ list @staticListPropertyListAST {
 
 #·······················································································································
 
-class @staticListAST : @abstractDeclarationAST {
+shared class @staticListAST : @abstractDeclarationAST {
   @lstring mStaticListName
   @staticListPropertyListAST mPropertyList
   @staticListValueListAST mValueList
@@ -498,7 +498,7 @@ map @staticListInvokedFunctionSetMap {
 
 #·······················································································································
 
-class @decoratedStaticList : @abstractDecoratedDeclaration {
+shared class @decoratedStaticList : @abstractDecoratedDeclaration {
   @lstring mStaticListName
   @staticListValueListAST mValueList
 }
@@ -563,7 +563,7 @@ method @staticListInitializationMap generateLLVMForStaticLists
 #! CODE GENERATION: INDIRECT FUNCTION CALL
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @staticListIndirectRoutineIR : @abstractRoutineIR {
+shared class @staticListIndirectRoutineIR : @abstractRoutineIR {
   @unifiedTypeMap-proxy mStaticListElementType
   @routineTypedSignature mFormalArgumentListForGeneration
   @unifiedTypeMap-proxy mReturnTypeProxy # .void if no return value

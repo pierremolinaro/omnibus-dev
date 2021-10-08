@@ -305,7 +305,7 @@ list @decoratedTaskList {
 
 #·······················································································································
 
-class @decoratedTaskListDeclaration : @abstractDecoratedDeclaration {
+shared class @decoratedTaskListDeclaration : @abstractDecoratedDeclaration {
   @decoratedTaskList mTaskList
 }
 
@@ -595,7 +595,7 @@ method @taskMapIR generateCode
 #! CODE GENERATION: ACTIVATE FUNCTION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @taskActivateFunctionIR : @abstractRoutineIR {
+shared class @taskActivateFunctionIR : @abstractRoutineIR {
   @string mAssemblerTaskName
   @string mActivateServiceInvocationName
   @uint mTaskIndex

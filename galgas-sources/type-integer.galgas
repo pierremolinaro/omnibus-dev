@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @integerDeclarationAST : @abstractDeclarationAST {
+shared class @integerDeclarationAST : @abstractDeclarationAST {
   @bool mIsSigned
   @uint mSize
 }
@@ -308,7 +308,7 @@ proc addIntegerInfixOperator
 #! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
+shared class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
   @string mLLVMOperation
 }
 
@@ -349,7 +349,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
 #! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
+shared class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
   @string mLLVMOperation
 }
 
@@ -868,7 +868,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #! CODE GENERATION: BUILTIN FUNCTIONS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @integerBuiltinFunctionIR : @abstractRoutineIR {
+shared class @integerBuiltinFunctionIR : @abstractRoutineIR {
   @string mLLVMTypeName
   @string mIntrinsicName
 }

@@ -16,18 +16,18 @@ list @llvmGenerationInstructionElementList {
 
 #·······················································································································
 
-abstract class @abstractLLVMInstruction {
+abstract shared class @abstractLLVMInstruction {
 }
 
 #·······················································································································
 
-class @llvmGenerationInstruction : @abstractLLVMInstruction {
+shared class @llvmGenerationInstruction : @abstractLLVMInstruction {
   @llvmGenerationInstructionElementList mGenerationList
 }
 
 #·······················································································································
 
-class @llvmVarInstruction : @abstractLLVMInstruction {
+shared class @llvmVarInstruction : @abstractLLVMInstruction {
   @lstring mVariableName
 }
 

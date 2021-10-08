@@ -11,7 +11,7 @@ setter @instructionListIR appendGetUniversalArrayElementReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
+shared class @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
   @omnibusType mType
   @string mLLVMName
   @omnibusType mElementType

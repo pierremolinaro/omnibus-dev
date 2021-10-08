@@ -35,7 +35,7 @@ setter @instructionListIR appendCopyFromReferences
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @copyFromReferencesIR : @abstractInstructionIR {
+shared class @copyFromReferencesIR : @abstractInstructionIR {
   @LValueRepresentation mTarget
   @string mSourceLLVMName
 }

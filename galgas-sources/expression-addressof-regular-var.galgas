@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @addressofExpressionAST : @expressionAST {
+shared class @addressofExpressionAST : @expressionAST {
   @LValueAST mLValue
 }
 
@@ -97,7 +97,7 @@ override method @addressofExpressionAST analyzeExpression
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @addressofInstructionIR : @abstractInstructionIR {
+shared class @addressofInstructionIR : @abstractInstructionIR {
   @objectIR mTarget
   @LValueRepresentation mLValue
 }

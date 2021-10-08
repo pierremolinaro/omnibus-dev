@@ -8,7 +8,7 @@ setter @instructionListIR appendBoolToUInt
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @boolToUIntIR : @abstractInstructionIR {
+shared class @boolToUIntIR : @abstractInstructionIR {
   @objectIR mUIntResult
   @objectIR mBoolSource
 }

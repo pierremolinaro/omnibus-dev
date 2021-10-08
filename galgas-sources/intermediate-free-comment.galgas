@@ -5,7 +5,7 @@ setter @instructionListIR appendFreeComment ?let @string inComment {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @freeCommentIR : @abstractInstructionIR {
+shared class @freeCommentIR : @abstractInstructionIR {
   @string mComment
 }
 

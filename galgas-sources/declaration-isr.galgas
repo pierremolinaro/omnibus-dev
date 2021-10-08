@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @isrDeclarationAST : @abstractDeclarationAST {
+shared class @isrDeclarationAST : @abstractDeclarationAST {
   @lstring mISRName
   @mode mMode
   @lstring mDriverName
@@ -112,7 +112,7 @@ override method @isrDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
+shared class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
   @lstring mISRName
   @mode mMode
   @lstring mDriverName

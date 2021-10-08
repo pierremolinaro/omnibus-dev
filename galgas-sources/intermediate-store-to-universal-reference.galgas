@@ -11,7 +11,7 @@ setter @instructionListIR appendStoreToUniversalReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @storeToUniversalReferenceIR : @abstractInstructionIR {
+shared class @storeToUniversalReferenceIR : @abstractInstructionIR {
   @string mLLVMTargetVarName
   @omnibusType mTargetVarType
   @objectIR mSourceValue

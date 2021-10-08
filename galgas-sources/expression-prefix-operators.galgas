@@ -11,7 +11,7 @@ enum @prefixOperator {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @prefixOperatorExpressionAST : @expressionAST {
+shared class @prefixOperatorExpressionAST : @expressionAST {
   @location mOperatorLocation
   @prefixOperator mOp
   @expressionAST mExpression

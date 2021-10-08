@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @addressofControlRegisterAST : @expressionAST {
+shared class @addressofControlRegisterAST : @expressionAST {
   @controlRegisterLValueAST mControlRegisterLValue
 }
 

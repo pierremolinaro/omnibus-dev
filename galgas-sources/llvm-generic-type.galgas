@@ -51,7 +51,7 @@ list @llvmStringDefinition {
 
 #·······················································································································
 
-class @llvmGenericType : @abstractDeclarationAST {
+shared class @llvmGenericType : @abstractDeclarationAST {
   @lstring mTypeName
   @genericFormalParameterList mGenericFormalParameterList
   @ctExpressionAST mWhereClause

@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @sizeofExpressionAST : @expressionAST {
+shared class @sizeofExpressionAST : @expressionAST {
   @LValueAST mLValue
 }
 
 #·······················································································································
 
-class @sizeofTypeAST : @expressionAST {
+shared class @sizeofTypeAST : @expressionAST {
   @lstring mTypeName
 }
 
@@ -149,7 +149,7 @@ override method @sizeofTypeAST analyzeExpression
 #! @sizeofInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @sizeofInstructionIR : @abstractInstructionIR {
+shared class @sizeofInstructionIR : @abstractInstructionIR {
   @objectIR mTarget
   @omnibusType mSourceType
 }

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @panicAST : @abstractDeclarationAST {
+shared class @panicAST : @abstractDeclarationAST {
   @bool mIsSetup # true: setup, false: loop
   @instructionListAST mPanicInstructionList
   @location mEndOfPanicInstructions
@@ -217,7 +217,7 @@ func %once panicModeName -> @string {
 
 #·······················································································································
 
-class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
+shared class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
   @bool mIsSetup # true: setup, false: loop
   @lbigint mPriority
 }
@@ -274,7 +274,7 @@ proc generatePanicCode
 #! CODE GENERATION: Panic routine, specific to a source file 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
+shared class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
   @string inFilePath
 }
 
@@ -318,7 +318,7 @@ override method @fileSpecificPanicRoutineIR enterAccessibleEntities
 #! CODE GENERATION: Panic routine, in universal mode 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @universalModePanicRoutineIR : @abstractRoutineIR {
+shared class @universalModePanicRoutineIR : @abstractRoutineIR {
 }
 
 #·······················································································································
@@ -365,7 +365,7 @@ override method @universalModePanicRoutineIR enterAccessibleEntities
 #! CODE GENERATION: Panic routine, in section mode 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @sectionModePanicRoutineIR : @abstractRoutineIR {
+shared class @sectionModePanicRoutineIR : @abstractRoutineIR {
   @panicSortedListIR mPanicSetupListIR
   @panicSortedListIR mPanicLoopListIR
 }

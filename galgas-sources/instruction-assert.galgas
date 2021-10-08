@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @assertInstructionAST : @instructionAST {
+shared class @assertInstructionAST : @instructionAST {
   @expressionAST mExpression
 }
 
@@ -91,7 +91,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @assertInstructionIR : @abstractInstructionIR {
+shared class @assertInstructionIR : @abstractInstructionIR {
   @location mAssertInstructionLocation
   @instructionListIR mInstructionList
   @objectIR mExpressionValue

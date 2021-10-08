@@ -5902,13 +5902,13 @@ typeComparisonResult GALGAS_userLLVMTypeDefinitionIR::objectCompare (const GALGA
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_userLLVMTypeDefinitionIR::GALGAS_userLLVMTypeDefinitionIR (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_userLLVMTypeDefinitionIR::GALGAS_userLLVMTypeDefinitionIR (const cPtr_userLLVMTypeDefinitionIR * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_userLLVMTypeDefinitionIR) ;
 }
 
@@ -6963,13 +6963,13 @@ typeComparisonResult GALGAS_abstractImplicitConverterToBoolean::objectCompare (c
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractImplicitConverterToBoolean::GALGAS_abstractImplicitConverterToBoolean (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractImplicitConverterToBoolean::GALGAS_abstractImplicitConverterToBoolean (const cPtr_abstractImplicitConverterToBoolean * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractImplicitConverterToBoolean) ;
 }
 
@@ -7050,13 +7050,13 @@ typeComparisonResult GALGAS_prefixOperatorUsage::objectCompare (const GALGAS_pre
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_prefixOperatorUsage::GALGAS_prefixOperatorUsage (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_prefixOperatorUsage::GALGAS_prefixOperatorUsage (const cPtr_prefixOperatorUsage * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_prefixOperatorUsage) ;
 }
 
@@ -7137,13 +7137,13 @@ typeComparisonResult GALGAS_omnibusInfixOperatorUsage::objectCompare (const GALG
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_omnibusInfixOperatorUsage::GALGAS_omnibusInfixOperatorUsage (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_omnibusInfixOperatorUsage::GALGAS_omnibusInfixOperatorUsage (const cPtr_omnibusInfixOperatorUsage * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_omnibusInfixOperatorUsage) ;
 }
 
@@ -10099,13 +10099,13 @@ typeComparisonResult GALGAS_expressionAST::objectCompare (const GALGAS_expressio
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_expressionAST::GALGAS_expressionAST (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_expressionAST::GALGAS_expressionAST (const cPtr_expressionAST * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_expressionAST) ;
 }
 
@@ -10186,13 +10186,13 @@ typeComparisonResult GALGAS_abstractAssignmentOperatorUsage::objectCompare (cons
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractAssignmentOperatorUsage::GALGAS_abstractAssignmentOperatorUsage (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractAssignmentOperatorUsage::GALGAS_abstractAssignmentOperatorUsage (const cPtr_abstractAssignmentOperatorUsage * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractAssignmentOperatorUsage) ;
 }
 

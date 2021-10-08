@@ -2,7 +2,7 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @registerInExpressionAST : @expressionAST {
+shared class @registerInExpressionAST : @expressionAST {
   @controlRegisterLValueAST mControlRegisterLValue
   @lstring mFieldName # Empty string if no field access
 }

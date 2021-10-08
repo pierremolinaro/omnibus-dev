@@ -9,7 +9,7 @@ list @switchCaseListAST {
 
 #·······················································································································
 
-class @switchInstructionAST : @instructionAST {
+shared class @switchInstructionAST : @instructionAST {
   @expressionAST mSwitchExpression
   @location mEndOf_test_expression
   @switchCaseListAST mSwitchCaseList
@@ -172,7 +172,7 @@ list @switchCaseListIR {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @switchInstructionIR : @abstractInstructionIR {
+shared class @switchInstructionIR : @abstractInstructionIR {
   @uint mLabelIndex
   @instructionListIR mSwitchExpressionGenerationList
   @objectIR mSwitchExpression

@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @ctExpressionAST {
+abstract shared class @ctExpressionAST {
 }
 
 #·······················································································································
 
-class @ctInfixExpressionAST : @ctExpressionAST {
+shared class @ctInfixExpressionAST : @ctExpressionAST {
   @ctExpressionAST mLeftExpression
   @location mOperatorLocation
   @compileTimeInfixOperatorEnumeration mInfixOperator
@@ -16,7 +16,7 @@ class @ctInfixExpressionAST : @ctExpressionAST {
 
 #·······················································································································
 
-class @ctPrefixExpressionAST : @ctExpressionAST {
+shared class @ctPrefixExpressionAST : @ctExpressionAST {
   @location mOperatorLocation
   @compileTimePrefixOperatorEnumeration mPrefixOperator
   @ctExpressionAST mExpression
@@ -24,23 +24,23 @@ class @ctPrefixExpressionAST : @ctExpressionAST {
 
 #·······················································································································
 
-class @ctTrueExpressionAST : @ctExpressionAST {
+shared class @ctTrueExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-class @ctFalseExpressionAST : @ctExpressionAST {
+shared class @ctFalseExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-class @ctIntExpressionAST : @ctExpressionAST {
+shared class @ctIntExpressionAST : @ctExpressionAST {
   @lbigint mValue
 }
 
 #·······················································································································
 
-class @ctIdentifierExpressionAST : @ctExpressionAST {
+shared class @ctIdentifierExpressionAST : @ctExpressionAST {
   @lstring mIdentifier
 }
 

@@ -17,7 +17,7 @@ setter @instructionListIR appendLogicalShiftRight
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @logicalRightShiftIR : @abstractInstructionIR {
+shared class @logicalRightShiftIR : @abstractInstructionIR {
   @objectIR mResult
   @objectIR mSource
   @uint mShiftAmount

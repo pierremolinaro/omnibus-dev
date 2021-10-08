@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeConvertToBooleanAST : @abstractDeclarationAST {
+shared class @compileTimeConvertToBooleanAST : @abstractDeclarationAST {
   @lstring mReceiverName
   @lstring mReceiverTypeName
   @lstring mConverterName
@@ -17,7 +17,7 @@ override getter @compileTimeConvertToBooleanAST locationForErrorSignaling -> @lo
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmConvertToBooleanAST : @abstractDeclarationAST {
+shared class @llvmConvertToBooleanAST : @abstractDeclarationAST {
   @lstring mReceiverName
   @lstring mReceiverTypeName
   @lstring mConverterName
@@ -195,7 +195,7 @@ getter @implicitBooleanConversionResult llvmName -> @string {
 
 #·······················································································································
 
-abstract class @abstractImplicitConverterToBoolean {
+abstract shared class @abstractImplicitConverterToBoolean {
 }
 
 #·······················································································································
@@ -210,7 +210,7 @@ abstract method @abstractImplicitConverterToBoolean generateConvertToBooleanCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
+shared class @compileTimeImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
   @lstring mReceiverName
   @ctExpressionAST mExpression
 }
@@ -234,7 +234,7 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
+shared class @llvmImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
   @lstring mReceiverName
   @omnibusType mReceiverType
   @llvmGenerationInstructionList mInstructionList

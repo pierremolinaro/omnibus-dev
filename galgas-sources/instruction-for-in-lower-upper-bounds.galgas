@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forLowerUpperBoundInstructionAST : @instructionAST {
+shared class @forLowerUpperBoundInstructionAST : @instructionAST {
   @lstring mVarName
   @lstring mTypeName
   @expressionAST mLowerBoundExpression
@@ -206,7 +206,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
+shared class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
   @string mVarName
   @omnibusType mType
   @bool mUnsigned

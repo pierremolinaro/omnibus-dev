@@ -13454,13 +13454,13 @@ typeComparisonResult GALGAS_abstractDecoratedDeclaration::objectCompare (const G
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractDecoratedDeclaration::GALGAS_abstractDecoratedDeclaration (void) :
-AC_GALGAS_class (false) {
+AC_GALGAS_class (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractDecoratedDeclaration::GALGAS_abstractDecoratedDeclaration (const cPtr_abstractDecoratedDeclaration * inSourcePtr) :
-AC_GALGAS_class (inSourcePtr, false) {
+AC_GALGAS_class (inSourcePtr, true) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractDecoratedDeclaration) ;
 }
 

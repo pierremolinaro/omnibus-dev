@@ -2,7 +2,7 @@
 #  AST                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compiletimeBoolAST : @abstractDeclarationAST {
+shared class @compiletimeBoolAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -73,7 +73,7 @@ override method @compiletimeBoolAST enterInContext
 #  IMPLICIT CONVERSION TO i1
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
+shared class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
 #·······················································································································
@@ -94,7 +94,7 @@ override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBool
 #  COMPILE TIME PREFIX OPERATOR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeBoolNotOperator : @prefixOperatorUsage {
+shared class @compileTimeBoolNotOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································
@@ -117,7 +117,7 @@ override method @compileTimeBoolNotOperator generateCode
 #  COMPILE TIME INFIX OPERATORS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
+shared class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -139,7 +139,7 @@ override method @compileTimeBoolEqualOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
+shared class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -161,7 +161,7 @@ override method @compileTimeBoolXorOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
+shared class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································

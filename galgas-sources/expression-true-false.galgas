@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @literalBooleanInExpressionAST : @expressionAST {
+shared class @literalBooleanInExpressionAST : @expressionAST {
   @bool mValue
 }
 

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varInstructionWithAssignmentAST : @instructionAST {
+shared class @varInstructionWithAssignmentAST : @instructionAST {
   @lstring mVarName
   @lstring mOptionalTypeName
   @expressionAST mSourceExpression
@@ -10,7 +10,7 @@ class @varInstructionWithAssignmentAST : @instructionAST {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @varDeclarationInstructionAST : @instructionAST {
+shared class @varDeclarationInstructionAST : @instructionAST {
   @lstring mVarName
   @lstring mTypeName
 }

@@ -17,7 +17,7 @@ list @primaryInExpressionAccessListAST {
 
 #·······················································································································
 
-class @primaryInExpressionAST : @expressionAST {
+shared class @primaryInExpressionAST : @expressionAST {
   @lstring mReceiverName
   @primaryInExpressionAccessListAST mAccessList
 }

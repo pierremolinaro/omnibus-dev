@@ -33,7 +33,7 @@ getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
 
 #·······················································································································
 
-class @llvmPrefixOperatorAST : @abstractDeclarationAST {
+shared class @llvmPrefixOperatorAST : @abstractDeclarationAST {
   @llvmPrefixOperatorEnumeration mPrefixOperator
   @location mPrefixOperatorLocation
   @lstring mReceiverName
@@ -244,7 +244,7 @@ override method @llvmPrefixOperatorAST enterInContext
 #   INFIX OPERATOR MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
+shared class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
   @string mPrefixMangledFunctionName
   @lstring mReceiverOperandName
   @llvmGenerationInstructionList mInstructionList
@@ -284,7 +284,7 @@ override method @llvmPrefixOperatorUsage generateCode
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @prefixOperatorRoutineIR : @abstractRoutineIR {
+shared class @prefixOperatorRoutineIR : @abstractRoutineIR {
   @omnibusType mReceiverType
   @string mReceiverVarName
   @omnibusType mResultType

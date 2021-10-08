@@ -1,6 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @standaloneRoutineCallIR : @abstractInstructionIR {
+shared class @standaloneRoutineCallIR : @abstractInstructionIR {
   @objectIR mResult
   @lstring mFunctionMangledName
   @string mFunctionNameForGeneration

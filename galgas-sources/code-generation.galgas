@@ -18,7 +18,7 @@ struct @generationAdds {
 #! @abstractInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractInstructionIR {
+abstract shared class @abstractInstructionIR {
 }
 
 #·······················································································································

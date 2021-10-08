@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @syncDeclarationAST : @abstractDeclarationAST {
+shared class @syncDeclarationAST : @abstractDeclarationAST {
   @lstring mSyncToolName
   @structurePropertyListAST mStructurePropertyListAST
 }

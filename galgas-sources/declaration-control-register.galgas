@@ -58,7 +58,7 @@ list @registerGroupListAST {
 
 #·······················································································································
 
-class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
+shared class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
   @registerGroupListAST mRegisterGroupList
   @controlRegisterDeclarationList mRegisters
 }
@@ -651,7 +651,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclaration {
+shared class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclaration {
   @lstring mGroupName
   @lbigintlist mBaseAddresses
 }

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @typedConstantCallAST : @expressionAST {
+shared class @typedConstantCallAST : @expressionAST {
   @lstring mOptionalTypeName
   @lstring mConstructorName
   @primaryInExpressionAccessListAST mAccessList

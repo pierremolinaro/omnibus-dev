@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @ifInstructionAST : @instructionAST {
+shared class @ifInstructionAST : @instructionAST {
   @expressionAST mTestExpression
   @location mTestExpressionEndLocation
   @bool mStaticIfExpression
@@ -187,7 +187,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @ifInstructionIR : @abstractInstructionIR {
+shared class @ifInstructionIR : @abstractInstructionIR {
   @string mLLVMTestName
   @location mLocation
   @instructionListIR mThenInstructionGenerationList

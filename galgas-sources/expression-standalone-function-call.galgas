@@ -2,7 +2,7 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @standaloneFunctionInExpressionAST : @expressionAST {
+shared class @standaloneFunctionInExpressionAST : @expressionAST {
   @lstring mStandaloneFunctionName
   @effectiveArgumentListAST mArguments
   @location mEndOfArguments

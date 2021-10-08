@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-class @ifExpressionAST : @expressionAST {
+shared class @ifExpressionAST : @expressionAST {
   @expressionAST mIfExpression
   @location mIfExpressionEndLocation
   @expressionAST mThenExpression

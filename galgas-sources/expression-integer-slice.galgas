@@ -10,7 +10,7 @@ list @integerSliceFieldListAST {
 
 #·······················································································································
 
-class @integerSliceExpressionAST : @expressionAST {
+shared class @integerSliceExpressionAST : @expressionAST {
   @lstring mTypeName
   @integerSliceFieldListAST mSliceValues
   @location mLocation

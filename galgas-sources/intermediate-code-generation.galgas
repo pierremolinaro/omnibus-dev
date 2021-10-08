@@ -30,7 +30,7 @@ list @controlRegisterGroupArrayList {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract class @abstractRoutineIR {
+abstract shared class @abstractRoutineIR {
   @lstring mRoutineMangledName
   @bool isRequired %selector
   @bool warnsIfUnused %selector
