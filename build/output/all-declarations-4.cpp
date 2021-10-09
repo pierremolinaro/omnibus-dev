@@ -10,21 +10,21 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 class cNode_routineLLVMNameDict : public GALGAS_routineLLVMNameDict_2D_element {
-  public : cNode_routineLLVMNameDict * mInfPtr ;
-  public : cNode_routineLLVMNameDict * mSupPtr ;
-  public : int32_t mBalance ;
+  public: cNode_routineLLVMNameDict * mInfPtr ;
+  public: cNode_routineLLVMNameDict * mSupPtr ;
+  public: int32_t mBalance ;
 
-  public : cNode_routineLLVMNameDict (const GALGAS_mode & in_key,
-                                      const GALGAS_string & inProperty_mRoutineLLVMName) :
+  public: cNode_routineLLVMNameDict (const GALGAS_mode & in_key,
+                                     const GALGAS_string & inProperty_mRoutineLLVMName) :
   GALGAS_routineLLVMNameDict_2D_element (in_key, inProperty_mRoutineLLVMName),
   mInfPtr (NULL),
   mSupPtr (NULL),
   mBalance (0) {
   }
 
-  public : cNode_routineLLVMNameDict (cNode_routineLLVMNameDict * inNode) ;
+  public: cNode_routineLLVMNameDict (cNode_routineLLVMNameDict * inNode) ;
 
-  public : virtual ~ cNode_routineLLVMNameDict (void) {
+  public: virtual ~ cNode_routineLLVMNameDict (void) {
     macroMyDelete (mInfPtr) ;
     macroMyDelete (mSupPtr) ;
   }
@@ -34,30 +34,30 @@ class cNode_routineLLVMNameDict : public GALGAS_routineLLVMNameDict_2D_element {
 
 class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
 //--------------------------------- Attributes
-  private : cNode_routineLLVMNameDict * mRoot ;
-  private : uint32_t mCount ;
+  private: cNode_routineLLVMNameDict * mRoot ;
+  private: uint32_t mCount ;
 
 //--------------------------------- Constructor
-  protected : cSharedDictRoot_routineLLVMNameDict (LOCATION_ARGS) :
+  protected: cSharedDictRoot_routineLLVMNameDict (LOCATION_ARGS) :
   C_SharedObject (THERE),
   mRoot (NULL),
   mCount (0) {
   }
 
 //--------------------------------- Virtual destructor
-  protected : virtual ~ cSharedDictRoot_routineLLVMNameDict (void) {
+  protected: virtual ~ cSharedDictRoot_routineLLVMNameDict (void) {
     macroMyDelete (mRoot) ;
   }
 
 //--------------------------------- No copy
-  private : cSharedDictRoot_routineLLVMNameDict (const cSharedDictRoot_routineLLVMNameDict &) ;
-  private : cSharedDictRoot_routineLLVMNameDict & operator = (const cSharedDictRoot_routineLLVMNameDict &) ;
+  private: cSharedDictRoot_routineLLVMNameDict (const cSharedDictRoot_routineLLVMNameDict &) ;
+  private: cSharedDictRoot_routineLLVMNameDict & operator = (const cSharedDictRoot_routineLLVMNameDict &) ;
 
 //--------------------------------- Copy a map
-  protected : VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_routineLLVMNameDict * inSource) ;
+  protected: VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_routineLLVMNameDict * inSource) ;
 
 //--------------------------------- Insert
-  protected : VIRTUAL_IN_DEBUG void performInsert (const GALGAS_routineLLVMNameDict_2D_element & inNewNode) {
+  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_routineLLVMNameDict_2D_element & inNewNode) {
     macroUniqueSharedObject (this) ;
     bool extension = false ;
     bool entryAdded = false ;
@@ -70,7 +70,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     #endif
   }
 
-  protected : static void rotateLeft (cNode_routineLLVMNameDict * & ioRootPtr) {
+  protected: static void rotateLeft (cNode_routineLLVMNameDict * & ioRootPtr) {
     cNode_routineLLVMNameDict * ptr = ioRootPtr->mSupPtr ;
     ioRootPtr->mSupPtr = ptr->mInfPtr ;
     ptr->mInfPtr = ioRootPtr;
@@ -89,7 +89,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     ioRootPtr = ptr ;
   }
 
-  protected : static void rotateRight (cNode_routineLLVMNameDict * & ioRootPtr) {
+  protected: static void rotateRight (cNode_routineLLVMNameDict * & ioRootPtr) {
     cNode_routineLLVMNameDict * ptr = ioRootPtr->mInfPtr ;
     ioRootPtr->mInfPtr = ptr->mSupPtr ;
     ptr->mSupPtr = ioRootPtr ;
@@ -107,7 +107,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     ioRootPtr = ptr ;
   }
 
-  protected : static void recursiveAddEntry (cNode_routineLLVMNameDict * & ioRootPtr,
+  protected: static void recursiveAddEntry (cNode_routineLLVMNameDict * & ioRootPtr,
                                              const GALGAS_routineLLVMNameDict_2D_element & inNewNode,
                                              bool & outEntryAdded,
                                              bool & ioExtension) {
@@ -155,7 +155,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   }
 
 //--------------------------------- Search
-  private : VIRTUAL_IN_DEBUG cNode_routineLLVMNameDict * findEntryInDict (const GALGAS_mode & inKey) const {
+  private: VIRTUAL_IN_DEBUG cNode_routineLLVMNameDict * findEntryInDict (const GALGAS_mode & inKey) const {
     cNode_routineLLVMNameDict * result = NULL ;
     cNode_routineLLVMNameDict * currentNode = mRoot ;
     while ((currentNode != NULL) && (NULL == result)) {
@@ -173,7 +173,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   }
 
 //--------------------------------- Remove
-  protected : VIRTUAL_IN_DEBUG void performRemove (const GALGAS_mode & inKey, cNode_routineLLVMNameDict * & outRemovedNodePtr) {
+  protected: VIRTUAL_IN_DEBUG void performRemove (const GALGAS_mode & inKey, cNode_routineLLVMNameDict * & outRemovedNodePtr) {
     bool branchHasBeenRemoved = false ; // Unused here
     internalRemoveRecursively (mRoot, inKey, outRemovedNodePtr, branchHasBeenRemoved) ;
     if (NULL != outRemovedNodePtr) {
@@ -181,7 +181,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     }
   }
 
-  protected : static void supBranchDecreased (cNode_routineLLVMNameDict * & ioRoot,
+  protected: static void supBranchDecreased (cNode_routineLLVMNameDict * & ioRoot,
                                               bool & ioBranchHasBeenRemoved) {
     ioRoot->mBalance ++ ;
     switch (ioRoot->mBalance) {
@@ -208,7 +208,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     }
   }
 
-  protected : static void infBranchDecreased (cNode_routineLLVMNameDict * & ioRoot,
+  protected: static void infBranchDecreased (cNode_routineLLVMNameDict * & ioRoot,
                                               bool & ioBranchHasBeenRemoved) {
     ioRoot->mBalance -- ;
     switch (ioRoot->mBalance) {
@@ -235,7 +235,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     }
   }
 
-  protected : static void  getPreviousElement (cNode_routineLLVMNameDict * & ioRoot,
+  protected: static void  getPreviousElement (cNode_routineLLVMNameDict * & ioRoot,
                                                cNode_routineLLVMNameDict * & ioElement,
                                                bool & ioBranchHasBeenRemoved) {
     if (ioRoot->mSupPtr == NULL) {
@@ -250,7 +250,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     }
   }
 
-  protected : static void internalRemoveRecursively (cNode_routineLLVMNameDict * & ioRoot,
+  protected: static void internalRemoveRecursively (cNode_routineLLVMNameDict * & ioRoot,
                                                      const GALGAS_mode & inKeyToRemove,
                                                      cNode_routineLLVMNameDict * & outRemovedNode,
                                                      bool & ioBranchHasBeenRemoved) {
@@ -294,11 +294,11 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   }
 
 //--------------------------------- Internal method for enumeration
-  protected : VIRTUAL_IN_DEBUG void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
+  protected: VIRTUAL_IN_DEBUG void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
 
 //--------------------------------- Check Dictionary
   #ifndef DO_NOT_GENERATE_CHECKINGS
-      private : VIRTUAL_IN_DEBUG void checkDict (LOCATION_ARGS) const {
+      private: VIRTUAL_IN_DEBUG void checkDict (LOCATION_ARGS) const {
       uint32_t n = 0 ;
       checkNode (mRoot, n) ;
       MF_AssertThere (n == mCount, "n (%lld) != mCount (%lld)", n, mCount) ;
@@ -307,7 +307,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
 
 
   #ifndef DO_NOT_GENERATE_CHECKINGS
-    private : static void checkNode (const cNode_routineLLVMNameDict * inNode,
+    private: static void checkNode (const cNode_routineLLVMNameDict * inNode,
                                      uint32_t & ioCount) {
       if (NULL != inNode) {
         checkNode (inNode->mInfPtr, ioCount) ;
@@ -318,7 +318,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   #endif
 
 //--------------------------------- Compare Dictionaries
-  public : typeComparisonResult compare (const cSharedDictRoot_routineLLVMNameDict * inOperand) const {
+  public: typeComparisonResult compare (const cSharedDictRoot_routineLLVMNameDict * inOperand) const {
     typeComparisonResult result = kOperandEqual ;
     if (mCount < inOperand->mCount) {
       result = kFirstOperandLowerThanSecond ;
@@ -616,36 +616,36 @@ typeComparisonResult GALGAS_routineLLVMNameDict::objectCompare (const GALGAS_rou
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_routineLLVMNameDict : public cCollectionElement {
-  public : GALGAS_routineLLVMNameDict_2D_element mElement ;
+  public: GALGAS_routineLLVMNameDict_2D_element mElement ;
 
 //--- Constructor
-  public : cCollectionElement_routineLLVMNameDict (const GALGAS_routineLLVMNameDict_2D_element & inElement) :
+  public: cCollectionElement_routineLLVMNameDict (const GALGAS_routineLLVMNameDict_2D_element & inElement) :
   cCollectionElement (HERE),
   mElement (inElement) {
   }
 
 //--- No copy
-  private : cCollectionElement_routineLLVMNameDict (const cCollectionElement_routineLLVMNameDict &) ;
-  private : cCollectionElement_routineLLVMNameDict & operator = (const cCollectionElement_routineLLVMNameDict &) ;
+  private: cCollectionElement_routineLLVMNameDict (const cCollectionElement_routineLLVMNameDict &) ;
+  private: cCollectionElement_routineLLVMNameDict & operator = (const cCollectionElement_routineLLVMNameDict &) ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const { return mElement.isValid () ; }
+  public: virtual bool isValid (void) const { return mElement.isValid () ; }
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const {
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const {
     const cCollectionElement_routineLLVMNameDict * p = (const cCollectionElement_routineLLVMNameDict *) inOperand ;
     return mElement.objectCompare (p->mElement) ;
   }
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) {
+  public: virtual cCollectionElement * copy (void) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_routineLLVMNameDict (mElement)) ;
     return p ;
   }
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const {
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const {
     mElement.description (ioString, inIndentation) ;
   }
 } ;
@@ -887,26 +887,26 @@ void extensionSetter_addFunctionWithTwoInputArguments (GALGAS_routineMapForConte
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_sectionIRlist : public cCollectionElement {
-  public : GALGAS_sectionIRlist_2D_element mObject ;
+  public: GALGAS_sectionIRlist_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_sectionIRlist (const GALGAS_string & in_mSectionCallName,
-                                             const GALGAS_string & in_mSectionImplementationName,
-                                             const GALGAS_bool & in_invocationFromAnyMode
-                                             COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_sectionIRlist (const GALGAS_sectionIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_sectionIRlist (const GALGAS_string & in_mSectionCallName,
+                                            const GALGAS_string & in_mSectionImplementationName,
+                                            const GALGAS_bool & in_invocationFromAnyMode
+                                            COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_sectionIRlist (const GALGAS_sectionIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1434,26 +1434,26 @@ GALGAS_sectionIRlist GALGAS_sectionIRlist::extractObject (const GALGAS_object & 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_primitiveAndServiceIRlist : public cCollectionElement {
-  public : GALGAS_primitiveAndServiceIRlist_2D_element mObject ;
+  public: GALGAS_primitiveAndServiceIRlist_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_primitiveAndServiceIRlist (const GALGAS_string & in_mCallName,
-                                                         const GALGAS_string & in_mImplementationName,
-                                                         const GALGAS_bool & in_mHasReturnValue
-                                                         COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_primitiveAndServiceIRlist (const GALGAS_primitiveAndServiceIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_primitiveAndServiceIRlist (const GALGAS_string & in_mCallName,
+                                                        const GALGAS_string & in_mImplementationName,
+                                                        const GALGAS_bool & in_mHasReturnValue
+                                                        COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_primitiveAndServiceIRlist (const GALGAS_primitiveAndServiceIRlist_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2055,26 +2055,26 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_routineFormalArgumentListIR : public cCollectionElement {
-  public : GALGAS_routineFormalArgumentListIR_2D_element mObject ;
+  public: GALGAS_routineFormalArgumentListIR_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_routineFormalArgumentListIR (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentKind,
-                                                           const GALGAS_omnibusType & in_mFormalArgumentType,
-                                                           const GALGAS_string & in_mFormalArgumentName
-                                                           COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_routineFormalArgumentListIR (const GALGAS_routineFormalArgumentListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_routineFormalArgumentListIR (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentKind,
+                                                          const GALGAS_omnibusType & in_mFormalArgumentType,
+                                                          const GALGAS_string & in_mFormalArgumentName
+                                                          COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_routineFormalArgumentListIR (const GALGAS_routineFormalArgumentListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3764,26 +3764,26 @@ GALGAS_guardKindGenerationIR GALGAS_guardKindGenerationIR::extractObject (const 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_allocaList : public cCollectionElement {
-  public : GALGAS_allocaList_2D_element mObject ;
+  public: GALGAS_allocaList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_allocaList (const GALGAS_string & in_mVarLLVMName,
-                                          const GALGAS_omnibusType & in_mLLVMType,
-                                          const GALGAS_bool & in_mFormalInputArgument
-                                          COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_allocaList (const GALGAS_allocaList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_allocaList (const GALGAS_string & in_mVarLLVMName,
+                                         const GALGAS_omnibusType & in_mLLVMType,
+                                         const GALGAS_bool & in_mFormalInputArgument
+                                         COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_allocaList (const GALGAS_allocaList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4311,24 +4311,24 @@ GALGAS_allocaList GALGAS_allocaList::extractObject (const GALGAS_object & inObje
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_instructionListIR : public cCollectionElement {
-  public : GALGAS_instructionListIR_2D_element mObject ;
+  public: GALGAS_instructionListIR_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_instructionListIR (const GALGAS_abstractInstructionIR & in_mInstructionGeneration
-                                                 COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_instructionListIR (const GALGAS_instructionListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_instructionListIR (const GALGAS_abstractInstructionIR & in_mInstructionGeneration
+                                                COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_instructionListIR (const GALGAS_instructionListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5043,25 +5043,25 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_routineFormalArgum
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_effectiveArgumentListAST : public cCollectionElement {
-  public : GALGAS_effectiveArgumentListAST_2D_element mObject ;
+  public: GALGAS_effectiveArgumentListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_effectiveArgumentListAST (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterKind,
-                                                        const GALGAS_lstring & in_mSelector
-                                                        COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_effectiveArgumentListAST (const GALGAS_effectiveArgumentListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_effectiveArgumentListAST (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterKind,
+                                                       const GALGAS_lstring & in_mSelector
+                                                       COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_effectiveArgumentListAST (const GALGAS_effectiveArgumentListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5525,36 +5525,36 @@ GALGAS_effectiveArgumentListAST GALGAS_effectiveArgumentListAST::extractObject (
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_decoratedRegularRoutineList : public cCollectionElement {
-  public : GALGAS_decoratedRegularRoutineList_2D_element mObject ;
+  public: GALGAS_decoratedRegularRoutineList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_decoratedRegularRoutineList (const GALGAS_lstring & in_receiverTypeName,
-                                                           const GALGAS_mode & in_mode,
-                                                           const GALGAS_bool & in_isRequired,
-                                                           const GALGAS_routineKind & in_routineKind,
-                                                           const GALGAS_bool & in_warnIfUnused,
-                                                           const GALGAS_bool & in_exportedRoutine,
-                                                           const GALGAS_routineAttributes & in_routineAttributes,
-                                                           const GALGAS_lstring & in_routineMangledLLVMName,
-                                                           const GALGAS_routineFormalArgumentListAST & in_formalArgumentList,
-                                                           const GALGAS_bool & in_warningOnUnusedArgs,
-                                                           const GALGAS_instructionListAST & in_mInstructionList,
-                                                           const GALGAS_location & in_mEndOfRoutineDeclaration,
-                                                           const GALGAS_lstring & in_returnTypeName
-                                                           COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_decoratedRegularRoutineList (const GALGAS_decoratedRegularRoutineList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_decoratedRegularRoutineList (const GALGAS_lstring & in_receiverTypeName,
+                                                          const GALGAS_mode & in_mode,
+                                                          const GALGAS_bool & in_isRequired,
+                                                          const GALGAS_routineKind & in_routineKind,
+                                                          const GALGAS_bool & in_warnIfUnused,
+                                                          const GALGAS_bool & in_exportedRoutine,
+                                                          const GALGAS_routineAttributes & in_routineAttributes,
+                                                          const GALGAS_lstring & in_routineMangledLLVMName,
+                                                          const GALGAS_routineFormalArgumentListAST & in_formalArgumentList,
+                                                          const GALGAS_bool & in_warningOnUnusedArgs,
+                                                          const GALGAS_instructionListAST & in_mInstructionList,
+                                                          const GALGAS_location & in_mEndOfRoutineDeclaration,
+                                                          const GALGAS_lstring & in_returnTypeName
+                                                          COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_decoratedRegularRoutineList (const GALGAS_decoratedRegularRoutineList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7413,26 +7413,26 @@ GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine
 //----------------------------------------------------------------------------------------------------------------------
 
 class cSortedListElement_panicSortedListIR : public cSortedListElement {
-  public : GALGAS_panicSortedListIR_2D_element mObject ;
+  public: GALGAS_panicSortedListIR_2D_element mObject ;
 
 //--- Constructor
-  public : cSortedListElement_panicSortedListIR (const GALGAS_bigint & in_mPriority
-                                                 COMMA_LOCATION_ARGS) ;
+  public: cSortedListElement_panicSortedListIR (const GALGAS_bigint & in_mPriority
+                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cSortedListElement * copy (void) ;
+  public: virtual cSortedListElement * copy (void) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Description
- public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+ public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 
 //--- Virtual method that comparing element for sorting
-  public : virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+  public: virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7765,24 +7765,24 @@ GALGAS_ctExpressionAST GALGAS_ctExpressionAST::extractObject (const GALGAS_objec
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_llvmGenerationInstructionList : public cCollectionElement {
-  public : GALGAS_llvmGenerationInstructionList_2D_element mObject ;
+  public: GALGAS_llvmGenerationInstructionList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_llvmGenerationInstructionList (const GALGAS_abstractLLVMInstruction & in_mInstruction
-                                                             COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_llvmGenerationInstructionList (const GALGAS_llvmGenerationInstructionList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmGenerationInstructionList (const GALGAS_abstractLLVMInstruction & in_mInstruction
+                                                            COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmGenerationInstructionList (const GALGAS_llvmGenerationInstructionList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8986,24 +8986,24 @@ GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::extractObject (const 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_primaryInExpressionAccessListAST : public cCollectionElement {
-  public : GALGAS_primaryInExpressionAccessListAST_2D_element mObject ;
+  public: GALGAS_primaryInExpressionAccessListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessAST & in_mAccess
-                                                                COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessAST & in_mAccess
+                                                               COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -10056,26 +10056,26 @@ GALGAS_booleanShortCircuitAndOperatorExpressionAST GALGAS_booleanShortCircuitAnd
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_integerSliceFieldListAST : public cCollectionElement {
-  public : GALGAS_integerSliceFieldListAST_2D_element mObject ;
+  public: GALGAS_integerSliceFieldListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_integerSliceFieldListAST (const GALGAS_lstring & in_mSliceWidth,
-                                                        const GALGAS_expressionAST & in_mExpression,
-                                                        const GALGAS_location & in_mExpressionLocation
-                                                        COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_integerSliceFieldListAST (const GALGAS_integerSliceFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_integerSliceFieldListAST (const GALGAS_lstring & in_mSliceWidth,
+                                                       const GALGAS_expressionAST & in_mExpression,
+                                                       const GALGAS_location & in_mExpressionLocation
+                                                       COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_integerSliceFieldListAST (const GALGAS_integerSliceFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -10779,26 +10779,26 @@ GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::extra
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_registerIntegerFieldListAST : public cCollectionElement {
-  public : GALGAS_registerIntegerFieldListAST_2D_element mObject ;
+  public: GALGAS_registerIntegerFieldListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_registerIntegerFieldListAST (const GALGAS_lstring & in_mFieldName,
-                                                           const GALGAS_expressionAST & in_mExpression,
-                                                           const GALGAS_location & in_mExpressionLocation
-                                                           COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_registerIntegerFieldListAST (const GALGAS_registerIntegerFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_registerIntegerFieldListAST (const GALGAS_lstring & in_mFieldName,
+                                                          const GALGAS_expressionAST & in_mExpression,
+                                                          const GALGAS_location & in_mExpressionLocation
+                                                          COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_registerIntegerFieldListAST (const GALGAS_registerIntegerFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -11783,25 +11783,25 @@ GALGAS_primaryInExpressionAccessAST GALGAS_primaryInExpressionAccessAST::extract
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_functionCallEffectiveParameterListAST : public cCollectionElement {
-  public : GALGAS_functionCallEffectiveParameterListAST_2D_element mObject ;
+  public: GALGAS_functionCallEffectiveParameterListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_functionCallEffectiveParameterListAST (const GALGAS_lstring & in_mSelector,
-                                                                     const GALGAS_expressionAST & in_mExpression
-                                                                     COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_functionCallEffectiveParameterListAST (const GALGAS_functionCallEffectiveParameterListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_functionCallEffectiveParameterListAST (const GALGAS_lstring & in_mSelector,
+                                                                    const GALGAS_expressionAST & in_mExpression
+                                                                    COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_functionCallEffectiveParameterListAST (const GALGAS_functionCallEffectiveParameterListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -13311,24 +13311,24 @@ GALGAS_omnibusInfixOperator GALGAS_omnibusInfixOperator::extractObject (const GA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_genericFormalParameterList : public cCollectionElement {
-  public : GALGAS_genericFormalParameterList_2D_element mObject ;
+  public: GALGAS_genericFormalParameterList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_genericFormalParameterList (const GALGAS_genericFormalParameter & in_mParameter
-                                                          COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_genericFormalParameterList (const GALGAS_genericFormalParameterList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_genericFormalParameterList (const GALGAS_genericFormalParameter & in_mParameter
+                                                         COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_genericFormalParameterList (const GALGAS_genericFormalParameterList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------

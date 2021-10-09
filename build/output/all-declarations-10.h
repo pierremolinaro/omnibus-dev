@@ -103,65 +103,65 @@ class GALGAS_string function_boolTypeName (class C_Compiler * inCompiler
 
 class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GALGAS_abstractRoutineIR {
 //--- Constructor
-  public : GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (void) ;
+  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (void) ;
 
 //--------------------------------- Default GALGAS constructor
-  public : static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_default (LOCATION_ARGS) ;
+  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_default (LOCATION_ARGS) ;
 
 //---
-  public : inline const class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * ptr (void) const { return (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR *) mObjectPtr ; }
+  public: inline const class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * ptr (void) const { return (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * inSourcePtr) ;
+  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR extractObject (const GALGAS_object & inObject,
-                                                                                              C_Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR extractObject (const GALGAS_object & inObject,
+                                                                                             C_Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                                      const class GALGAS_bool & inOperand1,
-                                                                                                      const class GALGAS_bool & inOperand2,
-                                                                                                      const class GALGAS_omnibusType & inOperand3,
-                                                                                                      const class GALGAS_omnibusType & inOperand4,
-                                                                                                      const class GALGAS_uint & inOperand5
-                                                                                                      COMMA_LOCATION_ARGS) ;
+  public: static class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                                                     const class GALGAS_bool & inOperand1,
+                                                                                                     const class GALGAS_bool & inOperand2,
+                                                                                                     const class GALGAS_omnibusType & inOperand3,
+                                                                                                     const class GALGAS_omnibusType & inOperand4,
+                                                                                                     const class GALGAS_uint & inOperand5
+                                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inOperand) const ;
+  public: typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_setMArraySize (class GALGAS_uint inArgument0
-                                                       COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void setter_setMArraySize (class GALGAS_uint inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMElementType (class GALGAS_omnibusType inArgument0
-                                                         COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void setter_setMElementType (class GALGAS_omnibusType inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (class GALGAS_omnibusType inArgument0
-                                                                COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (class GALGAS_omnibusType inArgument0
+                                                               COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
 
@@ -178,36 +178,36 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValue
 
 class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public : GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
-  public : GALGAS_omnibusType mProperty_mElementType ;
-  public : GALGAS_uint mProperty_mArraySize ;
+  public: GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
+  public: GALGAS_omnibusType mProperty_mElementType ;
+  public: GALGAS_uint mProperty_mArraySize ;
 
 //--- Constructor
-  public : cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                       const GALGAS_bool & in_isRequired,
-                                                                       const GALGAS_bool & in_warnsIfUnused,
-                                                                       const GALGAS_omnibusType & in_mFixedSizeArrayType,
-                                                                       const GALGAS_omnibusType & in_mElementType,
-                                                                       const GALGAS_uint & in_mArraySize
-                                                                       COMMA_LOCATION_ARGS) ;
+  public: cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                                                      const GALGAS_bool & in_isRequired,
+                                                                      const GALGAS_bool & in_warnsIfUnused,
+                                                                      const GALGAS_omnibusType & in_mFixedSizeArrayType,
+                                                                      const GALGAS_omnibusType & in_mElementType,
+                                                                      const GALGAS_uint & in_mArraySize
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
-  public : VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG void setter_setMElementType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
-  public : VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG void setter_setMArraySize (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_omnibusType getter_mElementType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMElementType (GALGAS_omnibusType inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_uint getter_mArraySize (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMArraySize (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString,
+                                    const int32_t inIndentation) const ;
 
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
 
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
 
@@ -431,53 +431,53 @@ class GALGAS_string function_functionResultVariableName (class C_Compiler * inCo
 
 class GALGAS_addressofInstructionIR : public GALGAS_abstractInstructionIR {
 //--- Constructor
-  public : GALGAS_addressofInstructionIR (void) ;
+  public: GALGAS_addressofInstructionIR (void) ;
 
 //---
-  public : inline const class cPtr_addressofInstructionIR * ptr (void) const { return (const cPtr_addressofInstructionIR *) mObjectPtr ; }
+  public: inline const class cPtr_addressofInstructionIR * ptr (void) const { return (const cPtr_addressofInstructionIR *) mObjectPtr ; }
 
 //--------------------------------- Constructor from pointer
-  public : GALGAS_addressofInstructionIR (const cPtr_addressofInstructionIR * inSourcePtr) ;
+  public: GALGAS_addressofInstructionIR (const cPtr_addressofInstructionIR * inSourcePtr) ;
 
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
-  protected : virtual AC_GALGAS_root * clonedObject (void) const ;
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
 
 //--------------------------------- Object extraction
-  public : static GALGAS_addressofInstructionIR extractObject (const GALGAS_object & inObject,
-                                                               C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_addressofInstructionIR extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public : static class GALGAS_addressofInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                       const class GALGAS_LValueRepresentation & inOperand1
-                                                                       COMMA_LOCATION_ARGS) ;
+  public: static class GALGAS_addressofInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
+                                                                      const class GALGAS_LValueRepresentation & inOperand1
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public : typeComparisonResult objectCompare (const GALGAS_addressofInstructionIR & inOperand) const ;
+  public: typeComparisonResult objectCompare (const GALGAS_addressofInstructionIR & inOperand) const ;
 
 //--------------------------------- Setters
-  public : VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueRepresentation inArgument0
-                                                    COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueRepresentation inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
 
-  public : VIRTUAL_IN_DEBUG void setter_setMTarget (class GALGAS_objectIR inArgument0
-                                                    COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG void setter_setMTarget (class GALGAS_objectIR inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
 
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public : VIRTUAL_IN_DEBUG class GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
 
-  public : VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
-  public : VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
  
 } ; // End of GALGAS_addressofInstructionIR class
 
@@ -494,29 +494,29 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofInstructio
 
 class cPtr_addressofInstructionIR : public cPtr_abstractInstructionIR {
 //--- Attributes
-  public : GALGAS_objectIR mProperty_mTarget ;
-  public : GALGAS_LValueRepresentation mProperty_mLValue ;
+  public: GALGAS_objectIR mProperty_mTarget ;
+  public: GALGAS_LValueRepresentation mProperty_mLValue ;
 
 //--- Constructor
-  public : cPtr_addressofInstructionIR (const GALGAS_objectIR & in_mTarget,
-                                        const GALGAS_LValueRepresentation & in_mLValue
-                                        COMMA_LOCATION_ARGS) ;
+  public: cPtr_addressofInstructionIR (const GALGAS_objectIR & in_mTarget,
+                                       const GALGAS_LValueRepresentation & in_mLValue
+                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public : virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public : VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG void setter_setMTarget (GALGAS_objectIR inValue COMMA_LOCATION_ARGS) ;
-  public : VIRTUAL_IN_DEBUG GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
-  public : VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueRepresentation inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_objectIR getter_mTarget (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMTarget (GALGAS_objectIR inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_LValueRepresentation getter_mLValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueRepresentation inValue COMMA_LOCATION_ARGS) ;
 //--- Description
-  public : virtual void description (C_String & ioString,
-                                     const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString,
+                                    const int32_t inIndentation) const ;
 
-  public : virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
 
-  public : virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
 
 } ;
 

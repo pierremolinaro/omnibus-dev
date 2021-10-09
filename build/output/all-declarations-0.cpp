@@ -11655,25 +11655,25 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::extractObject (const 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_interruptionConfigurationList : public cCollectionElement {
-  public : GALGAS_interruptionConfigurationList_2D_element mObject ;
+  public: GALGAS_interruptionConfigurationList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
-                                                             const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
-                                                             COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_interruptionConfigurationList (const GALGAS_interruptionConfigurationList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
+                                                            const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
+                                                            COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_interruptionConfigurationList (const GALGAS_interruptionConfigurationList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12224,24 +12224,24 @@ GALGAS_abstractDeclarationAST GALGAS_abstractDeclarationAST::extractObject (cons
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_declarationListAST : public cCollectionElement {
-  public : GALGAS_declarationListAST_2D_element mObject ;
+  public: GALGAS_declarationListAST_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_declarationListAST (const GALGAS_abstractDeclarationAST & in_mDeclaration
-                                                  COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_declarationListAST (const GALGAS_declarationListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_declarationListAST (const GALGAS_abstractDeclarationAST & in_mDeclaration
+                                                 COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_declarationListAST (const GALGAS_declarationListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12637,21 +12637,21 @@ GALGAS_declarationListAST GALGAS_declarationListAST::extractObject (const GALGAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cNode_extendStaticArrayDeclarationDictAST : public GALGAS_extendStaticArrayDeclarationDictAST_2D_element {
-  public : cNode_extendStaticArrayDeclarationDictAST * mInfPtr ;
-  public : cNode_extendStaticArrayDeclarationDictAST * mSupPtr ;
-  public : int32_t mBalance ;
+  public: cNode_extendStaticArrayDeclarationDictAST * mInfPtr ;
+  public: cNode_extendStaticArrayDeclarationDictAST * mSupPtr ;
+  public: int32_t mBalance ;
 
-  public : cNode_extendStaticArrayDeclarationDictAST (const GALGAS_string & in_key,
-                                                      const GALGAS_staticListValueListAST & inProperty_mExpressions) :
+  public: cNode_extendStaticArrayDeclarationDictAST (const GALGAS_string & in_key,
+                                                     const GALGAS_staticListValueListAST & inProperty_mExpressions) :
   GALGAS_extendStaticArrayDeclarationDictAST_2D_element (in_key, inProperty_mExpressions),
   mInfPtr (NULL),
   mSupPtr (NULL),
   mBalance (0) {
   }
 
-  public : cNode_extendStaticArrayDeclarationDictAST (cNode_extendStaticArrayDeclarationDictAST * inNode) ;
+  public: cNode_extendStaticArrayDeclarationDictAST (cNode_extendStaticArrayDeclarationDictAST * inNode) ;
 
-  public : virtual ~ cNode_extendStaticArrayDeclarationDictAST (void) {
+  public: virtual ~ cNode_extendStaticArrayDeclarationDictAST (void) {
     macroMyDelete (mInfPtr) ;
     macroMyDelete (mSupPtr) ;
   }
@@ -12661,30 +12661,30 @@ class cNode_extendStaticArrayDeclarationDictAST : public GALGAS_extendStaticArra
 
 class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObject {
 //--------------------------------- Attributes
-  private : cNode_extendStaticArrayDeclarationDictAST * mRoot ;
-  private : uint32_t mCount ;
+  private: cNode_extendStaticArrayDeclarationDictAST * mRoot ;
+  private: uint32_t mCount ;
 
 //--------------------------------- Constructor
-  protected : cSharedDictRoot_extendStaticArrayDeclarationDictAST (LOCATION_ARGS) :
+  protected: cSharedDictRoot_extendStaticArrayDeclarationDictAST (LOCATION_ARGS) :
   C_SharedObject (THERE),
   mRoot (NULL),
   mCount (0) {
   }
 
 //--------------------------------- Virtual destructor
-  protected : virtual ~ cSharedDictRoot_extendStaticArrayDeclarationDictAST (void) {
+  protected: virtual ~ cSharedDictRoot_extendStaticArrayDeclarationDictAST (void) {
     macroMyDelete (mRoot) ;
   }
 
 //--------------------------------- No copy
-  private : cSharedDictRoot_extendStaticArrayDeclarationDictAST (const cSharedDictRoot_extendStaticArrayDeclarationDictAST &) ;
-  private : cSharedDictRoot_extendStaticArrayDeclarationDictAST & operator = (const cSharedDictRoot_extendStaticArrayDeclarationDictAST &) ;
+  private: cSharedDictRoot_extendStaticArrayDeclarationDictAST (const cSharedDictRoot_extendStaticArrayDeclarationDictAST &) ;
+  private: cSharedDictRoot_extendStaticArrayDeclarationDictAST & operator = (const cSharedDictRoot_extendStaticArrayDeclarationDictAST &) ;
 
 //--------------------------------- Copy a map
-  protected : VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_extendStaticArrayDeclarationDictAST * inSource) ;
+  protected: VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_extendStaticArrayDeclarationDictAST * inSource) ;
 
 //--------------------------------- Insert
-  protected : VIRTUAL_IN_DEBUG void performInsert (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode) {
+  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode) {
     macroUniqueSharedObject (this) ;
     bool extension = false ;
     bool entryAdded = false ;
@@ -12697,7 +12697,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     #endif
   }
 
-  protected : static void rotateLeft (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr) {
+  protected: static void rotateLeft (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr) {
     cNode_extendStaticArrayDeclarationDictAST * ptr = ioRootPtr->mSupPtr ;
     ioRootPtr->mSupPtr = ptr->mInfPtr ;
     ptr->mInfPtr = ioRootPtr;
@@ -12716,7 +12716,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     ioRootPtr = ptr ;
   }
 
-  protected : static void rotateRight (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr) {
+  protected: static void rotateRight (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr) {
     cNode_extendStaticArrayDeclarationDictAST * ptr = ioRootPtr->mInfPtr ;
     ioRootPtr->mInfPtr = ptr->mSupPtr ;
     ptr->mSupPtr = ioRootPtr ;
@@ -12734,7 +12734,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     ioRootPtr = ptr ;
   }
 
-  protected : static void recursiveAddEntry (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr,
+  protected: static void recursiveAddEntry (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr,
                                              const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode,
                                              bool & outEntryAdded,
                                              bool & ioExtension) {
@@ -12782,7 +12782,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   }
 
 //--------------------------------- Search
-  private : VIRTUAL_IN_DEBUG cNode_extendStaticArrayDeclarationDictAST * findEntryInDict (const GALGAS_string & inKey) const {
+  private: VIRTUAL_IN_DEBUG cNode_extendStaticArrayDeclarationDictAST * findEntryInDict (const GALGAS_string & inKey) const {
     cNode_extendStaticArrayDeclarationDictAST * result = NULL ;
     cNode_extendStaticArrayDeclarationDictAST * currentNode = mRoot ;
     while ((currentNode != NULL) && (NULL == result)) {
@@ -12800,7 +12800,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   }
 
 //--------------------------------- Remove
-  protected : VIRTUAL_IN_DEBUG void performRemove (const GALGAS_string & inKey, cNode_extendStaticArrayDeclarationDictAST * & outRemovedNodePtr) {
+  protected: VIRTUAL_IN_DEBUG void performRemove (const GALGAS_string & inKey, cNode_extendStaticArrayDeclarationDictAST * & outRemovedNodePtr) {
     bool branchHasBeenRemoved = false ; // Unused here
     internalRemoveRecursively (mRoot, inKey, outRemovedNodePtr, branchHasBeenRemoved) ;
     if (NULL != outRemovedNodePtr) {
@@ -12808,7 +12808,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     }
   }
 
-  protected : static void supBranchDecreased (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
+  protected: static void supBranchDecreased (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
                                               bool & ioBranchHasBeenRemoved) {
     ioRoot->mBalance ++ ;
     switch (ioRoot->mBalance) {
@@ -12835,7 +12835,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     }
   }
 
-  protected : static void infBranchDecreased (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
+  protected: static void infBranchDecreased (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
                                               bool & ioBranchHasBeenRemoved) {
     ioRoot->mBalance -- ;
     switch (ioRoot->mBalance) {
@@ -12862,7 +12862,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     }
   }
 
-  protected : static void  getPreviousElement (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
+  protected: static void  getPreviousElement (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
                                                cNode_extendStaticArrayDeclarationDictAST * & ioElement,
                                                bool & ioBranchHasBeenRemoved) {
     if (ioRoot->mSupPtr == NULL) {
@@ -12877,7 +12877,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     }
   }
 
-  protected : static void internalRemoveRecursively (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
+  protected: static void internalRemoveRecursively (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
                                                      const GALGAS_string & inKeyToRemove,
                                                      cNode_extendStaticArrayDeclarationDictAST * & outRemovedNode,
                                                      bool & ioBranchHasBeenRemoved) {
@@ -12921,11 +12921,11 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   }
 
 //--------------------------------- Internal method for enumeration
-  protected : VIRTUAL_IN_DEBUG void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
+  protected: VIRTUAL_IN_DEBUG void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
 
 //--------------------------------- Check Dictionary
   #ifndef DO_NOT_GENERATE_CHECKINGS
-      private : VIRTUAL_IN_DEBUG void checkDict (LOCATION_ARGS) const {
+      private: VIRTUAL_IN_DEBUG void checkDict (LOCATION_ARGS) const {
       uint32_t n = 0 ;
       checkNode (mRoot, n) ;
       MF_AssertThere (n == mCount, "n (%lld) != mCount (%lld)", n, mCount) ;
@@ -12934,7 +12934,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
 
 
   #ifndef DO_NOT_GENERATE_CHECKINGS
-    private : static void checkNode (const cNode_extendStaticArrayDeclarationDictAST * inNode,
+    private: static void checkNode (const cNode_extendStaticArrayDeclarationDictAST * inNode,
                                      uint32_t & ioCount) {
       if (NULL != inNode) {
         checkNode (inNode->mInfPtr, ioCount) ;
@@ -12945,7 +12945,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   #endif
 
 //--------------------------------- Compare Dictionaries
-  public : typeComparisonResult compare (const cSharedDictRoot_extendStaticArrayDeclarationDictAST * inOperand) const {
+  public: typeComparisonResult compare (const cSharedDictRoot_extendStaticArrayDeclarationDictAST * inOperand) const {
     typeComparisonResult result = kOperandEqual ;
     if (mCount < inOperand->mCount) {
       result = kFirstOperandLowerThanSecond ;
@@ -13243,36 +13243,36 @@ typeComparisonResult GALGAS_extendStaticArrayDeclarationDictAST::objectCompare (
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_extendStaticArrayDeclarationDictAST : public cCollectionElement {
-  public : GALGAS_extendStaticArrayDeclarationDictAST_2D_element mElement ;
+  public: GALGAS_extendStaticArrayDeclarationDictAST_2D_element mElement ;
 
 //--- Constructor
-  public : cCollectionElement_extendStaticArrayDeclarationDictAST (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inElement) :
+  public: cCollectionElement_extendStaticArrayDeclarationDictAST (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inElement) :
   cCollectionElement (HERE),
   mElement (inElement) {
   }
 
 //--- No copy
-  private : cCollectionElement_extendStaticArrayDeclarationDictAST (const cCollectionElement_extendStaticArrayDeclarationDictAST &) ;
-  private : cCollectionElement_extendStaticArrayDeclarationDictAST & operator = (const cCollectionElement_extendStaticArrayDeclarationDictAST &) ;
+  private: cCollectionElement_extendStaticArrayDeclarationDictAST (const cCollectionElement_extendStaticArrayDeclarationDictAST &) ;
+  private: cCollectionElement_extendStaticArrayDeclarationDictAST & operator = (const cCollectionElement_extendStaticArrayDeclarationDictAST &) ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const { return mElement.isValid () ; }
+  public: virtual bool isValid (void) const { return mElement.isValid () ; }
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const {
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const {
     const cCollectionElement_extendStaticArrayDeclarationDictAST * p = (const cCollectionElement_extendStaticArrayDeclarationDictAST *) inOperand ;
     return mElement.objectCompare (p->mElement) ;
   }
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) {
+  public: virtual cCollectionElement * copy (void) {
     cCollectionElement * p = NULL ;
     macroMyNew (p, cCollectionElement_extendStaticArrayDeclarationDictAST (mElement)) ;
     return p ;
   }
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const {
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const {
     mElement.description (ioString, inIndentation) ;
   }
 } ;

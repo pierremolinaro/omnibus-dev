@@ -8871,7 +8871,7 @@ void extensionMethod_semanticAnalysis (const GALGAS_decoratedRegularRoutineList_
                                        GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                        C_Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
-  ioArgument_ioTemporaries.mProperty_mTemporaryIndex = GALGAS_uint ((uint32_t) 0U) ;
+  ioArgument_ioTemporaries.setter_setMTemporaryIndex (GALGAS_uint ((uint32_t) 0U) COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 45)) ;
   const GALGAS_decoratedRegularRoutineList_2D_element temp_0 = inObject ;
   GALGAS_omnibusType temp_1 ;
   const enumGalgasBool test_2 = GALGAS_bool (kIsEqual, temp_0.getter_receiverTypeName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
@@ -10293,11 +10293,11 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
     }
   }
   const GALGAS_configurationDeclarationAST temp_3 = object ;
-  ioArgument_ioContext.mProperty_mTargetParameters = temp_3.getter_mTargetParameters (HERE) ;
+  ioArgument_ioContext.setter_setMTargetParameters (temp_3.getter_mTargetParameters (HERE) COMMA_SOURCE_FILE ("configuration.galgas", 350)) ;
   GALGAS_omnibusType var_panicCodeType_13419 ;
   const GALGAS_configurationDeclarationAST temp_4 = object ;
   ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (temp_4.getter_mPanicCodeTypeName (HERE), var_panicCodeType_13419, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 352)) ;
-  ioArgument_ioContext.mProperty_mPanicCodeType = var_panicCodeType_13419 ;
+  ioArgument_ioContext.setter_setMPanicCodeType (var_panicCodeType_13419 COMMA_SOURCE_FILE ("configuration.galgas", 356)) ;
   enumGalgasBool test_5 = kBoolTrue ;
   if (kBoolTrue == test_5) {
     test_5 = ioArgument_ioContext.getter_mPanicCodeType (HERE).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 357)).boolEnum () ;
@@ -10326,7 +10326,7 @@ static void extensionMethod_configurationDeclarationAST_enterInContext (const cP
   GALGAS_omnibusType var_panicLineType_13922 ;
   const GALGAS_configurationDeclarationAST temp_11 = object ;
   ioArgument_ioContext.getter_mTypeMap (HERE).method_searchKey (temp_11.getter_mPanicLineTypeName (HERE), var_panicLineType_13922, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 366)) ;
-  ioArgument_ioContext.mProperty_mPanicLineType = var_panicLineType_13922 ;
+  ioArgument_ioContext.setter_setMPanicLineType (var_panicLineType_13922 COMMA_SOURCE_FILE ("configuration.galgas", 370)) ;
   enumGalgasBool test_12 = kBoolTrue ;
   if (kBoolTrue == test_12) {
     test_12 = ioArgument_ioContext.getter_mPanicLineType (HERE).getter_kind (HERE).getter_isInteger (SOURCE_FILE ("configuration.galgas", 371)).boolEnum () ;
@@ -11925,10 +11925,10 @@ void routine_semanticAnalysis (const GALGAS_string /* constinArgument_inSourceFi
                                COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIntermediateCodeStruct.drop () ; // Release 'out' argument
   outArgument_outIntermediateCodeStruct = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 138)) ;
-  outArgument_outIntermediateCodeStruct.mProperty_mRoutineListIR = constinArgument_inRoutineListIR ;
-  outArgument_outIntermediateCodeStruct.mProperty_mTargetParameters = constinArgument_inSemanticContext.getter_mTargetParameters (HERE) ;
-  outArgument_outIntermediateCodeStruct.mProperty_mStaticEntityMap = constinArgument_inStaticEntityMap ;
-  outArgument_outIntermediateCodeStruct.mProperty_mGlobalTaskVariableList = constinArgument_inSemanticContext.getter_mGlobalTaskVariableList (HERE) ;
+  outArgument_outIntermediateCodeStruct.setter_setMRoutineListIR (constinArgument_inRoutineListIR COMMA_SOURCE_FILE ("semantic-analysis.galgas", 139)) ;
+  outArgument_outIntermediateCodeStruct.setter_setMTargetParameters (constinArgument_inSemanticContext.getter_mTargetParameters (HERE) COMMA_SOURCE_FILE ("semantic-analysis.galgas", 140)) ;
+  outArgument_outIntermediateCodeStruct.setter_setMStaticEntityMap (constinArgument_inStaticEntityMap COMMA_SOURCE_FILE ("semantic-analysis.galgas", 141)) ;
+  outArgument_outIntermediateCodeStruct.setter_setMGlobalTaskVariableList (constinArgument_inSemanticContext.getter_mGlobalTaskVariableList (HERE) COMMA_SOURCE_FILE ("semantic-analysis.galgas", 142)) ;
   GALGAS_semanticTemporariesStruct var_temporaries_6196 = GALGAS_semanticTemporariesStruct::constructor_default (SOURCE_FILE ("semantic-analysis.galgas", 144)) ;
   cEnumerator_declarationDecorationList enumerator_6257 (constinArgument_inDecoratedDeclarationList, kENUMERATION_UP) ;
   while (enumerator_6257.hasCurrentObject ()) {

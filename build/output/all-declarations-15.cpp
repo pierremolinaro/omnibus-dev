@@ -360,7 +360,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   GALGAS_ast var_ast_3320 = constinArgument_inAST ;
   GALGAS_stringset var_sourceFileAbsolutePathSet_3367 = constinArgument_inImportedFileAbsolutePathSet ;
-  var_ast_3320.mProperty_mDeclarationListAST = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 95)) ;
+  var_ast_3320.setter_setMDeclarationListAST (GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 95)) COMMA_SOURCE_FILE ("program.galgas", 95)) ;
   cEnumerator_declarationListAST enumerator_3558 (constinArgument_inAST.getter_mDeclarationListAST (HERE), kENUMERATION_UP) ;
   while (enumerator_3558.hasCurrentObject ()) {
     GALGAS_abstractDeclarationAST var_newDeclaration_3664 ;
@@ -469,7 +469,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   GALGAS_semanticContext var_semanticContext_6453 = GALGAS_semanticContext::constructor_default (SOURCE_FILE ("program.galgas", 167)) ;
   GALGAS_staticEntityMap var_globalLiteralStringMap_6506 = GALGAS_staticEntityMap::constructor_default (SOURCE_FILE ("program.galgas", 168)) ;
   GALGAS_staticListInitializationMap var_staticListValueMap_6567 = GALGAS_staticListInitializationMap::constructor_emptyMap (SOURCE_FILE ("program.galgas", 169)) ;
-  var_ast_3320.mProperty_mDeclarationListAST = var_orderedDeclarationListAST_5385 ;
+  var_ast_3320.setter_setMDeclarationListAST (var_orderedDeclarationListAST_5385 COMMA_SOURCE_FILE ("program.galgas", 170)) ;
   GALGAS_declarationDecorationList var_decoratedDeclarationList_6680 = GALGAS_declarationDecorationList::constructor_emptyList (SOURCE_FILE ("program.galgas", 171)) ;
   GALGAS_decoratedRegularRoutineList var_decoratedRoutineList_6737 = GALGAS_decoratedRegularRoutineList::constructor_emptyList (SOURCE_FILE ("program.galgas", 172)) ;
   GALGAS_routineListIR var_routineListIR_6773 = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("program.galgas", 173)) ;

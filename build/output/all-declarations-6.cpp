@@ -2133,25 +2133,25 @@ void extensionMethod_enterAccessibleEntities (const GALGAS_instructionListIR inO
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_routineAccessibilityIR : public cCollectionElement {
-  public : GALGAS_routineAccessibilityIR_2D_element mObject ;
+  public: GALGAS_routineAccessibilityIR_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_routineAccessibilityIR (const GALGAS_abstractRoutineIR & in_mRoutine,
-                                                      const GALGAS_stringset & in_mAccessibleRoutineSet
-                                                      COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_routineAccessibilityIR (const GALGAS_routineAccessibilityIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_routineAccessibilityIR (const GALGAS_abstractRoutineIR & in_mRoutine,
+                                                     const GALGAS_stringset & in_mAccessibleRoutineSet
+                                                     COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_routineAccessibilityIR (const GALGAS_routineAccessibilityIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2751,24 +2751,24 @@ C_PrologueEpilogue gMethod_abstractInstructionIR_enterAccessibleEntities (define
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_instructionListListIR : public cCollectionElement {
-  public : GALGAS_instructionListListIR_2D_element mObject ;
+  public: GALGAS_instructionListListIR_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_instructionListListIR (const GALGAS_instructionListIR & in_mInstructionList
-                                                     COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_instructionListListIR (const GALGAS_instructionListListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_instructionListListIR (const GALGAS_instructionListIR & in_mInstructionList
+                                                    COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_instructionListListIR (const GALGAS_instructionListListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5069,24 +5069,24 @@ GALGAS_llvmStringDefinitionElement GALGAS_llvmStringDefinitionElement::extractOb
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_llvmStringDefinition : public cCollectionElement {
-  public : GALGAS_llvmStringDefinition_2D_element mObject ;
+  public: GALGAS_llvmStringDefinition_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_llvmStringDefinition (const GALGAS_llvmStringDefinitionElement & in_mElement
-                                                    COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_llvmStringDefinition (const GALGAS_llvmStringDefinition_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmStringDefinition (const GALGAS_llvmStringDefinitionElement & in_mElement
+                                                   COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmStringDefinition (const GALGAS_llvmStringDefinition_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6090,24 +6090,24 @@ GALGAS_llvmGenerationInstructionElement GALGAS_llvmGenerationInstructionElement:
 //----------------------------------------------------------------------------------------------------------------------
 
 class cCollectionElement_llvmGenerationInstructionElementList : public cCollectionElement {
-  public : GALGAS_llvmGenerationInstructionElementList_2D_element mObject ;
+  public: GALGAS_llvmGenerationInstructionElementList_2D_element mObject ;
 
 //--- Constructors
-  public : cCollectionElement_llvmGenerationInstructionElementList (const GALGAS_llvmGenerationInstructionElement & in_mElement
-                                                                    COMMA_LOCATION_ARGS) ;
-  public : cCollectionElement_llvmGenerationInstructionElementList (const GALGAS_llvmGenerationInstructionElementList_2D_element & inElement COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmGenerationInstructionElementList (const GALGAS_llvmGenerationInstructionElement & in_mElement
+                                                                   COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_llvmGenerationInstructionElementList (const GALGAS_llvmGenerationInstructionElementList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public : virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
-  public : virtual bool isValid (void) const ;
+  public: virtual bool isValid (void) const ;
 
 //--- Virtual method that returns a copy of current object
-  public : virtual cCollectionElement * copy (void) ;
+  public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public : virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------

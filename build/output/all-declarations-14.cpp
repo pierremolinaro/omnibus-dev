@@ -796,7 +796,7 @@ void routine_codeOptimization (const GALGAS_string constinArgument_inSourceFile,
         inCompiler->printMessage (var_m_4006  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 85)) ;
       }
     }
-    ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR = GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 88)) ;
+    ioArgument_ioIntermediateCodeStruct.setter_setMRoutineListIR (GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 88)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 88)) ;
     cEnumerator_routineAccessibilityIR enumerator_4356 (var_routineAccessibilityIR_1371, kENUMERATION_UP) ;
     while (enumerator_4356.hasCurrentObject ()) {
       enumGalgasBool test_9 = kBoolTrue ;
@@ -1229,7 +1229,7 @@ void routine_generateCodeFiles (const GALGAS_string constinArgument_inCurrentDir
                                 C_Compiler * inCompiler
                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_generationAdds var_generationAdds_7430 = GALGAS_generationAdds::constructor_default (SOURCE_FILE ("code-generation.galgas", 168)) ;
-  var_generationAdds_7430.mProperty_mStaticEntityMap = constinArgument_inIntermediateCodeStruct.getter_mStaticEntityMap (HERE) ;
+  var_generationAdds_7430.setter_setMStaticEntityMap (constinArgument_inIntermediateCodeStruct.getter_mStaticEntityMap (HERE) COMMA_SOURCE_FILE ("code-generation.galgas", 169)) ;
   GALGAS_generationContext var_generationContext_7562 = GALGAS_generationContext::constructor_new (constinArgument_inPanicCodeType, constinArgument_inPanicLineType, constinArgument_inTargetParameters.getter_mNopInstructionStringInLLVM (HERE).getter_string (HERE), constinArgument_inIntermediateCodeStruct.getter_mGlobalTaskVariableList (HERE), constinArgument_inAvailableInterruptMap  COMMA_SOURCE_FILE ("code-generation.galgas", 170)) ;
   GALGAS_string var_sourceDirectory_7781 = constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 177)) ;
   enumGalgasBool test_0 = kBoolTrue ;
