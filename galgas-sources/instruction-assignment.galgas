@@ -262,7 +262,7 @@ private proc handlePropertyAccessInAssignment
 #  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
-  case computedProperty (@unifiedTypeMap-proxy computedPropertyType getterModeDictionary setterModeDictionary) :
+  case computedProperty (@unifiedTypeMap-entry computedPropertyType getterModeDictionary setterModeDictionary) :
   #--- Get property value
     let getterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!getterModeDictionary !inMode !inPropertyName)
     [!?ioInstructionGenerationList appendGetComputedPropertyValue

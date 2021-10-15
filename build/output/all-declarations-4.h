@@ -122,9 +122,9 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapForCon
                                                    const class GALGAS_lstring constin_inMethodName,
                                                    const class GALGAS_mode constin_inMode,
                                                    const class GALGAS_string constin_inInputSelector,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy,
+                                                   const class GALGAS_unifiedTypeMap_2D_entry constin_inInputArgumentTypeProxy,
                                                    const class GALGAS_string constin_inInputArgumentName,
-                                                   const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                   const class GALGAS_unifiedTypeMap_2D_entry constin_inResultType,
                                                    class GALGAS_lstring & out_outRoutineLLVMName,
                                                    class C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
@@ -154,12 +154,12 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GALGAS_routineMapFo
                                                        const class GALGAS_lstring constin_inMethodName,
                                                        const class GALGAS_mode constin_inMode,
                                                        const class GALGAS_string constin_inInputSelector_31_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_31_,
+                                                       const class GALGAS_unifiedTypeMap_2D_entry constin_inInputArgumentTypeProxy_31_,
                                                        const class GALGAS_string constin_inInputArgumentName_31_,
                                                        const class GALGAS_string constin_inInputSelector_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inInputArgumentTypeProxy_32_,
+                                                       const class GALGAS_unifiedTypeMap_2D_entry constin_inInputArgumentTypeProxy_32_,
                                                        const class GALGAS_string constin_inInputArgumentName_32_,
-                                                       const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                       const class GALGAS_unifiedTypeMap_2D_entry constin_inResultType,
                                                        class GALGAS_lstring & out_outRoutineLLVMName,
                                                        class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
@@ -849,12 +849,12 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 class cMapElement_externProcedureMapIR : public cMapElement {
 //--- Map attributes
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnType ;
 
 //--- Constructor
   public: cMapElement_externProcedureMapIR (const GALGAS_lstring & inKey,
                                             const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
+                                            const GALGAS_unifiedTypeMap_2D_entry & in_mReturnType
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
@@ -882,7 +882,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
 
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnType ;
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -903,7 +903,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
     mProperty_mFormalArgumentListForGeneration = inValue ;
   }
 
-  public: inline void setter_setMReturnType (const GALGAS_unifiedTypeMap_2D_proxy & inValue COMMA_UNUSED_LOCATION_ARGS) {
+  public: inline void setter_setMReturnType (const GALGAS_unifiedTypeMap_2D_entry & inValue COMMA_UNUSED_LOCATION_ARGS) {
     mProperty_mReturnType = inValue ;
   }
 
@@ -913,7 +913,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public: GALGAS_externProcedureMapIR_2D_element (const GALGAS_lstring & in_lkey,
                                                   const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                  const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType) ;
+                                                  const GALGAS_unifiedTypeMap_2D_entry & in_mReturnType) ;
 
 //-- Start of generic part --*
 
@@ -928,7 +928,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_externProcedureMapIR_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
                                                                                const class GALGAS_routineFormalArgumentListIR & inOperand1,
-                                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2
+                                                                               const class GALGAS_unifiedTypeMap_2D_entry & inOperand2
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -947,7 +947,7 @@ class GALGAS_externProcedureMapIR_2D_element : public AC_GALGAS_root {
 
   public: VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReturnType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods

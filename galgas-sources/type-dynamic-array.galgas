@@ -68,7 +68,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   if not ioContext.mTargetParameters.mHandleDynamicArray then
     error self.mElementTypeName : "this target does not handle dynamic array"
   end
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mDynamicArrayTypeName ?let arrayTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mDynamicArrayTypeName ?let arrayTypeProxy]
 #-------------------------------------------- Get element type
   [ioContext.mTypeMap searchKey !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
@@ -88,8 +88,8 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !type:type
     ]
   else
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !["u32" nowhere] ?let uint32TypeProxy]
-    [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mElementTypeName ?let elementTypeProxy]
+    [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !["u32" nowhere] ?let uint32TypeProxy]
+    [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
   #--- Method 'removeAll()'
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
@@ -329,8 +329,8 @@ override method @dynArrayLengthFunctionIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 shared class @dynArrayAppendFunctionIR : @abstractRoutineIR {
-  @unifiedTypeMap-proxy mArrayTypeProxy
-  @unifiedTypeMap-proxy mElementTypeProxy
+  @unifiedTypeMap-entry mArrayTypeProxy
+  @unifiedTypeMap-entry mElementTypeProxy
   @string mInsertFunctionMangledName
 }
 
@@ -387,7 +387,7 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 shared class @dynArrayInsertFunctionIR : @abstractRoutineIR {
-  @unifiedTypeMap-proxy mElementTypeProxy
+  @unifiedTypeMap-entry mElementTypeProxy
 }
 
 #·······················································································································

@@ -46,7 +46,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 #--- Receiver type
   let receiverType = if self.receiverTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.receiverTypeName} type]
+    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.receiverTypeName} type]
     end
 #--- Variable map
   var universalMap = inContext.mValuedObjectMap
@@ -55,7 +55,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
 #--- Return value ?
   if self.returnTypeName.string != "" then
     let resultVarName = @lstring.new {!functionResultVariableName () !self.returnTypeName.location}
-    let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.returnTypeName} type]
+    let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.returnTypeName} type]
     [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
   end
 #--- Analyse formal arguments
@@ -89,7 +89,7 @@ method @decoratedRegularRoutineList-element semanticAnalysis
   let returnType = if self.returnTypeName.string == "" then
     voidType ()
   else
-    [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.returnTypeName} type]
+    [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.returnTypeName} type]
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.new {
     !self.routineMangledLLVMName

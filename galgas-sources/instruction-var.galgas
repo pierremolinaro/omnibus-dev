@@ -122,7 +122,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 {
   @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
+    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end
 #--- Analyze source expression
   [self.mSourceExpression analyzeExpression
@@ -177,7 +177,7 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-  let targetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let targetType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #---
   if [targetType isCompileTimeType] then
     error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"

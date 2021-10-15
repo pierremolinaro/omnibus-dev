@@ -3069,7 +3069,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 
   public: GALGAS_lstring mProperty_mSelector ;
 
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mTypeProxy ;
 
   public: GALGAS_lstring mProperty_mFormalArgumentName ;
 
@@ -3089,7 +3089,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
     mProperty_mSelector = inValue ;
   }
 
-  public: inline void setter_setMTypeProxy (const GALGAS_unifiedTypeMap_2D_proxy & inValue COMMA_UNUSED_LOCATION_ARGS) {
+  public: inline void setter_setMTypeProxy (const GALGAS_unifiedTypeMap_2D_entry & inValue COMMA_UNUSED_LOCATION_ARGS) {
     mProperty_mTypeProxy = inValue ;
   }
 
@@ -3103,7 +3103,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- Native constructor
   public: GALGAS_routineTypedSignature_2D_element (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                    const GALGAS_lstring & in_mSelector,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                   const GALGAS_unifiedTypeMap_2D_entry & in_mTypeProxy,
                                                    const GALGAS_lstring & in_mFormalArgumentName) ;
 
 //-- Start of generic part --*
@@ -3119,7 +3119,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_routineTypedSignature_2D_element constructor_new (const class GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                                                 const class GALGAS_lstring & inOperand1,
-                                                                                const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                                const class GALGAS_unifiedTypeMap_2D_entry & inOperand2,
                                                                                 const class GALGAS_lstring & inOperand3
                                                                                 COMMA_LOCATION_ARGS) ;
 
@@ -3141,7 +3141,7 @@ class GALGAS_routineTypedSignature_2D_element : public AC_GALGAS_root {
 
   public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSelector (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mTypeProxy (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
@@ -4130,7 +4130,7 @@ void extensionSetter_addFunctionWithoutArgument (class GALGAS_routineMapForConte
                                                  const class GALGAS_string constin_inLLVMBaseTypeName,
                                                  const class GALGAS_lstring constin_inMethodName,
                                                  const class GALGAS_mode constin_inMode,
-                                                 const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultType,
+                                                 const class GALGAS_unifiedTypeMap_2D_entry constin_inResultType,
                                                  class GALGAS_lstring & out_outRoutineLLVMName,
                                                  class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;

@@ -110,7 +110,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Search Type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #--- Check type is an unsigned integer type
   @uint bitCount
   if not [resultType.kind isInteger] then
@@ -175,7 +175,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
       rightShiftAmount = 0
     end
-    let sliceType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !sliceTypeName} type]
+    let sliceType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !sliceTypeName} type]
   #--- Shift and truncate source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]

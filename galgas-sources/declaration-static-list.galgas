@@ -279,12 +279,12 @@ override method @staticListAST enterInContext
 #  @propertyGetterMap propertyGetterMap = {}
   @stringset propertyNameSet = {}
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!self.mStaticListName)
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
   for (propertyName kind) in self.mPropertyList do (propertyIndex)
     switch kind
     case valueType (@lstring propertyTypeName) :
-      let propertyType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !propertyTypeName} type]
+      let propertyType = [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !propertyTypeName} type]
       if [propertyNameSet hasKey !propertyName] then
         error propertyName : "duplicated property name"
       else
@@ -306,10 +306,10 @@ override method @staticListAST enterInContext
       )
     #--- Signature
       routineTypedSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
-      let @unifiedTypeMap-proxy returnTypeProxy = if returnTypeName.string == "" then
+      let @unifiedTypeMap-entry returnTypeProxy = if returnTypeName.string == "" then
         .null
       else
-        @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !returnTypeName}
+        @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !returnTypeName}
       end
     #--- Enter routine type in type map
       let propertyType = @omnibusType.new {
@@ -462,7 +462,7 @@ override method @staticListAST enterInContext
     !type:arrayType
   ]
 #-------------------------------------------------------------------- Enter list in constant map
-  let staticListType = @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !omnibusNameForStaticListType (!self.mStaticListName)}
+  let staticListType = @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !omnibusNameForStaticListType (!self.mStaticListName)}
   [!?ioContext.mGlobalConstantMap insertKey
     !self.mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
@@ -564,9 +564,9 @@ method @staticListInitializationMap generateLLVMForStaticLists
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 shared class @staticListIndirectRoutineIR : @abstractRoutineIR {
-  @unifiedTypeMap-proxy mStaticListElementType
+  @unifiedTypeMap-entry mStaticListElementType
   @routineTypedSignature mFormalArgumentListForGeneration
-  @unifiedTypeMap-proxy mReturnTypeProxy # .void if no return value
+  @unifiedTypeMap-entry mReturnTypeProxy # .void if no return value
   @uint mPropertyIndex
 }
 

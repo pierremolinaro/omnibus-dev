@@ -235,7 +235,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  let receiverType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mReceiverTypeName} type]
+  let receiverType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mReceiverTypeName} type]
 #----------- 
   var warnIfUnused = true
   for (attribute) in self.mGuardAttributeList do

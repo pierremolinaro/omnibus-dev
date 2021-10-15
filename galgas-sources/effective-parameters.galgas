@@ -133,7 +133,7 @@ proc analyzeEffectiveParameters
       let type = if typeName.string == "" then
         [formal_mTypeProxy type]
       else
-        [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !typeName} type]
+        [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !typeName} type]
       end
       if constant then
         [!?ioUniversalMap insertLocalConstant !name !false !type !name]

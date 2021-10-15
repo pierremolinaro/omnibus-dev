@@ -112,7 +112,7 @@ override method @enumerationDeclarationAST enterInContext
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
-  let integerTypeProxy = @unifiedTypeMap-proxy.searchKey {
+  let integerTypeProxy = @unifiedTypeMap-entry.searchKey {
     !ioContext.mTypeMap
     !.new {!"u" + representationBitCount !self.mEnumerationName}
   }

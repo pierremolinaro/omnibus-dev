@@ -789,7 +789,7 @@ void extensionSetter_addFunctionWithoutArgument (GALGAS_routineMapForContext & i
                                                  const GALGAS_string constinArgument_inLLVMBaseTypeName,
                                                  const GALGAS_lstring constinArgument_inMethodName,
                                                  const GALGAS_mode constinArgument_inMode,
-                                                 const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                 const GALGAS_unifiedTypeMap_2D_entry constinArgument_inResultType,
                                                  GALGAS_lstring & outArgument_outRoutineLLVMName,
                                                  C_Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
@@ -817,9 +817,9 @@ void extensionSetter_addFunctionWithInputArgument (GALGAS_routineMapForContext &
                                                    const GALGAS_lstring constinArgument_inMethodName,
                                                    const GALGAS_mode constinArgument_inMode,
                                                    const GALGAS_string constinArgument_inInputSelector,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy,
+                                                   const GALGAS_unifiedTypeMap_2D_entry constinArgument_inInputArgumentTypeProxy,
                                                    const GALGAS_string constinArgument_inInputArgumentName,
-                                                   const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                   const GALGAS_unifiedTypeMap_2D_entry constinArgument_inResultType,
                                                    GALGAS_lstring & outArgument_outRoutineLLVMName,
                                                    C_Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
@@ -853,12 +853,12 @@ void extensionSetter_addFunctionWithTwoInputArguments (GALGAS_routineMapForConte
                                                        const GALGAS_lstring constinArgument_inMethodName,
                                                        const GALGAS_mode constinArgument_inMode,
                                                        const GALGAS_string constinArgument_inInputSelector_31_,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy_31_,
+                                                       const GALGAS_unifiedTypeMap_2D_entry constinArgument_inInputArgumentTypeProxy_31_,
                                                        const GALGAS_string constinArgument_inInputArgumentName_31_,
                                                        const GALGAS_string constinArgument_inInputSelector_32_,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inInputArgumentTypeProxy_32_,
+                                                       const GALGAS_unifiedTypeMap_2D_entry constinArgument_inInputArgumentTypeProxy_32_,
                                                        const GALGAS_string constinArgument_inInputArgumentName_32_,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy constinArgument_inResultType,
+                                                       const GALGAS_unifiedTypeMap_2D_entry constinArgument_inResultType,
                                                        GALGAS_lstring & outArgument_outRoutineLLVMName,
                                                        C_Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
@@ -2599,7 +2599,7 @@ GALGAS_routineFormalArgumentListIR GALGAS_routineFormalArgumentListIR::extractOb
 
 cMapElement_externProcedureMapIR::cMapElement_externProcedureMapIR (const GALGAS_lstring & inKey,
                                                                     const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
+                                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReturnType
                                                                     COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
@@ -2696,7 +2696,7 @@ GALGAS_externProcedureMapIR GALGAS_externProcedureMapIR::getter_overriddenMap (C
 
 void GALGAS_externProcedureMapIR::addAssign_operation (const GALGAS_lstring & inKey,
                                                        const GALGAS_routineFormalArgumentListIR & inArgument0,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy & inArgument1,
+                                                       const GALGAS_unifiedTypeMap_2D_entry & inArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
   cMapElement_externProcedureMapIR * p = NULL ;
@@ -2713,7 +2713,7 @@ void GALGAS_externProcedureMapIR::addAssign_operation (const GALGAS_lstring & in
 
 void GALGAS_externProcedureMapIR::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_routineFormalArgumentListIR inArgument0,
-                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument1,
+                                                    GALGAS_unifiedTypeMap_2D_entry inArgument1,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
   cMapElement_externProcedureMapIR * p = NULL ;
@@ -2743,12 +2743,12 @@ GALGAS_routineFormalArgumentListIR GALGAS_externProcedureMapIR::getter_mFormalAr
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_externProcedureMapIR::getter_mReturnTypeForKey (const GALGAS_string & inKey,
+GALGAS_unifiedTypeMap_2D_entry GALGAS_externProcedureMapIR::getter_mReturnTypeForKey (const GALGAS_string & inKey,
                                                                                       C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) attributes ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
     result = p->mProperty_mReturnType ;
@@ -2772,7 +2772,7 @@ void GALGAS_externProcedureMapIR::setter_setMFormalArgumentListForGenerationForK
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_externProcedureMapIR::setter_setMReturnTypeForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+void GALGAS_externProcedureMapIR::setter_setMReturnTypeForKey (GALGAS_unifiedTypeMap_2D_entry inAttributeValue,
                                                                GALGAS_string inKey,
                                                                C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) {
@@ -2828,7 +2828,7 @@ GALGAS_routineFormalArgumentListIR cEnumerator_externProcedureMapIR::current_mFo
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_externProcedureMapIR::current_mReturnType (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cEnumerator_externProcedureMapIR::current_mReturnType (LOCATION_ARGS) const {
   const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_externProcedureMapIR) ;
   return p->mProperty_mReturnType ;
@@ -2838,7 +2838,7 @@ GALGAS_unifiedTypeMap_2D_proxy cEnumerator_externProcedureMapIR::current_mReturn
 
 bool GALGAS_externProcedureMapIR::optional_searchKey (const GALGAS_string & inKey,
                                                       GALGAS_routineFormalArgumentListIR & outArgument0,
-                                                      GALGAS_unifiedTypeMap_2D_proxy & outArgument1) const {
+                                                      GALGAS_unifiedTypeMap_2D_entry & outArgument1) const {
   const cMapElement_externProcedureMapIR * p = (const cMapElement_externProcedureMapIR *) searchForKey (inKey) ;
   const bool result = NULL != p ;
   if (result) {

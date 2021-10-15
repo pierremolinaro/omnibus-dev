@@ -43,9 +43,9 @@ class GALGAS_systemUserRoutineIR : public GALGAS_abstractRoutineIR {
                                                                    const class GALGAS_bool & inOperand2,
                                                                    const class GALGAS_string & inOperand3,
                                                                    const class GALGAS_routineTypedSignature & inOperand4,
-                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                                   const class GALGAS_unifiedTypeMap_2D_entry & inOperand5,
                                                                    const class GALGAS_bool & inOperand6,
-                                                                   const class GALGAS_unifiedTypeMap_2D_proxy & inOperand7
+                                                                   const class GALGAS_unifiedTypeMap_2D_entry & inOperand7
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -61,10 +61,10 @@ class GALGAS_systemUserRoutineIR : public GALGAS_abstractRoutineIR {
   public: VIRTUAL_IN_DEBUG void setter_setMMangledImplementationName (class GALGAS_string inArgument0
                                                                       COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                               COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                             COMMA_LOCATION_ARGS) ;
 
 
@@ -78,9 +78,9 @@ class GALGAS_systemUserRoutineIR : public GALGAS_abstractRoutineIR {
 
   public: VIRTUAL_IN_DEBUG class GALGAS_string getter_mMangledImplementationName (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReceiverTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReceiverTypeProxy (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReturnTypeProxy (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
@@ -105,9 +105,9 @@ class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public: GALGAS_string mProperty_mMangledImplementationName ;
   public: GALGAS_routineTypedSignature mProperty_mFormalArgumentList ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReceiverTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReceiverTypeProxy ;
   public: GALGAS_bool mProperty_mIsSection ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnTypeProxy ;
 
 //--- Constructor
   public: cPtr_systemUserRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
@@ -115,9 +115,9 @@ class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
                                     const GALGAS_bool & in_warnsIfUnused,
                                     const GALGAS_string & in_mMangledImplementationName,
                                     const GALGAS_routineTypedSignature & in_mFormalArgumentList,
-                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReceiverTypeProxy,
+                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReceiverTypeProxy,
                                     const GALGAS_bool & in_mIsSection,
-                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy
+                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReturnTypeProxy
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -128,12 +128,12 @@ class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
   public: VIRTUAL_IN_DEBUG void setter_setMMangledImplementationName (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
   public: VIRTUAL_IN_DEBUG GALGAS_routineTypedSignature getter_mFormalArgumentList (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMFormalArgumentList (GALGAS_routineTypedSignature inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mReceiverTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mReceiverTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
   public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSection (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMIsSection (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -178,7 +178,7 @@ class GALGAS_externRoutineIR : public GALGAS_abstractRoutineIR {
                                                                const class GALGAS_bool & inOperand1,
                                                                const class GALGAS_bool & inOperand2,
                                                                const class GALGAS_routineFormalArgumentListIR & inOperand3,
-                                                               const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4
+                                                               const class GALGAS_unifiedTypeMap_2D_entry & inOperand4
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -188,7 +188,7 @@ class GALGAS_externRoutineIR : public GALGAS_abstractRoutineIR {
   public: VIRTUAL_IN_DEBUG void setter_setMFormalArgumentListForGeneration (class GALGAS_routineFormalArgumentListIR inArgument0
                                                                             COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnType (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnType (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                        COMMA_LOCATION_ARGS) ;
 
 
@@ -198,7 +198,7 @@ class GALGAS_externRoutineIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Getters
   public: VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReturnType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
@@ -222,14 +222,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externRoutineIR ;
 class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnType ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnType ;
 
 //--- Constructor
   public: cPtr_externRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
                                 const GALGAS_bool & in_isRequired,
                                 const GALGAS_bool & in_warnsIfUnused,
                                 const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
+                                const GALGAS_unifiedTypeMap_2D_entry & in_mReturnType
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
@@ -238,8 +238,8 @@ class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attribute accessors
   public: VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListIR getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMFormalArgumentListForGeneration (GALGAS_routineFormalArgumentListIR inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mReturnType (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnType (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mReturnType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnType (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;

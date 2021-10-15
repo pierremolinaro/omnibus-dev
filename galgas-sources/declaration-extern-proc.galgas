@@ -86,7 +86,7 @@ method @externFunctionDeclarationListAST-element enterExternProcInContext
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mProcFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mReturnTypeName ?let returnTypeProxy]
+  [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mReturnTypeName ?let returnTypeProxy]
 #--- Enter in context
   let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !self.mRoutineNameForGeneration]
   let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: self.mExternProcedureName]
@@ -137,9 +137,9 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   )
 #--- Return type
   let returnType = if self.mReturnTypeName.string == "" then
-    @unifiedTypeMap-proxy.null
+    @unifiedTypeMap-entry.null
   else
-    @unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mReturnTypeName}
+    @unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mReturnTypeName}
   end
 #--- Routine name for generation
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
@@ -162,7 +162,7 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
 
 shared class @externRoutineIR : @abstractRoutineIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @unifiedTypeMap-proxy mReturnType
+  @unifiedTypeMap-entry mReturnType
 }
 
 #·······················································································································
@@ -199,7 +199,7 @@ override method @externRoutineIR llvmCodeGeneration
 
 map @externProcedureMapIR {
   @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @unifiedTypeMap-proxy mReturnType
+  @unifiedTypeMap-entry mReturnType
   insert insertKey error message "extern procedure %K is already declared"
 }
 

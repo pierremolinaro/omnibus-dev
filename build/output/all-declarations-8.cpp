@@ -604,9 +604,9 @@ GALGAS_systemUserRoutineIR GALGAS_systemUserRoutineIR::constructor_default (LOCA
                                                       GALGAS_bool::constructor_default (HERE),
                                                       GALGAS_string::constructor_default (HERE),
                                                       GALGAS_routineTypedSignature::constructor_emptyList (HERE),
-                                                      GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE),
+                                                      GALGAS_unifiedTypeMap_2D_entry::constructor_null (HERE),
                                                       GALGAS_bool::constructor_default (HERE),
-                                                      GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)
+                                                      GALGAS_unifiedTypeMap_2D_entry::constructor_null (HERE)
                                                       COMMA_THERE) ;
 }
 
@@ -624,9 +624,9 @@ GALGAS_systemUserRoutineIR GALGAS_systemUserRoutineIR::constructor_new (const GA
                                                                         const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                         const GALGAS_string & inAttribute_mMangledImplementationName,
                                                                         const GALGAS_routineTypedSignature & inAttribute_mFormalArgumentList,
-                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReceiverTypeProxy,
+                                                                        const GALGAS_unifiedTypeMap_2D_entry & inAttribute_mReceiverTypeProxy,
                                                                         const GALGAS_bool & inAttribute_mIsSection,
-                                                                        const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReturnTypeProxy
+                                                                        const GALGAS_unifiedTypeMap_2D_entry & inAttribute_mReturnTypeProxy
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_systemUserRoutineIR result ;
   if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mMangledImplementationName.isValid () && inAttribute_mFormalArgumentList.isValid () && inAttribute_mReceiverTypeProxy.isValid () && inAttribute_mIsSection.isValid () && inAttribute_mReturnTypeProxy.isValid ()) {
@@ -673,8 +673,8 @@ GALGAS_routineTypedSignature cPtr_systemUserRoutineIR::getter_mFormalArgumentLis
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_systemUserRoutineIR::getter_mReceiverTypeProxy (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+GALGAS_unifiedTypeMap_2D_entry GALGAS_systemUserRoutineIR::getter_mReceiverTypeProxy (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != mObjectPtr) {
     const cPtr_systemUserRoutineIR * p = (const cPtr_systemUserRoutineIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_systemUserRoutineIR) ;
@@ -685,7 +685,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_systemUserRoutineIR::getter_mReceiverTypeP
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_systemUserRoutineIR::getter_mReceiverTypeProxy (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cPtr_systemUserRoutineIR::getter_mReceiverTypeProxy (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReceiverTypeProxy ;
 }
 
@@ -709,8 +709,8 @@ GALGAS_bool cPtr_systemUserRoutineIR::getter_mIsSection (UNUSED_LOCATION_ARGS) c
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_systemUserRoutineIR::getter_mReturnTypeProxy (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+GALGAS_unifiedTypeMap_2D_entry GALGAS_systemUserRoutineIR::getter_mReturnTypeProxy (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != mObjectPtr) {
     const cPtr_systemUserRoutineIR * p = (const cPtr_systemUserRoutineIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_systemUserRoutineIR) ;
@@ -721,7 +721,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_systemUserRoutineIR::getter_mReturnTypePro
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_systemUserRoutineIR::getter_mReturnTypeProxy (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cPtr_systemUserRoutineIR::getter_mReturnTypeProxy (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReturnTypeProxy ;
 }
 
@@ -765,7 +765,7 @@ void cPtr_systemUserRoutineIR::setter_setMFormalArgumentList (GALGAS_routineType
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_systemUserRoutineIR::setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue
+void GALGAS_systemUserRoutineIR::setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue
                                                                COMMA_LOCATION_ARGS) {
   if (NULL != mObjectPtr) {
     insulate (THERE) ;
@@ -777,7 +777,7 @@ void GALGAS_systemUserRoutineIR::setter_setMReceiverTypeProxy (GALGAS_unifiedTyp
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void cPtr_systemUserRoutineIR::setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue
+void cPtr_systemUserRoutineIR::setter_setMReceiverTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue
                                                              COMMA_UNUSED_LOCATION_ARGS) {
   mProperty_mReceiverTypeProxy = inValue ;
 }
@@ -803,7 +803,7 @@ void cPtr_systemUserRoutineIR::setter_setMIsSection (GALGAS_bool inValue
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_systemUserRoutineIR::setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue
+void GALGAS_systemUserRoutineIR::setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue
                                                              COMMA_LOCATION_ARGS) {
   if (NULL != mObjectPtr) {
     insulate (THERE) ;
@@ -815,7 +815,7 @@ void GALGAS_systemUserRoutineIR::setter_setMReturnTypeProxy (GALGAS_unifiedTypeM
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void cPtr_systemUserRoutineIR::setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue
+void cPtr_systemUserRoutineIR::setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue
                                                            COMMA_UNUSED_LOCATION_ARGS) {
   mProperty_mReturnTypeProxy = inValue ;
 }
@@ -829,9 +829,9 @@ cPtr_systemUserRoutineIR::cPtr_systemUserRoutineIR (const GALGAS_lstring & in_mR
                                                     const GALGAS_bool & in_warnsIfUnused,
                                                     const GALGAS_string & in_mMangledImplementationName,
                                                     const GALGAS_routineTypedSignature & in_mFormalArgumentList,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReceiverTypeProxy,
+                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReceiverTypeProxy,
                                                     const GALGAS_bool & in_mIsSection,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy
+                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReturnTypeProxy
                                                     COMMA_LOCATION_ARGS) :
 cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mMangledImplementationName (in_mMangledImplementationName),
@@ -1149,15 +1149,15 @@ void extensionMethod_externProcedureSemanticAnalysis (const GALGAS_externFunctio
   routine_enterFormalArguments (constinArgument_inContext, temp_0.getter_mProcFormalArgumentList (HERE), joker_5411, var_formalArguments_5317, GALGAS_bool (true), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 131)) ;
   }
   const GALGAS_externFunctionDeclarationListAST_2D_element temp_1 = inObject ;
-  GALGAS_unifiedTypeMap_2D_proxy temp_2 ;
+  GALGAS_unifiedTypeMap_2D_entry temp_2 ;
   const enumGalgasBool test_3 = GALGAS_bool (kIsEqual, temp_1.getter_mReturnTypeName (HERE).getter_string (HERE).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
   if (kBoolTrue == test_3) {
-    temp_2 = GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
+    temp_2 = GALGAS_unifiedTypeMap_2D_entry::constructor_null (SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
   }else if (kBoolFalse == test_3) {
     const GALGAS_externFunctionDeclarationListAST_2D_element temp_4 = inObject ;
-    temp_2 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_4.getter_mReturnTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
+    temp_2 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_4.getter_mReturnTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
   }
-  GALGAS_unifiedTypeMap_2D_proxy var_returnType_5518 = temp_2 ;
+  GALGAS_unifiedTypeMap_2D_entry var_returnType_5518 = temp_2 ;
   {
   const GALGAS_externFunctionDeclarationListAST_2D_element temp_5 = inObject ;
   ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (temp_5.getter_mRoutineNameForGeneration (HERE), var_formalArguments_5317, var_returnType_5518, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
@@ -1225,7 +1225,7 @@ GALGAS_externRoutineIR GALGAS_externRoutineIR::constructor_default (LOCATION_ARG
                                                   GALGAS_bool::constructor_default (HERE),
                                                   GALGAS_bool::constructor_default (HERE),
                                                   GALGAS_routineFormalArgumentListIR::constructor_emptyList (HERE),
-                                                  GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)
+                                                  GALGAS_unifiedTypeMap_2D_entry::constructor_null (HERE)
                                                   COMMA_THERE) ;
 }
 
@@ -1242,7 +1242,7 @@ GALGAS_externRoutineIR GALGAS_externRoutineIR::constructor_new (const GALGAS_lst
                                                                 const GALGAS_bool & inAttribute_isRequired,
                                                                 const GALGAS_bool & inAttribute_warnsIfUnused,
                                                                 const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
-                                                                const GALGAS_unifiedTypeMap_2D_proxy & inAttribute_mReturnType
+                                                                const GALGAS_unifiedTypeMap_2D_entry & inAttribute_mReturnType
                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_externRoutineIR result ;
   if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnType.isValid ()) {
@@ -1271,8 +1271,8 @@ GALGAS_routineFormalArgumentListIR cPtr_externRoutineIR::getter_mFormalArgumentL
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_externRoutineIR::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+GALGAS_unifiedTypeMap_2D_entry GALGAS_externRoutineIR::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != mObjectPtr) {
     const cPtr_externRoutineIR * p = (const cPtr_externRoutineIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_externRoutineIR) ;
@@ -1283,7 +1283,7 @@ GALGAS_unifiedTypeMap_2D_proxy GALGAS_externRoutineIR::getter_mReturnType (UNUSE
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cPtr_externRoutineIR::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cPtr_externRoutineIR::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReturnType ;
 }
 
@@ -1308,7 +1308,7 @@ void cPtr_externRoutineIR::setter_setMFormalArgumentListForGeneration (GALGAS_ro
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMap_2D_proxy inValue
+void GALGAS_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMap_2D_entry inValue
                                                     COMMA_LOCATION_ARGS) {
   if (NULL != mObjectPtr) {
     insulate (THERE) ;
@@ -1320,7 +1320,7 @@ void GALGAS_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMap_2D_pro
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void cPtr_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMap_2D_proxy inValue
+void cPtr_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMap_2D_entry inValue
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   mProperty_mReturnType = inValue ;
 }
@@ -1333,7 +1333,7 @@ cPtr_externRoutineIR::cPtr_externRoutineIR (const GALGAS_lstring & in_mRoutineMa
                                             const GALGAS_bool & in_isRequired,
                                             const GALGAS_bool & in_warnsIfUnused,
                                             const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnType
+                                            const GALGAS_unifiedTypeMap_2D_entry & in_mReturnType
                                             COMMA_LOCATION_ARGS) :
 cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
 mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
@@ -1430,7 +1430,7 @@ GALGAS_externProcedureMapIR_2D_element::~ GALGAS_externProcedureMapIR_2D_element
 
 GALGAS_externProcedureMapIR_2D_element::GALGAS_externProcedureMapIR_2D_element (const GALGAS_lstring & inOperand0,
                                                                                 const GALGAS_routineFormalArgumentListIR & inOperand1,
-                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand2) :
+                                                                                const GALGAS_unifiedTypeMap_2D_entry & inOperand2) :
 mProperty_lkey (inOperand0),
 mProperty_mFormalArgumentListForGeneration (inOperand1),
 mProperty_mReturnType (inOperand2) {
@@ -1441,14 +1441,14 @@ mProperty_mReturnType (inOperand2) {
 GALGAS_externProcedureMapIR_2D_element GALGAS_externProcedureMapIR_2D_element::constructor_default (UNUSED_LOCATION_ARGS) {
   return GALGAS_externProcedureMapIR_2D_element (GALGAS_lstring::constructor_default (HERE),
                                                  GALGAS_routineFormalArgumentListIR::constructor_emptyList (HERE),
-                                                 GALGAS_unifiedTypeMap_2D_proxy::constructor_null (HERE)) ;
+                                                 GALGAS_unifiedTypeMap_2D_entry::constructor_null (HERE)) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_externProcedureMapIR_2D_element GALGAS_externProcedureMapIR_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
                                                                                                 const GALGAS_routineFormalArgumentListIR & inOperand1,
-                                                                                                const GALGAS_unifiedTypeMap_2D_proxy & inOperand2 
+                                                                                                const GALGAS_unifiedTypeMap_2D_entry & inOperand2 
                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_externProcedureMapIR_2D_element result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
@@ -1518,7 +1518,7 @@ GALGAS_routineFormalArgumentListIR GALGAS_externProcedureMapIR_2D_element::gette
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_externProcedureMapIR_2D_element::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry GALGAS_externProcedureMapIR_2D_element::getter_mReturnType (UNUSED_LOCATION_ARGS) const {
   return mProperty_mReturnType ;
 }
 

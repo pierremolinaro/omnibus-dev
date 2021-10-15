@@ -98,7 +98,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   case noSubscript :
     error self.mIteratedObject : "this object is not enumerable" : iteratedElementType
   case literalString :
-    iteratedElementType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !["u8" nowhere]} type]
+    iteratedElementType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !["u8" nowhere]} type]
   case staticSubscript (elementType *) :
     iteratedElementType = elementType
   end

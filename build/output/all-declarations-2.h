@@ -50,7 +50,7 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_propertyGetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+  public: static class GALGAS_propertyGetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_entry & inOperand0,
                                                                                const class GALGAS_routineLLVMNameDict & inOperand1
                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -70,7 +70,7 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+  public: VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_unifiedTypeMap_2D_entry & outArgument0,
                                                          class GALGAS_routineLLVMNameDict & outArgument1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const ;
@@ -95,7 +95,7 @@ class GALGAS_propertyGetterKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+  public: VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_entry & outOperand0,
                                                            class GALGAS_routineLLVMNameDict & outOperand1) const ;
 
   public: VIRTUAL_IN_DEBUG bool optional_constantProperty (class GALGAS_objectIR & outOperand0) const ;
@@ -258,11 +258,11 @@ class cEnumAssociatedValues_propertyGetterKind_storedProperty : public cEnumAsso
 //----------------------------------------------------------------------------------------------------------------------
 
 class cEnumAssociatedValues_propertyGetterKind_computedProperty : public cEnumAssociatedValues {
-  public: const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public: const GALGAS_unifiedTypeMap_2D_entry mAssociatedValue0 ;
   public: const GALGAS_routineLLVMNameDict mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+  public: cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1
                                                                      COMMA_LOCATION_ARGS) ;
 
@@ -330,7 +330,7 @@ class GALGAS_propertySetterKind : public AC_GALGAS_root {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_propertySetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_proxy & inOperand0,
+  public: static class GALGAS_propertySetterKind constructor_computedProperty (const class GALGAS_unifiedTypeMap_2D_entry & inOperand0,
                                                                                const class GALGAS_routineLLVMNameDict & inOperand1,
                                                                                const class GALGAS_routineLLVMNameDict & inOperand2
                                                                                COMMA_LOCATION_ARGS) ;
@@ -348,7 +348,7 @@ class GALGAS_propertySetterKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outArgument0,
+  public: VIRTUAL_IN_DEBUG void method_computedProperty (class GALGAS_unifiedTypeMap_2D_entry & outArgument0,
                                                          class GALGAS_routineLLVMNameDict & outArgument1,
                                                          class GALGAS_routineLLVMNameDict & outArgument2,
                                                          C_Compiler * inCompiler
@@ -368,7 +368,7 @@ class GALGAS_propertySetterKind : public AC_GALGAS_root {
 
 
 //--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_proxy & outOperand0,
+  public: VIRTUAL_IN_DEBUG bool optional_computedProperty (class GALGAS_unifiedTypeMap_2D_entry & outOperand0,
                                                            class GALGAS_routineLLVMNameDict & outOperand1,
                                                            class GALGAS_routineLLVMNameDict & outOperand2) const ;
 
@@ -530,12 +530,12 @@ class cEnumAssociatedValues_propertySetterKind_storedProperty : public cEnumAsso
 //----------------------------------------------------------------------------------------------------------------------
 
 class cEnumAssociatedValues_propertySetterKind_computedProperty : public cEnumAssociatedValues {
-  public: const GALGAS_unifiedTypeMap_2D_proxy mAssociatedValue0 ;
+  public: const GALGAS_unifiedTypeMap_2D_entry mAssociatedValue0 ;
   public: const GALGAS_routineLLVMNameDict mAssociatedValue1 ;
   public: const GALGAS_routineLLVMNameDict mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+  public: cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue1,
                                                                      const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                      COMMA_LOCATION_ARGS) ;
@@ -3262,14 +3262,14 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
 //--------------------------------- += operator (with list of field expressions)
   public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
                                                      const class GALGAS_routineFormalArgumentListIR & inOperand1,
-                                                     const class GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                     const class GALGAS_unifiedTypeMap_2D_entry & inOperand2,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
                                                   class GALGAS_routineFormalArgumentListIR constinArgument1,
-                                                  class GALGAS_unifiedTypeMap_2D_proxy constinArgument2,
+                                                  class GALGAS_unifiedTypeMap_2D_entry constinArgument2,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -3278,7 +3278,7 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeForKey (class GALGAS_unifiedTypeMap_2D_proxy constinArgument0,
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeForKey (class GALGAS_unifiedTypeMap_2D_entry constinArgument0,
                                                              class GALGAS_string constinArgument1,
                                                              C_Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
@@ -3292,7 +3292,7 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
                                                                                                                    C_Compiler * inCompiler
                                                                                                                    COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeForKey (const class GALGAS_string & constinOperand0,
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReturnTypeForKey (const class GALGAS_string & constinOperand0,
                                                                                           C_Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const ;
 
@@ -3303,7 +3303,7 @@ class GALGAS_externProcedureMapIR : public AC_GALGAS_map {
 //--------------------------------- Optional Methods
   public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
                                                     class GALGAS_routineFormalArgumentListIR & outOperand1,
-                                                    class GALGAS_unifiedTypeMap_2D_proxy & outOperand2) const ;
+                                                    class GALGAS_unifiedTypeMap_2D_entry & outOperand2) const ;
 
 
 //--------------------------------- Introspection
@@ -3329,7 +3329,7 @@ class cEnumerator_externProcedureMapIR : public cGenericAbstractEnumerator {
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
   public: class GALGAS_routineFormalArgumentListIR current_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
-  public: class GALGAS_unifiedTypeMap_2D_proxy current_mReturnType (LOCATION_ARGS) const ;
+  public: class GALGAS_unifiedTypeMap_2D_entry current_mReturnType (LOCATION_ARGS) const ;
 //--- Current element access
   public: class GALGAS_externProcedureMapIR_2D_element current (LOCATION_ARGS) const ;
 } ;

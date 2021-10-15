@@ -67,7 +67,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
 {
   let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
+    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end
 #--- Analyze source expression
   [self.mSourceExpression analyzeExpression

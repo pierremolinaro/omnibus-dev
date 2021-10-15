@@ -202,7 +202,7 @@ override method @functionDeclarationAST enterInContext
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mFunctionFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-proxy makeOptionalProxy !?ioContext.mTypeMap !self.mFunctionReturnTypeName ?let returnTypeProxy]
+  [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mFunctionReturnTypeName ?let returnTypeProxy]
 #--- Attributes
   var warnIfUnused = true
   var exportedFunction = false
@@ -270,7 +270,7 @@ override method @functionDeclarationAST enterInContext
 map @routineMapForContext {
   @bool mIsPublic
   @routineTypedSignature mSignature
-  @unifiedTypeMap-proxy mReturnTypeProxy # null if no returned value
+  @unifiedTypeMap-entry mReturnTypeProxy # null if no returned value
   @routineLLVMNameDict mModeDictionary
   @bool mIsExported
   @mode mFunctionMode
@@ -292,7 +292,7 @@ setter @routineMapForContext addFunctionWithoutArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let @routineFormalArgumentListAST formalArguments = {}
@@ -322,9 +322,9 @@ setter @routineMapForContext addFunctionWithInputArgument
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
   ?inputArgumentSelector:let @string inInputSelector
-  ?inputArgumentTypeProxy:let @unifiedTypeMap-proxy inInputArgumentTypeProxy
+  ?inputArgumentTypeProxy:let @unifiedTypeMap-entry inInputArgumentTypeProxy
   ?inputArgumentName: let @string inInputArgumentName
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {
@@ -360,12 +360,12 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
   ?inputArgumentSelector1:let @string inInputSelector1
-  ?inputArgumentTypeProxy1:let @unifiedTypeMap-proxy inInputArgumentTypeProxy1
+  ?inputArgumentTypeProxy1:let @unifiedTypeMap-entry inInputArgumentTypeProxy1
   ?inputArgumentName1: let @string inInputArgumentName1
   ?inputArgumentSelector2:let @string inInputSelector2
-  ?inputArgumentTypeProxy2:let @unifiedTypeMap-proxy inInputArgumentTypeProxy2
+  ?inputArgumentTypeProxy2:let @unifiedTypeMap-entry inInputArgumentTypeProxy2
   ?inputArgumentName2: let @string inInputArgumentName2
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultType
+  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {

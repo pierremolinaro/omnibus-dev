@@ -34,7 +34,7 @@ void extensionSetter_addComputedPropertyGetter (class GALGAS_semanticContext & i
                                                 const class GALGAS_lstring constin_inPropertyName,
                                                 const class GALGAS_mode constin_inMode,
                                                 const class GALGAS_propertyVisibility constin_inVisibility,
-                                                const class GALGAS_unifiedTypeMap_2D_proxy constin_inResultTypeProxy,
+                                                const class GALGAS_unifiedTypeMap_2D_entry constin_inResultTypeProxy,
                                                 class GALGAS_lstring & out_outRoutineLLVMName,
                                                 class C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) ;

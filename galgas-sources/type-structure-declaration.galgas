@@ -356,7 +356,7 @@ method @structurePropertyListAST-element enterPropertyInContext
 #---------- Property type
   let @omnibusType optionalPropertyType = if self.mPropertyTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName} type]
+    else [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName} type]
   end
 #---------- Init expression
   switch self.mPropertyKind
@@ -473,7 +473,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !self.mPropertyName
       !self.mVisibility
       !.computedProperty{
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
+        !typeProxy: @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
         !modeDictionary:modeDictionary
       }
     ]
@@ -508,7 +508,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !self.mPropertyName
       !self.mVisibility
       !.computedProperty {
-        !typeProxy: @unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
+        !typeProxy: @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
         !getterModeDictionary: getterModeDictionary
         !setterModeDictionary: setterModeDictionary
       }

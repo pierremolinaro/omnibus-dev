@@ -80,7 +80,7 @@ override method @addressofExpressionAST analyzeExpression
       !?instructionListIR: ioInstructionGenerationList
       ?let @LValueRepresentation lvalueIR
     ]
-    let resultTypeProxy = @unifiedTypeMap-proxy.searchKey {
+    let resultTypeProxy = @unifiedTypeMap-entry.searchKey {
       !inContext.mTypeMap
       !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
     }

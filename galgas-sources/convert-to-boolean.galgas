@@ -129,7 +129,7 @@ override method @compileTimeConvertToBooleanAST enterInContext
     error self.mConverterName : "the implicit converter name should be 'convertToBoolean'"
   end
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
 #--- Check native operator expression
@@ -158,7 +158,7 @@ override method @llvmConvertToBooleanAST enterInContext
     error self.mConverterName : "the implicit converter name should be 'convertToBoolean'"
   end
 #--- Check types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsNotCompileTimeType !self.mReceiverTypeName.location]
 #--- Enter in infix operator map  

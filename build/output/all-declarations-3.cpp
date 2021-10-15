@@ -9888,7 +9888,7 @@ class cCollectionElement_routineTypedSignature : public cCollectionElement {
 //--- Constructors
   public: cCollectionElement_routineTypedSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                     const GALGAS_lstring & in_mSelector,
-                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mTypeProxy,
                                                     const GALGAS_lstring & in_mFormalArgumentName
                                                     COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_routineTypedSignature (const GALGAS_routineTypedSignature_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -9910,7 +9910,7 @@ class cCollectionElement_routineTypedSignature : public cCollectionElement {
 
 cCollectionElement_routineTypedSignature::cCollectionElement_routineTypedSignature (const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                                                     const GALGAS_lstring & in_mSelector,
-                                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mTypeProxy,
                                                                                     const GALGAS_lstring & in_mFormalArgumentName
                                                                                     COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
@@ -9989,7 +9989,7 @@ GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_emptyList
 
 GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_listWithValue (const GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                                                       const GALGAS_lstring & inOperand1,
-                                                                                      const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                                                      const GALGAS_unifiedTypeMap_2D_entry & inOperand2,
                                                                                       const GALGAS_lstring & inOperand3
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_routineTypedSignature result ;
@@ -10007,7 +10007,7 @@ GALGAS_routineTypedSignature GALGAS_routineTypedSignature::constructor_listWithV
 void GALGAS_routineTypedSignature::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                               const GALGAS_procFormalArgumentPassingMode & in_mFormalArgumentPassingMode,
                                                               const GALGAS_lstring & in_mSelector,
-                                                              const GALGAS_unifiedTypeMap_2D_proxy & in_mTypeProxy,
+                                                              const GALGAS_unifiedTypeMap_2D_entry & in_mTypeProxy,
                                                               const GALGAS_lstring & in_mFormalArgumentName
                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement_routineTypedSignature * p = NULL ;
@@ -10023,7 +10023,7 @@ void GALGAS_routineTypedSignature::makeAttributesFromObjects (capCollectionEleme
 
 void GALGAS_routineTypedSignature::addAssign_operation (const GALGAS_procFormalArgumentPassingMode & inOperand0,
                                                         const GALGAS_lstring & inOperand1,
-                                                        const GALGAS_unifiedTypeMap_2D_proxy & inOperand2,
+                                                        const GALGAS_unifiedTypeMap_2D_entry & inOperand2,
                                                         const GALGAS_lstring & inOperand3
                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
@@ -10063,7 +10063,7 @@ void GALGAS_routineTypedSignature::setter_append (GALGAS_routineTypedSignature_2
 
 void GALGAS_routineTypedSignature::setter_insertAtIndex (const GALGAS_procFormalArgumentPassingMode inOperand0,
                                                          const GALGAS_lstring inOperand1,
-                                                         const GALGAS_unifiedTypeMap_2D_proxy inOperand2,
+                                                         const GALGAS_unifiedTypeMap_2D_entry inOperand2,
                                                          const GALGAS_lstring inOperand3,
                                                          const GALGAS_uint inInsertionIndex,
                                                          C_Compiler * inCompiler
@@ -10086,7 +10086,7 @@ void GALGAS_routineTypedSignature::setter_insertAtIndex (const GALGAS_procFormal
 
 void GALGAS_routineTypedSignature::setter_removeAtIndex (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                          GALGAS_lstring & outOperand1,
-                                                         GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                         GALGAS_unifiedTypeMap_2D_entry & outOperand2,
                                                          GALGAS_lstring & outOperand3,
                                                          const GALGAS_uint inRemoveIndex,
                                                          C_Compiler * inCompiler
@@ -10128,7 +10128,7 @@ void GALGAS_routineTypedSignature::setter_removeAtIndex (GALGAS_procFormalArgume
 
 void GALGAS_routineTypedSignature::setter_popFirst (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                     GALGAS_lstring & outOperand1,
-                                                    GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                    GALGAS_unifiedTypeMap_2D_entry & outOperand2,
                                                     GALGAS_lstring & outOperand3,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) {
@@ -10153,7 +10153,7 @@ void GALGAS_routineTypedSignature::setter_popFirst (GALGAS_procFormalArgumentPas
 
 void GALGAS_routineTypedSignature::setter_popLast (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                    GALGAS_lstring & outOperand1,
-                                                   GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                   GALGAS_unifiedTypeMap_2D_entry & outOperand2,
                                                    GALGAS_lstring & outOperand3,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
@@ -10178,7 +10178,7 @@ void GALGAS_routineTypedSignature::setter_popLast (GALGAS_procFormalArgumentPass
 
 void GALGAS_routineTypedSignature::method_first (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                  GALGAS_lstring & outOperand1,
-                                                 GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                 GALGAS_unifiedTypeMap_2D_entry & outOperand2,
                                                  GALGAS_lstring & outOperand3,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) const {
@@ -10203,7 +10203,7 @@ void GALGAS_routineTypedSignature::method_first (GALGAS_procFormalArgumentPassin
 
 void GALGAS_routineTypedSignature::method_last (GALGAS_procFormalArgumentPassingMode & outOperand0,
                                                 GALGAS_lstring & outOperand1,
-                                                GALGAS_unifiedTypeMap_2D_proxy & outOperand2,
+                                                GALGAS_unifiedTypeMap_2D_entry & outOperand2,
                                                 GALGAS_lstring & outOperand3,
                                                 C_Compiler * inCompiler
                                                 COMMA_LOCATION_ARGS) const {
@@ -10335,7 +10335,7 @@ GALGAS_lstring GALGAS_routineTypedSignature::getter_mSelectorAtIndex (const GALG
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_routineTypedSignature::setter_setMTypeProxyAtIndex (GALGAS_unifiedTypeMap_2D_proxy inOperand,
+void GALGAS_routineTypedSignature::setter_setMTypeProxyAtIndex (GALGAS_unifiedTypeMap_2D_entry inOperand,
                                                                 GALGAS_uint inIndex,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) {
@@ -10349,12 +10349,12 @@ void GALGAS_routineTypedSignature::setter_setMTypeProxyAtIndex (GALGAS_unifiedTy
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineTypedSignature::getter_mTypeProxyAtIndex (const GALGAS_uint & inIndex,
+GALGAS_unifiedTypeMap_2D_entry GALGAS_routineTypedSignature::getter_mTypeProxyAtIndex (const GALGAS_uint & inIndex,
                                                                                        C_Compiler * inCompiler
                                                                                        COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_routineTypedSignature * p = (cCollectionElement_routineTypedSignature *) attributes.ptr () ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != p) {
     macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
     result = p->mObject.mProperty_mTypeProxy ;
@@ -10428,7 +10428,7 @@ GALGAS_lstring cEnumerator_routineTypedSignature::current_mSelector (LOCATION_AR
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_routineTypedSignature::current_mTypeProxy (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cEnumerator_routineTypedSignature::current_mTypeProxy (LOCATION_ARGS) const {
   const cCollectionElement_routineTypedSignature * p = (const cCollectionElement_routineTypedSignature *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cCollectionElement_routineTypedSignature) ;
   return p->mObject.mProperty_mTypeProxy ;
@@ -11664,7 +11664,7 @@ void extensionMethod_enterInContext (const GALGAS_taskListAST inObject,
   while (enumerator_7877.hasCurrentObject ()) {
     {
     GALGAS_lstring joker_8209 ; // Joker input parameter
-    extensionSetter_addFunctionWithoutArgument (ioArgument_ioContext.mProperty_mRoutineMap, enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_string (SOURCE_FILE ("task-declaration.galgas", 226)), enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_string (SOURCE_FILE ("task-declaration.galgas", 227)), GALGAS_lstring::constructor_new (GALGAS_string ("activate"), enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 228)), GALGAS_mode::constructor_safeUserMode (SOURCE_FILE ("task-declaration.galgas", 229)), GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("task-declaration.galgas", 230)), joker_8209, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 225)) ;
+    extensionSetter_addFunctionWithoutArgument (ioArgument_ioContext.mProperty_mRoutineMap, enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_string (SOURCE_FILE ("task-declaration.galgas", 226)), enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_string (SOURCE_FILE ("task-declaration.galgas", 227)), GALGAS_lstring::constructor_new (GALGAS_string ("activate"), enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_location (HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 228)), GALGAS_mode::constructor_safeUserMode (SOURCE_FILE ("task-declaration.galgas", 229)), GALGAS_unifiedTypeMap_2D_entry::constructor_null (SOURCE_FILE ("task-declaration.galgas", 230)), joker_8209, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 225)) ;
     }
     GALGAS_string var_assemblerTaskName_8242 = enumerator_7877.current (HERE).getter_mTaskName (HERE).getter_string (HERE).getter_assemblerRepresentation (SOURCE_FILE ("task-declaration.galgas", 233)) ;
     GALGAS_string var_activateTaskCallName_8314 = function_llvmNameForServiceCall (function_llvmNameForActivateTask (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 234)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 234)) ;

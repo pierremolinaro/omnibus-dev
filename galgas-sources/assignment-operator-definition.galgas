@@ -226,9 +226,9 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   [!?formalGenericConstantParameterMap insertKey !self.mSourceVariableName]
   [self.mLLVMInstructionList checkInstructionList !formalGenericConstantParameterMap]
 #--- Types
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mTargetTypeName ?let targetTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mTargetTypeName ?let targetTypeProxy]
   let targetType = [targetTypeProxy type]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !self.mSourceTypeName ?let sourceTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mSourceTypeName ?let sourceTypeProxy]
   let sourceType = [sourceTypeProxy type]
 #---
   let key = assignmentOperatorKey (!targetType !self.mOperatorLocation !sourceType)

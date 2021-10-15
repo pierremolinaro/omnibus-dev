@@ -108,7 +108,7 @@ override method @convertExpressionAST analyzeExpression
 #--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
-    else [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
   end
 #--- Check types
   if not [resultType.kind isInteger] then

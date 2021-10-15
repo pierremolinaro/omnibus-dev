@@ -100,7 +100,7 @@ override method @integerSliceExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Search Type
-  let resultType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #--- Check type is an unsigned integer type
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" :outResult
@@ -138,7 +138,7 @@ override method @integerSliceExpressionAST analyzeExpression
           leftShiftAmount = 0
         end
       #--- Analyze expression
-        let expressionTargetType = [@unifiedTypeMap-proxy.searchKey {!inContext.mTypeMap !expressionTypeName} type]
+        let expressionTargetType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !expressionTypeName} type]
         [expression analyzeExpression
           !self:inSelfType
           !routineAttributes:inRoutineAttributes

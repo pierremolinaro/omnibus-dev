@@ -7600,7 +7600,7 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (co
 cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
                                                                     const GALGAS_bool & in_mIsPublic,
                                                                     const GALGAS_routineTypedSignature & in_mSignature,
-                                                                    const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
+                                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReturnTypeProxy,
                                                                     const GALGAS_routineLLVMNameDict & in_mModeDictionary,
                                                                     const GALGAS_bool & in_mIsExported,
                                                                     const GALGAS_mode & in_mFunctionMode
@@ -7733,7 +7733,7 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::getter_overriddenMap (C
 void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
                                                        const GALGAS_bool & inArgument0,
                                                        const GALGAS_routineTypedSignature & inArgument1,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy & inArgument2,
+                                                       const GALGAS_unifiedTypeMap_2D_entry & inArgument2,
                                                        const GALGAS_routineLLVMNameDict & inArgument3,
                                                        const GALGAS_bool & inArgument4,
                                                        const GALGAS_mode & inArgument5,
@@ -7754,7 +7754,7 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
 void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_bool inArgument0,
                                                     GALGAS_routineTypedSignature inArgument1,
-                                                    GALGAS_unifiedTypeMap_2D_proxy inArgument2,
+                                                    GALGAS_unifiedTypeMap_2D_entry inArgument2,
                                                     GALGAS_routineLLVMNameDict inArgument3,
                                                     GALGAS_bool inArgument4,
                                                     GALGAS_mode inArgument5,
@@ -7779,7 +7779,7 @@ const char * kSearchErrorMessage_routineMapForContext_searchKey = "there is no '
 void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     GALGAS_bool & outArgument0,
                                                     GALGAS_routineTypedSignature & outArgument1,
-                                                    GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
+                                                    GALGAS_unifiedTypeMap_2D_entry & outArgument2,
                                                     GALGAS_routineLLVMNameDict & outArgument3,
                                                     GALGAS_bool & outArgument4,
                                                     GALGAS_mode & outArgument5,
@@ -7839,12 +7839,12 @@ GALGAS_routineTypedSignature GALGAS_routineMapForContext::getter_mSignatureForKe
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_routineMapForContext::getter_mReturnTypeProxyForKey (const GALGAS_string & inKey,
+GALGAS_unifiedTypeMap_2D_entry GALGAS_routineMapForContext::getter_mReturnTypeProxyForKey (const GALGAS_string & inKey,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_unifiedTypeMap_2D_proxy result ;
+  GALGAS_unifiedTypeMap_2D_entry result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     result = p->mProperty_mReturnTypeProxy ;
@@ -7927,7 +7927,7 @@ void GALGAS_routineMapForContext::setter_setMSignatureForKey (GALGAS_routineType
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_routineMapForContext::setter_setMReturnTypeProxyForKey (GALGAS_unifiedTypeMap_2D_proxy inAttributeValue,
+void GALGAS_routineMapForContext::setter_setMReturnTypeProxyForKey (GALGAS_unifiedTypeMap_2D_entry inAttributeValue,
                                                                     GALGAS_string inKey,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) {
@@ -8033,7 +8033,7 @@ GALGAS_routineTypedSignature cEnumerator_routineMapForContext::current_mSignatur
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy cEnumerator_routineMapForContext::current_mReturnTypeProxy (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMap_2D_entry cEnumerator_routineMapForContext::current_mReturnTypeProxy (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
   return p->mProperty_mReturnTypeProxy ;
@@ -8068,7 +8068,7 @@ GALGAS_mode cEnumerator_routineMapForContext::current_mFunctionMode (LOCATION_AR
 bool GALGAS_routineMapForContext::optional_searchKey (const GALGAS_string & inKey,
                                                       GALGAS_bool & outArgument0,
                                                       GALGAS_routineTypedSignature & outArgument1,
-                                                      GALGAS_unifiedTypeMap_2D_proxy & outArgument2,
+                                                      GALGAS_unifiedTypeMap_2D_entry & outArgument2,
                                                       GALGAS_routineLLVMNameDict & outArgument3,
                                                       GALGAS_bool & outArgument4,
                                                       GALGAS_mode & outArgument5) const {

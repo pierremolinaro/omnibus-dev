@@ -369,7 +369,7 @@ typeComparisonResult cEnumAssociatedValues_propertyGetterKind_storedProperty::co
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_propertyGetterKind_computedProperty::cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+cEnumAssociatedValues_propertyGetterKind_computedProperty::cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                                                                       const GALGAS_routineLLVMNameDict & inAssociatedValue1
                                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -456,7 +456,7 @@ GALGAS_propertyGetterKind GALGAS_propertyGetterKind::constructor_storedProperty 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_propertyGetterKind GALGAS_propertyGetterKind::constructor_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+GALGAS_propertyGetterKind GALGAS_propertyGetterKind::constructor_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                                    const GALGAS_routineLLVMNameDict & inAssociatedValue1
                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_propertyGetterKind result ;
@@ -506,7 +506,7 @@ void GALGAS_propertyGetterKind::method_storedProperty (GALGAS_omnibusType & outA
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyGetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+void GALGAS_propertyGetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue0,
                                                          GALGAS_routineLLVMNameDict & outAssociatedValue1,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) const {
@@ -555,7 +555,7 @@ bool GALGAS_propertyGetterKind::optional_storedProperty (GALGAS_omnibusType & ou
 
 //----------------------------------------------------------------------------------------------------------------------
 
-bool GALGAS_propertyGetterKind::optional_computedProperty (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+bool GALGAS_propertyGetterKind::optional_computedProperty (GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue0,
                                                            GALGAS_routineLLVMNameDict & outAssociatedValue1) const {
   const bool ok = mEnum == kEnum_computedProperty ;
   if (ok) {
@@ -1159,7 +1159,7 @@ typeComparisonResult cEnumAssociatedValues_propertySetterKind_storedProperty::co
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_propertySetterKind_computedProperty::cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+cEnumAssociatedValues_propertySetterKind_computedProperty::cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                                                                       const GALGAS_routineLLVMNameDict & inAssociatedValue1,
                                                                                                                       const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                                                                       COMMA_LOCATION_ARGS) :
@@ -1223,7 +1223,7 @@ GALGAS_propertySetterKind GALGAS_propertySetterKind::constructor_storedProperty 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_propertySetterKind GALGAS_propertySetterKind::constructor_computedProperty (const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue0,
+GALGAS_propertySetterKind GALGAS_propertySetterKind::constructor_computedProperty (const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue0,
                                                                                    const GALGAS_routineLLVMNameDict & inAssociatedValue1,
                                                                                    const GALGAS_routineLLVMNameDict & inAssociatedValue2
                                                                                    COMMA_LOCATION_ARGS) {
@@ -1259,7 +1259,7 @@ void GALGAS_propertySetterKind::method_storedProperty (GALGAS_omnibusType & outA
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue0,
                                                          GALGAS_routineLLVMNameDict & outAssociatedValue1,
                                                          GALGAS_routineLLVMNameDict & outAssociatedValue2,
                                                          C_Compiler * inCompiler
@@ -1295,7 +1295,7 @@ bool GALGAS_propertySetterKind::optional_storedProperty (GALGAS_omnibusType & ou
 
 //----------------------------------------------------------------------------------------------------------------------
 
-bool GALGAS_propertySetterKind::optional_computedProperty (GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue0,
+bool GALGAS_propertySetterKind::optional_computedProperty (GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue0,
                                                            GALGAS_routineLLVMNameDict & outAssociatedValue1,
                                                            GALGAS_routineLLVMNameDict & outAssociatedValue2) const {
   const bool ok = mEnum == kEnum_computedProperty ;
@@ -4473,7 +4473,7 @@ typeComparisonResult cEnumAssociatedValues_typeKind_dynamicArrayType::compare (c
 
 cEnumAssociatedValues_typeKind_function::cEnumAssociatedValues_typeKind_function (const GALGAS_mode & inAssociatedValue0,
                                                                                   const GALGAS_routineTypedSignature & inAssociatedValue1,
-                                                                                  const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2
+                                                                                  const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue2
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -4695,7 +4695,7 @@ GALGAS_typeKind GALGAS_typeKind::constructor_dynamicArrayType (const GALGAS_omni
 
 GALGAS_typeKind GALGAS_typeKind::constructor_function (const GALGAS_mode & inAssociatedValue0,
                                                        const GALGAS_routineTypedSignature & inAssociatedValue1,
-                                                       const GALGAS_unifiedTypeMap_2D_proxy & inAssociatedValue2
+                                                       const GALGAS_unifiedTypeMap_2D_entry & inAssociatedValue2
                                                        COMMA_LOCATION_ARGS) {
   GALGAS_typeKind result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
@@ -4858,7 +4858,7 @@ void GALGAS_typeKind::method_dynamicArrayType (GALGAS_omnibusType & outAssociate
 
 void GALGAS_typeKind::method_function (GALGAS_mode & outAssociatedValue0,
                                        GALGAS_routineTypedSignature & outAssociatedValue1,
-                                       GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2,
+                                       GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue2,
                                        C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != kEnum_function) {
@@ -5030,7 +5030,7 @@ bool GALGAS_typeKind::optional_dynamicArrayType (GALGAS_omnibusType & outAssocia
 
 bool GALGAS_typeKind::optional_function (GALGAS_mode & outAssociatedValue0,
                                          GALGAS_routineTypedSignature & outAssociatedValue1,
-                                         GALGAS_unifiedTypeMap_2D_proxy & outAssociatedValue2) const {
+                                         GALGAS_unifiedTypeMap_2D_entry & outAssociatedValue2) const {
   const bool ok = mEnum == kEnum_function ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_typeKind_function *) unsafePointer () ;
@@ -5770,48 +5770,48 @@ GALGAS_arcAssignmentList GALGAS_arcAssignmentList::extractObject (const GALGAS_o
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy::GALGAS_unifiedTypeMap_2D_proxy (void) :
-AC_GALGAS_uniqueMapProxy () {
+GALGAS_unifiedTypeMap_2D_entry::GALGAS_unifiedTypeMap_2D_entry (void) :
+AC_GALGAS_sharedMapEntry () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_null (LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  result.makeNullProxy (THERE) ;
+GALGAS_unifiedTypeMap_2D_entry GALGAS_unifiedTypeMap_2D_entry::constructor_null (LOCATION_ARGS) {
+  GALGAS_unifiedTypeMap_2D_entry result ;
+  result.makeNullEntry (THERE) ;
   return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeOptionalProxy (GALGAS_unifiedTypeMap & ioMap,
+void GALGAS_unifiedTypeMap_2D_entry::class_method_makeOptionalEntry (GALGAS_unifiedTypeMap & ioMap,
                                                                      GALGAS_lstring inKey,
-                                                                     GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                                     GALGAS_unifiedTypeMap_2D_entry & outEntry
                                                                      COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeOptionalProxy (ioMap, inKey COMMA_THERE) ;
+  outEntry.internalMakeOptionalEntry (ioMap, inKey COMMA_THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (GALGAS_unifiedTypeMap & ioMap,
+void GALGAS_unifiedTypeMap_2D_entry::class_method_makeEntry (GALGAS_unifiedTypeMap & ioMap,
                                                              GALGAS_lstring inKey,
-                                                             GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                             GALGAS_unifiedTypeMap_2D_entry & outEntry
                                                              COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxy (ioMap, inKey COMMA_THERE) ;
+  outEntry.internalMakeEntry (ioMap, inKey COMMA_THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxyFromString (GALGAS_unifiedTypeMap & ioMap,
+void GALGAS_unifiedTypeMap_2D_entry::class_method_makeEntryFromString (GALGAS_unifiedTypeMap & ioMap,
                                                                        GALGAS_string inKey,
-                                                                       GALGAS_unifiedTypeMap_2D_proxy & outProxy
+                                                                       GALGAS_unifiedTypeMap_2D_entry & outEntry
                                                                        COMMA_LOCATION_ARGS) {
-  outProxy.internalMakeProxyFromString (ioMap, inKey COMMA_THERE) ;
+  outEntry.internalMakeEntryFromString (ioMap, inKey COMMA_THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_omnibusType GALGAS_unifiedTypeMap_2D_proxy::getter_type (C_Compiler * inCompiler
+GALGAS_omnibusType GALGAS_unifiedTypeMap_2D_entry::getter_type (C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const {
   GALGAS_omnibusType result ;
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) getAttributeListPointer (inCompiler, "type" COMMA_THERE) ;
@@ -5824,54 +5824,54 @@ GALGAS_omnibusType GALGAS_unifiedTypeMap_2D_proxy::getter_type (C_Compiler * inC
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (const GALGAS_unifiedTypeMap & inMap,
+GALGAS_unifiedTypeMap_2D_entry GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (const GALGAS_unifiedTypeMap & inMap,
                                                                                       const GALGAS_lstring & inKey,
                                                                                       C_Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  result.internalMakeRegularProxyBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedTypeMap_searchKey, inCompiler COMMA_THERE) ;
+  GALGAS_unifiedTypeMap_2D_entry result ;
+  result.internalMakeRegularEntryBySearchingKey (inMap, inKey, kSearchErrorMessage_unifiedTypeMap_searchKey, inCompiler COMMA_THERE) ;
   return result ;
 }
 
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//@unifiedTypeMap-proxy type
+//@unifiedTypeMap-entry type
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ("unifiedTypeMap-proxy",
+kTypeDescriptor_GALGAS_unifiedTypeMap_2D_entry ("unifiedTypeMap-entry",
                                                 NULL) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor * GALGAS_unifiedTypeMap_2D_proxy::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_proxy ;
+const C_galgas_type_descriptor * GALGAS_unifiedTypeMap_2D_entry::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_unifiedTypeMap_2D_entry ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_proxy::clonedObject (void) const {
+AC_GALGAS_root * GALGAS_unifiedTypeMap_2D_entry::clonedObject (void) const {
   AC_GALGAS_root * result = NULL ;
   if (isValid ()) {
-    macroMyNew (result, GALGAS_unifiedTypeMap_2D_proxy (*this)) ;
+    macroMyNew (result, GALGAS_unifiedTypeMap_2D_entry (*this)) ;
   }
   return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_proxy GALGAS_unifiedTypeMap_2D_proxy::extractObject (const GALGAS_object & inObject,
+GALGAS_unifiedTypeMap_2D_entry GALGAS_unifiedTypeMap_2D_entry::extractObject (const GALGAS_object & inObject,
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) {
-  GALGAS_unifiedTypeMap_2D_proxy result ;
-  const GALGAS_unifiedTypeMap_2D_proxy * p = (const GALGAS_unifiedTypeMap_2D_proxy *) inObject.embeddedObject () ;
+  GALGAS_unifiedTypeMap_2D_entry result ;
+  const GALGAS_unifiedTypeMap_2D_entry * p = (const GALGAS_unifiedTypeMap_2D_entry *) inObject.embeddedObject () ;
   if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_unifiedTypeMap_2D_proxy *> (p)) {
+    if (NULL != dynamic_cast <const GALGAS_unifiedTypeMap_2D_entry *> (p)) {
       result = *p ;
     }else{
-      inCompiler->castError ("unifiedTypeMap-proxy", p->dynamicTypeDescriptor () COMMA_THERE) ;
+      inCompiler->castError ("unifiedTypeMap-entry", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

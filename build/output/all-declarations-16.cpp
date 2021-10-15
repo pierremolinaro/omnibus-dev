@@ -830,16 +830,16 @@ static void extensionMethod_llvmAssignmentOperatorDeclarationAST_enterInContext 
   }
   const GALGAS_llvmAssignmentOperatorDeclarationAST temp_5 = object ;
   extensionMethod_checkInstructionList (temp_5.getter_mLLVMInstructionList (HERE), var_formalGenericConstantParameterMap_9977, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 227)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_targetTypeProxy_10684 ;
+  GALGAS_unifiedTypeMap_2D_entry var_targetTypeProxy_10684 ;
   {
   const GALGAS_llvmAssignmentOperatorDeclarationAST temp_6 = object ;
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mProperty_mTypeMap, temp_6.getter_mTargetTypeName (HERE), var_targetTypeProxy_10684 COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 229)) ;
+  GALGAS_unifiedTypeMap_2D_entry::class_method_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_6.getter_mTargetTypeName (HERE), var_targetTypeProxy_10684 COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 229)) ;
   }
   GALGAS_omnibusType var_targetType_10702 = var_targetTypeProxy_10684.getter_type (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 230)) ;
-  GALGAS_unifiedTypeMap_2D_proxy var_sourceTypeProxy_10826 ;
+  GALGAS_unifiedTypeMap_2D_entry var_sourceTypeProxy_10826 ;
   {
   const GALGAS_llvmAssignmentOperatorDeclarationAST temp_7 = object ;
-  GALGAS_unifiedTypeMap_2D_proxy::class_method_makeProxy (ioArgument_ioContext.mProperty_mTypeMap, temp_7.getter_mSourceTypeName (HERE), var_sourceTypeProxy_10826 COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 231)) ;
+  GALGAS_unifiedTypeMap_2D_entry::class_method_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_7.getter_mSourceTypeName (HERE), var_sourceTypeProxy_10826 COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 231)) ;
   }
   GALGAS_omnibusType var_sourceType_10844 = var_sourceTypeProxy_10826.getter_type (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 232)) ;
   const GALGAS_llvmAssignmentOperatorDeclarationAST temp_8 = object ;

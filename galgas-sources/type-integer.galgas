@@ -76,8 +76,8 @@ override method @integerDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   let integerTypeName = [[self typeName] nowhere]
-  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
-#  [@unifiedTypeMap-proxy makeProxy !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
+  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !integerTypeName ?let selfTypeProxy]
+#  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !.new {!boolTypeName () !.nowhere} ?let boolTypeProxy]
 #--------------------------------------- Get min and max
   let min = minValueForInteger (!not self.mIsSigned !self.mSize)
   let max = maxValueForInteger (!not self.mIsSigned !self.mSize)
@@ -395,7 +395,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #  ?signed:let @bool inIsSigned
 #  ?!context:@semanticContext ioContext
 #{
-#  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#  let selfType = [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 #  let booleanType = [ioContext booleanType !.nowhere]
 ##--- Comparison infix operator
 #  let intIntOp = combineTypeNamesForInfixOperator (!inIntegerTypeName !inIntegerTypeName)
@@ -550,7 +550,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #  ?!context:@semanticContext ioContext
 #{
 ##--- Infix operators
-#  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#  let selfType = [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 #  let booleanType = [ioContext booleanType !.nowhere]
 ##--- Comparison infix operator
 #  let intLiteralOp = combineTypeNamesForInfixOperator (!inIntegerTypeName.string !ctIntegerTypeName ())
@@ -701,7 +701,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #  ?!context:@semanticContext ioContext
 #{
 ##--- Infix operators
-#  let selfType = [@unifiedTypeMap-proxy.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
+#  let selfType = [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !inIntegerTypeName} type]
 ##--- Comparison infix operator
 #  let intLiteralOp = combineTypeNamesForInfixOperator (!ctIntegerTypeName () !inIntegerTypeName.string)
 #  let booleanType = [ioContext booleanType !.nowhere]

@@ -1358,8 +1358,8 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
   public: static class GALGAS_dynArrayAppendFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
                                                                         const class GALGAS_bool & inOperand1,
                                                                         const class GALGAS_bool & inOperand2,
-                                                                        const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
-                                                                        const class GALGAS_unifiedTypeMap_2D_proxy & inOperand4,
+                                                                        const class GALGAS_unifiedTypeMap_2D_entry & inOperand3,
+                                                                        const class GALGAS_unifiedTypeMap_2D_entry & inOperand4,
                                                                         const class GALGAS_string & inOperand5
                                                                         COMMA_LOCATION_ARGS) ;
 
@@ -1367,10 +1367,10 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
   public: typeComparisonResult objectCompare (const GALGAS_dynArrayAppendFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMArrayTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMArrayTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                            COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                              COMMA_LOCATION_ARGS) ;
 
   public: VIRTUAL_IN_DEBUG void setter_setMInsertFunctionMangledName (class GALGAS_string inArgument0
@@ -1381,9 +1381,9 @@ class GALGAS_dynArrayAppendFunctionIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mArrayTypeProxy (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mElementTypeProxy (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
 
@@ -1408,16 +1408,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunct
 
 class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mArrayTypeProxy ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mArrayTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mElementTypeProxy ;
   public: GALGAS_string mProperty_mInsertFunctionMangledName ;
 
 //--- Constructor
   public: cPtr_dynArrayAppendFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
                                          const GALGAS_bool & in_isRequired,
                                          const GALGAS_bool & in_warnsIfUnused,
-                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mArrayTypeProxy,
-                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy,
+                                         const GALGAS_unifiedTypeMap_2D_entry & in_mArrayTypeProxy,
+                                         const GALGAS_unifiedTypeMap_2D_entry & in_mElementTypeProxy,
                                          const GALGAS_string & in_mInsertFunctionMangledName
                                          COMMA_LOCATION_ARGS) ;
 
@@ -1425,10 +1425,10 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mArrayTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMArrayTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mArrayTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMArrayTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
   public: VIRTUAL_IN_DEBUG GALGAS_string getter_mInsertFunctionMangledName (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMInsertFunctionMangledName (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
 //--- Description
@@ -1474,14 +1474,14 @@ class GALGAS_dynArrayInsertFunctionIR : public GALGAS_abstractRoutineIR {
   public: static class GALGAS_dynArrayInsertFunctionIR constructor_new (const class GALGAS_lstring & inOperand0,
                                                                         const class GALGAS_bool & inOperand1,
                                                                         const class GALGAS_bool & inOperand2,
-                                                                        const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3
+                                                                        const class GALGAS_unifiedTypeMap_2D_entry & inOperand3
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: typeComparisonResult objectCompare (const GALGAS_dynArrayInsertFunctionIR & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                              COMMA_LOCATION_ARGS) ;
 
 
@@ -1489,7 +1489,7 @@ class GALGAS_dynArrayInsertFunctionIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mElementTypeProxy (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
@@ -1512,21 +1512,21 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayInsertFunct
 
 class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mElementTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mElementTypeProxy ;
 
 //--- Constructor
   public: cPtr_dynArrayInsertFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
                                          const GALGAS_bool & in_isRequired,
                                          const GALGAS_bool & in_warnsIfUnused,
-                                         const GALGAS_unifiedTypeMap_2D_proxy & in_mElementTypeProxy
+                                         const GALGAS_unifiedTypeMap_2D_entry & in_mElementTypeProxy
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mElementTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mElementTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2746,9 +2746,9 @@ class GALGAS_staticListIndirectRoutineIR : public GALGAS_abstractRoutineIR {
   public: static class GALGAS_staticListIndirectRoutineIR constructor_new (const class GALGAS_lstring & inOperand0,
                                                                            const class GALGAS_bool & inOperand1,
                                                                            const class GALGAS_bool & inOperand2,
-                                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand3,
+                                                                           const class GALGAS_unifiedTypeMap_2D_entry & inOperand3,
                                                                            const class GALGAS_routineTypedSignature & inOperand4,
-                                                                           const class GALGAS_unifiedTypeMap_2D_proxy & inOperand5,
+                                                                           const class GALGAS_unifiedTypeMap_2D_entry & inOperand5,
                                                                            const class GALGAS_uint & inOperand6
                                                                            COMMA_LOCATION_ARGS) ;
 
@@ -2762,10 +2762,10 @@ class GALGAS_staticListIndirectRoutineIR : public GALGAS_abstractRoutineIR {
   public: VIRTUAL_IN_DEBUG void setter_setMPropertyIndex (class GALGAS_uint inArgument0
                                                           COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                             COMMA_LOCATION_ARGS) ;
 
-  public: VIRTUAL_IN_DEBUG void setter_setMStaticListElementType (class GALGAS_unifiedTypeMap_2D_proxy inArgument0
+  public: VIRTUAL_IN_DEBUG void setter_setMStaticListElementType (class GALGAS_unifiedTypeMap_2D_entry inArgument0
                                                                   COMMA_LOCATION_ARGS) ;
 
 
@@ -2777,9 +2777,9 @@ class GALGAS_staticListIndirectRoutineIR : public GALGAS_abstractRoutineIR {
 
   public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mReturnTypeProxy (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_proxy getter_mStaticListElementType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMap_2D_entry getter_mStaticListElementType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Optional Methods
@@ -2802,18 +2802,18 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListIndirectR
 
 class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
 //--- Attributes
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mStaticListElementType ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mStaticListElementType ;
   public: GALGAS_routineTypedSignature mProperty_mFormalArgumentListForGeneration ;
-  public: GALGAS_unifiedTypeMap_2D_proxy mProperty_mReturnTypeProxy ;
+  public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnTypeProxy ;
   public: GALGAS_uint mProperty_mPropertyIndex ;
 
 //--- Constructor
   public: cPtr_staticListIndirectRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
                                             const GALGAS_bool & in_isRequired,
                                             const GALGAS_bool & in_warnsIfUnused,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mStaticListElementType,
+                                            const GALGAS_unifiedTypeMap_2D_entry & in_mStaticListElementType,
                                             const GALGAS_routineTypedSignature & in_mFormalArgumentListForGeneration,
-                                            const GALGAS_unifiedTypeMap_2D_proxy & in_mReturnTypeProxy,
+                                            const GALGAS_unifiedTypeMap_2D_entry & in_mReturnTypeProxy,
                                             const GALGAS_uint & in_mPropertyIndex
                                             COMMA_LOCATION_ARGS) ;
 
@@ -2821,12 +2821,12 @@ class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mStaticListElementType (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStaticListElementType (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mStaticListElementType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMStaticListElementType (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
   public: VIRTUAL_IN_DEBUG GALGAS_routineTypedSignature getter_mFormalArgumentListForGeneration (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMFormalArgumentListForGeneration (GALGAS_routineTypedSignature inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_proxy getter_mReturnTypeProxy (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_proxy inValue COMMA_LOCATION_ARGS) ;
+  public: VIRTUAL_IN_DEBUG GALGAS_unifiedTypeMap_2D_entry getter_mReturnTypeProxy (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeProxy (GALGAS_unifiedTypeMap_2D_entry inValue COMMA_LOCATION_ARGS) ;
   public: VIRTUAL_IN_DEBUG GALGAS_uint getter_mPropertyIndex (LOCATION_ARGS) const ;
   public: VIRTUAL_IN_DEBUG void setter_setMPropertyIndex (GALGAS_uint inValue COMMA_LOCATION_ARGS) ;
 //--- Description

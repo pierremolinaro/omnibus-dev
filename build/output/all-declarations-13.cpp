@@ -266,7 +266,7 @@ void routine_handlePropertyAccessInAssignment (const GALGAS_omnibusType constinA
   case GALGAS_propertySetterKind::kEnum_computedProperty:
     {
       const cEnumAssociatedValues_propertySetterKind_computedProperty * extractPtr_13576 = (const cEnumAssociatedValues_propertySetterKind_computedProperty *) (var_propertyAccess_11541.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMap_2D_proxy extractedValue_computedPropertyType = extractPtr_13576->mAssociatedValue0 ;
+      const GALGAS_unifiedTypeMap_2D_entry extractedValue_computedPropertyType = extractPtr_13576->mAssociatedValue0 ;
       const GALGAS_routineLLVMNameDict extractedValue_getterModeDictionary = extractPtr_13576->mAssociatedValue1 ;
       const GALGAS_routineLLVMNameDict extractedValue_setterModeDictionary = extractPtr_13576->mAssociatedValue2 ;
       GALGAS_string var_getterRoutineLLVMName_11735 = function_checkModeAndReturnsRoutineLLVMName (extractedValue_getterModeDictionary, constinArgument_inMode, constinArgument_inPropertyName, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 267)) ;
@@ -697,7 +697,7 @@ static void extensionMethod_sliceAssignmentInstructionAST_instructionSemanticAna
   const cPtr_sliceAssignmentInstructionAST * object = (const cPtr_sliceAssignmentInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_sliceAssignmentInstructionAST) ;
   const GALGAS_sliceAssignmentInstructionAST temp_0 = object ;
-  GALGAS_omnibusType var_resultType_4486 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 113)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 113)) ;
+  GALGAS_omnibusType var_resultType_4486 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 113)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 113)) ;
   GALGAS_uint var_bitCount_4626 ;
   enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
@@ -820,7 +820,7 @@ static void extensionMethod_sliceAssignmentInstructionAST_instructionSemanticAna
       inCompiler->emitSemanticError (enumerator_6077.current_mSliceWidth (HERE).getter_location (SOURCE_FILE ("instruction-slice-assignment.galgas", 175)), GALGAS_string ("bit slice overflow: ").add_operation (var_specifiedBitCount_7028.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 175)).add_operation (GALGAS_string (" bits, should be "), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 175)).add_operation (var_bitCount_4626.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 175)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 175)), fixItArray23  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 175)) ;
       var_rightShiftAmount_5961 = GALGAS_uint ((uint32_t) 0U) ;
     }
-    GALGAS_omnibusType var_sliceType_7228 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_sliceTypeName_6179, inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 178)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 178)) ;
+    GALGAS_omnibusType var_sliceType_7228 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), var_sliceTypeName_6179, inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 178)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 178)) ;
     {
     extensionSetter_appendLogicalShiftRight (ioArgument_ioInstructionGenerationList, var_sourceOperandForSlicing_6112, var_rightShiftAmount_5961, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 180)) ;
     }
@@ -1204,7 +1204,7 @@ static void extensionMethod_varInstructionWithAssignmentAST_instructionSemanticA
     temp_1 = function_voidType (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 124)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_varInstructionWithAssignmentAST temp_3 = object ;
-    temp_1 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_3.getter_mOptionalTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 125)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 125)) ;
+    temp_1 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_3.getter_mOptionalTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 125)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 125)) ;
   }
   GALGAS_omnibusType var_targetType_5026 = temp_1 ;
   GALGAS_objectIR var_sourcePossibleReference_5633 ;
@@ -1259,7 +1259,7 @@ static void extensionMethod_varDeclarationInstructionAST_instructionSemanticAnal
   const cPtr_varDeclarationInstructionAST * object = (const cPtr_varDeclarationInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_varDeclarationInstructionAST) ;
   const GALGAS_varDeclarationInstructionAST temp_0 = object ;
-  GALGAS_omnibusType var_targetType_7298 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)) ;
+  GALGAS_omnibusType var_targetType_7298 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-var.galgas", 180)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 180)) ;
   enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
     test_1 = callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_targetType_7298.ptr (), inCompiler COMMA_SOURCE_FILE ("instruction-var.galgas", 182)).boolEnum () ;
@@ -1367,7 +1367,7 @@ static void extensionMethod_letInstructionWithAssignmentAST_instructionSemanticA
     temp_1 = function_voidType (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 69)) ;
   }else if (kBoolFalse == test_2) {
     const GALGAS_letInstructionWithAssignmentAST temp_3 = object ;
-    temp_1 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_3.getter_mOptionalTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-let.galgas", 70)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 70)) ;
+    temp_1 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_3.getter_mOptionalTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-let.galgas", 70)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-let.galgas", 70)) ;
   }
   GALGAS_omnibusType var_targetType_3229 = temp_1 ;
   GALGAS_objectIR var_expressionResult_3825 ;
@@ -2722,7 +2722,7 @@ static void extensionMethod_forInstructionAST_instructionSemanticAnalysis (const
     break ;
   case GALGAS_subscript::kEnum_literalString:
     {
-      var_iteratedElementType_4188 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), GALGAS_string ("u8").getter_nowhere (SOURCE_FILE ("instruction-for-in-do.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)) ;
+      var_iteratedElementType_4188 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), GALGAS_string ("u8").getter_nowhere (SOURCE_FILE ("instruction-for-in-do.galgas", 101)), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-do.galgas", 101)) ;
     }
     break ;
   case GALGAS_subscript::kEnum_staticSubscript:
@@ -3114,7 +3114,7 @@ static void extensionMethod_forLowerUpperBoundInstructionAST_instructionSemantic
   const cPtr_forLowerUpperBoundInstructionAST * object = (const cPtr_forLowerUpperBoundInstructionAST *) inObject ;
   macroValidSharedObject (object, cPtr_forLowerUpperBoundInstructionAST) ;
   const GALGAS_forLowerUpperBoundInstructionAST temp_0 = object ;
-  GALGAS_omnibusType var_type_4078 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)) ;
+  GALGAS_omnibusType var_type_4078 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), temp_0.getter_mTypeName (HERE), inCompiler  COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)).getter_type (inCompiler COMMA_SOURCE_FILE ("instruction-for-in-lower-upper-bounds.galgas", 90)) ;
   switch (var_type_4078.getter_kind (HERE).enumValue ()) {
   case GALGAS_typeKind::kNotBuilt:
     break ;
@@ -3560,7 +3560,7 @@ static void extensionMethod_standAloneProcedureCallInstructionAST_instructionSem
   GALGAS_string var_requiredFunctionMangledName_7243 = temp_2.getter_mSandAloneRoutineName (HERE).getter_string (HERE).add_operation (var_calledRoutineSignature_7108.getter_string (SOURCE_FILE ("instruction-procedure-call.galgas", 169)), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 169)) ;
   GALGAS_bool var_implementedPublic_7492 ;
   GALGAS_routineTypedSignature var_formalSignature_7517 ;
-  GALGAS_unifiedTypeMap_2D_proxy var_formalReturnTypeProxy_7548 ;
+  GALGAS_unifiedTypeMap_2D_entry var_formalReturnTypeProxy_7548 ;
   GALGAS_routineLLVMNameDict var_implementedModeDictionary_7611 ;
   GALGAS_bool var_implementedIsExported_7649 ;
   GALGAS_mode var_implementedMode_7681 ;
@@ -3568,7 +3568,7 @@ static void extensionMethod_standAloneProcedureCallInstructionAST_instructionSem
   constinArgument_inContext.getter_mRoutineMap (HERE).method_searchKey (GALGAS_lstring::constructor_new (var_requiredFunctionMangledName_7243, temp_3.getter_mSandAloneRoutineName (HERE).getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 172))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 172)), var_implementedPublic_7492, var_formalSignature_7517, var_formalReturnTypeProxy_7548, var_implementedModeDictionary_7611, var_implementedIsExported_7649, var_implementedMode_7681, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 171)) ;
   enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
-    test_4 = GALGAS_bool (kIsNotEqual, var_formalReturnTypeProxy_7548.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 181)))).boolEnum () ;
+    test_4 = GALGAS_bool (kIsNotEqual, var_formalReturnTypeProxy_7548.objectCompare (GALGAS_unifiedTypeMap_2D_entry::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 181)))).boolEnum () ;
     if (kBoolTrue == test_4) {
       const GALGAS_standAloneProcedureCallInstructionAST temp_5 = object ;
       TC_Array <C_FixItDescription> fixItArray6 ;
@@ -3794,7 +3794,7 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
         case GALGAS_propertyGetterKind::kEnum_computedProperty:
           {
             const cEnumAssociatedValues_propertyGetterKind_computedProperty * extractPtr_13466 = (const cEnumAssociatedValues_propertyGetterKind_computedProperty *) (var_propertyAccess_11897.unsafePointer ()) ;
-            const GALGAS_unifiedTypeMap_2D_proxy extractedValue_propertyTypeProxy = extractPtr_13466->mAssociatedValue0 ;
+            const GALGAS_unifiedTypeMap_2D_entry extractedValue_propertyTypeProxy = extractPtr_13466->mAssociatedValue0 ;
             const GALGAS_routineLLVMNameDict extractedValue_modeDictionary = extractPtr_13466->mAssociatedValue1 ;
             GALGAS_string var_routineLLVMName_12939 = function_checkModeAndReturnsRoutineLLVMName (extractedValue_modeDictionary, constinArgument_inMode, extractedValue_propertyName, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 313)) ;
             GALGAS_objectIR var_resultValueIR_13278 ;
@@ -3841,7 +3841,7 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
       GALGAS_lstring var_methodMangledName_13831 = extensionGetter_mangledName (temp_19.getter_mArguments (HERE), var_currentType_9803.getter_omnibusTypeDescriptionName (SOURCE_FILE ("instruction-procedure-call.galgas", 334)), extractedValue_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 334)) ;
       GALGAS_bool var_implementedPublic_14047 ;
       GALGAS_routineTypedSignature var_formalSignature_14074 ;
-      GALGAS_unifiedTypeMap_2D_proxy var_formalReturnTypeProxy_14107 ;
+      GALGAS_unifiedTypeMap_2D_entry var_formalReturnTypeProxy_14107 ;
       GALGAS_routineLLVMNameDict var_implementedModeDictionary_14172 ;
       GALGAS_bool var_implementedIsExported_14212 ;
       GALGAS_mode var_implementedMode_14246 ;
@@ -3849,7 +3849,7 @@ static void extensionMethod_procedureCallInstructionAST_instructionSemanticAnaly
       GALGAS_string var_functionLLVMName_14296 = function_checkModeAndReturnsRoutineLLVMName (var_implementedModeDictionary_14172, constinArgument_inMode, extractedValue_methodName, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 345)) ;
       enumGalgasBool test_20 = kBoolTrue ;
       if (kBoolTrue == test_20) {
-        test_20 = GALGAS_bool (kIsNotEqual, var_formalReturnTypeProxy_14107.objectCompare (GALGAS_unifiedTypeMap_2D_proxy::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 347)))).boolEnum () ;
+        test_20 = GALGAS_bool (kIsNotEqual, var_formalReturnTypeProxy_14107.objectCompare (GALGAS_unifiedTypeMap_2D_entry::constructor_null (SOURCE_FILE ("instruction-procedure-call.galgas", 347)))).boolEnum () ;
         if (kBoolTrue == test_20) {
           TC_Array <C_FixItDescription> fixItArray21 ;
           inCompiler->emitSemanticError (extractedValue_methodName.getter_location (SOURCE_FILE ("instruction-procedure-call.galgas", 348)), GALGAS_string ("cannot be called in instruction, returns a value"), fixItArray21  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 348)) ;
@@ -4604,7 +4604,7 @@ void routine_analyzeEffectiveParameters (const GALGAS_omnibusType constinArgumen
         if (kBoolTrue == test_1) {
           temp_0 = enumerator_5237.current_mTypeProxy (HERE).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 134)) ;
         }else if (kBoolFalse == test_1) {
-          temp_0 = GALGAS_unifiedTypeMap_2D_proxy::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)) ;
+          temp_0 = GALGAS_unifiedTypeMap_2D_entry::constructor_searchKey (constinArgument_inContext.getter_mTypeMap (HERE), extractedValue_typeName, inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)).getter_type (inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas", 136)) ;
         }
         GALGAS_omnibusType var_type_5418 = temp_0 ;
         enumGalgasBool test_2 = kBoolTrue ;

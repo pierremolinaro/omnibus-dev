@@ -157,7 +157,7 @@ setter @semanticContext addComputedPropertyGetter
   ?propertyName:let @lstring inPropertyName
   ?mode:let @mode inMode
   ?visibility:let @propertyVisibility inVisibility
-  ?resultTypeProxy:let @unifiedTypeMap-proxy inResultTypeProxy
+  ?resultTypeProxy:let @unifiedTypeMap-entry inResultTypeProxy
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   @propertyGetterMap getterMap
@@ -180,7 +180,7 @@ setter @semanticContext addComputedPropertyGetter
 
 enum @propertyGetterKind {
   case storedProperty (@omnibusType type @uint index)
-  case computedProperty (@unifiedTypeMap-proxy typeProxy @routineLLVMNameDict modeDictionary)
+  case computedProperty (@unifiedTypeMap-entry typeProxy @routineLLVMNameDict modeDictionary)
   case constantProperty (@objectIR value)
 }
 
@@ -249,7 +249,7 @@ map @propertySetterMap {
 
 enum @propertySetterKind {
   case storedProperty (@omnibusType type @uint index)
-  case computedProperty (@unifiedTypeMap-proxy typeProxy
+  case computedProperty (@unifiedTypeMap-entry typeProxy
                          @routineLLVMNameDict getterModeDictionary
                          @routineLLVMNameDict setterModeDictionary)
 }
