@@ -33,13 +33,13 @@ getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
 
 #·······················································································································
 
-shared class @llvmPrefixOperatorAST : @abstractDeclarationAST {
-  @llvmPrefixOperatorEnumeration mPrefixOperator
-  @location mPrefixOperatorLocation
-  @lstring mReceiverName
-  @lstring mReceiverTypeName
-  @llvmGenerationInstructionList mInstructionList
-  @lstring mResultTypeName
+refclass @llvmPrefixOperatorAST : @abstractDeclarationAST {
+  public var @llvmPrefixOperatorEnumeration mPrefixOperator
+  public var @location mPrefixOperatorLocation
+  public var @lstring mReceiverName
+  public var @lstring mReceiverTypeName
+  public var @llvmGenerationInstructionList mInstructionList
+  public var @lstring mResultTypeName
 }
 
 #·······················································································································
@@ -55,15 +55,15 @@ proc appendPrefixOperatorDeclaration_minus
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type
-  @llvmGenerationInstructionList llvmInstructionList = {}
-  @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = {}
+  var @llvmGenerationInstructionElementList instructionElements = {}
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = sub "}
   instructionElements += !.type {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: " 0, "}
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
   llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
+  var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
     !.minusOp
     !.nowhere
     !["SELF" nowhere]
@@ -90,8 +90,8 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type
-  @llvmGenerationInstructionList llvmInstructionList = {}
-  @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = {}
+  var @llvmGenerationInstructionElementList instructionElements = {}
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = xor "}
   instructionElements += !.type {!name: ["SELF" nowhere]}
@@ -99,7 +99,7 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: ", -1"}
   llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
+  var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
     !.bitWiseComplement
     !.nowhere
     !["SELF" nowhere]
@@ -214,18 +214,18 @@ override method @llvmPrefixOperatorAST enterInContext
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
 #--- Generation routine
-  @assignmentGenerationVarMap varMap = {}
+  var @assignmentGenerationVarMap varMap = {}
   [!?varMap insertKey !self.mReceiverName !"%" + self.mReceiverName]
-  @assignmentGenerationVarMap typeMap = {}
+  var @assignmentGenerationVarMap typeMap = {}
   [!?typeMap insertKey !self.mReceiverName ![receiverType llvmTypeName]]
   [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
-  @llvmGenerationInstructionList instructionList = {}
+  var @llvmGenerationInstructionList instructionList = {}
   instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
   instructionList += self.mInstructionList
   [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
-  @stringlist generatedInstructions = {}
-  @allocaList allocaList = {}
-  @uint temporaryIndex = 0
+  var @stringlist generatedInstructions = {}
+  var @allocaList allocaList = {}
+  var @uint temporaryIndex = 0
   [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
   let routine = @prefixOperatorRoutineIR.new {
     !.new {!prefixMangledFunctionName !self.mPrefixOperatorLocation}
@@ -244,10 +244,10 @@ override method @llvmPrefixOperatorAST enterInContext
 #   INFIX OPERATOR MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
-  @string mPrefixMangledFunctionName
-  @lstring mReceiverOperandName
-  @llvmGenerationInstructionList mInstructionList
+refclass @llvmPrefixOperatorUsage : @prefixOperatorUsage {
+  public var @string mPrefixMangledFunctionName
+  public var @lstring mReceiverOperandName
+  public var @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
@@ -270,7 +270,7 @@ override method @llvmPrefixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  @procCallEffectiveParameterListIR argumentList = {}
+  var @procCallEffectiveParameterListIR argumentList = {}
   argumentList += !.output !receiverOperand
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
     !outResultValue
@@ -284,12 +284,12 @@ override method @llvmPrefixOperatorUsage generateCode
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @prefixOperatorRoutineIR : @abstractRoutineIR {
-  @omnibusType mReceiverType
-  @string mReceiverVarName
-  @omnibusType mResultType
-  @stringlist mGeneratedInstructions
-  @allocaList mAllocaList
+refclass @prefixOperatorRoutineIR : @abstractRoutineIR {
+  public var @omnibusType mReceiverType
+  public var @string mReceiverVarName
+  public var @omnibusType mResultType
+  public var @stringlist mGeneratedInstructions
+  public var @allocaList mAllocaList
 }
 
 #·······················································································································

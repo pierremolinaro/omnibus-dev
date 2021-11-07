@@ -1716,20 +1716,23 @@ class cParser_omnibus_5F_syntax {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @abstractLLVMInstruction class
+// Phase 1: @abstractLLVMInstruction reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_abstractLLVMInstruction : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_abstractLLVMInstruction : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_abstractLLVMInstruction (void) ;
 
-//---
-  public: inline const class cPtr_abstractLLVMInstruction * ptr (void) const { return (const cPtr_abstractLLVMInstruction *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_abstractLLVMInstruction (const cPtr_abstractLLVMInstruction * inSourcePtr) ;
+  public: GALGAS_abstractLLVMInstruction (const class cPtr_abstractLLVMInstruction * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1768,8 +1771,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractLLVMInstruc
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_abstractLLVMInstruction : public acPtr_class {
-//--- Attributes
+class cPtr_abstractLLVMInstruction : public acStrongPtr_class {
+//--- Properties
 
 //--- Constructor
   public: cPtr_abstractLLVMInstruction (LOCATION_ARGS) ;
@@ -1787,20 +1790,23 @@ class cPtr_abstractLLVMInstruction : public acPtr_class {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @expressionAST class
+// Phase 1: @expressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_expressionAST : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_expressionAST : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_expressionAST (void) ;
 
-//---
-  public: inline const class cPtr_expressionAST * ptr (void) const { return (const cPtr_expressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_expressionAST (const cPtr_expressionAST * inSourcePtr) ;
+  public: GALGAS_expressionAST (const class cPtr_expressionAST * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -1839,8 +1845,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_expressionAST ;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_expressionAST : public acPtr_class {
-//--- Attributes
+class cPtr_expressionAST : public acStrongPtr_class {
+//--- Properties
 
 //--- Constructor
   public: cPtr_expressionAST (LOCATION_ARGS) ;
@@ -1858,19 +1864,24 @@ class cPtr_expressionAST : public acPtr_class {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @addressofControlRegisterAST class
+// Phase 1: @addressofControlRegisterAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_addressofControlRegisterAST (void) ;
 
-//---
-  public: inline const class cPtr_addressofControlRegisterAST * ptr (void) const { return (const cPtr_addressofControlRegisterAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_addressofControlRegisterAST (const cPtr_addressofControlRegisterAST * inSourcePtr) ;
+  public: GALGAS_addressofControlRegisterAST (const class cPtr_addressofControlRegisterAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_controlRegisterLValueAST readProperty_mControlRegisterLValue (void) const ;
 
 //-- Start of generic part --*
 
@@ -1898,8 +1909,6 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2100,12 +2109,24 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIndexAST ;
 class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_mRegisterGroupName ;
+  public: inline GALGAS_lstring readProperty_mRegisterGroupName (void) const {
+    return mProperty_mRegisterGroupName ;
+  }
 
   public: GALGAS_registerGroupIndexAST mProperty_mGroupIndex ;
+  public: inline GALGAS_registerGroupIndexAST readProperty_mGroupIndex (void) const {
+    return mProperty_mGroupIndex ;
+  }
 
   public: GALGAS_lstring mProperty_mRegisterName ;
+  public: inline GALGAS_lstring readProperty_mRegisterName (void) const {
+    return mProperty_mRegisterName ;
+  }
 
   public: GALGAS_registerIndexAST mProperty_mRegisterIndex ;
+  public: inline GALGAS_registerIndexAST readProperty_mRegisterIndex (void) const {
+    return mProperty_mRegisterIndex ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2169,14 +2190,6 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupIndexAST getter_mGroupIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerIndexAST getter_mRegisterIndex (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2197,7 +2210,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterLVal
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
 
 //--- Constructor
@@ -2208,8 +2221,6 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2222,19 +2233,24 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @addressofExpressionAST class
+// Phase 1: @addressofExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_addressofExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_addressofExpressionAST * ptr (void) const { return (const cPtr_addressofExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_addressofExpressionAST (const cPtr_addressofExpressionAST * inSourcePtr) ;
+  public: GALGAS_addressofExpressionAST (const class cPtr_addressofExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_LValueAST readProperty_mLValue (void) const ;
 
 //-- Start of generic part --*
 
@@ -2262,8 +2278,6 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2393,8 +2407,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueOperandAST ;
 class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
+  public: inline GALGAS_lstring readProperty_mIdentifier (void) const {
+    return mProperty_mIdentifier ;
+  }
 
   public: GALGAS_LValueOperandAST mProperty_mOperand ;
+  public: inline GALGAS_LValueOperandAST readProperty_mOperand (void) const {
+    return mProperty_mOperand ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -2446,10 +2466,6 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_LValueOperandAST getter_mOperand (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2470,7 +2486,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_addressofExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
 
 //--- Constructor
@@ -2481,8 +2497,6 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2495,19 +2509,24 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @instructionAST class
+// Phase 1: @instructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_instructionAST : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_instructionAST : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_instructionAST (void) ;
 
-//---
-  public: inline const class cPtr_instructionAST * ptr (void) const { return (const cPtr_instructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_instructionAST (const cPtr_instructionAST * inSourcePtr) ;
+  public: GALGAS_instructionAST (const class cPtr_instructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_location readProperty_mInstructionLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -2531,8 +2550,6 @@ class GALGAS_instructionAST : public AC_GALGAS_class {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mInstructionLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2552,8 +2569,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST ;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_instructionAST : public acPtr_class {
-//--- Attributes
+class cPtr_instructionAST : public acStrongPtr_class {
+//--- Properties
   public: GALGAS_location mProperty_mInstructionLocation ;
 
 //--- Constructor
@@ -2561,8 +2578,6 @@ class cPtr_instructionAST : public acPtr_class {
                                COMMA_LOCATION_ARGS) ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mInstructionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInstructionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const = 0 ;
@@ -2575,19 +2590,24 @@ class cPtr_instructionAST : public acPtr_class {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @assertInstructionAST class
+// Phase 1: @assertInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_assertInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_assertInstructionAST * ptr (void) const { return (const cPtr_assertInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_assertInstructionAST (const cPtr_assertInstructionAST * inSourcePtr) ;
+  public: GALGAS_assertInstructionAST (const class cPtr_assertInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -2616,8 +2636,6 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2638,7 +2656,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assertInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
 
 //--- Constructor
@@ -2650,8 +2668,6 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2664,19 +2680,26 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @assignmentInstructionAST class
+// Phase 1: @assignmentInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_assignmentInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_assignmentInstructionAST * ptr (void) const { return (const cPtr_assignmentInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_assignmentInstructionAST (const cPtr_assignmentInstructionAST * inSourcePtr) ;
+  public: GALGAS_assignmentInstructionAST (const class cPtr_assignmentInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_LValueAST readProperty_mTargetAST (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -2709,10 +2732,6 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_LValueAST getter_mTargetAST (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2733,7 +2752,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_LValueAST mProperty_mTargetAST ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
 
@@ -2747,10 +2766,6 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mTargetAST (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTargetAST (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2763,19 +2778,32 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @bitbandInstructionAST class
+// Phase 1: @bitbandInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_bitbandInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_bitbandInstructionAST * ptr (void) const { return (const cPtr_bitbandInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_bitbandInstructionAST (const cPtr_bitbandInstructionAST * inSourcePtr) ;
+  public: GALGAS_bitbandInstructionAST (const class cPtr_bitbandInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_controlRegisterLValueAST readProperty_mControlRegisterLValue (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mBitExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mBitExpressionLocation (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mSourceExpressionLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -2820,16 +2848,6 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mBitExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mBitExpressionLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2850,7 +2868,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_expressionAST mProperty_mBitExpression ;
   public: GALGAS_location mProperty_mBitExpressionLocation ;
@@ -2870,16 +2888,6 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mBitExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMBitExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mBitExpressionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMBitExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2892,19 +2900,28 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @booleanShortCircuitAndOperatorExpressionAST class
+// Phase 1: @booleanShortCircuitAndOperatorExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_booleanShortCircuitAndOperatorExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_booleanShortCircuitAndOperatorExpressionAST * ptr (void) const { return (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_booleanShortCircuitAndOperatorExpressionAST (const cPtr_booleanShortCircuitAndOperatorExpressionAST * inSourcePtr) ;
+  public: GALGAS_booleanShortCircuitAndOperatorExpressionAST (const class cPtr_booleanShortCircuitAndOperatorExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mLeftExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -2940,12 +2957,6 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -2966,7 +2977,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanShortCircuit
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_expressionAST mProperty_mRightExpression ;
@@ -2981,12 +2992,6 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -2999,19 +3004,26 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @callInstructionAST class
+// Phase 1: @callInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_callInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_callInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_callInstructionAST * ptr (void) const { return (const cPtr_callInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_callInstructionAST (const cPtr_callInstructionAST * inSourcePtr) ;
+  public: GALGAS_callInstructionAST (const class cPtr_callInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_effectiveArgumentListAST readProperty_mArguments (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfArguments (void) const ;
 
 //-- Start of generic part --*
 
@@ -3038,10 +3050,6 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -3215,7 +3223,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_callInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
   public: GALGAS_location mProperty_mEndOfArguments ;
 
@@ -3226,10 +3234,6 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
                                    COMMA_LOCATION_ARGS) ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMArguments (GALGAS_effectiveArgumentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const = 0 ;
@@ -3242,19 +3246,26 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @checkInstructionAST class
+// Phase 1: @checkInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_checkInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_checkInstructionAST * ptr (void) const { return (const cPtr_checkInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_checkInstructionAST (const cPtr_checkInstructionAST * inSourcePtr) ;
+  public: GALGAS_checkInstructionAST (const class cPtr_checkInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mCheckMessage (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -3287,10 +3298,6 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mCheckMessage (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -3311,7 +3318,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_checkInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mCheckMessage ;
   public: GALGAS_expressionAST mProperty_mExpression ;
 
@@ -3325,10 +3332,6 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mCheckMessage (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMCheckMessage (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -3341,20 +3344,23 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @abstractDeclarationAST class
+// Phase 1: @abstractDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_abstractDeclarationAST : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_abstractDeclarationAST : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_abstractDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_abstractDeclarationAST * ptr (void) const { return (const cPtr_abstractDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_abstractDeclarationAST (const cPtr_abstractDeclarationAST * inSourcePtr) ;
+  public: GALGAS_abstractDeclarationAST (const class cPtr_abstractDeclarationAST * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3393,8 +3399,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclaration
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_abstractDeclarationAST : public acPtr_class {
-//--- Attributes
+class cPtr_abstractDeclarationAST : public acStrongPtr_class {
+//--- Properties
 
 //--- Constructor
   public: cPtr_abstractDeclarationAST (LOCATION_ARGS) ;
@@ -3412,19 +3418,30 @@ class cPtr_abstractDeclarationAST : public acPtr_class {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @compileTimeConvertToBooleanAST class
+// Phase 1: @compileTimeConvertToBooleanAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_compileTimeConvertToBooleanAST (void) ;
 
-//---
-  public: inline const class cPtr_compileTimeConvertToBooleanAST * ptr (void) const { return (const cPtr_compileTimeConvertToBooleanAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_compileTimeConvertToBooleanAST (const cPtr_compileTimeConvertToBooleanAST * inSourcePtr) ;
+  public: GALGAS_compileTimeConvertToBooleanAST (const class cPtr_compileTimeConvertToBooleanAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mConverterName (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -3464,14 +3481,6 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -3487,20 +3496,23 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeConvertT
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctExpressionAST class
+// Phase 1: @ctExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_ctExpressionAST : public AC_GALGAS_class {
-//--- Constructor
+class GALGAS_ctExpressionAST : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
   public: GALGAS_ctExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_ctExpressionAST * ptr (void) const { return (const cPtr_ctExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctExpressionAST (const cPtr_ctExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctExpressionAST (const class cPtr_ctExpressionAST * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -3539,8 +3551,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctExpressionAST ;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class cPtr_ctExpressionAST : public acPtr_class {
-//--- Attributes
+class cPtr_ctExpressionAST : public acStrongPtr_class {
+//--- Properties
 
 //--- Constructor
   public: cPtr_ctExpressionAST (LOCATION_ARGS) ;
@@ -3563,7 +3575,7 @@ class cPtr_ctExpressionAST : public acPtr_class {
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mConverterName ;
@@ -3580,14 +3592,6 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConverterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -3600,19 +3604,38 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @compileTimeInfixOperatorAST class
+// Phase 1: @compileTimeInfixOperatorAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_compileTimeInfixOperatorAST (void) ;
 
-//---
-  public: inline const class cPtr_compileTimeInfixOperatorAST * ptr (void) const { return (const cPtr_compileTimeInfixOperatorAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_compileTimeInfixOperatorAST (const cPtr_compileTimeInfixOperatorAST * inSourcePtr) ;
+  public: GALGAS_compileTimeInfixOperatorAST (const class cPtr_compileTimeInfixOperatorAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_compileTimeInfixOperatorEnumeration readProperty_mInfixOperator (void) const ;
+
+  public: class GALGAS_location readProperty_mInfixOperatorLocation (void) const ;
+
+  public: class GALGAS_lstring readProperty_mLeftOperandName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mLeftTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mRightOperandName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mRightTypeName (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
+
+  public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -3668,22 +3691,6 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -3861,7 +3868,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOpe
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public: GALGAS_location mProperty_mInfixOperatorLocation ;
   public: GALGAS_lstring mProperty_mLeftOperandName ;
@@ -3886,22 +3893,6 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_compileTimeInfixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -3914,19 +3905,34 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @compiletimePrefixOperatorAST class
+// Phase 1: @compiletimePrefixOperatorAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_compiletimePrefixOperatorAST (void) ;
 
-//---
-  public: inline const class cPtr_compiletimePrefixOperatorAST * ptr (void) const { return (const cPtr_compiletimePrefixOperatorAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_compiletimePrefixOperatorAST (const cPtr_compiletimePrefixOperatorAST * inSourcePtr) ;
+  public: GALGAS_compiletimePrefixOperatorAST (const class cPtr_compiletimePrefixOperatorAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_compileTimePrefixOperatorEnumeration readProperty_mPrefixOperator (void) const ;
+
+  public: class GALGAS_location readProperty_mPrefixOperatorLocation (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
+
+  public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -3974,18 +3980,6 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -4079,7 +4073,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimePrefixOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_compileTimePrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_location mProperty_mPrefixOperatorLocation ;
   public: GALGAS_lstring mProperty_mReceiverName ;
@@ -4100,18 +4094,6 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_compileTimePrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -4124,22 +4106,31 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @constructorCallAST class
+// Phase 1: @constructorCallAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_constructorCallAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_constructorCallAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_constructorCallAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_constructorCallAST * ptr (void) const { return (const cPtr_constructorCallAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_constructorCallAST (const cPtr_constructorCallAST * inSourcePtr) ;
+  public: GALGAS_constructorCallAST (const class cPtr_constructorCallAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_functionCallEffectiveParameterListAST readProperty_mParameterList (void) const ;
+
+  public: class GALGAS_location readProperty_mErrorLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -4175,12 +4166,6 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_functionCallEffectiveParameterListAST getter_mParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -4354,7 +4339,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallEffecti
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_constructorCallAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_functionCallEffectiveParameterListAST mProperty_mParameterList ;
   public: GALGAS_location mProperty_mErrorLocation ;
@@ -4369,12 +4354,6 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_functionCallEffectiveParameterListAST getter_mParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMParameterList (GALGAS_functionCallEffectiveParameterListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mErrorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMErrorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -4387,19 +4366,28 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @controlRegisterAssignmentInstructionAST class
+// Phase 1: @controlRegisterAssignmentInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_controlRegisterAssignmentInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_controlRegisterAssignmentInstructionAST * ptr (void) const { return (const cPtr_controlRegisterAssignmentInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_controlRegisterAssignmentInstructionAST (const cPtr_controlRegisterAssignmentInstructionAST * inSourcePtr) ;
+  public: GALGAS_controlRegisterAssignmentInstructionAST (const class cPtr_controlRegisterAssignmentInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_controlRegisterLValueAST readProperty_mControlRegisterLValue (void) const ;
+
+  public: class GALGAS_controlRegisterAssignmentOperatorKind readProperty_mAssignmentKind (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -4436,12 +4424,6 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterAssignmentOperatorKind getter_mAssignmentKind (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -4755,7 +4737,7 @@ class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWith
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_controlRegisterAssignmentOperatorKind mProperty_mAssignmentKind ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -4771,12 +4753,6 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterAssignmentOperatorKind getter_mAssignmentKind (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAssignmentKind (GALGAS_controlRegisterAssignmentOperatorKind inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -4789,22 +4765,29 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @controlRegisterGroupDeclarationAST class
+// Phase 1: @controlRegisterGroupDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_controlRegisterGroupDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_controlRegisterGroupDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_controlRegisterGroupDeclarationAST * ptr (void) const { return (const cPtr_controlRegisterGroupDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_controlRegisterGroupDeclarationAST (const cPtr_controlRegisterGroupDeclarationAST * inSourcePtr) ;
+  public: GALGAS_controlRegisterGroupDeclarationAST (const class cPtr_controlRegisterGroupDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_registerGroupListAST readProperty_mRegisterGroupList (void) const ;
+
+  public: class GALGAS_controlRegisterDeclarationList readProperty_mRegisters (void) const ;
 
 //-- Start of generic part --*
 
@@ -4836,10 +4819,6 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupListAST getter_mRegisterGroupList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5204,7 +5183,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupListAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_registerGroupListAST mProperty_mRegisterGroupList ;
   public: GALGAS_controlRegisterDeclarationList mProperty_mRegisters ;
 
@@ -5217,10 +5196,6 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_registerGroupListAST getter_mRegisterGroupList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRegisterGroupList (GALGAS_registerGroupListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterDeclarationList getter_mRegisters (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRegisters (GALGAS_controlRegisterDeclarationList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5233,19 +5208,28 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @convertExpressionAST class
+// Phase 1: @convertExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_convertExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_convertExpressionAST * ptr (void) const { return (const cPtr_convertExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_convertExpressionAST (const cPtr_convertExpressionAST * inSourcePtr) ;
+  public: GALGAS_convertExpressionAST (const class cPtr_convertExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -5281,12 +5265,6 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5307,7 +5285,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_convertExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
@@ -5322,12 +5300,6 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5340,23 +5312,26 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctFalseExpressionAST class
+// Phase 1: @ctFalseExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctFalseExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctFalseExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctFalseExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_ctFalseExpressionAST * ptr (void) const { return (const cPtr_ctFalseExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctFalseExpressionAST (const cPtr_ctFalseExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctFalseExpressionAST (const class cPtr_ctFalseExpressionAST * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5399,7 +5374,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctFalseExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_ctFalseExpressionAST (LOCATION_ARGS) ;
@@ -5420,22 +5395,27 @@ class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctIdentifierExpressionAST class
+// Phase 1: @ctIdentifierExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctIdentifierExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctIdentifierExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_ctIdentifierExpressionAST * ptr (void) const { return (const cPtr_ctIdentifierExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctIdentifierExpressionAST (const cPtr_ctIdentifierExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctIdentifierExpressionAST (const class cPtr_ctIdentifierExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mIdentifier (void) const ;
 
 //-- Start of generic part --*
 
@@ -5463,8 +5443,6 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5485,7 +5463,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctIdentifierExpress
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
 
 //--- Constructor
@@ -5496,8 +5474,6 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIdentifier (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5510,19 +5486,30 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctInfixExpressionAST class
+// Phase 1: @ctInfixExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctInfixExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_ctInfixExpressionAST * ptr (void) const { return (const cPtr_ctInfixExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctInfixExpressionAST (const cPtr_ctInfixExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctInfixExpressionAST (const class cPtr_ctInfixExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_ctExpressionAST readProperty_mLeftExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_compileTimeInfixOperatorEnumeration readProperty_mInfixOperator (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -5562,14 +5549,6 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5590,7 +5569,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctInfixExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_ctExpressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
@@ -5607,14 +5586,6 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_compileTimeInfixOperatorEnumeration getter_mInfixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_compileTimeInfixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5627,22 +5598,27 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctIntExpressionAST class
+// Phase 1: @ctIntExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctIntExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctIntExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_ctIntExpressionAST * ptr (void) const { return (const cPtr_ctIntExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctIntExpressionAST (const cPtr_ctIntExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctIntExpressionAST (const class cPtr_ctIntExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lbigint readProperty_mValue (void) const ;
 
 //-- Start of generic part --*
 
@@ -5670,8 +5646,6 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mValue (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5692,7 +5666,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctIntExpressionAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lbigint mProperty_mValue ;
 
 //--- Constructor
@@ -5703,8 +5677,6 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMValue (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5717,19 +5689,28 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctPrefixExpressionAST class
+// Phase 1: @ctPrefixExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctPrefixExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_ctPrefixExpressionAST * ptr (void) const { return (const cPtr_ctPrefixExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctPrefixExpressionAST (const cPtr_ctPrefixExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctPrefixExpressionAST (const class cPtr_ctPrefixExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_compileTimePrefixOperatorEnumeration readProperty_mPrefixOperator (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -5765,12 +5746,6 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -5791,7 +5766,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctPrefixExpressionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_compileTimePrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
@@ -5806,12 +5781,6 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_compileTimePrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_compileTimePrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -5824,23 +5793,26 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ctTrueExpressionAST class
+// Phase 1: @ctTrueExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ctTrueExpressionAST : public GALGAS_ctExpressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ctTrueExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctTrueExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_ctTrueExpressionAST * ptr (void) const { return (const cPtr_ctTrueExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ctTrueExpressionAST (const cPtr_ctTrueExpressionAST * inSourcePtr) ;
+  public: GALGAS_ctTrueExpressionAST (const class cPtr_ctTrueExpressionAST * inSourcePtr) ;
 
+//--------------------------------- Property read access
 //-- Start of generic part --*
 
 //--------------------------------- Object cloning
@@ -5883,7 +5855,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctTrueExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
-//--- Attributes
+//--- Properties
 
 //--- Constructor
   public: cPtr_ctTrueExpressionAST (LOCATION_ARGS) ;
@@ -5904,22 +5876,29 @@ class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @enumerationDeclarationAST class
+// Phase 1: @enumerationDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_enumerationDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_enumerationDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_enumerationDeclarationAST * ptr (void) const { return (const cPtr_enumerationDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_enumerationDeclarationAST (const cPtr_enumerationDeclarationAST * inSourcePtr) ;
+  public: GALGAS_enumerationDeclarationAST (const class cPtr_enumerationDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mEnumerationName (void) const ;
+
+  public: class GALGAS_enumerationConstantList readProperty_mCaseNameList (void) const ;
 
 //-- Start of generic part --*
 
@@ -5951,10 +5930,6 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_enumerationConstantList getter_mCaseNameList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mEnumerationName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -6128,7 +6103,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumerationConstant
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mEnumerationName ;
   public: GALGAS_enumerationConstantList mProperty_mCaseNameList ;
 
@@ -6141,10 +6116,6 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mEnumerationName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEnumerationName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_enumerationConstantList getter_mCaseNameList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMCaseNameList (GALGAS_enumerationConstantList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -6157,19 +6128,28 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @extendExpressionAST class
+// Phase 1: @extendExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_extendExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_extendExpressionAST * ptr (void) const { return (const cPtr_extendExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_extendExpressionAST (const cPtr_extendExpressionAST * inSourcePtr) ;
+  public: GALGAS_extendExpressionAST (const class cPtr_extendExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -6205,12 +6185,6 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -6231,7 +6205,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_extendExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
@@ -6246,12 +6220,6 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -6264,19 +6232,30 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @fixedSizeArrayTypeDeclarationAST class
+// Phase 1: @fixedSizeArrayTypeDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_fixedSizeArrayTypeDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_fixedSizeArrayTypeDeclarationAST * ptr (void) const { return (const cPtr_fixedSizeArrayTypeDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_fixedSizeArrayTypeDeclarationAST (const cPtr_fixedSizeArrayTypeDeclarationAST * inSourcePtr) ;
+  public: GALGAS_fixedSizeArrayTypeDeclarationAST (const class cPtr_fixedSizeArrayTypeDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mFixedSizeArrayType (void) const ;
+
+  public: class GALGAS_lstring readProperty_mElementTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSizeExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mSizeExpressionLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -6316,14 +6295,6 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -6344,7 +6315,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mFixedSizeArrayType ;
   public: GALGAS_lstring mProperty_mElementTypeName ;
   public: GALGAS_expressionAST mProperty_mSizeExpression ;
@@ -6361,14 +6332,6 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFixedSizeArrayType (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSizeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -6381,19 +6344,36 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @forInstructionAST class
+// Phase 1: @forInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_forInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_forInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_forInstructionAST * ptr (void) const { return (const cPtr_forInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_forInstructionAST (const cPtr_forInstructionAST * inSourcePtr) ;
+  public: GALGAS_forInstructionAST (const class cPtr_forInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mVarName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mIteratedObject (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mWhileExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_whileExpression (void) const ;
+
+  public: class GALGAS_bool readProperty_mStaticWhileExpression (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mDoInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_for_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -6446,20 +6426,6 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_for_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIteratedObject (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mStaticWhileExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -6614,7 +6580,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mIteratedObject ;
   public: GALGAS_expressionAST mProperty_mWhileExpression ;
@@ -6638,20 +6604,6 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIteratedObject (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIteratedObject (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mWhileExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMWhileExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_whileExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_whileExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticWhileExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStaticWhileExpression (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_for_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_for_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -6664,19 +6616,38 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @forLowerUpperBoundInstructionAST class
+// Phase 1: @forLowerUpperBoundInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_forLowerUpperBoundInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_forLowerUpperBoundInstructionAST * ptr (void) const { return (const cPtr_forLowerUpperBoundInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_forLowerUpperBoundInstructionAST (const cPtr_forLowerUpperBoundInstructionAST * inSourcePtr) ;
+  public: GALGAS_forLowerUpperBoundInstructionAST (const class cPtr_forLowerUpperBoundInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mVarName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mLowerBoundExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_lowerBoundExpression_5F_instruction (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mUpperBoundExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_upperBoundExpression_5F_instruction (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mDoInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_do_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -6733,22 +6704,6 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_lowerBoundExpression_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_upperBoundExpression_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLowerBoundExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mUpperBoundExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -6769,7 +6724,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_expressionAST mProperty_mLowerBoundExpression ;
@@ -6795,22 +6750,6 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLowerBoundExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLowerBoundExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_lowerBoundExpression_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_lowerBoundExpression_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mUpperBoundExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMUpperBoundExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_upperBoundExpression_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_upperBoundExpression_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mDoInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_do_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_do_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -6823,19 +6762,40 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @functionDeclarationAST class
+// Phase 1: @functionDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_functionDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_functionDeclarationAST * ptr (void) const { return (const cPtr_functionDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_functionDeclarationAST (const cPtr_functionDeclarationAST * inSourcePtr) ;
+  public: GALGAS_functionDeclarationAST (const class cPtr_functionDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_mode readProperty_mMode (void) const ;
+
+  public: class GALGAS_bool readProperty_mPublicFunction (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mFunctionName (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mFunctionAttributeList (void) const ;
+
+  public: class GALGAS_routineFormalArgumentListAST readProperty_mFunctionFormalArgumentList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mFunctionReturnTypeName (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mFunctionInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfFunctionDeclaration (void) const ;
 
 //-- Start of generic part --*
 
@@ -6895,24 +6855,6 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -7288,7 +7230,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_mode mProperty_mMode ;
   public: GALGAS_bool mProperty_mPublicFunction ;
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
@@ -7315,24 +7257,6 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublicFunction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPublicFunction (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFunctionName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mFunctionAttributeList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFunctionAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFunctionFormalArgumentList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFunctionFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFunctionReturnTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFunctionReturnTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mFunctionInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFunctionInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfFunctionDeclaration (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfFunctionDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -7345,19 +7269,30 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @globalConstantDeclarationAST class
+// Phase 1: @globalConstantDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_globalConstantDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_globalConstantDeclarationAST * ptr (void) const { return (const cPtr_globalConstantDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_globalConstantDeclarationAST (const cPtr_globalConstantDeclarationAST * inSourcePtr) ;
+  public: GALGAS_globalConstantDeclarationAST (const class cPtr_globalConstantDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mConstantName (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mAttributeList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mConstantTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -7397,14 +7332,6 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -7425,7 +7352,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalConstantDecla
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mConstantName ;
   public: GALGAS_lstringlist mProperty_mAttributeList ;
   public: GALGAS_lstring mProperty_mConstantTypeName ;
@@ -7442,14 +7369,6 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConstantName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConstantTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -7462,19 +7381,40 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @guardDeclarationAST class
+// Phase 1: @guardDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_guardDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_guardDeclarationAST * ptr (void) const { return (const cPtr_guardDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_guardDeclarationAST (const cPtr_guardDeclarationAST * inSourcePtr) ;
+  public: GALGAS_guardDeclarationAST (const class cPtr_guardDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_string readProperty_mReceiverLLVMBaseTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mGuardName (void) const ;
+
+  public: class GALGAS_bool readProperty_mIsPublic (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mGuardAttributeList (void) const ;
+
+  public: class GALGAS_routineFormalArgumentListAST readProperty_mGuardFormalArgumentList (void) const ;
+
+  public: class GALGAS_guardKind readProperty_mGuardKind (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mGuardInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfGuardDeclaration (void) const ;
 
 //-- Start of generic part --*
 
@@ -7534,24 +7474,6 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfGuardDeclaration (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mGuardAttributeList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mGuardFormalArgumentList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mGuardInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_guardKind getter_mGuardKind (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_string getter_mReceiverLLVMBaseTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -7675,7 +7597,7 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_string mProperty_mReceiverLLVMBaseTypeName ;
   public: GALGAS_lstring mProperty_mGuardName ;
@@ -7702,24 +7624,6 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_string getter_mReceiverLLVMBaseTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverLLVMBaseTypeName (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mGuardName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGuardName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsPublic (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIsPublic (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mGuardAttributeList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGuardAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mGuardFormalArgumentList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGuardFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_guardKind getter_mGuardKind (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGuardKind (GALGAS_guardKind inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mGuardInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGuardInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfGuardDeclaration (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfGuardDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -7732,19 +7636,34 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ifExpressionAST class
+// Phase 1: @ifExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ifExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_ifExpressionAST * ptr (void) const { return (const cPtr_ifExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ifExpressionAST (const cPtr_ifExpressionAST * inSourcePtr) ;
+  public: GALGAS_ifExpressionAST (const class cPtr_ifExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mIfExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mIfExpressionEndLocation (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mThenExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mThenExpressionEndLocation (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mElseExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mElseExpressionEndLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -7792,18 +7711,6 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mElseExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mElseExpressionEndLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mIfExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mIfExpressionEndLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mThenExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mThenExpressionEndLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -7824,7 +7731,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifExpressionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ifExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mIfExpression ;
   public: GALGAS_location mProperty_mIfExpressionEndLocation ;
   public: GALGAS_expressionAST mProperty_mThenExpression ;
@@ -7845,18 +7752,6 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mIfExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIfExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mIfExpressionEndLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIfExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mThenExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMThenExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mThenExpressionEndLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMThenExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mElseExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElseExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mElseExpressionEndLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElseExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -7869,19 +7764,38 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @ifInstructionAST class
+// Phase 1: @ifInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_ifInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_ifInstructionAST * ptr (void) const { return (const cPtr_ifInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_ifInstructionAST (const cPtr_ifInstructionAST * inSourcePtr) ;
+  public: GALGAS_ifInstructionAST (const class cPtr_ifInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mTestExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mTestExpressionEndLocation (void) const ;
+
+  public: class GALGAS_bool readProperty_mStaticIfExpression (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mThenInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfThenInstructionList (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mElseInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfElseInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_if_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -7938,22 +7852,6 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mElseInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfElseInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfThenInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_if_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mStaticIfExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mTestExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mTestExpressionEndLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mThenInstructionList (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -7974,7 +7872,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ifInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mTestExpression ;
   public: GALGAS_location mProperty_mTestExpressionEndLocation ;
   public: GALGAS_bool mProperty_mStaticIfExpression ;
@@ -8000,22 +7898,6 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mTestExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTestExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mTestExpressionEndLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTestExpressionEndLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mStaticIfExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStaticIfExpression (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mThenInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMThenInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfThenInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfThenInstructionList (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mElseInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElseInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfElseInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfElseInstructionList (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_if_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_if_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8028,22 +7910,31 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @integerSliceExpressionAST class
+// Phase 1: @integerSliceExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_integerSliceExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_integerSliceExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_integerSliceExpressionAST * ptr (void) const { return (const cPtr_integerSliceExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_integerSliceExpressionAST (const cPtr_integerSliceExpressionAST * inSourcePtr) ;
+  public: GALGAS_integerSliceExpressionAST (const class cPtr_integerSliceExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_integerSliceFieldListAST readProperty_mSliceValues (void) const ;
+
+  public: class GALGAS_location readProperty_mLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -8079,12 +7970,6 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_integerSliceFieldListAST getter_mSliceValues (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8277,7 +8162,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerSliceFieldLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_integerSliceFieldListAST mProperty_mSliceValues ;
   public: GALGAS_location mProperty_mLocation ;
@@ -8292,12 +8177,6 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_integerSliceFieldListAST getter_mSliceValues (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSliceValues (GALGAS_integerSliceFieldListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8310,19 +8189,32 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @isrDeclarationAST class
+// Phase 1: @isrDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_isrDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_isrDeclarationAST * ptr (void) const { return (const cPtr_isrDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_isrDeclarationAST (const cPtr_isrDeclarationAST * inSourcePtr) ;
+  public: GALGAS_isrDeclarationAST (const class cPtr_isrDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mISRName (void) const ;
+
+  public: class GALGAS_mode readProperty_mMode (void) const ;
+
+  public: class GALGAS_lstring readProperty_mDriverName (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mISRInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfISRDeclaration (void) const ;
 
 //-- Start of generic part --*
 
@@ -8366,16 +8258,6 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfISRDeclaration (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mISRInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mISRName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8396,7 +8278,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_isrDeclarationAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mISRName ;
   public: GALGAS_mode mProperty_mMode ;
   public: GALGAS_lstring mProperty_mDriverName ;
@@ -8415,16 +8297,6 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mISRName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMISRName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMDriverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mISRInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMISRInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfISRDeclaration (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfISRDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8437,19 +8309,28 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @letInstructionWithAssignmentAST class
+// Phase 1: @letInstructionWithAssignmentAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_letInstructionWithAssignmentAST (void) ;
 
-//---
-  public: inline const class cPtr_letInstructionWithAssignmentAST * ptr (void) const { return (const cPtr_letInstructionWithAssignmentAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_letInstructionWithAssignmentAST (const cPtr_letInstructionWithAssignmentAST * inSourcePtr) ;
+  public: GALGAS_letInstructionWithAssignmentAST (const class cPtr_letInstructionWithAssignmentAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mConstantName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mOptionalTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -8486,12 +8367,6 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8512,7 +8387,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mConstantName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -8528,12 +8403,6 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstantName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConstantName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8546,22 +8415,27 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @literalBooleanInExpressionAST class
+// Phase 1: @literalBooleanInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_literalBooleanInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalBooleanInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_literalBooleanInExpressionAST * ptr (void) const { return (const cPtr_literalBooleanInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_literalBooleanInExpressionAST (const cPtr_literalBooleanInExpressionAST * inSourcePtr) ;
+  public: GALGAS_literalBooleanInExpressionAST (const class cPtr_literalBooleanInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_bool readProperty_mValue (void) const ;
 
 //-- Start of generic part --*
 
@@ -8589,8 +8463,6 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mValue (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8611,7 +8483,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalBooleanInExp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_bool mProperty_mValue ;
 
 //--- Constructor
@@ -8622,8 +8494,6 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMValue (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8636,22 +8506,27 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @literalIntegerInExpressionAST class
+// Phase 1: @literalIntegerInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_literalIntegerInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalIntegerInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_literalIntegerInExpressionAST * ptr (void) const { return (const cPtr_literalIntegerInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_literalIntegerInExpressionAST (const cPtr_literalIntegerInExpressionAST * inSourcePtr) ;
+  public: GALGAS_literalIntegerInExpressionAST (const class cPtr_literalIntegerInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lbigint readProperty_mLiteralInteger (void) const ;
 
 //-- Start of generic part --*
 
@@ -8679,8 +8554,6 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mLiteralInteger (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8701,7 +8574,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerInExp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lbigint mProperty_mLiteralInteger ;
 
 //--- Constructor
@@ -8712,8 +8585,6 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mLiteralInteger (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLiteralInteger (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8726,22 +8597,27 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @literalStringInExpressionAST class
+// Phase 1: @literalStringInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_literalStringInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalStringInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_literalStringInExpressionAST * ptr (void) const { return (const cPtr_literalStringInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_literalStringInExpressionAST (const cPtr_literalStringInExpressionAST * inSourcePtr) ;
+  public: GALGAS_literalStringInExpressionAST (const class cPtr_literalStringInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mLiteralString (void) const ;
 
 //-- Start of generic part --*
 
@@ -8769,8 +8645,6 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLiteralString (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -8791,7 +8665,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringInExpr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mLiteralString ;
 
 //--- Constructor
@@ -8802,8 +8676,6 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLiteralString (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLiteralString (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -8816,19 +8688,40 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmAssignmentOperatorDeclarationAST class
+// Phase 1: @llvmAssignmentOperatorDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmAssignmentOperatorDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_llvmAssignmentOperatorDeclarationAST * ptr (void) const { return (const cPtr_llvmAssignmentOperatorDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmAssignmentOperatorDeclarationAST (const cPtr_llvmAssignmentOperatorDeclarationAST * inSourcePtr) ;
+  public: GALGAS_llvmAssignmentOperatorDeclarationAST (const class cPtr_llvmAssignmentOperatorDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTargetVariableName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTargetTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mTargetGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mSourceVariableName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mSourceTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mSourceGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mWhereClause (void) const ;
+
+  public: class GALGAS_llvmGenerationInstructionList readProperty_mLLVMInstructionList (void) const ;
 
 //-- Start of generic part --*
 
@@ -8888,24 +8781,6 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mLLVMInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mSourceGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSourceTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSourceVariableName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mTargetGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTargetTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTargetVariableName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -9194,7 +9069,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_lstring mProperty_mTargetVariableName ;
   public: GALGAS_lstring mProperty_mTargetTypeName ;
@@ -9221,24 +9096,6 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetVariableName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTargetVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTargetTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTargetTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mTargetGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTargetGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSourceVariableName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSourceTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mSourceGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMWhereClause (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mLLVMInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLLVMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -9251,22 +9108,33 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmConvertToBooleanAST class
+// Phase 1: @llvmConvertToBooleanAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmConvertToBooleanAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmConvertToBooleanAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_llvmConvertToBooleanAST * ptr (void) const { return (const cPtr_llvmConvertToBooleanAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmConvertToBooleanAST (const cPtr_llvmConvertToBooleanAST * inSourcePtr) ;
+  public: GALGAS_llvmConvertToBooleanAST (const class cPtr_llvmConvertToBooleanAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mConverterName (void) const ;
+
+  public: class GALGAS_llvmGenerationInstructionList readProperty_mInstructionList (void) const ;
 
 //-- Start of generic part --*
 
@@ -9306,14 +9174,6 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -9334,7 +9194,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmConvertToBoolea
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mConverterName ;
@@ -9351,14 +9211,6 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConverterName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConverterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -9371,22 +9223,27 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmGenerationInstruction class
+// Phase 1: @llvmGenerationInstruction reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmGenerationInstruction (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmGenerationInstruction constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_llvmGenerationInstruction * ptr (void) const { return (const cPtr_llvmGenerationInstruction *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmGenerationInstruction (const cPtr_llvmGenerationInstruction * inSourcePtr) ;
+  public: GALGAS_llvmGenerationInstruction (const class cPtr_llvmGenerationInstruction * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_llvmGenerationInstructionElementList readProperty_mGenerationList (void) const ;
 
 //-- Start of generic part --*
 
@@ -9414,8 +9271,6 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionElementList getter_mGenerationList (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -9570,7 +9425,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
-//--- Attributes
+//--- Properties
   public: GALGAS_llvmGenerationInstructionElementList mProperty_mGenerationList ;
 
 //--- Constructor
@@ -9581,8 +9436,6 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionElementList getter_mGenerationList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGenerationList (GALGAS_llvmGenerationInstructionElementList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -9595,19 +9448,30 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmGenericType class
+// Phase 1: @llvmGenericType reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmGenericType (void) ;
 
-//---
-  public: inline const class cPtr_llvmGenericType * ptr (void) const { return (const cPtr_llvmGenericType *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmGenericType (const cPtr_llvmGenericType * inSourcePtr) ;
+  public: GALGAS_llvmGenericType (const class cPtr_llvmGenericType * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_ctExpressionAST readProperty_mWhereClause (void) const ;
+
+  public: class GALGAS_bigint readProperty_mBitSize (void) const ;
 
 //-- Start of generic part --*
 
@@ -9647,14 +9511,6 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bigint getter_mBitSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -9675,7 +9531,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenericType ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_genericFormalParameterList mProperty_mGenericFormalParameterList ;
   public: GALGAS_ctExpressionAST mProperty_mWhereClause ;
@@ -9692,14 +9548,6 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_ctExpressionAST getter_mWhereClause (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMWhereClause (GALGAS_ctExpressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bigint getter_mBitSize (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMBitSize (GALGAS_bigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -9712,19 +9560,44 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmInfixOperatorAST class
+// Phase 1: @llvmInfixOperatorAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmInfixOperatorAST (void) ;
 
-//---
-  public: inline const class cPtr_llvmInfixOperatorAST * ptr (void) const { return (const cPtr_llvmInfixOperatorAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmInfixOperatorAST (const cPtr_llvmInfixOperatorAST * inSourcePtr) ;
+  public: GALGAS_llvmInfixOperatorAST (const class cPtr_llvmInfixOperatorAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_omnibusInfixOperator readProperty_mInfixOperator (void) const ;
+
+  public: class GALGAS_location readProperty_mInfixOperatorLocation (void) const ;
+
+  public: class GALGAS_lstring readProperty_mLeftOperandName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mLeftTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mLeftGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mRightOperandName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mRightTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mRightGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
+
+  public: class GALGAS_genericFormalParameterList readProperty_mResultGenericFormalParameterList (void) const ;
+
+  public: class GALGAS_llvmGenerationInstructionList readProperty_mInstructionList (void) const ;
 
 //-- Start of generic part --*
 
@@ -9792,28 +9665,6 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mLeftGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mResultGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameterList getter_mRightGenericFormalParameterList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -9834,7 +9685,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_omnibusInfixOperator mProperty_mInfixOperator ;
   public: GALGAS_location mProperty_mInfixOperatorLocation ;
   public: GALGAS_lstring mProperty_mLeftOperandName ;
@@ -9865,28 +9716,6 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_omnibusInfixOperator inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mInfixOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftOperandName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLeftTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mLeftGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightOperandName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightOperandName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRightTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mRightGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_genericFormalParameterList getter_mResultGenericFormalParameterList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMResultGenericFormalParameterList (GALGAS_genericFormalParameterList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -9899,19 +9728,34 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmPrefixOperatorAST class
+// Phase 1: @llvmPrefixOperatorAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmPrefixOperatorAST (void) ;
 
-//---
-  public: inline const class cPtr_llvmPrefixOperatorAST * ptr (void) const { return (const cPtr_llvmPrefixOperatorAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmPrefixOperatorAST (const cPtr_llvmPrefixOperatorAST * inSourcePtr) ;
+  public: GALGAS_llvmPrefixOperatorAST (const class cPtr_llvmPrefixOperatorAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_llvmPrefixOperatorEnumeration readProperty_mPrefixOperator (void) const ;
+
+  public: class GALGAS_location readProperty_mPrefixOperatorLocation (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_llvmGenerationInstructionList readProperty_mInstructionList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -9959,18 +9803,6 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_llvmPrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10078,7 +9910,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorE
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_llvmPrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_location mProperty_mPrefixOperatorLocation ;
   public: GALGAS_lstring mProperty_mReceiverName ;
@@ -10099,18 +9931,6 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmPrefixOperatorEnumeration getter_mPrefixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPrefixOperator (GALGAS_llvmPrefixOperatorEnumeration inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mPrefixOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPrefixOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_llvmGenerationInstructionList getter_mInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_llvmGenerationInstructionList inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mResultTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMResultTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10123,22 +9943,27 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @llvmVarInstruction class
+// Phase 1: @llvmVarInstruction reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_llvmVarInstruction (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmVarInstruction constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_llvmVarInstruction * ptr (void) const { return (const cPtr_llvmVarInstruction *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_llvmVarInstruction (const cPtr_llvmVarInstruction * inSourcePtr) ;
+  public: GALGAS_llvmVarInstruction (const class cPtr_llvmVarInstruction * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mVariableName (void) const ;
 
 //-- Start of generic part --*
 
@@ -10166,8 +9991,6 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVariableName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10188,7 +10011,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmVarInstruction 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mVariableName ;
 
 //--- Constructor
@@ -10199,8 +10022,6 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVariableName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMVariableName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10213,19 +10034,30 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @omnibusInfixOperatorExpressionAST class
+// Phase 1: @omnibusInfixOperatorExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_omnibusInfixOperatorExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_omnibusInfixOperatorExpressionAST * ptr (void) const { return (const cPtr_omnibusInfixOperatorExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_omnibusInfixOperatorExpressionAST (const cPtr_omnibusInfixOperatorExpressionAST * inSourcePtr) ;
+  public: GALGAS_omnibusInfixOperatorExpressionAST (const class cPtr_omnibusInfixOperatorExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mLeftExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_omnibusInfixOperator readProperty_mInfixOperator (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -10265,14 +10097,6 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10293,7 +10117,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperato
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_omnibusInfixOperator mProperty_mInfixOperator ;
@@ -10310,14 +10134,6 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mLeftExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLeftExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_omnibusInfixOperator getter_mInfixOperator (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (GALGAS_omnibusInfixOperator inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mRightExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRightExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10330,22 +10146,33 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @panicAST class
+// Phase 1: @panicAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_panicAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_panicAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_panicAST * ptr (void) const { return (const cPtr_panicAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_panicAST (const cPtr_panicAST * inSourcePtr) ;
+  public: GALGAS_panicAST (const class cPtr_panicAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_bool readProperty_mIsSetup (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mPanicInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfPanicInstructions (void) const ;
+
+  public: class GALGAS_lbigint readProperty_mPriority (void) const ;
 
 //-- Start of generic part --*
 
@@ -10385,14 +10212,6 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mIsSetup (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10413,7 +10232,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_panicAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_bool mProperty_mIsSetup ;
   public: GALGAS_instructionListAST mProperty_mPanicInstructionList ;
   public: GALGAS_location mProperty_mEndOfPanicInstructions ;
@@ -10430,14 +10249,6 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mIsSetup (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIsSetup (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mPanicInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPanicInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfPanicInstructions (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfPanicInstructions (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lbigint getter_mPriority (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPriority (GALGAS_lbigint inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10450,19 +10261,24 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @panicInstructionAST class
+// Phase 1: @panicInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_panicInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_panicInstructionAST * ptr (void) const { return (const cPtr_panicInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_panicInstructionAST (const cPtr_panicInstructionAST * inSourcePtr) ;
+  public: GALGAS_panicInstructionAST (const class cPtr_panicInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mCodeExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -10491,8 +10307,6 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mCodeExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10513,7 +10327,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_panicInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mCodeExpression ;
 
 //--- Constructor
@@ -10525,8 +10339,6 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mCodeExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMCodeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10539,19 +10351,28 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @prefixOperatorExpressionAST class
+// Phase 1: @prefixOperatorExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_prefixOperatorExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_prefixOperatorExpressionAST * ptr (void) const { return (const cPtr_prefixOperatorExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_prefixOperatorExpressionAST (const cPtr_prefixOperatorExpressionAST * inSourcePtr) ;
+  public: GALGAS_prefixOperatorExpressionAST (const class cPtr_prefixOperatorExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_location readProperty_mOperatorLocation (void) const ;
+
+  public: class GALGAS_prefixOperator readProperty_mOp (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -10587,12 +10408,6 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_prefixOperator getter_mOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10700,7 +10515,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperator ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_prefixOperator mProperty_mOp ;
   public: GALGAS_expressionAST mProperty_mExpression ;
@@ -10715,12 +10530,6 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mOperatorLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOperatorLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_prefixOperator getter_mOp (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOp (GALGAS_prefixOperator inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10733,22 +10542,29 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @primaryInExpressionAST class
+// Phase 1: @primaryInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_primaryInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_primaryInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_primaryInExpressionAST * ptr (void) const { return (const cPtr_primaryInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_primaryInExpressionAST (const cPtr_primaryInExpressionAST * inSourcePtr) ;
+  public: GALGAS_primaryInExpressionAST (const class cPtr_primaryInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverName (void) const ;
+
+  public: class GALGAS_primaryInExpressionAccessListAST readProperty_mAccessList (void) const ;
 
 //-- Start of generic part --*
 
@@ -10780,10 +10596,6 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -10938,7 +10750,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpression
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
 
@@ -10951,10 +10763,6 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_primaryInExpressionAccessListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -10967,22 +10775,29 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @procedureCallInstructionAST class
+// Phase 1: @procedureCallInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_procedureCallInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_procedureCallInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_procedureCallInstructionAST * ptr (void) const { return (const cPtr_procedureCallInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_procedureCallInstructionAST (const cPtr_procedureCallInstructionAST * inSourcePtr) ;
+  public: GALGAS_procedureCallInstructionAST (const class cPtr_procedureCallInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mIdentifier (void) const ;
+
+  public: class GALGAS_accessInAssignmentListAST readProperty_mAccessList (void) const ;
 
 //-- Start of generic part --*
 
@@ -11017,10 +10832,6 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11175,7 +10986,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentL
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
   public: GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
 
@@ -11191,10 +11002,6 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mIdentifier (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMIdentifier (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_accessInAssignmentListAST getter_mAccessList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_accessInAssignmentListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -11207,22 +11014,31 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @registerConstantExpressionAST class
+// Phase 1: @registerConstantExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_registerConstantExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_registerConstantExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_registerConstantExpressionAST * ptr (void) const { return (const cPtr_registerConstantExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_registerConstantExpressionAST (const cPtr_registerConstantExpressionAST * inSourcePtr) ;
+  public: GALGAS_registerConstantExpressionAST (const class cPtr_registerConstantExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mRegisterGroupName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mRegisterName (void) const ;
+
+  public: class GALGAS_registerIntegerFieldListAST readProperty_mFieldValues (void) const ;
 
 //-- Start of generic part --*
 
@@ -11258,12 +11074,6 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11456,7 +11266,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mRegisterGroupName ;
   public: GALGAS_lstring mProperty_mRegisterName ;
   public: GALGAS_registerIntegerFieldListAST mProperty_mFieldValues ;
@@ -11471,12 +11281,6 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterGroupName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRegisterGroupName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mRegisterName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMRegisterName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_registerIntegerFieldListAST getter_mFieldValues (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFieldValues (GALGAS_registerIntegerFieldListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -11489,19 +11293,26 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @registerInExpressionAST class
+// Phase 1: @registerInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_registerInExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_registerInExpressionAST * ptr (void) const { return (const cPtr_registerInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_registerInExpressionAST (const cPtr_registerInExpressionAST * inSourcePtr) ;
+  public: GALGAS_registerInExpressionAST (const class cPtr_registerInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_controlRegisterLValueAST readProperty_mControlRegisterLValue (void) const ;
+
+  public: class GALGAS_lstring readProperty_mFieldName (void) const ;
 
 //-- Start of generic part --*
 
@@ -11533,10 +11344,6 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11557,7 +11364,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_registerInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_lstring mProperty_mFieldName ;
 
@@ -11570,10 +11377,6 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_controlRegisterLValueAST getter_mControlRegisterLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (GALGAS_controlRegisterLValueAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mFieldName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFieldName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -11586,19 +11389,24 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @sizeofExpressionAST class
+// Phase 1: @sizeofExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_sizeofExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_sizeofExpressionAST * ptr (void) const { return (const cPtr_sizeofExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_sizeofExpressionAST (const cPtr_sizeofExpressionAST * inSourcePtr) ;
+  public: GALGAS_sizeofExpressionAST (const class cPtr_sizeofExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_LValueAST readProperty_mLValue (void) const ;
 
 //-- Start of generic part --*
 
@@ -11626,8 +11434,6 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11648,7 +11454,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
 
 //--- Constructor
@@ -11659,8 +11465,6 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_LValueAST getter_mLValue (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLValue (GALGAS_LValueAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -11673,22 +11477,27 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @sizeofTypeAST class
+// Phase 1: @sizeofTypeAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_sizeofTypeAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_sizeofTypeAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_sizeofTypeAST * ptr (void) const { return (const cPtr_sizeofTypeAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_sizeofTypeAST (const cPtr_sizeofTypeAST * inSourcePtr) ;
+  public: GALGAS_sizeofTypeAST (const class cPtr_sizeofTypeAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -11716,8 +11525,6 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11738,7 +11545,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofTypeAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sizeofTypeAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
 
 //--- Constructor
@@ -11749,8 +11556,6 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -11763,19 +11568,30 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @sliceAssignmentInstructionAST class
+// Phase 1: @sliceAssignmentInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_sliceAssignmentInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_sliceAssignmentInstructionAST * ptr (void) const { return (const cPtr_sliceAssignmentInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_sliceAssignmentInstructionAST (const cPtr_sliceAssignmentInstructionAST * inSourcePtr) ;
+  public: GALGAS_sliceAssignmentInstructionAST (const class cPtr_sliceAssignmentInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_sliceAssignmentListAST readProperty_mSliceAssignmentList (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mSourceExpressionLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -11816,14 +11632,6 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_sliceAssignmentListAST getter_mSliceAssignmentList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -11997,7 +11805,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentList
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_sliceAssignmentListAST mProperty_mSliceAssignmentList ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -12015,14 +11823,6 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_sliceAssignmentListAST getter_mSliceAssignmentList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSliceAssignmentList (GALGAS_sliceAssignmentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mSourceExpressionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -12035,22 +11835,27 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @standAloneProcedureCallInstructionAST class
+// Phase 1: @standAloneProcedureCallInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_standAloneProcedureCallInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_standAloneProcedureCallInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_standAloneProcedureCallInstructionAST * ptr (void) const { return (const cPtr_standAloneProcedureCallInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_standAloneProcedureCallInstructionAST (const cPtr_standAloneProcedureCallInstructionAST * inSourcePtr) ;
+  public: GALGAS_standAloneProcedureCallInstructionAST (const class cPtr_standAloneProcedureCallInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mSandAloneRoutineName (void) const ;
 
 //-- Start of generic part --*
 
@@ -12081,8 +11886,6 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSandAloneRoutineName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -12103,7 +11906,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standAloneProcedure
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mSandAloneRoutineName ;
 
 //--- Constructor
@@ -12117,8 +11920,6 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSandAloneRoutineName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSandAloneRoutineName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -12131,22 +11932,31 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @standaloneFunctionInExpressionAST class
+// Phase 1: @standaloneFunctionInExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_standaloneFunctionInExpressionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_standaloneFunctionInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_standaloneFunctionInExpressionAST * ptr (void) const { return (const cPtr_standaloneFunctionInExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_standaloneFunctionInExpressionAST (const cPtr_standaloneFunctionInExpressionAST * inSourcePtr) ;
+  public: GALGAS_standaloneFunctionInExpressionAST (const class cPtr_standaloneFunctionInExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mStandaloneFunctionName (void) const ;
+
+  public: class GALGAS_effectiveArgumentListAST readProperty_mArguments (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfArguments (void) const ;
 
 //-- Start of generic part --*
 
@@ -12182,12 +11992,6 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStandaloneFunctionName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -12208,7 +12012,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneFunctionI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mStandaloneFunctionName ;
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
   public: GALGAS_location mProperty_mEndOfArguments ;
@@ -12223,12 +12027,6 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStandaloneFunctionName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStandaloneFunctionName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_effectiveArgumentListAST getter_mArguments (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMArguments (GALGAS_effectiveArgumentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfArguments (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfArguments (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -12241,22 +12039,31 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @staticListAST class
+// Phase 1: @staticListAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_staticListAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_staticListAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_staticListAST * ptr (void) const { return (const cPtr_staticListAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_staticListAST (const cPtr_staticListAST * inSourcePtr) ;
+  public: GALGAS_staticListAST (const class cPtr_staticListAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mStaticListName (void) const ;
+
+  public: class GALGAS_staticListPropertyListAST readProperty_mPropertyList (void) const ;
+
+  public: class GALGAS_staticListValueListAST readProperty_mValueList (void) const ;
 
 //-- Start of generic part --*
 
@@ -12292,12 +12099,6 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_staticListPropertyListAST getter_mPropertyList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mStaticListName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_staticListValueListAST getter_mValueList (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -12624,7 +12425,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListValueList
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mStaticListName ;
   public: GALGAS_staticListPropertyListAST mProperty_mPropertyList ;
   public: GALGAS_staticListValueListAST mProperty_mValueList ;
@@ -12639,12 +12440,6 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mStaticListName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStaticListName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_staticListPropertyListAST getter_mPropertyList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPropertyList (GALGAS_staticListPropertyListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_staticListValueListAST getter_mValueList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMValueList (GALGAS_staticListValueListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -12657,22 +12452,39 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @structureDeclarationAST class
+// Phase 1: @structureDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_structureDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_structureDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_structureDeclarationAST * ptr (void) const { return (const cPtr_structureDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_structureDeclarationAST (const cPtr_structureDeclarationAST * inSourcePtr) ;
+  public: GALGAS_structureDeclarationAST (const class cPtr_structureDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mOmnibusTypeSpecificName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mLLVMBaseTypeName (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mAttributeListAST (void) const ;
+
+  public: class GALGAS_bool readProperty_mGenerateAssignmentRoutine (void) const ;
+
+  public: class GALGAS_structurePropertyListAST readProperty_mStructurePropertyListAST (void) const ;
+
+  public: class GALGAS_bool readProperty_mMayImplementDeinit (void) const ;
 
 //-- Start of generic part --*
 
@@ -12724,20 +12536,6 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOmnibusTypeSpecificName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -12968,7 +12766,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structurePropertyLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mOmnibusTypeSpecificName ;
   public: GALGAS_lstring mProperty_mLLVMBaseTypeName ;
@@ -12991,20 +12789,6 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOmnibusTypeSpecificName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOmnibusTypeSpecificName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mLLVMBaseTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMLLVMBaseTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeListAST (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAttributeListAST (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mGenerateAssignmentRoutine (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMGenerateAssignmentRoutine (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (GALGAS_structurePropertyListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mMayImplementDeinit (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMMayImplementDeinit (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13017,19 +12801,30 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @switchInstructionAST class
+// Phase 1: @switchInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_switchInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_switchInstructionAST * ptr (void) const { return (const cPtr_switchInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_switchInstructionAST (const cPtr_switchInstructionAST * inSourcePtr) ;
+  public: GALGAS_switchInstructionAST (const class cPtr_switchInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mSwitchExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_test_5F_expression (void) const ;
+
+  public: class GALGAS_switchCaseListAST readProperty_mSwitchCaseList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_switch_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -13070,14 +12865,6 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_switch_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_switchCaseListAST getter_mSwitchCaseList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSwitchExpression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -13251,7 +13038,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_switchInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mSwitchExpression ;
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
   public: GALGAS_switchCaseListAST mProperty_mSwitchCaseList ;
@@ -13269,14 +13056,6 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSwitchExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSwitchExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_switchCaseListAST getter_mSwitchCaseList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSwitchCaseList (GALGAS_switchCaseListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_switch_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_switch_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13289,22 +13068,29 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @syncDeclarationAST class
+// Phase 1: @syncDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_syncDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_syncDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_syncDeclarationAST * ptr (void) const { return (const cPtr_syncDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_syncDeclarationAST (const cPtr_syncDeclarationAST * inSourcePtr) ;
+  public: GALGAS_syncDeclarationAST (const class cPtr_syncDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mSyncToolName (void) const ;
+
+  public: class GALGAS_structurePropertyListAST readProperty_mStructurePropertyListAST (void) const ;
 
 //-- Start of generic part --*
 
@@ -13336,10 +13122,6 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -13360,7 +13142,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncDeclarationAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mSyncToolName ;
   public: GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
 
@@ -13373,10 +13155,6 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncToolName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSyncToolName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_structurePropertyListAST getter_mStructurePropertyListAST (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (GALGAS_structurePropertyListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13389,22 +13167,29 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @syncInstructionAST class
+// Phase 1: @syncInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_syncInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_syncInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_syncInstructionAST * ptr (void) const { return (const cPtr_syncInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_syncInstructionAST (const cPtr_syncInstructionAST * inSourcePtr) ;
+  public: GALGAS_syncInstructionAST (const class cPtr_syncInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_syncInstructionBranchListAST readProperty_mBranchList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_on_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -13437,10 +13222,6 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_syncInstructionBranchListAST getter_mBranchList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -13633,7 +13414,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionBran
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_syncInstructionBranchListAST mProperty_mBranchList ;
   public: GALGAS_location mProperty_mEndOf_5F_on_5F_instruction ;
 
@@ -13647,10 +13428,6 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_syncInstructionBranchListAST getter_mBranchList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMBranchList (GALGAS_syncInstructionBranchListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_on_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_on_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13663,19 +13440,28 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @syncToolInstanceDeclarationAST class
+// Phase 1: @syncToolInstanceDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_syncToolInstanceDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_syncToolInstanceDeclarationAST * ptr (void) const { return (const cPtr_syncToolInstanceDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_syncToolInstanceDeclarationAST (const cPtr_syncToolInstanceDeclarationAST * inSourcePtr) ;
+  public: GALGAS_syncToolInstanceDeclarationAST (const class cPtr_syncToolInstanceDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mSyncTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mSyncInstanceName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -13711,12 +13497,6 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSyncInstanceName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSyncTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -13737,7 +13517,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncToolInstanceDec
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mSyncTypeName ;
   public: GALGAS_lstring mProperty_mSyncInstanceName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -13752,12 +13532,6 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSyncTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSyncInstanceName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSyncInstanceName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13770,19 +13544,40 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @systemRoutineDeclarationAST class
+// Phase 1: @systemRoutineDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_systemRoutineDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_systemRoutineDeclarationAST * ptr (void) const { return (const cPtr_systemRoutineDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_systemRoutineDeclarationAST (const cPtr_systemRoutineDeclarationAST * inSourcePtr) ;
+  public: GALGAS_systemRoutineDeclarationAST (const class cPtr_systemRoutineDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mReceiverTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mSystemRoutineName (void) const ;
+
+  public: class GALGAS_mode readProperty_mMode (void) const ;
+
+  public: class GALGAS_bool readProperty_mPublic (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mAttributeList (void) const ;
+
+  public: class GALGAS_routineFormalArgumentListAST readProperty_mFormalArgumentList (void) const ;
+
+  public: class GALGAS_lstring readProperty_mReturnTypeName (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfInstructionListLocation (void) const ;
 
 //-- Start of generic part --*
 
@@ -13842,24 +13637,6 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfInstructionListLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -13880,7 +13657,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mSystemRoutineName ;
   public: GALGAS_mode mProperty_mMode ;
@@ -13907,24 +13684,6 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReceiverTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReceiverTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSystemRoutineName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSystemRoutineName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_mode getter_mMode (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMMode (GALGAS_mode inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_bool getter_mPublic (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPublic (GALGAS_bool inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_routineFormalArgumentListAST getter_mFormalArgumentList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMFormalArgumentList (GALGAS_routineFormalArgumentListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mReturnTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMReturnTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfInstructionListLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfInstructionListLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -13937,22 +13696,37 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @taskSetupDeclarationAST class
+// Phase 1: @taskSetupDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_taskSetupDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_taskSetupDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_taskSetupDeclarationAST * ptr (void) const { return (const cPtr_taskSetupDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_taskSetupDeclarationAST (const cPtr_taskSetupDeclarationAST * inSourcePtr) ;
+  public: GALGAS_taskSetupDeclarationAST (const class cPtr_taskSetupDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mTaskName (void) const ;
+
+  public: class GALGAS_string readProperty_mQualifier (void) const ;
+
+  public: class GALGAS_lstring readProperty_mSetupName (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mDependanceList (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mTaskSetupInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfTaskSetupDeclaration (void) const ;
 
 //-- Start of generic part --*
 
@@ -14000,18 +13774,6 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDependanceList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfTaskSetupDeclaration (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_string getter_mQualifier (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSetupName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTaskName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mTaskSetupInstructionList (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14032,7 +13794,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSetupDeclaratio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mTaskName ;
   public: GALGAS_string mProperty_mQualifier ;
   public: GALGAS_lstring mProperty_mSetupName ;
@@ -14053,18 +13815,6 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTaskName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTaskName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_string getter_mQualifier (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMQualifier (GALGAS_string inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mSetupName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSetupName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mDependanceList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMDependanceList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mTaskSetupInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTaskSetupInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfTaskSetupDeclaration (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfTaskSetupDeclaration (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14077,19 +13827,28 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @truncateExpressionAST class
+// Phase 1: @truncateExpressionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_truncateExpressionAST (void) ;
 
-//---
-  public: inline const class cPtr_truncateExpressionAST * ptr (void) const { return (const cPtr_truncateExpressionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_truncateExpressionAST (const cPtr_truncateExpressionAST * inSourcePtr) ;
+  public: GALGAS_truncateExpressionAST (const class cPtr_truncateExpressionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -14125,12 +13884,6 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14151,7 +13904,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateExpressionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_truncateExpressionAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
@@ -14166,12 +13919,6 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOfExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14184,22 +13931,29 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @typeAliasDeclarationAST class
+// Phase 1: @typeAliasDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_typeAliasDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typeAliasDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_typeAliasDeclarationAST * ptr (void) const { return (const cPtr_typeAliasDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_typeAliasDeclarationAST (const cPtr_typeAliasDeclarationAST * inSourcePtr) ;
+  public: GALGAS_typeAliasDeclarationAST (const class cPtr_typeAliasDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mAliasTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mOriginalTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -14231,10 +13985,6 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mAliasTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14255,7 +14005,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeAliasDeclaratio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mAliasTypeName ;
   public: GALGAS_lstring mProperty_mOriginalTypeName ;
 
@@ -14268,10 +14018,6 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mAliasTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAliasTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOriginalTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOriginalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14284,22 +14030,29 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @typeDynamicArrayDeclarationAST class
+// Phase 1: @typeDynamicArrayDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_typeDynamicArrayDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typeDynamicArrayDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_typeDynamicArrayDeclarationAST * ptr (void) const { return (const cPtr_typeDynamicArrayDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_typeDynamicArrayDeclarationAST (const cPtr_typeDynamicArrayDeclarationAST * inSourcePtr) ;
+  public: GALGAS_typeDynamicArrayDeclarationAST (const class cPtr_typeDynamicArrayDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mDynamicArrayTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mElementTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -14331,10 +14084,6 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDynamicArrayTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14355,7 +14104,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeDynamicArrayDec
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mDynamicArrayTypeName ;
   public: GALGAS_lstring mProperty_mElementTypeName ;
 
@@ -14368,10 +14117,6 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mDynamicArrayTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMDynamicArrayTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mElementTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMElementTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14384,19 +14129,30 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @typeOpaqueDeclarationAST class
+// Phase 1: @typeOpaqueDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_typeOpaqueDeclarationAST (void) ;
 
-//---
-  public: inline const class cPtr_typeOpaqueDeclarationAST * ptr (void) const { return (const cPtr_typeOpaqueDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_typeOpaqueDeclarationAST (const cPtr_typeOpaqueDeclarationAST * inSourcePtr) ;
+  public: GALGAS_typeOpaqueDeclarationAST (const class cPtr_typeOpaqueDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mOpaqueTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSizeExpression (void) const ;
+
+  public: class GALGAS_location readProperty_mSizeExpressionLocation (void) const ;
+
+  public: class GALGAS_lstringlist readProperty_mAttributeList (void) const ;
 
 //-- Start of generic part --*
 
@@ -14436,14 +14192,6 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14464,7 +14212,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeOpaqueDeclarati
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mOpaqueTypeName ;
   public: GALGAS_expressionAST mProperty_mSizeExpression ;
   public: GALGAS_location mProperty_mSizeExpressionLocation ;
@@ -14481,14 +14229,6 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOpaqueTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOpaqueTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSizeExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSizeExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mSizeExpressionLocation (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSizeExpressionLocation (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstringlist getter_mAttributeList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (GALGAS_lstringlist inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14501,22 +14241,31 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @typedConstantCallAST class
+// Phase 1: @typedConstantCallAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_typedConstantCallAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typedConstantCallAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_typedConstantCallAST * ptr (void) const { return (const cPtr_typedConstantCallAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_typedConstantCallAST (const cPtr_typedConstantCallAST * inSourcePtr) ;
+  public: GALGAS_typedConstantCallAST (const class cPtr_typedConstantCallAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mOptionalTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mConstructorName (void) const ;
+
+  public: class GALGAS_primaryInExpressionAccessListAST readProperty_mAccessList (void) const ;
 
 //-- Start of generic part --*
 
@@ -14552,12 +14301,6 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mConstructorName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14578,7 +14321,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typedConstantCallAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typedConstantCallAST : public cPtr_expressionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_lstring mProperty_mConstructorName ;
   public: GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
@@ -14593,12 +14336,6 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mConstructorName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMConstructorName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_primaryInExpressionAccessListAST getter_mAccessList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMAccessList (GALGAS_primaryInExpressionAccessListAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14611,22 +14348,29 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @varDeclarationInstructionAST class
+// Phase 1: @varDeclarationInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_varDeclarationInstructionAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_varDeclarationInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_varDeclarationInstructionAST * ptr (void) const { return (const cPtr_varDeclarationInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_varDeclarationInstructionAST (const cPtr_varDeclarationInstructionAST * inSourcePtr) ;
+  public: GALGAS_varDeclarationInstructionAST (const class cPtr_varDeclarationInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mVarName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mTypeName (void) const ;
 
 //-- Start of generic part --*
 
@@ -14659,10 +14403,6 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14683,7 +14423,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varDeclarationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mTypeName ;
 
@@ -14697,10 +14437,6 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14713,19 +14449,28 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @varInstructionWithAssignmentAST class
+// Phase 1: @varInstructionWithAssignmentAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_varInstructionWithAssignmentAST (void) ;
 
-//---
-  public: inline const class cPtr_varInstructionWithAssignmentAST * ptr (void) const { return (const cPtr_varInstructionWithAssignmentAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_varInstructionWithAssignmentAST (const cPtr_varInstructionWithAssignmentAST * inSourcePtr) ;
+  public: GALGAS_varInstructionWithAssignmentAST (const class cPtr_varInstructionWithAssignmentAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mVarName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mOptionalTypeName (void) const ;
+
+  public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of generic part --*
 
@@ -14762,12 +14507,6 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14788,7 +14527,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionWithA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -14804,12 +14543,6 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mVarName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMVarName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mOptionalTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_mSourceExpression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -14822,19 +14555,30 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @whileInstructionAST class
+// Phase 1: @whileInstructionAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_whileInstructionAST (void) ;
 
-//---
-  public: inline const class cPtr_whileInstructionAST * ptr (void) const { return (const cPtr_whileInstructionAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_whileInstructionAST (const cPtr_whileInstructionAST * inSourcePtr) ;
+  public: GALGAS_whileInstructionAST (const class cPtr_whileInstructionAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_expressionAST readProperty_m_5F_while_5F_Expression (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_test_5F_expression (void) const ;
+
+  public: class GALGAS_instructionListAST readProperty_mWhileInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mEndOf_5F_while_5F_instruction (void) const ;
 
 //-- Start of generic part --*
 
@@ -14875,14 +14619,6 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mEndOf_5F_while_5F_instruction (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mWhileInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_expressionAST getter_m_5F_while_5F_Expression (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -14903,7 +14639,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_whileInstructionAST : public cPtr_instructionAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_expressionAST mProperty_m_5F_while_5F_Expression ;
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
   public: GALGAS_instructionListAST mProperty_mWhileInstructionList ;
@@ -14921,14 +14657,6 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_expressionAST getter_m_5F_while_5F_Expression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setM_5F_while_5F_Expression (GALGAS_expressionAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_test_5F_expression (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_instructionListAST getter_mWhileInstructionList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMWhileInstructionList (GALGAS_instructionListAST inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_location getter_mEndOf_5F_while_5F_instruction (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_while_5F_instruction (GALGAS_location inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -19661,26 +19389,59 @@ void extensionMethod_buildProcedureCallAccessList (const class GALGAS_LValueOper
 class GALGAS_ast : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_declarationListAST mProperty_mDeclarationListAST ;
+  public: inline GALGAS_declarationListAST readProperty_mDeclarationListAST (void) const {
+    return mProperty_mDeclarationListAST ;
+  }
 
   public: GALGAS_extendStaticArrayDeclarationDictAST mProperty_mExtendStaticArrayDeclarationAST ;
+  public: inline GALGAS_extendStaticArrayDeclarationDictAST readProperty_mExtendStaticArrayDeclarationAST (void) const {
+    return mProperty_mExtendStaticArrayDeclarationAST ;
+  }
 
   public: GALGAS_requiredFunctionDeclarationListAST mProperty_mRequiredFunctionListAST ;
+  public: inline GALGAS_requiredFunctionDeclarationListAST readProperty_mRequiredFunctionListAST (void) const {
+    return mProperty_mRequiredFunctionListAST ;
+  }
 
   public: GALGAS_externFunctionDeclarationListAST mProperty_mExternFunctionListAST ;
+  public: inline GALGAS_externFunctionDeclarationListAST readProperty_mExternFunctionListAST (void) const {
+    return mProperty_mExternFunctionListAST ;
+  }
 
   public: GALGAS_lstringlist mProperty_mTargetListAST ;
+  public: inline GALGAS_lstringlist readProperty_mTargetListAST (void) const {
+    return mProperty_mTargetListAST ;
+  }
 
   public: GALGAS_taskListAST mProperty_mTaskListAST ;
+  public: inline GALGAS_taskListAST readProperty_mTaskListAST (void) const {
+    return mProperty_mTaskListAST ;
+  }
 
   public: GALGAS_checkTargetListAST mProperty_mCheckTargetListAST ;
+  public: inline GALGAS_checkTargetListAST readProperty_mCheckTargetListAST (void) const {
+    return mProperty_mCheckTargetListAST ;
+  }
 
   public: GALGAS_driverDeclarationListAST mProperty_mDriverDeclarationListAST ;
+  public: inline GALGAS_driverDeclarationListAST readProperty_mDriverDeclarationListAST (void) const {
+    return mProperty_mDriverDeclarationListAST ;
+  }
 
   public: GALGAS_driverInstanciationListAST mProperty_mRequiredDriverListAST ;
+  public: inline GALGAS_driverInstanciationListAST readProperty_mRequiredDriverListAST (void) const {
+    return mProperty_mRequiredDriverListAST ;
+  }
 
   public: GALGAS_uint mProperty_mTypeDeclarationIndex ;
+  public: inline GALGAS_uint readProperty_mTypeDeclarationIndex (void) const {
+    return mProperty_mTypeDeclarationIndex ;
+  }
 
   public: GALGAS_controlRegisterUserAccesMapAST mProperty_mControlRegisterUserAccesMapAST ;
+  public: inline GALGAS_controlRegisterUserAccesMapAST readProperty_mControlRegisterUserAccesMapAST (void) const {
+    return mProperty_mControlRegisterUserAccesMapAST ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -19789,28 +19550,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_checkTargetListAST getter_mCheckTargetListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterUserAccesMapAST getter_mControlRegisterUserAccesMapAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_declarationListAST getter_mDeclarationListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_driverDeclarationListAST getter_mDriverDeclarationListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_extendStaticArrayDeclarationDictAST getter_mExtendStaticArrayDeclarationAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_externFunctionDeclarationListAST getter_mExternFunctionListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_driverInstanciationListAST getter_mRequiredDriverListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_requiredFunctionDeclarationListAST getter_mRequiredFunctionListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mTargetListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_taskListAST getter_mTaskListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mTypeDeclarationIndex (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -19833,22 +19572,49 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ast ;
 class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_mDriverName ;
+  public: inline GALGAS_lstring readProperty_mDriverName (void) const {
+    return mProperty_mDriverName ;
+  }
 
   public: GALGAS_lstringlist mProperty_mDriverDependanceList ;
+  public: inline GALGAS_lstringlist readProperty_mDriverDependanceList (void) const {
+    return mProperty_mDriverDependanceList ;
+  }
 
   public: GALGAS_structurePropertyListAST mProperty_mPropertyListAST ;
+  public: inline GALGAS_structurePropertyListAST readProperty_mPropertyListAST (void) const {
+    return mProperty_mPropertyListAST ;
+  }
 
   public: GALGAS_location mProperty_mBootLocation ;
+  public: inline GALGAS_location readProperty_mBootLocation (void) const {
+    return mProperty_mBootLocation ;
+  }
 
   public: GALGAS_instructionListAST mProperty_mBootInstructionList ;
+  public: inline GALGAS_instructionListAST readProperty_mBootInstructionList (void) const {
+    return mProperty_mBootInstructionList ;
+  }
 
   public: GALGAS_location mProperty_mBootEndLocation ;
+  public: inline GALGAS_location readProperty_mBootEndLocation (void) const {
+    return mProperty_mBootEndLocation ;
+  }
 
   public: GALGAS_location mProperty_mStartupLocation ;
+  public: inline GALGAS_location readProperty_mStartupLocation (void) const {
+    return mProperty_mStartupLocation ;
+  }
 
   public: GALGAS_instructionListAST mProperty_mStartupInstructionList ;
+  public: inline GALGAS_instructionListAST readProperty_mStartupInstructionList (void) const {
+    return mProperty_mStartupInstructionList ;
+  }
 
   public: GALGAS_location mProperty_mStartupEndLocation ;
+  public: inline GALGAS_location readProperty_mStartupEndLocation (void) const {
+    return mProperty_mStartupEndLocation ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -19945,24 +19711,6 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mBootEndLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mBootInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mBootLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_mDriverDependanceList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mDriverName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_structurePropertyListAST getter_mPropertyListAST (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mStartupEndLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_instructionListAST getter_mStartupInstructionList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mStartupLocation (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -20061,22 +19809,33 @@ class cParser_omnibus_5F_target_5F_specific_5F_syntax {
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @configurationDeclarationAST class
+// Phase 1: @configurationDeclarationAST reference class
 //
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclarationAST {
-//--- Constructor
+//--------------------------------- Default constructor
   public: GALGAS_configurationDeclarationAST (void) ;
 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_configurationDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//---
-  public: inline const class cPtr_configurationDeclarationAST * ptr (void) const { return (const cPtr_configurationDeclarationAST *) mObjectPtr ; }
-
+//--------------------------------- Embedded object pointer
+ public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
+   return (acStrongPtr_class *) mObjectPtr ;
+ }
+  
 //--------------------------------- Constructor from pointer
-  public: GALGAS_configurationDeclarationAST (const cPtr_configurationDeclarationAST * inSourcePtr) ;
+  public: GALGAS_configurationDeclarationAST (const class cPtr_configurationDeclarationAST * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_lstring readProperty_mPanicCodeTypeName (void) const ;
+
+  public: class GALGAS_lstring readProperty_mPanicLineTypeName (void) const ;
+
+  public: class GALGAS_targetParameters readProperty_mTargetParameters (void) const ;
+
+  public: class GALGAS_interruptionConfigurationList readProperty_mInterruptionConfigurationList (void) const ;
 
 //-- Start of generic part --*
 
@@ -20116,14 +19875,6 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_interruptionConfigurationList getter_mInterruptionConfigurationList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -20299,66 +20050,159 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_location mProperty_mConfigurationLocation ;
+  public: inline GALGAS_location readProperty_mConfigurationLocation (void) const {
+    return mProperty_mConfigurationLocation ;
+  }
 
   public: GALGAS__32_lstringlist mProperty_mPython_5F_utilityToolList ;
+  public: inline GALGAS__32_lstringlist readProperty_mPython_5F_utilityToolList (void) const {
+    return mProperty_mPython_5F_utilityToolList ;
+  }
 
   public: GALGAS_lstring mProperty_mPython_5F_build ;
+  public: inline GALGAS_lstring readProperty_mPython_5F_build (void) const {
+    return mProperty_mPython_5F_build ;
+  }
 
   public: GALGAS_lstring mProperty_mLinkerScript ;
+  public: inline GALGAS_lstring readProperty_mLinkerScript (void) const {
+    return mProperty_mLinkerScript ;
+  }
 
   public: GALGAS_uint mProperty_mPointerSize ;
+  public: inline GALGAS_uint readProperty_mPointerSize (void) const {
+    return mProperty_mPointerSize ;
+  }
 
   public: GALGAS_bool mProperty_mHandleDynamicArray ;
+  public: inline GALGAS_bool readProperty_mHandleDynamicArray (void) const {
+    return mProperty_mHandleDynamicArray ;
+  }
 
   public: GALGAS_lbigint mProperty_mSystemStackSize ;
+  public: inline GALGAS_lbigint readProperty_mSystemStackSize (void) const {
+    return mProperty_mSystemStackSize ;
+  }
 
   public: GALGAS_lbigint mProperty_mStackedUserRegisterOnInterruptByteSize ;
+  public: inline GALGAS_lbigint readProperty_mStackedUserRegisterOnInterruptByteSize (void) const {
+    return mProperty_mStackedUserRegisterOnInterruptByteSize ;
+  }
 
   public: GALGAS_lstring mProperty_mNopInstructionStringInLLVM ;
+  public: inline GALGAS_lstring readProperty_mNopInstructionStringInLLVM (void) const {
+    return mProperty_mNopInstructionStringInLLVM ;
+  }
 
   public: GALGAS_lbigint mProperty_mBitbandRegisterBaseAddress ;
+  public: inline GALGAS_lbigint readProperty_mBitbandRegisterBaseAddress (void) const {
+    return mProperty_mBitbandRegisterBaseAddress ;
+  }
 
   public: GALGAS_lbigint mProperty_mBitbandRegisterEndAddress ;
+  public: inline GALGAS_lbigint readProperty_mBitbandRegisterEndAddress (void) const {
+    return mProperty_mBitbandRegisterEndAddress ;
+  }
 
   public: GALGAS_lbigint mProperty_mBitbandRegisterRelocationAddress ;
+  public: inline GALGAS_lbigint readProperty_mBitbandRegisterRelocationAddress (void) const {
+    return mProperty_mBitbandRegisterRelocationAddress ;
+  }
 
   public: GALGAS_lbigint mProperty_mBitbandRegisterOffsetMultiplier ;
+  public: inline GALGAS_lbigint readProperty_mBitbandRegisterOffsetMultiplier (void) const {
+    return mProperty_mBitbandRegisterOffsetMultiplier ;
+  }
 
   public: GALGAS_lbigint mProperty_mBitbandRegisterBitMultiplier ;
+  public: inline GALGAS_lbigint readProperty_mBitbandRegisterBitMultiplier (void) const {
+    return mProperty_mBitbandRegisterBitMultiplier ;
+  }
 
   public: GALGAS_lstring mProperty_mSectionHandler ;
+  public: inline GALGAS_lstring readProperty_mSectionHandler (void) const {
+    return mProperty_mSectionHandler ;
+  }
 
   public: GALGAS_lbigint mProperty_mSectionPushedRegisterByteSize ;
+  public: inline GALGAS_lbigint readProperty_mSectionPushedRegisterByteSize (void) const {
+    return mProperty_mSectionPushedRegisterByteSize ;
+  }
 
   public: GALGAS_lstring mProperty_mSectionDispatcherHeader ;
+  public: inline GALGAS_lstring readProperty_mSectionDispatcherHeader (void) const {
+    return mProperty_mSectionDispatcherHeader ;
+  }
 
   public: GALGAS_lstring mProperty_mSectionDispatcherEntry ;
+  public: inline GALGAS_lstring readProperty_mSectionDispatcherEntry (void) const {
+    return mProperty_mSectionDispatcherEntry ;
+  }
 
   public: GALGAS_lstring mProperty_mSectionDispatcherInvocationFromAnyMode ;
+  public: inline GALGAS_lstring readProperty_mSectionDispatcherInvocationFromAnyMode (void) const {
+    return mProperty_mSectionDispatcherInvocationFromAnyMode ;
+  }
 
   public: GALGAS_lstring mProperty_mSectionDispatcherInvocationFromUserMode ;
+  public: inline GALGAS_lstring readProperty_mSectionDispatcherInvocationFromUserMode (void) const {
+    return mProperty_mSectionDispatcherInvocationFromUserMode ;
+  }
 
   public: GALGAS_lstringlist mProperty_m_5F_C_5F_definitionFiles ;
+  public: inline GALGAS_lstringlist readProperty_m_5F_C_5F_definitionFiles (void) const {
+    return mProperty_m_5F_C_5F_definitionFiles ;
+  }
 
   public: GALGAS_lstringlist mProperty_m_5F_S_5F_definitionFiles ;
+  public: inline GALGAS_lstringlist readProperty_m_5F_S_5F_definitionFiles (void) const {
+    return mProperty_m_5F_S_5F_definitionFiles ;
+  }
 
   public: GALGAS_lstringlist mProperty_m_5F_LL_5F_definitionFiles ;
+  public: inline GALGAS_lstringlist readProperty_m_5F_LL_5F_definitionFiles (void) const {
+    return mProperty_m_5F_LL_5F_definitionFiles ;
+  }
 
   public: GALGAS_lstring mProperty_mXtrInterruptHandler ;
+  public: inline GALGAS_lstring readProperty_mXtrInterruptHandler (void) const {
+    return mProperty_mXtrInterruptHandler ;
+  }
 
   public: GALGAS_lstring mProperty_mUndefinedInterruptHandler ;
+  public: inline GALGAS_lstring readProperty_mUndefinedInterruptHandler (void) const {
+    return mProperty_mUndefinedInterruptHandler ;
+  }
 
   public: GALGAS_lstring mProperty_mServiceHandler ;
+  public: inline GALGAS_lstring readProperty_mServiceHandler (void) const {
+    return mProperty_mServiceHandler ;
+  }
 
   public: GALGAS_lbigint mProperty_mServicePushedRegisterByteSize ;
+  public: inline GALGAS_lbigint readProperty_mServicePushedRegisterByteSize (void) const {
+    return mProperty_mServicePushedRegisterByteSize ;
+  }
 
   public: GALGAS_lstring mProperty_mServiceDispatcherEntry ;
+  public: inline GALGAS_lstring readProperty_mServiceDispatcherEntry (void) const {
+    return mProperty_mServiceDispatcherEntry ;
+  }
 
   public: GALGAS_lstring mProperty_mServiceDispatcherHeader ;
+  public: inline GALGAS_lstring readProperty_mServiceDispatcherHeader (void) const {
+    return mProperty_mServiceDispatcherHeader ;
+  }
 
   public: GALGAS_lstring mProperty_mServiceEntryNoReturnedValue ;
+  public: inline GALGAS_lstring readProperty_mServiceEntryNoReturnedValue (void) const {
+    return mProperty_mServiceEntryNoReturnedValue ;
+  }
 
   public: GALGAS_lstring mProperty_mServiceEntryWithReturnValue ;
+  public: inline GALGAS_lstring readProperty_mServiceEntryWithReturnValue (void) const {
+    return mProperty_mServiceEntryWithReturnValue ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -20587,68 +20431,6 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBitbandRegisterBaseAddress (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBitbandRegisterBitMultiplier (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBitbandRegisterEndAddress (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBitbandRegisterOffsetMultiplier (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mBitbandRegisterRelocationAddress (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_location getter_mConfigurationLocation (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mHandleDynamicArray (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mLinkerScript (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mNopInstructionStringInLLVM (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_mPointerSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mPython_5F_build (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS__32_lstringlist getter_mPython_5F_utilityToolList (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherEntry (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherHeader (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherInvocationFromAnyMode (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionDispatcherInvocationFromUserMode (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mSectionHandler (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSectionPushedRegisterByteSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherEntry (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceDispatcherHeader (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntryNoReturnedValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceEntryWithReturnValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mServiceHandler (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mServicePushedRegisterByteSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mStackedUserRegisterOnInterruptByteSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lbigint getter_mSystemStackSize (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mUndefinedInterruptHandler (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mXtrInterruptHandler (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_C_5F_definitionFiles (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_LL_5F_definitionFiles (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstringlist getter_m_5F_S_5F_definitionFiles (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -20669,7 +20451,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
-//--- Attributes
+//--- Properties
   public: GALGAS_lstring mProperty_mPanicCodeTypeName ;
   public: GALGAS_lstring mProperty_mPanicLineTypeName ;
   public: GALGAS_targetParameters mProperty_mTargetParameters ;
@@ -20686,14 +20468,6 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
 
 //--- Attribute accessors
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicCodeTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPanicCodeTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_lstring getter_mPanicLineTypeName (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMPanicLineTypeName (GALGAS_lstring inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_targetParameters getter_mTargetParameters (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMTargetParameters (GALGAS_targetParameters inValue COMMA_LOCATION_ARGS) ;
-  public: VIRTUAL_IN_DEBUG GALGAS_interruptionConfigurationList getter_mInterruptionConfigurationList (LOCATION_ARGS) const ;
-  public: VIRTUAL_IN_DEBUG void setter_setMInterruptionConfigurationList (GALGAS_interruptionConfigurationList inValue COMMA_LOCATION_ARGS) ;
 //--- Description
   public: virtual void description (C_String & ioString,
                                     const int32_t inIndentation) const ;
@@ -20825,8 +20599,14 @@ class GALGAS_string function_isrSlotTypeName (class C_Compiler * inCompiler
 class GALGAS_interruptionConfigurationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_lstring mProperty_mInterruptName ;
+  public: inline GALGAS_lstring readProperty_mInterruptName (void) const {
+    return mProperty_mInterruptName ;
+  }
 
   public: GALGAS_interruptionPanicCode mProperty_mInterruptionPanicCode ;
+  public: inline GALGAS_interruptionPanicCode readProperty_mInterruptionPanicCode (void) const {
+    return mProperty_mInterruptionPanicCode ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -20878,10 +20658,6 @@ class GALGAS_interruptionConfigurationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_lstring getter_mInterruptName (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_interruptionPanicCode getter_mInterruptionPanicCode (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -20897,6 +20673,62 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 
 //----------------------------------------------------------------------------------------------------------------------
 //
+// Phase 1: @abstractDeclarationAST_2D_weak weak reference class
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_abstractDeclarationAST_2D_weak : public AC_GALGAS_weak_reference {
+//--------------------------------- Default constructor
+  public: GALGAS_abstractDeclarationAST_2D_weak (void) ;
+
+//--------------------------------- Default GALGAS constructor
+  public: static GALGAS_abstractDeclarationAST_2D_weak constructor_default (LOCATION_ARGS) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_abstractDeclarationAST_2D_weak (const class GALGAS_abstractDeclarationAST & inSource) ;
+
+  public: GALGAS_abstractDeclarationAST_2D_weak & operator = (const class GALGAS_abstractDeclarationAST & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_abstractDeclarationAST bang_abstractDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_abstractDeclarationAST_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                      C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_abstractDeclarationAST_2D_weak constructor_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_abstractDeclarationAST_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
+ 
+} ; // End of GALGAS_abstractDeclarationAST_2D_weak class
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
 // Phase 1: @declarationListAST_2D_element struct
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -20904,6 +20736,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigu
 class GALGAS_declarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_abstractDeclarationAST mProperty_mDeclaration ;
+  public: inline GALGAS_abstractDeclarationAST readProperty_mDeclaration (void) const {
+    return mProperty_mDeclaration ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -20949,8 +20784,6 @@ class GALGAS_declarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_abstractDeclarationAST getter_mDeclaration (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 
@@ -20973,8 +20806,14 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_declarationListAST_
 class GALGAS_extendStaticArrayDeclarationDictAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Properties
   public: GALGAS_string mProperty_key ;
+  public: inline GALGAS_string readProperty_key (void) const {
+    return mProperty_key ;
+  }
 
   public: GALGAS_staticListValueListAST mProperty_mExpressions ;
+  public: inline GALGAS_staticListValueListAST readProperty_mExpressions (void) const {
+    return mProperty_mExpressions ;
+  }
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
@@ -21029,10 +20868,6 @@ class GALGAS_extendStaticArrayDeclarationDictAST_2D_element : public AC_GALGAS_r
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_string getter_key (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_staticListValueListAST getter_mExpressions (LOCATION_ARGS) const ;
-
 
 //--------------------------------- Optional Methods
 

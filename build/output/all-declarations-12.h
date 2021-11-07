@@ -8,252 +8,544 @@
 
 #include "all-declarations-11.h"
 
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Function 'acceptVariableOmnibusName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_acceptVariableOmnibusName (class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Routine 'analyzeEffectiveParameters'
+//                               Bool options                                                    
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_routineTypedSignature constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_location constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
-                                         class C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+extern C_BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicRoutineNameForFilePath'
+//                               UInt options                                                    
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_panicRoutineNameForFilePath (const class GALGAS_string & constinArgument0,
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                              String options                                                   
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//                              String List options                                              
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'configurationNodeNameForPrecedenceGraph'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_configurationNodeNameForPrecedenceGraph (class C_Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'ctBoolTypeName'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_ctBoolTypeName (class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'routineMangledNameFromCall'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_lstring function_routineMangledNameFromCall (const class GALGAS_string & constinArgument0,
+                                                          const class GALGAS_lstring & constinArgument1,
+                                                          const class GALGAS_effectiveArgumentListAST & constinArgument2,
                                                           class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicModeName'
+//Routine 'appendUnsignedOperatorsTo'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_panicModeName (class C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
+void routine_appendUnsignedOperatorsTo (const class GALGAS_string constinArgument0,
+                                        class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                        class C_Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Routine 'generatePanicCode'
+//Routine 'appendInfixOperatorDeclaration'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-void routine_generatePanicCode (class GALGAS_string & ioArgument0,
-                                const class GALGAS_generationContext constinArgument1,
-                                class GALGAS_generationAdds & ioArgument2,
-                                class C_Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
+void routine_appendInfixOperatorDeclaration (const class GALGAS_omnibusInfixOperator constinArgument0,
+                                             const class GALGAS_string constinArgument1,
+                                             const class GALGAS_string constinArgument2,
+                                             const class GALGAS_string constinArgument3,
+                                             class GALGAS_semanticTypePrecedenceGraph & ioArgument4,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'llvmNameForSectionImplementation'
+//Routine 'appendPrefixOperatorDeclaration_bitWiseComplement'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_llvmNameForSectionImplementation (const class GALGAS_string & constinArgument0,
-                                                               class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+void routine_appendPrefixOperatorDeclaration_5F_bitWiseComplement (const class GALGAS_string constinArgument0,
+                                                                   class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                                   class C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicRoutineName'
+//Routine 'appendSignedOperatorsTo'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_panicRoutineName (class C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+void routine_appendSignedOperatorsTo (const class GALGAS_string constinArgument0,
+                                      class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'llvmNameForSectionCall'
+//Routine 'appendPrefixOperatorDeclaration_minus'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_llvmNameForSectionCall (const class GALGAS_string & constinArgument0,
-                                                     class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+void routine_appendPrefixOperatorDeclaration_5F_minus (const class GALGAS_string constinArgument0,
+                                                       class GALGAS_semanticTypePrecedenceGraph & ioArgument1,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForAssertViolation'
+//Routine 'buildOrderedDeclarationList'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForAssertViolation (class C_Compiler * inCompiler
+void routine_buildOrderedDeclarationList (const class GALGAS_ast constinArgument0,
+                                          const class GALGAS_string constinArgument1,
+                                          const class GALGAS_location constinArgument2,
+                                          class GALGAS_declarationListAST & outArgument3,
+                                          class C_Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'buildSemanticContext'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_buildSemanticContext (const class GALGAS_lstring constinArgument0,
+                                   const class GALGAS_ast constinArgument1,
+                                   class GALGAS_staticEntityMap & ioArgument2,
+                                   class GALGAS_staticListInitializationMap & ioArgument3,
+                                   class GALGAS_semanticContext & outArgument4,
+                                   class GALGAS_declarationDecorationList & outArgument5,
+                                   class GALGAS_decoratedRegularRoutineList & outArgument6,
+                                   class GALGAS_routineListIR & outArgument7,
+                                   class GALGAS_userLLVMTypeDefinitionListIR & outArgument8,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'buildControlRegisterMapHTMLFile'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_buildControlRegisterMapHTMLFile (const class GALGAS_controlRegisterGroupMap constinArgument0,
+                                              const class GALGAS_lstring constinArgument1,
+                                              class C_Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'buildGlobalConstantMapHTMLFile'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_buildGlobalConstantMapHTMLFile (class GALGAS_globalConstantMap inArgument0,
+                                             const class GALGAS_lstring constinArgument1,
+                                             class C_Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'buildTypeMapHTMLFile'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_buildTypeMapHTMLFile (const class GALGAS_unifiedTypeMap constinArgument0,
+                                   const class GALGAS_routineMapForContext constinArgument1,
+                                   const class GALGAS_infixOperatorMap constinArgument2,
+                                   const class GALGAS_prefixOperatorMap constinArgument3,
+                                   const class GALGAS_assignmentOperatorMap constinArgument4,
+                                   const class GALGAS_lstring constinArgument5,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeIntegerType'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_omnibusType function_compileTimeIntegerType (class C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForUnsignedAdditionOverflow'
+//Function 'ctIntegerTypeName'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForUnsignedAdditionOverflow (class C_Compiler * inCompiler
+class GALGAS_string function_ctIntegerTypeName (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeBoolType'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_omnibusType function_compileTimeBoolType (class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'staticStringTypeName'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_staticStringTypeName (class C_Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Filewrapper 'typeDumpGenerationTemplate'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_typeDumpGenerationTemplate ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Filewrapper template 'typeDumpGenerationTemplate dump'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
+                                                                   const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                   const class GALGAS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
+                                                                   const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                   const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
+                                                                   const class GALGAS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
+                                                                   const class GALGAS_infixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
+                                                                   const class GALGAS_prefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
+                                                                   const class GALGAS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
                                                                    COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedAdditionOverflow'
+//Function 'linkForHTMLTypeMap'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForSignedAdditionOverflow (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_linkForHTMLTypeMap (const class GALGAS_string & constinArgument0,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForUnsignedSubtractOverflow'
+//Routine 'declareLLVMTypes'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForUnsignedSubtractOverflow (class C_Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
+void routine_declareLLVMTypes (const class GALGAS_userLLVMTypeDefinitionListIR constinArgument0,
+                               class GALGAS_string & ioArgument1,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedSubtractOverflow'
+//Routine 'getNewTempReference'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForSignedSubtractOverflow (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+void routine_getNewTempReference (const class GALGAS_omnibusType constinArgument0,
+                                  class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                  class GALGAS_objectIR & outArgument2,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForUnsignedMultiplicationOverflow'
+//Routine 'semanticAnalysis'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class C_Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
+void routine_semanticAnalysis (const class GALGAS_string constinArgument0,
+                               const class GALGAS_ast constinArgument1,
+                               const class GALGAS_stringset constinArgument2,
+                               const class GALGAS_declarationDecorationList constinArgument3,
+                               const class GALGAS_decoratedRegularRoutineList constinArgument4,
+                               const class GALGAS_routineListIR constinArgument5,
+                               const class GALGAS_semanticContext constinArgument6,
+                               const class GALGAS_location constinArgument7,
+                               const class GALGAS_staticEntityMap constinArgument8,
+                               class GALGAS_intermediateCodeStruct & outArgument9,
+                               class C_Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedMultiplicationOverflow'
+//Routine 'appendPanicRoutines'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForSignedMultiplicationOverflow (class C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
+void routine_appendPanicRoutines (const class GALGAS_stringset constinArgument0,
+                                  class GALGAS_intermediateCodeStruct & ioArgument1,
+                                  class C_Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForUnsignedDivisionByZero'
+//Routine 'checkRequiredProcedures'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForUnsignedDivisionByZero (class C_Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) ;
+void routine_checkRequiredProcedures (const class GALGAS_ast constinArgument0,
+                                      const class GALGAS_semanticContext constinArgument1,
+                                      const class GALGAS_location constinArgument2,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedDivisionByZero'
+//Function 'assignmentOperatorFuncName'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForSignedDivisionByZero (class C_Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_assignmentOperatorFuncName (const class GALGAS_omnibusType & constinArgument0,
+                                                         const class GALGAS_omnibusType & constinArgument1,
+                                                         class C_Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForUnsignedRemainderByZero'
+//Function 'assignValueToFixedSizeArrayElements_functionName'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForUnsignedRemainderByZero (class C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
+                                                                                  class C_Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedRemainderByZero'
+//Routine 'addIntegerInfixOperator'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForSignedRemainderByZero (class C_Compiler * inCompiler
+void routine_addIntegerInfixOperator (const class GALGAS_omnibusInfixOperator constinArgument0,
+                                      const class GALGAS_omnibusType constinArgument1,
+                                      const class GALGAS_string constinArgument2,
+                                      class GALGAS_infixOperatorMap & ioArgument3,
+                                      const class GALGAS_omnibusType constinArgument4,
+                                      class C_Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'copyableAttribute'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_copyableAttribute (class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'minValueForInteger'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'maxValueForInteger'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'instantiableAttribute'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_instantiableAttribute (class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'registerGroupNameFromOmnibusName'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_lstring function_registerGroupNameFromOmnibusName (const class GALGAS_lstring & constinArgument0,
+                                                                class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForConvertOverflow'
+//Filewrapper 'controlRegisterDumpGenerationTemplate'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForConvertOverflow (class C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplate ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForNegativeArrayIndex'
+//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForNegativeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class C_Compiler * inCompiler,
+                                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                    const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                    const class GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForTooLargeArrayIndex'
+//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForTooLargeArrayIndex (class C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class C_Compiler * inCompiler,
+                                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                                       const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
+                                                                                       const class GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
+                                                                                       COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForClosedSync'
+//Routine 'buildControlRegisterMaps'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_bigint function_panicCodeForClosedSync (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+void routine_buildControlRegisterMaps (const class GALGAS_controlRegisterMap constinArgument0,
+                                       const class GALGAS_bigint constinArgument1,
+                                       const class GALGAS_string constinArgument2,
+                                       class GALGAS_controlRegisterByAddress & ioArgument3,
+                                       class GALGAS_controlRegisterByName & ioArgument4,
+                                       class GALGAS_uint & ioArgument5,
+                                       class C_Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'infixOperatorFunctionName'
+//Function 'arrayIndexListFor'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_infixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
-                                                        const class GALGAS_omnibusInfixOperator & constinArgument1,
-                                                        const class GALGAS_omnibusType & constinArgument2,
-                                                        class C_Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
+class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & constinArgument0,
+                                                  class C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'prefixOperatorFunctionName'
+//Function 'fieldIndexColumns'
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_prefixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
-                                                         const class GALGAS_prefixOperator & constinArgument1,
-                                                         class C_Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
+class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
+                                                class C_Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Filewrapper 'constantDumpGenerationTemplate'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Filewrapper template 'constantDumpGenerationTemplate dump'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class C_Compiler * inCompiler,
+                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
+                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Function 'linkForGlobalConstant'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
+                                                    class C_Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'retainRequiredDrivers'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_retainRequiredDrivers (class GALGAS_ast & ioArgument0,
+                                    class C_Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) ;
 

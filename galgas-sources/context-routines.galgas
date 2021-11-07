@@ -19,7 +19,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
   end
   s += inRoutineName.string
   s += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"

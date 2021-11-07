@@ -5,35 +5,35 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @intermediateCodeStruct {
-  @staticEntityMap mStaticEntityMap
-  @interruptMapIR mInterruptMapIR
-  @externProcedureMapIR mExternProcedureMapIR
-  @panicSortedListIR mPanicSetupListIR
-  @panicSortedListIR mPanicLoopListIR
-  @taskMapIR mTaskMapIR
-  @globalTaskVariableList mGlobalTaskVariableList
-  @uint mMaxBranchOfOnInstructions
-  @targetParameters mTargetParameters
-  @driverListIR mDriverList
-  @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
-  @globalSyncInstanceMapIR mGlobalSyncInstanceMap
-  @controlRegisterGroupArrayList mControlRegisterGroupArrayList
-  @routineListIR mRoutineListIR
+  public var @staticEntityMap mStaticEntityMap
+  public var @interruptMapIR mInterruptMapIR
+  public var @externProcedureMapIR mExternProcedureMapIR
+  public var @panicSortedListIR mPanicSetupListIR
+  public var @panicSortedListIR mPanicLoopListIR
+  public var @taskMapIR mTaskMapIR
+  public var @globalTaskVariableList mGlobalTaskVariableList
+  public var @uint mMaxBranchOfOnInstructions
+  public var @targetParameters mTargetParameters
+  public var @driverListIR mDriverList
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate
+  public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap
+  public var @controlRegisterGroupArrayList mControlRegisterGroupArrayList
+  public var @routineListIR mRoutineListIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @controlRegisterGroupArrayList {
-  @lstring mGroupName
-  @lbigintlist mBaseAddresses
+  public var @lstring mGroupName
+  public var @lbigintlist mBaseAddresses
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @abstractRoutineIR {
-  @lstring mRoutineMangledName
-  @bool isRequired %selector
-  @bool warnsIfUnused %selector
+abstract refclass @abstractRoutineIR {
+  public var @lstring mRoutineMangledName
+  public var @bool isRequired %selector
+  public var @bool warnsIfUnused %selector
 }
 
 #·······················································································································
@@ -63,7 +63,7 @@ method @abstractRoutineIR enterAccessibleEntities
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @routineListIR {
-  @abstractRoutineIR mRoutine
+  public var @abstractRoutineIR mRoutine
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

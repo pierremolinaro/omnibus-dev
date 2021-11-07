@@ -2,8 +2,8 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @addressofExpressionAST : @expressionAST {
-  @LValueAST mLValue
+refclass @addressofExpressionAST : @expressionAST {
+  public var @LValueAST mLValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -97,9 +97,9 @@ override method @addressofExpressionAST analyzeExpression
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @addressofInstructionIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @LValueRepresentation mLValue
+refclass @addressofInstructionIR : @abstractInstructionIR {
+  public var @objectIR mTarget
+  public var @LValueRepresentation mLValue
 }
 
 #·······················································································································

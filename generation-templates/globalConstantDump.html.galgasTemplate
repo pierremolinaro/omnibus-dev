@@ -52,7 +52,7 @@ tr.result_line {
 <h1>Global Constants of %!PROJECT_NAME%</h1>
 <p>This document lists all %![[GLOBAL_CONSTANT_MAP count] string]% defined global constants, sorted by name.</p>
 <p>%
-for () in FIRST_LETTER_SET
+for (key) in FIRST_LETTER_SET
 do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
 between % - %
 end
@@ -62,7 +62,7 @@ end
 </p>
 <table class="result">
 <tr><td class="result_title">Constant Name</td><td class="result_title">OMNIBUS Type</td><td class="result_title">LLVM Type</td><td class="result_title">Value</td></tr>\n%
-for () in GLOBAL_CONSTANT_MAP do
+for (lkey mValue) in GLOBAL_CONSTANT_MAP do
   %<tr class="result_line"><td><a name="%!lkey.string%">%!lkey.string%</a></td><td>..<'$%![mValue omnibusTypeDescriptionName]%</td><td>%![mValue llvmTypeName]%</td><td>%![mValue llvmName]%</td></tr>\n%
 end%
 </table>

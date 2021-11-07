@@ -3,17 +3,17 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @switchCaseListAST {
-  @lstringlist mCaseIdentifiers
-  @instructionListAST mCaseInstructionList
+  public var @lstringlist mCaseIdentifiers
+  public var @instructionListAST mCaseInstructionList
 }
 
 #·······················································································································
 
-shared class @switchInstructionAST : @instructionAST {
-  @expressionAST mSwitchExpression
-  @location mEndOf_test_expression
-  @switchCaseListAST mSwitchCaseList
-  @location mEndOf_switch_instruction
+refclass @switchInstructionAST : @instructionAST {
+  public var @expressionAST mSwitchExpression
+  public var @location mEndOf_test_expression
+  public var @switchCaseListAST mSwitchCaseList
+  public var @location mEndOf_switch_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -30,10 +30,10 @@ syntax extension omnibus_syntax {
     <expression> !?ioAST ?let @expressionAST switchExpression
     let switchExpressionEndLocation = @location.here
     ${$
-    @switchCaseListAST switchCaseList = {}
+    var @switchCaseListAST switchCaseList = {}
     repeat
       $case$
-      @lstringlist caseIdentifiers = {}
+      var @lstringlist caseIdentifiers = {}
       repeat
         $identifier$ ?let caseIdf
         caseIdentifiers += !caseIdf
@@ -87,7 +87,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
-  @instructionListIR switchExpressionGenerationList = {}
+  var @instructionListIR switchExpressionGenerationList = {}
   [self.mSwitchExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
@@ -118,10 +118,10 @@ override method @switchInstructionAST instructionSemanticAnalysis
   end
 #--- Analyse case list
   [!?ioUniversalMap openOverrideForSelectBlock]
-  @stringset usedEnumerationValues = {}
-  @switchCaseListIR switchCaseListIR = {}
+  var @stringset usedEnumerationValues = {}
+  var @switchCaseListIR switchCaseListIR = {}
   for (caseIdentifiers instructionList) in self.mSwitchCaseList do
-    @uintlist caseIdentifierIndexList = {}
+    var @uintlist caseIdentifierIndexList = {}
     for (caseIdf) in caseIdentifiers do
       [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
       caseIdentifierIndexList += !constantIdx
@@ -130,7 +130,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
       end
       usedEnumerationValues += !caseIdf
     end
-    @instructionListIR instructionGenerationList = {}
+    var @instructionListIR instructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -166,17 +166,17 @@ override method @switchInstructionAST instructionSemanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @switchCaseListIR {
-  @uintlist mCaseIdentifierIndexes
-  @instructionListIR mCaseInstructionList
+  public var @uintlist mCaseIdentifierIndexes
+  public var @instructionListIR mCaseInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @switchInstructionIR : @abstractInstructionIR {
-  @uint mLabelIndex
-  @instructionListIR mSwitchExpressionGenerationList
-  @objectIR mSwitchExpression
-  @switchCaseListIR mCaseGenerationList
+refclass @switchInstructionIR : @abstractInstructionIR {
+  public var @uint mLabelIndex
+  public var @instructionListIR mSwitchExpressionGenerationList
+  public var @objectIR mSwitchExpression
+  public var @switchCaseListIR mCaseGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -25,8 +25,8 @@ getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
 #·······················································································································
 
 list @effectiveArgumentListAST {
-  @effectiveArgumentPassingModeAST mEffectiveParameterKind
-  @lstring mSelector
+  public var @effectiveArgumentPassingModeAST mEffectiveParameterKind
+  public var @lstring mSelector
 }
 
 #·······················································································································
@@ -79,7 +79,7 @@ syntax extension omnibus_syntax {
       outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
     while
       $?selector:$ ?let selector
-      @bool constant
+      var @bool constant
       select
         $var$
         constant = false
@@ -88,7 +88,7 @@ syntax extension omnibus_syntax {
         constant = true
       end
       $identifier$ ?let effectiveParameterName
-      @lstring typeName
+      var @lstring typeName
       select
         typeName = ["" nowhere]
       or
@@ -126,8 +126,8 @@ proc analyzeEffectiveParameters
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
 #--- Analyze effective parameters
-  @procEffectiveParameterList parameterList = {}
-  for () formal_ in inFormalSignature, () effective_ in inEffectiveParameterList do
+  var @procEffectiveParameterList parameterList = {}
+  for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
@@ -227,7 +227,7 @@ proc analyzeEffectiveParameters
     error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
       + [inEffectiveParameterList length] + " argument(s)"
   else
-    for () formal_ in inFormalSignature, () actual_ in parameterList do
+    for (formal_mFormalArgumentPassingMode formal_mSelector formal_mTypeProxy *) in inFormalSignature, (actual_mEffectiveParameterPassingMode actual_mSelector actual_mParameterType) in parameterList do
       if [formal_mTypeProxy type].omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then
         error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.omnibusTypeDescriptionName +
            ", and is incompatible with the formal type $" + [formal_mTypeProxy key]

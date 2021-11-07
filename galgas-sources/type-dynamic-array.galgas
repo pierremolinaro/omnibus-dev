@@ -2,9 +2,9 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
-  @lstring mDynamicArrayTypeName
-  @lstring mElementTypeName
+refclass @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mDynamicArrayTypeName
+  public var @lstring mElementTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -163,7 +163,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !insertFunctionMangledName
     }
   #-------------------------------------------- Constructor map
-    @constructorMap constructorMap = {}
+    var @constructorMap constructorMap = {}
     [!?constructorMap insertKey !["()" nowhere] !{} !.null]
     [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
   #-------------------------------------------- Type attributes
@@ -281,7 +281,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
 #! CODE GENERATION: removeAll
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynArrayRemoveAllFunctionIR : @abstractRoutineIR {
+refclass @dynArrayRemoveAllFunctionIR : @abstractRoutineIR {
 }
 
 #·······················································································································
@@ -305,7 +305,7 @@ override method @dynArrayRemoveAllFunctionIR llvmCodeGeneration
 #! CODE GENERATION: length
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynArrayLengthFunctionIR : @abstractRoutineIR {
+refclass @dynArrayLengthFunctionIR : @abstractRoutineIR {
 }
 
 #·······················································································································
@@ -328,10 +328,10 @@ override method @dynArrayLengthFunctionIR llvmCodeGeneration
 #! CODE GENERATION: append(?:)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynArrayAppendFunctionIR : @abstractRoutineIR {
-  @unifiedTypeMap-entry mArrayTypeProxy
-  @unifiedTypeMap-entry mElementTypeProxy
-  @string mInsertFunctionMangledName
+refclass @dynArrayAppendFunctionIR : @abstractRoutineIR {
+  public var @unifiedTypeMap-entry mArrayTypeProxy
+  public var @unifiedTypeMap-entry mElementTypeProxy
+  public var @string mInsertFunctionMangledName
 }
 
 #·······················································································································
@@ -386,8 +386,8 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
 #! CODE GENERATION: insert(?:)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynArrayInsertFunctionIR : @abstractRoutineIR {
-  @unifiedTypeMap-entry mElementTypeProxy
+refclass @dynArrayInsertFunctionIR : @abstractRoutineIR {
+  public var @unifiedTypeMap-entry mElementTypeProxy
 }
 
 #·······················································································································
@@ -439,9 +439,9 @@ override method @dynArrayInsertFunctionIR llvmCodeGeneration
 #! CODE GENERATION: DYNAMIC ARRAY ASSIGNMENT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynamicArrayTypeAssignUsage : @abstractAssignmentOperatorUsage {
-  @omnibusType mDynamicArrayType
-  @string mAssignFunctionName
+refclass @dynamicArrayTypeAssignUsage : @abstractAssignmentOperatorUsage {
+  public var @omnibusType mDynamicArrayType
+  public var @string mAssignFunctionName
 }
 
 #·······················································································································
@@ -463,7 +463,7 @@ override method @dynamicArrayTypeAssignUsage generateCode
           + ", " + targetTypeName + "* " + [inSourcePossibleReference llvmName] + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !{!self.mAssignFunctionName}]
   else # Not initialized, perform a store  
-    @objectIR sourceValue = inSourcePossibleReference
+    var @objectIR sourceValue = inSourcePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
     let s = "store " + targetTypeName + " " + [sourceValue llvmName] + ", " + targetTypeName + "* " + inTargetLLVMName
     [!?ioInstructionListIR appendInstructionAsFreeString !s !{}]
@@ -472,7 +472,7 @@ override method @dynamicArrayTypeAssignUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @dynamicArrayTypeAssignGenericFunctionIR : @abstractRoutineIR {
+refclass @dynamicArrayTypeAssignGenericFunctionIR : @abstractRoutineIR {
 }
 
 #·······················································································································

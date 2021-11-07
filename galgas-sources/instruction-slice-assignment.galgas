@@ -2,18 +2,18 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @sliceAssignmentInstructionAST : @instructionAST {
-  @lstring mTypeName
-  @sliceAssignmentListAST mSliceAssignmentList
-  @expressionAST mSourceExpression
-  @location mSourceExpressionLocation
+refclass @sliceAssignmentInstructionAST : @instructionAST {
+  public var @lstring mTypeName
+  public var @sliceAssignmentListAST mSliceAssignmentList
+  public var @expressionAST mSourceExpression
+  public var @location mSourceExpressionLocation
 }
 
 #·······················································································································
 
 list @sliceAssignmentListAST {
-  @lstring mSliceWidth
-  @sliceTargetAST mSliceKind
+  public var @lstring mSliceWidth
+  public var @sliceTargetAST mSliceKind
 }
 
 #·······················································································································
@@ -36,10 +36,10 @@ syntax extension omnibus_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
     $\$type$ ?let typeName
-    @sliceAssignmentListAST sliceAssignmentListAST = {}
+    var @sliceAssignmentListAST sliceAssignmentListAST = {}
     repeat
       $?selector:$ ?let sliceWidth
-      @sliceTargetAST sliceKind
+      var @sliceTargetAST sliceKind
       select
         $_$
         sliceKind = .discarded
@@ -83,7 +83,7 @@ syntax extension omnibus_syntax {
 override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
+  for (* sliceKind) in self.mSliceAssignmentList do
     switch sliceKind
     case discarded :
     case varDeclaration (*) :
@@ -112,7 +112,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
 #--- Search Type
   let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
 #--- Check type is an unsigned integer type
-  @uint bitCount
+  var @uint bitCount
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" : bitCount
   else
@@ -148,12 +148,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   end
 #--- Analyze slices
   var rightShiftAmount = bitCount
-  @bigint accumulatedFieldStaticValues = 0G
+  var @bigint accumulatedFieldStaticValues = 0G
   for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     var sourceOperandForSlicing = sourceOperand
   #--- Analyze selector
-    @lstring sliceTypeName
-    @uint sliceWidth
+    var @lstring sliceTypeName
+    var @uint sliceWidth
     if sliceWidthStr.string == "" then
       error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
     elsif sliceWidthStr.string == "b" then

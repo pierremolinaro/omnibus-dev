@@ -47,8 +47,8 @@ func infixOperatorMapKey ?let @omnibusType inLeftType
                          ?let @location inOperatorLocation
                          ?let @omnibusType inRightType -> @lstring 
 {
-  var s = [inLeftType omnibusTypeDescriptionName] + " " + inInfixOperator
-  s += " " + [inRightType omnibusTypeDescriptionName]
+  var s = inLeftType.omnibusTypeDescriptionName + " " + inInfixOperator
+  s += " " + inRightType.omnibusTypeDescriptionName
   result = .new {!s !inOperatorLocation}
 }
 
@@ -59,7 +59,7 @@ func infixOperatorFunctionName
       ?let @omnibusInfixOperator inOperator
       ?let @omnibusType inRightType -> @string
 {
-  result = "operator." + [inLeftType omnibusTypeDescriptionName] + "."
+  result = "operator." + inLeftType.omnibusTypeDescriptionName + "."
   switch inOperator
    case equal     : result += "equal"
    case lessThan : result += "lessThan"
@@ -80,7 +80,7 @@ func infixOperatorFunctionName
    case leftShiftOp  : result += "leftShift"
    case rightShiftOp : result += "rightShift"
   end
-  result += "." + [inRightType omnibusTypeDescriptionName]
+  result += "." + inRightType.omnibusTypeDescriptionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -91,14 +91,14 @@ func prefixOperatorMapKey ?let @omnibusType inReceiverType
                           ?let @prefixOperator inOperator
                           ?let @location inOperatorLocation -> @lstring 
 {
-  @string s
+  var @string s
   switch inOperator
    case minusNoOvf : s = "-%"
    case minusOp    : s = "-"
    case notOp      : s = "not"
    case bitWiseComplement : s = "~"
   end
-  s += " " + [inReceiverType omnibusTypeDescriptionName]
+  s += " " + inReceiverType.omnibusTypeDescriptionName
   result = .new {!s !inOperatorLocation}
 }
 
@@ -115,7 +115,7 @@ func prefixOperatorFunctionName
    case notOp      : result += "not"
    case bitWiseComplement : result += "complement"
   end
-  result += "." + [inReceiverType omnibusTypeDescriptionName]
+  result += "." + inReceiverType.omnibusTypeDescriptionName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

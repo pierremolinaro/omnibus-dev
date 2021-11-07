@@ -3,9 +3,9 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @universalValuedObjectMap {
-  @flatValuedObjectMap mInternalPropertyAndRoutineMap
-  @scopeStack mScopeStack
-  @lstringlist mLocalObjectList
+  public var @flatValuedObjectMap mInternalPropertyAndRoutineMap
+  public var @scopeStack mScopeStack
+  public var @lstringlist mLocalObjectList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -384,7 +384,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
 #·······················································································································
 
 setter @universalValuedObjectMap openOverrideForSelectBlock {
-  @referenceStateMap initialStateMap = {}
+  var @referenceStateMap initialStateMap = {}
   for entry in self.mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
     case task (*) :
@@ -404,7 +404,7 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
 #·······················································································································
 
 setter @universalValuedObjectMap openOverrideForRepeatBlock {
-  @referenceStateMap initialStateMap = {}
+  var @referenceStateMap initialStateMap = {}
   for entry in self.mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
     case task (*) :
@@ -435,7 +435,7 @@ setter @universalValuedObjectMap openBranch {
 setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
   [!?self.mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?var referenceStateMap ?let localObjectList]
   if firstBranch then
-    @referenceStateMap newReferenceStateMap = {}
+    var @referenceStateMap newReferenceStateMap = {}
     for entry in self.mInternalPropertyAndRoutineMap do
       switch entry.mValuedObject
       case task (*) :
@@ -521,9 +521,9 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @flatValuedObjectMap { # Key is a valued object
-  @valuedObjectState mObjectState
-  @bool mObjectShouldBeValuedAtEndOfScope
-  @valuedObject mValuedObject
+  public var @valuedObjectState mObjectState
+  public var @bool mObjectShouldBeValuedAtEndOfScope
+  public var @valuedObject mValuedObject
 
   insert insertKey error message "the '%K' entity is already declared in %L"
   search searchKey error message "there is no '%K' entity"
@@ -540,17 +540,17 @@ enum @scopeKind {
 #·······················································································································
 
 list @scopeStack {
-  @scopeKind mScopeKind
-  @bool mFirstBranch
-  @referenceStateMap mInitialStateMap
-  @referenceStateMap mReferenceStateMap
-  @lstringlist mObjectList
+  public var @scopeKind mScopeKind
+  public var @bool mFirstBranch
+  public var @referenceStateMap mInitialStateMap
+  public var @referenceStateMap mReferenceStateMap
+  public var @lstringlist mObjectList
 }
 
 #·······················································································································
 
 map @referenceStateMap {
-  @valuedObjectState mState
+  public var @valuedObjectState mState
   insert insertKey error message "INTERNAL ERROR"
   search searchKey error message "INTERNAL ERROR"
 }

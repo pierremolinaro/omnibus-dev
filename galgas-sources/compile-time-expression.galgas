@@ -2,46 +2,46 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @ctExpressionAST {
+abstract refclass @ctExpressionAST {
 }
 
 #·······················································································································
 
-shared class @ctInfixExpressionAST : @ctExpressionAST {
-  @ctExpressionAST mLeftExpression
-  @location mOperatorLocation
-  @compileTimeInfixOperatorEnumeration mInfixOperator
-  @ctExpressionAST mRightExpression
+refclass @ctInfixExpressionAST : @ctExpressionAST {
+  public var @ctExpressionAST mLeftExpression
+  public var @location mOperatorLocation
+  public var @compileTimeInfixOperatorEnumeration mInfixOperator
+  public var @ctExpressionAST mRightExpression
 }
 
 #·······················································································································
 
-shared class @ctPrefixExpressionAST : @ctExpressionAST {
-  @location mOperatorLocation
-  @compileTimePrefixOperatorEnumeration mPrefixOperator
-  @ctExpressionAST mExpression
+refclass @ctPrefixExpressionAST : @ctExpressionAST {
+  public var @location mOperatorLocation
+  public var @compileTimePrefixOperatorEnumeration mPrefixOperator
+  public var @ctExpressionAST mExpression
 }
 
 #·······················································································································
 
-shared class @ctTrueExpressionAST : @ctExpressionAST {
+refclass @ctTrueExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-shared class @ctFalseExpressionAST : @ctExpressionAST {
+refclass @ctFalseExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-shared class @ctIntExpressionAST : @ctExpressionAST {
-  @lbigint mValue
+refclass @ctIntExpressionAST : @ctExpressionAST {
+  public var @lbigint mValue
 }
 
 #·······················································································································
 
-shared class @ctIdentifierExpressionAST : @ctExpressionAST {
-  @lstring mIdentifier
+refclass @ctIdentifierExpressionAST : @ctExpressionAST {
+  public var @lstring mIdentifier
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -451,7 +451,7 @@ override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCh
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctMap {
-  @bigint mValue
+  public var @bigint mValue
   insert insertKey error message "the '%K' key is already declared in %L"
   search searchKey error message "there is no '%K' key"
 }
@@ -525,7 +525,7 @@ override method @ctIntExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
-  outValue = [self.mValue bigint]
+  outValue = self.mValue.bigint
 }
 
 #·······················································································································

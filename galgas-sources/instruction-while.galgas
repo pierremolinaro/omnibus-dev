@@ -2,11 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @whileInstructionAST : @instructionAST {
-  @expressionAST m_while_Expression
-  @location mEndOf_test_expression
-  @instructionListAST mWhileInstructionList
-  @location mEndOf_while_instruction
+refclass @whileInstructionAST : @instructionAST {
+  public var @expressionAST m_while_Expression
+  public var @location mEndOf_test_expression
+  public var @instructionListAST mWhileInstructionList
+  public var @location mEndOf_while_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -65,7 +65,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
-  @instructionListIR testInstructionGenerationList = {}
+  var @instructionListIR testInstructionGenerationList = {}
   [self.m_while_Expression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -105,7 +105,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #    error mEndOf_test_expression : "test expression type should not be static"
 #  end
 #--- Analyze instruction list
-  @instructionListIR instructionGenerationList = {}
+  var @instructionListIR instructionGenerationList = {}
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [self.mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -133,11 +133,11 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @whileInstructionIR : @abstractInstructionIR {
-  @uint mLabelIndex
-  @instructionListIR mTestInstructionGenerationList
-  @string m_while_llvmName
-  @instructionListIR mInstructionGenerationList
+refclass @whileInstructionIR : @abstractInstructionIR {
+  public var @uint mLabelIndex
+  public var @instructionListIR mTestInstructionGenerationList
+  public var @string m_while_llvmName
+  public var @instructionListIR mInstructionGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

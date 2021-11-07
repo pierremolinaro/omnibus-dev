@@ -2,16 +2,16 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
-  @location mOperatorLocation
-  @lstring mTargetVariableName
-  @lstring mTargetTypeName
-  @genericFormalParameterList mTargetGenericFormalParameterList
-  @lstring mSourceVariableName
-  @lstring mSourceTypeName
-  @genericFormalParameterList mSourceGenericFormalParameterList
-  @ctExpressionAST mWhereClause
-  @llvmGenerationInstructionList mLLVMInstructionList
+refclass @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
+  public var @location mOperatorLocation
+  public var @lstring mTargetVariableName
+  public var @lstring mTargetTypeName
+  public var @genericFormalParameterList mTargetGenericFormalParameterList
+  public var @lstring mSourceVariableName
+  public var @lstring mSourceTypeName
+  public var @genericFormalParameterList mSourceGenericFormalParameterList
+  public var @ctExpressionAST mWhereClause
+  public var @llvmGenerationInstructionList mLLVMInstructionList
 }
 
 #·······················································································································
@@ -162,7 +162,7 @@ override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
-  result = "assign." + [inTargetType llvmBaseTypeName] + ".ref.from." + [inSourceType llvmBaseTypeName] + ".ref"
+  result = "assign." + inTargetType.llvmBaseTypeName + ".ref.from." + inSourceType.llvmBaseTypeName + ".ref"
 }
 
 #·······················································································································
@@ -171,7 +171,7 @@ func assignmentOperatorKey ?let @omnibusType inTargetType
                            ?let @location inErrorLocation
                            ?let @omnibusType inSourceType -> @lstring {
   result = @lstring.new {
-    ![inTargetType omnibusTypeDescriptionName] + " = " + [inSourceType omnibusTypeDescriptionName]
+    !inTargetType.omnibusTypeDescriptionName + " = " + inSourceType.omnibusTypeDescriptionName
     !inErrorLocation
   }
 }
@@ -180,7 +180,7 @@ func assignmentOperatorKey ?let @omnibusType inTargetType
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @abstractAssignmentOperatorUsage {
+abstract refclass @abstractAssignmentOperatorUsage {
 }
 
 #·······················································································································
@@ -198,7 +198,7 @@ abstract method @abstractAssignmentOperatorUsage generateCode
 #·······················································································································
 
 map @assignmentOperatorMap {
-  @abstractAssignmentOperatorUsage mOperatorUsage
+  public var @abstractAssignmentOperatorUsage mOperatorUsage
   insert insertKey error message "the '%K' assignment is already declared in %L"
   search searchKey error message "there is no '%K' assignment"
 }
@@ -216,7 +216,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Build formal generic constant parameter map
-  @ctCheckMap formalGenericConstantParameterMap = {}
+  var @ctCheckMap formalGenericConstantParameterMap = {}
   [self.mTargetGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
   [self.mSourceGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
@@ -253,15 +253,15 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
    && ([self.mSourceGenericFormalParameterList length] == 0)
    && not [sourceType.kind isCompileTimeInteger]
    && not [sourceType.kind isCompileTimeBool] then
-    @assignmentGenerationVarMap varMap = {}
+    var @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !self.mTargetVariableName !"%" + self.mTargetVariableName]
     [!?varMap insertKey !self.mSourceVariableName !"%" + self.mSourceVariableName]
-    @assignmentGenerationVarMap typeMap = {}
+    var @assignmentGenerationVarMap typeMap = {}
     [!?typeMap insertKey !self.mTargetVariableName ![targetType llvmTypeName]]
     [!?typeMap insertKey !self.mSourceVariableName ![sourceType llvmTypeName]]
-    @stringlist generatedInstructions = {}
-    @allocaList allocaList = {}
-    @uint temporaryIndex = 0
+    var @stringlist generatedInstructions = {}
+    var @allocaList allocaList = {}
+    var @uint temporaryIndex = 0
     [self.mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR.new {
       !.new {!assignmentOperatorFuncName (!targetType !sourceType) !self.mOperatorLocation}
@@ -282,15 +282,15 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
-  @omnibusType mTargetType
-  @lstring mTargetVarName
-  @genericFormalParameterList mTargetGenericFormalParameterList
-  @omnibusType mSourceTpe
-  @lstring mSourceVarName
-  @genericFormalParameterList mSourceGenericFormalParameterList
-  @ctExpressionAST mWhereClause
-  @llvmGenerationInstructionList mInstructionList
+refclass @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+  public var @omnibusType mTargetType
+  public var @lstring mTargetVarName
+  public var @genericFormalParameterList mTargetGenericFormalParameterList
+  public var @omnibusType mSourceTpe
+  public var @lstring mSourceVarName
+  public var @genericFormalParameterList mSourceGenericFormalParameterList
+  public var @ctExpressionAST mWhereClause
+  public var @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
@@ -316,13 +316,13 @@ override method @llvmAssignmentOperatorUsage generateCode
       [!?ioInstructionListIR appendInstructionAsFreeString !s !{!llvmRoutineName}]
     else
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
-    @assignmentGenerationVarMap varMap = {}
+    var @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !self.mTargetVarName !inTargetLLVMName]
     [!?varMap insertKey !self.mSourceVarName !srcLLVMName]
-    @assignmentGenerationVarMap typeMap = {}
+    var @assignmentGenerationVarMap typeMap = {}
     [!?typeMap insertKey !self.mTargetVarName ![inTargetType llvmTypeName]]
     [!?typeMap insertKey !self.mSourceVarName ! [sourceType llvmTypeName]]
-    @stringlist generatedInstructions = {}
+    var @stringlist generatedInstructions = {}
     [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
     for (str) in generatedInstructions do
      [!?ioInstructionListIR appendInstructionAsFreeString !str !{}]
@@ -344,7 +344,7 @@ setter @instructionListIR appendAssignmentIR
 {
   let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
   [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
-  @instructionListIR instructions = {}
+  var @instructionListIR instructions = {}
   [operatorUsage generateCode
     !?ioTemporaries
     !?instructions
@@ -360,13 +360,13 @@ setter @instructionListIR appendAssignmentIR
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @assignmentRoutineIR : @abstractRoutineIR {
-  @omnibusType mTargetType
-  @string mTargetVarName
-  @omnibusType mSourceType
-  @string mSourceVarName
-  @stringlist mGeneratedInstructions
-  @allocaList mAllocaList
+refclass @assignmentRoutineIR : @abstractRoutineIR {
+  public var @omnibusType mTargetType
+  public var @string mTargetVarName
+  public var @omnibusType mSourceType
+  public var @string mSourceVarName
+  public var @stringlist mGeneratedInstructions
+  public var @allocaList mAllocaList
 }
 
 #·······················································································································
@@ -389,8 +389,8 @@ override method @assignmentRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
-  @omnibusType mTargetType
+refclass @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
+  public var @omnibusType mTargetType
 }
 
 #·······················································································································
@@ -414,7 +414,7 @@ override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+refclass @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 }
 
 #·······················································································································
@@ -430,7 +430,7 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
     ?initializedTarget: let @bool unused inTargetIsInitialized
 {
 #--- If source is a reference, load value
-  @objectIR sourceValue = inSourcePossibleReference
+  var @objectIR sourceValue = inSourcePossibleReference
   if [inSourcePossibleReference isReference] then
     getNewTempValue (!inTargetType !?ioTemporaries ?sourceValue)
     let s = [sourceValue llvmName] + " = load " + [inTargetType llvmTypeName] + ", "

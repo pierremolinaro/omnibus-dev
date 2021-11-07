@@ -2,8 +2,8 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @literalStringInExpressionAST : @expressionAST {
-  @lstring mLiteralString
+refclass @literalStringInExpressionAST : @expressionAST {
+  public var @lstring mLiteralString
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

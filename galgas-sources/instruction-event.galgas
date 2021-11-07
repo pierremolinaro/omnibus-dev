@@ -19,16 +19,16 @@ enum @guardedCommandAST {
 #·······················································································································
 
 list @syncInstructionBranchListAST {
-  @guardedCommandAST mGuardedCommand
-  @instructionListAST mInstructionList
-  @location mEndOfBranch
+  public var @guardedCommandAST mGuardedCommand
+  public var @instructionListAST mInstructionList
+  public var @location mEndOfBranch
 }
 
 #·······················································································································
 
-shared class @syncInstructionAST : @instructionAST {
-  @syncInstructionBranchListAST mBranchList
-  @location mEndOf_on_instruction
+refclass @syncInstructionAST : @instructionAST {
+  public var @syncInstructionBranchListAST mBranchList
+  public var @location mEndOf_on_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -42,7 +42,7 @@ syntax extension omnibus_syntax {
   rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
     let endOfExp = @location.here
     $event$
-    @lbool usesSelf
+    var @lbool usesSelf
     select
       usesSelf = .new {!false !.here}
     or
@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
       usesSelf = .new {!true !.here}
       $.$
     end
-    @lstringlist nameList = {}
+    var @lstringlist nameList = {}
     repeat
       $identifier$ ?var name
       nameList += !name
@@ -82,7 +82,7 @@ syntax extension omnibus_syntax {
       }
     or
       $event$
-      @lbool usesSelf
+      var @lbool usesSelf
       select
         usesSelf = .new {!false !.here}
       or
@@ -90,7 +90,7 @@ syntax extension omnibus_syntax {
         usesSelf = .new {!true !.here}
         $.$
       end
-      @lstringlist nameList = {}
+      var @lstringlist nameList = {}
       repeat
         $identifier$ ?var name
         nameList += !name
@@ -116,7 +116,7 @@ syntax extension omnibus_syntax {
     $sync$
     ${$
     let startLocation = @location.here
-    @syncInstructionBranchListAST instructionBranchList = {}
+    var @syncInstructionBranchListAST instructionBranchList = {}
     repeat
     while
       $when$
@@ -165,11 +165,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #-------------------- Guards
-  @guardedCommandIRList guardedCommandIRList = {}
-  for (guardedCommand instructionList endOfBranch) in self.mBranchList do
+  var @guardedCommandIRList guardedCommandIRList = {}
+  for (guardedCommand * *) in self.mBranchList do
     switch guardedCommand
     case boolean (isContinue expression endOfExpression) :
-      @instructionListIR guardInstructionGenerationList = {}
+      var @instructionListIR guardInstructionGenerationList = {}
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes: inRoutineAttributes | .guard
@@ -203,7 +203,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !boolGuardBoolLLVMName: [booleanResult llvmName]
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
-      @instructionListIR boolExpInstructionGenerationList = {}
+      var @instructionListIR boolExpInstructionGenerationList = {}
     #--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
@@ -245,16 +245,16 @@ override method @syncInstructionAST instructionSemanticAnalysis
 #        !?boolExpressionResult
 #      ]
     #--- Analyze synchronization
-      @instructionListIR guardInstructionGenerationList = {}
-      @procCallEffectiveParameterListIR guardEffectiveParameterListIR
-      @lstring guardMangledName
+      var @instructionListIR guardInstructionGenerationList = {}
+      var @procCallEffectiveParameterListIR guardEffectiveParameterListIR
+      var @lstring guardMangledName
       if usesSelf.bool then # self.p1.p2. … (…)
         if [inSelfType.kind isVoid] then
           error usesSelf : "'self' is not available in this context" : guardEffectiveParameterListIR, guardMangledName
         else
           var propertyList = nameList
           [!?propertyList popLast ?let guardName]
-          @objectIR currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
+          var @objectIR currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
           for (propertyName) in propertyList do
             handlePropertyAccessInExpression (
               !context: inContext
@@ -375,9 +375,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
   end
 #-------------------- Instruction lists
   [!?ioUniversalMap openOverrideForSelectBlock]
-  @syncInstructionBranchListIR syncInstructionBranchListIR = {}
+  var @syncInstructionBranchListIR syncInstructionBranchListIR = {}
   for (* instructionList endOfBranch) in self.mBranchList, (guardedCommandIR) in guardedCommandIRList do
-    @instructionListIR branchInstructionGenerationList = {}
+    var @instructionListIR branchInstructionGenerationList = {}
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -415,7 +415,7 @@ proc analyzeGuardCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
 {
-  let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [[inReceiver type] omnibusTypeDescriptionName] !functionName: inGuardName]
+  let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [inReceiver type].omnibusTypeDescriptionName !functionName: inGuardName]
 #  let guardMap = [[inReceiver type] guardMap]
   [inContext.mGuardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 #--- Check accessibility
@@ -468,21 +468,21 @@ enum @guardedCommandIR {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @syncInstructionBranchListIR {
-  @guardedCommandIR mGuardedCommand
-  @instructionListIR mInstructionGenerationList
+  public var @guardedCommandIR mGuardedCommand
+  public var @instructionListIR mInstructionGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @guardedCommandIRList {
-  @guardedCommandIR mGuardedCommand
+  public var @guardedCommandIR mGuardedCommand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @syncInstructionIR : @abstractInstructionIR {
-  @location mSelectInstructionLocation
-  @syncInstructionBranchListIR mOnInstructionBranchListIR
+refclass @syncInstructionIR : @abstractInstructionIR {
+  public var @location mSelectInstructionLocation
+  public var @syncInstructionBranchListIR mOnInstructionBranchListIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -505,7 +505,7 @@ override method @syncInstructionIR llvmInstructionCode
   var currentStartBranchLabel = startLabelName
   for branch in self.mOnInstructionBranchListIR do (idx)
     let acceptanceVarName = "%" + startLabel + ".accept." + idx
-    @bool isWhileGuardedCommand
+    var @bool isWhileGuardedCommand
     switch branch.mGuardedCommand
     case booleanGuard (isExitCommand instructionGenerationList boolGuardBoolLLVMName) :
       isWhileGuardedCommand = isExitCommand
@@ -529,7 +529,7 @@ override method @syncInstructionIR llvmInstructionCode
       let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
       ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + [guardMangledName assemblerRepresentation]
       ioLLVMcode += " ("
-      for () in effectiveParameterList do
+      for (mEffectiveParameterPassingMode mParameter) in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
           ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
@@ -552,7 +552,7 @@ override method @syncInstructionIR llvmInstructionCode
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + [guardMangledName assemblerRepresentation]
       ioLLVMcode += " ("
-      for () in effectiveParameterList do
+      for (mEffectiveParameterPassingMode mParameter) in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
           ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]

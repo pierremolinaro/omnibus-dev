@@ -11,12 +11,12 @@ setter @instructionListIR appendGetUniversalArrayElementReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
-  @omnibusType mType
-  @string mLLVMName
-  @omnibusType mElementType
-  @string mElementLLVMName
-  @objectIR mIndexIR
+refclass @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
+  public var @omnibusType mType
+  public var @string mLLVMName
+  public var @omnibusType mElementType
+  public var @string mElementLLVMName
+  public var @objectIR mIndexIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

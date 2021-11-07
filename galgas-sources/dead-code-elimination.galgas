@@ -13,8 +13,8 @@ method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineS
 #·······················································································································
 
 list @routineAccessibilityIR {
-  @abstractRoutineIR mRoutine
-  @stringset mAccessibleRoutineSet
+  public var @abstractRoutineIR mRoutine
+  public var @stringset mAccessibleRoutineSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,13 +23,13 @@ proc codeOptimization
  ?let @string inSourceFile
  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  @routineAccessibilityIR routineAccessibilityIR = {}
+  var @routineAccessibilityIR routineAccessibilityIR = {}
 #----------------------------------------------- Compute accessiblity graph
-  @stringset exploreRoutineSet = {}
-  @stringset allRoutineSet = {}
-  @stringset definedRoutineSet = {}
+  var @stringset exploreRoutineSet = {}
+  var @stringset allRoutineSet = {}
+  var @stringset definedRoutineSet = {}
   for routine in ioIntermediateCodeStruct.mRoutineListIR do
-    @stringset accessibleRoutineSet = {}
+    var @stringset accessibleRoutineSet = {}
     [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
     allRoutineSet += accessibleRoutineSet
@@ -57,7 +57,7 @@ proc codeOptimization
   if [option omnibus_options.noDeadCodeElimination value] then
     message "    No dead code elimination (option --" + [option omnibus_options.noDeadCodeElimination string] + ")\n"
   else
-    @stringset usefulRoutineSet = {}
+    var @stringset usefulRoutineSet = {}
     loop ([ioIntermediateCodeStruct.mRoutineListIR length] + 1) while [exploreRoutineSet count] > 0 do
       let currentSet = exploreRoutineSet
       exploreRoutineSet = {}
@@ -109,12 +109,12 @@ private proc displayInvocationGraph
 {
   var s = "digraph G {\n"
 #--- Build graph
-  @stringset definedRoutines = {}
-  @stringset allRoutines = {}
+  var @stringset definedRoutines = {}
+  var @stringset allRoutines = {}
   for (routine) in inRoutineListIR do
     definedRoutines += !routine.mRoutineMangledName
     allRoutines += !routine.mRoutineMangledName
-    @stringset accessibleRoutineSet = {}
+    var @stringset accessibleRoutineSet = {}
     [routine enterAccessibleEntities !?accessibleRoutineSet !?*]
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"

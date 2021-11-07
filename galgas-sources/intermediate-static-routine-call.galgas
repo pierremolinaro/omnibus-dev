@@ -1,10 +1,10 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @standaloneRoutineCallIR : @abstractInstructionIR {
-  @objectIR mResult
-  @lstring mFunctionMangledName
-  @string mFunctionNameForGeneration
-  @procCallEffectiveParameterListIR mArgumentList
+refclass @standaloneRoutineCallIR : @abstractInstructionIR {
+  public var @objectIR mResult
+  public var @lstring mFunctionMangledName
+  public var @string mFunctionNameForGeneration
+  public var @procCallEffectiveParameterListIR mArgumentList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,7 +21,7 @@ override method @standaloneRoutineCallIR llvmInstructionCode
     ioLLVMcode += [self.mResult llvmName] + " = call " + [self.mResult llvmTypeName]
   end
   ioLLVMcode += " @" + [self.mFunctionNameForGeneration assemblerRepresentation] + " ("
-  for () in self.mArgumentList do
+  for (mEffectiveParameterPassingMode mParameter) in self.mArgumentList do
     switch mEffectiveParameterPassingMode
     case input:
       ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]

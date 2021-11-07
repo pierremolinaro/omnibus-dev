@@ -2,14 +2,14 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @instructionAST {
-  @location mInstructionLocation
+abstract refclass @instructionAST {
+  public var @location mInstructionLocation
 }
 
 #·······················································································································
 
 list @instructionListAST {
-  @instructionAST mInstruction
+  public var @instructionAST mInstruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,7 +52,7 @@ abstract method @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanti
 method @instructionListAST noteInstructionListTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in self do
+  for (mInstruction) in self do
     [mInstruction noteInstructionTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -95,8 +95,8 @@ method @instructionListAST analyzeBranchInstructionList
 {
 #--- Begin branch
   [!?ioUniversalMap openBranch]
-  for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
+  for (mInstruction) in self do
+    [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
     [mInstruction instructionSemanticAnalysis 
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -126,8 +126,8 @@ method @instructionListAST analyzeRoutineInstructionList
   ?!alloca:@allocaList ioAllocaList
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
 {
-  for () in self do
-    [!?ioInstructionGenerationList appendSourceLineComment ![mInstruction mInstructionLocation]]
+  for (mInstruction) in self do
+    [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
     [mInstruction instructionSemanticAnalysis 
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -151,7 +151,7 @@ method @instructionListIR instructionListLLVMCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  for () in self do
+  for (mInstructionGeneration) in self do
     [mInstructionGeneration llvmInstructionCode
       !?ioLLVMcode
       !inGenerationContext

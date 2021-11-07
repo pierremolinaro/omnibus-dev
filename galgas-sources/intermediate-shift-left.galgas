@@ -9,10 +9,10 @@ setter @instructionListIR appendShiftLeft
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @leftShiftIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
-  @uint mShiftAmount
+refclass @leftShiftIR : @abstractInstructionIR {
+  public var @objectIR mResult
+  public var @objectIR mSource
+  public var @uint mShiftAmount
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

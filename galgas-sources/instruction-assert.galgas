@@ -2,8 +2,8 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @assertInstructionAST : @instructionAST {
-  @expressionAST mExpression
+refclass @assertInstructionAST : @instructionAST {
+  public var @expressionAST mExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -55,7 +55,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
-  @instructionListIR instructionGenerationList = {}
+  var @instructionListIR instructionGenerationList = {}
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -91,10 +91,10 @@ override method @assertInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @assertInstructionIR : @abstractInstructionIR {
-  @location mAssertInstructionLocation
-  @instructionListIR mInstructionList
-  @objectIR mExpressionValue
+refclass @assertInstructionIR : @abstractInstructionIR {
+  public var @location mAssertInstructionLocation
+  public var @instructionListIR mInstructionList
+  public var @objectIR mExpressionValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

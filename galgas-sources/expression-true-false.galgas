@@ -2,8 +2,8 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @literalBooleanInExpressionAST : @expressionAST {
-  @bool mValue
+refclass @literalBooleanInExpressionAST : @expressionAST {
+  public var @bool mValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

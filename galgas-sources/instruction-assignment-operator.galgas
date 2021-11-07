@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
   #--- Right expression
     <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression
-    @primaryInExpressionAccessListAST expressionAccessList = {}
+    var @primaryInExpressionAccessListAST expressionAccessList = {}
     [lvalue.mOperand buildExpressionAccessList !?expressionAccessList]
 #    for (access) in lvalue.mAccessList do
 #      switch access

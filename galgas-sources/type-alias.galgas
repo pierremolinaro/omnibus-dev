@@ -2,9 +2,9 @@
 #!  AST                                                                                                               
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @typeAliasDeclarationAST : @abstractDeclarationAST {
-  @lstring mAliasTypeName
-  @lstring mOriginalTypeName
+refclass @typeAliasDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mAliasTypeName
+  public var @lstring mOriginalTypeName
 }
 
 #·······················································································································

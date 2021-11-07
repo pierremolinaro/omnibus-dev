@@ -12,14 +12,14 @@ enum @primaryInExpressionAccessAST {
 #·······················································································································
 
 list @primaryInExpressionAccessListAST {
-  @primaryInExpressionAccessAST mAccess
+  public var @primaryInExpressionAccessAST mAccess
 }
 
 #·······················································································································
 
-shared class @primaryInExpressionAST : @expressionAST {
-  @lstring mReceiverName
-  @primaryInExpressionAccessListAST mAccessList
+refclass @primaryInExpressionAST : @expressionAST {
+  public var @lstring mReceiverName
+  public var @primaryInExpressionAccessListAST mAccessList
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -69,7 +69,7 @@ syntax extension omnibus_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      @bool checkIndexExpression
+      var @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true
@@ -112,7 +112,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
     case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
+      for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
         case inputWithType (* @lstring typeName *) :
@@ -143,7 +143,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
     case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
+      for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
         case inputWithType (* @lstring typeName *) :
@@ -579,7 +579,7 @@ private proc handleArrayAccessInExpression
 #--- Check current object is an array
   switch [ioResult type].subscript
   case noSubscript :
-    error inEndOfIndex : "the receiver type is " + [[ioResult type] omnibusTypeDescriptionName] + " and does not accept subscripting"
+    error inEndOfIndex : "the receiver type is " + [ioResult type].omnibusTypeDescriptionName + " and does not accept subscripting"
   case literalString  :
     error inEndOfIndex
     : "the receiver type is literal string (dynamic array) and does not accept subscripting"
@@ -630,7 +630,7 @@ private proc handleFunctionCallInExpression
 {
   let receiverType = [ioObjectIR type]
 #--- Search routine in receiver type routine map
-  let methodMangledName = [inArguments mangledName !receiverTypeName: [receiverType omnibusTypeDescriptionName] !functionName: inMethodName]
+  let methodMangledName = [inArguments mangledName !receiverTypeName: receiverType.omnibusTypeDescriptionName !functionName: inMethodName]
 #  log routineMap
 #  log methodMangledName
   [inContext.mRoutineMap searchKey
@@ -651,7 +651,7 @@ private proc handleFunctionCallInExpression
   #--- If receiver is a value, create a reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]
   #--- Add receiver as first parameter
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
   #--- Analyze effective parameters
     analyzeEffectiveParameters (

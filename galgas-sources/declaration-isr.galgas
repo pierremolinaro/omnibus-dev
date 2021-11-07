@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @isrDeclarationAST : @abstractDeclarationAST {
-  @lstring mISRName
-  @mode mMode
-  @lstring mDriverName
-  @instructionListAST mISRInstructionList
-  @location mEndOfISRDeclaration
+refclass @isrDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mISRName
+  public var @mode mMode
+  public var @lstring mDriverName
+  public var @instructionListAST mISRInstructionList
+  public var @location mEndOfISRDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
 
   rule <isr_in_driver> ?!@ast ioAST ?let @lstring inDriverName {
     $interrupt$
-    @mode mode
+    var @mode mode
     select
       $service$
       mode = .serviceMode
@@ -112,10 +112,10 @@ override method @isrDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
-  @lstring mISRName
-  @mode mMode
-  @lstring mDriverName
+refclass @decoratedISRDeclaration : @abstractDecoratedDeclaration {
+  public var @lstring mISRName
+  public var @mode mMode
+  public var @lstring mDriverName
 }
 
 #·······················································································································
@@ -142,9 +142,9 @@ override method @decoratedISRDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @interruptMapIR {
-  @omnibusType mSelfType
-  @string mDriverName 
-  @mode mMode
+  public var @omnibusType mSelfType
+  public var @string mDriverName 
+  public var @mode mMode
 
   insert insertKey error message "interrupt '%K' is already defined"
 }
@@ -160,7 +160,7 @@ method @interruptMapIR interruptCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
 #--- Generate interrupt routines
-  @stringset definedInterrupts = {}
+  var @stringset definedInterrupts = {}
   for interrupt in self do
     definedInterrupts += !interrupt.lkey.string
     let interruptImplementationName = if interrupt.mMode == .serviceMode then

@@ -9,16 +9,16 @@ enum @guardKind {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @guardDeclarationAST : @abstractDeclarationAST {
-  @lstring mReceiverTypeName # Empty string if standalone
-  @string mReceiverLLVMBaseTypeName
-  @lstring mGuardName
-  @bool mIsPublic
-  @lstringlist mGuardAttributeList
-  @routineFormalArgumentListAST mGuardFormalArgumentList
-  @guardKind mGuardKind
-  @instructionListAST mGuardInstructionList
-  @location mEndOfGuardDeclaration
+refclass @guardDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mReceiverTypeName # Empty string if standalone
+  public var @string mReceiverLLVMBaseTypeName
+  public var @lstring mGuardName
+  public var @bool mIsPublic
+  public var @lstringlist mGuardAttributeList
+  public var @routineFormalArgumentListAST mGuardFormalArgumentList
+  public var @guardKind mGuardKind
+  public var @instructionListAST mGuardInstructionList
+  public var @location mEndOfGuardDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -32,23 +32,23 @@ syntax extension omnibus_syntax {
   rule <guard> ?!@ast ioAST
                ?receiverTypeName: let @lstring inReceiverTypeName
                ?receiverLLVMBaseTypeName: let @string inReceiverLLVMBaseTypeName {
-    @bool public
+    var @bool publicAccess
     select
-      public = false
+      publicAccess = false
     or
       $public$
-      public = true
+      publicAccess = true
     end
     $guard$
     $identifier$ ?let guardName
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
     <procedure_formal_arguments> !?ioAST ?let guardFormalArgumentList
-    @guardKind guardKind
+    var @guardKind guardKind
     select
       guardKind = .baseGuard
     or
@@ -64,7 +64,7 @@ syntax extension omnibus_syntax {
       !inReceiverTypeName
       !inReceiverLLVMBaseTypeName
       !guardName
-      !public
+      !publicAccess
       !attributeList
       !guardFormalArgumentList
       !guardKind
@@ -175,7 +175,7 @@ private func guardUserLLVMName ?let @string inReceiverLLVMBaseTypeName
   s += inReceiverLLVMBaseTypeName + "."
   s += inGuardName.string
   s += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -192,7 +192,7 @@ private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
   s += inReceiverLLVMBaseTypeName + "."
   s += inGuardName.string
   s += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -204,10 +204,10 @@ private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @guardMapForContext {
-  @bool mIsPublic
-  @routineTypedSignature mSignature
-  @lstring mUserRoutineLLVMName
-  @lstring mImplementationRoutineLLVMName
+  public var @bool mIsPublic
+  public var @routineTypedSignature mSignature
+  public var @lstring mUserRoutineLLVMName
+  public var @lstring mImplementationRoutineLLVMName
 
   insert insertKey error message "the '%K' guard is already declared in %L"
   search searchKey error message "there is no '%K' guard"
@@ -217,15 +217,15 @@ map @guardMapForContext {
 #!  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
-  @lstring mReceiverTypeName
-  @lstring mGuardName
-  @bool mIsPublic
-  @lstringlist mGuardAttributeList
-  @routineFormalArgumentListAST mGuardFormalArgumentList
-  @guardKind mGuardKind
-  @instructionListAST mGuardInstructionList
-  @location mEndOfGuardDeclaration
+refclass @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
+  public var @lstring mReceiverTypeName
+  public var @lstring mGuardName
+  public var @bool mIsPublic
+  public var @lstringlist mGuardAttributeList
+  public var @routineFormalArgumentListAST mGuardFormalArgumentList
+  public var @guardKind mGuardKind
+  public var @instructionListAST mGuardInstructionList
+  public var @location mEndOfGuardDeclaration
 }
 
 #·······················································································································
@@ -252,10 +252,10 @@ override method @decoratedGuardDeclaration semanticAnalysis
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
-  @routineFormalArgumentListIR formalArguments = {}
-  @guardKindGenerationIR convenienceGuardGenerationIR
-  @allocaList allocaList = {}
-  @instructionListIR instructionGenerationList = {}
+  var @routineFormalArgumentListIR formalArguments = {}
+  var @guardKindGenerationIR convenienceGuardGenerationIR
+  var @allocaList allocaList = {}
+  var @instructionListIR instructionGenerationList = {}
   switch self.mGuardKind
   case baseGuard :
   #--- Add 'accept" output variable
@@ -410,10 +410,10 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  @allocaList baseGuardAllocaList = {}
-  @instructionListIR baseGuardInstructionGenerationList = {}
+  var @allocaList baseGuardAllocaList = {}
+  var @instructionListIR baseGuardInstructionGenerationList = {}
 #--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
-  @objectIR currentObject
+  var @objectIR currentObject
   if self.mIdentifier.string == "" then # Receiver is self
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : currentObject
@@ -465,10 +465,10 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
-    let guardMangledName = [self.mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
+    let guardMangledName = [self.mArguments mangledName !receiverTypeName: currentType.omnibusTypeDescriptionName !functionName: methodName]
     [inContext.mGuardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = {
       !.outputInput
       !.reference {!type:currentType !llvmName:[currentObject llvmName]}
     }
@@ -514,11 +514,11 @@ enum @guardKindGenerationIR {
 
 #·······················································································································
 
-shared class @guardUserRoutineIR : @abstractRoutineIR {
-  @string mMangledImplementationGuardName
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @omnibusType mReceiverType
-  @guardKindGenerationIR mGuardKindGenerationIR
+refclass @guardUserRoutineIR : @abstractRoutineIR {
+  public var @string mMangledImplementationGuardName
+  public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  public var @omnibusType mReceiverType
+  public var @guardKindGenerationIR mGuardKindGenerationIR
 }
 
 #·······················································································································
@@ -568,12 +568,12 @@ override method @guardUserRoutineIR llvmCodeGeneration
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @guardImplementationRoutineIR : @abstractRoutineIR {
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @omnibusType mReceiverType
-  @guardKindGenerationIR mGuardKindGenerationIR
-  @allocaList mAllocaList
-  @instructionListIR mInstructionGenerationList
+refclass @guardImplementationRoutineIR : @abstractRoutineIR {
+  public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  public var @omnibusType mReceiverType
+  public var @guardKindGenerationIR mGuardKindGenerationIR
+  public var @allocaList mAllocaList
+  public var @instructionListIR mInstructionGenerationList
 }
 
 #·······················································································································
@@ -595,7 +595,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
     first = false
   end
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     if first then
       first = false
     else
@@ -614,7 +614,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
 #--- Allocate local variables 
   var allocaList = self.mAllocaList
 #--- Store input arguments in memory
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       allocaList += !llvmNameForLocalVariable (!mFormalArgumentName) !mFormalArgumentType !true
@@ -624,7 +624,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
 #--- Allocate local variables 
   [allocaList generateAllocaList !?ioLLVMcode]
 #---
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       let llvmType = [mFormalArgumentType llvmTypeName]
@@ -655,7 +655,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     [baseGuardInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  %invoked.guard.result = call i1 @" + [baseGuardMangledName assemblerRepresentation]
     ioLLVMcode += " ("
-    for () in baseGuardEffectiveParameterList do
+    for (mEffectiveParameterPassingMode mParameter) in baseGuardEffectiveParameterList do
       switch mEffectiveParameterPassingMode
       case input:
         ioLLVMcode += [mParameter llvmTypeName] + "* " + [mParameter llvmName]

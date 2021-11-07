@@ -9,7 +9,7 @@ enum @objectIR {
   case reference (@omnibusType type @string llvmName)
 #--- Values
   case null (@omnibusType type)
-  case llvmValue (@omnibusType type @string llvmName)
+  case llvmNamedValue (@omnibusType type @string llvmName)
   case literalInteger  (@omnibusType type @bigint value)
   case llvmStructureValue (@omnibusType type @sortedOperandIRList values)
   case literalString  (@uint utf8Size @uint index)
@@ -30,11 +30,11 @@ getter @objectIR llvmName -> @string {
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = [value string]
-  case llvmValue (* llvmName) : result = llvmName
+  case llvmNamedValue (* llvmName) : result = llvmName
   case reference (* llvmName) : result = llvmName
   case llvmStructureValue (* @sortedOperandIRList inValues) :
     result = "{"
-    for () in inValues
+    for (mOperand *) in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmName]
       between result += ", "
     end
@@ -62,7 +62,7 @@ getter @objectIR llvmValue -> @string {
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = [value string]
-  case llvmValue (* llvmName) : result = llvmName
+  case llvmNamedValue (* llvmName) : result = llvmName
   case reference (* llvmName) : result = llvmName
   case literalString  (@uint size @uint index) :
     let sizeStr = [size string]
@@ -70,21 +70,21 @@ getter @objectIR llvmValue -> @string {
     result += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   case llvmStructureValue (* @sortedOperandIRList inValues) :
     result = "{"
-    for () in inValues
+    for (mOperand *) in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmValue]
       between result += ", "
     end
     result += "}"
   case llvmArrayStaticValues (* @operandIRList inValues *) :
     result = "["
-    for () in inValues
+    for (mOperand) in inValues
       do result += [mOperand llvmTypeName] + " " + [mOperand llvmValue]
       between result += ", "
     end
     result += "]"
   case llvmArrayRepeatedStaticValue (* size value *) :
     result = "["
-    for i in 0 ..< size
+    for * in 0 ..< size
       do result += [value llvmTypeName] + " " + [value llvmValue]
       between result += ", "
     end
@@ -105,7 +105,7 @@ getter @objectIR type -> @omnibusType {
   case null (type) : result = type
   case zero (type) : result = type
   case literalInteger (type *) : result = type
-  case llvmValue (type *) : result = type
+  case llvmNamedValue (type *) : result = type
   case llvmStructureValue (type *) : result = type
   case llvmArrayStaticValues (type * *) : result = type
   case literalString  (* *) : result = literalStringType ()
@@ -139,8 +139,8 @@ getter @objectIR withType ?let @omnibusType inType -> @objectIR {
     result = .null {!type: inType}
   case literalInteger (* @bigint value) :
     result = .literalInteger {!type: inType !value: value}
-  case llvmValue (* llvmName) :
-    result = .llvmValue {!type: inType !llvmName:llvmName}
+  case llvmNamedValue (* llvmName) :
+    result = .llvmNamedValue {!type: inType !llvmName:llvmName}
   case zero (*) :
     result = .zero {!type: inType}
   case llvmStructureValue (* @sortedOperandIRList values) :
@@ -167,7 +167,7 @@ getter @objectIR name -> @string {
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = [value string]
-  case llvmValue (* name) : result = name
+  case llvmNamedValue (* name) : result = name
   case llvmStructureValue (* *) : result = "{...}"
   case llvmArrayStaticValues (3*) : result = "[...]"
   case llvmArrayDynamicValues (2*) : result = "[...]"
@@ -189,7 +189,7 @@ getter @objectIR isStatic -> @bool {
   case zero (*) : result = true
   case null (*) : result = true
   case literalInteger (* *) : result = true
-  case llvmValue (* *) : result = false
+  case llvmNamedValue (* *) : result = false
   case llvmStructureValue (* *) : result = true
   case llvmArrayStaticValues (3*) : result = true
   case llvmArrayDynamicValues (2*) : result = false

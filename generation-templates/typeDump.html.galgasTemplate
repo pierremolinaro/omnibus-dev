@@ -52,7 +52,7 @@ tr.result_line {
 <h1>Types defined by %!PROJECT_NAME%</h1>
 <p>This document lists all %![[GLOBAL_TYPE_MAP count] string]% defined types, sorted by name.</p>
 <p>%
-for () in FIRST_LETTER_SET
+for (key) in FIRST_LETTER_SET
 do %<a class="header_link" href="#%![[[key characterAtIndex!0] uint] string]%">%!key%</a>%
 between % - %
 end
@@ -60,14 +60,14 @@ end
 <p>%
 !TABLE_OF_TYPES_STRING%
 </p>
-%for () in GLOBAL_TYPE_MAP do%
+%for (lkey type) in GLOBAL_TYPE_MAP do%
 <h2>
   <a name="%!lkey.string%">%!lkey.string%</a>
 </h2>
 <p>
 Kind: %![type descriptionForHTMLFile]%<br>
-Description: %![type omnibusTypeDescriptionName]%<br>
-LLVM Base Name: %if [type llvmBaseTypeName] == "" then !"<i>none, compile time type</i>" else ![type llvmBaseTypeName] end%<br>
+Description: %!type.omnibusTypeDescriptionName%<br>
+LLVM Base Name: %if type.llvmBaseTypeName == "" then !"<i>none, compile time type</i>" else !type.llvmBaseTypeName end%<br>
 LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" else ![type llvmTypeName] end%
 </p>
 %end%
@@ -82,12 +82,12 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
       <td class="result_title">Typed signature</td>
       <td class="result_title">Routine LLVM Name, by mode</td>
     </tr>
-  %for () in ALL_ROUTINE_MAP: routine_ do%
+  %for (routine_lkey routine_mIsPublic routine_mSignature routine_mReturnTypeProxy routine_mModeDictionary routine_mIsExported routine_mFunctionMode) in ALL_ROUTINE_MAP do%
     <tr class="result_line">
       <td>%!routine_lkey.string%</td>
       <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
       <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
-      <td>%for () in routine_mModeDictionary : mode_ do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
+      <td>%for (mode_key mode_mRoutineLLVMName) in routine_mModeDictionary do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
     </tr>
   %end%
   </table>
@@ -101,10 +101,10 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
       <td class="result_title">Infix operator</td>
       <td class="result_title">Result Type</td>
     </tr>
-  %for () in INFIX_OPERATOR_MAP: op_ do%
+  %for (op_lkey op_mResultType op_mOperatorUsage) in INFIX_OPERATOR_MAP do%
     <tr class="result_line">
       <td>%!op_lkey.string%</td>
-      <td>%![op_mResultType omnibusTypeDescriptionName]%</td>
+      <td>%!op_mResultType.omnibusTypeDescriptionName%</td>
     </tr>
   %end%
   </table>
@@ -118,10 +118,10 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
       <td class="result_title">Prefix operator</td>
       <td class="result_title">Result Type</td>
     </tr>
-  %for () in PREFIX_OPERATOR_MAP: op_ do%
+  %for (op_lkey op_mReceiverType op_mResultType op_mOperator) in PREFIX_OPERATOR_MAP do%
     <tr class="result_line">
       <td>%!op_lkey.string%</td>
-      <td>%![op_mResultType omnibusTypeDescriptionName]%</td>
+      <td>%!op_mResultType.omnibusTypeDescriptionName%</td>
     </tr>
   %end%
   </table>
@@ -133,7 +133,7 @@ LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" 
     <tr>
       <td class="result_title">Operator</td>
     </tr>
-  %for () in ASSIGNMENT_OPERATOR_MAP: op_ do%
+  %for (op_lkey op_mOperatorUsage) in ASSIGNMENT_OPERATOR_MAP do%
     <tr class="result_line">
       <td>%!op_lkey.string%</td>
     </tr>

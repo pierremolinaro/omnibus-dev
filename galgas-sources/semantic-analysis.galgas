@@ -77,11 +77,11 @@ abstract method @abstractDecoratedDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticTemporariesStruct {
-  @uint mTemporaryIndex
-  @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-  @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-  @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
-  @stringset mInitializedDriverSet
+  public var @uint mTemporaryIndex
+  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
+  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
+  public var @stringset mInitializedDriverSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -102,7 +102,7 @@ proc getNewTempValue
     outTempVariable = .void
   else
     [!?ioTemporaries newTempLLVMVar ?let llvmName]
-    outTempVariable = .llvmValue {!type: inType !llvmName:llvmName}
+    outTempVariable = .llvmNamedValue {!type: inType !llvmName:llvmName}
   end
 }
 
@@ -141,7 +141,7 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mStaticEntityMap = inStaticEntityMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
 #---
-  @semanticTemporariesStruct temporaries = .default
+  var @semanticTemporariesStruct temporaries = .default
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext

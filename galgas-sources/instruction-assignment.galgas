@@ -2,9 +2,9 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @assignmentInstructionAST : @instructionAST {
-  @LValueAST mTargetAST
-  @expressionAST mSourceExpression
+refclass @assignmentInstructionAST : @instructionAST {
+  public var @LValueAST mTargetAST
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -72,7 +72,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     ?result:@objectIR sourceOperandPossibleReference
   ]
 #--- Analyze LValue
-  @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = {}
+  var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = {}
   [self.mTargetAST analyzeLValueInAssignment
     !self: inSelfType
     !routineAttributes:inRoutineAttributes
@@ -276,7 +276,7 @@ private proc handlePropertyAccessInAssignment
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?resultValueIR]
   #--- Append pending computed property store
     let setterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!setterModeDictionary !inMode !inPropertyName)
-    @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = {}
+    var @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = {}
     var tempValueIR = resultValueIR
     [!?pendingStoreComputedPropertyInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?tempValueIR]
     [!?pendingStoreComputedPropertyInstructionGenerationList appendStoreComputedPropertyValue
@@ -355,7 +355,7 @@ private proc handleArrayAccessInAssignment
   switch ioCurrentType.subscript
   case noSubscript :
     error inEndOfIndex
-    : "the receiver type is " + [ioCurrentType omnibusTypeDescriptionName] + " and does not accept subscripting"
+    : "the receiver type is " + ioCurrentType.omnibusTypeDescriptionName + " and does not accept subscripting"
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"

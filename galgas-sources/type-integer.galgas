@@ -2,9 +2,9 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @integerDeclarationAST : @abstractDeclarationAST {
-  @bool mIsSigned
-  @uint mSize
+refclass @integerDeclarationAST : @abstractDeclarationAST {
+  public var @bool mIsSigned
+  public var @uint mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -188,7 +188,7 @@ override method @integerDeclarationAST enterInContext
     !"ctpop"
   }
 #--------------------------------------- Class constant map
-  @constantMap constantMap = {}
+  var @constantMap constantMap = {}
   [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
   [!?ioContext.mTypeConstantMap insertKey
@@ -196,7 +196,7 @@ override method @integerDeclarationAST enterInContext
     !constantMap
   ]
 #--------------------------------------- Constructor map
-  @constructorMap constructorMap = {} 
+  var @constructorMap constructorMap = {} 
   [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 #--------------------------------------- Enter in type map
@@ -308,8 +308,8 @@ proc addIntegerInfixOperator
 #! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
-  @string mLLVMOperation
+refclass @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
+  public var @string mLLVMOperation
 }
 
 #·······················································································································
@@ -330,11 +330,11 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   if value < minValue then
     error inOperatorLocation
     : "right operand is a compile time integer with an invalid value, lower than $"
-      + [[inLeftOperand type] omnibusTypeDescriptionName] + " minimum value"
+      + [inLeftOperand type].omnibusTypeDescriptionName + " minimum value"
   elsif value > maxValue then
     error inOperatorLocation
     : "right operand is a compile time integer with an invalid value, greater than $"
-      + [[inLeftOperand type] omnibusTypeDescriptionName] + " maximum value"
+      + [inLeftOperand type].omnibusTypeDescriptionName + " maximum value"
   end
 #---
   var leftOperand = inLeftOperand
@@ -349,8 +349,8 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
 #! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
-  @string mLLVMOperation
+refclass @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
+  public var @string mLLVMOperation
 }
 
 #·······················································································································
@@ -371,11 +371,11 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   if value < minValue then
     error inOperatorLocation
     : "left operand is a compile time integer with an invalid value, lower than $"
-      + [[inRightOperand type] omnibusTypeDescriptionName] + " minimum value"
+      + [inRightOperand type].omnibusTypeDescriptionName + " minimum value"
   elsif value > maxValue then
     error inOperatorLocation
     : "left operand is a compile time integer with an invalid value, greater than $"
-      + [[inRightOperand type] omnibusTypeDescriptionName] + " maximum value"
+      + [inRightOperand type].omnibusTypeDescriptionName + " maximum value"
   end
 #---
   var rightOperand = inRightOperand
@@ -868,9 +868,9 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #! CODE GENERATION: BUILTIN FUNCTIONS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @integerBuiltinFunctionIR : @abstractRoutineIR {
-  @string mLLVMTypeName
-  @string mIntrinsicName
+refclass @integerBuiltinFunctionIR : @abstractRoutineIR {
+  public var @string mLLVMTypeName
+  public var @string mIntrinsicName
 }
 
 #·······················································································································

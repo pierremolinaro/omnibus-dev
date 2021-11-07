@@ -2,22 +2,22 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @callInstructionAST : @instructionAST {
-  @effectiveArgumentListAST mArguments
-  @location mEndOfArguments
+abstract refclass @callInstructionAST : @instructionAST {
+  public var @effectiveArgumentListAST mArguments
+  public var @location mEndOfArguments
 }
 
 #·······················································································································
 
-shared class @standAloneProcedureCallInstructionAST : @callInstructionAST {
-  @lstring mSandAloneRoutineName
+refclass @standAloneProcedureCallInstructionAST : @callInstructionAST {
+  public var @lstring mSandAloneRoutineName
 }
 
 #·······················································································································
 
-shared class @procedureCallInstructionAST : @callInstructionAST {
-  @lstring mIdentifier
-  @accessInAssignmentListAST mAccessList
+refclass @procedureCallInstructionAST : @callInstructionAST {
+  public var @lstring mIdentifier
+  public var @accessInAssignmentListAST mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -47,7 +47,7 @@ syntax extension omnibus_syntax {
         !assignmentTargetAST.mIdentifier
       }
     else
-      @accessInAssignmentListAST accessList = {}
+      var @accessInAssignmentListAST accessList = {}
       [assignmentTargetAST.mOperand buildProcedureCallAccessList !?accessList]
       outInstruction = @procedureCallInstructionAST.new {
         !instructionLocation
@@ -92,7 +92,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     end
   end
-  for () in self.mArguments do
+  for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -111,7 +111,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
 override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in self.mArguments do
+  for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -145,9 +145,9 @@ getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstri
 #·······················································································································
 
 list @procEffectiveParameterList {
-  @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
-  @lstring mSelector
-  @omnibusType mParameterType
+  public var @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
+  public var @lstring mSelector
+  public var @omnibusType mParameterType
 }
 
 #·······················································································································
@@ -184,7 +184,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !self.mSandAloneRoutineName)
 #--- Analyze effective parameters
-  @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+  var @procCallEffectiveParameterListIR effectiveParameterListIR = {}
   analyzeEffectiveParameters (
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -232,8 +232,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
 #--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
 #    If identifier is empty string, the receiver is "self"
   var receiverIsSelf = false
-  @omnibusType currentType
-  @string currentLLVMAddressVar
+  var @omnibusType currentType
+  var @string currentLLVMAddressVar
   if self.mIdentifier.string == "" then # Receiver is self
     receiverIsSelf = true
     if inSelfType.kind == .void then
@@ -331,7 +331,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property is required here"
   case property (@lstring methodName) :
-    let methodMangledName = [self.mArguments mangledName !receiverTypeName: [currentType omnibusTypeDescriptionName] !functionName: methodName]
+    let methodMangledName = [self.mArguments mangledName !receiverTypeName: currentType.omnibusTypeDescriptionName !functionName: methodName]
     [inContext.mRoutineMap searchKey
       !methodMangledName
       ?let unused implementedPublic
@@ -348,7 +348,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       error methodName : "cannot be called in instruction, returns a value"
     end
   #--- Add receiver as first parameter
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = {
       !.outputInput
       !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
     }
@@ -391,8 +391,8 @@ enum @procEffectiveParameterPassingModeIR {
 #·······················································································································
 
 list @procCallEffectiveParameterListIR {
-  @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
-  @objectIR mParameter
+  public var @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
+  public var @objectIR mParameter
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

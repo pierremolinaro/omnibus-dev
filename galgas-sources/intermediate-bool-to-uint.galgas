@@ -8,9 +8,9 @@ setter @instructionListIR appendBoolToUInt
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @boolToUIntIR : @abstractInstructionIR {
-  @objectIR mUIntResult
-  @objectIR mBoolSource
+refclass @boolToUIntIR : @abstractInstructionIR {
+  public var @objectIR mUIntResult
+  public var @objectIR mBoolSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

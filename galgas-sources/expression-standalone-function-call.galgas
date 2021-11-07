@@ -2,10 +2,10 @@
 #! AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @standaloneFunctionInExpressionAST : @expressionAST {
-  @lstring mStandaloneFunctionName
-  @effectiveArgumentListAST mArguments
-  @location mEndOfArguments
+refclass @standaloneFunctionInExpressionAST : @expressionAST {
+  public var @lstring mStandaloneFunctionName
+  public var @effectiveArgumentListAST mArguments
+  public var @location mEndOfArguments
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,7 +35,7 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !inConstantName !self.mStandaloneFunctionName]
-  for () in self.mArguments do
+  for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -56,7 +56,7 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
 override method @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for () in self.mArguments do
+  for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
     case inputWithType (* @lstring typeName *) :
@@ -114,7 +114,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !requiredFunctionMangledName)
   #--- Analyze effective parameters
-    @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = {}
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes

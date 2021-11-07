@@ -2,7 +2,7 @@
 #  AST                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntAST : @abstractDeclarationAST {
+refclass @compileTimeIntAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -122,7 +122,7 @@ override method @compileTimeIntAST enterInContext
 #  COMPILE TIME INFIX OPERATORS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -148,7 +148,7 @@ override method @compileTimeIntModuloOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -174,7 +174,7 @@ override method @compileTimeIntModuloZeroOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -200,7 +200,7 @@ override method @compileTimeIntDivideOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -226,7 +226,7 @@ override method @compileTimeIntDivideZeroOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -248,7 +248,7 @@ override method @compileTimeIntMultiplyOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -270,7 +270,7 @@ override method @compileTimeIntSubtractOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -292,7 +292,7 @@ override method @compileTimeIntEqualOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -314,7 +314,7 @@ override method @compileTimeIntAddOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -336,7 +336,7 @@ override method @compileTimeIntBitWiseAndOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -362,7 +362,7 @@ override method @compileTimeIntShiftLeftOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -388,7 +388,7 @@ override method @compileTimeIntShiftRightOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -410,7 +410,7 @@ override method @compileTimeIntLessThanOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntLowerOrEqualOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntLowerOrEqualOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -432,7 +432,7 @@ override method @compileTimeIntLowerOrEqualOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -454,7 +454,7 @@ override method @compileTimeIntXorOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -478,7 +478,7 @@ override method @compileTimeIntBitWiseOrOperator generateCode
 #  COMPILE TIME PREFIX OPERATOR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntMinusOperator : @prefixOperatorUsage {
+refclass @compileTimeIntMinusOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································
@@ -499,7 +499,7 @@ override method @compileTimeIntMinusOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeIntComplementOperator : @prefixOperatorUsage {
+refclass @compileTimeIntComplementOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································

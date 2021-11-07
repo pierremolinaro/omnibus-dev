@@ -14,10 +14,10 @@ setter @instructionListIR appendGetArrayElementReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @getArrayElementReferenceIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mArray
-  @objectIR mIndex
+refclass @getArrayElementReferenceIR : @abstractInstructionIR {
+  public var @objectIR mTarget
+  public var @objectIR mArray
+  public var @objectIR mIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

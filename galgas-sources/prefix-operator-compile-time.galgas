@@ -27,13 +27,13 @@ getter @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
 
 #·······················································································································
 
-shared class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
-  @compileTimePrefixOperatorEnumeration mPrefixOperator
-  @location mPrefixOperatorLocation
-  @lstring mReceiverName
-  @lstring mReceiverTypeName
-  @ctExpressionAST mExpression
-  @lstring mResultTypeName
+refclass @compiletimePrefixOperatorAST : @abstractDeclarationAST {
+  public var @compileTimePrefixOperatorEnumeration mPrefixOperator
+  public var @location mPrefixOperatorLocation
+  public var @lstring mReceiverName
+  public var @lstring mReceiverTypeName
+  public var @ctExpressionAST mExpression
+  public var @lstring mResultTypeName
 }
 
 #·······················································································································
@@ -132,7 +132,7 @@ override method @compiletimePrefixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  @ctCheckMap ctCheckMap = {}
+  var @ctCheckMap ctCheckMap = {}
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
@@ -154,10 +154,10 @@ override method @compiletimePrefixOperatorAST enterInContext
 #   PREFIX OPERATOR USAGE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
-  @location mPrefixOperatorLocation
-  @lstring mReceiverOperandName
-  @ctExpressionAST mExpression
+refclass @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
+  public var @location mPrefixOperatorLocation
+  public var @lstring mReceiverOperandName
+  public var @ctExpressionAST mExpression
 }
 
 #·······················································································································
@@ -173,7 +173,7 @@ override method @compileTimePrefixOperatorUsage generateCode
   !@objectIR outResultValue
 {
   [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
-  @ctMap varMap = {}
+  var @ctMap varMap = {}
   [!?varMap insertKey !self.mReceiverOperandName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
   outResultValue = .literalInteger {!type: inResultType !value: result}

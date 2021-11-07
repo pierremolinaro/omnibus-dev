@@ -2,9 +2,9 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @syncDeclarationAST : @abstractDeclarationAST {
-  @lstring mSyncToolName
-  @structurePropertyListAST mStructurePropertyListAST
+refclass @syncDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mSyncToolName
+  public var @structurePropertyListAST mStructurePropertyListAST
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
     $sync$
     $\$type$ ?let structureName
     ${$
-    @structurePropertyListAST fieldList = {}
+    var @structurePropertyListAST fieldList = {}
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
@@ -97,11 +97,11 @@ override method @syncDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
-  @propertyList propertyList = {}
+  var @propertyList propertyList = {}
 #  @propertyGetterMap propertyGetterMap = {}
-  @sortedOperandIRList sortedOperandIRList = {}
-  @constructorSignature constructorSignature = {}
-  @string constructorKey = "("
+  var @sortedOperandIRList sortedOperandIRList = {}
+  var @constructorSignature constructorSignature = {}
+  var @string constructorKey = "("
   for property in self.mStructurePropertyListAST do
     [property enterPropertyInContext
       !?context:ioContext
@@ -120,7 +120,7 @@ override method @syncDeclarationAST enterInContext
   end
   constructorKey += ")"
 #---------------------------------------- Constructor map
-  @constructorMap constructorMap = {}
+  var @constructorMap constructorMap = {}
   [!?constructorMap insertKey
     !.new {!constructorKey !self.mSyncToolName.location}
     !constructorSignature

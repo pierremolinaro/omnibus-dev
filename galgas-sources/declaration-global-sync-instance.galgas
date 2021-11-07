@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
-  @lstring mSyncTypeName
-  @lstring mSyncInstanceName
-  @expressionAST mSourceExpression
+refclass @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mSyncTypeName
+  public var @lstring mSyncInstanceName
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $sync$
     $identifier$ ?let syncInstanceName
-    @lstring syncTypeName
+    var @lstring syncTypeName
     select
       syncTypeName = ["" here]
     or
@@ -67,8 +67,8 @@ override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @lo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMap %selectors {
-  @omnibusType type
-  @objectIR initialValue
+  public var @omnibusType type
+  public var @objectIR initialValue
 
   insert insertKey error message "the '%K' global variable is already declared in %L"
   search searchKey error message "there is no '%K' global variable"
@@ -87,7 +87,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Get sync type
-  @omnibusType optionalSyncType
+  var @omnibusType optionalSyncType
   if self.mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else
@@ -130,9 +130,9 @@ override method @syncToolInstanceDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @decoratedSyncInstance : @abstractDecoratedDeclaration {
-  @lstring mSyncInstanceName
-  @objectIR mExpressionGeneratedCode
+refclass @decoratedSyncInstance : @abstractDecoratedDeclaration {
+  public var @lstring mSyncInstanceName
+  public var @objectIR mExpressionGeneratedCode
 }
 
 #·······················································································································
@@ -153,7 +153,7 @@ override method @decoratedSyncInstance semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMapIR {
-  @objectIR mInitialValue
+  public var @objectIR mInitialValue
   insert insertKey error message "** internal error **"
 }
 

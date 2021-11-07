@@ -8,9 +8,9 @@ setter @instructionListIR appendExtend
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @extendIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
+refclass @extendIR : @abstractInstructionIR {
+  public var @objectIR mResult
+  public var @objectIR mSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

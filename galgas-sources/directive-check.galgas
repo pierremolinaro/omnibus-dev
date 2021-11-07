@@ -2,9 +2,9 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @checkInstructionAST : @instructionAST {
-  @lstring mCheckMessage
-  @expressionAST mExpression
+refclass @checkInstructionAST : @instructionAST {
+  public var @lstring mCheckMessage
+  public var @expressionAST mExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $ctAssert$
-    @lstring checkMessage
+    var @lstring checkMessage
     select
       checkMessage = ["" here]
     or
@@ -57,7 +57,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
 #--- Analyze expression
-  @instructionListIR instructionGenerationList = {}
+  var @instructionListIR instructionGenerationList = {}
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes

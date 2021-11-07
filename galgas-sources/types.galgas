@@ -4,12 +4,12 @@
 #
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @omnibusType {
-  @subscript subscript %selector
-  @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
-  @string omnibusTypeDescriptionName %selector # used for type checking and type display
-  @typeKind kind %selector
-  @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
+refclass @omnibusType {
+  public var @subscript subscript %selector
+  public var @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
+  public var @string omnibusTypeDescriptionName %selector # used for type checking and type display
+  public var @typeKind kind %selector
+  public var @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
 }
 
 #·······················································································································
@@ -66,9 +66,9 @@ getter @omnibusType llvmTypeName -> @string {
   case enumeration (@uint bitCount) :
     result = "i" + bitCount
   case structure (*) :
-    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
+    result = "%" + [self.llvmBaseTypeName assemblerRepresentation]
   case syncTool :
-    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
+    result = "%" + [self.llvmBaseTypeName assemblerRepresentation]
   case integer (* * * @uint bitCount) :
     result = "i" + bitCount
   case compileTimeBool, compileTimeInteger :
@@ -76,11 +76,11 @@ getter @omnibusType llvmTypeName -> @string {
   case generic (3*) :
     result = "" # No LLVM type, Compile Time Type
   case llvmType (*) :
-    result = [self llvmBaseTypeName]
+    result = self.llvmBaseTypeName
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
   case staticArrayType (* *) :
-    result = "%" + [[self llvmBaseTypeName] assemblerRepresentation]
+    result = "%" + [self.llvmBaseTypeName assemblerRepresentation]
   case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
   case function (* signature returnTypeProxy) :
@@ -90,7 +90,7 @@ getter @omnibusType llvmTypeName -> @string {
       result = [[returnTypeProxy type] llvmTypeName]
     end
     result += "("
-    for () in signature 
+    for (mFormalArgumentPassingMode * mTypeProxy *) in signature 
     do
       result += [[mTypeProxy type] llvmTypeName]
       switch mFormalArgumentPassingMode
@@ -341,9 +341,9 @@ getter @omnibusType descriptionForHTMLFile -> @string {
 #·······················································································································
 
 list @arcAssignmentList {
-  @string mPropertyName
-  @omnibusType mPropertyType
-  @uintlist mPropertyIndexPath
+  public var @string mPropertyName
+  public var @omnibusType mPropertyType
+  public var @uintlist mPropertyIndexPath
 }
 
 #·······················································································································
@@ -354,7 +354,7 @@ getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignment
     result += !"" !self !inPropertyIndexPath
   elsif [self.kind isStructure] then
     [self.kind structure ?propertyList:let @propertyList propertyList]
-    for (propertyName propertyType) in propertyList do (idx)
+    for (* propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + {!idx}
       result += [propertyType arcList !indexPath]
     end
@@ -367,7 +367,7 @@ getter @omnibusType deinitNeeded -> @bool {
   result = [self.kind isDynamicArrayType]
   if [self.kind isStructure] then
     [self.kind structure ?propertyList:let @propertyList propertyList]
-    for (propertyName propertyType) in propertyList while not result do
+    for (* propertyType) in propertyList while not result do
       result = [propertyType deinitNeeded]
     end
   end
@@ -376,7 +376,7 @@ getter @omnibusType deinitNeeded -> @bool {
 #·······················································································································
 
 shared map @unifiedTypeMap %selectors {
-  @omnibusType type
+  public var @omnibusType type
 
   insert insertType error message "the '%K' type is already declared in %L"
   search searchKey error message "there is no '%K' type"
@@ -488,13 +488,13 @@ proc buildTypeMapHTMLFile
 #------------------------------------ Build an HTML file that contains all types
   let @string typeDumpFilePath = inSourceFile.string + ".types.html"
   if [option omnibus_options.emitTypeMap value] then
-    @stringset firstLetterSet = {}
-    for () in inTypeMap do
+    var @stringset firstLetterSet = {}
+    for (lkey *) in inTypeMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end
-    @string tableOfTypeString = ""
-    @char currentFirstLetter = ' '
-    for () type_ in inTypeMap do
+    var @string tableOfTypeString = ""
+    var @char currentFirstLetter = ' '
+    for (type_lkey *) in inTypeMap do
       if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
         tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
@@ -560,8 +560,8 @@ proc declareLLVMTypes
 #! USER LLVM TYPE DEFINITION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @userLLVMTypeDefinitionIR {
-  @string mLLVMDefinedTypeName
+abstract refclass @userLLVMTypeDefinitionIR {
+  public var @string mLLVMDefinedTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -571,7 +571,7 @@ abstract method @userLLVMTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @userLLVMTypeDefinitionListIR {
-  @userLLVMTypeDefinitionIR mType
+  public var @userLLVMTypeDefinitionIR mType
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

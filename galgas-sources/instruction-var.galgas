@@ -2,17 +2,17 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @varInstructionWithAssignmentAST : @instructionAST {
-  @lstring mVarName
-  @lstring mOptionalTypeName
-  @expressionAST mSourceExpression
+refclass @varInstructionWithAssignmentAST : @instructionAST {
+  public var @lstring mVarName
+  public var @lstring mOptionalTypeName
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @varDeclarationInstructionAST : @instructionAST {
-  @lstring mVarName
-  @lstring mTypeName
+refclass @varDeclarationInstructionAST : @instructionAST {
+  public var @lstring mVarName
+  public var @lstring mTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -120,7 +120,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  @omnibusType targetType = if self.mOptionalTypeName.string == ""
+  var @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
     else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
   end

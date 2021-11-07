@@ -2,10 +2,10 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @extendExpressionAST : @expressionAST {
-  @expressionAST mExpression
-  @lstring mTypeName
-  @location mEndOfExpression
+refclass @extendExpressionAST : @expressionAST {
+  public var @expressionAST mExpression
+  public var @lstring mTypeName
+  public var @location mEndOfExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $extend$
-    @lstring typeName
+    var @lstring typeName
     select
       typeName = ["" here]
     or

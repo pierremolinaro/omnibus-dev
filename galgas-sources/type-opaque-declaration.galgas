@@ -2,11 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
-  @lstring mOpaqueTypeName
-  @expressionAST mSizeExpression
-  @location mSizeExpressionLocation
-  @lstringlist mAttributeList
+refclass @typeOpaqueDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mOpaqueTypeName
+  public var @expressionAST mSizeExpression
+  public var @location mSizeExpressionLocation
+  public var @lstringlist mAttributeList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $opaque$
     $\$type$ ?let opaqueTypeName
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
@@ -86,7 +86,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  @omnibusTypeAttributes opaqueTypeAttributes = .none
+  var @omnibusTypeAttributes opaqueTypeAttributes = .none
   var copyable = false
   for (attribute) in self.mAttributeList do
     if attribute.string == instantiableAttribute () then
@@ -120,7 +120,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   if not [sizeExpressionIR isLiteralInteger] then
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
-    @constructorMap constructorMap = {}
+    var @constructorMap constructorMap = {}
     if [opaqueTypeAttributes instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]

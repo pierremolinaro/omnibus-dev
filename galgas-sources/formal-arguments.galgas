@@ -11,10 +11,10 @@ enum @procFormalArgumentPassingMode {
 #·······················································································································
 
 list @routineFormalArgumentListAST {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @lstring mFormalArgumentTypeName
-  @lstring mFormalArgumentName
+  public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  public var @lstring mSelector
+  public var @lstring mFormalArgumentTypeName
+  public var @lstring mFormalArgumentName
 }
 
 #·······················································································································
@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
         !formalArgumentName
     while
       $?!selector:$ ?let selector
-      @lstring formalArgumentName
+      var @lstring formalArgumentName
       select
         $_$
         formalArgumentName = ["" nowhere]
@@ -78,7 +78,7 @@ syntax extension omnibus_syntax {
         !formalArgumentName
     while
       $?selector:$ ?let selector
-      @lstring formalArgumentName
+      var @lstring formalArgumentName
       select
         $_$
         formalArgumentName = ["" nowhere]
@@ -124,10 +124,10 @@ syntax extension omnibus_syntax {
 # La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
 
 list @routineTypedSignature {
-  @procFormalArgumentPassingMode mFormalArgumentPassingMode
-  @lstring mSelector
-  @unifiedTypeMap-entry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
-  @lstring mFormalArgumentName
+  public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
+  public var @lstring mSelector
+  public var @unifiedTypeMap-entry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
+  public var @lstring mFormalArgumentName
 }
 
 #·······················································································································
@@ -151,7 +151,7 @@ getter @routineTypedSignature mangledName
     s += inReceiverTypeName + "."
   end
   s += inFunctionName.string + "("
-  for (formalArgumentPassingMode selector typeProxy *) in self do
+  for (formalArgumentPassingMode selector * *) in self do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -223,9 +223,9 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @routineFormalArgumentListIR {
-  @procFormalArgumentPassingMode mFormalArgumentKind
-  @omnibusType mFormalArgumentType
-  @string mFormalArgumentName
+  public var @procFormalArgumentPassingMode mFormalArgumentKind
+  public var @omnibusType mFormalArgumentType
+  public var @string mFormalArgumentName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -237,7 +237,7 @@ proc enterFormalArguments
   ?!@routineFormalArgumentListIR ioFormalArguments
   ?warningOnUnusedArgs:let @bool inUnusedWarning
 {
-  for (argumentKind selector formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
+  for (argumentKind * formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
     let typeProxy = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind

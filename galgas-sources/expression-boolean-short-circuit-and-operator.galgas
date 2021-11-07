@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
-  @expressionAST mLeftExpression
-  @location mOperatorLocation
-  @expressionAST mRightExpression
+refclass @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
+  public var @expressionAST mLeftExpression
+  public var @location mOperatorLocation
+  public var @expressionAST mRightExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -47,7 +47,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze left expression
-  @instructionListIR leftInstructionGenerationList = {}
+  var @instructionListIR leftInstructionGenerationList = {}
   [self.mLeftExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -74,7 +74,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     ?let leftBooleanOperand
   ]
 #--- Analyze right expression
-  @instructionListIR rightInstructionGenerationList = {}
+  var @instructionListIR rightInstructionGenerationList = {}
   [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes

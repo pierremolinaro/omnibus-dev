@@ -11,10 +11,10 @@ enum @prefixOperator {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @prefixOperatorExpressionAST : @expressionAST {
-  @location mOperatorLocation
-  @prefixOperator mOp
-  @expressionAST mExpression
+refclass @prefixOperatorExpressionAST : @expressionAST {
+  public var @location mOperatorLocation
+  public var @prefixOperator mOp
+  public var @expressionAST mExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

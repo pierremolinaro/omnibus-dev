@@ -10,7 +10,7 @@ enum @genericFormalParameter {
 #·······················································································································
 
 list @genericFormalParameterList {
-  @genericFormalParameter mParameter
+  public var @genericFormalParameter mParameter
 }
 
 #·······················································································································
@@ -23,7 +23,7 @@ enum @llvmStringDefinitionElement {
 #·······················································································································
 
 list @llvmStringDefinition {
-  @llvmStringDefinitionElement mElement
+  public var @llvmStringDefinitionElement mElement
 }
 
 #·······················································································································
@@ -51,11 +51,11 @@ list @llvmStringDefinition {
 
 #·······················································································································
 
-shared class @llvmGenericType : @abstractDeclarationAST {
-  @lstring mTypeName
-  @genericFormalParameterList mGenericFormalParameterList
-  @ctExpressionAST mWhereClause
-  @bigint mBitSize
+refclass @llvmGenericType : @abstractDeclarationAST {
+  public var @lstring mTypeName
+  public var @genericFormalParameterList mGenericFormalParameterList
+  public var @ctExpressionAST mWhereClause
+  public var @bigint mBitSize
 }
 
 #·······················································································································
@@ -214,7 +214,7 @@ override method @llvmGenericType enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Build formal generic constant parameter map
-  @ctCheckMap formalGenericConstantParameterMap = {}
+  var @ctCheckMap formalGenericConstantParameterMap = {}
   [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
   [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]

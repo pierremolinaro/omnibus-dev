@@ -30,13 +30,13 @@ grammar omnibus_grammar
 
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
-  @ast ast = .default
+  var @ast ast = .default
   grammar omnibus_grammar in inSourceFile
     !?ast
     ?importClauseList:let importedFileList
     ?endOfSourceFile:let endOfSourceFile
 #--- Recursively import files
-  @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
+  var @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
   let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
   recursiveImportFiles (
     !?ast:ast
@@ -46,7 +46,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   )
 #--- Check target names are not duplicated
   if @uint.errorCount == 0 then
-    @stringset targetNameSet = {}
+    var @stringset targetNameSet = {}
     for (targetName) in ast.mTargetListAST do
       if [targetNameSet hasKey !targetName.string] then
         error targetName : "Duplicated target"
@@ -89,8 +89,8 @@ private proc compileProject
   if [option omnibus_options.printPasses value] then
     message "** Parsing\n" 
   end
-  @ast ast = inAST
-  @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
+  var @ast ast = inAST
+  var @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #------------------------------------------------------------ Enter extensions
   ast.mDeclarationListAST = {}
   for (declaration) in inAST.mDeclarationListAST do
@@ -101,7 +101,7 @@ private proc compileProject
     ast.mDeclarationListAST += !newDeclaration
   end
   for (staticListName elementList) in ast.mExtendStaticArrayDeclarationAST do
-    for (element errorLocation) in elementList do
+    for (* errorLocation) in elementList do
       error errorLocation : "'" + staticListName + "' static list is not defined"
     end
   end
@@ -135,7 +135,7 @@ private proc compileProject
     message "    Duration: " + [parsingTime string] + "\n" 
   end
 #------------------------------------------------------------ Ordered declaration list
-  @declarationListAST orderedDeclarationListAST = .default
+  var @declarationListAST orderedDeclarationListAST = .default
   if @uint.errorCount == 0 then
     let @timer t = .start 
     if [option omnibus_options.printPasses value] then
@@ -164,14 +164,14 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic context
-  @semanticContext semanticContext = .default
-  @staticEntityMap globalLiteralStringMap = .default
-  @staticListInitializationMap staticListValueMap = {}
+  var @semanticContext semanticContext = .default
+  var @staticEntityMap globalLiteralStringMap = .default
+  var @staticListInitializationMap staticListValueMap = {}
   ast.mDeclarationListAST = orderedDeclarationListAST
-  @declarationDecorationList decoratedDeclarationList = {}
-  @decoratedRegularRoutineList decoratedRoutineList = {}
-  @routineListIR routineListIR = {}
-  @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = {}
+  var @declarationDecorationList decoratedDeclarationList = {}
+  var @decoratedRegularRoutineList decoratedRoutineList = {}
+  var @routineListIR routineListIR = {}
+  var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = {}
   if @uint.errorCount == 0 then
     let @timer t = .start 
     buildSemanticContext (
@@ -190,7 +190,7 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic analysis
-  @intermediateCodeStruct intermediateCodeStruct = .default
+  var @intermediateCodeStruct intermediateCodeStruct = .default
   if @uint.errorCount == 0 then
     let @timer t = .start 
     semanticAnalysis (

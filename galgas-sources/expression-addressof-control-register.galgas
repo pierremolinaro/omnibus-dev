@@ -2,8 +2,8 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @addressofControlRegisterAST : @expressionAST {
-  @controlRegisterLValueAST mControlRegisterLValue
+refclass @addressofControlRegisterAST : @expressionAST {
+  public var @controlRegisterLValueAST mControlRegisterLValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -82,7 +82,7 @@ override method @addressofControlRegisterAST analyzeExpression
     !inContext.mTypeMap
     !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
   }
-  outResult = .llvmValue {!type:[resultTypeProxy type] !llvmName:llvmRegisterAddressName}
+  outResult = .llvmNamedValue {!type:[resultTypeProxy type] !llvmName:llvmRegisterAddressName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

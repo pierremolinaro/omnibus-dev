@@ -5,8 +5,8 @@ setter @instructionListIR appendSourceLineComment ?let @location inSourceLocatio
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @sourceLocationIR : @abstractInstructionIR {
-  @location mSourceLocation
+refclass @sourceLocationIR : @abstractInstructionIR {
+  public var @location mSourceLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

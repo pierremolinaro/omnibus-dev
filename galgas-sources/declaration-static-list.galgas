@@ -10,23 +10,23 @@ enum @staticListPropertyTypeAST {
 #·······················································································································
 
 list @staticListPropertyListAST {
-  @lstring mPropertyName
-  @staticListPropertyTypeAST mPropertyType
+  public var @lstring mPropertyName
+  public var @staticListPropertyTypeAST mPropertyType
 }
 
 #·······················································································································
 
-shared class @staticListAST : @abstractDeclarationAST {
-  @lstring mStaticListName
-  @staticListPropertyListAST mPropertyList
-  @staticListValueListAST mValueList
+refclass @staticListAST : @abstractDeclarationAST {
+  public var @lstring mStaticListName
+  public var @staticListPropertyListAST mPropertyList
+  public var @staticListValueListAST mValueList
 }
 
 #·······················································································································
 
 list @staticListValueListAST {
-  @extendStaticListElementAST mElement
-  @location mLocation
+  public var @extendStaticListElementAST mElement
+  public var @location mLocation
 }
 
 #·······················································································································
@@ -39,14 +39,14 @@ enum @extendStaticListExpressionAST {
 #·······················································································································
 
 list @extendStaticListElementAST {
-  @extendStaticListExpressionAST mExpression
-  @location mEndOfExpression
+  public var @extendStaticListExpressionAST mExpression
+  public var @location mEndOfExpression
 }
 
 #·······················································································································
 
 dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
-  @staticListValueListAST mExpressions
+  public var @staticListValueListAST mExpressions
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -61,7 +61,7 @@ syntax extension omnibus_syntax {
     $staticArray$
     $identifier$ ?let staticListName
     ${$
-    @staticListPropertyListAST propertyList = {}
+    var @staticListPropertyListAST propertyList = {}
     repeat
       <staticArrayProperty>!?ioAST !?propertyList
     while
@@ -81,14 +81,14 @@ syntax extension omnibus_syntax {
     or
       $func$
       <mode> ?let mode
-      @lstringlist attributeList = {}
+      var @lstringlist attributeList = {}
       repeat
       while
         $@attribute$ ?let attribute
         attributeList += !attribute
       end
       <procedure_formal_arguments> !?ioAST ?let formalArgs
-      @lstring returnType
+      var @lstring returnType
       select
         returnType = ["" here]
       or
@@ -109,7 +109,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let staticListName
     $($
     repeat
-      @extendStaticListElementAST expressions = {}
+      var @extendStaticListElementAST expressions = {}
       repeat
         $!selector:$ ?let selector
         if selector.string != "" then
@@ -118,7 +118,7 @@ syntax extension omnibus_syntax {
         <staticArray_exp> !?ioAST !?expressions
       while
       end
-      @staticListValueListAST expressionList = {}
+      var @staticListValueListAST expressionList = {}
       if [ioAST.mExtendStaticArrayDeclarationAST hasKey !staticListName] then
         [ioAST.mExtendStaticArrayDeclarationAST searchKey !staticListName ?expressionList]
       end
@@ -250,7 +250,7 @@ private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> 
 #·······················································································································
 
 map @staticlistMap {
-  @propertyList mStaticListPropertyList
+  public var @propertyList mStaticListPropertyList
 
   insert insertKey error message "static list '%K' is already defined"
 }
@@ -258,7 +258,7 @@ map @staticlistMap {
 #·······················································································································
 
 map @staticListInitializationMap {
-  @stringlist mInitializationList
+  public var @stringlist mInitializationList
 
   insert insertKey error message "static list '%K' is already defined"
 }
@@ -275,9 +275,9 @@ override method @staticListAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-  @propertyList propertyList = {}
+  var @propertyList propertyList = {}
 #  @propertyGetterMap propertyGetterMap = {}
-  @stringset propertyNameSet = {}
+  var @stringset propertyNameSet = {}
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!self.mStaticListName)
   [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
@@ -367,7 +367,7 @@ override method @staticListAST enterInContext
     !type:elementType
   ]
 #-------------------------------------------------------------------- Enter static list values
-  @stringlist stringValueList = {}
+  var @stringlist stringValueList = {}
   for (element *) in self.mValueList do
     if [propertyList length] != [element length] then
       error self.mStaticListName
@@ -490,7 +490,7 @@ override method @staticListAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @staticListInvokedFunctionSetMap {
-  @stringset mInvokedFunctionSet
+  public var @stringset mInvokedFunctionSet
   
   insert insertKey error message "INTERNAL ERROR"
   search searchKey error message "INTERNAL ERROR"
@@ -498,9 +498,9 @@ map @staticListInvokedFunctionSetMap {
 
 #·······················································································································
 
-shared class @decoratedStaticList : @abstractDecoratedDeclaration {
-  @lstring mStaticListName
-  @staticListValueListAST mValueList
+refclass @decoratedStaticList : @abstractDecoratedDeclaration {
+  public var @lstring mStaticListName
+  public var @staticListValueListAST mValueList
 }
 
 #·······················································································································
@@ -510,9 +510,9 @@ override method @decoratedStaticList semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  @stringset invokedFunctionSet = {}
+  var @stringset invokedFunctionSet = {}
   for (element *) in self.mValueList do
-    for (operand endOfExp) in element do
+    for (operand *) in element do
       switch operand
       case expression (@expressionAST unused exp) :
       case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
@@ -563,11 +563,11 @@ method @staticListInitializationMap generateLLVMForStaticLists
 #! CODE GENERATION: INDIRECT FUNCTION CALL
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @staticListIndirectRoutineIR : @abstractRoutineIR {
-  @unifiedTypeMap-entry mStaticListElementType
-  @routineTypedSignature mFormalArgumentListForGeneration
-  @unifiedTypeMap-entry mReturnTypeProxy # .void if no return value
-  @uint mPropertyIndex
+refclass @staticListIndirectRoutineIR : @abstractRoutineIR {
+  public var @unifiedTypeMap-entry mStaticListElementType
+  public var @routineTypedSignature mFormalArgumentListForGeneration
+  public var @unifiedTypeMap-entry mReturnTypeProxy # .void if no return value
+  public var @uint mPropertyIndex
 }
 
 #·······················································································································
@@ -590,7 +590,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
     first = false
   end
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentPassingMode * mTypeProxy mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     if first then
       first = false
     else
@@ -607,7 +607,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Indirect function LLVM type name
-  @string llvmFunctionTypeName
+  var @string llvmFunctionTypeName
   if self.mReturnTypeProxy == .null then
     llvmFunctionTypeName = "void"
   else
@@ -615,7 +615,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   end
   llvmFunctionTypeName += "("
   first = true
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentPassingMode * mTypeProxy *) in self.mFormalArgumentListForGeneration do
     if first then
       first = false
     else
@@ -642,7 +642,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   end
   ioLLVMcode += " %f ("
   first = true
-  for () in self.mFormalArgumentListForGeneration do
+  for (mFormalArgumentPassingMode * mTypeProxy mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     if first then
       first = false
     else

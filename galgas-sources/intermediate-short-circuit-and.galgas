@@ -20,13 +20,13 @@ setter @instructionListIR appendShortCircuitAndOperation
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @shortCircuitAndOperationIR : @abstractInstructionIR {
-  @objectIR mTargetOperand
-  @string mLeftOperandLLVMName
-  @instructionListIR mLeftInstructionList
-  @string mRightOperandLLVMName
-  @instructionListIR mRightInstructionList
-  @location mLocation
+refclass @shortCircuitAndOperationIR : @abstractInstructionIR {
+  public var @objectIR mTargetOperand
+  public var @string mLeftOperandLLVMName
+  public var @instructionListIR mLeftInstructionList
+  public var @string mRightOperandLLVMName
+  public var @instructionListIR mRightInstructionList
+  public var @location mLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

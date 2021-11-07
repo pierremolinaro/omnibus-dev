@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @truncateExpressionAST : @expressionAST {
-  @expressionAST mExpression
-  @lstring mTypeName
-  @location mEndOfExpression
+refclass @truncateExpressionAST : @expressionAST {
+  public var @expressionAST mExpression
+  public var @lstring mTypeName
+  public var @location mEndOfExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $truncate$
-    @lstring typeName
+    var @lstring typeName
     select
       typeName = ["" here]
     or
@@ -136,9 +136,9 @@ override method @truncateExpressionAST analyzeExpression
 #! @truncateInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @truncateInstructionIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mOperand
+refclass @truncateInstructionIR : @abstractInstructionIR {
+  public var @objectIR mTarget
+  public var @objectIR mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

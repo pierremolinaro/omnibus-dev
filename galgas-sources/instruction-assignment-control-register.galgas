@@ -9,10 +9,10 @@ enum @controlRegisterAssignmentOperatorKind {
 
 #·······················································································································
 
-shared class @controlRegisterAssignmentInstructionAST : @instructionAST {
-  @controlRegisterLValueAST mControlRegisterLValue
-  @controlRegisterAssignmentOperatorKind mAssignmentKind
-  @expressionAST mSourceExpression
+refclass @controlRegisterAssignmentInstructionAST : @instructionAST {
+  public var @controlRegisterLValueAST mControlRegisterLValue
+  public var @controlRegisterAssignmentOperatorKind mAssignmentKind
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <control_register_lvalue> !?ioAST ?let registerLValue
   #--- Assignment or assignment operator
-    @controlRegisterAssignmentOperatorKind assignmentKind
+    var @controlRegisterAssignmentOperatorKind assignmentKind
     select
       $=$
       assignmentKind = .assignment

@@ -14,7 +14,7 @@ setter @instructionListIR appendLoadWhenReference
 #--- Values
   case literalInteger (**) :
   case null (*) :
-  case llvmValue (**) :
+  case llvmNamedValue (**) :
   case llvmStructureValue (* *) :
   case llvmArrayStaticValues (3*) :
   case literalString (**) :

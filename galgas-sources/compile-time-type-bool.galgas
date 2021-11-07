@@ -2,7 +2,7 @@
 #  AST                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compiletimeBoolAST : @abstractDeclarationAST {
+refclass @compiletimeBoolAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -65,7 +65,7 @@ override method @compiletimeBoolAST enterInContext
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolEqualOperator.new]
 #--- Implicit conversion to i1 for test expressions
-  key = @lstring.new {![ctBoolType omnibusTypeDescriptionName] !.nowhere}
+  key = @lstring.new {!ctBoolType.omnibusTypeDescriptionName !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@compileTimeBoolImplicitConverterToBoolean.new]
 }
 
@@ -73,7 +73,7 @@ override method @compiletimeBoolAST enterInContext
 #  IMPLICIT CONVERSION TO i1
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
+refclass @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
 #·······················································································································
@@ -94,7 +94,7 @@ override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBool
 #  COMPILE TIME PREFIX OPERATOR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeBoolNotOperator : @prefixOperatorUsage {
+refclass @compileTimeBoolNotOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································
@@ -117,7 +117,7 @@ override method @compileTimeBoolNotOperator generateCode
 #  COMPILE TIME INFIX OPERATORS
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -139,7 +139,7 @@ override method @compileTimeBoolEqualOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -161,7 +161,7 @@ override method @compileTimeBoolXorOperator generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
+refclass @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································

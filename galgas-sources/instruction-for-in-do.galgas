@@ -2,14 +2,14 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @forInstructionAST : @instructionAST {
-  @lstring mVarName
-  @lstring mIteratedObject
-  @expressionAST mWhileExpression
-  @location mEndOf_whileExpression
-  @bool mStaticWhileExpression
-  @instructionListAST mDoInstructionList
-  @location mEndOf_for_instruction
+refclass @forInstructionAST : @instructionAST {
+  public var @lstring mVarName
+  public var @lstring mIteratedObject
+  public var @expressionAST mWhileExpression
+  public var @location mEndOf_whileExpression
+  public var @bool mStaticWhileExpression
+  public var @instructionListAST mDoInstructionList
+  public var @location mEndOf_for_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     $in$
     $identifier$ ?let iteratedObject
     var staticWhileExpression = false
-    @expressionAST whileExpression
+    var @expressionAST whileExpression
     select
       whileExpression = @literalBooleanInExpressionAST.new {!true}
       staticWhileExpression = true
@@ -93,7 +93,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Type kind
   let iteratedType = [iteratedObjectPointer type]
 #--- Get iterated element type
-  @omnibusType iteratedElementType
+  var @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
     error self.mIteratedObject : "this object is not enumerable" : iteratedElementType
@@ -110,7 +110,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioUniversalMap insertLocalConstant !self.mVarName !false !iteratedElementType !omnibusName]
 #------------------------------------ Analyze while expression
-  @instructionListIR whileExpression_GenerationList = {}
+  var @instructionListIR whileExpression_GenerationList = {}
   [self.mWhileExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -150,7 +150,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
 #  end
 #------------------------------------ "DO" instruction list
-  @instructionListIR doInstructionList_GenerationList = {}
+  var @instructionListIR doInstructionList_GenerationList = {}
   [self.mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -179,7 +179,7 @@ override method @forInstructionAST instructionSemanticAnalysis
     }
   case staticSubscript (elementType size) :
   #--- Static array map ? If yes, enter invoked function set
-    @stringset invokedFunctionSet = {}
+    var @stringset invokedFunctionSet = {}
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !self.mIteratedObject] then
       [ioTemporaries.mStaticArrayMapForTemporaries searchKey !self.mIteratedObject ?invokedFunctionSet]
     end
@@ -201,16 +201,16 @@ override method @forInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION (ON ARRAY)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @forInstructionOnArrayIR : @abstractInstructionIR {
-  @string mEnumeratedValueName
-  @lstring mIteratedObjectName
-  @objectIR mIteratedObject
-  @instructionListIR mWhileInstructionList
-  @string mWhileExpressionBooleanResult_llvmName
-  @instructionListIR mDoInstructionList
-  @omnibusType mElementType
-  @uint mArraySize
-  @stringset mInvokedFunctionSet
+refclass @forInstructionOnArrayIR : @abstractInstructionIR {
+  public var @string mEnumeratedValueName
+  public var @lstring mIteratedObjectName
+  public var @objectIR mIteratedObject
+  public var @instructionListIR mWhileInstructionList
+  public var @string mWhileExpressionBooleanResult_llvmName
+  public var @instructionListIR mDoInstructionList
+  public var @omnibusType mElementType
+  public var @uint mArraySize
+  public var @stringset mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -334,14 +334,14 @@ override method @forInstructionOnArrayIR enterAccessibleEntities
 #  CODE GENERATION (ON STRING)
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
-  @string mVarName
-  @location mLocation
-  @objectIR mStringElementIteratedObject
-  @omnibusType mLiteralStringType
-  @instructionListIR mWhileInstructionList
-  @objectIR mWhileExpressionResult
-  @instructionListIR mDoInstructionList
+refclass @forInstructionOnLiteralStringIR : @abstractInstructionIR {
+  public var @string mVarName
+  public var @location mLocation
+  public var @objectIR mStringElementIteratedObject
+  public var @omnibusType mLiteralStringType
+  public var @instructionListIR mWhileInstructionList
+  public var @objectIR mWhileExpressionResult
+  public var @instructionListIR mDoInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

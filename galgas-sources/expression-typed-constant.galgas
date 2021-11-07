@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @typedConstantCallAST : @expressionAST {
-  @lstring mOptionalTypeName
-  @lstring mConstructorName
-  @primaryInExpressionAccessListAST mAccessList
+refclass @typedConstantCallAST : @expressionAST {
+  public var @lstring mOptionalTypeName
+  public var @lstring mConstructorName
+  public var @primaryInExpressionAccessListAST mAccessList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    @lstring optionalTypeName
+    var @lstring optionalTypeName
     select
       optionalTypeName = .new {!"" !.here}
     or
@@ -52,7 +52,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
     case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
+      for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
         case inputWithType (* @lstring typeName *) :
@@ -83,7 +83,7 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
     case arrayAccess (@expressionAST indexExpression 2*) :
       [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case funcCall (* @effectiveArgumentListAST arguments *) :
-      for () in arguments do
+      for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
         case inputWithType (* @lstring typeName *) :
@@ -117,7 +117,7 @@ override method @typedConstantCallAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze constructor source type
-  @omnibusType inferredResultType
+  var @omnibusType inferredResultType
   if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else

@@ -2,11 +2,11 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @globalConstantDeclarationAST : @abstractDeclarationAST {
-  @lstring mConstantName
-  @lstringlist mAttributeList
-  @lstring mConstantTypeName # Empty string if no type annotation
-  @expressionAST mSourceExpression
+refclass @globalConstantDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mConstantName
+  public var @lstringlist mAttributeList
+  public var @lstring mConstantTypeName # Empty string if no type annotation
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -25,14 +25,14 @@ syntax extension omnibus_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $let$
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
     $identifier$ ?let constantName
-    @lstring typeName
+    var @lstring typeName
     select
       typeName = ["" nowhere]
     or
@@ -133,13 +133,13 @@ proc buildGlobalConstantMapHTMLFile
 #------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
-    @stringset firstLetterSet = {}
-    for () in inGlobalConstantMap do
+    var @stringset firstLetterSet = {}
+    for (lkey *) in inGlobalConstantMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end
-    @string tableOfTypeString = ""
-    @char currentFirstLetter = ' '
-    for () type_ in inGlobalConstantMap do
+    var @string tableOfTypeString = ""
+    var @char currentFirstLetter = ' '
+    for (type_lkey *) in inGlobalConstantMap do
       if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
         tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"

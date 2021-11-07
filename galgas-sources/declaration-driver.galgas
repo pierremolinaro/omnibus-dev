@@ -3,53 +3,53 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @driverDeclarationAST {
-  @lstring mDriverName
-  @lstringlist mDriverDependanceList
-  @structurePropertyListAST mPropertyListAST
+  public var @lstring mDriverName
+  public var @lstringlist mDriverDependanceList
+  public var @structurePropertyListAST mPropertyListAST
 #--- Boot
-  @location mBootLocation
-  @instructionListAST mBootInstructionList
-  @location mBootEndLocation
+  public var @location mBootLocation
+  public var @instructionListAST mBootInstructionList
+  public var @location mBootEndLocation
 #--- Startup
-  @location mStartupLocation
-  @instructionListAST mStartupInstructionList
-  @location mStartupEndLocation
+  public var @location mStartupLocation
+  public var @instructionListAST mStartupInstructionList
+  public var @location mStartupEndLocation
 }
 
 #·······················································································································
 
 list @driverDeclarationListAST {
-  @driverDeclarationAST mDriver
+  public var @driverDeclarationAST mDriver
 }
 
 #·······················································································································
 
 list @driverInstanciationArgumentListAST {
-  @lstring mSelector
-  @expressionAST mExpression
+  public var @lstring mSelector
+  public var @expressionAST mExpression
 }
 
 #·······················································································································
 
 list @driverInstanciationListAST {
-  @lstring mDriverName
-  @driverInstanciationArgumentListAST mDriverInstanciationArgumentList
+  public var @lstring mDriverName
+  public var @driverInstanciationArgumentListAST mDriverInstanciationArgumentList
 }
 
 #·······················································································································
 
-shared class @implementedDriverAST : @abstractDeclarationAST {
-  @lstring mDriverName
-  @lstringlist mDriverDependanceList
-  @bool mIsInstancied
+refclass @implementedDriverAST : @abstractDeclarationAST {
+  public var @lstring mDriverName
+  public var @lstringlist mDriverDependanceList
+  public var @bool mIsInstancied
 #--- Boot
-  @location mBootLocation
-  @instructionListAST mBootInstructionList
-  @location mBootEndLocation
+  public var @location mBootLocation
+  public var @instructionListAST mBootInstructionList
+  public var @location mBootEndLocation
 #--- Startup
-  @location mStartupLocation
-  @instructionListAST mStartupInstructionList
-  @location mStartupEndLocation
+  public var @location mStartupLocation
+  public var @instructionListAST mStartupInstructionList
+  public var @location mStartupEndLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $driver$
     $identifier$ ?let driverName
-    @lstringlist driverDependenceList = {}
+    var @lstringlist driverDependenceList = {}
     select
     or
       $>$
@@ -75,14 +75,14 @@ syntax extension omnibus_syntax {
       end       
     end
     ${$
-    @structurePropertyListAST propertyListAST = {}
+    var @structurePropertyListAST propertyListAST = {}
     var bootHandled = false
     var bootLocation = @location.here
-    @instructionListAST bootInstructionList = {}
+    var @instructionListAST bootInstructionList = {}
     var bootEndLocation = @location.here
     var startupHandled = false
     var startupLocation = @location.here
-    @instructionListAST startupInstructionList = {}
+    var @instructionListAST startupInstructionList = {}
     var startupEndLocation = @location.here
     repeat
     while
@@ -142,7 +142,7 @@ syntax extension omnibus_syntax {
     $driver$
     $identifier$ ?let driverName
     $($
-    @driverInstanciationArgumentListAST driverInstanciationArgumentList = {}
+    var @driverInstanciationArgumentListAST driverInstanciationArgumentList = {}
     repeat
     while
       $!selector:$ ?let selector
@@ -213,7 +213,7 @@ private func llvmStartupRoutineNameFromDriver ?let @lstring inDriverName -> @lst
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @driverInstanciationArgumentMap {
-  @expressionAST mExpression
+  public var @expressionAST mExpression
   insert insertKey error message "duplicated '%K' selector"
   search searchKey error message "uninitialized '%K' property"
 }
@@ -221,7 +221,7 @@ map @driverInstanciationArgumentMap {
 #·······················································································································
 
 map @instanciedDriverMap {
-  @driverInstanciationArgumentMap mDriverInstanciationArgumentMap
+  public var @driverInstanciationArgumentMap mDriverInstanciationArgumentMap
   insert insertKey error message "the '%K' driver is already instancied in %L"
   search searchKey error message "internal error %K"
 }
@@ -230,7 +230,7 @@ map @instanciedDriverMap {
 
 proc retainRequiredDrivers ?!@ast ioAST {
 #--- Check at most one drive has no dependence
-  @lstringlist driverWithNoDependenceList = {}
+  var @lstringlist driverWithNoDependenceList = {}
   for (declaration) in ioAST.mDriverDeclarationListAST do
      if [declaration.mDriverDependanceList length] == 0 then
        driverWithNoDependenceList += !declaration.mDriverName
@@ -242,27 +242,27 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
   end
 #--- Build instancied driver map
-  @instanciedDriverMap instanciedDriverMap = {}
+  var @instanciedDriverMap instanciedDriverMap = {}
   for (driverName args) in ioAST.mRequiredDriverListAST do
-     @driverInstanciationArgumentMap driverInstanciationArgumentMap = {}
+     var @driverInstanciationArgumentMap driverInstanciationArgumentMap = {}
      for (selector expression) in args do
        [!?driverInstanciationArgumentMap insertKey !selector !expression]
      end
     [!?instanciedDriverMap insertKey !driverName !driverInstanciationArgumentMap]
   end
 #--- Append required drivers to declaration list AST (and init list AST)
-  @stringset validDriverNames = {} # For checking all required drivers have been declared
+  var @stringset validDriverNames = {} # For checking all required drivers have been declared
   for (declaration) in ioAST.mDriverDeclarationListAST do
     validDriverNames += !declaration.mDriverName.string
     let driverIsInstancied = [instanciedDriverMap hasKey !declaration.mDriverName.string]
   #--- Build driver instanciation property list
-    @structurePropertyListAST driverPropertyListAST = {}
+    var @structurePropertyListAST driverPropertyListAST = {}
     if driverIsInstancied then
       [instanciedDriverMap searchKey !declaration.mDriverName ?let driverInstanciationArgumentMap]
     #--- Build driver property list, adding init expression
-      @stringset validArgumentSet = {}
+      var @stringset validArgumentSet = {}
       for (propertyName propertyAttributeList * optionalPropertyTypeName propertyKind) in declaration.mPropertyListAST do
-        @propertyKindAST driverPropertyKind
+        var @propertyKindAST driverPropertyKind
         switch propertyKind 
         case uninitializedStoredProperty :
           [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
@@ -379,8 +379,8 @@ override method @implementedDriverAST enterInContext
 #   SEMANTICS                                                                                                           
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
-  @lstring mDriverName
+refclass @decoratedRequiredDriver : @abstractDecoratedDeclaration {
+  public var @lstring mDriverName
 }
 
 #·······················································································································
@@ -398,7 +398,7 @@ override method @decoratedRequiredDriver semanticAnalysis
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
   [constructorMap searchKey !.new {!"()" !self.mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
-  @operandIRList initialValueList = {}
+  var @operandIRList initialValueList = {}
   for (initialValue *) in sortedOperandList do
     initialValueList += !initialValue
   end
@@ -415,9 +415,9 @@ override method @decoratedRequiredDriver semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @driverListIR {
-  @lstring mDriverName
-  @omnibusType mType
-  @operandIRList mInitialValueList
+  public var @lstring mDriverName
+  public var @omnibusType mType
+  public var @operandIRList mInitialValueList
 }
 
 #·······················································································································

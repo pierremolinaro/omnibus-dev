@@ -12,11 +12,11 @@ setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
-  @string mLLVMResultVarName
-  @objectIR mIndexResult
-  @string mAddressLLVMname
-  @uint mElementSize
+refclass @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
+  public var @string mLLVMResultVarName
+  public var @objectIR mIndexResult
+  public var @string mAddressLLVMname
+  public var @uint mElementSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

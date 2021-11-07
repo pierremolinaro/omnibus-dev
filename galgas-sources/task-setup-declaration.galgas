@@ -2,13 +2,13 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @taskSetupDeclarationAST : @abstractDeclarationAST {
-  @lstring mTaskName
-  @string mQualifier
-  @lstring mSetupName
-  @lstringlist mDependanceList
-  @instructionListAST mTaskSetupInstructionList
-  @location mEndOfTaskSetupDeclaration
+refclass @taskSetupDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mTaskName
+  public var @string mQualifier
+  public var @lstring mSetupName
+  public var @lstringlist mDependanceList
+  public var @instructionListAST mTaskSetupInstructionList
+  public var @location mEndOfTaskSetupDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     $event$
     $@attribute$ ?let attribute
     $identifier$ ?let name
-    @lstringlist dependenceList = {}
+    var @lstringlist dependenceList = {}
     select
     or
       $>$

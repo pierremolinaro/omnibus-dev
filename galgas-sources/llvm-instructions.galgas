@@ -11,36 +11,36 @@ enum @llvmGenerationInstructionElement {
 #·······················································································································
 
 list @llvmGenerationInstructionElementList {
-  @llvmGenerationInstructionElement mElement
+  public var @llvmGenerationInstructionElement mElement
 }
 
 #·······················································································································
 
-abstract shared class @abstractLLVMInstruction {
+abstract refclass @abstractLLVMInstruction {
 }
 
 #·······················································································································
 
-shared class @llvmGenerationInstruction : @abstractLLVMInstruction {
-  @llvmGenerationInstructionElementList mGenerationList
+refclass @llvmGenerationInstruction : @abstractLLVMInstruction {
+  public var @llvmGenerationInstructionElementList mGenerationList
 }
 
 #·······················································································································
 
-shared class @llvmVarInstruction : @abstractLLVMInstruction {
-  @lstring mVariableName
+refclass @llvmVarInstruction : @abstractLLVMInstruction {
+  public var @lstring mVariableName
 }
 
 #·······················································································································
 
 list @llvmGenerationInstructionList {
-  @abstractLLVMInstruction mInstruction
+  public var @abstractLLVMInstruction mInstruction
 }
 
 #·······················································································································
 
 setter @llvmGenerationInstructionList appendReturn ?let @lstring inReturnType ?let @lstring inReturnValue {
-  @llvmGenerationInstructionElementList elements = {}
+  var @llvmGenerationInstructionElementList elements = {}
   elements += !.string {!string: "ret "}
   elements += !.type {!name: inReturnType}
   elements += !.string {!string: " "}
@@ -77,7 +77,7 @@ syntax extension omnibus_syntax {
 
   rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
     $llvm$
-    @llvmGenerationInstructionElementList elementList = {}
+    var @llvmGenerationInstructionElementList elementList = {}
     repeat
       select
         $"string"$ ?let string
@@ -139,7 +139,7 @@ override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap io
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @assignmentGenerationVarMap {
-  @string mValue
+  public var @string mValue
   insert insertKey error message "internal error"
   search searchKey error message "internal error"
 }

@@ -6,9 +6,9 @@ setter @instructionListIR appendInstructionAsFreeString ?let @string inString ?l
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @freeStringIR : @abstractInstructionIR {
-  @string mString
-  @stringset mInvokedFunctionSet
+refclass @freeStringIR : @abstractInstructionIR {
+  public var @string mString
+  public var @stringset mInvokedFunctionSet
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

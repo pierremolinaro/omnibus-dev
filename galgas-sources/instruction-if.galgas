@@ -2,15 +2,15 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @ifInstructionAST : @instructionAST {
-  @expressionAST mTestExpression
-  @location mTestExpressionEndLocation
-  @bool mStaticIfExpression
-  @instructionListAST mThenInstructionList
-  @location mEndOfThenInstructionList
-  @instructionListAST mElseInstructionList
-  @location mEndOfElseInstructionList
-  @location mEndOf_if_instruction
+refclass @ifInstructionAST : @instructionAST {
+  public var @expressionAST mTestExpression
+  public var @location mTestExpressionEndLocation
+  public var @bool mStaticIfExpression
+  public var @instructionListAST mThenInstructionList
+  public var @location mEndOfThenInstructionList
+  public var @instructionListAST mElseInstructionList
+  public var @location mEndOfElseInstructionList
+  public var @location mEndOf_if_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -31,7 +31,7 @@ syntax extension omnibus_syntax {
   rule <if_instruction> ?!@ast ioAST !@ifInstructionAST outIfInstruction {
     $if$
     let instructionLocation = @location.here
-    @bool staticIfExpression
+    var @bool staticIfExpression
     select
       $@attribute$ ? let attributeValue
       if attributeValue.string == staticAttribute () then
@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let thenInstructionList
     $}$
     let endOfThenBranch = @location.here
-    @instructionListAST elseInstructionList
+    var @instructionListAST elseInstructionList
     select
       elseInstructionList = {}
     or
@@ -146,7 +146,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   end
   [!?ioUniversalMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
-  @instructionListIR thenInstructionGenerationList = {}
+  var @instructionListIR thenInstructionGenerationList = {}
   [self.mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -160,7 +160,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
-  @instructionListIR elseInstructionGenerationList = {}
+  var @instructionListIR elseInstructionGenerationList = {}
   [self.mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -187,11 +187,11 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @ifInstructionIR : @abstractInstructionIR {
-  @string mLLVMTestName
-  @location mLocation
-  @instructionListIR mThenInstructionGenerationList
-  @instructionListIR mElseInstructionGenerationList
+refclass @ifInstructionIR : @abstractInstructionIR {
+  public var @string mLLVMTestName
+  public var @location mLocation
+  public var @instructionListIR mThenInstructionGenerationList
+  public var @instructionListIR mElseInstructionGenerationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

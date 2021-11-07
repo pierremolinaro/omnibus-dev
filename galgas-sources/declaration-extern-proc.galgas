@@ -3,13 +3,13 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @externFunctionDeclarationListAST {
-  @lstring mExternProcedureName
-  @mode mMode
-  @lstringlist mAttributeList
-  @routineFormalArgumentListAST mProcFormalArgumentList
-  @lstring mReturnTypeName
-  @lstring mRoutineNameForGeneration
-  @location mEndOfProcLocation
+  public var @lstring mExternProcedureName
+  public var @mode mMode
+  public var @lstringlist mAttributeList
+  public var @routineFormalArgumentListAST mProcFormalArgumentList
+  public var @lstring mReturnTypeName
+  public var @lstring mRoutineNameForGeneration
+  public var @location mEndOfProcLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-    @lstring returnTypeName
+    var @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or
@@ -56,7 +56,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  for () in self do
+  for (* * * mProcFormalArgumentList mReturnTypeName * *) in self do
     for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
       [!?ioGraph noteNode !formalArgumentTypeName]
     end
@@ -127,7 +127,7 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Analyse formal arguments
-  @routineFormalArgumentListIR formalArguments = {}
+  var @routineFormalArgumentListIR formalArguments = {}
   enterFormalArguments (
     !context:inContext
     !self.mProcFormalArgumentList
@@ -160,9 +160,9 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
 #!  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @externRoutineIR : @abstractRoutineIR {
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @unifiedTypeMap-entry mReturnType
+refclass @externRoutineIR : @abstractRoutineIR {
+  public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  public var @unifiedTypeMap-entry mReturnType
 }
 
 #·······················································································································
@@ -179,7 +179,7 @@ override method @externRoutineIR llvmCodeGeneration
       ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
   end
   ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
-  for () in self.mFormalArgumentListForGeneration
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
@@ -198,8 +198,8 @@ override method @externRoutineIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
-  @routineFormalArgumentListIR mFormalArgumentListForGeneration
-  @unifiedTypeMap-entry mReturnType
+  public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
+  public var @unifiedTypeMap-entry mReturnType
   insert insertKey error message "extern procedure %K is already declared"
 }
 
@@ -219,7 +219,7 @@ method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMco
       ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
   end
   ioLLVMcode += " @" + procName + " ("
-  for () in self.mFormalArgumentListForGeneration
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :

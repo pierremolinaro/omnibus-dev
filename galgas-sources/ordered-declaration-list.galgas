@@ -27,7 +27,7 @@ abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @s
 #  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
+refclass @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -145,8 +145,8 @@ proc buildOrderedDeclarationList
   !orderedDeclarationList: @declarationListAST outSortedDeclarationListAST
 {
 #-------------------------------------- Build precedence graph
-  @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
-  for () in inAST.mDeclarationListAST do
+  var @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
+  for (mDeclaration) in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
   end
@@ -154,7 +154,7 @@ proc buildOrderedDeclarationList
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 #--------------------------------------- Add needed UIntXX and IntXX types
   var addintegerTypeCount = 0
-  for () in [precedenceGraph undefinedNodeKeyList] do
+  for (mValue) in [precedenceGraph undefinedNodeKeyList] do
   #--- Detect uXX types
     let Uxx = [mValue componentsSeparatedByString !"u"]
     if ([Uxx length] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
@@ -194,7 +194,7 @@ proc buildOrderedDeclarationList
 #------------------------------------------  Get ordered declaration list
   outSortedDeclarationListAST = {}
   if [precedenceGraph undefinedNodeCount] > 0 then
-    for () in  [precedenceGraph undefinedNodeReferenceList] do
+    for (mValue) in  [precedenceGraph undefinedNodeReferenceList] do
       error mValue : mValue.string + " is not defined in declaration dependency graph"
     end
   else
@@ -208,11 +208,11 @@ proc buildOrderedDeclarationList
       var s = "semantic analysis not performed, "
             + [unsortedSemanticDeclarationListAST length]
             + " declarations are involved in circular definition:"
-      for () in unsortedSemanticDeclarationListAST do
+      for (mDeclaration) in unsortedSemanticDeclarationListAST do
         s += "\n-  " + [mDeclaration keyRepresentationForErrorSignaling]
       end
       error inEndOfSourceFile : s
-      for () in  unsortedSemanticDeclarationListAST do
+      for (mDeclaration) in  unsortedSemanticDeclarationListAST do
         error [mDeclaration locationForErrorSignaling] : "the " + [mDeclaration keyRepresentationForErrorSignaling] + " is declared here"
       end
     end

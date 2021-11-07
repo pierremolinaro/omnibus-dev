@@ -10,64 +10,64 @@ enum @interruptionPanicCode {
 #·······················································································································
 
 list @interruptionConfigurationList {
-  @lstring mInterruptName
-  @interruptionPanicCode mInterruptionPanicCode
+  public var @lstring mInterruptName
+  public var @interruptionPanicCode mInterruptionPanicCode
 }
 
 #·······················································································································
 
 struct @targetParameters {
-  @location mConfigurationLocation
+  public var @location mConfigurationLocation
   
-  @2lstringlist mPython_utilityToolList
-  @lstring mPython_build
+  public var @2lstringlist mPython_utilityToolList
+  public var @lstring mPython_build
 
-  @lstring mLinkerScript
+  public var @lstring mLinkerScript
   
-  @uint mPointerSize
+  public var @uint mPointerSize
 
-  @bool mHandleDynamicArray
+  public var @bool mHandleDynamicArray
  
-  @lbigint mSystemStackSize
-  @lbigint mStackedUserRegisterOnInterruptByteSize
+  public var @lbigint mSystemStackSize
+  public var @lbigint mStackedUserRegisterOnInterruptByteSize
 
-  @lstring mNopInstructionStringInLLVM
+  public var @lstring mNopInstructionStringInLLVM
 
-  @lbigint mBitbandRegisterBaseAddress
-  @lbigint mBitbandRegisterEndAddress
-  @lbigint mBitbandRegisterRelocationAddress
-  @lbigint mBitbandRegisterOffsetMultiplier
-  @lbigint mBitbandRegisterBitMultiplier
+  public var @lbigint mBitbandRegisterBaseAddress
+  public var @lbigint mBitbandRegisterEndAddress
+  public var @lbigint mBitbandRegisterRelocationAddress
+  public var @lbigint mBitbandRegisterOffsetMultiplier
+  public var @lbigint mBitbandRegisterBitMultiplier
   
-  @lstring mSectionHandler
-  @lbigint mSectionPushedRegisterByteSize 
-  @lstring mSectionDispatcherHeader
-  @lstring mSectionDispatcherEntry
-  @lstring mSectionDispatcherInvocationFromAnyMode
-  @lstring mSectionDispatcherInvocationFromUserMode
+  public var @lstring mSectionHandler
+  public var @lbigint mSectionPushedRegisterByteSize 
+  public var @lstring mSectionDispatcherHeader
+  public var @lstring mSectionDispatcherEntry
+  public var @lstring mSectionDispatcherInvocationFromAnyMode
+  public var @lstring mSectionDispatcherInvocationFromUserMode
 
-  @lstringlist m_C_definitionFiles
-  @lstringlist m_S_definitionFiles
-  @lstringlist m_LL_definitionFiles
+  public var @lstringlist m_C_definitionFiles
+  public var @lstringlist m_S_definitionFiles
+  public var @lstringlist m_LL_definitionFiles
   
-  @lstring mXtrInterruptHandler
-  @lstring mUndefinedInterruptHandler
+  public var @lstring mXtrInterruptHandler
+  public var @lstring mUndefinedInterruptHandler
   
-  @lstring mServiceHandler
-  @lbigint mServicePushedRegisterByteSize
-  @lstring mServiceDispatcherEntry
-  @lstring mServiceDispatcherHeader
-  @lstring mServiceEntryNoReturnedValue
-  @lstring mServiceEntryWithReturnValue
+  public var @lstring mServiceHandler
+  public var @lbigint mServicePushedRegisterByteSize
+  public var @lstring mServiceDispatcherEntry
+  public var @lstring mServiceDispatcherHeader
+  public var @lstring mServiceEntryNoReturnedValue
+  public var @lstring mServiceEntryWithReturnValue
 }
 
 #·······················································································································
 
-shared class @configurationDeclarationAST : @abstractDeclarationAST {
-  @lstring mPanicCodeTypeName
-  @lstring mPanicLineTypeName
-  @targetParameters mTargetParameters
-  @interruptionConfigurationList mInterruptionConfigurationList
+refclass @configurationDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mPanicCodeTypeName
+  public var @lstring mPanicLineTypeName
+  public var @targetParameters mTargetParameters
+  public var @interruptionConfigurationList mInterruptionConfigurationList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -120,7 +120,7 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
     <configuration_key> !"DYNAMIC_ARRAY"
-    @bool handleDynamicArray
+    var @bool handleDynamicArray
     select
       $yes$
       handleDynamicArray = true
@@ -133,11 +133,11 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"NOP"
     $"string"$ ?let nopInstructionStringInLLVM
     <configuration_key> !"BIT_BAND"
-    @lbigint bitbandRegisterBaseAddress
-    @lbigint bitbandRegisterEndAddress
-    @lbigint bitbandRegisterRelocationAddress
-    @lbigint bitbandRegisterOffsetMultiplier
-    @lbigint bitbandRegisterBitMultiplier
+    var @lbigint bitbandRegisterBaseAddress
+    var @lbigint bitbandRegisterEndAddress
+    var @lbigint bitbandRegisterRelocationAddress
+    var @lbigint bitbandRegisterOffsetMultiplier
+    var @lbigint bitbandRegisterBitMultiplier
     select
       $no$
       bitbandRegisterBaseAddress = .new {!0G !.here}
@@ -183,21 +183,21 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"UNUSED_INTERRUPT"
     $"string"$ ?let undefinedInterruptHandler
     <configuration_key> !"CPP_FILES"
-    @lstringlist C_definitionFiles = {}
+    var @lstringlist C_definitionFiles = {}
     repeat
     while
       $"string"$ ?let fileRelativePath
       C_definitionFiles += !fileRelativePath
     end
     <configuration_key> !"S_FILES"
-    @lstringlist S_definitionFiles = {}
+    var @lstringlist S_definitionFiles = {}
     repeat
     while
       $"string"$ ?let fileRelativePath
       S_definitionFiles += !fileRelativePath
     end
     <configuration_key> !"LL_FILES"
-    @lstringlist LL_definitionFiles = {}
+    var @lstringlist LL_definitionFiles = {}
     repeat
     while
       $"string"$ ?let fileRelativePath
@@ -211,7 +211,7 @@ syntax extension omnibus_target_specific_syntax {
       outImportedFileList += !relativeFilePath
     end
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
-    @uint ptrSize
+    var @uint ptrSize
     if pointerSize.bigint == 0G then
       error pointerSize : "zero size pointer is invalid" : ptrSize
     else
@@ -275,7 +275,7 @@ syntax extension omnibus_target_specific_syntax {
     repeat
     while
       $identifier$ ?let interruptName
-      @interruptionPanicCode interruptionPanicCode
+      var @interruptionPanicCode interruptionPanicCode
       select
         interruptionPanicCode = .noCode
       or
@@ -377,7 +377,7 @@ override method @configurationDeclarationAST enterInContext
     error self.mPanicLineTypeName : "this type should be an unsigned integer type"
   end
 #--------------------------------- Interrupt panic codes
-  @stringset panicCodeSet = {}
+  var @stringset panicCodeSet = {}
   for (name panicCode) in self.mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode

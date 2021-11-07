@@ -11,10 +11,10 @@ setter @instructionListIR appendStoreToUniversalReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @storeToUniversalReferenceIR : @abstractInstructionIR {
-  @string mLLVMTargetVarName
-  @omnibusType mTargetVarType
-  @objectIR mSourceValue
+refclass @storeToUniversalReferenceIR : @abstractInstructionIR {
+  public var @string mLLVMTargetVarName
+  public var @omnibusType mTargetVarType
+  public var @objectIR mSourceValue
 }
 
 #·······················································································································
@@ -27,7 +27,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   case void :
   case null (*) :
   case reference (* *) :
-  case llvmValue (* *) :
+  case llvmNamedValue (* *) :
   case literalInteger  (* *) :
   case llvmStructureValue (* *) :
   case llvmArrayRepeatedDynamicValue (* * value) :
@@ -62,7 +62,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  store " +  llvmType + " null, " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   case reference (* *) :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"
-  case llvmValue (* @string llvmName) :
+  case llvmNamedValue (* @string llvmName) :
     ioLLVMcode += "  store " +  llvmType + " " + llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   case literalInteger  (* @bigint value) :
     ioLLVMcode += "  store " +  llvmType + " " + value + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"

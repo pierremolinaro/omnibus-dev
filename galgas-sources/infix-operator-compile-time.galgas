@@ -66,15 +66,15 @@ getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfi
 
 #·······················································································································
 
-shared class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
-  @compileTimeInfixOperatorEnumeration mInfixOperator
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mLeftTypeName
-  @lstring mRightOperandName
-  @lstring mRightTypeName
-  @ctExpressionAST mExpression
-  @lstring mResultTypeName
+refclass @compileTimeInfixOperatorAST : @abstractDeclarationAST {
+  public var @compileTimeInfixOperatorEnumeration mInfixOperator
+  public var @location mInfixOperatorLocation
+  public var @lstring mLeftOperandName
+  public var @lstring mLeftTypeName
+  public var @lstring mRightOperandName
+  public var @lstring mRightTypeName
+  public var @ctExpressionAST mExpression
+  public var @lstring mResultTypeName
 }
 
 #·······················································································································
@@ -219,7 +219,7 @@ override method @compileTimeInfixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  @ctCheckMap ctCheckMap = {}
+  var @ctCheckMap ctCheckMap = {}
   [!?ctCheckMap insertKey !self.mLeftOperandName]
   [!?ctCheckMap insertKey !self.mRightOperandName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
@@ -257,10 +257,10 @@ override method @compileTimeInfixOperatorAST enterInContext
 #!  GENERATE CODE                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
-  @ctExpressionAST mExpression
+refclass @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  public var @lstring mLeftOperandName
+  public var @lstring mRightOperandName
+  public var @ctExpressionAST mExpression
 }
 
 #·······················································································································
@@ -272,7 +272,7 @@ method @compileTimeInfixOperatorUsage eval
 {
   [inLeftOperand literalInteger ?1* ?value: let leftValue]
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  @ctMap varMap = {}
+  var @ctMap varMap = {}
   [!?varMap insertKey !self.mLeftOperandName !leftValue]
   [!?varMap insertKey !self.mRightOperandName !rightValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]
@@ -296,9 +296,9 @@ override method @compileTimeInfixOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
-  @compileTimeInfixOperatorUsage mEqualOperatorUsage
-  @compileTimeInfixOperatorUsage mLessThanOperatorUsage
+refclass @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
+  public var @compileTimeInfixOperatorUsage mEqualOperatorUsage
+  public var @compileTimeInfixOperatorUsage mLessThanOperatorUsage
 }
 
 #·······················································································································

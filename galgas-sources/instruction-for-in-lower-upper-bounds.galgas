@@ -2,15 +2,15 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @forLowerUpperBoundInstructionAST : @instructionAST {
-  @lstring mVarName
-  @lstring mTypeName
-  @expressionAST mLowerBoundExpression
-  @location mEndOf_lowerBoundExpression_instruction
-  @expressionAST mUpperBoundExpression
-  @location mEndOf_upperBoundExpression_instruction
-  @instructionListAST mDoInstructionList
-  @location mEndOf_do_instruction
+refclass @forLowerUpperBoundInstructionAST : @instructionAST {
+  public var @lstring mVarName
+  public var @lstring mTypeName
+  public var @expressionAST mLowerBoundExpression
+  public var @location mEndOf_lowerBoundExpression_instruction
+  public var @expressionAST mUpperBoundExpression
+  public var @location mEndOf_upperBoundExpression_instruction
+  public var @instructionListAST mDoInstructionList
+  public var @location mEndOf_do_instruction
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,7 +23,7 @@ syntax extension omnibus_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $for$
-    @lstring varName
+    var @lstring varName
     select
       $_$
       varName = ["" here]
@@ -175,7 +175,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
      [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
     end
   #--- Analyze instruction list
-    @instructionListIR instructionGenerationList = {}
+    var @instructionListIR instructionGenerationList = {}
     [self.mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -206,14 +206,14 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
-  @string mVarName
-  @omnibusType mType
-  @bool mUnsigned
-  @location mLocation
-  @objectIR mLowerExpressionResult
-  @objectIR mUpperExpressionResult
-  @instructionListIR mInstructionList
+refclass @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
+  public var @string mVarName
+  public var @omnibusType mType
+  public var @bool mUnsigned
+  public var @location mLocation
+  public var @objectIR mLowerExpressionResult
+  public var @objectIR mUpperExpressionResult
+  public var @instructionListIR mInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

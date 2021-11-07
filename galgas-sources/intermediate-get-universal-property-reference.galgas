@@ -11,12 +11,12 @@ setter @instructionListIR appendGetUniversalPropertyReference
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
-  @omnibusType mType
-  @string mLLVMName
-  @string mElementLLVMName
-  @uint mPropertyIndex
-  @string mPropertyName
+refclass @getUniversalPropertyReferenceIR : @abstractInstructionIR {
+  public var @omnibusType mType
+  public var @string mLLVMName
+  public var @string mElementLLVMName
+  public var @uint mPropertyIndex
+  public var @string mPropertyName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

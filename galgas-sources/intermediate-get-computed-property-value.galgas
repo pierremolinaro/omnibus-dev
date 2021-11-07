@@ -7,16 +7,16 @@ setter @instructionListIR appendGetComputedPropertyValue
   !@objectIR outResultValueIR
 {
  [!?ioTemporaries newTempLLVMVar ?let result_llvmName]
- outResultValueIR = .llvmValue {!type:inResultType !llvmName:result_llvmName}
+ outResultValueIR = .llvmNamedValue {!type:inResultType !llvmName:result_llvmName}
   self += !@getComputedPropertyValueIR.new {!inReceiverIR !inLLVMGetterName !outResultValueIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @getComputedPropertyValueIR : @abstractInstructionIR {
-  @objectIR mReceiverIR
-  @string mLLVMGetterName
-  @objectIR mResultValueIR
+refclass @getComputedPropertyValueIR : @abstractInstructionIR {
+  public var @objectIR mReceiverIR
+  public var @string mLLVMGetterName
+  public var @objectIR mResultValueIR
 }
 
 #·······················································································································

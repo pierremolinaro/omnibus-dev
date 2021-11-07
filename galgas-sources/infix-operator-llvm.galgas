@@ -2,19 +2,19 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmInfixOperatorAST : @abstractDeclarationAST {
-  @omnibusInfixOperator mInfixOperator
-  @location mInfixOperatorLocation
-  @lstring mLeftOperandName
-  @lstring mLeftTypeName
-  @genericFormalParameterList mLeftGenericFormalParameterList
-  @lstring mRightOperandName
-  @lstring mRightTypeName
-  @genericFormalParameterList mRightGenericFormalParameterList
+refclass @llvmInfixOperatorAST : @abstractDeclarationAST {
+  public var @omnibusInfixOperator mInfixOperator
+  public var @location mInfixOperatorLocation
+  public var @lstring mLeftOperandName
+  public var @lstring mLeftTypeName
+  public var @genericFormalParameterList mLeftGenericFormalParameterList
+  public var @lstring mRightOperandName
+  public var @lstring mRightTypeName
+  public var @genericFormalParameterList mRightGenericFormalParameterList
  # @ctExpressionAST mWhereExpression
-  @lstring mResultTypeName
-  @genericFormalParameterList mResultGenericFormalParameterList # À modifier
-  @llvmGenerationInstructionList mInstructionList
+  public var @lstring mResultTypeName
+  public var @genericFormalParameterList mResultGenericFormalParameterList # À modifier
+  public var @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
@@ -33,8 +33,8 @@ proc appendInfixOperatorDeclaration
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type --- type
-  @llvmGenerationInstructionList llvmInstructionList = {}
-  @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = {}
+  var @llvmGenerationInstructionElementList instructionElements = {}
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
   instructionElements += !.type {!name: ["LEFT" nowhere]}
@@ -43,7 +43,7 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
   llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  @abstractDeclarationAST declaration = @llvmInfixOperatorAST.new {
+  var @abstractDeclarationAST declaration = @llvmInfixOperatorAST.new {
     !inInfixOperator
     !.nowhere
     !["LEFT" nowhere]
@@ -207,10 +207,10 @@ override method @llvmInfixOperatorAST enterInContext
       !self.mInstructionList
     }
     [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
-    @assignmentGenerationVarMap varMap = {}
+    var @assignmentGenerationVarMap varMap = {}
     [!?varMap insertKey !self.mLeftOperandName !"%" + self.mLeftOperandName]
     [!?varMap insertKey !self.mRightOperandName !"%" + self.mRightOperandName]
-    @assignmentGenerationVarMap typeMap = {}
+    var @assignmentGenerationVarMap typeMap = {}
     if not [leftType isCompileTimeType] then
       [!?typeMap insertKey !self.mLeftOperandName ![leftType llvmTypeName]]
     end
@@ -218,13 +218,13 @@ override method @llvmInfixOperatorAST enterInContext
       [!?typeMap insertKey !self.mRightOperandName ![rightType llvmTypeName]]
     end
     [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
-    @llvmGenerationInstructionList instructionList = {}
+    var @llvmGenerationInstructionList instructionList = {}
     instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
     instructionList += self.mInstructionList
     [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
-    @stringlist generatedInstructions = {}
-    @allocaList allocaList = {}
-    @uint temporaryIndex = 0
+    var @stringlist generatedInstructions = {}
+    var @allocaList allocaList = {}
+    var @uint temporaryIndex = 0
     [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @infixOperatorRoutineIR.new {
       !.new {!infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType) !self.mInfixOperatorLocation}
@@ -253,11 +253,11 @@ override method @llvmInfixOperatorAST enterInContext
 #   INFIX OPERATOR USAGE
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @string mInfixMangledFunctionName
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
-  @llvmGenerationInstructionList mInstructionList
+refclass @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  public var @string mInfixMangledFunctionName
+  public var @lstring mLeftOperandName
+  public var @lstring mRightOperandName
+  public var @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
@@ -285,7 +285,7 @@ override method @llvmInfixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  @procCallEffectiveParameterListIR argumentList = {}
+  var @procCallEffectiveParameterListIR argumentList = {}
   argumentList += !.output !leftOperand
   argumentList += !.output !rightOperand
   ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
@@ -298,10 +298,10 @@ override method @llvmInfixOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
-  @lstring mLeftOperandName
-  @lstring mRightOperandName
-  @llvmGenerationInstructionList mInstructionList
+refclass @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
+  public var @lstring mLeftOperandName
+  public var @lstring mRightOperandName
+  public var @llvmGenerationInstructionList mInstructionList
 }
 
 #·······················································································································
@@ -329,18 +329,18 @@ override method @llvmInlineInfixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  @assignmentGenerationVarMap varMap = {}
+  var @assignmentGenerationVarMap varMap = {}
   [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
   [!?varMap insertKey !self.mRightOperandName ![rightOperand llvmName]]
   [!?varMap insertKey !["result" nowhere] ![outResultValue llvmName]]
-  @assignmentGenerationVarMap typeMap = {}
+  var @assignmentGenerationVarMap typeMap = {}
   if not [[leftOperand type] isCompileTimeType] then
     [!?typeMap insertKey !self.mLeftOperandName ![[leftOperand type] llvmTypeName]]
   end
   if not [[rightOperand type] isCompileTimeType] then
     [!?typeMap insertKey !self.mRightOperandName ![[rightOperand type] llvmTypeName]]
   end
-  @stringlist generatedInstructions = {}
+  var @stringlist generatedInstructions = {}
   [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
   for (str) in generatedInstructions do
     [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
@@ -351,14 +351,14 @@ override method @llvmInlineInfixOperatorUsage generateCode
 #   CODE GENERATION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @infixOperatorRoutineIR : @abstractRoutineIR {
-  @omnibusType mTargetType
-  @string mTargetVarName
-  @omnibusType mSourceType
-  @string mSourceVarName
-  @omnibusType mResultType
-  @stringlist mGeneratedInstructions
-  @allocaList mAllocaList
+refclass @infixOperatorRoutineIR : @abstractRoutineIR {
+  public var @omnibusType mTargetType
+  public var @string mTargetVarName
+  public var @omnibusType mSourceType
+  public var @string mSourceVarName
+  public var @omnibusType mResultType
+  public var @stringlist mGeneratedInstructions
+  public var @allocaList mAllocaList
 }
 
 #·······················································································································

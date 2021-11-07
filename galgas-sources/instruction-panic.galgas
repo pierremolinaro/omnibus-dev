@@ -2,8 +2,8 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @panicInstructionAST : @instructionAST {
-  @expressionAST mCodeExpression
+refclass @panicInstructionAST : @instructionAST {
+  public var @expressionAST mCodeExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -53,7 +53,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
-  @instructionListIR unusedInstructionListIR = {}
+  var @instructionListIR unusedInstructionListIR = {}
   [self.mCodeExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
@@ -92,9 +92,9 @@ override method @panicInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @panicInstructionIR : @abstractInstructionIR {
-  @location mThrowLocation
-  @bigint mPanicCode
+refclass @panicInstructionIR : @abstractInstructionIR {
+  public var @location mThrowLocation
+  public var @bigint mPanicCode
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

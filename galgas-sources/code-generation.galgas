@@ -7,18 +7,18 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationAdds {
-  @uint mUniqueIndex
-  @stringset mExternFunctionDeclarationSet
-  @staticEntityMap mStaticEntityMap
-  @bool mUsesGuards
-  @bool mNeedsDynamicMemoryAllocation
+  public var @uint mUniqueIndex
+  public var @stringset mExternFunctionDeclarationSet
+  public var @staticEntityMap mStaticEntityMap
+  public var @bool mUsesGuards
+  public var @bool mNeedsDynamicMemoryAllocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! @abstractInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract shared class @abstractInstructionIR {
+abstract refclass @abstractInstructionIR {
 }
 
 #·······················································································································
@@ -41,13 +41,13 @@ method @abstractInstructionIR enterAccessibleEntities
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListIR {
-  @abstractInstructionIR mInstructionGeneration
+  public var @abstractInstructionIR mInstructionGeneration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListListIR {
-  @instructionListIR mInstructionList
+  public var @instructionListIR mInstructionList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -131,7 +131,7 @@ proc codeGeneration
     let @timer scriptTime = .start 
     let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python " + productDirectory + "/" + script + ".py"
-    @sint result = [fullScript system]
+    var @sint result = [fullScript system]
     if result != 0S then
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
@@ -144,11 +144,11 @@ proc codeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationContext {
-  @omnibusType mPanicCodeLLVMType
-  @omnibusType mPanicLineLLVMType
-  @string mNopInstructionInLLVM
-  @globalTaskVariableList mGlobalTaskVariableList
-  @availableInterruptMap mAvailableInterruptMap
+  public var @omnibusType mPanicCodeLLVMType
+  public var @omnibusType mPanicLineLLVMType
+  public var @string mNopInstructionInLLVM
+  public var @globalTaskVariableList mGlobalTaskVariableList
+  public var @availableInterruptMap mAvailableInterruptMap
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -165,7 +165,7 @@ private proc generateCodeFiles
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
 {
-  @generationAdds generationAdds = .default
+  var @generationAdds generationAdds = .default
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
   let @generationContext generationContext = .new {
     !inPanicCodeType
@@ -253,7 +253,7 @@ private proc generateCodeFiles
   ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-  @primitiveAndServiceIRlist primitiveAndServiceList = {}
+  var @primitiveAndServiceIRlist primitiveAndServiceList = {}
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
@@ -265,7 +265,7 @@ private proc generateCodeFiles
       !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- Routine list
-  @sectionIRlist sectionIRlist = {}
+  var @sectionIRlist sectionIRlist = {}
   for routine in inIntermediateCodeStruct.mRoutineListIR do
     [routine.mRoutine svcDeclarationGeneration
       !?primitiveAndServiceList
@@ -323,7 +323,7 @@ private proc generateCodeFiles
 #----------------------------------------- Static Strings
   if [generationAdds.mStaticEntityMap.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
-    for () in generationAdds.mStaticEntityMap.mStaticStringMap do
+    for (lkey mIndex) in generationAdds.mStaticEntityMap.mStaticStringMap do
       let lgStr = [[lkey.string utf8Length] + 1 string]
       llvmCode += literalCharacterArrayName (!mIndex) + " = private unnamed_addr constant ["
       llvmCode += lgStr + " x i8] c\"" + lkey.string + "\\00\", align 1\n"
@@ -335,10 +335,10 @@ private proc generateCodeFiles
 #----------------------------------------- Global structured constants
   if [generationAdds.mStaticEntityMap.mGlobalStructuredConstantList length] > 0 then
     llvmCode += llvmTitleComment (!"Global structured constants")
-    for () in generationAdds.mStaticEntityMap.mGlobalStructuredConstantList do (idx)
+    for (mType mOperandIRList) in generationAdds.mStaticEntityMap.mGlobalStructuredConstantList do (idx)
       llvmCode += "@gconst." + idx + " = private unnamed_addr constant " + [mType llvmTypeName]
       llvmCode += " ["
-      for () in mOperandIRList
+      for (mOperand) in mOperandIRList
         do llvmCode += [mOperand llvmTypeName] + " " + [mOperand llvmName]
         between llvmCode += ", "
       end

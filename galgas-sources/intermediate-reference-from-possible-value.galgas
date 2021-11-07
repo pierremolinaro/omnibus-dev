@@ -5,13 +5,13 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
   ?!@allocaList ioAllocaList
   ?!@objectIR ioObjectIR
 {
-  @bool performStore
+  var @bool performStore
   switch ioObjectIR
   case void : # Do nothing
     performStore = false
   case reference (* *) : # Already a reference: do nothing
     performStore = false
-  case llvmValue (* *) :
+  case llvmNamedValue (* *) :
     performStore = true
   case literalInteger  (* *) :
     performStore = true

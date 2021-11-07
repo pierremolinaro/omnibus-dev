@@ -2,11 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @panicAST : @abstractDeclarationAST {
-  @bool mIsSetup # true: setup, false: loop
-  @instructionListAST mPanicInstructionList
-  @location mEndOfPanicInstructions
-  @lbigint mPriority
+refclass @panicAST : @abstractDeclarationAST {
+  public var @bool mIsSetup # true: setup, false: loop
+  public var @instructionListAST mPanicInstructionList
+  public var @location mEndOfPanicInstructions
+  public var @lbigint mPriority
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $panic$
     $@attribute$ ?let attribute
-    @bool isSetup
+    var @bool isSetup
     if attribute.string == "setup" then
       isSetup = true
     elsif attribute.string == "loop" then
@@ -133,16 +133,16 @@ override method @panicAST enterInContext
     !self.mPriority
   }
 #--- Insert predefined input arguments
-  @routineFormalArgumentListAST arguments = {}
+  var @routineFormalArgumentListAST arguments = {}
   arguments +=
     !.input
     !["" nowhere]
-    ![[ioContext.mPanicLineType llvmBaseTypeName] nowhere]
+    ![ioContext.mPanicLineType.llvmBaseTypeName nowhere]
     !["LINE" nowhere]
   arguments +=
     !.input
     !["" nowhere]
-    ![[ioContext.mPanicCodeType llvmBaseTypeName] nowhere]
+    ![ioContext.mPanicCodeType.llvmBaseTypeName nowhere]
     !["CODE" nowhere]
   arguments +=
     !.input
@@ -217,9 +217,9 @@ func %once panicModeName -> @string {
 
 #·······················································································································
 
-shared class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
-  @bool mIsSetup # true: setup, false: loop
-  @lbigint mPriority
+refclass @decoratedPanicRoutine : @abstractDecoratedDeclaration {
+  public var @bool mIsSetup # true: setup, false: loop
+  public var @lbigint mPriority
 }
 
 #·······················································································································
@@ -244,7 +244,7 @@ override method @decoratedPanicRoutine semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @panicSortedListIR {
-  @bigint mPriority
+  public var @bigint mPriority
 }{
   mPriority <
 }
@@ -274,8 +274,8 @@ proc generatePanicCode
 #! CODE GENERATION: Panic routine, specific to a source file 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
-  @string inFilePath
+refclass @fileSpecificPanicRoutineIR : @abstractRoutineIR {
+  public var @string inFilePath
 }
 
 #·······················································································································
@@ -318,7 +318,7 @@ override method @fileSpecificPanicRoutineIR enterAccessibleEntities
 #! CODE GENERATION: Panic routine, in universal mode 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @universalModePanicRoutineIR : @abstractRoutineIR {
+refclass @universalModePanicRoutineIR : @abstractRoutineIR {
 }
 
 #·······················································································································
@@ -365,9 +365,9 @@ override method @universalModePanicRoutineIR enterAccessibleEntities
 #! CODE GENERATION: Panic routine, in section mode 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @sectionModePanicRoutineIR : @abstractRoutineIR {
-  @panicSortedListIR mPanicSetupListIR
-  @panicSortedListIR mPanicLoopListIR
+refclass @sectionModePanicRoutineIR : @abstractRoutineIR {
+  public var @panicSortedListIR mPanicSetupListIR
+  public var @panicSortedListIR mPanicLoopListIR
 }
 
 #·······················································································································

@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @convertExpressionAST : @expressionAST {
-  @expressionAST mExpression
-  @lstring mTypeName
-  @location mEndOfExpression
+refclass @convertExpressionAST : @expressionAST {
+  public var @expressionAST mExpression
+  public var @lstring mTypeName
+  public var @location mEndOfExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $convert$
-    @lstring typeName
+    var @lstring typeName
     select
       typeName = ["" here]
     or
@@ -144,10 +144,10 @@ override method @convertExpressionAST analyzeExpression
 #! @convertInstructionIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @convertInstructionIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @objectIR mOperand
-  @location mLocation
+refclass @convertInstructionIR : @abstractInstructionIR {
+  public var @objectIR mTarget
+  public var @objectIR mOperand
+  public var @location mLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

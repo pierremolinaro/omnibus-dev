@@ -3,15 +3,15 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @enumerationConstantList {
-  @lstring mConstantName
-  @bigint mConstantValue
+  public var @lstring mConstantName
+  public var @bigint mConstantValue
 }
 
 #·······················································································································
 
-shared class @enumerationDeclarationAST : @abstractDeclarationAST {
-  @lstring mEnumerationName
-  @enumerationConstantList mCaseNameList
+refclass @enumerationDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mEnumerationName
+  public var @enumerationConstantList mCaseNameList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     $enum$
     $\$type$ ?let enumerationName
     ${$
-    @enumerationConstantList enumCaseList = {}
+    var @enumerationConstantList enumCaseList = {}
     var idx = 0G
     repeat
       $case$
@@ -52,13 +52,13 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
 {
   [!?ioGraph addNode !self.mEnumerationName !self]
 #--- Mark dependance from $uintN used for value property
-  @bigint maxValue = 0G
+  var @bigint maxValue = 0G
   for (* value) in self.mCaseNameList do
     if maxValue < value then
       maxValue = value
     end
   end
-  @uint representationBitCount = 0
+  var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do
     representationBitCount ++ ;
     maxValue = maxValue / 2G
@@ -93,8 +93,8 @@ override method @enumerationDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Build constant map
-  @constantMap enumConstantMap = {}
-  @bigint maxValue = 0G
+  var @constantMap enumConstantMap = {}
+  var @bigint maxValue = 0G
   for (name value) in self.mCaseNameList do
     [!?enumConstantMap insertKey !name !value !self.mEnumerationName]
     if maxValue < value then
@@ -106,7 +106,7 @@ override method @enumerationDeclarationAST enterInContext
     !enumConstantMap
   ]
 #---------------- Compute representation bit count
-  @uint representationBitCount = 0
+  var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do
     representationBitCount ++ ;
     maxValue = maxValue / 2G
@@ -196,8 +196,8 @@ override method @enumerationDeclarationAST enterInContext
 #!  CODE GENERATION                                                                                                    
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @enumToUintRoutineIR : @abstractRoutineIR {
-  @string mEnumerationLLVMTypeName
+refclass @enumToUintRoutineIR : @abstractRoutineIR {
+  public var @string mEnumerationLLVMTypeName
 }
 
 #·······················································································································

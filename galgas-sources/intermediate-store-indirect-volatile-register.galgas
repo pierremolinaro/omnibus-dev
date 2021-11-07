@@ -9,10 +9,10 @@ setter @instructionListIR appendStoreIndirectVolatileRegister
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @storeIndirectVolatileIR : @abstractInstructionIR {
-  @omnibusType mTargetVarType
-  @string mLLVMName
-  @objectIR mSourceValue
+refclass @storeIndirectVolatileIR : @abstractInstructionIR {
+  public var @omnibusType mTargetVarType
+  public var @string mLLVMName
+  public var @objectIR mSourceValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

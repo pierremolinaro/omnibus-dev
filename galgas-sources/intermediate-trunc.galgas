@@ -17,9 +17,9 @@ setter @instructionListIR appendTrunc
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @truncIR : @abstractInstructionIR {
-  @objectIR mResult
-  @objectIR mSource
+refclass @truncIR : @abstractInstructionIR {
+  public var @objectIR mResult
+  public var @objectIR mSource
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

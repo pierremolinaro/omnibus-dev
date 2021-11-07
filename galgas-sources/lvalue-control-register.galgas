@@ -17,10 +17,10 @@ enum @registerIndexAST {
 #·······················································································································
 
 struct @controlRegisterLValueAST {
-  @lstring mRegisterGroupName
-  @registerGroupIndexAST mGroupIndex
-  @lstring mRegisterName
-  @registerIndexAST mRegisterIndex
+  public var @lstring mRegisterGroupName
+  public var @registerGroupIndexAST mGroupIndex
+  public var @lstring mRegisterName
+  public var @registerIndexAST mRegisterIndex
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -33,14 +33,14 @@ syntax extension omnibus_syntax {
 
   rule <control_register_lvalue> ?!@ast ioAST !@controlRegisterLValueAST outRegisterLValue {
     $©group$ ?let registerGroupName
-    @registerGroupIndexAST groupIndex
+    var @registerGroupIndexAST groupIndex
     select
       groupIndex = .noIndex
     or
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      @bool checkIndexExpression
+      var @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true
@@ -52,14 +52,14 @@ syntax extension omnibus_syntax {
     end
     $.$
     $identifier$ ?let registerName
-    @registerIndexAST registerIndex
+    var @registerIndexAST registerIndex
     select
       registerIndex = .noIndex
     or
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      @bool checkIndexExpression
+      var @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true
@@ -164,7 +164,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     error self.mRegisterName : "this control register is not accessible in user mode"
   end
 #-------------------- Group index ?
-  @string registerAddress
+  var @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
     if [self.mGroupIndex isIndex] then

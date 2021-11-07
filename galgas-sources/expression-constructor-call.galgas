@@ -3,16 +3,16 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @functionCallEffectiveParameterListAST {
-  @lstring mSelector
-  @expressionAST mExpression
+  public var @lstring mSelector
+  public var @expressionAST mExpression
 }
 
 #·······················································································································
 
-shared class @constructorCallAST : @expressionAST {
-  @lstring mTypeName
-  @functionCallEffectiveParameterListAST mParameterList
-  @location mErrorLocation
+refclass @constructorCallAST : @expressionAST {
+  public var @lstring mTypeName
+  public var @functionCallEffectiveParameterListAST mParameterList
+  public var @location mErrorLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -24,7 +24,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <type_definition> !?ioAST ?let typeName
     $($
-    @functionCallEffectiveParameterListAST parameterList = {}
+    var @functionCallEffectiveParameterListAST parameterList = {}
     repeat
     while
       $!selector:$ ?let selector
@@ -48,7 +48,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
 {
   [!?ioGraph addEdge !inConstantName !self.mTypeName]
   
-  for () in self.mParameterList do
+  for (* mExpression) in self.mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
@@ -59,7 +59,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
 
 override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
-  for () in self.mParameterList do
+  for (* mExpression) in self.mParameterList do
     [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   end
 }
@@ -121,8 +121,8 @@ override method @constructorCallAST analyzeExpression
       if [result isStatic] then
         let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
         outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
-        @operandIRList operandIRList = {}
-        for i in 0 ..< size do
+        var @operandIRList operandIRList = {}
+        for * in 0 ..< size do
           operandIRList += !result
         end
         ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
@@ -131,14 +131,14 @@ override method @constructorCallAST analyzeExpression
       end
     else
       var individualConstructor = "("
-      for i in 0 ..< size do
+      for * in 0 ..< size do
         individualConstructor += "!"
       end
       individualConstructor += ")"
       if constructorKey == individualConstructor then
-        @operandIRList operandIRList = {}
+        var @operandIRList operandIRList = {}
         var resultIsStatic = true
-        for () in self.mParameterList do
+        for (mSelector mExpression) in self.mParameterList do
           [mExpression analyzeExpression
             !self:inSelfType
             !routineAttributes:inRoutineAttributes
@@ -189,7 +189,7 @@ override method @constructorCallAST analyzeExpression
         + " instead of " + [self.mParameterList length]
       : outResult
     else
-      for () formal_ in constructorSignature, () effective_ in self.mParameterList do
+      for (formal_mSelector formal_mType formal_mFieldIndex) in constructorSignature, (effective_mSelector effective_mExpression) in self.mParameterList do
         if effective_mSelector.string != formal_mSelector  then
           error effective_mSelector : "the selector should be '!" + formal_mSelector + ":'"
         end

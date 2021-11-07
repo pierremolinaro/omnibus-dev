@@ -3,17 +3,17 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @integerSliceFieldListAST {
-  @lstring mSliceWidth
-  @expressionAST mExpression
-  @location mExpressionLocation
+  public var @lstring mSliceWidth
+  public var @expressionAST mExpression
+  public var @location mExpressionLocation
 }
 
 #·······················································································································
 
-shared class @integerSliceExpressionAST : @expressionAST {
-  @lstring mTypeName
-  @integerSliceFieldListAST mSliceValues
-  @location mLocation
+refclass @integerSliceExpressionAST : @expressionAST {
+  public var @lstring mTypeName
+  public var @integerSliceFieldListAST mSliceValues
+  public var @location mLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -27,7 +27,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
     $\$type$ ?let typeName
-    @integerSliceFieldListAST integerFieldValues = {}
+    var @integerSliceFieldListAST integerFieldValues = {}
     repeat
       $!selector:$ ?let sliceWidth
       <expression> !?ioAST ?let expression
@@ -54,7 +54,7 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
+  for (* expression *) in self.mSliceValues do
     [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
@@ -111,11 +111,11 @@ override method @integerSliceExpressionAST analyzeExpression
     else
     #------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
-      @bigint accumulatedFieldStaticValues = 0G
-      @operandIRList operandList = {}
+      var @bigint accumulatedFieldStaticValues = 0G
+      var @operandIRList operandList = {}
       for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
-        @uint sliceWidth
-        @lstring expressionTypeName
+        var @uint sliceWidth
+        var @lstring expressionTypeName
         if sliceWidthStr.string == "" then
           error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
         elsif sliceWidthStr.string == "b" then
@@ -171,10 +171,10 @@ override method @integerSliceExpressionAST analyzeExpression
         case syncTool :
           error expressionLocation: "an unsigned integer expression is required here"
         case boolean :
-          if [[expressionResult type] omnibusTypeDescriptionName] != [expressionTargetType omnibusTypeDescriptionName] then
+          if [expressionResult type].omnibusTypeDescriptionName != expressionTargetType.omnibusTypeDescriptionName then
             error expressionLocation :
-            "an $" + [expressionTargetType omnibusTypeDescriptionName] + " expression is required, found an $" +
-            [[expressionResult type] omnibusTypeDescriptionName] + " expression"
+            "an $" + expressionTargetType.omnibusTypeDescriptionName + " expression is required, found an $" +
+            [expressionResult type].omnibusTypeDescriptionName + " expression"
           end
           if [expressionResult isLiteralInteger] then
             [expressionResult literalInteger ?1* ?value:let @bigint value]

@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @bitbandInstructionAST : @instructionAST {
-  @controlRegisterLValueAST mControlRegisterLValue
-  @expressionAST mBitExpression
-  @location mBitExpressionLocation
-  @expressionAST mSourceExpression
-  @location mSourceExpressionLocation
+refclass @bitbandInstructionAST : @instructionAST {
+  public var @controlRegisterLValueAST mControlRegisterLValue
+  public var @expressionAST mBitExpression
+  public var @location mBitExpressionLocation
+  public var @expressionAST mSourceExpression
+  public var @location mSourceExpressionLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -175,14 +175,14 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @bitbandInstructionIR : @abstractInstructionIR {
-  @string mRegisterAddressLLVMname
-  @objectIR mBitExpressionOperand
-  @objectIR mSourceExpressionOperand
-  @bigint mBitbandRegisterBaseAddress
-  @bigint mBitbandRegisterRelocationAddress
-  @bigint mBitbandRegisterOffsetMultiplier
-  @bigint mBitbandRegisterBitMultiplier
+refclass @bitbandInstructionIR : @abstractInstructionIR {
+  public var @string mRegisterAddressLLVMname
+  public var @objectIR mBitExpressionOperand
+  public var @objectIR mSourceExpressionOperand
+  public var @bigint mBitbandRegisterBaseAddress
+  public var @bigint mBitbandRegisterRelocationAddress
+  public var @bigint mBitbandRegisterOffsetMultiplier
+  public var @bigint mBitbandRegisterBitMultiplier
 }
 
 #·······················································································································

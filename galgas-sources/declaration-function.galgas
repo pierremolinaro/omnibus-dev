@@ -2,16 +2,16 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @functionDeclarationAST : @abstractDeclarationAST {
-  @mode mMode
-  @bool mPublicFunction
-  @lstring mReceiverTypeName # Empty string if standalone
-  @lstring mFunctionName
-  @lstringlist mFunctionAttributeList
-  @routineFormalArgumentListAST mFunctionFormalArgumentList
-  @lstring mFunctionReturnTypeName # Empty string if no return value
-  @instructionListAST mFunctionInstructionList
-  @location mEndOfFunctionDeclaration
+refclass @functionDeclarationAST : @abstractDeclarationAST {
+  public var @mode mMode
+  public var @bool mPublicFunction
+  public var @lstring mReceiverTypeName # Empty string if standalone
+  public var @lstring mFunctionName
+  public var @lstringlist mFunctionAttributeList
+  public var @routineFormalArgumentListAST mFunctionFormalArgumentList
+  public var @lstring mFunctionReturnTypeName # Empty string if no return value
+  public var @instructionListAST mFunctionInstructionList
+  public var @location mEndOfFunctionDeclaration
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -30,12 +30,12 @@ syntax extension omnibus_syntax {
 
   rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
   #--- Public ?
-    @bool public
+    var @bool publicAccess
     select
-      public = false
+      publicAccess = false
     or
       $public$
-      public = true
+      publicAccess = true
     end
     <function_header>
       !?ioAST
@@ -43,7 +43,7 @@ syntax extension omnibus_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-    @lstring returnTypeName
+    var @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or
@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
     $}$
     ioAST.mDeclarationListAST += !@functionDeclarationAST.new {
       !mode
-      !public
+      !publicAccess
       !inReceiverTypeName
       !procName
       !attributeList
@@ -268,12 +268,12 @@ override method @functionDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @routineMapForContext {
-  @bool mIsPublic
-  @routineTypedSignature mSignature
-  @unifiedTypeMap-entry mReturnTypeProxy # null if no returned value
-  @routineLLVMNameDict mModeDictionary
-  @bool mIsExported
-  @mode mFunctionMode
+  public var @bool mIsPublic
+  public var @routineTypedSignature mSignature
+  public var @unifiedTypeMap-entry mReturnTypeProxy # null if no returned value
+  public var @routineLLVMNameDict mModeDictionary
+  public var @bool mIsExported
+  public var @mode mFunctionMode
 
   insert insertKey error message "the '%K' function is already declared in %L"
   search searchKey error message "there is no '%K' function"
@@ -282,7 +282,7 @@ map @routineMapForContext {
 #·······················································································································
 
 dict @routineLLVMNameDict : @mode {
-  @string mRoutineLLVMName
+  public var @string mRoutineLLVMName
 }
 
 #·······················································································································

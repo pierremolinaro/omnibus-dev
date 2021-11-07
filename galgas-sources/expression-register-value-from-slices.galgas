@@ -3,17 +3,17 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @registerIntegerFieldListAST {
-  @lstring mFieldName
-  @expressionAST mExpression
-  @location mExpressionLocation
+  public var @lstring mFieldName
+  public var @expressionAST mExpression
+  public var @location mExpressionLocation
 }
 
 #·······················································································································
 
-shared class @registerConstantExpressionAST : @expressionAST {
-  @lstring mRegisterGroupName
-  @lstring mRegisterName
-  @registerIntegerFieldListAST mFieldValues
+refclass @registerConstantExpressionAST : @expressionAST {
+  public var @lstring mRegisterGroupName
+  public var @lstring mRegisterName
+  public var @registerIntegerFieldListAST mFieldValues
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -29,7 +29,7 @@ syntax extension omnibus_syntax {
     $©group$ ?let registerGroupName
     $.$
     $identifier$ ?let registerName
-    @registerIntegerFieldListAST integerFieldValues = {}
+    var @registerIntegerFieldListAST integerFieldValues = {}
     repeat
       $!selector:$ ?let registerFieldName
       <expression> !?ioAST ?let expression
@@ -102,8 +102,8 @@ override method @registerConstantExpressionAST analyzeExpression
     ?let unused elementArraySize
   ]
 #------------------------------------------------------ Valuated fields
-  @bigint accumulatedFieldStaticValues = 0G
-  @operandIRList operandList = {}
+  var @bigint accumulatedFieldStaticValues = 0G
+  var @operandIRList operandList = {}
   for (fieldName expression expressionLocation) in self.mFieldValues do
     if fieldName.string == "" then
       error fieldName : "anonymous selector not allowed here" : operandList

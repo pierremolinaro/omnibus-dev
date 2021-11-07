@@ -2,21 +2,21 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @structureDeclarationAST : @abstractDeclarationAST {
-  @lstring mReceiverTypeName
-  @lstring mOmnibusTypeSpecificName
-  @lstring mLLVMBaseTypeName
-  @lstringlist mAttributeListAST
-  @bool mGenerateAssignmentRoutine
-  @structurePropertyListAST mStructurePropertyListAST
-  @bool mMayImplementDeinit
+refclass @structureDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mReceiverTypeName
+  public var @lstring mOmnibusTypeSpecificName
+  public var @lstring mLLVMBaseTypeName
+  public var @lstringlist mAttributeListAST
+  public var @bool mGenerateAssignmentRoutine
+  public var @structurePropertyListAST mStructurePropertyListAST
+  public var @bool mMayImplementDeinit
 }
 
 #·······················································································································
 
 list @propertyAttributeList {
-  @lstring mAttributeName
-  @lbigint mAttributeValue
+  public var @lstring mAttributeName
+  public var @lbigint mAttributeValue
 }
 
 #·······················································································································
@@ -33,11 +33,11 @@ enum @propertyKindAST {
 #·······················································································································
 
 list @structurePropertyListAST {
-  @lstring mPropertyName
-  @propertyAttributeList mPropertyAttributeList
-  @propertyVisibility mVisibility
-  @lstring mPropertyTypeName
-  @propertyKindAST mPropertyKind
+  public var @lstring mPropertyName
+  public var @propertyAttributeList mPropertyAttributeList
+  public var @propertyVisibility mVisibility
+  public var @lstring mPropertyTypeName
+  public var @propertyKindAST mPropertyKind
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -52,7 +52,7 @@ syntax extension omnibus_syntax {
     ?!@ast ioAST
     ?!@structurePropertyListAST ioPropertyListAST
   {
-    @propertyVisibility visibility
+    var @propertyVisibility visibility
     select
       visibility = .isPrivate
     or
@@ -80,7 +80,7 @@ syntax extension omnibus_syntax {
   {
     $let$
     $identifier$ ?let propertyName
-    @lstring typeName
+    var @lstring typeName
     select
       <type_definition> !?ioAST ?typeName
     or
@@ -114,7 +114,7 @@ syntax extension omnibus_syntax {
   {
     $var$
     $identifier$ ?let propertyName
-    @propertyAttributeList propertyAttributeList = {}
+    var @propertyAttributeList propertyAttributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
@@ -234,14 +234,14 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $struct$
     $\$type$ ?let structureName
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end 
     ${$
-    @structurePropertyListAST fieldList = {}
+    var @structurePropertyListAST fieldList = {}
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
@@ -307,15 +307,15 @@ override getter @structureDeclarationAST locationForErrorSignaling -> @location 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @propertyList {
-  @string mPropertyName
-  @omnibusType mType
+  public var @string mPropertyName
+  public var @omnibusType mType
 }
 
 #·······················································································································
 
 sortedlist @sortedOperandIRList {
-  @objectIR mOperand
-  @uint mIndex
+  public var @objectIR mOperand
+  public var @uint mIndex
 }{
   mIndex <
 }
@@ -336,7 +336,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!@bool canBeCopied
 {
 #---------- Attributes
-  @lbigint explicitAlignment = .new {!0G !.nowhere}
+  var @lbigint explicitAlignment = .new {!0G !.nowhere}
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
@@ -369,7 +369,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !optionalContextualTypeName: self.mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
-    @omnibusType actualPropertyType
+    var @omnibusType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
@@ -396,7 +396,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !optionalContextualTypeName: self.mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
-    @omnibusType actualPropertyType
+    var @omnibusType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
@@ -553,11 +553,11 @@ override method @structureDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
-  @propertyList propertyList = {}
+  var @propertyList propertyList = {}
 #  @propertyGetterMap propertyGetterMap = {}
-  @sortedOperandIRList sortedOperandIRList = {}
-  @constructorSignature constructorSignature = {}
-  @string constructorKey = "("
+  var @sortedOperandIRList sortedOperandIRList = {}
+  var @constructorSignature constructorSignature = {}
+  var @string constructorKey = "("
   var canBeCopied = true
   for property in self.mStructurePropertyListAST do
     [property enterPropertyInContext
@@ -577,7 +577,7 @@ override method @structureDeclarationAST enterInContext
   end
   constructorKey += ")"
 #---------------------------------------- Constructor map
-  @constructorMap constructorMap = {}
+  var @constructorMap constructorMap = {}
   [!?constructorMap insertKey
     !.new {!constructorKey !self.mReceiverTypeName.location}
     !constructorSignature
@@ -638,15 +638,15 @@ override method @structureDeclarationAST enterInContext
 #! USER LLVM TYPE DEFINITION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
-  @propertyList mPropertyList
+refclass @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+  public var @propertyList mPropertyList
 }
 
 #·······················································································································
 
 override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type {"
-  for () in self.mPropertyList
+  for (* mType) in self.mPropertyList
     do ioLLVMcode += [mType llvmTypeName]
     between ioLLVMcode += ", "
   end
@@ -656,8 +656,8 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: ASSIGNMENT
 
-shared class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
-  @omnibusType mStructureType
+refclass @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+  public var @omnibusType mStructureType
 }
 
 #·······················································································································
@@ -721,7 +721,7 @@ override method @structureAssignmentOperatorUsage generateCode
     error inErrorLocation : "invalid structure assignment «literalInteger»"
   case literalString (2*) :
     error inErrorLocation : "invalid structure assignment «literalString»"
-  case llvmValue (2*) :
+  case llvmNamedValue (2*) :
     error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
   case null (*) :
     error inErrorLocation : "invalid structure assignment «llvmValue»"
@@ -734,8 +734,8 @@ override method @structureAssignmentOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @structureTypeAssignFunctionIR : @abstractRoutineIR {
-  @omnibusType mStructureType
+refclass @structureTypeAssignFunctionIR : @abstractRoutineIR {
+  public var @omnibusType mStructureType
 }
 
 #·······················································································································

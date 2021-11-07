@@ -2,10 +2,10 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @letInstructionWithAssignmentAST : @instructionAST {
-  @lstring mConstantName
-  @lstring mOptionalTypeName
-  @expressionAST mSourceExpression
+refclass @letInstructionWithAssignmentAST : @instructionAST {
+  public var @lstring mConstantName
+  public var @lstring mOptionalTypeName
+  public var @expressionAST mSourceExpression
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $let$
     $identifier$ ?let varName
-    @lstring optionalTypeName
+    var @lstring optionalTypeName
     select
       optionalTypeName = ["" nowhere]
     or

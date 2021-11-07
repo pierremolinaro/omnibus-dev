@@ -5,9 +5,9 @@ setter @instructionListIR generateRelease ?let @omnibusType inType ?let @lstring
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @releaseIR : @abstractInstructionIR {
-  @omnibusType mType
-  @lstring mOmnibusName
+refclass @releaseIR : @abstractInstructionIR {
+  public var @omnibusType mType
+  public var @lstring mOmnibusName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

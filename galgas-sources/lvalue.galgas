@@ -10,7 +10,7 @@ enum @accessInAssignmentAST {
 #·······················································································································
 
 list @accessInAssignmentListAST {
-  @accessInAssignmentAST mAccess
+  public var @accessInAssignmentAST mAccess
 }
 
 
@@ -25,8 +25,8 @@ enum @LValueOperandAST {
 #·······················································································································
 
 struct @LValueAST {
-  @lstring mIdentifier # self is represented by an empty string, with actual "self" location
-  @LValueOperandAST mOperand
+  public var @lstring mIdentifier # self is represented by an empty string, with actual "self" location
+  public var @LValueOperandAST mOperand
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -38,7 +38,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
-    @lstring receiver
+    var @lstring receiver
     select
       $identifier$ ?receiver
     or
@@ -70,7 +70,7 @@ syntax extension omnibus_syntax {
     $[$
     <expression> !?ioAST ?let expression
     let endOfIndex = @location.here
-    @bool checkIndexExpression
+    var @bool checkIndexExpression
     select
       $]$
       checkIndexExpression = true
@@ -117,8 +117,8 @@ method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePr
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @LValueRepresentation {
-  @omnibusType type
-  @string llvmName
+  public var @omnibusType type
+  public var @string llvmName
 }
 
 #·······················································································································
@@ -342,7 +342,7 @@ private proc handleArrayAccess
   switch ioCurrentType.subscript
   case noSubscript :
     error inEndOfIndex
-    : "the receiver type is " + [ioCurrentType omnibusTypeDescriptionName] + " and does not accept subscripting"
+    : "the receiver type is " + ioCurrentType.omnibusTypeDescriptionName + " and does not accept subscripting"
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"

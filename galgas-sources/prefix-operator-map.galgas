@@ -3,16 +3,16 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @prefixOperatorMap {
-  @omnibusType mReceiverType
-  @omnibusType mResultType
-  @prefixOperatorUsage mOperator
+  public var @omnibusType mReceiverType
+  public var @omnibusType mResultType
+  public var @prefixOperatorUsage mOperator
   insert insertKey error message "the '%K' infix operator is already declared in %L"
   search searchKey error message "there is no '%K' infix operator"
 }
 
 #·······················································································································
 
-abstract shared class @prefixOperatorUsage {}
+abstract refclass @prefixOperatorUsage {}
 
 #·······················································································································
 

@@ -159,7 +159,7 @@ private proc copyExecutableFileWithSubstitutions
   ?to:let @string inDestinationAbsoluteFilePath
   ?let @2stringlist inSubstitutions
 {
-  @string s
+  var @string s
   if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
@@ -181,7 +181,7 @@ private proc copyFileWithSubstitutions
   ?to:let @string inDestinationAbsoluteFilePath
   ?let @2stringlist inSubstitutions
 {
-  @string s
+  var @string s
   if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]

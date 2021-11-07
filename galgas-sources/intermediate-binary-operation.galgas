@@ -53,13 +53,13 @@ setter @instructionListIR appendBinaryOperation
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @binaryOperationIR : @abstractInstructionIR {
-  @objectIR mTarget
-  @omnibusType mOperandType
-  @objectIR mLeft
-  @llvmBinaryOperation mOperation
-  @objectIR mRight
-  @location mLocation
+refclass @binaryOperationIR : @abstractInstructionIR {
+  public var @objectIR mTarget
+  public var @omnibusType mOperandType
+  public var @objectIR mLeft
+  public var @llvmBinaryOperation mOperation
+  public var @objectIR mRight
+  public var @location mLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

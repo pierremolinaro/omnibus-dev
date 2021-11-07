@@ -2,16 +2,16 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @systemRoutineDeclarationAST : @abstractDeclarationAST {
-  @lstring mReceiverTypeName
-  @lstring mSystemRoutineName
-  @mode mMode
-  @bool mPublic
-  @lstringlist mAttributeList
-  @routineFormalArgumentListAST mFormalArgumentList
-  @lstring mReturnTypeName
-  @instructionListAST mInstructionList
-  @location mEndOfInstructionListLocation
+refclass @systemRoutineDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mReceiverTypeName
+  public var @lstring mSystemRoutineName
+  public var @mode mMode
+  public var @bool mPublic
+  public var @lstringlist mAttributeList
+  public var @routineFormalArgumentListAST mFormalArgumentList
+  public var @lstring mReturnTypeName
+  public var @instructionListAST mInstructionList
+  public var @location mEndOfInstructionListLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -23,30 +23,30 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    @bool public
+    var @bool publicAccess
     select
-      public = false
+      publicAccess = false
     or
       $public$
-      public = true
+      publicAccess = true
     end
     $section$
     $identifier$ ?let name
-    @mode mode
+    var @mode mode
     select
       mode = .sectionMode
     or
       $safe$
       mode = .safeSectionMode
     end
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end
     <procedure_formal_arguments> !?ioAST ?let formalArgumentList
-    @lstring returnTypeName
+    var @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or
@@ -59,7 +59,7 @@ syntax extension omnibus_syntax {
       !inReceiverTypeName
       !name
       !mode
-      !public
+      !publicAccess
       !attributeList
       !formalArgumentList
       !returnTypeName
@@ -74,23 +74,23 @@ syntax extension omnibus_syntax {
   # A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    @bool public
+    var @bool publicAccess
     select
-      public = false
+      publicAccess = false
     or
       $public$
-      public = true
+      publicAccess = true
     end
     $primitive$
     $identifier$ ?let name
-    @mode mode
+    var @mode mode
     select
       mode = .primitiveMode
     or
       $safe$
       mode = .safePrimitiveMode
     end
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
@@ -104,7 +104,7 @@ syntax extension omnibus_syntax {
       !inReceiverTypeName
       !name
       !mode
-      !public
+      !publicAccess
       !attributeList
       !formalArgumentList
       !["" here]
@@ -116,23 +116,23 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    @bool public
+    var @bool publicAccess
     select
-      public = false
+      publicAccess = false
     or
       $public$
-      public = true
+      publicAccess = true
     end
     $service$
     $identifier$ ?let name
-    @mode mode
+    var @mode mode
     select
       mode = .serviceMode
     or
       $safe$
       mode = .safeServiceMode
     end
-    @lstringlist attributeList = {}
+    var @lstringlist attributeList = {}
     repeat
     while
       $@attribute$ ?let attribute
@@ -146,7 +146,7 @@ syntax extension omnibus_syntax {
       !inReceiverTypeName
       !name
       !mode
-      !public
+      !publicAccess
       !attributeList
       !formalArgumentList
       !["" here]
@@ -211,7 +211,7 @@ private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeNam
                                           ?let @lstring inGuardName
                                           ?let @routineFormalArgumentListAST inFormalArgumentList
 -> @lstring {
-  @string s
+  var @string s
   switch inKind 
   case section :
     s = "section"
@@ -228,7 +228,7 @@ private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeNam
   end
   s += inGuardName.string
   s += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -242,7 +242,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
                                             ?let @lstring inGuardName
                                             ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
 {
-  @string s
+  var @string s
   switch inKind 
   case section :
     s = "section"
@@ -259,7 +259,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
   end
   s += inGuardName.string
   s += "("
-  for (formalArgumentPassingMode selector formalArgumentTypeName *) in inFormalArgumentList do
+  for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
@@ -283,14 +283,14 @@ override method @systemRoutineDeclarationAST enterInContext
 #---------------------------------------- Self type proxy
   [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mReceiverTypeName ?let selfTypeProxy]
 #  log mReceiverTypeName
-  let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [[selfTypeProxy type] llvmBaseTypeName] end
+  let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
 #--- Attributes
-  @stringset attributeSet = {}
+  var @stringset attributeSet = {}
   for attribute in self.mAttributeList do
     attributeSet += !attribute.mValue.string
   end
 #---
-  @routineKind routineKind
+  var @routineKind routineKind
   switch self.mMode
   case sectionMode, safeSectionMode :
     routineKind = .section
@@ -388,17 +388,17 @@ override method @systemRoutineDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @sectionIRlist {
-  @string mSectionCallName
-  @string mSectionImplementationName
-  @bool invocationFromAnyMode %selector
+  public var @string mSectionCallName
+  public var @string mSectionImplementationName
+  public var @bool invocationFromAnyMode %selector
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @primitiveAndServiceIRlist {
-  @string mCallName
-  @string mImplementationName
-  @bool mHasReturnValue
+  public var @string mCallName
+  public var @string mImplementationName
+  public var @bool mHasReturnValue
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -415,7 +415,7 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
     result += [inReceiverType llvmTypeName] + " * %receiver"
     first = false
   end
-  for () in inFormalArgumentListForGeneration do
+  for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in inFormalArgumentListForGeneration do
     if first then
       first = false
     else
@@ -467,7 +467,7 @@ proc generateSectionDispatcher
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherHeader
   )
-  for (callName implementationName invocationFromUserModeOnly) in inSectionIRlist do (idx)
+  for (callName implementationName *) in inSectionIRlist do (idx)
     var s = getTargetTextFile (
       !currentDir:inCurrentDirectory
       !from:inTargetName + "/" + inTargetParameters.mSectionDispatcherEntry
@@ -540,12 +540,12 @@ proc generatePrimitiveAndServiceDispatcher
 #! SYSTEM USER ROUTINE IR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @systemUserRoutineIR : @abstractRoutineIR {
-  @string mMangledImplementationName
-  @routineTypedSignature mFormalArgumentList
-  @unifiedTypeMap-entry mReceiverTypeProxy
-  @bool mIsSection # If false, service or primitive
-  @unifiedTypeMap-entry mReturnTypeProxy
+refclass @systemUserRoutineIR : @abstractRoutineIR {
+  public var @string mMangledImplementationName
+  public var @routineTypedSignature mFormalArgumentList
+  public var @unifiedTypeMap-entry mReceiverTypeProxy
+  public var @bool mIsSection # If false, service or primitive
+  public var @unifiedTypeMap-entry mReturnTypeProxy
 }
 
 #·······················································································································
@@ -592,7 +592,7 @@ override method @systemUserRoutineIR llvmCodeGeneration
     ioLLVMcode += [[self.mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
     first = false
   end
-  for () in self.mFormalArgumentList do
+  for (mFormalArgumentPassingMode * mTypeProxy *) in self.mFormalArgumentList do
     if first then
       first = false
     else

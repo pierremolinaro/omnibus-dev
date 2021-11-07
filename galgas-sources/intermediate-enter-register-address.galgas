@@ -12,11 +12,11 @@ setter @instructionListIR appendEnterRegisterAddress
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @enterRegisterAddressIR : @abstractInstructionIR {
-  @string mLLVMName
-  @bigint mBaseAddress
-  @bigint mAddressOffset
-  @string mRegisterName
+refclass @enterRegisterAddressIR : @abstractInstructionIR {
+  public var @string mLLVMName
+  public var @bigint mBaseAddress
+  public var @bigint mAddressOffset
+  public var @string mRegisterName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

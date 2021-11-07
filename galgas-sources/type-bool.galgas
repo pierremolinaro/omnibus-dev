@@ -8,7 +8,7 @@ func %once boolTypeName -> @string {
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @boolTypeAST : @abstractDeclarationAST {
+refclass @boolTypeAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -79,7 +79,7 @@ override method @boolTypeAST enterInContext
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.new {!"icmp eq"}]
 #--- Implicit conversion to i1 for test expressions
-  key = @lstring.new {![boolType omnibusTypeDescriptionName] !.nowhere}
+  key = @lstring.new {!boolType.omnibusTypeDescriptionName !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean.new]
 #--- Enter assignment operator
   key = assignmentOperatorKey (!boolType !.nowhere !boolType)
@@ -100,7 +100,7 @@ override method @boolTypeAST enterInContext
 #  IMPLICIT CONVERSION TO i1
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
+refclass @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
 #·······················································································································
@@ -120,7 +120,7 @@ override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
 #  COMPILE TIME PREFIX OPERATOR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @boolNotOperator : @prefixOperatorUsage {
+refclass @boolNotOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································

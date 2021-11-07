@@ -2,11 +2,11 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
-  @lstring mFixedSizeArrayType
-  @lstring mElementTypeName
-  @expressionAST mSizeExpression
-  @location mSizeExpressionLocation
+refclass @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
+  public var @lstring mFixedSizeArrayType
+  public var @lstring mElementTypeName
+  public var @expressionAST mSizeExpression
+  public var @location mSizeExpressionLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -108,7 +108,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       ]
     else
     #-------------------------------------------- Class method map : add "count" constructor
-      @constantMap constantMap = {}
+      var @constantMap constantMap = {}
       [!?constantMap insertKey !.new {!"count" !self.mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
       [!?ioContext.mTypeConstantMap insertKey
         !omnibusTypeDescriptionName
@@ -122,19 +122,19 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
     #-------------------------------------------- Constructor map
-      @constructorMap constructorMap = {}
+      var @constructorMap constructorMap = {}
     #--- Constructor (!repeated)
       [!?constructorMap insertKey !["(!repeated)" nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
     #--- Constructor (!!!!)
       var constructorName = "("
-      for i in 0 ..< [arraySize uint] do
+      for * in 0 ..< [arraySize uint] do
         constructorName += "!"
       end
       constructorName += ")"
       [!?constructorMap insertKey ![constructorName nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
       [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
     #-------------------------------------------- Type attributes
-      @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
+      var @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @omnibusType.new {
 #        !propertyGetterMap:arrayTypePropertyMap
@@ -185,16 +185,16 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignValueToFixedSizeArrayElements_functionName ?let @omnibusType inFixedSizeArrayType -> @string {
-  result = "assign.value.to.fixed.size.array." + [inFixedSizeArrayType llvmBaseTypeName]
+  result = "assign.value.to.fixed.size.array." + inFixedSizeArrayType.llvmBaseTypeName
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! USER LLVM TYPE DEFINITION
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
-  @omnibusType mElementType
-  @bigint mSize
+refclass @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+  public var @omnibusType mElementType
+  public var @bigint mSize
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -207,10 +207,10 @@ override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string 
 #! CODE GENERATION: STATIC ARRAY ASSIGNMENT
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
-  @omnibusType mElementType
-  @uint mArraySize
-  @string mAssignValueToElements_functionName
+refclass @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+  public var @omnibusType mElementType
+  public var @uint mArraySize
+  public var @string mAssignValueToElements_functionName
 }
 
 #·······················································································································
@@ -229,7 +229,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
   let elementTypeName = [self.mElementType llvmTypeName]
   switch inSourcePossibleReference
   case llvmArrayRepeatedDynamicValue (2* @objectIR sourceValuePossibleReference) :
-    @objectIR sourceValue = sourceValuePossibleReference
+    var @objectIR sourceValue = sourceValuePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
     var s = "call void @" + [self.mAssignValueToElements_functionName assemblerRepresentation]
     s += " (" + arrayTypeName + "* " + inTargetLLVMName
@@ -239,7 +239,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex ++
     for (value) in values do (idx)
-      @objectIR sourceValue = value
+      var @objectIR sourceValue = value
       [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
@@ -275,7 +275,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     error inErrorLocation : "invalid fixed array assignment source (literalString)"
   case llvmStructureValue (2*) :
     error inErrorLocation : "invalid fixed array assignment source (llvmStructureValue)"
-  case llvmValue (2*) :
+  case llvmNamedValue (2*) :
     error inErrorLocation : "invalid fixed array assignment source (llvmValue)"
   case null (*) :
     error inErrorLocation : "invalid fixed array assignment source (null)"
@@ -288,10 +288,10 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
-  @omnibusType mFixedSizeArrayType
-  @omnibusType mElementType
-  @uint mArraySize
+refclass @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
+  public var @omnibusType mFixedSizeArrayType
+  public var @omnibusType mElementType
+  public var @uint mArraySize
 }
 
 #·······················································································································
@@ -323,8 +323,8 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
-  @omnibusType mFixedSizeArrayType
+refclass @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
+  public var @omnibusType mFixedSizeArrayType
 }
 
 #·······················································································································

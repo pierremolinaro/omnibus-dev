@@ -12,11 +12,11 @@ setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
-  @string mLLVMName
-  @string mGroupName
-  @uint mGroupSize
-  @objectIR mIndexIR
+refclass @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
+  public var @string mLLVMName
+  public var @string mGroupName
+  public var @uint mGroupSize
+  public var @objectIR mIndexIR
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

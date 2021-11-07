@@ -3,11 +3,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @requiredFunctionDeclarationListAST {
-  @lstring mName
-  @mode mExecutionMode
-  @bool mIsExported
-  @routineFormalArgumentListAST mFormalArgumentList
-  @location mEndOfProcLocation
+  public var @lstring mName
+  public var @mode mExecutionMode
+  public var @bool mIsExported
+  public var @routineFormalArgumentListAST mFormalArgumentList
+  public var @location mEndOfProcLocation
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

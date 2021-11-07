@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-shared class @ifExpressionAST : @expressionAST {
-  @expressionAST mIfExpression
-  @location mIfExpressionEndLocation
-  @expressionAST mThenExpression
-  @location mThenExpressionEndLocation
-  @expressionAST mElseExpression
-  @location mElseExpressionEndLocation
+refclass @ifExpressionAST : @expressionAST {
+  public var @expressionAST mIfExpression
+  public var @location mIfExpressionEndLocation
+  public var @expressionAST mThenExpression
+  public var @location mThenExpressionEndLocation
+  public var @expressionAST mElseExpression
+  public var @location mElseExpressionEndLocation
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -35,7 +35,7 @@ syntax extension omnibus_syntax {
     let @location thenExpressionEndLocation = .here
     $}$
     $else$
-    @expressionAST elseExpression
+    var @expressionAST elseExpression
     select
       ${$
       <expression> !?ioAST ?elseExpression
