@@ -341,6 +341,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOpera
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
   public: GALGAS_lstring mProperty_mTargetVarName ;
@@ -535,6 +538,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentRoutineIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
   public: GALGAS_string mProperty_mTargetVarName ;
@@ -698,6 +704,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleAssignmentCop
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_simpleAssignmentCopyRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
 
@@ -1062,6 +1071,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValue
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
   public: GALGAS_omnibusType mProperty_mElementType ;
@@ -1543,6 +1555,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofInstructio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_addressofInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_LValueRepresentation mProperty_mLValue ;

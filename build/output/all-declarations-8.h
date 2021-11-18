@@ -725,6 +725,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImpl
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -864,6 +867,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotO
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -1003,6 +1009,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqua
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -1267,6 +1276,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMStaticArray
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_userLLVMStaticArrayTypeDefinitionIR : public cPtr_userLLVMTypeDefinitionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mElementType ;
   public: GALGAS_bigint mProperty_mSize ;
@@ -1429,6 +1441,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssig
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mElementType ;
   public: GALGAS_uint mProperty_mArraySize ;
@@ -1639,6 +1654,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticArrayTypeAssi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticArrayTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
 
@@ -1842,6 +1860,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayRemoveAllFu
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayRemoveAllFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -1987,6 +2008,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayLengthFunct
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayLengthFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -2150,6 +2174,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunct
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_unifiedTypeMap_2D_entry mProperty_mArrayTypeProxy ;
   public: GALGAS_unifiedTypeMap_2D_entry mProperty_mElementTypeProxy ;
@@ -2307,6 +2334,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayInsertFunct
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_unifiedTypeMap_2D_entry mProperty_mElementTypeProxy ;
 
@@ -2463,6 +2493,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAss
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynamicArrayTypeAssignUsage : public cPtr_abstractAssignmentOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mDynamicArrayType ;
   public: GALGAS_string mProperty_mAssignFunctionName ;
@@ -2609,6 +2642,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynamicArrayTypeAss
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_dynamicArrayTypeAssignGenericFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -2816,6 +2852,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumToUintRoutineIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mEnumerationLLVMTypeName ;
 
@@ -3022,6 +3061,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureAssignment
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mStructureType ;
 
@@ -3172,6 +3214,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structureTypeAssign
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mStructureType ;
 
@@ -3387,6 +3432,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerBuiltinFunct
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMTypeName ;
   public: GALGAS_string mProperty_mIntrinsicName ;
@@ -3624,6 +3672,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedControlReg
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mGroupName ;
   public: GALGAS_lbigintlist mProperty_mBaseAddresses ;
@@ -3910,6 +3961,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedSyncInstan
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedSyncInstance : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mSyncInstanceName ;
   public: GALGAS_objectIR mProperty_mExpressionGeneratedCode ;
@@ -4107,6 +4161,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mDriverName ;
   public: GALGAS_lstringlist mProperty_mDriverDependanceList ;
@@ -4270,6 +4327,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRequiredDr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mDriverName ;
 

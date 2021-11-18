@@ -759,6 +759,17 @@ class cEnumAssociatedValues_typeKind_function : public cEnumAssociatedValues {
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_omnibusType : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/* § public: virtual GALGAS_arcAssignmentList getter_arcList (const GALGAS_uintlist inPropertyIndexPath,
+           C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_bool getter_copyable (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_bool getter_deinitNeeded (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_string getter_descriptionForHTMLFile (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_bool getter_instanciable (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_bool getter_isCompileTimeType (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_string getter_llvmTypeName (C_Compiler * COMMA_LOCATION_ARGS) const ; */
 //--- Properties
   public: GALGAS_subscript mProperty_subscript ;
   public: GALGAS_omnibusTypeAttributes mProperty_attributes ;
@@ -3597,6 +3608,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMTypeDefinit
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_userLLVMTypeDefinitionIR : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMDefinedTypeName ;
 
@@ -5378,6 +5392,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compiletimeBoolAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compiletimeBoolAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5460,6 +5477,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compiletimeBoolAST_
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractImplicitConverterToBoolean : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5539,6 +5559,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractImplicitCon
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_prefixOperatorUsage : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5618,6 +5641,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorUsage
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_omnibusInfixOperatorUsage : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5754,6 +5780,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolXorO
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolXorOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5893,6 +5922,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolOrOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolOrOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6032,6 +6064,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6171,6 +6206,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntModul
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntModuloOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6310,6 +6348,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntModul
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntModuloZeroOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6449,6 +6490,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntDivid
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntDivideOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6588,6 +6632,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntDivid
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntDivideZeroOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6727,6 +6774,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMulti
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntMultiplyOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6866,6 +6916,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntSubtr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntSubtractOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7005,6 +7058,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntEqual
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntEqualOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7144,6 +7200,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntAddOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntAddOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7283,6 +7342,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntBitWiseAndOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7422,6 +7484,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntShift
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntShiftLeftOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7561,6 +7626,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntShift
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntShiftRightOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7700,6 +7768,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntLessT
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntLessThanOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7839,6 +7910,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntLower
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntLowerOrEqualOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -7978,6 +8052,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntXorOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntXorOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8117,6 +8194,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntBitWiseOrOperator : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8256,6 +8336,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMinus
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntMinusOperator : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8395,6 +8478,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntCompl
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeIntComplementOperator : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8534,6 +8620,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolTypeAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_boolTypeAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8673,6 +8762,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConvert
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_boolImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8812,6 +8904,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolNotOperator ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_boolNotOperator : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -8894,6 +8989,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolNotOperator_2D_
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractAssignmentOperatorUsage : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor

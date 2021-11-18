@@ -613,6 +613,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfixOperator
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_inlineInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMOperation ;
 
@@ -1283,6 +1286,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mAssertInstructionLocation ;
   public: GALGAS_instructionListIR mProperty_mInstructionList ;
@@ -1548,6 +1554,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mRegisterAddressLLVMname ;
   public: GALGAS_objectIR mProperty_mBitExpressionOperand ;
@@ -1702,6 +1711,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionNOP ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_instructionNOP : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -1910,6 +1922,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionIR 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_panicInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mThrowLocation ;
   public: GALGAS_bigint mProperty_mPanicCode ;
@@ -2133,6 +2148,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMTestName ;
   public: GALGAS_location mProperty_mLocation ;
@@ -2988,6 +3006,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mSelectInstructionLocation ;
   public: GALGAS_syncInstructionBranchListIR mProperty_mOnInstructionBranchListIR ;
@@ -3211,6 +3232,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionIR 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_uint mProperty_mLabelIndex ;
   public: GALGAS_instructionListIR mProperty_mTestInstructionGenerationList ;

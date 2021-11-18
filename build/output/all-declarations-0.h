@@ -1772,6 +1772,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractLLVMInstruc
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractLLVMInstruction : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -1846,6 +1849,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_expressionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_expressionAST : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -2210,6 +2216,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterLVal
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
 
@@ -2486,6 +2495,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_addressofExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
 
@@ -2570,6 +2582,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_instructionAST : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mInstructionLocation ;
 
@@ -2656,6 +2671,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assertInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
 
@@ -2752,6 +2770,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_LValueAST mProperty_mTargetAST ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
@@ -2868,6 +2889,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_expressionAST mProperty_mBitExpression ;
@@ -2977,6 +3001,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_booleanShortCircuit
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
@@ -3223,6 +3250,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_callInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
   public: GALGAS_location mProperty_mEndOfArguments ;
@@ -3318,6 +3348,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_checkInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mCheckMessage ;
   public: GALGAS_expressionAST mProperty_mExpression ;
@@ -3400,6 +3433,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclaration
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractDeclarationAST : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/* § public: virtual GALGAS_string getter_keyRepresentationForErrorSignaling (C_Compiler * COMMA_LOCATION_ARGS) const ; */
+/* § public: virtual GALGAS_location getter_locationForErrorSignaling (C_Compiler * COMMA_LOCATION_ARGS) const ; */
 //--- Properties
 
 //--- Constructor
@@ -3552,6 +3590,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctExpressionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctExpressionAST : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -3575,6 +3616,9 @@ class cPtr_ctExpressionAST : public acStrongPtr_class {
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
@@ -3868,6 +3912,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOpe
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public: GALGAS_location mProperty_mInfixOperatorLocation ;
@@ -4073,6 +4120,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimePrefixOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_compileTimePrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_location mProperty_mPrefixOperatorLocation ;
@@ -4339,6 +4389,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallEffecti
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_constructorCallAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_functionCallEffectiveParameterListAST mProperty_mParameterList ;
@@ -4737,6 +4790,9 @@ class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWith
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_controlRegisterAssignmentOperatorKind mProperty_mAssignmentKind ;
@@ -5183,6 +5239,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupListAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_registerGroupListAST mProperty_mRegisterGroupList ;
   public: GALGAS_controlRegisterDeclarationList mProperty_mRegisters ;
@@ -5285,6 +5344,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_convertExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
@@ -5374,6 +5436,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctFalseExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5463,6 +5528,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctIdentifierExpress
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
 
@@ -5569,6 +5637,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctInfixExpressionAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_ctExpressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
@@ -5666,6 +5737,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctIntExpressionAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lbigint mProperty_mValue ;
 
@@ -5766,6 +5840,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctPrefixExpressionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_compileTimePrefixOperatorEnumeration mProperty_mPrefixOperator ;
@@ -5855,6 +5932,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctTrueExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -6103,6 +6183,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enumerationConstant
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mEnumerationName ;
   public: GALGAS_enumerationConstantList mProperty_mCaseNameList ;
@@ -6205,6 +6288,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_extendExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
@@ -6315,6 +6401,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mFixedSizeArrayType ;
   public: GALGAS_lstring mProperty_mElementTypeName ;
@@ -6580,6 +6669,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mIteratedObject ;
@@ -6724,6 +6816,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mTypeName ;
@@ -7230,6 +7325,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgume
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_mode mProperty_mMode ;
   public: GALGAS_bool mProperty_mPublicFunction ;
@@ -7352,6 +7450,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalConstantDecla
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mConstantName ;
   public: GALGAS_lstringlist mProperty_mAttributeList ;
@@ -7597,6 +7698,9 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_string mProperty_mReceiverLLVMBaseTypeName ;
@@ -7731,6 +7835,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifExpressionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ifExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mIfExpression ;
   public: GALGAS_location mProperty_mIfExpressionEndLocation ;
@@ -7872,6 +7979,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_ifInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mTestExpression ;
   public: GALGAS_location mProperty_mTestExpressionEndLocation ;
@@ -8162,6 +8272,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerSliceFieldLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_integerSliceFieldListAST mProperty_mSliceValues ;
@@ -8278,6 +8391,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_isrDeclarationAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mISRName ;
   public: GALGAS_mode mProperty_mMode ;
@@ -8387,6 +8503,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mConstantName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
@@ -8483,6 +8602,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalBooleanInExp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_bool mProperty_mValue ;
 
@@ -8574,6 +8696,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerInExp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lbigint mProperty_mLiteralInteger ;
 
@@ -8665,6 +8790,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringInExpr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mLiteralString ;
 
@@ -9069,6 +9197,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_lstring mProperty_mTargetVariableName ;
@@ -9194,6 +9325,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmConvertToBoolea
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
@@ -9425,6 +9559,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_llvmGenerationInstructionElementList mProperty_mGenerationList ;
 
@@ -9531,6 +9668,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenericType ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_genericFormalParameterList mProperty_mGenericFormalParameterList ;
@@ -9685,6 +9825,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusInfixOperator mProperty_mInfixOperator ;
   public: GALGAS_location mProperty_mInfixOperatorLocation ;
@@ -9910,6 +10053,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorE
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_llvmPrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_location mProperty_mPrefixOperatorLocation ;
@@ -10011,6 +10157,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmVarInstruction 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mVariableName ;
 
@@ -10117,6 +10266,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperato
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
@@ -10232,6 +10384,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_panicAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_bool mProperty_mIsSetup ;
   public: GALGAS_instructionListAST mProperty_mPanicInstructionList ;
@@ -10327,6 +10482,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_panicInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mCodeExpression ;
 
@@ -10515,6 +10673,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperator ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_prefixOperator mProperty_mOp ;
@@ -10750,6 +10911,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpression
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
@@ -10986,6 +11150,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentL
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
   public: GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
@@ -11266,6 +11433,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFiel
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mRegisterGroupName ;
   public: GALGAS_lstring mProperty_mRegisterName ;
@@ -11364,6 +11534,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_registerInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_lstring mProperty_mFieldName ;
@@ -11454,6 +11627,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofExpressionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
 
@@ -11545,6 +11721,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofTypeAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sizeofTypeAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
 
@@ -11805,6 +11984,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentList
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_sliceAssignmentListAST mProperty_mSliceAssignmentList ;
@@ -11906,6 +12088,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standAloneProcedure
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mSandAloneRoutineName ;
 
@@ -12012,6 +12197,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneFunctionI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mStandaloneFunctionName ;
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
@@ -12425,6 +12613,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListValueList
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mStaticListName ;
   public: GALGAS_staticListPropertyListAST mProperty_mPropertyList ;
@@ -12766,6 +12957,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_structurePropertyLi
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mOmnibusTypeSpecificName ;
@@ -13038,6 +13232,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListAST ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_switchInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mSwitchExpression ;
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
@@ -13142,6 +13339,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncDeclarationAST 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mSyncToolName ;
   public: GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
@@ -13414,6 +13614,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionBran
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_syncInstructionBranchListAST mProperty_mBranchList ;
   public: GALGAS_location mProperty_mEndOf_5F_on_5F_instruction ;
@@ -13517,6 +13720,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncToolInstanceDec
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mSyncTypeName ;
   public: GALGAS_lstring mProperty_mSyncInstanceName ;
@@ -13657,6 +13863,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemRoutineDeclar
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mSystemRoutineName ;
@@ -13794,6 +14003,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSetupDeclaratio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mTaskName ;
   public: GALGAS_string mProperty_mQualifier ;
@@ -13904,6 +14116,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateExpressionA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_truncateExpressionAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
@@ -14005,6 +14220,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeAliasDeclaratio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mAliasTypeName ;
   public: GALGAS_lstring mProperty_mOriginalTypeName ;
@@ -14104,6 +14322,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeDynamicArrayDec
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mDynamicArrayTypeName ;
   public: GALGAS_lstring mProperty_mElementTypeName ;
@@ -14212,6 +14433,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeOpaqueDeclarati
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mOpaqueTypeName ;
   public: GALGAS_expressionAST mProperty_mSizeExpression ;
@@ -14321,6 +14545,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typedConstantCallAS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_typedConstantCallAST : public cPtr_expressionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_lstring mProperty_mConstructorName ;
@@ -14423,6 +14650,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varDeclarationInstr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mTypeName ;
@@ -14527,6 +14757,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionWithA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
@@ -14639,6 +14872,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionAST
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_whileInstructionAST : public cPtr_instructionAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_expressionAST mProperty_m_5F_while_5F_Expression ;
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
@@ -20451,6 +20687,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_targetParameters ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mPanicCodeTypeName ;
   public: GALGAS_lstring mProperty_mPanicLineTypeName ;

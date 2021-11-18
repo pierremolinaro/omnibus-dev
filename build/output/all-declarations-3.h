@@ -244,6 +244,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMSructureTyp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_userLLVMSructureTypeDefinitionIR : public cPtr_userLLVMTypeDefinitionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_propertyList mProperty_mPropertyList ;
 
@@ -398,6 +401,10 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerDeclarationA
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_integerDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
+/* § public: virtual GALGAS_string getter_typeName (C_Compiler * COMMA_LOCATION_ARGS) const ; */
 //--- Properties
   public: GALGAS_bool mProperty_mIsSigned ;
   public: GALGAS_uint mProperty_mSize ;
@@ -568,6 +575,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfix_5F_inte
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMOperation ;
 
@@ -715,6 +725,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_inlineInfix_5F_comp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMOperation ;
 
@@ -856,6 +869,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringDeclar
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_literalStringDeclarationAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor

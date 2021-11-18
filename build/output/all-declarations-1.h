@@ -2646,6 +2646,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeDeclarat
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeDeclarationBarrierAST : public cPtr_abstractDeclarationAST {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -9214,6 +9217,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDecoratedDe
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractDecoratedDeclaration : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor

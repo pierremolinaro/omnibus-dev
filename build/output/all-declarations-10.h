@@ -199,6 +199,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOpe
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mLeftOperandName ;
   public: GALGAS_lstring mProperty_mRightOperandName ;
@@ -380,6 +383,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixInf
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeInfixInfEqualOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_compileTimeInfixOperatorUsage mProperty_mEqualOperatorUsage ;
   public: GALGAS_compileTimeInfixOperatorUsage mProperty_mLessThanOperatorUsage ;
@@ -603,6 +609,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorUs
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mInfixMangledFunctionName ;
   public: GALGAS_lstring mProperty_mLeftOperandName ;
@@ -768,6 +777,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInlineInfixOper
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmInlineInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mLeftOperandName ;
   public: GALGAS_lstring mProperty_mRightOperandName ;
@@ -958,6 +970,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorRoutin
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_infixOperatorRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
   public: GALGAS_string mProperty_mTargetVarName ;
@@ -1185,6 +1200,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimePrefixOp
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimePrefixOperatorUsage : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mPrefixOperatorLocation ;
   public: GALGAS_lstring mProperty_mReceiverOperandName ;
@@ -1404,6 +1422,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorU
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmPrefixOperatorUsage : public cPtr_prefixOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mPrefixMangledFunctionName ;
   public: GALGAS_lstring mProperty_mReceiverOperandName ;
@@ -1582,6 +1603,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorRouti
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_prefixOperatorRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mReceiverType ;
   public: GALGAS_string mProperty_mReceiverVarName ;
@@ -2355,6 +2379,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArr
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mEnumeratedValueName ;
   public: GALGAS_lstring mProperty_mIteratedObjectName ;
@@ -2551,6 +2578,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnLit
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mVarName ;
   public: GALGAS_location mProperty_mLocation ;
@@ -2799,6 +2829,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mVarName ;
   public: GALGAS_omnibusType mProperty_mType ;
@@ -3600,6 +3633,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneRoutineCa
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_lstring mProperty_mFunctionMangledName ;

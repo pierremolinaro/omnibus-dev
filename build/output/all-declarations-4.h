@@ -549,6 +549,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedTaskList ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedTaskListDeclaration : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_decoratedTaskList mProperty_mTaskList ;
 
@@ -643,6 +646,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractRoutineIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractRoutineIR : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mRoutineMangledName ;
   public: GALGAS_bool mProperty_isRequired ;
@@ -750,6 +756,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskActivateFunctio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_taskActivateFunctionIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mAssemblerTaskName ;
   public: GALGAS_string mProperty_mActivateServiceInvocationName ;
@@ -4128,6 +4137,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractInstruction
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_abstractInstructionIR : public acStrongPtr_class {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -5196,6 +5208,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateInstruction
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_truncateInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_objectIR mProperty_mOperand ;

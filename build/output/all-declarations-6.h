@@ -386,6 +386,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_uint mProperty_mLabelIndex ;
   public: GALGAS_instructionListIR mProperty_mSwitchExpressionGenerationList ;
@@ -756,6 +759,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_nopIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_nopIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -919,6 +925,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeStringIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_freeStringIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mString ;
   public: GALGAS_stringset mProperty_mInvokedFunctionSet ;
@@ -1083,6 +1092,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_extendIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_objectIR mProperty_mSource ;
@@ -1248,6 +1260,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_truncIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_objectIR mProperty_mSource ;
@@ -1424,6 +1439,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolToUIntIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_boolToUIntIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mUIntResult ;
   public: GALGAS_objectIR mProperty_mBoolSource ;
@@ -1595,6 +1613,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_objectIR mProperty_mSource ;
@@ -1768,6 +1789,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_logicalRightShiftIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_logicalRightShiftIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_objectIR mProperty_mSource ;
@@ -1974,6 +1998,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_omnibusType mProperty_mOperandType ;
@@ -2118,6 +2145,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOper
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetOperand ;
   public: GALGAS_string mProperty_mLeftOperandLLVMName ;
@@ -2290,6 +2320,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadFromReferenceIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_loadFromReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetValue ;
   public: GALGAS_string mProperty_mLLVMName ;
@@ -2461,6 +2494,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeToUniversalRef
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMTargetVarName ;
   public: GALGAS_omnibusType mProperty_mTargetVarType ;
@@ -2578,6 +2614,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeFromTemporaryR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetVarType ;
   public: GALGAS_string mProperty_mLLVMTargetVarName ;
@@ -2691,6 +2730,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_releaseIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_releaseIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mType ;
   public: GALGAS_lstring mProperty_mOmnibusName ;
@@ -2814,6 +2856,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_computeSubscriptedV
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMResultVarName ;
   public: GALGAS_objectIR mProperty_mIndexResult ;
@@ -3011,6 +3056,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterAddres
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMName ;
   public: GALGAS_bigint mProperty_mBaseAddress ;
@@ -3194,6 +3242,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterGroupS
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_enterRegisterGroupSubscriptedAddressIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mLLVMName ;
   public: GALGAS_string mProperty_mGroupName ;
@@ -3362,6 +3413,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadIndirectVolatil
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetValue ;
   public: GALGAS_string mProperty_mLLVMName ;
@@ -3533,6 +3587,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeIndirectVolati
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetVarType ;
   public: GALGAS_string mProperty_mLLVMName ;
@@ -3733,6 +3790,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueRepresentatio
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_LValueRepresentation mProperty_mTarget ;
   public: GALGAS_string mProperty_mSourceLLVMName ;
@@ -3902,6 +3962,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalPropert
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mType ;
   public: GALGAS_string mProperty_mLLVMName ;
@@ -4037,6 +4100,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalArrayEl
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mType ;
   public: GALGAS_string mProperty_mLLVMName ;
@@ -4160,6 +4226,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getComputedProperty
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mReceiverIR ;
   public: GALGAS_string mProperty_mLLVMGetterName ;
@@ -4333,6 +4402,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeComputedProper
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_storeComputedPropertyValueIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mReceiverIR ;
   public: GALGAS_string mProperty_mLLVMSetterName ;
@@ -4508,6 +4580,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getArrayElementRefe
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_objectIR mProperty_mArray ;
@@ -4688,6 +4763,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selectInstructionIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetValue ;
   public: GALGAS_string mProperty_m_5F_if_5F_variableLLVMName ;
@@ -4864,6 +4942,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_testArrayIndexIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mIndex ;
   public: GALGAS_location mProperty_mErrorLocation ;
@@ -5015,6 +5096,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sourceLocationIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_location mProperty_mSourceLocation ;
 
@@ -5173,6 +5257,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeCommentIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_freeCommentIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mComment ;
 
@@ -6818,6 +6905,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleCopyAssignmen
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_simpleCopyAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor

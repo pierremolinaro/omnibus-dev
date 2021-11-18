@@ -140,6 +140,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedStaticList
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mStaticListName ;
   public: GALGAS_staticListValueListAST mProperty_mValueList ;
@@ -310,6 +313,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListIndirectR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_unifiedTypeMap_2D_entry mProperty_mStaticListElementType ;
   public: GALGAS_routineTypedSignature mProperty_mFormalArgumentListForGeneration ;
@@ -717,6 +723,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_systemUserRoutineIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mMangledImplementationName ;
   public: GALGAS_routineTypedSignature mProperty_mFormalArgumentList ;
@@ -884,6 +893,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externRoutineIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
   public: GALGAS_unifiedTypeMap_2D_entry mProperty_mReturnType ;
@@ -1115,6 +1127,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedISRDeclara
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedISRDeclaration : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mISRName ;
   public: GALGAS_mode mProperty_mMode ;
@@ -1361,6 +1376,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedGuardDecla
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedGuardDeclaration : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mGuardName ;
@@ -1540,6 +1558,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardUserRoutineIR 
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_mMangledImplementationGuardName ;
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
@@ -1720,6 +1741,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardImplementation
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
   public: GALGAS_omnibusType mProperty_mReceiverType ;
@@ -1931,6 +1955,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_regularRoutineIR ;
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_omnibusType mProperty_mReceiverType ;
   public: GALGAS_routineFormalArgumentListIR mProperty_mFormalArgumentListForGeneration ;
@@ -2180,6 +2207,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedPanicRouti
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_decoratedPanicRoutine : public cPtr_abstractDecoratedDeclaration {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_bool mProperty_mIsSetup ;
   public: GALGAS_lbigint mProperty_mPriority ;
@@ -2332,6 +2362,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fileSpecificPanicRo
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_fileSpecificPanicRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_string mProperty_inFilePath ;
 
@@ -2479,6 +2512,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalModePanicR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_universalModePanicRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
 
 //--- Constructor
@@ -2636,6 +2672,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionModePanicRou
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sectionModePanicRoutineIR : public cPtr_abstractRoutineIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_panicSortedListIR mProperty_mPanicSetupListIR ;
   public: GALGAS_panicSortedListIR mProperty_mPanicLoopListIR ;
@@ -2903,6 +2942,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeImplicit
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
@@ -3064,6 +3106,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmImplicitConvert
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_llvmImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_omnibusType mProperty_mReceiverType ;
@@ -3280,6 +3325,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_objectIR mProperty_mOperand ;
@@ -3658,6 +3706,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofInstructionIR
 //----------------------------------------------------------------------------------------------------------------------
 
 class cPtr_sizeofInstructionIR : public cPtr_abstractInstructionIR {
+
+//----------------------------------------------------------------------------------------------------------------------
+
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_omnibusType mProperty_mSourceType ;
