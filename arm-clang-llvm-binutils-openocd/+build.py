@@ -3,6 +3,7 @@
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 # This script cross compiles binutils and LLVM/CLANG for ARM targets.
+# https://llvm.org/docs/CMake.html
 # It also compiles OpenOCD, TeensyLoader and ARM STACK COMPUTATIONS
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 #  SETTINGS
