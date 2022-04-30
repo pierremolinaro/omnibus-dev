@@ -276,3 +276,4 @@ arm-clang-llvm-binutils-openocd/libusb-product/**
 arm-clang-llvm-binutils-openocd/PRODUCT/**
 build/indexes/**
 stm32-gpio-modes/extract-stm32-gpio-modes/build/**
+-projets-auxiliaires/property-as-inout-argument/build/**
