@@ -99,7 +99,7 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: ", -1"}
   llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
+  let @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
     !.bitWiseComplement
     !.nowhere
     !["SELF" nowhere]

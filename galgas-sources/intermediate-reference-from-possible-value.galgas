@@ -5,7 +5,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
   ?!@allocaList ioAllocaList
   ?!@objectIR ioObjectIR
 {
-  var @bool performStore
+  let @bool performStore
   switch ioObjectIR
   case void : # Do nothing
     performStore = false

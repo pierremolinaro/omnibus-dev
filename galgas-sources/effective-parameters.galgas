@@ -79,7 +79,7 @@ syntax extension omnibus_syntax {
       outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
     while
       $?selector:$ ?let selector
-      var @bool constant
+      let @bool constant
       select
         $var$
         constant = false
@@ -88,7 +88,7 @@ syntax extension omnibus_syntax {
         constant = true
       end
       $identifier$ ?let effectiveParameterName
-      var @lstring typeName
+      let @lstring typeName
       select
         typeName = ["" nowhere]
       or

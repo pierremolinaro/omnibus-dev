@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    var @lstring optionalTypeName
+    let @lstring optionalTypeName
     select
       optionalTypeName = .new {!"" !.here}
     or
@@ -117,7 +117,7 @@ override method @typedConstantCallAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze constructor source type
-  var @omnibusType inferredResultType
+  let @omnibusType inferredResultType
   if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else

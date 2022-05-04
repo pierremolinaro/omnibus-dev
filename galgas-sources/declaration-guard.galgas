@@ -32,7 +32,7 @@ syntax extension omnibus_syntax {
   rule <guard> ?!@ast ioAST
                ?receiverTypeName: let @lstring inReceiverTypeName
                ?receiverLLVMBaseTypeName: let @string inReceiverLLVMBaseTypeName {
-    var @bool publicAccess
+    let @bool publicAccess
     select
       publicAccess = false
     or
@@ -48,7 +48,7 @@ syntax extension omnibus_syntax {
       attributeList += !attribute
     end
     <procedure_formal_arguments> !?ioAST ?let guardFormalArgumentList
-    var @guardKind guardKind
+    let @guardKind guardKind
     select
       guardKind = .baseGuard
     or
@@ -253,7 +253,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
   var @routineFormalArgumentListIR formalArguments = {}
-  var @guardKindGenerationIR convenienceGuardGenerationIR
+  let @guardKindGenerationIR convenienceGuardGenerationIR
   var @allocaList allocaList = {}
   var @instructionListIR instructionGenerationList = {}
   switch self.mGuardKind
@@ -428,7 +428,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       ?currentObject
     ]
   end
-  var currentErrorLocation = self.mIdentifier.location
+  let currentErrorLocation = self.mIdentifier.location
 #--- Insulate last access
   var accessList = self.mAccessList
   [!?accessList popLast ?let lastAccess]

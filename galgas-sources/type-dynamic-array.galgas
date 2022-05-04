@@ -82,7 +82,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !self.mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
-    [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type:var type]
+    [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: let type]
     [!?ioContext.mTypeMap insertType
       !lkey:self.mDynamicArrayTypeName
       !type:type

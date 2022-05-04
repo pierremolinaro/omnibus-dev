@@ -52,7 +52,7 @@ syntax extension omnibus_syntax {
     ?!@ast ioAST
     ?!@structurePropertyListAST ioPropertyListAST
   {
-    var @propertyVisibility visibility
+    let @propertyVisibility visibility
     select
       visibility = .isPrivate
     or
@@ -80,7 +80,7 @@ syntax extension omnibus_syntax {
   {
     $let$
     $identifier$ ?let propertyName
-    var @lstring typeName
+    let @lstring typeName
     select
       <type_definition> !?ioAST ?typeName
     or
@@ -369,7 +369,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !optionalContextualTypeName: self.mPropertyTypeName
       ?result:let @objectIR expressionIR
     )
-    var @omnibusType actualPropertyType
+    let @omnibusType actualPropertyType
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else

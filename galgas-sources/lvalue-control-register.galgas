@@ -33,14 +33,14 @@ syntax extension omnibus_syntax {
 
   rule <control_register_lvalue> ?!@ast ioAST !@controlRegisterLValueAST outRegisterLValue {
     $©group$ ?let registerGroupName
-    var @registerGroupIndexAST groupIndex
+    let @registerGroupIndexAST groupIndex
     select
       groupIndex = .noIndex
     or
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      var @bool checkIndexExpression
+      let @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true
@@ -52,14 +52,14 @@ syntax extension omnibus_syntax {
     end
     $.$
     $identifier$ ?let registerName
-    var @registerIndexAST registerIndex
+    let @registerIndexAST registerIndex
     select
       registerIndex = .noIndex
     or
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      var @bool checkIndexExpression
+      let @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true
@@ -164,7 +164,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     error self.mRegisterName : "this control register is not accessible in user mode"
   end
 #-------------------- Group index ?
-  var @string registerAddress
+  let @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
     if [self.mGroupIndex isIndex] then

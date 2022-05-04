@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $sync$
     $identifier$ ?let syncInstanceName
-    var @lstring syncTypeName
+    let @lstring syncTypeName
     select
       syncTypeName = ["" here]
     or
@@ -87,7 +87,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Get sync type
-  var @omnibusType optionalSyncType
+  let @omnibusType optionalSyncType
   if self.mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else

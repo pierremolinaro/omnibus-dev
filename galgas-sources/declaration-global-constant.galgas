@@ -32,7 +32,7 @@ syntax extension omnibus_syntax {
       attributeList += !attribute
     end
     $identifier$ ?let constantName
-    var @lstring typeName
+    let @lstring typeName
     select
       typeName = ["" nowhere]
     or

@@ -42,7 +42,7 @@ syntax extension omnibus_syntax {
   rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
     let endOfExp = @location.here
     $event$
-    var @lbool usesSelf
+    let @lbool usesSelf
     select
       usesSelf = .new {!false !.here}
     or
@@ -52,7 +52,7 @@ syntax extension omnibus_syntax {
     end
     var @lstringlist nameList = {}
     repeat
-      $identifier$ ?var name
+      $identifier$ ?let name
       nameList += !name
     while
       $.$
@@ -82,7 +82,7 @@ syntax extension omnibus_syntax {
       }
     or
       $event$
-      var @lbool usesSelf
+      let @lbool usesSelf
       select
         usesSelf = .new {!false !.here}
       or
@@ -92,7 +92,7 @@ syntax extension omnibus_syntax {
       end
       var @lstringlist nameList = {}
       repeat
-        $identifier$ ?var name
+        $identifier$ ?let name
         nameList += !name
       while
         $.$
@@ -246,8 +246,8 @@ override method @syncInstructionAST instructionSemanticAnalysis
 #      ]
     #--- Analyze synchronization
       var @instructionListIR guardInstructionGenerationList = {}
-      var @procCallEffectiveParameterListIR guardEffectiveParameterListIR
-      var @lstring guardMangledName
+      let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
+      let @lstring guardMangledName
       if usesSelf.bool then # self.p1.p2. … (…)
         if [inSelfType.kind isVoid] then
           error usesSelf : "'self' is not available in this context" : guardEffectiveParameterListIR, guardMangledName
@@ -505,7 +505,7 @@ override method @syncInstructionIR llvmInstructionCode
   var currentStartBranchLabel = startLabelName
   for branch in self.mOnInstructionBranchListIR do (idx)
     let acceptanceVarName = "%" + startLabel + ".accept." + idx
-    var @bool isWhileGuardedCommand
+    let @bool isWhileGuardedCommand
     switch branch.mGuardedCommand
     case booleanGuard (isExitCommand instructionGenerationList boolGuardBoolLLVMName) :
       isWhileGuardedCommand = isExitCommand

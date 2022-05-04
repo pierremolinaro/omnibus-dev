@@ -71,7 +71,7 @@ syntax extension omnibus_syntax {
       $func$
       $identifier$ ?let procName
       <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
-      var @lstring returnTypeName
+      let @lstring returnTypeName
       select
         returnTypeName = ["" here]
       or

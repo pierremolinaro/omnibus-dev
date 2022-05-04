@@ -65,7 +65,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR expressionResult
+    ?result: let @objectIR expressionResult
   ]
 #--- Generate code
   let currentlyInSafeMode = [inMode isSafe]

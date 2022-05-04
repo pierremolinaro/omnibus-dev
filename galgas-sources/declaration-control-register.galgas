@@ -134,7 +134,7 @@ syntax extension omnibus_syntax {
       or
         ${$
         repeat
-          var @controlRegisterBitSlice registerBitSlice
+          let @controlRegisterBitSlice registerBitSlice
           select
             $integer$ ?let @lbigint unusedBitCount
             registerBitSlice = .unusedBits {!count:unusedBitCount}
@@ -177,7 +177,7 @@ syntax extension omnibus_syntax {
         error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
       end
       <expression> !?ioAST ?let registerOffset
-      var @bool isReadOnly
+      let @bool isReadOnly
       select
         isReadOnly = false
       or
@@ -209,7 +209,7 @@ syntax extension omnibus_syntax {
       end
       <expression> !?ioAST ?let arrayElementSizeExpression
       $]$
-      var @bool isReadOnly
+      let @bool isReadOnly
       select
         isReadOnly = false
       or
@@ -512,7 +512,7 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
       !optionalContextualTypeName: ["" nowhere]
       ?result:let @objectIR addressOffsetExpressionResult
     )
-    var @bigint registerAddressOffset
+    let @bigint registerAddressOffset
     if not [addressOffsetExpressionResult isLiteralInteger] then
       error register.mRegisterOffsetLocation
         : "control register address offset is not a static integer expression"
@@ -521,7 +521,7 @@ method @controlRegisterDeclarationList-element buildControlRegisterMapForGroup
       [addressOffsetExpressionResult literalInteger ?1* ?value:registerAddressOffset]
     end
     var @bigint arraySize
-    var @uint elementArraySize
+    let @uint elementArraySize
     switch register.mControlRegisterKind
     case scalar :
       arraySize = 0G
@@ -625,7 +625,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
         !optionalContextualTypeName:["" nowhere]
         ?result:let @objectIR groupArraySizeExpressionResult
       )
-      var @bigint groupSize
+      let @bigint groupSize
       if not [groupArraySizeExpressionResult isLiteralInteger] then
         error groupSizeExpressionLocation
           : "control register group size is not a static integer expression"

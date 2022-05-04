@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
         !formalArgumentName
     while
       $?!selector:$ ?let selector
-      var @lstring formalArgumentName
+      let @lstring formalArgumentName
       select
         $_$
         formalArgumentName = ["" nowhere]
@@ -78,7 +78,7 @@ syntax extension omnibus_syntax {
         !formalArgumentName
     while
       $?selector:$ ?let selector
-      var @lstring formalArgumentName
+      let @lstring formalArgumentName
       select
         $_$
         formalArgumentName = ["" nowhere]

@@ -23,7 +23,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    var @bool publicAccess
+    let @bool publicAccess
     select
       publicAccess = false
     or
@@ -32,7 +32,7 @@ syntax extension omnibus_syntax {
     end
     $section$
     $identifier$ ?let name
-    var @mode mode
+    let @mode mode
     select
       mode = .sectionMode
     or
@@ -46,7 +46,7 @@ syntax extension omnibus_syntax {
       attributeList += !attribute
     end
     <procedure_formal_arguments> !?ioAST ?let formalArgumentList
-    var @lstring returnTypeName
+    let @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or
@@ -74,7 +74,7 @@ syntax extension omnibus_syntax {
   # A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    var @bool publicAccess
+    let @bool publicAccess
     select
       publicAccess = false
     or
@@ -83,7 +83,7 @@ syntax extension omnibus_syntax {
     end
     $primitive$
     $identifier$ ?let name
-    var @mode mode
+    let @mode mode
     select
       mode = .primitiveMode
     or
@@ -116,7 +116,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
-    var @bool publicAccess
+    let @bool publicAccess
     select
       publicAccess = false
     or
@@ -125,7 +125,7 @@ syntax extension omnibus_syntax {
     end
     $service$
     $identifier$ ?let name
-    var @mode mode
+    let @mode mode
     select
       mode = .serviceMode
     or
@@ -290,7 +290,7 @@ override method @systemRoutineDeclarationAST enterInContext
     attributeSet += !attribute.mValue.string
   end
 #---
-  var @routineKind routineKind
+  let @routineKind routineKind
   switch self.mMode
   case sectionMode, safeSectionMode :
     routineKind = .section

@@ -78,7 +78,7 @@ proc codeOptimization
     end
   #-----------------------------------------------
     if [option omnibus_options.printPasses value] then
-      var m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
+      let m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
   #    for (r) in usefulRoutineSet do
   #      m += "    - " + r + "\n"
   #    end

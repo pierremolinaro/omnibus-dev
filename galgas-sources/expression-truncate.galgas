@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $truncate$
-    var @lstring typeName
+    let @lstring typeName
     select
       typeName = ["" here]
     or

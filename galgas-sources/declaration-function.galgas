@@ -30,7 +30,7 @@ syntax extension omnibus_syntax {
 
   rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
   #--- Public ?
-    var @bool publicAccess
+    let @bool publicAccess
     select
       publicAccess = false
     or
@@ -43,7 +43,7 @@ syntax extension omnibus_syntax {
       ?name:let procName
       ?attributes:let attributeList
       ?formalArguments:let procFormalArgumentList
-    var @lstring returnTypeName
+    let @lstring returnTypeName
     select
       returnTypeName = ["" here]
     or

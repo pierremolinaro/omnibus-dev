@@ -23,7 +23,7 @@ syntax extension omnibus_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $for$
-    var @lstring varName
+    let @lstring varName
     select
       $_$
       varName = ["" here]

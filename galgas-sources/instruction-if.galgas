@@ -31,7 +31,7 @@ syntax extension omnibus_syntax {
   rule <if_instruction> ?!@ast ioAST !@ifInstructionAST outIfInstruction {
     $if$
     let instructionLocation = @location.here
-    var @bool staticIfExpression
+    let @bool staticIfExpression
     select
       $@attribute$ ? let attributeValue
       if attributeValue.string == staticAttribute () then
@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let thenInstructionList
     $}$
     let endOfThenBranch = @location.here
-    var @instructionListAST elseInstructionList
+    let @instructionListAST elseInstructionList
     select
       elseInstructionList = {}
     or

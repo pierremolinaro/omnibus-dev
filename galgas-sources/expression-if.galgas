@@ -35,7 +35,7 @@ syntax extension omnibus_syntax {
     let @location thenExpressionEndLocation = .here
     $}$
     $else$
-    var @expressionAST elseExpression
+    let @expressionAST elseExpression
     select
       ${$
       <expression> !?ioAST ?elseExpression

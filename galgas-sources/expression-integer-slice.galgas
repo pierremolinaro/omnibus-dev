@@ -114,8 +114,8 @@ override method @integerSliceExpressionAST analyzeExpression
       var @bigint accumulatedFieldStaticValues = 0G
       var @operandIRList operandList = {}
       for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
-        var @uint sliceWidth
-        var @lstring expressionTypeName
+        let @uint sliceWidth
+        let @lstring expressionTypeName
         if sliceWidthStr.string == "" then
           error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
         elsif sliceWidthStr.string == "b" then

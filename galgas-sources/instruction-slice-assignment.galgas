@@ -39,7 +39,7 @@ syntax extension omnibus_syntax {
     var @sliceAssignmentListAST sliceAssignmentListAST = {}
     repeat
       $?selector:$ ?let sliceWidth
-      var @sliceTargetAST sliceKind
+      let @sliceTargetAST sliceKind
       select
         $_$
         sliceKind = .discarded
@@ -148,12 +148,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   end
 #--- Analyze slices
   var rightShiftAmount = bitCount
-  var @bigint accumulatedFieldStaticValues = 0G
+  let @bigint accumulatedFieldStaticValues = 0G
   for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     var sourceOperandForSlicing = sourceOperand
   #--- Analyze selector
-    var @lstring sliceTypeName
-    var @uint sliceWidth
+    let @lstring sliceTypeName
+    let @uint sliceWidth
     if sliceWidthStr.string == "" then
       error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
     elsif sliceWidthStr.string == "b" then

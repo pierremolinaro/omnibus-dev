@@ -69,7 +69,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR sourceOperandPossibleReference
+    ?result: let @objectIR sourceOperandPossibleReference
   ]
 #--- Analyze LValue
   var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = {}

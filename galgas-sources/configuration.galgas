@@ -120,7 +120,7 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"POINTER_BIT_COUNT"
     $integer$ ?let pointerSize
     <configuration_key> !"DYNAMIC_ARRAY"
-    var @bool handleDynamicArray
+    let @bool handleDynamicArray
     select
       $yes$
       handleDynamicArray = true
@@ -133,11 +133,11 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"NOP"
     $"string"$ ?let nopInstructionStringInLLVM
     <configuration_key> !"BIT_BAND"
-    var @lbigint bitbandRegisterBaseAddress
-    var @lbigint bitbandRegisterEndAddress
-    var @lbigint bitbandRegisterRelocationAddress
-    var @lbigint bitbandRegisterOffsetMultiplier
-    var @lbigint bitbandRegisterBitMultiplier
+    let @lbigint bitbandRegisterBaseAddress
+    let @lbigint bitbandRegisterEndAddress
+    let @lbigint bitbandRegisterRelocationAddress
+    let @lbigint bitbandRegisterOffsetMultiplier
+    let @lbigint bitbandRegisterBitMultiplier
     select
       $no$
       bitbandRegisterBaseAddress = .new {!0G !.here}
@@ -211,7 +211,7 @@ syntax extension omnibus_target_specific_syntax {
       outImportedFileList += !relativeFilePath
     end
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
-    var @uint ptrSize
+    let @uint ptrSize
     if pointerSize.bigint == 0G then
       error pointerSize : "zero size pointer is invalid" : ptrSize
     else
@@ -275,7 +275,7 @@ syntax extension omnibus_target_specific_syntax {
     repeat
     while
       $identifier$ ?let interruptName
-      var @interruptionPanicCode interruptionPanicCode
+      let @interruptionPanicCode interruptionPanicCode
       select
         interruptionPanicCode = .noCode
       or

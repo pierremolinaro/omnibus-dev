@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     $in$
     $identifier$ ?let iteratedObject
     var staticWhileExpression = false
-    var @expressionAST whileExpression
+    let @expressionAST whileExpression
     select
       whileExpression = @literalBooleanInExpressionAST.new {!true}
       staticWhileExpression = true
@@ -93,7 +93,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #--- Type kind
   let iteratedType = [iteratedObjectPointer type]
 #--- Get iterated element type
-  var @omnibusType iteratedElementType
+  let @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
     error self.mIteratedObject : "this object is not enumerable" : iteratedElementType

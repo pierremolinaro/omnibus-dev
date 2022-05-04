@@ -71,7 +71,7 @@ override method @typeAliasDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------- Enter in type map
-  [ioContext.mTypeMap searchKey !lkey:self.mOriginalTypeName ?type:var type]
+  [ioContext.mTypeMap searchKey !lkey:self.mOriginalTypeName ?type: let type]
 #---------- Enter in type map
   [!?ioContext.mTypeMap insertType
     !lkey:self.mAliasTypeName

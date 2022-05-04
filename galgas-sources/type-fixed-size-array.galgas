@@ -101,7 +101,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
     let omnibusTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !self.mFixedSizeArrayType}
     let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !self.mFixedSizeArrayType}
     if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
-      [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: var type]
+      [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: let type]
       [!?ioContext.mTypeMap insertType
         !lkey:self.mFixedSizeArrayType
         !type:type
@@ -134,7 +134,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       [!?constructorMap insertKey ![constructorName nowhere] !{} !.arrayValue {!elementType:elementType !size:arraySize}]
       [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
     #-------------------------------------------- Type attributes
-      var @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
+      let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @omnibusType.new {
 #        !propertyGetterMap:arrayTypePropertyMap

@@ -126,7 +126,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR leftOperand
+    ?result:let @objectIR leftOperand
   ]
 #------------------- Analyze right expression
   [self.mRightExpression analyzeExpression
@@ -140,7 +140,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR rightOperand
+    ?result: let @objectIR rightOperand
   ]
 #------------------- Generate code
   [inContext.mInfixOperatorMap generateInfixOperatorCode

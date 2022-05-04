@@ -131,7 +131,7 @@ proc codeGeneration
     let @timer scriptTime = .start 
     let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python " + productDirectory + "/" + script + ".py"
-    var @sint result = [fullScript system]
+    let @sint result = [fullScript system]
     if result != 0S then
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
@@ -366,7 +366,7 @@ private proc generateCodeFiles
   let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
   let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
-  var cppCode = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
+  let cppCode = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
 #----------------------------------------- Add user type declarations
 #  for (userType) in inIntermediateCodeStruct.mTypeCppGenerationList do
 #    [userType generateTypeCppCode !?cppCode]

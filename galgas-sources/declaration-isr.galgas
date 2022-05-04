@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
 
   rule <isr_in_driver> ?!@ast ioAST ?let @lstring inDriverName {
     $interrupt$
-    var @mode mode
+    let @mode mode
     select
       $service$
       mode = .serviceMode

@@ -310,7 +310,7 @@ override method @llvmAssignmentOperatorUsage generateCode
     && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
     && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
       let llvmRoutineName = assignmentOperatorFuncName (!inTargetType ![inSourcePossibleReference type])
-      var s = "call void @" + [llvmRoutineName assemblerRepresentation]
+      let s = "call void @" + [llvmRoutineName assemblerRepresentation]
             + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
       [!?ioInstructionListIR appendInstructionAsFreeString !s !{!llvmRoutineName}]

@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $panic$
     $@attribute$ ?let attribute
-    var @bool isSetup
+    let @bool isSetup
     if attribute.string == "setup" then
       isSetup = true
     elsif attribute.string == "loop" then

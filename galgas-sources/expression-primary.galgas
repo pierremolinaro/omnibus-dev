@@ -69,7 +69,7 @@ syntax extension omnibus_syntax {
       $[$
       <expression> !?ioAST ?let expression
       let endOfIndex = @location.here
-      var @bool checkIndexExpression
+      let @bool checkIndexExpression
       select
         $]$
         checkIndexExpression = true

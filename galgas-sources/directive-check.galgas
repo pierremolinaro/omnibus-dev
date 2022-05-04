@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $ctAssert$
-    var @lstring checkMessage
+    let @lstring checkMessage
     select
       checkMessage = ["" here]
     or
@@ -69,7 +69,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:instructionGenerationList
-    ?result:@objectIR expressionResult
+    ?result: let @objectIR expressionResult
   ]
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !expressionResult

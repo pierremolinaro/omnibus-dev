@@ -262,7 +262,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
     #--- Build driver property list, adding init expression
       var @stringset validArgumentSet = {}
       for (propertyName propertyAttributeList * optionalPropertyTypeName propertyKind) in declaration.mPropertyListAST do
-        var @propertyKindAST driverPropertyKind
+        let @propertyKindAST driverPropertyKind
         switch propertyKind 
         case uninitializedStoredProperty :
           [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]

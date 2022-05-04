@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $let$
     $identifier$ ?let varName
-    var @lstring optionalTypeName
+    let @lstring optionalTypeName
     select
       optionalTypeName = ["" nowhere]
     or

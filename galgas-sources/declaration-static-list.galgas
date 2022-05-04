@@ -88,7 +88,7 @@ syntax extension omnibus_syntax {
         attributeList += !attribute
       end
       <procedure_formal_arguments> !?ioAST ?let formalArgs
-      var @lstring returnType
+      let @lstring returnType
       select
         returnType = ["" here]
       or
