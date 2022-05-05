@@ -988,7 +988,7 @@ static void extensionMethod_compileTimeInfixOperatorUsage_eval (const cPtr_compi
                                                                 GALGAS_bigint & outArgument_outResult,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_compileTimeInfixOperatorUsage * object = inObject ;
+  auto object = (cPtr_compileTimeInfixOperatorUsage *) inObject ; // A
   macroValidSharedObject (object, cPtr_compileTimeInfixOperatorUsage) ;
   GALGAS_bigint var_leftValue_10824 ;
   GALGAS_omnibusType joker_10800_1 ; // Joker input parameter
@@ -12084,7 +12084,7 @@ static void extensionMethod_binaryOperationIR_enterCodeForOverflowOperation (con
                                                                              GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                                              C_Compiler * inCompiler
                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_binaryOperationIR * object = inObject ;
+  auto object = (cPtr_binaryOperationIR *) inObject ; // A
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   const GALGAS_binaryOperationIR temp_0 = object ;
   GALGAS_string var_llvmType_2143 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.readProperty_mOperandType ().ptr (), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 85)) ;
@@ -12194,7 +12194,7 @@ static void extensionMethod_binaryOperationIR_enterCodeForDivisionWithZeroDiviso
                                                                                         GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                                                         C_Compiler * inCompiler
                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_binaryOperationIR * object = inObject ;
+  auto object = (cPtr_binaryOperationIR *) inObject ; // A
   macroValidSharedObject (object, cPtr_binaryOperationIR) ;
   const GALGAS_binaryOperationIR temp_0 = object ;
   GALGAS_string var_llvmType_3912 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.readProperty_mOperandType ().ptr (), inCompiler COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 112)) ;

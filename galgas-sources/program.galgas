@@ -31,10 +31,11 @@ grammar omnibus_grammar
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
   var @ast ast = .default
-  grammar omnibus_grammar in inSourceFile
+  grammar omnibus_grammar (
     !?ast
     ?importClauseList:let importedFileList
     ?endOfSourceFile:let endOfSourceFile
+  ) in inSourceFile
 #--- Recursively import files
   var @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
   let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
@@ -248,11 +249,11 @@ private proc addTargetSpecificFiles
     if [targetDirectory directoryExists] then
       let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.omnibus-target"
       if [targetDefinitionFullPath fileExists] then
-        grammar omnibus_target_grammar
-         in [targetDefinitionFullPath nowhere]
+        grammar omnibus_target_grammar (
           !?ioAST
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
+        ) in [targetDefinitionFullPath nowhere]
         recursiveImportFileSystemTargetFiles (
           !?ast:ioAST
           !targetDirectory:targetDirectory + "/" + inTargetName.string
@@ -271,10 +272,11 @@ private proc addTargetSpecificFiles
     let @filewrapper fw = [filewrapper targetTemplates]
     if [fw fileExistsAtPath !inTargetName.string + "/+config.omnibus-target"] then
       let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.omnibus-target"]
-      grammar omnibus_target_grammar on (source, inTargetName.string)
+      grammar omnibus_target_grammar (
         !?ioAST
         ?importClauseList:let importedFileList
         ?endOfSourceFile:*
+      ) on source:inTargetName.string
       recursiveImportEmbeddedTargetFiles (
         !?ast:ioAST
         !currentDirectory:inTargetName.string
@@ -302,10 +304,10 @@ private proc recursiveImportFileSystemTargetFiles
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
-          grammar omnibus_grammar in @lstring.new {!absolutePath !path.location}
-            !?ioAST
+          grammar omnibus_grammar (            !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
+          ) in @lstring.new {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -313,10 +315,11 @@ private proc recursiveImportFileSystemTargetFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         elsif [absolutePath pathExtension] == "omnibus-target" then
-          grammar omnibus_target_grammar in @lstring.new {!absolutePath !path.location}
+          grammar omnibus_target_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
+          ) in @lstring.new {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -348,10 +351,11 @@ private proc recursiveImportEmbeddedTargetFiles
       let embeddedPath = ":" + fullPath
       if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
         ioImportedFileAbsolutePathSet += !embeddedPath
-        grammar omnibus_grammar on ([fw textFileContentsAtPath !fullPath], path.string)
+        grammar omnibus_grammar (
           !?ioAST
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
+        ) on [fw textFileContentsAtPath !fullPath]:path.string
         recursiveImportEmbeddedTargetFiles (
           !?ast:ioAST
           !currentDirectory:[fullPath stringByDeletingLastPathComponent]
@@ -379,10 +383,11 @@ private proc recursiveImportFiles
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
-          grammar omnibus_grammar in @lstring.new {!absolutePath !path.location}
+          grammar omnibus_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
+          ) in @lstring.new {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory
@@ -390,10 +395,11 @@ private proc recursiveImportFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         elsif [absolutePath pathExtension] == "omnibus-target" then
-          grammar omnibus_target_grammar in @lstring.new {!absolutePath !path.location}
+          grammar omnibus_target_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
+          ) in @lstring.new {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory
@@ -411,10 +417,11 @@ private proc recursiveImportFiles
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet += !embeddedPath
           if [path pathExtension] == "omnibus-import" then
-            grammar omnibus_grammar on ([fw textFileContentsAtPath !path.string], path.string)
+            grammar omnibus_grammar (
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
+            ) on [fw textFileContentsAtPath !path.string] : path.string
             recursiveImportFiles (
               !?ast:ioAST
               !currentDirectory:inCurrentDirectory
@@ -422,10 +429,11 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           elsif [path pathExtension] == "omnibus-target" then
-            grammar omnibus_target_grammar on ([fw textFileContentsAtPath !path.string], path.string)
+            grammar omnibus_target_grammar (
               !?ioAST
               ?importClauseList:let importedFileList
               ?endOfSourceFile:*
+            ) on [fw textFileContentsAtPath !path.string] : path.string
             recursiveImportFiles (
               !?ast:ioAST
               !currentDirectory:inCurrentDirectory

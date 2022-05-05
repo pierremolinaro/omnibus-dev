@@ -3330,7 +3330,7 @@ static void extensionMethod_omnibusType_checkIsCompileTimeType (const cPtr_omnib
                                                                 const GALGAS_location constinArgument_inErrorLocation,
                                                                 C_Compiler * inCompiler
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_omnibusType * object = inObject ;
+  auto object = (cPtr_omnibusType *) inObject ; // A
   macroValidSharedObject (object, cPtr_omnibusType) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
@@ -3414,7 +3414,7 @@ static void extensionMethod_omnibusType_checkIsNotCompileTimeType (const cPtr_om
                                                                    const GALGAS_location constinArgument_inErrorLocation,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_omnibusType * object = inObject ;
+  auto object = (cPtr_omnibusType *) inObject ; // A
   macroValidSharedObject (object, cPtr_omnibusType) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
@@ -3749,7 +3749,7 @@ static void extensionMethod_omnibusType_generateRetain (const cPtr_omnibusType *
                                                         GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                         C_Compiler * inCompiler
                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_omnibusType * object = inObject ;
+  auto object = (cPtr_omnibusType *) inObject ; // A
   macroValidSharedObject (object, cPtr_omnibusType) ;
   const GALGAS_omnibusType temp_0 = object ;
   GALGAS_string var_llvmTypeName_7133 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 207)) ;
@@ -3864,7 +3864,7 @@ static void extensionMethod_omnibusType_generateInsulate (const cPtr_omnibusType
                                                           GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                           C_Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_omnibusType * object = inObject ;
+  auto object = (cPtr_omnibusType *) inObject ; // A
   macroValidSharedObject (object, cPtr_omnibusType) ;
   const GALGAS_omnibusType temp_0 = object ;
   GALGAS_string var_llvmTypeName_8821 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 241)) ;
@@ -3982,7 +3982,7 @@ static void extensionMethod_omnibusType_generateRelease (const cPtr_omnibusType 
                                                          GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                          C_Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_omnibusType * object = inObject ;
+  auto object = (cPtr_omnibusType *) inObject ; // A
   macroValidSharedObject (object, cPtr_omnibusType) ;
   const GALGAS_omnibusType temp_0 = object ;
   GALGAS_string var_llvmTypeName_11054 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 278)) ;
@@ -12091,7 +12091,7 @@ static void extensionMethod_typeOpaqueDeclarationAST_noteTypesInPrecedenceGraph 
                                                                                  GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_typeOpaqueDeclarationAST * object = inObject ;
+  auto object = (cPtr_typeOpaqueDeclarationAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_typeOpaqueDeclarationAST) ;
   {
   const GALGAS_typeOpaqueDeclarationAST temp_0 = object ;

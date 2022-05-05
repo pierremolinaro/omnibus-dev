@@ -4138,7 +4138,7 @@ static void extensionMethod_abstractDeclarationAST_enterExtension (const cPtr_ab
                                                                    GALGAS_abstractDeclarationAST & outArgument_outNewDeclaration,
                                                                    C_Compiler * /* inCompiler */
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_abstractDeclarationAST * object = inObject ;
+  auto object = (cPtr_abstractDeclarationAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_abstractDeclarationAST) ;
   const GALGAS_abstractDeclarationAST temp_0 = object ;
   outArgument_outNewDeclaration = temp_0 ;

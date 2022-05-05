@@ -7730,7 +7730,7 @@ static void extensionMethod_panicAST_noteTypesInPrecedenceGraph (const cPtr_pani
                                                                  GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                                  C_Compiler * inCompiler
                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_panicAST * object = inObject ;
+  auto object = (cPtr_panicAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_panicAST) ;
   const GALGAS_panicAST temp_0 = object ;
   extensionMethod_noteInstructionListTypesInPrecedenceGraph (temp_0.readProperty_mPanicInstructionList (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("panic.galgas", 53)) ;
@@ -15067,7 +15067,7 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionNoSel
                                                                                    GALGAS_objectIR & outArgument_outResult,
                                                                                    C_Compiler * inCompiler
                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_primaryInExpressionAST * object = inObject ;
+  auto object = (cPtr_primaryInExpressionAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_primaryInExpressionAST) ;
   GALGAS_valuedObject var_entity_9506 ;
   const GALGAS_primaryInExpressionAST temp_0 = object ;
@@ -15258,7 +15258,7 @@ static void extensionMethod_primaryInExpressionAST_analyzePrimaryExpressionWithS
                                                                                      GALGAS_objectIR & outArgument_outResult,
                                                                                      C_Compiler * inCompiler
                                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_primaryInExpressionAST * object = inObject ;
+  auto object = (cPtr_primaryInExpressionAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_primaryInExpressionAST) ;
   outArgument_outResult = GALGAS_objectIR::constructor_reference (constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 432))  COMMA_SOURCE_FILE ("expression-primary.galgas", 432)) ;
   const GALGAS_primaryInExpressionAST temp_0 = object ;

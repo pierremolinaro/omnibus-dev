@@ -7399,7 +7399,7 @@ static void extensionMethod_controlRegisterGroupDeclarationAST_noteTypesInPreced
                                                                                            GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                                                            C_Compiler * inCompiler
                                                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  const cPtr_controlRegisterGroupDeclarationAST * object = inObject ;
+  auto object = (cPtr_controlRegisterGroupDeclarationAST *) inObject ; // A
   macroValidSharedObject (object, cPtr_controlRegisterGroupDeclarationAST) ;
   const GALGAS_controlRegisterGroupDeclarationAST temp_0 = object ;
   cEnumerator_controlRegisterDeclarationList enumerator_11594 (temp_0.readProperty_mRegisters (), kENUMERATION_UP) ;
