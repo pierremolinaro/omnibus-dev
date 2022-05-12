@@ -36,7 +36,7 @@ setter @instructionListIR referenceFromPossibleValue # Turn a value to a referen
   if performStore then
   #--- Declare new temporary variable
     let llvmTemporaryName = llvmNameForLocalVariable (!"temp." + ioTemporaries.mTemporaryIndex)
-    ioTemporaries.mTemporaryIndex ++
+    ioTemporaries.mTemporaryIndex += 1
   #--- Add temporary reference to allocation list
     ioAllocaList += !llvmTemporaryName ![ioObjectIR type] !false
   #--- Store value to temporary reference

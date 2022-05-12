@@ -114,7 +114,7 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let @uint fieldBitCount
       ]
       let inferredTypeName = @lstring.new {!"u" + fieldBitCount !fieldName.location}
-      [inContext.mTypeMap searchKey !lkey:inferredTypeName ?type:let inferredType]
+      [inContext.mTypeMap searchType !lkey:inferredTypeName ?type:let inferredType]
     #--- Analyze expression
       [expression analyzeExpression
         !self:inSelfType

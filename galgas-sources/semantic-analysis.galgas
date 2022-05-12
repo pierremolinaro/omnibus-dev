@@ -20,42 +20,6 @@ func checkAssignmentCompatibility
     let key = assignmentOperatorKey (!inOptionalTargetAnnotationType !.nowhere ![inSourceValue type])
     [inAssignmentOperatorMap searchKey !key ?*]
     result = [inSourceValue withType !inOptionalTargetAnnotationType]
-#    [!?ioInstructionGenerationList appendAssignmentIR
-#      !?ioTemporaries
-#      !inContext.mAssignmentOperatorMap
-#      !?ioAllocaList
-#      !targetType
-#      !targetReference_llvmName
-#      !expressionResult
-#      !sliceWidthStr.location
-#    ]
-#setter @instructionListIR appendAssignmentIR
-#    ?!@semanticTemporariesStruct ioTemporaries
-#    ?let @assignmentOperatorMap inAssignmentOperatorMap
-#    ?!@allocaList ioAllocaList
-#    ?let @omnibusType inTargetType
-#    ?let @string inTargetLLVMName
-#    ?let @objectIR inSourcePossibleReference
-#    ?let @location inErrorLocation
-
-
-
-#    if inOptionalTargetAnnotationType.omnibusTypeDescriptionName == sourceType.omnibusTypeDescriptionName then
-#      result = inSourceValue
-#    elsif [sourceType.kind isCompileTimeInteger] && [inOptionalTargetAnnotationType.kind isInteger] then
-#      [inSourceValue literalInteger ?1* ?value:let value]
-#      [inOptionalTargetAnnotationType.kind integer ?min:let minTarget ?max:let maxTarget ?2*]
-#      if (value < minTarget) || (maxTarget < value) then
-#        error inErrorLocation : "literal integer too large" : result
-#      else
-#        result = [inSourceValue withType !inOptionalTargetAnnotationType]
-#      end
-#    else
-#      error inErrorLocation
-#      : "object of type " + inOptionalTargetAnnotationType.omnibusTypeDescriptionName
-#        + " cannot be assigned from expression of type " + [inSourceValue omnibusTypeDescriptionName]
-#      : result
-#    end
   end
 
   if not inStaticTypeAllowed then
@@ -88,7 +52,7 @@ struct @semanticTemporariesStruct {
 
 setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
   outTempLLVMVar = "%temp." + self.mTemporaryIndex
-  self.mTemporaryIndex ++
+  self.mTemporaryIndex += 1
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

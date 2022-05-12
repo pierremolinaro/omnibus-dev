@@ -157,7 +157,7 @@ setter @semanticContext addComputedPropertyGetter
   ?propertyName:let @lstring inPropertyName
   ?mode:let @mode inMode
   ?visibility:let @propertyVisibility inVisibility
-  ?resultTypeProxy:let @unifiedTypeMap-entry inResultTypeProxy
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultTypeProxy
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   var @propertyGetterMap getterMap
@@ -180,7 +180,7 @@ setter @semanticContext addComputedPropertyGetter
 
 enum @propertyGetterKind {
   case storedProperty (@omnibusType type @uint index)
-  case computedProperty (@unifiedTypeMap-entry typeProxy @routineLLVMNameDict modeDictionary)
+  case computedProperty (@unifiedTypeMapEntry typeProxy @routineLLVMNameDict modeDictionary)
   case constantProperty (@objectIR value)
 }
 
@@ -249,7 +249,7 @@ map @propertySetterMap {
 
 enum @propertySetterKind {
   case storedProperty (@omnibusType type @uint index)
-  case computedProperty (@unifiedTypeMap-entry typeProxy
+  case computedProperty (@unifiedTypeMapEntry typeProxy
                          @routineLLVMNameDict getterModeDictionary
                          @routineLLVMNameDict setterModeDictionary)
 }
@@ -314,7 +314,7 @@ map @availableInterruptMap {
 #·······················································································································
 
 getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
-  [self.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:result]
+  [self.mTypeMap searchType !lkey:[boolTypeName () nowhere] ?type:result]
 }
 
 #·······················································································································

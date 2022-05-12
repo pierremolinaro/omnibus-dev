@@ -65,10 +65,10 @@ end
   <a name="%!lkey.string%">%!lkey.string%</a>
 </h2>
 <p>
-Kind: %![type descriptionForHTMLFile]%<br>
-Description: %!type.omnibusTypeDescriptionName%<br>
-LLVM Base Name: %if type.llvmBaseTypeName == "" then !"<i>none, compile time type</i>" else !type.llvmBaseTypeName end%<br>
-LLVM Name: %if [type llvmTypeName] == "" then !"<i>none, compile time type</i>" else ![type llvmTypeName] end%
+Kind: %![[type definition] descriptionForHTMLFile]%<br>
+Description: %![type definition].omnibusTypeDescriptionName%<br>
+LLVM Base Name: %if [type definition].llvmBaseTypeName == "" then !"<i>none, compile time type</i>" else ![type definition].llvmBaseTypeName end%<br>
+LLVM Name: %if [[type definition] llvmTypeName] == "" then !"<i>none, compile time type</i>" else ![[type definition] llvmTypeName] end%
 </p>
 %end%
 <p>

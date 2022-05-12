@@ -1724,11 +1724,6 @@ class GALGAS_abstractLLVMInstruction : public AC_GALGAS_reference_class {
 //--------------------------------- Default constructor
   public: GALGAS_abstractLLVMInstruction (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_abstractLLVMInstruction (const class cPtr_abstractLLVMInstruction * inSourcePtr) ;
 
@@ -1801,11 +1796,6 @@ class GALGAS_expressionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Default constructor
   public: GALGAS_expressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_expressionAST (const class cPtr_expressionAST * inSourcePtr) ;
 
@@ -1878,11 +1868,6 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_addressofControlRegisterAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_addressofControlRegisterAST (const class cPtr_addressofControlRegisterAST * inSourcePtr) ;
 
@@ -2250,11 +2235,6 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_addressofExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_addressofExpressionAST (const class cPtr_addressofExpressionAST * inSourcePtr) ;
 
@@ -2529,11 +2509,6 @@ class GALGAS_instructionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Default constructor
   public: GALGAS_instructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_instructionAST (const class cPtr_instructionAST * inSourcePtr) ;
 
@@ -2613,11 +2588,6 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_assertInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_assertInstructionAST (const class cPtr_assertInstructionAST * inSourcePtr) ;
 
@@ -2706,11 +2676,6 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_assignmentInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_assignmentInstructionAST (const class cPtr_assignmentInstructionAST * inSourcePtr) ;
 
@@ -2807,11 +2772,6 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_bitbandInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_bitbandInstructionAST (const class cPtr_bitbandInstructionAST * inSourcePtr) ;
 
@@ -2932,11 +2892,6 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
 //--------------------------------- Default constructor
   public: GALGAS_booleanShortCircuitAndOperatorExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_booleanShortCircuitAndOperatorExpressionAST (const class cPtr_booleanShortCircuitAndOperatorExpressionAST * inSourcePtr) ;
 
@@ -3039,11 +2994,6 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_callInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_callInstructionAST (const class cPtr_callInstructionAST * inSourcePtr) ;
 
@@ -3284,11 +3234,6 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_checkInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_checkInstructionAST (const class cPtr_checkInstructionAST * inSourcePtr) ;
 
@@ -3385,11 +3330,6 @@ class GALGAS_abstractDeclarationAST : public AC_GALGAS_reference_class {
 //--------------------------------- Default constructor
   public: GALGAS_abstractDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_abstractDeclarationAST (const class cPtr_abstractDeclarationAST * inSourcePtr) ;
 
@@ -3464,11 +3404,6 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeConvertToBooleanAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_compileTimeConvertToBooleanAST (const class cPtr_compileTimeConvertToBooleanAST * inSourcePtr) ;
 
@@ -3542,11 +3477,6 @@ class GALGAS_ctExpressionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Default constructor
   public: GALGAS_ctExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctExpressionAST (const class cPtr_ctExpressionAST * inSourcePtr) ;
 
@@ -3656,11 +3586,6 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeInfixOperatorAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_compileTimeInfixOperatorAST (const class cPtr_compileTimeInfixOperatorAST * inSourcePtr) ;
 
@@ -3960,11 +3885,6 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
 //--------------------------------- Default constructor
   public: GALGAS_compiletimePrefixOperatorAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_compiletimePrefixOperatorAST (const class cPtr_compiletimePrefixOperatorAST * inSourcePtr) ;
 
@@ -4167,11 +4087,6 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_constructorCallAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_constructorCallAST (const class cPtr_constructorCallAST * inSourcePtr) ;
 
@@ -4427,11 +4342,6 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
 //--------------------------------- Default constructor
   public: GALGAS_controlRegisterAssignmentInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_controlRegisterAssignmentInstructionAST (const class cPtr_controlRegisterAssignmentInstructionAST * inSourcePtr) ;
 
@@ -4772,8 +4682,8 @@ class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWith
   public: const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (const GALGAS_omnibusInfixOperator & inAssociatedValue0,
-                                                                                              const GALGAS_location & inAssociatedValue1
+  public: cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (const GALGAS_omnibusInfixOperator inAssociatedValue0,
+                                                                                              const GALGAS_location inAssociatedValue1
                                                                                               COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -4832,11 +4742,6 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_controlRegisterGroupDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_controlRegisterGroupDeclarationAST (const class cPtr_controlRegisterGroupDeclarationAST * inSourcePtr) ;
 
@@ -5275,11 +5180,6 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_convertExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_convertExpressionAST (const class cPtr_convertExpressionAST * inSourcePtr) ;
 
@@ -5385,11 +5285,6 @@ class GALGAS_ctFalseExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctFalseExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctFalseExpressionAST (const class cPtr_ctFalseExpressionAST * inSourcePtr) ;
 
@@ -5471,11 +5366,6 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctIdentifierExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctIdentifierExpressionAST (const class cPtr_ctIdentifierExpressionAST * inSourcePtr) ;
 
@@ -5562,11 +5452,6 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_ctInfixExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctInfixExpressionAST (const class cPtr_ctInfixExpressionAST * inSourcePtr) ;
 
@@ -5680,11 +5565,6 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctIntExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctIntExpressionAST (const class cPtr_ctIntExpressionAST * inSourcePtr) ;
 
@@ -5771,11 +5651,6 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_ctPrefixExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctPrefixExpressionAST (const class cPtr_ctPrefixExpressionAST * inSourcePtr) ;
 
@@ -5881,11 +5756,6 @@ class GALGAS_ctTrueExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_ctTrueExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ctTrueExpressionAST (const class cPtr_ctTrueExpressionAST * inSourcePtr) ;
 
@@ -5967,11 +5837,6 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_enumerationDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_enumerationDeclarationAST (const class cPtr_enumerationDeclarationAST * inSourcePtr) ;
 
@@ -6219,11 +6084,6 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_extendExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_extendExpressionAST (const class cPtr_extendExpressionAST * inSourcePtr) ;
 
@@ -6326,11 +6186,6 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
 //--------------------------------- Default constructor
   public: GALGAS_fixedSizeArrayTypeDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_fixedSizeArrayTypeDeclarationAST (const class cPtr_fixedSizeArrayTypeDeclarationAST * inSourcePtr) ;
 
@@ -6441,11 +6296,6 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_forInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_forInstructionAST (const class cPtr_forInstructionAST * inSourcePtr) ;
 
@@ -6716,11 +6566,6 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_forLowerUpperBoundInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_forLowerUpperBoundInstructionAST (const class cPtr_forLowerUpperBoundInstructionAST * inSourcePtr) ;
 
@@ -6865,11 +6710,6 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_functionDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_functionDeclarationAST (const class cPtr_functionDeclarationAST * inSourcePtr) ;
 
@@ -7375,11 +7215,6 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
 //--------------------------------- Default constructor
   public: GALGAS_globalConstantDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_globalConstantDeclarationAST (const class cPtr_globalConstantDeclarationAST * inSourcePtr) ;
 
@@ -7490,11 +7325,6 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_guardDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_guardDeclarationAST (const class cPtr_guardDeclarationAST * inSourcePtr) ;
 
@@ -7681,7 +7511,7 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
   public: const GALGAS_callInstructionAST mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_guardKind_convenienceGuard (const GALGAS_callInstructionAST & inAssociatedValue0
+  public: cEnumAssociatedValues_guardKind_convenienceGuard (const GALGAS_callInstructionAST inAssociatedValue0
                                                             COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -7748,11 +7578,6 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_ifExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ifExpressionAST (const class cPtr_ifExpressionAST * inSourcePtr) ;
 
@@ -7879,11 +7704,6 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_ifInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_ifInstructionAST (const class cPtr_ifInstructionAST * inSourcePtr) ;
 
@@ -8031,11 +7851,6 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_integerSliceExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_integerSliceExpressionAST (const class cPtr_integerSliceExpressionAST * inSourcePtr) ;
 
@@ -8310,11 +8125,6 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_isrDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_isrDeclarationAST (const class cPtr_isrDeclarationAST * inSourcePtr) ;
 
@@ -8433,11 +8243,6 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_letInstructionWithAssignmentAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_letInstructionWithAssignmentAST (const class cPtr_letInstructionWithAssignmentAST * inSourcePtr) ;
 
@@ -8545,11 +8350,6 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalBooleanInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_literalBooleanInExpressionAST (const class cPtr_literalBooleanInExpressionAST * inSourcePtr) ;
 
@@ -8639,11 +8439,6 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalIntegerInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_literalIntegerInExpressionAST (const class cPtr_literalIntegerInExpressionAST * inSourcePtr) ;
 
@@ -8733,11 +8528,6 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_literalStringInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_literalStringInExpressionAST (const class cPtr_literalStringInExpressionAST * inSourcePtr) ;
 
@@ -8824,11 +8614,6 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
 //--------------------------------- Default constructor
   public: GALGAS_llvmAssignmentOperatorDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmAssignmentOperatorDeclarationAST (const class cPtr_llvmAssignmentOperatorDeclarationAST * inSourcePtr) ;
 
@@ -9250,11 +9035,6 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmConvertToBooleanAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmConvertToBooleanAST (const class cPtr_llvmConvertToBooleanAST * inSourcePtr) ;
 
@@ -9368,11 +9148,6 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmGenerationInstruction constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmGenerationInstruction (const class cPtr_llvmGenerationInstruction * inSourcePtr) ;
 
@@ -9593,11 +9368,6 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_llvmGenericType (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmGenericType (const class cPtr_llvmGenericType * inSourcePtr) ;
 
@@ -9708,11 +9478,6 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_llvmInfixOperatorAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmInfixOperatorAST (const class cPtr_llvmInfixOperatorAST * inSourcePtr) ;
 
@@ -9879,11 +9644,6 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_llvmPrefixOperatorAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmPrefixOperatorAST (const class cPtr_llvmPrefixOperatorAST * inSourcePtr) ;
 
@@ -10100,11 +9860,6 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_llvmVarInstruction constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_llvmVarInstruction (const class cPtr_llvmVarInstruction * inSourcePtr) ;
 
@@ -10191,11 +9946,6 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_omnibusInfixOperatorExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_omnibusInfixOperatorExpressionAST (const class cPtr_omnibusInfixOperatorExpressionAST * inSourcePtr) ;
 
@@ -10309,11 +10059,6 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_panicAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_panicAST (const class cPtr_panicAST * inSourcePtr) ;
 
@@ -10424,11 +10169,6 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_panicInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_panicInstructionAST (const class cPtr_panicInstructionAST * inSourcePtr) ;
 
@@ -10517,11 +10257,6 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_prefixOperatorExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_prefixOperatorExpressionAST (const class cPtr_prefixOperatorExpressionAST * inSourcePtr) ;
 
@@ -10714,11 +10449,6 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_primaryInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_primaryInExpressionAST (const class cPtr_primaryInExpressionAST * inSourcePtr) ;
 
@@ -10950,11 +10680,6 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_procedureCallInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_procedureCallInstructionAST (const class cPtr_procedureCallInstructionAST * inSourcePtr) ;
 
@@ -11192,11 +10917,6 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_registerConstantExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_registerConstantExpressionAST (const class cPtr_registerConstantExpressionAST * inSourcePtr) ;
 
@@ -11471,11 +11191,6 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_registerInExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_registerInExpressionAST (const class cPtr_registerInExpressionAST * inSourcePtr) ;
 
@@ -11570,11 +11285,6 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_sizeofExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_sizeofExpressionAST (const class cPtr_sizeofExpressionAST * inSourcePtr) ;
 
@@ -11664,11 +11374,6 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_sizeofTypeAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_sizeofTypeAST (const class cPtr_sizeofTypeAST * inSourcePtr) ;
 
@@ -11755,11 +11460,6 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_sliceAssignmentInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_sliceAssignmentInstructionAST (const class cPtr_sliceAssignmentInstructionAST * inSourcePtr) ;
 
@@ -12028,11 +11728,6 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_standAloneProcedureCallInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_standAloneProcedureCallInstructionAST (const class cPtr_standAloneProcedureCallInstructionAST * inSourcePtr) ;
 
@@ -12128,11 +11823,6 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_standaloneFunctionInExpressionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_standaloneFunctionInExpressionAST (const class cPtr_standaloneFunctionInExpressionAST * inSourcePtr) ;
 
@@ -12238,11 +11928,6 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_staticListAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_staticListAST (const class cPtr_staticListAST * inSourcePtr) ;
 
@@ -12654,11 +12339,6 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_structureDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_structureDeclarationAST (const class cPtr_structureDeclarationAST * inSourcePtr) ;
 
@@ -13003,11 +12683,6 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_switchInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_switchInstructionAST (const class cPtr_switchInstructionAST * inSourcePtr) ;
 
@@ -13276,11 +12951,6 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_syncDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_syncDeclarationAST (const class cPtr_syncDeclarationAST * inSourcePtr) ;
 
@@ -13378,11 +13048,6 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_syncInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_syncInstructionAST (const class cPtr_syncInstructionAST * inSourcePtr) ;
 
@@ -13651,11 +13316,6 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Default constructor
   public: GALGAS_syncToolInstanceDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_syncToolInstanceDeclarationAST (const class cPtr_syncToolInstanceDeclarationAST * inSourcePtr) ;
 
@@ -13758,11 +13418,6 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Default constructor
   public: GALGAS_systemRoutineDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_systemRoutineDeclarationAST (const class cPtr_systemRoutineDeclarationAST * inSourcePtr) ;
 
@@ -13916,11 +13571,6 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_taskSetupDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_taskSetupDeclarationAST (const class cPtr_taskSetupDeclarationAST * inSourcePtr) ;
 
@@ -14047,11 +13697,6 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Default constructor
   public: GALGAS_truncateExpressionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_truncateExpressionAST (const class cPtr_truncateExpressionAST * inSourcePtr) ;
 
@@ -14157,11 +13802,6 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typeAliasDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_typeAliasDeclarationAST (const class cPtr_typeAliasDeclarationAST * inSourcePtr) ;
 
@@ -14259,11 +13899,6 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typeDynamicArrayDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_typeDynamicArrayDeclarationAST (const class cPtr_typeDynamicArrayDeclarationAST * inSourcePtr) ;
 
@@ -14358,11 +13993,6 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Default constructor
   public: GALGAS_typeOpaqueDeclarationAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_typeOpaqueDeclarationAST (const class cPtr_typeOpaqueDeclarationAST * inSourcePtr) ;
 
@@ -14476,11 +14106,6 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_typedConstantCallAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_typedConstantCallAST (const class cPtr_typedConstantCallAST * inSourcePtr) ;
 
@@ -14586,11 +14211,6 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_varDeclarationInstructionAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_varDeclarationInstructionAST (const class cPtr_varDeclarationInstructionAST * inSourcePtr) ;
 
@@ -14687,11 +14307,6 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_varInstructionWithAssignmentAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_varInstructionWithAssignmentAST (const class cPtr_varInstructionWithAssignmentAST * inSourcePtr) ;
 
@@ -14796,11 +14411,6 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Default constructor
   public: GALGAS_whileInstructionAST (void) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_whileInstructionAST (const class cPtr_whileInstructionAST * inSourcePtr) ;
 
@@ -15037,8 +14647,8 @@ class cEnumAssociatedValues_LValueOperandAST_property : public cEnumAssociatedVa
   public: const GALGAS_LValueOperandAST mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring & inAssociatedValue0,
-                                                           const GALGAS_LValueOperandAST & inAssociatedValue1
+  public: cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring inAssociatedValue0,
+                                                           const GALGAS_LValueOperandAST inAssociatedValue1
                                                            COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15057,10 +14667,10 @@ class cEnumAssociatedValues_LValueOperandAST_arrayAccess : public cEnumAssociate
   public: const GALGAS_LValueOperandAST mAssociatedValue3 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                              const GALGAS_location & inAssociatedValue1,
-                                                              const GALGAS_bool & inAssociatedValue2,
-                                                              const GALGAS_LValueOperandAST & inAssociatedValue3
+  public: cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST inAssociatedValue0,
+                                                              const GALGAS_location inAssociatedValue1,
+                                                              const GALGAS_bool inAssociatedValue2,
+                                                              const GALGAS_LValueOperandAST inAssociatedValue3
                                                               COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15171,7 +14781,7 @@ class cEnumAssociatedValues_controlRegisterBitSlice_unusedBits : public cEnumAss
   public: const GALGAS_lbigint mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (const GALGAS_lbigint & inAssociatedValue0
+  public: cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (const GALGAS_lbigint inAssociatedValue0
                                                                     COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15188,8 +14798,8 @@ class cEnumAssociatedValues_controlRegisterBitSlice_namedBit : public cEnumAssoc
   public: const GALGAS_lbigint mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterBitSlice_namedBit (const GALGAS_lstring & inAssociatedValue0,
-                                                                  const GALGAS_lbigint & inAssociatedValue1
+  public: cEnumAssociatedValues_controlRegisterBitSlice_namedBit (const GALGAS_lstring inAssociatedValue0,
+                                                                  const GALGAS_lbigint inAssociatedValue1
                                                                   COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15303,7 +14913,7 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
   public: const GALGAS_lbigint mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterGroupKindAST_single (const GALGAS_lbigint & inAssociatedValue0
+  public: cEnumAssociatedValues_controlRegisterGroupKindAST_single (const GALGAS_lbigint inAssociatedValue0
                                                                     COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15321,9 +14931,9 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnu
   public: const GALGAS_lbigintlist mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                        const GALGAS_location & inAssociatedValue1,
-                                                                        const GALGAS_lbigintlist & inAssociatedValue2
+  public: cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_expressionAST inAssociatedValue0,
+                                                                        const GALGAS_location inAssociatedValue1,
+                                                                        const GALGAS_lbigintlist inAssociatedValue2
                                                                         COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15438,10 +15048,10 @@ class cEnumAssociatedValues_controlRegisterKind_registerArray : public cEnumAsso
   public: const GALGAS_location mAssociatedValue3 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_controlRegisterKind_registerArray (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                   const GALGAS_location & inAssociatedValue1,
-                                                                   const GALGAS_expressionAST & inAssociatedValue2,
-                                                                   const GALGAS_location & inAssociatedValue3
+  public: cEnumAssociatedValues_controlRegisterKind_registerArray (const GALGAS_expressionAST inAssociatedValue0,
+                                                                   const GALGAS_location inAssociatedValue1,
+                                                                   const GALGAS_expressionAST inAssociatedValue2,
+                                                                   const GALGAS_location inAssociatedValue3
                                                                    COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15594,7 +15204,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_input : public cEnum
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (const GALGAS_lstring inAssociatedValue0
                                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15612,9 +15222,9 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType : publ
   public: const GALGAS_lstring mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (const GALGAS_bool & inAssociatedValue0,
-                                                                               const GALGAS_lstring & inAssociatedValue1,
-                                                                               const GALGAS_lstring & inAssociatedValue2
+  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (const GALGAS_bool inAssociatedValue0,
+                                                                               const GALGAS_lstring inAssociatedValue1,
+                                                                               const GALGAS_lstring inAssociatedValue2
                                                                                COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15631,8 +15241,8 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_output : public cEnu
   public: const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                        const GALGAS_location & inAssociatedValue1
+  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (const GALGAS_expressionAST inAssociatedValue0,
+                                                                        const GALGAS_location inAssociatedValue1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15648,7 +15258,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput : public
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (const GALGAS_lstring inAssociatedValue0
                                                                              COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15664,7 +15274,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVaria
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (const GALGAS_lstring inAssociatedValue0
                                                                                          COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15775,7 +15385,7 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_expression : public cE
   public: const GALGAS_expressionAST mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_extendStaticListExpressionAST_expression (const GALGAS_expressionAST & inAssociatedValue0
+  public: cEnumAssociatedValues_extendStaticListExpressionAST_expression (const GALGAS_expressionAST inAssociatedValue0
                                                                           COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15792,8 +15402,8 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_function : public cEnu
   public: const GALGAS_routineFormalArgumentListAST mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_extendStaticListExpressionAST_function (const GALGAS_lstring & inAssociatedValue0,
-                                                                        const GALGAS_routineFormalArgumentListAST & inAssociatedValue1
+  public: cEnumAssociatedValues_extendStaticListExpressionAST_function (const GALGAS_lstring inAssociatedValue0,
+                                                                        const GALGAS_routineFormalArgumentListAST inAssociatedValue1
                                                                         COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15901,7 +15511,7 @@ class cEnumAssociatedValues_genericFormalParameter_constant : public cEnumAssoci
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_genericFormalParameter_constant (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_genericFormalParameter_constant (const GALGAS_lstring inAssociatedValue0
                                                                  COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -15917,7 +15527,7 @@ class cEnumAssociatedValues_genericFormalParameter_type : public cEnumAssociated
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_genericFormalParameter_type (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_genericFormalParameter_type (const GALGAS_lstring inAssociatedValue0
                                                              COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16051,9 +15661,9 @@ class cEnumAssociatedValues_guardedCommandAST_boolean : public cEnumAssociatedVa
   public: const GALGAS_location mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_guardedCommandAST_boolean (const GALGAS_bool & inAssociatedValue0,
-                                                           const GALGAS_expressionAST & inAssociatedValue1,
-                                                           const GALGAS_location & inAssociatedValue2
+  public: cEnumAssociatedValues_guardedCommandAST_boolean (const GALGAS_bool inAssociatedValue0,
+                                                           const GALGAS_expressionAST inAssociatedValue1,
+                                                           const GALGAS_location inAssociatedValue2
                                                            COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16075,13 +15685,13 @@ class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociat
   public: const GALGAS_effectiveArgumentListAST mAssociatedValue6 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_guardedCommandAST_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                               const GALGAS_expressionAST & inAssociatedValue1,
-                                                               const GALGAS_bool & inAssociatedValue2,
-                                                               const GALGAS_location & inAssociatedValue3,
-                                                               const GALGAS_lbool & inAssociatedValue4,
-                                                               const GALGAS_lstringlist & inAssociatedValue5,
-                                                               const GALGAS_effectiveArgumentListAST & inAssociatedValue6
+  public: cEnumAssociatedValues_guardedCommandAST_boolAndSync (const GALGAS_bool inAssociatedValue0,
+                                                               const GALGAS_expressionAST inAssociatedValue1,
+                                                               const GALGAS_bool inAssociatedValue2,
+                                                               const GALGAS_location inAssociatedValue3,
+                                                               const GALGAS_lbool inAssociatedValue4,
+                                                               const GALGAS_lstringlist inAssociatedValue5,
+                                                               const GALGAS_effectiveArgumentListAST inAssociatedValue6
                                                                COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16201,7 +15811,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_string : public cEn
   public: const GALGAS_string mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_string (const GALGAS_string & inAssociatedValue0
+  public: cEnumAssociatedValues_llvmGenerationInstructionElement_string (const GALGAS_string inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16217,7 +15827,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_symbol : public cEn
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (const GALGAS_lstring inAssociatedValue0
                                                                          COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16233,7 +15843,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_type : public cEnum
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_type (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_llvmGenerationInstructionElement_type (const GALGAS_lstring inAssociatedValue0
                                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16380,7 +15990,7 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnum
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_property (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_primaryInExpressionAccessAST_property (const GALGAS_lstring inAssociatedValue0
                                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16397,8 +16007,8 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public c
   public: const GALGAS_lbigint mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (const GALGAS_lbigint & inAssociatedValue0,
-                                                                           const GALGAS_lbigint & inAssociatedValue1
+  public: cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (const GALGAS_lbigint inAssociatedValue0,
+                                                                           const GALGAS_lbigint inAssociatedValue1
                                                                            COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16416,9 +16026,9 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cE
   public: const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                          const GALGAS_location & inAssociatedValue1,
-                                                                          const GALGAS_bool & inAssociatedValue2
+  public: cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (const GALGAS_expressionAST inAssociatedValue0,
+                                                                          const GALGAS_location inAssociatedValue1,
+                                                                          const GALGAS_bool inAssociatedValue2
                                                                           COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16436,9 +16046,9 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall : public cEnum
   public: const GALGAS_location mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (const GALGAS_lstring & inAssociatedValue0,
-                                                                       const GALGAS_effectiveArgumentListAST & inAssociatedValue1,
-                                                                       const GALGAS_location & inAssociatedValue2
+  public: cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (const GALGAS_lstring inAssociatedValue0,
+                                                                       const GALGAS_effectiveArgumentListAST inAssociatedValue1,
+                                                                       const GALGAS_location inAssociatedValue2
                                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16670,7 +16280,7 @@ class cEnumAssociatedValues_propertyKindAST_initializedStoredProperty : public c
   public: const GALGAS_expressionAST mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (const GALGAS_expressionAST & inAssociatedValue0
+  public: cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (const GALGAS_expressionAST inAssociatedValue0
                                                                            COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16686,7 +16296,7 @@ class cEnumAssociatedValues_propertyKindAST_initializedConstantProperty : public
   public: const GALGAS_expressionAST mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (const GALGAS_expressionAST & inAssociatedValue0
+  public: cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (const GALGAS_expressionAST inAssociatedValue0
                                                                              COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16703,8 +16313,8 @@ class cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty : public cE
   public: const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (const GALGAS_instructionListAST & inAssociatedValue0,
-                                                                          const GALGAS_location & inAssociatedValue1
+  public: cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (const GALGAS_instructionListAST inAssociatedValue0,
+                                                                          const GALGAS_location inAssociatedValue1
                                                                           COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16721,8 +16331,8 @@ class cEnumAssociatedValues_propertyKindAST_writeComputedProperty : public cEnum
   public: const GALGAS_location mAssociatedValue1 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_writeComputedProperty (const GALGAS_instructionListAST & inAssociatedValue0,
-                                                                       const GALGAS_location & inAssociatedValue1
+  public: cEnumAssociatedValues_propertyKindAST_writeComputedProperty (const GALGAS_instructionListAST inAssociatedValue0,
+                                                                       const GALGAS_location inAssociatedValue1
                                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16817,9 +16427,9 @@ class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociated
   public: const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_registerGroupIndexAST_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                             const GALGAS_location & inAssociatedValue1,
-                                                             const GALGAS_bool & inAssociatedValue2
+  public: cEnumAssociatedValues_registerGroupIndexAST_index (const GALGAS_expressionAST inAssociatedValue0,
+                                                             const GALGAS_location inAssociatedValue1,
+                                                             const GALGAS_bool inAssociatedValue2
                                                              COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16841,9 +16451,9 @@ class cEnumAssociatedValues_registerIndexAST_index : public cEnumAssociatedValue
   public: const GALGAS_bool mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_registerIndexAST_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                        const GALGAS_location & inAssociatedValue1,
-                                                        const GALGAS_bool & inAssociatedValue2
+  public: cEnumAssociatedValues_registerIndexAST_index (const GALGAS_expressionAST inAssociatedValue0,
+                                                        const GALGAS_location inAssociatedValue1,
+                                                        const GALGAS_bool inAssociatedValue2
                                                         COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16970,7 +16580,7 @@ class cEnumAssociatedValues_sliceTargetAST_varDeclaration : public cEnumAssociat
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_varDeclaration (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_sliceTargetAST_varDeclaration (const GALGAS_lstring inAssociatedValue0
                                                                COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -16986,7 +16596,7 @@ class cEnumAssociatedValues_sliceTargetAST_letDeclaration : public cEnumAssociat
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_letDeclaration (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_sliceTargetAST_letDeclaration (const GALGAS_lstring inAssociatedValue0
                                                                COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -17002,7 +16612,7 @@ class cEnumAssociatedValues_sliceTargetAST_lValue : public cEnumAssociatedValues
   public: const GALGAS_LValueAST mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_lValue (const GALGAS_LValueAST & inAssociatedValue0
+  public: cEnumAssociatedValues_sliceTargetAST_lValue (const GALGAS_LValueAST inAssociatedValue0
                                                        COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -17116,7 +16726,7 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_valueType : public cEnumAs
   public: const GALGAS_lstring mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_staticListPropertyTypeAST_valueType (const GALGAS_lstring & inAssociatedValue0
+  public: cEnumAssociatedValues_staticListPropertyTypeAST_valueType (const GALGAS_lstring inAssociatedValue0
                                                                      COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -17134,9 +16744,9 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_function : public cEnumAss
   public: const GALGAS_lstring mAssociatedValue2 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_staticListPropertyTypeAST_function (const GALGAS_mode & inAssociatedValue0,
-                                                                    const GALGAS_routineFormalArgumentListAST & inAssociatedValue1,
-                                                                    const GALGAS_lstring & inAssociatedValue2
+  public: cEnumAssociatedValues_staticListPropertyTypeAST_function (const GALGAS_mode inAssociatedValue0,
+                                                                    const GALGAS_routineFormalArgumentListAST inAssociatedValue1,
+                                                                    const GALGAS_lstring inAssociatedValue2
                                                                     COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,
@@ -20056,11 +19666,6 @@ class GALGAS_configurationDeclarationAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Default GALGAS constructor
   public: static GALGAS_configurationDeclarationAST constructor_default (LOCATION_ARGS) ;
 
-//--------------------------------- Embedded object pointer
- public: inline acStrongPtr_class * embeddedObjectPtr (void) const {
-   return (acStrongPtr_class *) mObjectPtr ;
- }
-  
 //--------------------------------- Constructor from pointer
   public: GALGAS_configurationDeclarationAST (const class cPtr_configurationDeclarationAST * inSourcePtr) ;
 
@@ -20810,7 +20415,7 @@ class cEnumAssociatedValues_interruptionPanicCode_code : public cEnumAssociatedV
   public: const GALGAS_lbigint mAssociatedValue0 ;
 
 //--- Constructor
-  public: cEnumAssociatedValues_interruptionPanicCode_code (const GALGAS_lbigint & inAssociatedValue0
+  public: cEnumAssociatedValues_interruptionPanicCode_code (const GALGAS_lbigint inAssociatedValue0
                                                             COMMA_LOCATION_ARGS) ;
 
   public: virtual void description (C_String & ioString,

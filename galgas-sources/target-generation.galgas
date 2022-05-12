@@ -100,27 +100,27 @@ proc generateTarget
   if [option omnibus_options.optimization1 value] then
     opt_optimizationOption = "O1"
     llc_optimizationOption = "O1"
-    optimizationOptionCount ++
+    optimizationOptionCount += 1
   end
   if [option omnibus_options.optimization2 value] then
     opt_optimizationOption = "O2"
     llc_optimizationOption = "O2"
-    optimizationOptionCount ++
+    optimizationOptionCount += 1
   end
   if [option omnibus_options.optimizationS value] then
     opt_optimizationOption = "Os"
     llc_optimizationOption = "O2"
-    optimizationOptionCount ++
+    optimizationOptionCount += 1
   end
   if [option omnibus_options.optimizationZ value] then
     opt_optimizationOption = "Oz"
     llc_optimizationOption = "O2"
-    optimizationOptionCount ++
+    optimizationOptionCount += 1
   end
   if [option omnibus_options.optimizationZ3 value] then
     opt_optimizationOption = "O3"
     llc_optimizationOption = "O3"
-    optimizationOptionCount ++
+    optimizationOptionCount += 1
   end
   if optimizationOptionCount > 1 then
     warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"

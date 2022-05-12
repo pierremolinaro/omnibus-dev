@@ -99,10 +99,9 @@ override method @sizeofExpressionAST analyzeExpression
   else
   #--- Analyze LValue
     [ioUniversalMap searchValuedObjectType !context:inContext !selfType:inSelfType !self.mLValue ?let type]
-    let resultTypeProxy = @unifiedTypeMap-entry.searchKey {
-      !inContext.mTypeMap
+    let resultTypeProxy = [inContext.mTypeMap searchKey
       !["u" + inContext.mTargetParameters.mPointerSize nowhere]
-    }
+    ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@sizeofInstructionIR.new {
@@ -132,11 +131,10 @@ override method @sizeofTypeAST analyzeExpression
   if [inRoutineAttributes guard] then
     error self.mTypeName : "sizeof () cannot be used in guard" : outResult
   else
-    let type = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
-    let resultTypeProxy = @unifiedTypeMap-entry.searchKey {
-      !inContext.mTypeMap
+    let type = [[inContext.mTypeMap searchKey !self.mTypeName] type]
+    let resultTypeProxy = [inContext.mTypeMap searchKey
       !["u" + inContext.mTargetParameters.mPointerSize nowhere]
-    }
+    ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@sizeofInstructionIR.new {!outResult!type}

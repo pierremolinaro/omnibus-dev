@@ -205,7 +205,7 @@ override method @ifInstructionIR llvmInstructionCode
   let labelTrue = "if." + ioGenerationAdds.mUniqueIndex + ".true"
   let labelFalse = "if." + ioGenerationAdds.mUniqueIndex + ".false"
   let labelEnd = "if." + ioGenerationAdds.mUniqueIndex + ".end"
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += "  br i1 " + self.mLLVMTestName + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 #--- True branch
   ioLLVMcode += labelTrue + ":\n"

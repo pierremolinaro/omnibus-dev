@@ -87,7 +87,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Get iterated element type
-  let type = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let type = [[inContext.mTypeMap searchKey !self.mTypeName] type]
   switch type.kind
   case boolean, void :
     error self.mTypeName : "an integer type is required here"
@@ -169,7 +169,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     [!?ioUniversalMap openOverrideForRepeatBlock]
   #--- Enter iteration variable name
     let enumeratedVarName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
-    ioTemporaries.mTemporaryIndex ++
+    ioTemporaries.mTemporaryIndex += 1
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if self.mVarName.string != "" then
      [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]

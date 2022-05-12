@@ -279,12 +279,12 @@ override method @staticListAST enterInContext
 #  @propertyGetterMap propertyGetterMap = {}
   var @stringset propertyNameSet = {}
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!self.mStaticListName)
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !omnibusElementTypeName ?let elementTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !omnibusElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
   for (propertyName kind) in self.mPropertyList do (propertyIndex)
     switch kind
     case valueType (@lstring propertyTypeName) :
-      let propertyType = [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !propertyTypeName} type]
+      let propertyType = [[ioContext.mTypeMap searchKey !propertyTypeName] type]
       if [propertyNameSet hasKey !propertyName] then
         error propertyName : "duplicated property name"
       else
@@ -306,14 +306,13 @@ override method @staticListAST enterInContext
       )
     #--- Signature
       routineTypedSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
-      let @unifiedTypeMap-entry returnTypeProxy = if returnTypeName.string == "" then
+      let @unifiedTypeMapEntry returnTypeProxy = if returnTypeName.string == "" then
         .null
       else
-        @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !returnTypeName}
+        [ioContext.mTypeMap searchKey !returnTypeName]
       end
     #--- Enter routine type in type map
       let propertyType = @omnibusType.new {
-#        !propertyGetterMap:{}
         !subscript:.noSubscript
         !attributes:.none
         !omnibusTypeDescriptionName:""
@@ -355,17 +354,13 @@ override method @staticListAST enterInContext
   [!?ioContext.mStaticListMap insertKey !self.mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
   let elementType = @omnibusType.new {
-#    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!self.mStaticListName)
     !kind:.structure {!propertyList:propertyList}
     !llvmBaseTypeName:llvmNameForStaticListElementType (!self.mStaticListName)
   }
-  [!?ioContext.mTypeMap insertType
-    !lkey:omnibusElementTypeName
-    !type:elementType
-  ]
+  [!?ioContext.mTypeMap insertType !omnibusElementTypeName !type:elementType]
 #-------------------------------------------------------------------- Enter static list values
   var @stringlist stringValueList = {}
   for (element *) in self.mValueList do
@@ -450,7 +445,6 @@ override method @staticListAST enterInContext
   ]
 #-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType.new {
-#    !propertyGetterMap:listTypePropertyMap
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!self.mStaticListName)
@@ -458,11 +452,11 @@ override method @staticListAST enterInContext
     !llvmBaseTypeName:llvmNameForStaticListType (!self.mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:omnibusNameForStaticListType (!self.mStaticListName)
+    !omnibusNameForStaticListType (!self.mStaticListName)
     !type:arrayType
   ]
 #-------------------------------------------------------------------- Enter list in constant map
-  let staticListType = @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !omnibusNameForStaticListType (!self.mStaticListName)}
+  let staticListType = [ioContext.mTypeMap searchKey !omnibusNameForStaticListType (!self.mStaticListName)]
   [!?ioContext.mGlobalConstantMap insertKey
     !self.mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
@@ -564,9 +558,9 @@ method @staticListInitializationMap generateLLVMForStaticLists
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @staticListIndirectRoutineIR : @abstractRoutineIR {
-  public var @unifiedTypeMap-entry mStaticListElementType
+  public var @unifiedTypeMapEntry mStaticListElementType
   public var @routineTypedSignature mFormalArgumentListForGeneration
-  public var @unifiedTypeMap-entry mReturnTypeProxy # .void if no return value
+  public var @unifiedTypeMapEntry mReturnTypeProxy # .void if no return value
   public var @uint mPropertyIndex
 }
 

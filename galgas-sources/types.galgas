@@ -5,11 +5,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @omnibusType {
-  public var @subscript subscript %selector
-  public var @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
-  public var @string omnibusTypeDescriptionName %selector # used for type checking and type display
-  public var @typeKind kind %selector
-  public var @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
+  public let @subscript subscript %selector
+  public let @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
+  public let @string omnibusTypeDescriptionName %selector # used for type checking and type display
+  public let @typeKind kind %selector
+  public let @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
 }
 
 #·······················································································································
@@ -49,7 +49,7 @@ enum @typeKind {
   case dynamicArrayType (@omnibusType elementType)
   case function (@mode mode
                  @routineTypedSignature signature
-                 @unifiedTypeMap-entry returnTypeProxy)
+                 @unifiedTypeMapEntry returnTypeProxy)
   default void
 }
 
@@ -208,14 +208,14 @@ method @omnibusType generateRetain
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if [self.kind isDynamicArrayType] then
     let tempLLVMVariable = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.retain." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds "
       ioLLVMcode += llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
       for (idx) in indexPath do
@@ -243,7 +243,7 @@ method @omnibusType generateInsulate
   if [self.kind isDynamicArrayType] then
     let loadedVar = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
     let insulatedVar = "%temp." + [inOmnibusName assemblerRepresentation] + ".insulated." + ioGenerationAdds.mUniqueIndex   
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + loadedVar + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @arc.insulate (" + llvmTypeName + " " + loadedVar + ")\n"
     ioLLVMcode += "  store " + llvmTypeName + " " + insulatedVar + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
@@ -251,7 +251,7 @@ method @omnibusType generateInsulate
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
       for (idx) in indexPath do
         ioLLVMcode += ", i32 " + idx
@@ -260,7 +260,7 @@ method @omnibusType generateInsulate
       let propertyTypeLLVMName = [propertyType llvmTypeName]
       let loadedVar = llvmVarName + ".loaded." + ioGenerationAdds.mUniqueIndex 
       let insulatedVar = llvmVarName + ".insulated." + ioGenerationAdds.mUniqueIndex 
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + loadedVar + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
       ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @arc.insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n" 
       ioLLVMcode += "  store " + propertyTypeLLVMName + " " + insulatedVar + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
@@ -279,14 +279,14 @@ method @omnibusType generateRelease
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if [self.kind isDynamicArrayType] then
     let tempLLVMVariable = "%temp." + [inOmnibusName assemblerRepresentation] + ".loaded." + ioGenerationAdds.mUniqueIndex   
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ") ;\n"
   else
     let arcAssignmentList = [self arcList !{}]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
       for (idx) in indexPath do
         ioLLVMcode += ", i32 " + idx
@@ -375,102 +375,11 @@ getter @omnibusType deinitNeeded -> @bool {
 
 #·······················································································································
 
-shared map @unifiedTypeMap %selectors {
-  public var @omnibusType type
-
-  insert insertType error message "the '%K' type is already declared in %L"
-  search searchKey error message "there is no '%K' type"
-}
-
-##·······················································································································
-#
-#list @locationlist {
-#  @location location
-#}
-##·······················································································································
-#
-#enum @internalMapEntry {
-#  case unsolved (@locationlist locationList)
-#  case solved (@omnibusType type)
-#}
-#
-##·······················································································································
-#
-#shared class @unifiedTypeMap2-proxy {
-#  @internalMapEntry node
-#}
-#
-##·······················································································································
-#
-#map @internalTypeMap %selectors {
-#  @unifiedTypeMap2-proxy entry
+#shared map @unifiedTypeMap %selectors {
+#  public var @omnibusType type
 #
 #  insert insertType error message "the '%K' type is already declared in %L"
 #  search searchKey error message "there is no '%K' type"
-#}
-#
-##·······················································································································
-#
-#struct @unifiedTypeMap2 {
-#  private @internalTypeMap mMap
-#}
-#
-##·······················································································································
-#
-#setter @unifiedTypeMap2 noteType ?let @lstring inKey {
-#  with inKey.string in !?self.mMap do
-#    switch entry.node
-#    case unsolved (locationList) :
-#      entry.node = .unsolved {!locationList: locationList + {!inKey.location}}
-#    case solved (*) :
-#    end
-#  else
-#    [!?self.mMap insertType !lkey: inKey !entry: .new {! .unsolved {!locationList: {!inKey.location}}}]
-#  end
-#}
-#
-##·······················································································································
-#
-#setter @unifiedTypeMap2 defineType ?let @lstring inKey ?let @omnibusType inType {
-#  with inKey.string in !?self.mMap do
-#    switch entry.node
-#    case unsolved (*) :
-#      entry.node = .solved {!type: inType}
-#    case solved (*) :
-#      error inKey : "type is already defined"
-#    end
-#  else
-#    [!?self.mMap insertType !lkey: inKey !entry: .new {!.solved {!type: inType}}]
-#  end
-#}
-#
-##·······················································································································
-#
-#method @unifiedTypeMap2 getType ?let @lstring inKey !@omnibusType outType {
-#  if let [self.mMap searchKey !key: inKey ?entry: let entry] then
-#    switch entry.node
-#    case unsolved (*) :
-#      error inKey : "undefined type" : outType
-#    case solved (type) :
-#      outType = type
-#    end
-#  else
-#    error inKey : "undefined type" : outType
-#  end
-#}
-#
-##·······················································································································
-#
-#method @unifiedTypeMap2 checkAllTypesAreDefined {
-#  for (* entry) in self.mMap do
-#    switch entry.node
-#    case unsolved (locationlist) :
-#      for (location) in locationlist do
-#        error location : "undefined type"
-#      end
-#    case solved (*) :
-#    end
-#  end
 #}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

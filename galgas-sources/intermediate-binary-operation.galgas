@@ -87,7 +87,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += " (" + llvmType + " " + [self.mLeft llvmName] + ", " + llvmType + " " + [self.mRight llvmName] + ")\n"
   ioLLVMcode += "  " + [self.mTarget llvmName] + ".hasOvf = extractvalue {" + llvmType + ", i1} " + [self.mTarget llvmName] + ".r, 1\n"
   let labelName = "label." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += "  br i1 " + [self.mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioLLVMcode += labelName + ".ovf:\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mLocation) assemblerRepresentation] + " ("
@@ -112,7 +112,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   let llvmType = [self.mOperandType llvmTypeName]
   ioLLVMcode += "  " + [self.mRight llvmName] + ".isZero = icmp eq " + llvmType + " " + [self.mRight llvmName] + ", 0\n"
   let labelName = "label." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += "  br i1 " + [self.mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
   ioLLVMcode += labelName + ".divideByZero:\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mLocation) assemblerRepresentation] + " ("

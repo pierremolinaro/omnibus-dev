@@ -399,7 +399,7 @@ private proc controlRegisterType
   !type:@omnibusType outRegisterType
   !bitCount:@uint outRegisterBitCount
 {
-  [ioContext.mTypeMap searchKey !lkey:inRegisterTypeName ?type:outRegisterType]
+  [ioContext.mTypeMap searchType !lkey:inRegisterTypeName ?type:outRegisterType]
   switch outRegisterType.kind
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount

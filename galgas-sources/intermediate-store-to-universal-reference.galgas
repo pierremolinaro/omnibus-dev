@@ -69,7 +69,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   case llvmStructureValue (* @sortedOperandIRList operands) :
     for (value index) in operands do
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
@@ -83,7 +83,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     let startLabel = "assign.start." + ioGenerationAdds.mUniqueIndex
     let loopLabel = "assign.loop." + ioGenerationAdds.mUniqueIndex
     let exitLabel = "assign.exit." + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  br label %" + startLabel + " ;--- Assign static array from repeated dynamic value\n"
     ioLLVMcode += startLabel + ":\n"
     ioLLVMcode += "  br label %" + loopLabel + "\n"
@@ -106,7 +106,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     let startLabel = "assign.start." + ioGenerationAdds.mUniqueIndex
     let loopLabel = "assign.loop." + ioGenerationAdds.mUniqueIndex
     let exitLabel = "assign.exit." + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  br label %" + startLabel + " ;--- Assign static array from repeated static value\n"
     ioLLVMcode += startLabel + ":\n"
     ioLLVMcode += "  br label %" + loopLabel + "\n"
@@ -123,7 +123,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += ";--- Assign static array from static value\n"
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]
@@ -133,7 +133,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += ";--- Assign static array from dynamic values\n"
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
-      ioGenerationAdds.mUniqueIndex ++
+      ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
       let valueType = [value llvmTypeName]

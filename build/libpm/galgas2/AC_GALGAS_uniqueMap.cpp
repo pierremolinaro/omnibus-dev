@@ -4,7 +4,7 @@
 //
 //  This file is part of libpm library                                                           
 //
-//  Copyright (C) 2008, ..., 2021 Pierre Molinaro.
+//  Copyright (C) 2008, ..., 2022 Pierre Molinaro.
 //
 //  e-mail : pierre@pcmolinaro.name
 //
@@ -32,24 +32,6 @@
 class cUniqueMapNode ;
 
 //----------------------------------------------------------------------------------------------------------------------
-
-class structDependanceEdge {
-  public: cUniqueMapNode * mSource ;
-  public: cUniqueMapNode * mTarget ;
-}  ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static bool operator == (const structDependanceEdge & inOperand1,
-                         const structDependanceEdge & inOperand2) {
-  return
-    (inOperand1.mSource == inOperand2.mSource)
-  &&
-    (inOperand1.mTarget == inOperand2.mTarget)
-  ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
 //
 //  c S h a r e d M a p R o o t                                                                  
 //
@@ -60,18 +42,7 @@ class cSharedUniqueMapRoot : public C_SharedObject {
   private: cUniqueMapNode * mRoot ;
   private: uint32_t mNodeCount ;
   protected: cSharedUniqueMapRoot * mOverridenMap ;
-  private: TC_UniqueArray <structDependanceEdge> mDependenceEdges ;
 
-//--- For automaton and block overrides
-  public: const cBranchOverrideTransformationDescriptor * mBranchBehaviourArray ;
-  public: uint32_t mBranchBehaviourArraySize ;
-  public: const cBranchOverrideCompatibilityDescriptor * mBranchCombinationArray ;
-  public: uint32_t mBranchCombinationArraySize ;
-  public: const char * mOverrideName ;
-  public: uint32_t mBeginBranchCount ;
-  public: uint32_t mEndBranchCount ;
-  public: uint32_t mStateArrayLevel ;
-  
 //--------------------------------- Accessors
   public: inline const cUniqueMapNode * root (void) const { return mRoot ; }
   public: inline uint32_t count (void) const { return mNodeCount ; }
@@ -86,17 +57,6 @@ class cSharedUniqueMapRoot : public C_SharedObject {
   private: cSharedUniqueMapRoot (const cSharedUniqueMapRoot &) ;
   private: cSharedUniqueMapRoot & operator = (const cSharedUniqueMapRoot &) ;
 
-//--------------------------------- EnterEdge
-  public: void enterEdge (cUniqueMapNode * inSource,
-                          cUniqueMapNode * inTarget) ;
-
-//--------------------------------- Edge graphviz representation
-  public: VIRTUAL_IN_DEBUG C_String edgeGraphvizRepresentation (void) const ;
-
-//--------------------------------- internalTopologicalSort
-  public: VIRTUAL_IN_DEBUG void internalTopologicalSort (GALGAS_lstringlist & outSortedNodeKeyList,
-                                                         GALGAS_lstringlist & outUnsortedNodeKeyList) const ;
-
 //--------------------------------- Unsolved Entry Count
   public: VIRTUAL_IN_DEBUG uint32_t unsolvedEntryCount (void) const ;
 
@@ -108,10 +68,7 @@ class cSharedUniqueMapRoot : public C_SharedObject {
 //--------------------------------- Insert
   protected: VIRTUAL_IN_DEBUG cUniqueMapNode * performInsert (capCollectionElement & inAttributes,
                                                               C_Compiler * inCompiler,
-                                                              const uint32_t inInitialState,
-                                                              const char * inInsertErrorMessage,
-                                                              const mapAutomatonIssueEnum inShadowBehaviour,
-                                                              const C_String & inShadowErrorMessage
+                                                              const char * inInsertErrorMessage
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Search
@@ -168,38 +125,6 @@ class cSharedUniqueMapRoot : public C_SharedObject {
 
   protected: VIRTUAL_IN_DEBUG void unsolvedEntryKeyList (GALGAS_lstringlist & ioList) const ;
 
-//--------------------------------- Check Map Automatons state
-  public: VIRTUAL_IN_DEBUG void checkAutomatonStates (const GALGAS_location & inErrorLocation,
-                                                      const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Begin override for block
-  public: VIRTUAL_IN_DEBUG void openOverride (const cBranchOverrideTransformationDescriptor inBranchBehaviourArray [],
-                                              const uint32_t inBranchBehaviourSize,
-                                              const cBranchOverrideCompatibilityDescriptor inBranchCombinationArray [],
-                                              const uint32_t inBranchCombinationSize,
-                                              const char * inBlockName,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- End override for block
-  public: VIRTUAL_IN_DEBUG void closeOverride (const GALGAS_location & inErrorLocation,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Branch Handling
-  public: VIRTUAL_IN_DEBUG void openBranch (C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void closeBranch (const GALGAS_location & inErrorLocation,
-                                             const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                             #ifndef DO_NOT_GENERATE_CHECKINGS
-                                               const uint32_t inAutomatonStateCount,
-                                             #endif
-                                             C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Check Map
   #ifndef DO_NOT_GENERATE_CHECKINGS
     private: VIRTUAL_IN_DEBUG void checkMap (LOCATION_ARGS) const ;
@@ -248,14 +173,9 @@ class cUniqueMapNode {
   public: capCollectionElement mAttributes ;
   private: cSharedEntry * mEntry ;
   public: TC_UniqueArray <GALGAS_location> mInvocationLocationArray ;
-//--- For state
-  public: uint32_t mCurrentState ;
-  public: cOverrideStateDescriptor * mStateArray ;
-  public: uint32_t mStateArraySize ;
 
 //--- Constructor
   public: cUniqueMapNode (const C_String & inKey,
-                          const uint32_t inInitialState,
                           capCollectionElement & inAttributes) ;
 
 //--- Solved ?
@@ -281,16 +201,7 @@ cSharedUniqueMapRoot::cSharedUniqueMapRoot (LOCATION_ARGS) :
 C_SharedObject (THERE),
 mRoot (NULL),
 mNodeCount (0),
-mOverridenMap (NULL),
-mDependenceEdges (),
-mBranchBehaviourArray (NULL),
-mBranchBehaviourArraySize (0),
-mBranchCombinationArray (NULL),
-mBranchCombinationArraySize (0),
-mOverrideName (NULL),
-mBeginBranchCount (0),
-mEndBranchCount (0),
-mStateArrayLevel (0) {
+mOverridenMap (NULL) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -303,7 +214,6 @@ cSharedUniqueMapRoot::~ cSharedUniqueMapRoot (void) {
 //----------------------------------------------------------------------------------------------------------------------
 
 cUniqueMapNode::cUniqueMapNode (const C_String & inKey,
-                                const uint32_t inInitialState,
                                 capCollectionElement & inAttributes) :
 mInfPtr (NULL),
 mSupPtr (NULL),
@@ -312,10 +222,7 @@ mKey (inKey),
 mDefinitionLocation (),
 mAttributes (inAttributes),
 mEntry (NULL),
-mInvocationLocationArray (),
-mCurrentState (inInitialState),
-mStateArray (NULL),
-mStateArraySize (0) {
+mInvocationLocationArray () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -323,7 +230,6 @@ mStateArraySize (0) {
 cUniqueMapNode::~cUniqueMapNode (void) {
   macroMyDelete (mInfPtr) ;
   macroMyDelete (mSupPtr) ;
-  macroMyDeletePODArray (mStateArray) ;
 //--- Detach Entry
   if (NULL != mEntry) {
     mEntry->mNode = NULL ;
@@ -370,27 +276,23 @@ cUniqueMapNode::~cUniqueMapNode (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-AC_GALGAS_uniqueMap::AC_GALGAS_uniqueMap (const mapAutomatonIssueEnum inShadowBehaviour,
-                                          const C_String & inShadowMessage) :
+AC_GALGAS_uniqueMap::AC_GALGAS_uniqueMap (void) :
 AC_GALGAS_root (),
-mSharedMap (NULL),
-mShadowBehaviour (inShadowBehaviour),
-mShadowMessage (inShadowMessage) {
+mSharedMap (NULL) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_uniqueMap::AC_GALGAS_uniqueMap (const AC_GALGAS_uniqueMap & inSource) :
 AC_GALGAS_root (),
-mSharedMap (NULL),
-mShadowBehaviour (inSource.mShadowBehaviour),
-mShadowMessage (inSource.mShadowMessage) {
+mSharedMap (NULL) {
   macroAssignSharedObject (mSharedMap, inSource.mSharedMap) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_uniqueMap & AC_GALGAS_uniqueMap::operator = (const AC_GALGAS_uniqueMap & inSource) {
+//  printf ("AFFECTATION\n") ;
   macroAssignSharedObject (mSharedMap, inSource.mSharedMap) ;
   return *this ;
 }
@@ -430,7 +332,7 @@ static void internalDescription (cUniqueMapNode * inNode,
     ioString << "\n" ;
     ioString.writeStringMultiple ("| ", inIndentation) ;
     ioString << "|-at " << cStringWithUnsigned (ioIdx)
-             << ": key '" << inNode->mKey << "', state " << cStringWithUnsigned (inNode->mCurrentState) ;
+             << ": key '" << inNode->mKey ;
     inNode->mAttributes.description (ioString, inIndentation + 1) ;
     ioIdx ++ ;
     internalDescription (inNode->mSupPtr, ioString, inIndentation, ioIdx) ;
@@ -593,20 +495,19 @@ static void rotateRight (cUniqueMapNode * & ioRootPtr) {
 
 static cUniqueMapNode * internalInsert (cUniqueMapNode * & ioRootPtr,
                                         const C_String & inKey,
-                                        const uint32_t inInitialState,
                                         capCollectionElement & inAttributes,
                                         bool & outEntryAlreadyExists,
                                         bool & ioExtension) {
   cUniqueMapNode * matchingEntry = NULL ;
   if (ioRootPtr == NULL) {
-    macroMyNew (ioRootPtr, cUniqueMapNode (inKey, inInitialState, inAttributes)) ;
+    macroMyNew (ioRootPtr, cUniqueMapNode (inKey, inAttributes)) ;
     ioExtension = true ;
     matchingEntry = ioRootPtr ;
   }else{
     macroValidPointer (ioRootPtr) ;
     const int32_t comparaison = ioRootPtr->mKey.compare (inKey) ;
     if (comparaison > 0) {
-      matchingEntry = internalInsert (ioRootPtr->mInfPtr, inKey, inInitialState, inAttributes, outEntryAlreadyExists, ioExtension) ;
+      matchingEntry = internalInsert (ioRootPtr->mInfPtr, inKey, inAttributes, outEntryAlreadyExists, ioExtension) ;
       if (ioExtension) {
         ioRootPtr->mBalance ++ ;
         if (ioRootPtr->mBalance == 0) {
@@ -620,7 +521,7 @@ static cUniqueMapNode * internalInsert (cUniqueMapNode * & ioRootPtr,
         }
       }
     }else if (comparaison < 0) {
-      matchingEntry = internalInsert (ioRootPtr->mSupPtr, inKey, inInitialState, inAttributes, outEntryAlreadyExists, ioExtension) ;
+      matchingEntry = internalInsert (ioRootPtr->mSupPtr, inKey, inAttributes, outEntryAlreadyExists, ioExtension) ;
       if (ioExtension) {
         ioRootPtr->mBalance-- ;
         if (ioRootPtr->mBalance == 0) {
@@ -650,10 +551,7 @@ static cUniqueMapNode * internalInsert (cUniqueMapNode * & ioRootPtr,
 
 cUniqueMapNode * cSharedUniqueMapRoot::performInsert (capCollectionElement & inAttributes,
                                                       C_Compiler * inCompiler,
-                                                      const uint32_t inInitialState,
-                                                      const char * inInsertErrorMessage,
-                                                      const mapAutomatonIssueEnum inShadowBehaviour,
-                                                      const C_String & inShadowMessage
+                                                      const char * inInsertErrorMessage
                                                       COMMA_LOCATION_ARGS) {
   cUniqueMapNode * result = NULL ;
 //--- If all attributes are built, perform insertion
@@ -664,37 +562,11 @@ cUniqueMapNode * cSharedUniqueMapRoot::performInsert (capCollectionElement & inA
   //--- Insert or replace
     bool extension = false ; // Unused here
     bool entryAlreadyExists = false ;
-    cUniqueMapNode * matchingEntry = internalInsert (mRoot, key, inInitialState, inAttributes, entryAlreadyExists, extension) ;
+    cUniqueMapNode * matchingEntry = internalInsert (mRoot, key, inAttributes, entryAlreadyExists, extension) ;
     if (! entryAlreadyExists) {
       result = matchingEntry ;
       matchingEntry->mDefinitionLocation = p->mProperty_lkey.mProperty_location ;
       mNodeCount ++ ;
-      switch (inShadowBehaviour) {
-      case kMapAutomatonNoIssue :
-        break ;
-      case kMapAutomatonIssueWarning :
-        matchingEntry = findEntryInMap (key, mOverridenMap) ;
-        if (NULL != matchingEntry) {
-        //--- Existing key
-          cMapElement * me = (cMapElement *) matchingEntry->mAttributes.ptr () ;
-          macroValidSharedObject (me, cMapElement) ;
-          const GALGAS_location lstring_existingKey_location = me->mProperty_lkey.mProperty_location ;
-        //--- Emit error message
-          inCompiler->semanticWarningWith_K_L_message (p->mProperty_lkey, inShadowMessage.cString (HERE), lstring_existingKey_location COMMA_THERE) ;
-        }
-        break ;
-      case kMapAutomatonIssueError :
-        matchingEntry = findEntryInMap (key, mOverridenMap) ;
-        if (NULL != matchingEntry) {
-        //--- Existing key
-          cMapElement * me = (cMapElement *) matchingEntry->mAttributes.ptr () ;
-          macroValidSharedObject (me, cMapElement) ;
-          const GALGAS_location lstring_existingKey_location = me->mProperty_lkey.mProperty_location ;
-        //--- Emit error message
-          inCompiler->semanticErrorWith_K_L_message (p->mProperty_lkey, inShadowMessage.cString (HERE), lstring_existingKey_location COMMA_THERE) ;
-        }
-        break ;
-      }
     }else{ // Error, entry already exists
     //--- Existing key
       cMapElement * me = (cMapElement *) matchingEntry->mAttributes.ptr () ;
@@ -715,212 +587,15 @@ cUniqueMapNode * cSharedUniqueMapRoot::performInsert (capCollectionElement & inA
 
 void AC_GALGAS_uniqueMap::insertInSharedMap (capCollectionElement & inAttributes,
                                              C_Compiler * inCompiler,
-                                             const uint32_t inInitialState,
-                                             const char * /* inInitialStateName */,
                                              const char * inInsertErrorMessage
                                              COMMA_LOCATION_ARGS) {
 //--- If all attributes are built, perform insertion
   if (isValid ()) {
     /* cUniqueMapNode * node = */ mSharedMap->performInsert (inAttributes,
                                                              inCompiler,
-                                                             inInitialState,
-                                                             inInsertErrorMessage,
-                                                             mShadowBehaviour,
-                                                             mShadowMessage
+                                                             inInsertErrorMessage
                                                              COMMA_THERE) ;
   }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark Modifier enterEdge
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::enterEdge (cUniqueMapNode * inSource,
-                                      cUniqueMapNode * inTarget) {
-  const structDependanceEdge e = {inSource, inTarget} ;
-  mDependenceEdges.appendObjectIfUnique (e) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::setter_enterEdge (const GALGAS_lstring & inSource,
-                                            const GALGAS_lstring & inTarget
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inSource.isValid () && inTarget.isValid ()) {
-    cUniqueMapNode * source = mSharedMap->performInsertEntry (inSource.mProperty_string.stringValue (), inSource.mProperty_location) ;
-    cUniqueMapNode * target = mSharedMap->performInsertEntry (inTarget.mProperty_string.stringValue (), inTarget.mProperty_location) ;
-    mSharedMap->enterEdge (source, target) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark Modifier enterEdge
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-class cTopologicalSortElement {
-  public: uint32_t mDependencyCount ;
-  public: TC_Array <int32_t> mDependenceArray ; // Node indexes of nodes after current node
-  public: int32_t mExplorationLink ;
-  public: GALGAS_lstring mKey ;
-
-//--- Constructor
-  public: cTopologicalSortElement (void) ;
-} ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-cTopologicalSortElement::cTopologicalSortElement (void) :
-mDependencyCount (0),
-mDependenceArray (),
-mExplorationLink (-1),
-mKey () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void enterNodes (const cUniqueMapNode * inNode,
-                        TC_UniqueArray <cTopologicalSortElement> & ioArray,
-                        TC_UniqueArray <const cUniqueMapNode *> & ioNodeArray) {
-  if (NULL != inNode) {
-    enterNodes (inNode->mInfPtr, ioArray, ioNodeArray) ;
-    ioNodeArray.appendObject (inNode) ;
-    const int32_t idx = ioArray.count () ;
-    ioArray.appendObject (cTopologicalSortElement ()) ;
-    GALGAS_lstring lkey ;
-    lkey.mProperty_string = inNode->mKey ;
-    lkey.mProperty_location = inNode->mDefinitionLocation ;
-    ioArray (idx COMMA_HERE).mKey = lkey ;
-    enterNodes (inNode->mSupPtr, ioArray, ioNodeArray) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::internalTopologicalSort (GALGAS_lstringlist & outSortedNodeKeyList,
-                                                    GALGAS_lstringlist & outUnsortedNodeKeyList) const {
-//--- Enter nodes
-  TC_UniqueArray <const cUniqueMapNode *> nodeArray ;
-  TC_UniqueArray <cTopologicalSortElement> array ;
-  enterNodes (mRoot, array, nodeArray) ;
-//--- Enter arcs
-  for (int32_t i=0 ; i<mDependenceEdges.count () ; i++) {
-    const int32_t sourceNodeID = nodeArray.indexOfFirstObjectEqualTo (mDependenceEdges (i COMMA_HERE).mSource) ;
-    const int32_t targetNodeID = nodeArray.indexOfFirstObjectEqualTo (mDependenceEdges (i COMMA_HERE).mTarget) ;
-    cTopologicalSortElement & source = array (sourceNodeID COMMA_HERE) ;
-    cTopologicalSortElement & target = array (targetNodeID COMMA_HERE) ;
-    source.mDependencyCount ++ ;
-    target.mDependenceArray.appendObject (sourceNodeID) ;
-  }
-//--- Make exploration link
-  for (int32_t i=1 ; i<array.count () ; i++) {
-    array (i-1 COMMA_HERE).mExplorationLink = i ;
-  }
-  int32_t theRoot = (mNodeCount > 0) ? 0 : -1 ;
-//--- Display
- /*  printf ("*** Working array:\n") ;
-    for (int32_t i=0 ; i<array.count () ; i++) {
-      cTopologicalSortElement & entry = array (i COMMA_HERE) ;
-      printf ("#%d '%s' dep %d :", i, entry.mKey.getter_string (HERE).stringValue ().cString (HERE), entry.mDependencyCount) ;
-      for (int32_t j=0 ; j<entry.mDependenceArray.count () ; j++) {
-        printf (" %d", entry.mDependenceArray (j COMMA_HERE)) ;
-      }
-      printf ("\n") ;
-    } */
-//--- Loop for accumulating sorted nodes
-  outSortedNodeKeyList = GALGAS_lstringlist::constructor_emptyList (HERE) ;
-  bool loop = true ;
-  while (loop) {
-    loop = false ;
-    int32_t p = theRoot ;
-    theRoot = -1 ;
-    while (p >= 0) {
-      cTopologicalSortElement & entry = array (p COMMA_HERE) ;
-      const int32_t next = entry.mExplorationLink ;
-      if (0 == entry.mDependencyCount) {
-        loop = true ;
-        for (int32_t i=0 ; i<entry.mDependenceArray.count () ; i++) {
-          array (entry.mDependenceArray (i COMMA_HERE) COMMA_HERE).mDependencyCount -- ;
-        }
-        outSortedNodeKeyList.addAssign_operation (entry.mKey COMMA_HERE) ;
-      }else{
-        entry.mExplorationLink = theRoot ;
-        theRoot = p ;
-      }
-      p = next ;
-    }
-  }
-//--- Add unsorted nodes
-  outUnsortedNodeKeyList = GALGAS_lstringlist::constructor_emptyList (HERE) ;
-  int32_t p = theRoot ;
-  while (p >= 0) {
-    cTopologicalSortElement & entry = array (p COMMA_HERE) ;
-    outUnsortedNodeKeyList.addAssign_operation (entry.mKey COMMA_HERE) ;
-    p = entry.mExplorationLink ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::method_topologicalSort (GALGAS_lstringlist & outSortedKeys,
-                                                  GALGAS_lstringlist & outUnsortedKeys,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  outSortedKeys.drop () ;
-  outUnsortedKeys.drop () ;
-  if (isValid ()) {
-    uint32_t undefinedNodeCount = mSharedMap->unsolvedEntryCount () ;
-    if (0 != undefinedNodeCount) {
-      C_String s ;
-      s << "Cannot apply graph topologicalSort: there " ;
-      if (undefinedNodeCount > 1) {
-        s << "are " << cStringWithUnsigned (undefinedNodeCount) << " undefined nodes" ;
-      }else{
-        s << "is 1 undefined node" ;
-      }
-      inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-    }else{
-      mSharedMap->internalTopologicalSort (outSortedKeys, outUnsortedKeys) ;
-    }
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark Reader edgeGraphvizRepresentation
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-C_String cSharedUniqueMapRoot::edgeGraphvizRepresentation (void) const {
-  C_String s ;
-  s << "digraph G {\n" ;
-  for (int32_t i=0 ; i<mDependenceEdges.count () ; i++) {
-    const structDependanceEdge edge = mDependenceEdges (i COMMA_HERE) ;
-    s << "  \"" << edge.mSource->mKey
-      << "\" -> \"" << edge.mTarget->mKey
-      << "\" ;\n" ;
-  }  
-  s << "}\n" ;
-  return s ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_string AC_GALGAS_uniqueMap::getter_edgeGraphvizRepresentation (UNUSED_LOCATION_ARGS) const {
-  GALGAS_string result ;
-  if (isValid ()) {
-    result = GALGAS_string (mSharedMap->edgeGraphvizRepresentation ()) ;
-  }
-  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1210,31 +885,6 @@ static void emitErrorMessageForKey (const GALGAS_lstring & inKey,
 
 //----------------------------------------------------------------------------------------------------------------------
 
-static C_String buildIssueMessage (const char * inIssueMessage,
-                                   const C_String & inKey) {
-  C_String result ;
-  const C_String issueMessage (inIssueMessage) ;
-  bool gotPercent = false ;
-  for (int32_t i=0 ; i<issueMessage.length () ; i++) {
-    const utf32 c = issueMessage (i COMMA_HERE) ;
-    if (gotPercent) {
-      if (UNICODE_VALUE (c) == 'K') {
-        result << inKey ;
-      }else{
-        result.appendUnicodeCharacter (c COMMA_HERE) ;
-      }
-      gotPercent = false ;
-    }else if (UNICODE_VALUE (c) == '%') {
-      gotPercent = true ;
-    }else{
-      result.appendUnicodeCharacter (c COMMA_HERE) ;
-    }
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 static void findNearestKeyForNode (const C_String & inKey,
                                    const cUniqueMapNode * inCurrentNode,
                                    uint32_t & ioBestDistance,
@@ -1306,55 +956,6 @@ const cCollectionElement * AC_GALGAS_uniqueMap::performSearch (const GALGAS_lstr
     const cUniqueMapNode * node = mSharedMap->performSearch (inKey, inCompiler, inSearchErrorMessage COMMA_THERE) ;
     if (NULL != node) {
       result = node->mAttributes.ptr () ;
-    }
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-const cCollectionElement * AC_GALGAS_uniqueMap::performSearch (const GALGAS_lstring & inKey,
-                                                               C_Compiler * inCompiler,
-                                                               const uint32_t inActionIndex,
-                                                               const cMapAutomatonTransition inTransitionArray [],
-                                                               const uint32_t inAutomatonActionCount,
-                                                               #ifndef DO_NOT_GENERATE_CHECKINGS
-                                                                 const uint32_t inAutomatonStateCount,
-                                                               #endif
-                                                               const char * inSearchErrorMessage
-                                                               COMMA_LOCATION_ARGS) {
-  const cCollectionElement * result = NULL ;
-  if (isValid () && inKey.isValid ()) {
-    cUniqueMapNode * node = mSharedMap->performSearch (inKey, inCompiler, inSearchErrorMessage COMMA_THERE) ;
-    if (NULL != node) {
-      result = node->mAttributes.ptr () ;
-    //--- Perform transition
-      MF_Assert (node->mCurrentState < inAutomatonStateCount, "node->mCurrentState (%lld) >= inAutomatonStateCount (%lld)", (int64_t) node->mCurrentState, (int64_t) inAutomatonStateCount) ;
-      MF_Assert (inActionIndex < inAutomatonActionCount, "inActionIndex (%lld) >= inAutomatonActionCount (%lld)", (int64_t) inActionIndex, (int64_t) inAutomatonActionCount) ;
-      const cMapAutomatonTransition & transition = inTransitionArray [node->mCurrentState * inAutomatonActionCount + inActionIndex] ;
-      // printf ("NODE '%s' : %d -> %d\n", inKey.getter_string (HERE).stringValue ().cString (HERE), node->mCurrentState, transition.mTargetStateIndex) ;
-      node->mCurrentState = transition.mTargetStateIndex ;
-      MF_Assert (node->mCurrentState < inAutomatonStateCount, "node->mCurrentState (%lld) >= inAutomatonStateCount (%lld)", (int64_t) node->mCurrentState, (int64_t) inAutomatonStateCount) ;
-    //--- Issue ?
-      switch (transition.mIssue) {
-      case kMapAutomatonNoIssue :
-        break ;
-      case kMapAutomatonIssueWarning : {
-        macroValidSharedObject (node->mAttributes.ptr (), cMapElement) ;
-        const GALGAS_location loc = inKey.mProperty_location ;
-        const C_String warningMessage = buildIssueMessage (transition.mIssueMessage, inKey.mProperty_string.stringValue ()) ;
-        inCompiler->semanticWarningAtLocation (loc, warningMessage COMMA_THERE) ;
-        }
-        break ;
-      case kMapAutomatonIssueError : {
-        macroValidSharedObject (node->mAttributes.ptr (), cMapElement) ;
-        const GALGAS_location loc = inKey.mProperty_location ;
-        const C_String errorMessage = buildIssueMessage (transition.mIssueMessage, inKey.mProperty_string.stringValue ()) ;
-        inCompiler->semanticErrorAtLocation (loc, errorMessage, TC_Array <C_FixItDescription> () COMMA_THERE) ;
-        result = NULL ; // All output arguments will not be built
-        }
-        break ;
-      }
     }
   }
   return result ;
@@ -1518,463 +1119,6 @@ typeComparisonResult AC_GALGAS_uniqueMap::objectCompare (const AC_GALGAS_uniqueM
     result = mSharedMap->mapCompare (inOperand.mSharedMap) ;
   }
   return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark Open Override
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void recursiveInitializeStateArray (cUniqueMapNode * inNode,
-                                           const uint32_t inIndex) {
-  if (NULL != inNode) {
-    // printf ("node %p, inIndex %u, inNode->mStateArray %p, key '%s'\n", inNode, inIndex, inNode->mStateArray, inNode->mKey.cString (HERE)) ;
-    recursiveInitializeStateArray (inNode->mInfPtr, inIndex) ;
-    if (inNode->mStateArraySize <= inIndex) {
-      inNode->mStateArraySize = inIndex + 1 ;
-      macroMyReallocPODArray (inNode->mStateArray, cOverrideStateDescriptor, inNode->mStateArraySize) ;
-    }
-    inNode->mStateArray [inIndex].mInitialStateIndex = inNode->mCurrentState ;
-    inNode->mStateArray [inIndex].mResultingStateIndex = inNode->mCurrentState ;
-    recursiveInitializeStateArray (inNode->mSupPtr, inIndex) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::openOverride (const cBranchOverrideTransformationDescriptor inBranchBehaviourArray [],
-                                         const uint32_t inBranchBehaviourArraySize,
-                                         const cBranchOverrideCompatibilityDescriptor inBranchCombinationArray [],
-                                         const uint32_t inBranchCombinationArraySize,
-                                         const char * inOverrideName,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
-  // printf ("-------------------------- openOverride\n") ;
-  if (NULL != mOverrideName) {
-    C_String m ;
-    m << "Illegal invocation of 'beginOverrideForMap"
-      << C_String (inOverrideName).stringByCapitalizingFirstCharacter ()
-      << "': the '"
-      << mOverrideName
-      << "' override is still running" ;
-    inCompiler->onTheFlySemanticError (m COMMA_THERE) ;
-  }
-  mBranchBehaviourArray = inBranchBehaviourArray ;
-  mBranchBehaviourArraySize = inBranchBehaviourArraySize ;
-  mBranchCombinationArray = inBranchCombinationArray ;
-  mBranchCombinationArraySize = inBranchCombinationArraySize ;
-  mOverrideName = inOverrideName ;
-  mBeginBranchCount = 0 ;
-  mEndBranchCount = 0 ;
-//--- Increment level of all overriden maps
-  cSharedUniqueMapRoot * currentMap = this ;
-  while (currentMap != NULL) {
-    macroValidSharedObject (currentMap, cSharedUniqueMapRoot) ;
-    recursiveInitializeStateArray (currentMap->mRoot, currentMap->mStateArrayLevel) ;
-    currentMap->mStateArrayLevel ++ ;
-    currentMap = currentMap->mOverridenMap ;
-  }
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    checkMap (HERE) ;
-  #endif
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::openOverride (const cBranchOverrideTransformationDescriptor inBranchBehaviourArray [],
-                                        const uint32_t inBranchBehaviourSize,
-                                        const cBranchOverrideCompatibilityDescriptor inBranchCombinationArray [],
-                                        const uint32_t inBranchCombinationSize,
-                                        const char * inBlockName,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    mSharedMap->openOverride (inBranchBehaviourArray,
-                              inBranchBehaviourSize,
-                              inBranchCombinationArray,
-                              inBranchCombinationSize,
-                              inBlockName,
-                              inCompiler
-                              COMMA_THERE) ;
-    cSharedUniqueMapRoot * newRoot = NULL ;
-    macroMyNew (newRoot, cSharedUniqueMapRoot (THERE)) ;
-    macroAssignSharedObject (newRoot->mOverridenMap, mSharedMap) ;
-    macroAssignSharedObject (mSharedMap, newRoot) ;
-    macroDetachSharedObject (newRoot) ;
-    #ifndef DO_NOT_GENERATE_CHECKINGS
-      mSharedMap->checkMap (HERE) ;
-    #endif
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark map Open Branch
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void recursiveRestoreInitialState (cUniqueMapNode * inNode,
-                                          const uint32_t inIndex) {
-  if (NULL != inNode) {
-    recursiveRestoreInitialState (inNode->mInfPtr, inIndex) ;
-    MF_Assert (inIndex < inNode->mStateArraySize, "inIndex %lld >= inNode->mStateArraySize %lld", inIndex, inNode->mStateArraySize) ;
-    inNode->mCurrentState = inNode->mStateArray [inIndex].mInitialStateIndex ;
-    // printf ("OPEN BRANCH '%s' -> current state %u\n", inNode->mKey.cString (HERE), inNode->mCurrentState) ;
-    recursiveRestoreInitialState (inNode->mSupPtr, inIndex) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::openBranch (C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) {
-  // printf ("-------------------------- openBranch\n") ;
-  if (NULL == mOverridenMap) {
-    C_String m ;
-    m << "Illegal invocation of 'openBranch' modifier: no override" ;
-    inCompiler->onTheFlySemanticError (m COMMA_THERE) ;
-  }else if (mOverridenMap->mBeginBranchCount != mOverridenMap->mEndBranchCount) {
-    C_String m ;
-    m << "Illegal invocation of 'openBranch' modifier: openBranch / closeBranch invocations should be balanced" ;
-    inCompiler->onTheFlySemanticError (m COMMA_THERE) ;
-  }else{
-    macroValidPointer (mOverridenMap) ;
-    mOverridenMap->mBeginBranchCount ++ ;
-    if (mOverridenMap->mBeginBranchCount > 0) {
-      cSharedUniqueMapRoot * currentMap = mOverridenMap ; // Start at first overriden map
-      while (NULL != currentMap) {
-        macroValidSharedObject (currentMap, cSharedUniqueMapRoot) ;
-        recursiveRestoreInitialState (currentMap->mRoot, currentMap->mStateArrayLevel - 1) ;
-        currentMap = currentMap->mOverridenMap ;
-      }
-    }
-    #ifndef DO_NOT_GENERATE_CHECKINGS
-      checkMap (HERE) ;
-    #endif
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::setter_openBranch (C_Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    mSharedMap->openBranch (inCompiler COMMA_THERE) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark map End Branch
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void printIssueMessage (C_Compiler * inCompiler,
-                               const C_String & inKey,
-                               const mapAutomatonIssueEnum inIssue,
-                               const char * inIssueMessage,
-                               const GALGAS_location & inIssueLocation
-                               COMMA_LOCATION_ARGS) {
-  switch (inIssue) {
-    case kMapAutomatonIssueWarning : {
-      const C_String warningMessage = buildIssueMessage (inIssueMessage, inKey) ;
-      inCompiler->semanticWarningAtLocation (inIssueLocation, warningMessage COMMA_THERE) ;
-      }
-      break ;
-    case kMapAutomatonIssueError : {
-      const C_String errorMessage = buildIssueMessage (inIssueMessage, inKey) ;
-      inCompiler->semanticErrorAtLocation (inIssueLocation, errorMessage, TC_Array <C_FixItDescription> () COMMA_THERE) ;
-      }
-      break ;
-    case kMapAutomatonNoIssue : break ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void recursiveCheckBranchTransition (C_Compiler * inCompiler,
-                                            const GALGAS_location & inIssueLocation,
-                                            cUniqueMapNode * inNode,
-                                            const cBranchOverrideTransformationDescriptor inBranchBehaviourArray [],
-                                            const uint32_t inBranchBehaviourArraySize,
-                                            const cBranchOverrideCompatibilityDescriptor inBranchCombinationArray [],
-                                            const uint32_t inBranchCombinationArraySize,
-                                            #ifndef DO_NOT_GENERATE_CHECKINGS
-                                              const uint32_t inAutomatonStateCount,
-                                            #endif
-                                            const uint32_t inIndex,
-                                            const bool inCheckBranchCompatibility
-                                            COMMA_LOCATION_ARGS) {
-  if (NULL != inNode) {
-    recursiveCheckBranchTransition (inCompiler, inIssueLocation, inNode->mInfPtr,
-                                    inBranchBehaviourArray, inBranchBehaviourArraySize,
-                                    inBranchCombinationArray, inBranchCombinationArraySize,
-                                    #ifndef DO_NOT_GENERATE_CHECKINGS
-                                      inAutomatonStateCount,
-                                    #endif
-                                    inIndex, inCheckBranchCompatibility COMMA_THERE) ;
-    recursiveCheckBranchTransition (inCompiler, inIssueLocation, inNode->mSupPtr,
-                                    inBranchBehaviourArray, inBranchBehaviourArraySize,
-                                    inBranchCombinationArray, inBranchCombinationArraySize,
-                                    #ifndef DO_NOT_GENERATE_CHECKINGS
-                                      inAutomatonStateCount,
-                                    #endif
-                                    inIndex, inCheckBranchCompatibility COMMA_THERE) ;
-    MF_Assert (inIndex < inNode->mStateArraySize, "inIndex %lld >= inNode->mStateArraySize %lld", inIndex, inNode->mStateArraySize) ;
-    const uint32_t previousResultingState = inNode->mStateArray [inIndex].mResultingStateIndex ;
-  //--- Check branch behaviour
-    const uint32_t initialState = inNode->mStateArray [inIndex].mInitialStateIndex ;
-    MF_Assert (initialState < inAutomatonStateCount, "initialState (%lld) >= inAutomatonStateCount (%lld)", (int64_t) initialState, (int64_t) inAutomatonStateCount) ;
-    uint32_t resultingCandidateState = inNode->mCurrentState ;
-    if (initialState != resultingCandidateState) {
-      MF_Assert (resultingCandidateState < inAutomatonStateCount, "resultingCandidateState (%lld) >= inAutomatonStateCount (%lld)", (int64_t) resultingCandidateState, (int64_t) inAutomatonStateCount) ;
-      inNode->mStateArray [inIndex].mResultingStateIndex = resultingCandidateState ;
-      bool foundBehaviour = false ;
-      uint32_t behaviourIndex = 0 ;
-      while ((! foundBehaviour) && (behaviourIndex < inBranchBehaviourArraySize)) {
-        foundBehaviour = (inBranchBehaviourArray [behaviourIndex].mFirstStateIndex == initialState)
-                      && (inBranchBehaviourArray [behaviourIndex].mLastStateIndex == resultingCandidateState) ;
-        if (foundBehaviour) {
-          resultingCandidateState = inBranchBehaviourArray [behaviourIndex].mResultingStateIndex  ;
-          //const uint32_t actualResultCandidateStateIndex = inBranchBehaviourArray [behaviourIndex].mResultingStateIndex  ;
- //         inNode->mStateArray [inIndex].mResultingStateIndex = actualResultCandidateStateIndex  ;
-          // printf (" resulting state %u\n", actualResultCandidateStateIndex) ;
-          //printf ("CLOSE BRANCH %d '%s': %u:%u -> %u (previous %u)\n", inCheckBranchCompatibility, inNode->mKey.cString (HERE), initialState, resultingCandidateState, actualResultCandidateStateIndex, previousResultingState) ;
-          printIssueMessage (inCompiler, inNode->mKey,
-                             inBranchBehaviourArray [behaviourIndex].mIssue, inBranchBehaviourArray [behaviourIndex].mIssueMessage,
-                             inIssueLocation COMMA_THERE) ;
-        }
-        behaviourIndex ++ ;
-      }
-      MF_Assert (foundBehaviour, "inBranchBehaviourArray for %lld %lld not found", initialState, resultingCandidateState) ;
-    }
-  //---
-    MF_Assert (previousResultingState < inAutomatonStateCount, "previousResultingState (%lld) >= inAutomatonStateCount (%lld)", (int64_t) previousResultingState, (int64_t) inAutomatonStateCount) ;
-    // printf ("recursiveCheckBranchTransition '%s' : initialState %u, previousResultingState %u resultingCandidateState %u\n", inNode->mKey.cString (HERE), initialState, previousResultingState, resultingCandidateState) ;
-    if (inCheckBranchCompatibility && (previousResultingState != resultingCandidateState)) {
-       bool foundCompatibility = false ;
-       uint32_t compatibilityIndex = 0 ;
-       while ((! foundCompatibility) && (compatibilityIndex < inBranchCombinationArraySize)) {
-         foundCompatibility = (inBranchCombinationArray [compatibilityIndex].mFirstCandidateStateIndex == previousResultingState)
-                           && (inBranchCombinationArray [compatibilityIndex].mSecondCandidateStateIndex == resultingCandidateState) ;
-         if (foundCompatibility) {
-           // printf ("MERGE '%s': %u:%u ->%u\n", inNode->mKey.cString (HERE), previousResultingState, resultingCandidateState, inBranchCombinationArray [compatibilityIndex].mResultingStateIndex) ;
-           inNode->mStateArray [inIndex].mResultingStateIndex = inBranchCombinationArray [compatibilityIndex].mResultingStateIndex ;
-           printIssueMessage (inCompiler, inNode->mKey,
-                              inBranchCombinationArray [compatibilityIndex].mIssue, inBranchCombinationArray [compatibilityIndex].mIssueMessage,
-                              inIssueLocation COMMA_THERE) ;
-         }
-         compatibilityIndex ++ ;
-       }
-       MF_Assert (foundCompatibility, "inBranchBehaviourArray for %lld %lld not found", previousResultingState, resultingCandidateState) ;
-     }
-  //---
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::closeBranch (const GALGAS_location & inErrorLocation,
-                                        const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                        #ifndef DO_NOT_GENERATE_CHECKINGS
-                                          const uint32_t inAutomatonStateCount,
-                                        #endif
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-  // printf ("-------------------------- closeBranch\n") ;
-  if (NULL == mOverridenMap) {
-    C_String m ;
-    m << "Illegal invocation of 'closeBranch' modifier: no override" ;
-    inCompiler->onTheFlySemanticError (m COMMA_THERE) ;
-  }else{
-    macroValidSharedObject (mOverridenMap, cSharedUniqueMapRoot) ;
-    mOverridenMap->mEndBranchCount ++ ;
-    if (mOverridenMap->mBeginBranchCount != mOverridenMap->mEndBranchCount) {
-      C_String m ;
-      m << "Illegal invocation of 'closeBranch' modifier: openBranch / closeBranch invocations should be balanced" ;
-      inCompiler->onTheFlySemanticError (m COMMA_THERE) ;
-    }else{
-      checkAutomatonStates (inErrorLocation, inAutomatonFinalIssueArray, inCompiler COMMA_THERE) ;
-    }
-  //--- For all overriden maps, check variables transitions
-    cSharedUniqueMapRoot * currentMap = mOverridenMap ;
-    while (NULL != currentMap) {
-      macroValidSharedObject (currentMap, cSharedUniqueMapRoot) ;
-      MF_Assert (currentMap->mStateArrayLevel > 0, "currentMap->mStateArrayLevel == 0", 0, 0) ;
-      recursiveCheckBranchTransition (inCompiler, inErrorLocation, currentMap->mRoot,
-                                      mOverridenMap->mBranchBehaviourArray,
-                                      mOverridenMap->mBranchBehaviourArraySize,
-                                      mOverridenMap->mBranchCombinationArray,
-                                      mOverridenMap->mBranchCombinationArraySize,
-                                      #ifndef DO_NOT_GENERATE_CHECKINGS
-                                        inAutomatonStateCount,
-                                      #endif
-                                      currentMap->mStateArrayLevel - 1,
-                                      mOverridenMap->mEndBranchCount > 1
-                                      COMMA_THERE) ;
-      currentMap = currentMap->mOverridenMap ;
-    }
-  //--- Remove all entries of first level
-    macroMyDelete (mRoot) ;
-    mNodeCount = 0 ;
-    #ifndef DO_NOT_GENERATE_CHECKINGS
-      checkMap (HERE) ;
-    #endif
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::closeBranch (const GALGAS_location & inErrorLocation,
-                                       const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                       #ifndef DO_NOT_GENERATE_CHECKINGS
-                                         const uint32_t inAutomatonStateCount,
-                                       #endif
-                                       C_Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    mSharedMap->closeBranch (inErrorLocation,
-                             inAutomatonFinalIssueArray,
-                             #ifndef DO_NOT_GENERATE_CHECKINGS
-                               inAutomatonStateCount,
-                             #endif
-                             inCompiler COMMA_THERE) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark map End Override
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void recursiveSetFinalState (cUniqueMapNode * inNode,
-                                    const uint32_t inIndex) {
-  if (NULL != inNode) {
-    recursiveSetFinalState (inNode->mInfPtr, inIndex) ;
-    MF_Assert (inIndex < inNode->mStateArraySize, "inIndex %lld >= inNode->mStateArraySize %lld", inIndex, inNode->mStateArraySize) ;
-    inNode->mCurrentState = inNode->mStateArray [inIndex].mResultingStateIndex ;
-    recursiveSetFinalState (inNode->mSupPtr, inIndex) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::closeOverride (const GALGAS_location & inErrorLocation,
-                                          C_Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  // printf ("-------------------------- closeOverride\n") ;
-  if (NULL != mOverrideName) {
-    C_String m ;
-    m << "Illegal invocation of 'closeOverride' modifier: the '"
-      << mOverrideName
-      << "' override is still running" ;
-    inCompiler->semanticErrorAtLocation (inErrorLocation, m, TC_Array <C_FixItDescription> () COMMA_THERE) ;
-  }else if (mOverridenMap->mBeginBranchCount != mOverridenMap->mEndBranchCount) {
-    C_String m ;
-    m << "Illegal invocation of 'closeOverride' modifier: openBranch / closeBranch invocations should be balanced" ;
-    inCompiler->semanticErrorAtLocation (inErrorLocation, m, TC_Array <C_FixItDescription> () COMMA_THERE) ;
-  }
-//--- Decrement level of overriden maps
-  macroValidSharedObject (mOverridenMap, cSharedUniqueMapRoot) ;
-  mOverridenMap->mOverrideName = NULL ;
-  cSharedUniqueMapRoot * currentMap = mOverridenMap ;
-  while (NULL != currentMap) {
-    macroValidSharedObject (currentMap, cSharedUniqueMapRoot) ;
-    MF_Assert (currentMap->mStateArrayLevel > 0, "currentMap->mStateArrayLevel == 0", 0, 0) ;
-    currentMap->mStateArrayLevel -- ;
-    recursiveSetFinalState (currentMap->mRoot, currentMap->mStateArrayLevel) ;
-    currentMap = currentMap->mOverridenMap ;
-  }
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    checkMap (HERE) ;
-  #endif
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::setter_closeOverride (const GALGAS_location & inErrorLocation,
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    mSharedMap->closeOverride (inErrorLocation, inCompiler COMMA_THERE) ;
-    macroValidSharedObject (mSharedMap->mOverridenMap, cSharedUniqueMapRoot) ;
-    cSharedUniqueMapRoot * p = mSharedMap->mOverridenMap ;
-    macroAssignSharedObject (mSharedMap, p) ;
-    macroValidSharedObject (mSharedMap, cSharedUniqueMapRoot) ;
-    #ifndef DO_NOT_GENERATE_CHECKINGS
-      mSharedMap->checkMap (HERE) ;
-    #endif
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-#ifdef PRAGMA_MARK_ALLOWED
-  #pragma mark map checkAutomatonStates
-#endif
-
-//----------------------------------------------------------------------------------------------------------------------
-
-static void recursiveCheckAutomatonStates (const cUniqueMapNode * inNode,
-                                           C_Compiler * inCompiler,
-                                           const GALGAS_location & inErrorLocation,
-                                           const cMapAutomatonFinalIssue inAutomatonFinalIssueArray []
-                                           COMMA_LOCATION_ARGS) {
-  if (NULL != inNode) {
-    recursiveCheckAutomatonStates (inNode->mInfPtr, inCompiler, inErrorLocation, inAutomatonFinalIssueArray COMMA_THERE) ;
-    const uint32_t currentState = inNode->mCurrentState ;
-    const cMapAutomatonFinalIssue & issue = inAutomatonFinalIssueArray [currentState] ;
-    if (NULL != issue.mIssueMessage) {
-      switch (issue.mIssue) {
-        case kMapAutomatonIssueWarning : {
-          const C_String warningMessage = buildIssueMessage (issue.mIssueMessage, inNode->mKey) ;
-          macroValidSharedObject (inNode->mAttributes.ptr (), cMapElement) ;
-          const GALGAS_location loc = ((const cMapElement *) inNode->mAttributes.ptr ())->mProperty_lkey.mProperty_location ;
-          inCompiler->semanticWarningAtLocation (loc, warningMessage COMMA_THERE) ;
-          }
-          break ;
-        case kMapAutomatonIssueError : {
-          const C_String errorMessage = buildIssueMessage (issue.mIssueMessage, inNode->mKey) ;
-          macroValidSharedObject (inNode->mAttributes.ptr (), cMapElement) ;
-          const GALGAS_location loc = ((const cMapElement *) inNode->mAttributes.ptr ())->mProperty_lkey.mProperty_location ;
-          inCompiler->semanticErrorAtLocation (loc, errorMessage, TC_Array <C_FixItDescription> () COMMA_THERE) ;
-          }
-          break ;
-        case kMapAutomatonNoIssue : break ;
-      }
-    }
-    recursiveCheckAutomatonStates (inNode->mSupPtr, inCompiler, inErrorLocation, inAutomatonFinalIssueArray COMMA_THERE) ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cSharedUniqueMapRoot::checkAutomatonStates (const GALGAS_location & inErrorLocation,
-                                                 const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
-  recursiveCheckAutomatonStates (mRoot, inCompiler, inErrorLocation, inAutomatonFinalIssueArray COMMA_THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void AC_GALGAS_uniqueMap::checkAutomatonStates (const GALGAS_location & inErrorLocation,
-                                                const cMapAutomatonFinalIssue inAutomatonFinalIssueArray [],
-                                                C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  if (isValid () && inErrorLocation.isValid ()) {
-    mSharedMap->checkAutomatonStates (inErrorLocation, inAutomatonFinalIssueArray, inCompiler COMMA_THERE) ;
-  }
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2313,7 +1457,7 @@ static cUniqueMapNode * internalInsertEntry (cUniqueMapNode * & ioRootPtr,
   cUniqueMapNode * matchingEntry = NULL ;
   if (ioRootPtr == NULL) {
     capCollectionElement emptyAttributes ;
-    macroMyNew (ioRootPtr, cUniqueMapNode (inKey, 0, emptyAttributes)) ;
+    macroMyNew (ioRootPtr, cUniqueMapNode (inKey, emptyAttributes)) ;
     if (inLocation.isValidAndNotNowhere ()) {
       ioRootPtr->mInvocationLocationArray.appendObject (inLocation) ;
     }

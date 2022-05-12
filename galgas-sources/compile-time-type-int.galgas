@@ -52,7 +52,7 @@ override method @compileTimeIntAST enterInContext
   let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
   let ctInt = compileTimeIntegerType ()
  #--- Enter type
-  [!?ioContext.mTypeMap insertType !lkey: ctIntegerTypeName !type: ctInt]
+  [!?ioContext.mTypeMap insertType ! ctIntegerTypeName !type: ctInt]
  #--- Enter ~ prefix operator
   var key = prefixOperatorMapKey (!ctInt !.bitWiseComplement !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntComplementOperator.new]

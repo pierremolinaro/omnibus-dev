@@ -82,25 +82,6 @@ override method @omnibusInfixOperatorExpressionAST noteExpressionTypesInPreceden
 #  SEMANTICS                                                                                                            
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#method @infixOperatorMap_EX checkBinaryOperationWith
-#  ?leftType:let @omnibusType inLeftType
-#  ?rightType:let @omnibusType inRightType
-#  ?operatorLocation:let @location inOperatorLocation
-#  !resultType: @omnibusType outResultType
-#  !op:@omnibusInfixOperatorDescription outOperation
-#{
-#  let lkey = combineTypeNamesForInfixOperator (!inLeftType.omnibusTypeDescriptionName !inRightType.omnibusTypeDescriptionName)
-#  if [self hasKey !lkey.string] then
-#    [self searchKey !lkey ?outResultType ?outOperation]
-#  else
-#    error inOperatorLocation
-#      : "infix operation between " + inLeftType.omnibusTypeDescriptionName + " and " + inRightType.omnibusTypeDescriptionName + " is not defined"
-#      : outResultType, outOperation
-#  end
-#}
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 override method @omnibusInfixOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes

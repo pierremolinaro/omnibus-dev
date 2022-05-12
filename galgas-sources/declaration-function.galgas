@@ -202,7 +202,7 @@ override method @functionDeclarationAST enterInContext
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mFunctionFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mFunctionReturnTypeName ?let returnTypeProxy]
+  [!?ioContext.mTypeMap makeOptionalEntry !self.mFunctionReturnTypeName ?let returnTypeProxy]
 #--- Attributes
   var warnIfUnused = true
   var exportedFunction = false
@@ -270,7 +270,7 @@ override method @functionDeclarationAST enterInContext
 map @routineMapForContext {
   public var @bool mIsPublic
   public var @routineTypedSignature mSignature
-  public var @unifiedTypeMap-entry mReturnTypeProxy # null if no returned value
+  public var @unifiedTypeMapEntry mReturnTypeProxy # null if no returned value
   public var @routineLLVMNameDict mModeDictionary
   public var @bool mIsExported
   public var @mode mFunctionMode
@@ -292,7 +292,7 @@ setter @routineMapForContext addFunctionWithoutArgument
   ?llvmBaseTypeName:let @string inLLVMBaseTypeName
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
-  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let @routineFormalArgumentListAST formalArguments = {}
@@ -322,9 +322,9 @@ setter @routineMapForContext addFunctionWithInputArgument
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
   ?inputArgumentSelector:let @string inInputSelector
-  ?inputArgumentTypeProxy:let @unifiedTypeMap-entry inInputArgumentTypeProxy
+  ?inputArgumentTypeProxy:let @unifiedTypeMapEntry inInputArgumentTypeProxy
   ?inputArgumentName: let @string inInputArgumentName
-  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {
@@ -360,12 +360,12 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ?methodName:let @lstring inMethodName
   ?mode:let @mode inMode
   ?inputArgumentSelector1:let @string inInputSelector1
-  ?inputArgumentTypeProxy1:let @unifiedTypeMap-entry inInputArgumentTypeProxy1
+  ?inputArgumentTypeProxy1:let @unifiedTypeMapEntry inInputArgumentTypeProxy1
   ?inputArgumentName1: let @string inInputArgumentName1
   ?inputArgumentSelector2:let @string inInputSelector2
-  ?inputArgumentTypeProxy2:let @unifiedTypeMap-entry inInputArgumentTypeProxy2
+  ?inputArgumentTypeProxy2:let @unifiedTypeMapEntry inInputArgumentTypeProxy2
   ?inputArgumentName2: let @string inInputArgumentName2
-  ?resultTypeProxy:let @unifiedTypeMap-entry inResultType
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST {

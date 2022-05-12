@@ -53,7 +53,7 @@ override method @boolTypeAST enterInContext
   let boolType = boolType ()
   let ctBoolType = compileTimeBoolType ()
  #--- Enter type
-  [!?ioContext.mTypeMap insertType !lkey: boolTypeName !type: boolType]
+  [!?ioContext.mTypeMap insertType ! boolTypeName !type: boolType]
  #--- Enter not prefix operator
   var key = prefixOperatorMapKey (!boolType !.notOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator.new]

@@ -60,7 +60,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
   end
   var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do
-    representationBitCount ++ ;
+    representationBitCount += 1 ;
     maxValue = maxValue / 2G
   end
   [!?ioGraph addEdge !self.mEnumerationName !["u" + representationBitCount nowhere]]
@@ -108,14 +108,13 @@ override method @enumerationDeclarationAST enterInContext
 #---------------- Compute representation bit count
   var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0G do
-    representationBitCount ++ ;
+    representationBitCount += 1 ;
     maxValue = maxValue / 2G
   end
 #---------------- Property map: add uintN() accessor
-  let integerTypeProxy = @unifiedTypeMap-entry.searchKey {
-    !ioContext.mTypeMap
+  let integerTypeProxy = [ioContext.mTypeMap searchKey
     !.new {!"u" + representationBitCount !self.mEnumerationName}
-  }
+  ]
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: self.mEnumerationName
     !llvmBaseTypeName:self.mEnumerationName
@@ -133,14 +132,13 @@ override method @enumerationDeclarationAST enterInContext
   }
 #---------------- Insert enumeration in type map
   let enumerationType = @omnibusType.new {
-#    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName: self.mEnumerationName
     !kind:.enumeration {!bitCount:representationBitCount}
     !llvmBaseTypeName: self.mEnumerationName
   }
-  [!?ioContext.mTypeMap insertType !lkey:self.mEnumerationName !type:enumerationType]
+  [!?ioContext.mTypeMap insertType !self.mEnumerationName !type:enumerationType]
 #--- Enter assignment operator
   let key = assignmentOperatorKey (!enumerationType !self.mEnumerationName.location !enumerationType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]

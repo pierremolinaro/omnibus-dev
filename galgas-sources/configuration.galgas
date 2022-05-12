@@ -349,7 +349,7 @@ override method @configurationDeclarationAST enterInContext
   end
   ioContext.mTargetParameters = self.mTargetParameters
 #--- Panic code type
-  [ioContext.mTypeMap searchKey
+  [ioContext.mTypeMap searchType
     !lkey:self.mPanicCodeTypeName
     ?type:let panicCodeType
   ]
@@ -363,7 +363,7 @@ override method @configurationDeclarationAST enterInContext
     error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
   end
 #--- Panic line type
-  [ioContext.mTypeMap searchKey
+  [ioContext.mTypeMap searchType
     !lkey:self.mPanicLineTypeName
     ?type:let panicLineType
   ]

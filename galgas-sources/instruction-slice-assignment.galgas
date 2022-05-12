@@ -110,7 +110,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Search Type
-  let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
 #--- Check type is an unsigned integer type
   var @uint bitCount
   if not [resultType.kind isInteger] then
@@ -148,7 +148,6 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   end
 #--- Analyze slices
   var rightShiftAmount = bitCount
-  let @bigint accumulatedFieldStaticValues = 0G
   for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     var sourceOperandForSlicing = sourceOperand
   #--- Analyze selector
@@ -175,7 +174,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
       rightShiftAmount = 0
     end
-    let sliceType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !sliceTypeName} type]
+    let sliceType = [[inContext.mTypeMap searchKey !sliceTypeName] type]
   #--- Shift and truncate source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]
@@ -185,7 +184,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     case varDeclaration (varName) :
     #--- Declare local variable
       let omnibusLocalVariableName = @lstring.new {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
-      ioTemporaries.mTemporaryIndex ++
+      ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalVariable !varName !sliceType !omnibusLocalVariableName !.hasUnreadValue !false]
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
@@ -205,7 +204,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     case letDeclaration (letName) :
     #--- Declare local constant
       let omnibusLocalVariableName = @lstring.new {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
-      ioTemporaries.mTemporaryIndex ++
+      ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !omnibusLocalVariableName]
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false

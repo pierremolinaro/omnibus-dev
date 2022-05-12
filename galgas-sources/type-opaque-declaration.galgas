@@ -127,17 +127,13 @@ override method @typeOpaqueDeclarationAST enterInContext
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
     let opaqueType = @omnibusType.new {
-#      !propertyGetterMap:{}
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:self.mOpaqueTypeName
       !kind:.opaque {!bitCount:bitSize}
       !llvmBaseTypeName:self.mOpaqueTypeName
     }
-    [!?ioContext.mTypeMap insertType
-      !lkey:self.mOpaqueTypeName
-      !type:opaqueType
-    ]
+    [!?ioContext.mTypeMap insertType !self.mOpaqueTypeName !type:opaqueType]
   end
 #--- Add Assignment ?
   if copyable then

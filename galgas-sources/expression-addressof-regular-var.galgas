@@ -80,10 +80,9 @@ override method @addressofExpressionAST analyzeExpression
       !?instructionListIR: ioInstructionGenerationList
       ?let @LValueRepresentation lvalueIR
     ]
-    let resultTypeProxy = @unifiedTypeMap-entry.searchKey {
-      !inContext.mTypeMap
+    let resultTypeProxy = [inContext.mTypeMap searchKey
       !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
-    }
+    ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@addressofInstructionIR.new {

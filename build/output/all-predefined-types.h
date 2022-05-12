@@ -23,7 +23,7 @@
 #include "galgas2/AC_GALGAS_enumAssociatedValues.h"
 #include "galgas2/AC_GALGAS_graph.h"
 #include "galgas2/acStrongPtr_class.h"
-#include "galgas2/cPtr_weakReference_class.h"
+#include "galgas2/cPtr_weakReference_proxy.h"
 #include "galgas2/AC_GALGAS_weak_reference.h"
 #include "command_line_interface/C_BoolCommandLineOption.h"
 #include "command_line_interface/C_UIntCommandLineOption.h"
@@ -678,6 +678,26 @@ class GALGAS_bigint : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG GALGAS_bigint right_shift_operation (const GALGAS_bigint inShiftOperand,
                                                                 class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- += operator (with expression)
+  public: VIRTUAL_IN_DEBUG void plusAssign_operation (const GALGAS_bigint inOperand,
+                                                       class C_Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- -= operator (with expression)
+  public: VIRTUAL_IN_DEBUG void minusAssign_operation (const GALGAS_bigint inOperand,
+                                                        class C_Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- *= operator (with expression)
+  public: VIRTUAL_IN_DEBUG void mulAssign_operation (const GALGAS_bigint inOperand,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- /= operator (with expression)
+  public: VIRTUAL_IN_DEBUG void divAssign_operation (const GALGAS_bigint inOperand,
+                                                      class C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- & operator
   public: VIRTUAL_IN_DEBUG GALGAS_bigint operator_and (const GALGAS_bigint & inOperand

@@ -126,7 +126,7 @@ override method @decoratedISRDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Self type
-  [inContext.mTypeMap searchKey !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName) ?type:let selfType]
+  [inContext.mTypeMap searchType !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName) ?type:let selfType]
 #--- Code generation
   [inContext.mAvailableInterruptMap searchKey !self.mISRName ?*]
   [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey

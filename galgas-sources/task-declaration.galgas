@@ -262,7 +262,7 @@ method @taskListAST enterInContext
       !taskListInstructionList
       !task.mTaskName.location
       !returnTypeName: ["" nowhere]
-    [ioContext.mTypeMap searchKey !lkey:task.mTaskName ?type:let taskType]
+    [ioContext.mTypeMap searchType !lkey:task.mTaskName ?type:let taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
     var initialValueList = @sortedOperandIRList {}
     let typeName = @lstring.new {!taskType.omnibusTypeDescriptionName !task.mTaskName.location}
@@ -389,7 +389,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inContext.mTypeMap searchKey !lkey:self.mTaskName ?type: let taskType]
+  [inContext.mTypeMap searchType !lkey:self.mTaskName ?type: let taskType]
 #------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = self.mStackSize.bigint
   if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then

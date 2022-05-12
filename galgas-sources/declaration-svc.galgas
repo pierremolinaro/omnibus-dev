@@ -281,7 +281,7 @@ override method @systemRoutineDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Self type proxy
-  [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mReceiverTypeName ?let selfTypeProxy]
+  [!?ioContext.mTypeMap makeOptionalEntry !self.mReceiverTypeName ?let selfTypeProxy]
 #  log mReceiverTypeName
   let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
 #--- Attributes
@@ -317,7 +317,7 @@ override method @systemRoutineDeclarationAST enterInContext
 #--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mFormalArgumentList ?let signature)
 #--- Return type
-  [@unifiedTypeMap-entry makeOptionalEntry !?ioContext.mTypeMap !self.mReturnTypeName ?let returnTypeProxy]
+  [!?ioContext.mTypeMap makeOptionalEntry  !self.mReturnTypeName ?let returnTypeProxy]
 #--- Attributes
   var mutating = false
   var noUnusedWarning = false
@@ -543,9 +543,9 @@ proc generatePrimitiveAndServiceDispatcher
 refclass @systemUserRoutineIR : @abstractRoutineIR {
   public var @string mMangledImplementationName
   public var @routineTypedSignature mFormalArgumentList
-  public var @unifiedTypeMap-entry mReceiverTypeProxy
+  public var @unifiedTypeMapEntry mReceiverTypeProxy
   public var @bool mIsSection # If false, service or primitive
-  public var @unifiedTypeMap-entry mReturnTypeProxy
+  public var @unifiedTypeMapEntry mReturnTypeProxy
 }
 
 #·······················································································································

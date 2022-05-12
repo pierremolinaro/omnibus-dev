@@ -121,7 +121,7 @@ override method @typedConstantCallAST analyzeExpression
   if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else
-    inferredResultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
+    inferredResultType = [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
   end
   if inferredResultType.kind == .void then
     error self.mConstructorName : "cannot infer type" : outResult
@@ -130,7 +130,7 @@ override method @typedConstantCallAST analyzeExpression
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
 #    let classConstantMap = inferredResultType.classConstantMap
     [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
-    let resultType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !classTypeName} type]
+    let resultType = [[inContext.mTypeMap searchKey !classTypeName] type]
     outResult = .literalInteger {!type:resultType !value:value}
   end
 #--- Analyze access list

@@ -356,7 +356,7 @@ method @structurePropertyListAST-element enterPropertyInContext
 #---------- Property type
   let @omnibusType optionalPropertyType = if self.mPropertyTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName} type]
+    else [[ioContext.mTypeMap searchKey !self.mPropertyTypeName] type]
   end
 #---------- Init expression
   switch self.mPropertyKind
@@ -473,7 +473,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !self.mPropertyName
       !self.mVisibility
       !.computedProperty{
-        !typeProxy: @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
+        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName]
         !modeDictionary:modeDictionary
       }
     ]
@@ -508,7 +508,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !self.mPropertyName
       !self.mVisibility
       !.computedProperty {
-        !typeProxy: @unifiedTypeMap-entry.searchKey {!ioContext.mTypeMap !self.mPropertyTypeName}
+        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName]
         !getterModeDictionary: getterModeDictionary
         !setterModeDictionary: setterModeDictionary
       }
@@ -603,7 +603,6 @@ override method @structureDeclarationAST enterInContext
   end
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-#    !propertyGetterMap: propertyGetterMap
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:self.mOmnibusTypeSpecificName
@@ -611,7 +610,7 @@ override method @structureDeclarationAST enterInContext
     !llvmBaseTypeName:self.mLLVMBaseTypeName
   }
   [!?ioContext.mTypeMap insertType
-    !lkey:self.mReceiverTypeName
+    !self.mReceiverTypeName
     !type:structureType
   ]
 #-------------------------------------------- GenerateLLVM type definition
@@ -709,7 +708,7 @@ override method @structureAssignmentOperatorUsage generateCode
     [!?ioInstructionListIR appendInstructionAsFreeString !s !{!assignmentFunctionLLVMName}]
   case llvmStructureValue (* sortedOperandValues) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
-    ioTemporaries.mTemporaryIndex ++
+    ioTemporaries.mTemporaryIndex += 1
     for (operand idx) in sortedOperandValues do
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
@@ -754,7 +753,7 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   for (propertyName propertyType indexPath) in arcAssignmentList do
     let propertyTypeLLVMName = [propertyType llvmTypeName]
     let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource, i32 0"
     for (idx) in indexPath do
       ioLLVMcode += ", i32 " + idx
@@ -766,7 +765,7 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   end
   for (propertyName propertyType indexPath) in arcAssignmentList do
     let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inTarget, i32 0"
     for (idx) in indexPath do
       ioLLVMcode += ", i32 " + idx

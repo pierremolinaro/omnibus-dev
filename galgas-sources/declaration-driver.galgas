@@ -336,7 +336,7 @@ override method @implementedDriverAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  [ioContext.mTypeMap searchKey
+  [ioContext.mTypeMap searchType
     !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName)
     ?type:let driverType
   ]
@@ -390,7 +390,7 @@ override method @decoratedRequiredDriver semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  [inContext.mTypeMap searchKey
+  [inContext.mTypeMap searchType
     !lkey: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     ?type:let driverType
   ]

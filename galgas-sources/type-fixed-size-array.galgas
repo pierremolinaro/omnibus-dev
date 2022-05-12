@@ -25,7 +25,7 @@ syntax extension omnibus_syntax {
     $]$
     let sizeExpressionLocation = @location.here
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
-    ioAST.mTypeDeclarationIndex ++
+    ioAST.mTypeDeclarationIndex += 1
     ioAST.mDeclarationListAST += !@fixedSizeArrayTypeDeclarationAST.new {
       !outTypeName
       !elementTypeName
@@ -77,7 +77,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #--- Get element type
-  [ioContext.mTypeMap searchKey !lkey:self.mElementTypeName ?type:let elementType]
+  [ioContext.mTypeMap searchType !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
     error self.mElementTypeName : "an array element should be copyable"
   end
@@ -101,9 +101,9 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
     let omnibusTypeDescriptionName = @lstring.new {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !self.mFixedSizeArrayType}
     let llvmBaseTypeName = @lstring.new {!elementType.llvmBaseTypeName + "-" + arraySize !self.mFixedSizeArrayType}
     if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
-      [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: let type]
+      [ioContext.mTypeMap searchType !lkey:omnibusTypeDescriptionName ?type: let type]
       [!?ioContext.mTypeMap insertType
-        !lkey:self.mFixedSizeArrayType
+        !self.mFixedSizeArrayType
         !type:type
       ]
     else
@@ -137,7 +137,6 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
     #-------------------------------------------- Enter in type map
       let arrayType = @omnibusType.new {
-#        !propertyGetterMap:arrayTypePropertyMap
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
         !omnibusTypeDescriptionName:omnibusTypeDescriptionName
@@ -145,11 +144,11 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !llvmBaseTypeName:llvmBaseTypeName
       }
       [!?ioContext.mTypeMap insertType
-        !lkey:self.mFixedSizeArrayType
+        !self.mFixedSizeArrayType
         !type:arrayType
       ]
       [!?ioContext.mTypeMap insertType
-        !lkey:omnibusTypeDescriptionName
+        !omnibusTypeDescriptionName
         !type:arrayType
       ]
     #-------------------------------------------- GenerateLLVM type definition
@@ -237,7 +236,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     [!?ioInstructionListIR appendInstructionAsFreeString !s !{!self.mAssignValueToElements_functionName}]
   case llvmArrayDynamicValues (1* @operandIRList values) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
-    ioTemporaries.mTemporaryIndex ++
+    ioTemporaries.mTemporaryIndex += 1
     for (value) in values do (idx)
       var @objectIR sourceValue = value
       [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
@@ -249,7 +248,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     end
   case llvmArrayStaticValues (1* @operandIRList values 1*) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
-    ioTemporaries.mTemporaryIndex ++
+    ioTemporaries.mTemporaryIndex += 1
     for (value) in values do (idx)
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
@@ -342,7 +341,7 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   for (propertyName propertyType indexPath) in arcAssignmentList do
     let propertyTypeLLVMName = [propertyType llvmTypeName]
     let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inSource, i32 0"
     for (idx) in indexPath do
       ioLLVMcode += ", i32 " + idx
@@ -354,7 +353,7 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   end
   for (propertyName propertyType indexPath) in arcAssignmentList do
     let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* %inTarget, i32 0"
     for (idx) in indexPath do
       ioLLVMcode += ", i32 " + idx

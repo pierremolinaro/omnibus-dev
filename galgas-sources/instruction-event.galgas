@@ -494,7 +494,7 @@ override method @syncInstructionIR llvmInstructionCode
 {
   ioGenerationAdds.mUsesGuards = true
   let startLabel = "select." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
 #---
   ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
   let startLabelName = startLabel + ".start" 

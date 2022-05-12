@@ -511,7 +511,7 @@ proc handleSliceInExpression
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
     let resultIntegerName = @lstring.new {!"u" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
-    [inContext.mTypeMap searchKey !lkey:resultIntegerName ?type:let sliceType]
+    [inContext.mTypeMap searchType !lkey:resultIntegerName ?type:let sliceType]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end
 }

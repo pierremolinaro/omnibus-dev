@@ -107,7 +107,7 @@ override method @assertInstructionIR llvmInstructionCode
   [self.mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext!?ioGenerationAdds]
   let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
   let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += "  br i1 " + [self.mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
   ioLLVMcode += labelAssertEr + ":\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mAssertInstructionLocation) assemblerRepresentation] + " ("

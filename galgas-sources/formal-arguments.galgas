@@ -126,7 +126,7 @@ syntax extension omnibus_syntax {
 list @routineTypedSignature {
   public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
   public var @lstring mSelector
-  public var @unifiedTypeMap-entry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
+  public var @unifiedTypeMapEntry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
   public var @lstring mFormalArgumentName
 }
 
@@ -166,7 +166,7 @@ proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
 {
   outSignature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
-    [@unifiedTypeMap-entry makeEntry !?ioTypeMap !formalArgumentTypeName ?let typeProxy]
+    [!?ioTypeMap makeEntry !formalArgumentTypeName ?let typeProxy]
     outSignature += !formalArgumentPassingMode !selector !typeProxy !formalArgumentName
   end
 }
@@ -179,7 +179,7 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
 {
   outSignature = {}
   for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
-    let typeProxy = @unifiedTypeMap-entry.searchKey {!inTypeMap !formalArgumentTypeName}
+    let typeProxy = [inTypeMap searchKey !formalArgumentTypeName]
     outSignature += !formalArgumentPassingMode !selector !typeProxy !formalArgumentName
   end
 }
@@ -238,7 +238,7 @@ proc enterFormalArguments
   ?warningOnUnusedArgs:let @bool inUnusedWarning
 {
   for (argumentKind * formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
-    let typeProxy = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !formalArgumentTypeName} type]
+    let typeProxy = [[inContext.mTypeMap searchKey !formalArgumentTypeName] type]
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :

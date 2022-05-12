@@ -125,10 +125,10 @@ override method @compiletimePrefixOperatorAST enterInContext
   ?!userDefinedTypes: @userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mReceiverTypeName ?let receiverTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression

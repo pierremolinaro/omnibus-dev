@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
     <type_definition> !?ioAST ?let elementTypeName
     $]$
     outTypeName = ["anonymous." + ioAST.mTypeDeclarationIndex here]
-    ioAST.mTypeDeclarationIndex ++
+    ioAST.mTypeDeclarationIndex += 1
     ioAST.mDeclarationListAST += !@typeDynamicArrayDeclarationAST.new {!outTypeName !elementTypeName}
   }
 
@@ -68,9 +68,9 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   if not ioContext.mTargetParameters.mHandleDynamicArray then
     error self.mElementTypeName : "this target does not handle dynamic array"
   end
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mDynamicArrayTypeName ?let arrayTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mDynamicArrayTypeName ?let arrayTypeProxy]
 #-------------------------------------------- Get element type
-  [ioContext.mTypeMap searchKey !lkey:self.mElementTypeName ?type:let elementType]
+  [ioContext.mTypeMap searchType !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
     error self.mElementTypeName : "an array element should be copyable"
   end
@@ -82,14 +82,14 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   let llvmBaseTypeName = @lstring.new {!"dyn-" + elementType.llvmBaseTypeName !self.mDynamicArrayTypeName}
 #-------------------------------------------- Original type name
   if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
-    [ioContext.mTypeMap searchKey !lkey:omnibusTypeDescriptionName ?type: let type]
+    [ioContext.mTypeMap searchType !lkey:omnibusTypeDescriptionName ?type: let type]
     [!?ioContext.mTypeMap insertType
-      !lkey:self.mDynamicArrayTypeName
+      !self.mDynamicArrayTypeName
       !type:type
     ]
   else
-    [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !["u32" nowhere] ?let uint32TypeProxy]
-    [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mElementTypeName ?let elementTypeProxy]
+    [!?ioContext.mTypeMap makeEntry !["u32" nowhere] ?let uint32TypeProxy]
+    [!?ioContext.mTypeMap makeEntry !self.mElementTypeName ?let elementTypeProxy]
   #-------------------------------------------- Property map
   #--- Method 'removeAll()'
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
@@ -170,17 +170,13 @@ override method @typeDynamicArrayDeclarationAST enterInContext
     let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
   #-------------------------------------------- Enter in type map
     let dynamicArrayType = @omnibusType.new {
-#      !propertyGetterMap:{}
       !subscript:.noSubscript
       !attributes:typeAttributes
       !omnibusTypeDescriptionName:omnibusTypeDescriptionName
       !kind:.dynamicArrayType {!elementType:elementType}
       !llvmBaseTypeName:llvmBaseTypeName
     }
-    [!?ioContext.mTypeMap insertType
-      !lkey:self.mDynamicArrayTypeName
-      !type:dynamicArrayType
-    ]
+    [!?ioContext.mTypeMap insertType !self.mDynamicArrayTypeName !type:dynamicArrayType]
   #-------------------------------------------- Assignment
   let assignmentFunctionName = assignmentOperatorFuncName (!dynamicArrayType !dynamicArrayType)
    let routine = @dynamicArrayTypeAssignGenericFunctionIR.new {
@@ -329,8 +325,8 @@ override method @dynArrayLengthFunctionIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @dynArrayAppendFunctionIR : @abstractRoutineIR {
-  public var @unifiedTypeMap-entry mArrayTypeProxy
-  public var @unifiedTypeMap-entry mElementTypeProxy
+  public var @unifiedTypeMapEntry mArrayTypeProxy
+  public var @unifiedTypeMapEntry mElementTypeProxy
   public var @string mInsertFunctionMangledName
 }
 
@@ -387,7 +383,7 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @dynArrayInsertFunctionIR : @abstractRoutineIR {
-  public var @unifiedTypeMap-entry mElementTypeProxy
+  public var @unifiedTypeMapEntry mElementTypeProxy
 }
 
 #·······················································································································

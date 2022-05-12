@@ -46,7 +46,7 @@ override method @literalStringDeclarationAST enterInContext
 #--- Enter in type map
   let selfType = literalStringType ()
   [!?ioContext.mTypeMap insertType
-    !lkey:[staticStringTypeName () nowhere]
+    ![staticStringTypeName () nowhere]
     !type: selfType
   ]
 #--- Enter assignment operator

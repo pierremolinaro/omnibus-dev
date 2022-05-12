@@ -186,11 +186,11 @@ override method @llvmInfixOperatorAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Check types
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mLeftTypeName ?let leftTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
   let leftType = [leftTypeProxy type]
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mRightTypeName ?let rightTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mRightTypeName ?let rightTypeProxy]
   let rightType = [rightTypeProxy type]
-  [@unifiedTypeMap-entry makeEntry !?ioContext.mTypeMap !self.mResultTypeName ?let resultTypeProxy]
+  [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   if [leftType isCompileTimeType] & [rightType isCompileTimeType] then
     error self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type"

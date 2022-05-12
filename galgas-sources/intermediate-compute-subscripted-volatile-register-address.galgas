@@ -28,7 +28,7 @@ override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
 {
   let registerIndexName = "%register.index." + ioGenerationAdds.mUniqueIndex
   let scriptedRegisterOffsetName = "%register.offset." + ioGenerationAdds.mUniqueIndex
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
 #--- Needs to perform an extend to i32 ?
   [[self.mIndexResult type].kind integer ?3* ?bitCount:let bitCount]
   if bitCount < 32 then

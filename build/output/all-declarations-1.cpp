@@ -5410,8 +5410,8 @@ GALGAS_scopeStack GALGAS_scopeStack::extractObject (const GALGAS_object & inObje
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_LValueOperandAST_property::cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring & inAssociatedValue0,
-                                                                                                  const GALGAS_LValueOperandAST & inAssociatedValue1
+cEnumAssociatedValues_LValueOperandAST_property::cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring inAssociatedValue0,
+                                                                                                  const GALGAS_LValueOperandAST inAssociatedValue1
                                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -5445,10 +5445,10 @@ typeComparisonResult cEnumAssociatedValues_LValueOperandAST_property::compare (c
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_LValueOperandAST_arrayAccess::cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                                                        const GALGAS_location & inAssociatedValue1,
-                                                                                                        const GALGAS_bool & inAssociatedValue2,
-                                                                                                        const GALGAS_LValueOperandAST & inAssociatedValue3
+cEnumAssociatedValues_LValueOperandAST_arrayAccess::cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST inAssociatedValue0,
+                                                                                                        const GALGAS_location inAssociatedValue1,
+                                                                                                        const GALGAS_bool inAssociatedValue2,
+                                                                                                        const GALGAS_LValueOperandAST inAssociatedValue3
                                                                                                         COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -5864,8 +5864,8 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::extractObject (const GALGAS_o
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_driver::cEnumAssociatedValues_valuedObject_driver (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                                      const GALGAS_bool & inAssociatedValue1
+cEnumAssociatedValues_valuedObject_driver::cEnumAssociatedValues_valuedObject_driver (const GALGAS_omnibusType inAssociatedValue0,
+                                                                                      const GALGAS_bool inAssociatedValue1
                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -5899,7 +5899,7 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_driver::compare (const c
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_task::cEnumAssociatedValues_valuedObject_task (const GALGAS_omnibusType & inAssociatedValue0
+cEnumAssociatedValues_valuedObject_task::cEnumAssociatedValues_valuedObject_task (const GALGAS_omnibusType inAssociatedValue0
                                                                                   COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -5928,7 +5928,7 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_task::compare (const cEn
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_globalConstant::cEnumAssociatedValues_valuedObject_globalConstant (const GALGAS_objectIR & inAssociatedValue0
+cEnumAssociatedValues_valuedObject_globalConstant::cEnumAssociatedValues_valuedObject_globalConstant (const GALGAS_objectIR inAssociatedValue0
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -5957,9 +5957,9 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_globalConstant::compare 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_localConstant::cEnumAssociatedValues_valuedObject_localConstant (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                                                    const GALGAS_lstring & inAssociatedValue1,
-                                                                                                    const GALGAS_bool & inAssociatedValue2
+cEnumAssociatedValues_valuedObject_localConstant::cEnumAssociatedValues_valuedObject_localConstant (const GALGAS_omnibusType inAssociatedValue0,
+                                                                                                    const GALGAS_lstring inAssociatedValue1,
+                                                                                                    const GALGAS_bool inAssociatedValue2
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -5998,8 +5998,8 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_localConstant::compare (
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_localVariable::cEnumAssociatedValues_valuedObject_localVariable (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                                                    const GALGAS_lstring & inAssociatedValue1
+cEnumAssociatedValues_valuedObject_localVariable::cEnumAssociatedValues_valuedObject_localVariable (const GALGAS_omnibusType inAssociatedValue0,
+                                                                                                    const GALGAS_lstring inAssociatedValue1
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -6033,8 +6033,8 @@ typeComparisonResult cEnumAssociatedValues_valuedObject_localVariable::compare (
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_valuedObject_globalSyncInstance::cEnumAssociatedValues_valuedObject_globalSyncInstance (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                                                              const GALGAS_lstring & inAssociatedValue1
+cEnumAssociatedValues_valuedObject_globalSyncInstance::cEnumAssociatedValues_valuedObject_globalSyncInstance (const GALGAS_omnibusType inAssociatedValue0,
+                                                                                                              const GALGAS_lstring inAssociatedValue1
                                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),
@@ -7348,16 +7348,16 @@ GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST:
 typeComparisonResult GALGAS_compileTimeDeclarationBarrierAST_2D_weak::objectCompare (const GALGAS_compileTimeDeclarationBarrierAST_2D_weak & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_class * myPtr = (cPtr_weakReference_class *) mObjectPtr ;
-    const size_t myObjectPtr = size_t (myPtr->strongObject ()) ;
-    cPtr_weakReference_class * operandPtr = (cPtr_weakReference_class *) inOperand.mObjectPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr->strongObject ()) ;
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
       result = kFirstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -7372,12 +7372,12 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_compileTimeDeclarationBarrierAST_2D_weak & GALGAS_compileTimeDeclarationBarrierAST_2D_weak::operator = (const GALGAS_compileTimeDeclarationBarrierAST & inSource) {
-  cPtr_weakReference_class * proxyPtr = NULL ;
-  acStrongPtr_class * p = inSource.embeddedObjectPtr () ;
+  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != NULL) {
     proxyPtr = p->getProxy () ;
   }
-  macroAssignSharedObject (mObjectPtr, proxyPtr) ;
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
   return *this ;
 }
 
@@ -7391,7 +7391,7 @@ GALGAS_abstractDeclarationAST_2D_weak (inSource) {
 
 GALGAS_compileTimeDeclarationBarrierAST_2D_weak GALGAS_compileTimeDeclarationBarrierAST_2D_weak::constructor_nil (LOCATION_ARGS) {
   GALGAS_compileTimeDeclarationBarrierAST_2D_weak result ;
-  macroMyNew (result.mObjectPtr, cPtr_weakReference_class (THERE)) ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
@@ -7399,9 +7399,8 @@ GALGAS_compileTimeDeclarationBarrierAST_2D_weak GALGAS_compileTimeDeclarationBar
 
 GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST_2D_weak::bang_compileTimeDeclarationBarrierAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_compileTimeDeclarationBarrierAST result ;
-  if (mObjectPtr != NULL) {
-    cPtr_weakReference_class * p = (cPtr_weakReference_class *) mObjectPtr ;
-    acStrongPtr_class * strongPtr = p->strongObject () ;
+  if (mProxyPtr != NULL) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == NULL) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
@@ -7711,7 +7710,7 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::extractObject (co
 cMapElement_routineMapForContext::cMapElement_routineMapForContext (const GALGAS_lstring & inKey,
                                                                     const GALGAS_bool & in_mIsPublic,
                                                                     const GALGAS_routineTypedSignature & in_mSignature,
-                                                                    const GALGAS_unifiedTypeMap_2D_entry & in_mReturnTypeProxy,
+                                                                    const GALGAS_unifiedTypeMapEntry & in_mReturnTypeProxy,
                                                                     const GALGAS_routineLLVMNameDict & in_mModeDictionary,
                                                                     const GALGAS_bool & in_mIsExported,
                                                                     const GALGAS_mode & in_mFunctionMode
@@ -7844,7 +7843,7 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::getter_overriddenMap (C
 void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & inKey,
                                                        const GALGAS_bool & inArgument0,
                                                        const GALGAS_routineTypedSignature & inArgument1,
-                                                       const GALGAS_unifiedTypeMap_2D_entry & inArgument2,
+                                                       const GALGAS_unifiedTypeMapEntry & inArgument2,
                                                        const GALGAS_routineLLVMNameDict & inArgument3,
                                                        const GALGAS_bool & inArgument4,
                                                        const GALGAS_mode & inArgument5,
@@ -7865,7 +7864,7 @@ void GALGAS_routineMapForContext::addAssign_operation (const GALGAS_lstring & in
 void GALGAS_routineMapForContext::setter_insertKey (GALGAS_lstring inKey,
                                                     GALGAS_bool inArgument0,
                                                     GALGAS_routineTypedSignature inArgument1,
-                                                    GALGAS_unifiedTypeMap_2D_entry inArgument2,
+                                                    GALGAS_unifiedTypeMapEntry inArgument2,
                                                     GALGAS_routineLLVMNameDict inArgument3,
                                                     GALGAS_bool inArgument4,
                                                     GALGAS_mode inArgument5,
@@ -7890,7 +7889,7 @@ const char * kSearchErrorMessage_routineMapForContext_searchKey = "there is no '
 void GALGAS_routineMapForContext::method_searchKey (GALGAS_lstring inKey,
                                                     GALGAS_bool & outArgument0,
                                                     GALGAS_routineTypedSignature & outArgument1,
-                                                    GALGAS_unifiedTypeMap_2D_entry & outArgument2,
+                                                    GALGAS_unifiedTypeMapEntry & outArgument2,
                                                     GALGAS_routineLLVMNameDict & outArgument3,
                                                     GALGAS_bool & outArgument4,
                                                     GALGAS_mode & outArgument5,
@@ -7950,12 +7949,12 @@ GALGAS_routineTypedSignature GALGAS_routineMapForContext::getter_mSignatureForKe
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_entry GALGAS_routineMapForContext::getter_mReturnTypeProxyForKey (const GALGAS_string & inKey,
-                                                                                           C_Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMapEntry GALGAS_routineMapForContext::getter_mReturnTypeProxyForKey (const GALGAS_string & inKey,
+                                                                                       C_Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) attributes ;
-  GALGAS_unifiedTypeMap_2D_entry result ;
+  GALGAS_unifiedTypeMapEntry result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_routineMapForContext) ;
     result = p->mProperty_mReturnTypeProxy ;
@@ -8038,7 +8037,7 @@ void GALGAS_routineMapForContext::setter_setMSignatureForKey (GALGAS_routineType
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_routineMapForContext::setter_setMReturnTypeProxyForKey (GALGAS_unifiedTypeMap_2D_entry inAttributeValue,
+void GALGAS_routineMapForContext::setter_setMReturnTypeProxyForKey (GALGAS_unifiedTypeMapEntry inAttributeValue,
                                                                     GALGAS_string inKey,
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) {
@@ -8144,7 +8143,7 @@ GALGAS_routineTypedSignature cEnumerator_routineMapForContext::current_mSignatur
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap_2D_entry cEnumerator_routineMapForContext::current_mReturnTypeProxy (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMapEntry cEnumerator_routineMapForContext::current_mReturnTypeProxy (LOCATION_ARGS) const {
   const cMapElement_routineMapForContext * p = (const cMapElement_routineMapForContext *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_routineMapForContext) ;
   return p->mProperty_mReturnTypeProxy ;
@@ -8179,7 +8178,7 @@ GALGAS_mode cEnumerator_routineMapForContext::current_mFunctionMode (LOCATION_AR
 bool GALGAS_routineMapForContext::optional_searchKey (const GALGAS_string & inKey,
                                                       GALGAS_bool & outArgument0,
                                                       GALGAS_routineTypedSignature & outArgument1,
-                                                      GALGAS_unifiedTypeMap_2D_entry & outArgument2,
+                                                      GALGAS_unifiedTypeMapEntry & outArgument2,
                                                       GALGAS_routineLLVMNameDict & outArgument3,
                                                       GALGAS_bool & outArgument4,
                                                       GALGAS_mode & outArgument5) const {
@@ -9853,23 +9852,23 @@ GALGAS_staticlistMap GALGAS_staticlistMap::extractObject (const GALGAS_object & 
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement_unifiedTypeMap::cMapElement_unifiedTypeMap (const GALGAS_lstring & inKey,
-                                                        const GALGAS_omnibusType & in_type
+                                                        const GALGAS_unifiedTypeMapElementClass & in_mElement
                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inKey COMMA_THERE),
-mProperty_type (in_type) {
+mProperty_mElement (in_mElement) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_unifiedTypeMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_type.isValid () ;
+  return mProperty_lkey.isValid () && mProperty_mElement.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_unifiedTypeMap::copy (void) {
   cMapElement * result = NULL ;
-  macroMyNew (result, cMapElement_unifiedTypeMap (mProperty_lkey, mProperty_type COMMA_HERE)) ;
+  macroMyNew (result, cMapElement_unifiedTypeMap (mProperty_lkey, mProperty_mElement COMMA_HERE)) ;
   return result ;
 }
 
@@ -9878,8 +9877,8 @@ cMapElement * cMapElement_unifiedTypeMap::copy (void) {
 void cMapElement_unifiedTypeMap::description (C_String & ioString, const int32_t inIndentation) const {
   ioString << "\n" ;
   ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "type" ":" ;
-  mProperty_type.description (ioString, inIndentation) ;
+  ioString << "mElement" ":" ;
+  mProperty_mElement.description (ioString, inIndentation) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9888,7 +9887,7 @@ typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionEleme
   cMapElement_unifiedTypeMap * operand = (cMapElement_unifiedTypeMap *) inOperand ;
   typeComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
   if (kOperandEqual == result) {
-    result = mProperty_type.objectCompare (operand->mProperty_type) ;
+    result = mProperty_mElement.objectCompare (operand->mProperty_mElement) ;
   }
   return result ;
 }
@@ -9896,123 +9895,106 @@ typeComparisonResult cMapElement_unifiedTypeMap::compare (const cCollectionEleme
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_unifiedTypeMap::GALGAS_unifiedTypeMap (void) :
-AC_GALGAS_uniqueMap (kMapAutomatonNoIssue, "") {
+AC_GALGAS_map (true) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_unifiedTypeMap::GALGAS_unifiedTypeMap (const GALGAS_unifiedTypeMap & inSource) :
-AC_GALGAS_uniqueMap (inSource) {
+AC_GALGAS_map (inSource) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_unifiedTypeMap & GALGAS_unifiedTypeMap::operator = (const GALGAS_unifiedTypeMap & inSource) {
-  * ((AC_GALGAS_uniqueMap *) this) = inSource ;
+  * ((AC_GALGAS_map *) this) = inSource ;
   return * this ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptySharedMap (LOCATION_ARGS) {
+GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS) {
   GALGAS_unifiedTypeMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-//  Map automaton states                                                                         
-//----------------------------------------------------------------------------------------------------------------------
 
-
-//----------------------------------------------------------------------------------------------------------------------
-//  Map automaton state names                                                                    
-//----------------------------------------------------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//  Map automaton actions                                                                        
-//----------------------------------------------------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//  Map automaton transitions                                                                    
-//----------------------------------------------------------------------------------------------------------------------
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//  Map automaton final state issues                                                             
-//----------------------------------------------------------------------------------------------------------------------
-
+GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_mapWithMapToOverride (const GALGAS_unifiedTypeMap & inMapToOverride
+                                                                               COMMA_LOCATION_ARGS) {
+  GALGAS_unifiedTypeMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMap::setter_insertType (GALGAS_lstring inKey,
-                                               GALGAS_omnibusType inArgument0,
-                                               C_Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
+GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::getter_overriddenMap (C_Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
+  GALGAS_unifiedTypeMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+void GALGAS_unifiedTypeMap::addAssign_operation (const GALGAS_lstring & inKey,
+                                                 const GALGAS_unifiedTypeMapElementClass & inArgument0,
+                                                 C_Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
   cMapElement_unifiedTypeMap * p = NULL ;
   macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' type is already declared in %L" ;
-  insertInSharedMap (attributes,
-                     inCompiler,
-                     0,
-                     NULL,
-                     kInsertErrorMessage
-                     COMMA_THERE) ;
+  const char * kInsertErrorMessage = "@unifiedTypeMap insert error: '%K' already in map" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-const char * kSearchErrorMessage_unifiedTypeMap_searchKey = "there is no '%K' type" ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_unifiedTypeMap::method_searchKey (GALGAS_lstring inKey,
-                                              GALGAS_omnibusType & outArgument0,
-                                              C_Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) performSearch (inKey,
-                                                                                               inCompiler,
-                                                                                               kSearchErrorMessage_unifiedTypeMap_searchKey
-                                                                                               COMMA_THERE) ;
-  if (NULL == p) {
-    outArgument0.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    outArgument0 = p->mProperty_type ;
-  }
+void GALGAS_unifiedTypeMap::setter_internalInsertKey (GALGAS_lstring inKey,
+                                                      GALGAS_unifiedTypeMapElementClass inArgument0,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_unifiedTypeMap * p = NULL ;
+  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' key is already declared in %L" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_omnibusType GALGAS_unifiedTypeMap::getter_typeForKey (const GALGAS_string & inKey,
-                                                             C_Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMapElementClass GALGAS_unifiedTypeMap::getter_mElementForKey (const GALGAS_string & inKey,
+                                                                                C_Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) attributes ;
-  GALGAS_omnibusType result ;
+  GALGAS_unifiedTypeMapElementClass result ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    result = p->mProperty_type ;
+    result = p->mProperty_mElement ;
   }
   return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMap::setter_setTypeForKey (GALGAS_omnibusType inAttributeValue,
-                                                  GALGAS_string inKey,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+void GALGAS_unifiedTypeMap::setter_setMElementForKey (GALGAS_unifiedTypeMapElementClass inAttributeValue,
+                                                      GALGAS_string inKey,
+                                                      C_Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_unifiedTypeMap * p = (cMapElement_unifiedTypeMap *) attributes ;
   if (NULL != p) {
     macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-    p->mProperty_type = inAttributeValue ;
+    p->mProperty_mElement = inAttributeValue ;
   }
 }
 
@@ -10021,7 +10003,7 @@ void GALGAS_unifiedTypeMap::setter_setTypeForKey (GALGAS_omnibusType inAttribute
 cMapElement_unifiedTypeMap * GALGAS_unifiedTypeMap::readWriteAccessForWithInstruction (C_Compiler * inCompiler,
                                                                                        const GALGAS_string & inKey
                                                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedTypeMap * result = (cMapElement_unifiedTypeMap *) searchForReadWriteAttribute (inKey, inCompiler COMMA_THERE) ;
+  cMapElement_unifiedTypeMap * result = (cMapElement_unifiedTypeMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
   macroNullOrValidSharedObject (result, cMapElement_unifiedTypeMap) ;
   return result ;
 }
@@ -10036,6 +10018,14 @@ cGenericAbstractEnumerator (inOrder) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
+GALGAS_unifiedTypeMap_2D_element cEnumerator_unifiedTypeMap::current (LOCATION_ARGS) const {
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
+  return GALGAS_unifiedTypeMap_2D_element (p->mProperty_lkey, p->mProperty_mElement) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
 GALGAS_lstring cEnumerator_unifiedTypeMap::current_lkey (LOCATION_ARGS) const {
   const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement) ;
@@ -10044,13 +10034,26 @@ GALGAS_lstring cEnumerator_unifiedTypeMap::current_lkey (LOCATION_ARGS) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_omnibusType cEnumerator_unifiedTypeMap::current_type (LOCATION_ARGS) const {
+GALGAS_unifiedTypeMapElementClass cEnumerator_unifiedTypeMap::current_mElement (LOCATION_ARGS) const {
   const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) currentObjectPtr (THERE) ;
   macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
-  return p->mProperty_type ;
+  return p->mProperty_mElement ;
 }
 
+//----------------------------------------------------------------------------------------------------------------------
 
+bool GALGAS_unifiedTypeMap::optional_searchKey (const GALGAS_string & inKey,
+                                                GALGAS_unifiedTypeMapElementClass & outArgument0) const {
+  const cMapElement_unifiedTypeMap * p = (const cMapElement_unifiedTypeMap *) searchForKey (inKey) ;
+  const bool result = NULL != p ;
+  if (result) {
+    macroValidSharedObject (p, cMapElement_unifiedTypeMap) ;
+    outArgument0 = p->mProperty_mElement ;
+  }else{
+    outArgument0.drop () ;
+  }
+  return result ;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -13631,16 +13634,16 @@ GALGAS_abstractDecoratedDeclaration GALGAS_abstractDecoratedDeclaration::extract
 typeComparisonResult GALGAS_abstractDecoratedDeclaration_2D_weak::objectCompare (const GALGAS_abstractDecoratedDeclaration_2D_weak & inOperand) const {
   typeComparisonResult result = kOperandNotValid ;
   if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_class * myPtr = (cPtr_weakReference_class *) mObjectPtr ;
-    const size_t myObjectPtr = size_t (myPtr->strongObject ()) ;
-    cPtr_weakReference_class * operandPtr = (cPtr_weakReference_class *) inOperand.mObjectPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr->strongObject ()) ;
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
       result = kFirstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -13655,12 +13658,12 @@ AC_GALGAS_weak_reference () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractDecoratedDeclaration_2D_weak & GALGAS_abstractDecoratedDeclaration_2D_weak::operator = (const GALGAS_abstractDecoratedDeclaration & inSource) {
-  cPtr_weakReference_class * proxyPtr = NULL ;
-  acStrongPtr_class * p = inSource.embeddedObjectPtr () ;
+  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
   if (p != NULL) {
     proxyPtr = p->getProxy () ;
   }
-  macroAssignSharedObject (mObjectPtr, proxyPtr) ;
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
   return *this ;
 }
 
@@ -13674,7 +13677,7 @@ AC_GALGAS_weak_reference (inSource) {
 
 GALGAS_abstractDecoratedDeclaration_2D_weak GALGAS_abstractDecoratedDeclaration_2D_weak::constructor_nil (LOCATION_ARGS) {
   GALGAS_abstractDecoratedDeclaration_2D_weak result ;
-  macroMyNew (result.mObjectPtr, cPtr_weakReference_class (THERE)) ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
 }
 
@@ -13682,9 +13685,8 @@ GALGAS_abstractDecoratedDeclaration_2D_weak GALGAS_abstractDecoratedDeclaration_
 
 GALGAS_abstractDecoratedDeclaration GALGAS_abstractDecoratedDeclaration_2D_weak::bang_abstractDecoratedDeclaration_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_abstractDecoratedDeclaration result ;
-  if (mObjectPtr != NULL) {
-    cPtr_weakReference_class * p = (cPtr_weakReference_class *) mObjectPtr ;
-    acStrongPtr_class * strongPtr = p->strongObject () ;
+  if (mProxyPtr != NULL) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
     if (strongPtr == NULL) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
@@ -14807,7 +14809,7 @@ GALGAS_constructorMap GALGAS_constructorMap::extractObject (const GALGAS_object 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_constructorValue_simple::cEnumAssociatedValues_constructorValue_simple (const GALGAS_bigint & inAssociatedValue0
+cEnumAssociatedValues_constructorValue_simple::cEnumAssociatedValues_constructorValue_simple (const GALGAS_bigint inAssociatedValue0
                                                                                               COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -14836,7 +14838,7 @@ typeComparisonResult cEnumAssociatedValues_constructorValue_simple::compare (con
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_constructorValue_structure::cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList & inAssociatedValue0
+cEnumAssociatedValues_constructorValue_structure::cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0) {
@@ -14865,8 +14867,8 @@ typeComparisonResult cEnumAssociatedValues_constructorValue_structure::compare (
 
 //----------------------------------------------------------------------------------------------------------------------
 
-cEnumAssociatedValues_constructorValue_arrayValue::cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                                                      const GALGAS_uint & inAssociatedValue1
+cEnumAssociatedValues_constructorValue_arrayValue::cEnumAssociatedValues_constructorValue_arrayValue (const GALGAS_omnibusType inAssociatedValue0,
+                                                                                                      const GALGAS_uint inAssociatedValue1
                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
 mAssociatedValue0 (inAssociatedValue0),

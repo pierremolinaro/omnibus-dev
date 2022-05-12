@@ -164,7 +164,7 @@ proc buildOrderedDeclarationList
     #--- Add assignment operator declaration
       appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
     #---
-      addintegerTypeCount ++
+      addintegerTypeCount += 1
     else
       let Ixx = [mValue componentsSeparatedByString !"i"]
       if ([Ixx length] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
@@ -174,7 +174,7 @@ proc buildOrderedDeclarationList
       #--- Add assignment operator declaration
         appendSignedOperatorsTo (!mValue !?precedenceGraph)
       #---
-        addintegerTypeCount ++
+        addintegerTypeCount += 1
       end
     end
   end

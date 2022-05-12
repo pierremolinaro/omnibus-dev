@@ -71,7 +71,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 {
 #-------------------- Source Expression
 #--- Inferred source expression type
-  [inContext.mTypeMap searchKey
+  [inContext.mTypeMap searchType
     !lkey:.new {!"u1" !self.mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
   ]
@@ -125,7 +125,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 
 #-------------------- Bit Expression
 #--- Inferred bit expression type
-  [inContext.mTypeMap searchKey
+  [inContext.mTypeMap searchType
     !lkey:.new {!"u" + [registerBitCount-1G significantBitCount] !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
@@ -203,7 +203,7 @@ override method @bitbandInstructionIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   let idx = [ioGenerationAdds.mUniqueIndex string]
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += ";--- Bit band\n"
   ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + self.mRegisterAddressLLVMname + ", " + self.mBitbandRegisterBaseAddress + "\n"
   ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + self.mBitbandRegisterOffsetMultiplier + "\n"

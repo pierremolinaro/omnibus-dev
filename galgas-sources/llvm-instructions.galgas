@@ -204,7 +204,7 @@ override method @llvmVarInstruction generateIRCode
     ?!@allocaList unused ioAllocaList
 {
   let newTemporaryVariable = "%temp" + ioTemporaryIndex
-  ioTemporaryIndex ++
+  ioTemporaryIndex += 1
   [!?ioVarMap insertKey !self.mVariableName !newTemporaryVariable]
 }
 

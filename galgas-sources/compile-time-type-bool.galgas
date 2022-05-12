@@ -51,7 +51,7 @@ override method @compiletimeBoolAST enterInContext
   let ctBoolTypeName = [ctBoolTypeName () nowhere]
   let ctBoolType = compileTimeBoolType ()
  #--- Enter type
-  [!?ioContext.mTypeMap insertType !lkey: ctBoolTypeName !type: ctBoolType]
+  [!?ioContext.mTypeMap insertType ! ctBoolTypeName !type: ctBoolType]
  #--- Enter not prefix operator
   var key = prefixOperatorMapKey (!ctBoolType !.notOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolType !ctBoolType !@compileTimeBoolNotOperator.new]

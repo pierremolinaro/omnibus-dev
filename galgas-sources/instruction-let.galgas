@@ -67,7 +67,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
 {
   let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
+    else [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
   end
 #--- Analyze source expression
   [self.mSourceExpression analyzeExpression
@@ -95,14 +95,13 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !errorLocation:self.mConstantName.location
     !staticTypeAllowed:true
   )
-  drop targetType
 #---
   if not [[result type] instanciable] then
     error self.mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
   let omnibusName = @lstring.new {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}
-  ioTemporaries.mTemporaryIndex ++
+  ioTemporaries.mTemporaryIndex += 1
   if [result omnibusTypeDescriptionName] != ctIntegerTypeName () then
     ioAllocaList += !llvmNameForLocalVariable (!omnibusName) ![result type] !false
     [!?ioInstructionGenerationList appendStoreTemporaryReference

@@ -31,7 +31,7 @@ override method @testArrayIndexIR llvmInstructionCode
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex
     let testToZeroOk = "test.index.zero.ok." + ioGenerationAdds.mUniqueIndex
     let testToZeroFailure = "test.index.zero.fails." + ioGenerationAdds.mUniqueIndex
-    ioGenerationAdds.mUniqueIndex ++
+    ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + testToZero + " = icmp sge " + [[self.mIndex type] llvmTypeName] + " " + [self.mIndex llvmName] + ", 0\n"
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
   
@@ -62,7 +62,7 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += testToSizeOk + ":\n"
   end
 #---
-  ioGenerationAdds.mUniqueIndex ++
+  ioGenerationAdds.mUniqueIndex += 1
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

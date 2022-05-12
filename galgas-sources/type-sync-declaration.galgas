@@ -129,17 +129,13 @@ override method @syncDeclarationAST enterInContext
   [!?ioContext.mTypeConstructorMap insertKey !self.mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
   let structureType = @omnibusType.new {
-#    !propertyGetterMap:propertyGetterMap
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: self.mSyncToolName
     !kind: .syncTool
     !llvmBaseTypeName:self.mSyncToolName
   }
-  [!?ioContext.mTypeMap insertType
-    !lkey:self.mSyncToolName
-    !type:structureType
-  ]
+  [!?ioContext.mTypeMap insertType !self.mSyncToolName !type: structureType]
 #-------------------------------------------- GenerateLLVM type definitions
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
     ![structureType llvmTypeName]

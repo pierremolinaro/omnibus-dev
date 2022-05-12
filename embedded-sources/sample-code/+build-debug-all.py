@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -21,8 +21,8 @@ def runCommand (command) :
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #---
-runCommand (["LPC-L2294/-build.py"])
-runCommand (["teensy-3-1/-build.py"])
-runCommand (["teensy-3-6/-build.py"])
+runCommand (["LPC-L2294/+build-debug.py"])
+runCommand (["teensy-3-1/+build-debug.py"])
+runCommand (["teensy-3-6/+build-debug.py"])
 
 #----------------------------------------------------------------------------------------------------------------------*

@@ -122,7 +122,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 {
   let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mOptionalTypeName} type]
+    else [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
   end
 #--- Analyze source expression
   [self.mSourceExpression analyzeExpression
@@ -147,7 +147,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
   )
 #--- Declare local variable
   let omnibusLocalVariableName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
-  ioTemporaries.mTemporaryIndex ++
+  ioTemporaries.mTemporaryIndex += 1
   [!?ioUniversalMap insertLocalVariable !self.mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
@@ -177,7 +177,7 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-  let targetType = [@unifiedTypeMap-entry.searchKey {!inContext.mTypeMap !self.mTypeName} type]
+  let targetType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
 #---
   if [targetType isCompileTimeType] then
     error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
@@ -186,7 +186,7 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   end
 #--- Declare local variable
   let omnibusName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
-  ioTemporaries.mTemporaryIndex ++
+  ioTemporaries.mTemporaryIndex += 1
   [!?ioUniversalMap insertLocalVariable !self.mVarName !targetType !omnibusName !.noValue !true]
 #--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !targetType !false
