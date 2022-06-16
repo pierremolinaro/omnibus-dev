@@ -12798,12 +12798,13 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   protected: VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_extendStaticArrayDeclarationDictAST * inSource) ;
 
 //--------------------------------- Insert
-  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode) {
+  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode,
+                                                  const bool inEntryOverrideAllowed) {
     macroUniqueSharedObject (this) ;
     bool extension = false ;
-    bool entryAdded = false ;
-    recursiveAddEntry (mRoot, inNewNode, entryAdded, extension) ;
-    if (entryAdded) {
+    bool entryAlreadyInDict = false ;
+    recursiveAddEntry (mRoot, inNewNode, entryAlreadyInDict, extension, inEntryOverrideAllowed) ;
+    if (!entryAlreadyInDict) {
       mCount ++ ;
     }
     #ifndef DO_NOT_GENERATE_CHECKINGS
@@ -12849,18 +12850,19 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
   }
 
   protected: static void recursiveAddEntry (cNode_extendStaticArrayDeclarationDictAST * & ioRootPtr,
-                                             const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode,
-                                             bool & outEntryAdded,
-                                             bool & ioExtension) {
+                                            const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inNewNode,
+                                            bool & outEntryAlreadyPresent,
+                                            bool & ioExtension,
+                                            const bool inEntryOverrideAllowed) {
     if (ioRootPtr == NULL) {
       macroMyNew (ioRootPtr, cNode_extendStaticArrayDeclarationDictAST (inNewNode.mProperty_key, inNewNode.mProperty_mExpressions)) ;
       ioExtension = true ;
-      outEntryAdded = true ;
+      outEntryAlreadyPresent = false ;
     }else{
       macroValidPointer (ioRootPtr) ;
       const typeComparisonResult comparaison = ioRootPtr->mProperty_key.objectCompare (inNewNode.mProperty_key) ;
       if (comparaison == kFirstOperandGreaterThanSecond) {
-        recursiveAddEntry (ioRootPtr->mInfPtr, inNewNode, outEntryAdded, ioExtension) ;
+        recursiveAddEntry (ioRootPtr->mInfPtr, inNewNode, outEntryAlreadyPresent, ioExtension, inEntryOverrideAllowed) ;
         if (ioExtension) {
           ioRootPtr->mBalance++;
           if (ioRootPtr->mBalance == 0) {
@@ -12874,7 +12876,7 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
           }
         }
       }else if (comparaison == kFirstOperandLowerThanSecond) {
-        recursiveAddEntry (ioRootPtr->mSupPtr, inNewNode, outEntryAdded, ioExtension) ;
+        recursiveAddEntry (ioRootPtr->mSupPtr, inNewNode, outEntryAlreadyPresent, ioExtension, inEntryOverrideAllowed) ;
         if (ioExtension) {
           ioRootPtr->mBalance-- ;
           if (ioRootPtr->mBalance == 0) {
@@ -12889,8 +12891,10 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
         }
       }else{  // Found
         ioExtension = false ;
-        outEntryAdded = false ;
-        ioRootPtr->mProperty_mExpressions = inNewNode.mProperty_mExpressions ;
+        outEntryAlreadyPresent = true ;
+        if (inEntryOverrideAllowed) {
+          ioRootPtr->mProperty_mExpressions = inNewNode.mProperty_mExpressions ;
+        }
       }
     }
   }
@@ -13220,7 +13224,8 @@ void GALGAS_extendStaticArrayDeclarationDictAST::addAssign_operation (const GALG
   if (isValid () && newElement.isValid ()) {
     insulate (THERE) ;
     macroUniqueSharedObject (mSharedDict) ;
-    mSharedDict->performInsert (newElement) ;
+    const bool entryOverrideAllowed = true ;
+    mSharedDict->performInsert (newElement, entryOverrideAllowed) ;
   }
 }
 

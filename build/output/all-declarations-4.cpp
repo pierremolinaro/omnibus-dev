@@ -7459,12 +7459,13 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   protected: VIRTUAL_IN_DEBUG void copyFrom (const cSharedDictRoot_routineLLVMNameDict * inSource) ;
 
 //--------------------------------- Insert
-  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_routineLLVMNameDict_2D_element & inNewNode) {
+  protected: VIRTUAL_IN_DEBUG void performInsert (const GALGAS_routineLLVMNameDict_2D_element & inNewNode,
+                                                  const bool inEntryOverrideAllowed) {
     macroUniqueSharedObject (this) ;
     bool extension = false ;
-    bool entryAdded = false ;
-    recursiveAddEntry (mRoot, inNewNode, entryAdded, extension) ;
-    if (entryAdded) {
+    bool entryAlreadyInDict = false ;
+    recursiveAddEntry (mRoot, inNewNode, entryAlreadyInDict, extension, inEntryOverrideAllowed) ;
+    if (!entryAlreadyInDict) {
       mCount ++ ;
     }
     #ifndef DO_NOT_GENERATE_CHECKINGS
@@ -7510,18 +7511,19 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
   }
 
   protected: static void recursiveAddEntry (cNode_routineLLVMNameDict * & ioRootPtr,
-                                             const GALGAS_routineLLVMNameDict_2D_element & inNewNode,
-                                             bool & outEntryAdded,
-                                             bool & ioExtension) {
+                                            const GALGAS_routineLLVMNameDict_2D_element & inNewNode,
+                                            bool & outEntryAlreadyPresent,
+                                            bool & ioExtension,
+                                            const bool inEntryOverrideAllowed) {
     if (ioRootPtr == NULL) {
       macroMyNew (ioRootPtr, cNode_routineLLVMNameDict (inNewNode.mProperty_key, inNewNode.mProperty_mRoutineLLVMName)) ;
       ioExtension = true ;
-      outEntryAdded = true ;
+      outEntryAlreadyPresent = false ;
     }else{
       macroValidPointer (ioRootPtr) ;
       const typeComparisonResult comparaison = ioRootPtr->mProperty_key.objectCompare (inNewNode.mProperty_key) ;
       if (comparaison == kFirstOperandGreaterThanSecond) {
-        recursiveAddEntry (ioRootPtr->mInfPtr, inNewNode, outEntryAdded, ioExtension) ;
+        recursiveAddEntry (ioRootPtr->mInfPtr, inNewNode, outEntryAlreadyPresent, ioExtension, inEntryOverrideAllowed) ;
         if (ioExtension) {
           ioRootPtr->mBalance++;
           if (ioRootPtr->mBalance == 0) {
@@ -7535,7 +7537,7 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
           }
         }
       }else if (comparaison == kFirstOperandLowerThanSecond) {
-        recursiveAddEntry (ioRootPtr->mSupPtr, inNewNode, outEntryAdded, ioExtension) ;
+        recursiveAddEntry (ioRootPtr->mSupPtr, inNewNode, outEntryAlreadyPresent, ioExtension, inEntryOverrideAllowed) ;
         if (ioExtension) {
           ioRootPtr->mBalance-- ;
           if (ioRootPtr->mBalance == 0) {
@@ -7550,8 +7552,10 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
         }
       }else{  // Found
         ioExtension = false ;
-        outEntryAdded = false ;
-        ioRootPtr->mProperty_mRoutineLLVMName = inNewNode.mProperty_mRoutineLLVMName ;
+        outEntryAlreadyPresent = true ;
+        if (inEntryOverrideAllowed) {
+          ioRootPtr->mProperty_mRoutineLLVMName = inNewNode.mProperty_mRoutineLLVMName ;
+        }
       }
     }
   }
@@ -7881,7 +7885,8 @@ void GALGAS_routineLLVMNameDict::addAssign_operation (const GALGAS_mode & inKey,
   if (isValid () && newElement.isValid ()) {
     insulate (THERE) ;
     macroUniqueSharedObject (mSharedDict) ;
-    mSharedDict->performInsert (newElement) ;
+    const bool entryOverrideAllowed = true ;
+    mSharedDict->performInsert (newElement, entryOverrideAllowed) ;
   }
 }
 
