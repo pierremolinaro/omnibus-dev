@@ -1,7 +1,7 @@
 project (1:0:0) -> "omnibus" {
 #--- Targets
   %makefile-macosx
-  %LatestMacOS
+  %MacOS
   %applicationBundleBase : "pierre.molinaro.name"
   %quietOutputByDefault
 
