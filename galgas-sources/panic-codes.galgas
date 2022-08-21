@@ -4,41 +4,41 @@ func %once panicRoutineName -> @string { result = "handle.panic" }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForAssertViolation -> @bigint { result = 1G }
+func %once panicCodeForAssertViolation -> @bigint { result = 1 }
 
-func %once panicCodeForUnsignedAdditionOverflow -> @bigint { result = 2G }
+func %once panicCodeForUnsignedAdditionOverflow -> @bigint { result = 2 }
 
-func %once panicCodeForSignedAdditionOverflow -> @bigint { result = 3G }
+func %once panicCodeForSignedAdditionOverflow -> @bigint { result = 3 }
 
-func %once panicCodeForUnsignedSubtractOverflow -> @bigint { result = 4G }
+func %once panicCodeForUnsignedSubtractOverflow -> @bigint { result = 4 }
 
-func %once panicCodeForSignedSubtractOverflow -> @bigint { result = 5G }
+func %once panicCodeForSignedSubtractOverflow -> @bigint { result = 5 }
 
-func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint { result = 6G }
+func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint { result = 6 }
 
-func %once panicCodeForSignedMultiplicationOverflow -> @bigint { result = 7G }
+func %once panicCodeForSignedMultiplicationOverflow -> @bigint { result = 7 }
 
-func %once panicCodeForUnsignedDivisionByZero -> @bigint { result = 8G }
+func %once panicCodeForUnsignedDivisionByZero -> @bigint { result = 8 }
 
-func %once panicCodeForSignedDivisionByZero -> @bigint { result = 9G }
+func %once panicCodeForSignedDivisionByZero -> @bigint { result = 9 }
 
-func %once panicCodeForUnsignedRemainderByZero -> @bigint { result = 10G }
+func %once panicCodeForUnsignedRemainderByZero -> @bigint { result = 10 }
 
-func %once panicCodeForSignedRemainderByZero -> @bigint { result = 11G }
-
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once panicCodeForConvertOverflow -> @bigint { result = 12G }
+func %once panicCodeForSignedRemainderByZero -> @bigint { result = 11 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForNegativeArrayIndex -> @bigint { result = 14G }
-
-func %once panicCodeForTooLargeArrayIndex -> @bigint { result = 15G }
+func %once panicCodeForConvertOverflow -> @bigint { result = 12 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForClosedSync -> @bigint { result = 16G }
+func %once panicCodeForNegativeArrayIndex -> @bigint { result = 14 }
+
+func %once panicCodeForTooLargeArrayIndex -> @bigint { result = 15 }
+
+#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForClosedSync -> @bigint { result = 16 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 

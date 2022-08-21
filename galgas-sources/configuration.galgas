@@ -140,11 +140,11 @@ syntax extension omnibus_target_specific_syntax {
     let @lbigint bitbandRegisterBitMultiplier
     select
       $no$
-      bitbandRegisterBaseAddress = .new {!0G !.here}
-      bitbandRegisterEndAddress = .new {!0G !.here}
-      bitbandRegisterRelocationAddress = .new {!0G !.here}
-      bitbandRegisterOffsetMultiplier = .new {!0G !.here}
-      bitbandRegisterBitMultiplier= .new {!0G !.here}
+      bitbandRegisterBaseAddress = .new {!0 !.here}
+      bitbandRegisterEndAddress = .new {!0 !.here}
+      bitbandRegisterRelocationAddress = .new {!0 !.here}
+      bitbandRegisterOffsetMultiplier = .new {!0 !.here}
+      bitbandRegisterBitMultiplier= .new {!0 !.here}
     or
       $integer$ ?bitbandRegisterBaseAddress
       $integer$ ?bitbandRegisterEndAddress
@@ -212,7 +212,7 @@ syntax extension omnibus_target_specific_syntax {
     end
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
     let @uint ptrSize
-    if pointerSize.bigint == 0G then
+    if pointerSize.bigint == 0 then
       error pointerSize : "zero size pointer is invalid" : ptrSize
     else
       ptrSize = [pointerSize.bigint uint]

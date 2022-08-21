@@ -255,7 +255,7 @@ method @taskListAST enterInContext
       !routineKind: .function
       !warnIfUnused: true
       !exportedRoutine: false
-      !routineAttributes: .mutating
+      !routineAttributes: .mutatingRoutine
       !routineMangledLLVMName: routineMangledName
       !formalArgumentList: {}
       !warningOnUnusedArgs: true
@@ -392,7 +392,7 @@ method @decoratedTaskList-element taskSemanticAnalysis
   [inContext.mTypeMap searchType !lkey:self.mTaskName ?type: let taskType]
 #------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = self.mStackSize.bigint
-  if (stackSize < 64G) || ((stackSize mod 8G) != 0G) then
+  if (stackSize < 64) || ((stackSize mod 8) != 0) then
     error self.mStackSize : "stack size should be a multiple of 8, and >= 64"
   end
 #------------------------------------------- Analyze task setup routines

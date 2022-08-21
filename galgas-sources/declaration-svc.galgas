@@ -319,7 +319,7 @@ override method @systemRoutineDeclarationAST enterInContext
 #--- Return type
   [!?ioContext.mTypeMap makeOptionalEntry  !self.mReturnTypeName ?let returnTypeProxy]
 #--- Attributes
-  var mutating = false
+  var mutatingRoutine = false
   var noUnusedWarning = false
   for (attribute) in self.mAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
@@ -328,17 +328,17 @@ override method @systemRoutineDeclarationAST enterInContext
       end
       noUnusedWarning = true    
     elsif attribute.string == mutatingAttribute () then
-      if mutating then
+      if mutatingRoutine then
         error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
       end
-      mutating = true    
+      mutatingRoutine = true    
     else
       error attribute 
       : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + noUnusedWarningAttribute ()
       fixit { remove }
     end
   end
-  let @routineAttributes attributes = .mutating
+  let @routineAttributes attributes = .mutatingRoutine
 #--- Enter in routine map
   let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForSystemRoutine
     !userRoutineMangledName

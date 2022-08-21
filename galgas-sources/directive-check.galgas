@@ -101,7 +101,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
 #    error mInstructionLocation : "expression is not static: use assert instruction"
 #  else
 #    [expressionResult literalInteger ?1* ?value:@bigint value]
-#    if value != 1G then
+#    if value != 1 then
 #      if mCheckMessage.string != "" then
 #        error mCheckMessage : "check failure: " + mCheckMessage
 #      else

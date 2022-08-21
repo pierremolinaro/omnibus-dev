@@ -111,7 +111,7 @@ override method @integerSliceExpressionAST analyzeExpression
     else
     #------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
-      var @bigint accumulatedFieldStaticValues = 0G
+      var @bigint accumulatedFieldStaticValues = 0
       var @operandIRList operandList = {}
       for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
         let @uint sliceWidth
@@ -203,12 +203,12 @@ override method @integerSliceExpressionAST analyzeExpression
           error expressionLocation: "an unsigned integer expression is required here"
         case compileTimeInteger :
           [expressionResult literalInteger ?1* ?value:let @bigint value]
-          if value < 0G then
+          if value < 0 then
             error expressionLocation: "this integer expression should be positive"
-          elsif value < (1G << sliceWidth) then
+          elsif value < (1 << sliceWidth) then
             accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
           else
-            error expressionLocation: "expression too large (should be < " + (1G << sliceWidth) + ")"
+            error expressionLocation: "expression too large (should be < " + (1 << sliceWidth) + ")"
           end
         case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
           if not unsigned then

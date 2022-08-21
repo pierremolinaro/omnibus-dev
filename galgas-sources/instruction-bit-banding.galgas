@@ -97,7 +97,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
   if ([sourceExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
     [sourceExpressionOperand literalInteger ?1* ?value:let @bigint value]
-    if (value < 0G) || (value > 1G) then
+    if (value < 0) || (value > 1) then
       error self.mSourceExpressionLocation : "static value should be 0 or 1"
     else
       sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
@@ -126,7 +126,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Bit Expression
 #--- Inferred bit expression type
   [inContext.mTypeMap searchType
-    !lkey:.new {!"u" + [registerBitCount-1G significantBitCount] !self.mBitExpressionLocation}
+    !lkey:.new {!"u" + [registerBitCount-1 significantBitCount] !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 #--- Compute bit expression
@@ -151,7 +151,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
   if ([bitExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
     [bitExpressionOperand literalInteger ?1* ?value:let @bigint value]
-    if (value < 0G) || (value >= registerBitCount) then
+    if (value < 0) || (value >= registerBitCount) then
       error self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
     else
       bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}

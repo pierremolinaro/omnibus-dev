@@ -181,21 +181,7 @@ void routine_handleArraySubscriptNew (const class GALGAS_omnibusType constinArgu
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractRoutineIR_svcDeclarationGeneration) (const class cPtr_abstractRoutineIR * inObject,
-                                                                                     class GALGAS_primitiveAndServiceIRlist & ioArgument0,
-                                                                                     class GALGAS_sectionIRlist & ioArgument1,
-                                                                                     class GALGAS_generationAdds & ioArgument2,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_svcDeclarationGeneration (const int32_t inClassIndex,
-                                                    extensionMethodSignature_abstractRoutineIR_svcDeclarationGeneration inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_svcDeclarationGeneration (const class cPtr_abstractRoutineIR * inObject,
+void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR * inObject,
                                                    GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
                                                    GALGAS_sectionIRlist & io_ioSectionList,
                                                    GALGAS_generationAdds & io_ioGenerationAdds,
@@ -208,20 +194,7 @@ void callExtensionMethod_svcDeclarationGeneration (const class cPtr_abstractRout
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractRoutineIR_enterAccessibleEntities) (const class cPtr_abstractRoutineIR * inObject,
-                                                                                    class GALGAS_stringset & ioArgument0,
-                                                                                    class GALGAS_uint & ioArgument1,
-                                                                                    class C_Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                   extensionMethodSignature_abstractRoutineIR_enterAccessibleEntities inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractRoutineIR * inObject,
+void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR * inObject,
                                                   GALGAS_stringset & io_ioInvokedRoutineSet,
                                                   GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
@@ -233,23 +206,7 @@ void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractRouti
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForOverflowOperation) (const class cPtr_binaryOperationIR * inObject,
-                                                                                          const class GALGAS_string constinArgument0,
-                                                                                          const class GALGAS_bigint constinArgument1,
-                                                                                          class GALGAS_string & ioArgument2,
-                                                                                          const class GALGAS_generationContext constinArgument3,
-                                                                                          class GALGAS_generationAdds & ioArgument4,
-                                                                                          class C_Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_enterCodeForOverflowOperation (const int32_t inClassIndex,
-                                                         extensionMethodSignature_binaryOperationIR_enterCodeForOverflowOperation inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_enterCodeForOverflowOperation (const class cPtr_binaryOperationIR * inObject,
+void callExtensionMethod_enterCodeForOverflowOperation (class cPtr_binaryOperationIR * inObject,
                                                         const GALGAS_string constin_inOperation,
                                                         const GALGAS_bigint constin_inPanicCode,
                                                         GALGAS_string & io_ioLLVMcode,
@@ -274,23 +231,7 @@ class GALGAS_string function_panicRoutineNameForLocationFile (const class GALGAS
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic) (const class cPtr_binaryOperationIR * inObject,
-                                                                                                     const class GALGAS_string constinArgument0,
-                                                                                                     const class GALGAS_bigint constinArgument1,
-                                                                                                     class GALGAS_string & ioArgument2,
-                                                                                                     const class GALGAS_generationContext constinArgument3,
-                                                                                                     class GALGAS_generationAdds & ioArgument4,
-                                                                                                     class C_Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const int32_t inClassIndex,
-                                                                    extensionMethodSignature_binaryOperationIR_enterCodeForDivisionWithZeroDivisorPanic inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class cPtr_binaryOperationIR * inObject,
+void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (class cPtr_binaryOperationIR * inObject,
                                                                    const GALGAS_string constin_inOperation,
                                                                    const GALGAS_bigint constin_inPanicCode,
                                                                    GALGAS_string & io_ioLLVMcode,
@@ -298,4 +239,18 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (const class c
                                                                    GALGAS_generationAdds & io_ioGenerationAdds,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension setter '@semanticContext insertGetter'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertGetter (class GALGAS_semanticContext & ioObject,
+                                   const class GALGAS_lstring constin_inTypeName,
+                                   const class GALGAS_lstring constin_inGetterName,
+                                   const class GALGAS_propertyVisibility constin_inVisibility,
+                                   const class GALGAS_propertyGetterKind constin_inAccess,
+                                   class C_Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 

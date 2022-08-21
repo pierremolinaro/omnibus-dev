@@ -122,7 +122,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   else
     var @constructorMap constructorMap = {}
     if [opaqueTypeAttributes instanciable] then
-      [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0G}]
+      [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]

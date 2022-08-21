@@ -351,7 +351,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
 
 #      if [boolExpressionResult isLiteralInteger] then
 #        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
-#        if value == 1G then
+#        if value == 1 then
 #          guardedCommandIRList += !.sync {
 #            !isExitCommand:isContinue
 #            !guardMangledName:guardMangledName.string

@@ -137,7 +137,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
     switch access
     case integerSlice (@lbigint low @lbigint high) :
       if high.bigint >= low.bigint then
-        [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1G uint] !low.location]
+        [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1 uint] !low.location]
       end
     case property (*) :
     case arrayAccess (@expressionAST indexExpression 2*) :
@@ -510,7 +510,7 @@ proc handleSliceInExpression
   #--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
-    let resultIntegerName = @lstring.new {!"u" + (inHigh.bigint - inLow.bigint + 1G) !inLow.location}
+    let resultIntegerName = @lstring.new {!"u" + (inHigh.bigint - inLow.bigint + 1) !inLow.location}
     [inContext.mTypeMap searchType !lkey:resultIntegerName ?type:let sliceType]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end

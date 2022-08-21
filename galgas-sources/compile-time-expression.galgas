@@ -471,8 +471,8 @@ override method @ctInfixExpressionAST computeCompileTimeExpression
   [self.mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
   [self.mRightExpression computeCompileTimeExpression !inMap ?result: let right]
   switch self.mInfixOperator
-   case equal     : outValue = if left == right then 1G else 0G end
-   case lessThan  : outValue = if left <  right then 1G else 0G end
+   case equal     : outValue = if left == right then 1 else 0 end
+   case lessThan  : outValue = if left <  right then 1 else 0 end
    case bitWiseAndOp: outValue = left & right
    case bitWiseOrOp : outValue = left | right
    case bitWiseXorOp : outValue = left ^ right
@@ -497,7 +497,7 @@ override method @ctPrefixExpressionAST computeCompileTimeExpression
   [self.mExpression computeCompileTimeExpression !inMap ?result: let exp]
   switch self.mPrefixOperator
    case minusOp  : outValue = - exp
-   case notOp  : outValue = if exp == 0G then 1G else 0G end
+   case notOp  : outValue = if exp == 0 then 1 else 0 end
   end
 }
 
@@ -507,7 +507,7 @@ override method @ctTrueExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
-  outValue = 1G
+  outValue = 1
 }
 
 #·······················································································································
@@ -516,7 +516,7 @@ override method @ctFalseExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
-  outValue = 0G
+  outValue = 0
 }
 
 #·······················································································································

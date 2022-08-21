@@ -33,14 +33,14 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
   }
   GALGAS_string var_opt_5F_optimizationOption_4184 = GALGAS_string ("disable-opt") ;
   GALGAS_string var_llc_5F_optimizationOption_4229 = GALGAS_string ("O0") ;
-  GALGAS_uint var_optimizationOptionCount_4266 = GALGAS_uint ((uint32_t) 0U) ;
+  GALGAS_bigint var_optimizationOptionCount_4266 = GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 99)) ;
   enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
     test_1 = GALGAS_bool (gOption_omnibus_5F_options_optimization_31_.readProperty_value ()).boolEnum () ;
     if (kBoolTrue == test_1) {
       var_opt_5F_optimizationOption_4184 = GALGAS_string ("O1") ;
       var_llc_5F_optimizationOption_4229 = GALGAS_string ("O1") ;
-      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 103)) ;
+      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 103)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 103)) ;
     }
   }
   enumGalgasBool test_2 = kBoolTrue ;
@@ -49,7 +49,7 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
     if (kBoolTrue == test_2) {
       var_opt_5F_optimizationOption_4184 = GALGAS_string ("O2") ;
       var_llc_5F_optimizationOption_4229 = GALGAS_string ("O2") ;
-      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
+      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 108)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 108)) ;
     }
   }
   enumGalgasBool test_3 = kBoolTrue ;
@@ -58,7 +58,7 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
     if (kBoolTrue == test_3) {
       var_opt_5F_optimizationOption_4184 = GALGAS_string ("Os") ;
       var_llc_5F_optimizationOption_4229 = GALGAS_string ("O2") ;
-      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
+      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 113)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 113)) ;
     }
   }
   enumGalgasBool test_4 = kBoolTrue ;
@@ -67,7 +67,7 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
     if (kBoolTrue == test_4) {
       var_opt_5F_optimizationOption_4184 = GALGAS_string ("Oz") ;
       var_llc_5F_optimizationOption_4229 = GALGAS_string ("O2") ;
-      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 118)) ;
+      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 118)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 118)) ;
     }
   }
   enumGalgasBool test_5 = kBoolTrue ;
@@ -76,12 +76,12 @@ void routine_generateTarget (const GALGAS_string constinArgument_inCurrentDirect
     if (kBoolTrue == test_5) {
       var_opt_5F_optimizationOption_4184 = GALGAS_string ("O3") ;
       var_llc_5F_optimizationOption_4229 = GALGAS_string ("O3") ;
-      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
+      var_optimizationOptionCount_4266.plusAssign_operation(GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 123)) ;
     }
   }
   enumGalgasBool test_6 = kBoolTrue ;
   if (kBoolTrue == test_6) {
-    test_6 = GALGAS_bool (kIsStrictSup, var_optimizationOptionCount_4266.objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+    test_6 = GALGAS_bool (kIsStrictSup, var_optimizationOptionCount_4266.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 125)))).boolEnum () ;
     if (kBoolTrue == test_6) {
       TC_Array <C_FixItDescription> fixItArray7 ;
       inCompiler->emitSemanticWarning (GALGAS_location::constructor_nowhere (SOURCE_FILE ("target-generation.galgas", 126)), GALGAS_string ("several optimization options: --").add_operation (var_opt_5F_optimizationOption_4184, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)).add_operation (GALGAS_string (" is used"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 126)), fixItArray7  COMMA_SOURCE_FILE ("target-generation.galgas", 126)) ;
@@ -282,7 +282,7 @@ void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourc
   }
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 49)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_0 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 49)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_0) {
       GALGAS_stringset var_targetNameSet_1852 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("program.galgas", 50)) ;
       cEnumerator_lstringlist enumerator_1877 (var_ast_1227.readProperty_mTargetListAST (), kENUMERATION_UP) ;
@@ -302,11 +302,11 @@ void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourc
   }
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
-    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 59)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 59)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_3) {
       enumGalgasBool test_4 = kBoolTrue ;
       if (kBoolTrue == test_4) {
-        test_4 = GALGAS_bool (kIsEqual, var_ast_1227.readProperty_mTargetListAST ().getter_length (SOURCE_FILE ("program.galgas", 60)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+        test_4 = GALGAS_bool (kIsEqual, var_ast_1227.readProperty_mTargetListAST ().getter_length (SOURCE_FILE ("program.galgas", 60)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
         if (kBoolTrue == test_4) {
           TC_Array <C_FixItDescription> fixItArray5 ;
           inCompiler->emitSemanticWarning (var_endOfSourceFile_1360, GALGAS_string ("no target: only syntax analysis is performed"), fixItArray5  COMMA_SOURCE_FILE ("program.galgas", 61)) ;
@@ -315,7 +315,7 @@ void routine_importFilesAndCompile (const GALGAS_lstring constinArgument_inSourc
       if (kBoolFalse == test_4) {
         enumGalgasBool test_6 = kBoolTrue ;
         if (kBoolTrue == test_6) {
-          test_6 = GALGAS_bool (kIsStrictSup, var_ast_1227.readProperty_mTargetListAST ().getter_length (SOURCE_FILE ("program.galgas", 62)).objectCompare (GALGAS_uint ((uint32_t) 1U))).boolEnum () ;
+          test_6 = GALGAS_bool (kIsStrictSup, var_ast_1227.readProperty_mTargetListAST ().getter_length (SOURCE_FILE ("program.galgas", 62)).objectCompare (GALGAS_uint (uint32_t (1U)))).boolEnum () ;
           if (kBoolTrue == test_6) {
             TC_Array <C_FixItDescription> fixItArray7 ;
             inCompiler->emitSemanticWarning (var_endOfSourceFile_1360, var_ast_1227.readProperty_mTargetListAST ().getter_length (SOURCE_FILE ("program.galgas", 63)).getter_string (SOURCE_FILE ("program.galgas", 63)).add_operation (GALGAS_string (" targets: only syntax analysis is performed"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 63)), fixItArray7  COMMA_SOURCE_FILE ("program.galgas", 63)) ;
@@ -364,7 +364,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   cEnumerator_declarationListAST enumerator_3554 (constinArgument_inAST.readProperty_mDeclarationListAST (), kENUMERATION_UP) ;
   while (enumerator_3554.hasCurrentObject ()) {
     GALGAS_abstractDeclarationAST var_newDeclaration_3690 ;
-    callExtensionMethod_enterExtension ((const cPtr_abstractDeclarationAST *) enumerator_3554.current_mDeclaration (HERE).ptr (), var_ast_3342.mProperty_mExtendStaticArrayDeclarationAST, var_newDeclaration_3690, inCompiler COMMA_SOURCE_FILE ("program.galgas", 98)) ;
+    callExtensionMethod_enterExtension ((cPtr_abstractDeclarationAST *) enumerator_3554.current_mDeclaration (HERE).ptr (), var_ast_3342.mProperty_mExtendStaticArrayDeclarationAST, var_newDeclaration_3690, inCompiler COMMA_SOURCE_FILE ("program.galgas", 98)) ;
     var_ast_3342.mProperty_mDeclarationListAST.addAssign_operation (var_newDeclaration_3690  COMMA_SOURCE_FILE ("program.galgas", 102)) ;
     enumerator_3554.gotoNextObject () ;
   }
@@ -386,7 +386,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_2 = kBoolTrue ;
   if (kBoolTrue == test_2) {
-    test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 118)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_2 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 118)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_2) {
       var_ast_3342.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_compiletimeBoolAST::constructor_new (SOURCE_FILE ("program.galgas", 121))  COMMA_SOURCE_FILE ("program.galgas", 121)) ;
       var_ast_3342.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_compileTimeIntAST::constructor_new (SOURCE_FILE ("program.galgas", 123))  COMMA_SOURCE_FILE ("program.galgas", 123)) ;
@@ -396,7 +396,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
-    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 130)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 130)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_3) {
       {
       routine_retainRequiredDrivers (var_ast_3342, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 131)) ;
@@ -405,7 +405,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
-    test_4 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.readProperty_value ()).operator_and (GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 134)).objectCompare (GALGAS_uint ((uint32_t) 0U))) COMMA_SOURCE_FILE ("program.galgas", 134)).boolEnum () ;
+    test_4 = GALGAS_bool (gOption_omnibus_5F_options_printPasses.readProperty_value ()).operator_and (GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 134)).objectCompare (GALGAS_uint (uint32_t (0U)))) COMMA_SOURCE_FILE ("program.galgas", 134)).boolEnum () ;
     if (kBoolTrue == test_4) {
       inCompiler->printMessage (GALGAS_string ("    ").add_operation (var_ast_3342.readProperty_mDeclarationListAST ().getter_length (SOURCE_FILE ("program.galgas", 135)).getter_string (SOURCE_FILE ("program.galgas", 135)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 135)).add_operation (GALGAS_string (" declarations\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 135))  COMMA_SOURCE_FILE ("program.galgas", 135)) ;
       inCompiler->printMessage (GALGAS_string ("    Duration: ").add_operation (var_parsingTime_3230.getter_string (SOURCE_FILE ("program.galgas", 136)), inCompiler COMMA_SOURCE_FILE ("program.galgas", 136)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 136))  COMMA_SOURCE_FILE ("program.galgas", 136)) ;
@@ -414,7 +414,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   GALGAS_declarationListAST var_orderedDeclarationListAST_5409 = GALGAS_declarationListAST::constructor_emptyList (SOURCE_FILE ("program.galgas", 139)) ;
   enumGalgasBool test_5 = kBoolTrue ;
   if (kBoolTrue == test_5) {
-    test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 140)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_5 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 140)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_5) {
       GALGAS_timer var_t_5469 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 141)) ;
       enumGalgasBool test_6 = kBoolTrue ;
@@ -438,7 +438,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_8 = kBoolTrue ;
   if (kBoolTrue == test_8) {
-    test_8 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 156)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_8 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 156)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_8) {
       cEnumerator_checkTargetListAST enumerator_6068 (var_ast_3342.readProperty_mCheckTargetListAST (), kENUMERATION_UP) ;
       while (enumerator_6068.hasCurrentObject ()) {
@@ -476,7 +476,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   GALGAS_userLLVMTypeDefinitionListIR var_userLLVMTypeDefinitionListIR_6891 = GALGAS_userLLVMTypeDefinitionListIR::constructor_emptyList (SOURCE_FILE ("program.galgas", 175)) ;
   enumGalgasBool test_12 = kBoolTrue ;
   if (kBoolTrue == test_12) {
-    test_12 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 176)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_12 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 176)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_12) {
       GALGAS_timer var_t_6945 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 177)) ;
       {
@@ -494,7 +494,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   GALGAS_intermediateCodeStruct var_intermediateCodeStruct_7525 = GALGAS_intermediateCodeStruct::constructor_default (SOURCE_FILE ("program.galgas", 194)) ;
   enumGalgasBool test_14 = kBoolTrue ;
   if (kBoolTrue == test_14) {
-    test_14 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 195)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_14 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 195)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_14) {
       GALGAS_timer var_t_7585 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 196)) ;
       {
@@ -511,7 +511,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_16 = kBoolTrue ;
   if (kBoolTrue == test_16) {
-    test_16 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 214)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_16 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 214)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_16) {
       GALGAS_timer var_tOpt_8288 = GALGAS_timer::constructor_start (SOURCE_FILE ("program.galgas", 215)) ;
       {
@@ -528,7 +528,7 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
   }
   enumGalgasBool test_18 = kBoolTrue ;
   if (kBoolTrue == test_18) {
-    test_18 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 222)).objectCompare (GALGAS_uint ((uint32_t) 0U))).boolEnum () ;
+    test_18 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("program.galgas", 222)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_18) {
       {
       routine_codeGeneration (constinArgument_inCurrentDirectory, constinArgument_inSourceFile.readProperty_string (), constinArgument_inEndOfSourceFile, var_intermediateCodeStruct_7525, var_userLLVMTypeDefinitionListIR_6891, constinArgument_inTargetName, var_semanticContext_6481.readProperty_mPanicCodeType (), var_semanticContext_6481.readProperty_mPanicLineType (), var_semanticContext_6481.readProperty_mAvailableInterruptMap (), var_staticListValueMap_6603, var_semanticContext_6481.readProperty_mTargetParameters (), inCompiler  COMMA_SOURCE_FILE ("program.galgas", 223)) ;

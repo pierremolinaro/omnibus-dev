@@ -140,7 +140,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
 #--- If source operand is static type, check value and convert it to 'resultType'
   if [sourceOperand isLiteralInteger] then
     [sourceOperand literalInteger ?1* ?value:let @bigint value]
-    if value >= (1G << bitCount) then
+    if value >= (1 << bitCount) then
       error self.mSourceExpressionLocation : "static value too large" : sourceOperand
     else
       sourceOperand = .literalInteger {!type:resultType !value:value}

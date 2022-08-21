@@ -45,9 +45,9 @@ override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @st
 
 func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
   if inIsUnsigned then
-    result = 0G
+    result = 0
   else # Signed
-    result = - (1G << (inBitCount - 1))
+    result = - (1 << (inBitCount - 1))
   end
 }
 
@@ -55,9 +55,9 @@ func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 
 func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
   if inIsUnsigned then
-    result = (1G << inBitCount) - 1G
+    result = (1 << inBitCount) - 1
   else # Signed
-    result = (1G << (inBitCount - 1)) - 1G
+    result = (1 << (inBitCount - 1)) - 1
   end
 }
 

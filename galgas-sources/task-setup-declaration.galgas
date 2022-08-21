@@ -129,7 +129,7 @@ override method @taskSetupDeclarationAST enterInContext
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !routineAttributes: .mutating
+    !routineAttributes: .mutatingRoutine
     !routineMangledLLVMName: .new {!mangledName !self.mSetupName.location}
     !formalArgumentList: {}
     !warningOnUnusedArgs:true

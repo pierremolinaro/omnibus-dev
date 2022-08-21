@@ -314,7 +314,7 @@ override method @compileTimeInfixInfEqualOperatorUsage generateCode
   !@objectIR outResultValue
 {
   [self.mEqualOperatorUsage eval !inLeftOperand !inRightOperand ?var result]
-  if result == 0G then
+  if result == 0 then
     [self.mLessThanOperatorUsage eval !inLeftOperand !inRightOperand ?result]
   end
   outResultValue = .literalInteger {!type: inResultType !value: result}

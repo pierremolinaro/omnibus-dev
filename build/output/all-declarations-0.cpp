@@ -2289,18 +2289,11 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
 
 
 //----------------------------------------------------------------------------------------------------------------------
-//            Unicode test functions                                                             
-//----------------------------------------------------------------------------------------------------------------------
- 
-//----------------------------------------------------------------------------------------------------------------------
-//               P A R S E    L E X I C A L    T O K E N                                         
+//               INTERNAL PARSE LEXICAL TOKEN                                         
 //----------------------------------------------------------------------------------------------------------------------
 
-bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
-  cTokenFor_omnibus_5F_lexique token ;
-  mLoop = true ;
-  token.mTokenCode = -1 ;
-  while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F_lexique & token) {
+  bool loop = true ;
     token.mLexicalAttribute_bigInteger.setToZero () ;
     token.mLexicalAttribute_tokenString.setLengthToZero () ;
     mTokenStartLocation = mCurrentLocation ;
@@ -2310,10 +2303,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
           if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32Char (TO_UNICODE ('_')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (token.mTokenCode == -1) {
           token.mTokenCode = search_into_keyWordList (token.mLexicalAttribute_tokenString) ;
         }
@@ -2327,10 +2320,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
             if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('.'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
         }else{
           lexicalError (gLexicalMessage_omnibus_5F_lexique_attributeError COMMA_LINE_AND_SOURCE_FILE) ;
         }
@@ -2340,10 +2333,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
         do {
           if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('1'))) {
           ::scanner_routine_enterBinaryDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
           do {
@@ -2351,10 +2344,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
               ::scanner_routine_enterBinaryDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
             }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
           token.mTokenCode = kToken_integer ;
           enterToken (token) ;
         }else{
@@ -2364,10 +2357,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
         do {
           if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
           ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
           do {
@@ -2375,10 +2368,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
               ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
             }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
           token.mTokenCode = kToken_integer ;
           enterToken (token) ;
         }else{
@@ -2391,10 +2384,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterDecimalDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
           }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         token.mTokenCode = kToken_integer ;
         enterToken (token) ;
       }else if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
@@ -2404,10 +2397,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
           }else if (testForInputUTF32Char (TO_UNICODE (' ')) || testForInputUTF32Char (TO_UNICODE ('!')) || testForInputUTF32CharRange (TO_UNICODE ('#'), TO_UNICODE (65533))) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
           token.mTokenCode = kToken__22_string_22_ ;
           enterToken (token) ;
@@ -2418,19 +2411,19 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
         do {
           if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         enterDroppedTerminal (kToken_commentMark) ;
       }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__2F__2F_, 2, true)) {
         do {
           if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
           }else{
-            mLoop = false ;
+            loop = false ;
           }
-        }while (mLoop) ;
-        mLoop = true ;
+        }while (loop) ;
+        loop = true ;
         enterDroppedTerminal (kToken_comment) ;
       }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__3E__3E__3D_, 3, true)) {
         token.mTokenCode = kToken__3E__3E__3D_ ;
@@ -2607,10 +2600,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
               ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
               if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
               }else{
-                mLoop = false ;
+                loop = false ;
               }
-            }while (mLoop) ;
-            mLoop = true ;
+            }while (loop) ;
+            loop = true ;
             if (testForInputUTF32Char (TO_UNICODE (':'))) {
               token.mTokenCode = kToken__3F__21_selector_3A_ ;
               enterToken (token) ;
@@ -2631,10 +2624,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
             if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
           if (testForInputUTF32Char (TO_UNICODE (':'))) {
             token.mTokenCode = kToken__3F_selector_3A_ ;
             enterToken (token) ;
@@ -2663,10 +2656,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
               ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
               if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
               }else{
-                mLoop = false ;
+                loop = false ;
               }
-            }while (mLoop) ;
-            mLoop = true ;
+            }while (loop) ;
+            loop = true ;
             if (testForInputUTF32Char (TO_UNICODE (':'))) {
               token.mTokenCode = kToken__21__3F_selector_3A_ ;
               enterToken (token) ;
@@ -2687,10 +2680,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
             if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
           if (testForInputUTF32Char (TO_UNICODE (':'))) {
             token.mTokenCode = kToken__21_selector_3A_ ;
             enterToken (token) ;
@@ -2712,10 +2705,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
             if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
         }else{
           lexicalError (gLexicalMessage_omnibus_5F_lexique_typeError COMMA_LINE_AND_SOURCE_FILE) ;
         }
@@ -2727,10 +2720,10 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
             if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
             }else{
-              mLoop = false ;
+              loop = false ;
             }
-          }while (mLoop) ;
-          mLoop = true ;
+          }while (loop) ;
+          loop = true ;
         }else{
           lexicalError (gLexicalMessage_omnibus_5F_lexique_groupError COMMA_LINE_AND_SOURCE_FILE) ;
         }
@@ -2738,16 +2731,27 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
         enterToken (token) ;
       }else if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE (' '))) {
       }else if (testForInputUTF32Char (TO_UNICODE ('\0'))) { // End of source text ? 
-        token.mTokenCode = kToken_ ; // Empty string code
-      }else{ // Unknown input character
-        unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
-        token.mTokenCode = -1 ; // No token
-        advance () ; // ... go throught unknown character
-      }
-    }catch (const C_lexicalErrorException &) {
+      token.mTokenCode = kToken_ ; // Empty string code
+    }else{ // Unknown input character
+      unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
       token.mTokenCode = -1 ; // No token
       advance () ; // ... go throught unknown character
     }
+  }catch (const C_lexicalErrorException &) {
+    token.mTokenCode = -1 ; // No token
+    advance () ; // ... go throught unknown character
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//               P A R S E    L E X I C A L    T O K E N                                         
+//----------------------------------------------------------------------------------------------------------------------
+
+bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
+  cTokenFor_omnibus_5F_lexique token ;
+  token.mTokenCode = -1 ;
+  while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+    internalParseLexicalToken (token) ;
   }
   if (UNICODE_VALUE (mCurrentChar) == '\0') {
     token.mTokenCode = 0 ;
@@ -3362,7 +3366,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_type_5F_definition_i4_ (G
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 25)) ;
   GALGAS_location var_sizeExpressionLocation_1342 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 26)) ;
   outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.readProperty_mTypeDeclarationIndex ().getter_string (SOURCE_FILE ("type-fixed-size-array.galgas", 27)), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 27)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 27)) ;
-  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 28)) ;
+  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.plusAssign_operation(GALGAS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 28)) ;
   ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_fixedSizeArrayTypeDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1303, var_sizeExpression_1244, var_sizeExpressionLocation_1342  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 29))  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 29)) ;
 }
 
@@ -3388,7 +3392,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_type_5F_definition_i5_ (G
   nt_type_5F_definition_ (ioArgument_ioAST, var_elementTypeName_1159, inCompiler) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 21)) ;
   outArgument_outTypeName = GALGAS_string ("anonymous.").add_operation (ioArgument_ioAST.readProperty_mTypeDeclarationIndex ().getter_string (SOURCE_FILE ("type-dynamic-array.galgas", 22)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)).getter_here (inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 22)) ;
-  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.plusAssign_operation(GALGAS_uint ((uint32_t) 1U), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 23)) ;
+  ioArgument_ioAST.mProperty_mTypeDeclarationIndex.plusAssign_operation(GALGAS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 23)) ;
   ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_typeDynamicArrayDeclarationAST::constructor_new (outArgument_outTypeName, var_elementTypeName_1159  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24))  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 24)) ;
 }
 
@@ -3414,10 +3418,10 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i6_ (GALGAS_a
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_case COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 32)) ;
-    GALGAS_lstring var_constantName_1490 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_constantName_1489 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 33)) ;
-    var_enumCaseList_1407.addAssign_operation (var_constantName_1490, var_idx_1424  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 34)) ;
-    var_idx_1424 = var_idx_1424.add_operation (GALGAS_uint ((uint32_t) 1U).getter_bigint (SOURCE_FILE ("type-enumeration-declaration.galgas", 35)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 35)) ;
+    var_enumCaseList_1407.addAssign_operation (var_constantName_1489, var_idx_1424  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 34)) ;
+    var_idx_1424 = var_idx_1424.add_operation (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 35)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 35)) ;
     switch (select_omnibus_5F_syntax_1 (inCompiler)) {
     case 2: {
     } break ;
@@ -4111,9 +4115,9 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i15_ (GALGAS_
           } break ;
           case 2: {
             inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("declaration-control-register.galgas", 146)) ;
-            GALGAS_lbigint var_bitCount_5911 = inCompiler->synthetizedAttribute_bigInteger () ;
+            GALGAS_lbigint var_bitCount_5910 = inCompiler->synthetizedAttribute_bigInteger () ;
             inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("declaration-control-register.galgas", 147)) ;
-            var_registerBitSlice_5543 = GALGAS_controlRegisterBitSlice::constructor_namedBit (var_bitName_5729, var_bitCount_5911  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 148)) ;
+            var_registerBitSlice_5543 = GALGAS_controlRegisterBitSlice::constructor_namedBit (var_bitName_5729, var_bitCount_5910  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 148)) ;
           } break ;
           default:
             break ;
@@ -4136,8 +4140,8 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i15_ (GALGAS_
     default:
       break ;
     }
-    GALGAS_location var_endOfBitSlice_6155 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 157)) ;
-    var_controlRegisterDeclarationList_5141.addAssign_operation (var_registerDeclarationList_5219, var_registerTypeName_5373, var_registerBitSliceList_5433, var_endOfBitSlice_6155  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 158)) ;
+    GALGAS_location var_endOfBitSlice_6154 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 157)) ;
+    var_controlRegisterDeclarationList_5141.addAssign_operation (var_registerDeclarationList_5219, var_registerTypeName_5373, var_registerBitSliceList_5433, var_endOfBitSlice_6154  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 158)) ;
     switch (select_omnibus_5F_syntax_17 (inCompiler)) {
     case 2: {
     } break ;
@@ -4262,104 +4266,104 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i15_parse (C_
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_registerDeclaration_i16_ (GALGAS_ast & ioArgument_ioAST,
                                                                                  GALGAS_controlRegisterNameListAST & ioArgument_ioRegisterDeclarationList,
                                                                                  C_Lexique_omnibus_5F_lexique * inCompiler) {
-  GALGAS_lstring var_registerName_6876 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerName_6875 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-control-register.galgas", 173)) ;
   switch (select_omnibus_5F_syntax_23 (inCompiler)) {
   case 1: {
-    GALGAS_lstring var_attributeOffset_6927 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_attributeOffset_6926 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 175)) ;
     enumGalgasBool test_0 = kBoolTrue ;
     if (kBoolTrue == test_0) {
-      test_0 = GALGAS_bool (kIsNotEqual, var_attributeOffset_6927.readProperty_string ().objectCompare (GALGAS_string ("offset"))).boolEnum () ;
+      test_0 = GALGAS_bool (kIsNotEqual, var_attributeOffset_6926.readProperty_string ().objectCompare (GALGAS_string ("offset"))).boolEnum () ;
       if (kBoolTrue == test_0) {
         TC_Array <C_FixItDescription> fixItArray1 ;
         appendFixItActions (fixItArray1, kFixItReplace, GALGAS_string ("@offset")) ;
-        inCompiler->emitSemanticError (var_attributeOffset_6927.readProperty_location (), GALGAS_string ("attribute should be @offset"), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 177)) ;
+        inCompiler->emitSemanticError (var_attributeOffset_6926.readProperty_location (), GALGAS_string ("attribute should be @offset"), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 177)) ;
       }
     }
-    GALGAS_expressionAST var_registerOffset_7123 ;
-    nt_expression_ (ioArgument_ioAST, var_registerOffset_7123, inCompiler) ;
-    GALGAS_bool var_isReadOnly_7150 ;
+    GALGAS_expressionAST var_registerOffset_7122 ;
+    nt_expression_ (ioArgument_ioAST, var_registerOffset_7122, inCompiler) ;
+    GALGAS_bool var_isReadOnly_7149 ;
     switch (select_omnibus_5F_syntax_24 (inCompiler)) {
     case 1: {
-      var_isReadOnly_7150 = GALGAS_bool (false) ;
+      var_isReadOnly_7149 = GALGAS_bool (false) ;
     } break ;
     case 2: {
-      GALGAS_lstring var_attribute_7235 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_7234 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 184)) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        test_2 = GALGAS_bool (kIsNotEqual, var_attribute_7235.readProperty_string ().objectCompare (GALGAS_string ("ro"))).boolEnum () ;
+        test_2 = GALGAS_bool (kIsNotEqual, var_attribute_7234.readProperty_string ().objectCompare (GALGAS_string ("ro"))).boolEnum () ;
         if (kBoolTrue == test_2) {
           TC_Array <C_FixItDescription> fixItArray3 ;
           appendFixItActions (fixItArray3, kFixItReplace, GALGAS_string ("@ro")) ;
-          inCompiler->emitSemanticError (var_attribute_7235.readProperty_location (), GALGAS_string ("attribute should be @ro"), fixItArray3  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 186)) ;
+          inCompiler->emitSemanticError (var_attribute_7234.readProperty_location (), GALGAS_string ("attribute should be @ro"), fixItArray3  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 186)) ;
         }
       }
-      var_isReadOnly_7150 = GALGAS_bool (true) ;
+      var_isReadOnly_7149 = GALGAS_bool (true) ;
     } break ;
     default:
       break ;
     }
-    ioArgument_ioRegisterDeclarationList.addAssign_operation (var_registerName_6876, GALGAS_controlRegisterKind::constructor_scalar (SOURCE_FILE ("declaration-control-register.galgas", 192)), var_isReadOnly_7150, var_registerOffset_7123, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 195))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 190)) ;
+    ioArgument_ioRegisterDeclarationList.addAssign_operation (var_registerName_6875, GALGAS_controlRegisterKind::constructor_scalar (SOURCE_FILE ("declaration-control-register.galgas", 192)), var_isReadOnly_7149, var_registerOffset_7122, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 195))  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 190)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("declaration-control-register.galgas", 197)) ;
-    GALGAS_expressionAST var_sizeExpression_7600 ;
-    nt_expression_ (ioArgument_ioAST, var_sizeExpression_7600, inCompiler) ;
-    GALGAS_location var_sizeExpressionLocation_7633 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 199)) ;
-    GALGAS_lstring var_attributeOffset_7690 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_expressionAST var_sizeExpression_7599 ;
+    nt_expression_ (ioArgument_ioAST, var_sizeExpression_7599, inCompiler) ;
+    GALGAS_location var_sizeExpressionLocation_7632 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 199)) ;
+    GALGAS_lstring var_attributeOffset_7689 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 200)) ;
     enumGalgasBool test_4 = kBoolTrue ;
     if (kBoolTrue == test_4) {
-      test_4 = GALGAS_bool (kIsNotEqual, var_attributeOffset_7690.readProperty_string ().objectCompare (GALGAS_string ("offset"))).boolEnum () ;
+      test_4 = GALGAS_bool (kIsNotEqual, var_attributeOffset_7689.readProperty_string ().objectCompare (GALGAS_string ("offset"))).boolEnum () ;
       if (kBoolTrue == test_4) {
         TC_Array <C_FixItDescription> fixItArray5 ;
         appendFixItActions (fixItArray5, kFixItReplace, GALGAS_string ("@offset")) ;
-        inCompiler->emitSemanticError (var_attributeOffset_7690.readProperty_location (), GALGAS_string ("attribute should be @offset"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 202)) ;
+        inCompiler->emitSemanticError (var_attributeOffset_7689.readProperty_location (), GALGAS_string ("attribute should be @offset"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 202)) ;
       }
     }
-    GALGAS_expressionAST var_baseAddressExpression_7893 ;
-    nt_expression_ (ioArgument_ioAST, var_baseAddressExpression_7893, inCompiler) ;
-    GALGAS_location var_baseAddressExpressionLocation_7933 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 205)) ;
-    GALGAS_lstring var_attributeInc_7987 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_expressionAST var_baseAddressExpression_7892 ;
+    nt_expression_ (ioArgument_ioAST, var_baseAddressExpression_7892, inCompiler) ;
+    GALGAS_location var_baseAddressExpressionLocation_7932 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 205)) ;
+    GALGAS_lstring var_attributeInc_7986 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 206)) ;
     enumGalgasBool test_6 = kBoolTrue ;
     if (kBoolTrue == test_6) {
-      test_6 = GALGAS_bool (kIsNotEqual, var_attributeInc_7987.readProperty_string ().objectCompare (GALGAS_string ("inc"))).boolEnum () ;
+      test_6 = GALGAS_bool (kIsNotEqual, var_attributeInc_7986.readProperty_string ().objectCompare (GALGAS_string ("inc"))).boolEnum () ;
       if (kBoolTrue == test_6) {
         TC_Array <C_FixItDescription> fixItArray7 ;
         appendFixItActions (fixItArray7, kFixItReplace, GALGAS_string ("@inc")) ;
-        inCompiler->emitSemanticError (var_attributeInc_7987.readProperty_location (), GALGAS_string ("attribute should be @inc"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 208)) ;
+        inCompiler->emitSemanticError (var_attributeInc_7986.readProperty_location (), GALGAS_string ("attribute should be @inc"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 208)) ;
       }
     }
-    GALGAS_expressionAST var_arrayElementSizeExpression_8180 ;
-    nt_expression_ (ioArgument_ioAST, var_arrayElementSizeExpression_8180, inCompiler) ;
+    GALGAS_expressionAST var_arrayElementSizeExpression_8179 ;
+    nt_expression_ (ioArgument_ioAST, var_arrayElementSizeExpression_8179, inCompiler) ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("declaration-control-register.galgas", 211)) ;
-    GALGAS_bool var_isReadOnly_8217 ;
+    GALGAS_bool var_isReadOnly_8216 ;
     switch (select_omnibus_5F_syntax_25 (inCompiler)) {
     case 1: {
-      var_isReadOnly_8217 = GALGAS_bool (false) ;
+      var_isReadOnly_8216 = GALGAS_bool (false) ;
     } break ;
     case 2: {
-      GALGAS_lstring var_attribute_8302 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_attribute_8301 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 216)) ;
       enumGalgasBool test_8 = kBoolTrue ;
       if (kBoolTrue == test_8) {
-        test_8 = GALGAS_bool (kIsNotEqual, var_attribute_8302.readProperty_string ().objectCompare (GALGAS_string ("ro"))).boolEnum () ;
+        test_8 = GALGAS_bool (kIsNotEqual, var_attribute_8301.readProperty_string ().objectCompare (GALGAS_string ("ro"))).boolEnum () ;
         if (kBoolTrue == test_8) {
           TC_Array <C_FixItDescription> fixItArray9 ;
           appendFixItActions (fixItArray9, kFixItReplace, GALGAS_string ("@ro")) ;
-          inCompiler->emitSemanticError (var_attribute_8302.readProperty_location (), GALGAS_string ("attribute should be @ro"), fixItArray9  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 218)) ;
+          inCompiler->emitSemanticError (var_attribute_8301.readProperty_location (), GALGAS_string ("attribute should be @ro"), fixItArray9  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 218)) ;
         }
       }
-      var_isReadOnly_8217 = GALGAS_bool (true) ;
+      var_isReadOnly_8216 = GALGAS_bool (true) ;
     } break ;
     default:
       break ;
     }
-    GALGAS_location var_arrayElementSizeExpressionLocation_8514 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 222)) ;
-    ioArgument_ioRegisterDeclarationList.addAssign_operation (var_registerName_6876, GALGAS_controlRegisterKind::constructor_registerArray (var_sizeExpression_7600, var_sizeExpressionLocation_7633, var_arrayElementSizeExpression_8180, var_arrayElementSizeExpressionLocation_8514  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 225)), var_isReadOnly_8217, var_baseAddressExpression_7893, var_baseAddressExpressionLocation_7933  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 223)) ;
+    GALGAS_location var_arrayElementSizeExpressionLocation_8513 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 222)) ;
+    ioArgument_ioRegisterDeclarationList.addAssign_operation (var_registerName_6875, GALGAS_controlRegisterKind::constructor_registerArray (var_sizeExpression_7599, var_sizeExpressionLocation_7632, var_arrayElementSizeExpression_8179, var_arrayElementSizeExpressionLocation_8513  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 225)), var_isReadOnly_8216, var_baseAddressExpression_7892, var_baseAddressExpressionLocation_7932  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 223)) ;
   } break ;
   default:
     break ;
@@ -4413,26 +4417,26 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_registerDeclaration_i16_p
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i17_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_registers COMMA_SOURCE_FILE ("declaration-control-register.galgas", 242)) ;
-  GALGAS_lstring var_attribute_9319 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_attribute_9318 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-control-register.galgas", 243)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (kIsNotEqual, var_attribute_9319.readProperty_string ().objectCompare (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 244)))).boolEnum () ;
+    test_0 = GALGAS_bool (kIsNotEqual, var_attribute_9318.readProperty_string ().objectCompare (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 244)))).boolEnum () ;
     if (kBoolTrue == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (var_attribute_9319.readProperty_location (), GALGAS_string ("this attribute should be @").add_operation (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)) ;
+      inCompiler->emitSemanticError (var_attribute_9318.readProperty_location (), GALGAS_string ("this attribute should be @").add_operation (function_userAttributeForRegister (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)), fixItArray1  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 245)) ;
     }
   }
-  GALGAS_lstring var_registerGroupName_9510 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerGroupName_9509 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-control-register.galgas", 247)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("declaration-control-register.galgas", 248)) ;
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
-    GALGAS_lstring var_registerName_9566 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_registerName_9565 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-control-register.galgas", 250)) ;
-    GALGAS_lstring var_key_9580 = GALGAS_lstring::constructor_new (GALGAS_string ("#").add_operation (var_registerGroupName_9510.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)).add_operation (var_registerName_9566.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)), var_registerName_9566.readProperty_location ()  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)) ;
+    GALGAS_lstring var_key_9579 = GALGAS_lstring::constructor_new (GALGAS_string ("#").add_operation (var_registerGroupName_9509.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)).add_operation (var_registerName_9565.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)), var_registerName_9565.readProperty_location ()  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 251)) ;
     {
-    ioArgument_ioAST.mProperty_mControlRegisterUserAccesMapAST.setter_insertKey (var_key_9580, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 252)) ;
+    ioArgument_ioAST.mProperty_mControlRegisterUserAccesMapAST.setter_insertKey (var_key_9579, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 252)) ;
     }
     switch (select_omnibus_5F_syntax_26 (inCompiler)) {
     case 2: {
@@ -7585,7 +7589,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_primary_i70_ (GALGAS_ast 
   }
   enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
-    test_1 = GALGAS_bool (kIsStrictInf, var_integerFieldValues_1483.getter_length (SOURCE_FILE ("expression-integer-slice.galgas", 37)).objectCompare (GALGAS_uint ((uint32_t) 2U))).boolEnum () ;
+    test_1 = GALGAS_bool (kIsStrictInf, var_integerFieldValues_1483.getter_length (SOURCE_FILE ("expression-integer-slice.galgas", 37)).objectCompare (GALGAS_uint (uint32_t (2U)))).boolEnum () ;
     if (kBoolTrue == test_1) {
       TC_Array <C_FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)), GALGAS_string ("this expression should contain two bit slices or more"), fixItArray2  COMMA_SOURCE_FILE ("expression-integer-slice.galgas", 38)) ;
@@ -11146,59 +11150,59 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
     break ;
   }
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_serviceHandler_5979 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_serviceHandler_5974 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_SYSTEM_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_servicePushedRegisterByteSize_6081 = inCompiler->synthetizedAttribute_bigInteger () ;
+  GALGAS_lbigint var_servicePushedRegisterByteSize_6076 = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_HEADER"), inCompiler) ;
-  GALGAS_lstring var_serviceDispatcherHeader_6178 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_serviceDispatcherHeader_6173 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_ENTRY"), inCompiler) ;
-  GALGAS_lstring var_serviceDispatcherEntry_6273 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_serviceDispatcherEntry_6268 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_NO_RETURNED_VALUE"), inCompiler) ;
-  GALGAS_lstring var_serviceEntryNoReturnedValue_6380 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_serviceEntryNoReturnedValue_6375 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_WITH_RETURNED_VALUE"), inCompiler) ;
-  GALGAS_lstring var_serviceEntryReturnValue_6485 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_serviceEntryReturnValue_6480 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_sectionHandler_6563 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sectionHandler_6558 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_SYSTEM_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_sectionPushedRegisterByteSize_6665 = inCompiler->synthetizedAttribute_bigInteger () ;
+  GALGAS_lbigint var_sectionPushedRegisterByteSize_6660 = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_HEADER"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherHeader_6762 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sectionDispatcherHeader_6757 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_ENTRY"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherEntry_6857 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sectionDispatcherEntry_6852 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_UNKNOWN_MODE"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherInvocationFromAnyMode_6975 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sectionDispatcherInvocationFromAnyMode_6970 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_USER_MODE"), inCompiler) ;
-  GALGAS_lstring var_sectionDispatcherInvocationFromUserMode_7091 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_sectionDispatcherInvocationFromUserMode_7086 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_HANDLER"), inCompiler) ;
-  GALGAS_lstring var_xtrInterruptHandler_7176 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_xtrInterruptHandler_7171 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_USER_STACK_SIZE"), inCompiler) ;
-  GALGAS_lbigint var_stackedUserRegisterOnInterruptByteSize_7287 = inCompiler->synthetizedAttribute_bigInteger () ;
+  GALGAS_lbigint var_stackedUserRegisterOnInterruptByteSize_7282 = inCompiler->synthetizedAttribute_bigInteger () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
   nt_configuration_5F_key_ (GALGAS_string ("UNUSED_INTERRUPT"), inCompiler) ;
-  GALGAS_lstring var_undefinedInterruptHandler_7377 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_undefinedInterruptHandler_7372 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
   nt_configuration_5F_key_ (GALGAS_string ("CPP_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_C_5F_definitionFiles_7453 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 186)) ;
+  GALGAS_lstringlist var_C_5F_definitionFiles_7448 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 186)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     switch (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_7518 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_fileRelativePath_7513 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
-      var_C_5F_definitionFiles_7453.addAssign_operation (var_fileRelativePath_7518  COMMA_SOURCE_FILE ("configuration.galgas", 190)) ;
+      var_C_5F_definitionFiles_7448.addAssign_operation (var_fileRelativePath_7513  COMMA_SOURCE_FILE ("configuration.galgas", 190)) ;
     } break ;
     default:
       repeatFlag_0 = false ;
@@ -11206,14 +11210,14 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("S_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_S_5F_definitionFiles_7645 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 193)) ;
+  GALGAS_lstringlist var_S_5F_definitionFiles_7640 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 193)) ;
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     switch (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_7710 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_fileRelativePath_7705 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
-      var_S_5F_definitionFiles_7645.addAssign_operation (var_fileRelativePath_7710  COMMA_SOURCE_FILE ("configuration.galgas", 197)) ;
+      var_S_5F_definitionFiles_7640.addAssign_operation (var_fileRelativePath_7705  COMMA_SOURCE_FILE ("configuration.galgas", 197)) ;
     } break ;
     default:
       repeatFlag_1 = false ;
@@ -11221,14 +11225,14 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("LL_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_LL_5F_definitionFiles_7839 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 200)) ;
+  GALGAS_lstringlist var_LL_5F_definitionFiles_7834 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 200)) ;
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
     switch (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_fileRelativePath_7904 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_fileRelativePath_7899 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
-      var_LL_5F_definitionFiles_7839.addAssign_operation (var_fileRelativePath_7904  COMMA_SOURCE_FILE ("configuration.galgas", 204)) ;
+      var_LL_5F_definitionFiles_7834.addAssign_operation (var_fileRelativePath_7899  COMMA_SOURCE_FILE ("configuration.galgas", 204)) ;
     } break ;
     default:
       repeatFlag_2 = false ;
@@ -11241,35 +11245,35 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   while (repeatFlag_3) {
     switch (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_relativeFilePath_8088 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_relativeFilePath_8083 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
-      outArgument_outImportedFileList.addAssign_operation (var_relativeFilePath_8088  COMMA_SOURCE_FILE ("configuration.galgas", 211)) ;
+      outArgument_outImportedFileList.addAssign_operation (var_relativeFilePath_8083  COMMA_SOURCE_FILE ("configuration.galgas", 211)) ;
     } break ;
     default:
       repeatFlag_3 = false ;
       break ;
     }
   }
-  GALGAS_interruptionConfigurationList var_interruptionConfigurationList_8204 ;
-  GALGAS_enumerationConstantList var_interruptConstantList_8231 ;
-  nt_interruptConfigList_ (var_interruptionConfigurationList_8204, var_interruptConstantList_8231, inCompiler) ;
-  GALGAS_uint var_ptrSize_8253 ;
+  GALGAS_interruptionConfigurationList var_interruptionConfigurationList_8199 ;
+  GALGAS_enumerationConstantList var_interruptConstantList_8226 ;
+  nt_interruptConfigList_ (var_interruptionConfigurationList_8199, var_interruptConstantList_8226, inCompiler) ;
+  GALGAS_uint var_ptrSize_8248 ;
   enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
     test_4 = GALGAS_bool (kIsEqual, var_pointerSize_4742.readProperty_bigint ().objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 215)))).boolEnum () ;
     if (kBoolTrue == test_4) {
       TC_Array <C_FixItDescription> fixItArray5 ;
       inCompiler->emitSemanticError (var_pointerSize_4742.readProperty_location (), GALGAS_string ("zero size pointer is invalid"), fixItArray5  COMMA_SOURCE_FILE ("configuration.galgas", 216)) ;
-      var_ptrSize_8253.drop () ; // Release error dropped variable
+      var_ptrSize_8248.drop () ; // Release error dropped variable
     }
   }
   if (kBoolFalse == test_4) {
-    var_ptrSize_8253 = var_pointerSize_4742.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 218)) ;
+    var_ptrSize_8248 = var_pointerSize_4742.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 218)) ;
   }
-  GALGAS_targetParameters var_parameters_8435 = GALGAS_targetParameters::constructor_new (var_loc_4274, var_python_5F_utilityToolList_4350, var_python_5F_build_4423, var_linkerScript_4497, var_ptrSize_8253, var_handleDynamicArray_4816, var_systemStackSize_5010, var_stackedUserRegisterOnInterruptByteSize_7287, var_nopInstructionStringInLLVM_5088, var_bitbandRegisterBaseAddress_5168, var_bitbandRegisterEndAddress_5211, var_bitbandRegisterRelocationAddress_5261, var_bitbandRegisterOffsetMultiplier_5310, var_bitbandRegisterBitMultiplier_5356, var_sectionHandler_6563, var_sectionPushedRegisterByteSize_6665, var_sectionDispatcherHeader_6762, var_sectionDispatcherEntry_6857, var_sectionDispatcherInvocationFromAnyMode_6975, var_sectionDispatcherInvocationFromUserMode_7091, var_C_5F_definitionFiles_7453, var_S_5F_definitionFiles_7645, var_LL_5F_definitionFiles_7839, var_xtrInterruptHandler_7176, var_undefinedInterruptHandler_7377, var_serviceHandler_5979, var_servicePushedRegisterByteSize_6081, var_serviceDispatcherEntry_6273, var_serviceDispatcherHeader_6178, var_serviceEntryNoReturnedValue_6380, var_serviceEntryReturnValue_6485  COMMA_SOURCE_FILE ("configuration.galgas", 220)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_panicCodeTypeName_4581, var_panicLineTypeName_4666, var_parameters_8435, var_interruptionConfigurationList_8204  COMMA_SOURCE_FILE ("configuration.galgas", 253))  COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
+  GALGAS_targetParameters var_parameters_8429 = GALGAS_targetParameters::constructor_new (var_loc_4274, var_python_5F_utilityToolList_4350, var_python_5F_build_4423, var_linkerScript_4497, var_ptrSize_8248, var_handleDynamicArray_4816, var_systemStackSize_5010, var_stackedUserRegisterOnInterruptByteSize_7282, var_nopInstructionStringInLLVM_5088, var_bitbandRegisterBaseAddress_5168, var_bitbandRegisterEndAddress_5211, var_bitbandRegisterRelocationAddress_5261, var_bitbandRegisterOffsetMultiplier_5310, var_bitbandRegisterBitMultiplier_5356, var_sectionHandler_6558, var_sectionPushedRegisterByteSize_6660, var_sectionDispatcherHeader_6757, var_sectionDispatcherEntry_6852, var_sectionDispatcherInvocationFromAnyMode_6970, var_sectionDispatcherInvocationFromUserMode_7086, var_C_5F_definitionFiles_7448, var_S_5F_definitionFiles_7640, var_LL_5F_definitionFiles_7834, var_xtrInterruptHandler_7171, var_undefinedInterruptHandler_7372, var_serviceHandler_5974, var_servicePushedRegisterByteSize_6076, var_serviceDispatcherEntry_6268, var_serviceDispatcherHeader_6173, var_serviceEntryNoReturnedValue_6375, var_serviceEntryReturnValue_6480  COMMA_SOURCE_FILE ("configuration.galgas", 220)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_panicCodeTypeName_4581, var_panicLineTypeName_4666, var_parameters_8429, var_interruptionConfigurationList_8199  COMMA_SOURCE_FILE ("configuration.galgas", 253))  COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
   outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 259)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::constructor_new (GALGAS_lstring::constructor_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_xtrInterruptHandler_7176.readProperty_location ()  COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_interruptConstantList_8231  COMMA_SOURCE_FILE ("configuration.galgas", 260))  COMMA_SOURCE_FILE ("configuration.galgas", 260)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::constructor_new (GALGAS_lstring::constructor_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_xtrInterruptHandler_7171.readProperty_location ()  COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_interruptConstantList_8226  COMMA_SOURCE_FILE ("configuration.galgas", 260))  COMMA_SOURCE_FILE ("configuration.galgas", 260)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -11412,24 +11416,24 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   while (repeatFlag_0) {
     switch (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler)) {
     case 2: {
-      GALGAS_lstring var_interruptName_10239 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_interruptName_10233 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
-      GALGAS_interruptionPanicCode var_interruptionPanicCode_10294 ;
+      GALGAS_interruptionPanicCode var_interruptionPanicCode_10288 ;
       switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
       case 1: {
-        var_interruptionPanicCode_10294 = GALGAS_interruptionPanicCode::constructor_noCode (SOURCE_FILE ("configuration.galgas", 280)) ;
+        var_interruptionPanicCode_10288 = GALGAS_interruptionPanicCode::constructor_noCode (SOURCE_FILE ("configuration.galgas", 280)) ;
       } break ;
       case 2: {
         inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
-        GALGAS_lbigint var_panicCode_10402 = inCompiler->synthetizedAttribute_bigInteger () ;
+        GALGAS_lbigint var_panicCode_10396 = inCompiler->synthetizedAttribute_bigInteger () ;
         inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
-        var_interruptionPanicCode_10294 = GALGAS_interruptionPanicCode::constructor_code (var_panicCode_10402  COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
-        outArgument_outEnumerationConstantList.addAssign_operation (var_interruptName_10239, var_panicCode_10402.readProperty_bigint ()  COMMA_SOURCE_FILE ("configuration.galgas", 285)) ;
+        var_interruptionPanicCode_10288 = GALGAS_interruptionPanicCode::constructor_code (var_panicCode_10396  COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
+        outArgument_outEnumerationConstantList.addAssign_operation (var_interruptName_10233, var_panicCode_10396.readProperty_bigint ()  COMMA_SOURCE_FILE ("configuration.galgas", 285)) ;
       } break ;
       default:
         break ;
       }
-      outArgument_interruptionConfigurationList.addAssign_operation (var_interruptName_10239, var_interruptionPanicCode_10294  COMMA_SOURCE_FILE ("configuration.galgas", 287)) ;
+      outArgument_interruptionConfigurationList.addAssign_operation (var_interruptName_10233, var_interruptionPanicCode_10288  COMMA_SOURCE_FILE ("configuration.galgas", 287)) ;
     } break ;
     default:
       repeatFlag_0 = false ;

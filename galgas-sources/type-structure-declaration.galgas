@@ -336,7 +336,7 @@ method @structurePropertyListAST-element enterPropertyInContext
   ?!@bool canBeCopied
 {
 #---------- Attributes
-  var @lbigint explicitAlignment = .new {!0G !.nowhere}
+  var @lbigint explicitAlignment = .new {!0 !.nowhere}
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
@@ -345,7 +345,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       error attribute : "@align attribute already defined"
     else
     #--- Check alignment is a power of 2
-      if align.bigint != (1G << [align.bigint - 1G bitCountForUnsignedRepresentation]) then
+      if align.bigint != (1 << [align.bigint - 1 bitCountForUnsignedRepresentation]) then
         error align : "alignment should be a power of 2"
       else
         explicitAlignment = align
@@ -530,7 +530,7 @@ method @structurePropertyListAST-element enterPropertyInContext
       !routineKind: .function
       !warnIfUnused: false
       !exportedRoutine: false
-      !routineAttributes: .mutating
+      !routineAttributes: .mutatingRoutine
       !routineMangledLLVMName: functionLLVMName
       !formalArgumentList: formalArgumentList
       !warningOnUnusedArgs: false 

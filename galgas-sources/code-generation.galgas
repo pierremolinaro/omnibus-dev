@@ -132,7 +132,7 @@ proc codeGeneration
     let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python " + productDirectory + "/" + script + ".py"
     let @sint result = [fullScript system]
-    if result != 0S then
+    if result != 0 then
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
     if [option omnibus_options.printPasses value] then

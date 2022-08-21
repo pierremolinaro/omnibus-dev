@@ -10,20 +10,6 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Routine 'enterFormalArguments'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
-                                   const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                   class GALGAS_universalValuedObjectMap & ioArgument2,
-                                   class GALGAS_routineFormalArgumentListIR & ioArgument3,
-                                   const class GALGAS_bool constinArgument4,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
 //Extension getter '@effectiveArgumentListAST routineSignature' (as function)
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -39,19 +25,7 @@ class GALGAS_lstring extensionGetter_routineSignature (const class GALGAS_effect
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_panicAST_noteTypesInPrecedenceGraph) (const class cPtr_panicAST * inObject,
-                                                                              class GALGAS_semanticTypePrecedenceGraph & ioArgument0,
-                                                                              class C_Compiler * inCompiler
-                                                                              COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_noteTypesInPrecedenceGraph (const int32_t inClassIndex,
-                                                      extensionMethodSignature_panicAST_noteTypesInPrecedenceGraph inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_noteTypesInPrecedenceGraph (const class cPtr_panicAST * inObject,
+void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_panicAST * inObject,
                                                      GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
@@ -131,7 +105,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 
 class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
@@ -145,16 +128,16 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -220,29 +203,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionNoSelf) (const class cPtr_primaryInExpressionAST * inObject,
-                                                                                                const class GALGAS_omnibusType constinArgument0,
-                                                                                                const class GALGAS_routineAttributes constinArgument1,
-                                                                                                const class GALGAS_omnibusType constinArgument2,
-                                                                                                const class GALGAS_semanticContext constinArgument3,
-                                                                                                const class GALGAS_mode constinArgument4,
-                                                                                                class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                                                class GALGAS_staticEntityMap & ioArgument6,
-                                                                                                class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                                                class GALGAS_allocaList & ioArgument8,
-                                                                                                class GALGAS_instructionListIR & ioArgument9,
-                                                                                                class GALGAS_objectIR & outArgument10,
-                                                                                                class C_Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_analyzePrimaryExpressionNoSelf (const int32_t inClassIndex,
-                                                          extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionNoSelf inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_analyzePrimaryExpressionNoSelf (const class cPtr_primaryInExpressionAST * inObject,
+void callExtensionMethod_analyzePrimaryExpressionNoSelf (class cPtr_primaryInExpressionAST * inObject,
                                                          const GALGAS_omnibusType constin_inSelfType,
                                                          const GALGAS_routineAttributes constin_inRoutineAttributes,
                                                          const GALGAS_omnibusType constin_inOptionalTargetType,
@@ -284,29 +245,7 @@ void routine_procAnalyzeAccesListInExpression (const class GALGAS_omnibusType co
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionWithSelf) (const class cPtr_primaryInExpressionAST * inObject,
-                                                                                                  const class GALGAS_omnibusType constinArgument0,
-                                                                                                  const class GALGAS_routineAttributes constinArgument1,
-                                                                                                  const class GALGAS_omnibusType constinArgument2,
-                                                                                                  const class GALGAS_semanticContext constinArgument3,
-                                                                                                  const class GALGAS_mode constinArgument4,
-                                                                                                  class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                                                  class GALGAS_staticEntityMap & ioArgument6,
-                                                                                                  class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                                                  class GALGAS_allocaList & ioArgument8,
-                                                                                                  class GALGAS_instructionListIR & ioArgument9,
-                                                                                                  class GALGAS_objectIR & outArgument10,
-                                                                                                  class C_Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_analyzePrimaryExpressionWithSelf (const int32_t inClassIndex,
-                                                            extensionMethodSignature_primaryInExpressionAST_analyzePrimaryExpressionWithSelf inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_analyzePrimaryExpressionWithSelf (const class cPtr_primaryInExpressionAST * inObject,
+void callExtensionMethod_analyzePrimaryExpressionWithSelf (class cPtr_primaryInExpressionAST * inObject,
                                                            const GALGAS_omnibusType constin_inSelfType,
                                                            const GALGAS_routineAttributes constin_inRoutineAttributes,
                                                            const GALGAS_omnibusType constin_inOptionalTargetType,
@@ -402,21 +341,7 @@ void routine_handleSliceInExpression (const class GALGAS_semanticContext constin
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_compileTimeInfixOperatorUsage_eval) (const class cPtr_compileTimeInfixOperatorUsage * inObject,
-                                                                             const class GALGAS_objectIR constinArgument0,
-                                                                             const class GALGAS_objectIR constinArgument1,
-                                                                             class GALGAS_bigint & outArgument2,
-                                                                             class C_Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_eval (const int32_t inClassIndex,
-                                extensionMethodSignature_compileTimeInfixOperatorUsage_eval inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_eval (const class cPtr_compileTimeInfixOperatorUsage * inObject,
+void callExtensionMethod_eval (class cPtr_compileTimeInfixOperatorUsage * inObject,
                                const GALGAS_objectIR constin_inLeftOperand,
                                const GALGAS_objectIR constin_inRightOperand,
                                GALGAS_bigint & out_outResult,

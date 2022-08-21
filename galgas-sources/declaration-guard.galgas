@@ -290,7 +290,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyze instruction list
     [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
-      !routineAttributes:.mutating
+      !routineAttributes:.mutatingRoutine
       !context:inContext
       !mode:.guardMode
       !?temporary:ioTemporaries
@@ -311,7 +311,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyze base guard
     [baseGuardInstruction baseGuardAnalyze 
       !self:receiverType
-      !routineAttributes:.mutating
+      !routineAttributes:.mutatingRoutine
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries
@@ -322,7 +322,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   #--- Analyze instruction list
     [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
-      !routineAttributes: .mutating
+      !routineAttributes: .mutatingRoutine
       !context:inContext
       !mode:.serviceMode # Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries

@@ -138,7 +138,7 @@ override method @compileTimeIntModuloOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue == 0G then
+  if rightValue == 0 then
     error inOperatorLocation : "compile time divide by zero" : outResultValue
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
@@ -164,8 +164,8 @@ override method @compileTimeIntModuloZeroOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue == 0G then
-    outResultValue = .literalInteger {!type: inResultType !value: 0G}
+  if rightValue == 0 then
+    outResultValue = .literalInteger {!type: inResultType !value: 0}
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
@@ -190,7 +190,7 @@ override method @compileTimeIntDivideOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue == 0G then
+  if rightValue == 0 then
     error inOperatorLocation : "compile time divide by zero" : outResultValue
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
@@ -216,8 +216,8 @@ override method @compileTimeIntDivideZeroOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue == 0G then
-    outResultValue = .literalInteger {!type: inResultType !value: 0G}
+  if rightValue == 0 then
+    outResultValue = .literalInteger {!type: inResultType !value: 0}
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
@@ -352,7 +352,7 @@ override method @compileTimeIntShiftLeftOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue < 0G then
+  if rightValue < 0 then
     error inOperatorLocation : "compile time left shift right operand should be ≥ 0" : outResultValue
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]
@@ -378,7 +378,7 @@ override method @compileTimeIntShiftRightOperator generateCode
   !@objectIR outResultValue
 {
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  if rightValue < 0G then
+  if rightValue < 0 then
     error inOperatorLocation : "compile time right shift right operand should be ≥ 0" : outResultValue
   else
     [inLeftOperand literalInteger ?1* ?value: let leftValue]

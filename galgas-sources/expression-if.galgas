@@ -189,7 +189,7 @@ override method @ifExpressionAST analyzeExpression
   end
 #  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
 #    [ifExpressionResult literalInteger ?1* ?value:let value]
-#    outResult = if value != 0G then thenExpressionResult else elseExpressionResult end
+#    outResult = if value != 0 then thenExpressionResult else elseExpressionResult end
 #  else # No, generate 'select' LLVM instruction
 #    getNewTempValue (![elseExpressionResult type] !?ioTemporaries ?outResult)
 #    [!?ioInstructionGenerationList appendSelectOperation

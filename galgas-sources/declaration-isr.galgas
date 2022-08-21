@@ -99,7 +99,7 @@ override method @isrDeclarationAST enterInContext
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !routineAttributes:.mutating
+    !routineAttributes:.mutatingRoutine
     !routineMangledLLVMName: isrRoutineMangledName
     !formalArgumentList: {}
     !warningOnUnusedArgs: true

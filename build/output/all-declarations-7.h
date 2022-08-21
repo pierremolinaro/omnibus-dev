@@ -10,246 +10,6 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @computeSubscriptedVolatileRegisterAddress_2D_weak weak reference class
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak (const class GALGAS_computeSubscriptedVolatileRegisterAddress & inSource) ;
-
-  public: GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak & operator = (const class GALGAS_computeSubscriptedVolatileRegisterAddress & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_computeSubscriptedVolatileRegisterAddress bang_computeSubscriptedVolatileRegisterAddress_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                                         C_Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak constructor_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak class
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendEnterRegisterAddress'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendEnterRegisterAddress (class GALGAS_instructionListIR & ioObject,
-                                                 class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                 class GALGAS_string & out_out_5F_llvmName,
-                                                 const class GALGAS_bigint constin_inBaseAddress,
-                                                 const class GALGAS_bigint constin_inAddressOffset,
-                                                 const class GALGAS_string constin_inRegisterName,
-                                                 class C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-// Phase 1: @enterRegisterAddressIR reference class
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_enterRegisterAddressIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_enterRegisterAddressIR constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_enterRegisterAddressIR (const class cPtr_enterRegisterAddressIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_string readProperty_mLLVMName (void) const ;
-
-  public: class GALGAS_bigint readProperty_mBaseAddress (void) const ;
-
-  public: class GALGAS_bigint readProperty_mAddressOffset (void) const ;
-
-  public: class GALGAS_string readProperty_mRegisterName (void) const ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_enterRegisterAddressIR extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_enterRegisterAddressIR constructor_new (const class GALGAS_string & inOperand0,
-                                                                      const class GALGAS_bigint & inOperand1,
-                                                                      const class GALGAS_bigint & inOperand2,
-                                                                      const class GALGAS_string & inOperand3
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMAddressOffset (class GALGAS_bigint inArgument0
-                                                          COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMBaseAddress (class GALGAS_bigint inArgument0
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMLLVMName (class GALGAS_string inArgument0
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMRegisterName (class GALGAS_string inArgument0
-                                                         COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_enterRegisterAddressIR class
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterAddressIR ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @enterRegisterAddressIR class
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
-
-//----------------------------------------------------------------------------------------------------------------------
-
-//--- Properties
-  public: GALGAS_string mProperty_mLLVMName ;
-  public: GALGAS_bigint mProperty_mBaseAddress ;
-  public: GALGAS_bigint mProperty_mAddressOffset ;
-  public: GALGAS_string mProperty_mRegisterName ;
-
-//--- Constructor
-  public: cPtr_enterRegisterAddressIR (const GALGAS_string & in_mLLVMName,
-                                       const GALGAS_bigint & in_mBaseAddress,
-                                       const GALGAS_bigint & in_mAddressOffset,
-                                       const GALGAS_string & in_mRegisterName
-                                       COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
-
-} ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-// Phase 1: @enterRegisterAddressIR_2D_weak weak reference class
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_enterRegisterAddressIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_enterRegisterAddressIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_enterRegisterAddressIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_enterRegisterAddressIR_2D_weak (const class GALGAS_enterRegisterAddressIR & inSource) ;
-
-  public: GALGAS_enterRegisterAddressIR_2D_weak & operator = (const class GALGAS_enterRegisterAddressIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_enterRegisterAddressIR bang_enterRegisterAddressIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_enterRegisterAddressIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                      C_Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_enterRegisterAddressIR_2D_weak constructor_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const ;
- 
-} ; // End of GALGAS_enterRegisterAddressIR_2D_weak class
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterAddressIR_2D_weak ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
 //Extension setter '@instructionListIR appendEnterRegisterGroupSubscriptedAddress'
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -344,7 +104,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_enterRegisterGroupS
 
 class cPtr_enterRegisterGroupSubscriptedAddressIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_string mProperty_mLLVMName ;
@@ -360,16 +124,16 @@ class cPtr_enterRegisterGroupSubscriptedAddressIR : public cPtr_abstractInstruct
                                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -510,7 +274,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_loadIndirectVolatil
 
 class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetValue ;
@@ -522,16 +290,16 @@ class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -679,7 +447,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeIndirectVolati
 
 class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetVarType ;
@@ -693,16 +465,16 @@ class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -849,7 +621,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_copyFromReferencesI
 
 class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_LValueRepresentation mProperty_mTarget ;
@@ -861,16 +642,16 @@ class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1072,7 +853,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalPropert
 
 class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mType ;
@@ -1090,16 +875,16 @@ class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1261,7 +1046,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getUniversalArrayEl
 
 class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mType ;
@@ -1279,16 +1068,16 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
                                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1438,7 +1227,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getComputedProperty
 
 class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mReceiverIR ;
@@ -1452,16 +1250,16 @@ class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1609,7 +1407,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeComputedProper
 
 class cPtr_storeComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mReceiverIR ;
@@ -1623,16 +1430,16 @@ class cPtr_storeComputedPropertyValueIR : public cPtr_abstractInstructionIR {
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1782,7 +1589,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_getArrayElementRefe
 
 class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
@@ -1796,16 +1607,16 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -1960,7 +1771,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_selectInstructionIR
 
 class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mTargetValue ;
@@ -1976,16 +1791,16 @@ class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -2134,7 +1949,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_testArrayIndexIR ;
 
 class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mIndex ;
@@ -2148,16 +1972,16 @@ class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -2283,7 +2107,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sourceLocationIR ;
 
 class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mSourceLocation ;
@@ -2293,16 +2121,16 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -2439,7 +2267,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeCommentIR ;
 
 class cPtr_freeCommentIR : public cPtr_abstractInstructionIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_string mProperty_mComment ;
@@ -2449,16 +2281,16 @@ class cPtr_freeCommentIR : public cPtr_abstractInstructionIR {
                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -2536,20 +2368,7 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionList
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities) (const class cPtr_abstractInstructionIR * inObject,
-                                                                                        class GALGAS_stringset & ioArgument0,
-                                                                                        class GALGAS_uint & ioArgument1,
-                                                                                        class C_Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_enterAccessibleEntities (const int32_t inClassIndex,
-                                                   extensionMethodSignature_abstractInstructionIR_enterAccessibleEntities inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_enterAccessibleEntities (const class cPtr_abstractInstructionIR * inObject,
+void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractInstructionIR * inObject,
                                                   GALGAS_stringset & io_ioInvokedRoutineSet,
                                                   GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
@@ -3588,19 +3407,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctCheckMap_2D_eleme
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_ctExpressionAST_checkCompileTimeExpression) (const class cPtr_ctExpressionAST * inObject,
-                                                                                     const class GALGAS_ctCheckMap constinArgument0,
-                                                                                     class C_Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_checkCompileTimeExpression (const int32_t inClassIndex,
-                                                      extensionMethodSignature_ctExpressionAST_checkCompileTimeExpression inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_checkCompileTimeExpression (const class cPtr_ctExpressionAST * inObject,
+void callExtensionMethod_checkCompileTimeExpression (class cPtr_ctExpressionAST * inObject,
                                                      const GALGAS_ctCheckMap constin_inMap,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
@@ -3832,20 +3639,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctMap_2D_element ;
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_ctExpressionAST_computeCompileTimeExpression) (const class cPtr_ctExpressionAST * inObject,
-                                                                                       const class GALGAS_ctMap constinArgument0,
-                                                                                       class GALGAS_bigint & outArgument1,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_computeCompileTimeExpression (const int32_t inClassIndex,
-                                                        extensionMethodSignature_ctExpressionAST_computeCompileTimeExpression inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_computeCompileTimeExpression (const class cPtr_ctExpressionAST * inObject,
+void callExtensionMethod_computeCompileTimeExpression (class cPtr_ctExpressionAST * inObject,
                                                        const GALGAS_ctMap constin_inMap,
                                                        GALGAS_bigint & out_outValue,
                                                        C_Compiler * inCompiler
@@ -4185,26 +3979,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOpera
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractAssignmentOperatorUsage_generateCode) (const class cPtr_abstractAssignmentOperatorUsage * inObject,
-                                                                                       class GALGAS_semanticTemporariesStruct & ioArgument0,
-                                                                                       class GALGAS_instructionListIR & ioArgument1,
-                                                                                       class GALGAS_allocaList & ioArgument2,
-                                                                                       const class GALGAS_omnibusType constinArgument3,
-                                                                                       const class GALGAS_string constinArgument4,
-                                                                                       const class GALGAS_objectIR constinArgument5,
-                                                                                       const class GALGAS_location constinArgument6,
-                                                                                       const class GALGAS_bool constinArgument7,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_generateCode (const int32_t inClassIndex,
-                                        extensionMethodSignature_abstractAssignmentOperatorUsage_generateCode inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_generateCode (const class cPtr_abstractAssignmentOperatorUsage * inObject,
+void callExtensionMethod_generateCode (class cPtr_abstractAssignmentOperatorUsage * inObject,
                                        GALGAS_semanticTemporariesStruct & io_ioTemporaries,
                                        GALGAS_instructionListIR & io_ioInstructionListIR,
                                        GALGAS_allocaList & io_ioAllocaList,
@@ -4321,7 +4096,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOpera
 
 class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method generateCode
+  public: virtual void method_generateCode (class GALGAS_semanticTemporariesStruct & ioTemporaries,
+           class GALGAS_instructionListIR & ioInstructionListIR,
+           class GALGAS_allocaList & ioAllocaList,
+           const class GALGAS_omnibusType inTargetType,
+           const class GALGAS_string inTargetLLVMName,
+           const class GALGAS_objectIR inSourcePossibleReference,
+           const class GALGAS_location inErrorLocation,
+           const class GALGAS_bool inTargetIsInitialized,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
@@ -4345,16 +4129,16 @@ class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorU
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -4543,7 +4327,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentRoutineIR
 
 class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmCodeGeneration
+  public: virtual void method_llvmCodeGeneration (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
@@ -4566,16 +4354,16 @@ class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -4704,7 +4492,11 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleAssignmentCop
 
 class cPtr_simpleAssignmentCopyRoutineIR : public cPtr_abstractRoutineIR {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method llvmCodeGeneration
+  public: virtual void method_llvmCodeGeneration (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_omnibusType mProperty_mTargetType ;
@@ -4717,16 +4509,16 @@ class cPtr_simpleAssignmentCopyRoutineIR : public cPtr_abstractRoutineIR {
                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -4846,7 +4638,16 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleCopyAssignmen
 
 class cPtr_simpleCopyAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
 
-//----------------------------------------------------------------------------------------------------------------------
+//--- Extension method generateCode
+  public: virtual void method_generateCode (class GALGAS_semanticTemporariesStruct & ioTemporaries,
+           class GALGAS_instructionListIR & ioInstructionListIR,
+           class GALGAS_allocaList & ioAllocaList,
+           const class GALGAS_omnibusType inTargetType,
+           const class GALGAS_string inTargetLLVMName,
+           const class GALGAS_objectIR inSourcePossibleReference,
+           const class GALGAS_location inErrorLocation,
+           const class GALGAS_bool inTargetIsInitialized,
+           C_Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
 
@@ -4854,16 +4655,16 @@ class cPtr_simpleCopyAssignmentOperatorUsage : public cPtr_abstractAssignmentOpe
   public: cPtr_simpleCopyAssignmentOperatorUsage (LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const ;
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
   public: virtual void description (C_String & ioString,
-                                    const int32_t inIndentation) const ;
+                                    const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const ;
+  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const ;
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
 
@@ -5190,19 +4991,7 @@ void extensionMethod_checkInstructionList (const class GALGAS_llvmGenerationInst
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractLLVMInstruction_checkInstructionList) (const class cPtr_abstractLLVMInstruction * inObject,
-                                                                                       class GALGAS_ctCheckMap & ioArgument0,
-                                                                                       class C_Compiler * inCompiler
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_checkInstructionList (const int32_t inClassIndex,
-                                                extensionMethodSignature_abstractLLVMInstruction_checkInstructionList inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_checkInstructionList (const class cPtr_abstractLLVMInstruction * inObject,
+void callExtensionMethod_checkInstructionList (class cPtr_abstractLLVMInstruction * inObject,
                                                GALGAS_ctCheckMap & io_ioMap,
                                                C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
@@ -5449,23 +5238,7 @@ void extensionMethod_generateIRCode (const class GALGAS_llvmGenerationInstructio
 //
 //----------------------------------------------------------------------------------------------------------------------
 
-typedef void (*extensionMethodSignature_abstractLLVMInstruction_generateIRCode) (const class cPtr_abstractLLVMInstruction * inObject,
-                                                                                 class GALGAS_assignmentGenerationVarMap & ioArgument0,
-                                                                                 class GALGAS_assignmentGenerationVarMap & ioArgument1,
-                                                                                 class GALGAS_stringlist & ioArgument2,
-                                                                                 class GALGAS_uint & ioArgument3,
-                                                                                 class GALGAS_allocaList & ioArgument4,
-                                                                                 class C_Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void enterExtensionMethod_generateIRCode (const int32_t inClassIndex,
-                                          extensionMethodSignature_abstractLLVMInstruction_generateIRCode inMethod) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_generateIRCode (const class cPtr_abstractLLVMInstruction * inObject,
+void callExtensionMethod_generateIRCode (class cPtr_abstractLLVMInstruction * inObject,
                                          GALGAS_assignmentGenerationVarMap & io_ioVarMap,
                                          GALGAS_assignmentGenerationVarMap & io_ioTypeMap,
                                          GALGAS_stringlist & io_ioInstructionAsStringListIR,
