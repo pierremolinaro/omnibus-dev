@@ -18,7 +18,6 @@ lexique omnibus_lexique {
     "convert",
     "ctAssert",
     "compiletime",
-#    "sync",
     "driver",
     "else",
     "enum",

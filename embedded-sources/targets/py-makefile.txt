@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -277,7 +277,7 @@ class Job:
   mOutputLines = []
   mOpenSourceOnError = False # Do not try to open source file on error
   mLogUtilityTool = False
-  
+
   #····················································································································*
 
   def __init__ (self, targets, requiredFiles, command, postCommands, priority, title, openSourceOnError, logUtilityTool):
@@ -343,7 +343,7 @@ class Rule:
   mDeleteTargetOnError = False # No operation on error
   mCleanOperation = 0 # No operation on clean
   mOpenSourceOnError = False # Do not try to open source file on error
-  
+
   #····················································································································*
 
   def __init__ (self, targets, title = ""):
@@ -376,17 +376,17 @@ class Rule:
         self.mTitle += " " + s
     else:
       self.mTitle = copy.deepcopy (title)
-  
+
   #····················································································································*
 
   def deleteTargetFileOnClean (self):
     self.mCleanOperation = 1
-  
+
   #····················································································································*
 
   def deleteTargetDirectoryOnClean (self):
     self.mCleanOperation = 2
-  
+
   #····················································································································*
 
   def enterSecondaryDependanceFile (self, secondaryDependanceFile, make):
@@ -417,7 +417,7 @@ class Rule:
             if self.mSecondaryMostRecentModificationDate < modifDate :
               self.mSecondaryMostRecentModificationDate = modifDate
               #print BOLD_BLUE () + str (modifDate) + ENDC ()
-    
+
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
 #   class Make                                                                                                         *
 #——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
@@ -504,7 +504,7 @@ class Make:
            s += " \"" + cmd + "\""
          print s
          print "    Title: \"" + postCommand.mTitle + "\""
-        
+
     print BOLD_BLUE () + "--- End of print rule ---" + ENDC ()
 
   #····················································································································*
@@ -834,7 +834,7 @@ class Make:
       for target in targetList:
         print "  Target: \"" + target + "\""
       print "  Message: \"" + message + "\""
-        
+
     print BOLD_BLUE () + "--- End of print goals ---" + ENDC ()
 
   #····················································································································*
