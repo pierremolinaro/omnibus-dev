@@ -31,8 +31,8 @@
   self = [super init] ;
   if (self) {
     noteObjectAllocation (self) ;
-   mLexicalAttribute_bigInteger = [[NSMutableString alloc] init] ;
-   mLexicalAttribute_tokenString = [[NSMutableString alloc] init] ;
+    mLexicalAttribute_bigInteger = [[NSMutableString alloc] init] ;
+    mLexicalAttribute_tokenString = [[NSMutableString alloc] init] ;
   }
   return self ;
 }

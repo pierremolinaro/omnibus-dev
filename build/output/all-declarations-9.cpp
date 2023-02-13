@@ -1782,23 +1782,23 @@ mProperty_returnTypeName (inOperand12) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList_2D_element::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                                              const GALGAS_mode & inOperand1,
-                                                                                                              const GALGAS_bool & inOperand2,
-                                                                                                              const GALGAS_routineKind & inOperand3,
-                                                                                                              const GALGAS_bool & inOperand4,
-                                                                                                              const GALGAS_bool & inOperand5,
-                                                                                                              const GALGAS_routineAttributes & inOperand6,
-                                                                                                              const GALGAS_lstring & inOperand7,
-                                                                                                              const GALGAS_routineFormalArgumentListAST & inOperand8,
-                                                                                                              const GALGAS_bool & inOperand9,
-                                                                                                              const GALGAS_instructionListAST & inOperand10,
-                                                                                                              const GALGAS_location & inOperand11,
-                                                                                                              const GALGAS_lstring & inOperand12 
+GALGAS_decoratedRegularRoutineList_2D_element GALGAS_decoratedRegularRoutineList_2D_element::constructor_new (const GALGAS_lstring & in_receiverTypeName,
+                                                                                                              const GALGAS_mode & in_mode,
+                                                                                                              const GALGAS_bool & in_isRequired,
+                                                                                                              const GALGAS_routineKind & in_routineKind,
+                                                                                                              const GALGAS_bool & in_warnIfUnused,
+                                                                                                              const GALGAS_bool & in_exportedRoutine,
+                                                                                                              const GALGAS_routineAttributes & in_routineAttributes,
+                                                                                                              const GALGAS_lstring & in_routineMangledLLVMName,
+                                                                                                              const GALGAS_routineFormalArgumentListAST & in_formalArgumentList,
+                                                                                                              const GALGAS_bool & in_warningOnUnusedArgs,
+                                                                                                              const GALGAS_instructionListAST & in_mInstructionList,
+                                                                                                              const GALGAS_location & in_mEndOfRoutineDeclaration,
+                                                                                                              const GALGAS_lstring & in_returnTypeName 
                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_decoratedRegularRoutineList_2D_element result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid ()) {
-    result = GALGAS_decoratedRegularRoutineList_2D_element (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12) ;
+  if (in_receiverTypeName.isValid () && in_mode.isValid () && in_isRequired.isValid () && in_routineKind.isValid () && in_warnIfUnused.isValid () && in_exportedRoutine.isValid () && in_routineAttributes.isValid () && in_routineMangledLLVMName.isValid () && in_formalArgumentList.isValid () && in_warningOnUnusedArgs.isValid () && in_mInstructionList.isValid () && in_mEndOfRoutineDeclaration.isValid () && in_returnTypeName.isValid ()) {
+    result = GALGAS_decoratedRegularRoutineList_2D_element (in_receiverTypeName, in_mode, in_isRequired, in_routineKind, in_warnIfUnused, in_exportedRoutine, in_routineAttributes, in_routineMangledLLVMName, in_formalArgumentList, in_warningOnUnusedArgs, in_mInstructionList, in_mEndOfRoutineDeclaration, in_returnTypeName) ;
   }
   return result ;
 }
@@ -5291,14 +5291,14 @@ mProperty_mRegisterIndex (inOperand3) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterLValueAST GALGAS_controlRegisterLValueAST::constructor_new (const GALGAS_lstring & inOperand0,
-                                                                                  const GALGAS_registerGroupIndexAST & inOperand1,
-                                                                                  const GALGAS_lstring & inOperand2,
-                                                                                  const GALGAS_registerIndexAST & inOperand3 
+GALGAS_controlRegisterLValueAST GALGAS_controlRegisterLValueAST::constructor_new (const GALGAS_lstring & in_mRegisterGroupName,
+                                                                                  const GALGAS_registerGroupIndexAST & in_mGroupIndex,
+                                                                                  const GALGAS_lstring & in_mRegisterName,
+                                                                                  const GALGAS_registerIndexAST & in_mRegisterIndex 
                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_controlRegisterLValueAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-    result = GALGAS_controlRegisterLValueAST (inOperand0, inOperand1, inOperand2, inOperand3) ;
+  if (in_mRegisterGroupName.isValid () && in_mGroupIndex.isValid () && in_mRegisterName.isValid () && in_mRegisterIndex.isValid ()) {
+    result = GALGAS_controlRegisterLValueAST (in_mRegisterGroupName, in_mGroupIndex, in_mRegisterName, in_mRegisterIndex) ;
   }
   return result ;
 }
@@ -5421,12 +5421,12 @@ mProperty_mOperand (inOperand1) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_LValueAST GALGAS_LValueAST::constructor_new (const GALGAS_lstring & inOperand0,
-                                                    const GALGAS_LValueOperandAST & inOperand1 
+GALGAS_LValueAST GALGAS_LValueAST::constructor_new (const GALGAS_lstring & in_mIdentifier,
+                                                    const GALGAS_LValueOperandAST & in_mOperand 
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_LValueAST result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_LValueAST (inOperand0, inOperand1) ;
+  if (in_mIdentifier.isValid () && in_mOperand.isValid ()) {
+    result = GALGAS_LValueAST (in_mIdentifier, in_mOperand) ;
   }
   return result ;
 }
@@ -5544,12 +5544,12 @@ GALGAS_LValueRepresentation GALGAS_LValueRepresentation::constructor_default (UN
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_LValueRepresentation GALGAS_LValueRepresentation::constructor_new (const GALGAS_omnibusType & inOperand0,
-                                                                          const GALGAS_string & inOperand1 
+GALGAS_LValueRepresentation GALGAS_LValueRepresentation::constructor_new (const GALGAS_omnibusType & in_type,
+                                                                          const GALGAS_string & in_llvmName 
                                                                           COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_LValueRepresentation result ;
-  if (inOperand0.isValid () && inOperand1.isValid ()) {
-    result = GALGAS_LValueRepresentation (inOperand0, inOperand1) ;
+  if (in_type.isValid () && in_llvmName.isValid ()) {
+    result = GALGAS_LValueRepresentation (in_type, in_llvmName) ;
   }
   return result ;
 }

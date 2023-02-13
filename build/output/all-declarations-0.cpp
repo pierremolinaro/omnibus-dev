@@ -90,16 +90,16 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique_comment = "a comment"
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_commentMark = "a comment" ;
 
 //--- Syntax error message for terminal '$?selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F_selector_3A_ = "the '\?' or '\?selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F_selector_3A_ = "the '?' or '?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$?!selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F__21_selector_3A_ = "the '\?!' or '\?!selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F__21_selector_3A_ = "the '?!' or '?!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!selector:$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21_selector_3A_ = "the '!' or '!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!?selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21__3F_selector_3A_ = "the '!\?' or '!\?selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21__3F_selector_3A_ = "the '!?' or '!?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$$type$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__24_type = "a type $..." ;
@@ -1696,14 +1696,14 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__3F_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\?selector:") ;
+      s.appendCString ("?selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__3F__21_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\?!selector:") ;
+      s.appendCString ("?!selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
@@ -1717,7 +1717,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__21__3F_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!\?selector:") ;
+      s.appendCString ("!?selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
@@ -2830,10 +2830,10 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("\"string\"") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("comment") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("commentMark") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\?selector:") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\?!selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("?selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("?!selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!selector:") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("!\?selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("!?selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("$type") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("\xC2""\xA9""group") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("addressof") COMMA_THERE) ;
@@ -12984,9 +12984,9 @@ class cSharedDictRoot_extendStaticArrayDeclarationDictAST : public C_SharedObjec
     }
   }
 
-  protected: static void  getPreviousElement (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
-                                               cNode_extendStaticArrayDeclarationDictAST * & ioElement,
-                                               bool & ioBranchHasBeenRemoved) {
+  protected: static void getPreviousElement (cNode_extendStaticArrayDeclarationDictAST * & ioRoot,
+                                             cNode_extendStaticArrayDeclarationDictAST * & ioElement,
+                                             bool & ioBranchHasBeenRemoved) {
     if (ioRoot->mSupPtr == NULL) {
       ioElement = ioRoot ;
       ioRoot = ioRoot->mInfPtr ;
@@ -13160,6 +13160,16 @@ void GALGAS_extendStaticArrayDeclarationDictAST::description (C_String & ioStrin
     ioString << " not built" ;
   }
   ioString << ">" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_uint GALGAS_extendStaticArrayDeclarationDictAST::getter_count (UNUSED_LOCATION_ARGS) const {
+  GALGAS_uint result ;
+  if (isValid ()) {
+    result = GALGAS_uint (mSharedDict->mCount) ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

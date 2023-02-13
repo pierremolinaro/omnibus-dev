@@ -6566,9 +6566,9 @@ class cSharedDictRoot_routineLLVMNameDict : public C_SharedObject {
     }
   }
 
-  protected: static void  getPreviousElement (cNode_routineLLVMNameDict * & ioRoot,
-                                               cNode_routineLLVMNameDict * & ioElement,
-                                               bool & ioBranchHasBeenRemoved) {
+  protected: static void getPreviousElement (cNode_routineLLVMNameDict * & ioRoot,
+                                             cNode_routineLLVMNameDict * & ioElement,
+                                             bool & ioBranchHasBeenRemoved) {
     if (ioRoot->mSupPtr == NULL) {
       ioElement = ioRoot ;
       ioRoot = ioRoot->mInfPtr ;
@@ -6742,6 +6742,16 @@ void GALGAS_routineLLVMNameDict::description (C_String & ioString,
     ioString << " not built" ;
   }
   ioString << ">" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_uint GALGAS_routineLLVMNameDict::getter_count (UNUSED_LOCATION_ARGS) const {
+  GALGAS_uint result ;
+  if (isValid ()) {
+    result = GALGAS_uint (mSharedDict->mCount) ;
+  }
+  return result ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12213,7 +12223,7 @@ GALGAS_string extensionGetter_formalPassingModeString (const GALGAS_procFormalAr
     break ;
   case GALGAS_procFormalArgumentPassingMode::kEnum_input:
     {
-      result_result = GALGAS_string ("\?") ;
+      result_result = GALGAS_string ("?") ;
     }
     break ;
   case GALGAS_procFormalArgumentPassingMode::kEnum_output:
@@ -12223,7 +12233,7 @@ GALGAS_string extensionGetter_formalPassingModeString (const GALGAS_procFormalAr
     break ;
   case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
     {
-      result_result = GALGAS_string ("\?!") ;
+      result_result = GALGAS_string ("?!") ;
     }
     break ;
   }
@@ -12256,12 +12266,12 @@ GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const GALGAS
     break ;
   case GALGAS_procFormalArgumentPassingMode::kEnum_output:
     {
-      result_result = GALGAS_string ("\?") ;
+      result_result = GALGAS_string ("?") ;
     }
     break ;
   case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
     {
-      result_result = GALGAS_string ("!\?") ;
+      result_result = GALGAS_string ("!?") ;
     }
     break ;
   }

@@ -240,17 +240,3 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (class cPtr_bi
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension setter '@semanticContext insertGetter'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertGetter (class GALGAS_semanticContext & ioObject,
-                                   const class GALGAS_lstring constin_inTypeName,
-                                   const class GALGAS_lstring constin_inGetterName,
-                                   const class GALGAS_propertyVisibility constin_inVisibility,
-                                   const class GALGAS_propertyGetterKind constin_inAccess,
-                                   class C_Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-

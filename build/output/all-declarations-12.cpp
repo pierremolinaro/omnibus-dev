@@ -1550,7 +1550,7 @@ GALGAS_lstring function_systemUserMangledNameFromAST (const GALGAS_string & cons
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      var_s_7337 = GALGAS_string ("\?\?\?") ;
+      var_s_7337 = GALGAS_string ("???") ;
     }
     break ;
   }
@@ -1656,7 +1656,7 @@ GALGAS_lstring function_systemImplementationMangledNameFromAST (const GALGAS_str
     break ;
   case GALGAS_routineKind::kEnum_function:
     {
-      var_s_8335 = GALGAS_string ("\?\?\?") ;
+      var_s_8335 = GALGAS_string ("???") ;
     }
     break ;
   }

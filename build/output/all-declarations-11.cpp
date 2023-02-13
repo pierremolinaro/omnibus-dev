@@ -9,6 +9,37 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
+//Extension method '@semanticContext insertGetter'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertGetter (GALGAS_semanticContext & ioObject,
+                                   const GALGAS_lstring constinArgument_inTypeName,
+                                   const GALGAS_lstring constinArgument_inGetterName,
+                                   const GALGAS_propertyVisibility constinArgument_inVisibility,
+                                   const GALGAS_propertyGetterKind constinArgument_inAccess,
+                                   C_Compiler * inCompiler
+                                   COMMA_UNUSED_LOCATION_ARGS) {
+  cMapElement_typePropertyGetterMap * objectArray_5762 = (cMapElement_typePropertyGetterMap *) ioObject.mProperty_mTypePropertyGetterMap.readWriteAccessForWithInstruction (inCompiler, constinArgument_inTypeName.readProperty_string ()  COMMA_SOURCE_FILE ("context.galgas", 133)) ;
+  if (NULL != objectArray_5762) {
+    macroValidSharedObject (objectArray_5762, cMapElement_typePropertyGetterMap) ;
+    {
+    objectArray_5762->mProperty_mGetterMap.setter_insertKey (constinArgument_inGetterName, constinArgument_inVisibility, constinArgument_inAccess, inCompiler COMMA_SOURCE_FILE ("context.galgas", 134)) ;
+    }
+  }else{
+    GALGAS_propertyGetterMap var_getterMap_5927 = GALGAS_propertyGetterMap::constructor_emptyMap (SOURCE_FILE ("context.galgas", 136)) ;
+    {
+    var_getterMap_5927.setter_insertKey (constinArgument_inGetterName, constinArgument_inVisibility, constinArgument_inAccess, inCompiler COMMA_SOURCE_FILE ("context.galgas", 137)) ;
+    }
+    {
+    ioObject.mProperty_mTypePropertyGetterMap.setter_insertKey (constinArgument_inTypeName, var_getterMap_5927, inCompiler COMMA_SOURCE_FILE ("context.galgas", 138)) ;
+    }
+  }
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//
 //Extension Getter '@semanticContext propertyGetterMap'
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -1708,24 +1739,24 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_default
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_staticEntityMap & inOperand0,
-                                                                              const GALGAS_interruptMapIR & inOperand1,
-                                                                              const GALGAS_externProcedureMapIR & inOperand2,
-                                                                              const GALGAS_panicSortedListIR & inOperand3,
-                                                                              const GALGAS_panicSortedListIR & inOperand4,
-                                                                              const GALGAS_taskMapIR & inOperand5,
-                                                                              const GALGAS_globalTaskVariableList & inOperand6,
-                                                                              const GALGAS_uint & inOperand7,
-                                                                              const GALGAS_targetParameters & inOperand8,
-                                                                              const GALGAS_driverListIR & inOperand9,
-                                                                              const GALGAS_staticListInvokedFunctionSetMap & inOperand10,
-                                                                              const GALGAS_globalSyncInstanceMapIR & inOperand11,
-                                                                              const GALGAS_controlRegisterGroupArrayList & inOperand12,
-                                                                              const GALGAS_routineListIR & inOperand13 
+GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::constructor_new (const GALGAS_staticEntityMap & in_mStaticEntityMap,
+                                                                              const GALGAS_interruptMapIR & in_mInterruptMapIR,
+                                                                              const GALGAS_externProcedureMapIR & in_mExternProcedureMapIR,
+                                                                              const GALGAS_panicSortedListIR & in_mPanicSetupListIR,
+                                                                              const GALGAS_panicSortedListIR & in_mPanicLoopListIR,
+                                                                              const GALGAS_taskMapIR & in_mTaskMapIR,
+                                                                              const GALGAS_globalTaskVariableList & in_mGlobalTaskVariableList,
+                                                                              const GALGAS_uint & in_mMaxBranchOfOnInstructions,
+                                                                              const GALGAS_targetParameters & in_mTargetParameters,
+                                                                              const GALGAS_driverListIR & in_mDriverList,
+                                                                              const GALGAS_staticListInvokedFunctionSetMap & in_mStaticArrayMapForIntermediate,
+                                                                              const GALGAS_globalSyncInstanceMapIR & in_mGlobalSyncInstanceMap,
+                                                                              const GALGAS_controlRegisterGroupArrayList & in_mControlRegisterGroupArrayList,
+                                                                              const GALGAS_routineListIR & in_mRoutineListIR 
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_intermediateCodeStruct result ;
-  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid () && inOperand9.isValid () && inOperand10.isValid () && inOperand11.isValid () && inOperand12.isValid () && inOperand13.isValid ()) {
-    result = GALGAS_intermediateCodeStruct (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8, inOperand9, inOperand10, inOperand11, inOperand12, inOperand13) ;
+  if (in_mStaticEntityMap.isValid () && in_mInterruptMapIR.isValid () && in_mExternProcedureMapIR.isValid () && in_mPanicSetupListIR.isValid () && in_mPanicLoopListIR.isValid () && in_mTaskMapIR.isValid () && in_mGlobalTaskVariableList.isValid () && in_mMaxBranchOfOnInstructions.isValid () && in_mTargetParameters.isValid () && in_mDriverList.isValid () && in_mStaticArrayMapForIntermediate.isValid () && in_mGlobalSyncInstanceMap.isValid () && in_mControlRegisterGroupArrayList.isValid () && in_mRoutineListIR.isValid ()) {
+    result = GALGAS_intermediateCodeStruct (in_mStaticEntityMap, in_mInterruptMapIR, in_mExternProcedureMapIR, in_mPanicSetupListIR, in_mPanicLoopListIR, in_mTaskMapIR, in_mGlobalTaskVariableList, in_mMaxBranchOfOnInstructions, in_mTargetParameters, in_mDriverList, in_mStaticArrayMapForIntermediate, in_mGlobalSyncInstanceMap, in_mControlRegisterGroupArrayList, in_mRoutineListIR) ;
   }
   return result ;
 }
