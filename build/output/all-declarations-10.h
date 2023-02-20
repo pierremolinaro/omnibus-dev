@@ -182,9 +182,9 @@ void routine_handleArraySubscriptNew (const class GALGAS_omnibusType constinArgu
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR * inObject,
-                                                   GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
-                                                   GALGAS_sectionIRlist & io_ioSectionList,
-                                                   GALGAS_generationAdds & io_ioGenerationAdds,
+                                                   class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
+                                                   class GALGAS_sectionIRlist & io_ioSectionList,
+                                                   class GALGAS_generationAdds & io_ioGenerationAdds,
                                                    C_Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -195,8 +195,8 @@ void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR 
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR * inObject,
-                                                  GALGAS_stringset & io_ioInvokedRoutineSet,
-                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  class GALGAS_stringset & io_ioInvokedRoutineSet,
+                                                  class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -207,11 +207,11 @@ void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR *
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterCodeForOverflowOperation (class cPtr_binaryOperationIR * inObject,
-                                                        const GALGAS_string constin_inOperation,
-                                                        const GALGAS_bigint constin_inPanicCode,
-                                                        GALGAS_string & io_ioLLVMcode,
-                                                        const GALGAS_generationContext constin_inGenerationContext,
-                                                        GALGAS_generationAdds & io_ioGenerationAdds,
+                                                        const class GALGAS_string constin_inOperation,
+                                                        const class GALGAS_bigint constin_inPanicCode,
+                                                        class GALGAS_string & io_ioLLVMcode,
+                                                        const class GALGAS_generationContext constin_inGenerationContext,
+                                                        class GALGAS_generationAdds & io_ioGenerationAdds,
                                                         C_Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -232,11 +232,11 @@ class GALGAS_string function_panicRoutineNameForLocationFile (const class GALGAS
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (class cPtr_binaryOperationIR * inObject,
-                                                                   const GALGAS_string constin_inOperation,
-                                                                   const GALGAS_bigint constin_inPanicCode,
-                                                                   GALGAS_string & io_ioLLVMcode,
-                                                                   const GALGAS_generationContext constin_inGenerationContext,
-                                                                   GALGAS_generationAdds & io_ioGenerationAdds,
+                                                                   const class GALGAS_string constin_inOperation,
+                                                                   const class GALGAS_bigint constin_inPanicCode,
+                                                                   class GALGAS_string & io_ioLLVMcode,
+                                                                   const class GALGAS_generationContext constin_inGenerationContext,
+                                                                   class GALGAS_generationAdds & io_ioGenerationAdds,
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 

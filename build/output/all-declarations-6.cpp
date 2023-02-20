@@ -10501,17 +10501,17 @@ GALGAS_string extensionGetter_matchingFormalArgument (const GALGAS_effectiveArgu
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_output:
     {
-      result_result = GALGAS_string ("?") ;
+      result_result = GALGAS_string ("\?") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInput:
     {
-      result_result = GALGAS_string ("?!") ;
+      result_result = GALGAS_string ("\?!") ;
     }
     break ;
   case GALGAS_effectiveArgumentPassingModeAST::kEnum_outputInputSelfVariable:
     {
-      result_result = GALGAS_string ("?!") ;
+      result_result = GALGAS_string ("\?!") ;
     }
     break ;
   }

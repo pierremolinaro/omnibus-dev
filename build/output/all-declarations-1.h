@@ -740,7 +740,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterUser
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_location callExtensionGetter_locationForErrorSignaling (const class cPtr_abstractDeclarationAST * inObject,
-                                                                     C_Compiler * inCompiler
+                                                                     class C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -750,8 +750,8 @@ class GALGAS_location callExtensionGetter_locationForErrorSignaling (const class
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterExtension (class cPtr_abstractDeclarationAST * inObject,
-                                         GALGAS_extendStaticArrayDeclarationDictAST & io_ioExtendStaticArrayDeclarationAST,
-                                         GALGAS_abstractDeclarationAST & out_outNewDeclaration,
+                                         class GALGAS_extendStaticArrayDeclarationDictAST & io_ioExtendStaticArrayDeclarationAST,
+                                         class GALGAS_abstractDeclarationAST & out_outNewDeclaration,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -2518,8 +2518,8 @@ void extensionSetter_noteUINTType (class GALGAS_semanticTypePrecedenceGraph & io
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterInPrecedenceGraph (class cPtr_abstractDeclarationAST * inObject,
-                                                 GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                 C_Compiler * inCompiler
+                                                 class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                 class C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2529,7 +2529,7 @@ void callExtensionMethod_enterInPrecedenceGraph (class cPtr_abstractDeclarationA
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_string callExtensionGetter_keyRepresentationForErrorSignaling (const class cPtr_abstractDeclarationAST * inObject,
-                                                                            C_Compiler * inCompiler
+                                                                            class C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

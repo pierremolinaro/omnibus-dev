@@ -1088,15 +1088,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_operandIRList_2D_el
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterInContext (class cPtr_abstractDeclarationAST * inObject,
-                                         GALGAS_semanticContext & io_ioContext,
-                                         GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
-                                         GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
-                                         GALGAS_routineListIR & io_ioRoutineListIR,
-                                         GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
-                                         GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                         GALGAS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
-                                         GALGAS_userLLVMTypeDefinitionListIR & io_ioUserLLVMTypeDefinitionListIR,
-                                         C_Compiler * inCompiler
+                                         class GALGAS_semanticContext & io_ioContext,
+                                         class GALGAS_declarationDecorationList & io_ioDecoratedDeclarationList,
+                                         class GALGAS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
+                                         class GALGAS_routineListIR & io_ioRoutineListIR,
+                                         class GALGAS_staticListInitializationMap & io_ioStaticListValueMap,
+                                         class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                         class GALGAS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
+                                         class GALGAS_userLLVMTypeDefinitionListIR & io_ioUserLLVMTypeDefinitionListIR,
+                                         class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2840,8 +2840,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_userLLVMTypeDefinit
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateLLVMType (class cPtr_userLLVMTypeDefinitionIR * inObject,
-                                           GALGAS_string & io_ioLLVMcode,
-                                           C_Compiler * inCompiler
+                                           class GALGAS_string & io_ioLLVMcode,
+                                           class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3235,10 +3235,10 @@ class GALGAS_string extensionGetter_key (const class GALGAS_unifiedTypeMapEntry 
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_semanticAnalysis (class cPtr_abstractDecoratedDeclaration * inObject,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                           C_Compiler * inCompiler
+                                           const class GALGAS_semanticContext constin_inContext,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GALGAS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

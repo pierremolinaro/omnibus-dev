@@ -26,7 +26,7 @@ class GALGAS_lstring extensionGetter_routineSignature (const class GALGAS_effect
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_panicAST * inObject,
-                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -204,17 +204,17 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionI
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_analyzePrimaryExpressionNoSelf (class cPtr_primaryInExpressionAST * inObject,
-                                                         const GALGAS_omnibusType constin_inSelfType,
-                                                         const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                         const GALGAS_omnibusType constin_inOptionalTargetType,
-                                                         const GALGAS_semanticContext constin_inContext,
-                                                         const GALGAS_mode constin_inMode,
-                                                         GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                         GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                         GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                         GALGAS_allocaList & io_ioAllocaList,
-                                                         GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                         GALGAS_objectIR & out_outResult,
+                                                         const class GALGAS_omnibusType constin_inSelfType,
+                                                         const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                         const class GALGAS_omnibusType constin_inOptionalTargetType,
+                                                         const class GALGAS_semanticContext constin_inContext,
+                                                         const class GALGAS_mode constin_inMode,
+                                                         class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                         class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                         class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                         class GALGAS_allocaList & io_ioAllocaList,
+                                                         class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                         class GALGAS_objectIR & out_outResult,
                                                          C_Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
@@ -246,17 +246,17 @@ void routine_procAnalyzeAccesListInExpression (const class GALGAS_omnibusType co
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_analyzePrimaryExpressionWithSelf (class cPtr_primaryInExpressionAST * inObject,
-                                                           const GALGAS_omnibusType constin_inSelfType,
-                                                           const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                           const GALGAS_omnibusType constin_inOptionalTargetType,
-                                                           const GALGAS_semanticContext constin_inContext,
-                                                           const GALGAS_mode constin_inMode,
-                                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                           GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                           GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                           GALGAS_allocaList & io_ioAllocaList,
-                                                           GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                           GALGAS_objectIR & out_outResult,
+                                                           const class GALGAS_omnibusType constin_inSelfType,
+                                                           const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                           const class GALGAS_omnibusType constin_inOptionalTargetType,
+                                                           const class GALGAS_semanticContext constin_inContext,
+                                                           const class GALGAS_mode constin_inMode,
+                                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                           class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                           class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                           class GALGAS_allocaList & io_ioAllocaList,
+                                                           class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                           class GALGAS_objectIR & out_outResult,
                                                            C_Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -342,9 +342,9 @@ void routine_handleSliceInExpression (const class GALGAS_semanticContext constin
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_eval (class cPtr_compileTimeInfixOperatorUsage * inObject,
-                               const GALGAS_objectIR constin_inLeftOperand,
-                               const GALGAS_objectIR constin_inRightOperand,
-                               GALGAS_bigint & out_outResult,
+                               const class GALGAS_objectIR constin_inLeftOperand,
+                               const class GALGAS_objectIR constin_inRightOperand,
+                               class GALGAS_bigint & out_outResult,
                                C_Compiler * inCompiler
                                COMMA_LOCATION_ARGS) ;
 

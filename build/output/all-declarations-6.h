@@ -4140,10 +4140,10 @@ void extensionMethod_llvmRoutineGeneration (const class GALGAS_routineListIR inO
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_llvmCodeGeneration (class cPtr_abstractRoutineIR * inObject,
-                                             GALGAS_string & io_ioLLVMcode,
-                                             const GALGAS_generationContext constin_inGenerationContext,
-                                             GALGAS_generationAdds & io_ioGenerationAdds,
-                                             C_Compiler * inCompiler
+                                             class GALGAS_string & io_ioLLVMcode,
+                                             const class GALGAS_generationContext constin_inGenerationContext,
+                                             class GALGAS_generationAdds & io_ioGenerationAdds,
+                                             class C_Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

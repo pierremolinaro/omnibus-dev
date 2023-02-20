@@ -57,7 +57,7 @@ static const char * gLexicalMessage_omnibus_5F_lexique_attributeError = "in an a
 
 static const char * gLexicalMessage_omnibus_5F_lexique_binaryDigitError = "0b should be followed by a binary digit" ;
 
-static const char * gLexicalMessage_omnibus_5F_lexique_groupError = "in a register group name, a letter or a digit should follow the '\xC2""\xA9""' character" ;
+static const char * gLexicalMessage_omnibus_5F_lexique_groupError = "in a register group name, a letter or a digit should follow the '©' character" ;
 
 static const char * gLexicalMessage_omnibus_5F_lexique_hexDigitError = "0x should be followed by a hexadecimal digit" ;
 
@@ -90,22 +90,22 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique_comment = "a comment"
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_commentMark = "a comment" ;
 
 //--- Syntax error message for terminal '$?selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F_selector_3A_ = "the '?' or '?selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F_selector_3A_ = "the '\?' or '\?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$?!selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F__21_selector_3A_ = "the '?!' or '?!selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3F__21_selector_3A_ = "the '\?!' or '\?!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!selector:$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21_selector_3A_ = "the '!' or '!selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$!?selector:$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21__3F_selector_3A_ = "the '!?' or '!?selector:' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__21__3F_selector_3A_ = "the '!\?' or '!\?selector:' delimitor" ;
 
 //--- Syntax error message for terminal '$$type$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__24_type = "a type $..." ;
 
 //--- Syntax error message for terminal '$©group$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__A9_group = "a control register group \xC2""\xA9""..." ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__A9_group = "a control register group ©..." ;
 
 //--- Syntax error message for terminal '$addressof$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique_addressof = "the 'addressof' keyword" ;
@@ -294,19 +294,19 @@ static const char * gSyntaxErrorMessage_omnibus_5F_lexique__5F_ = "the '_' delim
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3D__3D_ = "the '==' delimitor" ;
 
 //--- Syntax error message for terminal '$≠$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2260_ = "the '\xE2""\x89""\xA0""' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2260_ = "the '≠' delimitor" ;
 
 //--- Syntax error message for terminal '$<$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3C_ = "the '<' delimitor" ;
 
 //--- Syntax error message for terminal '$≤$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2264_ = "the '\xE2""\x89""\xA4""' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2264_ = "the '≤' delimitor" ;
 
 //--- Syntax error message for terminal '$>$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__3E_ = "the '>' delimitor" ;
 
 //--- Syntax error message for terminal '$≥$' :
-static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2265_ = "the '\xE2""\x89""\xA5""' delimitor" ;
+static const char * gSyntaxErrorMessage_omnibus_5F_lexique__2265_ = "the '≥' delimitor" ;
 
 //--- Syntax error message for terminal '$[$' :
 static const char * gSyntaxErrorMessage_omnibus_5F_lexique__5B_ = "the '[' delimitor" ;
@@ -1696,14 +1696,14 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__3F_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("?selector:") ;
+      s.appendCString ("\?selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__3F__21_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("?!selector:") ;
+      s.appendCString ("\?!selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
@@ -1717,7 +1717,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__21__3F_selector_3A_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!?selector:") ;
+      s.appendCString ("!\?selector:") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
@@ -1731,7 +1731,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__A9_group:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\xC2""\xA9""group") ;
+      s.appendCString ("©group") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
       s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
@@ -2048,7 +2048,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__2260_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\xE2""\x89""\xA0""") ;
+      s.appendCString ("≠") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C_:
@@ -2058,7 +2058,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__2264_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\xE2""\x89""\xA4""") ;
+      s.appendCString ("≤") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E_:
@@ -2068,7 +2068,7 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
       break ;
     case kToken__2265_:
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\xE2""\x89""\xA5""") ;
+      s.appendCString ("≥") ;
       s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5B_:
@@ -2830,12 +2830,12 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string ("\"string\"") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("comment") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("commentMark") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("?selector:") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("?!selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("\?selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("\?!selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("!selector:") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("!?selector:") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("!\?selector:") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("$type") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\xC2""\xA9""group") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("©group") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("addressof") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("assert") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("boot") COMMA_THERE) ;
@@ -2898,11 +2898,11 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   result.addAssign_operation (GALGAS_string (")") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("_") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("==") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\xE2""\x89""\xA0""") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("≠") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("<") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\xE2""\x89""\xA4""") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("≤") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string (">") COMMA_THERE) ;
-  result.addAssign_operation (GALGAS_string ("\xE2""\x89""\xA5""") COMMA_THERE) ;
+  result.addAssign_operation (GALGAS_string ("≥") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("[") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("]") COMMA_THERE) ;
   result.addAssign_operation (GALGAS_string ("]!") COMMA_THERE) ;
@@ -2981,9 +2981,9 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
     ioList.appendObject ("|") ;
     ioList.appendObject ("}") ;
     ioList.appendObject ("~") ;
-    ioList.appendObject ("\xE2""\x89""\xA0""") ;
-    ioList.appendObject ("\xE2""\x89""\xA4""") ;
-    ioList.appendObject ("\xE2""\x89""\xA5""") ;
+    ioList.appendObject ("≠") ;
+    ioList.appendObject ("≤") ;
+    ioList.appendObject ("≥") ;
     ioList.appendObject ("!%") ;
     ioList.appendObject ("!/") ;
     ioList.appendObject ("%=") ;

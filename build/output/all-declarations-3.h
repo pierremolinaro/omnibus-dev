@@ -3141,7 +3141,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2D_element
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_controlRegisterGroupDeclarationAST * inObject,
-                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
@@ -4095,9 +4095,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalConstantDecla
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_addDependenceEdgeForStaticExpression (class cPtr_expressionAST * inObject,
-                                                               const GALGAS_lstring constin_inConstantName,
-                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               C_Compiler * inCompiler
+                                                               const class GALGAS_lstring constin_inConstantName,
+                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

@@ -2369,8 +2369,8 @@ void extensionMethod_enterAccessibleEntities (const class GALGAS_instructionList
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractInstructionIR * inObject,
-                                                  GALGAS_stringset & io_ioInvokedRoutineSet,
-                                                  GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  class GALGAS_stringset & io_ioInvokedRoutineSet,
+                                                  class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -3408,8 +3408,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctCheckMap_2D_eleme
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkCompileTimeExpression (class cPtr_ctExpressionAST * inObject,
-                                                     const GALGAS_ctCheckMap constin_inMap,
-                                                     C_Compiler * inCompiler
+                                                     const class GALGAS_ctCheckMap constin_inMap,
+                                                     class C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3640,9 +3640,9 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctMap_2D_element ;
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_computeCompileTimeExpression (class cPtr_ctExpressionAST * inObject,
-                                                       const GALGAS_ctMap constin_inMap,
-                                                       GALGAS_bigint & out_outValue,
-                                                       C_Compiler * inCompiler
+                                                       const class GALGAS_ctMap constin_inMap,
+                                                       class GALGAS_bigint & out_outValue,
+                                                       class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3980,15 +3980,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmAssignmentOpera
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateCode (class cPtr_abstractAssignmentOperatorUsage * inObject,
-                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                       GALGAS_instructionListIR & io_ioInstructionListIR,
-                                       GALGAS_allocaList & io_ioAllocaList,
-                                       const GALGAS_omnibusType constin_inTargetType,
-                                       const GALGAS_string constin_inTargetLLVMName,
-                                       const GALGAS_objectIR constin_inSourcePossibleReference,
-                                       const GALGAS_location constin_inErrorLocation,
-                                       const GALGAS_bool constin_inTargetIsInitialized,
-                                       C_Compiler * inCompiler
+                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       class GALGAS_instructionListIR & io_ioInstructionListIR,
+                                       class GALGAS_allocaList & io_ioAllocaList,
+                                       const class GALGAS_omnibusType constin_inTargetType,
+                                       const class GALGAS_string constin_inTargetLLVMName,
+                                       const class GALGAS_objectIR constin_inSourcePossibleReference,
+                                       const class GALGAS_location constin_inErrorLocation,
+                                       const class GALGAS_bool constin_inTargetIsInitialized,
+                                       class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4992,8 +4992,8 @@ void extensionMethod_checkInstructionList (const class GALGAS_llvmGenerationInst
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkInstructionList (class cPtr_abstractLLVMInstruction * inObject,
-                                               GALGAS_ctCheckMap & io_ioMap,
-                                               C_Compiler * inCompiler
+                                               class GALGAS_ctCheckMap & io_ioMap,
+                                               class C_Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5239,12 +5239,12 @@ void extensionMethod_generateIRCode (const class GALGAS_llvmGenerationInstructio
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateIRCode (class cPtr_abstractLLVMInstruction * inObject,
-                                         GALGAS_assignmentGenerationVarMap & io_ioVarMap,
-                                         GALGAS_assignmentGenerationVarMap & io_ioTypeMap,
-                                         GALGAS_stringlist & io_ioInstructionAsStringListIR,
-                                         GALGAS_uint & io_ioTemporaryIndex,
-                                         GALGAS_allocaList & io_ioAllocaList,
-                                         C_Compiler * inCompiler
+                                         class GALGAS_assignmentGenerationVarMap & io_ioVarMap,
+                                         class GALGAS_assignmentGenerationVarMap & io_ioTypeMap,
+                                         class GALGAS_stringlist & io_ioInstructionAsStringListIR,
+                                         class GALGAS_uint & io_ioTemporaryIndex,
+                                         class GALGAS_allocaList & io_ioAllocaList,
+                                         class C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

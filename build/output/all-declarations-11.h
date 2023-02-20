@@ -268,15 +268,15 @@ void extensionMethod_llvmPrototypeGeneration (const class GALGAS_externProcedure
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_baseGuardAnalyze (class cPtr_callInstructionAST * inObject,
-                                           const GALGAS_omnibusType constin_inSelfType,
-                                           const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                           const GALGAS_semanticContext constin_inContext,
-                                           const GALGAS_mode constin_inMode,
-                                           GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                           GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                           GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                           GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
-                                           C_Compiler * inCompiler
+                                           const class GALGAS_omnibusType constin_inSelfType,
+                                           const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                           const class GALGAS_semanticContext constin_inContext,
+                                           const class GALGAS_mode constin_inMode,
+                                           class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                           class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                           class GALGAS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
+                                           class C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------

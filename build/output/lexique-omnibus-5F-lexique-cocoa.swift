@@ -792,11 +792,11 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
       tokenCode = omnibus_lexique_1__21__2F_
     }else if scanningOk && self.testForInputString ("!%", advance: true) {
       tokenCode = omnibus_lexique_1__21__25_
-    }else if scanningOk && self.testForInputString ("\xE2""\x89""\xA5""", advance: true) {
+    }else if scanningOk && self.testForInputString ("≥", advance: true) {
       tokenCode = omnibus_lexique_1__2265_
-    }else if scanningOk && self.testForInputString ("\xE2""\x89""\xA4""", advance: true) {
+    }else if scanningOk && self.testForInputString ("≤", advance: true) {
       tokenCode = omnibus_lexique_1__2264_
-    }else if scanningOk && self.testForInputString ("\xE2""\x89""\xA0""", advance: true) {
+    }else if scanningOk && self.testForInputString ("≠", advance: true) {
       tokenCode = omnibus_lexique_1__2260_
     }else if scanningOk && self.testForInputString ("~", advance: true) {
       tokenCode = omnibus_lexique_1__7E_

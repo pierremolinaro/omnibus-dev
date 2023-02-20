@@ -329,11 +329,11 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
     mTokenCode = omnibus_lexique_1__21__2F_ ;
   }else if (scanningOk && [self testForInputString:@"!%" advance:YES]) {
     mTokenCode = omnibus_lexique_1__21__25_ ;
-  }else if (scanningOk && [self testForInputString:@"\xE2""\x89""\xA5""" advance:YES]) {
+  }else if (scanningOk && [self testForInputString:@"≥" advance:YES]) {
     mTokenCode = omnibus_lexique_1__2265_ ;
-  }else if (scanningOk && [self testForInputString:@"\xE2""\x89""\xA4""" advance:YES]) {
+  }else if (scanningOk && [self testForInputString:@"≤" advance:YES]) {
     mTokenCode = omnibus_lexique_1__2264_ ;
-  }else if (scanningOk && [self testForInputString:@"\xE2""\x89""\xA0""" advance:YES]) {
+  }else if (scanningOk && [self testForInputString:@"≠" advance:YES]) {
     mTokenCode = omnibus_lexique_1__2260_ ;
   }else if (scanningOk && [self testForInputString:@"~" advance:YES]) {
     mTokenCode = omnibus_lexique_1__7E_ ;

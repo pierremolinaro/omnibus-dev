@@ -1055,8 +1055,7 @@ void extensionMethod_llvmPrototypeGeneration (const GALGAS_externProcedureMapIR_
     }
     enumerator_9004.gotoNextObject () ;
   }
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)).add_operation (GALGAS_string ("; declared by extern Omnibus function declaration\n"
-    "\n"), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (")").add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)).add_operation (GALGAS_string ("; declared by extern Omnibus function declaration\n\n"), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)), inCompiler  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 235)) ;
 }
 
 
@@ -2832,8 +2831,7 @@ void routine_buildOrderedDeclarationList (const GALGAS_ast constinArgument_inAST
         GALGAS_string var_s_11092 = GALGAS_string ("semantic analysis not performed, ").add_operation (var_unsortedSemanticDeclarationListAST_11005.getter_length (SOURCE_FILE ("ordered-declaration-list.galgas", 209)).getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 208)).add_operation (GALGAS_string (" declarations are involved in circular definition:"), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 209)) ;
         cEnumerator_declarationListAST enumerator_11279 (var_unsortedSemanticDeclarationListAST_11005, kENUMERATION_UP) ;
         while (enumerator_11279.hasCurrentObject ()) {
-          var_s_11092.plusAssign_operation(GALGAS_string ("\n"
-            "-  ").add_operation (callExtensionGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclarationAST *) enumerator_11279.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)) ;
+          var_s_11092.plusAssign_operation(GALGAS_string ("\n-  ").add_operation (callExtensionGetter_keyRepresentationForErrorSignaling ((const cPtr_abstractDeclarationAST *) enumerator_11279.current_mDeclaration (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 212)) ;
           enumerator_11279.gotoNextObject () ;
         }
         TC_Array <C_FixItDescription> fixItArray13 ;
@@ -3358,66 +3356,13 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
                                                                    const GALGAS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
-  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-    "<html>\n"
-    "<head>\n"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
-    "<title>Global constants of " ;
+  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</title>\n"
-    "<style type=\"text/css\">body {\n"
-    "  font-family: Georgia, sans-serif ;\n"
-    "  font-size: small ;\n"
-    "}\n"
-    "\n"
-    "h1 {\n"
-    "  text-align: center ;\n"
-    "}\n"
-    "\n"
-    ".selecteur {\n"
-    "  color:green ;\n"
-    "}\n"
-    "\n"
-    "a.header_link {\n"
-    "  background-color: #FFFFCC ;\n"
-    "}\n"
-    "\n"
-    "a:visited, a:link, a:active{\n"
-    "  color: blue ;\n"
-    "  text-decoration: underline ;\n"
-    "}\n"
-    "\n"
-    "a:hover {\n"
-    "  color:green ;\n"
-    "  background-color: #FFFF00 ;\n"
-    "  text-decoration: none ;\n"
-    "}\n"
-    "\n"
-    "table.result {\n"
-    "  border: 1px solid #666666 ;\n"
-    "}\n"
-    "\n"
-    "td.result_title {\n"
-    "  font-weight: bold ;\n"
-    "  text-align: center ;\n"
-    "  background-color: yellow ;\n"
-    "}\n"
-    "\n"
-    "tr.result_line {\n"
-    "  background-color: #EEEEEE ;\n"
-    "}\n"
-    "\n"
-    "</style>\n"
-    "</head>\n"
-    "<body>\n"
-    "<div>\n"
-    "<h1>Types defined by " ;
+  result << "</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Types defined by " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</h1>\n"
-    "<p>This document lists all " ;
+  result << "</h1>\n<p>This document lists all " ;
   result << in_GLOBAL_5F_TYPE_5F_MAP.getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).stringValue () ;
-  result << " defined types, sorted by name.</p>\n"
-    "<p>" ;
+  result << " defined types, sorted by name.</p>\n<p>" ;
   GALGAS_uint index_990_ (0) ;
   if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
     cEnumerator_stringset enumerator_990 (in_FIRST_5F_LETTER_5F_SET, kENUMERATION_UP) ;
@@ -3434,82 +3379,55 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
       enumerator_990.gotoNextObject () ;
     }
   }
-  result << "</p>\n"
-    "<p>" ;
+  result << "</p>\n<p>" ;
   result << in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue () ;
-  result << "\n"
-    "</p>\n" ;
+  result << "\n</p>\n" ;
   GALGAS_uint index_1175_ (0) ;
   if (in_GLOBAL_5F_TYPE_5F_MAP.isValid ()) {
     cEnumerator_unifiedTypeMap enumerator_1175 (in_GLOBAL_5F_TYPE_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_1175.hasCurrentObject ()) {
-      result << "\n"
-        "<h2>\n"
-        "  <a name=\"" ;
+      result << "\n<h2>\n  <a name=\"" ;
       result << enumerator_1175.current_lkey (HERE).readProperty_string ().stringValue () ;
       result << "\">" ;
       result << enumerator_1175.current_lkey (HERE).readProperty_string ().stringValue () ;
-      result << "</a>\n"
-        "</h2>\n"
-        "<p>\n"
-        "Kind: " ;
+      result << "</a>\n</h2>\n<p>\nKind: " ;
       result << callExtensionGetter_descriptionForHTMLFile ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).stringValue () ;
-      result << "<br>\n"
-        "Description: " ;
+      result << "<br>\nDescription: " ;
       result << callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 69)).readProperty_omnibusTypeDescriptionName ().stringValue () ;
-      result << "<br>\n"
-        "LLVM Base Name: " ;
+      result << "<br>\nLLVM Base Name: " ;
       const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 70)).readProperty_llvmBaseTypeName ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_0) {
         result << GALGAS_string ("<i>none, compile time type</i>").stringValue () ;
       }else if (kBoolFalse == test_0) {
         result << callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 70)).readProperty_llvmBaseTypeName ().stringValue () ;
       }
-      result << "<br>\n"
-        "LLVM Name: " ;
+      result << "<br>\nLLVM Name: " ;
       const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_1) {
         result << GALGAS_string ("<i>none, compile time type</i>").stringValue () ;
       }else if (kBoolFalse == test_1) {
         result << callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1175.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).stringValue () ;
       }
-      result << "\n"
-        "</p>\n" ;
+      result << "\n</p>\n" ;
       index_1175_.increment () ;
       enumerator_1175.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "<p>\n"
-    "<h2>\n"
-    "  Routines\n"
-    "</h2>\n"
-    "  <table class=\"result\">\n"
-    "    <tr>\n"
-    "      <td class=\"result_title\">Standalone routine Name</td>\n"
-    "      <td class=\"result_title\">Visibility</td>\n"
-    "      <td class=\"result_title\">Typed signature</td>\n"
-    "      <td class=\"result_title\">Routine LLVM Name, by mode</td>\n"
-    "    </tr>\n"
-    "  " ;
+  result << "\n<p>\n<h2>\n  Routines\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Standalone routine Name</td>\n      <td class=\"result_title\">Visibility</td>\n      <td class=\"result_title\">Typed signature</td>\n      <td class=\"result_title\">Routine LLVM Name, by mode</td>\n    </tr>\n  " ;
   GALGAS_uint index_2120_ (0) ;
   if (in_ALL_5F_ROUTINE_5F_MAP.isValid ()) {
     cEnumerator_routineMapForContext enumerator_2120 (in_ALL_5F_ROUTINE_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_2120.hasCurrentObject ()) {
-      result << "\n"
-        "    <tr class=\"result_line\">\n"
-        "      <td>" ;
+      result << "\n    <tr class=\"result_line\">\n      <td>" ;
       result << enumerator_2120.current_lkey (HERE).readProperty_string ().stringValue () ;
-      result << "</td>\n"
-        "      <td>" ;
+      result << "</td>\n      <td>" ;
       const enumGalgasBool test_2 = enumerator_2120.current_mIsPublic (HERE).boolEnum () ;
       if (kBoolTrue == test_2) {
         result << GALGAS_string ("public").stringValue () ;
       }else if (kBoolFalse == test_2) {
         result << GALGAS_string ("private").stringValue () ;
       }
-      result << "</td>\n"
-        "      <td>" ;
+      result << "</td>\n      <td>" ;
       result << extensionGetter_typedString (enumerator_2120.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue () ;
       const enumGalgasBool test_3 = enumerator_2120.current_mReturnTypeProxy (HERE).getter_isNull (SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).boolEnum () ;
       if (kBoolTrue == test_3) {
@@ -3517,8 +3435,7 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
         result << " -> " ;
         result << extensionGetter_key (enumerator_2120.current_mReturnTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue () ;
       }
-      result << "</td>\n"
-        "      <td>" ;
+      result << "</td>\n      <td>" ;
       GALGAS_uint index_2479_ (0) ;
       if (enumerator_2120.current_mModeDictionary (HERE).isValid ()) {
         cEnumerator_routineLLVMNameDict enumerator_2479 (enumerator_2120.current_mModeDictionary (HERE), kENUMERATION_UP) ;
@@ -3533,107 +3450,52 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (C_Compiler * 
           enumerator_2479.gotoNextObject () ;
         }
       }
-      result << "</td>\n"
-        "    </tr>\n"
-        "  " ;
+      result << "</td>\n    </tr>\n  " ;
       index_2120_.increment () ;
       enumerator_2120.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "  </table>\n"
-    "</p>\n"
-    "<p>\n"
-    "<h2>\n"
-    "  Infix Operators\n"
-    "</h2>\n"
-    "  <table class=\"result\">\n"
-    "    <tr>\n"
-    "      <td class=\"result_title\">Infix operator</td>\n"
-    "      <td class=\"result_title\">Result Type</td>\n"
-    "    </tr>\n"
-    "  " ;
+  result << "\n  </table>\n</p>\n<p>\n<h2>\n  Infix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Infix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  " ;
   GALGAS_uint index_2837_ (0) ;
   if (in_INFIX_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_infixOperatorMap enumerator_2837 (in_INFIX_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_2837.hasCurrentObject ()) {
-      result << "\n"
-        "    <tr class=\"result_line\">\n"
-        "      <td>" ;
+      result << "\n    <tr class=\"result_line\">\n      <td>" ;
       result << enumerator_2837.current_lkey (HERE).readProperty_string ().stringValue () ;
-      result << "</td>\n"
-        "      <td>" ;
+      result << "</td>\n      <td>" ;
       result << enumerator_2837.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue () ;
-      result << "</td>\n"
-        "    </tr>\n"
-        "  " ;
+      result << "</td>\n    </tr>\n  " ;
       index_2837_.increment () ;
       enumerator_2837.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "  </table>\n"
-    "</p>\n"
-    "<p>\n"
-    "<h2>\n"
-    "  Prefix Operators\n"
-    "</h2>\n"
-    "  <table class=\"result\">\n"
-    "    <tr>\n"
-    "      <td class=\"result_title\">Prefix operator</td>\n"
-    "      <td class=\"result_title\">Result Type</td>\n"
-    "    </tr>\n"
-    "  " ;
+  result << "\n  </table>\n</p>\n<p>\n<h2>\n  Prefix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Prefix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  " ;
   GALGAS_uint index_3260_ (0) ;
   if (in_PREFIX_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_prefixOperatorMap enumerator_3260 (in_PREFIX_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_3260.hasCurrentObject ()) {
-      result << "\n"
-        "    <tr class=\"result_line\">\n"
-        "      <td>" ;
+      result << "\n    <tr class=\"result_line\">\n      <td>" ;
       result << enumerator_3260.current_lkey (HERE).readProperty_string ().stringValue () ;
-      result << "</td>\n"
-        "      <td>" ;
+      result << "</td>\n      <td>" ;
       result << enumerator_3260.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue () ;
-      result << "</td>\n"
-        "    </tr>\n"
-        "  " ;
+      result << "</td>\n    </tr>\n  " ;
       index_3260_.increment () ;
       enumerator_3260.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "  </table>\n"
-    "</p>\n"
-    "<h2>\n"
-    "  Assignment Operators\n"
-    "</h2>\n"
-    "  <table class=\"result\">\n"
-    "    <tr>\n"
-    "      <td class=\"result_title\">Operator</td>\n"
-    "    </tr>\n"
-    "  " ;
+  result << "\n  </table>\n</p>\n<h2>\n  Assignment Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Operator</td>\n    </tr>\n  " ;
   GALGAS_uint index_3605_ (0) ;
   if (in_ASSIGNMENT_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_assignmentOperatorMap enumerator_3605 (in_ASSIGNMENT_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_3605.hasCurrentObject ()) {
-      result << "\n"
-        "    <tr class=\"result_line\">\n"
-        "      <td>" ;
+      result << "\n    <tr class=\"result_line\">\n      <td>" ;
       result << enumerator_3605.current_lkey (HERE).readProperty_string ().stringValue () ;
-      result << "</td>\n"
-        "    </tr>\n"
-        "  " ;
+      result << "</td>\n    </tr>\n  " ;
       index_3605_.increment () ;
       enumerator_3605.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "  </table>\n"
-    "</p>\n"
-    "</div>\n"
-    "</body>\n"
-    "</html>\n" ;
+  result << "\n  </table>\n</p>\n</div>\n</body>\n</html>\n" ;
   return GALGAS_string (result) ;
 }
 
@@ -4696,7 +4558,7 @@ void cPtr_compileTimeIntShiftLeftOperator::method_generateCode (const GALGAS_obj
     test_0 = GALGAS_bool (kIsStrictInf, var_rightValue_16264.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 355)))).boolEnum () ;
     if (kBoolTrue == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("compile time left shift right operand should be \xE2""\x89""\xA5"" 0"), fixItArray1  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 356)) ;
+      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("compile time left shift right operand should be ≥ 0"), fixItArray1  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 356)) ;
       outArgument_outResultValue.drop () ; // Release error dropped variable
     }
   }
@@ -4731,7 +4593,7 @@ void cPtr_compileTimeIntShiftRightOperator::method_generateCode (const GALGAS_ob
     test_0 = GALGAS_bool (kIsStrictInf, var_rightValue_17312.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 381)))).boolEnum () ;
     if (kBoolTrue == test_0) {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("compile time right shift right operand should be \xE2""\x89""\xA5"" 0"), fixItArray1  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 382)) ;
+      inCompiler->emitSemanticError (constinArgument_inOperatorLocation, GALGAS_string ("compile time right shift right operand should be ≥ 0"), fixItArray1  COMMA_SOURCE_FILE ("compile-time-type-int.galgas", 382)) ;
       outArgument_outResultValue.drop () ; // Release error dropped variable
     }
   }
@@ -5313,7 +5175,7 @@ void cPtr_fixedSizeArrayTypeDeclarationAST::method_enterInContext (GALGAS_semant
     GALGAS_omnibusType joker_4999_1 ; // Joker input parameter
     var_sizeExpressionIR_4801.method_literalInteger (joker_4999_1, var_arraySize_5022, inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 99)) ;
     const GALGAS_fixedSizeArrayTypeDeclarationAST temp_12 = this ;
-    GALGAS_lstring var_omnibusTypeDescriptionName_5125 = GALGAS_lstring::constructor_new (GALGAS_string ("[").add_operation (var_arraySize_5022.getter_string (SOURCE_FILE ("type-fixed-size-array.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (GALGAS_string (" \xE2""\x80""\xA2"" "), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (var_elementType_4272.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)), temp_12.readProperty_mFixedSizeArrayType ().readProperty_location ()  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)) ;
+    GALGAS_lstring var_omnibusTypeDescriptionName_5125 = GALGAS_lstring::constructor_new (GALGAS_string ("[").add_operation (var_arraySize_5022.getter_string (SOURCE_FILE ("type-fixed-size-array.galgas", 101)), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (GALGAS_string (" • "), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (var_elementType_4272.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)).add_operation (GALGAS_string ("]"), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)), temp_12.readProperty_mFixedSizeArrayType ().readProperty_location ()  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 101)) ;
     const GALGAS_fixedSizeArrayTypeDeclarationAST temp_13 = this ;
     GALGAS_lstring var_llvmBaseTypeName_5265 = GALGAS_lstring::constructor_new (var_elementType_4272.readProperty_llvmBaseTypeName ().add_operation (GALGAS_string ("-"), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 102)).add_operation (var_arraySize_5022.getter_string (SOURCE_FILE ("type-fixed-size-array.galgas", 102)), inCompiler COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 102)), temp_13.readProperty_mFixedSizeArrayType ().readProperty_location ()  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 102)) ;
     enumGalgasBool test_14 = kBoolTrue ;
@@ -5632,8 +5494,7 @@ void cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR::method_llvmCode
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br i1 %continue, label %loop, label %exit\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 317)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("exit:\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 318)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 319)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 320)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 320)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -5727,8 +5588,7 @@ void cPtr_staticArrayTypeAssignFunctionIR::method_llvmCodeGeneration (GALGAS_str
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 403)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 404)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 405)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 406)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-fixed-size-array.galgas", 406)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -5931,8 +5791,7 @@ void cPtr_dynArrayRemoveAllFunctionIR::method_llvmCodeGeneration (GALGAS_string 
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (%ptrtype %buffer.pointer)\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 294)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store %ptrtype null, %ptrtype* %ioArray\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 295)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 296)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 297)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 297)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -5952,8 +5811,7 @@ void cPtr_dynArrayLengthFunctionIR::method_llvmCodeGeneration (GALGAS_string & i
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %buffer.pointer = load %ptrtype, %ptrtype* %ioArray\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 317)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %length = call i32 @arc.length (%ptrtype %buffer.pointer)\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 318)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret i32 %length\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 319)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 320)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 320)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -5998,8 +5856,7 @@ void cPtr_dynArrayAppendFunctionIR::method_llvmCodeGeneration (GALGAS_string & i
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @").add_operation (var_insertRoutineLLVMName_16826, inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 374)).add_operation (GALGAS_string ("(%ptrtype* %ioArray, "), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 374)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_elementType_16366.ptr (), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 375)), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 375)).add_operation (GALGAS_string (" %inValue, i32 %current.buffer.length)\n"), inCompiler COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 375)), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 374)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Return\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 376)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 377)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 378)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 378)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -6056,8 +5913,7 @@ void cPtr_dynArrayInsertFunctionIR::method_llvmCodeGeneration (GALGAS_string & i
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store %ptrtype %new.buffer.pointer, %ptrtype* %ioArray\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 428)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Return\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 429)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 430)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 431)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 431)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -6122,8 +5978,7 @@ void cPtr_dynamicArrayTypeAssignGenericFunctionIR::method_llvmCodeGeneration (GA
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  call void @arc.release (%ptrtype %target)\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 488)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store %ptrtype %source, %ptrtype* %inTargetPtr\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 489)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 490)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 491)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-dynamic-array.galgas", 491)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -6322,8 +6177,7 @@ void cPtr_enumToUintRoutineIR::method_llvmCodeGeneration (GALGAS_string & ioArgu
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %r = load ").add_operation (temp_3.readProperty_mEnumerationLLVMTypeName (), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 211)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 211)).add_operation (temp_4.readProperty_mEnumerationLLVMTypeName (), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 211)).add_operation (GALGAS_string ("* %inValue\n"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 211)) ;
   const GALGAS_enumToUintRoutineIR temp_5 = this ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (temp_5.readProperty_mEnumerationLLVMTypeName (), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 212)).add_operation (GALGAS_string (" %r\n"), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 212)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 213)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 213)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -6597,19 +6451,19 @@ void cPtr_structureAssignmentOperatorUsage::method_generateCode (GALGAS_semantic
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""llvmArrayRepeatedDynamicValue\xC2""\xBB"""), fixItArray1  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 692)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «llvmArrayRepeatedDynamicValue»"), fixItArray1  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 692)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
     {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""llvmArrayDynamicValues\xC2""\xBB"""), fixItArray2  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 694)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «llvmArrayDynamicValues»"), fixItArray2  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 694)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
     {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""llvmArrayStaticValues\xC2""\xBB"""), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 696)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «llvmArrayStaticValues»"), fixItArray3  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 696)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
@@ -6660,37 +6514,37 @@ void cPtr_structureAssignmentOperatorUsage::method_generateCode (GALGAS_semantic
   case GALGAS_objectIR::kEnum_literalInteger:
     {
       TC_Array <C_FixItDescription> fixItArray6 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""literalInteger\xC2""\xBB"""), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 720)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «literalInteger»"), fixItArray6  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 720)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_literalString:
     {
       TC_Array <C_FixItDescription> fixItArray7 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""literalString\xC2""\xBB"""), fixItArray7  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 722)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «literalString»"), fixItArray7  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 722)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmNamedValue:
     {
       TC_Array <C_FixItDescription> fixItArray8 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""llvmArrayStaticValues\xC2""\xBB"""), fixItArray8  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 724)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «llvmArrayStaticValues»"), fixItArray8  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 724)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_null:
     {
       TC_Array <C_FixItDescription> fixItArray9 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""llvmValue\xC2""\xBB"""), fixItArray9  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 726)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «llvmValue»"), fixItArray9  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 726)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray10 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""void\xC2""\xBB"""), fixItArray10  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 728)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «void»"), fixItArray10  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 728)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_zero:
     {
       TC_Array <C_FixItDescription> fixItArray11 ;
-      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment \xC2""\xAB""zero\xC2""\xBB"""), fixItArray11  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 730)) ;
+      inCompiler->emitSemanticError (constinArgument_inErrorLocation, GALGAS_string ("invalid structure assignment «zero»"), fixItArray11  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 730)) ;
     }
     break ;
   }
@@ -6789,8 +6643,7 @@ void cPtr_structureTypeAssignFunctionIR::method_llvmCodeGeneration (GALGAS_strin
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  br label %copy.end\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 816)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("copy.end:\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 817)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 818)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 819)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-structure-declaration.galgas", 819)) ;
 }
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -7447,8 +7300,7 @@ void cPtr_integerBuiltinFunctionIR::method_llvmCodeGeneration (GALGAS_string & i
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (" (").add_operation (temp_8.readProperty_mLLVMTypeName (), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 405)).add_operation (GALGAS_string (" %value)\n"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 405)), inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 405)) ;
   const GALGAS_integerBuiltinFunctionIR temp_9 = this ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ret ").add_operation (temp_9.readProperty_mLLVMTypeName (), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 406)).add_operation (GALGAS_string (" %result\n"), inCompiler COMMA_SOURCE_FILE ("type-integer.galgas", 406)), inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 406)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n"
-    "\n"), inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 407)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("type-integer.galgas", 407)) ;
   const GALGAS_integerBuiltinFunctionIR temp_10 = this ;
   const GALGAS_integerBuiltinFunctionIR temp_11 = this ;
   const GALGAS_integerBuiltinFunctionIR temp_12 = this ;
@@ -7987,7 +7839,7 @@ void routine_buildControlRegisterSliceMap (const GALGAS_controlRegisterBitSliceL
             const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * extractPtr_19047 = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) (enumerator_18825.current_mRegisterBitSlice (HERE).unsafePointer ()) ;
             const GALGAS_lbigint extractedValue_18924_count = extractPtr_19047->mAssociatedValue0 ;
             var_shiftCount_18792 = var_shiftCount_18792.add_operation (extractedValue_18924_count.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 456)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 456)) ;
-            outArgument_outControlRegisterFieldList.addAssign_operation (extractedValue_18924_count.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 457)), GALGAS_string ("\xE2""\x80""\x94""")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 457)) ;
+            outArgument_outControlRegisterFieldList.addAssign_operation (extractedValue_18924_count.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 457)), GALGAS_string ("—")  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 457)) ;
           }
           break ;
         case GALGAS_controlRegisterBitSlice::kEnum_namedBit:
@@ -8322,93 +8174,13 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByNa
                                                                                     const GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
-  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-    "<html>\n"
-    "<head>\n"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
-    "<title>Control Registers of " ;
+  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << ", sorted by name</title>\n"
-    "<style type=\"text/css\">body {\n"
-    "  font-size: small ;\n"
-    "}\n"
-    "\n"
-    "h1 {\n"
-    "  text-align: center ;\n"
-    "}\n"
-    "\n"
-    ".selecteur {\n"
-    "  color:green ;\n"
-    "}\n"
-    "\n"
-    "a.header_link {\n"
-    "  background-color: #FFFFCC ;\n"
-    "}\n"
-    "\n"
-    "a:visited, a:link, a:active{\n"
-    "  color: blue ;\n"
-    "  text-decoration: underline ;\n"
-    "}\n"
-    "\n"
-    "a:hover {\n"
-    "  color:green ;\n"
-    "  background-color: #FFFF00 ;\n"
-    "  text-decoration: none ;\n"
-    "}\n"
-    "\n"
-    "table.result {\n"
-    "  border: 1px solid #666666 ;\n"
-    "}\n"
-    "\n"
-    "table.fields {\n"
-    "\xC2""\xA0""\xC2""\xA0""border-collapse: collapse ;\n"
-    "  border-spacing: 1px 1px;\n"
-    "}\n"
-    "\n"
-    "td.fields {\n"
-    "  border: 1px solid #333333 ;\n"
-    "  text-align: center ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.result_title {\n"
-    "  font-weight: bold ;\n"
-    "  text-align: center ;\n"
-    "  background-color: yellow ;\n"
-    "}\n"
-    "\n"
-    "td.address {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.name {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.type {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "tr.result_line {\n"
-    "  background-color: #EEEEEE ;\n"
-    "}\n"
-    "\n"
-    "</style>\n"
-    "</head>\n"
-    "<body>\n"
-    "<div>\n"
-    "<h1>Control Registers of " ;
+  result << ", sorted by name</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << ", sorted by name</h1>\n"
-    "<p>This document lists all " ;
+  result << ", sorted by name</h1>\n<p>This document lists all " ;
   result << in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByNameDump.html.galgasTemplate", 78)).stringValue () ;
-  result << " defined control registers, sorted by name.</p>\n"
-    "<table class=\"result\">\n"
-    "<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"resul"
-    "t_title\">Value</td></tr>\n" ;
+  result << " defined control registers, sorted by name.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n" ;
   GALGAS_uint index_1561_ (0) ;
   if (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME.isValid ()) {
     cEnumerator_controlRegisterByName enumerator_1561 (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME, kENUMERATION_UP) ;
@@ -8418,11 +8190,7 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByNa
       enumerator_1561.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "</table>\n"
-    "</div>\n"
-    "</body>\n"
-    "</html>\n" ;
+  result << "\n</table>\n</div>\n</body>\n</html>\n" ;
   return GALGAS_string (result) ;
 }
 
@@ -8438,93 +8206,13 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAd
                                                                                        const GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
-  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-    "<html>\n"
-    "<head>\n"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
-    "<title>Control Registers of " ;
+  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << ", sorted by address</title>\n"
-    "<style type=\"text/css\">body {\n"
-    "  font-size: small ;\n"
-    "}\n"
-    "\n"
-    "h1 {\n"
-    "  text-align: center ;\n"
-    "}\n"
-    "\n"
-    ".selecteur {\n"
-    "  color:green ;\n"
-    "}\n"
-    "\n"
-    "a.header_link {\n"
-    "  background-color: #FFFFCC ;\n"
-    "}\n"
-    "\n"
-    "a:visited, a:link, a:active{\n"
-    "  color: blue ;\n"
-    "  text-decoration: underline ;\n"
-    "}\n"
-    "\n"
-    "a:hover {\n"
-    "  color:green ;\n"
-    "  background-color: #FFFF00 ;\n"
-    "  text-decoration: none ;\n"
-    "}\n"
-    "\n"
-    "table.result {\n"
-    "  border: 1px solid #666666 ;\n"
-    "}\n"
-    "\n"
-    "table.fields {\n"
-    "\xC2""\xA0""\xC2""\xA0""border-collapse: collapse ;\n"
-    "  border-spacing: 1px 1px;\n"
-    "}\n"
-    "\n"
-    "td.fields {\n"
-    "  border: 1px solid #333333 ;\n"
-    "  text-align: center ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.result_title {\n"
-    "  font-weight: bold ;\n"
-    "  text-align: center ;\n"
-    "  background-color: yellow ;\n"
-    "}\n"
-    "\n"
-    "td.address {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.name {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "td.type {\n"
-    "  font-family: Courier ;\n"
-    "  padding : 4px ;\n"
-    "}\n"
-    "\n"
-    "tr.result_line {\n"
-    "  background-color: #EEEEEE ;\n"
-    "}\n"
-    "\n"
-    "</style>\n"
-    "</head>\n"
-    "<body>\n"
-    "<div>\n"
-    "<h1>Control Registers of " ;
+  result << ", sorted by address</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << ", sorted by address</h1>\n"
-    "<p>This document lists all " ;
+  result << ", sorted by address</h1>\n<p>This document lists all " ;
   result << in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByAddressDump.html.galgasTemplate", 78)).stringValue () ;
-  result << " defined control registers, sorted by address.</p>\n"
-    "<table class=\"result\">\n"
-    "<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"resul"
-    "t_title\">Value</td></tr>\n" ;
+  result << " defined control registers, sorted by address.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n" ;
   GALGAS_uint index_1567_ (0) ;
   if (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS.isValid ()) {
     cEnumerator_controlRegisterByAddress enumerator_1567 (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS, kENUMERATION_UP) ;
@@ -8534,11 +8222,7 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAd
       enumerator_1567.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "</table>\n"
-    "</div>\n"
-    "</body>\n"
-    "</html>\n" ;
+  result << "\n</table>\n</div>\n</body>\n</html>\n" ;
   return GALGAS_string (result) ;
 }
 
@@ -8870,66 +8554,13 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
                                                                        const GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   C_String result ;
-  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n"
-    "<html>\n"
-    "<head>\n"
-    "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n"
-    "<title>Global constants of " ;
+  result << "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</title>\n"
-    "<style type=\"text/css\">body {\n"
-    "  font-family: Georgia, sans-serif ;\n"
-    "  font-size: small ;\n"
-    "}\n"
-    "\n"
-    "h1 {\n"
-    "  text-align: center ;\n"
-    "}\n"
-    "\n"
-    ".selecteur {\n"
-    "  color:green ;\n"
-    "}\n"
-    "\n"
-    "a.header_link {\n"
-    "  background-color: #FFFFCC ;\n"
-    "}\n"
-    "\n"
-    "a:visited, a:link, a:active{\n"
-    "  color: blue ;\n"
-    "  text-decoration: underline ;\n"
-    "}\n"
-    "\n"
-    "a:hover {\n"
-    "  color:green ;\n"
-    "  background-color: #FFFF00 ;\n"
-    "  text-decoration: none ;\n"
-    "}\n"
-    "\n"
-    "table.result {\n"
-    "  border: 1px solid #666666 ;\n"
-    "}\n"
-    "\n"
-    "td.result_title {\n"
-    "  font-weight: bold ;\n"
-    "  text-align: center ;\n"
-    "  background-color: yellow ;\n"
-    "}\n"
-    "\n"
-    "tr.result_line {\n"
-    "  background-color: #EEEEEE ;\n"
-    "}\n"
-    "\n"
-    "</style>\n"
-    "</head>\n"
-    "<body>\n"
-    "<div>\n"
-    "<h1>Global Constants of " ;
+  result << "</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Global Constants of " ;
   result << in_PROJECT_5F_NAME.stringValue () ;
-  result << "</h1>\n"
-    "<p>This document lists all " ;
+  result << "</h1>\n<p>This document lists all " ;
   result << in_GLOBAL_5F_CONSTANT_5F_MAP.getter_count (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).stringValue () ;
-  result << " defined global constants, sorted by name.</p>\n"
-    "<p>" ;
+  result << " defined global constants, sorted by name.</p>\n<p>" ;
   GALGAS_uint index_1008_ (0) ;
   if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
     cEnumerator_stringset enumerator_1008 (in_FIRST_5F_LETTER_5F_SET, kENUMERATION_UP) ;
@@ -8946,14 +8577,9 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
       enumerator_1008.gotoNextObject () ;
     }
   }
-  result << "</p>\n"
-    "<p>" ;
+  result << "</p>\n<p>" ;
   result << in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue () ;
-  result << "\n"
-    "</p>\n"
-    "<table class=\"result\">\n"
-    "<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_titl"
-    "e\">Value</td></tr>\n" ;
+  result << "\n</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_title\">Value</td></tr>\n" ;
   GALGAS_uint index_1393_ (0) ;
   if (in_GLOBAL_5F_CONSTANT_5F_MAP.isValid ()) {
     cEnumerator_globalConstantMap enumerator_1393 (in_GLOBAL_5F_CONSTANT_5F_MAP, kENUMERATION_UP) ;
@@ -8973,11 +8599,7 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (C_Compile
       enumerator_1393.gotoNextObject () ;
     }
   }
-  result << "\n"
-    "</table>\n"
-    "</div>\n"
-    "</body>\n"
-    "</html>\n" ;
+  result << "\n</table>\n</div>\n</body>\n</html>\n" ;
   return GALGAS_string (result) ;
 }
 

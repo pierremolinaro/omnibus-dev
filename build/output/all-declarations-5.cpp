@@ -11026,7 +11026,7 @@ GALGAS_string extensionGetter_string (const GALGAS_omnibusInfixOperator & inObje
     break ;
   case GALGAS_omnibusInfixOperator::kEnum_infEqual:
     {
-      result_result = GALGAS_string ("\xE2""\x89""\xA4""") ;
+      result_result = GALGAS_string ("≤") ;
     }
     break ;
   case GALGAS_omnibusInfixOperator::kEnum_bitWiseAndOp:

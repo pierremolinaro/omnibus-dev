@@ -413,7 +413,7 @@ void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObj
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkIsCompileTimeType (class cPtr_omnibusType * inObject,
-                                                 const GALGAS_location constin_inErrorLocation,
+                                                 const class GALGAS_location constin_inErrorLocation,
                                                  C_Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -424,7 +424,7 @@ void callExtensionMethod_checkIsCompileTimeType (class cPtr_omnibusType * inObje
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_checkIsNotCompileTimeType (class cPtr_omnibusType * inObject,
-                                                    const GALGAS_location constin_inErrorLocation,
+                                                    const class GALGAS_location constin_inErrorLocation,
                                                     C_Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
 
@@ -465,9 +465,9 @@ class GALGAS_bool callExtensionGetter_copyable (const cPtr_omnibusType * inObjec
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateRetain (class cPtr_omnibusType * inObject,
-                                         const GALGAS_string constin_inOmnibusName,
-                                         GALGAS_string & io_ioLLVMcode,
-                                         GALGAS_generationAdds & io_ioGenerationAdds,
+                                         const class GALGAS_string constin_inOmnibusName,
+                                         class GALGAS_string & io_ioLLVMcode,
+                                         class GALGAS_generationAdds & io_ioGenerationAdds,
                                          C_Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
@@ -478,7 +478,7 @@ void callExtensionMethod_generateRetain (class cPtr_omnibusType * inObject,
 //----------------------------------------------------------------------------------------------------------------------
 
 class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusType * inObject,
-                                                            const GALGAS_uintlist constin_inPropertyIndexPath,
+                                                            const class GALGAS_uintlist constin_inPropertyIndexPath,
                                                             class C_Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -489,9 +489,9 @@ class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusTy
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateInsulate (class cPtr_omnibusType * inObject,
-                                           const GALGAS_string constin_inOmnibusName,
-                                           GALGAS_string & io_ioLLVMcode,
-                                           GALGAS_generationAdds & io_ioGenerationAdds,
+                                           const class GALGAS_string constin_inOmnibusName,
+                                           class GALGAS_string & io_ioLLVMcode,
+                                           class GALGAS_generationAdds & io_ioGenerationAdds,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
@@ -502,9 +502,9 @@ void callExtensionMethod_generateInsulate (class cPtr_omnibusType * inObject,
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateRelease (class cPtr_omnibusType * inObject,
-                                          const GALGAS_string constin_inOmnibusName,
-                                          GALGAS_string & io_ioLLVMcode,
-                                          GALGAS_generationAdds & io_ioGenerationAdds,
+                                          const class GALGAS_string constin_inOmnibusName,
+                                          class GALGAS_string & io_ioLLVMcode,
+                                          class GALGAS_generationAdds & io_ioGenerationAdds,
                                           C_Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
@@ -1322,7 +1322,7 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValue
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_typeOpaqueDeclarationAST * inObject,
-                                                     GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                     class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
 

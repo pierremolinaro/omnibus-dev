@@ -1115,13 +1115,13 @@ class GALGAS_string extensionGetter_llvmName (const class GALGAS_implicitBoolean
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateConvertToBooleanCode (class cPtr_abstractImplicitConverterToBoolean * inObject,
-                                                       const GALGAS_objectIR constin_inReceiverOperand,
-                                                       const GALGAS_location constin_inErrorLocation,
-                                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                       GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                       GALGAS_allocaList & io_ioAllocaList,
-                                                       GALGAS_implicitBooleanConversionResult & out_outResult,
-                                                       C_Compiler * inCompiler
+                                                       const class GALGAS_objectIR constin_inReceiverOperand,
+                                                       const class GALGAS_location constin_inErrorLocation,
+                                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                       class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                       class GALGAS_allocaList & io_ioAllocaList,
+                                                       class GALGAS_implicitBooleanConversionResult & out_outResult,
+                                                       class C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1538,8 +1538,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_expressionAST_2D_we
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteExpressionTypesInPrecedenceGraph (class cPtr_expressionAST * inObject,
-                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                               C_Compiler * inCompiler
+                                                               class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               class C_Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1549,18 +1549,18 @@ void callExtensionMethod_noteExpressionTypesInPrecedenceGraph (class cPtr_expres
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_analyzeExpression (class cPtr_expressionAST * inObject,
-                                            const GALGAS_omnibusType constin_inSelfType,
-                                            const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                            const GALGAS_omnibusType constin_inTargetType,
-                                            const GALGAS_semanticContext constin_inContext,
-                                            const GALGAS_mode constin_inMode,
-                                            GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                            GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                            GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                            GALGAS_allocaList & io_ioAllocaList,
-                                            GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                            GALGAS_objectIR & out_outResult,
-                                            C_Compiler * inCompiler
+                                            const class GALGAS_omnibusType constin_inSelfType,
+                                            const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                            const class GALGAS_omnibusType constin_inTargetType,
+                                            const class GALGAS_semanticContext constin_inContext,
+                                            const class GALGAS_mode constin_inMode,
+                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                            class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                            class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                            class GALGAS_allocaList & io_ioAllocaList,
+                                            class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                            class GALGAS_objectIR & out_outResult,
+                                            class C_Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4646,15 +4646,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorRoutin
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateCode (class cPtr_omnibusInfixOperatorUsage * inObject,
-                                       const GALGAS_objectIR constin_inLeftOperand,
-                                       const GALGAS_location constin_inOperatorLocation,
-                                       const GALGAS_objectIR constin_inRightOperand,
-                                       const GALGAS_omnibusType constin_inResultType,
-                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                       GALGAS_allocaList & io_ioAllocaList,
-                                       GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                       GALGAS_objectIR & out_outResultValue,
-                                       C_Compiler * inCompiler
+                                       const class GALGAS_objectIR constin_inLeftOperand,
+                                       const class GALGAS_location constin_inOperatorLocation,
+                                       const class GALGAS_objectIR constin_inRightOperand,
+                                       const class GALGAS_omnibusType constin_inResultType,
+                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       class GALGAS_allocaList & io_ioAllocaList,
+                                       class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                       class GALGAS_objectIR & out_outResultValue,
+                                       class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5601,15 +5601,15 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorRouti
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_generateCode (class cPtr_prefixOperatorUsage * inObject,
-                                       const GALGAS_objectIR constin_inReceiverOperand,
-                                       const GALGAS_location constin_inOperatorLocation,
-                                       const GALGAS_omnibusType constin_inResultType,
-                                       const GALGAS_bool constin_inDoNotGeneratePanicCode,
-                                       const GALGAS_bool constin_inSafeMode,
-                                       GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                       GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                       GALGAS_objectIR & out_outResultValue,
-                                       C_Compiler * inCompiler
+                                       const class GALGAS_objectIR constin_inReceiverOperand,
+                                       const class GALGAS_location constin_inOperatorLocation,
+                                       const class GALGAS_omnibusType constin_inResultType,
+                                       const class GALGAS_bool constin_inDoNotGeneratePanicCode,
+                                       const class GALGAS_bool constin_inSafeMode,
+                                       class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                       class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                       class GALGAS_objectIR & out_outResultValue,
+                                       class C_Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5761,8 +5761,8 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST_2D_w
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (class cPtr_instructionAST * inObject,
-                                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                                C_Compiler * inCompiler
+                                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                                class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5772,16 +5772,16 @@ void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (class cPtr_instr
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_instructionSemanticAnalysis (class cPtr_instructionAST * inObject,
-                                                      const GALGAS_omnibusType constin_inSelfType,
-                                                      const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                      const GALGAS_semanticContext constin_inContext,
-                                                      const GALGAS_mode constin_inMode,
-                                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                      GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                      GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                      GALGAS_allocaList & io_ioAllocaList,
-                                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                      C_Compiler * inCompiler
+                                                      const class GALGAS_omnibusType constin_inSelfType,
+                                                      const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                      const class GALGAS_semanticContext constin_inContext,
+                                                      const class GALGAS_mode constin_inMode,
+                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                      class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                      class GALGAS_allocaList & io_ioAllocaList,
+                                                      class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                      class C_Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5875,10 +5875,10 @@ void extensionMethod_instructionListLLVMCode (const class GALGAS_instructionList
 //----------------------------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_llvmInstructionCode (class cPtr_abstractInstructionIR * inObject,
-                                              GALGAS_string & io_ioLLVMcode,
-                                              const GALGAS_generationContext constin_inGenerationContext,
-                                              GALGAS_generationAdds & io_ioGenerationAdds,
-                                              C_Compiler * inCompiler
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              const class GALGAS_generationContext constin_inGenerationContext,
+                                              class GALGAS_generationAdds & io_ioGenerationAdds,
+                                              class C_Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //----------------------------------------------------------------------------------------------------------------------
