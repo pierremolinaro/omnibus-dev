@@ -151,7 +151,7 @@ mObject (inElement.mProperty_mValue_30_, inElement.mProperty_mValue_31_) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement__32_lstringlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -717,7 +717,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_lstringlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1263,7 +1263,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_uintlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1680,7 +1680,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_lbigintlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2097,7 +2097,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_stringlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3073,7 +3073,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_functionlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3490,7 +3490,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_luintlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4030,7 +4030,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_objectlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4447,7 +4447,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_typelist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4864,7 +4864,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_uint_36__34_list::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5281,7 +5281,7 @@ mObject (inElement.mProperty_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_bigintlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6438,7 +6438,7 @@ mObject (inElement.mProperty_mValue_30_, inElement.mProperty_mValue_31_) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement__32_stringlist::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

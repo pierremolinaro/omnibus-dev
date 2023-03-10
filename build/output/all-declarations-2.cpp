@@ -21,7 +21,8 @@ mProperty_mAccess (in_mAccess) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_propertyGetterMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mVisibility.isValid () && mProperty_mAccess.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mVisibility.isValid () && mProperty_mAccess.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -811,7 +812,8 @@ mProperty_mAccess (in_mAccess) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_propertySetterMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mVisibility.isValid () && mProperty_mAccess.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mVisibility.isValid () && mProperty_mAccess.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1409,7 +1411,8 @@ mProperty_mIndex (in_mIndex) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_staticStringMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mIndex.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mIndex.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1715,7 +1718,7 @@ mObject (inElement.mProperty_mType, inElement.mProperty_mOperandIRList) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_globalStructuredConstantList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2195,7 +2198,7 @@ mObject (inElement.mProperty_mOperand) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_operandIRList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5338,7 +5341,7 @@ mObject (inElement.mProperty_mPropertyName, inElement.mProperty_mPropertyType, i
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_arcAssignmentList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6120,7 +6123,7 @@ mObject (inElement.mProperty_mType) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_userLLVMTypeDefinitionListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7396,7 +7399,8 @@ mProperty_mInvokedFunctionSet (in_mInvokedFunctionSet) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_staticListInvokedFunctionSetMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mInvokedFunctionSet.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mInvokedFunctionSet.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -15548,7 +15552,7 @@ mObject (inElement.mProperty_mConstantName, inElement.mProperty_mConstantValue) 
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_enumerationConstantList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -16258,7 +16262,7 @@ mObject (inElement.mProperty_mPropertyName, inElement.mProperty_mPropertyAttribu
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_structurePropertyListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

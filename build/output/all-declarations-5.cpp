@@ -1286,7 +1286,7 @@ mObject (inElement.mProperty_mInstruction) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_llvmGenerationInstructionList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4013,7 +4013,7 @@ mObject (inElement.mProperty_mAccess) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_primaryInExpressionAccessListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5292,7 +5292,7 @@ mObject (inElement.mProperty_mSliceWidth, inElement.mProperty_mExpression, inEle
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_integerSliceFieldListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6555,7 +6555,7 @@ mObject (inElement.mProperty_mFieldName, inElement.mProperty_mExpression, inElem
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_registerIntegerFieldListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7890,7 +7890,7 @@ mObject (inElement.mProperty_mSelector, inElement.mProperty_mExpression) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_functionCallEffectiveParameterListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9860,7 +9860,7 @@ mObject (inElement.mProperty_mParameter) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_genericFormalParameterList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14554,7 +14554,7 @@ mObject (inElement.mProperty_mSliceWidth, inElement.mProperty_mSliceKind) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_sliceAssignmentListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

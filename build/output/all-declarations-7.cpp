@@ -3826,7 +3826,7 @@ mObject (inElement.mProperty_mRoutine, inElement.mProperty_mAccessibleRoutineSet
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_routineAccessibilityIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4349,7 +4349,7 @@ mObject (inElement.mProperty_mInstructionList) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_instructionListListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6219,6 +6219,7 @@ cMapElement (inKey COMMA_THERE) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_ctCheckMap::isValid (void) const {
+  /* return mProperty_lkey.isValid () ; */
   return mProperty_lkey.isValid () ;
 }
 
@@ -6455,7 +6456,8 @@ mProperty_mValue (in_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_ctMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mValue.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mValue.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7256,7 +7258,7 @@ mObject (inElement.mProperty_mElement) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_llvmStringDefinition::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8899,7 +8901,7 @@ mObject (inElement.mProperty_mElement) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_llvmGenerationInstructionElementList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9920,7 +9922,8 @@ mProperty_mValue (in_mValue) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cMapElement_assignmentGenerationVarMap::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mValue.isValid () ;
+  /* return mProperty_lkey.isValid () && mProperty_mValue.isValid () ; */
+  return mProperty_lkey.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

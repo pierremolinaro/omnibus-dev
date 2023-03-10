@@ -81,11 +81,11 @@ def runCommand (command) :
 
 def compileSource (source) :
   print (MAGENTA() + BOLD () + "********** Compile " + os.path.basename (os.getcwd ()) + "/"  + source + ENDC ())
-  command = ["../../../makefile-macosx/omnibus-debug", "--no-panic-generation", "-v", "--Oz", source]
+  command = ["../../../makefile-unix/omnibus-debug", "--no-panic-generation", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
-  command = ["../../../makefile-macosx/omnibus-debug", "-v", "--Oz", source]
+  command = ["../../../makefile-unix/omnibus-debug", "-v", "--Oz", source]
   returncode = subprocess.call (command)
   if returncode != 0 :
     sys.exit (returncode)
@@ -97,7 +97,7 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile omnibus
 print (MAGENTA() + BOLD () + "********** Compile OMNIBUS" + ENDC ())
-runCommand (["python", "../../../makefile-macosx/build+debug.py"])
+runCommand (["python", "../../../makefile-unix/build+debug.py"])
 #--- Compile omnibus sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :

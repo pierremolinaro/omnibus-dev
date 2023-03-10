@@ -11699,7 +11699,7 @@ mObject (inElement.mProperty_mInterruptName, inElement.mProperty_mInterruptionPa
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_interruptionConfigurationList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12376,7 +12376,7 @@ mObject (inElement.mProperty_mDeclaration) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_declarationListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------

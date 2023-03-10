@@ -3153,7 +3153,7 @@ mObject (inElement.mProperty_mGuardedCommand, inElement.mProperty_mInstructionGe
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_syncInstructionBranchListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3633,7 +3633,7 @@ mObject (inElement.mProperty_mGuardedCommand) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_guardedCommandIRList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5864,7 +5864,7 @@ mObject (inElement.mProperty_mAccess) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_accessInAssignmentListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6950,7 +6950,7 @@ mObject (inElement.mProperty_mEffectiveParameterPassingMode, inElement.mProperty
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_procEffectiveParameterList::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7640,7 +7640,7 @@ mObject (inElement.mProperty_mEffectiveParameterPassingMode, inElement.mProperty
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_procCallEffectiveParameterListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8122,7 +8122,7 @@ mObject (inElement.mProperty_mCaseIdentifiers, inElement.mProperty_mCaseInstruct
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_switchCaseListAST::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8969,7 +8969,7 @@ mObject (inElement.mProperty_mCaseIdentifierIndexes, inElement.mProperty_mCaseIn
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_switchCaseListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -11279,7 +11279,7 @@ mObject (inElement.mProperty_mRoutine) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_routineListIR::isValid (void) const {
-  return mObject.isValid () ;
+  return true ; // return mObject.isValid () ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
