@@ -4001,12 +4001,6 @@ bool GALGAS_omnibusTypeAttributes::isValid (void) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_omnibusTypeAttributes::drop (void) {
-  mIsValid = false ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::operator_or (const GALGAS_omnibusTypeAttributes & inOperand
                                                                         COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_omnibusTypeAttributes result ;

@@ -10192,7 +10192,7 @@ class cEnumAssociatedValues_constructorValue_arrayValue : public cEnumAssociated
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @omnibusTypeAttributes struct
+// Phase 1: @omnibusTypeAttributes boolset
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -10203,7 +10203,7 @@ class GALGAS_omnibusTypeAttributes : public AC_GALGAS_root {
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public: VIRTUAL_IN_DEBUG void drop (void) ;
+  public: VIRTUAL_IN_DEBUG void drop (void) { mIsValid = false ; }
 
 //--------------------------------- Default constructor
   public: GALGAS_omnibusTypeAttributes (void) ;

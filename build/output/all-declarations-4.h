@@ -766,7 +766,7 @@ void extensionMethod_enterInContext (const class GALGAS_taskListAST inObject,
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @routineAttributes struct
+// Phase 1: @routineAttributes boolset
 //
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -777,7 +777,7 @@ class GALGAS_routineAttributes : public AC_GALGAS_root {
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG bool isValid (void) const ;
-  public: VIRTUAL_IN_DEBUG void drop (void) ;
+  public: VIRTUAL_IN_DEBUG void drop (void) { mIsValid = false ; }
 
 //--------------------------------- Default constructor
   public: GALGAS_routineAttributes (void) ;

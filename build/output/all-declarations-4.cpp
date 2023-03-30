@@ -14110,12 +14110,6 @@ bool GALGAS_routineAttributes::isValid (void) const {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-void GALGAS_routineAttributes::drop (void) {
-  mIsValid = false ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_routineAttributes GALGAS_routineAttributes::operator_or (const GALGAS_routineAttributes & inOperand
                                                                 COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS_routineAttributes result ;
