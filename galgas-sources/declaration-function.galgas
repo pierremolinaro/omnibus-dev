@@ -281,9 +281,10 @@ map @routineMapForContext {
 
 #·······················································································································
 
-dict @routineLLVMNameDict : @mode {
-  public var @string mRoutineLLVMName
-}
+typealias @routineLLVMNameDict = [@mode : @string]
+#dict @routineLLVMNameDict : @mode {
+#  @string
+#}
 
 #·······················································································································
 

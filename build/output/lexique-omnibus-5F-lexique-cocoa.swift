@@ -571,12 +571,6 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
 
   //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  func indexingDirectory () -> String {
-    return ""
-  }
-
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
   func indexingTitles () -> [String] {
 
     return []
