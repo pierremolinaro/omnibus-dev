@@ -5388,13 +5388,13 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i21_indexing 
 void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i22_ (GALGAS_ast & ioArgument_ioAST,
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 62)) ;
-  GALGAS_lstring var_staticListName_2825 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_staticListName_2835 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 63)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7B_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 64)) ;
-  GALGAS_staticListPropertyListAST var_propertyList_2881 = GALGAS_staticListPropertyListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 65)) ;
+  GALGAS_staticListPropertyListAST var_propertyList_2891 = GALGAS_staticListPropertyListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 65)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    nt_staticArrayProperty_ (ioArgument_ioAST, var_propertyList_2881, inCompiler) ;
+    nt_staticArrayProperty_ (ioArgument_ioAST, var_propertyList_2891, inCompiler) ;
     switch (select_omnibus_5F_syntax_34 (inCompiler)) {
     case 2: {
     } break ;
@@ -5404,7 +5404,7 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i22_ (GALGAS_
     }
   }
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__7D_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 70)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_staticListAST::constructor_new (var_staticListName_2825, var_propertyList_2881, GALGAS_staticListValueListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 71))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 71))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 71)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_staticListAST::constructor_new (var_staticListName_2835, var_propertyList_2891, GALGAS_staticListValueListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 71))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 71))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 71)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
@@ -5454,47 +5454,47 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArrayProperty_i23_ 
                                                                                  GALGAS_staticListPropertyListAST & ioArgument_ioPropertyList,
                                                                                  C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_let COMMA_SOURCE_FILE ("declaration-static-list.galgas", 77)) ;
-  GALGAS_lstring var_propertyName_3322 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_propertyName_3332 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 78)) ;
   switch (select_omnibus_5F_syntax_35 (inCompiler)) {
   case 1: {
-    GALGAS_lstring var_typeName_3379 ;
-    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3379, inCompiler) ;
-    ioArgument_ioPropertyList.addAssign_operation (var_propertyName_3322, GALGAS_staticListPropertyTypeAST::constructor_valueType (var_typeName_3379  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 81))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 81)) ;
+    GALGAS_lstring var_typeName_3389 ;
+    nt_type_5F_definition_ (ioArgument_ioAST, var_typeName_3389, inCompiler) ;
+    ioArgument_ioPropertyList.addAssign_operation (var_propertyName_3332, GALGAS_staticListPropertyTypeAST::constructor_valueType (var_typeName_3389  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 81))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 81)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("declaration-static-list.galgas", 83)) ;
-    GALGAS_mode var_mode_3488 ;
-    nt_mode_ (var_mode_3488, inCompiler) ;
-    GALGAS_lstringlist var_attributeList_3525 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 85)) ;
+    GALGAS_mode var_mode_3498 ;
+    nt_mode_ (var_mode_3498, inCompiler) ;
+    GALGAS_lstringlist var_attributeList_3535 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 85)) ;
     bool repeatFlag_0 = true ;
     while (repeatFlag_0) {
       switch (select_omnibus_5F_syntax_36 (inCompiler)) {
       case 2: {
-        GALGAS_lstring var_attribute_3591 = inCompiler->synthetizedAttribute_tokenString () ;
+        GALGAS_lstring var_attribute_3601 = inCompiler->synthetizedAttribute_tokenString () ;
         inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__40_attribute COMMA_SOURCE_FILE ("declaration-static-list.galgas", 88)) ;
-        var_attributeList_3525.addAssign_operation (var_attribute_3591  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 89)) ;
+        var_attributeList_3535.addAssign_operation (var_attribute_3601  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 89)) ;
       } break ;
       default:
         repeatFlag_0 = false ;
         break ;
       }
     }
-    GALGAS_routineFormalArgumentListAST var_formalArgs_3696 ;
-    nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_formalArgs_3696, inCompiler) ;
-    GALGAS_lstring var_returnType_3726 ;
+    GALGAS_routineFormalArgumentListAST var_formalArgs_3706 ;
+    nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_formalArgs_3706, inCompiler) ;
+    GALGAS_lstring var_returnType_3736 ;
     switch (select_omnibus_5F_syntax_37 (inCompiler)) {
     case 1: {
-      var_returnType_3726 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 94)) ;
+      var_returnType_3736 = GALGAS_string::makeEmptyString ().getter_here (inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 94)) ;
     } break ;
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 96)) ;
-      nt_type_5F_definition_ (ioArgument_ioAST, var_returnType_3726, inCompiler) ;
+      nt_type_5F_definition_ (ioArgument_ioAST, var_returnType_3736, inCompiler) ;
     } break ;
     default:
       break ;
     }
-    ioArgument_ioPropertyList.addAssign_operation (var_propertyName_3322, GALGAS_staticListPropertyTypeAST::constructor_function (var_mode_3488, var_formalArgs_3696, var_returnType_3726  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 99))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 99)) ;
+    ioArgument_ioPropertyList.addAssign_operation (var_propertyName_3332, GALGAS_staticListPropertyTypeAST::constructor_function (var_mode_3498, var_formalArgs_3706, var_returnType_3736  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 99))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 99)) ;
   } break ;
   default:
     break ;
@@ -5588,25 +5588,25 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_ (GALGAS_
                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_extend COMMA_SOURCE_FILE ("declaration-static-list.galgas", 108)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_staticArray COMMA_SOURCE_FILE ("declaration-static-list.galgas", 109)) ;
-  GALGAS_lstring var_staticListName_4337 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_staticListName_4347 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 110)) ;
   inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__28_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 111)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
-    GALGAS_extendStaticListElementAST var_expressions_4406 = GALGAS_extendStaticListElementAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 113)) ;
+    GALGAS_extendStaticListElementAST var_expressions_4416 = GALGAS_extendStaticListElementAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 113)) ;
     bool repeatFlag_1 = true ;
     while (repeatFlag_1) {
-      GALGAS_lstring var_selector_4459 = inCompiler->synthetizedAttribute_tokenString () ;
+      GALGAS_lstring var_selector_4469 = inCompiler->synthetizedAttribute_tokenString () ;
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__21_selector_3A_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 115)) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        test_2 = GALGAS_bool (kIsNotEqual, var_selector_4459.readProperty_string ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+        test_2 = GALGAS_bool (kIsNotEqual, var_selector_4469.readProperty_string ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
         if (kBoolTrue == test_2) {
           TC_Array <C_FixItDescription> fixItArray3 ;
-          inCompiler->emitSemanticError (var_selector_4459.readProperty_location (), GALGAS_string ("selector should be empty"), fixItArray3  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 117)) ;
+          inCompiler->emitSemanticError (var_selector_4469.readProperty_location (), GALGAS_string ("selector should be empty"), fixItArray3  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 117)) ;
         }
       }
-      nt_staticArray_5F_exp_ (ioArgument_ioAST, var_expressions_4406, inCompiler) ;
+      nt_staticArray_5F_exp_ (ioArgument_ioAST, var_expressions_4416, inCompiler) ;
       switch (select_omnibus_5F_syntax_39 (inCompiler)) {
       case 2: {
       } break ;
@@ -5615,16 +5615,16 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_declaration_i24_ (GALGAS_
         break ;
       }
     }
-    GALGAS_staticListValueListAST var_expressionList_4682 = GALGAS_staticListValueListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 122)) ;
+    GALGAS_staticListValueListAST var_expressionList_4692 = GALGAS_staticListValueListAST::constructor_emptyList (SOURCE_FILE ("declaration-static-list.galgas", 122)) ;
     enumGalgasBool test_4 = kBoolTrue ;
     if (kBoolTrue == test_4) {
-      test_4 = ioArgument_ioAST.readProperty_mExtendStaticArrayDeclarationAST ().getter_hasKey (var_staticListName_4337.readProperty_string () COMMA_SOURCE_FILE ("declaration-static-list.galgas", 123)).boolEnum () ;
+      test_4 = ioArgument_ioAST.readProperty_mExtendStaticArrayDeclarationAST ().getter_hasKey (var_staticListName_4347.readProperty_string () COMMA_SOURCE_FILE ("declaration-static-list.galgas", 123)).boolEnum () ;
       if (kBoolTrue == test_4) {
-        ioArgument_ioAST.readProperty_mExtendStaticArrayDeclarationAST ().method_searchKey (var_staticListName_4337.readProperty_string (), var_expressionList_4682, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 124)) ;
+        ioArgument_ioAST.readProperty_mExtendStaticArrayDeclarationAST ().method_searchKey (var_staticListName_4347.readProperty_string (), var_expressionList_4692, inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 124)) ;
       }
     }
-    var_expressionList_4682.addAssign_operation (var_expressions_4406, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 126))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 126)) ;
-    ioArgument_ioAST.mProperty_mExtendStaticArrayDeclarationAST.addAssign_operation (var_staticListName_4337.readProperty_string (), var_expressionList_4682, inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 127)) ;
+    var_expressionList_4692.addAssign_operation (var_expressions_4416, GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 126))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 126)) ;
+    ioArgument_ioAST.mProperty_mExtendStaticArrayDeclarationAST.addAssign_operation (var_staticListName_4347.readProperty_string (), var_expressionList_4692, inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 127)) ;
     switch (select_omnibus_5F_syntax_38 (inCompiler)) {
     case 2: {
       inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2C_ COMMA_SOURCE_FILE ("declaration-static-list.galgas", 129)) ;
@@ -5711,17 +5711,17 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_staticArray_5F_exp_i25_ (
                                                                                 C_Lexique_omnibus_5F_lexique * inCompiler) {
   switch (select_omnibus_5F_syntax_40 (inCompiler)) {
   case 1: {
-    GALGAS_expressionAST var_exp_5284 ;
-    nt_expression_ (ioArgument_ioAST, var_exp_5284, inCompiler) ;
-    ioArgument_ioExpressions.addAssign_operation (GALGAS_extendStaticListExpressionAST::constructor_expression (var_exp_5284  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139)) ;
+    GALGAS_expressionAST var_exp_5294 ;
+    nt_expression_ (ioArgument_ioAST, var_exp_5294, inCompiler) ;
+    ioArgument_ioExpressions.addAssign_operation (GALGAS_extendStaticListExpressionAST::constructor_expression (var_exp_5294  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 139)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_func COMMA_SOURCE_FILE ("declaration-static-list.galgas", 141)) ;
-    GALGAS_lstring var_functionName_5395 = inCompiler->synthetizedAttribute_tokenString () ;
+    GALGAS_lstring var_functionName_5405 = inCompiler->synthetizedAttribute_tokenString () ;
     inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("declaration-static-list.galgas", 142)) ;
-    GALGAS_routineFormalArgumentListAST var_formalArgs_5454 ;
-    nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_formalArgs_5454, inCompiler) ;
-    ioArgument_ioExpressions.addAssign_operation (GALGAS_extendStaticListExpressionAST::constructor_function (var_functionName_5395, var_formalArgs_5454  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 145)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 146))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 144)) ;
+    GALGAS_routineFormalArgumentListAST var_formalArgs_5464 ;
+    nt_procedure_5F_formal_5F_arguments_ (ioArgument_ioAST, var_formalArgs_5464, inCompiler) ;
+    ioArgument_ioExpressions.addAssign_operation (GALGAS_extendStaticListExpressionAST::constructor_function (var_functionName_5405, var_formalArgs_5464  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 145)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 146))  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 144)) ;
   } break ;
   default:
     break ;

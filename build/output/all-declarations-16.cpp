@@ -368,9 +368,9 @@ void routine_compileProject (const GALGAS_lstring constinArgument_inSourceFile,
     var_ast_3342.mProperty_mDeclarationListAST.addAssign_operation (var_newDeclaration_3690  COMMA_SOURCE_FILE ("program.galgas", 102)) ;
     enumerator_3554.gotoNextObject () ;
   }
-  cEnumerator__5B_string_3A_staticListValueListAST_5D_ enumerator_3783 (var_ast_3342.readProperty_mExtendStaticArrayDeclarationAST (), kENUMERATION_UP) ;
+  cEnumerator_extendStaticArrayDeclarationDictAST enumerator_3783 (var_ast_3342.readProperty_mExtendStaticArrayDeclarationAST (), kENUMERATION_UP) ;
   while (enumerator_3783.hasCurrentObject ()) {
-    cEnumerator_staticListValueListAST enumerator_3852 (enumerator_3783.current_value (HERE), kENUMERATION_UP) ;
+    cEnumerator_staticListValueListAST enumerator_3852 (enumerator_3783.current_mStaticList (HERE), kENUMERATION_UP) ;
     while (enumerator_3852.hasCurrentObject ()) {
       TC_Array <C_FixItDescription> fixItArray1 ;
       inCompiler->emitSemanticError (enumerator_3852.current_mLocation (HERE), GALGAS_string ("'").add_operation (enumerator_3783.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 106)).add_operation (GALGAS_string ("' static list is not defined"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 106)), fixItArray1  COMMA_SOURCE_FILE ("program.galgas", 106)) ;

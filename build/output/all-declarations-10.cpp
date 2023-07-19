@@ -8,6 +8,222 @@
 #include "all-declarations-10.h"
 
 //----------------------------------------------------------------------------------------------------------------------
+// @externRoutineIR reference class
+//----------------------------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_externRoutineIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractRoutineIR::printNonNullClassInstanceProperties () ;
+    mProperty_mFormalArgumentListForGeneration.printNonNullClassInstanceProperties ("mFormalArgumentListForGeneration") ;
+    mProperty_mReturnType.printNonNullClassInstanceProperties ("mReturnType") ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult cPtr_externRoutineIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  typeComparisonResult result = kOperandEqual ;
+  const cPtr_externRoutineIR * p = (const cPtr_externRoutineIR *) inOperandPtr ;
+  macroValidSharedObject (p, cPtr_externRoutineIR) ;
+  if (kOperandEqual == result) {
+    result = mProperty_mRoutineMangledName.objectCompare (p->mProperty_mRoutineMangledName) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_isRequired.objectCompare (p->mProperty_isRequired) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_warnsIfUnused.objectCompare (p->mProperty_warnsIfUnused) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mFormalArgumentListForGeneration.objectCompare (p->mProperty_mFormalArgumentListForGeneration) ;
+  }
+  if (kOperandEqual == result) {
+    result = mProperty_mReturnType.objectCompare (p->mProperty_mReturnType) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+typeComparisonResult GALGAS_externRoutineIR::objectCompare (const GALGAS_externRoutineIR & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_externRoutineIR::GALGAS_externRoutineIR (void) :
+GALGAS_abstractRoutineIR () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_externRoutineIR::GALGAS_externRoutineIR (const cPtr_externRoutineIR * inSourcePtr) :
+GALGAS_abstractRoutineIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_externRoutineIR) ;
+}
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_externRoutineIR GALGAS_externRoutineIR::constructor_new (const GALGAS_lstring & inAttribute_mRoutineMangledName,
+                                                                const GALGAS_bool & inAttribute_isRequired,
+                                                                const GALGAS_bool & inAttribute_warnsIfUnused,
+                                                                const GALGAS_routineFormalArgumentListIR & inAttribute_mFormalArgumentListForGeneration,
+                                                                const GALGAS_unifiedTypeMapEntry & inAttribute_mReturnType
+                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_externRoutineIR result ;
+  if (inAttribute_mRoutineMangledName.isValid () && inAttribute_isRequired.isValid () && inAttribute_warnsIfUnused.isValid () && inAttribute_mFormalArgumentListForGeneration.isValid () && inAttribute_mReturnType.isValid ()) {
+    macroMyNew (result.mObjectPtr, cPtr_externRoutineIR (inAttribute_mRoutineMangledName, inAttribute_isRequired, inAttribute_warnsIfUnused, inAttribute_mFormalArgumentListForGeneration, inAttribute_mReturnType COMMA_THERE)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+void GALGAS_externRoutineIR::setter_setMFormalArgumentListForGeneration (GALGAS_routineFormalArgumentListIR inValue
+                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    p->mProperty_mFormalArgumentListForGeneration = inValue ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+void GALGAS_externRoutineIR::setter_setMReturnType (GALGAS_unifiedTypeMapEntry inValue
+                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  if (NULL != mObjectPtr) {
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    p->mProperty_mReturnType = inValue ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_routineFormalArgumentListIR GALGAS_externRoutineIR::readProperty_mFormalArgumentListForGeneration (void) const {
+  if (NULL == mObjectPtr) {
+    return GALGAS_routineFormalArgumentListIR () ;
+  }else{
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    return p->mProperty_mFormalArgumentListForGeneration ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_unifiedTypeMapEntry GALGAS_externRoutineIR::readProperty_mReturnType (void) const {
+  if (NULL == mObjectPtr) {
+    return GALGAS_unifiedTypeMapEntry () ;
+  }else{
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    return p->mProperty_mReturnType ;
+  }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//Pointer class for @externRoutineIR class
+//----------------------------------------------------------------------------------------------------------------------
+
+cPtr_externRoutineIR::cPtr_externRoutineIR (const GALGAS_lstring & in_mRoutineMangledName,
+                                            const GALGAS_bool & in_isRequired,
+                                            const GALGAS_bool & in_warnsIfUnused,
+                                            const GALGAS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
+                                            const GALGAS_unifiedTypeMapEntry & in_mReturnType
+                                            COMMA_LOCATION_ARGS) :
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
+mProperty_mFormalArgumentListForGeneration (in_mFormalArgumentListForGeneration),
+mProperty_mReturnType (in_mReturnType) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_externRoutineIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_externRoutineIR ;
+}
+
+void cPtr_externRoutineIR::description (C_String & ioString,
+                                        const int32_t inIndentation) const {
+  ioString << "[@externRoutineIR:" ;
+  mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
+  ioString << ", " ;
+  mProperty_mReturnType.description (ioString, inIndentation+1) ;
+  ioString << "]" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_externRoutineIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = NULL ;
+  macroMyNew (ptr, cPtr_externRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnType COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @externRoutineIR generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_externRoutineIR ("externRoutineIR",
+                                        & kTypeDescriptor_GALGAS_abstractRoutineIR) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_externRoutineIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_externRoutineIR ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_externRoutineIR::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_externRoutineIR (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_externRoutineIR GALGAS_externRoutineIR::extractObject (const GALGAS_object & inObject,
+                                                              C_Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_externRoutineIR result ;
+  const GALGAS_externRoutineIR * p = (const GALGAS_externRoutineIR *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_externRoutineIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("externRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_externProcedureMapIR_2D_element::GALGAS_externProcedureMapIR_2D_element (void) :
 mProperty_lkey (),

@@ -12337,7 +12337,7 @@ GALGAS_routineMapForContext_2D_element::GALGAS_routineMapForContext_2D_element (
                                                                                 const GALGAS_bool & inOperand1,
                                                                                 const GALGAS_routineTypedSignature & inOperand2,
                                                                                 const GALGAS_unifiedTypeMapEntry & inOperand3,
-                                                                                const GALGAS__5B_mode_3A_string_5D_ & inOperand4,
+                                                                                const GALGAS_routineLLVMNameDict & inOperand4,
                                                                                 const GALGAS_bool & inOperand5,
                                                                                 const GALGAS_mode & inOperand6) :
 mProperty_lkey (inOperand0),
@@ -12355,7 +12355,7 @@ GALGAS_routineMapForContext_2D_element GALGAS_routineMapForContext_2D_element::c
                                                                                                 const GALGAS_bool & in_mIsPublic,
                                                                                                 const GALGAS_routineTypedSignature & in_mSignature,
                                                                                                 const GALGAS_unifiedTypeMapEntry & in_mReturnTypeProxy,
-                                                                                                const GALGAS__5B_mode_3A_string_5D_ & in_mModeDictionary,
+                                                                                                const GALGAS_routineLLVMNameDict & in_mModeDictionary,
                                                                                                 const GALGAS_bool & in_mIsExported,
                                                                                                 const GALGAS_mode & in_mFunctionMode 
                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {

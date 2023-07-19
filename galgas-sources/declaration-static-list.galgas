@@ -45,10 +45,10 @@ list @extendStaticListElementAST {
 
 #·······················································································································
 
-typealias @extendStaticArrayDeclarationDictAST = [@string : @staticListValueListAST] # key is static list name
-#dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
-#  @staticListValueListAST
-#}
+#typealias @extendStaticArrayDeclarationDictAST = [@string : @staticListValueListAST] # key is static list name
+dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
+  @staticListValueListAST mStaticList
+}
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               

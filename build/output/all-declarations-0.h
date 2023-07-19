@@ -3994,7 +3994,7 @@ class cPtr_abstractDeclarationAST : public acStrongPtr_class {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (C_Compiler * COMMA_LOCATION_ARGS) const = 0 ;
 
 //--- Extension method enterExtension
-  public: virtual void method_enterExtension (class GALGAS__5B_string_3A_staticListValueListAST_5D_ & ioExtendStaticArrayDeclarationAST,
+  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & ioExtendStaticArrayDeclarationAST,
            class GALGAS_abstractDeclarationAST & outNewDeclaration,
            C_Compiler * COMMA_LOCATION_ARGS) ;
 
@@ -13987,7 +13987,7 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (C_Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterExtension
-  public: virtual void method_enterExtension (class GALGAS__5B_string_3A_staticListValueListAST_5D_ & ioExtendStaticArrayDeclarationAST,
+  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & ioExtendStaticArrayDeclarationAST,
            class GALGAS_abstractDeclarationAST & outNewDeclaration,
            C_Compiler * COMMA_LOCATION_ARGS) override ;
 
@@ -16530,6 +16530,131 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+// Phase 1: @extendStaticArrayDeclarationDictAST dict
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+class cSharedDictRoot_extendStaticArrayDeclarationDictAST ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+class GALGAS_extendStaticArrayDeclarationDictAST : public AC_GALGAS_root {
+//--------------------------------- Attributes
+  private: cSharedDictRoot_extendStaticArrayDeclarationDictAST * mSharedDict ;
+
+//--------------------------------- Default constructor
+  public: GALGAS_extendStaticArrayDeclarationDictAST (void) ;
+
+//--------------------------------- Destructor
+  public: virtual ~ GALGAS_extendStaticArrayDeclarationDictAST (void) ;
+
+//--------------------------------- Handle copy
+  public: GALGAS_extendStaticArrayDeclarationDictAST (const GALGAS_extendStaticArrayDeclarationDictAST & inSource) ;
+  public: GALGAS_extendStaticArrayDeclarationDictAST & operator = (const GALGAS_extendStaticArrayDeclarationDictAST & inSource) ;
+
+//--- isValid
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mSharedDict != NULL ; }
+
+//--- drop
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--- Implementation of reader 'description'
+  public: VIRTUAL_IN_DEBUG void description (C_String & ioString,
+                                              const int32_t inIndentation) const override ;
+
+//--- Insulate
+  private: void insulate (LOCATION_ARGS) ;
+
+//--- Object compare
+  public: VIRTUAL_IN_DEBUG typeComparisonResult objectCompare (const GALGAS_extendStaticArrayDeclarationDictAST & inOperand) const ;
+
+//--- Enumeration
+  public: void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_extendStaticArrayDeclarationDictAST extractObject (const GALGAS_object & inObject,
+                                                                           C_Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_extendStaticArrayDeclarationDictAST constructor_emptyDict (LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
+                                                     const class GALGAS_staticListValueListAST & inOperand1,
+                                                     C_Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Setters
+  public: VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_string constinArgument0,
+                                                  class GALGAS_staticListValueListAST & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMStaticListForKey (class GALGAS_staticListValueListAST constinArgument0,
+                                                             class GALGAS_string constinArgument1,
+                                                             C_Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_string constinArgument0,
+                                                  class GALGAS_staticListValueListAST & outArgument1,
+                                                  C_Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_count (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_hasKey (const class GALGAS_string & constinOperand0
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_staticListValueListAST getter_mStaticListForKey (const class GALGAS_string & constinOperand0,
+                                                                                         C_Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Optional Methods
+  public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                    class GALGAS_staticListValueListAST & outOperand1) const ;
+
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+//--------------------------------- Friend
+
+  friend class cEnumerator_extendStaticArrayDeclarationDictAST ;
+ 
+} ; // End of GALGAS_extendStaticArrayDeclarationDictAST class
+
+//----------------------------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//----------------------------------------------------------------------------------------------------------------------
+
+class cEnumerator_extendStaticArrayDeclarationDictAST : public cGenericAbstractEnumerator {
+  public: cEnumerator_extendStaticArrayDeclarationDictAST (const GALGAS_extendStaticArrayDeclarationDictAST & inEnumeratedObject,
+                                                           const typeEnumerationOrder inOrder) ;
+
+//--- Current element access
+  public: class GALGAS_string current_key (LOCATION_ARGS) const ;
+  public: class GALGAS_staticListValueListAST current_mStaticList (LOCATION_ARGS) const ;
+//--- Current element access
+  public: class GALGAS_extendStaticArrayDeclarationDictAST_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticArrayDeclarationDictAST ;
 
 //----------------------------------------------------------------------------------------------------------------------
 //
@@ -21123,134 +21248,6 @@ void extensionMethod_buildProcedureCallAccessList (const class GALGAS_LValueOper
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-// Phase 1: @[string:staticListValueListAST] dict
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class cSharedDictRoot__5B_string_3A_staticListValueListAST_5D_ ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS__5B_string_3A_staticListValueListAST_5D_ : public AC_GALGAS_root {
-//--------------------------------- Attributes
-  private: cSharedDictRoot__5B_string_3A_staticListValueListAST_5D_ * mSharedDict ;
-
-//--------------------------------- Default constructor
-  public: GALGAS__5B_string_3A_staticListValueListAST_5D_ (void) ;
-
-//--------------------------------- Destructor
-  public: virtual ~ GALGAS__5B_string_3A_staticListValueListAST_5D_ (void) ;
-
-//--------------------------------- Handle copy
-  public: GALGAS__5B_string_3A_staticListValueListAST_5D_ (const GALGAS__5B_string_3A_staticListValueListAST_5D_ & inSource) ;
-  public: GALGAS__5B_string_3A_staticListValueListAST_5D_ & operator = (const GALGAS__5B_string_3A_staticListValueListAST_5D_ & inSource) ;
-
-//--- isValid
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mSharedDict != NULL ; }
-
-//--- drop
-  public: VIRTUAL_IN_DEBUG void drop (void) override ;
-
-//--- Implementation of reader 'description'
-  public: VIRTUAL_IN_DEBUG void description (C_String & ioString,
-                                              const int32_t inIndentation) const override ;
-
-//--- Insulate
-  private: void insulate (LOCATION_ARGS) ;
-
-//--- Object compare
-  public: VIRTUAL_IN_DEBUG typeComparisonResult objectCompare (const GALGAS__5B_string_3A_staticListValueListAST_5D_ & inOperand) const ;
-
-//--- Enumeration
-  public: void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS__5B_string_3A_staticListValueListAST_5D_ extractObject (const GALGAS_object & inObject,
-                                                                                C_Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS__5B_string_3A_staticListValueListAST_5D_ constructor_emptyDict (LOCATION_ARGS) ;
-
-//--------------------------------- += operator (with list of field expressions)
-  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_string & inOperand0,
-                                                     const class GALGAS_staticListValueListAST & inOperand1,
-                                                     C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_removeKey (class GALGAS_string constinArgument0,
-                                                  class GALGAS_staticListValueListAST & outArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_string constinArgument0,
-                                                  class GALGAS_staticListValueListAST & outArgument1,
-                                                  C_Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
-
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_uint getter_count (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_hasKey (const class GALGAS_string & constinOperand0
-                                                            COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_staticListValueListAST getter_valueForKey (const class GALGAS_string & constinOperand0,
-                                                                                   C_Compiler * inCompiler
-                                                                                   COMMA_LOCATION_ARGS) const ;
-
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
-                                                    class GALGAS_staticListValueListAST & outOperand1) const ;
-
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
-//--------------------------------- Friend
-
-  friend class cEnumerator__5B_string_3A_staticListValueListAST_5D_ ;
- 
-} ; // End of GALGAS__5B_string_3A_staticListValueListAST_5D_ class
-
-//----------------------------------------------------------------------------------------------------------------------
-//   Enumerator declaration                                                                      
-//----------------------------------------------------------------------------------------------------------------------
-
-class cEnumerator__5B_string_3A_staticListValueListAST_5D_ : public cGenericAbstractEnumerator {
-  public: cEnumerator__5B_string_3A_staticListValueListAST_5D_ (const GALGAS__5B_string_3A_staticListValueListAST_5D_ & inEnumeratedObject,
-                                                                const typeEnumerationOrder inOrder) ;
-
-//--- Current element access
-  public: class GALGAS_string current_key (LOCATION_ARGS) const ;
-  public: class GALGAS_staticListValueListAST current_value (LOCATION_ARGS) const ;
-//--- Current element access
-  public: class GALGAS__5B_string_3A_staticListValueListAST_5D__2D_element current (LOCATION_ARGS) const ;
-} ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS__5B_string_3A_staticListValueListAST_5D_ ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-// Phase 1: @extendStaticArrayDeclarationDictAST type alias
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-typedef GALGAS__5B_string_3A_staticListValueListAST_5D_ GALGAS_extendStaticArrayDeclarationDictAST ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
 // Phase 1: @ast struct
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -21262,8 +21259,8 @@ class GALGAS_ast : public AC_GALGAS_root {
     return mProperty_mDeclarationListAST ;
   }
 
-  public: GALGAS__5B_string_3A_staticListValueListAST_5D_ mProperty_mExtendStaticArrayDeclarationAST ;
-  public: inline GALGAS__5B_string_3A_staticListValueListAST_5D_ readProperty_mExtendStaticArrayDeclarationAST (void) const {
+  public: GALGAS_extendStaticArrayDeclarationDictAST mProperty_mExtendStaticArrayDeclarationAST ;
+  public: inline GALGAS_extendStaticArrayDeclarationDictAST readProperty_mExtendStaticArrayDeclarationAST (void) const {
     return mProperty_mExtendStaticArrayDeclarationAST ;
   }
 
@@ -21327,7 +21324,7 @@ class GALGAS_ast : public AC_GALGAS_root {
     mProperty_mDeclarationListAST = inValue ;
   }
 
-  public: inline void setter_setMExtendStaticArrayDeclarationAST (const GALGAS__5B_string_3A_staticListValueListAST_5D_ & inValue COMMA_UNUSED_LOCATION_ARGS) {
+  public: inline void setter_setMExtendStaticArrayDeclarationAST (const GALGAS_extendStaticArrayDeclarationDictAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
     mProperty_mExtendStaticArrayDeclarationAST = inValue ;
   }
 
@@ -21372,7 +21369,7 @@ class GALGAS_ast : public AC_GALGAS_root {
 
 //--------------------------------- Native constructor
   public: GALGAS_ast (const GALGAS_declarationListAST & in_mDeclarationListAST,
-                      const GALGAS__5B_string_3A_staticListValueListAST_5D_ & in_mExtendStaticArrayDeclarationAST,
+                      const GALGAS_extendStaticArrayDeclarationDictAST & in_mExtendStaticArrayDeclarationAST,
                       const GALGAS_requiredFunctionDeclarationListAST & in_mRequiredFunctionListAST,
                       const GALGAS_externFunctionDeclarationListAST & in_mExternFunctionListAST,
                       const GALGAS_lstringlist & in_mTargetListAST,
@@ -21395,7 +21392,7 @@ class GALGAS_ast : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_ast constructor_new (const class GALGAS_declarationListAST & inOperand0,
-                                                   const class GALGAS__5B_string_3A_staticListValueListAST_5D_ & inOperand1,
+                                                   const class GALGAS_extendStaticArrayDeclarationDictAST & inOperand1,
                                                    const class GALGAS_requiredFunctionDeclarationListAST & inOperand2,
                                                    const class GALGAS_externFunctionDeclarationListAST & inOperand3,
                                                    const class GALGAS_lstringlist & inOperand4,

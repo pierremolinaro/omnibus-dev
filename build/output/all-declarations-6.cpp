@@ -8,6 +8,693 @@
 #include "all-declarations-6.h"
 
 //----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::GALGAS_omnibusInfixOperatorExpressionAST_2D_weak (void) :
+GALGAS_expressionAST_2D_weak () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST_2D_weak & GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::operator = (const GALGAS_omnibusInfixOperatorExpressionAST & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != NULL) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::GALGAS_omnibusInfixOperatorExpressionAST_2D_weak (const GALGAS_omnibusInfixOperatorExpressionAST & inSource) :
+GALGAS_expressionAST_2D_weak (inSource) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST_2D_weak GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+  GALGAS_omnibusInfixOperatorExpressionAST_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::bang_omnibusInfixOperatorExpressionAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_omnibusInfixOperatorExpressionAST result ;
+  if (mProxyPtr != NULL) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == NULL) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_omnibusInfixOperatorExpressionAST) ;
+      result = GALGAS_omnibusInfixOperatorExpressionAST ((cPtr_omnibusInfixOperatorExpressionAST *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @omnibusInfixOperatorExpressionAST-weak generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_omnibusInfixOperatorExpressionAST_2D_weak ("omnibusInfixOperatorExpressionAST-weak",
+                                                                  & kTypeDescriptor_GALGAS_expressionAST_2D_weak) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_omnibusInfixOperatorExpressionAST_2D_weak ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_omnibusInfixOperatorExpressionAST_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_omnibusInfixOperatorExpressionAST_2D_weak GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                                  C_Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_omnibusInfixOperatorExpressionAST_2D_weak result ;
+  const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak * p = (const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("omnibusInfixOperatorExpressionAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorEnumeration::GALGAS_compileTimePrefixOperatorEnumeration (void) :
+mEnum (kNotBuilt) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorEnumeration GALGAS_compileTimePrefixOperatorEnumeration::constructor_notOp (UNUSED_LOCATION_ARGS) {
+  GALGAS_compileTimePrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_notOp ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorEnumeration GALGAS_compileTimePrefixOperatorEnumeration::constructor_minusOp (UNUSED_LOCATION_ARGS) {
+  GALGAS_compileTimePrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_minusOp ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_compileTimePrefixOperatorEnumeration::optional_notOp () const {
+  const bool ok = mEnum == kEnum_notOp ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_compileTimePrefixOperatorEnumeration::optional_minusOp () const {
+  const bool ok = mEnum == kEnum_minusOp ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static const char * gEnumNameArrayFor_compileTimePrefixOperatorEnumeration [3] = {
+  "(not built)",
+  "notOp",
+  "minusOp"
+} ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_compileTimePrefixOperatorEnumeration::getter_isNotOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_notOp == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_compileTimePrefixOperatorEnumeration::getter_isMinusOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_minusOp == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+void GALGAS_compileTimePrefixOperatorEnumeration::description (C_String & ioString,
+                                                               const int32_t /* inIndentation */) const {
+  ioString << "<enum @compileTimePrefixOperatorEnumeration: " << gEnumNameArrayFor_compileTimePrefixOperatorEnumeration [mEnum] ;
+  ioString << ">" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_compileTimePrefixOperatorEnumeration::objectCompare (const GALGAS_compileTimePrefixOperatorEnumeration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @compileTimePrefixOperatorEnumeration generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimePrefixOperatorEnumeration ("compileTimePrefixOperatorEnumeration",
+                                                             NULL) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimePrefixOperatorEnumeration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimePrefixOperatorEnumeration ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimePrefixOperatorEnumeration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimePrefixOperatorEnumeration (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorEnumeration GALGAS_compileTimePrefixOperatorEnumeration::extractObject (const GALGAS_object & inObject,
+                                                                                                        C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimePrefixOperatorEnumeration result ;
+  const GALGAS_compileTimePrefixOperatorEnumeration * p = (const GALGAS_compileTimePrefixOperatorEnumeration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compileTimePrefixOperatorEnumeration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimePrefixOperatorEnumeration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension Getter '@compileTimePrefixOperatorEnumeration string'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_string extensionGetter_string (const GALGAS_compileTimePrefixOperatorEnumeration & inObject,
+                                      C_Compiler *
+                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const GALGAS_compileTimePrefixOperatorEnumeration temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_compileTimePrefixOperatorEnumeration::kNotBuilt:
+    break ;
+  case GALGAS_compileTimePrefixOperatorEnumeration::kEnum_notOp:
+    {
+      result_result = GALGAS_string ("not") ;
+    }
+    break ;
+  case GALGAS_compileTimePrefixOperatorEnumeration::kEnum_minusOp:
+    {
+      result_result = GALGAS_string ("-") ;
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Extension Getter '@compileTimePrefixOperatorEnumeration prefixOperator'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_prefixOperator extensionGetter_prefixOperator (const GALGAS_compileTimePrefixOperatorEnumeration & inObject,
+                                                      C_Compiler *
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_prefixOperator result_result ; // Returned variable
+  const GALGAS_compileTimePrefixOperatorEnumeration temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_compileTimePrefixOperatorEnumeration::kNotBuilt:
+    break ;
+  case GALGAS_compileTimePrefixOperatorEnumeration::kEnum_notOp:
+    {
+      result_result = GALGAS_prefixOperator::constructor_notOp (SOURCE_FILE ("prefix-operator-compile-time.galgas", 23)) ;
+    }
+    break ;
+  case GALGAS_compileTimePrefixOperatorEnumeration::kEnum_minusOp:
+    {
+      result_result = GALGAS_prefixOperator::constructor_minusOp (SOURCE_FILE ("prefix-operator-compile-time.galgas", 24)) ;
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_compiletimePrefixOperatorAST_2D_weak::objectCompare (const GALGAS_compiletimePrefixOperatorAST_2D_weak & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST_2D_weak::GALGAS_compiletimePrefixOperatorAST_2D_weak (void) :
+GALGAS_abstractDeclarationAST_2D_weak () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST_2D_weak & GALGAS_compiletimePrefixOperatorAST_2D_weak::operator = (const GALGAS_compiletimePrefixOperatorAST & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != NULL) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST_2D_weak::GALGAS_compiletimePrefixOperatorAST_2D_weak (const GALGAS_compiletimePrefixOperatorAST & inSource) :
+GALGAS_abstractDeclarationAST_2D_weak (inSource) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST_2D_weak GALGAS_compiletimePrefixOperatorAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+  GALGAS_compiletimePrefixOperatorAST_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST GALGAS_compiletimePrefixOperatorAST_2D_weak::bang_compiletimePrefixOperatorAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compiletimePrefixOperatorAST result ;
+  if (mProxyPtr != NULL) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == NULL) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compiletimePrefixOperatorAST) ;
+      result = GALGAS_compiletimePrefixOperatorAST ((cPtr_compiletimePrefixOperatorAST *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @compiletimePrefixOperatorAST-weak generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compiletimePrefixOperatorAST_2D_weak ("compiletimePrefixOperatorAST-weak",
+                                                             & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compiletimePrefixOperatorAST_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compiletimePrefixOperatorAST_2D_weak ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compiletimePrefixOperatorAST_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compiletimePrefixOperatorAST_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compiletimePrefixOperatorAST_2D_weak GALGAS_compiletimePrefixOperatorAST_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                        C_Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_compiletimePrefixOperatorAST_2D_weak result ;
+  const GALGAS_compiletimePrefixOperatorAST_2D_weak * p = (const GALGAS_compiletimePrefixOperatorAST_2D_weak *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compiletimePrefixOperatorAST_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compiletimePrefixOperatorAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_compileTimePrefixOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimePrefixOperatorUsage_2D_weak & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage_2D_weak::GALGAS_compileTimePrefixOperatorUsage_2D_weak (void) :
+GALGAS_prefixOperatorUsage_2D_weak () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage_2D_weak & GALGAS_compileTimePrefixOperatorUsage_2D_weak::operator = (const GALGAS_compileTimePrefixOperatorUsage & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != NULL) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage_2D_weak::GALGAS_compileTimePrefixOperatorUsage_2D_weak (const GALGAS_compileTimePrefixOperatorUsage & inSource) :
+GALGAS_prefixOperatorUsage_2D_weak (inSource) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage_2D_weak GALGAS_compileTimePrefixOperatorUsage_2D_weak::constructor_nil (LOCATION_ARGS) {
+  GALGAS_compileTimePrefixOperatorUsage_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage GALGAS_compileTimePrefixOperatorUsage_2D_weak::bang_compileTimePrefixOperatorUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compileTimePrefixOperatorUsage result ;
+  if (mProxyPtr != NULL) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == NULL) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compileTimePrefixOperatorUsage) ;
+      result = GALGAS_compileTimePrefixOperatorUsage ((cPtr_compileTimePrefixOperatorUsage *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @compileTimePrefixOperatorUsage-weak generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimePrefixOperatorUsage_2D_weak ("compileTimePrefixOperatorUsage-weak",
+                                                               & kTypeDescriptor_GALGAS_prefixOperatorUsage_2D_weak) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimePrefixOperatorUsage_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimePrefixOperatorUsage_2D_weak ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimePrefixOperatorUsage_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimePrefixOperatorUsage_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimePrefixOperatorUsage_2D_weak GALGAS_compileTimePrefixOperatorUsage_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                            C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimePrefixOperatorUsage_2D_weak result ;
+  const GALGAS_compileTimePrefixOperatorUsage_2D_weak * p = (const GALGAS_compileTimePrefixOperatorUsage_2D_weak *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_compileTimePrefixOperatorUsage_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimePrefixOperatorUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration::GALGAS_llvmPrefixOperatorEnumeration (void) :
+mEnum (kNotBuilt) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration GALGAS_llvmPrefixOperatorEnumeration::constructor_notOp (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmPrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_notOp ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration GALGAS_llvmPrefixOperatorEnumeration::constructor_bitWiseComplement (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmPrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_bitWiseComplement ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration GALGAS_llvmPrefixOperatorEnumeration::constructor_minusOp (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmPrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_minusOp ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration GALGAS_llvmPrefixOperatorEnumeration::constructor_minusOpNoOvf (UNUSED_LOCATION_ARGS) {
+  GALGAS_llvmPrefixOperatorEnumeration result ;
+  result.mEnum = kEnum_minusOpNoOvf ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_llvmPrefixOperatorEnumeration::optional_notOp () const {
+  const bool ok = mEnum == kEnum_notOp ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_llvmPrefixOperatorEnumeration::optional_bitWiseComplement () const {
+  const bool ok = mEnum == kEnum_bitWiseComplement ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_llvmPrefixOperatorEnumeration::optional_minusOp () const {
+  const bool ok = mEnum == kEnum_minusOp ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+bool GALGAS_llvmPrefixOperatorEnumeration::optional_minusOpNoOvf () const {
+  const bool ok = mEnum == kEnum_minusOpNoOvf ;
+  return ok ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+static const char * gEnumNameArrayFor_llvmPrefixOperatorEnumeration [5] = {
+  "(not built)",
+  "notOp",
+  "bitWiseComplement",
+  "minusOp",
+  "minusOpNoOvf"
+} ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmPrefixOperatorEnumeration::getter_isNotOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_notOp == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmPrefixOperatorEnumeration::getter_isBitWiseComplement (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_bitWiseComplement == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmPrefixOperatorEnumeration::getter_isMinusOp (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_minusOp == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmPrefixOperatorEnumeration::getter_isMinusOpNoOvf (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_minusOpNoOvf == mEnum) ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+void GALGAS_llvmPrefixOperatorEnumeration::description (C_String & ioString,
+                                                        const int32_t /* inIndentation */) const {
+  ioString << "<enum @llvmPrefixOperatorEnumeration: " << gEnumNameArrayFor_llvmPrefixOperatorEnumeration [mEnum] ;
+  ioString << ">" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_llvmPrefixOperatorEnumeration::objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @llvmPrefixOperatorEnumeration generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_llvmPrefixOperatorEnumeration ("llvmPrefixOperatorEnumeration",
+                                                      NULL) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_llvmPrefixOperatorEnumeration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_llvmPrefixOperatorEnumeration ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_llvmPrefixOperatorEnumeration::clonedObject (void) const {
+  AC_GALGAS_root * result = NULL ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_llvmPrefixOperatorEnumeration (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_llvmPrefixOperatorEnumeration GALGAS_llvmPrefixOperatorEnumeration::extractObject (const GALGAS_object & inObject,
+                                                                                          C_Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_llvmPrefixOperatorEnumeration result ;
+  const GALGAS_llvmPrefixOperatorEnumeration * p = (const GALGAS_llvmPrefixOperatorEnumeration *) inObject.embeddedObject () ;
+  if (NULL != p) {
+    if (NULL != dynamic_cast <const GALGAS_llvmPrefixOperatorEnumeration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("llvmPrefixOperatorEnumeration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
 //
 //Extension Getter '@llvmPrefixOperatorEnumeration string'
 //
@@ -15084,746 +15771,4 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_objectIR & inObject,
 
 
 
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@objectIR llvmTypeName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_string extensionGetter_llvmTypeName (const GALGAS_objectIR & inObject,
-                                            C_Compiler * inCompiler
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  const GALGAS_objectIR temp_0 = inObject ;
-  result_result = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) extensionGetter_type (temp_0, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 121)).ptr (), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 121)) ;
-//---
-  return result_result ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@objectIR omnibusTypeDescriptionName'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_string extensionGetter_omnibusTypeDescriptionName (const GALGAS_objectIR & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  const GALGAS_objectIR temp_0 = inObject ;
-  result_result = extensionGetter_type (temp_0, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 127)).readProperty_omnibusTypeDescriptionName () ;
-//---
-  return result_result ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@objectIR withType'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
-                                          const GALGAS_omnibusType & constinArgument_inType,
-                                          C_Compiler * inCompiler
-                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_objectIR result_result ; // Returned variable
-  const GALGAS_objectIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_objectIR::kNotBuilt:
-    break ;
-  case GALGAS_objectIR::kEnum_void:
-    {
-      TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 135)), GALGAS_string ("<<@objectIR withType void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 135)) ;
-      result_result.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_reference:
-    {
-      const cEnumAssociatedValues_objectIR_reference * extractPtr_5812 = (const cEnumAssociatedValues_objectIR_reference *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_5751_llvmName = extractPtr_5812->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_reference (constinArgument_inType, extractedValue_5751_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 137)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_null:
-    {
-      result_result = GALGAS_objectIR::constructor_null (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 139)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalInteger:
-    {
-      const cEnumAssociatedValues_objectIR_literalInteger * extractPtr_5966 = (const cEnumAssociatedValues_objectIR_literalInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_5904_value = extractPtr_5966->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_literalInteger (constinArgument_inType, extractedValue_5904_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 141)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmNamedValue:
-    {
-      const cEnumAssociatedValues_objectIR_llvmNamedValue * extractPtr_6067 = (const cEnumAssociatedValues_objectIR_llvmNamedValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_6000_llvmName = extractPtr_6067->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmNamedValue (constinArgument_inType, extractedValue_6000_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 143)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_zero:
-    {
-      result_result = GALGAS_objectIR::constructor_zero (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 145)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmStructureValue:
-    {
-      const cEnumAssociatedValues_objectIR_llvmStructureValue * extractPtr_6245 = (const cEnumAssociatedValues_objectIR_llvmStructureValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_sortedOperandIRList extractedValue_6177_values = extractPtr_6245->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmStructureValue (constinArgument_inType, extractedValue_6177_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 147)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalString:
-    {
-      const cEnumAssociatedValues_objectIR_literalString * extractPtr_6354 = (const cEnumAssociatedValues_objectIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_6279_size = extractPtr_6354->mAssociatedValue0 ;
-      const GALGAS_uint extractedValue_6291_index = extractPtr_6354->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_literalString (extractedValue_6279_size, extractedValue_6291_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 149)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
-    {
-      const cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue * extractPtr_6515 = (const cEnumAssociatedValues_objectIR_llvmArrayRepeatedStaticValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_6398_size = extractPtr_6515->mAssociatedValue1 ;
-      const GALGAS_objectIR extractedValue_6404_value = extractPtr_6515->mAssociatedValue2 ;
-      const GALGAS_uint extractedValue_6410_index = extractPtr_6515->mAssociatedValue3 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayRepeatedStaticValue (constinArgument_inType, extractedValue_6398_size, extractedValue_6404_value, extractedValue_6410_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 151)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
-    {
-      const cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue * extractPtr_6659 = (const cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_6560_size = extractPtr_6659->mAssociatedValue1 ;
-      const GALGAS_objectIR extractedValue_6566_value = extractPtr_6659->mAssociatedValue2 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayRepeatedDynamicValue (constinArgument_inType, extractedValue_6560_size, extractedValue_6566_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 153)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
-    {
-      const cEnumAssociatedValues_objectIR_llvmArrayStaticValues * extractPtr_6803 = (const cEnumAssociatedValues_objectIR_llvmArrayStaticValues *) (temp_0.unsafePointer ()) ;
-      const GALGAS_operandIRList extractedValue_6713_values = extractPtr_6803->mAssociatedValue1 ;
-      const GALGAS_uint extractedValue_6719_index = extractPtr_6803->mAssociatedValue2 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayStaticValues (constinArgument_inType, extractedValue_6713_values, extractedValue_6719_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 155)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
-    {
-      const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues * extractPtr_6930 = (const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues *) (temp_0.unsafePointer ()) ;
-      const GALGAS_operandIRList extractedValue_6858_values = extractPtr_6930->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayDynamicValues (constinArgument_inType, extractedValue_6858_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 157)) ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@objectIR name'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_string extensionGetter_name (const GALGAS_objectIR & inObject,
-                                    C_Compiler * inCompiler
-                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string result_result ; // Returned variable
-  const GALGAS_objectIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_objectIR::kNotBuilt:
-    break ;
-  case GALGAS_objectIR::kEnum_void:
-    {
-      TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 165)), GALGAS_string ("<<@objectIR name void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 165)) ;
-      result_result.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_reference:
-    {
-      const cEnumAssociatedValues_objectIR_reference * extractPtr_7226 = (const cEnumAssociatedValues_objectIR_reference *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_7205_llvmName = extractPtr_7226->mAssociatedValue1 ;
-      result_result = extractedValue_7205_llvmName ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_zero:
-    {
-      result_result = GALGAS_string ("zeroinitializer") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_null:
-    {
-      result_result = GALGAS_string ("null") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalInteger:
-    {
-      const cEnumAssociatedValues_objectIR_literalInteger * extractPtr_7371 = (const cEnumAssociatedValues_objectIR_literalInteger *) (temp_0.unsafePointer ()) ;
-      const GALGAS_bigint extractedValue_7344_value = extractPtr_7371->mAssociatedValue1 ;
-      result_result = extractedValue_7344_value.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 169)) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmNamedValue:
-    {
-      const cEnumAssociatedValues_objectIR_llvmNamedValue * extractPtr_7418 = (const cEnumAssociatedValues_objectIR_llvmNamedValue *) (temp_0.unsafePointer ()) ;
-      const GALGAS_string extractedValue_7401_name = extractPtr_7418->mAssociatedValue1 ;
-      result_result = extractedValue_7401_name ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmStructureValue:
-    {
-      result_result = GALGAS_string ("{...}") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
-    {
-      result_result = GALGAS_string ("[...]") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
-    {
-      result_result = GALGAS_string ("[...]") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
-    {
-      result_result = GALGAS_string ("[...]") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
-    {
-      result_result = GALGAS_string ("[...]") ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalString:
-    {
-      const cEnumAssociatedValues_objectIR_literalString * extractPtr_7935 = (const cEnumAssociatedValues_objectIR_literalString *) (temp_0.unsafePointer ()) ;
-      const GALGAS_uint extractedValue_7731_size = extractPtr_7935->mAssociatedValue0 ;
-      const GALGAS_uint extractedValue_7743_index = extractPtr_7935->mAssociatedValue1 ;
-      GALGAS_string var_sizeStr_7762 = extractedValue_7731_size.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 177)) ;
-      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_7762, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (var_sizeStr_7762, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)) ;
-      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_7743_index, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)) ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@objectIR isStatic'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_bool extensionGetter_isStatic (const GALGAS_objectIR & inObject,
-                                      C_Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bool result_result ; // Returned variable
-  const GALGAS_objectIR temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GALGAS_objectIR::kNotBuilt:
-    break ;
-  case GALGAS_objectIR::kEnum_void:
-    {
-      TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 187)), GALGAS_string ("<<@objectIR isStatic void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 187)) ;
-      result_result.drop () ; // Release error dropped variable
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_reference:
-    {
-      result_result = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_zero:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_null:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalInteger:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmNamedValue:
-    {
-      result_result = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmStructureValue:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
-    {
-      result_result = GALGAS_bool (false) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_literalString:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
-    {
-      result_result = GALGAS_bool (true) ;
-    }
-    break ;
-  case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
-    {
-      result_result = GALGAS_bool (false) ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Class for element of '@routineListIR' list
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class cCollectionElement_routineListIR : public cCollectionElement {
-  public: GALGAS_routineListIR_2D_element mObject ;
-
-//--- Constructors
-  public: cCollectionElement_routineListIR (const GALGAS_abstractRoutineIR & in_mRoutine
-                                            COMMA_LOCATION_ARGS) ;
-  public: cCollectionElement_routineListIR (const GALGAS_routineListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
-
-//--- Virtual method that checks that all attributes are valid
-  public: virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public: virtual cCollectionElement * copy (void) ;
-
-//--- Description
-  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
-} ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-cCollectionElement_routineListIR::cCollectionElement_routineListIR (const GALGAS_abstractRoutineIR & in_mRoutine
-                                                                    COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mRoutine) {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-cCollectionElement_routineListIR::cCollectionElement_routineListIR (const GALGAS_routineListIR_2D_element & inElement COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (inElement.mProperty_mRoutine) {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-bool cCollectionElement_routineListIR::isValid (void) const {
-  return true ; // return mObject.isValid () ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-cCollectionElement * cCollectionElement_routineListIR::copy (void) {
-  cCollectionElement * result = NULL ;
-  macroMyNew (result, cCollectionElement_routineListIR (mObject.mProperty_mRoutine COMMA_HERE)) ;
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void cCollectionElement_routineListIR::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mRoutine" ":" ;
-  mObject.mProperty_mRoutine.description (ioString, inIndentation) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-typeComparisonResult cCollectionElement_routineListIR::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_routineListIR * operand = (cCollectionElement_routineListIR *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_routineListIR) ;
-  return mObject.objectCompare (operand->mObject) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR::GALGAS_routineListIR (void) :
-AC_GALGAS_list () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR::GALGAS_routineListIR (const capCollectionElementArray & inSharedArray) :
-AC_GALGAS_list (inSharedArray) {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_routineListIR  (capCollectionElementArray ()) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::constructor_listWithValue (const GALGAS_abstractRoutineIR & inOperand0
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_routineListIR result ;
-  if (inOperand0.isValid ()) {
-    result = GALGAS_routineListIR (capCollectionElementArray ()) ;
-    capCollectionElement attributes ;
-    GALGAS_routineListIR::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
-    result.appendObject (attributes) ;
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                      const GALGAS_abstractRoutineIR & in_mRoutine
-                                                      COMMA_LOCATION_ARGS) {
-  cCollectionElement_routineListIR * p = NULL ;
-  macroMyNew (p, cCollectionElement_routineListIR (in_mRoutine COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::addAssign_operation (const GALGAS_abstractRoutineIR & inOperand0
-                                                COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inOperand0.isValid ()) {
-      cCollectionElement * p = NULL ;
-      macroMyNew (p, cCollectionElement_routineListIR (inOperand0 COMMA_THERE)) ;
-      capCollectionElement attributes ;
-      attributes.setPointer (p) ;
-      macroDetachSharedObject (p) ;
-      appendObject (attributes) ;
-    }else{ // Destroy receiver
-      drop () ;
-    }
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_append (GALGAS_routineListIR_2D_element inElement,
-                                          C_Compiler * /* inCompiler */
-                                          COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
-      macroMyNew (p, cCollectionElement_routineListIR (inElement COMMA_THERE)) ;
-      capCollectionElement attributes ;
-      attributes.setPointer (p) ;
-      macroDetachSharedObject (p) ;
-      appendObject (attributes) ;
-    }else{
-      drop () ;
-    }
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_insertAtIndex (const GALGAS_abstractRoutineIR inOperand0,
-                                                 const GALGAS_uint inInsertionIndex,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inInsertionIndex.isValid () && inOperand0.isValid ()) {
-      cCollectionElement * p = NULL ;
-      macroMyNew (p, cCollectionElement_routineListIR (inOperand0 COMMA_THERE)) ;
-      capCollectionElement attributes ;
-      attributes.setPointer (p) ;
-      macroDetachSharedObject (p) ;
-      insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
-    }else{
-      drop () ;
-    }
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_removeAtIndex (GALGAS_abstractRoutineIR & outOperand0,
-                                                 const GALGAS_uint inRemoveIndex,
-                                                 C_Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  if (isValid ()) {
-    if (inRemoveIndex.isValid ()) {
-      capCollectionElement attributes ;
-      removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
-      cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-      if (NULL == p) {
-        outOperand0.drop () ;
-        drop () ;
-      }else{
-        macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-        outOperand0 = p->mObject.mProperty_mRoutine ;
-      }
-    }else{
-      outOperand0.drop () ;
-      drop () ;    
-    }
-  }else{
-    outOperand0.drop () ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_popFirst (GALGAS_abstractRoutineIR & outOperand0,
-                                            C_Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    outOperand0 = p->mObject.mProperty_mRoutine ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_popLast (GALGAS_abstractRoutineIR & outOperand0,
-                                           C_Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-  capCollectionElement attributes ;
-  removeLastObject (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    outOperand0 = p->mObject.mProperty_mRoutine ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::method_first (GALGAS_abstractRoutineIR & outOperand0,
-                                         C_Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readFirst (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    outOperand0 = p->mObject.mProperty_mRoutine ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::method_last (GALGAS_abstractRoutineIR & outOperand0,
-                                        C_Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes ;
-  readLast (attributes, inCompiler COMMA_THERE) ;
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-  if (NULL == p) {
-    outOperand0.drop () ;
-  }else{
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    outOperand0 = p->mObject.mProperty_mRoutine ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::add_operation (const GALGAS_routineListIR & inOperand,
-                                                          C_Compiler * /* inCompiler */
-                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GALGAS_routineListIR result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.appendList (inOperand) ;
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
-  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                    C_Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
-  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                  C_Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
-  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::plusAssign_operation (const GALGAS_routineListIR inOperand,
-                                                 C_Compiler * /* inCompiler */
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  appendList (inOperand) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-void GALGAS_routineListIR::setter_setMRoutineAtIndex (GALGAS_abstractRoutineIR inOperand,
-                                                      GALGAS_uint inIndex,
-                                                      C_Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    macroUniqueSharedObject (p) ;
-    p->mObject.mProperty_mRoutine = inOperand ;
-  }
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_abstractRoutineIR GALGAS_routineListIR::getter_mRoutineAtIndex (const GALGAS_uint & inIndex,
-                                                                       C_Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) const {
-  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) attributes.ptr () ;
-  GALGAS_abstractRoutineIR result ;
-  if (NULL != p) {
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    result = p->mObject.mProperty_mRoutine ;
-  }
-  return result ;
-}
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-cEnumerator_routineListIR::cEnumerator_routineListIR (const GALGAS_routineListIR & inEnumeratedObject,
-                                                      const typeEnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR_2D_element cEnumerator_routineListIR::current (LOCATION_ARGS) const {
-  const cCollectionElement_routineListIR * p = (const cCollectionElement_routineListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-  return p->mObject ;
-}
-
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_abstractRoutineIR cEnumerator_routineListIR::current_mRoutine (LOCATION_ARGS) const {
-  const cCollectionElement_routineListIR * p = (const cCollectionElement_routineListIR *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-  return p->mObject.mProperty_mRoutine ;
-}
-
-
-
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//     @routineListIR generic code implementation
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineListIR ("routineListIR",
-                                      NULL) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_routineListIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineListIR ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_routineListIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_routineListIR (*this)) ;
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_routineListIR GALGAS_routineListIR::extractObject (const GALGAS_object & inObject,
-                                                          C_Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_routineListIR result ;
-  const GALGAS_routineListIR * p = (const GALGAS_routineListIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_routineListIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 
