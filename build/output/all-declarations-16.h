@@ -227,3 +227,13 @@ extern const cDirectoryWrapper gWrapperDirectory_1_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_2_embeddedSampleCode ;
 extern const cDirectoryWrapper gWrapperDirectory_3_embeddedSampleCode ;
 
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Routine 'print'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void routine_print (const class GALGAS_string constinArgument0,
+                    class C_Compiler * inCompiler
+                    COMMA_LOCATION_ARGS) ;
+

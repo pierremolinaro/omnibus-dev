@@ -5849,12 +5849,3 @@ class GALGAS_string extensionGetter_llvmTypeName (const class GALGAS_objectIR & 
                                                   class C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Function 'literalStringType'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_omnibusType function_literalStringType (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
