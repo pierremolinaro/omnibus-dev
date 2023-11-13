@@ -33,8 +33,8 @@ xcode-project/*.xcodeproj/xcuserdata/**
 xcode-project/*.xcodeproj/xcshareddata/xcschemes/**
 xcode-project/*.xcodeproj/project.xcworkspace/**
 
-makefile-macosx/omnibus
-makefile-macosx/omnibus-debug
+makefile-unix/omnibus
+makefile-unix/omnibus-debug
 makefile-x86linux32-on-macosx/omnibus
 makefile-x86linux32-on-macosx/omnibus-debug
 makefile-x86linux64-on-macosx/omnibus

@@ -231,7 +231,7 @@ GALGAS_string function_getTargetTextFile (const GALGAS_string & constinArgument_
 static const C_galgas_type_descriptor * functionArgs_getTargetTextFile [3] = {
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -864,13 +864,13 @@ const cRegularFileWrapper gWrapperFile_0_embeddedSampleCode (
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_1 [2] = {
   & gWrapperFile_0_embeddedSampleCode,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'LPC-L2294' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_1 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'LPC-L2294'
@@ -1081,13 +1081,13 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_2 [16] = 
   & gWrapperFile_7_embeddedSampleCode,
   & gWrapperFile_5_embeddedSampleCode,
   & gWrapperFile_1_embeddedSampleCode,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'teensy-3-1' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_2 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'teensy-3-1'
@@ -1441,13 +1441,13 @@ static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_3 [27] = 
   & gWrapperFile_39_embeddedSampleCode,
   & gWrapperFile_23_embeddedSampleCode,
   & gWrapperFile_17_embeddedSampleCode,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'teensy-3-6' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_3 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'teensy-3-6'
@@ -1463,7 +1463,7 @@ const cDirectoryWrapper gWrapperDirectory_3_embeddedSampleCode (
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_embeddedSampleCode_0 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of '' directory
@@ -1472,7 +1472,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_embeddedSampleCode_0 [4]
   & gWrapperDirectory_1_embeddedSampleCode,
   & gWrapperDirectory_2_embeddedSampleCode,
   & gWrapperDirectory_3_embeddedSampleCode,
-  NULL
+  nullptr
 } ;
 
 //--- Directory ''
@@ -1914,7 +1914,7 @@ GALGAS_string function_assignmentOperatorFuncName (const GALGAS_omnibusType & co
 static const C_galgas_type_descriptor * functionArgs_assignmentOperatorFuncName [3] = {
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_omnibusType,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1969,7 +1969,7 @@ static const C_galgas_type_descriptor * functionArgs_assignmentOperatorKey [4] =
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_location,
   & kTypeDescriptor_GALGAS_omnibusType,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2420,7 +2420,7 @@ static const char * kSourceFileExtensions [] = {
   "omnibus-target",
   "omnibus-import",
   "omnibus",
-  NULL
+  nullptr
 } ;    
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2429,7 +2429,7 @@ static const char * kSourceFileHelpMessages [] = {
   "a target definition text file with the .omnibus-target extension",
   "an imported text file with the .omnibus-import extension",
   "a source text file with the .omnibus extension",
-  NULL
+  nullptr
 } ;    
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2633,8 +2633,8 @@ int mainForLIBPM (int inArgc, const char * inArgv []) {
     returnCode = 1 ;
   }else{
   //--- Common lexique object
-    C_Compiler * commonCompiler = NULL ;
-    macroMyNew (commonCompiler, C_Compiler (NULL COMMA_HERE)) ;
+    C_Compiler * commonCompiler = nullptr ;
+    macroMyNew (commonCompiler, C_Compiler (nullptr COMMA_HERE)) ;
     try{
       routine_before (commonCompiler COMMA_HERE) ;
       cLexiqueIntrospection::handleGetKeywordListOption (commonCompiler) ;

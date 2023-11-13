@@ -1134,7 +1134,7 @@ static void releaseOnceFunctionResult_llvmSeparatorLine (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (nullptr,
                                                                releaseOnceFunctionResult_llvmSeparatorLine) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1142,7 +1142,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmSeparatorLine [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1186,7 +1186,7 @@ GALGAS_string function_llvmTitleComment (const GALGAS_string & constinArgument_i
 
 static const C_galgas_type_descriptor * functionArgs_llvmTitleComment [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1254,7 +1254,7 @@ static void releaseOnceFunctionResult_asSeparatorLine (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (nullptr,
                                                              releaseOnceFunctionResult_asSeparatorLine) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1262,7 +1262,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_asSeparatorLine [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1306,7 +1306,7 @@ GALGAS_string function_asTitleComment (const GALGAS_string & constinArgument_inT
 
 static const C_galgas_type_descriptor * functionArgs_asTitleComment [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2448,13 +2448,13 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_1 [25] = {
   & gWrapperFile_37_targetTemplates,
   & gWrapperFile_52_targetTemplates,
   & gWrapperFile_41_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'LPC-L2294' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_1 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'LPC-L2294'
@@ -2843,13 +2843,13 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_3 [14] = {
   & gWrapperFile_80_targetTemplates,
   & gWrapperFile_78_targetTemplates,
   & gWrapperFile_77_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'unprivileged' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_3 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'unprivileged'
@@ -2882,14 +2882,14 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_2 [18] = {
   & gWrapperFile_70_targetTemplates,
   & gWrapperFile_67_targetTemplates,
   & gWrapperFile_60_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'teensy-3-1' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_2 [2] = {
   & gWrapperDirectory_3_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'teensy-3-1'
@@ -3278,13 +3278,13 @@ const cRegularFileWrapper gWrapperFile_118_targetTemplates (
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_5 [2] = {
   & gWrapperFile_118_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'xtr32' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_5 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'xtr32'
@@ -3313,13 +3313,13 @@ const cRegularFileWrapper gWrapperFile_119_targetTemplates (
 
 static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_6 [2] = {
   & gWrapperFile_119_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'xtr64' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_6 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'xtr64'
@@ -3365,7 +3365,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [31] = {
   & gWrapperFile_97_targetTemplates,
   & gWrapperFile_92_targetTemplates,
   & gWrapperFile_91_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of 'teensy-3-6' directory
@@ -3373,7 +3373,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_4 [31] = {
 static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_4 [3] = {
   & gWrapperDirectory_5_targetTemplates,
   & gWrapperDirectory_6_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- Directory 'teensy-3-6'
@@ -3423,7 +3423,7 @@ static const cRegularFileWrapper * gWrapperAllFiles_targetTemplates_0 [35] = {
   & gWrapperFile_27_targetTemplates,
   & gWrapperFile_14_targetTemplates,
   & gWrapperFile_12_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of '' directory
@@ -3432,7 +3432,7 @@ static const cDirectoryWrapper * gWrapperAllDirectories_targetTemplates_0 [4] = 
   & gWrapperDirectory_1_targetTemplates,
   & gWrapperDirectory_2_targetTemplates,
   & gWrapperDirectory_4_targetTemplates,
-  NULL
+  nullptr
 } ;
 
 //--- Directory ''

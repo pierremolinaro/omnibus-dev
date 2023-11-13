@@ -16,13 +16,13 @@
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_controlRegisterDumpGenerationTemplate_0 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of '' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_controlRegisterDumpGenerationTemplate_0 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory ''
@@ -127,7 +127,7 @@ GALGAS_string function_fieldIndexColumns (const GALGAS_uint & constinArgument_in
 
 static const C_galgas_type_descriptor * functionArgs_fieldIndexColumns [2] = {
   & kTypeDescriptor_GALGAS_uint,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ GALGAS_uintlist function_arrayIndexListFor (const GALGAS_uint & constinArgument_
 
 static const C_galgas_type_descriptor * functionArgs_arrayIndexListFor [2] = {
   & kTypeDescriptor_GALGAS_uint,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -395,13 +395,13 @@ void routine_buildGlobalConstantMapHTMLFile (GALGAS_globalConstantMap inArgument
 //--- All files of '' directory
 
 static const cRegularFileWrapper * gWrapperAllFiles_constantDumpGenerationTemplate_0 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- All sub-directories of '' directory
 
 static const cDirectoryWrapper * gWrapperAllDirectories_constantDumpGenerationTemplate_0 [1] = {
-  NULL
+  nullptr
 } ;
 
 //--- Directory ''
@@ -499,7 +499,7 @@ GALGAS_string function_linkForGlobalConstant (const GALGAS_string & constinArgum
 
 static const C_galgas_type_descriptor * functionArgs_linkForGlobalConstant [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -747,7 +747,7 @@ GALGAS_lstring function_omnibusTypeSpecificNameForDriver (const GALGAS_lstring &
 
 static const C_galgas_type_descriptor * functionArgs_omnibusTypeSpecificNameForDriver [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -794,7 +794,7 @@ GALGAS_lstring function_llvmDriverNameFromName (const GALGAS_lstring & constinAr
 
 static const C_galgas_type_descriptor * functionArgs_llvmDriverNameFromName [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -841,7 +841,7 @@ GALGAS_lstring function_llvmBootRoutineNameFromDriver (const GALGAS_lstring & co
 
 static const C_galgas_type_descriptor * functionArgs_llvmBootRoutineNameFromDriver [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -888,7 +888,7 @@ GALGAS_lstring function_llvmStartupRoutineNameFromDriver (const GALGAS_lstring &
 
 static const C_galgas_type_descriptor * functionArgs_llvmStartupRoutineNameFromDriver [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1298,7 +1298,7 @@ GALGAS_lstring function_omnibusNameForStaticListType (const GALGAS_lstring & con
 
 static const C_galgas_type_descriptor * functionArgs_omnibusNameForStaticListType [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1345,7 +1345,7 @@ GALGAS_lstring function_llvmNameForStaticListType (const GALGAS_lstring & consti
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForStaticListType [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1392,7 +1392,7 @@ GALGAS_lstring function_omnibusNameForStaticListElementType (const GALGAS_lstrin
 
 static const C_galgas_type_descriptor * functionArgs_omnibusNameForStaticListElementType [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1439,7 +1439,7 @@ GALGAS_lstring function_llvmNameForStaticListElementType (const GALGAS_lstring &
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForStaticListElementType [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2619,7 +2619,7 @@ static const C_galgas_type_descriptor * functionArgs_systemUserMangledNameFromAS
   & kTypeDescriptor_GALGAS_routineKind,
   & kTypeDescriptor_GALGAS_lstring,
   & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2725,7 +2725,7 @@ static const C_galgas_type_descriptor * functionArgs_systemImplementationMangled
   & kTypeDescriptor_GALGAS_routineKind,
   & kTypeDescriptor_GALGAS_lstring,
   & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2992,7 +2992,7 @@ static const C_galgas_type_descriptor * functionArgs_llvmFunctionPrototype [5] =
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_routineFormalArgumentListIR,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3693,7 +3693,7 @@ static const C_galgas_type_descriptor * functionArgs_guardUserLLVMName [4] = {
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_lstring,
   & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3762,7 +3762,7 @@ static const C_galgas_type_descriptor * functionArgs_guardImplementationLLVMName
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_lstring,
   & kTypeDescriptor_GALGAS_routineFormalArgumentListAST,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4762,7 +4762,7 @@ static const C_galgas_type_descriptor * functionArgs_checkModeAndReturnsRoutineL
   & kTypeDescriptor_GALGAS_routineLLVMNameDict,
   & kTypeDescriptor_GALGAS_mode,
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4896,7 +4896,7 @@ GALGAS_string function_panicRoutineNameForLocationFile (const GALGAS_location & 
 
 static const C_galgas_type_descriptor * functionArgs_panicRoutineNameForLocationFile [2] = {
   & kTypeDescriptor_GALGAS_location,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4952,7 +4952,7 @@ GALGAS_string function_panicRoutineNameForFilePath (const GALGAS_string & consti
 
 static const C_galgas_type_descriptor * functionArgs_panicRoutineNameForFilePath [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5097,7 +5097,7 @@ static void releaseOnceFunctionResult_panicModeName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicModeName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicModeName (nullptr,
                                                            releaseOnceFunctionResult_panicModeName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5105,7 +5105,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicModeName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicModeName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5368,7 +5368,7 @@ static void releaseOnceFunctionResult_panicRoutineName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicRoutineName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicRoutineName (nullptr,
                                                               releaseOnceFunctionResult_panicRoutineName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5376,7 +5376,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicRoutineName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicRoutineName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5438,7 +5438,7 @@ static void releaseOnceFunctionResult_panicCodeForAssertViolation (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForAssertViolation (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForAssertViolation (nullptr,
                                                                          releaseOnceFunctionResult_panicCodeForAssertViolation) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5446,7 +5446,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForAssertViolation (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForAssertViolation [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5508,7 +5508,7 @@ static void releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow (void
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedAdditionOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedAdditionOverflow (nullptr,
                                                                                   releaseOnceFunctionResult_panicCodeForUnsignedAdditionOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5516,7 +5516,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedAdditionOverflow
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedAdditionOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5578,7 +5578,7 @@ static void releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow (void) 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedAdditionOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedAdditionOverflow (nullptr,
                                                                                 releaseOnceFunctionResult_panicCodeForSignedAdditionOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5586,7 +5586,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedAdditionOverflow (
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedAdditionOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5648,7 +5648,7 @@ static void releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow (void
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedSubtractOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedSubtractOverflow (nullptr,
                                                                                   releaseOnceFunctionResult_panicCodeForUnsignedSubtractOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5656,7 +5656,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedSubtractOverflow
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedSubtractOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5718,7 +5718,7 @@ static void releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow (void) 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedSubtractOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedSubtractOverflow (nullptr,
                                                                                 releaseOnceFunctionResult_panicCodeForSignedSubtractOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5726,7 +5726,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedSubtractOverflow (
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedSubtractOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5788,7 +5788,7 @@ static void releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedMultiplicationOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedMultiplicationOverflow (nullptr,
                                                                                         releaseOnceFunctionResult_panicCodeForUnsignedMultiplicationOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5796,7 +5796,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedMultiplicationOv
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedMultiplicationOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5858,7 +5858,7 @@ static void releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow (
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedMultiplicationOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedMultiplicationOverflow (nullptr,
                                                                                       releaseOnceFunctionResult_panicCodeForSignedMultiplicationOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5866,7 +5866,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedMultiplicationOver
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedMultiplicationOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5928,7 +5928,7 @@ static void releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero (void) 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedDivisionByZero (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedDivisionByZero (nullptr,
                                                                                 releaseOnceFunctionResult_panicCodeForUnsignedDivisionByZero) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5936,7 +5936,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedDivisionByZero (
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedDivisionByZero [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5998,7 +5998,7 @@ static void releaseOnceFunctionResult_panicCodeForSignedDivisionByZero (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedDivisionByZero (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedDivisionByZero (nullptr,
                                                                               releaseOnceFunctionResult_panicCodeForSignedDivisionByZero) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6006,7 +6006,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedDivisionByZero (NU
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedDivisionByZero [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6068,7 +6068,7 @@ static void releaseOnceFunctionResult_panicCodeForUnsignedRemainderByZero (void)
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedRemainderByZero (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedRemainderByZero (nullptr,
                                                                                  releaseOnceFunctionResult_panicCodeForUnsignedRemainderByZero) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6076,7 +6076,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForUnsignedRemainderByZero 
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForUnsignedRemainderByZero [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6138,7 +6138,7 @@ static void releaseOnceFunctionResult_panicCodeForSignedRemainderByZero (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedRemainderByZero (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedRemainderByZero (nullptr,
                                                                                releaseOnceFunctionResult_panicCodeForSignedRemainderByZero) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6146,7 +6146,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForSignedRemainderByZero (N
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForSignedRemainderByZero [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6208,7 +6208,7 @@ static void releaseOnceFunctionResult_panicCodeForConvertOverflow (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForConvertOverflow (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForConvertOverflow (nullptr,
                                                                          releaseOnceFunctionResult_panicCodeForConvertOverflow) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6216,7 +6216,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForConvertOverflow (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForConvertOverflow [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6278,7 +6278,7 @@ static void releaseOnceFunctionResult_panicCodeForNegativeArrayIndex (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForNegativeArrayIndex (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForNegativeArrayIndex (nullptr,
                                                                             releaseOnceFunctionResult_panicCodeForNegativeArrayIndex) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6286,7 +6286,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForNegativeArrayIndex (NULL
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForNegativeArrayIndex [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6348,7 +6348,7 @@ static void releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (nullptr,
                                                                             releaseOnceFunctionResult_panicCodeForTooLargeArrayIndex) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6356,7 +6356,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForTooLargeArrayIndex (NULL
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForTooLargeArrayIndex [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6418,7 +6418,7 @@ static void releaseOnceFunctionResult_panicCodeForClosedSync (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForClosedSync (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForClosedSync (nullptr,
                                                                     releaseOnceFunctionResult_panicCodeForClosedSync) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6426,7 +6426,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_panicCodeForClosedSync (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_panicCodeForClosedSync [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------

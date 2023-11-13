@@ -8,117 +8,6 @@
 #include "all-declarations-3.h"
 
 //----------------------------------------------------------------------------------------------------------------------
-
-typeComparisonResult GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::objectCompare (const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (void) :
-GALGAS_omnibusInfixOperatorUsage_2D_weak () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator_2D_weak & GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::operator = (const GALGAS_compileTimeIntBitWiseOrOperator & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (const GALGAS_compileTimeIntBitWiseOrOperator & inSource) :
-GALGAS_omnibusInfixOperatorUsage_2D_weak (inSource) {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::constructor_nil (LOCATION_ARGS) {
-  GALGAS_compileTimeIntBitWiseOrOperator_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::bang_compileTimeIntBitWiseOrOperator_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_compileTimeIntBitWiseOrOperator result ;
-  if (mProxyPtr != NULL) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_compileTimeIntBitWiseOrOperator) ;
-      result = GALGAS_compileTimeIntBitWiseOrOperator ((cPtr_compileTimeIntBitWiseOrOperator *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//     @compileTimeIntBitWiseOrOperator-weak generic code implementation
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator_2D_weak ("compileTimeIntBitWiseOrOperator-weak",
-                                                                & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage_2D_weak) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator_2D_weak ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                              C_Compiler * inCompiler
-                                                                                                              COMMA_LOCATION_ARGS) {
-  GALGAS_compileTimeIntBitWiseOrOperator_2D_weak result ;
-  const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak * p = (const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("compileTimeIntBitWiseOrOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
 // @compileTimeIntMinusOperator reference class
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -147,7 +36,7 @@ typeComparisonResult GALGAS_compileTimeIntMinusOperator::objectCompare (const GA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -201,7 +90,7 @@ void cPtr_compileTimeIntMinusOperator::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_compileTimeIntMinusOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_compileTimeIntMinusOperator (THERE)) ;
   return ptr ;
 }
@@ -226,7 +115,7 @@ const C_galgas_type_descriptor * GALGAS_compileTimeIntMinusOperator::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_compileTimeIntMinusOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_compileTimeIntMinusOperator (*this)) ;
   }
@@ -240,8 +129,8 @@ GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_compileTimeIntMinusOperator result ;
   const GALGAS_compileTimeIntMinusOperator * p = (const GALGAS_compileTimeIntMinusOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_compileTimeIntMinusOperator *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntMinusOperator *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntMinusOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -279,9 +168,9 @@ GALGAS_prefixOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_compileTimeIntMinusOperator_2D_weak & GALGAS_compileTimeIntMinusOperator_2D_weak::operator = (const GALGAS_compileTimeIntMinusOperator & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -306,9 +195,9 @@ GALGAS_compileTimeIntMinusOperator_2D_weak GALGAS_compileTimeIntMinusOperator_2D
 
 GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator_2D_weak::bang_compileTimeIntMinusOperator_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_compileTimeIntMinusOperator result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_compileTimeIntMinusOperator) ;
@@ -337,7 +226,7 @@ const C_galgas_type_descriptor * GALGAS_compileTimeIntMinusOperator_2D_weak::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_compileTimeIntMinusOperator_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_compileTimeIntMinusOperator_2D_weak (*this)) ;
   }
@@ -351,8 +240,8 @@ GALGAS_compileTimeIntMinusOperator_2D_weak GALGAS_compileTimeIntMinusOperator_2D
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_compileTimeIntMinusOperator_2D_weak result ;
   const GALGAS_compileTimeIntMinusOperator_2D_weak * p = (const GALGAS_compileTimeIntMinusOperator_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_compileTimeIntMinusOperator_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntMinusOperator_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntMinusOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -390,7 +279,7 @@ typeComparisonResult GALGAS_compileTimeIntComplementOperator::objectCompare (con
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -444,7 +333,7 @@ void cPtr_compileTimeIntComplementOperator::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_compileTimeIntComplementOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_compileTimeIntComplementOperator (THERE)) ;
   return ptr ;
 }
@@ -469,7 +358,7 @@ const C_galgas_type_descriptor * GALGAS_compileTimeIntComplementOperator::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_compileTimeIntComplementOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_compileTimeIntComplementOperator (*this)) ;
   }
@@ -483,8 +372,8 @@ GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_compileTimeIntComplementOperator result ;
   const GALGAS_compileTimeIntComplementOperator * p = (const GALGAS_compileTimeIntComplementOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_compileTimeIntComplementOperator *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntComplementOperator *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntComplementOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -522,9 +411,9 @@ GALGAS_prefixOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_compileTimeIntComplementOperator_2D_weak & GALGAS_compileTimeIntComplementOperator_2D_weak::operator = (const GALGAS_compileTimeIntComplementOperator & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -549,9 +438,9 @@ GALGAS_compileTimeIntComplementOperator_2D_weak GALGAS_compileTimeIntComplementO
 
 GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator_2D_weak::bang_compileTimeIntComplementOperator_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_compileTimeIntComplementOperator result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_compileTimeIntComplementOperator) ;
@@ -580,7 +469,7 @@ const C_galgas_type_descriptor * GALGAS_compileTimeIntComplementOperator_2D_weak
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_compileTimeIntComplementOperator_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_compileTimeIntComplementOperator_2D_weak (*this)) ;
   }
@@ -594,8 +483,8 @@ GALGAS_compileTimeIntComplementOperator_2D_weak GALGAS_compileTimeIntComplementO
                                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_compileTimeIntComplementOperator_2D_weak result ;
   const GALGAS_compileTimeIntComplementOperator_2D_weak * p = (const GALGAS_compileTimeIntComplementOperator_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_compileTimeIntComplementOperator_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntComplementOperator_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntComplementOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -633,7 +522,7 @@ typeComparisonResult GALGAS_boolTypeAST::objectCompare (const GALGAS_boolTypeAST
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -687,7 +576,7 @@ void cPtr_boolTypeAST::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_boolTypeAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_boolTypeAST (THERE)) ;
   return ptr ;
 }
@@ -712,7 +601,7 @@ const C_galgas_type_descriptor * GALGAS_boolTypeAST::staticTypeDescriptor (void)
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolTypeAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolTypeAST (*this)) ;
   }
@@ -726,8 +615,8 @@ GALGAS_boolTypeAST GALGAS_boolTypeAST::extractObject (const GALGAS_object & inOb
                                                       COMMA_LOCATION_ARGS) {
   GALGAS_boolTypeAST result ;
   const GALGAS_boolTypeAST * p = (const GALGAS_boolTypeAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolTypeAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolTypeAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolTypeAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -765,9 +654,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_boolTypeAST_2D_weak & GALGAS_boolTypeAST_2D_weak::operator = (const GALGAS_boolTypeAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -792,9 +681,9 @@ GALGAS_boolTypeAST_2D_weak GALGAS_boolTypeAST_2D_weak::constructor_nil (LOCATION
 
 GALGAS_boolTypeAST GALGAS_boolTypeAST_2D_weak::bang_boolTypeAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_boolTypeAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_boolTypeAST) ;
@@ -823,7 +712,7 @@ const C_galgas_type_descriptor * GALGAS_boolTypeAST_2D_weak::staticTypeDescripto
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolTypeAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolTypeAST_2D_weak (*this)) ;
   }
@@ -837,8 +726,8 @@ GALGAS_boolTypeAST_2D_weak GALGAS_boolTypeAST_2D_weak::extractObject (const GALG
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_boolTypeAST_2D_weak result ;
   const GALGAS_boolTypeAST_2D_weak * p = (const GALGAS_boolTypeAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolTypeAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolTypeAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolTypeAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -876,7 +765,7 @@ typeComparisonResult GALGAS_boolImplicitConverterToBoolean::objectCompare (const
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -930,7 +819,7 @@ void cPtr_boolImplicitConverterToBoolean::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
   return ptr ;
 }
@@ -955,7 +844,7 @@ const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean::staticTy
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolImplicitConverterToBoolean (*this)) ;
   }
@@ -969,8 +858,8 @@ GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::ext
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_boolImplicitConverterToBoolean result ;
   const GALGAS_boolImplicitConverterToBoolean * p = (const GALGAS_boolImplicitConverterToBoolean *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolImplicitConverterToBoolean", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1008,9 +897,9 @@ GALGAS_abstractImplicitConverterToBoolean_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_boolImplicitConverterToBoolean_2D_weak & GALGAS_boolImplicitConverterToBoolean_2D_weak::operator = (const GALGAS_boolImplicitConverterToBoolean & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1035,9 +924,9 @@ GALGAS_boolImplicitConverterToBoolean_2D_weak GALGAS_boolImplicitConverterToBool
 
 GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean_2D_weak::bang_boolImplicitConverterToBoolean_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_boolImplicitConverterToBoolean result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_boolImplicitConverterToBoolean) ;
@@ -1066,7 +955,7 @@ const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean_2D_weak::
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolImplicitConverterToBoolean_2D_weak (*this)) ;
   }
@@ -1080,8 +969,8 @@ GALGAS_boolImplicitConverterToBoolean_2D_weak GALGAS_boolImplicitConverterToBool
                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_boolImplicitConverterToBoolean_2D_weak result ;
   const GALGAS_boolImplicitConverterToBoolean_2D_weak * p = (const GALGAS_boolImplicitConverterToBoolean_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolImplicitConverterToBoolean-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1119,7 +1008,7 @@ typeComparisonResult GALGAS_boolNotOperator::objectCompare (const GALGAS_boolNot
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -1173,7 +1062,7 @@ void cPtr_boolNotOperator::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_boolNotOperator::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_boolNotOperator (THERE)) ;
   return ptr ;
 }
@@ -1198,7 +1087,7 @@ const C_galgas_type_descriptor * GALGAS_boolNotOperator::staticTypeDescriptor (v
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolNotOperator::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolNotOperator (*this)) ;
   }
@@ -1212,8 +1101,8 @@ GALGAS_boolNotOperator GALGAS_boolNotOperator::extractObject (const GALGAS_objec
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_boolNotOperator result ;
   const GALGAS_boolNotOperator * p = (const GALGAS_boolNotOperator *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolNotOperator *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolNotOperator *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolNotOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1251,9 +1140,9 @@ GALGAS_prefixOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_boolNotOperator_2D_weak & GALGAS_boolNotOperator_2D_weak::operator = (const GALGAS_boolNotOperator & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1278,9 +1167,9 @@ GALGAS_boolNotOperator_2D_weak GALGAS_boolNotOperator_2D_weak::constructor_nil (
 
 GALGAS_boolNotOperator GALGAS_boolNotOperator_2D_weak::bang_boolNotOperator_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_boolNotOperator result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_boolNotOperator) ;
@@ -1309,7 +1198,7 @@ const C_galgas_type_descriptor * GALGAS_boolNotOperator_2D_weak::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_boolNotOperator_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_boolNotOperator_2D_weak (*this)) ;
   }
@@ -1323,8 +1212,8 @@ GALGAS_boolNotOperator_2D_weak GALGAS_boolNotOperator_2D_weak::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_boolNotOperator_2D_weak result ;
   const GALGAS_boolNotOperator_2D_weak * p = (const GALGAS_boolNotOperator_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_boolNotOperator_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolNotOperator_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("boolNotOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1362,9 +1251,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_typeAliasDeclarationAST_2D_weak & GALGAS_typeAliasDeclarationAST_2D_weak::operator = (const GALGAS_typeAliasDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1389,9 +1278,9 @@ GALGAS_typeAliasDeclarationAST_2D_weak GALGAS_typeAliasDeclarationAST_2D_weak::c
 
 GALGAS_typeAliasDeclarationAST GALGAS_typeAliasDeclarationAST_2D_weak::bang_typeAliasDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_typeAliasDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_typeAliasDeclarationAST) ;
@@ -1420,7 +1309,7 @@ const C_galgas_type_descriptor * GALGAS_typeAliasDeclarationAST_2D_weak::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_typeAliasDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_typeAliasDeclarationAST_2D_weak (*this)) ;
   }
@@ -1434,8 +1323,8 @@ GALGAS_typeAliasDeclarationAST_2D_weak GALGAS_typeAliasDeclarationAST_2D_weak::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_typeAliasDeclarationAST_2D_weak result ;
   const GALGAS_typeAliasDeclarationAST_2D_weak * p = (const GALGAS_typeAliasDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typeAliasDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_typeAliasDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("typeAliasDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1468,7 +1357,7 @@ typeComparisonResult GALGAS_expressionAST::objectCompare (const GALGAS_expressio
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -1503,7 +1392,7 @@ acStrongPtr_class (THERE) {
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_expressionAST ("expressionAST",
-                                      NULL) ;
+                                      nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1514,7 +1403,7 @@ const C_galgas_type_descriptor * GALGAS_expressionAST::staticTypeDescriptor (voi
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_expressionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_expressionAST (*this)) ;
   }
@@ -1528,8 +1417,8 @@ GALGAS_expressionAST GALGAS_expressionAST::extractObject (const GALGAS_object & 
                                                           COMMA_LOCATION_ARGS) {
   GALGAS_expressionAST result ;
   const GALGAS_expressionAST * p = (const GALGAS_expressionAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_expressionAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_expressionAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("expressionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1567,9 +1456,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak & GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak::operator = (const GALGAS_fixedSizeArrayTypeDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1594,9 +1483,9 @@ GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak GALGAS_fixedSizeArrayTypeDeclara
 
 GALGAS_fixedSizeArrayTypeDeclarationAST GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak::bang_fixedSizeArrayTypeDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_fixedSizeArrayTypeDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_fixedSizeArrayTypeDeclarationAST) ;
@@ -1625,7 +1514,7 @@ const C_galgas_type_descriptor * GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak (*this)) ;
   }
@@ -1639,8 +1528,8 @@ GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak GALGAS_fixedSizeArrayTypeDeclara
                                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak result ;
   const GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak * p = (const GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_fixedSizeArrayTypeDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("fixedSizeArrayTypeDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1678,9 +1567,9 @@ GALGAS_userLLVMTypeDefinitionIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak & GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak::operator = (const GALGAS_userLLVMStaticArrayTypeDefinitionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1705,9 +1594,9 @@ GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak GALGAS_userLLVMStaticArrayTyp
 
 GALGAS_userLLVMStaticArrayTypeDefinitionIR GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak::bang_userLLVMStaticArrayTypeDefinitionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_userLLVMStaticArrayTypeDefinitionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_userLLVMStaticArrayTypeDefinitionIR) ;
@@ -1736,7 +1625,7 @@ const C_galgas_type_descriptor * GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_w
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak (*this)) ;
   }
@@ -1750,8 +1639,8 @@ GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak GALGAS_userLLVMStaticArrayTyp
                                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak result ;
   const GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak * p = (const GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_userLLVMStaticArrayTypeDefinitionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("userLLVMStaticArrayTypeDefinitionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1784,7 +1673,7 @@ typeComparisonResult GALGAS_abstractAssignmentOperatorUsage::objectCompare (cons
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -1819,7 +1708,7 @@ acStrongPtr_class (THERE) {
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_abstractAssignmentOperatorUsage ("abstractAssignmentOperatorUsage",
-                                                        NULL) ;
+                                                        nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1830,7 +1719,7 @@ const C_galgas_type_descriptor * GALGAS_abstractAssignmentOperatorUsage::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_abstractAssignmentOperatorUsage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_abstractAssignmentOperatorUsage (*this)) ;
   }
@@ -1844,8 +1733,8 @@ GALGAS_abstractAssignmentOperatorUsage GALGAS_abstractAssignmentOperatorUsage::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_abstractAssignmentOperatorUsage result ;
   const GALGAS_abstractAssignmentOperatorUsage * p = (const GALGAS_abstractAssignmentOperatorUsage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractAssignmentOperatorUsage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_abstractAssignmentOperatorUsage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("abstractAssignmentOperatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1883,9 +1772,9 @@ AC_GALGAS_weak_reference () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractAssignmentOperatorUsage_2D_weak & GALGAS_abstractAssignmentOperatorUsage_2D_weak::operator = (const GALGAS_abstractAssignmentOperatorUsage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -1910,9 +1799,9 @@ GALGAS_abstractAssignmentOperatorUsage_2D_weak GALGAS_abstractAssignmentOperator
 
 GALGAS_abstractAssignmentOperatorUsage GALGAS_abstractAssignmentOperatorUsage_2D_weak::bang_abstractAssignmentOperatorUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_abstractAssignmentOperatorUsage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_abstractAssignmentOperatorUsage) ;
@@ -1930,7 +1819,7 @@ GALGAS_abstractAssignmentOperatorUsage GALGAS_abstractAssignmentOperatorUsage_2D
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_abstractAssignmentOperatorUsage_2D_weak ("abstractAssignmentOperatorUsage-weak",
-                                                                NULL) ;
+                                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1941,7 +1830,7 @@ const C_galgas_type_descriptor * GALGAS_abstractAssignmentOperatorUsage_2D_weak:
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_abstractAssignmentOperatorUsage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_abstractAssignmentOperatorUsage_2D_weak (*this)) ;
   }
@@ -1955,8 +1844,8 @@ GALGAS_abstractAssignmentOperatorUsage_2D_weak GALGAS_abstractAssignmentOperator
                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_abstractAssignmentOperatorUsage_2D_weak result ;
   const GALGAS_abstractAssignmentOperatorUsage_2D_weak * p = (const GALGAS_abstractAssignmentOperatorUsage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractAssignmentOperatorUsage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_abstractAssignmentOperatorUsage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("abstractAssignmentOperatorUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1994,9 +1883,9 @@ AC_GALGAS_weak_reference () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_abstractRoutineIR_2D_weak & GALGAS_abstractRoutineIR_2D_weak::operator = (const GALGAS_abstractRoutineIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2021,9 +1910,9 @@ GALGAS_abstractRoutineIR_2D_weak GALGAS_abstractRoutineIR_2D_weak::constructor_n
 
 GALGAS_abstractRoutineIR GALGAS_abstractRoutineIR_2D_weak::bang_abstractRoutineIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_abstractRoutineIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_abstractRoutineIR) ;
@@ -2041,7 +1930,7 @@ GALGAS_abstractRoutineIR GALGAS_abstractRoutineIR_2D_weak::bang_abstractRoutineI
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_abstractRoutineIR_2D_weak ("abstractRoutineIR-weak",
-                                                  NULL) ;
+                                                  nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2052,7 +1941,7 @@ const C_galgas_type_descriptor * GALGAS_abstractRoutineIR_2D_weak::staticTypeDes
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_abstractRoutineIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_abstractRoutineIR_2D_weak (*this)) ;
   }
@@ -2066,8 +1955,8 @@ GALGAS_abstractRoutineIR_2D_weak GALGAS_abstractRoutineIR_2D_weak::extractObject
                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_abstractRoutineIR_2D_weak result ;
   const GALGAS_abstractRoutineIR_2D_weak * p = (const GALGAS_abstractRoutineIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_abstractRoutineIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_abstractRoutineIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("abstractRoutineIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2105,9 +1994,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_staticArrayTypeAssignFunctionIR_2D_weak & GALGAS_staticArrayTypeAssignFunctionIR_2D_weak::operator = (const GALGAS_staticArrayTypeAssignFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2132,9 +2021,9 @@ GALGAS_staticArrayTypeAssignFunctionIR_2D_weak GALGAS_staticArrayTypeAssignFunct
 
 GALGAS_staticArrayTypeAssignFunctionIR GALGAS_staticArrayTypeAssignFunctionIR_2D_weak::bang_staticArrayTypeAssignFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_staticArrayTypeAssignFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_staticArrayTypeAssignFunctionIR) ;
@@ -2163,7 +2052,7 @@ const C_galgas_type_descriptor * GALGAS_staticArrayTypeAssignFunctionIR_2D_weak:
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_staticArrayTypeAssignFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_staticArrayTypeAssignFunctionIR_2D_weak (*this)) ;
   }
@@ -2177,8 +2066,8 @@ GALGAS_staticArrayTypeAssignFunctionIR_2D_weak GALGAS_staticArrayTypeAssignFunct
                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_staticArrayTypeAssignFunctionIR_2D_weak result ;
   const GALGAS_staticArrayTypeAssignFunctionIR_2D_weak * p = (const GALGAS_staticArrayTypeAssignFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_staticArrayTypeAssignFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_staticArrayTypeAssignFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("staticArrayTypeAssignFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2216,9 +2105,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_typeDynamicArrayDeclarationAST_2D_weak & GALGAS_typeDynamicArrayDeclarationAST_2D_weak::operator = (const GALGAS_typeDynamicArrayDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2243,9 +2132,9 @@ GALGAS_typeDynamicArrayDeclarationAST_2D_weak GALGAS_typeDynamicArrayDeclaration
 
 GALGAS_typeDynamicArrayDeclarationAST GALGAS_typeDynamicArrayDeclarationAST_2D_weak::bang_typeDynamicArrayDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_typeDynamicArrayDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_typeDynamicArrayDeclarationAST) ;
@@ -2274,7 +2163,7 @@ const C_galgas_type_descriptor * GALGAS_typeDynamicArrayDeclarationAST_2D_weak::
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_typeDynamicArrayDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_typeDynamicArrayDeclarationAST_2D_weak (*this)) ;
   }
@@ -2288,8 +2177,8 @@ GALGAS_typeDynamicArrayDeclarationAST_2D_weak GALGAS_typeDynamicArrayDeclaration
                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_typeDynamicArrayDeclarationAST_2D_weak result ;
   const GALGAS_typeDynamicArrayDeclarationAST_2D_weak * p = (const GALGAS_typeDynamicArrayDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typeDynamicArrayDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_typeDynamicArrayDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("typeDynamicArrayDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2327,9 +2216,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynArrayRemoveAllFunctionIR_2D_weak & GALGAS_dynArrayRemoveAllFunctionIR_2D_weak::operator = (const GALGAS_dynArrayRemoveAllFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2354,9 +2243,9 @@ GALGAS_dynArrayRemoveAllFunctionIR_2D_weak GALGAS_dynArrayRemoveAllFunctionIR_2D
 
 GALGAS_dynArrayRemoveAllFunctionIR GALGAS_dynArrayRemoveAllFunctionIR_2D_weak::bang_dynArrayRemoveAllFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynArrayRemoveAllFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynArrayRemoveAllFunctionIR) ;
@@ -2385,7 +2274,7 @@ const C_galgas_type_descriptor * GALGAS_dynArrayRemoveAllFunctionIR_2D_weak::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynArrayRemoveAllFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynArrayRemoveAllFunctionIR_2D_weak (*this)) ;
   }
@@ -2399,8 +2288,8 @@ GALGAS_dynArrayRemoveAllFunctionIR_2D_weak GALGAS_dynArrayRemoveAllFunctionIR_2D
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayRemoveAllFunctionIR_2D_weak result ;
   const GALGAS_dynArrayRemoveAllFunctionIR_2D_weak * p = (const GALGAS_dynArrayRemoveAllFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynArrayRemoveAllFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynArrayRemoveAllFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayRemoveAllFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2438,9 +2327,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynArrayLengthFunctionIR_2D_weak & GALGAS_dynArrayLengthFunctionIR_2D_weak::operator = (const GALGAS_dynArrayLengthFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2465,9 +2354,9 @@ GALGAS_dynArrayLengthFunctionIR_2D_weak GALGAS_dynArrayLengthFunctionIR_2D_weak:
 
 GALGAS_dynArrayLengthFunctionIR GALGAS_dynArrayLengthFunctionIR_2D_weak::bang_dynArrayLengthFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynArrayLengthFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynArrayLengthFunctionIR) ;
@@ -2496,7 +2385,7 @@ const C_galgas_type_descriptor * GALGAS_dynArrayLengthFunctionIR_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynArrayLengthFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynArrayLengthFunctionIR_2D_weak (*this)) ;
   }
@@ -2510,8 +2399,8 @@ GALGAS_dynArrayLengthFunctionIR_2D_weak GALGAS_dynArrayLengthFunctionIR_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayLengthFunctionIR_2D_weak result ;
   const GALGAS_dynArrayLengthFunctionIR_2D_weak * p = (const GALGAS_dynArrayLengthFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynArrayLengthFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynArrayLengthFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayLengthFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2549,9 +2438,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynArrayAppendFunctionIR_2D_weak & GALGAS_dynArrayAppendFunctionIR_2D_weak::operator = (const GALGAS_dynArrayAppendFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2576,9 +2465,9 @@ GALGAS_dynArrayAppendFunctionIR_2D_weak GALGAS_dynArrayAppendFunctionIR_2D_weak:
 
 GALGAS_dynArrayAppendFunctionIR GALGAS_dynArrayAppendFunctionIR_2D_weak::bang_dynArrayAppendFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynArrayAppendFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynArrayAppendFunctionIR) ;
@@ -2607,7 +2496,7 @@ const C_galgas_type_descriptor * GALGAS_dynArrayAppendFunctionIR_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynArrayAppendFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynArrayAppendFunctionIR_2D_weak (*this)) ;
   }
@@ -2621,8 +2510,8 @@ GALGAS_dynArrayAppendFunctionIR_2D_weak GALGAS_dynArrayAppendFunctionIR_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayAppendFunctionIR_2D_weak result ;
   const GALGAS_dynArrayAppendFunctionIR_2D_weak * p = (const GALGAS_dynArrayAppendFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynArrayAppendFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynArrayAppendFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayAppendFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2660,9 +2549,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynArrayInsertFunctionIR_2D_weak & GALGAS_dynArrayInsertFunctionIR_2D_weak::operator = (const GALGAS_dynArrayInsertFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2687,9 +2576,9 @@ GALGAS_dynArrayInsertFunctionIR_2D_weak GALGAS_dynArrayInsertFunctionIR_2D_weak:
 
 GALGAS_dynArrayInsertFunctionIR GALGAS_dynArrayInsertFunctionIR_2D_weak::bang_dynArrayInsertFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynArrayInsertFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynArrayInsertFunctionIR) ;
@@ -2718,7 +2607,7 @@ const C_galgas_type_descriptor * GALGAS_dynArrayInsertFunctionIR_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynArrayInsertFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynArrayInsertFunctionIR_2D_weak (*this)) ;
   }
@@ -2732,8 +2621,8 @@ GALGAS_dynArrayInsertFunctionIR_2D_weak GALGAS_dynArrayInsertFunctionIR_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_dynArrayInsertFunctionIR_2D_weak result ;
   const GALGAS_dynArrayInsertFunctionIR_2D_weak * p = (const GALGAS_dynArrayInsertFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynArrayInsertFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynArrayInsertFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayInsertFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2771,9 +2660,9 @@ GALGAS_abstractAssignmentOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynamicArrayTypeAssignUsage_2D_weak & GALGAS_dynamicArrayTypeAssignUsage_2D_weak::operator = (const GALGAS_dynamicArrayTypeAssignUsage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2798,9 +2687,9 @@ GALGAS_dynamicArrayTypeAssignUsage_2D_weak GALGAS_dynamicArrayTypeAssignUsage_2D
 
 GALGAS_dynamicArrayTypeAssignUsage GALGAS_dynamicArrayTypeAssignUsage_2D_weak::bang_dynamicArrayTypeAssignUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynamicArrayTypeAssignUsage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynamicArrayTypeAssignUsage) ;
@@ -2829,7 +2718,7 @@ const C_galgas_type_descriptor * GALGAS_dynamicArrayTypeAssignUsage_2D_weak::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynamicArrayTypeAssignUsage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynamicArrayTypeAssignUsage_2D_weak (*this)) ;
   }
@@ -2843,8 +2732,8 @@ GALGAS_dynamicArrayTypeAssignUsage_2D_weak GALGAS_dynamicArrayTypeAssignUsage_2D
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_dynamicArrayTypeAssignUsage_2D_weak result ;
   const GALGAS_dynamicArrayTypeAssignUsage_2D_weak * p = (const GALGAS_dynamicArrayTypeAssignUsage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynamicArrayTypeAssignUsage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynamicArrayTypeAssignUsage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynamicArrayTypeAssignUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2882,9 +2771,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak & GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak::operator = (const GALGAS_dynamicArrayTypeAssignGenericFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -2909,9 +2798,9 @@ GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak GALGAS_dynamicArrayTypeAs
 
 GALGAS_dynamicArrayTypeAssignGenericFunctionIR GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak::bang_dynamicArrayTypeAssignGenericFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_dynamicArrayTypeAssignGenericFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_dynamicArrayTypeAssignGenericFunctionIR) ;
@@ -2940,7 +2829,7 @@ const C_galgas_type_descriptor * GALGAS_dynamicArrayTypeAssignGenericFunctionIR_
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak (*this)) ;
   }
@@ -2954,8 +2843,8 @@ GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak GALGAS_dynamicArrayTypeAs
                                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak result ;
   const GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak * p = (const GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_dynamicArrayTypeAssignGenericFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("dynamicArrayTypeAssignGenericFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3011,13 +2900,13 @@ mObject (inElement.mProperty_mConstantName, inElement.mProperty_mConstantValue) 
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_enumerationConstantList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_enumerationConstantList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_enumerationConstantList (mObject.mProperty_mConstantName, mObject.mProperty_mConstantValue COMMA_HERE)) ;
   return result ;
 }
@@ -3082,7 +2971,7 @@ void GALGAS_enumerationConstantList::makeAttributesFromObjects (capCollectionEle
                                                                 const GALGAS_lstring & in_mConstantName,
                                                                 const GALGAS_bigint & in_mConstantValue
                                                                 COMMA_LOCATION_ARGS) {
-  cCollectionElement_enumerationConstantList * p = NULL ;
+  cCollectionElement_enumerationConstantList * p = nullptr ;
   macroMyNew (p, cCollectionElement_enumerationConstantList (in_mConstantName,
                                                              in_mConstantValue COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -3096,7 +2985,7 @@ void GALGAS_enumerationConstantList::addAssign_operation (const GALGAS_lstring &
                                                           COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_enumerationConstantList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3115,7 +3004,7 @@ void GALGAS_enumerationConstantList::setter_append (GALGAS_enumerationConstantLi
                                                     COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_enumerationConstantList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3136,7 +3025,7 @@ void GALGAS_enumerationConstantList::setter_insertAtIndex (const GALGAS_lstring 
                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_enumerationConstantList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3160,7 +3049,7 @@ void GALGAS_enumerationConstantList::setter_removeAtIndex (GALGAS_lstring & outO
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -3189,7 +3078,7 @@ void GALGAS_enumerationConstantList::setter_popFirst (GALGAS_lstring & outOperan
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -3208,7 +3097,7 @@ void GALGAS_enumerationConstantList::setter_popLast (GALGAS_lstring & outOperand
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -3227,7 +3116,7 @@ void GALGAS_enumerationConstantList::method_first (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -3246,7 +3135,7 @@ void GALGAS_enumerationConstantList::method_last (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -3314,7 +3203,7 @@ void GALGAS_enumerationConstantList::setter_setMConstantNameAtIndex (GALGAS_lstr
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_enumerationConstantList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mConstantName = inOperand ;
@@ -3329,7 +3218,7 @@ GALGAS_lstring GALGAS_enumerationConstantList::getter_mConstantNameAtIndex (cons
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_enumerationConstantList) ;
     result = p->mObject.mProperty_mConstantName ;
   }
@@ -3343,7 +3232,7 @@ void GALGAS_enumerationConstantList::setter_setMConstantValueAtIndex (GALGAS_big
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_enumerationConstantList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mConstantValue = inOperand ;
@@ -3358,7 +3247,7 @@ GALGAS_bigint GALGAS_enumerationConstantList::getter_mConstantValueAtIndex (cons
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_enumerationConstantList * p = (cCollectionElement_enumerationConstantList *) attributes.ptr () ;
   GALGAS_bigint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_enumerationConstantList) ;
     result = p->mObject.mProperty_mConstantValue ;
   }
@@ -3411,7 +3300,7 @@ GALGAS_bigint cEnumerator_enumerationConstantList::current_mConstantValue (LOCAT
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_enumerationConstantList ("enumerationConstantList",
-                                                NULL) ;
+                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3422,7 +3311,7 @@ const C_galgas_type_descriptor * GALGAS_enumerationConstantList::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_enumerationConstantList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_enumerationConstantList (*this)) ;
   }
@@ -3436,8 +3325,8 @@ GALGAS_enumerationConstantList GALGAS_enumerationConstantList::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_enumerationConstantList result ;
   const GALGAS_enumerationConstantList * p = (const GALGAS_enumerationConstantList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_enumerationConstantList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_enumerationConstantList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("enumerationConstantList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3475,9 +3364,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_enumerationDeclarationAST_2D_weak & GALGAS_enumerationDeclarationAST_2D_weak::operator = (const GALGAS_enumerationDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3502,9 +3391,9 @@ GALGAS_enumerationDeclarationAST_2D_weak GALGAS_enumerationDeclarationAST_2D_wea
 
 GALGAS_enumerationDeclarationAST GALGAS_enumerationDeclarationAST_2D_weak::bang_enumerationDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_enumerationDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_enumerationDeclarationAST) ;
@@ -3533,7 +3422,7 @@ const C_galgas_type_descriptor * GALGAS_enumerationDeclarationAST_2D_weak::stati
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_enumerationDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_enumerationDeclarationAST_2D_weak (*this)) ;
   }
@@ -3547,8 +3436,8 @@ GALGAS_enumerationDeclarationAST_2D_weak GALGAS_enumerationDeclarationAST_2D_wea
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_enumerationDeclarationAST_2D_weak result ;
   const GALGAS_enumerationDeclarationAST_2D_weak * p = (const GALGAS_enumerationDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_enumerationDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_enumerationDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("enumerationDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3586,9 +3475,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_enumToUintRoutineIR_2D_weak & GALGAS_enumToUintRoutineIR_2D_weak::operator = (const GALGAS_enumToUintRoutineIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -3613,9 +3502,9 @@ GALGAS_enumToUintRoutineIR_2D_weak GALGAS_enumToUintRoutineIR_2D_weak::construct
 
 GALGAS_enumToUintRoutineIR GALGAS_enumToUintRoutineIR_2D_weak::bang_enumToUintRoutineIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_enumToUintRoutineIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_enumToUintRoutineIR) ;
@@ -3644,7 +3533,7 @@ const C_galgas_type_descriptor * GALGAS_enumToUintRoutineIR_2D_weak::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_enumToUintRoutineIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_enumToUintRoutineIR_2D_weak (*this)) ;
   }
@@ -3658,8 +3547,8 @@ GALGAS_enumToUintRoutineIR_2D_weak GALGAS_enumToUintRoutineIR_2D_weak::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_enumToUintRoutineIR_2D_weak result ;
   const GALGAS_enumToUintRoutineIR_2D_weak * p = (const GALGAS_enumToUintRoutineIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_enumToUintRoutineIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_enumToUintRoutineIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("enumToUintRoutineIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3721,13 +3610,13 @@ mObject (inElement.mProperty_mPropertyName, inElement.mProperty_mPropertyAttribu
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_structurePropertyListAST::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_structurePropertyListAST::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_structurePropertyListAST (mObject.mProperty_mPropertyName, mObject.mProperty_mPropertyAttributeList, mObject.mProperty_mVisibility, mObject.mProperty_mPropertyTypeName, mObject.mProperty_mPropertyKind COMMA_HERE)) ;
   return result ;
 }
@@ -3810,7 +3699,7 @@ void GALGAS_structurePropertyListAST::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_lstring & in_mPropertyTypeName,
                                                                  const GALGAS_propertyKindAST & in_mPropertyKind
                                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement_structurePropertyListAST * p = NULL ;
+  cCollectionElement_structurePropertyListAST * p = nullptr ;
   macroMyNew (p, cCollectionElement_structurePropertyListAST (in_mPropertyName,
                                                               in_mPropertyAttributeList,
                                                               in_mVisibility,
@@ -3830,7 +3719,7 @@ void GALGAS_structurePropertyListAST::addAssign_operation (const GALGAS_lstring 
                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_structurePropertyListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3849,7 +3738,7 @@ void GALGAS_structurePropertyListAST::setter_append (GALGAS_structurePropertyLis
                                                      COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_structurePropertyListAST (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3873,7 +3762,7 @@ void GALGAS_structurePropertyListAST::setter_insertAtIndex (const GALGAS_lstring
                                                             COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_structurePropertyListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -3900,7 +3789,7 @@ void GALGAS_structurePropertyListAST::setter_removeAtIndex (GALGAS_lstring & out
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         outOperand2.drop () ;
@@ -3944,7 +3833,7 @@ void GALGAS_structurePropertyListAST::setter_popFirst (GALGAS_lstring & outOpera
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -3972,7 +3861,7 @@ void GALGAS_structurePropertyListAST::setter_popLast (GALGAS_lstring & outOperan
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -4000,7 +3889,7 @@ void GALGAS_structurePropertyListAST::method_first (GALGAS_lstring & outOperand0
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -4028,7 +3917,7 @@ void GALGAS_structurePropertyListAST::method_last (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -4102,7 +3991,7 @@ void GALGAS_structurePropertyListAST::setter_setMPropertyNameAtIndex (GALGAS_lst
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mPropertyName = inOperand ;
@@ -4117,7 +4006,7 @@ GALGAS_lstring GALGAS_structurePropertyListAST::getter_mPropertyNameAtIndex (con
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mPropertyName ;
   }
@@ -4131,7 +4020,7 @@ void GALGAS_structurePropertyListAST::setter_setMPropertyAttributeListAtIndex (G
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mPropertyAttributeList = inOperand ;
@@ -4146,7 +4035,7 @@ GALGAS_propertyAttributeList GALGAS_structurePropertyListAST::getter_mPropertyAt
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_propertyAttributeList result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mPropertyAttributeList ;
   }
@@ -4160,7 +4049,7 @@ void GALGAS_structurePropertyListAST::setter_setMVisibilityAtIndex (GALGAS_prope
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mVisibility = inOperand ;
@@ -4175,7 +4064,7 @@ GALGAS_propertyVisibility GALGAS_structurePropertyListAST::getter_mVisibilityAtI
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_propertyVisibility result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mVisibility ;
   }
@@ -4189,7 +4078,7 @@ void GALGAS_structurePropertyListAST::setter_setMPropertyTypeNameAtIndex (GALGAS
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mPropertyTypeName = inOperand ;
@@ -4204,7 +4093,7 @@ GALGAS_lstring GALGAS_structurePropertyListAST::getter_mPropertyTypeNameAtIndex 
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mPropertyTypeName ;
   }
@@ -4218,7 +4107,7 @@ void GALGAS_structurePropertyListAST::setter_setMPropertyKindAtIndex (GALGAS_pro
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mPropertyKind = inOperand ;
@@ -4233,7 +4122,7 @@ GALGAS_propertyKindAST GALGAS_structurePropertyListAST::getter_mPropertyKindAtIn
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_structurePropertyListAST * p = (cCollectionElement_structurePropertyListAST *) attributes.ptr () ;
   GALGAS_propertyKindAST result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_structurePropertyListAST) ;
     result = p->mObject.mProperty_mPropertyKind ;
   }
@@ -4310,7 +4199,7 @@ GALGAS_propertyKindAST cEnumerator_structurePropertyListAST::current_mPropertyKi
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_structurePropertyListAST ("structurePropertyListAST",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -4321,7 +4210,7 @@ const C_galgas_type_descriptor * GALGAS_structurePropertyListAST::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_structurePropertyListAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_structurePropertyListAST (*this)) ;
   }
@@ -4335,8 +4224,8 @@ GALGAS_structurePropertyListAST GALGAS_structurePropertyListAST::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_structurePropertyListAST result ;
   const GALGAS_structurePropertyListAST * p = (const GALGAS_structurePropertyListAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structurePropertyListAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_structurePropertyListAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("structurePropertyListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -4374,9 +4263,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_structureDeclarationAST_2D_weak & GALGAS_structureDeclarationAST_2D_weak::operator = (const GALGAS_structureDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -4401,9 +4290,9 @@ GALGAS_structureDeclarationAST_2D_weak GALGAS_structureDeclarationAST_2D_weak::c
 
 GALGAS_structureDeclarationAST GALGAS_structureDeclarationAST_2D_weak::bang_structureDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_structureDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_structureDeclarationAST) ;
@@ -4432,7 +4321,7 @@ const C_galgas_type_descriptor * GALGAS_structureDeclarationAST_2D_weak::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_structureDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_structureDeclarationAST_2D_weak (*this)) ;
   }
@@ -4446,8 +4335,8 @@ GALGAS_structureDeclarationAST_2D_weak GALGAS_structureDeclarationAST_2D_weak::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_structureDeclarationAST_2D_weak result ;
   const GALGAS_structureDeclarationAST_2D_weak * p = (const GALGAS_structureDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structureDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_structureDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("structureDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -4503,13 +4392,13 @@ mObject (inElement.mProperty_mAttributeName, inElement.mProperty_mAttributeValue
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_propertyAttributeList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_propertyAttributeList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_propertyAttributeList (mObject.mProperty_mAttributeName, mObject.mProperty_mAttributeValue COMMA_HERE)) ;
   return result ;
 }
@@ -4574,7 +4463,7 @@ void GALGAS_propertyAttributeList::makeAttributesFromObjects (capCollectionEleme
                                                               const GALGAS_lstring & in_mAttributeName,
                                                               const GALGAS_lbigint & in_mAttributeValue
                                                               COMMA_LOCATION_ARGS) {
-  cCollectionElement_propertyAttributeList * p = NULL ;
+  cCollectionElement_propertyAttributeList * p = nullptr ;
   macroMyNew (p, cCollectionElement_propertyAttributeList (in_mAttributeName,
                                                            in_mAttributeValue COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -4588,7 +4477,7 @@ void GALGAS_propertyAttributeList::addAssign_operation (const GALGAS_lstring & i
                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyAttributeList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -4607,7 +4496,7 @@ void GALGAS_propertyAttributeList::setter_append (GALGAS_propertyAttributeList_2
                                                   COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyAttributeList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -4628,7 +4517,7 @@ void GALGAS_propertyAttributeList::setter_insertAtIndex (const GALGAS_lstring in
                                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyAttributeList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -4652,7 +4541,7 @@ void GALGAS_propertyAttributeList::setter_removeAtIndex (GALGAS_lstring & outOpe
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -4681,7 +4570,7 @@ void GALGAS_propertyAttributeList::setter_popFirst (GALGAS_lstring & outOperand0
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -4700,7 +4589,7 @@ void GALGAS_propertyAttributeList::setter_popLast (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -4719,7 +4608,7 @@ void GALGAS_propertyAttributeList::method_first (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -4738,7 +4627,7 @@ void GALGAS_propertyAttributeList::method_last (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -4806,7 +4695,7 @@ void GALGAS_propertyAttributeList::setter_setMAttributeNameAtIndex (GALGAS_lstri
                                                                     C_Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyAttributeList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mAttributeName = inOperand ;
@@ -4821,7 +4710,7 @@ GALGAS_lstring GALGAS_propertyAttributeList::getter_mAttributeNameAtIndex (const
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyAttributeList) ;
     result = p->mObject.mProperty_mAttributeName ;
   }
@@ -4835,7 +4724,7 @@ void GALGAS_propertyAttributeList::setter_setMAttributeValueAtIndex (GALGAS_lbig
                                                                      C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyAttributeList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mAttributeValue = inOperand ;
@@ -4850,7 +4739,7 @@ GALGAS_lbigint GALGAS_propertyAttributeList::getter_mAttributeValueAtIndex (cons
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyAttributeList * p = (cCollectionElement_propertyAttributeList *) attributes.ptr () ;
   GALGAS_lbigint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyAttributeList) ;
     result = p->mObject.mProperty_mAttributeValue ;
   }
@@ -4903,7 +4792,7 @@ GALGAS_lbigint cEnumerator_propertyAttributeList::current_mAttributeValue (LOCAT
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_propertyAttributeList ("propertyAttributeList",
-                                              NULL) ;
+                                              nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -4914,7 +4803,7 @@ const C_galgas_type_descriptor * GALGAS_propertyAttributeList::staticTypeDescrip
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_propertyAttributeList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_propertyAttributeList (*this)) ;
   }
@@ -4928,8 +4817,8 @@ GALGAS_propertyAttributeList GALGAS_propertyAttributeList::extractObject (const 
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_propertyAttributeList result ;
   const GALGAS_propertyAttributeList * p = (const GALGAS_propertyAttributeList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_propertyAttributeList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyAttributeList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("propertyAttributeList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5080,7 +4969,7 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_initializedStoredProp
   GALGAS_propertyKindAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_initializedStoredProperty ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -5103,7 +4992,7 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_initializedConstantPr
   GALGAS_propertyKindAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_initializedConstantProperty ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -5127,7 +5016,7 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_readOnlyComputedPrope
   GALGAS_propertyKindAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_readOnlyComputedProperty ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -5143,7 +5032,7 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::constructor_writeComputedProperty
   GALGAS_propertyKindAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_writeComputedProperty ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_propertyKindAST_writeComputedProperty (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -5227,7 +5116,6 @@ bool GALGAS_propertyKindAST::optional_initializedStoredProperty (GALGAS_expressi
   const bool ok = mEnum == kEnum_initializedStoredProperty ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_propertyKindAST_initializedStoredProperty *) unsafePointer () ;
-    // const cEnumAssociatedValues_propertyKindAST_initializedStoredProperty * ptr = (const cEnumAssociatedValues_propertyKindAST_initializedStoredProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -5246,7 +5134,6 @@ bool GALGAS_propertyKindAST::optional_initializedConstantProperty (GALGAS_expres
   const bool ok = mEnum == kEnum_initializedConstantProperty ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_propertyKindAST_initializedConstantProperty *) unsafePointer () ;
-    // const cEnumAssociatedValues_propertyKindAST_initializedConstantProperty * ptr = (const cEnumAssociatedValues_propertyKindAST_initializedConstantProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -5266,7 +5153,6 @@ bool GALGAS_propertyKindAST::optional_readOnlyComputedProperty (GALGAS_instructi
   const bool ok = mEnum == kEnum_readOnlyComputedProperty ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty *) unsafePointer () ;
-    // const cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty * ptr = (const cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -5280,7 +5166,6 @@ bool GALGAS_propertyKindAST::optional_writeComputedProperty (GALGAS_instructionL
   const bool ok = mEnum == kEnum_writeComputedProperty ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_propertyKindAST_writeComputedProperty *) unsafePointer () ;
-    // const cEnumAssociatedValues_propertyKindAST_writeComputedProperty * ptr = (const cEnumAssociatedValues_propertyKindAST_writeComputedProperty *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -5368,7 +5253,7 @@ typeComparisonResult GALGAS_propertyKindAST::objectCompare (const GALGAS_propert
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_propertyKindAST ("propertyKindAST",
-                                        NULL) ;
+                                        nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -5379,7 +5264,7 @@ const C_galgas_type_descriptor * GALGAS_propertyKindAST::staticTypeDescriptor (v
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_propertyKindAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_propertyKindAST (*this)) ;
   }
@@ -5393,8 +5278,8 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::extractObject (const GALGAS_objec
                                                               COMMA_LOCATION_ARGS) {
   GALGAS_propertyKindAST result ;
   const GALGAS_propertyKindAST * p = (const GALGAS_propertyKindAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_propertyKindAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyKindAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("propertyKindAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5450,13 +5335,13 @@ mObject (inElement.mProperty_mPropertyName, inElement.mProperty_mType) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_propertyList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_propertyList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_propertyList (mObject.mProperty_mPropertyName, mObject.mProperty_mType COMMA_HERE)) ;
   return result ;
 }
@@ -5521,7 +5406,7 @@ void GALGAS_propertyList::makeAttributesFromObjects (capCollectionElement & outA
                                                      const GALGAS_string & in_mPropertyName,
                                                      const GALGAS_omnibusType & in_mType
                                                      COMMA_LOCATION_ARGS) {
-  cCollectionElement_propertyList * p = NULL ;
+  cCollectionElement_propertyList * p = nullptr ;
   macroMyNew (p, cCollectionElement_propertyList (in_mPropertyName,
                                                   in_mType COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -5535,7 +5420,7 @@ void GALGAS_propertyList::addAssign_operation (const GALGAS_string & inOperand0,
                                                COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -5554,7 +5439,7 @@ void GALGAS_propertyList::setter_append (GALGAS_propertyList_2D_element inElemen
                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -5575,7 +5460,7 @@ void GALGAS_propertyList::setter_insertAtIndex (const GALGAS_string inOperand0,
                                                 COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_propertyList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -5599,7 +5484,7 @@ void GALGAS_propertyList::setter_removeAtIndex (GALGAS_string & outOperand0,
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -5628,7 +5513,7 @@ void GALGAS_propertyList::setter_popFirst (GALGAS_string & outOperand0,
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -5647,7 +5532,7 @@ void GALGAS_propertyList::setter_popLast (GALGAS_string & outOperand0,
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -5666,7 +5551,7 @@ void GALGAS_propertyList::method_first (GALGAS_string & outOperand0,
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -5685,7 +5570,7 @@ void GALGAS_propertyList::method_last (GALGAS_string & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -5753,7 +5638,7 @@ void GALGAS_propertyList::setter_setMPropertyNameAtIndex (GALGAS_string inOperan
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mPropertyName = inOperand ;
@@ -5768,7 +5653,7 @@ GALGAS_string GALGAS_propertyList::getter_mPropertyNameAtIndex (const GALGAS_uin
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
   GALGAS_string result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyList) ;
     result = p->mObject.mProperty_mPropertyName ;
   }
@@ -5782,7 +5667,7 @@ void GALGAS_propertyList::setter_setMTypeAtIndex (GALGAS_omnibusType inOperand,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mType = inOperand ;
@@ -5797,7 +5682,7 @@ GALGAS_omnibusType GALGAS_propertyList::getter_mTypeAtIndex (const GALGAS_uint &
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_propertyList * p = (cCollectionElement_propertyList *) attributes.ptr () ;
   GALGAS_omnibusType result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_propertyList) ;
     result = p->mObject.mProperty_mType ;
   }
@@ -5850,7 +5735,7 @@ GALGAS_omnibusType cEnumerator_propertyList::current_mType (LOCATION_ARGS) const
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_propertyList ("propertyList",
-                                     NULL) ;
+                                     nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -5861,7 +5746,7 @@ const C_galgas_type_descriptor * GALGAS_propertyList::staticTypeDescriptor (void
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_propertyList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_propertyList (*this)) ;
   }
@@ -5875,8 +5760,8 @@ GALGAS_propertyList GALGAS_propertyList::extractObject (const GALGAS_object & in
                                                         COMMA_LOCATION_ARGS) {
   GALGAS_propertyList result ;
   const GALGAS_propertyList * p = (const GALGAS_propertyList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_propertyList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("propertyList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -5933,7 +5818,7 @@ bool cSortedListElement_sortedOperandIRList::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cSortedListElement * cSortedListElement_sortedOperandIRList::copy (void) {
-  cSortedListElement * result = NULL ;
+  cSortedListElement * result = nullptr ;
   macroMyNew (result, cSortedListElement_sortedOperandIRList (mObject.mProperty_mOperand, mObject.mProperty_mIndex COMMA_HERE)) ;
   return result ;
 }
@@ -5991,7 +5876,7 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::constructor_sortedListWit
                                                                                         const GALGAS_uint & inOperand1
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_sortedOperandIRList result = constructor_emptySortedList (THERE) ;
-  cSortedListElement * p = NULL ;
+  cSortedListElement * p = nullptr ;
   macroMyNew (p, cSortedListElement_sortedOperandIRList (inOperand0, inOperand1 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
@@ -6006,7 +5891,7 @@ void GALGAS_sortedOperandIRList::addAssign_operation (const GALGAS_objectIR & in
                                                       const GALGAS_uint & inOperand1
                                                       COMMA_LOCATION_ARGS) {
   if (isValid ()) {
-    cSortedListElement * p = NULL ;
+    cSortedListElement * p = nullptr ;
     macroMyNew (p, cSortedListElement_sortedOperandIRList (inOperand0, inOperand1 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
@@ -6034,7 +5919,7 @@ void GALGAS_sortedOperandIRList::setter_popSmallest (GALGAS_objectIR & outOperan
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_sortedOperandIRList * p = (cSortedListElement_sortedOperandIRList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -6053,7 +5938,7 @@ void GALGAS_sortedOperandIRList::setter_popGreatest (GALGAS_objectIR & outOperan
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_sortedOperandIRList * p = (cSortedListElement_sortedOperandIRList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -6072,7 +5957,7 @@ void GALGAS_sortedOperandIRList::method_smallest (GALGAS_objectIR & outOperand0,
   capSortedListElement attributes ;
   smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_sortedOperandIRList * p = (cSortedListElement_sortedOperandIRList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -6091,7 +5976,7 @@ void GALGAS_sortedOperandIRList::method_greatest (GALGAS_objectIR & outOperand0,
   capSortedListElement attributes ;
   greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_sortedOperandIRList * p = (cSortedListElement_sortedOperandIRList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -6143,7 +6028,7 @@ GALGAS_uint cEnumerator_sortedOperandIRList::current_mIndex (LOCATION_ARGS) cons
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_sortedOperandIRList ("sortedOperandIRList",
-                                            NULL) ;
+                                            nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -6154,7 +6039,7 @@ const C_galgas_type_descriptor * GALGAS_sortedOperandIRList::staticTypeDescripto
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_sortedOperandIRList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_sortedOperandIRList (*this)) ;
   }
@@ -6168,8 +6053,8 @@ GALGAS_sortedOperandIRList GALGAS_sortedOperandIRList::extractObject (const GALG
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_sortedOperandIRList result ;
   const GALGAS_sortedOperandIRList * p = (const GALGAS_sortedOperandIRList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sortedOperandIRList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_sortedOperandIRList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("sortedOperandIRList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6217,7 +6102,7 @@ typeComparisonResult GALGAS_userLLVMSructureTypeDefinitionIR::objectCompare (con
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -6259,7 +6144,7 @@ GALGAS_userLLVMSructureTypeDefinitionIR GALGAS_userLLVMSructureTypeDefinitionIR:
 
 void GALGAS_userLLVMSructureTypeDefinitionIR::setter_setMPropertyList (GALGAS_propertyList inValue
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_userLLVMSructureTypeDefinitionIR * p = (cPtr_userLLVMSructureTypeDefinitionIR *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_userLLVMSructureTypeDefinitionIR) ;
     p->mProperty_mPropertyList = inValue ;
@@ -6269,7 +6154,7 @@ void GALGAS_userLLVMSructureTypeDefinitionIR::setter_setMPropertyList (GALGAS_pr
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_propertyList GALGAS_userLLVMSructureTypeDefinitionIR::readProperty_mPropertyList (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_propertyList () ;
   }else{
     cPtr_userLLVMSructureTypeDefinitionIR * p = (cPtr_userLLVMSructureTypeDefinitionIR *) mObjectPtr ;
@@ -6307,7 +6192,7 @@ void cPtr_userLLVMSructureTypeDefinitionIR::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_userLLVMSructureTypeDefinitionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_userLLVMSructureTypeDefinitionIR (mProperty_mLLVMDefinedTypeName, mProperty_mPropertyList COMMA_THERE)) ;
   return ptr ;
 }
@@ -6332,7 +6217,7 @@ const C_galgas_type_descriptor * GALGAS_userLLVMSructureTypeDefinitionIR::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_userLLVMSructureTypeDefinitionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_userLLVMSructureTypeDefinitionIR (*this)) ;
   }
@@ -6346,8 +6231,8 @@ GALGAS_userLLVMSructureTypeDefinitionIR GALGAS_userLLVMSructureTypeDefinitionIR:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_userLLVMSructureTypeDefinitionIR result ;
   const GALGAS_userLLVMSructureTypeDefinitionIR * p = (const GALGAS_userLLVMSructureTypeDefinitionIR *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_userLLVMSructureTypeDefinitionIR *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_userLLVMSructureTypeDefinitionIR *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("userLLVMSructureTypeDefinitionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6385,9 +6270,9 @@ GALGAS_userLLVMTypeDefinitionIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak & GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak::operator = (const GALGAS_userLLVMSructureTypeDefinitionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -6412,9 +6297,9 @@ GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak GALGAS_userLLVMSructureTypeDefin
 
 GALGAS_userLLVMSructureTypeDefinitionIR GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak::bang_userLLVMSructureTypeDefinitionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_userLLVMSructureTypeDefinitionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_userLLVMSructureTypeDefinitionIR) ;
@@ -6443,7 +6328,7 @@ const C_galgas_type_descriptor * GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak (*this)) ;
   }
@@ -6457,8 +6342,8 @@ GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak GALGAS_userLLVMSructureTypeDefin
                                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak result ;
   const GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak * p = (const GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_userLLVMSructureTypeDefinitionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("userLLVMSructureTypeDefinitionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6496,9 +6381,9 @@ GALGAS_abstractAssignmentOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_structureAssignmentOperatorUsage_2D_weak & GALGAS_structureAssignmentOperatorUsage_2D_weak::operator = (const GALGAS_structureAssignmentOperatorUsage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -6523,9 +6408,9 @@ GALGAS_structureAssignmentOperatorUsage_2D_weak GALGAS_structureAssignmentOperat
 
 GALGAS_structureAssignmentOperatorUsage GALGAS_structureAssignmentOperatorUsage_2D_weak::bang_structureAssignmentOperatorUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_structureAssignmentOperatorUsage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_structureAssignmentOperatorUsage) ;
@@ -6554,7 +6439,7 @@ const C_galgas_type_descriptor * GALGAS_structureAssignmentOperatorUsage_2D_weak
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_structureAssignmentOperatorUsage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_structureAssignmentOperatorUsage_2D_weak (*this)) ;
   }
@@ -6568,8 +6453,8 @@ GALGAS_structureAssignmentOperatorUsage_2D_weak GALGAS_structureAssignmentOperat
                                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_structureAssignmentOperatorUsage_2D_weak result ;
   const GALGAS_structureAssignmentOperatorUsage_2D_weak * p = (const GALGAS_structureAssignmentOperatorUsage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structureAssignmentOperatorUsage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_structureAssignmentOperatorUsage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("structureAssignmentOperatorUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6607,9 +6492,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_structureTypeAssignFunctionIR_2D_weak & GALGAS_structureTypeAssignFunctionIR_2D_weak::operator = (const GALGAS_structureTypeAssignFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -6634,9 +6519,9 @@ GALGAS_structureTypeAssignFunctionIR_2D_weak GALGAS_structureTypeAssignFunctionI
 
 GALGAS_structureTypeAssignFunctionIR GALGAS_structureTypeAssignFunctionIR_2D_weak::bang_structureTypeAssignFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_structureTypeAssignFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_structureTypeAssignFunctionIR) ;
@@ -6665,7 +6550,7 @@ const C_galgas_type_descriptor * GALGAS_structureTypeAssignFunctionIR_2D_weak::s
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_structureTypeAssignFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_structureTypeAssignFunctionIR_2D_weak (*this)) ;
   }
@@ -6679,8 +6564,8 @@ GALGAS_structureTypeAssignFunctionIR_2D_weak GALGAS_structureTypeAssignFunctionI
                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_structureTypeAssignFunctionIR_2D_weak result ;
   const GALGAS_structureTypeAssignFunctionIR_2D_weak * p = (const GALGAS_structureTypeAssignFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_structureTypeAssignFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_structureTypeAssignFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("structureTypeAssignFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6718,9 +6603,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_syncDeclarationAST_2D_weak & GALGAS_syncDeclarationAST_2D_weak::operator = (const GALGAS_syncDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -6745,9 +6630,9 @@ GALGAS_syncDeclarationAST_2D_weak GALGAS_syncDeclarationAST_2D_weak::constructor
 
 GALGAS_syncDeclarationAST GALGAS_syncDeclarationAST_2D_weak::bang_syncDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_syncDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_syncDeclarationAST) ;
@@ -6776,7 +6661,7 @@ const C_galgas_type_descriptor * GALGAS_syncDeclarationAST_2D_weak::staticTypeDe
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_syncDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_syncDeclarationAST_2D_weak (*this)) ;
   }
@@ -6790,8 +6675,8 @@ GALGAS_syncDeclarationAST_2D_weak GALGAS_syncDeclarationAST_2D_weak::extractObje
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_syncDeclarationAST_2D_weak result ;
   const GALGAS_syncDeclarationAST_2D_weak * p = (const GALGAS_syncDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_syncDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_syncDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("syncDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -6840,7 +6725,7 @@ typeComparisonResult GALGAS_integerDeclarationAST::objectCompare (const GALGAS_i
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -6882,7 +6767,7 @@ GALGAS_integerDeclarationAST GALGAS_integerDeclarationAST::constructor_new (cons
 
 void GALGAS_integerDeclarationAST::setter_setMIsSigned (GALGAS_bool inValue
                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_integerDeclarationAST * p = (cPtr_integerDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_integerDeclarationAST) ;
     p->mProperty_mIsSigned = inValue ;
@@ -6893,7 +6778,7 @@ void GALGAS_integerDeclarationAST::setter_setMIsSigned (GALGAS_bool inValue
 
 void GALGAS_integerDeclarationAST::setter_setMSize (GALGAS_uint inValue
                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_integerDeclarationAST * p = (cPtr_integerDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_integerDeclarationAST) ;
     p->mProperty_mSize = inValue ;
@@ -6903,7 +6788,7 @@ void GALGAS_integerDeclarationAST::setter_setMSize (GALGAS_uint inValue
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_bool GALGAS_integerDeclarationAST::readProperty_mIsSigned (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_bool () ;
   }else{
     cPtr_integerDeclarationAST * p = (cPtr_integerDeclarationAST *) mObjectPtr ;
@@ -6915,7 +6800,7 @@ GALGAS_bool GALGAS_integerDeclarationAST::readProperty_mIsSigned (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_uint GALGAS_integerDeclarationAST::readProperty_mSize (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_uint () ;
   }else{
     cPtr_integerDeclarationAST * p = (cPtr_integerDeclarationAST *) mObjectPtr ;
@@ -6954,7 +6839,7 @@ void cPtr_integerDeclarationAST::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_integerDeclarationAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_integerDeclarationAST (mProperty_mIsSigned, mProperty_mSize COMMA_THERE)) ;
   return ptr ;
 }
@@ -6979,7 +6864,7 @@ const C_galgas_type_descriptor * GALGAS_integerDeclarationAST::staticTypeDescrip
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_integerDeclarationAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_integerDeclarationAST (*this)) ;
   }
@@ -6993,8 +6878,8 @@ GALGAS_integerDeclarationAST GALGAS_integerDeclarationAST::extractObject (const 
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_integerDeclarationAST result ;
   const GALGAS_integerDeclarationAST * p = (const GALGAS_integerDeclarationAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_integerDeclarationAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_integerDeclarationAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("integerDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7032,9 +6917,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_integerDeclarationAST_2D_weak & GALGAS_integerDeclarationAST_2D_weak::operator = (const GALGAS_integerDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -7059,9 +6944,9 @@ GALGAS_integerDeclarationAST_2D_weak GALGAS_integerDeclarationAST_2D_weak::const
 
 GALGAS_integerDeclarationAST GALGAS_integerDeclarationAST_2D_weak::bang_integerDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_integerDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_integerDeclarationAST) ;
@@ -7090,7 +6975,7 @@ const C_galgas_type_descriptor * GALGAS_integerDeclarationAST_2D_weak::staticTyp
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_integerDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_integerDeclarationAST_2D_weak (*this)) ;
   }
@@ -7104,8 +6989,8 @@ GALGAS_integerDeclarationAST_2D_weak GALGAS_integerDeclarationAST_2D_weak::extra
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_integerDeclarationAST_2D_weak result ;
   const GALGAS_integerDeclarationAST_2D_weak * p = (const GALGAS_integerDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_integerDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_integerDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("integerDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7187,7 +7072,7 @@ typeComparisonResult GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operator
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -7227,7 +7112,7 @@ GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineIn
 
 void GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::setter_setMLLVMOperation (GALGAS_string inValue
                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage) ;
     p->mProperty_mLLVMOperation = inValue ;
@@ -7237,7 +7122,7 @@ void GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::setter_se
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_string GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::readProperty_mLLVMOperation (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_string () ;
   }else{
     cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) mObjectPtr ;
@@ -7272,7 +7157,7 @@ void cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::description
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (mProperty_mLLVMOperation COMMA_THERE)) ;
   return ptr ;
 }
@@ -7297,7 +7182,7 @@ const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (*this)) ;
   }
@@ -7311,8 +7196,8 @@ GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineIn
                                                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage result ;
   const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage * p = (const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("inlineInfix_integer_compileTimeInt_operatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7350,9 +7235,9 @@ GALGAS_omnibusInfixOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak & GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak::operator = (const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -7377,9 +7262,9 @@ GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak GALGAS_
 
 GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak::bang_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage) ;
@@ -7408,7 +7293,7 @@ const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak (*this)) ;
   }
@@ -7422,8 +7307,8 @@ GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak GALGAS_
                                                                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak result ;
   const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak * p = (const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("inlineInfix_integer_compileTimeInt_operatorUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7468,7 +7353,7 @@ typeComparisonResult GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operator
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -7508,7 +7393,7 @@ GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineIn
 
 void GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::setter_setMLLVMOperation (GALGAS_string inValue
                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
     p->mProperty_mLLVMOperation = inValue ;
@@ -7518,7 +7403,7 @@ void GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::setter_se
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_string GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::readProperty_mLLVMOperation (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_string () ;
   }else{
     cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) mObjectPtr ;
@@ -7553,7 +7438,7 @@ void cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::description
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (mProperty_mLLVMOperation COMMA_THERE)) ;
   return ptr ;
 }
@@ -7578,7 +7463,7 @@ const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (*this)) ;
   }
@@ -7592,8 +7477,8 @@ GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineIn
                                                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage result ;
   const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage * p = (const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("inlineInfix_compileTimeInt_integer_operatorUsage", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7631,9 +7516,9 @@ GALGAS_omnibusInfixOperatorUsage_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak & GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak::operator = (const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -7658,9 +7543,9 @@ GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak GALGAS_
 
 GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak::bang_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
@@ -7689,7 +7574,7 @@ const C_galgas_type_descriptor * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak (*this)) ;
   }
@@ -7703,8 +7588,8 @@ GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak GALGAS_
                                                                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak result ;
   const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak * p = (const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("inlineInfix_compileTimeInt_integer_operatorUsage-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7742,9 +7627,9 @@ GALGAS_abstractRoutineIR_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_integerBuiltinFunctionIR_2D_weak & GALGAS_integerBuiltinFunctionIR_2D_weak::operator = (const GALGAS_integerBuiltinFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -7769,9 +7654,9 @@ GALGAS_integerBuiltinFunctionIR_2D_weak GALGAS_integerBuiltinFunctionIR_2D_weak:
 
 GALGAS_integerBuiltinFunctionIR GALGAS_integerBuiltinFunctionIR_2D_weak::bang_integerBuiltinFunctionIR_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_integerBuiltinFunctionIR result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_integerBuiltinFunctionIR) ;
@@ -7800,7 +7685,7 @@ const C_galgas_type_descriptor * GALGAS_integerBuiltinFunctionIR_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_integerBuiltinFunctionIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_integerBuiltinFunctionIR_2D_weak (*this)) ;
   }
@@ -7814,8 +7699,8 @@ GALGAS_integerBuiltinFunctionIR_2D_weak GALGAS_integerBuiltinFunctionIR_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_integerBuiltinFunctionIR_2D_weak result ;
   const GALGAS_integerBuiltinFunctionIR_2D_weak * p = (const GALGAS_integerBuiltinFunctionIR_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_integerBuiltinFunctionIR_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_integerBuiltinFunctionIR_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("integerBuiltinFunctionIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7853,7 +7738,7 @@ typeComparisonResult GALGAS_literalStringDeclarationAST::objectCompare (const GA
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -7907,7 +7792,7 @@ void cPtr_literalStringDeclarationAST::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_literalStringDeclarationAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_literalStringDeclarationAST (THERE)) ;
   return ptr ;
 }
@@ -7932,7 +7817,7 @@ const C_galgas_type_descriptor * GALGAS_literalStringDeclarationAST::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_literalStringDeclarationAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_literalStringDeclarationAST (*this)) ;
   }
@@ -7946,8 +7831,8 @@ GALGAS_literalStringDeclarationAST GALGAS_literalStringDeclarationAST::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_literalStringDeclarationAST result ;
   const GALGAS_literalStringDeclarationAST * p = (const GALGAS_literalStringDeclarationAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_literalStringDeclarationAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_literalStringDeclarationAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("literalStringDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -7985,9 +7870,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_literalStringDeclarationAST_2D_weak & GALGAS_literalStringDeclarationAST_2D_weak::operator = (const GALGAS_literalStringDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -8012,9 +7897,9 @@ GALGAS_literalStringDeclarationAST_2D_weak GALGAS_literalStringDeclarationAST_2D
 
 GALGAS_literalStringDeclarationAST GALGAS_literalStringDeclarationAST_2D_weak::bang_literalStringDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_literalStringDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_literalStringDeclarationAST) ;
@@ -8043,7 +7928,7 @@ const C_galgas_type_descriptor * GALGAS_literalStringDeclarationAST_2D_weak::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_literalStringDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_literalStringDeclarationAST_2D_weak (*this)) ;
   }
@@ -8057,8 +7942,8 @@ GALGAS_literalStringDeclarationAST_2D_weak GALGAS_literalStringDeclarationAST_2D
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_literalStringDeclarationAST_2D_weak result ;
   const GALGAS_literalStringDeclarationAST_2D_weak * p = (const GALGAS_literalStringDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_literalStringDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_literalStringDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("literalStringDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -8096,9 +7981,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_typeOpaqueDeclarationAST_2D_weak & GALGAS_typeOpaqueDeclarationAST_2D_weak::operator = (const GALGAS_typeOpaqueDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -8123,9 +8008,9 @@ GALGAS_typeOpaqueDeclarationAST_2D_weak GALGAS_typeOpaqueDeclarationAST_2D_weak:
 
 GALGAS_typeOpaqueDeclarationAST GALGAS_typeOpaqueDeclarationAST_2D_weak::bang_typeOpaqueDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_typeOpaqueDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_typeOpaqueDeclarationAST) ;
@@ -8154,7 +8039,7 @@ const C_galgas_type_descriptor * GALGAS_typeOpaqueDeclarationAST_2D_weak::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_typeOpaqueDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_typeOpaqueDeclarationAST_2D_weak (*this)) ;
   }
@@ -8168,8 +8053,8 @@ GALGAS_typeOpaqueDeclarationAST_2D_weak GALGAS_typeOpaqueDeclarationAST_2D_weak:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_typeOpaqueDeclarationAST_2D_weak result ;
   const GALGAS_typeOpaqueDeclarationAST_2D_weak * p = (const GALGAS_typeOpaqueDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_typeOpaqueDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_typeOpaqueDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("typeOpaqueDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -8250,7 +8135,7 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterKind::constructor_registerArray
   GALGAS_controlRegisterKind result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
     result.mEnum = kEnum_registerArray ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_controlRegisterKind_registerArray (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2, inAssociatedValue3 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -8299,7 +8184,6 @@ bool GALGAS_controlRegisterKind::optional_registerArray (GALGAS_expressionAST & 
   const bool ok = mEnum == kEnum_registerArray ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_controlRegisterKind_registerArray *) unsafePointer () ;
-    // const cEnumAssociatedValues_controlRegisterKind_registerArray * ptr = (const cEnumAssociatedValues_controlRegisterKind_registerArray *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
@@ -8361,7 +8245,7 @@ typeComparisonResult GALGAS_controlRegisterKind::objectCompare (const GALGAS_con
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterKind ("controlRegisterKind",
-                                            NULL) ;
+                                            nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -8372,7 +8256,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterKind::staticTypeDescripto
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterKind::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterKind (*this)) ;
   }
@@ -8386,8 +8270,8 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterKind::extractObject (const GALG
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterKind result ;
   const GALGAS_controlRegisterKind * p = (const GALGAS_controlRegisterKind *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterKind *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterKind *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -8449,13 +8333,13 @@ mObject (inElement.mProperty_mRegisterName, inElement.mProperty_mControlRegister
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_controlRegisterNameListAST::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_controlRegisterNameListAST::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_controlRegisterNameListAST (mObject.mProperty_mRegisterName, mObject.mProperty_mControlRegisterKind, mObject.mProperty_mIsReadOnly, mObject.mProperty_mRegisterOffset, mObject.mProperty_mRegisterOffsetLocation COMMA_HERE)) ;
   return result ;
 }
@@ -8538,7 +8422,7 @@ void GALGAS_controlRegisterNameListAST::makeAttributesFromObjects (capCollection
                                                                    const GALGAS_expressionAST & in_mRegisterOffset,
                                                                    const GALGAS_location & in_mRegisterOffsetLocation
                                                                    COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterNameListAST * p = NULL ;
+  cCollectionElement_controlRegisterNameListAST * p = nullptr ;
   macroMyNew (p, cCollectionElement_controlRegisterNameListAST (in_mRegisterName,
                                                                 in_mControlRegisterKind,
                                                                 in_mIsReadOnly,
@@ -8558,7 +8442,7 @@ void GALGAS_controlRegisterNameListAST::addAssign_operation (const GALGAS_lstrin
                                                              COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterNameListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -8577,7 +8461,7 @@ void GALGAS_controlRegisterNameListAST::setter_append (GALGAS_controlRegisterNam
                                                        COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterNameListAST (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -8601,7 +8485,7 @@ void GALGAS_controlRegisterNameListAST::setter_insertAtIndex (const GALGAS_lstri
                                                               COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterNameListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -8628,7 +8512,7 @@ void GALGAS_controlRegisterNameListAST::setter_removeAtIndex (GALGAS_lstring & o
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         outOperand2.drop () ;
@@ -8672,7 +8556,7 @@ void GALGAS_controlRegisterNameListAST::setter_popFirst (GALGAS_lstring & outOpe
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -8700,7 +8584,7 @@ void GALGAS_controlRegisterNameListAST::setter_popLast (GALGAS_lstring & outOper
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -8728,7 +8612,7 @@ void GALGAS_controlRegisterNameListAST::method_first (GALGAS_lstring & outOperan
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -8756,7 +8640,7 @@ void GALGAS_controlRegisterNameListAST::method_last (GALGAS_lstring & outOperand
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -8830,7 +8714,7 @@ void GALGAS_controlRegisterNameListAST::setter_setMRegisterNameAtIndex (GALGAS_l
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterName = inOperand ;
@@ -8845,7 +8729,7 @@ GALGAS_lstring GALGAS_controlRegisterNameListAST::getter_mRegisterNameAtIndex (c
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     result = p->mObject.mProperty_mRegisterName ;
   }
@@ -8859,7 +8743,7 @@ void GALGAS_controlRegisterNameListAST::setter_setMControlRegisterKindAtIndex (G
                                                                                C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mControlRegisterKind = inOperand ;
@@ -8874,7 +8758,7 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterNameListAST::getter_mControlReg
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
   GALGAS_controlRegisterKind result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     result = p->mObject.mProperty_mControlRegisterKind ;
   }
@@ -8888,7 +8772,7 @@ void GALGAS_controlRegisterNameListAST::setter_setMIsReadOnlyAtIndex (GALGAS_boo
                                                                       C_Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mIsReadOnly = inOperand ;
@@ -8903,7 +8787,7 @@ GALGAS_bool GALGAS_controlRegisterNameListAST::getter_mIsReadOnlyAtIndex (const 
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
   GALGAS_bool result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     result = p->mObject.mProperty_mIsReadOnly ;
   }
@@ -8917,7 +8801,7 @@ void GALGAS_controlRegisterNameListAST::setter_setMRegisterOffsetAtIndex (GALGAS
                                                                           C_Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterOffset = inOperand ;
@@ -8932,7 +8816,7 @@ GALGAS_expressionAST GALGAS_controlRegisterNameListAST::getter_mRegisterOffsetAt
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
   GALGAS_expressionAST result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     result = p->mObject.mProperty_mRegisterOffset ;
   }
@@ -8946,7 +8830,7 @@ void GALGAS_controlRegisterNameListAST::setter_setMRegisterOffsetLocationAtIndex
                                                                                   C_Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterOffsetLocation = inOperand ;
@@ -8961,7 +8845,7 @@ GALGAS_location GALGAS_controlRegisterNameListAST::getter_mRegisterOffsetLocatio
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterNameListAST * p = (cCollectionElement_controlRegisterNameListAST *) attributes.ptr () ;
   GALGAS_location result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterNameListAST) ;
     result = p->mObject.mProperty_mRegisterOffsetLocation ;
   }
@@ -9038,7 +8922,7 @@ GALGAS_location cEnumerator_controlRegisterNameListAST::current_mRegisterOffsetL
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterNameListAST ("controlRegisterNameListAST",
-                                                   NULL) ;
+                                                   nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -9049,7 +8933,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterNameListAST::staticTypeDe
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterNameListAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterNameListAST (*this)) ;
   }
@@ -9063,8 +8947,8 @@ GALGAS_controlRegisterNameListAST GALGAS_controlRegisterNameListAST::extractObje
                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterNameListAST result ;
   const GALGAS_controlRegisterNameListAST * p = (const GALGAS_controlRegisterNameListAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterNameListAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterNameListAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterNameListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -9124,13 +9008,13 @@ mObject (inElement.mProperty_mRegisterArrayList, inElement.mProperty_mRegisterTy
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_controlRegisterDeclarationList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_controlRegisterDeclarationList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_controlRegisterDeclarationList (mObject.mProperty_mRegisterArrayList, mObject.mProperty_mRegisterTypeName, mObject.mProperty_mRegisterBitSliceList, mObject.mProperty_mRegisterBitSliceListLocation COMMA_HERE)) ;
   return result ;
 }
@@ -9207,7 +9091,7 @@ void GALGAS_controlRegisterDeclarationList::makeAttributesFromObjects (capCollec
                                                                        const GALGAS_controlRegisterBitSliceList & in_mRegisterBitSliceList,
                                                                        const GALGAS_location & in_mRegisterBitSliceListLocation
                                                                        COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterDeclarationList * p = NULL ;
+  cCollectionElement_controlRegisterDeclarationList * p = nullptr ;
   macroMyNew (p, cCollectionElement_controlRegisterDeclarationList (in_mRegisterArrayList,
                                                                     in_mRegisterTypeName,
                                                                     in_mRegisterBitSliceList,
@@ -9225,7 +9109,7 @@ void GALGAS_controlRegisterDeclarationList::addAssign_operation (const GALGAS_co
                                                                  COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9244,7 +9128,7 @@ void GALGAS_controlRegisterDeclarationList::setter_append (GALGAS_controlRegiste
                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterDeclarationList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9267,7 +9151,7 @@ void GALGAS_controlRegisterDeclarationList::setter_insertAtIndex (const GALGAS_c
                                                                   COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterDeclarationList (inOperand0, inOperand1, inOperand2, inOperand3 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9293,7 +9177,7 @@ void GALGAS_controlRegisterDeclarationList::setter_removeAtIndex (GALGAS_control
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         outOperand2.drop () ;
@@ -9332,7 +9216,7 @@ void GALGAS_controlRegisterDeclarationList::setter_popFirst (GALGAS_controlRegis
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -9357,7 +9241,7 @@ void GALGAS_controlRegisterDeclarationList::setter_popLast (GALGAS_controlRegist
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -9382,7 +9266,7 @@ void GALGAS_controlRegisterDeclarationList::method_first (GALGAS_controlRegister
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -9407,7 +9291,7 @@ void GALGAS_controlRegisterDeclarationList::method_last (GALGAS_controlRegisterN
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -9479,7 +9363,7 @@ void GALGAS_controlRegisterDeclarationList::setter_setMRegisterArrayListAtIndex 
                                                                                  C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterArrayList = inOperand ;
@@ -9494,7 +9378,7 @@ GALGAS_controlRegisterNameListAST GALGAS_controlRegisterDeclarationList::getter_
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
   GALGAS_controlRegisterNameListAST result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     result = p->mObject.mProperty_mRegisterArrayList ;
   }
@@ -9508,7 +9392,7 @@ void GALGAS_controlRegisterDeclarationList::setter_setMRegisterTypeNameAtIndex (
                                                                                 C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterTypeName = inOperand ;
@@ -9523,7 +9407,7 @@ GALGAS_lstring GALGAS_controlRegisterDeclarationList::getter_mRegisterTypeNameAt
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     result = p->mObject.mProperty_mRegisterTypeName ;
   }
@@ -9537,7 +9421,7 @@ void GALGAS_controlRegisterDeclarationList::setter_setMRegisterBitSliceListAtInd
                                                                                     C_Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterBitSliceList = inOperand ;
@@ -9552,7 +9436,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterDeclarationList::getter
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
   GALGAS_controlRegisterBitSliceList result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     result = p->mObject.mProperty_mRegisterBitSliceList ;
   }
@@ -9566,7 +9450,7 @@ void GALGAS_controlRegisterDeclarationList::setter_setMRegisterBitSliceListLocat
                                                                                             C_Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterBitSliceListLocation = inOperand ;
@@ -9581,7 +9465,7 @@ GALGAS_location GALGAS_controlRegisterDeclarationList::getter_mRegisterBitSliceL
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterDeclarationList * p = (cCollectionElement_controlRegisterDeclarationList *) attributes.ptr () ;
   GALGAS_location result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterDeclarationList) ;
     result = p->mObject.mProperty_mRegisterBitSliceListLocation ;
   }
@@ -9650,7 +9534,7 @@ GALGAS_location cEnumerator_controlRegisterDeclarationList::current_mRegisterBit
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterDeclarationList ("controlRegisterDeclarationList",
-                                                       NULL) ;
+                                                       nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -9661,7 +9545,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterDeclarationList::staticTy
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterDeclarationList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterDeclarationList (*this)) ;
   }
@@ -9675,8 +9559,8 @@ GALGAS_controlRegisterDeclarationList GALGAS_controlRegisterDeclarationList::ext
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterDeclarationList result ;
   const GALGAS_controlRegisterDeclarationList * p = (const GALGAS_controlRegisterDeclarationList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterDeclarationList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterDeclarationList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterDeclarationList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -9730,13 +9614,13 @@ mObject (inElement.mProperty_mRegisterBitSlice) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_controlRegisterBitSliceList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_controlRegisterBitSliceList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_controlRegisterBitSliceList (mObject.mProperty_mRegisterBitSlice COMMA_HERE)) ;
   return result ;
 }
@@ -9795,7 +9679,7 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::construct
 void GALGAS_controlRegisterBitSliceList::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                                     const GALGAS_controlRegisterBitSlice & in_mRegisterBitSlice
                                                                     COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterBitSliceList * p = NULL ;
+  cCollectionElement_controlRegisterBitSliceList * p = nullptr ;
   macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (in_mRegisterBitSlice COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
   macroDetachSharedObject (p) ;
@@ -9807,7 +9691,7 @@ void GALGAS_controlRegisterBitSliceList::addAssign_operation (const GALGAS_contr
                                                               COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9826,7 +9710,7 @@ void GALGAS_controlRegisterBitSliceList::setter_append (GALGAS_controlRegisterBi
                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9846,7 +9730,7 @@ void GALGAS_controlRegisterBitSliceList::setter_insertAtIndex (const GALGAS_cont
                                                                COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterBitSliceList (inOperand0 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -9869,7 +9753,7 @@ void GALGAS_controlRegisterBitSliceList::setter_removeAtIndex (GALGAS_controlReg
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         drop () ;
       }else{
@@ -9893,7 +9777,7 @@ void GALGAS_controlRegisterBitSliceList::setter_popFirst (GALGAS_controlRegister
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
@@ -9909,7 +9793,7 @@ void GALGAS_controlRegisterBitSliceList::setter_popLast (GALGAS_controlRegisterB
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
@@ -9925,7 +9809,7 @@ void GALGAS_controlRegisterBitSliceList::method_first (GALGAS_controlRegisterBit
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
@@ -9941,7 +9825,7 @@ void GALGAS_controlRegisterBitSliceList::method_last (GALGAS_controlRegisterBitS
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
   }else{
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
@@ -10007,7 +9891,7 @@ void GALGAS_controlRegisterBitSliceList::setter_setMRegisterBitSliceAtIndex (GAL
                                                                              C_Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterBitSlice = inOperand ;
@@ -10022,7 +9906,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSliceList::getter_mRegis
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterBitSliceList * p = (cCollectionElement_controlRegisterBitSliceList *) attributes.ptr () ;
   GALGAS_controlRegisterBitSlice result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterBitSliceList) ;
     result = p->mObject.mProperty_mRegisterBitSlice ;
   }
@@ -10067,7 +9951,7 @@ GALGAS_controlRegisterBitSlice cEnumerator_controlRegisterBitSliceList::current_
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSliceList ("controlRegisterBitSliceList",
-                                                    NULL) ;
+                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -10078,7 +9962,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSliceList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterBitSliceList (*this)) ;
   }
@@ -10092,8 +9976,8 @@ GALGAS_controlRegisterBitSliceList GALGAS_controlRegisterBitSliceList::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterBitSliceList result ;
   const GALGAS_controlRegisterBitSliceList * p = (const GALGAS_controlRegisterBitSliceList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterBitSliceList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterBitSliceList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -10180,7 +10064,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_unuse
   GALGAS_controlRegisterBitSlice result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_unusedBits ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -10196,7 +10080,7 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::constructor_named
   GALGAS_controlRegisterBitSlice result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_namedBit ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_controlRegisterBitSlice_namedBit (inAssociatedValue0, inAssociatedValue1 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -10245,7 +10129,6 @@ bool GALGAS_controlRegisterBitSlice::optional_unusedBits (GALGAS_lbigint & outAs
   const bool ok = mEnum == kEnum_unusedBits ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) unsafePointer () ;
-    // const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_unusedBits *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -10258,7 +10141,6 @@ bool GALGAS_controlRegisterBitSlice::optional_namedBit (GALGAS_lstring & outAsso
   const bool ok = mEnum == kEnum_namedBit ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) unsafePointer () ;
-    // const cEnumAssociatedValues_controlRegisterBitSlice_namedBit * ptr = (const cEnumAssociatedValues_controlRegisterBitSlice_namedBit *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
   }
@@ -10318,7 +10200,7 @@ typeComparisonResult GALGAS_controlRegisterBitSlice::objectCompare (const GALGAS
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSlice ("controlRegisterBitSlice",
-                                                NULL) ;
+                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -10329,7 +10211,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterBitSlice::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSlice::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterBitSlice (*this)) ;
   }
@@ -10343,8 +10225,8 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterBitSlice result ;
   const GALGAS_controlRegisterBitSlice * p = (const GALGAS_controlRegisterBitSlice *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSlice *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterBitSlice *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterBitSlice", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -10437,7 +10319,7 @@ GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::construct
   GALGAS_controlRegisterGroupKindAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_single ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_controlRegisterGroupKindAST_single (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -10454,7 +10336,7 @@ GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::construct
   GALGAS_controlRegisterGroupKindAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_groupArray ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -10506,7 +10388,6 @@ bool GALGAS_controlRegisterGroupKindAST::optional_single (GALGAS_lbigint & outAs
   const bool ok = mEnum == kEnum_single ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_controlRegisterGroupKindAST_single *) unsafePointer () ;
-    // const cEnumAssociatedValues_controlRegisterGroupKindAST_single * ptr = (const cEnumAssociatedValues_controlRegisterGroupKindAST_single *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -10520,7 +10401,6 @@ bool GALGAS_controlRegisterGroupKindAST::optional_groupArray (GALGAS_expressionA
   const bool ok = mEnum == kEnum_groupArray ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray *) unsafePointer () ;
-    // const cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray * ptr = (const cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
     outAssociatedValue1 = ptr->mAssociatedValue1 ;
     outAssociatedValue2 = ptr->mAssociatedValue2 ;
@@ -10581,7 +10461,7 @@ typeComparisonResult GALGAS_controlRegisterGroupKindAST::objectCompare (const GA
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterGroupKindAST ("controlRegisterGroupKindAST",
-                                                    NULL) ;
+                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -10592,7 +10472,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterGroupKindAST::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterGroupKindAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterGroupKindAST (*this)) ;
   }
@@ -10606,8 +10486,8 @@ GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupKindAST result ;
   const GALGAS_controlRegisterGroupKindAST * p = (const GALGAS_controlRegisterGroupKindAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterGroupKindAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterGroupKindAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterGroupKindAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -10663,13 +10543,13 @@ mObject (inElement.mProperty_mRegisterGroupName, inElement.mProperty_mControlReg
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_registerGroupListAST::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_registerGroupListAST::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_registerGroupListAST (mObject.mProperty_mRegisterGroupName, mObject.mProperty_mControlRegisterGroupKind COMMA_HERE)) ;
   return result ;
 }
@@ -10734,7 +10614,7 @@ void GALGAS_registerGroupListAST::makeAttributesFromObjects (capCollectionElemen
                                                              const GALGAS_lstring & in_mRegisterGroupName,
                                                              const GALGAS_controlRegisterGroupKindAST & in_mControlRegisterGroupKind
                                                              COMMA_LOCATION_ARGS) {
-  cCollectionElement_registerGroupListAST * p = NULL ;
+  cCollectionElement_registerGroupListAST * p = nullptr ;
   macroMyNew (p, cCollectionElement_registerGroupListAST (in_mRegisterGroupName,
                                                           in_mControlRegisterGroupKind COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -10748,7 +10628,7 @@ void GALGAS_registerGroupListAST::addAssign_operation (const GALGAS_lstring & in
                                                        COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_registerGroupListAST (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -10767,7 +10647,7 @@ void GALGAS_registerGroupListAST::setter_append (GALGAS_registerGroupListAST_2D_
                                                  COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_registerGroupListAST (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -10788,7 +10668,7 @@ void GALGAS_registerGroupListAST::setter_insertAtIndex (const GALGAS_lstring inO
                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_registerGroupListAST (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -10812,7 +10692,7 @@ void GALGAS_registerGroupListAST::setter_removeAtIndex (GALGAS_lstring & outOper
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -10841,7 +10721,7 @@ void GALGAS_registerGroupListAST::setter_popFirst (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -10860,7 +10740,7 @@ void GALGAS_registerGroupListAST::setter_popLast (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -10879,7 +10759,7 @@ void GALGAS_registerGroupListAST::method_first (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -10898,7 +10778,7 @@ void GALGAS_registerGroupListAST::method_last (GALGAS_lstring & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -10966,7 +10846,7 @@ void GALGAS_registerGroupListAST::setter_setMRegisterGroupNameAtIndex (GALGAS_ls
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_registerGroupListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mRegisterGroupName = inOperand ;
@@ -10981,7 +10861,7 @@ GALGAS_lstring GALGAS_registerGroupListAST::getter_mRegisterGroupNameAtIndex (co
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_registerGroupListAST) ;
     result = p->mObject.mProperty_mRegisterGroupName ;
   }
@@ -10995,7 +10875,7 @@ void GALGAS_registerGroupListAST::setter_setMControlRegisterGroupKindAtIndex (GA
                                                                               C_Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) {
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_registerGroupListAST) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mControlRegisterGroupKind = inOperand ;
@@ -11010,7 +10890,7 @@ GALGAS_controlRegisterGroupKindAST GALGAS_registerGroupListAST::getter_mControlR
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_registerGroupListAST * p = (cCollectionElement_registerGroupListAST *) attributes.ptr () ;
   GALGAS_controlRegisterGroupKindAST result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_registerGroupListAST) ;
     result = p->mObject.mProperty_mControlRegisterGroupKind ;
   }
@@ -11063,7 +10943,7 @@ GALGAS_controlRegisterGroupKindAST cEnumerator_registerGroupListAST::current_mCo
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_registerGroupListAST ("registerGroupListAST",
-                                             NULL) ;
+                                             nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -11074,7 +10954,7 @@ const C_galgas_type_descriptor * GALGAS_registerGroupListAST::staticTypeDescript
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_registerGroupListAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_registerGroupListAST (*this)) ;
   }
@@ -11088,8 +10968,8 @@ GALGAS_registerGroupListAST GALGAS_registerGroupListAST::extractObject (const GA
                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_registerGroupListAST result ;
   const GALGAS_registerGroupListAST * p = (const GALGAS_registerGroupListAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerGroupListAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_registerGroupListAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("registerGroupListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -11138,7 +11018,7 @@ typeComparisonResult GALGAS_controlRegisterGroupDeclarationAST::objectCompare (c
     }else if (myObjectPtr > operandObjectPtr) {
       result = kFirstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ; // mObjectPtr->dynamicObjectCompare (inOperand.mObjectPtr) ;
+      result = kOperandEqual ;
     }
   }
   return result ;
@@ -11180,7 +11060,7 @@ GALGAS_controlRegisterGroupDeclarationAST GALGAS_controlRegisterGroupDeclaration
 
 void GALGAS_controlRegisterGroupDeclarationAST::setter_setMRegisterGroupList (GALGAS_registerGroupListAST inValue
                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_controlRegisterGroupDeclarationAST * p = (cPtr_controlRegisterGroupDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_controlRegisterGroupDeclarationAST) ;
     p->mProperty_mRegisterGroupList = inValue ;
@@ -11191,7 +11071,7 @@ void GALGAS_controlRegisterGroupDeclarationAST::setter_setMRegisterGroupList (GA
 
 void GALGAS_controlRegisterGroupDeclarationAST::setter_setMRegisters (GALGAS_controlRegisterDeclarationList inValue
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  if (NULL != mObjectPtr) {
+  if (nullptr != mObjectPtr) {
     cPtr_controlRegisterGroupDeclarationAST * p = (cPtr_controlRegisterGroupDeclarationAST *) mObjectPtr ;
     macroValidSharedObject (p, cPtr_controlRegisterGroupDeclarationAST) ;
     p->mProperty_mRegisters = inValue ;
@@ -11201,7 +11081,7 @@ void GALGAS_controlRegisterGroupDeclarationAST::setter_setMRegisters (GALGAS_con
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_registerGroupListAST GALGAS_controlRegisterGroupDeclarationAST::readProperty_mRegisterGroupList (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_registerGroupListAST () ;
   }else{
     cPtr_controlRegisterGroupDeclarationAST * p = (cPtr_controlRegisterGroupDeclarationAST *) mObjectPtr ;
@@ -11213,7 +11093,7 @@ GALGAS_registerGroupListAST GALGAS_controlRegisterGroupDeclarationAST::readPrope
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_controlRegisterDeclarationList GALGAS_controlRegisterGroupDeclarationAST::readProperty_mRegisters (void) const {
-  if (NULL == mObjectPtr) {
+  if (nullptr == mObjectPtr) {
     return GALGAS_controlRegisterDeclarationList () ;
   }else{
     cPtr_controlRegisterGroupDeclarationAST * p = (cPtr_controlRegisterGroupDeclarationAST *) mObjectPtr ;
@@ -11252,7 +11132,7 @@ void cPtr_controlRegisterGroupDeclarationAST::description (C_String & ioString,
 //----------------------------------------------------------------------------------------------------------------------
 
 acPtr_class * cPtr_controlRegisterGroupDeclarationAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = NULL ;
+  acPtr_class * ptr = nullptr ;
   macroMyNew (ptr, cPtr_controlRegisterGroupDeclarationAST (mProperty_mRegisterGroupList, mProperty_mRegisters COMMA_THERE)) ;
   return ptr ;
 }
@@ -11277,7 +11157,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterGroupDeclarationAST::stat
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterGroupDeclarationAST::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterGroupDeclarationAST (*this)) ;
   }
@@ -11291,8 +11171,8 @@ GALGAS_controlRegisterGroupDeclarationAST GALGAS_controlRegisterGroupDeclaration
                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupDeclarationAST result ;
   const GALGAS_controlRegisterGroupDeclarationAST * p = (const GALGAS_controlRegisterGroupDeclarationAST *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterGroupDeclarationAST *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterGroupDeclarationAST *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterGroupDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -11330,9 +11210,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_controlRegisterGroupDeclarationAST_2D_weak & GALGAS_controlRegisterGroupDeclarationAST_2D_weak::operator = (const GALGAS_controlRegisterGroupDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -11357,9 +11237,9 @@ GALGAS_controlRegisterGroupDeclarationAST_2D_weak GALGAS_controlRegisterGroupDec
 
 GALGAS_controlRegisterGroupDeclarationAST GALGAS_controlRegisterGroupDeclarationAST_2D_weak::bang_controlRegisterGroupDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_controlRegisterGroupDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_controlRegisterGroupDeclarationAST) ;
@@ -11388,7 +11268,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterGroupDeclarationAST_2D_we
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterGroupDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterGroupDeclarationAST_2D_weak (*this)) ;
   }
@@ -11402,8 +11282,8 @@ GALGAS_controlRegisterGroupDeclarationAST_2D_weak GALGAS_controlRegisterGroupDec
                                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupDeclarationAST_2D_weak result ;
   const GALGAS_controlRegisterGroupDeclarationAST_2D_weak * p = (const GALGAS_controlRegisterGroupDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterGroupDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterGroupDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterGroupDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -11459,13 +11339,13 @@ mObject (inElement.mProperty_mFieldBitCount, inElement.mProperty_mFieldName) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_controlRegisterFieldList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_controlRegisterFieldList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_controlRegisterFieldList (mObject.mProperty_mFieldBitCount, mObject.mProperty_mFieldName COMMA_HERE)) ;
   return result ;
 }
@@ -11530,7 +11410,7 @@ void GALGAS_controlRegisterFieldList::makeAttributesFromObjects (capCollectionEl
                                                                  const GALGAS_uint & in_mFieldBitCount,
                                                                  const GALGAS_string & in_mFieldName
                                                                  COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterFieldList * p = NULL ;
+  cCollectionElement_controlRegisterFieldList * p = nullptr ;
   macroMyNew (p, cCollectionElement_controlRegisterFieldList (in_mFieldBitCount,
                                                               in_mFieldName COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -11544,7 +11424,7 @@ void GALGAS_controlRegisterFieldList::addAssign_operation (const GALGAS_uint & i
                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterFieldList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -11563,7 +11443,7 @@ void GALGAS_controlRegisterFieldList::setter_append (GALGAS_controlRegisterField
                                                      COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterFieldList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -11584,7 +11464,7 @@ void GALGAS_controlRegisterFieldList::setter_insertAtIndex (const GALGAS_uint in
                                                             COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterFieldList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -11608,7 +11488,7 @@ void GALGAS_controlRegisterFieldList::setter_removeAtIndex (GALGAS_uint & outOpe
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -11637,7 +11517,7 @@ void GALGAS_controlRegisterFieldList::setter_popFirst (GALGAS_uint & outOperand0
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -11656,7 +11536,7 @@ void GALGAS_controlRegisterFieldList::setter_popLast (GALGAS_uint & outOperand0,
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -11675,7 +11555,7 @@ void GALGAS_controlRegisterFieldList::method_first (GALGAS_uint & outOperand0,
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -11694,7 +11574,7 @@ void GALGAS_controlRegisterFieldList::method_last (GALGAS_uint & outOperand0,
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -11762,7 +11642,7 @@ void GALGAS_controlRegisterFieldList::setter_setMFieldBitCountAtIndex (GALGAS_ui
                                                                        C_Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterFieldList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mFieldBitCount = inOperand ;
@@ -11777,7 +11657,7 @@ GALGAS_uint GALGAS_controlRegisterFieldList::getter_mFieldBitCountAtIndex (const
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterFieldList) ;
     result = p->mObject.mProperty_mFieldBitCount ;
   }
@@ -11791,7 +11671,7 @@ void GALGAS_controlRegisterFieldList::setter_setMFieldNameAtIndex (GALGAS_string
                                                                    C_Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterFieldList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mFieldName = inOperand ;
@@ -11806,7 +11686,7 @@ GALGAS_string GALGAS_controlRegisterFieldList::getter_mFieldNameAtIndex (const G
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterFieldList * p = (cCollectionElement_controlRegisterFieldList *) attributes.ptr () ;
   GALGAS_string result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterFieldList) ;
     result = p->mObject.mProperty_mFieldName ;
   }
@@ -11859,7 +11739,7 @@ GALGAS_string cEnumerator_controlRegisterFieldList::current_mFieldName (LOCATION
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterFieldList ("controlRegisterFieldList",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -11870,7 +11750,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterFieldList::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterFieldList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterFieldList (*this)) ;
   }
@@ -11884,8 +11764,8 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterFieldList::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterFieldList result ;
   const GALGAS_controlRegisterFieldList * p = (const GALGAS_controlRegisterFieldList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterFieldList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterFieldList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterFieldList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -11914,7 +11794,7 @@ bool cMapElement_controlRegisterFieldMap::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_controlRegisterFieldMap::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_controlRegisterFieldMap (mProperty_lkey, mProperty_mBitIndex, mProperty_mBitCount COMMA_HERE)) ;
   return result ;
 }
@@ -11998,7 +11878,7 @@ void GALGAS_controlRegisterFieldMap::addAssign_operation (const GALGAS_lstring &
                                                           const GALGAS_uint & inArgument1,
                                                           C_Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterFieldMap * p = NULL ;
+  cMapElement_controlRegisterFieldMap * p = nullptr ;
   macroMyNew (p, cMapElement_controlRegisterFieldMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -12029,7 +11909,7 @@ void GALGAS_controlRegisterFieldMap::setter_insertKey (GALGAS_lstring inKey,
                                                        GALGAS_uint inArgument1,
                                                        C_Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterFieldMap * p = NULL ;
+  cMapElement_controlRegisterFieldMap * p = nullptr ;
   macroMyNew (p, cMapElement_controlRegisterFieldMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -12054,7 +11934,7 @@ void GALGAS_controlRegisterFieldMap::method_searchKey (GALGAS_lstring inKey,
                                                                                                                inCompiler,
                                                                                                                kSearchErrorMessage_controlRegisterFieldMap_searchKey
                                                                                                                COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
   }else{
@@ -12072,7 +11952,7 @@ GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitIndexForKey (const GALGAS
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterFieldMap) ;
     result = p->mProperty_mBitIndex ;
   }
@@ -12087,7 +11967,7 @@ GALGAS_uint GALGAS_controlRegisterFieldMap::getter_mBitCountForKey (const GALGAS
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterFieldMap) ;
     result = p->mProperty_mBitCount ;
   }
@@ -12102,7 +11982,7 @@ void GALGAS_controlRegisterFieldMap::setter_setMBitIndexForKey (GALGAS_uint inAt
                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterFieldMap * p = (cMapElement_controlRegisterFieldMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterFieldMap) ;
     p->mProperty_mBitIndex = inAttributeValue ;
   }
@@ -12116,7 +11996,7 @@ void GALGAS_controlRegisterFieldMap::setter_setMBitCountForKey (GALGAS_uint inAt
                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterFieldMap * p = (cMapElement_controlRegisterFieldMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterFieldMap) ;
     p->mProperty_mBitCount = inAttributeValue ;
   }
@@ -12178,7 +12058,7 @@ bool GALGAS_controlRegisterFieldMap::optional_searchKey (const GALGAS_string & i
                                                          GALGAS_uint & outArgument0,
                                                          GALGAS_uint & outArgument1) const {
   const cMapElement_controlRegisterFieldMap * p = (const cMapElement_controlRegisterFieldMap *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_controlRegisterFieldMap) ;
     outArgument0 = p->mProperty_mBitIndex ;
@@ -12198,7 +12078,7 @@ bool GALGAS_controlRegisterFieldMap::optional_searchKey (const GALGAS_string & i
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterFieldMap ("controlRegisterFieldMap",
-                                                NULL) ;
+                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -12209,7 +12089,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterFieldMap::staticTypeDescr
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterFieldMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterFieldMap (*this)) ;
   }
@@ -12223,8 +12103,8 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterFieldMap::extractObject (co
                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterFieldMap result ;
   const GALGAS_controlRegisterFieldMap * p = (const GALGAS_controlRegisterFieldMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterFieldMap *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterFieldMap *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterFieldMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -12255,7 +12135,7 @@ bool cMapElement_sliceMap::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_sliceMap::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_sliceMap (mProperty_lkey, mProperty_mAccessOperator, mProperty_mAccessRightOperand, mProperty_mResultType COMMA_HERE)) ;
   return result ;
 }
@@ -12347,7 +12227,7 @@ void GALGAS_sliceMap::addAssign_operation (const GALGAS_lstring & inKey,
                                            const GALGAS_omnibusType & inArgument2,
                                            C_Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
-  cMapElement_sliceMap * p = NULL ;
+  cMapElement_sliceMap * p = nullptr ;
   macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -12379,7 +12259,7 @@ void GALGAS_sliceMap::setter_insertKey (GALGAS_lstring inKey,
                                         GALGAS_omnibusType inArgument2,
                                         C_Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) {
-  cMapElement_sliceMap * p = NULL ;
+  cMapElement_sliceMap * p = nullptr ;
   macroMyNew (p, cMapElement_sliceMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -12405,7 +12285,7 @@ void GALGAS_sliceMap::method_searchKey (GALGAS_lstring inKey,
                                                                                  inCompiler,
                                                                                  kSearchErrorMessage_sliceMap_searchKey
                                                                                  COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
@@ -12425,7 +12305,7 @@ GALGAS_llvmBinaryOperation GALGAS_sliceMap::getter_mAccessOperatorForKey (const 
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
   GALGAS_llvmBinaryOperation result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     result = p->mProperty_mAccessOperator ;
   }
@@ -12440,7 +12320,7 @@ GALGAS_bigint GALGAS_sliceMap::getter_mAccessRightOperandForKey (const GALGAS_st
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
   GALGAS_bigint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     result = p->mProperty_mAccessRightOperand ;
   }
@@ -12455,7 +12335,7 @@ GALGAS_omnibusType GALGAS_sliceMap::getter_mResultTypeForKey (const GALGAS_strin
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) attributes ;
   GALGAS_omnibusType result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     result = p->mProperty_mResultType ;
   }
@@ -12470,7 +12350,7 @@ void GALGAS_sliceMap::setter_setMAccessOperatorForKey (GALGAS_llvmBinaryOperatio
                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     p->mProperty_mAccessOperator = inAttributeValue ;
   }
@@ -12484,7 +12364,7 @@ void GALGAS_sliceMap::setter_setMAccessRightOperandForKey (GALGAS_bigint inAttri
                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     p->mProperty_mAccessRightOperand = inAttributeValue ;
   }
@@ -12498,7 +12378,7 @@ void GALGAS_sliceMap::setter_setMResultTypeForKey (GALGAS_omnibusType inAttribut
                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_sliceMap * p = (cMapElement_sliceMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     p->mProperty_mResultType = inAttributeValue ;
   }
@@ -12569,7 +12449,7 @@ bool GALGAS_sliceMap::optional_searchKey (const GALGAS_string & inKey,
                                           GALGAS_bigint & outArgument1,
                                           GALGAS_omnibusType & outArgument2) const {
   const cMapElement_sliceMap * p = (const cMapElement_sliceMap *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_sliceMap) ;
     outArgument0 = p->mProperty_mAccessOperator ;
@@ -12591,7 +12471,7 @@ bool GALGAS_sliceMap::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_sliceMap ("sliceMap",
-                                 NULL) ;
+                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -12602,7 +12482,7 @@ const C_galgas_type_descriptor * GALGAS_sliceMap::staticTypeDescriptor (void) co
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_sliceMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_sliceMap (*this)) ;
   }
@@ -12616,8 +12496,8 @@ GALGAS_sliceMap GALGAS_sliceMap::extractObject (const GALGAS_object & inObject,
                                                 COMMA_LOCATION_ARGS) {
   GALGAS_sliceMap result ;
   const GALGAS_sliceMap * p = (const GALGAS_sliceMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sliceMap *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_sliceMap *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("sliceMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -13286,7 +13166,7 @@ typeComparisonResult GALGAS_llvmBinaryOperation::objectCompare (const GALGAS_llv
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_llvmBinaryOperation ("llvmBinaryOperation",
-                                            NULL) ;
+                                            nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -13297,7 +13177,7 @@ const C_galgas_type_descriptor * GALGAS_llvmBinaryOperation::staticTypeDescripto
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_llvmBinaryOperation::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_llvmBinaryOperation (*this)) ;
   }
@@ -13311,8 +13191,8 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::extractObject (const GALG
                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_llvmBinaryOperation result ;
   const GALGAS_llvmBinaryOperation * p = (const GALGAS_llvmBinaryOperation *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_llvmBinaryOperation *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_llvmBinaryOperation *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("llvmBinaryOperation", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -13390,7 +13270,7 @@ bool cMapElement_controlRegisterMap::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cMapElement * cMapElement_controlRegisterMap::copy (void) {
-  cMapElement * result = NULL ;
+  cMapElement * result = nullptr ;
   macroMyNew (result, cMapElement_controlRegisterMap (mProperty_lkey, mProperty_mType, mProperty_mIsReadOnly, mProperty_mUserAccess, mProperty_mRegisterFieldAccessMap, mProperty_mRegisterFieldMap, mProperty_mAddressOffset, mProperty_mControlRegisterFieldList, mProperty_mRegisterBitCount, mProperty_mArraySize, mProperty_mElementArraySize COMMA_HERE)) ;
   return result ;
 }
@@ -13538,7 +13418,7 @@ void GALGAS_controlRegisterMap::addAssign_operation (const GALGAS_lstring & inKe
                                                      const GALGAS_uint & inArgument9,
                                                      C_Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterMap * p = NULL ;
+  cMapElement_controlRegisterMap * p = nullptr ;
   macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -13577,7 +13457,7 @@ void GALGAS_controlRegisterMap::setter_insertKey (GALGAS_lstring inKey,
                                                   GALGAS_uint inArgument9,
                                                   C_Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterMap * p = NULL ;
+  cMapElement_controlRegisterMap * p = nullptr ;
   macroMyNew (p, cMapElement_controlRegisterMap (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5, inArgument6, inArgument7, inArgument8, inArgument9 COMMA_HERE)) ;
   capCollectionElement attributes ;
   attributes.setPointer (p) ;
@@ -13610,7 +13490,7 @@ void GALGAS_controlRegisterMap::method_searchKey (GALGAS_lstring inKey,
                                                                                                      inCompiler,
                                                                                                      kSearchErrorMessage_controlRegisterMap_searchKey
                                                                                                      COMMA_THERE) ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outArgument0.drop () ;
     outArgument1.drop () ;
     outArgument2.drop () ;
@@ -13644,7 +13524,7 @@ GALGAS_omnibusType GALGAS_controlRegisterMap::getter_mTypeForKey (const GALGAS_s
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_omnibusType result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mType ;
   }
@@ -13659,7 +13539,7 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mIsReadOnlyForKey (const GALGAS_st
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_bool result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mIsReadOnly ;
   }
@@ -13674,7 +13554,7 @@ GALGAS_bool GALGAS_controlRegisterMap::getter_mUserAccessForKey (const GALGAS_st
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_bool result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mUserAccess ;
   }
@@ -13689,7 +13569,7 @@ GALGAS_sliceMap GALGAS_controlRegisterMap::getter_mRegisterFieldAccessMapForKey 
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_sliceMap result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mRegisterFieldAccessMap ;
   }
@@ -13704,7 +13584,7 @@ GALGAS_controlRegisterFieldMap GALGAS_controlRegisterMap::getter_mRegisterFieldM
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_controlRegisterFieldMap result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mRegisterFieldMap ;
   }
@@ -13719,7 +13599,7 @@ GALGAS_bigint GALGAS_controlRegisterMap::getter_mAddressOffsetForKey (const GALG
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_bigint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mAddressOffset ;
   }
@@ -13734,7 +13614,7 @@ GALGAS_controlRegisterFieldList GALGAS_controlRegisterMap::getter_mControlRegist
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_controlRegisterFieldList result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mControlRegisterFieldList ;
   }
@@ -13749,7 +13629,7 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mRegisterBitCountForKey (const GAL
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mRegisterBitCount ;
   }
@@ -13764,7 +13644,7 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mArraySizeForKey (const GALGAS_str
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mArraySize ;
   }
@@ -13779,7 +13659,7 @@ GALGAS_uint GALGAS_controlRegisterMap::getter_mElementArraySizeForKey (const GAL
   const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) attributes ;
   GALGAS_uint result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     result = p->mProperty_mElementArraySize ;
   }
@@ -13794,7 +13674,7 @@ void GALGAS_controlRegisterMap::setter_setMTypeForKey (GALGAS_omnibusType inAttr
                                                        COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mType = inAttributeValue ;
   }
@@ -13808,7 +13688,7 @@ void GALGAS_controlRegisterMap::setter_setMIsReadOnlyForKey (GALGAS_bool inAttri
                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mIsReadOnly = inAttributeValue ;
   }
@@ -13822,7 +13702,7 @@ void GALGAS_controlRegisterMap::setter_setMUserAccessForKey (GALGAS_bool inAttri
                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mUserAccess = inAttributeValue ;
   }
@@ -13836,7 +13716,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterFieldAccessMapForKey (GALGAS_
                                                                          COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mRegisterFieldAccessMap = inAttributeValue ;
   }
@@ -13850,7 +13730,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterFieldMapForKey (GALGAS_contro
                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mRegisterFieldMap = inAttributeValue ;
   }
@@ -13864,7 +13744,7 @@ void GALGAS_controlRegisterMap::setter_setMAddressOffsetForKey (GALGAS_bigint in
                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mAddressOffset = inAttributeValue ;
   }
@@ -13878,7 +13758,7 @@ void GALGAS_controlRegisterMap::setter_setMControlRegisterFieldListForKey (GALGA
                                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mControlRegisterFieldList = inAttributeValue ;
   }
@@ -13892,7 +13772,7 @@ void GALGAS_controlRegisterMap::setter_setMRegisterBitCountForKey (GALGAS_uint i
                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mRegisterBitCount = inAttributeValue ;
   }
@@ -13906,7 +13786,7 @@ void GALGAS_controlRegisterMap::setter_setMArraySizeForKey (GALGAS_uint inAttrib
                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mArraySize = inAttributeValue ;
   }
@@ -13920,7 +13800,7 @@ void GALGAS_controlRegisterMap::setter_setMElementArraySizeForKey (GALGAS_uint i
                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
   cMapElement_controlRegisterMap * p = (cMapElement_controlRegisterMap *) attributes ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     p->mProperty_mElementArraySize = inAttributeValue ;
   }
@@ -14054,7 +13934,7 @@ bool GALGAS_controlRegisterMap::optional_searchKey (const GALGAS_string & inKey,
                                                     GALGAS_uint & outArgument8,
                                                     GALGAS_uint & outArgument9) const {
   const cMapElement_controlRegisterMap * p = (const cMapElement_controlRegisterMap *) searchForKey (inKey) ;
-  const bool result = NULL != p ;
+  const bool result = nullptr != p ;
   if (result) {
     macroValidSharedObject (p, cMapElement_controlRegisterMap) ;
     outArgument0 = p->mProperty_mType ;
@@ -14090,7 +13970,7 @@ bool GALGAS_controlRegisterMap::optional_searchKey (const GALGAS_string & inKey,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterMap ("controlRegisterMap",
-                                           NULL) ;
+                                           nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -14101,7 +13981,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterMap::staticTypeDescriptor
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterMap::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterMap (*this)) ;
   }
@@ -14115,8 +13995,8 @@ GALGAS_controlRegisterMap GALGAS_controlRegisterMap::extractObject (const GALGAS
                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterMap result ;
   const GALGAS_controlRegisterMap * p = (const GALGAS_controlRegisterMap *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterMap *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterMap *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -14197,7 +14077,7 @@ GALGAS_registerGroupKind GALGAS_registerGroupKind::constructor_single (const GAL
   GALGAS_registerGroupKind result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_single ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_registerGroupKind_single (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -14212,7 +14092,7 @@ GALGAS_registerGroupKind GALGAS_registerGroupKind::constructor_arrayGroup (const
   GALGAS_registerGroupKind result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_arrayGroup ;
-    cEnumAssociatedValues * ptr = NULL ;
+    cEnumAssociatedValues * ptr = nullptr ;
     macroMyNew (ptr, cEnumAssociatedValues_registerGroupKind_arrayGroup (inAssociatedValue0 COMMA_THERE)) ;
     result.mAssociatedValues.setPointer (ptr) ;
     macroDetachSharedObject (ptr) ;
@@ -14258,7 +14138,6 @@ bool GALGAS_registerGroupKind::optional_single (GALGAS_bigint & outAssociatedVal
   const bool ok = mEnum == kEnum_single ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_registerGroupKind_single *) unsafePointer () ;
-    // const cEnumAssociatedValues_registerGroupKind_single * ptr = (const cEnumAssociatedValues_registerGroupKind_single *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -14270,7 +14149,6 @@ bool GALGAS_registerGroupKind::optional_arrayGroup (GALGAS_lbigintlist & outAsso
   const bool ok = mEnum == kEnum_arrayGroup ;
   if (ok) {
     const auto * ptr = (const cEnumAssociatedValues_registerGroupKind_arrayGroup *) unsafePointer () ;
-    // const cEnumAssociatedValues_registerGroupKind_arrayGroup * ptr = (const cEnumAssociatedValues_registerGroupKind_arrayGroup *) unsafePointer () ;
     outAssociatedValue0 = ptr->mAssociatedValue0 ;
   }
   return ok ;
@@ -14329,7 +14207,7 @@ typeComparisonResult GALGAS_registerGroupKind::objectCompare (const GALGAS_regis
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_registerGroupKind ("registerGroupKind",
-                                          NULL) ;
+                                          nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -14340,7 +14218,7 @@ const C_galgas_type_descriptor * GALGAS_registerGroupKind::staticTypeDescriptor 
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_registerGroupKind::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_registerGroupKind (*this)) ;
   }
@@ -14354,8 +14232,8 @@ GALGAS_registerGroupKind GALGAS_registerGroupKind::extractObject (const GALGAS_o
                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_registerGroupKind result ;
   const GALGAS_registerGroupKind * p = (const GALGAS_registerGroupKind *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_registerGroupKind *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_registerGroupKind *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("registerGroupKind", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -14393,9 +14271,9 @@ GALGAS_abstractDecoratedDeclaration_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak & GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak::operator = (const GALGAS_decoratedControlRegisterArrayGroupDeclaration & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -14420,9 +14298,9 @@ GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak GALGAS_decoratedCon
 
 GALGAS_decoratedControlRegisterArrayGroupDeclaration GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak::bang_decoratedControlRegisterArrayGroupDeclaration_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_decoratedControlRegisterArrayGroupDeclaration result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_decoratedControlRegisterArrayGroupDeclaration) ;
@@ -14451,7 +14329,7 @@ const C_galgas_type_descriptor * GALGAS_decoratedControlRegisterArrayGroupDeclar
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak (*this)) ;
   }
@@ -14465,8 +14343,8 @@ GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak GALGAS_decoratedCon
                                                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak result ;
   const GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak * p = (const GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_decoratedControlRegisterArrayGroupDeclaration_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("decoratedControlRegisterArrayGroupDeclaration-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -14522,13 +14400,13 @@ mObject (inElement.mProperty_mGroupName, inElement.mProperty_mBaseAddresses) {
 //----------------------------------------------------------------------------------------------------------------------
 
 bool cCollectionElement_controlRegisterGroupArrayList::isValid (void) const {
-  return true ; // return mObject.isValid () ;
+  return true ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement_controlRegisterGroupArrayList::copy (void) {
-  cCollectionElement * result = NULL ;
+  cCollectionElement * result = nullptr ;
   macroMyNew (result, cCollectionElement_controlRegisterGroupArrayList (mObject.mProperty_mGroupName, mObject.mProperty_mBaseAddresses COMMA_HERE)) ;
   return result ;
 }
@@ -14593,7 +14471,7 @@ void GALGAS_controlRegisterGroupArrayList::makeAttributesFromObjects (capCollect
                                                                       const GALGAS_lstring & in_mGroupName,
                                                                       const GALGAS_lbigintlist & in_mBaseAddresses
                                                                       COMMA_LOCATION_ARGS) {
-  cCollectionElement_controlRegisterGroupArrayList * p = NULL ;
+  cCollectionElement_controlRegisterGroupArrayList * p = nullptr ;
   macroMyNew (p, cCollectionElement_controlRegisterGroupArrayList (in_mGroupName,
                                                                    in_mBaseAddresses COMMA_THERE)) ;
   outAttributes.setPointer (p) ;
@@ -14607,7 +14485,7 @@ void GALGAS_controlRegisterGroupArrayList::addAssign_operation (const GALGAS_lst
                                                                 COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterGroupArrayList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -14626,7 +14504,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_append (GALGAS_controlRegister
                                                           COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inElement.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterGroupArrayList (inElement COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -14647,7 +14525,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_insertAtIndex (const GALGAS_ls
                                                                  COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
-      cCollectionElement * p = NULL ;
+      cCollectionElement * p = nullptr ;
       macroMyNew (p, cCollectionElement_controlRegisterGroupArrayList (inOperand0, inOperand1 COMMA_THERE)) ;
       capCollectionElement attributes ;
       attributes.setPointer (p) ;
@@ -14671,7 +14549,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_removeAtIndex (GALGAS_lstring 
       capCollectionElement attributes ;
       removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
       cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
-      if (NULL == p) {
+      if (nullptr == p) {
         outOperand0.drop () ;
         outOperand1.drop () ;
         drop () ;
@@ -14700,7 +14578,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_popFirst (GALGAS_lstring & out
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -14719,7 +14597,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_popLast (GALGAS_lstring & outO
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -14738,7 +14616,7 @@ void GALGAS_controlRegisterGroupArrayList::method_first (GALGAS_lstring & outOpe
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -14757,7 +14635,7 @@ void GALGAS_controlRegisterGroupArrayList::method_last (GALGAS_lstring & outOper
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -14825,7 +14703,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_setMGroupNameAtIndex (GALGAS_l
                                                                         C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterGroupArrayList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mGroupName = inOperand ;
@@ -14840,7 +14718,7 @@ GALGAS_lstring GALGAS_controlRegisterGroupArrayList::getter_mGroupNameAtIndex (c
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
   GALGAS_lstring result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterGroupArrayList) ;
     result = p->mObject.mProperty_mGroupName ;
   }
@@ -14854,7 +14732,7 @@ void GALGAS_controlRegisterGroupArrayList::setter_setMBaseAddressesAtIndex (GALG
                                                                             C_Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) {
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterGroupArrayList) ;
     macroUniqueSharedObject (p) ;
     p->mObject.mProperty_mBaseAddresses = inOperand ;
@@ -14869,7 +14747,7 @@ GALGAS_lbigintlist GALGAS_controlRegisterGroupArrayList::getter_mBaseAddressesAt
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement_controlRegisterGroupArrayList * p = (cCollectionElement_controlRegisterGroupArrayList *) attributes.ptr () ;
   GALGAS_lbigintlist result ;
-  if (NULL != p) {
+  if (nullptr != p) {
     macroValidSharedObject (p, cCollectionElement_controlRegisterGroupArrayList) ;
     result = p->mObject.mProperty_mBaseAddresses ;
   }
@@ -14922,7 +14800,7 @@ GALGAS_lbigintlist cEnumerator_controlRegisterGroupArrayList::current_mBaseAddre
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterGroupArrayList ("controlRegisterGroupArrayList",
-                                                      NULL) ;
+                                                      nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -14933,7 +14811,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterGroupArrayList::staticTyp
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterGroupArrayList::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterGroupArrayList (*this)) ;
   }
@@ -14947,8 +14825,8 @@ GALGAS_controlRegisterGroupArrayList GALGAS_controlRegisterGroupArrayList::extra
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupArrayList result ;
   const GALGAS_controlRegisterGroupArrayList * p = (const GALGAS_controlRegisterGroupArrayList *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterGroupArrayList *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterGroupArrayList *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterGroupArrayList", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -15005,7 +14883,7 @@ bool cSortedListElement_controlRegisterByAddress::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cSortedListElement * cSortedListElement_controlRegisterByAddress::copy (void) {
-  cSortedListElement * result = NULL ;
+  cSortedListElement * result = nullptr ;
   macroMyNew (result, cSortedListElement_controlRegisterByAddress (mObject.mProperty_mAddress, mObject.mProperty_mHTML COMMA_HERE)) ;
   return result ;
 }
@@ -15063,7 +14941,7 @@ GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::constructor_sor
                                                                                                   const GALGAS_string & inOperand1
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByAddress result = constructor_emptySortedList (THERE) ;
-  cSortedListElement * p = NULL ;
+  cSortedListElement * p = nullptr ;
   macroMyNew (p, cSortedListElement_controlRegisterByAddress (inOperand0, inOperand1 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
@@ -15078,7 +14956,7 @@ void GALGAS_controlRegisterByAddress::addAssign_operation (const GALGAS_bigint &
                                                            const GALGAS_string & inOperand1
                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
-    cSortedListElement * p = NULL ;
+    cSortedListElement * p = nullptr ;
     macroMyNew (p, cSortedListElement_controlRegisterByAddress (inOperand0, inOperand1 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
@@ -15106,7 +14984,7 @@ void GALGAS_controlRegisterByAddress::setter_popSmallest (GALGAS_bigint & outOpe
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -15125,7 +15003,7 @@ void GALGAS_controlRegisterByAddress::setter_popGreatest (GALGAS_bigint & outOpe
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -15144,7 +15022,7 @@ void GALGAS_controlRegisterByAddress::method_smallest (GALGAS_bigint & outOperan
   capSortedListElement attributes ;
   smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -15163,7 +15041,7 @@ void GALGAS_controlRegisterByAddress::method_greatest (GALGAS_bigint & outOperan
   capSortedListElement attributes ;
   greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByAddress * p = (cSortedListElement_controlRegisterByAddress *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
   }else{
@@ -15215,7 +15093,7 @@ GALGAS_string cEnumerator_controlRegisterByAddress::current_mHTML (LOCATION_ARGS
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterByAddress ("controlRegisterByAddress",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -15226,7 +15104,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterByAddress::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterByAddress::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterByAddress (*this)) ;
   }
@@ -15240,8 +15118,8 @@ GALGAS_controlRegisterByAddress GALGAS_controlRegisterByAddress::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByAddress result ;
   const GALGAS_controlRegisterByAddress * p = (const GALGAS_controlRegisterByAddress *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterByAddress *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterByAddress *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterByAddress", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -15300,7 +15178,7 @@ bool cSortedListElement_controlRegisterByName::isValid (void) const {
 //----------------------------------------------------------------------------------------------------------------------
 
 cSortedListElement * cSortedListElement_controlRegisterByName::copy (void) {
-  cSortedListElement * result = NULL ;
+  cSortedListElement * result = nullptr ;
   macroMyNew (result, cSortedListElement_controlRegisterByName (mObject.mProperty_mAddress, mObject.mProperty_mHTML, mObject.mProperty_mName COMMA_HERE)) ;
   return result ;
 }
@@ -15363,7 +15241,7 @@ GALGAS_controlRegisterByName GALGAS_controlRegisterByName::constructor_sortedLis
                                                                                             const GALGAS_string & inOperand2
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByName result = constructor_emptySortedList (THERE) ;
-  cSortedListElement * p = NULL ;
+  cSortedListElement * p = nullptr ;
   macroMyNew (p, cSortedListElement_controlRegisterByName (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
   capSortedListElement attributes ;
   attributes.setPointer (p) ;
@@ -15379,7 +15257,7 @@ void GALGAS_controlRegisterByName::addAssign_operation (const GALGAS_bigint & in
                                                         const GALGAS_string & inOperand2
                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
-    cSortedListElement * p = NULL ;
+    cSortedListElement * p = nullptr ;
     macroMyNew (p, cSortedListElement_controlRegisterByName (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
     capSortedListElement attributes ;
     attributes.setPointer (p) ;
@@ -15408,7 +15286,7 @@ void GALGAS_controlRegisterByName::setter_popSmallest (GALGAS_bigint & outOperan
   capSortedListElement attributes ;
   removeSmallestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -15430,7 +15308,7 @@ void GALGAS_controlRegisterByName::setter_popGreatest (GALGAS_bigint & outOperan
   capSortedListElement attributes ;
   removeGreatestObject (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -15452,7 +15330,7 @@ void GALGAS_controlRegisterByName::method_smallest (GALGAS_bigint & outOperand0,
   capSortedListElement attributes ;
   smallestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -15474,7 +15352,7 @@ void GALGAS_controlRegisterByName::method_greatest (GALGAS_bigint & outOperand0,
   capSortedListElement attributes ;
   greatestObjectAttributeList (attributes, inCompiler COMMA_THERE) ;
   cSortedListElement_controlRegisterByName * p = (cSortedListElement_controlRegisterByName *) attributes.ptr () ;
-  if (NULL == p) {
+  if (nullptr == p) {
     outOperand0.drop () ;
     outOperand1.drop () ;
     outOperand2.drop () ;
@@ -15536,7 +15414,7 @@ GALGAS_string cEnumerator_controlRegisterByName::current_mName (LOCATION_ARGS) c
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterByName ("controlRegisterByName",
-                                              NULL) ;
+                                              nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -15547,7 +15425,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterByName::staticTypeDescrip
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterByName::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterByName (*this)) ;
   }
@@ -15561,8 +15439,8 @@ GALGAS_controlRegisterByName GALGAS_controlRegisterByName::extractObject (const 
                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByName result ;
   const GALGAS_controlRegisterByName * p = (const GALGAS_controlRegisterByName *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterByName *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterByName *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterByName", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -15600,9 +15478,9 @@ GALGAS_abstractDeclarationAST_2D_weak () {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_globalConstantDeclarationAST_2D_weak & GALGAS_globalConstantDeclarationAST_2D_weak::operator = (const GALGAS_globalConstantDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = NULL ;
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
   acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != NULL) {
+  if (p != nullptr) {
     proxyPtr = p->getProxy () ;
   }
   macroAssignSharedObject (mProxyPtr, proxyPtr) ;
@@ -15627,9 +15505,9 @@ GALGAS_globalConstantDeclarationAST_2D_weak GALGAS_globalConstantDeclarationAST_
 
 GALGAS_globalConstantDeclarationAST GALGAS_globalConstantDeclarationAST_2D_weak::bang_globalConstantDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   GALGAS_globalConstantDeclarationAST result ;
-  if (mProxyPtr != NULL) {
+  if (mProxyPtr != nullptr) {
     acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == NULL) {
+    if (strongPtr == nullptr) {
       inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
     }else{
       macroValidSharedObject (strongPtr, cPtr_globalConstantDeclarationAST) ;
@@ -15658,7 +15536,7 @@ const C_galgas_type_descriptor * GALGAS_globalConstantDeclarationAST_2D_weak::st
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_globalConstantDeclarationAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_globalConstantDeclarationAST_2D_weak (*this)) ;
   }
@@ -15672,11 +15550,140 @@ GALGAS_globalConstantDeclarationAST_2D_weak GALGAS_globalConstantDeclarationAST_
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_globalConstantDeclarationAST_2D_weak result ;
   const GALGAS_globalConstantDeclarationAST_2D_weak * p = (const GALGAS_globalConstantDeclarationAST_2D_weak *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_globalConstantDeclarationAST_2D_weak *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_globalConstantDeclarationAST_2D_weak *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("globalConstantDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//Abstract extension method '@expressionAST addDependenceEdgeForStaticExpression'
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_addDependenceEdgeForStaticExpression (cPtr_expressionAST * inObject,
+                                                               const GALGAS_lstring constin_inConstantName,
+                                                               GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                               C_Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) {
+//--- Drop output arguments
+//--- Find method
+  if (nullptr != inObject) {
+    macroValidSharedObject (inObject, cPtr_expressionAST) ;
+    inObject->method_addDependenceEdgeForStaticExpression (constin_inConstantName, io_ioGraph, inCompiler COMMA_THERE) ;
+  }
+}
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult GALGAS_syncToolInstanceDeclarationAST_2D_weak::objectCompare (const GALGAS_syncToolInstanceDeclarationAST_2D_weak & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST_2D_weak::GALGAS_syncToolInstanceDeclarationAST_2D_weak (void) :
+GALGAS_abstractDeclarationAST_2D_weak () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST_2D_weak & GALGAS_syncToolInstanceDeclarationAST_2D_weak::operator = (const GALGAS_syncToolInstanceDeclarationAST & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST_2D_weak::GALGAS_syncToolInstanceDeclarationAST_2D_weak (const GALGAS_syncToolInstanceDeclarationAST & inSource) :
+GALGAS_abstractDeclarationAST_2D_weak (inSource) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST_2D_weak GALGAS_syncToolInstanceDeclarationAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+  GALGAS_syncToolInstanceDeclarationAST_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST GALGAS_syncToolInstanceDeclarationAST_2D_weak::bang_syncToolInstanceDeclarationAST_2D_weak (C_Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_syncToolInstanceDeclarationAST result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_syncToolInstanceDeclarationAST) ;
+      result = GALGAS_syncToolInstanceDeclarationAST ((cPtr_syncToolInstanceDeclarationAST *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @syncToolInstanceDeclarationAST-weak generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_syncToolInstanceDeclarationAST_2D_weak ("syncToolInstanceDeclarationAST-weak",
+                                                               & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_syncToolInstanceDeclarationAST_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncToolInstanceDeclarationAST_2D_weak ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_syncToolInstanceDeclarationAST_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_syncToolInstanceDeclarationAST_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_syncToolInstanceDeclarationAST_2D_weak GALGAS_syncToolInstanceDeclarationAST_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                            C_Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_syncToolInstanceDeclarationAST_2D_weak result ;
+  const GALGAS_syncToolInstanceDeclarationAST_2D_weak * p = (const GALGAS_syncToolInstanceDeclarationAST_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_syncToolInstanceDeclarationAST_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("syncToolInstanceDeclarationAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

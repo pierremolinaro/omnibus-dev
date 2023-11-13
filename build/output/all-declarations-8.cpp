@@ -78,7 +78,7 @@ void GALGAS_operandIRList_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_operandIRList_2D_element ("operandIRList-element",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ const C_galgas_type_descriptor * GALGAS_operandIRList_2D_element::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_operandIRList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_operandIRList_2D_element (*this)) ;
   }
@@ -103,8 +103,8 @@ GALGAS_operandIRList_2D_element GALGAS_operandIRList_2D_element::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_operandIRList_2D_element result ;
   const GALGAS_operandIRList_2D_element * p = (const GALGAS_operandIRList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_operandIRList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_operandIRList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("operandIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -184,7 +184,7 @@ void GALGAS_userLLVMTypeDefinitionListIR_2D_element::description (C_String & ioS
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_userLLVMTypeDefinitionListIR_2D_element ("userLLVMTypeDefinitionListIR-element",
-                                                                NULL) ;
+                                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -195,7 +195,7 @@ const C_galgas_type_descriptor * GALGAS_userLLVMTypeDefinitionListIR_2D_element:
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_userLLVMTypeDefinitionListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_userLLVMTypeDefinitionListIR_2D_element (*this)) ;
   }
@@ -209,8 +209,8 @@ GALGAS_userLLVMTypeDefinitionListIR_2D_element GALGAS_userLLVMTypeDefinitionList
                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_userLLVMTypeDefinitionListIR_2D_element result ;
   const GALGAS_userLLVMTypeDefinitionListIR_2D_element * p = (const GALGAS_userLLVMTypeDefinitionListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_userLLVMTypeDefinitionListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_userLLVMTypeDefinitionListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("userLLVMTypeDefinitionListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -300,7 +300,7 @@ void GALGAS_sortedOperandIRList_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_sortedOperandIRList_2D_element ("sortedOperandIRList-element",
-                                                       NULL) ;
+                                                       nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -311,7 +311,7 @@ const C_galgas_type_descriptor * GALGAS_sortedOperandIRList_2D_element::staticTy
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_sortedOperandIRList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_sortedOperandIRList_2D_element (*this)) ;
   }
@@ -325,8 +325,8 @@ GALGAS_sortedOperandIRList_2D_element GALGAS_sortedOperandIRList_2D_element::ext
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_sortedOperandIRList_2D_element result ;
   const GALGAS_sortedOperandIRList_2D_element * p = (const GALGAS_sortedOperandIRList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sortedOperandIRList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_sortedOperandIRList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("sortedOperandIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -406,7 +406,7 @@ void GALGAS_controlRegisterBitSliceList_2D_element::description (C_String & ioSt
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterBitSliceList_2D_element ("controlRegisterBitSliceList-element",
-                                                               NULL) ;
+                                                               nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -417,7 +417,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterBitSliceList_2D_element::
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterBitSliceList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterBitSliceList_2D_element (*this)) ;
   }
@@ -431,8 +431,8 @@ GALGAS_controlRegisterBitSliceList_2D_element GALGAS_controlRegisterBitSliceList
                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterBitSliceList_2D_element result ;
   const GALGAS_controlRegisterBitSliceList_2D_element * p = (const GALGAS_controlRegisterBitSliceList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterBitSliceList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterBitSliceList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterBitSliceList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -529,7 +529,7 @@ void GALGAS_controlRegisterFieldList_2D_element::description (C_String & ioStrin
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterFieldList_2D_element ("controlRegisterFieldList-element",
-                                                            NULL) ;
+                                                            nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -540,7 +540,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterFieldList_2D_element::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterFieldList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterFieldList_2D_element (*this)) ;
   }
@@ -554,8 +554,8 @@ GALGAS_controlRegisterFieldList_2D_element GALGAS_controlRegisterFieldList_2D_el
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterFieldList_2D_element result ;
   const GALGAS_controlRegisterFieldList_2D_element * p = (const GALGAS_controlRegisterFieldList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterFieldList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterFieldList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterFieldList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -652,7 +652,7 @@ void GALGAS_controlRegisterByAddress_2D_element::description (C_String & ioStrin
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterByAddress_2D_element ("controlRegisterByAddress-element",
-                                                            NULL) ;
+                                                            nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -663,7 +663,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterByAddress_2D_element::sta
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterByAddress_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterByAddress_2D_element (*this)) ;
   }
@@ -677,8 +677,8 @@ GALGAS_controlRegisterByAddress_2D_element GALGAS_controlRegisterByAddress_2D_el
                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByAddress_2D_element result ;
   const GALGAS_controlRegisterByAddress_2D_element * p = (const GALGAS_controlRegisterByAddress_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterByAddress_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterByAddress_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterByAddress-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -786,7 +786,7 @@ void GALGAS_controlRegisterByName_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_controlRegisterByName_2D_element ("controlRegisterByName-element",
-                                                         NULL) ;
+                                                         nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -797,7 +797,7 @@ const C_galgas_type_descriptor * GALGAS_controlRegisterByName_2D_element::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_controlRegisterByName_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_controlRegisterByName_2D_element (*this)) ;
   }
@@ -811,8 +811,8 @@ GALGAS_controlRegisterByName_2D_element GALGAS_controlRegisterByName_2D_element:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterByName_2D_element result ;
   const GALGAS_controlRegisterByName_2D_element * p = (const GALGAS_controlRegisterByName_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_controlRegisterByName_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_controlRegisterByName_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("controlRegisterByName-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -909,7 +909,7 @@ void GALGAS_staticListValueListAST_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_staticListValueListAST_2D_element ("staticListValueListAST-element",
-                                                          NULL) ;
+                                                          nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -920,7 +920,7 @@ const C_galgas_type_descriptor * GALGAS_staticListValueListAST_2D_element::stati
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_staticListValueListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_staticListValueListAST_2D_element (*this)) ;
   }
@@ -934,8 +934,8 @@ GALGAS_staticListValueListAST_2D_element GALGAS_staticListValueListAST_2D_elemen
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_staticListValueListAST_2D_element result ;
   const GALGAS_staticListValueListAST_2D_element * p = (const GALGAS_staticListValueListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_staticListValueListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_staticListValueListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("staticListValueListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1025,7 +1025,7 @@ void GALGAS_extendStaticListElementAST_2D_element::description (C_String & ioStr
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_extendStaticListElementAST_2D_element ("extendStaticListElementAST-element",
-                                                              NULL) ;
+                                                              nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1036,7 +1036,7 @@ const C_galgas_type_descriptor * GALGAS_extendStaticListElementAST_2D_element::s
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_extendStaticListElementAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_extendStaticListElementAST_2D_element (*this)) ;
   }
@@ -1050,8 +1050,8 @@ GALGAS_extendStaticListElementAST_2D_element GALGAS_extendStaticListElementAST_2
                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_extendStaticListElementAST_2D_element result ;
   const GALGAS_extendStaticListElementAST_2D_element * p = (const GALGAS_extendStaticListElementAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_extendStaticListElementAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_extendStaticListElementAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticListElementAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1148,7 +1148,7 @@ void GALGAS_extendStaticArrayDeclarationDictAST_2D_element::description (C_Strin
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_extendStaticArrayDeclarationDictAST_2D_element ("extendStaticArrayDeclarationDictAST-element",
-                                                                       NULL) ;
+                                                                       nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1159,7 +1159,7 @@ const C_galgas_type_descriptor * GALGAS_extendStaticArrayDeclarationDictAST_2D_e
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_extendStaticArrayDeclarationDictAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_extendStaticArrayDeclarationDictAST_2D_element (*this)) ;
   }
@@ -1173,8 +1173,8 @@ GALGAS_extendStaticArrayDeclarationDictAST_2D_element GALGAS_extendStaticArrayDe
                                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_extendStaticArrayDeclarationDictAST_2D_element result ;
   const GALGAS_extendStaticArrayDeclarationDictAST_2D_element * p = (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_extendStaticArrayDeclarationDictAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_extendStaticArrayDeclarationDictAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticArrayDeclarationDictAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1337,7 +1337,7 @@ void GALGAS_taskSortedListIR_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_taskSortedListIR_2D_element ("taskSortedListIR-element",
-                                                    NULL) ;
+                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1348,7 +1348,7 @@ const C_galgas_type_descriptor * GALGAS_taskSortedListIR_2D_element::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_taskSortedListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_taskSortedListIR_2D_element (*this)) ;
   }
@@ -1362,8 +1362,8 @@ GALGAS_taskSortedListIR_2D_element GALGAS_taskSortedListIR_2D_element::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_taskSortedListIR_2D_element result ;
   const GALGAS_taskSortedListIR_2D_element * p = (const GALGAS_taskSortedListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_taskSortedListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_taskSortedListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("taskSortedListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1463,7 +1463,7 @@ void GALGAS_globalTaskVariableList_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_globalTaskVariableList_2D_element ("globalTaskVariableList-element",
-                                                          NULL) ;
+                                                          nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1474,7 +1474,7 @@ const C_galgas_type_descriptor * GALGAS_globalTaskVariableList_2D_element::stati
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_globalTaskVariableList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_globalTaskVariableList_2D_element (*this)) ;
   }
@@ -1488,8 +1488,8 @@ GALGAS_globalTaskVariableList_2D_element GALGAS_globalTaskVariableList_2D_elemen
                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_globalTaskVariableList_2D_element result ;
   const GALGAS_globalTaskVariableList_2D_element * p = (const GALGAS_globalTaskVariableList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_globalTaskVariableList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_globalTaskVariableList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("globalTaskVariableList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1579,7 +1579,7 @@ void GALGAS_routineLLVMNameDict_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_routineLLVMNameDict_2D_element ("routineLLVMNameDict-element",
-                                                       NULL) ;
+                                                       nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1590,7 +1590,7 @@ const C_galgas_type_descriptor * GALGAS_routineLLVMNameDict_2D_element::staticTy
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_routineLLVMNameDict_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_routineLLVMNameDict_2D_element (*this)) ;
   }
@@ -1604,8 +1604,8 @@ GALGAS_routineLLVMNameDict_2D_element GALGAS_routineLLVMNameDict_2D_element::ext
                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_routineLLVMNameDict_2D_element result ;
   const GALGAS_routineLLVMNameDict_2D_element * p = (const GALGAS_routineLLVMNameDict_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_routineLLVMNameDict_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_routineLLVMNameDict_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("routineLLVMNameDict-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1713,7 +1713,7 @@ void GALGAS_sectionIRlist_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_sectionIRlist_2D_element ("sectionIRlist-element",
-                                                 NULL) ;
+                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1724,7 +1724,7 @@ const C_galgas_type_descriptor * GALGAS_sectionIRlist_2D_element::staticTypeDesc
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_sectionIRlist_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_sectionIRlist_2D_element (*this)) ;
   }
@@ -1738,8 +1738,8 @@ GALGAS_sectionIRlist_2D_element GALGAS_sectionIRlist_2D_element::extractObject (
                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_sectionIRlist_2D_element result ;
   const GALGAS_sectionIRlist_2D_element * p = (const GALGAS_sectionIRlist_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_sectionIRlist_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_sectionIRlist_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("sectionIRlist-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1847,7 +1847,7 @@ void GALGAS_primitiveAndServiceIRlist_2D_element::description (C_String & ioStri
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_primitiveAndServiceIRlist_2D_element ("primitiveAndServiceIRlist-element",
-                                                             NULL) ;
+                                                             nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1858,7 +1858,7 @@ const C_galgas_type_descriptor * GALGAS_primitiveAndServiceIRlist_2D_element::st
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_primitiveAndServiceIRlist_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_primitiveAndServiceIRlist_2D_element (*this)) ;
   }
@@ -1872,8 +1872,8 @@ GALGAS_primitiveAndServiceIRlist_2D_element GALGAS_primitiveAndServiceIRlist_2D_
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_primitiveAndServiceIRlist_2D_element result ;
   const GALGAS_primitiveAndServiceIRlist_2D_element * p = (const GALGAS_primitiveAndServiceIRlist_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_primitiveAndServiceIRlist_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_primitiveAndServiceIRlist_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("primitiveAndServiceIRlist-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -1959,7 +1959,7 @@ void GALGAS_panicSortedListIR_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_panicSortedListIR_2D_element ("panicSortedListIR-element",
-                                                     NULL) ;
+                                                     nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -1970,7 +1970,7 @@ const C_galgas_type_descriptor * GALGAS_panicSortedListIR_2D_element::staticType
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_panicSortedListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_panicSortedListIR_2D_element (*this)) ;
   }
@@ -1984,8 +1984,8 @@ GALGAS_panicSortedListIR_2D_element GALGAS_panicSortedListIR_2D_element::extract
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_panicSortedListIR_2D_element result ;
   const GALGAS_panicSortedListIR_2D_element * p = (const GALGAS_panicSortedListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_panicSortedListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_panicSortedListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("panicSortedListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2065,7 +2065,7 @@ void GALGAS_primaryInExpressionAccessListAST_2D_element::description (C_String &
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_primaryInExpressionAccessListAST_2D_element ("primaryInExpressionAccessListAST-element",
-                                                                    NULL) ;
+                                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2076,7 +2076,7 @@ const C_galgas_type_descriptor * GALGAS_primaryInExpressionAccessListAST_2D_elem
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_primaryInExpressionAccessListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_primaryInExpressionAccessListAST_2D_element (*this)) ;
   }
@@ -2090,8 +2090,8 @@ GALGAS_primaryInExpressionAccessListAST_2D_element GALGAS_primaryInExpressionAcc
                                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_primaryInExpressionAccessListAST_2D_element result ;
   const GALGAS_primaryInExpressionAccessListAST_2D_element * p = (const GALGAS_primaryInExpressionAccessListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_primaryInExpressionAccessListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_primaryInExpressionAccessListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("primaryInExpressionAccessListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2171,7 +2171,7 @@ void GALGAS_instructionListAST_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_instructionListAST_2D_element ("instructionListAST-element",
-                                                      NULL) ;
+                                                      nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2182,7 +2182,7 @@ const C_galgas_type_descriptor * GALGAS_instructionListAST_2D_element::staticTyp
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_instructionListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_instructionListAST_2D_element (*this)) ;
   }
@@ -2196,8 +2196,8 @@ GALGAS_instructionListAST_2D_element GALGAS_instructionListAST_2D_element::extra
                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_instructionListAST_2D_element result ;
   const GALGAS_instructionListAST_2D_element * p = (const GALGAS_instructionListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_instructionListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("instructionListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2297,7 +2297,7 @@ void GALGAS_syncInstructionBranchListAST_2D_element::description (C_String & ioS
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_syncInstructionBranchListAST_2D_element ("syncInstructionBranchListAST-element",
-                                                                NULL) ;
+                                                                nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2308,7 +2308,7 @@ const C_galgas_type_descriptor * GALGAS_syncInstructionBranchListAST_2D_element:
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_syncInstructionBranchListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_syncInstructionBranchListAST_2D_element (*this)) ;
   }
@@ -2322,8 +2322,8 @@ GALGAS_syncInstructionBranchListAST_2D_element GALGAS_syncInstructionBranchListA
                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_syncInstructionBranchListAST_2D_element result ;
   const GALGAS_syncInstructionBranchListAST_2D_element * p = (const GALGAS_syncInstructionBranchListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_syncInstructionBranchListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_syncInstructionBranchListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("syncInstructionBranchListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2413,7 +2413,7 @@ void GALGAS_syncInstructionBranchListIR_2D_element::description (C_String & ioSt
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_syncInstructionBranchListIR_2D_element ("syncInstructionBranchListIR-element",
-                                                               NULL) ;
+                                                               nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2424,7 +2424,7 @@ const C_galgas_type_descriptor * GALGAS_syncInstructionBranchListIR_2D_element::
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_syncInstructionBranchListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_syncInstructionBranchListIR_2D_element (*this)) ;
   }
@@ -2438,8 +2438,8 @@ GALGAS_syncInstructionBranchListIR_2D_element GALGAS_syncInstructionBranchListIR
                                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_syncInstructionBranchListIR_2D_element result ;
   const GALGAS_syncInstructionBranchListIR_2D_element * p = (const GALGAS_syncInstructionBranchListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_syncInstructionBranchListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_syncInstructionBranchListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("syncInstructionBranchListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2519,7 +2519,7 @@ void GALGAS_guardedCommandIRList_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_guardedCommandIRList_2D_element ("guardedCommandIRList-element",
-                                                        NULL) ;
+                                                        nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2530,7 +2530,7 @@ const C_galgas_type_descriptor * GALGAS_guardedCommandIRList_2D_element::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_guardedCommandIRList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_guardedCommandIRList_2D_element (*this)) ;
   }
@@ -2544,8 +2544,8 @@ GALGAS_guardedCommandIRList_2D_element GALGAS_guardedCommandIRList_2D_element::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIRList_2D_element result ;
   const GALGAS_guardedCommandIRList_2D_element * p = (const GALGAS_guardedCommandIRList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_guardedCommandIRList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_guardedCommandIRList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("guardedCommandIRList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2635,7 +2635,7 @@ void GALGAS_procCallEffectiveParameterListIR_2D_element::description (C_String &
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_procCallEffectiveParameterListIR_2D_element ("procCallEffectiveParameterListIR-element",
-                                                                    NULL) ;
+                                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2646,7 +2646,7 @@ const C_galgas_type_descriptor * GALGAS_procCallEffectiveParameterListIR_2D_elem
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_procCallEffectiveParameterListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_procCallEffectiveParameterListIR_2D_element (*this)) ;
   }
@@ -2660,8 +2660,8 @@ GALGAS_procCallEffectiveParameterListIR_2D_element GALGAS_procCallEffectiveParam
                                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_procCallEffectiveParameterListIR_2D_element result ;
   const GALGAS_procCallEffectiveParameterListIR_2D_element * p = (const GALGAS_procCallEffectiveParameterListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_procCallEffectiveParameterListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_procCallEffectiveParameterListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("procCallEffectiveParameterListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2758,7 +2758,7 @@ void GALGAS_switchCaseListAST_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_switchCaseListAST_2D_element ("switchCaseListAST-element",
-                                                     NULL) ;
+                                                     nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2769,7 +2769,7 @@ const C_galgas_type_descriptor * GALGAS_switchCaseListAST_2D_element::staticType
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_switchCaseListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_switchCaseListAST_2D_element (*this)) ;
   }
@@ -2783,8 +2783,8 @@ GALGAS_switchCaseListAST_2D_element GALGAS_switchCaseListAST_2D_element::extract
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_switchCaseListAST_2D_element result ;
   const GALGAS_switchCaseListAST_2D_element * p = (const GALGAS_switchCaseListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_switchCaseListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_switchCaseListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("switchCaseListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2881,7 +2881,7 @@ void GALGAS_switchCaseListIR_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_switchCaseListIR_2D_element ("switchCaseListIR-element",
-                                                    NULL) ;
+                                                    nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2892,7 +2892,7 @@ const C_galgas_type_descriptor * GALGAS_switchCaseListIR_2D_element::staticTypeD
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_switchCaseListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_switchCaseListIR_2D_element (*this)) ;
   }
@@ -2906,8 +2906,8 @@ GALGAS_switchCaseListIR_2D_element GALGAS_switchCaseListIR_2D_element::extractOb
                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_switchCaseListIR_2D_element result ;
   const GALGAS_switchCaseListIR_2D_element * p = (const GALGAS_switchCaseListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_switchCaseListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_switchCaseListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("switchCaseListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -2987,7 +2987,7 @@ void GALGAS_accessInAssignmentListAST_2D_element::description (C_String & ioStri
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_accessInAssignmentListAST_2D_element ("accessInAssignmentListAST-element",
-                                                             NULL) ;
+                                                             nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -2998,7 +2998,7 @@ const C_galgas_type_descriptor * GALGAS_accessInAssignmentListAST_2D_element::st
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_accessInAssignmentListAST_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_accessInAssignmentListAST_2D_element (*this)) ;
   }
@@ -3012,8 +3012,8 @@ GALGAS_accessInAssignmentListAST_2D_element GALGAS_accessInAssignmentListAST_2D_
                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_accessInAssignmentListAST_2D_element result ;
   const GALGAS_accessInAssignmentListAST_2D_element * p = (const GALGAS_accessInAssignmentListAST_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_accessInAssignmentListAST_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_accessInAssignmentListAST_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("accessInAssignmentListAST-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3093,7 +3093,7 @@ void GALGAS_instructionListIR_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_instructionListIR_2D_element ("instructionListIR-element",
-                                                     NULL) ;
+                                                     nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3104,7 +3104,7 @@ const C_galgas_type_descriptor * GALGAS_instructionListIR_2D_element::staticType
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_instructionListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_instructionListIR_2D_element (*this)) ;
   }
@@ -3118,8 +3118,8 @@ GALGAS_instructionListIR_2D_element GALGAS_instructionListIR_2D_element::extract
                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_instructionListIR_2D_element result ;
   const GALGAS_instructionListIR_2D_element * p = (const GALGAS_instructionListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_instructionListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("instructionListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3205,7 +3205,7 @@ void GALGAS_instructionListListIR_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_instructionListListIR_2D_element ("instructionListListIR-element",
-                                                         NULL) ;
+                                                         nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3216,7 +3216,7 @@ const C_galgas_type_descriptor * GALGAS_instructionListListIR_2D_element::static
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_instructionListListIR_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_instructionListListIR_2D_element (*this)) ;
   }
@@ -3230,8 +3230,8 @@ GALGAS_instructionListListIR_2D_element GALGAS_instructionListListIR_2D_element:
                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_instructionListListIR_2D_element result ;
   const GALGAS_instructionListListIR_2D_element * p = (const GALGAS_instructionListListIR_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_instructionListListIR_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_instructionListListIR_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("instructionListListIR-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3311,7 +3311,7 @@ void GALGAS_genericFormalParameterList_2D_element::description (C_String & ioStr
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_genericFormalParameterList_2D_element ("genericFormalParameterList-element",
-                                                              NULL) ;
+                                                              nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3322,7 +3322,7 @@ const C_galgas_type_descriptor * GALGAS_genericFormalParameterList_2D_element::s
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_genericFormalParameterList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_genericFormalParameterList_2D_element (*this)) ;
   }
@@ -3336,8 +3336,8 @@ GALGAS_genericFormalParameterList_2D_element GALGAS_genericFormalParameterList_2
                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_genericFormalParameterList_2D_element result ;
   const GALGAS_genericFormalParameterList_2D_element * p = (const GALGAS_genericFormalParameterList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_genericFormalParameterList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_genericFormalParameterList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("genericFormalParameterList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3417,7 +3417,7 @@ void GALGAS_llvmStringDefinition_2D_element::description (C_String & ioString,
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_llvmStringDefinition_2D_element ("llvmStringDefinition-element",
-                                                        NULL) ;
+                                                        nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3428,7 +3428,7 @@ const C_galgas_type_descriptor * GALGAS_llvmStringDefinition_2D_element::staticT
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_llvmStringDefinition_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_llvmStringDefinition_2D_element (*this)) ;
   }
@@ -3442,8 +3442,8 @@ GALGAS_llvmStringDefinition_2D_element GALGAS_llvmStringDefinition_2D_element::e
                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_llvmStringDefinition_2D_element result ;
   const GALGAS_llvmStringDefinition_2D_element * p = (const GALGAS_llvmStringDefinition_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_llvmStringDefinition_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_llvmStringDefinition_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("llvmStringDefinition-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3523,7 +3523,7 @@ void GALGAS_llvmGenerationInstructionElementList_2D_element::description (C_Stri
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_llvmGenerationInstructionElementList_2D_element ("llvmGenerationInstructionElementList-element",
-                                                                        NULL) ;
+                                                                        nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3534,7 +3534,7 @@ const C_galgas_type_descriptor * GALGAS_llvmGenerationInstructionElementList_2D_
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_llvmGenerationInstructionElementList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_llvmGenerationInstructionElementList_2D_element (*this)) ;
   }
@@ -3548,8 +3548,8 @@ GALGAS_llvmGenerationInstructionElementList_2D_element GALGAS_llvmGenerationInst
                                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_llvmGenerationInstructionElementList_2D_element result ;
   const GALGAS_llvmGenerationInstructionElementList_2D_element * p = (const GALGAS_llvmGenerationInstructionElementList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_llvmGenerationInstructionElementList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_llvmGenerationInstructionElementList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("llvmGenerationInstructionElementList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3629,7 +3629,7 @@ void GALGAS_llvmGenerationInstructionList_2D_element::description (C_String & io
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS_llvmGenerationInstructionList_2D_element ("llvmGenerationInstructionList-element",
-                                                                 NULL) ;
+                                                                 nullptr) ;
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -3640,7 +3640,7 @@ const C_galgas_type_descriptor * GALGAS_llvmGenerationInstructionList_2D_element
 //----------------------------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS_llvmGenerationInstructionList_2D_element::clonedObject (void) const {
-  AC_GALGAS_root * result = NULL ;
+  AC_GALGAS_root * result = nullptr ;
   if (isValid ()) {
     macroMyNew (result, GALGAS_llvmGenerationInstructionList_2D_element (*this)) ;
   }
@@ -3654,8 +3654,8 @@ GALGAS_llvmGenerationInstructionList_2D_element GALGAS_llvmGenerationInstruction
                                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_llvmGenerationInstructionList_2D_element result ;
   const GALGAS_llvmGenerationInstructionList_2D_element * p = (const GALGAS_llvmGenerationInstructionList_2D_element *) inObject.embeddedObject () ;
-  if (NULL != p) {
-    if (NULL != dynamic_cast <const GALGAS_llvmGenerationInstructionList_2D_element *> (p)) {
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_llvmGenerationInstructionList_2D_element *> (p)) {
       result = *p ;
     }else{
       inCompiler->castError ("llvmGenerationInstructionList-element", p->dynamicTypeDescriptor () COMMA_THERE) ;
@@ -3902,7 +3902,7 @@ static const char * gNonTerminalNames_omnibus_grammar [203] = {
 #define ACCEPT (1)
 #define END (-1)
 
-static const int16_t gActionTable_omnibus_grammar [] = {
+static const int32_t gActionTable_omnibus_grammar [] = {
 // State S0 (index = 0)
   C_Lexique_omnibus_5F_lexique::kToken_import, SHIFT (1)
 , C_Lexique_omnibus_5F_lexique::kToken_typealias, SHIFT (2)
@@ -22183,7 +22183,7 @@ static const uint32_t gActionTableIndex_omnibus_grammar [1078] = {
 // Successor tables handle non terminal successors ;
 // an entry is (non_terminal_symbol, n) ; successor is state n.
 
-static const int16_t gSuccessorTable_omnibus_grammar_0 [23] = {0, 22,
+static const int32_t gSuccessorTable_omnibus_grammar_0 [23] = {0, 22,
   1, 23,
   2, 24,
   12, 25,
@@ -22195,13 +22195,13 @@ static const int16_t gSuccessorTable_omnibus_grammar_0 [23] = {0, 22,
   117, 31,
   120, 32, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_5 [3] = {87, 37, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_5 [3] = {87, 37, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_16 [3] = {14, 51, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_16 [3] = {14, 51, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_17 [3] = {14, 52, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_17 [3] = {14, 52, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_22 [21] = {0, 22,
+static const int32_t gSuccessorTable_omnibus_grammar_22 [21] = {0, 22,
   2, 24,
   12, 25,
   15, 26,
@@ -22212,7 +22212,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_22 [21] = {0, 22,
   117, 31,
   120, 32, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_24 [21] = {0, 22,
+static const int32_t gSuccessorTable_omnibus_grammar_24 [21] = {0, 22,
   2, 24,
   12, 25,
   15, 26,
@@ -22223,7 +22223,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_24 [21] = {0, 22,
   117, 31,
   120, 32, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_26 [21] = {0, 22,
+static const int32_t gSuccessorTable_omnibus_grammar_26 [21] = {0, 22,
   2, 24,
   12, 25,
   15, 26,
@@ -22234,47 +22234,47 @@ static const int16_t gSuccessorTable_omnibus_grammar_26 [21] = {0, 22,
   117, 31,
   120, 32, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_27 [5] = {33, 77,
+static const int32_t gSuccessorTable_omnibus_grammar_27 [5] = {33, 77,
   153, 78, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_29 [3] = {14, 79, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_29 [3] = {14, 79, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_36 [3] = {87, 85, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_36 [3] = {87, 85, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_38 [3] = {70, 88, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_38 [3] = {70, 88, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_40 [5] = {3, 92,
+static const int32_t gSuccessorTable_omnibus_grammar_40 [5] = {3, 92,
   89, 93, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_41 [3] = {73, 95, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_41 [3] = {73, 95, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_43 [3] = {75, 99, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_43 [3] = {75, 99, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_44 [3] = {90, 102, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_44 [3] = {90, 102, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_48 [3] = {101, 106, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_48 [3] = {101, 106, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_52 [3] = {123, 110, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_52 [3] = {123, 110, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_53 [5] = {34, 114,
+static const int32_t gSuccessorTable_omnibus_grammar_53 [5] = {34, 114,
   154, 115, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_54 [5] = {55, 117,
+static const int32_t gSuccessorTable_omnibus_grammar_54 [5] = {55, 117,
   195, 118, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_55 [5] = {35, 124,
+static const int32_t gSuccessorTable_omnibus_grammar_55 [5] = {35, 124,
   155, 125, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_79 [3] = {109, 131, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_79 [3] = {109, 131, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_83 [3] = {3, 135, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_83 [3] = {3, 135, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_86 [5] = {3, 137,
+static const int32_t gSuccessorTable_omnibus_grammar_86 [5] = {3, 137,
   88, 138, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_87 [3] = {70, 139, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_87 [3] = {70, 139, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_89 [23] = {4, 142,
+static const int32_t gSuccessorTable_omnibus_grammar_89 [23] = {4, 142,
   12, 143,
   15, 144,
   17, 145,
@@ -22286,7 +22286,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_89 [23] = {4, 142,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_91 [31] = {3, 168,
+static const int32_t gSuccessorTable_omnibus_grammar_91 [31] = {3, 168,
   20, 169,
   21, 170,
   22, 171,
@@ -22302,9 +22302,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_91 [31] = {3, 168,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_94 [3] = {73, 184, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_94 [3] = {73, 184, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_97 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_97 [31] = {3, 187,
   20, 188,
   21, 170,
   22, 171,
@@ -22320,43 +22320,43 @@ static const int16_t gSuccessorTable_omnibus_grammar_97 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_99 [3] = {74, 191, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_99 [3] = {74, 191, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_100 [3] = {93, 193, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_100 [3] = {93, 193, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_103 [3] = {9, 197, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_103 [3] = {9, 197, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_108 [5] = {13, 211,
+static const int32_t gSuccessorTable_omnibus_grammar_108 [5] = {13, 211,
   110, 212, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_109 [3] = {3, 213, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_109 [3] = {3, 213, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_116 [3] = {197, 219, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_116 [3] = {197, 219, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_117 [5] = {56, 221,
+static const int32_t gSuccessorTable_omnibus_grammar_117 [5] = {56, 221,
   198, 222, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_126 [3] = {186, 226, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_126 [3] = {186, 226, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_128 [7] = {58, 230,
+static const int32_t gSuccessorTable_omnibus_grammar_128 [7] = {58, 230,
   59, 231,
   199, 232, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_130 [3] = {3, 234, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_130 [3] = {3, 234, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_132 [3] = {114, 237, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_132 [3] = {114, 237, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_133 [3] = {118, 239, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_133 [3] = {118, 239, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_134 [3] = {121, 241, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_134 [3] = {121, 241, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_140 [11] = {4, 245,
+static const int32_t gSuccessorTable_omnibus_grammar_140 [11] = {4, 245,
   12, 246,
   62, 146,
   71, 247,
   108, 29, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_142 [23] = {4, 142,
+static const int32_t gSuccessorTable_omnibus_grammar_142 [23] = {4, 142,
   12, 143,
   15, 144,
   17, 145,
@@ -22368,7 +22368,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_142 [23] = {4, 142,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_143 [23] = {4, 142,
+static const int32_t gSuccessorTable_omnibus_grammar_143 [23] = {4, 142,
   12, 143,
   15, 144,
   17, 145,
@@ -22380,7 +22380,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_143 [23] = {4, 142,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_144 [23] = {4, 142,
+static const int32_t gSuccessorTable_omnibus_grammar_144 [23] = {4, 142,
   12, 143,
   15, 144,
   17, 145,
@@ -22392,7 +22392,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_144 [23] = {4, 142,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_145 [23] = {4, 142,
+static const int32_t gSuccessorTable_omnibus_grammar_145 [23] = {4, 142,
   12, 143,
   15, 144,
   17, 145,
@@ -22404,15 +22404,15 @@ static const int16_t gSuccessorTable_omnibus_grammar_145 [23] = {4, 142,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_146 [3] = {6, 254, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_146 [3] = {6, 254, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_151 [7] = {32, 262,
+static const int32_t gSuccessorTable_omnibus_grammar_151 [7] = {32, 262,
   45, 263,
   150, 264, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_153 [3] = {179, 266, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_153 [3] = {179, 266, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_154 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_154 [31] = {3, 187,
   20, 267,
   21, 170,
   22, 171,
@@ -22428,44 +22428,44 @@ static const int16_t gSuccessorTable_omnibus_grammar_154 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_155 [5] = {3, 268,
+static const int32_t gSuccessorTable_omnibus_grammar_155 [5] = {3, 268,
   143, 269, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_156 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_156 [11] = {3, 187,
   30, 270,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_157 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_157 [11] = {3, 187,
   30, 271,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_158 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_158 [11] = {3, 187,
   30, 272,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_159 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_159 [11] = {3, 187,
   30, 273,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_160 [5] = {3, 274,
+static const int32_t gSuccessorTable_omnibus_grammar_160 [5] = {3, 274,
   142, 275, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_161 [5] = {3, 276,
+static const int32_t gSuccessorTable_omnibus_grammar_161 [5] = {3, 276,
   144, 277, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_162 [3] = {44, 279, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_162 [3] = {44, 279, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_163 [3] = {3, 281, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_163 [3] = {3, 281, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_164 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_164 [31] = {3, 187,
   20, 282,
   21, 170,
   22, 171,
@@ -22481,32 +22481,32 @@ static const int16_t gSuccessorTable_omnibus_grammar_164 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_167 [5] = {32, 283,
+static const int32_t gSuccessorTable_omnibus_grammar_167 [5] = {32, 283,
   150, 264, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_170 [3] = {132, 288, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_170 [3] = {132, 288, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_171 [3] = {133, 290, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_171 [3] = {133, 290, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_172 [3] = {134, 292, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_172 [3] = {134, 292, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_173 [3] = {135, 294, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_173 [3] = {135, 294, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_174 [3] = {136, 296, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_174 [3] = {136, 296, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_175 [3] = {137, 299, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_175 [3] = {137, 299, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_176 [3] = {138, 304, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_176 [3] = {138, 304, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_177 [3] = {139, 307, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_177 [3] = {139, 307, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_178 [3] = {140, 312, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_178 [3] = {140, 312, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_179 [3] = {141, 319, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_179 [3] = {141, 319, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_181 [3] = {148, 321, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_181 [3] = {148, 321, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_183 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_183 [31] = {3, 187,
   20, 323,
   21, 170,
   22, 171,
@@ -22522,7 +22522,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_183 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_185 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_185 [31] = {3, 187,
   20, 324,
   21, 170,
   22, 171,
@@ -22538,9 +22538,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_185 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_190 [3] = {75, 327, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_190 [3] = {75, 327, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_192 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_192 [31] = {3, 187,
   20, 329,
   21, 170,
   22, 171,
@@ -22556,9 +22556,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_192 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_194 [3] = {91, 332, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_194 [3] = {91, 332, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_195 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_195 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22570,12 +22570,12 @@ static const int16_t gSuccessorTable_omnibus_grammar_195 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_197 [5] = {9, 344,
+static const int32_t gSuccessorTable_omnibus_grammar_197 [5] = {9, 344,
   94, 345, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_199 [3] = {102, 348, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_199 [3] = {102, 348, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_201 [17] = {36, 363,
+static const int32_t gSuccessorTable_omnibus_grammar_201 [17] = {36, 363,
   37, 364,
   39, 365,
   41, 366,
@@ -22584,13 +22584,13 @@ static const int16_t gSuccessorTable_omnibus_grammar_201 [17] = {36, 363,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_210 [3] = {111, 376, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_210 [3] = {111, 376, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_211 [3] = {112, 378, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_211 [3] = {112, 378, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_219 [3] = {196, 383, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_219 [3] = {196, 383, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_220 [19] = {46, 391,
+static const int32_t gSuccessorTable_omnibus_grammar_220 [19] = {46, 391,
   47, 392,
   48, 393,
   49, 394,
@@ -22600,12 +22600,12 @@ static const int16_t gSuccessorTable_omnibus_grammar_220 [19] = {46, 391,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_229 [3] = {201, 409, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_229 [3] = {201, 409, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_231 [5] = {59, 231,
+static const int32_t gSuccessorTable_omnibus_grammar_231 [5] = {59, 231,
   199, 411, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_235 [17] = {36, 413,
+static const int32_t gSuccessorTable_omnibus_grammar_235 [17] = {36, 413,
   37, 364,
   39, 365,
   41, 366,
@@ -22614,15 +22614,15 @@ static const int16_t gSuccessorTable_omnibus_grammar_235 [17] = {36, 413,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_237 [3] = {115, 415, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_237 [3] = {115, 415, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_239 [3] = {119, 417, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_239 [3] = {119, 417, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_241 [3] = {122, 419, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_241 [3] = {122, 419, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_242 [3] = {61, 421, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_242 [3] = {61, 421, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_243 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_243 [31] = {3, 187,
   20, 422,
   21, 170,
   22, 171,
@@ -22638,19 +22638,19 @@ static const int16_t gSuccessorTable_omnibus_grammar_243 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_245 [11] = {4, 245,
+static const int32_t gSuccessorTable_omnibus_grammar_245 [11] = {4, 245,
   12, 246,
   62, 146,
   71, 423,
   108, 29, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_246 [11] = {4, 245,
+static const int32_t gSuccessorTable_omnibus_grammar_246 [11] = {4, 245,
   12, 246,
   62, 146,
   71, 424,
   108, 29, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_259 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_259 [31] = {3, 187,
   20, 432,
   21, 170,
   22, 171,
@@ -22666,9 +22666,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_259 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_260 [3] = {183, 436, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_260 [3] = {183, 436, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_265 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_265 [31] = {3, 187,
   20, 438,
   21, 170,
   22, 171,
@@ -22684,17 +22684,17 @@ static const int16_t gSuccessorTable_omnibus_grammar_265 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_278 [5] = {42, 444,
+static const int32_t gSuccessorTable_omnibus_grammar_278 [5] = {42, 444,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_280 [5] = {42, 445,
+static const int32_t gSuccessorTable_omnibus_grammar_280 [5] = {42, 445,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_285 [3] = {152, 448, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_285 [3] = {152, 448, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_286 [3] = {3, 449, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_286 [3] = {3, 449, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_287 [29] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_287 [29] = {3, 187,
   21, 450,
   22, 171,
   23, 172,
@@ -22709,7 +22709,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_287 [29] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_289 [27] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_289 [27] = {3, 187,
   22, 451,
   23, 172,
   24, 173,
@@ -22723,7 +22723,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_289 [27] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_291 [25] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_291 [25] = {3, 187,
   23, 452,
   24, 173,
   25, 174,
@@ -22736,7 +22736,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_291 [25] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_293 [23] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_293 [23] = {3, 187,
   24, 453,
   25, 174,
   26, 175,
@@ -22748,7 +22748,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_293 [23] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_295 [21] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_295 [21] = {3, 187,
   25, 454,
   26, 175,
   27, 176,
@@ -22759,7 +22759,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_295 [21] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_297 [19] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_297 [19] = {3, 187,
   26, 455,
   27, 176,
   28, 177,
@@ -22769,7 +22769,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_297 [19] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_298 [19] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_298 [19] = {3, 187,
   26, 456,
   27, 176,
   28, 177,
@@ -22779,7 +22779,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_298 [19] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_300 [17] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_300 [17] = {3, 187,
   27, 457,
   28, 177,
   29, 178,
@@ -22788,7 +22788,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_300 [17] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_301 [17] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_301 [17] = {3, 187,
   27, 458,
   28, 177,
   29, 178,
@@ -22797,7 +22797,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_301 [17] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_302 [17] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_302 [17] = {3, 187,
   27, 459,
   28, 177,
   29, 178,
@@ -22806,7 +22806,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_302 [17] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_303 [17] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_303 [17] = {3, 187,
   27, 460,
   28, 177,
   29, 178,
@@ -22815,7 +22815,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_303 [17] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_305 [15] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_305 [15] = {3, 187,
   28, 461,
   29, 178,
   30, 179,
@@ -22823,7 +22823,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_305 [15] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_306 [15] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_306 [15] = {3, 187,
   28, 462,
   29, 178,
   30, 179,
@@ -22831,81 +22831,81 @@ static const int16_t gSuccessorTable_omnibus_grammar_306 [15] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_308 [13] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_308 [13] = {3, 187,
   29, 463,
   30, 179,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_309 [13] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_309 [13] = {3, 187,
   29, 464,
   30, 179,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_310 [13] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_310 [13] = {3, 187,
   29, 465,
   30, 179,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_311 [13] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_311 [13] = {3, 187,
   29, 466,
   30, 179,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_313 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_313 [11] = {3, 187,
   30, 467,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_314 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_314 [11] = {3, 187,
   30, 468,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_315 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_315 [11] = {3, 187,
   30, 469,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_316 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_316 [11] = {3, 187,
   30, 470,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_317 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_317 [11] = {3, 187,
   30, 471,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_318 [11] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_318 [11] = {3, 187,
   30, 472,
   31, 180,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_325 [3] = {86, 477, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_325 [3] = {86, 477, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_327 [3] = {74, 479, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_327 [3] = {74, 479, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_328 [3] = {8, 481, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_328 [3] = {8, 481, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_329 [3] = {93, 482, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_329 [3] = {93, 482, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_336 [3] = {124, 488, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_336 [3] = {124, 488, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_337 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_337 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22917,7 +22917,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_337 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_338 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_338 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22929,7 +22929,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_338 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_339 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_339 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22941,7 +22941,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_339 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_340 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_340 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22953,7 +22953,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_340 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_341 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_341 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -22965,13 +22965,13 @@ static const int16_t gSuccessorTable_omnibus_grammar_341 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_343 [5] = {3, 496,
+static const int32_t gSuccessorTable_omnibus_grammar_343 [5] = {3, 496,
   95, 497, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_344 [5] = {9, 344,
+static const int32_t gSuccessorTable_omnibus_grammar_344 [5] = {9, 344,
   94, 498, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_346 [35] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_346 [35] = {3, 187,
   10, 501,
   20, 502,
   21, 170,
@@ -22989,9 +22989,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_346 [35] = {3, 187,
   100, 503,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_349 [3] = {103, 506, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_349 [3] = {103, 506, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_355 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_355 [31] = {3, 187,
   20, 511,
   21, 170,
   22, 171,
@@ -23007,7 +23007,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_355 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_356 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_356 [31] = {3, 187,
   20, 512,
   21, 170,
   22, 171,
@@ -23023,11 +23023,11 @@ static const int16_t gSuccessorTable_omnibus_grammar_356 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_357 [3] = {164, 514, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_357 [3] = {164, 514, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_359 [3] = {157, 516, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_359 [3] = {157, 516, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_360 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_360 [31] = {3, 187,
   20, 517,
   21, 170,
   22, 171,
@@ -23043,9 +23043,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_360 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_361 [3] = {174, 520, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_361 [3] = {174, 520, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_362 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_362 [31] = {3, 187,
   20, 521,
   21, 170,
   22, 171,
@@ -23061,7 +23061,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_362 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_364 [15] = {37, 364,
+static const int32_t gSuccessorTable_omnibus_grammar_364 [15] = {37, 364,
   39, 365,
   41, 366,
   42, 367,
@@ -23069,23 +23069,23 @@ static const int16_t gSuccessorTable_omnibus_grammar_364 [15] = {37, 364,
   156, 523,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_367 [7] = {38, 536,
+static const int32_t gSuccessorTable_omnibus_grammar_367 [7] = {38, 536,
   45, 537,
   161, 538, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_368 [7] = {38, 541,
+static const int32_t gSuccessorTable_omnibus_grammar_368 [7] = {38, 541,
   158, 542,
   161, 538, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_370 [3] = {43, 545, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_370 [3] = {43, 545, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_377 [3] = {112, 546, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_377 [3] = {112, 546, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_378 [3] = {18, 548, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_378 [3] = {18, 548, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_382 [3] = {197, 551, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_382 [3] = {197, 551, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_386 [19] = {46, 553,
+static const int32_t gSuccessorTable_omnibus_grammar_386 [19] = {46, 553,
   47, 392,
   48, 393,
   49, 394,
@@ -23095,59 +23095,59 @@ static const int16_t gSuccessorTable_omnibus_grammar_386 [19] = {46, 553,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_387 [3] = {54, 554, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_387 [3] = {54, 554, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_388 [3] = {54, 555, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_388 [3] = {54, 555, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_392 [3] = {187, 557, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_392 [3] = {187, 557, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_393 [3] = {188, 559, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_393 [3] = {188, 559, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_394 [3] = {189, 561, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_394 [3] = {189, 561, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_395 [3] = {190, 564, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_395 [3] = {190, 564, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_396 [3] = {191, 569, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_396 [3] = {191, 569, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_397 [3] = {192, 572, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_397 [3] = {192, 572, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_398 [3] = {193, 575, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_398 [3] = {193, 575, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_399 [3] = {194, 581, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_399 [3] = {194, 581, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_401 [5] = {55, 583,
+static const int32_t gSuccessorTable_omnibus_grammar_401 [5] = {55, 583,
   195, 118, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_403 [3] = {186, 585, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_403 [3] = {186, 585, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_404 [5] = {55, 586,
+static const int32_t gSuccessorTable_omnibus_grammar_404 [5] = {55, 586,
   195, 118, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_409 [3] = {200, 588, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_409 [3] = {200, 588, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_412 [5] = {55, 589,
+static const int32_t gSuccessorTable_omnibus_grammar_412 [5] = {55, 589,
   195, 118, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_414 [3] = {115, 591, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_414 [3] = {115, 591, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_415 [3] = {18, 592, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_415 [3] = {18, 592, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_416 [3] = {119, 593, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_416 [3] = {119, 593, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_417 [3] = {19, 595, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_417 [3] = {19, 595, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_418 [3] = {122, 596, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_418 [3] = {122, 596, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_419 [3] = {19, 597, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_419 [3] = {19, 597, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_426 [5] = {3, 600,
+static const int32_t gSuccessorTable_omnibus_grammar_426 [5] = {3, 600,
   63, 601, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_427 [3] = {65, 603, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_427 [3] = {65, 603, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_428 [3] = {126, 605, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_428 [3] = {126, 605, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_429 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_429 [31] = {3, 187,
   20, 606,
   21, 170,
   22, 171,
@@ -23163,9 +23163,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_429 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_432 [3] = {151, 611, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_432 [3] = {151, 611, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_433 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_433 [31] = {3, 187,
   20, 612,
   21, 170,
   22, 171,
@@ -23181,14 +23181,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_433 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_434 [3] = {184, 616, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_434 [3] = {184, 616, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_437 [5] = {45, 620,
+static const int32_t gSuccessorTable_omnibus_grammar_437 [5] = {45, 620,
   150, 621, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_438 [3] = {180, 624, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_438 [3] = {180, 624, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_441 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_441 [31] = {3, 187,
   20, 626,
   21, 170,
   22, 171,
@@ -23204,7 +23204,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_441 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_442 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_442 [31] = {3, 187,
   20, 627,
   21, 170,
   22, 171,
@@ -23220,7 +23220,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_442 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_443 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_443 [31] = {3, 187,
   20, 628,
   21, 170,
   22, 171,
@@ -23236,7 +23236,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_443 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_446 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_446 [31] = {3, 187,
   20, 631,
   21, 170,
   22, 171,
@@ -23252,7 +23252,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_446 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_447 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_447 [31] = {3, 187,
   20, 632,
   21, 170,
   22, 171,
@@ -23268,53 +23268,53 @@ static const int16_t gSuccessorTable_omnibus_grammar_447 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_450 [3] = {132, 635, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_450 [3] = {132, 635, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_451 [3] = {133, 636, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_451 [3] = {133, 636, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_452 [3] = {134, 637, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_452 [3] = {134, 637, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_453 [3] = {135, 638, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_453 [3] = {135, 638, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_454 [3] = {136, 639, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_454 [3] = {136, 639, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_461 [3] = {139, 640, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_461 [3] = {139, 640, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_462 [3] = {139, 641, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_462 [3] = {139, 641, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_463 [3] = {140, 642, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_463 [3] = {140, 642, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_464 [3] = {140, 643, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_464 [3] = {140, 643, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_465 [3] = {140, 644, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_465 [3] = {140, 644, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_466 [3] = {140, 645, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_466 [3] = {140, 645, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_467 [3] = {141, 646, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_467 [3] = {141, 646, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_468 [3] = {141, 647, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_468 [3] = {141, 647, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_469 [3] = {141, 648, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_469 [3] = {141, 648, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_470 [3] = {141, 649, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_470 [3] = {141, 649, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_471 [3] = {141, 650, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_471 [3] = {141, 650, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_472 [3] = {141, 651, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_472 [3] = {141, 651, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_474 [5] = {32, 652,
+static const int32_t gSuccessorTable_omnibus_grammar_474 [5] = {32, 652,
   150, 264, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_478 [3] = {76, 656, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_478 [3] = {76, 656, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_480 [3] = {83, 659, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_480 [3] = {83, 659, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_481 [5] = {8, 660,
+static const int32_t gSuccessorTable_omnibus_grammar_481 [5] = {8, 660,
   78, 661, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_483 [3] = {91, 662, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_483 [3] = {91, 662, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_484 [17] = {36, 663,
+static const int32_t gSuccessorTable_omnibus_grammar_484 [17] = {36, 663,
   37, 364,
   39, 365,
   41, 366,
@@ -23323,7 +23323,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_484 [17] = {36, 663,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_485 [17] = {36, 664,
+static const int32_t gSuccessorTable_omnibus_grammar_485 [17] = {36, 664,
   37, 364,
   39, 365,
   41, 366,
@@ -23332,21 +23332,21 @@ static const int16_t gSuccessorTable_omnibus_grammar_485 [17] = {36, 664,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_495 [5] = {13, 666,
+static const int32_t gSuccessorTable_omnibus_grammar_495 [5] = {13, 666,
   110, 212, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_501 [3] = {99, 669, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_501 [3] = {99, 669, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_504 [3] = {102, 670, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_504 [3] = {102, 670, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_508 [5] = {3, 673,
+static const int32_t gSuccessorTable_omnibus_grammar_508 [5] = {3, 673,
   163, 674, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_509 [3] = {3, 676, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_509 [3] = {3, 676, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_510 [3] = {171, 678, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_510 [3] = {171, 678, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_514 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_514 [31] = {3, 187,
   20, 680,
   21, 170,
   22, 171,
@@ -23362,9 +23362,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_514 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_520 [3] = {3, 683, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_520 [3] = {3, 683, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_524 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_524 [31] = {3, 187,
   20, 685,
   21, 170,
   22, 171,
@@ -23380,7 +23380,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_524 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_536 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_536 [31] = {3, 187,
   20, 686,
   21, 170,
   22, 171,
@@ -23396,7 +23396,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_536 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_540 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_540 [31] = {3, 187,
   20, 687,
   21, 170,
   22, 171,
@@ -23412,7 +23412,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_540 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_542 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_542 [31] = {3, 187,
   20, 688,
   21, 170,
   22, 171,
@@ -23428,7 +23428,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_542 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_543 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_543 [31] = {3, 187,
   20, 689,
   21, 170,
   22, 171,
@@ -23444,14 +23444,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_543 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_547 [3] = {128, 694, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_547 [3] = {128, 694, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_549 [5] = {33, 696,
+static const int32_t gSuccessorTable_omnibus_grammar_549 [5] = {33, 696,
   153, 78, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_551 [3] = {196, 698, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_551 [3] = {196, 698, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_556 [17] = {47, 700,
+static const int32_t gSuccessorTable_omnibus_grammar_556 [17] = {47, 700,
   48, 393,
   49, 394,
   50, 395,
@@ -23460,7 +23460,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_556 [17] = {47, 700,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_558 [15] = {48, 701,
+static const int32_t gSuccessorTable_omnibus_grammar_558 [15] = {48, 701,
   49, 394,
   50, 395,
   51, 396,
@@ -23468,107 +23468,107 @@ static const int16_t gSuccessorTable_omnibus_grammar_558 [15] = {48, 701,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_560 [13] = {49, 702,
+static const int32_t gSuccessorTable_omnibus_grammar_560 [13] = {49, 702,
   50, 395,
   51, 396,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_562 [11] = {50, 703,
+static const int32_t gSuccessorTable_omnibus_grammar_562 [11] = {50, 703,
   51, 396,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_563 [11] = {50, 704,
+static const int32_t gSuccessorTable_omnibus_grammar_563 [11] = {50, 704,
   51, 396,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_565 [9] = {51, 705,
+static const int32_t gSuccessorTable_omnibus_grammar_565 [9] = {51, 705,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_566 [9] = {51, 706,
+static const int32_t gSuccessorTable_omnibus_grammar_566 [9] = {51, 706,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_567 [9] = {51, 707,
+static const int32_t gSuccessorTable_omnibus_grammar_567 [9] = {51, 707,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_568 [9] = {51, 708,
+static const int32_t gSuccessorTable_omnibus_grammar_568 [9] = {51, 708,
   52, 397,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_570 [7] = {52, 709,
+static const int32_t gSuccessorTable_omnibus_grammar_570 [7] = {52, 709,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_571 [7] = {52, 710,
+static const int32_t gSuccessorTable_omnibus_grammar_571 [7] = {52, 710,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_573 [5] = {53, 711,
+static const int32_t gSuccessorTable_omnibus_grammar_573 [5] = {53, 711,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_574 [5] = {53, 712,
+static const int32_t gSuccessorTable_omnibus_grammar_574 [5] = {53, 712,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_576 [3] = {54, 713, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_576 [3] = {54, 713, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_577 [3] = {54, 714, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_577 [3] = {54, 714, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_578 [3] = {54, 715, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_578 [3] = {54, 715, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_579 [3] = {54, 716, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_579 [3] = {54, 716, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_580 [3] = {54, 717, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_580 [3] = {54, 717, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_587 [3] = {201, 722, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_587 [3] = {201, 722, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_592 [3] = {116, 725, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_592 [3] = {116, 725, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_594 [3] = {131, 727, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_594 [3] = {131, 727, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_598 [3] = {61, 730, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_598 [3] = {61, 730, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_601 [3] = {64, 732, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_601 [3] = {64, 732, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_603 [5] = {3, 735,
+static const int32_t gSuccessorTable_omnibus_grammar_603 [5] = {3, 735,
   66, 736, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_604 [3] = {126, 737, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_604 [3] = {126, 737, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_605 [3] = {18, 738, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_605 [3] = {18, 738, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_606 [3] = {147, 740, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_606 [3] = {147, 740, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_611 [3] = {150, 743, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_611 [3] = {150, 743, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_612 [3] = {183, 744, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_612 [3] = {183, 744, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_613 [3] = {183, 745, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_613 [3] = {183, 745, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_617 [3] = {183, 747, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_617 [3] = {183, 747, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_620 [3] = {150, 749, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_620 [3] = {150, 749, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_625 [3] = {181, 751, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_625 [3] = {181, 751, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_632 [3] = {152, 756, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_632 [3] = {152, 756, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_653 [3] = {86, 757, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_653 [3] = {86, 757, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_655 [3] = {76, 758, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_655 [3] = {76, 758, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_657 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_657 [31] = {3, 187,
   20, 760,
   21, 170,
   22, 171,
@@ -23584,7 +23584,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_657 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_658 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_658 [31] = {3, 187,
   20, 761,
   21, 170,
   22, 171,
@@ -23600,14 +23600,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_658 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_660 [5] = {8, 660,
+static const int32_t gSuccessorTable_omnibus_grammar_660 [5] = {8, 660,
   78, 762, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_666 [3] = {96, 768, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_666 [3] = {96, 768, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_667 [3] = {18, 769, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_667 [3] = {18, 769, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_668 [35] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_668 [35] = {3, 187,
   10, 770,
   20, 502,
   21, 170,
@@ -23625,18 +23625,18 @@ static const int16_t gSuccessorTable_omnibus_grammar_668 [35] = {3, 187,
   100, 503,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_669 [3] = {98, 772, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_669 [3] = {98, 772, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_671 [9] = {5, 776,
+static const int32_t gSuccessorTable_omnibus_grammar_671 [9] = {5, 776,
   6, 777,
   11, 778,
   104, 779, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_672 [7] = {42, 783,
+static const int32_t gSuccessorTable_omnibus_grammar_672 [7] = {42, 783,
   160, 784,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_675 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_675 [31] = {3, 187,
   20, 786,
   21, 170,
   22, 171,
@@ -23652,9 +23652,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_675 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_676 [3] = {162, 788, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_676 [3] = {162, 788, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_677 [33] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_677 [33] = {3, 187,
   20, 790,
   21, 170,
   22, 171,
@@ -23671,7 +23671,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_677 [33] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_679 [17] = {36, 793,
+static const int32_t gSuccessorTable_omnibus_grammar_679 [17] = {36, 793,
   37, 364,
   39, 365,
   41, 366,
@@ -23680,7 +23680,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_679 [17] = {36, 793,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_681 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_681 [31] = {3, 187,
   20, 795,
   21, 170,
   22, 171,
@@ -23696,46 +23696,46 @@ static const int16_t gSuccessorTable_omnibus_grammar_681 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_689 [3] = {178, 802, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_689 [3] = {178, 802, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_690 [3] = {43, 803, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_690 [3] = {43, 803, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_692 [3] = {129, 807, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_692 [3] = {129, 807, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_693 [3] = {130, 810, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_693 [3] = {130, 810, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_700 [3] = {187, 815, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_700 [3] = {187, 815, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_701 [3] = {188, 816, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_701 [3] = {188, 816, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_702 [3] = {189, 817, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_702 [3] = {189, 817, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_709 [3] = {192, 818, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_709 [3] = {192, 818, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_710 [3] = {192, 819, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_710 [3] = {192, 819, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_711 [3] = {193, 820, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_711 [3] = {193, 820, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_712 [3] = {193, 821, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_712 [3] = {193, 821, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_713 [3] = {194, 822, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_713 [3] = {194, 822, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_714 [3] = {194, 823, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_714 [3] = {194, 823, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_715 [3] = {194, 824, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_715 [3] = {194, 824, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_716 [3] = {194, 825, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_716 [3] = {194, 825, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_717 [3] = {194, 826, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_717 [3] = {194, 826, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_721 [5] = {56, 829,
+static const int32_t gSuccessorTable_omnibus_grammar_721 [5] = {56, 829,
   198, 222, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_722 [3] = {200, 830, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_722 [3] = {200, 830, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_724 [3] = {3, 832, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_724 [3] = {3, 832, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_728 [17] = {36, 836,
+static const int32_t gSuccessorTable_omnibus_grammar_728 [17] = {36, 836,
   37, 364,
   39, 365,
   41, 366,
@@ -23744,7 +23744,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_728 [17] = {36, 836,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_729 [17] = {36, 837,
+static const int32_t gSuccessorTable_omnibus_grammar_729 [17] = {36, 837,
   37, 364,
   39, 365,
   41, 366,
@@ -23753,7 +23753,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_729 [17] = {36, 837,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_731 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_731 [31] = {3, 187,
   20, 838,
   21, 170,
   22, 171,
@@ -23769,9 +23769,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_731 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_733 [3] = {65, 839, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_733 [3] = {65, 839, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_734 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_734 [31] = {3, 187,
   20, 840,
   21, 170,
   22, 171,
@@ -23787,12 +23787,12 @@ static const int16_t gSuccessorTable_omnibus_grammar_734 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_735 [5] = {7, 843,
+static const int32_t gSuccessorTable_omnibus_grammar_735 [5] = {7, 843,
   67, 844, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_738 [3] = {127, 846, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_738 [3] = {127, 846, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_739 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_739 [31] = {3, 187,
   20, 847,
   21, 170,
   22, 171,
@@ -23808,7 +23808,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_739 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_741 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_741 [31] = {3, 187,
   20, 849,
   21, 170,
   22, 171,
@@ -23824,10 +23824,10 @@ static const int16_t gSuccessorTable_omnibus_grammar_741 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_746 [5] = {3, 851,
+static const int32_t gSuccessorTable_omnibus_grammar_746 [5] = {3, 851,
   185, 852, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_750 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_750 [31] = {3, 187,
   20, 854,
   21, 170,
   22, 171,
@@ -23843,11 +23843,11 @@ static const int16_t gSuccessorTable_omnibus_grammar_750 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_761 [3] = {84, 858, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_761 [3] = {84, 858, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_763 [3] = {79, 860, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_763 [3] = {79, 860, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_764 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_764 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -23859,7 +23859,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_764 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_765 [23] = {6, 337,
+static const int32_t gSuccessorTable_omnibus_grammar_765 [23] = {6, 337,
   12, 338,
   15, 339,
   16, 340,
@@ -23871,7 +23871,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_765 [23] = {6, 337,
   120, 32,
   125, 148, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_766 [17] = {36, 863,
+static const int32_t gSuccessorTable_omnibus_grammar_766 [17] = {36, 863,
   37, 364,
   39, 365,
   41, 366,
@@ -23880,13 +23880,13 @@ static const int16_t gSuccessorTable_omnibus_grammar_766 [17] = {36, 863,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_767 [3] = {96, 864, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_767 [3] = {96, 864, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_768 [3] = {18, 865, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_768 [3] = {18, 865, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_770 [3] = {99, 866, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_770 [3] = {99, 866, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_774 [33] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_774 [33] = {3, 187,
   20, 790,
   21, 170,
   22, 171,
@@ -23903,19 +23903,19 @@ static const int16_t gSuccessorTable_omnibus_grammar_774 [33] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_776 [9] = {5, 776,
+static const int32_t gSuccessorTable_omnibus_grammar_776 [9] = {5, 776,
   6, 777,
   11, 778,
   104, 872, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_778 [9] = {5, 776,
+static const int32_t gSuccessorTable_omnibus_grammar_778 [9] = {5, 776,
   6, 777,
   11, 778,
   104, 873, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_784 [3] = {159, 878, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_784 [3] = {159, 878, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_785 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_785 [31] = {3, 187,
   20, 879,
   21, 170,
   22, 171,
@@ -23931,7 +23931,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_785 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_787 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_787 [31] = {3, 187,
   20, 880,
   21, 170,
   22, 171,
@@ -23947,11 +23947,11 @@ static const int16_t gSuccessorTable_omnibus_grammar_787 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_789 [3] = {166, 882, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_789 [3] = {166, 882, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_790 [3] = {168, 884, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_790 [3] = {168, 884, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_794 [17] = {36, 887,
+static const int32_t gSuccessorTable_omnibus_grammar_794 [17] = {36, 887,
   37, 364,
   39, 365,
   41, 366,
@@ -23960,9 +23960,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_794 [17] = {36, 887,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_796 [3] = {172, 890, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_796 [3] = {172, 890, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_797 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_797 [31] = {3, 187,
   20, 891,
   21, 170,
   22, 171,
@@ -23978,7 +23978,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_797 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_799 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_799 [31] = {3, 187,
   20, 893,
   21, 170,
   22, 171,
@@ -23994,15 +23994,15 @@ static const int16_t gSuccessorTable_omnibus_grammar_799 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_802 [3] = {43, 894, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_802 [3] = {43, 894, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_804 [3] = {3, 895, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_804 [3] = {3, 895, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_807 [3] = {3, 896, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_807 [3] = {3, 896, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_810 [3] = {3, 897, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_810 [3] = {3, 897, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_812 [19] = {46, 898,
+static const int32_t gSuccessorTable_omnibus_grammar_812 [19] = {46, 898,
   47, 392,
   48, 393,
   49, 394,
@@ -24012,7 +24012,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_812 [19] = {46, 898,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_833 [17] = {36, 905,
+static const int32_t gSuccessorTable_omnibus_grammar_833 [17] = {36, 905,
   37, 364,
   39, 365,
   41, 366,
@@ -24021,9 +24021,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_833 [17] = {36, 905,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_834 [3] = {3, 906, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_834 [3] = {3, 906, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_841 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_841 [31] = {3, 187,
   20, 909,
   21, 170,
   22, 171,
@@ -24039,7 +24039,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_841 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_842 [19] = {36, 911,
+static const int32_t gSuccessorTable_omnibus_grammar_842 [19] = {36, 911,
   37, 364,
   39, 365,
   41, 366,
@@ -24049,26 +24049,26 @@ static const int16_t gSuccessorTable_omnibus_grammar_842 [19] = {36, 911,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_845 [7] = {41, 913,
+static const int32_t gSuccessorTable_omnibus_grammar_845 [7] = {41, 913,
   42, 914,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_847 [3] = {147, 916, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_847 [3] = {147, 916, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_849 [3] = {149, 918, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_849 [3] = {149, 918, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_850 [3] = {150, 919, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_850 [3] = {150, 919, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_852 [3] = {183, 920, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_852 [3] = {183, 920, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_853 [3] = {183, 921, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_853 [3] = {183, 921, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_854 [3] = {182, 924, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_854 [3] = {182, 924, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_855 [5] = {31, 926,
+static const int32_t gSuccessorTable_omnibus_grammar_855 [5] = {31, 926,
   146, 927, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_856 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_856 [31] = {3, 187,
   20, 928,
   21, 170,
   22, 171,
@@ -24084,14 +24084,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_856 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_859 [3] = {81, 931, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_859 [3] = {81, 931, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_860 [5] = {8, 932,
+static const int32_t gSuccessorTable_omnibus_grammar_860 [5] = {8, 932,
   77, 933, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_865 [3] = {97, 936, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_865 [3] = {97, 936, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_867 [35] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_867 [35] = {3, 187,
   10, 937,
   20, 502,
   21, 170,
@@ -24109,15 +24109,15 @@ static const int16_t gSuccessorTable_omnibus_grammar_867 [35] = {3, 187,
   100, 503,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_869 [3] = {18, 938, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_869 [3] = {18, 938, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_877 [7] = {42, 783,
+static const int32_t gSuccessorTable_omnibus_grammar_877 [7] = {42, 783,
   160, 941,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_883 [3] = {169, 946, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_883 [3] = {169, 946, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_885 [17] = {36, 947,
+static const int32_t gSuccessorTable_omnibus_grammar_885 [17] = {36, 947,
   37, 364,
   39, 365,
   41, 366,
@@ -24126,28 +24126,28 @@ static const int16_t gSuccessorTable_omnibus_grammar_885 [17] = {36, 947,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_889 [3] = {173, 950, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_889 [3] = {173, 950, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_892 [3] = {176, 954, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_892 [3] = {176, 954, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_895 [3] = {128, 955, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_895 [3] = {128, 955, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_896 [3] = {128, 956, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_896 [3] = {128, 956, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_897 [3] = {128, 957, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_897 [3] = {128, 957, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_903 [7] = {58, 962,
+static const int32_t gSuccessorTable_omnibus_grammar_903 [7] = {58, 962,
   59, 231,
   199, 232, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_904 [5] = {55, 963,
+static const int32_t gSuccessorTable_omnibus_grammar_904 [5] = {55, 963,
   195, 118, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_906 [3] = {131, 965, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_906 [3] = {131, 965, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_914 [3] = {45, 537, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_914 [3] = {45, 537, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_915 [17] = {36, 968,
+static const int32_t gSuccessorTable_omnibus_grammar_915 [17] = {36, 968,
   37, 364,
   39, 365,
   41, 366,
@@ -24156,7 +24156,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_915 [17] = {36, 968,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_917 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_917 [31] = {3, 187,
   20, 969,
   21, 170,
   22, 171,
@@ -24172,7 +24172,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_917 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_925 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_925 [31] = {3, 187,
   20, 971,
   21, 170,
   22, 171,
@@ -24188,21 +24188,21 @@ static const int16_t gSuccessorTable_omnibus_grammar_925 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_929 [3] = {82, 974, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_929 [3] = {82, 974, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_931 [5] = {80, 975,
+static const int32_t gSuccessorTable_omnibus_grammar_931 [5] = {80, 975,
   81, 976, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_932 [5] = {8, 660,
+static const int32_t gSuccessorTable_omnibus_grammar_932 [5] = {8, 660,
   78, 977, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_935 [3] = {3, 979, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_935 [3] = {3, 979, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_937 [3] = {99, 980, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_937 [3] = {99, 980, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_938 [3] = {105, 982, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_938 [3] = {105, 982, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_939 [17] = {36, 983,
+static const int32_t gSuccessorTable_omnibus_grammar_939 [17] = {36, 983,
   37, 364,
   39, 365,
   41, 366,
@@ -24211,17 +24211,17 @@ static const int16_t gSuccessorTable_omnibus_grammar_939 [17] = {36, 983,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_940 [3] = {106, 985, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_940 [3] = {106, 985, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_941 [3] = {159, 986, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_941 [3] = {159, 986, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_944 [3] = {167, 989, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_944 [3] = {167, 989, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_947 [3] = {171, 992, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_947 [3] = {171, 992, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_948 [3] = {165, 994, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_948 [3] = {165, 994, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_950 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_950 [31] = {3, 187,
   20, 995,
   21, 170,
   22, 171,
@@ -24237,7 +24237,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_950 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_951 [17] = {36, 996,
+static const int32_t gSuccessorTable_omnibus_grammar_951 [17] = {36, 996,
   37, 364,
   39, 365,
   41, 366,
@@ -24246,7 +24246,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_951 [17] = {36, 996,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_952 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_952 [31] = {3, 187,
   20, 997,
   21, 170,
   22, 171,
@@ -24262,7 +24262,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_952 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_960 [19] = {46, 1001,
+static const int32_t gSuccessorTable_omnibus_grammar_960 [19] = {46, 1001,
   47, 392,
   48, 393,
   49, 394,
@@ -24272,11 +24272,11 @@ static const int16_t gSuccessorTable_omnibus_grammar_960 [19] = {46, 1001,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_961 [7] = {58, 1002,
+static const int32_t gSuccessorTable_omnibus_grammar_961 [7] = {58, 1002,
   59, 231,
   199, 232, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_966 [17] = {36, 1005,
+static const int32_t gSuccessorTable_omnibus_grammar_966 [17] = {36, 1005,
   37, 364,
   39, 365,
   41, 366,
@@ -24285,9 +24285,9 @@ static const int16_t gSuccessorTable_omnibus_grammar_966 [17] = {36, 1005,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_969 [3] = {149, 1007, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_969 [3] = {149, 1007, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_972 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_972 [31] = {3, 187,
   20, 1009,
   21, 170,
   22, 171,
@@ -24303,14 +24303,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_972 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_976 [5] = {80, 1012,
+static const int32_t gSuccessorTable_omnibus_grammar_976 [5] = {80, 1012,
   81, 976, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_980 [3] = {98, 1014, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_980 [3] = {98, 1014, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_981 [3] = {3, 1015, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_981 [3] = {3, 1015, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_987 [31] = {3, 187,
+static const int32_t gSuccessorTable_omnibus_grammar_987 [31] = {3, 187,
   20, 1020,
   21, 170,
   22, 171,
@@ -24326,15 +24326,15 @@ static const int16_t gSuccessorTable_omnibus_grammar_987 [31] = {3, 187,
   44, 181,
   145, 182, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_989 [3] = {45, 1022, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_989 [3] = {45, 1022, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_991 [3] = {170, 1024, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_991 [3] = {170, 1024, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_993 [3] = {39, 1026, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_993 [3] = {39, 1026, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_998 [3] = {176, 1029, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_998 [3] = {176, 1029, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_999 [17] = {36, 1030,
+static const int32_t gSuccessorTable_omnibus_grammar_999 [17] = {36, 1030,
   37, 364,
   39, 365,
   41, 366,
@@ -24343,13 +24343,13 @@ static const int16_t gSuccessorTable_omnibus_grammar_999 [17] = {36, 1030,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1004 [7] = {58, 1034,
+static const int32_t gSuccessorTable_omnibus_grammar_1004 [7] = {58, 1034,
   59, 231,
   199, 232, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1013 [3] = {79, 1037, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1013 [3] = {79, 1037, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1016 [17] = {36, 1038,
+static const int32_t gSuccessorTable_omnibus_grammar_1016 [17] = {36, 1038,
   37, 364,
   39, 365,
   41, 366,
@@ -24358,14 +24358,14 @@ static const int16_t gSuccessorTable_omnibus_grammar_1016 [17] = {36, 1038,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1017 [9] = {5, 776,
+static const int32_t gSuccessorTable_omnibus_grammar_1017 [9] = {5, 776,
   6, 777,
   11, 778,
   104, 1039, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1018 [3] = {107, 1041, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1018 [3] = {107, 1041, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1019 [17] = {36, 1042,
+static const int32_t gSuccessorTable_omnibus_grammar_1019 [17] = {36, 1042,
   37, 364,
   39, 365,
   41, 366,
@@ -24374,11 +24374,11 @@ static const int16_t gSuccessorTable_omnibus_grammar_1019 [17] = {36, 1042,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1021 [3] = {167, 1043, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1021 [3] = {167, 1043, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1024 [3] = {45, 1045, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1024 [3] = {45, 1045, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1025 [17] = {36, 1046,
+static const int32_t gSuccessorTable_omnibus_grammar_1025 [17] = {36, 1046,
   37, 364,
   39, 365,
   41, 366,
@@ -24387,7 +24387,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_1025 [17] = {36, 1046,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1028 [17] = {36, 1047,
+static const int32_t gSuccessorTable_omnibus_grammar_1028 [17] = {36, 1047,
   37, 364,
   39, 365,
   41, 366,
@@ -24396,27 +24396,27 @@ static const int16_t gSuccessorTable_omnibus_grammar_1028 [17] = {36, 1047,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1030 [3] = {175, 1049, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1030 [3] = {175, 1049, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1035 [3] = {69, 1053, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1035 [3] = {69, 1053, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1036 [3] = {85, 1055, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1036 [3] = {85, 1055, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1037 [5] = {8, 932,
+static const int32_t gSuccessorTable_omnibus_grammar_1037 [5] = {8, 932,
   77, 1056, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1044 [3] = {170, 1060, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1044 [3] = {170, 1060, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1057 [9] = {5, 776,
+static const int32_t gSuccessorTable_omnibus_grammar_1057 [9] = {5, 776,
   6, 777,
   11, 778,
   104, 1067, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1058 [3] = {107, 1068, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1058 [3] = {107, 1068, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1063 [3] = {176, 1069, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1063 [3] = {176, 1069, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1065 [19] = {46, 1070,
+static const int32_t gSuccessorTable_omnibus_grammar_1065 [19] = {46, 1070,
   47, 392,
   48, 393,
   49, 394,
@@ -24426,7 +24426,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_1065 [19] = {46, 1070,
   53, 398,
   54, 399, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1066 [17] = {36, 1071,
+static const int32_t gSuccessorTable_omnibus_grammar_1066 [17] = {36, 1071,
   37, 364,
   39, 365,
   41, 366,
@@ -24435,7 +24435,7 @@ static const int16_t gSuccessorTable_omnibus_grammar_1066 [17] = {36, 1071,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1072 [17] = {36, 1075,
+static const int32_t gSuccessorTable_omnibus_grammar_1072 [17] = {36, 1075,
   37, 364,
   39, 365,
   41, 366,
@@ -24444,281 +24444,281 @@ static const int16_t gSuccessorTable_omnibus_grammar_1072 [17] = {36, 1075,
   156, 369,
   177, 370, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1074 [3] = {69, 1076, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1074 [3] = {69, 1076, -1} ;
 
-static const int16_t gSuccessorTable_omnibus_grammar_1075 [3] = {175, 1077, -1} ;
+static const int32_t gSuccessorTable_omnibus_grammar_1075 [3] = {175, 1077, -1} ;
 
-static const int16_t * gSuccessorTable_omnibus_grammar [1078] = {
-gSuccessorTable_omnibus_grammar_0, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_5, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_16, gSuccessorTable_omnibus_grammar_17, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_22, NULL, 
-  gSuccessorTable_omnibus_grammar_24, NULL, gSuccessorTable_omnibus_grammar_26, gSuccessorTable_omnibus_grammar_27, 
-  NULL, gSuccessorTable_omnibus_grammar_29, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_36, NULL, gSuccessorTable_omnibus_grammar_38, NULL, 
-  gSuccessorTable_omnibus_grammar_40, gSuccessorTable_omnibus_grammar_41, NULL, gSuccessorTable_omnibus_grammar_43, 
-  gSuccessorTable_omnibus_grammar_44, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_48, NULL, NULL, NULL, 
+static const int32_t * gSuccessorTable_omnibus_grammar [1078] = {
+gSuccessorTable_omnibus_grammar_0, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_5, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_16, gSuccessorTable_omnibus_grammar_17, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_22, nullptr, 
+  gSuccessorTable_omnibus_grammar_24, nullptr, gSuccessorTable_omnibus_grammar_26, gSuccessorTable_omnibus_grammar_27, 
+  nullptr, gSuccessorTable_omnibus_grammar_29, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_36, nullptr, gSuccessorTable_omnibus_grammar_38, nullptr, 
+  gSuccessorTable_omnibus_grammar_40, gSuccessorTable_omnibus_grammar_41, nullptr, gSuccessorTable_omnibus_grammar_43, 
+  gSuccessorTable_omnibus_grammar_44, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_48, nullptr, nullptr, nullptr, 
   gSuccessorTable_omnibus_grammar_52, gSuccessorTable_omnibus_grammar_53, gSuccessorTable_omnibus_grammar_54, gSuccessorTable_omnibus_grammar_55, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_79, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_83, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_86, gSuccessorTable_omnibus_grammar_87, 
-  NULL, gSuccessorTable_omnibus_grammar_89, NULL, gSuccessorTable_omnibus_grammar_91, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_94, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_97, NULL, gSuccessorTable_omnibus_grammar_99, 
-  gSuccessorTable_omnibus_grammar_100, NULL, NULL, gSuccessorTable_omnibus_grammar_103, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_108, gSuccessorTable_omnibus_grammar_109, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_116, gSuccessorTable_omnibus_grammar_117, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_126, NULL, 
-  gSuccessorTable_omnibus_grammar_128, NULL, gSuccessorTable_omnibus_grammar_130, NULL, 
-  gSuccessorTable_omnibus_grammar_132, gSuccessorTable_omnibus_grammar_133, gSuccessorTable_omnibus_grammar_134, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_140, NULL, gSuccessorTable_omnibus_grammar_142, gSuccessorTable_omnibus_grammar_143, 
-  gSuccessorTable_omnibus_grammar_144, gSuccessorTable_omnibus_grammar_145, gSuccessorTable_omnibus_grammar_146, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_151, 
-  NULL, gSuccessorTable_omnibus_grammar_153, gSuccessorTable_omnibus_grammar_154, gSuccessorTable_omnibus_grammar_155, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_79, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_83, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_86, gSuccessorTable_omnibus_grammar_87, 
+  nullptr, gSuccessorTable_omnibus_grammar_89, nullptr, gSuccessorTable_omnibus_grammar_91, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_94, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_97, nullptr, gSuccessorTable_omnibus_grammar_99, 
+  gSuccessorTable_omnibus_grammar_100, nullptr, nullptr, gSuccessorTable_omnibus_grammar_103, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_108, gSuccessorTable_omnibus_grammar_109, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_116, gSuccessorTable_omnibus_grammar_117, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_126, nullptr, 
+  gSuccessorTable_omnibus_grammar_128, nullptr, gSuccessorTable_omnibus_grammar_130, nullptr, 
+  gSuccessorTable_omnibus_grammar_132, gSuccessorTable_omnibus_grammar_133, gSuccessorTable_omnibus_grammar_134, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_140, nullptr, gSuccessorTable_omnibus_grammar_142, gSuccessorTable_omnibus_grammar_143, 
+  gSuccessorTable_omnibus_grammar_144, gSuccessorTable_omnibus_grammar_145, gSuccessorTable_omnibus_grammar_146, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_151, 
+  nullptr, gSuccessorTable_omnibus_grammar_153, gSuccessorTable_omnibus_grammar_154, gSuccessorTable_omnibus_grammar_155, 
   gSuccessorTable_omnibus_grammar_156, gSuccessorTable_omnibus_grammar_157, gSuccessorTable_omnibus_grammar_158, gSuccessorTable_omnibus_grammar_159, 
   gSuccessorTable_omnibus_grammar_160, gSuccessorTable_omnibus_grammar_161, gSuccessorTable_omnibus_grammar_162, gSuccessorTable_omnibus_grammar_163, 
-  gSuccessorTable_omnibus_grammar_164, NULL, NULL, gSuccessorTable_omnibus_grammar_167, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_170, gSuccessorTable_omnibus_grammar_171, 
+  gSuccessorTable_omnibus_grammar_164, nullptr, nullptr, gSuccessorTable_omnibus_grammar_167, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_170, gSuccessorTable_omnibus_grammar_171, 
   gSuccessorTable_omnibus_grammar_172, gSuccessorTable_omnibus_grammar_173, gSuccessorTable_omnibus_grammar_174, gSuccessorTable_omnibus_grammar_175, 
   gSuccessorTable_omnibus_grammar_176, gSuccessorTable_omnibus_grammar_177, gSuccessorTable_omnibus_grammar_178, gSuccessorTable_omnibus_grammar_179, 
-  NULL, gSuccessorTable_omnibus_grammar_181, NULL, gSuccessorTable_omnibus_grammar_183, 
-  NULL, gSuccessorTable_omnibus_grammar_185, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_190, NULL, 
-  gSuccessorTable_omnibus_grammar_192, NULL, gSuccessorTable_omnibus_grammar_194, gSuccessorTable_omnibus_grammar_195, 
-  NULL, gSuccessorTable_omnibus_grammar_197, NULL, gSuccessorTable_omnibus_grammar_199, 
-  NULL, gSuccessorTable_omnibus_grammar_201, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_210, gSuccessorTable_omnibus_grammar_211, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_219, 
-  gSuccessorTable_omnibus_grammar_220, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_229, NULL, gSuccessorTable_omnibus_grammar_231, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_235, 
-  NULL, gSuccessorTable_omnibus_grammar_237, NULL, gSuccessorTable_omnibus_grammar_239, 
-  NULL, gSuccessorTable_omnibus_grammar_241, gSuccessorTable_omnibus_grammar_242, gSuccessorTable_omnibus_grammar_243, 
-  NULL, gSuccessorTable_omnibus_grammar_245, gSuccessorTable_omnibus_grammar_246, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_259, 
-  gSuccessorTable_omnibus_grammar_260, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_265, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_278, NULL, 
-  gSuccessorTable_omnibus_grammar_280, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_285, gSuccessorTable_omnibus_grammar_286, gSuccessorTable_omnibus_grammar_287, 
-  NULL, gSuccessorTable_omnibus_grammar_289, NULL, gSuccessorTable_omnibus_grammar_291, 
-  NULL, gSuccessorTable_omnibus_grammar_293, NULL, gSuccessorTable_omnibus_grammar_295, 
-  NULL, gSuccessorTable_omnibus_grammar_297, gSuccessorTable_omnibus_grammar_298, NULL, 
+  nullptr, gSuccessorTable_omnibus_grammar_181, nullptr, gSuccessorTable_omnibus_grammar_183, 
+  nullptr, gSuccessorTable_omnibus_grammar_185, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_190, nullptr, 
+  gSuccessorTable_omnibus_grammar_192, nullptr, gSuccessorTable_omnibus_grammar_194, gSuccessorTable_omnibus_grammar_195, 
+  nullptr, gSuccessorTable_omnibus_grammar_197, nullptr, gSuccessorTable_omnibus_grammar_199, 
+  nullptr, gSuccessorTable_omnibus_grammar_201, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_210, gSuccessorTable_omnibus_grammar_211, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_219, 
+  gSuccessorTable_omnibus_grammar_220, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_229, nullptr, gSuccessorTable_omnibus_grammar_231, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_235, 
+  nullptr, gSuccessorTable_omnibus_grammar_237, nullptr, gSuccessorTable_omnibus_grammar_239, 
+  nullptr, gSuccessorTable_omnibus_grammar_241, gSuccessorTable_omnibus_grammar_242, gSuccessorTable_omnibus_grammar_243, 
+  nullptr, gSuccessorTable_omnibus_grammar_245, gSuccessorTable_omnibus_grammar_246, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_259, 
+  gSuccessorTable_omnibus_grammar_260, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_265, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_278, nullptr, 
+  gSuccessorTable_omnibus_grammar_280, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_285, gSuccessorTable_omnibus_grammar_286, gSuccessorTable_omnibus_grammar_287, 
+  nullptr, gSuccessorTable_omnibus_grammar_289, nullptr, gSuccessorTable_omnibus_grammar_291, 
+  nullptr, gSuccessorTable_omnibus_grammar_293, nullptr, gSuccessorTable_omnibus_grammar_295, 
+  nullptr, gSuccessorTable_omnibus_grammar_297, gSuccessorTable_omnibus_grammar_298, nullptr, 
   gSuccessorTable_omnibus_grammar_300, gSuccessorTable_omnibus_grammar_301, gSuccessorTable_omnibus_grammar_302, gSuccessorTable_omnibus_grammar_303, 
-  NULL, gSuccessorTable_omnibus_grammar_305, gSuccessorTable_omnibus_grammar_306, NULL, 
+  nullptr, gSuccessorTable_omnibus_grammar_305, gSuccessorTable_omnibus_grammar_306, nullptr, 
   gSuccessorTable_omnibus_grammar_308, gSuccessorTable_omnibus_grammar_309, gSuccessorTable_omnibus_grammar_310, gSuccessorTable_omnibus_grammar_311, 
-  NULL, gSuccessorTable_omnibus_grammar_313, gSuccessorTable_omnibus_grammar_314, gSuccessorTable_omnibus_grammar_315, 
-  gSuccessorTable_omnibus_grammar_316, gSuccessorTable_omnibus_grammar_317, gSuccessorTable_omnibus_grammar_318, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_325, NULL, gSuccessorTable_omnibus_grammar_327, 
-  gSuccessorTable_omnibus_grammar_328, gSuccessorTable_omnibus_grammar_329, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
+  nullptr, gSuccessorTable_omnibus_grammar_313, gSuccessorTable_omnibus_grammar_314, gSuccessorTable_omnibus_grammar_315, 
+  gSuccessorTable_omnibus_grammar_316, gSuccessorTable_omnibus_grammar_317, gSuccessorTable_omnibus_grammar_318, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_325, nullptr, gSuccessorTable_omnibus_grammar_327, 
+  gSuccessorTable_omnibus_grammar_328, gSuccessorTable_omnibus_grammar_329, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
   gSuccessorTable_omnibus_grammar_336, gSuccessorTable_omnibus_grammar_337, gSuccessorTable_omnibus_grammar_338, gSuccessorTable_omnibus_grammar_339, 
-  gSuccessorTable_omnibus_grammar_340, gSuccessorTable_omnibus_grammar_341, NULL, gSuccessorTable_omnibus_grammar_343, 
-  gSuccessorTable_omnibus_grammar_344, NULL, gSuccessorTable_omnibus_grammar_346, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_349, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_355, 
-  gSuccessorTable_omnibus_grammar_356, gSuccessorTable_omnibus_grammar_357, NULL, gSuccessorTable_omnibus_grammar_359, 
-  gSuccessorTable_omnibus_grammar_360, gSuccessorTable_omnibus_grammar_361, gSuccessorTable_omnibus_grammar_362, NULL, 
-  gSuccessorTable_omnibus_grammar_364, NULL, NULL, gSuccessorTable_omnibus_grammar_367, 
-  gSuccessorTable_omnibus_grammar_368, NULL, gSuccessorTable_omnibus_grammar_370, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_377, gSuccessorTable_omnibus_grammar_378, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_382, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_386, gSuccessorTable_omnibus_grammar_387, 
-  gSuccessorTable_omnibus_grammar_388, NULL, NULL, NULL, 
+  gSuccessorTable_omnibus_grammar_340, gSuccessorTable_omnibus_grammar_341, nullptr, gSuccessorTable_omnibus_grammar_343, 
+  gSuccessorTable_omnibus_grammar_344, nullptr, gSuccessorTable_omnibus_grammar_346, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_349, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_355, 
+  gSuccessorTable_omnibus_grammar_356, gSuccessorTable_omnibus_grammar_357, nullptr, gSuccessorTable_omnibus_grammar_359, 
+  gSuccessorTable_omnibus_grammar_360, gSuccessorTable_omnibus_grammar_361, gSuccessorTable_omnibus_grammar_362, nullptr, 
+  gSuccessorTable_omnibus_grammar_364, nullptr, nullptr, gSuccessorTable_omnibus_grammar_367, 
+  gSuccessorTable_omnibus_grammar_368, nullptr, gSuccessorTable_omnibus_grammar_370, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_377, gSuccessorTable_omnibus_grammar_378, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_382, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_386, gSuccessorTable_omnibus_grammar_387, 
+  gSuccessorTable_omnibus_grammar_388, nullptr, nullptr, nullptr, 
   gSuccessorTable_omnibus_grammar_392, gSuccessorTable_omnibus_grammar_393, gSuccessorTable_omnibus_grammar_394, gSuccessorTable_omnibus_grammar_395, 
   gSuccessorTable_omnibus_grammar_396, gSuccessorTable_omnibus_grammar_397, gSuccessorTable_omnibus_grammar_398, gSuccessorTable_omnibus_grammar_399, 
-  NULL, gSuccessorTable_omnibus_grammar_401, NULL, gSuccessorTable_omnibus_grammar_403, 
-  gSuccessorTable_omnibus_grammar_404, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_409, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_412, NULL, gSuccessorTable_omnibus_grammar_414, gSuccessorTable_omnibus_grammar_415, 
+  nullptr, gSuccessorTable_omnibus_grammar_401, nullptr, gSuccessorTable_omnibus_grammar_403, 
+  gSuccessorTable_omnibus_grammar_404, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_409, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_412, nullptr, gSuccessorTable_omnibus_grammar_414, gSuccessorTable_omnibus_grammar_415, 
   gSuccessorTable_omnibus_grammar_416, gSuccessorTable_omnibus_grammar_417, gSuccessorTable_omnibus_grammar_418, gSuccessorTable_omnibus_grammar_419, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_426, gSuccessorTable_omnibus_grammar_427, 
-  gSuccessorTable_omnibus_grammar_428, gSuccessorTable_omnibus_grammar_429, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_432, gSuccessorTable_omnibus_grammar_433, gSuccessorTable_omnibus_grammar_434, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_437, gSuccessorTable_omnibus_grammar_438, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_441, gSuccessorTable_omnibus_grammar_442, gSuccessorTable_omnibus_grammar_443, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_446, gSuccessorTable_omnibus_grammar_447, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_450, gSuccessorTable_omnibus_grammar_451, 
-  gSuccessorTable_omnibus_grammar_452, gSuccessorTable_omnibus_grammar_453, gSuccessorTable_omnibus_grammar_454, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_461, gSuccessorTable_omnibus_grammar_462, gSuccessorTable_omnibus_grammar_463, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_426, gSuccessorTable_omnibus_grammar_427, 
+  gSuccessorTable_omnibus_grammar_428, gSuccessorTable_omnibus_grammar_429, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_432, gSuccessorTable_omnibus_grammar_433, gSuccessorTable_omnibus_grammar_434, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_437, gSuccessorTable_omnibus_grammar_438, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_441, gSuccessorTable_omnibus_grammar_442, gSuccessorTable_omnibus_grammar_443, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_446, gSuccessorTable_omnibus_grammar_447, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_450, gSuccessorTable_omnibus_grammar_451, 
+  gSuccessorTable_omnibus_grammar_452, gSuccessorTable_omnibus_grammar_453, gSuccessorTable_omnibus_grammar_454, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_461, gSuccessorTable_omnibus_grammar_462, gSuccessorTable_omnibus_grammar_463, 
   gSuccessorTable_omnibus_grammar_464, gSuccessorTable_omnibus_grammar_465, gSuccessorTable_omnibus_grammar_466, gSuccessorTable_omnibus_grammar_467, 
   gSuccessorTable_omnibus_grammar_468, gSuccessorTable_omnibus_grammar_469, gSuccessorTable_omnibus_grammar_470, gSuccessorTable_omnibus_grammar_471, 
-  gSuccessorTable_omnibus_grammar_472, NULL, gSuccessorTable_omnibus_grammar_474, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_478, NULL, 
-  gSuccessorTable_omnibus_grammar_480, gSuccessorTable_omnibus_grammar_481, NULL, gSuccessorTable_omnibus_grammar_483, 
-  gSuccessorTable_omnibus_grammar_484, gSuccessorTable_omnibus_grammar_485, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_495, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_501, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_504, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_508, gSuccessorTable_omnibus_grammar_509, gSuccessorTable_omnibus_grammar_510, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_514, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_520, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_524, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_536, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_540, NULL, gSuccessorTable_omnibus_grammar_542, gSuccessorTable_omnibus_grammar_543, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_547, 
-  NULL, gSuccessorTable_omnibus_grammar_549, NULL, gSuccessorTable_omnibus_grammar_551, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_556, NULL, gSuccessorTable_omnibus_grammar_558, NULL, 
-  gSuccessorTable_omnibus_grammar_560, NULL, gSuccessorTable_omnibus_grammar_562, gSuccessorTable_omnibus_grammar_563, 
-  NULL, gSuccessorTable_omnibus_grammar_565, gSuccessorTable_omnibus_grammar_566, gSuccessorTable_omnibus_grammar_567, 
-  gSuccessorTable_omnibus_grammar_568, NULL, gSuccessorTable_omnibus_grammar_570, gSuccessorTable_omnibus_grammar_571, 
-  NULL, gSuccessorTable_omnibus_grammar_573, gSuccessorTable_omnibus_grammar_574, NULL, 
+  gSuccessorTable_omnibus_grammar_472, nullptr, gSuccessorTable_omnibus_grammar_474, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_478, nullptr, 
+  gSuccessorTable_omnibus_grammar_480, gSuccessorTable_omnibus_grammar_481, nullptr, gSuccessorTable_omnibus_grammar_483, 
+  gSuccessorTable_omnibus_grammar_484, gSuccessorTable_omnibus_grammar_485, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_495, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_501, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_504, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_508, gSuccessorTable_omnibus_grammar_509, gSuccessorTable_omnibus_grammar_510, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_514, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_520, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_524, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_536, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_540, nullptr, gSuccessorTable_omnibus_grammar_542, gSuccessorTable_omnibus_grammar_543, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_547, 
+  nullptr, gSuccessorTable_omnibus_grammar_549, nullptr, gSuccessorTable_omnibus_grammar_551, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_556, nullptr, gSuccessorTable_omnibus_grammar_558, nullptr, 
+  gSuccessorTable_omnibus_grammar_560, nullptr, gSuccessorTable_omnibus_grammar_562, gSuccessorTable_omnibus_grammar_563, 
+  nullptr, gSuccessorTable_omnibus_grammar_565, gSuccessorTable_omnibus_grammar_566, gSuccessorTable_omnibus_grammar_567, 
+  gSuccessorTable_omnibus_grammar_568, nullptr, gSuccessorTable_omnibus_grammar_570, gSuccessorTable_omnibus_grammar_571, 
+  nullptr, gSuccessorTable_omnibus_grammar_573, gSuccessorTable_omnibus_grammar_574, nullptr, 
   gSuccessorTable_omnibus_grammar_576, gSuccessorTable_omnibus_grammar_577, gSuccessorTable_omnibus_grammar_578, gSuccessorTable_omnibus_grammar_579, 
-  gSuccessorTable_omnibus_grammar_580, NULL, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_587, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_592, NULL, gSuccessorTable_omnibus_grammar_594, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_598, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_601, NULL, gSuccessorTable_omnibus_grammar_603, 
-  gSuccessorTable_omnibus_grammar_604, gSuccessorTable_omnibus_grammar_605, gSuccessorTable_omnibus_grammar_606, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_611, 
-  gSuccessorTable_omnibus_grammar_612, gSuccessorTable_omnibus_grammar_613, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_617, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_620, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_625, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_632, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_653, NULL, gSuccessorTable_omnibus_grammar_655, 
-  NULL, gSuccessorTable_omnibus_grammar_657, gSuccessorTable_omnibus_grammar_658, NULL, 
-  gSuccessorTable_omnibus_grammar_660, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_666, gSuccessorTable_omnibus_grammar_667, 
-  gSuccessorTable_omnibus_grammar_668, gSuccessorTable_omnibus_grammar_669, NULL, gSuccessorTable_omnibus_grammar_671, 
-  gSuccessorTable_omnibus_grammar_672, NULL, NULL, gSuccessorTable_omnibus_grammar_675, 
-  gSuccessorTable_omnibus_grammar_676, gSuccessorTable_omnibus_grammar_677, NULL, gSuccessorTable_omnibus_grammar_679, 
-  NULL, gSuccessorTable_omnibus_grammar_681, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_689, gSuccessorTable_omnibus_grammar_690, NULL, 
-  gSuccessorTable_omnibus_grammar_692, gSuccessorTable_omnibus_grammar_693, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_700, gSuccessorTable_omnibus_grammar_701, gSuccessorTable_omnibus_grammar_702, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_709, gSuccessorTable_omnibus_grammar_710, gSuccessorTable_omnibus_grammar_711, 
+  gSuccessorTable_omnibus_grammar_580, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_587, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_592, nullptr, gSuccessorTable_omnibus_grammar_594, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_598, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_601, nullptr, gSuccessorTable_omnibus_grammar_603, 
+  gSuccessorTable_omnibus_grammar_604, gSuccessorTable_omnibus_grammar_605, gSuccessorTable_omnibus_grammar_606, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_611, 
+  gSuccessorTable_omnibus_grammar_612, gSuccessorTable_omnibus_grammar_613, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_617, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_620, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_625, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_632, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_653, nullptr, gSuccessorTable_omnibus_grammar_655, 
+  nullptr, gSuccessorTable_omnibus_grammar_657, gSuccessorTable_omnibus_grammar_658, nullptr, 
+  gSuccessorTable_omnibus_grammar_660, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_666, gSuccessorTable_omnibus_grammar_667, 
+  gSuccessorTable_omnibus_grammar_668, gSuccessorTable_omnibus_grammar_669, nullptr, gSuccessorTable_omnibus_grammar_671, 
+  gSuccessorTable_omnibus_grammar_672, nullptr, nullptr, gSuccessorTable_omnibus_grammar_675, 
+  gSuccessorTable_omnibus_grammar_676, gSuccessorTable_omnibus_grammar_677, nullptr, gSuccessorTable_omnibus_grammar_679, 
+  nullptr, gSuccessorTable_omnibus_grammar_681, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_689, gSuccessorTable_omnibus_grammar_690, nullptr, 
+  gSuccessorTable_omnibus_grammar_692, gSuccessorTable_omnibus_grammar_693, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_700, gSuccessorTable_omnibus_grammar_701, gSuccessorTable_omnibus_grammar_702, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_709, gSuccessorTable_omnibus_grammar_710, gSuccessorTable_omnibus_grammar_711, 
   gSuccessorTable_omnibus_grammar_712, gSuccessorTable_omnibus_grammar_713, gSuccessorTable_omnibus_grammar_714, gSuccessorTable_omnibus_grammar_715, 
-  gSuccessorTable_omnibus_grammar_716, gSuccessorTable_omnibus_grammar_717, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_721, gSuccessorTable_omnibus_grammar_722, NULL, 
-  gSuccessorTable_omnibus_grammar_724, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_728, gSuccessorTable_omnibus_grammar_729, NULL, gSuccessorTable_omnibus_grammar_731, 
-  NULL, gSuccessorTable_omnibus_grammar_733, gSuccessorTable_omnibus_grammar_734, gSuccessorTable_omnibus_grammar_735, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_738, gSuccessorTable_omnibus_grammar_739, 
-  NULL, gSuccessorTable_omnibus_grammar_741, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_746, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_750, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_761, NULL, gSuccessorTable_omnibus_grammar_763, 
+  gSuccessorTable_omnibus_grammar_716, gSuccessorTable_omnibus_grammar_717, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_721, gSuccessorTable_omnibus_grammar_722, nullptr, 
+  gSuccessorTable_omnibus_grammar_724, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_728, gSuccessorTable_omnibus_grammar_729, nullptr, gSuccessorTable_omnibus_grammar_731, 
+  nullptr, gSuccessorTable_omnibus_grammar_733, gSuccessorTable_omnibus_grammar_734, gSuccessorTable_omnibus_grammar_735, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_738, gSuccessorTable_omnibus_grammar_739, 
+  nullptr, gSuccessorTable_omnibus_grammar_741, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_746, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_750, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_761, nullptr, gSuccessorTable_omnibus_grammar_763, 
   gSuccessorTable_omnibus_grammar_764, gSuccessorTable_omnibus_grammar_765, gSuccessorTable_omnibus_grammar_766, gSuccessorTable_omnibus_grammar_767, 
-  gSuccessorTable_omnibus_grammar_768, NULL, gSuccessorTable_omnibus_grammar_770, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_774, NULL, 
-  gSuccessorTable_omnibus_grammar_776, NULL, gSuccessorTable_omnibus_grammar_778, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_784, gSuccessorTable_omnibus_grammar_785, NULL, gSuccessorTable_omnibus_grammar_787, 
-  NULL, gSuccessorTable_omnibus_grammar_789, gSuccessorTable_omnibus_grammar_790, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_794, NULL, 
-  gSuccessorTable_omnibus_grammar_796, gSuccessorTable_omnibus_grammar_797, NULL, gSuccessorTable_omnibus_grammar_799, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_802, NULL, 
-  gSuccessorTable_omnibus_grammar_804, NULL, NULL, gSuccessorTable_omnibus_grammar_807, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_810, NULL, 
-  gSuccessorTable_omnibus_grammar_812, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_833, gSuccessorTable_omnibus_grammar_834, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_841, gSuccessorTable_omnibus_grammar_842, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_845, NULL, gSuccessorTable_omnibus_grammar_847, 
-  NULL, gSuccessorTable_omnibus_grammar_849, gSuccessorTable_omnibus_grammar_850, NULL, 
+  gSuccessorTable_omnibus_grammar_768, nullptr, gSuccessorTable_omnibus_grammar_770, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_774, nullptr, 
+  gSuccessorTable_omnibus_grammar_776, nullptr, gSuccessorTable_omnibus_grammar_778, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_784, gSuccessorTable_omnibus_grammar_785, nullptr, gSuccessorTable_omnibus_grammar_787, 
+  nullptr, gSuccessorTable_omnibus_grammar_789, gSuccessorTable_omnibus_grammar_790, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_794, nullptr, 
+  gSuccessorTable_omnibus_grammar_796, gSuccessorTable_omnibus_grammar_797, nullptr, gSuccessorTable_omnibus_grammar_799, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_802, nullptr, 
+  gSuccessorTable_omnibus_grammar_804, nullptr, nullptr, gSuccessorTable_omnibus_grammar_807, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_810, nullptr, 
+  gSuccessorTable_omnibus_grammar_812, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_833, gSuccessorTable_omnibus_grammar_834, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_841, gSuccessorTable_omnibus_grammar_842, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_845, nullptr, gSuccessorTable_omnibus_grammar_847, 
+  nullptr, gSuccessorTable_omnibus_grammar_849, gSuccessorTable_omnibus_grammar_850, nullptr, 
   gSuccessorTable_omnibus_grammar_852, gSuccessorTable_omnibus_grammar_853, gSuccessorTable_omnibus_grammar_854, gSuccessorTable_omnibus_grammar_855, 
-  gSuccessorTable_omnibus_grammar_856, NULL, NULL, gSuccessorTable_omnibus_grammar_859, 
-  gSuccessorTable_omnibus_grammar_860, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_865, NULL, gSuccessorTable_omnibus_grammar_867, 
-  NULL, gSuccessorTable_omnibus_grammar_869, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_877, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_883, 
-  NULL, gSuccessorTable_omnibus_grammar_885, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_889, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_892, NULL, NULL, gSuccessorTable_omnibus_grammar_895, 
-  gSuccessorTable_omnibus_grammar_896, gSuccessorTable_omnibus_grammar_897, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_903, 
-  gSuccessorTable_omnibus_grammar_904, NULL, gSuccessorTable_omnibus_grammar_906, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_914, gSuccessorTable_omnibus_grammar_915, 
-  NULL, gSuccessorTable_omnibus_grammar_917, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_925, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_929, NULL, gSuccessorTable_omnibus_grammar_931, 
-  gSuccessorTable_omnibus_grammar_932, NULL, NULL, gSuccessorTable_omnibus_grammar_935, 
-  NULL, gSuccessorTable_omnibus_grammar_937, gSuccessorTable_omnibus_grammar_938, gSuccessorTable_omnibus_grammar_939, 
-  gSuccessorTable_omnibus_grammar_940, gSuccessorTable_omnibus_grammar_941, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_944, NULL, NULL, gSuccessorTable_omnibus_grammar_947, 
-  gSuccessorTable_omnibus_grammar_948, NULL, gSuccessorTable_omnibus_grammar_950, gSuccessorTable_omnibus_grammar_951, 
-  gSuccessorTable_omnibus_grammar_952, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_960, gSuccessorTable_omnibus_grammar_961, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_966, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_969, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_972, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_976, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_980, gSuccessorTable_omnibus_grammar_981, NULL, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_987, 
-  NULL, gSuccessorTable_omnibus_grammar_989, NULL, gSuccessorTable_omnibus_grammar_991, 
-  NULL, gSuccessorTable_omnibus_grammar_993, NULL, NULL, 
-  NULL, NULL, gSuccessorTable_omnibus_grammar_998, gSuccessorTable_omnibus_grammar_999, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_1004, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_1013, NULL, NULL, 
+  gSuccessorTable_omnibus_grammar_856, nullptr, nullptr, gSuccessorTable_omnibus_grammar_859, 
+  gSuccessorTable_omnibus_grammar_860, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_865, nullptr, gSuccessorTable_omnibus_grammar_867, 
+  nullptr, gSuccessorTable_omnibus_grammar_869, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_877, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_883, 
+  nullptr, gSuccessorTable_omnibus_grammar_885, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_889, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_892, nullptr, nullptr, gSuccessorTable_omnibus_grammar_895, 
+  gSuccessorTable_omnibus_grammar_896, gSuccessorTable_omnibus_grammar_897, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_903, 
+  gSuccessorTable_omnibus_grammar_904, nullptr, gSuccessorTable_omnibus_grammar_906, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_914, gSuccessorTable_omnibus_grammar_915, 
+  nullptr, gSuccessorTable_omnibus_grammar_917, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_925, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_929, nullptr, gSuccessorTable_omnibus_grammar_931, 
+  gSuccessorTable_omnibus_grammar_932, nullptr, nullptr, gSuccessorTable_omnibus_grammar_935, 
+  nullptr, gSuccessorTable_omnibus_grammar_937, gSuccessorTable_omnibus_grammar_938, gSuccessorTable_omnibus_grammar_939, 
+  gSuccessorTable_omnibus_grammar_940, gSuccessorTable_omnibus_grammar_941, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_944, nullptr, nullptr, gSuccessorTable_omnibus_grammar_947, 
+  gSuccessorTable_omnibus_grammar_948, nullptr, gSuccessorTable_omnibus_grammar_950, gSuccessorTable_omnibus_grammar_951, 
+  gSuccessorTable_omnibus_grammar_952, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_960, gSuccessorTable_omnibus_grammar_961, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_966, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_969, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_972, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_976, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_980, gSuccessorTable_omnibus_grammar_981, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_987, 
+  nullptr, gSuccessorTable_omnibus_grammar_989, nullptr, gSuccessorTable_omnibus_grammar_991, 
+  nullptr, gSuccessorTable_omnibus_grammar_993, nullptr, nullptr, 
+  nullptr, nullptr, gSuccessorTable_omnibus_grammar_998, gSuccessorTable_omnibus_grammar_999, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_1004, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_1013, nullptr, nullptr, 
   gSuccessorTable_omnibus_grammar_1016, gSuccessorTable_omnibus_grammar_1017, gSuccessorTable_omnibus_grammar_1018, gSuccessorTable_omnibus_grammar_1019, 
-  NULL, gSuccessorTable_omnibus_grammar_1021, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_1024, gSuccessorTable_omnibus_grammar_1025, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_1028, NULL, gSuccessorTable_omnibus_grammar_1030, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_1035, 
-  gSuccessorTable_omnibus_grammar_1036, gSuccessorTable_omnibus_grammar_1037, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_1044, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, NULL, NULL, NULL, 
-  NULL, gSuccessorTable_omnibus_grammar_1057, gSuccessorTable_omnibus_grammar_1058, NULL, 
-  NULL, NULL, NULL, gSuccessorTable_omnibus_grammar_1063, 
-  NULL, gSuccessorTable_omnibus_grammar_1065, gSuccessorTable_omnibus_grammar_1066, NULL, 
-  NULL, NULL, NULL, NULL, 
-  gSuccessorTable_omnibus_grammar_1072, NULL, gSuccessorTable_omnibus_grammar_1074, gSuccessorTable_omnibus_grammar_1075, 
-  NULL, NULL} ;
+  nullptr, gSuccessorTable_omnibus_grammar_1021, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_1024, gSuccessorTable_omnibus_grammar_1025, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_1028, nullptr, gSuccessorTable_omnibus_grammar_1030, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_1035, 
+  gSuccessorTable_omnibus_grammar_1036, gSuccessorTable_omnibus_grammar_1037, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_1044, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  nullptr, gSuccessorTable_omnibus_grammar_1057, gSuccessorTable_omnibus_grammar_1058, nullptr, 
+  nullptr, nullptr, nullptr, gSuccessorTable_omnibus_grammar_1063, 
+  nullptr, gSuccessorTable_omnibus_grammar_1065, gSuccessorTable_omnibus_grammar_1066, nullptr, 
+  nullptr, nullptr, nullptr, nullptr, 
+  gSuccessorTable_omnibus_grammar_1072, nullptr, gSuccessorTable_omnibus_grammar_1074, gSuccessorTable_omnibus_grammar_1075, 
+  nullptr, nullptr} ;
 
 //---------------------------------------------------------------------------------------------------------------------*
 //                                                                                                                      
@@ -24726,7 +24726,7 @@ gSuccessorTable_omnibus_grammar_0, NULL, NULL, NULL,
 //                                                                                                                      
 //---------------------------------------------------------------------------------------------------------------------*
 
-static const int16_t gProductionsTable_omnibus_grammar [516 * 2] = {
+static const int32_t gProductionsTable_omnibus_grammar [516 * 2] = {
   0, 2,
   1, 1,
   2, 4,
@@ -25252,34 +25252,26 @@ static const int16_t gProductionsTable_omnibus_grammar [516 * 2] = {
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_import_5F_file_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 0 :
-      rule_omnibus_5F_syntax_import_5F_file_i0_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 0) {
+  rule_omnibus_5F_syntax_import_5F_file_i0_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_import_5F_file_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 0 :
-      rule_omnibus_5F_syntax_import_5F_file_i0_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 0) {
+  rule_omnibus_5F_syntax_import_5F_file_i0_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_import_5F_file_ (GALGAS_lstringlist &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 0 :
-      rule_omnibus_5F_syntax_import_5F_file_i0_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 0) {
+  rule_omnibus_5F_syntax_import_5F_file_i0_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -25291,24 +25283,18 @@ void cGrammar_omnibus_5F_grammar::nt_import_5F_file_ (GALGAS_lstringlist &  para
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_start_5F_symbol_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 1 :
-      rule_omnibus_5F_syntax_start_5F_symbol_i1_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 1) {
+  rule_omnibus_5F_syntax_start_5F_symbol_i1_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_start_5F_symbol_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 1 :
-      rule_omnibus_5F_syntax_start_5F_symbol_i1_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 1) {
+  rule_omnibus_5F_syntax_start_5F_symbol_i1_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -25316,11 +25302,9 @@ void cGrammar_omnibus_5F_grammar::nt_start_5F_symbol_ (GALGAS_ast &  parameter_1
                                 GALGAS_lstringlist &  parameter_2,
                                 GALGAS_location &  parameter_3,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 1 :
-      rule_omnibus_5F_syntax_start_5F_symbol_i1_(parameter_1, parameter_2, parameter_3, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 1) {
+  rule_omnibus_5F_syntax_start_5F_symbol_i1_(parameter_1, parameter_2, parameter_3, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -25725,6 +25709,7 @@ void cGrammar_omnibus_5F_grammar::nt_declaration_ (GALGAS_ast &  parameter_1,
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -25783,6 +25768,7 @@ void cGrammar_omnibus_5F_grammar::nt_type_5F_definition_ (GALGAS_ast &  paramete
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -25793,35 +25779,27 @@ void cGrammar_omnibus_5F_grammar::nt_type_5F_definition_ (GALGAS_ast &  paramete
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 7 :
-      rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 7) {
+  rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 7 :
-      rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 7) {
+  rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 GALGAS_structurePropertyListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 7 :
-      rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 7) {
+  rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i7_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -25833,35 +25811,27 @@ void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_proper
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 8 :
-      rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 8) {
+  rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 8 :
-      rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 8) {
+  rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 GALGAS_structurePropertyListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 8 :
-      rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 8) {
+  rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i8_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -25913,6 +25883,7 @@ void cGrammar_omnibus_5F_grammar::nt_struct_5F_property_5F_declaration_ (GALGAS_
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -25923,24 +25894,18 @@ void cGrammar_omnibus_5F_grammar::nt_struct_5F_property_5F_declaration_ (GALGAS_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 11 :
-      rule_omnibus_5F_syntax_propertyGetterSetter_i11_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 11) {
+  rule_omnibus_5F_syntax_propertyGetterSetter_i11_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 11 :
-      rule_omnibus_5F_syntax_propertyGetterSetter_i11_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 11) {
+  rule_omnibus_5F_syntax_propertyGetterSetter_i11_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -25951,11 +25916,9 @@ void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_ (GALGAS_ast &  parame
                                 const GALGAS_lstring  parameter_5,
                                 GALGAS_structurePropertyListAST &  parameter_6,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 11 :
-      rule_omnibus_5F_syntax_propertyGetterSetter_i11_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, parameter_6, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 11) {
+  rule_omnibus_5F_syntax_propertyGetterSetter_i11_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, parameter_6, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -25967,35 +25930,27 @@ void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_ (GALGAS_ast &  parame
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 16 :
-      rule_omnibus_5F_syntax_registerDeclaration_i16_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 16) {
+  rule_omnibus_5F_syntax_registerDeclaration_i16_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 16 :
-      rule_omnibus_5F_syntax_registerDeclaration_i16_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 16) {
+  rule_omnibus_5F_syntax_registerDeclaration_i16_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_ (GALGAS_ast &  parameter_1,
                                 GALGAS_controlRegisterNameListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 16 :
-      rule_omnibus_5F_syntax_registerDeclaration_i16_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 16) {
+  rule_omnibus_5F_syntax_registerDeclaration_i16_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26007,35 +25962,27 @@ void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_ (GALGAS_ast &  paramet
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 23 :
-      rule_omnibus_5F_syntax_staticArrayProperty_i23_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 23) {
+  rule_omnibus_5F_syntax_staticArrayProperty_i23_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 23 :
-      rule_omnibus_5F_syntax_staticArrayProperty_i23_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 23) {
+  rule_omnibus_5F_syntax_staticArrayProperty_i23_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_ (GALGAS_ast &  parameter_1,
                                 GALGAS_staticListPropertyListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 23 :
-      rule_omnibus_5F_syntax_staticArrayProperty_i23_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 23) {
+  rule_omnibus_5F_syntax_staticArrayProperty_i23_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26047,35 +25994,27 @@ void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_ (GALGAS_ast &  paramet
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 25 :
-      rule_omnibus_5F_syntax_staticArray_5F_exp_i25_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 25) {
+  rule_omnibus_5F_syntax_staticArray_5F_exp_i25_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 25 :
-      rule_omnibus_5F_syntax_staticArray_5F_exp_i25_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 25) {
+  rule_omnibus_5F_syntax_staticArray_5F_exp_i25_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_ (GALGAS_ast &  parameter_1,
                                 GALGAS_extendStaticListElementAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 25 :
-      rule_omnibus_5F_syntax_staticArray_5F_exp_i25_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 25) {
+  rule_omnibus_5F_syntax_staticArray_5F_exp_i25_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26087,24 +26026,18 @@ void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_ (GALGAS_ast &  paramete
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_task_5F_event_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 28 :
-      rule_omnibus_5F_syntax_task_5F_event_i28_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 28) {
+  rule_omnibus_5F_syntax_task_5F_event_i28_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_task_5F_event_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 28 :
-      rule_omnibus_5F_syntax_task_5F_event_i28_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 28) {
+  rule_omnibus_5F_syntax_task_5F_event_i28_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -26114,11 +26047,9 @@ void cGrammar_omnibus_5F_grammar::nt_task_5F_event_ (GALGAS_ast &  parameter_1,
                                 GALGAS_taskSetupListAST &  parameter_4,
                                 GALGAS_taskSetupListAST &  parameter_5,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 28 :
-      rule_omnibus_5F_syntax_task_5F_event_i28_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 28) {
+  rule_omnibus_5F_syntax_task_5F_event_i28_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26130,35 +26061,27 @@ void cGrammar_omnibus_5F_grammar::nt_task_5F_event_ (GALGAS_ast &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 30 :
-      rule_omnibus_5F_syntax_function_5F_declaration_i30_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 30) {
+  rule_omnibus_5F_syntax_function_5F_declaration_i30_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 30 :
-      rule_omnibus_5F_syntax_function_5F_declaration_i30_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 30) {
+  rule_omnibus_5F_syntax_function_5F_declaration_i30_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_ (GALGAS_ast &  parameter_1,
                                 const GALGAS_lstring  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 30 :
-      rule_omnibus_5F_syntax_function_5F_declaration_i30_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 30) {
+  rule_omnibus_5F_syntax_function_5F_declaration_i30_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26170,34 +26093,26 @@ void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_ (GALGAS_ast &  par
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_mode_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 31 :
-      rule_omnibus_5F_syntax_mode_i31_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 31) {
+  rule_omnibus_5F_syntax_mode_i31_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_mode_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 31 :
-      rule_omnibus_5F_syntax_mode_i31_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 31) {
+  rule_omnibus_5F_syntax_mode_i31_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_mode_ (GALGAS_mode &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 31 :
-      rule_omnibus_5F_syntax_mode_i31_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 31) {
+  rule_omnibus_5F_syntax_mode_i31_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26209,24 +26124,18 @@ void cGrammar_omnibus_5F_grammar::nt_mode_ (GALGAS_mode &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_header_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 32 :
-      rule_omnibus_5F_syntax_function_5F_header_i32_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 32) {
+  rule_omnibus_5F_syntax_function_5F_header_i32_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_header_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 32 :
-      rule_omnibus_5F_syntax_function_5F_header_i32_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 32) {
+  rule_omnibus_5F_syntax_function_5F_header_i32_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -26236,11 +26145,9 @@ void cGrammar_omnibus_5F_grammar::nt_function_5F_header_ (GALGAS_ast &  paramete
                                 GALGAS_lstringlist &  parameter_4,
                                 GALGAS_routineFormalArgumentListAST &  parameter_5,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 32 :
-      rule_omnibus_5F_syntax_function_5F_header_i32_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 32) {
+  rule_omnibus_5F_syntax_function_5F_header_i32_(parameter_1, parameter_2, parameter_3, parameter_4, parameter_5, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26300,6 +26207,7 @@ void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_ (GALGAS_a
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -26310,35 +26218,27 @@ void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_ (GALGAS_a
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 38 :
-      rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 38) {
+  rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 38 :
-      rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 38) {
+  rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_ (GALGAS_ast &  parameter_1,
                                 const GALGAS_lstring  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 38 :
-      rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 38) {
+  rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i38_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26350,24 +26250,18 @@ void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_ (GALGAS_ast &  paramet
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_guard_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 39 :
-      rule_omnibus_5F_syntax_guard_i39_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 39) {
+  rule_omnibus_5F_syntax_guard_i39_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_guard_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 39 :
-      rule_omnibus_5F_syntax_guard_i39_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 39) {
+  rule_omnibus_5F_syntax_guard_i39_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -26375,11 +26269,9 @@ void cGrammar_omnibus_5F_grammar::nt_guard_ (GALGAS_ast &  parameter_1,
                                 const GALGAS_lstring  parameter_2,
                                 const GALGAS_string  parameter_3,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 39 :
-      rule_omnibus_5F_syntax_guard_i39_(parameter_1, parameter_2, parameter_3, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 39) {
+  rule_omnibus_5F_syntax_guard_i39_(parameter_1, parameter_2, parameter_3, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26391,35 +26283,27 @@ void cGrammar_omnibus_5F_grammar::nt_guard_ (GALGAS_ast &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 40 :
-      rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 40) {
+  rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 40 :
-      rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 40) {
+  rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_ (GALGAS_ast &  parameter_1,
                                 GALGAS_routineFormalArgumentListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 40 :
-      rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 40) {
+  rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i40_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26431,35 +26315,27 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_ (GALGAS_a
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 41 :
-      rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 41) {
+  rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 41 :
-      rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 41) {
+  rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_ (GALGAS_ast &  parameter_1,
                                 GALGAS_routineFormalArgumentListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 41 :
-      rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 41) {
+  rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i41_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26471,35 +26347,27 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_ 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 45 :
-      rule_omnibus_5F_syntax_expression_i45_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 45) {
+  rule_omnibus_5F_syntax_expression_i45_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 45 :
-      rule_omnibus_5F_syntax_expression_i45_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 45) {
+  rule_omnibus_5F_syntax_expression_i45_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 45 :
-      rule_omnibus_5F_syntax_expression_i45_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 45) {
+  rule_omnibus_5F_syntax_expression_i45_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26511,35 +26379,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_ (GALGAS_ast &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 46 :
-      rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 46) {
+  rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 46 :
-      rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 46) {
+  rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 46 :
-      rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 46) {
+  rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i46_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26551,35 +26411,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_ (GALGAS_ast &
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 47 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 47) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 47 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 47) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 47 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 47) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i47_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26591,35 +26443,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_ (GALGAS_ast & 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 48 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 48) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 48 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 48) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 48 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 48) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i48_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26631,35 +26475,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_ (GALGAS_ast &
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 49 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 49) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 49 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 49) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 49 :
-      rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 49) {
+  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i49_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26671,35 +26507,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_ (GALGAS_ast &
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 50 :
-      rule_omnibus_5F_syntax_expression_5F_equality_i50_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 50) {
+  rule_omnibus_5F_syntax_expression_5F_equality_i50_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 50 :
-      rule_omnibus_5F_syntax_expression_5F_equality_i50_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 50) {
+  rule_omnibus_5F_syntax_expression_5F_equality_i50_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 50 :
-      rule_omnibus_5F_syntax_expression_5F_equality_i50_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 50) {
+  rule_omnibus_5F_syntax_expression_5F_equality_i50_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26711,35 +26539,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_ (GALGAS_ast &  para
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 51 :
-      rule_omnibus_5F_syntax_expression_5F_comparison_i51_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 51) {
+  rule_omnibus_5F_syntax_expression_5F_comparison_i51_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 51 :
-      rule_omnibus_5F_syntax_expression_5F_comparison_i51_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 51) {
+  rule_omnibus_5F_syntax_expression_5F_comparison_i51_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 51 :
-      rule_omnibus_5F_syntax_expression_5F_comparison_i51_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 51) {
+  rule_omnibus_5F_syntax_expression_5F_comparison_i51_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26751,35 +26571,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_ (GALGAS_ast &  pa
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 52 :
-      rule_omnibus_5F_syntax_expression_5F_shift_i52_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 52) {
+  rule_omnibus_5F_syntax_expression_5F_shift_i52_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 52 :
-      rule_omnibus_5F_syntax_expression_5F_shift_i52_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 52) {
+  rule_omnibus_5F_syntax_expression_5F_shift_i52_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 52 :
-      rule_omnibus_5F_syntax_expression_5F_shift_i52_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 52) {
+  rule_omnibus_5F_syntax_expression_5F_shift_i52_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26791,35 +26603,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_ (GALGAS_ast &  paramet
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 53 :
-      rule_omnibus_5F_syntax_expression_5F_addition_i53_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 53) {
+  rule_omnibus_5F_syntax_expression_5F_addition_i53_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 53 :
-      rule_omnibus_5F_syntax_expression_5F_addition_i53_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 53) {
+  rule_omnibus_5F_syntax_expression_5F_addition_i53_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 53 :
-      rule_omnibus_5F_syntax_expression_5F_addition_i53_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 53) {
+  rule_omnibus_5F_syntax_expression_5F_addition_i53_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -26831,35 +26635,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_ (GALGAS_ast &  para
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 54 :
-      rule_omnibus_5F_syntax_expression_5F_product_i54_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 54) {
+  rule_omnibus_5F_syntax_expression_5F_product_i54_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 54 :
-      rule_omnibus_5F_syntax_expression_5F_product_i54_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 54) {
+  rule_omnibus_5F_syntax_expression_5F_product_i54_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_ (GALGAS_ast &  parameter_1,
                                 GALGAS_expressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 54 :
-      rule_omnibus_5F_syntax_expression_5F_product_i54_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 54) {
+  rule_omnibus_5F_syntax_expression_5F_product_i54_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27117,6 +26913,7 @@ void cGrammar_omnibus_5F_grammar::nt_primary_ (GALGAS_ast &  parameter_1,
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -27127,35 +26924,27 @@ void cGrammar_omnibus_5F_grammar::nt_primary_ (GALGAS_ast &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 69 :
-      rule_omnibus_5F_syntax_expression_5F_if_i69_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 69) {
+  rule_omnibus_5F_syntax_expression_5F_if_i69_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 69 :
-      rule_omnibus_5F_syntax_expression_5F_if_i69_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 69) {
+  rule_omnibus_5F_syntax_expression_5F_if_i69_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_ (GALGAS_ast &  parameter_1,
                                 GALGAS_ifExpressionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 69 :
-      rule_omnibus_5F_syntax_expression_5F_if_i69_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 69) {
+  rule_omnibus_5F_syntax_expression_5F_if_i69_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27167,35 +26956,27 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_ (GALGAS_ast &  parameter_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 79 :
-      rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 79) {
+  rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 79 :
-      rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 79) {
+  rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_ (GALGAS_ast &  parameter_1,
                                 GALGAS_primaryInExpressionAccessListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 79 :
-      rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 79) {
+  rule_omnibus_5F_syntax_expression_5F_access_5F_list_i79_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27207,34 +26988,26 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_ (GALGAS_ast &
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 82 :
-      rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 82) {
+  rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 82 :
-      rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 82) {
+  rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_ (GALGAS_compileTimeInfixOperatorEnumeration &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 82 :
-      rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 82) {
+  rule_omnibus_5F_syntax_compileTimeInfixOperator_i82_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27246,34 +27019,26 @@ void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_ (GALGAS_compileTi
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 85 :
-      rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 85) {
+  rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 85 :
-      rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 85) {
+  rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_ (GALGAS_compileTimePrefixOperatorEnumeration &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 85 :
-      rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 85) {
+  rule_omnibus_5F_syntax_compileTimePrefixOperator_i85_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27285,34 +27050,26 @@ void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_ (GALGAS_compileT
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 87 :
-      rule_omnibus_5F_syntax_llvmPrefixOperator_i87_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 87) {
+  rule_omnibus_5F_syntax_llvmPrefixOperator_i87_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 87 :
-      rule_omnibus_5F_syntax_llvmPrefixOperator_i87_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 87) {
+  rule_omnibus_5F_syntax_llvmPrefixOperator_i87_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_ (GALGAS_llvmPrefixOperatorEnumeration &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 87 :
-      rule_omnibus_5F_syntax_llvmPrefixOperator_i87_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 87) {
+  rule_omnibus_5F_syntax_llvmPrefixOperator_i87_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27324,35 +27081,27 @@ void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_ (GALGAS_llvmPrefixOpera
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_instructionList_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 89 :
-      rule_omnibus_5F_syntax_instructionList_i89_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 89) {
+  rule_omnibus_5F_syntax_instructionList_i89_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_instructionList_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 89 :
-      rule_omnibus_5F_syntax_instructionList_i89_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 89) {
+  rule_omnibus_5F_syntax_instructionList_i89_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_instructionList_ (GALGAS_ast &  parameter_1,
                                 GALGAS_instructionListAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 89 :
-      rule_omnibus_5F_syntax_instructionList_i89_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 89) {
+  rule_omnibus_5F_syntax_instructionList_i89_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27547,6 +27296,7 @@ void cGrammar_omnibus_5F_grammar::nt_instruction_ (GALGAS_ast &  parameter_1,
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -27557,35 +27307,27 @@ void cGrammar_omnibus_5F_grammar::nt_instruction_ (GALGAS_ast &  parameter_1,
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 96 :
-      rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 96) {
+  rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 96 :
-      rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 96) {
+  rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_omnibusInfixOperator &  parameter_1,
                                 GALGAS_location &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 96 :
-      rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 96) {
+  rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i96_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27597,35 +27339,27 @@ void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 103 :
-      rule_omnibus_5F_syntax_if_5F_instruction_i103_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 103) {
+  rule_omnibus_5F_syntax_if_5F_instruction_i103_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 103 :
-      rule_omnibus_5F_syntax_if_5F_instruction_i103_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 103) {
+  rule_omnibus_5F_syntax_if_5F_instruction_i103_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_ (GALGAS_ast &  parameter_1,
                                 GALGAS_ifInstructionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 103 :
-      rule_omnibus_5F_syntax_if_5F_instruction_i103_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 103) {
+  rule_omnibus_5F_syntax_if_5F_instruction_i103_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27677,6 +27411,7 @@ void cGrammar_omnibus_5F_grammar::nt_guarded_5F_command_ (GALGAS_ast &  paramete
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -27687,35 +27422,27 @@ void cGrammar_omnibus_5F_grammar::nt_guarded_5F_command_ (GALGAS_ast &  paramete
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 111 :
-      rule_omnibus_5F_syntax_procedure_5F_call_i111_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 111) {
+  rule_omnibus_5F_syntax_procedure_5F_call_i111_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 111 :
-      rule_omnibus_5F_syntax_procedure_5F_call_i111_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 111) {
+  rule_omnibus_5F_syntax_procedure_5F_call_i111_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_ (GALGAS_ast &  parameter_1,
                                 GALGAS_callInstructionAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 111 :
-      rule_omnibus_5F_syntax_procedure_5F_call_i111_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 111) {
+  rule_omnibus_5F_syntax_procedure_5F_call_i111_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27727,35 +27454,27 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_ (GALGAS_ast &  parameter
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_lvalue_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 113 :
-      rule_omnibus_5F_syntax_lvalue_i113_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 113) {
+  rule_omnibus_5F_syntax_lvalue_i113_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_lvalue_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 113 :
-      rule_omnibus_5F_syntax_lvalue_i113_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 113) {
+  rule_omnibus_5F_syntax_lvalue_i113_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_lvalue_ (GALGAS_ast &  parameter_1,
                                 GALGAS_LValueAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 113 :
-      rule_omnibus_5F_syntax_lvalue_i113_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 113) {
+  rule_omnibus_5F_syntax_lvalue_i113_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27815,6 +27534,7 @@ void cGrammar_omnibus_5F_grammar::nt_lvalue_5F_operand_ (GALGAS_ast &  parameter
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -27825,35 +27545,27 @@ void cGrammar_omnibus_5F_grammar::nt_lvalue_5F_operand_ (GALGAS_ast &  parameter
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 117 :
-      rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 117) {
+  rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 117 :
-      rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 117) {
+  rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_ (GALGAS_ast &  parameter_1,
                                 GALGAS_controlRegisterLValueAST &  parameter_2,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 117 :
-      rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_(parameter_1, parameter_2, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 117) {
+  rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i117_(parameter_1, parameter_2, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27865,24 +27577,18 @@ void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_ (GALGAS_ast 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 118 :
-      rule_omnibus_5F_syntax_effective_5F_parameters_i118_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 118) {
+  rule_omnibus_5F_syntax_effective_5F_parameters_i118_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 118 :
-      rule_omnibus_5F_syntax_effective_5F_parameters_i118_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 118) {
+  rule_omnibus_5F_syntax_effective_5F_parameters_i118_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -27890,11 +27596,9 @@ void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_ (GALGAS_ast &  par
                                 GALGAS_effectiveArgumentListAST &  parameter_2,
                                 GALGAS_location &  parameter_3,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 118 :
-      rule_omnibus_5F_syntax_effective_5F_parameters_i118_(parameter_1, parameter_2, parameter_3, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 118) {
+  rule_omnibus_5F_syntax_effective_5F_parameters_i118_(parameter_1, parameter_2, parameter_3, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27906,34 +27610,26 @@ void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_ (GALGAS_ast &  par
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 121 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 121) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 121 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 121) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 121 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 121) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i121_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27945,34 +27641,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_ (GALGAS_ctEx
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 122 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 122) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 122 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 122) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 122 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 122) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i122_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -27984,34 +27672,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 123 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 123) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 123 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 123) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 123 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 123) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i123_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28023,34 +27703,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 124 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 124) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 124 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 124) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 124 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 124) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i124_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28062,34 +27734,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_ 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 125 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 125) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 125 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 125) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 125 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 125) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i125_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28101,34 +27765,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 126 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 126) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 126 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 126) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 126 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 126) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i126_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28140,34 +27796,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_ (GA
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 127 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 127) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 127 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 127) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 127 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 127) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i127_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28179,34 +27827,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_ 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 128 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 128) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 128 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 128) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 128 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 128) {
+  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i128_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28301,6 +27941,7 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_primary_ (GALGAS_ctExpre
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 
@@ -28311,34 +27952,26 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_primary_ (GALGAS_ctExpre
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 136 :
-      rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 136) {
+  rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 136 :
-      rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 136) {
+  rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_ (GALGAS_genericFormalParameterList &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 136 :
-      rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 136) {
+  rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i136_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28350,34 +27983,26 @@ void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_ (GALGAS_gen
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 137 :
-      rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 137) {
+  rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 137 :
-      rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 137) {
+  rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_ (GALGAS_ctExpressionAST &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 137 :
-      rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 137) {
+  rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i137_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28389,24 +28014,18 @@ void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_ (GALGAS_ctExpre
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 139 :
-      rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 139) {
+  rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 139 :
-      rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 139) {
+  rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
@@ -28414,11 +28033,9 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_ (GALGAS_lstring
                                 GALGAS_lstring &  parameter_2,
                                 GALGAS_genericFormalParameterList &  parameter_3,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 139 :
-      rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_(parameter_1, parameter_2, parameter_3, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 139) {
+  rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i139_(parameter_1, parameter_2, parameter_3, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28430,34 +28047,26 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_ (GALGAS_lstring
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_parse (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 141 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_parse(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 141) {
+  rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_parse(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_indexing (C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 141 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_indexing(inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 141) {
+  rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_indexing(inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
-    break ;
   }
 }
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGenerationInstructionList &  parameter_1,
                                 C_Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 141 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_(parameter_1, inLexique) ;
-    break ;
-  default :
+  if (inLexique->nextProductionIndex () == 141) {
+  rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i141_(parameter_1, inLexique) ;
+  }else{
     inLexique->internalBottomUpParserError (HERE) ;
   }
 }
@@ -28507,6 +28116,7 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_ (GALGAS_abstractLLVMIn
     break ;
   default :
     inLexique->internalBottomUpParserError (HERE) ;
+    break ;
   }
 }
 

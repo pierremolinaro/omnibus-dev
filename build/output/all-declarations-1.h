@@ -4299,7 +4299,7 @@ class GALGAS_routineLLVMNameDict : public AC_GALGAS_root {
   public: GALGAS_routineLLVMNameDict & operator = (const GALGAS_routineLLVMNameDict & inSource) ;
 
 //--- isValid
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mSharedDict != NULL ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return mSharedDict != nullptr ; }
 
 //--- drop
   public: VIRTUAL_IN_DEBUG void drop (void) override ;

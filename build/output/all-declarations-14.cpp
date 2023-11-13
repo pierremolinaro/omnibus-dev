@@ -585,12 +585,12 @@ void cPtr_compileTimeInfixOperatorAST::method_enterInContext (GALGAS_semanticCon
           enumGalgasBool test_21 = kBoolTrue ;
           if (kBoolTrue == test_21) {
             GALGAS_compileTimeInfixOperatorUsage var_eou_9163 (dynamic_cast <const cPtr_compileTimeInfixOperatorUsage *> (var_equalOperatorUsage_9044.ptr ())) ;
-            if (NULL == var_eou_9163.ptr ()) {
+            if (nullptr == var_eou_9163.ptr ()) {
               test_21 = kBoolFalse ;
             }
             if (kBoolTrue == test_21) {
               GALGAS_compileTimeInfixOperatorUsage var_ltou_9234 (dynamic_cast <const cPtr_compileTimeInfixOperatorUsage *> (var_lessThanOperatorUsage_9129.ptr ())) ;
-              if (NULL == var_ltou_9234.ptr ()) {
+              if (nullptr == var_ltou_9234.ptr ()) {
                 test_21 = kBoolFalse ;
               }
               if (kBoolTrue == test_21) {
@@ -5691,7 +5691,7 @@ static void releaseOnceFunctionResult_llvmAttributeFunction (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (nullptr,
                                                                    releaseOnceFunctionResult_llvmAttributeFunction) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5699,7 +5699,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmAttributeFunction (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmAttributeFunction [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5761,7 +5761,7 @@ static void releaseOnceFunctionResult_staticAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_staticAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_staticAttribute (nullptr,
                                                              releaseOnceFunctionResult_staticAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5769,7 +5769,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_staticAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_staticAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5831,7 +5831,7 @@ static void releaseOnceFunctionResult_compileTimeDeclarationBarrier (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_compileTimeDeclarationBarrier (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_compileTimeDeclarationBarrier (nullptr,
                                                                            releaseOnceFunctionResult_compileTimeDeclarationBarrier) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5839,7 +5839,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_compileTimeDeclarationBarrier (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_compileTimeDeclarationBarrier [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5881,7 +5881,7 @@ GALGAS_lstring function_registerGroupNameFromOmnibusName (const GALGAS_lstring &
 
 static const C_galgas_type_descriptor * functionArgs_registerGroupNameFromOmnibusName [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5928,7 +5928,7 @@ GALGAS_string function_literalStringName (const GALGAS_uint & constinArgument_in
 
 static const C_galgas_type_descriptor * functionArgs_literalStringName [2] = {
   & kTypeDescriptor_GALGAS_uint,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5975,7 +5975,7 @@ GALGAS_string function_literalCharacterArrayName (const GALGAS_uint & constinArg
 
 static const C_galgas_type_descriptor * functionArgs_literalCharacterArrayName [2] = {
   & kTypeDescriptor_GALGAS_uint,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6030,7 +6030,7 @@ static const C_galgas_type_descriptor * functionArgs_infixOperatorMapKey [5] = {
   & kTypeDescriptor_GALGAS_omnibusInfixOperator,
   & kTypeDescriptor_GALGAS_location,
   & kTypeDescriptor_GALGAS_omnibusType,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6188,7 +6188,7 @@ static const C_galgas_type_descriptor * functionArgs_infixOperatorFunctionName [
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_omnibusInfixOperator,
   & kTypeDescriptor_GALGAS_omnibusType,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6273,7 +6273,7 @@ static const C_galgas_type_descriptor * functionArgs_prefixOperatorMapKey [4] = 
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_prefixOperator,
   & kTypeDescriptor_GALGAS_location,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6355,7 +6355,7 @@ GALGAS_string function_prefixOperatorFunctionName (const GALGAS_omnibusType & co
 static const C_galgas_type_descriptor * functionArgs_prefixOperatorFunctionName [3] = {
   & kTypeDescriptor_GALGAS_omnibusType,
   & kTypeDescriptor_GALGAS_prefixOperator,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6426,7 +6426,7 @@ static void releaseOnceFunctionResult_staticStringTypeName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_staticStringTypeName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_staticStringTypeName (nullptr,
                                                                   releaseOnceFunctionResult_staticStringTypeName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6434,7 +6434,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_staticStringTypeName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_staticStringTypeName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6496,7 +6496,7 @@ static void releaseOnceFunctionResult_functionResultVariableName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_functionResultVariableName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_functionResultVariableName (nullptr,
                                                                         releaseOnceFunctionResult_functionResultVariableName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6504,7 +6504,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_functionResultVariableName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_functionResultVariableName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6546,7 +6546,7 @@ GALGAS_string function_llvmNameForFunction (const GALGAS_string & constinArgumen
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForFunction [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6595,7 +6595,7 @@ GALGAS_string function_getterLLVMName (GALGAS_string inArgument_inReceiverLLVMTy
 static const C_galgas_type_descriptor * functionArgs_getterLLVMName [3] = {
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6648,7 +6648,7 @@ GALGAS_string function_setterLLVMName (GALGAS_string inArgument_inReceiverLLVMTy
 static const C_galgas_type_descriptor * functionArgs_setterLLVMName [3] = {
   & kTypeDescriptor_GALGAS_string,
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6699,7 +6699,7 @@ GALGAS_lstring function_llvmNameForServiceInterrupt (const GALGAS_lstring & cons
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceInterrupt [2] = {
   & kTypeDescriptor_GALGAS_lstring,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6746,7 +6746,7 @@ GALGAS_string function_llvmNameForSectionInterrupt (const GALGAS_string & consti
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionInterrupt [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6793,7 +6793,7 @@ GALGAS_string function_llvmNameForServiceCall (const GALGAS_string & constinArgu
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceCall [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6840,7 +6840,7 @@ GALGAS_string function_llvmNameForServiceImplementation (const GALGAS_string & c
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForServiceImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6887,7 +6887,7 @@ GALGAS_string function_llvmNameForSectionCall (const GALGAS_string & constinArgu
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionCall [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -6934,7 +6934,7 @@ GALGAS_string function_llvmNameForSectionImplementation (const GALGAS_string & c
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSectionImplementation [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7001,7 +7001,7 @@ static void releaseOnceFunctionResult_acceptVariableOmnibusName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_acceptVariableOmnibusName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_acceptVariableOmnibusName (nullptr,
                                                                        releaseOnceFunctionResult_acceptVariableOmnibusName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7009,7 +7009,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_acceptVariableOmnibusName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_acceptVariableOmnibusName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7071,7 +7071,7 @@ static void releaseOnceFunctionResult_waitForGuardChangeFunctionName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_waitForGuardChangeFunctionName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_waitForGuardChangeFunctionName (nullptr,
                                                                             releaseOnceFunctionResult_waitForGuardChangeFunctionName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7079,7 +7079,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_waitForGuardChangeFunctionName (NULL
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_waitForGuardChangeFunctionName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7121,7 +7121,7 @@ GALGAS_string function_llvmNameForLocalVariable (const GALGAS_string & constinAr
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForLocalVariable [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7188,7 +7188,7 @@ static void releaseOnceFunctionResult_llvmNameForSelf (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForSelf (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForSelf (nullptr,
                                                              releaseOnceFunctionResult_llvmNameForSelf) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7196,7 +7196,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForSelf (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForSelf [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7238,7 +7238,7 @@ GALGAS_string function_llvmNameForGlobalVariable (const GALGAS_string & constinA
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForGlobalVariable [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7285,7 +7285,7 @@ GALGAS_string function_llvmNameForGlobalSyncInstance (const GALGAS_string & cons
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForGlobalSyncInstance [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7352,7 +7352,7 @@ static void releaseOnceFunctionResult_instantiableAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_instantiableAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_instantiableAttribute (nullptr,
                                                                    releaseOnceFunctionResult_instantiableAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7360,7 +7360,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_instantiableAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_instantiableAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7422,7 +7422,7 @@ static void releaseOnceFunctionResult_copyableAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_copyableAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_copyableAttribute (nullptr,
                                                                releaseOnceFunctionResult_copyableAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7430,7 +7430,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_copyableAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_copyableAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7492,7 +7492,7 @@ static void releaseOnceFunctionResult_mutatingAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_mutatingAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_mutatingAttribute (nullptr,
                                                                releaseOnceFunctionResult_mutatingAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7500,7 +7500,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_mutatingAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_mutatingAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7562,7 +7562,7 @@ static void releaseOnceFunctionResult_userAttributeForRegister (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_userAttributeForRegister (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_userAttributeForRegister (nullptr,
                                                                       releaseOnceFunctionResult_userAttributeForRegister) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7570,7 +7570,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_userAttributeForRegister (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_userAttributeForRegister [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7632,7 +7632,7 @@ static void releaseOnceFunctionResult_noUnusedWarningAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_noUnusedWarningAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_noUnusedWarningAttribute (nullptr,
                                                                       releaseOnceFunctionResult_noUnusedWarningAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7640,7 +7640,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_noUnusedWarningAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_noUnusedWarningAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7702,7 +7702,7 @@ static void releaseOnceFunctionResult_exportedAttribute (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_exportedAttribute (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_exportedAttribute (nullptr,
                                                                releaseOnceFunctionResult_exportedAttribute) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7710,7 +7710,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_exportedAttribute (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_exportedAttribute [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7752,7 +7752,7 @@ GALGAS_string function_stackNameForTask (const GALGAS_string & constinArgument_i
 
 static const C_galgas_type_descriptor * functionArgs_stackNameForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7799,7 +7799,7 @@ GALGAS_string function_setupNameForTaskType (const GALGAS_string & constinArgume
 
 static const C_galgas_type_descriptor * functionArgs_setupNameForTaskType [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7846,7 +7846,7 @@ GALGAS_string function_activateNameForTaskType (const GALGAS_string & constinArg
 
 static const C_galgas_type_descriptor * functionArgs_activateNameForTaskType [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7893,7 +7893,7 @@ GALGAS_string function_deactivateNameForTaskType (const GALGAS_string & constinA
 
 static const C_galgas_type_descriptor * functionArgs_deactivateNameForTaskType [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7940,7 +7940,7 @@ GALGAS_string function_stackAddressForTask (const GALGAS_string & constinArgumen
 
 static const C_galgas_type_descriptor * functionArgs_stackAddressForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -7987,7 +7987,7 @@ GALGAS_string function_mainRoutineNameForTask (const GALGAS_string & constinArgu
 
 static const C_galgas_type_descriptor * functionArgs_mainRoutineNameForTask [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8054,7 +8054,7 @@ static void releaseOnceFunctionResult_llvmNameForTaskLoopFunction (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (nullptr,
                                                                          releaseOnceFunctionResult_llvmNameForTaskLoopFunction) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8062,7 +8062,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskLoopFunction (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskLoopFunction [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8124,7 +8124,7 @@ static void releaseOnceFunctionResult_llvmNameForTaskWaitsForActivation (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskWaitsForActivation (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskWaitsForActivation (nullptr,
                                                                                releaseOnceFunctionResult_llvmNameForTaskWaitsForActivation) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8132,7 +8132,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForTaskWaitsForActivation (N
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForTaskWaitsForActivation [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8194,7 +8194,7 @@ static void releaseOnceFunctionResult_llvmNameForActivateTask (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForActivateTask (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForActivateTask (nullptr,
                                                                      releaseOnceFunctionResult_llvmNameForActivateTask) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8202,7 +8202,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_llvmNameForActivateTask (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_llvmNameForActivateTask [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8264,7 +8264,7 @@ static void releaseOnceFunctionResult_memoryAllocSectionName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_memoryAllocSectionName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_memoryAllocSectionName (nullptr,
                                                                     releaseOnceFunctionResult_memoryAllocSectionName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8272,7 +8272,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_memoryAllocSectionName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_memoryAllocSectionName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8334,7 +8334,7 @@ static void releaseOnceFunctionResult_memoryFreeSectionName (void) {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_memoryFreeSectionName (NULL,
+C_PrologueEpilogue gEpilogueForOnceFunction_memoryFreeSectionName (nullptr,
                                                                    releaseOnceFunctionResult_memoryFreeSectionName) ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8342,7 +8342,7 @@ C_PrologueEpilogue gEpilogueForOnceFunction_memoryFreeSectionName (NULL,
 //----------------------------------------------------------------------------------------------------------------------
 
 static const C_galgas_type_descriptor * functionArgs_memoryFreeSectionName [1] = {
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8384,7 +8384,7 @@ GALGAS_string function_registerGroupAddressArrayLLVMname (const GALGAS_string & 
 
 static const C_galgas_type_descriptor * functionArgs_registerGroupAddressArrayLLVMname [2] = {
   & kTypeDescriptor_GALGAS_string,
-  NULL
+  nullptr
 } ;
 
 //----------------------------------------------------------------------------------------------------------------------
