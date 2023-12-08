@@ -116,8 +116,7 @@ private proc displayInvocationGraph
     definedRoutines += !routine.mRoutineMangledName
     allRoutines += !routine.mRoutineMangledName
     var @stringset accessibleRoutineSet = {}
-    var @uint unusedMaxBranchOfOnInstructions = 0
-    [routine enterAccessibleEntities !?accessibleRoutineSet !?unusedMaxBranchOfOnInstructions]
+    [routine enterAccessibleEntities !?accessibleRoutineSet !?*]
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
     if routine.isRequired then

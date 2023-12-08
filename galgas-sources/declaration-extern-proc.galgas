@@ -128,11 +128,10 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
 {
 #--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = {}
-  var unusedUniversalValuedObjectMap = @universalValuedObjectMap.new
   enterFormalArguments (
     !context:inContext
     !self.mProcFormalArgumentList
-    !?unusedUniversalValuedObjectMap
+    !?*
     !?formalArguments
     !warningOnUnusedArgs: true
   )
