@@ -41,11 +41,11 @@ abstract method @abstractDecoratedDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticTemporariesStruct {
-  public var @uint mTemporaryIndex
-  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
-  public var @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries
-  public var @stringset mInitializedDriverSet
+  public var @uint mTemporaryIndex = 0
+  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = {}
+  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = {}
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries = {}
+  public var @stringset mInitializedDriverSet = {}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,13 +99,13 @@ proc semanticAnalysis
   ?staticEntityMap:let @staticEntityMap inStaticEntityMap
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
 {
-  outIntermediateCodeStruct = .default
+  outIntermediateCodeStruct = .new
   outIntermediateCodeStruct.mRoutineListIR = inRoutineListIR
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
   outIntermediateCodeStruct.mStaticEntityMap = inStaticEntityMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
 #---
-  var @semanticTemporariesStruct temporaries = .default
+  var @semanticTemporariesStruct temporaries = .new
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
       !context:inSemanticContext

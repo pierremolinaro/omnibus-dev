@@ -10,26 +10,6 @@
 
 //----------------------------------------------------------------------------------------------------------------------
 //
-//Function 'literalStringType'
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_omnibusType function_literalStringType (class C_Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
-//Extension getter '@objectIR withType' (as function)
-//
-//----------------------------------------------------------------------------------------------------------------------
-
-class GALGAS_objectIR extensionGetter_withType (const class GALGAS_objectIR & inObject,
-                                                const class GALGAS_omnibusType & constinArgument0,
-                                                class C_Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//----------------------------------------------------------------------------------------------------------------------
-//
 //Extension getter '@objectIR name' (as function)
 //
 //----------------------------------------------------------------------------------------------------------------------
@@ -90,7 +70,8 @@ class GALGAS_routineListIR_2D_element : public AC_GALGAS_root {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_routineListIR_2D_element constructor_new (const class GALGAS_abstractRoutineIR & inOperand0
+  public: static class GALGAS_routineListIR_2D_element constructor_new (const class GALGAS_abstractRoutineIR & inOperand0,
+                                                                        class C_Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -163,9 +144,6 @@ void extensionSetter_appendNOP (class GALGAS_instructionListIR & ioObject,
 class GALGAS_nopIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_nopIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_nopIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_nopIR (const class cPtr_nopIR * inSourcePtr) ;
@@ -252,9 +230,6 @@ class GALGAS_nopIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_nopIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_nopIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_nopIR_2D_weak (const class GALGAS_nopIR & inSource) ;
 
@@ -319,9 +294,6 @@ void extensionSetter_appendInstructionAsFreeString (class GALGAS_instructionList
 class GALGAS_freeStringIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_freeStringIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_freeStringIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_freeStringIR (const class cPtr_freeStringIR * inSourcePtr) ;
@@ -428,9 +400,6 @@ class cPtr_freeStringIR : public cPtr_abstractInstructionIR {
 class GALGAS_freeStringIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_freeStringIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_freeStringIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_freeStringIR_2D_weak (const class GALGAS_freeStringIR & inSource) ;
@@ -597,9 +566,6 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
 class GALGAS_extendIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_extendIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_extendIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_extendIR_2D_weak (const class GALGAS_extendIR & inSource) ;
@@ -780,9 +746,6 @@ class GALGAS_truncIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_truncIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_truncIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_truncIR_2D_weak (const class GALGAS_truncIR & inSource) ;
 
@@ -948,9 +911,6 @@ class cPtr_boolToUIntIR : public cPtr_abstractInstructionIR {
 class GALGAS_boolToUIntIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_boolToUIntIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_boolToUIntIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_boolToUIntIR_2D_weak (const class GALGAS_boolToUIntIR & inSource) ;
@@ -1126,9 +1086,6 @@ class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
 class GALGAS_leftShiftIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_leftShiftIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_leftShiftIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_leftShiftIR_2D_weak (const class GALGAS_leftShiftIR & inSource) ;
@@ -1316,9 +1273,6 @@ void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & i
 class GALGAS_logicalRightShiftIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_logicalRightShiftIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_logicalRightShiftIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_logicalRightShiftIR_2D_weak (const class GALGAS_logicalRightShiftIR & inSource) ;
@@ -1543,9 +1497,6 @@ class GALGAS_binaryOperationIR_2D_weak : public GALGAS_abstractInstructionIR_2D_
 //--------------------------------- Default constructor
   public: GALGAS_binaryOperationIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_binaryOperationIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_binaryOperationIR_2D_weak (const class GALGAS_binaryOperationIR & inSource) ;
 
@@ -1753,9 +1704,6 @@ class GALGAS_shortCircuitAndOperationIR_2D_weak : public GALGAS_abstractInstruct
 //--------------------------------- Default constructor
   public: GALGAS_shortCircuitAndOperationIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_shortCircuitAndOperationIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_shortCircuitAndOperationIR_2D_weak (const class GALGAS_shortCircuitAndOperationIR & inSource) ;
 
@@ -1921,9 +1869,6 @@ class cPtr_loadFromReferenceIR : public cPtr_abstractInstructionIR {
 class GALGAS_loadFromReferenceIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_loadFromReferenceIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_loadFromReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_loadFromReferenceIR_2D_weak (const class GALGAS_loadFromReferenceIR & inSource) ;
@@ -2105,9 +2050,6 @@ class GALGAS_storeToUniversalReferenceIR_2D_weak : public GALGAS_abstractInstruc
 //--------------------------------- Default constructor
   public: GALGAS_storeToUniversalReferenceIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_storeToUniversalReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_storeToUniversalReferenceIR_2D_weak (const class GALGAS_storeToUniversalReferenceIR & inSource) ;
 
@@ -2282,9 +2224,6 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
 class GALGAS_storeFromTemporaryReferenceIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_storeFromTemporaryReferenceIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_storeFromTemporaryReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_storeFromTemporaryReferenceIR_2D_weak (const class GALGAS_storeFromTemporaryReferenceIR & inSource) ;
@@ -2461,9 +2400,6 @@ class GALGAS_standaloneRoutineCallIR_2D_weak : public GALGAS_abstractInstruction
 //--------------------------------- Default constructor
   public: GALGAS_standaloneRoutineCallIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_standaloneRoutineCallIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_standaloneRoutineCallIR_2D_weak (const class GALGAS_standaloneRoutineCallIR & inSource) ;
 
@@ -2528,9 +2464,6 @@ void extensionSetter_generateRelease (class GALGAS_instructionListIR & ioObject,
 class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_releaseIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_releaseIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_releaseIR (const class cPtr_releaseIR * inSourcePtr) ;
@@ -2632,9 +2565,6 @@ class cPtr_releaseIR : public cPtr_abstractInstructionIR {
 class GALGAS_releaseIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_releaseIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_releaseIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_releaseIR_2D_weak (const class GALGAS_releaseIR & inSource) ;
@@ -2832,9 +2762,6 @@ class GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak : public GALGAS_a
 //--------------------------------- Default constructor
   public: GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak (const class GALGAS_computeSubscriptedVolatileRegisterAddress & inSource) ;
 
@@ -2902,9 +2829,6 @@ void extensionSetter_appendEnterRegisterAddress (class GALGAS_instructionListIR 
 class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_enterRegisterAddressIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_enterRegisterAddressIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_enterRegisterAddressIR (const class cPtr_enterRegisterAddressIR * inSourcePtr) ;
@@ -3022,9 +2946,6 @@ class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
 class GALGAS_enterRegisterAddressIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_enterRegisterAddressIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_enterRegisterAddressIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_enterRegisterAddressIR_2D_weak (const class GALGAS_enterRegisterAddressIR & inSource) ;
@@ -3211,9 +3132,6 @@ class GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak : public GALGAS_abst
 //--------------------------------- Default constructor
   public: GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak (const class GALGAS_enterRegisterGroupSubscriptedAddressIR & inSource) ;
 
@@ -3379,9 +3297,6 @@ class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
 class GALGAS_loadIndirectVolatileIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_loadIndirectVolatileIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_loadIndirectVolatileIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_loadIndirectVolatileIR_2D_weak (const class GALGAS_loadIndirectVolatileIR & inSource) ;
@@ -3558,9 +3473,6 @@ class GALGAS_storeIndirectVolatileIR_2D_weak : public GALGAS_abstractInstruction
 //--------------------------------- Default constructor
   public: GALGAS_storeIndirectVolatileIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_storeIndirectVolatileIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_storeIndirectVolatileIR_2D_weak (const class GALGAS_storeIndirectVolatileIR & inSource) ;
 
@@ -3628,9 +3540,6 @@ void extensionSetter_appendCopyFromReferences (class GALGAS_instructionListIR & 
 class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_copyFromReferencesIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_copyFromReferencesIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_copyFromReferencesIR (const class cPtr_copyFromReferencesIR * inSourcePtr) ;
@@ -3752,9 +3661,6 @@ class GALGAS_copyFromReferencesIR_2D_weak : public GALGAS_abstractInstructionIR_
 //--------------------------------- Default constructor
   public: GALGAS_copyFromReferencesIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_copyFromReferencesIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_copyFromReferencesIR_2D_weak (const class GALGAS_copyFromReferencesIR & inSource) ;
 
@@ -3845,9 +3751,6 @@ void extensionSetter_appendGetUniversalPropertyReference (class GALGAS_instructi
 class GALGAS_getUniversalPropertyReferenceIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_getUniversalPropertyReferenceIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_getUniversalPropertyReferenceIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_getUniversalPropertyReferenceIR (const class cPtr_getUniversalPropertyReferenceIR * inSourcePtr) ;
@@ -3973,9 +3876,6 @@ class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
 class GALGAS_getUniversalPropertyReferenceIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_getUniversalPropertyReferenceIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_getUniversalPropertyReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_getUniversalPropertyReferenceIR_2D_weak (const class GALGAS_getUniversalPropertyReferenceIR & inSource) ;
@@ -4170,9 +4070,6 @@ class GALGAS_getUniversalArrayElementReferenceIR_2D_weak : public GALGAS_abstrac
 //--------------------------------- Default constructor
   public: GALGAS_getUniversalArrayElementReferenceIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_getUniversalArrayElementReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_getUniversalArrayElementReferenceIR_2D_weak (const class GALGAS_getUniversalArrayElementReferenceIR & inSource) ;
 
@@ -4355,9 +4252,6 @@ class GALGAS_getComputedPropertyValueIR_2D_weak : public GALGAS_abstractInstruct
 //--------------------------------- Default constructor
   public: GALGAS_getComputedPropertyValueIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_getComputedPropertyValueIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_getComputedPropertyValueIR_2D_weak (const class GALGAS_getComputedPropertyValueIR & inSource) ;
 
@@ -4538,9 +4432,6 @@ class GALGAS_storeComputedPropertyValueIR_2D_weak : public GALGAS_abstractInstru
 //--------------------------------- Default constructor
   public: GALGAS_storeComputedPropertyValueIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_storeComputedPropertyValueIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_storeComputedPropertyValueIR_2D_weak (const class GALGAS_storeComputedPropertyValueIR & inSource) ;
 
@@ -4717,9 +4608,6 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
 class GALGAS_getArrayElementReferenceIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_getArrayElementReferenceIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_getArrayElementReferenceIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_getArrayElementReferenceIR_2D_weak (const class GALGAS_getArrayElementReferenceIR & inSource) ;
@@ -4905,9 +4793,6 @@ class GALGAS_selectInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2
 //--------------------------------- Default constructor
   public: GALGAS_selectInstructionIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_selectInstructionIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_selectInstructionIR_2D_weak (const class GALGAS_selectInstructionIR & inSource) ;
 
@@ -5089,9 +4974,6 @@ class GALGAS_testArrayIndexIR_2D_weak : public GALGAS_abstractInstructionIR_2D_w
 //--------------------------------- Default constructor
   public: GALGAS_testArrayIndexIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_testArrayIndexIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_testArrayIndexIR_2D_weak (const class GALGAS_testArrayIndexIR & inSource) ;
 
@@ -5144,9 +5026,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_testArrayIndexIR_2D
 class GALGAS_sourceLocationIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_sourceLocationIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_sourceLocationIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_sourceLocationIR (const class cPtr_sourceLocationIR * inSourcePtr) ;
@@ -5241,9 +5120,6 @@ class GALGAS_sourceLocationIR_2D_weak : public GALGAS_abstractInstructionIR_2D_w
 //--------------------------------- Default constructor
   public: GALGAS_sourceLocationIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_sourceLocationIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_sourceLocationIR_2D_weak (const class GALGAS_sourceLocationIR & inSource) ;
 
@@ -5307,9 +5183,6 @@ void extensionSetter_appendFreeComment (class GALGAS_instructionListIR & ioObjec
 class GALGAS_freeCommentIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Default constructor
   public: GALGAS_freeCommentIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_freeCommentIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_freeCommentIR (const class cPtr_freeCommentIR * inSourcePtr) ;
@@ -5403,9 +5276,6 @@ class cPtr_freeCommentIR : public cPtr_abstractInstructionIR {
 class GALGAS_freeCommentIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_freeCommentIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_freeCommentIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_freeCommentIR_2D_weak (const class GALGAS_freeCommentIR & inSource) ;
@@ -5681,7 +5551,8 @@ class GALGAS_routineAccessibilityIR_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_routineAccessibilityIR_2D_element constructor_new (const class GALGAS_abstractRoutineIR & inOperand0,
-                                                                                 const class GALGAS_stringset & inOperand1
+                                                                                 const class GALGAS_stringset & inOperand1,
+                                                                                 class C_Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5860,9 +5731,6 @@ class GALGAS_instructionListListIR_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_instructionListListIR_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_instructionListListIR_2D_element (void) ;
 
@@ -5888,7 +5756,8 @@ class GALGAS_instructionListListIR_2D_element : public AC_GALGAS_root {
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_instructionListListIR_2D_element constructor_new (const class GALGAS_instructionListIR & inOperand0
+  public: static class GALGAS_instructionListListIR_2D_element constructor_new (const class GALGAS_instructionListIR & inOperand0,
+                                                                                class C_Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -5925,9 +5794,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListList
 class GALGAS_ctExpressionAST_2D_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- Default constructor
   public: GALGAS_ctExpressionAST_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctExpressionAST_2D_weak (const class GALGAS_ctExpressionAST & inSource) ;
@@ -5982,9 +5848,6 @@ class GALGAS_ctInfixExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_wea
 //--------------------------------- Default constructor
   public: GALGAS_ctInfixExpressionAST_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctInfixExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctInfixExpressionAST_2D_weak (const class GALGAS_ctInfixExpressionAST & inSource) ;
 
@@ -6037,9 +5900,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctInfixExpressionAS
 class GALGAS_ctPrefixExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_ctPrefixExpressionAST_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctPrefixExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctPrefixExpressionAST_2D_weak (const class GALGAS_ctPrefixExpressionAST & inSource) ;
@@ -6094,9 +5954,6 @@ class GALGAS_ctTrueExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak
 //--------------------------------- Default constructor
   public: GALGAS_ctTrueExpressionAST_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctTrueExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctTrueExpressionAST_2D_weak (const class GALGAS_ctTrueExpressionAST & inSource) ;
 
@@ -6149,9 +6006,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctTrueExpressionAST
 class GALGAS_ctFalseExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_ctFalseExpressionAST_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctFalseExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctFalseExpressionAST_2D_weak (const class GALGAS_ctFalseExpressionAST & inSource) ;
@@ -6206,9 +6060,6 @@ class GALGAS_ctIntExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak 
 //--------------------------------- Default constructor
   public: GALGAS_ctIntExpressionAST_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctIntExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctIntExpressionAST_2D_weak (const class GALGAS_ctIntExpressionAST & inSource) ;
 
@@ -6261,9 +6112,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctIntExpressionAST_
 class GALGAS_ctIdentifierExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_ctIdentifierExpressionAST_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctIdentifierExpressionAST_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_ctIdentifierExpressionAST_2D_weak (const class GALGAS_ctIdentifierExpressionAST & inSource) ;
@@ -6451,9 +6299,6 @@ class GALGAS_ctCheckMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctCheckMap_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_ctCheckMap_2D_element (void) ;
 
@@ -6479,7 +6324,8 @@ class GALGAS_ctCheckMap_2D_element : public AC_GALGAS_root {
                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_ctCheckMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0
+  public: static class GALGAS_ctCheckMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
+                                                                     class C_Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6682,9 +6528,6 @@ class GALGAS_ctMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_ctMap_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_ctMap_2D_element (void) ;
 
@@ -6716,7 +6559,8 @@ class GALGAS_ctMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_ctMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                const class GALGAS_bigint & inOperand1
+                                                                const class GALGAS_bigint & inOperand1,
+                                                                class C_Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6922,7 +6766,8 @@ class GALGAS_llvmStringDefinition_2D_element : public AC_GALGAS_root {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_llvmStringDefinition_2D_element constructor_new (const class GALGAS_llvmStringDefinitionElement & inOperand0
+  public: static class GALGAS_llvmStringDefinition_2D_element constructor_new (const class GALGAS_llvmStringDefinitionElement & inOperand0,
+                                                                               class C_Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -6959,9 +6804,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmStringDefinitio
 class GALGAS_llvmGenericType_2D_weak : public GALGAS_abstractDeclarationAST_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_llvmGenericType_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_llvmGenericType_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_llvmGenericType_2D_weak (const class GALGAS_llvmGenericType & inSource) ;
@@ -7037,9 +6879,6 @@ void extensionMethod_checkCompileTimeExpression (const class GALGAS_llvmStringDe
 class GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak : public GALGAS_abstractDeclarationAST_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak (const class GALGAS_llvmAssignmentOperatorDeclarationAST & inSource) ;
@@ -7266,9 +7105,6 @@ class GALGAS_llvmAssignmentOperatorUsage_2D_weak : public GALGAS_abstractAssignm
 //--------------------------------- Default constructor
   public: GALGAS_llvmAssignmentOperatorUsage_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_llvmAssignmentOperatorUsage_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_llvmAssignmentOperatorUsage_2D_weak (const class GALGAS_llvmAssignmentOperatorUsage & inSource) ;
 
@@ -7351,9 +7187,6 @@ class GALGAS_lstring function_assignmentOperatorKey (const class GALGAS_omnibusT
 class GALGAS_assignmentRoutineIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Default constructor
   public: GALGAS_assignmentRoutineIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_assignmentRoutineIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_assignmentRoutineIR (const class cPtr_assignmentRoutineIR * inSourcePtr) ;
@@ -7494,9 +7327,6 @@ class GALGAS_assignmentRoutineIR_2D_weak : public GALGAS_abstractRoutineIR_2D_we
 //--------------------------------- Default constructor
   public: GALGAS_assignmentRoutineIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_assignmentRoutineIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_assignmentRoutineIR_2D_weak (const class GALGAS_assignmentRoutineIR & inSource) ;
 
@@ -7549,9 +7379,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentRoutineIR
 class GALGAS_simpleAssignmentCopyRoutineIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Default constructor
   public: GALGAS_simpleAssignmentCopyRoutineIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_simpleAssignmentCopyRoutineIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_simpleAssignmentCopyRoutineIR (const class cPtr_simpleAssignmentCopyRoutineIR * inSourcePtr) ;
@@ -7652,9 +7479,6 @@ class GALGAS_simpleAssignmentCopyRoutineIR_2D_weak : public GALGAS_abstractRouti
 //--------------------------------- Default constructor
   public: GALGAS_simpleAssignmentCopyRoutineIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_simpleAssignmentCopyRoutineIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_simpleAssignmentCopyRoutineIR_2D_weak (const class GALGAS_simpleAssignmentCopyRoutineIR & inSource) ;
 
@@ -7707,9 +7531,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_simpleAssignmentCop
 class GALGAS_simpleCopyAssignmentOperatorUsage : public GALGAS_abstractAssignmentOperatorUsage {
 //--------------------------------- Default constructor
   public: GALGAS_simpleCopyAssignmentOperatorUsage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_simpleCopyAssignmentOperatorUsage constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_simpleCopyAssignmentOperatorUsage (const class cPtr_simpleCopyAssignmentOperatorUsage * inSourcePtr) ;
@@ -7801,9 +7622,6 @@ class GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak : public GALGAS_abstractA
 //--------------------------------- Default constructor
   public: GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak (const class GALGAS_simpleCopyAssignmentOperatorUsage & inSource) ;
 
@@ -7889,7 +7707,8 @@ class GALGAS_llvmGenerationInstructionElementList_2D_element : public AC_GALGAS_
                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS constructors
-  public: static class GALGAS_llvmGenerationInstructionElementList_2D_element constructor_new (const class GALGAS_llvmGenerationInstructionElement & inOperand0
+  public: static class GALGAS_llvmGenerationInstructionElementList_2D_element constructor_new (const class GALGAS_llvmGenerationInstructionElement & inOperand0,
+                                                                                               class C_Compiler * inCompiler
                                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'
@@ -7926,9 +7745,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 class GALGAS_abstractLLVMInstruction_2D_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- Default constructor
   public: GALGAS_abstractLLVMInstruction_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_abstractLLVMInstruction_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_abstractLLVMInstruction_2D_weak (const class GALGAS_abstractLLVMInstruction & inSource) ;
@@ -7983,9 +7799,6 @@ class GALGAS_llvmGenerationInstruction_2D_weak : public GALGAS_abstractLLVMInstr
 //--------------------------------- Default constructor
   public: GALGAS_llvmGenerationInstruction_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_llvmGenerationInstruction_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_llvmGenerationInstruction_2D_weak (const class GALGAS_llvmGenerationInstruction & inSource) ;
 
@@ -8038,9 +7851,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstr
 class GALGAS_llvmVarInstruction_2D_weak : public GALGAS_abstractLLVMInstruction_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_llvmVarInstruction_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_llvmVarInstruction_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_llvmVarInstruction_2D_weak (const class GALGAS_llvmVarInstruction & inSource) ;
@@ -8283,9 +8093,6 @@ class GALGAS_assignmentGenerationVarMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
   public: VIRTUAL_IN_DEBUG void drop (void) override ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_assignmentGenerationVarMap_2D_element constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Default constructor
   public: GALGAS_assignmentGenerationVarMap_2D_element (void) ;
 
@@ -8317,7 +8124,8 @@ class GALGAS_assignmentGenerationVarMap_2D_element : public AC_GALGAS_root {
 
 //--------------------------------- GALGAS constructors
   public: static class GALGAS_assignmentGenerationVarMap_2D_element constructor_new (const class GALGAS_lstring & inOperand0,
-                                                                                     const class GALGAS_string & inOperand1
+                                                                                     const class GALGAS_string & inOperand1,
+                                                                                     class C_Compiler * inCompiler
                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Implementation of getter 'description'

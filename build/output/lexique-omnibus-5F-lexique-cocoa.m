@@ -156,109 +156,109 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
     }
   }else if (scanningOk && ([self testForInputChar:64])) {
     if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter] || [self testForInputFromChar:48 toChar:57])) {
-      BOOL loop2001 = YES ;
+      BOOL loop2009 = YES ;
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:46])) {
         }else{
-          loop2001 = NO ;
+          loop2009 = NO ;
         }
-      }while (loop2001 && scanningOk) ;
+      }while (loop2009 && scanningOk) ;
     }else{
       scanningOk = NO ;
     }
     mTokenCode = omnibus_lexique_1__40_attribute ;
   }else if (scanningOk && ([self testForInputString:@"0b" advance:YES])) {
-    BOOL loop2867 = YES ;
+    BOOL loop2887 = YES ;
     do {
       if (scanningOk && ([self testForInputChar:95])) {
       }else{
-        loop2867 = NO ;
+        loop2887 = NO ;
       }
-    }while (loop2867 && scanningOk) ;
+    }while (loop2887 && scanningOk) ;
     if (scanningOk && ([self testForInputFromChar:48 toChar:49])) {
       scanner_cocoa_routine_enterBinaryDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
-      BOOL loop3006 = YES ;
+      BOOL loop3026 = YES ;
       do {
         if (scanningOk && ([self testForInputFromChar:48 toChar:49])) {
           scanner_cocoa_routine_enterBinaryDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
         }else if (scanningOk && ([self testForInputChar:95])) {
         }else{
-          loop3006 = NO ;
+          loop3026 = NO ;
         }
-      }while (loop3006 && scanningOk) ;
+      }while (loop3026 && scanningOk) ;
       mTokenCode = omnibus_lexique_1_integer ;
     }else{
       scanningOk = NO ;
     }
   }else if (scanningOk && ([self testForInputString:@"0x" advance:YES])) {
-    BOOL loop3432 = YES ;
+    BOOL loop3458 = YES ;
     do {
       if (scanningOk && ([self testForInputChar:95])) {
       }else{
-        loop3432 = NO ;
+        loop3458 = NO ;
       }
-    }while (loop3432 && scanningOk) ;
+    }while (loop3458 && scanningOk) ;
     if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
       scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
-      BOOL loop3590 = YES ;
+      BOOL loop3616 = YES ;
       do {
         if (scanningOk && ([self testForInputFromChar:48 toChar:57] || [self testForInputFromChar:97 toChar:102] || [self testForInputFromChar:65 toChar:70])) {
           scanner_cocoa_routine_enterHexDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
         }else if (scanningOk && ([self testForInputChar:95])) {
         }else{
-          loop3590 = NO ;
+          loop3616 = NO ;
         }
-      }while (loop3590 && scanningOk) ;
+      }while (loop3616 && scanningOk) ;
       mTokenCode = omnibus_lexique_1_integer ;
     }else{
       scanningOk = NO ;
     }
   }else if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
     scanner_cocoa_routine_enterDecimalDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
-    BOOL loop4030 = YES ;
+    BOOL loop4056 = YES ;
     do {
       if (scanningOk && ([self testForInputFromChar:48 toChar:57])) {
         scanner_cocoa_routine_enterDecimalDigitIntoBigInt (& scanningOk, mPreviousChar, mLexicalAttribute_bigInteger) ;
       }else if (scanningOk && ([self testForInputChar:95])) {
       }else{
-        loop4030 = NO ;
+        loop4056 = NO ;
       }
-    }while (loop4030 && scanningOk) ;
+    }while (loop4056 && scanningOk) ;
     mTokenCode = omnibus_lexique_1_integer ;
   }else if (scanningOk && ([self testForInputChar:34])) {
-    BOOL loop4699 = YES ;
+    BOOL loop4731 = YES ;
     do {
       if (scanningOk && ([self testForInputString:@"\\\"" advance:YES])) {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, 34) ;
       }else if (scanningOk && ([self testForInputChar:32] || [self testForInputChar:33] || [self testForInputFromChar:35 toChar:65533])) {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
       }else{
-        loop4699 = NO ;
+        loop4731 = NO ;
       }
-    }while (loop4699 && scanningOk) ;
+    }while (loop4731 && scanningOk) ;
     if (scanningOk && ([self testForInputChar:34])) {
       mTokenCode = omnibus_lexique_1__22_string_22_ ;
     }else{
       scanningOk = NO ;
     }
   }else if (scanningOk && ([self testForInputString:@"//!" advance:YES])) {
-    BOOL loop5451 = YES ;
+    BOOL loop5483 = YES ;
     do {
       if (scanningOk && ([self testForInputFromChar:1 toChar:9] || [self testForInputChar:11] || [self testForInputChar:12] || [self testForInputFromChar:14 toChar:65533])) {
       }else{
-        loop5451 = NO ;
+        loop5483 = NO ;
       }
-    }while (loop5451 && scanningOk) ;
+    }while (loop5483 && scanningOk) ;
     mTokenCode = omnibus_lexique_1_commentMark ;
   }else if (scanningOk && ([self testForInputString:@"//" advance:YES])) {
-    BOOL loop5589 = YES ;
+    BOOL loop5621 = YES ;
     do {
       if (scanningOk && ([self testForInputFromChar:1 toChar:9] || [self testForInputChar:11] || [self testForInputChar:12] || [self testForInputFromChar:14 toChar:65533])) {
       }else{
-        loop5589 = NO ;
+        loop5621 = NO ;
       }
-    }while (loop5589 && scanningOk) ;
+    }while (loop5621 && scanningOk) ;
     mTokenCode = omnibus_lexique_1_comment ;
   }else if (scanningOk && [self testForInputString:@">>=" advance:YES]) {
     mTokenCode = omnibus_lexique_1__3E__3E__3D_ ;
@@ -375,14 +375,14 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
       scanningPointStructForCocoa locationForTag_onlyExclamationInterrogationMark ;
       [self saveScanningPoint: & locationForTag_onlyExclamationInterrogationMark] ;
       if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
-        BOOL loop7389 = YES ;
+        BOOL loop7421 = YES ;
         do {
           scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
           if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
           }else{
-            loop7389 = NO ;
+            loop7421 = NO ;
           }
-        }while (loop7389 && scanningOk) ;
+        }while (loop7421 && scanningOk) ;
         if (scanningOk && ([self testForInputChar:58])) {
           mTokenCode = omnibus_lexique_1__3F__21_selector_3A_ ;
         }else{
@@ -394,14 +394,14 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
         mTokenCode = omnibus_lexique_1__3F__21_selector_3A_ ;
       }
     }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
-      BOOL loop7824 = YES ;
+      BOOL loop7856 = YES ;
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
         }else{
-          loop7824 = NO ;
+          loop7856 = NO ;
         }
-      }while (loop7824 && scanningOk) ;
+      }while (loop7856 && scanningOk) ;
       if (scanningOk && ([self testForInputChar:58])) {
         mTokenCode = omnibus_lexique_1__3F_selector_3A_ ;
       }else{
@@ -419,14 +419,14 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
       scanningPointStructForCocoa locationForTag_onlyInterrogationExclamationMark ;
       [self saveScanningPoint: & locationForTag_onlyInterrogationExclamationMark] ;
       if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
-        BOOL loop8353 = YES ;
+        BOOL loop8385 = YES ;
         do {
           scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
           if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
           }else{
-            loop8353 = NO ;
+            loop8385 = NO ;
           }
-        }while (loop8353 && scanningOk) ;
+        }while (loop8385 && scanningOk) ;
         if (scanningOk && ([self testForInputChar:58])) {
           mTokenCode = omnibus_lexique_1__21__3F_selector_3A_ ;
         }else{
@@ -438,14 +438,14 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
         mTokenCode = omnibus_lexique_1__21__3F_selector_3A_ ;
       }
     }else if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57])) {
-      BOOL loop8788 = YES ;
+      BOOL loop8820 = YES ;
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForInputFromChar:97 toChar:122] || [self testForInputFromChar:65 toChar:90] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
         }else{
-          loop8788 = NO ;
+          loop8820 = NO ;
         }
-      }while (loop8788 && scanningOk) ;
+      }while (loop8820 && scanningOk) ;
       if (scanningOk && ([self testForInputChar:58])) {
         mTokenCode = omnibus_lexique_1__21_selector_3A_ ;
       }else{
@@ -458,28 +458,28 @@ static NSInteger search_into_omnibus_5F_lexique_keyWordList (NSString * inSearch
     }
   }else if (scanningOk && ([self testForInputChar:36])) {
     if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter])) {
-      BOOL loop9759 = YES ;
+      BOOL loop9797 = YES ;
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
         }else{
-          loop9759 = NO ;
+          loop9797 = NO ;
         }
-      }while (loop9759 && scanningOk) ;
+      }while (loop9797 && scanningOk) ;
     }else{
       scanningOk = NO ;
     }
     mTokenCode = omnibus_lexique_1__24_type ;
   }else if (scanningOk && ([self testForInputChar:169])) {
     if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter])) {
-      BOOL loop10619 = YES ;
+      BOOL loop10663 = YES ;
       do {
         scanner_cocoa_routine_enterCharacterIntoString (& scanningOk, mLexicalAttribute_tokenString, mPreviousChar) ;
         if (scanningOk && ([self testForCharWithFunction: isUnicodeLetter] || [self testForInputFromChar:48 toChar:57] || [self testForInputChar:95])) {
         }else{
-          loop10619 = NO ;
+          loop10663 = NO ;
         }
-      }while (loop10619 && scanningOk) ;
+      }while (loop10663 && scanningOk) ;
     }else{
       scanningOk = NO ;
     }

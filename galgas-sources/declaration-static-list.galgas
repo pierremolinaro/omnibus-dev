@@ -253,7 +253,7 @@ private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> 
 map @staticlistMap {
   public var @propertyList mStaticListPropertyList
 
-  insert insertKey error message "static list '%K' is already defined"
+  %insertSetter insertKey %errorMessage "static list '%K' is already defined"
 }
 
 #·······················································································································
@@ -261,7 +261,7 @@ map @staticlistMap {
 map @staticListInitializationMap {
   public var @stringlist mInitializationList
 
-  insert insertKey error message "static list '%K' is already defined"
+  %insertSetter insertKey %errorMessage "static list '%K' is already defined"
 }
 
 #·······················································································································
@@ -487,8 +487,8 @@ override method @staticListAST enterInContext
 map @staticListInvokedFunctionSetMap {
   public var @stringset mInvokedFunctionSet
   
-  insert insertKey error message "INTERNAL ERROR"
-  search searchKey error message "INTERNAL ERROR"
+  %insertSetter insertKey %errorMessage "INTERNAL ERROR"
+  %searchMethod searchKey %errorMessage "INTERNAL ERROR"
 }
 
 #·······················································································································

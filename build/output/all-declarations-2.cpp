@@ -53,7 +53,7 @@ typeComparisonResult cMapElement_implicitConversionToBooleanMap::compare (const 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_implicitConversionToBooleanMap::GALGAS_implicitConversionToBooleanMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -338,7 +338,7 @@ typeComparisonResult cMapElement_taskMap::compare (const cCollectionElement * in
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_taskMap::GALGAS_taskMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -677,7 +677,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_globalTaskVariableList GALGAS_globalTaskVariableList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_globalTaskVariableList  (capCollectionElementArray ()) ;
+  return GALGAS_globalTaskVariableList (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1411,7 +1411,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_declarationDecorationList GALGAS_declarationDecorationList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_declarationDecorationList  (capCollectionElementArray ()) ;
+  return GALGAS_declarationDecorationList (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -1787,7 +1787,7 @@ typeComparisonResult cMapElement_constantMap::compare (const cCollectionElement 
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_constantMap::GALGAS_constantMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2126,7 +2126,7 @@ typeComparisonResult cMapElement_constructorMap::compare (const cCollectionEleme
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_constructorMap::GALGAS_constructorMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -2859,7 +2859,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_constructorSignature GALGAS_constructorSignature::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_constructorSignature  (capCollectionElementArray ()) ;
+  return GALGAS_constructorSignature (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -3355,7 +3355,7 @@ typeComparisonResult cMapElement_propertyGetterMap::compare (const cCollectionEl
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_propertyGetterMap::GALGAS_propertyGetterMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4156,7 +4156,7 @@ typeComparisonResult cMapElement_propertySetterMap::compare (const cCollectionEl
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_propertySetterMap::GALGAS_propertySetterMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -4759,7 +4759,7 @@ typeComparisonResult cMapElement_staticStringMap::compare (const cCollectionElem
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_staticStringMap::GALGAS_staticStringMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5092,7 +5092,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_globalStructuredConstantList GALGAS_globalStructuredConstantList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_globalStructuredConstantList  (capCollectionElementArray ()) ;
+  return GALGAS_globalStructuredConstantList (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -5561,7 +5561,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_operandIRList GALGAS_operandIRList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_operandIRList  (capCollectionElementArray ()) ;
+  return GALGAS_operandIRList (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -8677,7 +8677,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_arcAssignmentList GALGAS_arcAssignmentList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_arcAssignmentList  (capCollectionElementArray ()) ;
+  return GALGAS_arcAssignmentList (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9454,7 +9454,7 @@ AC_GALGAS_list (inSharedArray) {
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_userLLVMTypeDefinitionListIR GALGAS_userLLVMTypeDefinitionListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
-  return GALGAS_userLLVMTypeDefinitionListIR  (capCollectionElementArray ()) ;
+  return GALGAS_userLLVMTypeDefinitionListIR (capCollectionElementArray ()) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -9907,9 +9907,9 @@ void extensionSetter_makeEntryFromString (GALGAS_unifiedTypeMap & ioObject,
     }
   }
   if (kBoolFalse == test_0) {
-    GALGAS_unifiedTypeMapElementClass var_newElement_2869 = GALGAS_unifiedTypeMapElementClass::constructor_new (GALGAS_lstring::constructor_new (constinArgument_inKey, GALGAS_location::constructor_nowhere (SOURCE_FILE ("unified-type-map.galgas", 63))  COMMA_SOURCE_FILE ("unified-type-map.galgas", 63)), GALGAS_typeDefinition::constructor_unsolved (SOURCE_FILE ("unified-type-map.galgas", 63))  COMMA_SOURCE_FILE ("unified-type-map.galgas", 63)) ;
+    GALGAS_unifiedTypeMapElementClass var_newElement_2869 = GALGAS_unifiedTypeMapElementClass::constructor_new (GALGAS_lstring::constructor_new (constinArgument_inKey, GALGAS_location::constructor_nowhere (SOURCE_FILE ("unified-type-map.galgas", 63)), inCompiler  COMMA_SOURCE_FILE ("unified-type-map.galgas", 63)), GALGAS_typeDefinition::constructor_unsolved (SOURCE_FILE ("unified-type-map.galgas", 63))  COMMA_SOURCE_FILE ("unified-type-map.galgas", 63)) ;
     {
-    ioObject.setter_internalInsertKey (GALGAS_lstring::constructor_new (constinArgument_inKey, GALGAS_location::constructor_nowhere (SOURCE_FILE ("unified-type-map.galgas", 64))  COMMA_SOURCE_FILE ("unified-type-map.galgas", 64)), var_newElement_2869, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 64)) ;
+    ioObject.setter_internalInsertKey (GALGAS_lstring::constructor_new (constinArgument_inKey, GALGAS_location::constructor_nowhere (SOURCE_FILE ("unified-type-map.galgas", 64)), inCompiler  COMMA_SOURCE_FILE ("unified-type-map.galgas", 64)), var_newElement_2869, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 64)) ;
     }
     outArgument_outEntry = GALGAS_unifiedTypeMapEntry::constructor_element (var_newElement_2869  COMMA_SOURCE_FILE ("unified-type-map.galgas", 65)) ;
   }
@@ -10552,16 +10552,16 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7104 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6825_weakElement = extractPtr_7104->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7111 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6832_weakElement = extractPtr_7111->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_6851 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6825_weakElement.ptr ())) ;
-        if (nullptr == var_type_6851.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_6858 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6832_weakElement.ptr ())) ;
+        if (nullptr == var_type_6858.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6851.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6858.readProperty_mDefinition ().enumValue ()) {
           case GALGAS_typeDefinition::kNotBuilt:
             break ;
           case GALGAS_typeDefinition::kEnum_unsolved:
@@ -10573,9 +10573,9 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
             break ;
           case GALGAS_typeDefinition::kEnum_solved:
             {
-              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7027 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6851.readProperty_mDefinition ().unsafePointer ()) ;
-              const GALGAS_omnibusType extractedValue_6996_definition = extractPtr_7027->mAssociatedValue0 ;
-              result_result = extractedValue_6996_definition ;
+              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7034 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6858.readProperty_mDefinition ().unsafePointer ()) ;
+              const GALGAS_omnibusType extractedValue_7003_definition = extractPtr_7034->mAssociatedValue0 ;
+              result_result = extractedValue_7003_definition ;
             }
             break ;
           }
@@ -10619,16 +10619,16 @@ GALGAS_string extensionGetter_key (const GALGAS_unifiedTypeMapEntry & inObject,
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7513 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7370_weakElement = extractPtr_7513->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7520 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7377_weakElement = extractPtr_7520->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_7396 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7370_weakElement.ptr ())) ;
-        if (nullptr == var_type_7396.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_7403 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7377_weakElement.ptr ())) ;
+        if (nullptr == var_type_7403.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_7396.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_7403.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {
@@ -10711,7 +10711,7 @@ typeComparisonResult cMapElement_staticListInvokedFunctionSetMap::compare (const
 //----------------------------------------------------------------------------------------------------------------------
 
 GALGAS_staticListInvokedFunctionSetMap::GALGAS_staticListInvokedFunctionSetMap (void) :
-AC_GALGAS_map (true) {
+AC_GALGAS_map () {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -10989,12 +10989,6 @@ typeComparisonResult GALGAS_compiletimeBoolAST::objectCompare (const GALGAS_comp
 
 GALGAS_compiletimeBoolAST::GALGAS_compiletimeBoolAST (void) :
 GALGAS_abstractDeclarationAST () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compiletimeBoolAST GALGAS_compiletimeBoolAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compiletimeBoolAST::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -11851,12 +11845,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeBoolXorOperator GALGAS_compileTimeBoolXorOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeBoolXorOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeBoolXorOperator::GALGAS_compileTimeBoolXorOperator (const cPtr_compileTimeBoolXorOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeBoolXorOperator) ;
@@ -12090,12 +12078,6 @@ typeComparisonResult GALGAS_compileTimeBoolOrOperator::objectCompare (const GALG
 
 GALGAS_compileTimeBoolOrOperator::GALGAS_compileTimeBoolOrOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeBoolOrOperator GALGAS_compileTimeBoolOrOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeBoolOrOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12337,12 +12319,6 @@ GALGAS_abstractDeclarationAST () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntAST GALGAS_compileTimeIntAST::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntAST::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntAST::GALGAS_compileTimeIntAST (const cPtr_compileTimeIntAST * inSourcePtr) :
 GALGAS_abstractDeclarationAST (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntAST) ;
@@ -12576,12 +12552,6 @@ typeComparisonResult GALGAS_compileTimeIntModuloOperator::objectCompare (const G
 
 GALGAS_compileTimeIntModuloOperator::GALGAS_compileTimeIntModuloOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntModuloOperator GALGAS_compileTimeIntModuloOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntModuloOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -12823,12 +12793,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntModuloZeroOperator GALGAS_compileTimeIntModuloZeroOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntModuloZeroOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntModuloZeroOperator::GALGAS_compileTimeIntModuloZeroOperator (const cPtr_compileTimeIntModuloZeroOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntModuloZeroOperator) ;
@@ -13062,12 +13026,6 @@ typeComparisonResult GALGAS_compileTimeIntDivideOperator::objectCompare (const G
 
 GALGAS_compileTimeIntDivideOperator::GALGAS_compileTimeIntDivideOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntDivideOperator GALGAS_compileTimeIntDivideOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntDivideOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -13309,12 +13267,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntDivideZeroOperator GALGAS_compileTimeIntDivideZeroOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntDivideZeroOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntDivideZeroOperator::GALGAS_compileTimeIntDivideZeroOperator (const cPtr_compileTimeIntDivideZeroOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntDivideZeroOperator) ;
@@ -13548,12 +13500,6 @@ typeComparisonResult GALGAS_compileTimeIntMultiplyOperator::objectCompare (const
 
 GALGAS_compileTimeIntMultiplyOperator::GALGAS_compileTimeIntMultiplyOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntMultiplyOperator GALGAS_compileTimeIntMultiplyOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntMultiplyOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -13795,12 +13741,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntSubtractOperator GALGAS_compileTimeIntSubtractOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntSubtractOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntSubtractOperator::GALGAS_compileTimeIntSubtractOperator (const cPtr_compileTimeIntSubtractOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntSubtractOperator) ;
@@ -14034,12 +13974,6 @@ typeComparisonResult GALGAS_compileTimeIntEqualOperator::objectCompare (const GA
 
 GALGAS_compileTimeIntEqualOperator::GALGAS_compileTimeIntEqualOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntEqualOperator GALGAS_compileTimeIntEqualOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntEqualOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14281,12 +14215,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntAddOperator GALGAS_compileTimeIntAddOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntAddOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntAddOperator::GALGAS_compileTimeIntAddOperator (const cPtr_compileTimeIntAddOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntAddOperator) ;
@@ -14520,12 +14448,6 @@ typeComparisonResult GALGAS_compileTimeIntBitWiseAndOperator::objectCompare (con
 
 GALGAS_compileTimeIntBitWiseAndOperator::GALGAS_compileTimeIntBitWiseAndOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntBitWiseAndOperator GALGAS_compileTimeIntBitWiseAndOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntBitWiseAndOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14767,12 +14689,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntShiftLeftOperator GALGAS_compileTimeIntShiftLeftOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntShiftLeftOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntShiftLeftOperator::GALGAS_compileTimeIntShiftLeftOperator (const cPtr_compileTimeIntShiftLeftOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntShiftLeftOperator) ;
@@ -15006,12 +14922,6 @@ typeComparisonResult GALGAS_compileTimeIntShiftRightOperator::objectCompare (con
 
 GALGAS_compileTimeIntShiftRightOperator::GALGAS_compileTimeIntShiftRightOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntShiftRightOperator GALGAS_compileTimeIntShiftRightOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntShiftRightOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -15253,12 +15163,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntLessThanOperator GALGAS_compileTimeIntLessThanOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntLessThanOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntLessThanOperator::GALGAS_compileTimeIntLessThanOperator (const cPtr_compileTimeIntLessThanOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntLessThanOperator) ;
@@ -15492,12 +15396,6 @@ typeComparisonResult GALGAS_compileTimeIntLowerOrEqualOperator::objectCompare (c
 
 GALGAS_compileTimeIntLowerOrEqualOperator::GALGAS_compileTimeIntLowerOrEqualOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
-GALGAS_compileTimeIntLowerOrEqualOperator GALGAS_compileTimeIntLowerOrEqualOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntLowerOrEqualOperator::constructor_new (THERE) ;
 }
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -15739,12 +15637,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntXorOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntXorOperator::GALGAS_compileTimeIntXorOperator (const cPtr_compileTimeIntXorOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntXorOperator) ;
@@ -15982,12 +15874,6 @@ GALGAS_omnibusInfixOperatorUsage () {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator::constructor_default (LOCATION_ARGS) {
-  return GALGAS_compileTimeIntBitWiseOrOperator::constructor_new (THERE) ;
-}
-
-//----------------------------------------------------------------------------------------------------------------------
-
 GALGAS_compileTimeIntBitWiseOrOperator::GALGAS_compileTimeIntBitWiseOrOperator (const cPtr_compileTimeIntBitWiseOrOperator * inSourcePtr) :
 GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntBitWiseOrOperator) ;
@@ -16177,6 +16063,132 @@ GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOpe
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntBitWiseOrOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+// @compileTimeIntMinusOperator reference class
+//----------------------------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntMinusOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//----------------------------------------------------------------------------------------------------------------------
+
+typeComparisonResult cPtr_compileTimeIntMinusOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
+  return kOperandEqual ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+typeComparisonResult GALGAS_compileTimeIntMinusOperator::objectCompare (const GALGAS_compileTimeIntMinusOperator & inOperand) const {
+  typeComparisonResult result = kOperandNotValid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = kFirstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = kFirstOperandGreaterThanSecond ;
+    }else{
+      result = kOperandEqual ;
+    }
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator::GALGAS_compileTimeIntMinusOperator (void) :
+GALGAS_prefixOperatorUsage () {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator::GALGAS_compileTimeIntMinusOperator (const cPtr_compileTimeIntMinusOperator * inSourcePtr) :
+GALGAS_prefixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntMinusOperator) ;
+}
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::constructor_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+//Pointer class for @compileTimeIntMinusOperator class
+//----------------------------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (THERE) {
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntMinusOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ;
+}
+
+void cPtr_compileTimeIntMinusOperator::description (C_String & ioString,
+                                                    const int32_t /* inIndentation */) const {
+  ioString << "[@compileTimeIntMinusOperator]" ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_compileTimeIntMinusOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//----------------------------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntMinusOperator generic code implementation
+//
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor
+kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ("compileTimeIntMinusOperator",
+                                                    & kTypeDescriptor_GALGAS_prefixOperatorUsage) ;
+
+//----------------------------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntMinusOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntMinusOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntMinusOperator (*this)) ;
+  }
+  return result ;
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::extractObject (const GALGAS_object & inObject,
+                                                                                      C_Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator result ;
+  const GALGAS_compileTimeIntMinusOperator * p = (const GALGAS_compileTimeIntMinusOperator *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntMinusOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntMinusOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

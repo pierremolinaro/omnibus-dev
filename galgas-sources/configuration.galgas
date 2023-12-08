@@ -40,7 +40,7 @@ struct @targetParameters {
   public var @lbigint mBitbandRegisterBitMultiplier
   
   public var @lstring mSectionHandler
-  public var @lbigint mSectionPushedRegisterByteSize 
+  public var @lbigint mSectionPushedRegisterByteSize
   public var @lstring mSectionDispatcherHeader
   public var @lstring mSectionDispatcherEntry
   public var @lstring mSectionDispatcherInvocationFromAnyMode
@@ -81,7 +81,7 @@ syntax extension omnibus_target_specific_syntax {
   rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
     if key.string != inKey then
-      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { replace inKey }
+      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { %replaceBy inKey }
     end
     $:$
   }
@@ -249,7 +249,7 @@ syntax extension omnibus_target_specific_syntax {
       !serviceDispatcherHeader
       !serviceEntryNoReturnedValue
       !serviceEntryReturnValue
-    }
+   }
    ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
       !panicCodeTypeName
       !panicLineTypeName

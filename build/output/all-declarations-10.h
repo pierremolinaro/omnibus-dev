@@ -154,9 +154,6 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
 //--------------------------------- Default constructor
   public: GALGAS_convertInstructionIR_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_convertInstructionIR_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_convertInstructionIR_2D_weak (const class GALGAS_convertInstructionIR & inSource) ;
 

@@ -204,7 +204,7 @@ syntax extension omnibus_syntax {
           end
           setterDefined = true
         else
-          error getterOrSetter : "invalid attribute" fixit { remove replace "@set" replace "@get" }
+          error getterOrSetter : "invalid attribute" fixit { %remove %replaceBy "@set" %replaceBy "@get" }
         end
       while
       end

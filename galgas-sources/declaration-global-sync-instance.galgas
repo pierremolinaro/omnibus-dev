@@ -66,12 +66,12 @@ override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @lo
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalSyncInstanceMap %selectors {
+map @globalSyncInstanceMap { # %selectors {
   public var @omnibusType type
   public var @objectIR initialValue
 
-  insert insertKey error message "the '%K' global variable is already declared in %L"
-  search searchKey error message "there is no '%K' global variable"
+  %insertSetter insertKey %errorMessage "the '%K' global variable is already declared in %L"
+  %searchMethod searchKey %errorMessage "there is no '%K' global variable"
 }
 
 #·······················································································································
@@ -112,9 +112,9 @@ override method @syncToolInstanceDeclarationAST enterInContext
   )
 #---------------- Enter variable in global variable map
   [!?ioContext.mGlobalSyncInstanceMap insertKey
-    !lkey:self.mSyncInstanceName
-    !type:[result type]
-    !initialValue:result
+    !self.mSyncInstanceName
+    ![result type]
+    !result
   ]
 #---------------- Check type is a sync tool type
   if not [[result type].kind isSyncTool] then
@@ -154,7 +154,7 @@ override method @decoratedSyncInstance semanticAnalysis
 
 map @globalSyncInstanceMapIR {
   public var @objectIR mInitialValue
-  insert insertKey error message "** internal error **"
+  %insertSetter insertKey %errorMessage "** internal error **"
 }
 
 #·······················································································································

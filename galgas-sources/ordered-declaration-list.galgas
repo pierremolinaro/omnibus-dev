@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @semanticTypePrecedenceGraph (@declarationListAST) {
-  insert addNode error message "the '%K' symbol is already declared at %L"
+  %insertSetter addNode %errorMessage "the '%K' symbol is already declared at %L"
 }
 
 #·······················································································································
@@ -183,7 +183,7 @@ proc buildOrderedDeclarationList
   [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
-    message "    Added " + addintegerTypeCount + " integer types\n" 
+    print (!"    Added " + addintegerTypeCount + " integer types\n")
   end
 #------------------------------------------  Write precedence graph file ?
   if (@uint.errorCount == 0) && [option omnibus_options.emitDeclarationDependencyGraphFile value] then

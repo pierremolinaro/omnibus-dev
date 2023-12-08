@@ -38,7 +38,7 @@ syntax extension omnibus_syntax {
           staticWhileExpression = true
         else
           error attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
-          fixit { replace "@" + staticAttribute () }
+          fixit { %replaceBy "@" + staticAttribute () }
         end
       or
       end

@@ -18,8 +18,6 @@ enum @subscript {
   case noSubscript
   case staticSubscript (@omnibusType elementType @bigint size)
   case literalString
-  
-  default noSubscript
 }
 
 #·······················································································································
@@ -50,7 +48,6 @@ enum @typeKind {
   case function (@mode mode
                  @routineTypedSignature signature
                  @unifiedTypeMapEntry returnTypeProxy)
-  default void
 }
 
 #·······················································································································

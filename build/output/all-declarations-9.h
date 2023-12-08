@@ -118,9 +118,6 @@ class GALGAS_configurationDeclarationAST_2D_weak : public GALGAS_abstractDeclara
 //--------------------------------- Default constructor
   public: GALGAS_configurationDeclarationAST_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_configurationDeclarationAST_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_configurationDeclarationAST_2D_weak (const class GALGAS_configurationDeclarationAST & inSource) ;
 
@@ -560,9 +557,6 @@ class GALGAS_compileTimeBoolImplicitConverterToBoolean : public GALGAS_abstractI
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolImplicitConverterToBoolean (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolImplicitConverterToBoolean constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor from pointer
   public: GALGAS_compileTimeBoolImplicitConverterToBoolean (const class cPtr_compileTimeBoolImplicitConverterToBoolean * inSourcePtr) ;
 
@@ -651,9 +645,6 @@ class GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak : public GALGAS_a
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak (const class GALGAS_compileTimeBoolImplicitConverterToBoolean & inSource) ;
 
@@ -706,9 +697,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImpl
 class GALGAS_compileTimeBoolNotOperator : public GALGAS_prefixOperatorUsage {
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolNotOperator (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolNotOperator constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_compileTimeBoolNotOperator (const class cPtr_compileTimeBoolNotOperator * inSourcePtr) ;
@@ -800,9 +788,6 @@ class GALGAS_compileTimeBoolNotOperator_2D_weak : public GALGAS_prefixOperatorUs
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolNotOperator_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolNotOperator_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_compileTimeBoolNotOperator_2D_weak (const class GALGAS_compileTimeBoolNotOperator & inSource) ;
 
@@ -855,9 +840,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotO
 class GALGAS_compileTimeBoolEqualOperator : public GALGAS_omnibusInfixOperatorUsage {
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolEqualOperator (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolEqualOperator constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_compileTimeBoolEqualOperator (const class cPtr_compileTimeBoolEqualOperator * inSourcePtr) ;
@@ -949,9 +931,6 @@ class GALGAS_compileTimeBoolEqualOperator_2D_weak : public GALGAS_omnibusInfixOp
 //--------------------------------- Default constructor
   public: GALGAS_compileTimeBoolEqualOperator_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_compileTimeBoolEqualOperator_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_compileTimeBoolEqualOperator_2D_weak (const class GALGAS_compileTimeBoolEqualOperator & inSource) ;
 
@@ -1004,9 +983,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqua
 class GALGAS_fixedSizeArrayAssignmentOperatorUsage : public GALGAS_abstractAssignmentOperatorUsage {
 //--------------------------------- Default constructor
   public: GALGAS_fixedSizeArrayAssignmentOperatorUsage (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_fixedSizeArrayAssignmentOperatorUsage constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_fixedSizeArrayAssignmentOperatorUsage (const class cPtr_fixedSizeArrayAssignmentOperatorUsage * inSourcePtr) ;
@@ -1122,9 +1098,6 @@ class GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak : public GALGAS_abstr
 //--------------------------------- Default constructor
   public: GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak (void) ;
 
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak constructor_default (LOCATION_ARGS) ;
-
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak (const class GALGAS_fixedSizeArrayAssignmentOperatorUsage & inSource) ;
 
@@ -1177,9 +1150,6 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssig
 class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GALGAS_abstractRoutineIR {
 //--------------------------------- Default constructor
   public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor from pointer
   public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * inSourcePtr) ;
@@ -1295,9 +1265,6 @@ class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_a
 class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak : public GALGAS_abstractRoutineIR_2D_weak {
 //--------------------------------- Default constructor
   public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak (void) ;
-
-//--------------------------------- Default GALGAS constructor
-  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak constructor_default (LOCATION_ARGS) ;
 
 //--------------------------------- Constructor and assignment from strong reference
   public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak (const class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inSource) ;

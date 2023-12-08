@@ -209,8 +209,8 @@ map @guardMapForContext {
   public var @lstring mUserRoutineLLVMName
   public var @lstring mImplementationRoutineLLVMName
 
-  insert insertKey error message "the '%K' guard is already declared in %L"
-  search searchKey error message "there is no '%K' guard"
+  %insertSetter insertKey %errorMessage "the '%K' guard is already declared in %L"
+  %searchMethod searchKey %errorMessage "there is no '%K' guard"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -8,9 +8,9 @@ lexique omnibus_lexique {
   
   style keywordsStyle -> "Keywords"
   
-  $identifier$ ! tokenString error message "an identifier"
+  $identifier$ ! tokenString %errorMessage "an identifier"
   
-  list keyWordList style keywordsStyle error message "the '%K' keyword" {
+  list keyWordList style keywordsStyle %errorMessage "the '%K' keyword" {
     "addressof",
     "assert",
     "boot",
@@ -70,7 +70,7 @@ lexique omnibus_lexique {
       enterCharacterIntoString (!?tokenString !*)
     while isUnicodeLetter | '_' | '0'->'9' :
     end
-    send search tokenString in keyWordList default $identifier$
+    send %codeFor tokenString in keyWordList default $identifier$
   }
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -79,9 +79,9 @@ lexique omnibus_lexique {
   
   style attributeStyle -> "Attributes"
   
-  $@attribute$ ! tokenString  style attributeStyle error message "an attribute @..."
+  $@attribute$ ! tokenString  style attributeStyle %errorMessage "an attribute @..."
   
-  message attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
+  %errorMessage attributeError : "in an attribute name, a letter, a digit or a dot should follow the '@' character"
   
   rule '@' {
     select
@@ -102,13 +102,13 @@ lexique omnibus_lexique {
   
   style integerStyle -> "Integer Constants"
   @bigint bigInteger
-  $integer$ !bigInteger style integerStyle error message "a literal integer"
+  $integer$ !bigInteger style integerStyle %errorMessage "a literal integer"
   
-  message internalError : "internal error"
+  %errorMessage internalError : "internal error"
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
-  message binaryDigitError : "0b should be followed by a binary digit"
+  %errorMessage binaryDigitError : "0b should be followed by a binary digit"
   
   rule "0b" {
     repeat
@@ -130,7 +130,7 @@ lexique omnibus_lexique {
   
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
-  message hexDigitError : "0x should be followed by a hexadecimal digit"
+  %errorMessage hexDigitError : "0x should be followed by a hexadecimal digit"
   
   rule "0x" {
     repeat
@@ -167,9 +167,9 @@ lexique omnibus_lexique {
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
   style stringStyle -> "Literal Strings"
-  $"string"$ ! tokenString style stringStyle %nonAtomicSelection error message "a literal character string \"...\""
+  $"string"$ ! tokenString style stringStyle %nonAtomicSelection %errorMessage "a literal character string \"...\""
   
-  message incorrectStringEnd : "string does not end with '\"'"
+  %errorMessage incorrectStringEnd : "string does not end with '\"'"
   
   rule '"' {
     repeat
@@ -191,8 +191,8 @@ lexique omnibus_lexique {
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
   style commentStyle -> "Comments"
-  $comment$ style commentStyle %nonAtomicSelection error message "a comment"
-  $commentMark$  style commentStyle %nonAtomicSelection error message "a comment"
+  $comment$ style commentStyle %nonAtomicSelection %errorMessage "a comment"
+  $commentMark$  style commentStyle %nonAtomicSelection %errorMessage "a comment"
   rule "//!" {
     repeat
     while '\u0001' -> '\u0009' | '\u000B' | '\u000C' | '\u000E' -> '\uFFFD' :
@@ -211,7 +211,7 @@ lexique omnibus_lexique {
   #—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
   
   style delimitersStyle -> "Delimiters"
-  list delimitorsList style delimitersStyle error message "the '%K' delimitor" {
+  list delimitorsList style delimitersStyle %errorMessage "the '%K' delimitor" {
     ":", ".",  ",", "{", "}", "=", "(", ")", "_",
     "==", "≠", "<", "≤", ">", "≥",
     "[", "]", "]!", "<<", ">>",
@@ -237,10 +237,10 @@ lexique omnibus_lexique {
   
   style selectorStyle -> "Selectors"
   
-  $?selector:$ !tokenString  style selectorStyle error message "the '?' or '?selector:' delimitor"
-  $?!selector:$ !tokenString  style selectorStyle error message "the '?!' or '?!selector:' delimitor"
-  $!selector:$ !tokenString  style selectorStyle error message "the '!' or '!selector:' delimitor"
-  $!?selector:$ !tokenString  style selectorStyle error message "the '!?' or '!?selector:' delimitor"
+  $?selector:$ !tokenString  style selectorStyle %errorMessage "the '?' or '?selector:' delimitor"
+  $?!selector:$ !tokenString  style selectorStyle %errorMessage "the '?!' or '?!selector:' delimitor"
+  $!selector:$ !tokenString  style selectorStyle %errorMessage "the '!' or '!selector:' delimitor"
+  $!?selector:$ !tokenString  style selectorStyle %errorMessage "the '!?' or '!?selector:' delimitor"
   
   rule '?' {
     tag onlyInterrogationMark
@@ -324,9 +324,9 @@ lexique omnibus_lexique {
   
   style typeStyle -> "Types"
   
-  $\$type$ ! tokenString  style typeStyle error message "a type $..."
+  $\$type$ ! tokenString  style typeStyle %errorMessage "a type $..."
   
-  message typeError : "in a type name, a letter or a digit should follow the '$' character"
+  %errorMessage typeError : "in a type name, a letter or a digit should follow the '$' character"
   
   rule '$' {
     select
@@ -347,9 +347,9 @@ lexique omnibus_lexique {
   
   style groupStyle -> "Control Register Groups"
   
-  $©group$ ! tokenString  style groupStyle error message "a control register group ©..."
+  $©group$ ! tokenString  style groupStyle %errorMessage "a control register group ©..."
   
-  message groupError : "in a register group name, a letter or a digit should follow the '©' character"
+  %errorMessage groupError : "in a register group name, a letter or a digit should follow the '©' character"
   
   rule '©' {
     select

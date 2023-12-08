@@ -18,17 +18,20 @@ proc computeStaticExpression
     [ioContext.mTypeMap searchType !lkey:inOptionalTypeName ?type:annotationType]
   end
 #---
+  var @semanticTemporariesStruct unusedSemanticTemporariesStruct = .new
+  var @allocaList unusedAllocaList = {}
+  var @instructionListIR unusedInstructionListIR = {}
   [inExpression analyzeExpression
     !self:voidType ()
     !routineAttributes:.none
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode
-    !?temporary:*
+    !?temporary: unusedSemanticTemporariesStruct
     !?staticEntityMap: ioStaticEntityMap
     !?variableMap:ioContext.mValuedObjectMap
-    !?alloca:*
-    !?instructionListIR:*
+    !?alloca: unusedAllocaList
+    !?instructionListIR: unusedInstructionListIR
     ?result:let @objectIR expressionIR
   ]
   if not [expressionIR isStatic] then

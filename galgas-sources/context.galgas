@@ -5,46 +5,90 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticContext {
-  public var @targetParameters mTargetParameters
+  public var @targetParameters mTargetParameters = .new {
+    !.here
+    !{}
+    !["" nowhere]
+    !["" nowhere]
+    !0
+    !false
+    !.new {!0 !.nowhere}
+    !.new {!0 !.nowhere}
+    !["" nowhere]
+    !.new {!0 !.nowhere}
+    !.new {!0 !.nowhere}
+    !.new {!0 !.nowhere}
+    !.new {!0 !.nowhere}
+    !.new {!0 !.nowhere}
+    !["" nowhere]
+    !.new {!0 !.nowhere}
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    !{}
+    !{}
+    !{}
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    !.new {!0 !.nowhere}
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+  }
 
-  public var @omnibusType mPanicCodeType
-  public var @omnibusType mPanicLineType
-  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap 
-  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap 
+  public var @omnibusType mPanicCodeType = .new {
+    !subscript: .noSubscript
+    !attributes:.none
+    !omnibusTypeDescriptionName: "<<unknown>>"
+    !kind:.void
+    !llvmBaseTypeName: "<<unknown>>"
+  }
+  public var @omnibusType mPanicLineType = .new {
+    !subscript: .noSubscript
+    !attributes:.none
+    !omnibusTypeDescriptionName: "<<unknown>>"
+    !kind:.void
+    !llvmBaseTypeName: "<<unknown>>"
+  }
+  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = {}
+  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = {}
 
-  public var @routineMapForContext mRoutineMap
-  public var @guardMapForContext mGuardMap
+  public var @routineMapForContext mRoutineMap = {}
+  public var @guardMapForContext mGuardMap = {}
   
-  public var @controlRegisterGroupMap mControlRegisterGroupMap
-  public var @globalConstantMap mGlobalConstantMap
-  public var @globalSyncInstanceMap mGlobalSyncInstanceMap
-  public var @staticlistMap mStaticListMap
+  public var @controlRegisterGroupMap mControlRegisterGroupMap = {}
+  public var @globalConstantMap mGlobalConstantMap = {}
+  public var @globalSyncInstanceMap mGlobalSyncInstanceMap = {}
+  public var @staticlistMap mStaticListMap = {}
 
-  public var @stringset mRequiredRoutineSet
+  public var @stringset mRequiredRoutineSet = {}
 
 #--- Types
-  public var @unifiedTypeMap mTypeMap
-  public var @typeConstantMap mTypeConstantMap
-  public var @typeConstructorMap mTypeConstructorMap
-  private var @typePropertySetterMap mTypePropertySetterMap
-  private var @typePropertyGetterMap mTypePropertyGetterMap
+  public var @unifiedTypeMap mTypeMap = {}
+  public var @typeConstantMap mTypeConstantMap = {}
+  public var @typeConstructorMap mTypeConstructorMap = {}
+  private var @typePropertySetterMap mTypePropertySetterMap = {}
+  private var @typePropertyGetterMap mTypePropertyGetterMap = {}
 
 #--- Interrupts
-  public var @availableInterruptMap mAvailableInterruptMap
+  public var @availableInterruptMap mAvailableInterruptMap = {}
 
 #--- Operator maps  
-  public var @infixOperatorMap mInfixOperatorMap
-  public var @prefixOperatorMap mPrefixOperatorMap
-  public var @assignmentOperatorMap mAssignmentOperatorMap
+  public var @infixOperatorMap mInfixOperatorMap = {}
+  public var @prefixOperatorMap mPrefixOperatorMap = {}
+  public var @assignmentOperatorMap mAssignmentOperatorMap = {}
   
-  public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap
+  public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap = {}
 
 #--- Tasks
-  public var @taskMap mTaskMap
-  public var @globalTaskVariableList mGlobalTaskVariableList
+  public var @taskMap mTaskMap = {}
+  public var @globalTaskVariableList mGlobalTaskVariableList = {}
 
 #--- Entity map
-  public var @universalValuedObjectMap mValuedObjectMap
+  public var @universalValuedObjectMap mValuedObjectMap = .new
 }
 
 #·······················································································································
@@ -64,8 +108,8 @@ list @declarationDecorationList {
 
 map @typeConstantMap {
   public var @constantMap mConstantMap
-  insert insertKey error message "the $%K type is already declared"
-  search searchKey error message "there is no $%K type"
+  %insertSetter insertKey %errorMessage "the $%K type is already declared"
+  %searchMethod searchKey %errorMessage "there is no $%K type"
 }
 
 #·······················································································································
@@ -73,8 +117,8 @@ map @typeConstantMap {
 map @constantMap {
   public var @bigint mIndex
   public var @lstring mClassTypeName
-  insert insertKey error message "the '%K' constant is already declared"
-  search searchKey error message "there is no '%K' constant"
+  %insertSetter insertKey %errorMessage "the '%K' constant is already declared"
+  %searchMethod searchKey %errorMessage "there is no '%K' constant"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -83,8 +127,8 @@ map @constantMap {
 
 map @typeConstructorMap {
   public var @constructorMap mConstructorMap
-  insert insertKey error message "the $%K type is already declared"
-  search searchKey error message "there is no $%K type"
+  %insertSetter insertKey %errorMessage "the $%K type is already declared"
+  %searchMethod searchKey %errorMessage "there is no $%K type"
 }
 
 #·······················································································································
@@ -109,19 +153,19 @@ list @constructorSignature {
 map @constructorMap { # Key is (!selector!selector)
   public var @constructorSignature mSignature
   public var @constructorValue mInitValue
-  insert insertKey error message "-- internal error --"
-  search searchKey error message "constructor is not defined"
+  %insertSetter insertKey %errorMessage "-- internal error --"
+  %searchMethod searchKey %errorMessage "constructor is not defined"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # PROPERTY GETTER MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @typePropertyGetterMap %noSuggestion {
+map @typePropertyGetterMap {
   public var @propertyGetterMap mGetterMap
-  insert insertKey error message "the $%K type is already declared"
-  search searchKey error message "there is no $%K type"
-  insert or replace
+  %insertSetter insertKey %errorMessage "the $%K type is already declared"
+  %searchMethod searchKey %errorMessage "there is no $%K type"
+  %insertOrReplaceSetter
 }
 
 #·······················································································································
@@ -196,19 +240,19 @@ enum @propertyVisibility {
 map @propertyGetterMap {
   public var @propertyVisibility mVisibility
   public var @propertyGetterKind mAccess
-  insert insertKey error message "the '%K' property is already declared"
-  search searchKey error message "there is no '%K' property"
+  %insertSetter insertKey %errorMessage "the '%K' property is already declared"
+  %searchMethod searchKey %errorMessage "there is no '%K' property"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # PROPERTY SETTER MAP
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @typePropertySetterMap %noSuggestion {
+map @typePropertySetterMap {
   public var @propertySetterMap mSetterMap
-  insert insertKey error message "the $%K type is already declared"
-  search searchKey error message "there is no $%K type"
-  insert or replace
+  %insertSetter insertKey %errorMessage "the $%K type is already declared"
+  %searchMethod searchKey %errorMessage "there is no $%K type"
+  %insertOrReplaceSetter
 }
 
 #·······················································································································
@@ -241,8 +285,8 @@ getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySe
 map @propertySetterMap {
   public var @propertyVisibility mVisibility
   public var @propertySetterKind mAccess
-  insert insertKey error message "the '%K' property is already declared"
-  search searchKey error message "there is no '%K' property"
+  %insertSetter insertKey %errorMessage "the '%K' property is already declared"
+  %searchMethod searchKey %errorMessage "there is no '%K' property"
 }
 
 #·······················································································································
@@ -259,8 +303,8 @@ enum @propertySetterKind {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @staticEntityMap {
-  public var @staticStringMap mStaticStringMap
-  public var @globalStructuredConstantList mGlobalStructuredConstantList
+  public var @staticStringMap mStaticStringMap = {}
+  public var @globalStructuredConstantList mGlobalStructuredConstantList = {}
 }
 
 #·······················································································································
@@ -274,8 +318,8 @@ list @globalStructuredConstantList {
 
 map @staticStringMap {
   public var @uint mIndex
-  insert insertKey error message "-- internal error --"
-  search searchKey error message "-- internal error --"
+  %insertSetter insertKey %errorMessage "-- internal error --"
+  %searchMethod searchKey %errorMessage "-- internal error --"
 }
 
 #·······················································································································
@@ -293,8 +337,8 @@ setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex 
 
 map @globalConstantMap {
   public var @objectIR mValue
-  insert insertKey error message "the '%K' constant is already declared in %L"
-  search searchKey error message "there is no '%K' constant"
+  %insertSetter insertKey %errorMessage "the '%K' constant is already declared in %L"
+  %searchMethod searchKey %errorMessage "there is no '%K' constant"
 }
 
 #·······················································································································
@@ -307,8 +351,8 @@ list @operandIRList {
 
 map @availableInterruptMap {
   public var @interruptionPanicCode mInterruptionPanicCode
-  insert insertKey error message "interrupt '%K' is already defined"
-  search searchKey error message "interrupt '%K' is not defined"
+  %insertSetter insertKey %errorMessage "interrupt '%K' is already defined"
+  %searchMethod searchKey %errorMessage "interrupt '%K' is not defined"
 }
 
 #·······················································································································
@@ -342,7 +386,7 @@ proc buildSemanticContext
   !@routineListIR outRoutineListIR
   !@userLLVMTypeDefinitionListIR outUserLLVMTypeDefinitionListIR
 {
-  outSemanticContext = .default
+  outSemanticContext = .new
   outDecoratedDeclarationList = {}
   outDecoratedRoutineList = {}
   outRoutineListIR = {}

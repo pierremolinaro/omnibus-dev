@@ -6,8 +6,8 @@ map @prefixOperatorMap {
   public var @omnibusType mReceiverType
   public var @omnibusType mResultType
   public var @prefixOperatorUsage mOperator
-  insert insertKey error message "the '%K' infix operator is already declared in %L"
-  search searchKey error message "there is no '%K' infix operator"
+  %insertSetter insertKey %errorMessage "the '%K' infix operator is already declared in %L"
+  %searchMethod searchKey %errorMessage "there is no '%K' infix operator"
 }
 
 #·······················································································································

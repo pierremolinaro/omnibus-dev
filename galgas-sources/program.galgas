@@ -1,24 +1,24 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-target"
-message "a target definition text file with the .omnibus-target extension"
-grammar omnibus_target_grammar
+%errorMessage "a target definition text file with the .omnibus-target extension"
+%useGrammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-import"
-message "an imported text file with the .omnibus-import extension"
-grammar omnibus_target_grammar
+%errorMessage "an imported text file with the .omnibus-import extension"
+%useGrammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus"
-message "a source text file with the .omnibus extension"
-grammar omnibus_grammar
+%errorMessage "a source text file with the .omnibus extension"
+%useGrammar omnibus_grammar
 ?sourceFilePath:@lstring inSourceFile
 {
   if ([option .mode value] == "") & not [option .outputConcreteSyntaxTree value] then
@@ -30,7 +30,7 @@ grammar omnibus_grammar
 
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
-  var @ast ast = .default
+  var @ast ast = .new
   grammar omnibus_grammar (
     !?ast
     ?importClauseList:let importedFileList
@@ -88,7 +88,7 @@ private proc compileProject
 {
   let @timer parsingTime = .start 
   if [option omnibus_options.printPasses value] then
-    message "** Parsing\n" 
+    print (!"** Parsing\n")
   end
   var @ast ast = inAST
   var @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
@@ -132,15 +132,15 @@ private proc compileProject
   end
 #------------------------------------------------------------ printPasses option
   if [option omnibus_options.printPasses value] & (@uint.errorCount == 0) then
-    message "    " + [ast.mDeclarationListAST length] + " declarations\n" 
-    message "    Duration: " + [parsingTime string] + "\n" 
+    print (!"    " + [ast.mDeclarationListAST length] + " declarations\n" )
+    print (!"    Duration: " + [parsingTime string] + "\n")
   end
 #------------------------------------------------------------ Ordered declaration list
-  var @declarationListAST orderedDeclarationListAST = .default
+  var @declarationListAST orderedDeclarationListAST = {}
   if @uint.errorCount == 0 then
     let @timer t = .start 
     if [option omnibus_options.printPasses value] then
-      message "** Declaration sorting\n" 
+      print (!"** Declaration sorting\n")
     end
     buildOrderedDeclarationList (
       !ast: ast
@@ -149,7 +149,7 @@ private proc compileProject
       ?orderedDeclarationList: orderedDeclarationListAST
     )
     if [option omnibus_options.printPasses value] then
-      message "    Duration: " + [t string] + "\n" 
+      print (!"    Duration: " + [t string] + "\n")
     end
   end
 #------------------------------------------------------------ Check "check target" declarations
@@ -165,8 +165,8 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic context
-  var @semanticContext semanticContext = .default
-  var @staticEntityMap globalLiteralStringMap = .default
+  var @semanticContext semanticContext = .new
+  var @staticEntityMap globalLiteralStringMap = .new
   var @staticListInitializationMap staticListValueMap = {}
   ast.mDeclarationListAST = orderedDeclarationListAST
   var @declarationDecorationList decoratedDeclarationList = {}
@@ -187,11 +187,11 @@ private proc compileProject
       ?userLLVMTypeDefinitionListIR
     )
     if [option omnibus_options.printPasses value] then
-      message "** Context: " + [t string] + "\n" 
+      print (!"** Context: " + [t string] + "\n")
     end
   end
 #------------------------------------------------------------ Semantic analysis
-  var @intermediateCodeStruct intermediateCodeStruct = .default
+  var @intermediateCodeStruct intermediateCodeStruct = .new
   if @uint.errorCount == 0 then
     let @timer t = .start 
     semanticAnalysis (
@@ -207,7 +207,7 @@ private proc compileProject
       ?intermediateCode:intermediateCodeStruct
     )
     if [option omnibus_options.printPasses value] then
-      message "** Semantic: " + [t string] + "\n" 
+      print (!"** Semantic: " + [t string] + "\n") 
     end
   end
 #------------------------------------------------------------ Code optimization
@@ -215,7 +215,7 @@ private proc compileProject
     let @timer tOpt = .start 
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
     if [option omnibus_options.printPasses value] then
-      message "    Duration: " + [tOpt string] + "\n" 
+      print (!"    Duration: " + [tOpt string] + "\n")
     end
   end
 #------------------------------------------------------------ Code generation

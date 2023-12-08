@@ -128,10 +128,11 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
 {
 #--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = {}
+  var unusedUniversalValuedObjectMap = @universalValuedObjectMap.new
   enterFormalArguments (
     !context:inContext
     !self.mProcFormalArgumentList
-    !?* # universalMap
+    !?unusedUniversalValuedObjectMap
     !?formalArguments
     !warningOnUnusedArgs: true
   )
@@ -200,7 +201,7 @@ override method @externRoutineIR llvmCodeGeneration
 map @externProcedureMapIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @unifiedTypeMapEntry mReturnType
-  insert insertKey error message "extern procedure %K is already declared"
+  %insertSetter insertKey %errorMessage "extern procedure %K is already declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

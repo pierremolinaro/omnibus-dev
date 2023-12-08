@@ -7,11 +7,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationAdds {
-  public var @uint mUniqueIndex
-  public var @stringset mExternFunctionDeclarationSet
-  public var @staticEntityMap mStaticEntityMap
-  public var @bool mUsesGuards
-  public var @bool mNeedsDynamicMemoryAllocation
+  public var @uint mUniqueIndex = 0
+  public var @stringset mExternFunctionDeclarationSet = {}
+  public var @staticEntityMap mStaticEntityMap = .new {}
+  public var @bool mUsesGuards = false
+  public var @bool mNeedsDynamicMemoryAllocation = false
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -124,7 +124,7 @@ proc codeGeneration
     !targetParameters:inTargetParameters
   )
   if [option omnibus_options.printPasses value] then
-    message "** Code generation: " + [generationTime string] + "\n" 
+    print (!"** Code generation: " + [generationTime string] + "\n" )
   end
 #----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
@@ -136,7 +136,7 @@ proc codeGeneration
       error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
     end
     if [option omnibus_options.printPasses value] then
-      message "** Compilation script: " + [scriptTime string] + "\n" 
+      print (!"** Compilation script: " + [scriptTime string] + "\n")
     end
   end
 }
@@ -165,7 +165,7 @@ private proc generateCodeFiles
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
 {
-  var @generationAdds generationAdds = .default
+  var @generationAdds generationAdds = .new
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
   let @generationContext generationContext = .new {
     !inPanicCodeType

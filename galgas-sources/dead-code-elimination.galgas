@@ -4,7 +4,8 @@
 #                                                                                                                       
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet ?!@uint ioMaxBranchOfOnInstructions {
+method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet
+                         ?!@uint ioMaxBranchOfOnInstructions {
   for (instruction) in self do
     [instruction enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   end
@@ -42,7 +43,7 @@ proc codeOptimization
     var m = "** Dead code elimination\n"
     m += "    " + [[ioIntermediateCodeStruct.mRoutineListIR length] string] + " routines, "
     m += [[exploreRoutineSet count] string] + " root routines.\n"
-    message m
+    print (!m)
   end
 #----------------------------------------------- Check all invoked routines are defined
   let undefinedRoutineSet = allRoutineSet - definedRoutineSet
@@ -55,7 +56,7 @@ proc codeOptimization
   end
 #----------------------------------------------- Compute useful routines
   if [option omnibus_options.noDeadCodeElimination value] then
-    message "    No dead code elimination (option --" + [option omnibus_options.noDeadCodeElimination string] + ")\n"
+    print (!"    No dead code elimination (option --" + [option omnibus_options.noDeadCodeElimination string] + ")\n")
   else
     var @stringset usefulRoutineSet = {}
     loop ([ioIntermediateCodeStruct.mRoutineListIR length] + 1) while [exploreRoutineSet count] > 0 do
@@ -82,7 +83,7 @@ proc codeOptimization
   #    for (r) in usefulRoutineSet do
   #      m += "    - " + r + "\n"
   #    end
-      message m
+      print (!m)
     end
   #----------------------------------------------- Eliminate useless routines
     ioIntermediateCodeStruct.mRoutineListIR = {}
@@ -115,7 +116,8 @@ private proc displayInvocationGraph
     definedRoutines += !routine.mRoutineMangledName
     allRoutines += !routine.mRoutineMangledName
     var @stringset accessibleRoutineSet = {}
-    [routine enterAccessibleEntities !?accessibleRoutineSet !?*]
+    var @uint unusedMaxBranchOfOnInstructions = 0
+    [routine enterAccessibleEntities !?accessibleRoutineSet !?unusedMaxBranchOfOnInstructions]
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
     if routine.isRequired then

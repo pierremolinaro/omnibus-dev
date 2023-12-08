@@ -103,6 +103,7 @@ override method @syncDeclarationAST enterInContext
   var @constructorSignature constructorSignature = {}
   var @string constructorKey = "("
   for property in self.mStructurePropertyListAST do
+    var unsusedBool = false
     [property enterPropertyInContext
       !?context:ioContext
       !?staticEntityMap:ioStaticEntityMap
@@ -111,11 +112,10 @@ override method @syncDeclarationAST enterInContext
       !receiverLLVMBaseTypeName: self.mSyncToolName
       !?ioDecoratedRoutineList
       !?propertyList
-#      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
-      !?*
+      !? unsusedBool
     ]
   end
   constructorKey += ")"

@@ -27,20 +27,20 @@ before {
     let targetDirectoryOption = [option omnibus_options.useDirAsTargetDir value]
     if targetDirectoryOption == "" then
       let embeddedFiles = [fw allTextFilePathes]
-      message "Embedded targets:\n"
+      print (!"Embedded targets:\n")
       for (f) in embeddedFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
           let targetName = [[f stringByDeletingLastPathComponent] subStringFromIndex !1]
-          message "  " + targetName + '\n'
+          print (!"  " + targetName + '\n')
         end
       end
     else
       let targetDirectory = [targetDirectoryOption absolutePathFromPath !.stringWithCurrentDirectory]
-      message "Targets in '" + targetDirectory + "' directory\n"
+      print (!"Targets in '" + targetDirectory + "' directory\n")
       let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !{!"omnibus-target"}]
       for (f) in allConfigFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
-          message "  " + [f stringByDeletingLastPathComponent] + '\n'
+          print (!"  " + [f stringByDeletingLastPathComponent] + '\n')
         end
       end
     end
@@ -51,7 +51,7 @@ before {
     let embeddedFiles = [fw allTextFilePathes]
     for (f) in embeddedFiles do
       let filePath = path + f
-      message "  " + filePath + '\n'
+      print (!"  " + filePath + '\n')
       let dir = [filePath stringByDeletingLastPathComponent]
       [dir makeDirectory]
       let text = [fw textFileContentsAtPath !f]

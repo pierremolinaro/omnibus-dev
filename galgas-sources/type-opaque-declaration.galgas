@@ -137,7 +137,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   end
 #--- Add Assignment ?
   if copyable then
-    message "OPAQUE " + self.mOpaqueTypeName + " is copyable\n"
+    print (!"OPAQUE " + self.mOpaqueTypeName + " is copyable\n")
   end
 }
 

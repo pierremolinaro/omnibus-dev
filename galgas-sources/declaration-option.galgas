@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
       end
     end 
     if not found then
-      error constantName : "unknown command line option" fixit { replace suggestionList } 
+      error constantName : "unknown command line option" fixit { %replaceBy suggestionList } 
     end
    }
 

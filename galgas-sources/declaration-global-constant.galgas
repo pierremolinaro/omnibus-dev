@@ -118,7 +118,7 @@ override method @globalConstantDeclarationAST enterInContext
   [!?ioContext.mValuedObjectMap insertGlobalConstant !self.mConstantName !expressionResult]
 #--- Display ?
   if displayValue then
-    message "Global constant '" + self.mConstantName + "' = " + [expressionResult llvmValue] + "\n"
+    print (!"Global constant '" + self.mConstantName + "' = " + [expressionResult llvmValue] + "\n")
   end
 }
 
