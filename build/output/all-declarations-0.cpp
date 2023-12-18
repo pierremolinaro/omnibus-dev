@@ -1,17 +1,17 @@
-#include "galgas2/C_Compiler.h"
+#include "galgas2/Compiler.h"
 #include "galgas2/C_galgas_io.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 #include "utilities/C_PrologueEpilogue.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "all-declarations-0.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //Class for element of '@_32_lstringlist' list
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 class cCollectionElement__32_lstringlist : public cCollectionElement {
   public: GALGAS__32_lstringlist_2D_element mObject ;
@@ -32,10 +32,10 @@ class cCollectionElement__32_lstringlist : public cCollectionElement {
   public: virtual cCollectionElement * copy (void) ;
 
 //--- Description
-  public: virtual void description (C_String & ioString, const int32_t inIndentation) const ;
+  public: virtual void description (String & ioString, const int32_t inIndentation) const ;
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GALGAS_lstring & in_mValue_30_,
                                                                         const GALGAS_lstring & in_mValue_31_
@@ -44,20 +44,20 @@ cCollectionElement (THERE),
 mObject (in_mValue_30_, in_mValue_31_) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cCollectionElement__32_lstringlist::cCollectionElement__32_lstringlist (const GALGAS__32_lstringlist_2D_element & inElement COMMA_LOCATION_ARGS) :
 cCollectionElement (THERE),
 mObject (inElement.mProperty_mValue_30_, inElement.mProperty_mValue_31_) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool cCollectionElement__32_lstringlist::isValid (void) const {
   return true ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cCollectionElement * cCollectionElement__32_lstringlist::copy (void) {
   cCollectionElement * result = nullptr ;
@@ -65,20 +65,20 @@ cCollectionElement * cCollectionElement__32_lstringlist::copy (void) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-void cCollectionElement__32_lstringlist::description (C_String & ioString, const int32_t inIndentation) const {
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mValue0" ":" ;
+void cCollectionElement__32_lstringlist::description (String & ioString, const int32_t inIndentation) const {
+  ioString.addNL () ;
+  ioString.addStringMultiple ("| ", inIndentation) ;
+  ioString.addString ("mValue0" ":") ;
   mObject.mProperty_mValue_30_.description (ioString, inIndentation) ;
-  ioString << "\n" ;
-  ioString.writeStringMultiple ("| ", inIndentation) ;
-  ioString << "mValue1" ":" ;
+  ioString.addNL () ;
+  ioString.addStringMultiple ("| ", inIndentation) ;
+  ioString.addString ("mValue1" ":") ;
   mObject.mProperty_mValue_31_.description (ioString, inIndentation) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 typeComparisonResult cCollectionElement__32_lstringlist::compare (const cCollectionElement * inOperand) const {
   cCollectionElement__32_lstringlist * operand = (cCollectionElement__32_lstringlist *) inOperand ;
@@ -86,25 +86,25 @@ typeComparisonResult cCollectionElement__32_lstringlist::compare (const cCollect
   return mObject.objectCompare (operand->mObject) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist::GALGAS__32_lstringlist (void) :
 AC_GALGAS_list () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist::GALGAS__32_lstringlist (const capCollectionElementArray & inSharedArray) :
 AC_GALGAS_list (inSharedArray) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::constructor_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS__32_lstringlist (capCollectionElementArray ()) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::constructor_listWithValue (const GALGAS_lstring & inOperand0,
                                                                           const GALGAS_lstring & inOperand1
@@ -119,7 +119,7 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::constructor_listWithValue (const 
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::makeAttributesFromObjects (capCollectionElement & outAttributes,
                                                         const GALGAS_lstring & in_mValue_30_,
@@ -132,7 +132,7 @@ void GALGAS__32_lstringlist::makeAttributesFromObjects (capCollectionElement & o
   macroDetachSharedObject (p) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::addAssign_operation (const GALGAS_lstring & inOperand0,
                                                   const GALGAS_lstring & inOperand1
@@ -147,11 +147,11 @@ void GALGAS__32_lstringlist::addAssign_operation (const GALGAS_lstring & inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_append (const GALGAS_lstring inOperand0,
                                             const GALGAS_lstring inOperand1,
-                                            C_Compiler * /* inCompiler */
+                                            Compiler * /* inCompiler */
                                             COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
@@ -163,12 +163,12 @@ void GALGAS__32_lstringlist::setter_append (const GALGAS_lstring inOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_insertAtIndex (const GALGAS_lstring inOperand0,
                                                    const GALGAS_lstring inOperand1,
                                                    const GALGAS_uint inInsertionIndex,
-                                                   C_Compiler * inCompiler
+                                                   Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inInsertionIndex.isValid () && inOperand0.isValid () && inOperand1.isValid ()) {
@@ -184,12 +184,12 @@ void GALGAS__32_lstringlist::setter_insertAtIndex (const GALGAS_lstring inOperan
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_removeAtIndex (GALGAS_lstring & outOperand0,
                                                    GALGAS_lstring & outOperand1,
                                                    const GALGAS_uint inRemoveIndex,
-                                                   C_Compiler * inCompiler
+                                                   Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     if (inRemoveIndex.isValid ()) {
@@ -216,11 +216,11 @@ void GALGAS__32_lstringlist::setter_removeAtIndex (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_popFirst (GALGAS_lstring & outOperand0,
                                               GALGAS_lstring & outOperand1,
-                                              C_Compiler * inCompiler
+                                              Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeFirstObject (attributes, inCompiler COMMA_THERE) ;
@@ -235,11 +235,11 @@ void GALGAS__32_lstringlist::setter_popFirst (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_popLast (GALGAS_lstring & outOperand0,
                                              GALGAS_lstring & outOperand1,
-                                             C_Compiler * inCompiler
+                                             Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) {
   capCollectionElement attributes ;
   removeLastObject (attributes, inCompiler COMMA_THERE) ;
@@ -254,11 +254,11 @@ void GALGAS__32_lstringlist::setter_popLast (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::method_first (GALGAS_lstring & outOperand0,
                                            GALGAS_lstring & outOperand1,
-                                           C_Compiler * inCompiler
+                                           Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readFirst (attributes, inCompiler COMMA_THERE) ;
@@ -273,11 +273,11 @@ void GALGAS__32_lstringlist::method_first (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::method_last (GALGAS_lstring & outOperand0,
                                           GALGAS_lstring & outOperand1,
-                                          C_Compiler * inCompiler
+                                          Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes ;
   readLast (attributes, inCompiler COMMA_THERE) ;
@@ -292,10 +292,10 @@ void GALGAS__32_lstringlist::method_last (GALGAS_lstring & outOperand0,
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::add_operation (const GALGAS__32_lstringlist & inOperand,
-                                                              C_Compiler * /* inCompiler */
+                                                              Compiler * /* inCompiler */
                                                               COMMA_UNUSED_LOCATION_ARGS) const {
   GALGAS__32_lstringlist result ;
   if (isValid () && inOperand.isValid ()) {
@@ -305,49 +305,49 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::add_operation (const GALGAS__32_l
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListWithRange (const GALGAS_range & inRange,
-                                                                        C_Compiler * inCompiler
+                                                                        Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const {
   GALGAS__32_lstringlist result = GALGAS__32_lstringlist::constructor_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListFromIndex (const GALGAS_uint & inIndex,
-                                                                        C_Compiler * inCompiler
+                                                                        Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const {
   GALGAS__32_lstringlist result = GALGAS__32_lstringlist::constructor_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::getter_subListToIndex (const GALGAS_uint & inIndex,
-                                                                      C_Compiler * inCompiler
+                                                                      Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const {
   GALGAS__32_lstringlist result = GALGAS__32_lstringlist::constructor_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::plusAssign_operation (const GALGAS__32_lstringlist inOperand,
-                                                   C_Compiler * /* inCompiler */
+                                                   Compiler * /* inCompiler */
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_setMValue_30_AtIndex (GALGAS_lstring inOperand,
                                                           GALGAS_uint inIndex,
-                                                          C_Compiler * inCompiler
+                                                          Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
   if (nullptr != p) {
@@ -357,10 +357,10 @@ void GALGAS__32_lstringlist::setter_setMValue_30_AtIndex (GALGAS_lstring inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_30_AtIndex (const GALGAS_uint & inIndex,
-                                                                 C_Compiler * inCompiler
+                                                                 Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -372,11 +372,11 @@ GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_30_AtIndex (const GALGAS_ui
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void GALGAS__32_lstringlist::setter_setMValue_31_AtIndex (GALGAS_lstring inOperand,
                                                           GALGAS_uint inIndex,
-                                                          C_Compiler * inCompiler
+                                                          Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) {
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
   if (nullptr != p) {
@@ -386,10 +386,10 @@ void GALGAS__32_lstringlist::setter_setMValue_31_AtIndex (GALGAS_lstring inOpera
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_31_AtIndex (const GALGAS_uint & inIndex,
-                                                                 C_Compiler * inCompiler
+                                                                 Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) const {
   capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
   cCollectionElement__32_lstringlist * p = (cCollectionElement__32_lstringlist *) attributes.ptr () ;
@@ -403,7 +403,7 @@ GALGAS_lstring GALGAS__32_lstringlist::getter_mValue_31_AtIndex (const GALGAS_ui
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cEnumerator__32_lstringlist::cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
                                                           const typeEnumerationOrder inOrder) :
@@ -411,7 +411,7 @@ cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist_2D_element cEnumerator__32_lstringlist::current (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
@@ -420,7 +420,7 @@ GALGAS__32_lstringlist_2D_element cEnumerator__32_lstringlist::current (LOCATION
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_30_ (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
@@ -428,7 +428,7 @@ GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_30_ (LOCATION_ARGS) c
   return p->mObject.mProperty_mValue_30_ ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_31_ (LOCATION_ARGS) const {
   const cCollectionElement__32_lstringlist * p = (const cCollectionElement__32_lstringlist *) currentObjectPtr (THERE) ;
@@ -439,23 +439,23 @@ GALGAS_lstring cEnumerator__32_lstringlist::current_mValue_31_ (LOCATION_ARGS) c
 
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //     @2lstringlist generic code implementation
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor
 kTypeDescriptor_GALGAS__32_lstringlist ("2lstringlist",
                                         nullptr) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor * GALGAS__32_lstringlist::staticTypeDescriptor (void) const {
   return & kTypeDescriptor_GALGAS__32_lstringlist ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 AC_GALGAS_root * GALGAS__32_lstringlist::clonedObject (void) const {
   AC_GALGAS_root * result = nullptr ;
@@ -465,10 +465,10 @@ AC_GALGAS_root * GALGAS__32_lstringlist::clonedObject (void) const {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS__32_lstringlist GALGAS__32_lstringlist::extractObject (const GALGAS_object & inObject,
-                                                              C_Compiler * inCompiler
+                                                              Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) {
   GALGAS__32_lstringlist result ;
   const GALGAS__32_lstringlist * p = (const GALGAS__32_lstringlist *) inObject.embeddedObject () ;
@@ -482,43 +482,43 @@ GALGAS__32_lstringlist GALGAS__32_lstringlist::extractObject (const GALGAS_objec
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //
 //     L E X I Q U E                                                                             
 //
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 #include "strings/unicode_character_cpp.h"
 #include "galgas2/scanner_actions.h"
 #include "galgas2/cLexiqueIntrospection.h"
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 cTokenFor_omnibus_5F_lexique::cTokenFor_omnibus_5F_lexique (void) :
 mLexicalAttribute_bigInteger (),
 mLexicalAttribute_tokenString () {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_Lexique_omnibus_5F_lexique::C_Lexique_omnibus_5F_lexique (C_Compiler * inCallerCompiler,
-                                                            const C_String & inSourceFileName
+C_Lexique_omnibus_5F_lexique::C_Lexique_omnibus_5F_lexique (Compiler * inCallerCompiler,
+                                                            const String & inSourceFileName
                                                             COMMA_LOCATION_ARGS) :
 C_Lexique (inCallerCompiler, inSourceFileName COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_Lexique_omnibus_5F_lexique::C_Lexique_omnibus_5F_lexique (C_Compiler * inCallerCompiler,
-                                                            const C_String & inSourceString,
-                                                            const C_String & inStringForError
+C_Lexique_omnibus_5F_lexique::C_Lexique_omnibus_5F_lexique (Compiler * inCallerCompiler,
+                                                            const String & inSourceString,
+                                                            const String & inStringForError
                                                             COMMA_LOCATION_ARGS) :
 C_Lexique (inCallerCompiler, inSourceString, inStringForError COMMA_THERE) {
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                        Lexical error message list                                             
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static const char * gLexicalMessage_omnibus_5F_lexique_attributeError = "in an attribute name, a letter, a digit or a dot should follow the '@' character" ;
 
@@ -534,12 +534,12 @@ static const char * gLexicalMessage_omnibus_5F_lexique_internalError = "internal
 
 static const char * gLexicalMessage_omnibus_5F_lexique_typeError = "in a type name, a letter or a digit should follow the '$' character" ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                getMessageForTerminal                                                          
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int32_t inTerminalIndex) const {
-  C_String result = "<unknown>" ;
+String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int32_t inTerminalIndex) const {
+  String result = "<unknown>" ;
   if ((inTerminalIndex >= 0) && (inTerminalIndex < 119)) {
     static const char * syntaxErrorMessageArray [119] = {kEndOfSourceLexicalErrorMessage,
         "an identifier",
@@ -666,9 +666,9 @@ C_String C_Lexique_omnibus_5F_lexique::getMessageForTerminal (const int32_t inTe
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                      U N I C O D E    S T R I N G S                                           
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 //--- Unicode string for '$_21__25_$'
 static const utf32 kUnicodeString_omnibus_5F_lexique__21__25_ [] = {
@@ -1618,9 +1618,9 @@ static const utf32 kUnicodeString_omnibus_5F_lexique__2265_ [] = {
   TO_UNICODE (0)
 } ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //             Key words table 'delimitorsList'      
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static const int32_t ktable_size_omnibus_5F_lexique_delimitorsList = 54 ;
 
@@ -1681,13 +1681,13 @@ static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_delimit
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique__3E__3E__3D_, 3, C_Lexique_omnibus_5F_lexique::kToken__3E__3E__3D_)
 } ;
 
-int32_t C_Lexique_omnibus_5F_lexique::search_into_delimitorsList (const C_String & inSearchedString) {
+int32_t C_Lexique_omnibus_5F_lexique::search_into_delimitorsList (const String & inSearchedString) {
   return searchInList (inSearchedString, ktable_for_omnibus_5F_lexique_delimitorsList, ktable_size_omnibus_5F_lexique_delimitorsList) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //             Key words table 'keyWordList'      
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static const int32_t ktable_size_omnibus_5F_lexique_keyWordList = 52 ;
 
@@ -1746,634 +1746,634 @@ static const C_unicode_lexique_table_entry ktable_for_omnibus_5F_lexique_keyWord
   C_unicode_lexique_table_entry (kUnicodeString_omnibus_5F_lexique_staticArray, 11, C_Lexique_omnibus_5F_lexique::kToken_staticArray)
 } ;
 
-int32_t C_Lexique_omnibus_5F_lexique::search_into_keyWordList (const C_String & inSearchedString) {
+int32_t C_Lexique_omnibus_5F_lexique::search_into_keyWordList (const String & inSearchedString) {
   return searchInList (inSearchedString, ktable_for_omnibus_5F_lexique_keyWordList, ktable_size_omnibus_5F_lexique_keyWordList) ;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                          getCurrentTokenString                                                
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inTokenPtr) const {
+String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inTokenPtr) const {
   const cTokenFor_omnibus_5F_lexique * ptr = (const cTokenFor_omnibus_5F_lexique *) inTokenPtr ;
-  C_String s ;
+  String s ;
   if (ptr == nullptr) {
-    s.appendCString("$$") ;
+    s.addString ("$$") ;
   }else{
     switch (ptr->mTokenCode) {
     case kToken_:
-      s.appendCString("$$") ;
+      s.addString ("$$") ;
       break ;
     case kToken_identifier:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("identifier") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("identifier") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__40_attribute:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("@attribute") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("@attribute") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_integer:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("integer") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("integer") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
       break ;
     case kToken__22_string_22_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\"string\"") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("\"string\"") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_comment:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("comment") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("comment") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_commentMark:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("commentMark") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("commentMark") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3F_selector_3A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\?selector:") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("\?selector:") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__3F__21_selector_3A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("\?!selector:") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("\?!selector:") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21_selector_3A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!selector:") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!selector:") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21__3F_selector_3A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!\?selector:") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!\?selector:") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__24_type:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("$type") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("$type") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__A9_group:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("©group") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendUnicodeCharacter (TO_UNICODE (' ') COMMA_HERE) ;
-      s.appendCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("©group") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_addressof:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("addressof") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("addressof") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_assert:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("assert") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("assert") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_boot:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("boot") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("boot") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_case:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("case") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("case") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_convert:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("convert") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("convert") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_ctAssert:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("ctAssert") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("ctAssert") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_compiletime:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("compiletime") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("compiletime") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_driver:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("driver") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("driver") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_else:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("else") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("else") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_enum:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("enum") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("enum") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_event:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("event") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("event") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_extend:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("extend") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("extend") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_extern:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("extern") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("extern") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_for:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("for") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("for") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_func:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("func") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("func") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_guard:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("guard") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("guard") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_if:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("if") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("if") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_import:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("import") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("import") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_in:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("in") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("in") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_interrupt:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("interrupt") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("interrupt") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_let:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("let") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("let") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_llvm:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("llvm") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("llvm") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_no:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("no") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("no") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_not:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("not") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("not") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_opaque:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("opaque") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("opaque") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_option:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("option") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("option") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_panic:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("panic") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("panic") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_primitive:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("primitive") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("primitive") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_public:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("public") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("public") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_registers:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("registers") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("registers") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_required:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("required") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("required") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_safe:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("safe") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("safe") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_section:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("section") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("section") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_self:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("self") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("self") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_service:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("service") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("service") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_sizeof:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("sizeof") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("sizeof") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_startup:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("startup") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("startup") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_struct:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("struct") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("struct") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_staticArray:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("staticArray") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("staticArray") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_switch:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("switch") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("switch") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_sync:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("sync") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("sync") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_target:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("target") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("target") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_task:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("task") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("task") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_truncate:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("truncate") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("truncate") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_typealias:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("typealias") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("typealias") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_var:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("var") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("var") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_until:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("until") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("until") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_user:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("user") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("user") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_where:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("where") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("where") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_when:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("when") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("when") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_while:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("while") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("while") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_yes:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("yes") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("yes") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (":") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (":") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (".") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (".") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (",") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (",") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7B_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("{") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("{") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("}") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("}") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__28_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("(") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("(") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__29_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (")") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (")") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5F_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("_") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("_") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3D__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("==") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("==") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2260_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("≠") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("≠") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("<") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("<") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2264_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("≤") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("≤") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (">") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (">") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2265_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("≥") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("≥") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5B_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("[") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("[") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("]") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("]") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5D__21_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("]!") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("]!") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C__3C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("<<") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("<<") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E__3E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (">>") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (">>") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("~") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("~") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C__7C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("||") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("||") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26__26_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("&&") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("&&") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__3E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("->") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("->") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E__2E__3C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("..<") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("..<") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E__2E__2E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("...") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("...") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("|") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("|") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("|=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("|=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("&") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("&") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("&=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("&=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5E_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("^") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("^") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5E__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("^=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("^=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("+") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("+") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__25_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("+%") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("+%") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("+=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("+=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__25__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("+%=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("+%=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("-") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("-") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__25_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("-%") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("-%") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("-=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("-=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__25__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("-%=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("-%=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("*") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("*") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__25_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("*%") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("*%") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("*=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("*=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__25__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("*%=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("*%=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2F_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("/") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("/") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__2F_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!/") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!/") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2F__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("/=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("/=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__2F__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!/=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!/=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__25_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("%") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("%") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__25_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!%") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!%") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__25__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("%=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("%=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__25__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("!%=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("!%=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C__3C__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString ("<<=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString ("<<=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E__3E__3D_:
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
-      s.appendCString (">>=") ;
-      s.appendUnicodeCharacter (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.addString (">>=") ;
+      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     default:
       break ;
@@ -2382,28 +2382,28 @@ C_String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inT
   return s ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                           Template Delimiters                                                 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                           Template Replacements                                               
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //            Terminal Symbols as end of script in template mark                                 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //               INTERNAL PARSE LEXICAL TOKEN                                         
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F_lexique & token) {
   bool loop = true ;
-  token.mLexicalAttribute_bigInteger.setToZero () ;
+  token.mLexicalAttribute_bigInteger = BigSigned () ;
   token.mLexicalAttribute_tokenString.setLengthToZero () ;
   mTokenStartLocation = mCurrentLocation ;
   try{
@@ -2697,12 +2697,12 @@ void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_
       token.mTokenCode = kToken__25_ ;
       enterToken (token) ;
     }else if (testForInputUTF32Char (TO_UNICODE ('\?'))) {
-      const C_LocationInSource currentLocationForTag_onlyInterrogationMark = mCurrentLocation ;
-      const C_LocationInSource endLocationForTag_onlyInterrogationMark = mTokenEndLocation ;
+      const LocationInSource currentLocationForTag_onlyInterrogationMark = mCurrentLocation ;
+      const LocationInSource endLocationForTag_onlyInterrogationMark = mTokenEndLocation ;
       const utf32 currentCharForTag_onlyInterrogationMark = mCurrentChar ;
       if (testForInputUTF32Char (TO_UNICODE ('!'))) {
-        const C_LocationInSource currentLocationForTag_onlyExclamationInterrogationMark = mCurrentLocation ;
-        const C_LocationInSource endLocationForTag_onlyExclamationInterrogationMark = mTokenEndLocation ;
+        const LocationInSource currentLocationForTag_onlyExclamationInterrogationMark = mCurrentLocation ;
+        const LocationInSource endLocationForTag_onlyExclamationInterrogationMark = mTokenEndLocation ;
         const utf32 currentCharForTag_onlyExclamationInterrogationMark = mCurrentChar ;
         if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           do {
@@ -2753,12 +2753,12 @@ void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_
         enterToken (token) ;
       }
     }else if (testForInputUTF32Char (TO_UNICODE ('!'))) {
-      const C_LocationInSource currentLocationForTag_onlyExclamationMark = mCurrentLocation ;
-      const C_LocationInSource endLocationForTag_onlyExclamationMark = mTokenEndLocation ;
+      const LocationInSource currentLocationForTag_onlyExclamationMark = mCurrentLocation ;
+      const LocationInSource endLocationForTag_onlyExclamationMark = mTokenEndLocation ;
       const utf32 currentCharForTag_onlyExclamationMark = mCurrentChar ;
       if (testForInputUTF32Char (TO_UNICODE ('\?'))) {
-        const C_LocationInSource currentLocationForTag_onlyInterrogationExclamationMark = mCurrentLocation ;
-        const C_LocationInSource endLocationForTag_onlyInterrogationExclamationMark = mTokenEndLocation ;
+        const LocationInSource currentLocationForTag_onlyInterrogationExclamationMark = mCurrentLocation ;
+        const LocationInSource endLocationForTag_onlyInterrogationExclamationMark = mTokenEndLocation ;
         const utf32 currentCharForTag_onlyInterrogationExclamationMark = mCurrentChar ;
         if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
           do {
@@ -2852,9 +2852,9 @@ void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //               P A R S E    L E X I C A L    T O K E N                                         
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
   cTokenFor_omnibus_5F_lexique token ;
@@ -2869,9 +2869,9 @@ bool C_Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
   return token.mTokenCode > 0 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                         E N T E R    T O K E N                                                
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 void C_Lexique_omnibus_5F_lexique::enterToken (cTokenFor_omnibus_5F_lexique & ioToken) {
   cTokenFor_omnibus_5F_lexique * ptr = nullptr ;
@@ -2887,25 +2887,25 @@ void C_Lexique_omnibus_5F_lexique::enterToken (cTokenFor_omnibus_5F_lexique & io
   enterTokenFromPointer (ptr) ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //               A T T R I B U T E   A C C E S S                                                 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_BigInt C_Lexique_omnibus_5F_lexique::attributeValue_bigInteger (void) const {
+BigSigned C_Lexique_omnibus_5F_lexique::attributeValue_bigInteger (void) const {
   cTokenFor_omnibus_5F_lexique * ptr = (cTokenFor_omnibus_5F_lexique *) currentTokenPtr (HERE) ;
   return ptr->mLexicalAttribute_bigInteger ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_Lexique_omnibus_5F_lexique::attributeValue_tokenString (void) const {
+String C_Lexique_omnibus_5F_lexique::attributeValue_tokenString (void) const {
   cTokenFor_omnibus_5F_lexique * ptr = (cTokenFor_omnibus_5F_lexique *) currentTokenPtr (HERE) ;
   return ptr->mLexicalAttribute_tokenString ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //         A S S I G N    F R O M    A T T R I B U T E                                           
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lbigint C_Lexique_omnibus_5F_lexique::synthetizedAttribute_bigInteger (void) const {
   cTokenFor_omnibus_5F_lexique * ptr = (cTokenFor_omnibus_5F_lexique *) currentTokenPtr (HERE) ;
@@ -2916,7 +2916,7 @@ GALGAS_lbigint C_Lexique_omnibus_5F_lexique::synthetizedAttribute_bigInteger (vo
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_lstring C_Lexique_omnibus_5F_lexique::synthetizedAttribute_tokenString (void) const {
   cTokenFor_omnibus_5F_lexique * ptr = (cTokenFor_omnibus_5F_lexique *) currentTokenPtr (HERE) ;
@@ -2927,9 +2927,9 @@ GALGAS_lstring C_Lexique_omnibus_5F_lexique::synthetizedAttribute_tokenString (v
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //                         I N T R O S P E C T I O N                                             
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   GALGAS_stringlist result = GALGAS_stringlist::constructor_emptyList (THERE) ;
@@ -3054,18 +3054,18 @@ GALGAS_stringlist C_Lexique_omnibus_5F_lexique::symbols (LOCATION_ARGS) {
   return result ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-static void getKeywordLists_omnibus_5F_lexique (TC_UniqueArray <C_String> & ioList) {
+static void getKeywordLists_omnibus_5F_lexique (TC_UniqueArray <String> & ioList) {
   ioList.appendObject ("omnibus_lexique:delimitorsList") ;
   ioList.appendObject ("omnibus_lexique:keyWordList") ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIdentifier,
+static void getKeywordsForIdentifier_omnibus_5F_lexique (const String & inIdentifier,
                                                          bool & ioFound,
-                                                         TC_UniqueArray <C_String> & ioList) {
+                                                         TC_UniqueArray <String> & ioList) {
   if (inIdentifier == "omnibus_lexique:delimitorsList") {
     ioFound = true ;
     ioList.appendObject ("%") ;
@@ -3182,15 +3182,15 @@ static void getKeywordsForIdentifier_omnibus_5F_lexique (const C_String & inIden
   }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 static cLexiqueIntrospection lexiqueIntrospection_omnibus_5F_lexique
 __attribute__ ((used))
 __attribute__ ((unused)) (getKeywordLists_omnibus_5F_lexique, getKeywordsForIdentifier_omnibus_5F_lexique) ;
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //   S T Y L E   I N D E X    F O R    T E R M I N A L                                           
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
 uint32_t C_Lexique_omnibus_5F_lexique::styleIndexForTerminal (const int32_t inTerminalIndex) const {
   static const uint32_t kTerminalSymbolStyles [119] = {0,
@@ -3316,12 +3316,12 @@ uint32_t C_Lexique_omnibus_5F_lexique::styleIndexForTerminal (const int32_t inTe
   return (inTerminalIndex >= 0) ? kTerminalSymbolStyles [inTerminalIndex] : 0 ;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 //   S T Y L E   N A M E    F O R    S T Y L E    I N D E X                                      
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
 
-C_String C_Lexique_omnibus_5F_lexique::styleNameForIndex (const uint32_t inStyleIndex) const {
-  C_String result ;
+String C_Lexique_omnibus_5F_lexique::styleNameForIndex (const uint32_t inStyleIndex) const {
+  String result ;
   if (inStyleIndex < 10) {
     static const char * kStyleArray [10] = {
       "",
