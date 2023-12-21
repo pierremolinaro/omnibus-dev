@@ -404,8 +404,8 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctCheckMap {
-  %insertSetter insertKey %errorMessage "the '%K' key is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' key"
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
 }
 
 #·······················································································································
@@ -452,8 +452,8 @@ override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCh
 
 map @ctMap {
   public var @bigint mValue
-  %insertSetter insertKey %errorMessage "the '%K' key is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' key"
+  insert insertKey error message "the '%K' key is already declared in %L"
+  search searchKey error message "there is no '%K' key"
 }
 
 #·······················································································································

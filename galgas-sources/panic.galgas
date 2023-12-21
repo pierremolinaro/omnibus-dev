@@ -104,10 +104,10 @@ func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @panicRoutinePriorityMap {
-  %insertSetter insertSetupKey %errorMessage "a panic setup routine with priority %K has been already declared"
-  %insertSetter insertLoopKey %errorMessage "a panic loop routine with priority %K has been already declared"
-  %searchMethod searchSetupKey %errorMessage "there is no panic setup routine with priority %K"
-  %searchMethod searchLoopKey %errorMessage "there is no panic loop routine with priority %K"
+  insert insertSetupKey error message "a panic setup routine with priority %K has been already declared"
+  insert insertLoopKey error message "a panic loop routine with priority %K has been already declared"
+  search searchSetupKey error message "there is no panic setup routine with priority %K"
+  search searchLoopKey error message "there is no panic loop routine with priority %K"
 }
 
 #·······················································································································

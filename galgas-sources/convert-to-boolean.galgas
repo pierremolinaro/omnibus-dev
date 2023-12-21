@@ -173,8 +173,8 @@ override method @llvmConvertToBooleanAST enterInContext
 
 map @implicitConversionToBooleanMap { # Key is a type omnibus name
   public var @abstractImplicitConverterToBoolean mConverter
-  %insertSetter insertKey %errorMessage "the '%K' type is already declared in %L"
-  %searchMethod searchKey %errorMessage "the '%K' type cannot be implicitly converted to boolean"
+  insert insertKey error message "the '%K' type is already declared in %L"
+  search searchKey error message "the '%K' type cannot be implicitly converted to boolean"
 }
 
 #·······················································································································

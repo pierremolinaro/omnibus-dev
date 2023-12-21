@@ -66,8 +66,8 @@ refclass @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
 #·······················································································································
 
 map @controlRegisterUserAccesMapAST {
-  %insertSetter insertKey %errorMessage "the '%K' register is already marked as @user in %L"
-  %removeSetter removeKey %errorMessage "-- INTERNAL ERROR ('%K') --"
+  insert insertKey error message "the '%K' register is already marked as @user in %L"
+  remove removeKey error message "-- INTERNAL ERROR ('%K') --"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -174,7 +174,7 @@ syntax extension omnibus_syntax {
     select
       $@attribute$ ?let attributeOffset
       if attributeOffset.string != "offset" then
-        error attributeOffset : "attribute should be @offset" fixit { %replaceBy "@offset" }
+        error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
       end
       <expression> !?ioAST ?let registerOffset
       let @bool isReadOnly
@@ -183,7 +183,7 @@ syntax extension omnibus_syntax {
       or
         $@attribute$ ?let attribute
         if attribute.string != "ro" then
-          error attribute : "attribute should be @ro" fixit { %replaceBy "@ro" }
+          error attribute : "attribute should be @ro" fixit { replace "@ro" }
         end
         isReadOnly = true
       end
@@ -199,13 +199,13 @@ syntax extension omnibus_syntax {
       let sizeExpressionLocation = @location.here
       $@attribute$ ?let attributeOffset
       if attributeOffset.string != "offset" then
-        error attributeOffset : "attribute should be @offset" fixit { %replaceBy "@offset" }
+        error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
       end
       <expression> !?ioAST ?let baseAddressExpression
       let baseAddressExpressionLocation = @location.here
       $@attribute$ ?let attributeInc
       if attributeInc.string != "inc" then
-        error attributeInc : "attribute should be @inc" fixit { %replaceBy "@inc" }
+        error attributeInc : "attribute should be @inc" fixit { replace "@inc" }
       end
       <expression> !?ioAST ?let arrayElementSizeExpression
       $]$
@@ -215,7 +215,7 @@ syntax extension omnibus_syntax {
       or
         $@attribute$ ?let attribute
         if attribute.string != "ro" then
-          error attribute : "attribute should be @ro" fixit { %replaceBy "@ro" }
+          error attribute : "attribute should be @ro" fixit { replace "@ro" }
         end
         isReadOnly = true
       end
@@ -274,8 +274,8 @@ list @controlRegisterFieldList { # Used for displaying in HTML file
 map @controlRegisterFieldMap {
   public var @uint mBitIndex
   public var @uint mBitCount
-  %insertSetter insertKey %errorMessage "the '%K' slice has been already declared"
-  %searchMethod searchKey %errorMessage "the '%K' slice is not declared"
+  insert insertKey error message "the '%K' slice has been already declared"
+  search searchKey error message "the '%K' slice is not declared"
 }
 
 #·······················································································································
@@ -284,8 +284,8 @@ map @sliceMap {
   public var @llvmBinaryOperation mAccessOperator
   public var @bigint mAccessRightOperand
   public var @omnibusType mResultType
-  %insertSetter insertKey %errorMessage "the '%K' slice has been already declared"
-  %searchMethod searchKey %errorMessage "the '%K' slice is not declared"
+  insert insertKey error message "the '%K' slice has been already declared"
+  search searchKey error message "the '%K' slice is not declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -371,8 +371,8 @@ map @controlRegisterMap {
   public var @uint mRegisterBitCount
   public var @uint mArraySize # 0 if not an array
   public var @uint mElementArraySize # 0 if not an array
-  %insertSetter insertKey %errorMessage "the '%K' control register has been already declared in %L"
-  %searchMethod searchKey %errorMessage "the '%K' control register is not declared"
+  insert insertKey error message "the '%K' control register has been already declared in %L"
+  search searchKey error message "the '%K' control register is not declared"
 }
 
 #·······················································································································
@@ -387,8 +387,8 @@ enum @registerGroupKind {
 map @controlRegisterGroupMap {
   public var @registerGroupKind mGroupKind
   public var @controlRegisterMap mControlRegisterMap
-  %insertSetter insertKey %errorMessage "the '%K' control register group has been already declared in %L"
-  %searchMethod searchKey %errorMessage "** internal error **"
+  insert insertKey error message "the '%K' control register group has been already declared in %L"
+  search searchKey error message "** internal error **"
 }
 
 #·······················································································································

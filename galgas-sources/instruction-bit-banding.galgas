@@ -22,7 +22,7 @@ syntax extension omnibus_syntax {
     <control_register_lvalue> !?ioAST ?let registerLValue
     $@attribute$ ?let attribute
     if attribute.string != "bit" then
-      error attribute : "attribute should be @bit" fixit { %replaceBy "@bit" }
+      error attribute : "attribute should be @bit" fixit { replace "@bit" }
     end
     <expression> !?ioAST ?let bitExpression
     let bitExpressionLocation = @location.here

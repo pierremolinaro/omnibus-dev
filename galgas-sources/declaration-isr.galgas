@@ -146,7 +146,7 @@ map @interruptMapIR {
   public var @string mDriverName 
   public var @mode mMode
 
-  %insertSetter insertKey %errorMessage "interrupt '%K' is already defined"
+  insert insertKey error message "interrupt '%K' is already defined"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

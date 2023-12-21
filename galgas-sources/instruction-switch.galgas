@@ -126,7 +126,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
       [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
       caseIdentifierIndexList += !constantIdx
       if [usedEnumerationValues hasKey !caseIdf] then
-        error caseIdf : "duplicated enumeration constant" fixit { %remove }
+        error caseIdf : "duplicated enumeration constant" fixit { remove }
       end
       usedEnumerationValues += !caseIdf
     end

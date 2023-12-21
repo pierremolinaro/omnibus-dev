@@ -200,7 +200,7 @@ override method @externRoutineIR llvmCodeGeneration
 map @externProcedureMapIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @unifiedTypeMapEntry mReturnType
-  %insertSetter insertKey %errorMessage "extern procedure %K is already declared"
+  insert insertKey error message "extern procedure %K is already declared"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

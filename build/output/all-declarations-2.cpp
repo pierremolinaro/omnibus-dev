@@ -10276,16 +10276,16 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7111 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6832_weakElement = extractPtr_7111->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7104 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6825_weakElement = extractPtr_7104->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_6858 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6832_weakElement.ptr ())) ;
-        if (nullptr == var_type_6858.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_6851 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6825_weakElement.ptr ())) ;
+        if (nullptr == var_type_6851.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6858.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6851.readProperty_mDefinition ().enumValue ()) {
           case GALGAS_typeDefinition::kNotBuilt:
             break ;
           case GALGAS_typeDefinition::kEnum_unsolved:
@@ -10297,9 +10297,9 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
             break ;
           case GALGAS_typeDefinition::kEnum_solved:
             {
-              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7034 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6858.readProperty_mDefinition ().unsafePointer ()) ;
-              const GALGAS_omnibusType extractedValue_7003_definition = extractPtr_7034->mAssociatedValue0 ;
-              result_result = extractedValue_7003_definition ;
+              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7027 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6851.readProperty_mDefinition ().unsafePointer ()) ;
+              const GALGAS_omnibusType extractedValue_6996_definition = extractPtr_7027->mAssociatedValue0 ;
+              result_result = extractedValue_6996_definition ;
             }
             break ;
           }
@@ -10343,16 +10343,16 @@ GALGAS_string extensionGetter_key (const GALGAS_unifiedTypeMapEntry & inObject,
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7520 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7377_weakElement = extractPtr_7520->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7513 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7370_weakElement = extractPtr_7513->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_7403 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7377_weakElement.ptr ())) ;
-        if (nullptr == var_type_7403.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_7396 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7370_weakElement.ptr ())) ;
+        if (nullptr == var_type_7396.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_7403.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_7396.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {

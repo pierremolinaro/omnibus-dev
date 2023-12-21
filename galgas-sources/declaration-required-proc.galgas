@@ -30,12 +30,12 @@ syntax extension omnibus_syntax {
     for (attribute) in attributeList do
       if attribute.string == exportedAttribute () then
         if isGlobal then
-          error attribute : "duplicated attribute" fixit { %remove }
+          error attribute : "duplicated attribute" fixit { remove }
         else
           isGlobal = true
         end
       else
-        error attribute : "invalid attribute" fixit { %remove %replaceBy "@" + exportedAttribute () }
+        error attribute : "invalid attribute" fixit { remove replace "@" + exportedAttribute () }
       end
     end
     ioAST.mRequiredFunctionListAST +=
@@ -103,7 +103,7 @@ proc checkRequiredProcedures
       if requiredFunction.mIsExported && not implementedIsExported then
         error errorLocation
         : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
-        fixit { %insertAfter " @" + exportedAttribute () }
+        fixit { insert after " @" + exportedAttribute () }
       elsif implementedIsExported && not requiredFunction.mIsExported then
         error errorLocation
         : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"

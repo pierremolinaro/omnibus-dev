@@ -324,18 +324,18 @@ override method @systemRoutineDeclarationAST enterInContext
   for (attribute) in self.mAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if noUnusedWarning then
-        error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { %remove }
+        error attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute" fixit { remove }
       end
       noUnusedWarning = true    
     elsif attribute.string == mutatingAttribute () then
       if mutatingRoutine then
-        error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { %remove }
+        error attribute : "duplicated @" + mutatingAttribute () + " attribute" fixit { remove }
       end
       mutatingRoutine = true    
     else
       error attribute 
       : "unknown attribute; available attributes are @" + mutatingAttribute () + ", @" + noUnusedWarningAttribute ()
-      fixit { %remove }
+      fixit { remove }
     end
   end
   let @routineAttributes attributes = .mutatingRoutine

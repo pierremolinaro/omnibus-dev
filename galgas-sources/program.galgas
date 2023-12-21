@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-target"
-%errorMessage "a target definition text file with the .omnibus-target extension"
+message "a target definition text file with the .omnibus-target extension"
 %useGrammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
@@ -9,7 +9,7 @@ case . "omnibus-target"
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-import"
-%errorMessage "an imported text file with the .omnibus-import extension"
+message "an imported text file with the .omnibus-import extension"
 %useGrammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
@@ -17,7 +17,7 @@ case . "omnibus-import"
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus"
-%errorMessage "a source text file with the .omnibus extension"
+message "a source text file with the .omnibus extension"
 %useGrammar omnibus_grammar
 ?sourceFilePath:@lstring inSourceFile
 {

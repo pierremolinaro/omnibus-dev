@@ -156,8 +156,8 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
 
 map @taskMap {
   public var @omnibusType mTaskType
-  %insertSetter insertKey %errorMessage "the '%K' task is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' task"
+  insert insertKey error message "the '%K' task is already declared in %L"
+  search searchKey error message "there is no '%K' task"
 }
 
 #·······················································································································
@@ -440,9 +440,9 @@ map @taskMapIR {
   public var @uint mTaskNameStringIndex
   public var @bool mActivate
 
-  %insertSetter insertKey %errorMessage "** internal error **"
-  %searchMethod searchKey %errorMessage "** internal error **"
-  %removeSetter removeKey %errorMessage "** internal error **"
+  insert insertKey error message "** internal error **"
+  search searchKey error message "** internal error **"
+  remove removeKey error message "** internal error **"
 }
 
 #·······················································································································

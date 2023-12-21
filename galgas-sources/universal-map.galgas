@@ -525,9 +525,9 @@ map @flatValuedObjectMap { # Key is a valued object
   public var @bool mObjectShouldBeValuedAtEndOfScope
   public var @valuedObject mValuedObject
 
-  %insertSetter insertKey %errorMessage "the '%K' entity is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' entity"
-  %removeSetter removeKey %errorMessage "there is no '%K' entity"
+  insert insertKey error message "the '%K' entity is already declared in %L"
+  search searchKey error message "there is no '%K' entity"
+  remove removeKey error message "there is no '%K' entity"
 }
 
 #·······················································································································
@@ -551,8 +551,8 @@ list @scopeStack {
 
 map @referenceStateMap {
   public var @valuedObjectState mState
-  %insertSetter insertKey %errorMessage "INTERNAL ERROR"
-  %searchMethod searchKey %errorMessage "INTERNAL ERROR"
+  insert insertKey error message "INTERNAL ERROR"
+  search searchKey error message "INTERNAL ERROR"
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

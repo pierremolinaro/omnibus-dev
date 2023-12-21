@@ -199,8 +199,8 @@ abstract method @abstractAssignmentOperatorUsage generateCode
 
 map @assignmentOperatorMap {
   public var @abstractAssignmentOperatorUsage mOperatorUsage
-  %insertSetter insertKey %errorMessage "the '%K' assignment is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' assignment"
+  insert insertKey error message "the '%K' assignment is already declared in %L"
+  search searchKey error message "there is no '%K' assignment"
 }
 
 #·······················································································································

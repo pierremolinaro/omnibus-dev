@@ -5,7 +5,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @semanticTypePrecedenceGraph (@declarationListAST) {
-  %insertSetter addNode %errorMessage "the '%K' symbol is already declared at %L"
+  insert addNode error message "the '%K' symbol is already declared at %L"
 }
 
 #·······················································································································

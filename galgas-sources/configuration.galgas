@@ -81,7 +81,7 @@ syntax extension omnibus_target_specific_syntax {
   rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
     if key.string != inKey then
-      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { %replaceBy inKey }
+      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { replace inKey }
     end
     $:$
   }

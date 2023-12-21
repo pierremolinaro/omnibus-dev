@@ -214,16 +214,16 @@ private func llvmStartupRoutineNameFromDriver ?let @lstring inDriverName -> @lst
 
 map @driverInstanciationArgumentMap {
   public var @expressionAST mExpression
-  %insertSetter insertKey %errorMessage "duplicated '%K' selector"
-  %searchMethod searchKey %errorMessage "uninitialized '%K' property"
+  insert insertKey error message "duplicated '%K' selector"
+  search searchKey error message "uninitialized '%K' property"
 }
 
 #·······················································································································
 
 map @instanciedDriverMap {
   public var @driverInstanciationArgumentMap mDriverInstanciationArgumentMap
-  %insertSetter insertKey %errorMessage "the '%K' driver is already instancied in %L"
-  %searchMethod searchKey %errorMessage "internal error %K"
+  insert insertKey error message "the '%K' driver is already instancied in %L"
+  search searchKey error message "internal error %K"
 }
 
 #·······················································································································

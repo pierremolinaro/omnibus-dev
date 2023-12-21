@@ -70,8 +70,8 @@ map @globalSyncInstanceMap { # %selectors {
   public var @omnibusType type
   public var @objectIR initialValue
 
-  %insertSetter insertKey %errorMessage "the '%K' global variable is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' global variable"
+  insert insertKey error message "the '%K' global variable is already declared in %L"
+  search searchKey error message "there is no '%K' global variable"
 }
 
 #·······················································································································
@@ -154,7 +154,7 @@ override method @decoratedSyncInstance semanticAnalysis
 
 map @globalSyncInstanceMapIR {
   public var @objectIR mInitialValue
-  %insertSetter insertKey %errorMessage "** internal error **"
+  insert insertKey error message "** internal error **"
 }
 
 #·······················································································································

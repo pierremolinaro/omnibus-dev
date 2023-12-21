@@ -275,8 +275,8 @@ map @routineMapForContext {
   public var @bool mIsExported
   public var @mode mFunctionMode
 
-  %insertSetter insertKey %errorMessage "the '%K' function is already declared in %L"
-  %searchMethod searchKey %errorMessage "there is no '%K' function"
+  insert insertKey error message "the '%K' function is already declared in %L"
+  search searchKey error message "there is no '%K' function"
 }
 
 #·······················································································································
