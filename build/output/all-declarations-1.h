@@ -2171,6 +2171,86 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_flatValuedObjectMap
 
 //--------------------------------------------------------------------------------------------------
 //
+//                                           Phase 1: @valuedObjectState enum                                          *
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_valuedObjectState : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public: GALGAS_valuedObjectState (void) ;
+
+//--------------------------------- Enumeration
+  public: typedef enum {
+    kNotBuilt,
+    kEnum_noValue,
+    kEnum_hasUnreadValue,
+    kEnum_hasReadValue
+  } enumeration ;
+  
+//--------------------------------- Private data member
+  private: enumeration mEnum ;
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
+  public: inline enumeration enumValue (void) const { return mEnum ; }
+
+//-- Start of generic part --*
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_valuedObjectState extractObject (const GALGAS_object & inObject,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS constructors
+  public: static class GALGAS_valuedObjectState constructor_hasReadValue (LOCATION_ARGS) ;
+
+  public: static class GALGAS_valuedObjectState constructor_hasUnreadValue (LOCATION_ARGS) ;
+
+  public: static class GALGAS_valuedObjectState constructor_noValue (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public: VIRTUAL_IN_DEBUG void description (String & ioString,
+                                             const int32_t inIndentation) const override ;
+//--------------------------------- Comparison
+  public: typeComparisonResult objectCompare (const GALGAS_valuedObjectState & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasReadValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasUnreadValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoValue (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Optional Methods
+  public: VIRTUAL_IN_DEBUG bool optional_hasReadValue () const ;
+
+  public: VIRTUAL_IN_DEBUG bool optional_hasUnreadValue () const ;
+
+  public: VIRTUAL_IN_DEBUG bool optional_noValue () const ;
+
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_valuedObjectState class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valuedObjectState ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //                                             Phase 1: @valuedObject enum                                             *
 //
 //--------------------------------------------------------------------------------------------------
@@ -2319,86 +2399,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valuedObject ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                           Phase 1: @valuedObjectState enum                                          *
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_valuedObjectState : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public: GALGAS_valuedObjectState (void) ;
-
-//--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_noValue,
-    kEnum_hasUnreadValue,
-    kEnum_hasReadValue
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of generic part --*
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_valuedObjectState extractObject (const GALGAS_object & inObject,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_valuedObjectState constructor_hasReadValue (LOCATION_ARGS) ;
-
-  public: static class GALGAS_valuedObjectState constructor_hasUnreadValue (LOCATION_ARGS) ;
-
-  public: static class GALGAS_valuedObjectState constructor_noValue (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public: VIRTUAL_IN_DEBUG void description (String & ioString,
-                                             const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_valuedObjectState & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasReadValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasUnreadValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoValue (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_hasReadValue () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_hasUnreadValue () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_noValue () const ;
-
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_valuedObjectState class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valuedObjectState ;
 
 //--------------------------------------------------------------------------------------------------
 //

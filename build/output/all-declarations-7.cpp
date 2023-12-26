@@ -2471,7 +2471,7 @@ void extensionSetter_appendLoadWhenReference (GALGAS_instructionListIR & ioObjec
       const GALGAS_string extractedValue_396_llvmName = extractPtr_550->mAssociatedValue1 ;
       GALGAS_objectIR var_resultingValue_456 ;
       {
-      routine_getNewTempValue (extractedValue_391_type, ioArgument_ioTemporaries, var_resultingValue_456, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 11)) ;
+      routine_getNewTempValue_3F__26__21_ (extractedValue_391_type, ioArgument_ioTemporaries, var_resultingValue_456, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 11)) ;
       }
       {
       extensionSetter_appendLoadFromReference (ioObject, var_resultingValue_456, extractedValue_396_llvmName, inCompiler COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 12)) ;
@@ -16029,7 +16029,7 @@ GALGAS_llvmGenerationInstructionList_2D_element GALGAS_llvmGenerationInstruction
 #include "utilities/MF_MemoryControl.h"
 #include "galgas2/C_galgas_CLI_Options.h"
 
-#include "files/C_FileManager.h"
+#include "files/FileManager.h"
 
 //---------------------------------------------------------------------------------------------------------------------*
 
@@ -37689,7 +37689,7 @@ void cGrammar_omnibus_5F_grammar::performIndexing (Compiler * inCompiler,
 
 void cGrammar_omnibus_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompiler,
              const String & inSourceFilePath) {
-  C_Lexique_omnibus_5F_lexique * scanner = NULL ;
+  C_Lexique_omnibus_5F_lexique * scanner = nullptr ;
   macroMyNew (scanner, C_Lexique_omnibus_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
   if (scanner->sourceText ().isValid ()) {
     scanner->performLexicalAnalysis () ;
@@ -37699,7 +37699,7 @@ void cGrammar_omnibus_5F_grammar::performOnlyLexicalAnalysis (Compiler * inCompi
 
 void cGrammar_omnibus_5F_grammar::performOnlySyntaxAnalysis (Compiler * inCompiler,
              const String & inSourceFilePath) {
-  C_Lexique_omnibus_5F_lexique * scanner = NULL ;
+  C_Lexique_omnibus_5F_lexique * scanner = nullptr ;
   macroMyNew (scanner, C_Lexique_omnibus_5F_lexique (inCompiler, inSourceFilePath COMMA_HERE)) ;
   if (scanner->sourceText ().isValid ()) {
     scanner->performBottomUpParsing (gActionTable_omnibus_grammar, gNonTerminalNames_omnibus_grammar,
@@ -37724,11 +37724,11 @@ void cGrammar_omnibus_5F_grammar::_performSourceFileParsing_ (Compiler * inCompi
   if (inFilePath.isValid ()) {
     const GALGAS_string filePathAsString = inFilePath.readProperty_string () ;
     String filePath = filePathAsString.stringValue () ;
-    if (! C_FileManager::isAbsolutePath (filePath)) {
+    if (! FileManager::isAbsolutePath (filePath)) {
       filePath = inCompiler->sourceFilePath ().stringByDeletingLastPathComponent ().stringByAppendingPathComponent (filePath) ;
     }
-    if (C_FileManager::fileExistsAtPath (filePath)) {
-      C_Lexique_omnibus_5F_lexique * scanner = NULL ;
+    if (FileManager::fileExistsAtPath (filePath)) {
+      C_Lexique_omnibus_5F_lexique * scanner = nullptr ;
       macroMyNew (scanner, C_Lexique_omnibus_5F_lexique (inCompiler, filePath COMMA_HERE)) ;
       if (scanner->sourceText ().isValid ()) {
         const bool ok = scanner->performBottomUpParsing (gActionTable_omnibus_grammar, gNonTerminalNames_omnibus_grammar,
@@ -37770,7 +37770,7 @@ void cGrammar_omnibus_5F_grammar::_performSourceStringParsing_ (Compiler * inCom
   if (inSourceString.isValid () && inNameString.isValid ()) {
     const String sourceString = inSourceString.stringValue () ;
     const String nameString = inNameString.stringValue () ;
-    C_Lexique_omnibus_5F_lexique * scanner = NULL ;
+    C_Lexique_omnibus_5F_lexique * scanner = nullptr ;
     macroMyNew (scanner, C_Lexique_omnibus_5F_lexique (inCompiler, sourceString, nameString COMMA_HERE)) ;
     if (scanner->sourceText ().isValid ()) {
       const bool ok = scanner->performBottomUpParsing (gActionTable_omnibus_grammar, gNonTerminalNames_omnibus_grammar,

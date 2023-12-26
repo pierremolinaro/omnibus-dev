@@ -1344,15 +1344,15 @@ class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALG
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'enterFormalArguments'
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_enterFormalArguments (const class GALGAS_semanticContext constinArgument0,
-                                   const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                   class GALGAS_universalValuedObjectMap & ioArgument2,
-                                   class GALGAS_routineFormalArgumentListIR & ioArgument3,
-                                   const class GALGAS_bool constinArgument4,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GALGAS_semanticContext constinArgument0,
+                                                                                 const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GALGAS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GALGAS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 

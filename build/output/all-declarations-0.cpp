@@ -2404,7 +2404,7 @@ String C_Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inTok
 void C_Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F_lexique & token) {
   bool loop = true ;
   token.mLexicalAttribute_bigInteger = BigSigned () ;
-  token.mLexicalAttribute_tokenString.setLengthToZero () ;
+  token.mLexicalAttribute_tokenString.removeAllKeepingCapacity () ;
   mTokenStartLocation = mCurrentLocation ;
   try{
     if (testForCharWithFunction (isUnicodeLetter)) {
@@ -2877,7 +2877,6 @@ void C_Lexique_omnibus_5F_lexique::enterToken (cTokenFor_omnibus_5F_lexique & io
   cTokenFor_omnibus_5F_lexique * ptr = nullptr ;
   macroMyNew (ptr, cTokenFor_omnibus_5F_lexique ()) ;
   ptr->mTokenCode = ioToken.mTokenCode ;
-  // ptr->mIsOptional = ioToken.mIsOptional ;
   ptr->mStartLocation = mTokenStartLocation ;
   ptr->mEndLocation = mTokenEndLocation ;
   ptr->mTemplateStringBeforeToken = ioToken.mTemplateStringBeforeToken ;

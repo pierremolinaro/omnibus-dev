@@ -3897,15 +3897,15 @@ void extensionSetter_addFunctionWithInputArgument (class GALGAS_routineMapForCon
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'routineTypedSignature'
+//Routine 'routineTypedSignature&?!'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_routineTypedSignature (class GALGAS_unifiedTypeMap & ioArgument0,
-                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                    class GALGAS_routineTypedSignature & outArgument2,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void routine_routineTypedSignature_26__3F__21_ (class GALGAS_unifiedTypeMap & ioArgument0,
+                                                const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                class GALGAS_routineTypedSignature & outArgument2,
+                                                class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //

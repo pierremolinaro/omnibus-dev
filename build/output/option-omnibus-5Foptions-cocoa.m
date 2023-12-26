@@ -4,7 +4,7 @@
 //--- END OF USER ZONE 1
 //--------------------------------------------------------------------------------------------------
 
-#import "option-omnibus-5F-options-cocoa.h"
+#import "option-omnibus-5Foptions-cocoa.h"
 #import "OC_GGS_CommandLineOption.h"
 
 //--------------------------------------------------------------------------------------------------

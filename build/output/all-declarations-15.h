@@ -10,118 +10,118 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'copyExecutableFile'
+//Routine 'copyExecutableFileWithSubstitutions?currentDir?from?to?'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_copyExecutableFile (const class GALGAS_string constinArgument0,
-                                 const class GALGAS_string constinArgument1,
-                                 const class GALGAS_string constinArgument2,
-                                 class Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
+void routine_copyExecutableFileWithSubstitutions_3F_currentDir_3F_from_3F_to_3F_ (const class GALGAS_string constinArgument0,
+                                                                                  const class GALGAS_string constinArgument1,
+                                                                                  const class GALGAS_string constinArgument2,
+                                                                                  const class GALGAS__32_stringlist constinArgument3,
+                                                                                  class Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'copyExecutableFileWithSubstitutions'
+//Routine 'copyExecutableFile?currentDir?from?to'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_copyExecutableFileWithSubstitutions (const class GALGAS_string constinArgument0,
-                                                  const class GALGAS_string constinArgument1,
-                                                  const class GALGAS_string constinArgument2,
-                                                  const class GALGAS__32_stringlist constinArgument3,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+void routine_copyExecutableFile_3F_currentDir_3F_from_3F_to (const class GALGAS_string constinArgument0,
+                                                             const class GALGAS_string constinArgument1,
+                                                             const class GALGAS_string constinArgument2,
+                                                             class Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'copyFileWithSubstitutions'
+//Routine 'copyFileWithSubstitutions?currentDir?from?to?'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_copyFileWithSubstitutions (const class GALGAS_string constinArgument0,
-                                        const class GALGAS_string constinArgument1,
-                                        const class GALGAS_string constinArgument2,
-                                        const class GALGAS__32_stringlist constinArgument3,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void routine_copyFileWithSubstitutions_3F_currentDir_3F_from_3F_to_3F_ (const class GALGAS_string constinArgument0,
+                                                                        const class GALGAS_string constinArgument1,
+                                                                        const class GALGAS_string constinArgument2,
+                                                                        const class GALGAS__32_stringlist constinArgument3,
+                                                                        class Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'importFilesAndCompile'
+//Routine 'importFilesAndCompile?sourceFilePath'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_importFilesAndCompile (const class GALGAS_lstring constinArgument0,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
+void routine_importFilesAndCompile_3F_sourceFilePath (const class GALGAS_lstring constinArgument0,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'compileProject'
+//Routine 'compileProject?sourceFile?ast?forTarget?endOfSourceFile?currentDirectory?importedFilePathSet'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_compileProject (const class GALGAS_lstring constinArgument0,
-                             const class GALGAS_ast constinArgument1,
-                             const class GALGAS_lstring constinArgument2,
-                             const class GALGAS_location constinArgument3,
-                             const class GALGAS_string constinArgument4,
-                             const class GALGAS_stringset constinArgument5,
-                             class Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) ;
+void routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile_3F_currentDirectory_3F_importedFilePathSet (const class GALGAS_lstring constinArgument0,
+                                                                                                                             const class GALGAS_ast constinArgument1,
+                                                                                                                             const class GALGAS_lstring constinArgument2,
+                                                                                                                             const class GALGAS_location constinArgument3,
+                                                                                                                             const class GALGAS_string constinArgument4,
+                                                                                                                             const class GALGAS_stringset constinArgument5,
+                                                                                                                             class Compiler * inCompiler
+                                                                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'recursiveImportFiles'
+//Routine 'recursiveImportFiles&ast?currentDirectory?importClauseList&importedFilePathSet'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_recursiveImportFiles (class GALGAS_ast & ioArgument0,
-                                   class GALGAS_string inArgument1,
-                                   class GALGAS_lstringlist inArgument2,
-                                   class GALGAS_stringset & ioArgument3,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
+void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GALGAS_ast & ioArgument0,
+                                                                                                         class GALGAS_string inArgument1,
+                                                                                                         class GALGAS_lstringlist inArgument2,
+                                                                                                         class GALGAS_stringset & ioArgument3,
+                                                                                                         class Compiler * inCompiler
+                                                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'addTargetSpecificFiles'
+//Routine 'addTargetSpecificFiles?forTarget&toAST?currentDirectory&importedFilePathSet'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_addTargetSpecificFiles (const class GALGAS_lstring constinArgument0,
-                                     class GALGAS_ast & ioArgument1,
-                                     const class GALGAS_string constinArgument2,
-                                     class GALGAS_stringset & ioArgument3,
-                                     class Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) ;
+void routine_addTargetSpecificFiles_3F_forTarget_26_toAST_3F_currentDirectory_26_importedFilePathSet (const class GALGAS_lstring constinArgument0,
+                                                                                                      class GALGAS_ast & ioArgument1,
+                                                                                                      const class GALGAS_string constinArgument2,
+                                                                                                      class GALGAS_stringset & ioArgument3,
+                                                                                                      class Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'recursiveImportEmbeddedTargetFiles'
+//Routine 'recursiveImportEmbeddedTargetFiles&ast?currentDirectory?importClauseList&importedFilePathSet'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_recursiveImportEmbeddedTargetFiles (class GALGAS_ast & ioArgument0,
-                                                 const class GALGAS_string constinArgument1,
-                                                 class GALGAS_lstringlist inArgument2,
-                                                 class GALGAS_stringset & ioArgument3,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GALGAS_ast & ioArgument0,
+                                                                                                                       const class GALGAS_string constinArgument1,
+                                                                                                                       class GALGAS_lstringlist inArgument2,
+                                                                                                                       class GALGAS_stringset & ioArgument3,
+                                                                                                                       class Compiler * inCompiler
+                                                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'recursiveImportFileSystemTargetFiles'
+//Routine 'recursiveImportFileSystemTargetFiles&ast?targetDirectory?importClauseList&importedFilePathSet'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_recursiveImportFileSystemTargetFiles (class GALGAS_ast & ioArgument0,
-                                                   const class GALGAS_string constinArgument1,
-                                                   class GALGAS_lstringlist inArgument2,
-                                                   class GALGAS_stringset & ioArgument3,
-                                                   class Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
+void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_importClauseList_26_importedFilePathSet (class GALGAS_ast & ioArgument0,
+                                                                                                                        const class GALGAS_string constinArgument1,
+                                                                                                                        class GALGAS_lstringlist inArgument2,
+                                                                                                                        class GALGAS_stringset & ioArgument3,
+                                                                                                                        class Compiler * inCompiler
+                                                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //

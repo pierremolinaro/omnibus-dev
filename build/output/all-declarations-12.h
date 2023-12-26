@@ -58,17 +58,17 @@ class GALGAS_string function_llvmFunctionPrototype (const class GALGAS_string & 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateSectionDispatcher'
+//Routine 'generateSectionDispatcher???targetParameters&?'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateSectionDispatcher (const class GALGAS_string constinArgument0,
-                                        const class GALGAS_string constinArgument1,
-                                        const class GALGAS_targetParameters constinArgument2,
-                                        class GALGAS_string & ioArgument3,
-                                        const class GALGAS_sectionIRlist constinArgument4,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void routine_generateSectionDispatcher_3F__3F__3F_targetParameters_26__3F_ (const class GALGAS_string constinArgument0,
+                                                                            const class GALGAS_string constinArgument1,
+                                                                            const class GALGAS_targetParameters constinArgument2,
+                                                                            class GALGAS_string & ioArgument3,
+                                                                            const class GALGAS_sectionIRlist constinArgument4,
+                                                                            class Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -83,29 +83,29 @@ class GALGAS_string function_getTargetTextFile (const class GALGAS_string & cons
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generatePrimitiveAndServiceDispatcher'
+//Routine 'generatePrimitiveAndServiceDispatcher??&??targetParameters'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generatePrimitiveAndServiceDispatcher (const class GALGAS_string constinArgument0,
-                                                    const class GALGAS_string constinArgument1,
-                                                    class GALGAS_string & ioArgument2,
-                                                    const class GALGAS_primitiveAndServiceIRlist constinArgument3,
-                                                    const class GALGAS_targetParameters constinArgument4,
+void routine_generatePrimitiveAndServiceDispatcher_3F__3F__26__3F__3F_targetParameters (const class GALGAS_string constinArgument0,
+                                                                                        const class GALGAS_string constinArgument1,
+                                                                                        class GALGAS_string & ioArgument2,
+                                                                                        const class GALGAS_primitiveAndServiceIRlist constinArgument3,
+                                                                                        const class GALGAS_targetParameters constinArgument4,
+                                                                                        class Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'routineTypedSignature2??!'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_routineTypedSignature_32__3F__3F__21_ (class GALGAS_unifiedTypeMap inArgument0,
+                                                    const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                    class GALGAS_routineTypedSignature & outArgument2,
                                                     class Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'routineTypedSignature2'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_routineTypedSignature_32_ (class GALGAS_unifiedTypeMap inArgument0,
-                                        const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                        class GALGAS_routineTypedSignature & outArgument2,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -142,25 +142,25 @@ class GALGAS_string function_acceptVariableOmnibusName (class Compiler * inCompi
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'analyzeEffectiveParameters'
+//Routine 'analyzeEffectiveParameters?self?routineAttributes?formal?effective?errorLocation?context?requiredMode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&effectiveIR'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_analyzeEffectiveParameters (const class GALGAS_omnibusType constinArgument0,
-                                         const class GALGAS_routineAttributes constinArgument1,
-                                         const class GALGAS_routineTypedSignature constinArgument2,
-                                         const class GALGAS_effectiveArgumentListAST constinArgument3,
-                                         const class GALGAS_location constinArgument4,
-                                         const class GALGAS_semanticContext constinArgument5,
-                                         const class GALGAS_mode constinArgument6,
-                                         class GALGAS_semanticTemporariesStruct & ioArgument7,
-                                         class GALGAS_staticEntityMap & ioArgument8,
-                                         class GALGAS_universalValuedObjectMap & ioArgument9,
-                                         class GALGAS_allocaList & ioArgument10,
-                                         class GALGAS_instructionListIR & ioArgument11,
-                                         class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
-                                         class Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+void routine_analyzeEffectiveParameters_3F_self_3F_routineAttributes_3F_formal_3F_effective_3F_errorLocation_3F_context_3F_requiredMode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_effectiveIR (const class GALGAS_omnibusType constinArgument0,
+                                                                                                                                                                                                                                      const class GALGAS_routineAttributes constinArgument1,
+                                                                                                                                                                                                                                      const class GALGAS_routineTypedSignature constinArgument2,
+                                                                                                                                                                                                                                      const class GALGAS_effectiveArgumentListAST constinArgument3,
+                                                                                                                                                                                                                                      const class GALGAS_location constinArgument4,
+                                                                                                                                                                                                                                      const class GALGAS_semanticContext constinArgument5,
+                                                                                                                                                                                                                                      const class GALGAS_mode constinArgument6,
+                                                                                                                                                                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument7,
+                                                                                                                                                                                                                                      class GALGAS_staticEntityMap & ioArgument8,
+                                                                                                                                                                                                                                      class GALGAS_universalValuedObjectMap & ioArgument9,
+                                                                                                                                                                                                                                      class GALGAS_allocaList & ioArgument10,
+                                                                                                                                                                                                                                      class GALGAS_instructionListIR & ioArgument11,
+                                                                                                                                                                                                                                      class GALGAS_procCallEffectiveParameterListIR & ioArgument12,
+                                                                                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -183,15 +183,15 @@ class GALGAS_string function_panicModeName (class Compiler * inCompiler
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generatePanicCode'
+//Routine 'generatePanicCode&?generationContext&generationAdds'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generatePanicCode (class GALGAS_string & ioArgument0,
-                                const class GALGAS_generationContext constinArgument1,
-                                class GALGAS_generationAdds & ioArgument2,
-                                class Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
+void routine_generatePanicCode_26__3F_generationContext_26_generationAdds (class GALGAS_string & ioArgument0,
+                                                                           const class GALGAS_generationContext constinArgument1,
+                                                                           class GALGAS_generationAdds & ioArgument2,
+                                                                           class Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -368,15 +368,4 @@ class GALGAS_string function_infixOperatorFunctionName (const class GALGAS_omnib
                                                         const class GALGAS_omnibusType & constinArgument2,
                                                         class Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'prefixOperatorFunctionName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_prefixOperatorFunctionName (const class GALGAS_omnibusType & constinArgument0,
-                                                         const class GALGAS_prefixOperator & constinArgument1,
-                                                         class Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
 

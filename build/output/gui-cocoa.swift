@@ -30,7 +30,7 @@ NSDictionary * indexingDescriptorDictionary (void) {
 //
 //--------------------------------------------------------------------------------------------------
 
-// #import "option-omnibus-5F-options-cocoa.h"
+// #import "option-omnibus-5Foptions-cocoa.h"
 
 //--------------------------------------------------------------------------------------------------
 

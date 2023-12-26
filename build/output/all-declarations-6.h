@@ -5240,15 +5240,15 @@ class cPtr_truncIR : public cPtr_abstractInstructionIR {
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'getNewTempValue'
+//Routine 'getNewTempValue?&!'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_getNewTempValue (const class GALGAS_omnibusType constinArgument0,
-                              class GALGAS_semanticTemporariesStruct & ioArgument1,
-                              class GALGAS_objectIR & outArgument2,
-                              class Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) ;
+void routine_getNewTempValue_3F__26__21_ (const class GALGAS_omnibusType constinArgument0,
+                                          class GALGAS_semanticTemporariesStruct & ioArgument1,
+                                          class GALGAS_objectIR & outArgument2,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //

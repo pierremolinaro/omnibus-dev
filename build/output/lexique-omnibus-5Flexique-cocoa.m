@@ -3,7 +3,7 @@
 
 //--- END OF USER ZONE 1
 
-#import "lexique-omnibus-5F-lexique-cocoa.h"
+#import "lexique-omnibus-5Flexique-cocoa.h"
 #import "PMDebug.h"
 
 //--------------------------------------------------------------------------------------------------

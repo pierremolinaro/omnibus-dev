@@ -10,6 +10,28 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Routine 'codeOptimization?&intermediateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_codeOptimization_3F__26_intermediateCode (const class GALGAS_string constinArgument0,
+                                                       class GALGAS_intermediateCodeStruct & ioArgument1,
+                                                       class Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'displayInvocationGraph??'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_displayInvocationGraph_3F__3F_ (const class GALGAS_routineListIR constinArgument0,
+                                             const class GALGAS_string constinArgument1,
+                                             class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Function 'asSeparatorLine'
 //
 //--------------------------------------------------------------------------------------------------
@@ -29,55 +51,55 @@ class GALGAS_string function_asTitleComment (const class GALGAS_string & constin
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'codeGeneration'
+//Routine 'codeGeneration?currentDir?outputFile?eof?intermediateCode?userDefinedTypes?target?panicCodeType?panicLineType?interrupts?staticlistValues?targetParameters'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_codeGeneration (const class GALGAS_string constinArgument0,
-                             const class GALGAS_string constinArgument1,
-                             const class GALGAS_location constinArgument2,
-                             const class GALGAS_intermediateCodeStruct constinArgument3,
-                             const class GALGAS_userLLVMTypeDefinitionListIR constinArgument4,
-                             const class GALGAS_lstring constinArgument5,
-                             const class GALGAS_omnibusType constinArgument6,
-                             const class GALGAS_omnibusType constinArgument7,
-                             const class GALGAS_availableInterruptMap constinArgument8,
-                             const class GALGAS_staticListInitializationMap constinArgument9,
-                             const class GALGAS_targetParameters constinArgument10,
-                             class Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) ;
+void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GALGAS_string constinArgument0,
+                                                                                                                                                                                                          const class GALGAS_string constinArgument1,
+                                                                                                                                                                                                          const class GALGAS_location constinArgument2,
+                                                                                                                                                                                                          const class GALGAS_intermediateCodeStruct constinArgument3,
+                                                                                                                                                                                                          const class GALGAS_userLLVMTypeDefinitionListIR constinArgument4,
+                                                                                                                                                                                                          const class GALGAS_lstring constinArgument5,
+                                                                                                                                                                                                          const class GALGAS_omnibusType constinArgument6,
+                                                                                                                                                                                                          const class GALGAS_omnibusType constinArgument7,
+                                                                                                                                                                                                          const class GALGAS_availableInterruptMap constinArgument8,
+                                                                                                                                                                                                          const class GALGAS_staticListInitializationMap constinArgument9,
+                                                                                                                                                                                                          const class GALGAS_targetParameters constinArgument10,
+                                                                                                                                                                                                          class Compiler * inCompiler
+                                                                                                                                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateCodeFiles'
+//Routine 'generateCodeFiles?currentDir?productDir?intermediateCode?userDefinedTypes?target?panicCodeType?panicLineType?interrupts?staticlistValues?targetParameters'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateCodeFiles (const class GALGAS_string constinArgument0,
-                                const class GALGAS_string constinArgument1,
-                                const class GALGAS_intermediateCodeStruct constinArgument2,
-                                const class GALGAS_userLLVMTypeDefinitionListIR constinArgument3,
-                                const class GALGAS_lstring constinArgument4,
-                                const class GALGAS_omnibusType constinArgument5,
-                                const class GALGAS_omnibusType constinArgument6,
-                                const class GALGAS_availableInterruptMap constinArgument7,
-                                const class GALGAS_staticListInitializationMap constinArgument8,
-                                const class GALGAS_targetParameters constinArgument9,
-                                class Compiler * inCompiler
-                                COMMA_LOCATION_ARGS) ;
+void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GALGAS_string constinArgument0,
+                                                                                                                                                                                                      const class GALGAS_string constinArgument1,
+                                                                                                                                                                                                      const class GALGAS_intermediateCodeStruct constinArgument2,
+                                                                                                                                                                                                      const class GALGAS_userLLVMTypeDefinitionListIR constinArgument3,
+                                                                                                                                                                                                      const class GALGAS_lstring constinArgument4,
+                                                                                                                                                                                                      const class GALGAS_omnibusType constinArgument5,
+                                                                                                                                                                                                      const class GALGAS_omnibusType constinArgument6,
+                                                                                                                                                                                                      const class GALGAS_availableInterruptMap constinArgument7,
+                                                                                                                                                                                                      const class GALGAS_staticListInitializationMap constinArgument8,
+                                                                                                                                                                                                      const class GALGAS_targetParameters constinArgument9,
+                                                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateTarget'
+//Routine 'generateTarget?currentDir?productDirectory?targetName?targetParameters'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateTarget (const class GALGAS_string constinArgument0,
-                             const class GALGAS_string constinArgument1,
-                             const class GALGAS_lstring constinArgument2,
-                             const class GALGAS_targetParameters constinArgument3,
-                             class Compiler * inCompiler
-                             COMMA_LOCATION_ARGS) ;
+void routine_generateTarget_3F_currentDir_3F_productDirectory_3F_targetName_3F_targetParameters (const class GALGAS_string constinArgument0,
+                                                                                                 const class GALGAS_string constinArgument1,
+                                                                                                 const class GALGAS_lstring constinArgument2,
+                                                                                                 const class GALGAS_targetParameters constinArgument3,
+                                                                                                 class Compiler * inCompiler
+                                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
