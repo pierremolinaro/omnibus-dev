@@ -50,7 +50,7 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
 
   public: class GALGAS_location readProperty_mLocation (void) const ;
 
-//-- Start of generic part --*
+//-- Start of type generic part
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -60,11 +60,11 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_convertInstructionIR constructor_new (const class GALGAS_objectIR & inOperand0,
-                                                                    const class GALGAS_objectIR & inOperand1,
-                                                                    const class GALGAS_location & inOperand2
-                                                                    COMMA_LOCATION_ARGS) ;
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_convertInstructionIR class_func_new (const class GALGAS_objectIR & inOperand0,
+                                                                   const class GALGAS_objectIR & inOperand1,
+                                                                   const class GALGAS_location & inOperand2
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: typeComparisonResult objectCompare (const GALGAS_convertInstructionIR & inOperand) const ;
@@ -162,7 +162,7 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
 //--------------------------------- Bang operator
   public: GALGAS_convertInstructionIR bang_convertInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
-//-- Start of generic part --*
+//-- Start of type generic part
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -172,8 +172,8 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
                                                                     Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS constructors
-  public: static class GALGAS_convertInstructionIR_2D_weak constructor_nil (LOCATION_ARGS) ;
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_convertInstructionIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: typeComparisonResult objectCompare (const GALGAS_convertInstructionIR_2D_weak & inOperand) const ;

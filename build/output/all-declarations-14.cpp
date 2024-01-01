@@ -1,7 +1,7 @@
-#include "galgas2/Compiler.h"
-#include "galgas2/C_galgas_io.h"
-#include "galgas2/C_galgas_CLI_Options.h"
-#include "utilities/C_PrologueEpilogue.h"
+#include "Compiler.h"
+#include "C_galgas_io.h"
+#include "C_galgas_CLI_Options.h"
+#include "PrologueEpilogue.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -353,13 +353,13 @@ void routine_codeOptimization_3F__26_intermediateCode (const GALGAS_string const
                                                        GALGAS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                                        Compiler * inCompiler
                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1401 = GALGAS_routineAccessibilityIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 27)) ;
-  GALGAS_stringset var_exploreRoutineSet_1522 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 29)) ;
-  GALGAS_stringset var_allRoutineSet_1562 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 30)) ;
-  GALGAS_stringset var_definedRoutineSet_1598 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 31)) ;
+  GALGAS_routineAccessibilityIR var_routineAccessibilityIR_1401 = GALGAS_routineAccessibilityIR::class_func_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 27)) ;
+  GALGAS_stringset var_exploreRoutineSet_1522 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 29)) ;
+  GALGAS_stringset var_allRoutineSet_1562 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 30)) ;
+  GALGAS_stringset var_definedRoutineSet_1598 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 31)) ;
   cEnumerator_routineListIR enumerator_1663 (ioArgument_ioIntermediateCodeStruct.readProperty_mRoutineListIR (), kENUMERATION_UP) ;
   while (enumerator_1663.hasCurrentObject ()) {
-    GALGAS_stringset var_accessibleRoutineSet_1700 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 33)) ;
+    GALGAS_stringset var_accessibleRoutineSet_1700 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 33)) ;
     callExtensionMethod_enterAccessibleEntities ((cPtr_abstractRoutineIR *) enumerator_1663.current (HERE).readProperty_mRoutine ().ptr (), var_accessibleRoutineSet_1700, ioArgument_ioIntermediateCodeStruct.mProperty_mMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 34)) ;
     var_routineAccessibilityIR_1401.addAssign_operation (enumerator_1663.current (HERE).readProperty_mRoutine (), var_accessibleRoutineSet_1700  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 35)) ;
     var_allRoutineSet_1562.plusAssign_operation(var_accessibleRoutineSet_1700, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 36)) ;
@@ -397,7 +397,7 @@ void routine_codeOptimization_3F__26_intermediateCode (const GALGAS_string const
         enumerator_2656.gotoNextObject () ;
       }
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 55)), var_m_2619, fixItArray3  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 55)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 55)), var_m_2619, fixItArray3  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 55)) ;
     }
   }
   enumGalgasBool test_4 = kBoolTrue ;
@@ -410,7 +410,7 @@ void routine_codeOptimization_3F__26_intermediateCode (const GALGAS_string const
     }
   }
   if (kBoolFalse == test_4) {
-    GALGAS_stringset var_usefulRoutineSet_3048 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 61)) ;
+    GALGAS_stringset var_usefulRoutineSet_3048 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 61)) ;
     if (ioArgument_ioIntermediateCodeStruct.readProperty_mRoutineListIR ().getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 62)).add_operation (GALGAS_uint (uint32_t (1U)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 62)).isValid ()) {
       uint32_t variant_3074 = ioArgument_ioIntermediateCodeStruct.readProperty_mRoutineListIR ().getter_count (SOURCE_FILE ("dead-code-elimination.galgas", 62)).add_operation (GALGAS_uint (uint32_t (1U)), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 62)).uintValue () ;
       bool loop_3074 = true ;
@@ -426,7 +426,7 @@ void routine_codeOptimization_3F__26_intermediateCode (const GALGAS_string const
         if (loop_3074) {
           variant_3074 -- ;
           GALGAS_stringset var_currentSet_3183 = var_exploreRoutineSet_1522 ;
-          var_exploreRoutineSet_1522 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 64)) ;
+          var_exploreRoutineSet_1522 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 64)) ;
           cEnumerator_routineAccessibilityIR enumerator_3264 (var_routineAccessibilityIR_1401, kENUMERATION_UP) ;
           while (enumerator_3264.hasCurrentObject ()) {
             GALGAS_lstring var_routineMangledName_3302 = enumerator_3264.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName () ;
@@ -466,7 +466,7 @@ void routine_codeOptimization_3F__26_intermediateCode (const GALGAS_string const
         }
       }
     }
-    ioArgument_ioIntermediateCodeStruct.setter_setMRoutineListIR (GALGAS_routineListIR::constructor_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 89)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 89)) ;
+    ioArgument_ioIntermediateCodeStruct.setter_setMRoutineListIR (GALGAS_routineListIR::class_func_emptyList (SOURCE_FILE ("dead-code-elimination.galgas", 89)) COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 89)) ;
     cEnumerator_routineAccessibilityIR enumerator_4403 (var_routineAccessibilityIR_1401, kENUMERATION_UP) ;
     while (enumerator_4403.hasCurrentObject ()) {
       enumGalgasBool test_9 = kBoolTrue ;
@@ -508,14 +508,14 @@ void routine_displayInvocationGraph_3F__3F_ (const GALGAS_routineListIR constinA
                                              Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   GALGAS_string var_s_5116 = GALGAS_string ("digraph G {\n") ;
-  GALGAS_stringset var_definedRoutines_5170 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 113)) ;
-  GALGAS_stringset var_allRoutines_5208 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 114)) ;
+  GALGAS_stringset var_definedRoutines_5170 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 113)) ;
+  GALGAS_stringset var_allRoutines_5208 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 114)) ;
   cEnumerator_routineListIR enumerator_5232 (constinArgument_inRoutineListIR, kENUMERATION_UP) ;
   while (enumerator_5232.hasCurrentObject ()) {
     var_definedRoutines_5170.addAssign_operation (enumerator_5232.current_mRoutine (HERE).readProperty_mRoutineMangledName ().readProperty_string ()  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 116)) ;
     var_allRoutines_5208.addAssign_operation (enumerator_5232.current_mRoutine (HERE).readProperty_mRoutineMangledName ().readProperty_string ()  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 117)) ;
-    GALGAS_stringset var_accessibleRoutineSet_5382 = GALGAS_stringset::constructor_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 118)) ;
-    GALGAS_uint joker_5468 = GALGAS_uint::constructor_compilationMode (SOURCE_FILE ("dead-code-elimination.galgas", 119)) ;
+    GALGAS_stringset var_accessibleRoutineSet_5382 = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("dead-code-elimination.galgas", 118)) ;
+    GALGAS_uint joker_5468 = GALGAS_uint::class_func_compilationMode (SOURCE_FILE ("dead-code-elimination.galgas", 119)) ;
     callExtensionMethod_enterAccessibleEntities ((cPtr_abstractRoutineIR *) enumerator_5232.current_mRoutine (HERE).ptr (), var_accessibleRoutineSet_5382, joker_5468, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 119)) ;
     var_allRoutines_5208.plusAssign_operation(var_accessibleRoutineSet_5382, inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 120)) ;
     var_s_5116.plusAssign_operation(GALGAS_string ("  \"").add_operation (enumerator_5232.current_mRoutine (HERE).readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 121)).add_operation (GALGAS_string ("\" [shape=rectangle"), inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 121)) ;
@@ -554,7 +554,7 @@ void routine_displayInvocationGraph_3F__3F_ (const GALGAS_routineListIR constinA
         enumerator_6282.gotoNextObject () ;
       }
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 142)), var_m_6178, fixItArray2  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 142)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("dead-code-elimination.galgas", 142)), var_m_6178, fixItArray2  COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 142)) ;
     }
   }
 }
@@ -603,8 +603,8 @@ static void releaseOnceFunctionResult_llvmSeparatorLine (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (nullptr,
-                                                               releaseOnceFunctionResult_llvmSeparatorLine) ;
+PrologueEpilogue gEpilogueForOnceFunction_llvmSeparatorLine (nullptr,
+                                                             releaseOnceFunctionResult_llvmSeparatorLine) ;
 
 //--------------------------------------------------------------------------------------------------
 //  Function introspection                                                                       
@@ -723,8 +723,8 @@ static void releaseOnceFunctionResult_asSeparatorLine (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-C_PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (nullptr,
-                                                             releaseOnceFunctionResult_asSeparatorLine) ;
+PrologueEpilogue gEpilogueForOnceFunction_asSeparatorLine (nullptr,
+                                                           releaseOnceFunctionResult_asSeparatorLine) ;
 
 //--------------------------------------------------------------------------------------------------
 //  Function introspection                                                                       
@@ -819,8 +819,8 @@ void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCo
                                                                                                                                                                                                           const GALGAS_targetParameters constinArgument_inTargetParameters,
                                                                                                                                                                                                           Compiler * inCompiler
                                                                                                                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_timer var_generationTime_4544 = GALGAS_timer::constructor_start (SOURCE_FILE ("code-generation.galgas", 98)) ;
-  GALGAS_string var_homeDir_4575 = GALGAS_string::constructor_homeDirectory (SOURCE_FILE ("code-generation.galgas", 99)).add_operation (GALGAS_string ("/omnibus-products/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 99)) ;
+  GALGAS_timer var_generationTime_4544 = GALGAS_timer::class_func_start (SOURCE_FILE ("code-generation.galgas", 98)) ;
+  GALGAS_string var_homeDir_4575 = GALGAS_string::class_func_homeDirectory (SOURCE_FILE ("code-generation.galgas", 99)).add_operation (GALGAS_string ("/omnibus-products/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 99)) ;
   GALGAS_string temp_0 ;
   const enumGalgasBool test_1 = GALGAS_bool (gOption_omnibus_5F_options_noPanicGeneration.readProperty_value ()).boolEnum () ;
   if (kBoolTrue == test_1) {
@@ -848,9 +848,9 @@ void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCo
   }
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
-    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::constructor_errorCount (SOURCE_FILE ("code-generation.galgas", 130)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+    test_3 = GALGAS_bool (kIsEqual, GALGAS_uint::class_func_errorCount (SOURCE_FILE ("code-generation.galgas", 130)).objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_3) {
-      GALGAS_timer var_scriptTime_5910 = GALGAS_timer::constructor_start (SOURCE_FILE ("code-generation.galgas", 131)) ;
+      GALGAS_timer var_scriptTime_5910 = GALGAS_timer::class_func_start (SOURCE_FILE ("code-generation.galgas", 131)) ;
       GALGAS_string temp_4 ;
       const enumGalgasBool test_5 = GALGAS_bool (gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing.readProperty_value ()).boolEnum () ;
       if (kBoolTrue == test_5) {
@@ -901,9 +901,9 @@ void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3
                                                                                                                                                                                                       const GALGAS_targetParameters constinArgument_inTargetParameters,
                                                                                                                                                                                                       Compiler * inCompiler
                                                                                                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_generationAdds var_generationAdds_7588 = GALGAS_generationAdds::constructor_new (inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 168)) ;
+  GALGAS_generationAdds var_generationAdds_7588 = GALGAS_generationAdds::class_func_new (inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 168)) ;
   var_generationAdds_7588.setter_setMStaticEntityMap (constinArgument_inIntermediateCodeStruct.readProperty_mStaticEntityMap () COMMA_SOURCE_FILE ("code-generation.galgas", 169)) ;
-  GALGAS_generationContext var_generationContext_7713 = GALGAS_generationContext::constructor_new (constinArgument_inPanicCodeType, constinArgument_inPanicLineType, constinArgument_inTargetParameters.readProperty_mNopInstructionStringInLLVM ().readProperty_string (), constinArgument_inIntermediateCodeStruct.readProperty_mGlobalTaskVariableList (), constinArgument_inAvailableInterruptMap, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 170)) ;
+  GALGAS_generationContext var_generationContext_7713 = GALGAS_generationContext::class_func_new (constinArgument_inPanicCodeType, constinArgument_inPanicLineType, constinArgument_inTargetParameters.readProperty_mNopInstructionStringInLLVM ().readProperty_string (), constinArgument_inIntermediateCodeStruct.readProperty_mGlobalTaskVariableList (), constinArgument_inAvailableInterruptMap, inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 170)) ;
   GALGAS_string var_sourceDirectory_7934 = constinArgument_inProductDirectory.add_operation (GALGAS_string ("/sources"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 177)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
@@ -967,7 +967,7 @@ void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3
   GALGAS_string var_XTRInterruptHandlerString_11419 = function_getTargetTextFile (constinArgument_inCurrentDirectory, constinArgument_inTargetName.readProperty_string ().add_operation (GALGAS_string ("/"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 244)).add_operation (constinArgument_inTargetParameters.readProperty_mXtrInterruptHandler ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 244)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 242)) ;
   extensionMethod_interruptCodeGeneration (constinArgument_inIntermediateCodeStruct.readProperty_mInterruptMapIR (), var_llvmCode_9369, var_asCode_8802, var_undefinedInterruptString_11243, var_XTRInterruptHandlerString_11419, var_generationContext_7713, var_generationAdds_7588, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 246)) ;
   extensionMethod_llvmPrototypeGeneration (constinArgument_inIntermediateCodeStruct.readProperty_mExternProcedureMapIR (), var_llvmCode_9369, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 255)) ;
-  GALGAS_primitiveAndServiceIRlist var_primitiveAndServiceList_11969 = GALGAS_primitiveAndServiceIRlist::constructor_emptyList (SOURCE_FILE ("code-generation.galgas", 256)) ;
+  GALGAS_primitiveAndServiceIRlist var_primitiveAndServiceList_11969 = GALGAS_primitiveAndServiceIRlist::class_func_emptyList (SOURCE_FILE ("code-generation.galgas", 256)) ;
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
     test_3 = var_generationAdds_7588.readProperty_mUsesGuards ().boolEnum () ;
@@ -977,7 +977,7 @@ void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3
       var_generationAdds_7588.mProperty_mExternFunctionDeclarationSet.addAssign_operation (GALGAS_string ("i1 @").add_operation (function_llvmNameForServiceCall (var_waitForGuardChange_12099, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 265)), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 265)).add_operation (GALGAS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 265))  COMMA_SOURCE_FILE ("code-generation.galgas", 264)) ;
     }
   }
-  GALGAS_sectionIRlist var_sectionIRlist_12547 = GALGAS_sectionIRlist::constructor_emptyList (SOURCE_FILE ("code-generation.galgas", 268)) ;
+  GALGAS_sectionIRlist var_sectionIRlist_12547 = GALGAS_sectionIRlist::class_func_emptyList (SOURCE_FILE ("code-generation.galgas", 268)) ;
   cEnumerator_routineListIR enumerator_12608 (constinArgument_inIntermediateCodeStruct.readProperty_mRoutineListIR (), kENUMERATION_UP) ;
   while (enumerator_12608.hasCurrentObject ()) {
     callExtensionMethod_svcDeclarationGeneration ((cPtr_abstractRoutineIR *) enumerator_12608.current (HERE).readProperty_mRoutine ().ptr (), var_primitiveAndServiceList_11969, var_sectionIRlist_12547, var_generationAdds_7588, inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 270)) ;
@@ -1136,7 +1136,7 @@ void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3
       var_json_17588.plusAssign_operation(GALGAS_string (","), inCompiler  COMMA_SOURCE_FILE ("code-generation.galgas", 415)) ;
     }
     GALGAS_string temp_11 ;
-    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_18944.current_mMode (HERE).objectCompare (GALGAS_mode::constructor_serviceMode (SOURCE_FILE ("code-generation.galgas", 417)))).boolEnum () ;
+    const enumGalgasBool test_12 = GALGAS_bool (kIsEqual, enumerator_18944.current_mMode (HERE).objectCompare (GALGAS_mode::class_func_serviceMode (SOURCE_FILE ("code-generation.galgas", 417)))).boolEnum () ;
     if (kBoolTrue == test_12) {
       temp_11 = function_llvmNameForServiceInterrupt (enumerator_18944.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 418)).readProperty_string () ;
     }else if (kBoolFalse == test_12) {

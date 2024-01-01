@@ -1,7 +1,7 @@
-#include "galgas2/Compiler.h"
-#include "galgas2/C_galgas_io.h"
-#include "galgas2/C_galgas_CLI_Options.h"
-#include "utilities/C_PrologueEpilogue.h"
+#include "Compiler.h"
+#include "C_galgas_io.h"
+#include "C_galgas_CLI_Options.h"
+#include "PrologueEpilogue.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_assertInstructionIR_2D_weak GALGAS_assertInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_assertInstructionIR_2D_weak GALGAS_assertInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_assertInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -81,9 +81,8 @@ GALGAS_assertInstructionIR GALGAS_assertInstructionIR_2D_weak::bang_assertInstru
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_assertInstructionIR_2D_weak ("assertInstructionIR-weak",
-                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionIR_2D_weak ("assertInstructionIR-weak",
+                                                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -164,7 +163,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_assignmentInstructionAST_2D_weak GALGAS_assignmentInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_assignmentInstructionAST_2D_weak GALGAS_assignmentInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_assignmentInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -192,9 +191,8 @@ GALGAS_assignmentInstructionAST GALGAS_assignmentInstructionAST_2D_weak::bang_as
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_assignmentInstructionAST_2D_weak ("assignmentInstructionAST-weak",
-                                                         & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructionAST_2D_weak ("assignmentInstructionAST-weak",
+                                                                                        & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -273,7 +271,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOperatorKind::constructor_assignment (UNUSED_LOCATION_ARGS) {
+GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOperatorKind::class_func_assignment (UNUSED_LOCATION_ARGS) {
   GALGAS_controlRegisterAssignmentOperatorKind result ;
   result.mEnum = kEnum_assignment ;
   return result ;
@@ -281,9 +279,9 @@ GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOpe
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOperatorKind::constructor_assignmentWithOperator (const GALGAS_omnibusInfixOperator & inAssociatedValue0,
-                                                                                                                               const GALGAS_location & inAssociatedValue1
-                                                                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOperatorKind::class_func_assignmentWithOperator (const GALGAS_omnibusInfixOperator & inAssociatedValue0,
+                                                                                                                              const GALGAS_location & inAssociatedValue1
+                                                                                                                              COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterAssignmentOperatorKind result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_assignmentWithOperator ;
@@ -386,9 +384,8 @@ typeComparisonResult GALGAS_controlRegisterAssignmentOperatorKind::objectCompare
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterAssignmentOperatorKind ("controlRegisterAssignmentOperatorKind",
-                                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssignmentOperatorKind ("controlRegisterAssignmentOperatorKind",
+                                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -469,7 +466,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterAssignmentInstructionAST_2D_weak GALGAS_controlRegisterAssignmentInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_controlRegisterAssignmentInstructionAST_2D_weak GALGAS_controlRegisterAssignmentInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_controlRegisterAssignmentInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -497,9 +494,8 @@ GALGAS_controlRegisterAssignmentInstructionAST GALGAS_controlRegisterAssignmentI
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterAssignmentInstructionAST_2D_weak ("controlRegisterAssignmentInstructionAST-weak",
-                                                                        & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssignmentInstructionAST_2D_weak ("controlRegisterAssignmentInstructionAST-weak",
+                                                                                                       & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -543,7 +539,7 @@ GALGAS_controlRegisterAssignmentInstructionAST_2D_weak GALGAS_controlRegisterAss
 class cCollectionElement_sliceAssignmentListAST : public cCollectionElement {
   public: GALGAS_sliceAssignmentListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_sliceAssignmentListAST (const GALGAS_lstring & in_mSliceWidth,
                                                      const GALGAS_sliceTargetAST & in_mSliceKind
                                                      COMMA_LOCATION_ARGS) ;
@@ -627,15 +623,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_sliceAssignmentListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                        const GALGAS_sliceTargetAST & inOperand1
-                                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                       const GALGAS_sliceTargetAST & inOperand1
+                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_sliceAssignmentListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_sliceAssignmentListAST (capCollectionElementArray ()) ;
@@ -837,7 +833,7 @@ GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::add_operation (cons
 GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                       Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -847,7 +843,7 @@ GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::getter_subListWithR
 GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                       Compiler * inCompiler
                                                                                       COMMA_LOCATION_ARGS) const {
-  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -857,7 +853,7 @@ GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::getter_subListFromI
 GALGAS_sliceAssignmentListAST GALGAS_sliceAssignmentListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                     Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_sliceAssignmentListAST result = GALGAS_sliceAssignmentListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -972,9 +968,8 @@ GALGAS_sliceTargetAST cEnumerator_sliceAssignmentListAST::current_mSliceKind (LO
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sliceAssignmentListAST ("sliceAssignmentListAST",
-                                               nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentListAST ("sliceAssignmentListAST",
+                                                                              nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1055,7 +1050,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceAssignmentInstructionAST_2D_weak GALGAS_sliceAssignmentInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_sliceAssignmentInstructionAST_2D_weak GALGAS_sliceAssignmentInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_sliceAssignmentInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -1083,9 +1078,8 @@ GALGAS_sliceAssignmentInstructionAST GALGAS_sliceAssignmentInstructionAST_2D_wea
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sliceAssignmentInstructionAST_2D_weak ("sliceAssignmentInstructionAST-weak",
-                                                              & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentInstructionAST_2D_weak ("sliceAssignmentInstructionAST-weak",
+                                                                                             & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1216,7 +1210,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_discarded (UNUSED_LOCATION_ARGS) {
+GALGAS_sliceTargetAST GALGAS_sliceTargetAST::class_func_discarded (UNUSED_LOCATION_ARGS) {
   GALGAS_sliceTargetAST result ;
   result.mEnum = kEnum_discarded ;
   return result ;
@@ -1224,8 +1218,8 @@ GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_discarded (UNUSED_LOCAT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_varDeclaration (const GALGAS_lstring & inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) {
+GALGAS_sliceTargetAST GALGAS_sliceTargetAST::class_func_varDeclaration (const GALGAS_lstring & inAssociatedValue0
+                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_sliceTargetAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_varDeclaration ;
@@ -1239,8 +1233,8 @@ GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_varDeclaration (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_letDeclaration (const GALGAS_lstring & inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) {
+GALGAS_sliceTargetAST GALGAS_sliceTargetAST::class_func_letDeclaration (const GALGAS_lstring & inAssociatedValue0
+                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_sliceTargetAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_letDeclaration ;
@@ -1254,8 +1248,8 @@ GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_letDeclaration (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST GALGAS_sliceTargetAST::constructor_lValue (const GALGAS_LValueAST & inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_sliceTargetAST GALGAS_sliceTargetAST::class_func_lValue (const GALGAS_LValueAST & inAssociatedValue0
+                                                                COMMA_LOCATION_ARGS) {
   GALGAS_sliceTargetAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_lValue ;
@@ -1421,9 +1415,8 @@ typeComparisonResult GALGAS_sliceTargetAST::objectCompare (const GALGAS_sliceTar
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_sliceTargetAST ("sliceTargetAST",
-                                       nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST ("sliceTargetAST",
+                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1504,7 +1497,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bitbandInstructionAST_2D_weak GALGAS_bitbandInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_bitbandInstructionAST_2D_weak GALGAS_bitbandInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_bitbandInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -1532,9 +1525,8 @@ GALGAS_bitbandInstructionAST GALGAS_bitbandInstructionAST_2D_weak::bang_bitbandI
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bitbandInstructionAST_2D_weak ("bitbandInstructionAST-weak",
-                                                      & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionAST_2D_weak ("bitbandInstructionAST-weak",
+                                                                                     & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1649,14 +1641,14 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR::constructor_new (const GALGAS_string & inAttribute_mRegisterAddressLLVMname,
-                                                                          const GALGAS_objectIR & inAttribute_mBitExpressionOperand,
-                                                                          const GALGAS_objectIR & inAttribute_mSourceExpressionOperand,
-                                                                          const GALGAS_bigint & inAttribute_mBitbandRegisterBaseAddress,
-                                                                          const GALGAS_bigint & inAttribute_mBitbandRegisterRelocationAddress,
-                                                                          const GALGAS_bigint & inAttribute_mBitbandRegisterOffsetMultiplier,
-                                                                          const GALGAS_bigint & inAttribute_mBitbandRegisterBitMultiplier
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR::class_func_new (const GALGAS_string & inAttribute_mRegisterAddressLLVMname,
+                                                                         const GALGAS_objectIR & inAttribute_mBitExpressionOperand,
+                                                                         const GALGAS_objectIR & inAttribute_mSourceExpressionOperand,
+                                                                         const GALGAS_bigint & inAttribute_mBitbandRegisterBaseAddress,
+                                                                         const GALGAS_bigint & inAttribute_mBitbandRegisterRelocationAddress,
+                                                                         const GALGAS_bigint & inAttribute_mBitbandRegisterOffsetMultiplier,
+                                                                         const GALGAS_bigint & inAttribute_mBitbandRegisterBitMultiplier
+                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_bitbandInstructionIR result ;
   if (inAttribute_mRegisterAddressLLVMname.isValid () && inAttribute_mBitExpressionOperand.isValid () && inAttribute_mSourceExpressionOperand.isValid () && inAttribute_mBitbandRegisterBaseAddress.isValid () && inAttribute_mBitbandRegisterRelocationAddress.isValid () && inAttribute_mBitbandRegisterOffsetMultiplier.isValid () && inAttribute_mBitbandRegisterBitMultiplier.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_bitbandInstructionIR (inAttribute_mRegisterAddressLLVMname, inAttribute_mBitExpressionOperand, inAttribute_mSourceExpressionOperand, inAttribute_mBitbandRegisterBaseAddress, inAttribute_mBitbandRegisterRelocationAddress, inAttribute_mBitbandRegisterOffsetMultiplier, inAttribute_mBitbandRegisterBitMultiplier COMMA_THERE)) ;
@@ -1887,9 +1879,8 @@ acPtr_class * cPtr_bitbandInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bitbandInstructionIR ("bitbandInstructionIR",
-                                             & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionIR ("bitbandInstructionIR",
+                                                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1970,7 +1961,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bitbandInstructionIR_2D_weak GALGAS_bitbandInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_bitbandInstructionIR_2D_weak GALGAS_bitbandInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_bitbandInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -1998,9 +1989,8 @@ GALGAS_bitbandInstructionIR GALGAS_bitbandInstructionIR_2D_weak::bang_bitbandIns
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_bitbandInstructionIR_2D_weak ("bitbandInstructionIR-weak",
-                                                     & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionIR_2D_weak ("bitbandInstructionIR-weak",
+                                                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2058,7 +2048,7 @@ void extensionMethod_buildExpressionAccessList (const GALGAS_LValueOperandAST in
       const cEnumAssociatedValues_LValueOperandAST_property * extractPtr_3323 = (const cEnumAssociatedValues_LValueOperandAST_property *) (temp_0.unsafePointer ()) ;
       const GALGAS_lstring extractedValue_3178_name = extractPtr_3323->mAssociatedValue0 ;
       const GALGAS_LValueOperandAST extractedValue_3201_next = extractPtr_3323->mAssociatedValue1 ;
-      ioArgument_ioExpressionAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_property (extractedValue_3178_name  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 93))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 93)) ;
+      ioArgument_ioExpressionAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::class_func_property (extractedValue_3178_name  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 93))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 93)) ;
       extensionMethod_buildExpressionAccessList (extractedValue_3201_next, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 94)) ;
     }
     break ;
@@ -2069,7 +2059,7 @@ void extensionMethod_buildExpressionAccessList (const GALGAS_LValueOperandAST in
       const GALGAS_location extractedValue_3376_endOfIndex = extractPtr_3625->mAssociatedValue1 ;
       const GALGAS_bool extractedValue_3393_checkIndexExpression = extractPtr_3625->mAssociatedValue2 ;
       const GALGAS_LValueOperandAST extractedValue_3432_next = extractPtr_3625->mAssociatedValue3 ;
-      ioArgument_ioExpressionAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::constructor_arrayAccess (extractedValue_3360_index, extractedValue_3376_endOfIndex, extractedValue_3393_checkIndexExpression  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 96))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 96)) ;
+      ioArgument_ioExpressionAccessList.addAssign_operation (GALGAS_primaryInExpressionAccessAST::class_func_arrayAccess (extractedValue_3360_index, extractedValue_3376_endOfIndex, extractedValue_3393_checkIndexExpression  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 96))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 96)) ;
       extensionMethod_buildExpressionAccessList (extractedValue_3432_next, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas", 97)) ;
     }
     break ;
@@ -2123,7 +2113,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_varInstructionWithAssignmentAST_2D_weak GALGAS_varInstructionWithAssignmentAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_varInstructionWithAssignmentAST_2D_weak GALGAS_varInstructionWithAssignmentAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_varInstructionWithAssignmentAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -2151,9 +2141,8 @@ GALGAS_varInstructionWithAssignmentAST GALGAS_varInstructionWithAssignmentAST_2D
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST_2D_weak ("varInstructionWithAssignmentAST-weak",
-                                                                & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST_2D_weak ("varInstructionWithAssignmentAST-weak",
+                                                                                               & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2234,7 +2223,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_varDeclarationInstructionAST_2D_weak GALGAS_varDeclarationInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_varDeclarationInstructionAST_2D_weak GALGAS_varDeclarationInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_varDeclarationInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -2262,9 +2251,8 @@ GALGAS_varDeclarationInstructionAST GALGAS_varDeclarationInstructionAST_2D_weak:
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_varDeclarationInstructionAST_2D_weak ("varDeclarationInstructionAST-weak",
-                                                             & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varDeclarationInstructionAST_2D_weak ("varDeclarationInstructionAST-weak",
+                                                                                            & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2345,7 +2333,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_letInstructionWithAssignmentAST_2D_weak GALGAS_letInstructionWithAssignmentAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_letInstructionWithAssignmentAST_2D_weak GALGAS_letInstructionWithAssignmentAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_letInstructionWithAssignmentAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -2373,9 +2361,8 @@ GALGAS_letInstructionWithAssignmentAST GALGAS_letInstructionWithAssignmentAST_2D
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST_2D_weak ("letInstructionWithAssignmentAST-weak",
-                                                                & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST_2D_weak ("letInstructionWithAssignmentAST-weak",
+                                                                                               & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2465,8 +2452,8 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_instructionNOP GALGAS_instructionNOP::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation
-                                                              COMMA_LOCATION_ARGS) {
+GALGAS_instructionNOP GALGAS_instructionNOP::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation
+                                                             COMMA_LOCATION_ARGS) {
   GALGAS_instructionNOP result ;
   if (inAttribute_mInstructionLocation.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_instructionNOP (inAttribute_mInstructionLocation COMMA_THERE)) ;
@@ -2511,9 +2498,8 @@ acPtr_class * cPtr_instructionNOP::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionNOP ("instructionNOP",
-                                       & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionNOP ("instructionNOP",
+                                                                      & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2594,7 +2580,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_instructionNOP_2D_weak GALGAS_instructionNOP_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_instructionNOP_2D_weak GALGAS_instructionNOP_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_instructionNOP_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -2622,9 +2608,8 @@ GALGAS_instructionNOP GALGAS_instructionNOP_2D_weak::bang_instructionNOP_2D_weak
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_instructionNOP_2D_weak ("instructionNOP-weak",
-                                               & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionNOP_2D_weak ("instructionNOP-weak",
+                                                                              & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2718,9 +2703,9 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicInstructionAST GALGAS_panicInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                        const GALGAS_expressionAST & inAttribute_mCodeExpression
-                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_panicInstructionAST GALGAS_panicInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
+                                                                       const GALGAS_expressionAST & inAttribute_mCodeExpression
+                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_panicInstructionAST result ;
   if (inAttribute_mInstructionLocation.isValid () && inAttribute_mCodeExpression.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_panicInstructionAST (inAttribute_mInstructionLocation, inAttribute_mCodeExpression COMMA_THERE)) ;
@@ -2792,9 +2777,8 @@ acPtr_class * cPtr_panicInstructionAST::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_panicInstructionAST ("panicInstructionAST",
-                                            & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionAST ("panicInstructionAST",
+                                                                           & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2875,7 +2859,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicInstructionAST_2D_weak GALGAS_panicInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_panicInstructionAST_2D_weak GALGAS_panicInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_panicInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -2903,9 +2887,8 @@ GALGAS_panicInstructionAST GALGAS_panicInstructionAST_2D_weak::bang_panicInstruc
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_panicInstructionAST_2D_weak ("panicInstructionAST-weak",
-                                                    & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionAST_2D_weak ("panicInstructionAST-weak",
+                                                                                   & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3000,9 +2983,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicInstructionIR GALGAS_panicInstructionIR::constructor_new (const GALGAS_location & inAttribute_mThrowLocation,
-                                                                      const GALGAS_bigint & inAttribute_mPanicCode
-                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_panicInstructionIR GALGAS_panicInstructionIR::class_func_new (const GALGAS_location & inAttribute_mThrowLocation,
+                                                                     const GALGAS_bigint & inAttribute_mPanicCode
+                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_panicInstructionIR result ;
   if (inAttribute_mThrowLocation.isValid () && inAttribute_mPanicCode.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_panicInstructionIR (inAttribute_mThrowLocation, inAttribute_mPanicCode COMMA_THERE)) ;
@@ -3098,9 +3081,8 @@ acPtr_class * cPtr_panicInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_panicInstructionIR ("panicInstructionIR",
-                                           & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionIR ("panicInstructionIR",
+                                                                          & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3181,7 +3163,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicInstructionIR_2D_weak GALGAS_panicInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_panicInstructionIR_2D_weak GALGAS_panicInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_panicInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -3209,9 +3191,8 @@ GALGAS_panicInstructionIR GALGAS_panicInstructionIR_2D_weak::bang_panicInstructi
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_panicInstructionIR_2D_weak ("panicInstructionIR-weak",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicInstructionIR_2D_weak ("panicInstructionIR-weak",
+                                                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3333,16 +3314,16 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_ifInstructionAST GALGAS_ifInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                  const GALGAS_expressionAST & inAttribute_mTestExpression,
-                                                                  const GALGAS_location & inAttribute_mTestExpressionEndLocation,
-                                                                  const GALGAS_bool & inAttribute_mStaticIfExpression,
-                                                                  const GALGAS_instructionListAST & inAttribute_mThenInstructionList,
-                                                                  const GALGAS_location & inAttribute_mEndOfThenInstructionList,
-                                                                  const GALGAS_instructionListAST & inAttribute_mElseInstructionList,
-                                                                  const GALGAS_location & inAttribute_mEndOfElseInstructionList,
-                                                                  const GALGAS_location & inAttribute_mEndOf_5F_if_5F_instruction
-                                                                  COMMA_LOCATION_ARGS) {
+GALGAS_ifInstructionAST GALGAS_ifInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
+                                                                 const GALGAS_expressionAST & inAttribute_mTestExpression,
+                                                                 const GALGAS_location & inAttribute_mTestExpressionEndLocation,
+                                                                 const GALGAS_bool & inAttribute_mStaticIfExpression,
+                                                                 const GALGAS_instructionListAST & inAttribute_mThenInstructionList,
+                                                                 const GALGAS_location & inAttribute_mEndOfThenInstructionList,
+                                                                 const GALGAS_instructionListAST & inAttribute_mElseInstructionList,
+                                                                 const GALGAS_location & inAttribute_mEndOfElseInstructionList,
+                                                                 const GALGAS_location & inAttribute_mEndOf_5F_if_5F_instruction
+                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_ifInstructionAST result ;
   if (inAttribute_mInstructionLocation.isValid () && inAttribute_mTestExpression.isValid () && inAttribute_mTestExpressionEndLocation.isValid () && inAttribute_mStaticIfExpression.isValid () && inAttribute_mThenInstructionList.isValid () && inAttribute_mEndOfThenInstructionList.isValid () && inAttribute_mElseInstructionList.isValid () && inAttribute_mEndOfElseInstructionList.isValid () && inAttribute_mEndOf_5F_if_5F_instruction.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_ifInstructionAST (inAttribute_mInstructionLocation, inAttribute_mTestExpression, inAttribute_mTestExpressionEndLocation, inAttribute_mStaticIfExpression, inAttribute_mThenInstructionList, inAttribute_mEndOfThenInstructionList, inAttribute_mElseInstructionList, inAttribute_mEndOfElseInstructionList, inAttribute_mEndOf_5F_if_5F_instruction COMMA_THERE)) ;
@@ -3603,9 +3584,8 @@ acPtr_class * cPtr_ifInstructionAST::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ifInstructionAST ("ifInstructionAST",
-                                         & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionAST ("ifInstructionAST",
+                                                                        & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3686,7 +3666,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_ifInstructionAST_2D_weak GALGAS_ifInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_ifInstructionAST_2D_weak GALGAS_ifInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_ifInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -3714,9 +3694,8 @@ GALGAS_ifInstructionAST GALGAS_ifInstructionAST_2D_weak::bang_ifInstructionAST_2
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ifInstructionAST_2D_weak ("ifInstructionAST-weak",
-                                                 & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionAST_2D_weak ("ifInstructionAST-weak",
+                                                                                & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3819,11 +3798,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_ifInstructionIR GALGAS_ifInstructionIR::constructor_new (const GALGAS_string & inAttribute_mLLVMTestName,
-                                                                const GALGAS_location & inAttribute_mLocation,
-                                                                const GALGAS_instructionListIR & inAttribute_mThenInstructionGenerationList,
-                                                                const GALGAS_instructionListIR & inAttribute_mElseInstructionGenerationList
-                                                                COMMA_LOCATION_ARGS) {
+GALGAS_ifInstructionIR GALGAS_ifInstructionIR::class_func_new (const GALGAS_string & inAttribute_mLLVMTestName,
+                                                               const GALGAS_location & inAttribute_mLocation,
+                                                               const GALGAS_instructionListIR & inAttribute_mThenInstructionGenerationList,
+                                                               const GALGAS_instructionListIR & inAttribute_mElseInstructionGenerationList
+                                                               COMMA_LOCATION_ARGS) {
   GALGAS_ifInstructionIR result ;
   if (inAttribute_mLLVMTestName.isValid () && inAttribute_mLocation.isValid () && inAttribute_mThenInstructionGenerationList.isValid () && inAttribute_mElseInstructionGenerationList.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_ifInstructionIR (inAttribute_mLLVMTestName, inAttribute_mLocation, inAttribute_mThenInstructionGenerationList, inAttribute_mElseInstructionGenerationList COMMA_THERE)) ;
@@ -3973,9 +3952,8 @@ acPtr_class * cPtr_ifInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ifInstructionIR ("ifInstructionIR",
-                                        & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR ("ifInstructionIR",
+                                                                       & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4056,7 +4034,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_ifInstructionIR_2D_weak GALGAS_ifInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_ifInstructionIR_2D_weak GALGAS_ifInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_ifInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -4084,9 +4062,8 @@ GALGAS_ifInstructionIR GALGAS_ifInstructionIR_2D_weak::bang_ifInstructionIR_2D_w
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_ifInstructionIR_2D_weak ("ifInstructionIR-weak",
-                                                & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ifInstructionIR_2D_weak ("ifInstructionIR-weak",
+                                                                               & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4236,10 +4213,10 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandAST GALGAS_guardedCommandAST::constructor_boolean (const GALGAS_bool & inAssociatedValue0,
-                                                                        const GALGAS_expressionAST & inAssociatedValue1,
-                                                                        const GALGAS_location & inAssociatedValue2
-                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandAST GALGAS_guardedCommandAST::class_func_boolean (const GALGAS_bool & inAssociatedValue0,
+                                                                       const GALGAS_expressionAST & inAssociatedValue1,
+                                                                       const GALGAS_location & inAssociatedValue2
+                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_boolean ;
@@ -4253,14 +4230,14 @@ GALGAS_guardedCommandAST GALGAS_guardedCommandAST::constructor_boolean (const GA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandAST GALGAS_guardedCommandAST::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                            const GALGAS_expressionAST & inAssociatedValue1,
-                                                                            const GALGAS_bool & inAssociatedValue2,
-                                                                            const GALGAS_location & inAssociatedValue3,
-                                                                            const GALGAS_lbool & inAssociatedValue4,
-                                                                            const GALGAS_lstringlist & inAssociatedValue5,
-                                                                            const GALGAS_effectiveArgumentListAST & inAssociatedValue6
-                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandAST GALGAS_guardedCommandAST::class_func_boolAndSync (const GALGAS_bool & inAssociatedValue0,
+                                                                           const GALGAS_expressionAST & inAssociatedValue1,
+                                                                           const GALGAS_bool & inAssociatedValue2,
+                                                                           const GALGAS_location & inAssociatedValue3,
+                                                                           const GALGAS_lbool & inAssociatedValue4,
+                                                                           const GALGAS_lstringlist & inAssociatedValue5,
+                                                                           const GALGAS_effectiveArgumentListAST & inAssociatedValue6
+                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid () && inAssociatedValue6.isValid ()) {
     result.mEnum = kEnum_boolAndSync ;
@@ -4418,9 +4395,8 @@ typeComparisonResult GALGAS_guardedCommandAST::objectCompare (const GALGAS_guard
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandAST ("guardedCommandAST",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommandAST ("guardedCommandAST",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4518,10 +4494,10 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionAST GALGAS_syncInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                      const GALGAS_syncInstructionBranchListAST & inAttribute_mBranchList,
-                                                                      const GALGAS_location & inAttribute_mEndOf_5F_on_5F_instruction
-                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_syncInstructionAST GALGAS_syncInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
+                                                                     const GALGAS_syncInstructionBranchListAST & inAttribute_mBranchList,
+                                                                     const GALGAS_location & inAttribute_mEndOf_5F_on_5F_instruction
+                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_syncInstructionAST result ;
   if (inAttribute_mInstructionLocation.isValid () && inAttribute_mBranchList.isValid () && inAttribute_mEndOf_5F_on_5F_instruction.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_syncInstructionAST (inAttribute_mInstructionLocation, inAttribute_mBranchList, inAttribute_mEndOf_5F_on_5F_instruction COMMA_THERE)) ;
@@ -4620,9 +4596,8 @@ acPtr_class * cPtr_syncInstructionAST::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionAST ("syncInstructionAST",
-                                           & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionAST ("syncInstructionAST",
+                                                                          & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4703,7 +4678,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionAST_2D_weak GALGAS_syncInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_syncInstructionAST_2D_weak GALGAS_syncInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_syncInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -4731,9 +4706,8 @@ GALGAS_syncInstructionAST GALGAS_syncInstructionAST_2D_weak::bang_syncInstructio
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionAST_2D_weak ("syncInstructionAST-weak",
-                                                   & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionAST_2D_weak ("syncInstructionAST-weak",
+                                                                                  & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4924,10 +4898,10 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const GALGAS_bool & inAssociatedValue0,
-                                                                           const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                           const GALGAS_string & inAssociatedValue2
-                                                                           COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandIR GALGAS_guardedCommandIR::class_func_booleanGuard (const GALGAS_bool & inAssociatedValue0,
+                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
+                                                                          const GALGAS_string & inAssociatedValue2
+                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_booleanGuard ;
@@ -4941,11 +4915,11 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_booleanGuard (const
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_sync (const GALGAS_bool & inAssociatedValue0,
-                                                                   const GALGAS_string & inAssociatedValue1,
-                                                                   const GALGAS_instructionListIR & inAssociatedValue2,
-                                                                   const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
-                                                                   COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandIR GALGAS_guardedCommandIR::class_func_sync (const GALGAS_bool & inAssociatedValue0,
+                                                                  const GALGAS_string & inAssociatedValue1,
+                                                                  const GALGAS_instructionListIR & inAssociatedValue2,
+                                                                  const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue3
+                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
     result.mEnum = kEnum_sync ;
@@ -4959,13 +4933,13 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_sync (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR GALGAS_guardedCommandIR::constructor_boolAndSync (const GALGAS_bool & inAssociatedValue0,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue1,
-                                                                          const GALGAS_string & inAssociatedValue2,
-                                                                          const GALGAS_string & inAssociatedValue3,
-                                                                          const GALGAS_instructionListIR & inAssociatedValue4,
-                                                                          const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandIR GALGAS_guardedCommandIR::class_func_boolAndSync (const GALGAS_bool & inAssociatedValue0,
+                                                                         const GALGAS_instructionListIR & inAssociatedValue1,
+                                                                         const GALGAS_string & inAssociatedValue2,
+                                                                         const GALGAS_string & inAssociatedValue3,
+                                                                         const GALGAS_instructionListIR & inAssociatedValue4,
+                                                                         const GALGAS_procCallEffectiveParameterListIR & inAssociatedValue5
+                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIR result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid () && inAssociatedValue4.isValid () && inAssociatedValue5.isValid ()) {
     result.mEnum = kEnum_boolAndSync ;
@@ -5167,9 +5141,8 @@ typeComparisonResult GALGAS_guardedCommandIR::objectCompare (const GALGAS_guarde
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
-                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommandIR ("guardedCommandIR",
+                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5213,7 +5186,7 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::extractObject (const GALGAS_obj
 class cCollectionElement_syncInstructionBranchListIR : public cCollectionElement {
   public: GALGAS_syncInstructionBranchListIR_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_syncInstructionBranchListIR (const GALGAS_guardedCommandIR & in_mGuardedCommand,
                                                           const GALGAS_instructionListIR & in_mInstructionGenerationList
                                                           COMMA_LOCATION_ARGS) ;
@@ -5297,15 +5270,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_syncInstructionBranchListIR (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::constructor_listWithValue (const GALGAS_guardedCommandIR & inOperand0,
-                                                                                                  const GALGAS_instructionListIR & inOperand1
-                                                                                                  COMMA_LOCATION_ARGS) {
+GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::class_func_listWithValue (const GALGAS_guardedCommandIR & inOperand0,
+                                                                                                 const GALGAS_instructionListIR & inOperand1
+                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_syncInstructionBranchListIR result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_syncInstructionBranchListIR (capCollectionElementArray ()) ;
@@ -5507,7 +5480,7 @@ GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::add_opera
 GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                 Compiler * inCompiler
                                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::constructor_emptyList (THERE) ;
+  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5517,7 +5490,7 @@ GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::getter_su
 GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                 Compiler * inCompiler
                                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::constructor_emptyList (THERE) ;
+  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5527,7 +5500,7 @@ GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::getter_su
 GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::constructor_emptyList (THERE) ;
+  GALGAS_syncInstructionBranchListIR result = GALGAS_syncInstructionBranchListIR::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5642,9 +5615,8 @@ GALGAS_instructionListIR cEnumerator_syncInstructionBranchListIR::current_mInstr
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionBranchListIR ("syncInstructionBranchListIR",
-                                                    nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionBranchListIR ("syncInstructionBranchListIR",
+                                                                                   nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5688,7 +5660,7 @@ GALGAS_syncInstructionBranchListIR GALGAS_syncInstructionBranchListIR::extractOb
 class cCollectionElement_guardedCommandIRList : public cCollectionElement {
   public: GALGAS_guardedCommandIRList_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_guardedCommandIRList (const GALGAS_guardedCommandIR & in_mGuardedCommand
                                                    COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_guardedCommandIRList (const GALGAS_guardedCommandIRList_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -5766,14 +5738,14 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_guardedCommandIRList (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::constructor_listWithValue (const GALGAS_guardedCommandIR & inOperand0
-                                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::class_func_listWithValue (const GALGAS_guardedCommandIR & inOperand0
+                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_guardedCommandIRList result ;
   if (inOperand0.isValid ()) {
     result = GALGAS_guardedCommandIRList (capCollectionElementArray ()) ;
@@ -5953,7 +5925,7 @@ GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::add_operation (const GA
 GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                   Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::constructor_emptyList (THERE) ;
+  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5963,7 +5935,7 @@ GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::getter_subListWithRange
 GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                   Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::constructor_emptyList (THERE) ;
+  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5973,7 +5945,7 @@ GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::getter_subListFromIndex
 GALGAS_guardedCommandIRList GALGAS_guardedCommandIRList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                 Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::constructor_emptyList (THERE) ;
+  GALGAS_guardedCommandIRList result = GALGAS_guardedCommandIRList::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -6051,9 +6023,8 @@ GALGAS_guardedCommandIR cEnumerator_guardedCommandIRList::current_mGuardedComman
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardedCommandIRList ("guardedCommandIRList",
-                                             nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommandIRList ("guardedCommandIRList",
+                                                                            nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6148,9 +6119,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionIR GALGAS_syncInstructionIR::constructor_new (const GALGAS_location & inAttribute_mSelectInstructionLocation,
-                                                                    const GALGAS_syncInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
-                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_syncInstructionIR GALGAS_syncInstructionIR::class_func_new (const GALGAS_location & inAttribute_mSelectInstructionLocation,
+                                                                   const GALGAS_syncInstructionBranchListIR & inAttribute_mOnInstructionBranchListIR
+                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_syncInstructionIR result ;
   if (inAttribute_mSelectInstructionLocation.isValid () && inAttribute_mOnInstructionBranchListIR.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_syncInstructionIR (inAttribute_mSelectInstructionLocation, inAttribute_mOnInstructionBranchListIR COMMA_THERE)) ;
@@ -6246,9 +6217,8 @@ acPtr_class * cPtr_syncInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionIR ("syncInstructionIR",
-                                          & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionIR ("syncInstructionIR",
+                                                                         & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6329,7 +6299,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_syncInstructionIR_2D_weak GALGAS_syncInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_syncInstructionIR_2D_weak GALGAS_syncInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_syncInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -6357,9 +6327,8 @@ GALGAS_syncInstructionIR GALGAS_syncInstructionIR_2D_weak::bang_syncInstructionI
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_syncInstructionIR_2D_weak ("syncInstructionIR-weak",
-                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_syncInstructionIR_2D_weak ("syncInstructionIR-weak",
+                                                                                 & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6465,12 +6434,12 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_whileInstructionAST GALGAS_whileInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                        const GALGAS_expressionAST & inAttribute_m_5F_while_5F_Expression,
-                                                                        const GALGAS_location & inAttribute_mEndOf_5F_test_5F_expression,
-                                                                        const GALGAS_instructionListAST & inAttribute_mWhileInstructionList,
-                                                                        const GALGAS_location & inAttribute_mEndOf_5F_while_5F_instruction
-                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_whileInstructionAST GALGAS_whileInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
+                                                                       const GALGAS_expressionAST & inAttribute_m_5F_while_5F_Expression,
+                                                                       const GALGAS_location & inAttribute_mEndOf_5F_test_5F_expression,
+                                                                       const GALGAS_instructionListAST & inAttribute_mWhileInstructionList,
+                                                                       const GALGAS_location & inAttribute_mEndOf_5F_while_5F_instruction
+                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_whileInstructionAST result ;
   if (inAttribute_mInstructionLocation.isValid () && inAttribute_m_5F_while_5F_Expression.isValid () && inAttribute_mEndOf_5F_test_5F_expression.isValid () && inAttribute_mWhileInstructionList.isValid () && inAttribute_mEndOf_5F_while_5F_instruction.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_whileInstructionAST (inAttribute_mInstructionLocation, inAttribute_m_5F_while_5F_Expression, inAttribute_mEndOf_5F_test_5F_expression, inAttribute_mWhileInstructionList, inAttribute_mEndOf_5F_while_5F_instruction COMMA_THERE)) ;
@@ -6623,9 +6592,8 @@ acPtr_class * cPtr_whileInstructionAST::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_whileInstructionAST ("whileInstructionAST",
-                                            & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionAST ("whileInstructionAST",
+                                                                           & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6706,7 +6674,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_whileInstructionAST_2D_weak GALGAS_whileInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_whileInstructionAST_2D_weak GALGAS_whileInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_whileInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -6734,9 +6702,8 @@ GALGAS_whileInstructionAST GALGAS_whileInstructionAST_2D_weak::bang_whileInstruc
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_whileInstructionAST_2D_weak ("whileInstructionAST-weak",
-                                                    & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionAST_2D_weak ("whileInstructionAST-weak",
+                                                                                   & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6839,11 +6806,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_whileInstructionIR GALGAS_whileInstructionIR::constructor_new (const GALGAS_uint & inAttribute_mLabelIndex,
-                                                                      const GALGAS_instructionListIR & inAttribute_mTestInstructionGenerationList,
-                                                                      const GALGAS_string & inAttribute_m_5F_while_5F_llvmName,
-                                                                      const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
-                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_whileInstructionIR GALGAS_whileInstructionIR::class_func_new (const GALGAS_uint & inAttribute_mLabelIndex,
+                                                                     const GALGAS_instructionListIR & inAttribute_mTestInstructionGenerationList,
+                                                                     const GALGAS_string & inAttribute_m_5F_while_5F_llvmName,
+                                                                     const GALGAS_instructionListIR & inAttribute_mInstructionGenerationList
+                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_whileInstructionIR result ;
   if (inAttribute_mLabelIndex.isValid () && inAttribute_mTestInstructionGenerationList.isValid () && inAttribute_m_5F_while_5F_llvmName.isValid () && inAttribute_mInstructionGenerationList.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_whileInstructionIR (inAttribute_mLabelIndex, inAttribute_mTestInstructionGenerationList, inAttribute_m_5F_while_5F_llvmName, inAttribute_mInstructionGenerationList COMMA_THERE)) ;
@@ -6993,9 +6960,8 @@ acPtr_class * cPtr_whileInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_whileInstructionIR ("whileInstructionIR",
-                                           & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionIR ("whileInstructionIR",
+                                                                          & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7076,7 +7042,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_whileInstructionIR_2D_weak GALGAS_whileInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_whileInstructionIR_2D_weak GALGAS_whileInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_whileInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7104,9 +7070,8 @@ GALGAS_whileInstructionIR GALGAS_whileInstructionIR_2D_weak::bang_whileInstructi
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_whileInstructionIR_2D_weak ("whileInstructionIR-weak",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_whileInstructionIR_2D_weak ("whileInstructionIR-weak",
+                                                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7187,7 +7152,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_forInstructionAST_2D_weak GALGAS_forInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_forInstructionAST_2D_weak GALGAS_forInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_forInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7215,9 +7180,8 @@ GALGAS_forInstructionAST GALGAS_forInstructionAST_2D_weak::bang_forInstructionAS
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forInstructionAST_2D_weak ("forInstructionAST-weak",
-                                                  & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionAST_2D_weak ("forInstructionAST-weak",
+                                                                                 & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7298,7 +7262,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_forInstructionOnArrayIR_2D_weak GALGAS_forInstructionOnArrayIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_forInstructionOnArrayIR_2D_weak GALGAS_forInstructionOnArrayIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_forInstructionOnArrayIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7326,9 +7290,8 @@ GALGAS_forInstructionOnArrayIR GALGAS_forInstructionOnArrayIR_2D_weak::bang_forI
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forInstructionOnArrayIR_2D_weak ("forInstructionOnArrayIR-weak",
-                                                        & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArrayIR_2D_weak ("forInstructionOnArrayIR-weak",
+                                                                                       & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7409,7 +7372,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_forInstructionOnLiteralStringIR_2D_weak GALGAS_forInstructionOnLiteralStringIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_forInstructionOnLiteralStringIR_2D_weak GALGAS_forInstructionOnLiteralStringIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_forInstructionOnLiteralStringIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7437,9 +7400,8 @@ GALGAS_forInstructionOnLiteralStringIR GALGAS_forInstructionOnLiteralStringIR_2D
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forInstructionOnLiteralStringIR_2D_weak ("forInstructionOnLiteralStringIR-weak",
-                                                                & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnLiteralStringIR_2D_weak ("forInstructionOnLiteralStringIR-weak",
+                                                                                               & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7520,7 +7482,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_forLowerUpperBoundInstructionAST_2D_weak GALGAS_forLowerUpperBoundInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_forLowerUpperBoundInstructionAST_2D_weak GALGAS_forLowerUpperBoundInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_forLowerUpperBoundInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7548,9 +7510,8 @@ GALGAS_forLowerUpperBoundInstructionAST GALGAS_forLowerUpperBoundInstructionAST_
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST_2D_weak ("forLowerUpperBoundInstructionAST-weak",
-                                                                 & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionAST_2D_weak ("forLowerUpperBoundInstructionAST-weak",
+                                                                                                & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7631,7 +7592,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_forLowerUpperBoundInstructionIR_2D_weak GALGAS_forLowerUpperBoundInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_forLowerUpperBoundInstructionIR_2D_weak GALGAS_forLowerUpperBoundInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_forLowerUpperBoundInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7659,9 +7620,8 @@ GALGAS_forLowerUpperBoundInstructionIR GALGAS_forLowerUpperBoundInstructionIR_2D
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionIR_2D_weak ("forLowerUpperBoundInstructionIR-weak",
-                                                                & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forLowerUpperBoundInstructionIR_2D_weak ("forLowerUpperBoundInstructionIR-weak",
+                                                                                               & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7742,7 +7702,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_callInstructionAST_2D_weak GALGAS_callInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_callInstructionAST_2D_weak GALGAS_callInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_callInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7770,9 +7730,8 @@ GALGAS_callInstructionAST GALGAS_callInstructionAST_2D_weak::bang_callInstructio
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_callInstructionAST_2D_weak ("callInstructionAST-weak",
-                                                   & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_callInstructionAST_2D_weak ("callInstructionAST-weak",
+                                                                                  & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7853,7 +7812,7 @@ GALGAS_callInstructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_standAloneProcedureCallInstructionAST_2D_weak GALGAS_standAloneProcedureCallInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_standAloneProcedureCallInstructionAST_2D_weak GALGAS_standAloneProcedureCallInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_standAloneProcedureCallInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -7881,9 +7840,8 @@ GALGAS_standAloneProcedureCallInstructionAST GALGAS_standAloneProcedureCallInstr
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_standAloneProcedureCallInstructionAST_2D_weak ("standAloneProcedureCallInstructionAST-weak",
-                                                                      & kTypeDescriptor_GALGAS_callInstructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standAloneProcedureCallInstructionAST_2D_weak ("standAloneProcedureCallInstructionAST-weak",
+                                                                                                     & kTypeDescriptor_GALGAS_callInstructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7927,7 +7885,7 @@ GALGAS_standAloneProcedureCallInstructionAST_2D_weak GALGAS_standAloneProcedureC
 class cCollectionElement_accessInAssignmentListAST : public cCollectionElement {
   public: GALGAS_accessInAssignmentListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_accessInAssignmentListAST (const GALGAS_accessInAssignmentAST & in_mAccess
                                                         COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_accessInAssignmentListAST (const GALGAS_accessInAssignmentListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -8005,14 +7963,14 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_accessInAssignmentListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::constructor_listWithValue (const GALGAS_accessInAssignmentAST & inOperand0
-                                                                                              COMMA_LOCATION_ARGS) {
+GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::class_func_listWithValue (const GALGAS_accessInAssignmentAST & inOperand0
+                                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_accessInAssignmentListAST result ;
   if (inOperand0.isValid ()) {
     result = GALGAS_accessInAssignmentListAST (capCollectionElementArray ()) ;
@@ -8192,7 +8150,7 @@ GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::add_operation
 GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -8202,7 +8160,7 @@ GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::getter_subLis
 GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -8212,7 +8170,7 @@ GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::getter_subLis
 GALGAS_accessInAssignmentListAST GALGAS_accessInAssignmentListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                           Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::constructor_emptyList (THERE) ;
+  GALGAS_accessInAssignmentListAST result = GALGAS_accessInAssignmentListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -8290,9 +8248,8 @@ GALGAS_accessInAssignmentAST cEnumerator_accessInAssignmentListAST::current_mAcc
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_accessInAssignmentListAST ("accessInAssignmentListAST",
-                                                  nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentListAST ("accessInAssignmentListAST",
+                                                                                 nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8373,7 +8330,7 @@ GALGAS_callInstructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procedureCallInstructionAST_2D_weak GALGAS_procedureCallInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_procedureCallInstructionAST_2D_weak GALGAS_procedureCallInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_procedureCallInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -8401,9 +8358,8 @@ GALGAS_procedureCallInstructionAST GALGAS_procedureCallInstructionAST_2D_weak::b
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procedureCallInstructionAST_2D_weak ("procedureCallInstructionAST-weak",
-                                                            & kTypeDescriptor_GALGAS_callInstructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procedureCallInstructionAST_2D_weak ("procedureCallInstructionAST-weak",
+                                                                                           & kTypeDescriptor_GALGAS_callInstructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8461,7 +8417,7 @@ void extensionMethod_buildProcedureCallAccessList (const GALGAS_LValueOperandAST
       const cEnumAssociatedValues_LValueOperandAST_property * extractPtr_3276 = (const cEnumAssociatedValues_LValueOperandAST_property *) (temp_0.unsafePointer ()) ;
       const GALGAS_lstring extractedValue_3148_name = extractPtr_3276->mAssociatedValue0 ;
       const GALGAS_LValueOperandAST extractedValue_3171_next = extractPtr_3276->mAssociatedValue1 ;
-      ioArgument_ioAccessList.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_property (extractedValue_3148_name  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
+      ioArgument_ioAccessList.addAssign_operation (GALGAS_accessInAssignmentAST::class_func_property (extractedValue_3148_name  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
       extensionMethod_buildProcedureCallAccessList (extractedValue_3171_next, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 73)) ;
     }
     break ;
@@ -8472,7 +8428,7 @@ void extensionMethod_buildProcedureCallAccessList (const GALGAS_LValueOperandAST
       const GALGAS_location extractedValue_3329_endOfIndex = extractPtr_3561->mAssociatedValue1 ;
       const GALGAS_bool extractedValue_3346_checkIndexExpression = extractPtr_3561->mAssociatedValue2 ;
       const GALGAS_LValueOperandAST extractedValue_3385_next = extractPtr_3561->mAssociatedValue3 ;
-      ioArgument_ioAccessList.addAssign_operation (GALGAS_accessInAssignmentAST::constructor_arrayAccess (extractedValue_3313_index, extractedValue_3329_endOfIndex, extractedValue_3346_checkIndexExpression  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
+      ioArgument_ioAccessList.addAssign_operation (GALGAS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3313_index, extractedValue_3329_endOfIndex, extractedValue_3346_checkIndexExpression  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
       extensionMethod_buildProcedureCallAccessList (extractedValue_3385_next, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 76)) ;
     }
     break ;
@@ -8652,8 +8608,8 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::constructor_input (const GALGAS_lstring & inAssociatedValue0
-                                                                                                  COMMA_LOCATION_ARGS) {
+GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::class_func_input (const GALGAS_lstring & inAssociatedValue0
+                                                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_effectiveArgumentPassingModeAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_input ;
@@ -8667,10 +8623,10 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::constructor_inputWithType (const GALGAS_bool & inAssociatedValue0,
-                                                                                                          const GALGAS_lstring & inAssociatedValue1,
-                                                                                                          const GALGAS_lstring & inAssociatedValue2
-                                                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::class_func_inputWithType (const GALGAS_bool & inAssociatedValue0,
+                                                                                                         const GALGAS_lstring & inAssociatedValue1,
+                                                                                                         const GALGAS_lstring & inAssociatedValue2
+                                                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_effectiveArgumentPassingModeAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_inputWithType ;
@@ -8684,9 +8640,9 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::constructor_output (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                                                   const GALGAS_location & inAssociatedValue1
-                                                                                                   COMMA_LOCATION_ARGS) {
+GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::class_func_output (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                                                  const GALGAS_location & inAssociatedValue1
+                                                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_effectiveArgumentPassingModeAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_output ;
@@ -8700,8 +8656,8 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::constructor_outputInput (const GALGAS_lstring & inAssociatedValue0
-                                                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::class_func_outputInput (const GALGAS_lstring & inAssociatedValue0
+                                                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_effectiveArgumentPassingModeAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_outputInput ;
@@ -8715,8 +8671,8 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::c
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::constructor_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
-                                                                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::class_func_outputInputSelfVariable (const GALGAS_lstring & inAssociatedValue0
+                                                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_effectiveArgumentPassingModeAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_outputInputSelfVariable ;
@@ -8951,9 +8907,8 @@ typeComparisonResult GALGAS_effectiveArgumentPassingModeAST::objectCompare (cons
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST ("effectiveArgumentPassingModeAST",
-                                                        nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST ("effectiveArgumentPassingModeAST",
+                                                                                       nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8997,7 +8952,7 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::e
 class cCollectionElement_procEffectiveParameterList : public cCollectionElement {
   public: GALGAS_procEffectiveParameterList_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_procEffectiveParameterList (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
                                                          const GALGAS_lstring & in_mSelector,
                                                          const GALGAS_omnibusType & in_mParameterType
@@ -9087,16 +9042,16 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_procEffectiveParameterList (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::constructor_listWithValue (const GALGAS_effectiveArgumentPassingModeAST & inOperand0,
-                                                                                                const GALGAS_lstring & inOperand1,
-                                                                                                const GALGAS_omnibusType & inOperand2
-                                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::class_func_listWithValue (const GALGAS_effectiveArgumentPassingModeAST & inOperand0,
+                                                                                               const GALGAS_lstring & inOperand1,
+                                                                                               const GALGAS_omnibusType & inOperand2
+                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_procEffectiveParameterList result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
     result = GALGAS_procEffectiveParameterList (capCollectionElementArray ()) ;
@@ -9320,7 +9275,7 @@ GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::add_operati
 GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::constructor_emptyList (THERE) ;
+  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -9330,7 +9285,7 @@ GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::getter_subL
 GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::constructor_emptyList (THERE) ;
+  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -9340,7 +9295,7 @@ GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::getter_subL
 GALGAS_procEffectiveParameterList GALGAS_procEffectiveParameterList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::constructor_emptyList (THERE) ;
+  GALGAS_procEffectiveParameterList result = GALGAS_procEffectiveParameterList::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -9492,9 +9447,8 @@ GALGAS_omnibusType cEnumerator_procEffectiveParameterList::current_mParameterTyp
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procEffectiveParameterList ("procEffectiveParameterList",
-                                                   nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParameterList ("procEffectiveParameterList",
+                                                                                  nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9537,7 +9491,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::constructor_input (UNUSED_LOCATION_ARGS) {
+GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::class_func_input (UNUSED_LOCATION_ARGS) {
   GALGAS_procEffectiveParameterPassingModeIR result ;
   result.mEnum = kEnum_input ;
   return result ;
@@ -9545,7 +9499,7 @@ GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingM
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::constructor_output (UNUSED_LOCATION_ARGS) {
+GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::class_func_output (UNUSED_LOCATION_ARGS) {
   GALGAS_procEffectiveParameterPassingModeIR result ;
   result.mEnum = kEnum_output ;
   return result ;
@@ -9553,7 +9507,7 @@ GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingM
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::constructor_outputInput (UNUSED_LOCATION_ARGS) {
+GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingModeIR::class_func_outputInput (UNUSED_LOCATION_ARGS) {
   GALGAS_procEffectiveParameterPassingModeIR result ;
   result.mEnum = kEnum_outputInput ;
   return result ;
@@ -9638,9 +9592,8 @@ typeComparisonResult GALGAS_procEffectiveParameterPassingModeIR::objectCompare (
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procEffectiveParameterPassingModeIR ("procEffectiveParameterPassingModeIR",
-                                                            nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParameterPassingModeIR ("procEffectiveParameterPassingModeIR",
+                                                                                           nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9684,7 +9637,7 @@ GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingM
 class cCollectionElement_procCallEffectiveParameterListIR : public cCollectionElement {
   public: GALGAS_procCallEffectiveParameterListIR_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_procCallEffectiveParameterListIR (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                                const GALGAS_objectIR & in_mParameter
                                                                COMMA_LOCATION_ARGS) ;
@@ -9768,15 +9721,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_procCallEffectiveParameterListIR (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::constructor_listWithValue (const GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
-                                                                                                            const GALGAS_objectIR & inOperand1
-                                                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::class_func_listWithValue (const GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
+                                                                                                           const GALGAS_objectIR & inOperand1
+                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_procCallEffectiveParameterListIR result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_procCallEffectiveParameterListIR (capCollectionElementArray ()) ;
@@ -9978,7 +9931,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                           Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (THERE) ;
+  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -9988,7 +9941,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                           Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (THERE) ;
+  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -9998,7 +9951,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                                         Compiler * inCompiler
                                                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::constructor_emptyList (THERE) ;
+  GALGAS_procCallEffectiveParameterListIR result = GALGAS_procCallEffectiveParameterListIR::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -10113,9 +10066,8 @@ GALGAS_objectIR cEnumerator_procCallEffectiveParameterListIR::current_mParameter
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_procCallEffectiveParameterListIR ("procCallEffectiveParameterListIR",
-                                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procCallEffectiveParameterListIR ("procCallEffectiveParameterListIR",
+                                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10159,7 +10111,7 @@ GALGAS_procCallEffectiveParameterListIR GALGAS_procCallEffectiveParameterListIR:
 class cCollectionElement_switchCaseListAST : public cCollectionElement {
   public: GALGAS_switchCaseListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_switchCaseListAST (const GALGAS_lstringlist & in_mCaseIdentifiers,
                                                 const GALGAS_instructionListAST & in_mCaseInstructionList
                                                 COMMA_LOCATION_ARGS) ;
@@ -10243,15 +10195,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchCaseListAST GALGAS_switchCaseListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_switchCaseListAST GALGAS_switchCaseListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_switchCaseListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchCaseListAST GALGAS_switchCaseListAST::constructor_listWithValue (const GALGAS_lstringlist & inOperand0,
-                                                                              const GALGAS_instructionListAST & inOperand1
-                                                                              COMMA_LOCATION_ARGS) {
+GALGAS_switchCaseListAST GALGAS_switchCaseListAST::class_func_listWithValue (const GALGAS_lstringlist & inOperand0,
+                                                                             const GALGAS_instructionListAST & inOperand1
+                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_switchCaseListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_switchCaseListAST (capCollectionElementArray ()) ;
@@ -10453,7 +10405,7 @@ GALGAS_switchCaseListAST GALGAS_switchCaseListAST::add_operation (const GALGAS_s
 GALGAS_switchCaseListAST GALGAS_switchCaseListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                             Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -10463,7 +10415,7 @@ GALGAS_switchCaseListAST GALGAS_switchCaseListAST::getter_subListWithRange (cons
 GALGAS_switchCaseListAST GALGAS_switchCaseListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                             Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -10473,7 +10425,7 @@ GALGAS_switchCaseListAST GALGAS_switchCaseListAST::getter_subListFromIndex (cons
 GALGAS_switchCaseListAST GALGAS_switchCaseListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                           Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListAST result = GALGAS_switchCaseListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -10588,9 +10540,8 @@ GALGAS_instructionListAST cEnumerator_switchCaseListAST::current_mCaseInstructio
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchCaseListAST ("switchCaseListAST",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListAST ("switchCaseListAST",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10696,12 +10647,12 @@ GALGAS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchInstructionAST GALGAS_switchInstructionAST::constructor_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                          const GALGAS_expressionAST & inAttribute_mSwitchExpression,
-                                                                          const GALGAS_location & inAttribute_mEndOf_5F_test_5F_expression,
-                                                                          const GALGAS_switchCaseListAST & inAttribute_mSwitchCaseList,
-                                                                          const GALGAS_location & inAttribute_mEndOf_5F_switch_5F_instruction
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_switchInstructionAST GALGAS_switchInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
+                                                                         const GALGAS_expressionAST & inAttribute_mSwitchExpression,
+                                                                         const GALGAS_location & inAttribute_mEndOf_5F_test_5F_expression,
+                                                                         const GALGAS_switchCaseListAST & inAttribute_mSwitchCaseList,
+                                                                         const GALGAS_location & inAttribute_mEndOf_5F_switch_5F_instruction
+                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_switchInstructionAST result ;
   if (inAttribute_mInstructionLocation.isValid () && inAttribute_mSwitchExpression.isValid () && inAttribute_mEndOf_5F_test_5F_expression.isValid () && inAttribute_mSwitchCaseList.isValid () && inAttribute_mEndOf_5F_switch_5F_instruction.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_switchInstructionAST (inAttribute_mInstructionLocation, inAttribute_mSwitchExpression, inAttribute_mEndOf_5F_test_5F_expression, inAttribute_mSwitchCaseList, inAttribute_mEndOf_5F_switch_5F_instruction COMMA_THERE)) ;
@@ -10854,9 +10805,8 @@ acPtr_class * cPtr_switchInstructionAST::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchInstructionAST ("switchInstructionAST",
-                                             & kTypeDescriptor_GALGAS_instructionAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionAST ("switchInstructionAST",
+                                                                            & kTypeDescriptor_GALGAS_instructionAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10937,7 +10887,7 @@ GALGAS_instructionAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchInstructionAST_2D_weak GALGAS_switchInstructionAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_switchInstructionAST_2D_weak GALGAS_switchInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_switchInstructionAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -10965,9 +10915,8 @@ GALGAS_switchInstructionAST GALGAS_switchInstructionAST_2D_weak::bang_switchInst
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchInstructionAST_2D_weak ("switchInstructionAST-weak",
-                                                     & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionAST_2D_weak ("switchInstructionAST-weak",
+                                                                                    & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11011,7 +10960,7 @@ GALGAS_switchInstructionAST_2D_weak GALGAS_switchInstructionAST_2D_weak::extract
 class cCollectionElement_switchCaseListIR : public cCollectionElement {
   public: GALGAS_switchCaseListIR_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_switchCaseListIR (const GALGAS_uintlist & in_mCaseIdentifierIndexes,
                                                const GALGAS_instructionListIR & in_mCaseInstructionList
                                                COMMA_LOCATION_ARGS) ;
@@ -11095,15 +11044,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchCaseListIR GALGAS_switchCaseListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_switchCaseListIR GALGAS_switchCaseListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_switchCaseListIR (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchCaseListIR GALGAS_switchCaseListIR::constructor_listWithValue (const GALGAS_uintlist & inOperand0,
-                                                                            const GALGAS_instructionListIR & inOperand1
-                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_switchCaseListIR GALGAS_switchCaseListIR::class_func_listWithValue (const GALGAS_uintlist & inOperand0,
+                                                                           const GALGAS_instructionListIR & inOperand1
+                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_switchCaseListIR result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_switchCaseListIR (capCollectionElementArray ()) ;
@@ -11305,7 +11254,7 @@ GALGAS_switchCaseListIR GALGAS_switchCaseListIR::add_operation (const GALGAS_swi
 GALGAS_switchCaseListIR GALGAS_switchCaseListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                           Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -11315,7 +11264,7 @@ GALGAS_switchCaseListIR GALGAS_switchCaseListIR::getter_subListWithRange (const 
 GALGAS_switchCaseListIR GALGAS_switchCaseListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                           Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -11325,7 +11274,7 @@ GALGAS_switchCaseListIR GALGAS_switchCaseListIR::getter_subListFromIndex (const 
 GALGAS_switchCaseListIR GALGAS_switchCaseListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                         Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::constructor_emptyList (THERE) ;
+  GALGAS_switchCaseListIR result = GALGAS_switchCaseListIR::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -11440,9 +11389,8 @@ GALGAS_instructionListIR cEnumerator_switchCaseListIR::current_mCaseInstructionL
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchCaseListIR ("switchCaseListIR",
-                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchCaseListIR ("switchCaseListIR",
+                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11545,11 +11493,11 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchInstructionIR GALGAS_switchInstructionIR::constructor_new (const GALGAS_uint & inAttribute_mLabelIndex,
-                                                                        const GALGAS_instructionListIR & inAttribute_mSwitchExpressionGenerationList,
-                                                                        const GALGAS_objectIR & inAttribute_mSwitchExpression,
-                                                                        const GALGAS_switchCaseListIR & inAttribute_mCaseGenerationList
-                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_switchInstructionIR GALGAS_switchInstructionIR::class_func_new (const GALGAS_uint & inAttribute_mLabelIndex,
+                                                                       const GALGAS_instructionListIR & inAttribute_mSwitchExpressionGenerationList,
+                                                                       const GALGAS_objectIR & inAttribute_mSwitchExpression,
+                                                                       const GALGAS_switchCaseListIR & inAttribute_mCaseGenerationList
+                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_switchInstructionIR result ;
   if (inAttribute_mLabelIndex.isValid () && inAttribute_mSwitchExpressionGenerationList.isValid () && inAttribute_mSwitchExpression.isValid () && inAttribute_mCaseGenerationList.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_switchInstructionIR (inAttribute_mLabelIndex, inAttribute_mSwitchExpressionGenerationList, inAttribute_mSwitchExpression, inAttribute_mCaseGenerationList COMMA_THERE)) ;
@@ -11699,9 +11647,8 @@ acPtr_class * cPtr_switchInstructionIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchInstructionIR ("switchInstructionIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionIR ("switchInstructionIR",
+                                                                           & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11782,7 +11729,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_switchInstructionIR_2D_weak GALGAS_switchInstructionIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_switchInstructionIR_2D_weak GALGAS_switchInstructionIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_switchInstructionIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -11810,9 +11757,8 @@ GALGAS_switchInstructionIR GALGAS_switchInstructionIR_2D_weak::bang_switchInstru
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_switchInstructionIR_2D_weak ("switchInstructionIR-weak",
-                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_switchInstructionIR_2D_weak ("switchInstructionIR-weak",
+                                                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11926,8 +11872,8 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::constructor_property (const GALGAS_lstring & inAssociatedValue0
-                                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::class_func_property (const GALGAS_lstring & inAssociatedValue0
+                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_accessInAssignmentAST result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_property ;
@@ -11941,10 +11887,10 @@ GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::constructor_property 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::constructor_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                                    const GALGAS_location & inAssociatedValue1,
-                                                                                    const GALGAS_bool & inAssociatedValue2
-                                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::class_func_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                                   const GALGAS_location & inAssociatedValue1,
+                                                                                   const GALGAS_bool & inAssociatedValue2
+                                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_accessInAssignmentAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_arrayAccess ;
@@ -12072,9 +12018,8 @@ typeComparisonResult GALGAS_accessInAssignmentAST::objectCompare (const GALGAS_a
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_accessInAssignmentAST ("accessInAssignmentAST",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentAST ("accessInAssignmentAST",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12197,7 +12142,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::constructor_noIndex (UNUSED_LOCATION_ARGS) {
+GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::class_func_noIndex (UNUSED_LOCATION_ARGS) {
   GALGAS_registerGroupIndexAST result ;
   result.mEnum = kEnum_noIndex ;
   return result ;
@@ -12205,10 +12150,10 @@ GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::constructor_noIndex (
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::constructor_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                              const GALGAS_location & inAssociatedValue1,
-                                                                              const GALGAS_bool & inAssociatedValue2
-                                                                              COMMA_LOCATION_ARGS) {
+GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::class_func_index (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                             const GALGAS_location & inAssociatedValue1,
+                                                                             const GALGAS_bool & inAssociatedValue2
+                                                                             COMMA_LOCATION_ARGS) {
   GALGAS_registerGroupIndexAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_index ;
@@ -12316,9 +12261,8 @@ typeComparisonResult GALGAS_registerGroupIndexAST::objectCompare (const GALGAS_r
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerGroupIndexAST ("registerGroupIndexAST",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupIndexAST ("registerGroupIndexAST",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12403,7 +12347,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerIndexAST GALGAS_registerIndexAST::constructor_noIndex (UNUSED_LOCATION_ARGS) {
+GALGAS_registerIndexAST GALGAS_registerIndexAST::class_func_noIndex (UNUSED_LOCATION_ARGS) {
   GALGAS_registerIndexAST result ;
   result.mEnum = kEnum_noIndex ;
   return result ;
@@ -12411,10 +12355,10 @@ GALGAS_registerIndexAST GALGAS_registerIndexAST::constructor_noIndex (UNUSED_LOC
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerIndexAST GALGAS_registerIndexAST::constructor_index (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                    const GALGAS_location & inAssociatedValue1,
-                                                                    const GALGAS_bool & inAssociatedValue2
-                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_registerIndexAST GALGAS_registerIndexAST::class_func_index (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                   const GALGAS_location & inAssociatedValue1,
+                                                                   const GALGAS_bool & inAssociatedValue2
+                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_registerIndexAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_index ;
@@ -12522,9 +12466,8 @@ typeComparisonResult GALGAS_registerIndexAST::objectCompare (const GALGAS_regist
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_registerIndexAST ("registerIndexAST",
-                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIndexAST ("registerIndexAST",
+                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12634,7 +12577,7 @@ GALGAS_lstring extensionGetter_mangledName (const GALGAS_effectiveArgumentListAS
     enumerator_1766.gotoNextObject () ;
   }
   var_s_1613.plusAssign_operation(GALGAS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 46)) ;
-  result_result = GALGAS_lstring::constructor_new (var_s_1613, constinArgument_inFunctionName.readProperty_location (), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 47)) ;
+  result_result = GALGAS_lstring::class_func_new (var_s_1613, constinArgument_inFunctionName.readProperty_location (), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas", 47)) ;
 //---
   return result_result ;
 }
@@ -12659,7 +12602,7 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 29)), GALGAS_string ("<<@objectIR llvmName void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 29)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 29)), GALGAS_string ("<<@objectIR llvmName void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 29)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -12737,14 +12680,14 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
     {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 51)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 51)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 51)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 51)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
     {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 53)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 53)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 53)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 53)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -12773,7 +12716,7 @@ GALGAS_string extensionGetter_llvmValue (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 61)), GALGAS_string ("<<@objectIR llvmName void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 61)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 61)), GALGAS_string ("<<@objectIR llvmName void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 61)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -12870,14 +12813,14 @@ GALGAS_string extensionGetter_llvmValue (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
     {
       TC_Array <C_FixItDescription> fixItArray2 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 93)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 93)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 93)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 93)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
     {
       TC_Array <C_FixItDescription> fixItArray3 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 95)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 95)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 95)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 95)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -12906,7 +12849,7 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 103)), GALGAS_string ("<<@objectIR type void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 103)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 103)), GALGAS_string ("<<@objectIR type void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 103)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -13049,7 +12992,7 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 135)), GALGAS_string ("<<@objectIR withType void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 135)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 135)), GALGAS_string ("<<@objectIR withType void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 135)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -13057,38 +13000,38 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
     {
       const cEnumAssociatedValues_objectIR_reference * extractPtr_5812 = (const cEnumAssociatedValues_objectIR_reference *) (temp_0.unsafePointer ()) ;
       const GALGAS_string extractedValue_5744_llvmName = extractPtr_5812->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_reference (constinArgument_inType, extractedValue_5744_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 137)) ;
+      result_result = GALGAS_objectIR::class_func_reference (constinArgument_inType, extractedValue_5744_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 137)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_null:
     {
-      result_result = GALGAS_objectIR::constructor_null (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 139)) ;
+      result_result = GALGAS_objectIR::class_func_null (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 139)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_literalInteger:
     {
       const cEnumAssociatedValues_objectIR_literalInteger * extractPtr_5966 = (const cEnumAssociatedValues_objectIR_literalInteger *) (temp_0.unsafePointer ()) ;
       const GALGAS_bigint extractedValue_5900_value = extractPtr_5966->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_literalInteger (constinArgument_inType, extractedValue_5900_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 141)) ;
+      result_result = GALGAS_objectIR::class_func_literalInteger (constinArgument_inType, extractedValue_5900_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 141)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmNamedValue:
     {
       const cEnumAssociatedValues_objectIR_llvmNamedValue * extractPtr_6067 = (const cEnumAssociatedValues_objectIR_llvmNamedValue *) (temp_0.unsafePointer ()) ;
       const GALGAS_string extractedValue_5993_llvmName = extractPtr_6067->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmNamedValue (constinArgument_inType, extractedValue_5993_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 143)) ;
+      result_result = GALGAS_objectIR::class_func_llvmNamedValue (constinArgument_inType, extractedValue_5993_llvmName  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 143)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_zero:
     {
-      result_result = GALGAS_objectIR::constructor_zero (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 145)) ;
+      result_result = GALGAS_objectIR::class_func_zero (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 145)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmStructureValue:
     {
       const cEnumAssociatedValues_objectIR_llvmStructureValue * extractPtr_6245 = (const cEnumAssociatedValues_objectIR_llvmStructureValue *) (temp_0.unsafePointer ()) ;
       const GALGAS_sortedOperandIRList extractedValue_6172_values = extractPtr_6245->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmStructureValue (constinArgument_inType, extractedValue_6172_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 147)) ;
+      result_result = GALGAS_objectIR::class_func_llvmStructureValue (constinArgument_inType, extractedValue_6172_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 147)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_literalString:
@@ -13096,7 +13039,7 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
       const cEnumAssociatedValues_objectIR_literalString * extractPtr_6354 = (const cEnumAssociatedValues_objectIR_literalString *) (temp_0.unsafePointer ()) ;
       const GALGAS_uint extractedValue_6276_size = extractPtr_6354->mAssociatedValue0 ;
       const GALGAS_uint extractedValue_6287_index = extractPtr_6354->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_literalString (extractedValue_6276_size, extractedValue_6287_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 149)) ;
+      result_result = GALGAS_objectIR::class_func_literalString (extractedValue_6276_size, extractedValue_6287_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 149)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedStaticValue:
@@ -13105,7 +13048,7 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
       const GALGAS_uint extractedValue_6395_size = extractPtr_6515->mAssociatedValue1 ;
       const GALGAS_objectIR extractedValue_6400_value = extractPtr_6515->mAssociatedValue2 ;
       const GALGAS_uint extractedValue_6406_index = extractPtr_6515->mAssociatedValue3 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayRepeatedStaticValue (constinArgument_inType, extractedValue_6395_size, extractedValue_6400_value, extractedValue_6406_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 151)) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedStaticValue (constinArgument_inType, extractedValue_6395_size, extractedValue_6400_value, extractedValue_6406_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 151)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayRepeatedDynamicValue:
@@ -13113,7 +13056,7 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
       const cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue * extractPtr_6659 = (const cEnumAssociatedValues_objectIR_llvmArrayRepeatedDynamicValue *) (temp_0.unsafePointer ()) ;
       const GALGAS_uint extractedValue_6557_size = extractPtr_6659->mAssociatedValue1 ;
       const GALGAS_objectIR extractedValue_6562_value = extractPtr_6659->mAssociatedValue2 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayRepeatedDynamicValue (constinArgument_inType, extractedValue_6557_size, extractedValue_6562_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 153)) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedDynamicValue (constinArgument_inType, extractedValue_6557_size, extractedValue_6562_value  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 153)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayStaticValues:
@@ -13121,14 +13064,14 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
       const cEnumAssociatedValues_objectIR_llvmArrayStaticValues * extractPtr_6803 = (const cEnumAssociatedValues_objectIR_llvmArrayStaticValues *) (temp_0.unsafePointer ()) ;
       const GALGAS_operandIRList extractedValue_6708_values = extractPtr_6803->mAssociatedValue1 ;
       const GALGAS_uint extractedValue_6715_index = extractPtr_6803->mAssociatedValue2 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayStaticValues (constinArgument_inType, extractedValue_6708_values, extractedValue_6715_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 155)) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayStaticValues (constinArgument_inType, extractedValue_6708_values, extractedValue_6715_index  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 155)) ;
     }
     break ;
   case GALGAS_objectIR::kEnum_llvmArrayDynamicValues:
     {
       const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues * extractPtr_6930 = (const cEnumAssociatedValues_objectIR_llvmArrayDynamicValues *) (temp_0.unsafePointer ()) ;
       const GALGAS_operandIRList extractedValue_6853_values = extractPtr_6930->mAssociatedValue1 ;
-      result_result = GALGAS_objectIR::constructor_llvmArrayDynamicValues (constinArgument_inType, extractedValue_6853_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 157)) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayDynamicValues (constinArgument_inType, extractedValue_6853_values  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 157)) ;
     }
     break ;
   }
@@ -13156,7 +13099,7 @@ GALGAS_string extensionGetter_name (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 165)), GALGAS_string ("<<@objectIR name void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 165)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 165)), GALGAS_string ("<<@objectIR name void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 165)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -13251,7 +13194,7 @@ GALGAS_bool extensionGetter_isStatic (const GALGAS_objectIR & inObject,
   case GALGAS_objectIR::kEnum_void:
     {
       TC_Array <C_FixItDescription> fixItArray1 ;
-      inCompiler->emitSemanticError (GALGAS_location::constructor_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 187)), GALGAS_string ("<<@objectIR isStatic void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 187)) ;
+      inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 187)), GALGAS_string ("<<@objectIR isStatic void>>"), fixItArray1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 187)) ;
       result_result.drop () ; // Release error dropped variable
     }
     break ;
@@ -13327,7 +13270,7 @@ GALGAS_bool extensionGetter_isStatic (const GALGAS_objectIR & inObject,
 class cCollectionElement_routineListIR : public cCollectionElement {
   public: GALGAS_routineListIR_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_routineListIR (const GALGAS_abstractRoutineIR & in_mRoutine
                                             COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_routineListIR (const GALGAS_routineListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -13405,14 +13348,14 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineListIR GALGAS_routineListIR::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_routineListIR GALGAS_routineListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_routineListIR (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineListIR GALGAS_routineListIR::constructor_listWithValue (const GALGAS_abstractRoutineIR & inOperand0
-                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_routineListIR GALGAS_routineListIR::class_func_listWithValue (const GALGAS_abstractRoutineIR & inOperand0
+                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_routineListIR result ;
   if (inOperand0.isValid ()) {
     result = GALGAS_routineListIR (capCollectionElementArray ()) ;
@@ -13592,7 +13535,7 @@ GALGAS_routineListIR GALGAS_routineListIR::add_operation (const GALGAS_routineLi
 GALGAS_routineListIR GALGAS_routineListIR::getter_subListWithRange (const GALGAS_range & inRange,
                                                                     Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
+  GALGAS_routineListIR result = GALGAS_routineListIR::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -13602,7 +13545,7 @@ GALGAS_routineListIR GALGAS_routineListIR::getter_subListWithRange (const GALGAS
 GALGAS_routineListIR GALGAS_routineListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                     Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
+  GALGAS_routineListIR result = GALGAS_routineListIR::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -13612,7 +13555,7 @@ GALGAS_routineListIR GALGAS_routineListIR::getter_subListFromIndex (const GALGAS
 GALGAS_routineListIR GALGAS_routineListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                   Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_routineListIR result = GALGAS_routineListIR::constructor_emptyList (THERE) ;
+  GALGAS_routineListIR result = GALGAS_routineListIR::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -13690,9 +13633,8 @@ GALGAS_abstractRoutineIR cEnumerator_routineListIR::current_mRoutine (LOCATION_A
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineListIR ("routineListIR",
-                                      nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineListIR ("routineListIR",
+                                                                     nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13759,7 +13701,7 @@ void extensionMethod_llvmRoutineGeneration (const GALGAS_routineListIR inObject,
 void extensionSetter_appendNOP (GALGAS_instructionListIR & ioObject,
                                 Compiler * /* inCompiler */
                                 COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_nopIR::constructor_new (SOURCE_FILE ("intermediate-nop.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-nop.galgas", 3)) ;
+  ioObject.addAssign_operation (GALGAS_nopIR::class_func_new (SOURCE_FILE ("intermediate-nop.galgas", 3))  COMMA_SOURCE_FILE ("intermediate-nop.galgas", 3)) ;
 }
 
 
@@ -13812,7 +13754,7 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_nopIR GALGAS_nopIR::constructor_new (LOCATION_ARGS) {
+GALGAS_nopIR GALGAS_nopIR::class_func_new (LOCATION_ARGS) {
   GALGAS_nopIR result ;
   macroMyNew (result.mObjectPtr, cPtr_nopIR (THERE)) ;
   return result ;
@@ -13852,9 +13794,8 @@ acPtr_class * cPtr_nopIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_nopIR ("nopIR",
-                              & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_nopIR ("nopIR",
+                                                             & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13935,7 +13876,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_nopIR_2D_weak GALGAS_nopIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_nopIR_2D_weak GALGAS_nopIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_nopIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -13963,9 +13904,8 @@ GALGAS_nopIR GALGAS_nopIR_2D_weak::bang_nopIR_2D_weak (Compiler * inCompiler COM
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_nopIR_2D_weak ("nopIR-weak",
-                                      & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_nopIR_2D_weak ("nopIR-weak",
+                                                                     & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14011,7 +13951,7 @@ void extensionSetter_appendInstructionAsFreeString (GALGAS_instructionListIR & i
                                                     const GALGAS_stringset constinArgument_inInvokedFunctionSet,
                                                     Compiler * /* inCompiler */
                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_freeStringIR::constructor_new (constinArgument_inString, constinArgument_inInvokedFunctionSet  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 4))  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 4)) ;
+  ioObject.addAssign_operation (GALGAS_freeStringIR::class_func_new (constinArgument_inString, constinArgument_inInvokedFunctionSet  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 4))  COMMA_SOURCE_FILE ("instruction-free-string.galgas", 4)) ;
 }
 
 
@@ -14075,9 +14015,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_freeStringIR GALGAS_freeStringIR::constructor_new (const GALGAS_string & inAttribute_mString,
-                                                          const GALGAS_stringset & inAttribute_mInvokedFunctionSet
-                                                          COMMA_LOCATION_ARGS) {
+GALGAS_freeStringIR GALGAS_freeStringIR::class_func_new (const GALGAS_string & inAttribute_mString,
+                                                         const GALGAS_stringset & inAttribute_mInvokedFunctionSet
+                                                         COMMA_LOCATION_ARGS) {
   GALGAS_freeStringIR result ;
   if (inAttribute_mString.isValid () && inAttribute_mInvokedFunctionSet.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_freeStringIR (inAttribute_mString, inAttribute_mInvokedFunctionSet COMMA_THERE)) ;
@@ -14173,9 +14113,8 @@ acPtr_class * cPtr_freeStringIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_freeStringIR ("freeStringIR",
-                                     & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeStringIR ("freeStringIR",
+                                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14256,7 +14195,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_freeStringIR_2D_weak GALGAS_freeStringIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_freeStringIR_2D_weak GALGAS_freeStringIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_freeStringIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -14284,9 +14223,8 @@ GALGAS_freeStringIR GALGAS_freeStringIR_2D_weak::bang_freeStringIR_2D_weak (Comp
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_freeStringIR_2D_weak ("freeStringIR-weak",
-                                             & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_freeStringIR_2D_weak ("freeStringIR-weak",
+                                                                            & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14332,7 +14270,7 @@ void extensionSetter_appendExtend (GALGAS_instructionListIR & ioObject,
                                    const GALGAS_objectIR constinArgument_inSource,
                                    Compiler * /* inCompiler */
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_extendIR::constructor_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6)) ;
+  ioObject.addAssign_operation (GALGAS_extendIR::class_func_new (constinArgument_inResult, constinArgument_inSource  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-extend.galgas", 6)) ;
 }
 
 
@@ -14396,9 +14334,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_extendIR GALGAS_extendIR::constructor_new (const GALGAS_objectIR & inAttribute_mResult,
-                                                  const GALGAS_objectIR & inAttribute_mSource
-                                                  COMMA_LOCATION_ARGS) {
+GALGAS_extendIR GALGAS_extendIR::class_func_new (const GALGAS_objectIR & inAttribute_mResult,
+                                                 const GALGAS_objectIR & inAttribute_mSource
+                                                 COMMA_LOCATION_ARGS) {
   GALGAS_extendIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_extendIR (inAttribute_mResult, inAttribute_mSource COMMA_THERE)) ;
@@ -14494,9 +14432,8 @@ acPtr_class * cPtr_extendIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_extendIR ("extendIR",
-                                 & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR ("extendIR",
+                                                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14577,7 +14514,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_extendIR_2D_weak GALGAS_extendIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_extendIR_2D_weak GALGAS_extendIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_extendIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -14605,9 +14542,8 @@ GALGAS_extendIR GALGAS_extendIR_2D_weak::bang_extendIR_2D_weak (Compiler * inCom
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_extendIR_2D_weak ("extendIR-weak",
-                                         & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR_2D_weak ("extendIR-weak",
+                                                                        & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14661,7 +14597,7 @@ void extensionSetter_appendTrunc (GALGAS_instructionListIR & ioObject,
       GALGAS_bigint var_value_357 ;
       GALGAS_omnibusType joker_330 ; // Joker input parameter
       ioArgument_ioObject.method_literalInteger (joker_330, var_value_357, inCompiler COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 9)) ;
-      ioArgument_ioObject = GALGAS_objectIR::constructor_literalInteger (constinArgument_inResultType, var_value_357  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 10)) ;
+      ioArgument_ioObject = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_value_357  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 10)) ;
     }
   }
   if (kBoolFalse == test_0) {
@@ -14669,7 +14605,7 @@ void extensionSetter_appendTrunc (GALGAS_instructionListIR & ioObject,
     {
     routine_getNewTempValue_3F__26__21_ (constinArgument_inResultType, ioArgument_ioTemporaries, var_result_492, inCompiler  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 12)) ;
     }
-    ioObject.addAssign_operation (GALGAS_truncIR::constructor_new (var_result_492, ioArgument_ioObject  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13))  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13)) ;
+    ioObject.addAssign_operation (GALGAS_truncIR::class_func_new (var_result_492, ioArgument_ioObject  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13))  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13)) ;
     ioArgument_ioObject = var_result_492 ;
   }
 }
@@ -14735,9 +14671,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_truncIR GALGAS_truncIR::constructor_new (const GALGAS_objectIR & inAttribute_mResult,
-                                                const GALGAS_objectIR & inAttribute_mSource
-                                                COMMA_LOCATION_ARGS) {
+GALGAS_truncIR GALGAS_truncIR::class_func_new (const GALGAS_objectIR & inAttribute_mResult,
+                                               const GALGAS_objectIR & inAttribute_mSource
+                                               COMMA_LOCATION_ARGS) {
   GALGAS_truncIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_truncIR (inAttribute_mResult, inAttribute_mSource COMMA_THERE)) ;
@@ -14833,9 +14769,8 @@ acPtr_class * cPtr_truncIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_truncIR ("truncIR",
-                                & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR ("truncIR",
+                                                               & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14916,7 +14851,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_truncIR_2D_weak GALGAS_truncIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_truncIR_2D_weak GALGAS_truncIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_truncIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -14944,9 +14879,8 @@ GALGAS_truncIR GALGAS_truncIR_2D_weak::bang_truncIR_2D_weak (Compiler * inCompil
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_truncIR_2D_weak ("truncIR-weak",
-                                        & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR_2D_weak ("truncIR-weak",
+                                                                       & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14992,7 +14926,7 @@ void extensionSetter_appendBoolToUInt (GALGAS_instructionListIR & ioObject,
                                        const GALGAS_objectIR constinArgument_inBoolSource,
                                        Compiler * /* inCompiler */
                                        COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_boolToUIntIR::constructor_new (constinArgument_inUIntResult, constinArgument_inBoolSource  COMMA_SOURCE_FILE ("intermediate-bool-to-uint.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-bool-to-uint.galgas", 6)) ;
+  ioObject.addAssign_operation (GALGAS_boolToUIntIR::class_func_new (constinArgument_inUIntResult, constinArgument_inBoolSource  COMMA_SOURCE_FILE ("intermediate-bool-to-uint.galgas", 6))  COMMA_SOURCE_FILE ("intermediate-bool-to-uint.galgas", 6)) ;
 }
 
 
@@ -15056,9 +14990,9 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_boolToUIntIR GALGAS_boolToUIntIR::constructor_new (const GALGAS_objectIR & inAttribute_mUIntResult,
-                                                          const GALGAS_objectIR & inAttribute_mBoolSource
-                                                          COMMA_LOCATION_ARGS) {
+GALGAS_boolToUIntIR GALGAS_boolToUIntIR::class_func_new (const GALGAS_objectIR & inAttribute_mUIntResult,
+                                                         const GALGAS_objectIR & inAttribute_mBoolSource
+                                                         COMMA_LOCATION_ARGS) {
   GALGAS_boolToUIntIR result ;
   if (inAttribute_mUIntResult.isValid () && inAttribute_mBoolSource.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_boolToUIntIR (inAttribute_mUIntResult, inAttribute_mBoolSource COMMA_THERE)) ;
@@ -15154,9 +15088,8 @@ acPtr_class * cPtr_boolToUIntIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_boolToUIntIR ("boolToUIntIR",
-                                     & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolToUIntIR ("boolToUIntIR",
+                                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15237,7 +15170,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_boolToUIntIR_2D_weak GALGAS_boolToUIntIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_boolToUIntIR_2D_weak GALGAS_boolToUIntIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_boolToUIntIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -15265,9 +15198,8 @@ GALGAS_boolToUIntIR GALGAS_boolToUIntIR_2D_weak::bang_boolToUIntIR_2D_weak (Comp
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_boolToUIntIR_2D_weak ("boolToUIntIR-weak",
-                                             & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolToUIntIR_2D_weak ("boolToUIntIR-weak",
+                                                                            & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15314,7 +15246,7 @@ void extensionSetter_appendShiftLeft (GALGAS_instructionListIR & ioObject,
                                       const GALGAS_uint constinArgument_inShiftAmount,
                                       Compiler * /* inCompiler */
                                       COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_leftShiftIR::constructor_new (constinArgument_inResult, constinArgument_inSource, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-shift-left.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-shift-left.galgas", 7)) ;
+  ioObject.addAssign_operation (GALGAS_leftShiftIR::class_func_new (constinArgument_inResult, constinArgument_inSource, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-shift-left.galgas", 7))  COMMA_SOURCE_FILE ("intermediate-shift-left.galgas", 7)) ;
 }
 
 
@@ -15382,10 +15314,10 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_leftShiftIR GALGAS_leftShiftIR::constructor_new (const GALGAS_objectIR & inAttribute_mResult,
-                                                        const GALGAS_objectIR & inAttribute_mSource,
-                                                        const GALGAS_uint & inAttribute_mShiftAmount
-                                                        COMMA_LOCATION_ARGS) {
+GALGAS_leftShiftIR GALGAS_leftShiftIR::class_func_new (const GALGAS_objectIR & inAttribute_mResult,
+                                                       const GALGAS_objectIR & inAttribute_mSource,
+                                                       const GALGAS_uint & inAttribute_mShiftAmount
+                                                       COMMA_LOCATION_ARGS) {
   GALGAS_leftShiftIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid () && inAttribute_mShiftAmount.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_leftShiftIR (inAttribute_mResult, inAttribute_mSource, inAttribute_mShiftAmount COMMA_THERE)) ;
@@ -15508,9 +15440,8 @@ acPtr_class * cPtr_leftShiftIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_leftShiftIR ("leftShiftIR",
-                                    & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR ("leftShiftIR",
+                                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15591,7 +15522,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_leftShiftIR_2D_weak GALGAS_leftShiftIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_leftShiftIR_2D_weak GALGAS_leftShiftIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_leftShiftIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -15619,9 +15550,8 @@ GALGAS_leftShiftIR GALGAS_leftShiftIR_2D_weak::bang_leftShiftIR_2D_weak (Compile
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_leftShiftIR_2D_weak ("leftShiftIR-weak",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR_2D_weak ("leftShiftIR-weak",
+                                                                           & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15675,7 +15605,7 @@ void extensionSetter_appendLogicalShiftRight (GALGAS_instructionListIR & ioObjec
       GALGAS_omnibusType var_type_238 ;
       GALGAS_bigint var_value_262 ;
       ioArgument_ioResult.method_literalInteger (var_type_238, var_value_262, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
-      ioArgument_ioResult = GALGAS_objectIR::constructor_literalInteger (var_type_238, var_value_262.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
+      ioArgument_ioResult = GALGAS_objectIR::class_func_literalInteger (var_type_238, var_value_262.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
     }
   }
   if (kBoolFalse == test_0) {
@@ -15686,7 +15616,7 @@ void extensionSetter_appendLogicalShiftRight (GALGAS_instructionListIR & ioObjec
     {
     routine_getNewTempValue_3F__26__21_ (extensionGetter_type (var_source_422, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
     }
-    ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::constructor_new (ioArgument_ioResult, var_source_422, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
+    ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::class_func_new (ioArgument_ioResult, var_source_422, constinArgument_inShiftAmount  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
   }
 }
 
@@ -15755,10 +15685,10 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_logicalRightShiftIR GALGAS_logicalRightShiftIR::constructor_new (const GALGAS_objectIR & inAttribute_mResult,
-                                                                        const GALGAS_objectIR & inAttribute_mSource,
-                                                                        const GALGAS_uint & inAttribute_mShiftAmount
-                                                                        COMMA_LOCATION_ARGS) {
+GALGAS_logicalRightShiftIR GALGAS_logicalRightShiftIR::class_func_new (const GALGAS_objectIR & inAttribute_mResult,
+                                                                       const GALGAS_objectIR & inAttribute_mSource,
+                                                                       const GALGAS_uint & inAttribute_mShiftAmount
+                                                                       COMMA_LOCATION_ARGS) {
   GALGAS_logicalRightShiftIR result ;
   if (inAttribute_mResult.isValid () && inAttribute_mSource.isValid () && inAttribute_mShiftAmount.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_logicalRightShiftIR (inAttribute_mResult, inAttribute_mSource, inAttribute_mShiftAmount COMMA_THERE)) ;
@@ -15881,9 +15811,8 @@ acPtr_class * cPtr_logicalRightShiftIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_logicalRightShiftIR ("logicalRightShiftIR",
-                                            & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_logicalRightShiftIR ("logicalRightShiftIR",
+                                                                           & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15964,7 +15893,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_logicalRightShiftIR_2D_weak GALGAS_logicalRightShiftIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_logicalRightShiftIR_2D_weak GALGAS_logicalRightShiftIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_logicalRightShiftIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -15992,9 +15921,8 @@ GALGAS_logicalRightShiftIR GALGAS_logicalRightShiftIR_2D_weak::bang_logicalRight
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_logicalRightShiftIR_2D_weak ("logicalRightShiftIR-weak",
-                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_logicalRightShiftIR_2D_weak ("logicalRightShiftIR-weak",
+                                                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16044,7 +15972,7 @@ void extensionSetter_appendBinaryOperation (GALGAS_instructionListIR & ioObject,
                                             const GALGAS_objectIR constinArgument_inRight,
                                             Compiler * /* inCompiler */
                                             COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_binaryOperationIR::constructor_new (constinArgument_inTarget, constinArgument_inOperandType, constinArgument_inLeft, constinArgument_inOperation, constinArgument_inRight, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51)) ;
+  ioObject.addAssign_operation (GALGAS_binaryOperationIR::class_func_new (constinArgument_inTarget, constinArgument_inOperandType, constinArgument_inLeft, constinArgument_inOperation, constinArgument_inRight, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51))  COMMA_SOURCE_FILE ("intermediate-binary-operation.galgas", 51)) ;
 }
 
 
@@ -16094,7 +16022,7 @@ GALGAS_abstractInstructionIR_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_binaryOperationIR_2D_weak GALGAS_binaryOperationIR_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_binaryOperationIR_2D_weak GALGAS_binaryOperationIR_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_binaryOperationIR_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -16122,9 +16050,8 @@ GALGAS_binaryOperationIR GALGAS_binaryOperationIR_2D_weak::bang_binaryOperationI
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_binaryOperationIR_2D_weak ("binaryOperationIR-weak",
-                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR_2D_weak ("binaryOperationIR-weak",
+                                                                                 & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16174,7 +16101,7 @@ void extensionSetter_appendShortCircuitAndOperation (GALGAS_instructionListIR & 
                                                      const GALGAS_location constinArgument_inLocation,
                                                      Compiler * /* inCompiler */
                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_shortCircuitAndOperationIR::constructor_new (constinArgument_inTargetOperand, constinArgument_inLeftOperandLLVMName, constinArgument_inLeftInstructionList, constinArgument_inRightOperandLLVMName, constinArgument_inRightInstructionList, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11)) ;
+  ioObject.addAssign_operation (GALGAS_shortCircuitAndOperationIR::class_func_new (constinArgument_inTargetOperand, constinArgument_inLeftOperandLLVMName, constinArgument_inLeftInstructionList, constinArgument_inRightOperandLLVMName, constinArgument_inRightInstructionList, constinArgument_inLocation  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11))  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11)) ;
 }
 
 
@@ -16254,13 +16181,13 @@ GALGAS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::constructor_new (const GALGAS_objectIR & inAttribute_mTargetOperand,
-                                                                                      const GALGAS_string & inAttribute_mLeftOperandLLVMName,
-                                                                                      const GALGAS_instructionListIR & inAttribute_mLeftInstructionList,
-                                                                                      const GALGAS_string & inAttribute_mRightOperandLLVMName,
-                                                                                      const GALGAS_instructionListIR & inAttribute_mRightInstructionList,
-                                                                                      const GALGAS_location & inAttribute_mLocation
-                                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::class_func_new (const GALGAS_objectIR & inAttribute_mTargetOperand,
+                                                                                     const GALGAS_string & inAttribute_mLeftOperandLLVMName,
+                                                                                     const GALGAS_instructionListIR & inAttribute_mLeftInstructionList,
+                                                                                     const GALGAS_string & inAttribute_mRightOperandLLVMName,
+                                                                                     const GALGAS_instructionListIR & inAttribute_mRightInstructionList,
+                                                                                     const GALGAS_location & inAttribute_mLocation
+                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_shortCircuitAndOperationIR result ;
   if (inAttribute_mTargetOperand.isValid () && inAttribute_mLeftOperandLLVMName.isValid () && inAttribute_mLeftInstructionList.isValid () && inAttribute_mRightOperandLLVMName.isValid () && inAttribute_mRightInstructionList.isValid () && inAttribute_mLocation.isValid ()) {
     macroMyNew (result.mObjectPtr, cPtr_shortCircuitAndOperationIR (inAttribute_mTargetOperand, inAttribute_mLeftOperandLLVMName, inAttribute_mLeftInstructionList, inAttribute_mRightOperandLLVMName, inAttribute_mRightInstructionList, inAttribute_mLocation COMMA_THERE)) ;
@@ -16464,9 +16391,8 @@ acPtr_class * cPtr_shortCircuitAndOperationIR::duplicate (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ("shortCircuitAndOperationIR",
-                                                   & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ("shortCircuitAndOperationIR",
+                                                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16496,117 +16422,6 @@ GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::extractObje
       result = *p ;
     }else{
       inCompiler->castError ("shortCircuitAndOperationIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-typeComparisonResult GALGAS_shortCircuitAndOperationIR_2D_weak::objectCompare (const GALGAS_shortCircuitAndOperationIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR_2D_weak::GALGAS_shortCircuitAndOperationIR_2D_weak (void) :
-GALGAS_abstractInstructionIR_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR_2D_weak & GALGAS_shortCircuitAndOperationIR_2D_weak::operator = (const GALGAS_shortCircuitAndOperationIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR_2D_weak::GALGAS_shortCircuitAndOperationIR_2D_weak (const GALGAS_shortCircuitAndOperationIR & inSource) :
-GALGAS_abstractInstructionIR_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR_2D_weak GALGAS_shortCircuitAndOperationIR_2D_weak::constructor_nil (LOCATION_ARGS) {
-  GALGAS_shortCircuitAndOperationIR_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR_2D_weak::bang_shortCircuitAndOperationIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_shortCircuitAndOperationIR result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_shortCircuitAndOperationIR) ;
-      result = GALGAS_shortCircuitAndOperationIR ((cPtr_shortCircuitAndOperationIR *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @shortCircuitAndOperationIR-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_shortCircuitAndOperationIR_2D_weak ("shortCircuitAndOperationIR-weak",
-                                                           & kTypeDescriptor_GALGAS_abstractInstructionIR_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_shortCircuitAndOperationIR_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_shortCircuitAndOperationIR_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_shortCircuitAndOperationIR_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_shortCircuitAndOperationIR_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR_2D_weak GALGAS_shortCircuitAndOperationIR_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_shortCircuitAndOperationIR_2D_weak result ;
-  const GALGAS_shortCircuitAndOperationIR_2D_weak * p = (const GALGAS_shortCircuitAndOperationIR_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_shortCircuitAndOperationIR_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("shortCircuitAndOperationIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

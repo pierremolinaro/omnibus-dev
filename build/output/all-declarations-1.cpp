@@ -1,7 +1,7 @@
-#include "galgas2/Compiler.h"
-#include "galgas2/C_galgas_io.h"
-#include "galgas2/C_galgas_CLI_Options.h"
-#include "utilities/C_PrologueEpilogue.h"
+#include "Compiler.h"
+#include "C_galgas_io.h"
+#include "C_galgas_CLI_Options.h"
+#include "PrologueEpilogue.h"
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12,9 +12,9 @@
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_ (const GALGAS_string constinArgument_inKey,
-                                                                                                                             C_Lexique_omnibus_5F_lexique * inCompiler) {
+                                                                                                                             Lexique_omnibus_5F_lexique * inCompiler) {
   GALGAS_lstring var_key_3358 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     test_0 = GALGAS_bool (kIsNotEqual, var_key_3358.readProperty_string ().objectCompare (constinArgument_inKey)).boolEnum () ;
@@ -24,39 +24,39 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
       inCompiler->emitSemanticError (var_key_3358.readProperty_location (), GALGAS_string ("invalid key (found '").add_operation (var_key_3358.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("', required '"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (constinArgument_inKey, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GALGAS_string ("'"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
     }
   }
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_parse (Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
   inCompiler->resetTemplateString () ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_indexing (C_Lexique_omnibus_5F_lexique * inCompiler) {
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
 void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_ (GALGAS__32_lstringlist & outArgument_outPythonUtilityToolList,
-                                                                                                                                          C_Lexique_omnibus_5F_lexique * inCompiler) {
+                                                                                                                                          Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outPythonUtilityToolList.drop () ; // Release 'out' argument
   nt_configuration_5F_key_ (GALGAS_string ("PYTHON_UTILITIES"), inCompiler) ;
-  outArgument_outPythonUtilityToolList = GALGAS__32_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 93)) ;
+  outArgument_outPythonUtilityToolList = GALGAS__32_lstringlist::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 93)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
       GALGAS_lstring var_relativePath_3839 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
       GALGAS_lstring var_destinationFile_3885 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
       outArgument_outPythonUtilityToolList.addAssign_operation (var_relativePath_3839, var_destinationFile_3885  COMMA_SOURCE_FILE ("configuration.galgas", 99)) ;
     }else{
       repeatFlag_0 = false ;
@@ -66,14 +66,14 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_parse (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_configuration_5F_key_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
     }else{
       repeatFlag_0 = false ;
     }
@@ -83,14 +83,14 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_indexing (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_configuration_5F_key_indexing (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
     }else{
       repeatFlag_0 = false ;
     }
@@ -102,36 +102,36 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_ (GALGAS_ast & ioArgument_ioAST,
                                                                                                                                          GALGAS_lstringlist & outArgument_outImportedFileList,
                                                                                                                                          GALGAS_location & outArgument_outEndOfSourceFile,
-                                                                                                                                         C_Lexique_omnibus_5F_lexique * inCompiler) {
+                                                                                                                                         Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outImportedFileList.drop () ; // Release 'out' argument
   outArgument_outEndOfSourceFile.drop () ; // Release 'out' argument
-  GALGAS_location var_loc_4271 = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
+  GALGAS_location var_loc_4271 = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
   GALGAS__32_lstringlist var_python_5F_utilityToolList_4328 ;
   nt_python_5F_utility_5F_tool_5F_list_ (var_python_5F_utilityToolList_4328, inCompiler) ;
   nt_configuration_5F_key_ (GALGAS_string ("PYTHON_BUILD"), inCompiler) ;
   GALGAS_lstring var_python_5F_build_4411 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
   nt_configuration_5F_key_ (GALGAS_string ("LINKER_SCRIPT"), inCompiler) ;
   GALGAS_lstring var_linkerScript_4485 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
   nt_configuration_5F_key_ (GALGAS_string ("PANIC_CODE_TYPE_NAME"), inCompiler) ;
   GALGAS_lstring var_panicCodeTypeName_4564 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
   nt_configuration_5F_key_ (GALGAS_string ("PANIC_LINE_TYPE_NAME"), inCompiler) ;
   GALGAS_lstring var_panicLineTypeName_4649 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
   nt_configuration_5F_key_ (GALGAS_string ("POINTER_BIT_COUNT"), inCompiler) ;
   GALGAS_lbigint var_pointerSize_4731 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
   nt_configuration_5F_key_ (GALGAS_string ("DYNAMIC_ARRAY"), inCompiler) ;
   GALGAS_bool var_handleDynamicArray_4798 ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
     var_handleDynamicArray_4798 = GALGAS_bool (true) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
     var_handleDynamicArray_4798 = GALGAS_bool (false) ;
   } break ;
   default:
@@ -139,10 +139,10 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   }
   nt_configuration_5F_key_ (GALGAS_string ("SYSTEM_STACK_SIZE"), inCompiler) ;
   GALGAS_lbigint var_systemStackSize_4995 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
   nt_configuration_5F_key_ (GALGAS_string ("NOP"), inCompiler) ;
   GALGAS_lstring var_nopInstructionStringInLLVM_5062 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
   nt_configuration_5F_key_ (GALGAS_string ("BIT_BAND"), inCompiler) ;
   GALGAS_lbigint var_bitbandRegisterBaseAddress_5142 ;
   GALGAS_lbigint var_bitbandRegisterEndAddress_5186 ;
@@ -151,116 +151,116 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   GALGAS_lbigint var_bitbandRegisterBitMultiplier_5328 ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
-    var_bitbandRegisterBaseAddress_5142 = GALGAS_lbigint::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)) ;
-    var_bitbandRegisterEndAddress_5186 = GALGAS_lbigint::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)) ;
-    var_bitbandRegisterRelocationAddress_5229 = GALGAS_lbigint::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)) ;
-    var_bitbandRegisterOffsetMultiplier_5279 = GALGAS_lbigint::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)) ;
-    var_bitbandRegisterBitMultiplier_5328 = GALGAS_lbigint::constructor_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+    var_bitbandRegisterBaseAddress_5142 = GALGAS_lbigint::class_func_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)) ;
+    var_bitbandRegisterEndAddress_5186 = GALGAS_lbigint::class_func_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)) ;
+    var_bitbandRegisterRelocationAddress_5229 = GALGAS_lbigint::class_func_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)) ;
+    var_bitbandRegisterOffsetMultiplier_5279 = GALGAS_lbigint::class_func_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)) ;
+    var_bitbandRegisterBitMultiplier_5328 = GALGAS_lbigint::class_func_new (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)) ;
   } break ;
   case 2: {
     var_bitbandRegisterBaseAddress_5142 = inCompiler->synthetizedAttribute_bigInteger () ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
     var_bitbandRegisterEndAddress_5186 = inCompiler->synthetizedAttribute_bigInteger () ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
     var_bitbandRegisterRelocationAddress_5229 = inCompiler->synthetizedAttribute_bigInteger () ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
     var_bitbandRegisterOffsetMultiplier_5279 = inCompiler->synthetizedAttribute_bigInteger () ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
     var_bitbandRegisterBitMultiplier_5328 = inCompiler->synthetizedAttribute_bigInteger () ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
   } break ;
   default:
     break ;
   }
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_HANDLER"), inCompiler) ;
   GALGAS_lstring var_serviceHandler_5960 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_SYSTEM_STACK_SIZE"), inCompiler) ;
   GALGAS_lbigint var_servicePushedRegisterByteSize_6047 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_HEADER"), inCompiler) ;
   GALGAS_lstring var_serviceDispatcherHeader_6150 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_DISPATCHER_ENTRY"), inCompiler) ;
   GALGAS_lstring var_serviceDispatcherEntry_6246 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_NO_RETURNED_VALUE"), inCompiler) ;
   GALGAS_lstring var_serviceEntryNoReturnedValue_6348 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SERVICE_ENTRY_WITH_RETURNED_VALUE"), inCompiler) ;
   GALGAS_lstring var_serviceEntryReturnValue_6457 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_HANDLER"), inCompiler) ;
   GALGAS_lstring var_sectionHandler_6544 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_SYSTEM_STACK_SIZE"), inCompiler) ;
   GALGAS_lbigint var_sectionPushedRegisterByteSize_6631 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_HEADER"), inCompiler) ;
   GALGAS_lstring var_sectionDispatcherHeader_6734 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_DISPATCHER_ENTRY"), inCompiler) ;
   GALGAS_lstring var_sectionDispatcherEntry_6830 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_UNKNOWN_MODE"), inCompiler) ;
   GALGAS_lstring var_sectionDispatcherInvocationFromAnyMode_6932 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
   nt_configuration_5F_key_ (GALGAS_string ("SECTION_ENTRY_FROM_USER_MODE"), inCompiler) ;
   GALGAS_lstring var_sectionDispatcherInvocationFromUserMode_7047 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_HANDLER"), inCompiler) ;
   GALGAS_lstring var_xtrInterruptHandler_7152 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPT_USER_STACK_SIZE"), inCompiler) ;
   GALGAS_lbigint var_stackedUserRegisterOnInterruptByteSize_7244 = inCompiler->synthetizedAttribute_bigInteger () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
   nt_configuration_5F_key_ (GALGAS_string ("UNUSED_INTERRUPT"), inCompiler) ;
   GALGAS_lstring var_undefinedInterruptHandler_7347 = inCompiler->synthetizedAttribute_tokenString () ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
   nt_configuration_5F_key_ (GALGAS_string ("CPP_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_C_5F_definitionFiles_7431 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 186)) ;
+  GALGAS_lstringlist var_C_5F_definitionFiles_7431 = GALGAS_lstringlist::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 186)) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
       GALGAS_lstring var_fileRelativePath_7497 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
       var_C_5F_definitionFiles_7431.addAssign_operation (var_fileRelativePath_7497  COMMA_SOURCE_FILE ("configuration.galgas", 190)) ;
     }else{
       repeatFlag_0 = false ;
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("S_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_S_5F_definitionFiles_7623 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 193)) ;
+  GALGAS_lstringlist var_S_5F_definitionFiles_7623 = GALGAS_lstringlist::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 193)) ;
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
       GALGAS_lstring var_fileRelativePath_7689 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
       var_S_5F_definitionFiles_7623.addAssign_operation (var_fileRelativePath_7689  COMMA_SOURCE_FILE ("configuration.galgas", 197)) ;
     }else{
       repeatFlag_1 = false ;
     }
   }
   nt_configuration_5F_key_ (GALGAS_string ("LL_FILES"), inCompiler) ;
-  GALGAS_lstringlist var_LL_5F_definitionFiles_7816 = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 200)) ;
+  GALGAS_lstringlist var_LL_5F_definitionFiles_7816 = GALGAS_lstringlist::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 200)) ;
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
       GALGAS_lstring var_fileRelativePath_7883 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
       var_LL_5F_definitionFiles_7816.addAssign_operation (var_fileRelativePath_7883  COMMA_SOURCE_FILE ("configuration.galgas", 204)) ;
     }else{
       repeatFlag_2 = false ;
     }
   }
-  outArgument_outImportedFileList = GALGAS_lstringlist::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 206)) ;
+  outArgument_outImportedFileList = GALGAS_lstringlist::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 206)) ;
   nt_configuration_5F_key_ (GALGAS_string ("OMNIBUS_FILES"), inCompiler) ;
   bool repeatFlag_3 = true ;
   while (repeatFlag_3) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
       GALGAS_lstring var_relativeFilePath_8067 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
       outArgument_outImportedFileList.addAssign_operation (var_relativeFilePath_8067  COMMA_SOURCE_FILE ("configuration.galgas", 211)) ;
     }else{
       repeatFlag_3 = false ;
@@ -282,91 +282,91 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   if (kBoolFalse == test_4) {
     var_ptrSize_8241 = var_pointerSize_4731.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 218)) ;
   }
-  GALGAS_targetParameters var_parameters_8419 = GALGAS_targetParameters::constructor_new (var_loc_4271, var_python_5F_utilityToolList_4328, var_python_5F_build_4411, var_linkerScript_4485, var_ptrSize_8241, var_handleDynamicArray_4798, var_systemStackSize_4995, var_stackedUserRegisterOnInterruptByteSize_7244, var_nopInstructionStringInLLVM_5062, var_bitbandRegisterBaseAddress_5142, var_bitbandRegisterEndAddress_5186, var_bitbandRegisterRelocationAddress_5229, var_bitbandRegisterOffsetMultiplier_5279, var_bitbandRegisterBitMultiplier_5328, var_sectionHandler_6544, var_sectionPushedRegisterByteSize_6631, var_sectionDispatcherHeader_6734, var_sectionDispatcherEntry_6830, var_sectionDispatcherInvocationFromAnyMode_6932, var_sectionDispatcherInvocationFromUserMode_7047, var_C_5F_definitionFiles_7431, var_S_5F_definitionFiles_7623, var_LL_5F_definitionFiles_7816, var_xtrInterruptHandler_7152, var_undefinedInterruptHandler_7347, var_serviceHandler_5960, var_servicePushedRegisterByteSize_6047, var_serviceDispatcherEntry_6246, var_serviceDispatcherHeader_6150, var_serviceEntryNoReturnedValue_6348, var_serviceEntryReturnValue_6457, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 220)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::constructor_new (var_panicCodeTypeName_4564, var_panicLineTypeName_4649, var_parameters_8419, var_interruptionConfigurationList_8170  COMMA_SOURCE_FILE ("configuration.galgas", 253))  COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
-  outArgument_outEndOfSourceFile = GALGAS_location::constructor_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 259)) ;
-  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::constructor_new (GALGAS_lstring::constructor_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_xtrInterruptHandler_7152.readProperty_location (), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_interruptConstantList_8205  COMMA_SOURCE_FILE ("configuration.galgas", 260))  COMMA_SOURCE_FILE ("configuration.galgas", 260)) ;
+  GALGAS_targetParameters var_parameters_8419 = GALGAS_targetParameters::class_func_new (var_loc_4271, var_python_5F_utilityToolList_4328, var_python_5F_build_4411, var_linkerScript_4485, var_ptrSize_8241, var_handleDynamicArray_4798, var_systemStackSize_4995, var_stackedUserRegisterOnInterruptByteSize_7244, var_nopInstructionStringInLLVM_5062, var_bitbandRegisterBaseAddress_5142, var_bitbandRegisterEndAddress_5186, var_bitbandRegisterRelocationAddress_5229, var_bitbandRegisterOffsetMultiplier_5279, var_bitbandRegisterBitMultiplier_5328, var_sectionHandler_6544, var_sectionPushedRegisterByteSize_6631, var_sectionDispatcherHeader_6734, var_sectionDispatcherEntry_6830, var_sectionDispatcherInvocationFromAnyMode_6932, var_sectionDispatcherInvocationFromUserMode_7047, var_C_5F_definitionFiles_7431, var_S_5F_definitionFiles_7623, var_LL_5F_definitionFiles_7816, var_xtrInterruptHandler_7152, var_undefinedInterruptHandler_7347, var_serviceHandler_5960, var_servicePushedRegisterByteSize_6047, var_serviceDispatcherEntry_6246, var_serviceDispatcherHeader_6150, var_serviceEntryNoReturnedValue_6348, var_serviceEntryReturnValue_6457, inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 220)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_configurationDeclarationAST::class_func_new (var_panicCodeTypeName_4564, var_panicLineTypeName_4649, var_parameters_8419, var_interruptionConfigurationList_8170  COMMA_SOURCE_FILE ("configuration.galgas", 253))  COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
+  outArgument_outEndOfSourceFile = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 259)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssign_operation (GALGAS_enumerationDeclarationAST::class_func_new (GALGAS_lstring::class_func_new (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_xtrInterruptHandler_7152.readProperty_location (), inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_interruptConstantList_8205  COMMA_SOURCE_FILE ("configuration.galgas", 260))  COMMA_SOURCE_FILE ("configuration.galgas", 260)) ;
 }
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_parse (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_python_5F_utility_5F_tool_5F_list_parse (inCompiler) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
   } break ;
   default:
     break ;
   }
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
   } break ;
   default:
     break ;
   }
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
   nt_configuration_5F_key_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
     }else{
       repeatFlag_0 = false ;
     }
@@ -375,7 +375,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
     }else{
       repeatFlag_1 = false ;
     }
@@ -384,7 +384,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
     }else{
       repeatFlag_2 = false ;
     }
@@ -393,7 +393,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_3 = true ;
   while (repeatFlag_3) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
     }else{
       repeatFlag_3 = false ;
     }
@@ -404,83 +404,83 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_indexing (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_python_5F_utility_5F_tool_5F_list_indexing (inCompiler) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
   } break ;
   default:
     break ;
   }
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
   switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
   case 1: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
   } break ;
   case 2: {
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
-    inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
   } break ;
   default:
     break ;
   }
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
-  inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
   nt_configuration_5F_key_indexing (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
     }else{
       repeatFlag_0 = false ;
     }
@@ -489,7 +489,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_1 = true ;
   while (repeatFlag_1) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
     }else{
       repeatFlag_1 = false ;
     }
@@ -498,7 +498,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_2 = true ;
   while (repeatFlag_2) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
     }else{
       repeatFlag_2 = false ;
     }
@@ -507,7 +507,7 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
   bool repeatFlag_3 = true ;
   while (repeatFlag_3) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
     }else{
       repeatFlag_3 = false ;
     }
@@ -519,27 +519,27 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_ (GALGAS_interruptionConfigurationList & outArgument_interruptionConfigurationList,
                                                                                                                             GALGAS_enumerationConstantList & outArgument_outEnumerationConstantList,
-                                                                                                                            C_Lexique_omnibus_5F_lexique * inCompiler) {
+                                                                                                                            Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_interruptionConfigurationList.drop () ; // Release 'out' argument
   outArgument_outEnumerationConstantList.drop () ; // Release 'out' argument
-  outArgument_interruptionConfigurationList = GALGAS_interruptionConfigurationList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 272)) ;
-  outArgument_outEnumerationConstantList = GALGAS_enumerationConstantList::constructor_emptyList (SOURCE_FILE ("configuration.galgas", 273)) ;
+  outArgument_interruptionConfigurationList = GALGAS_interruptionConfigurationList::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 272)) ;
+  outArgument_outEnumerationConstantList = GALGAS_enumerationConstantList::class_func_emptyList (SOURCE_FILE ("configuration.galgas", 273)) ;
   nt_configuration_5F_key_ (GALGAS_string ("INTERRUPTS"), inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
       GALGAS_lstring var_interruptName_10219 = inCompiler->synthetizedAttribute_tokenString () ;
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
       GALGAS_interruptionPanicCode var_interruptionPanicCode_10266 ;
       switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
       case 1: {
-        var_interruptionPanicCode_10266 = GALGAS_interruptionPanicCode::constructor_noCode (SOURCE_FILE ("configuration.galgas", 280)) ;
+        var_interruptionPanicCode_10266 = GALGAS_interruptionPanicCode::class_func_noCode (SOURCE_FILE ("configuration.galgas", 280)) ;
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
         GALGAS_lbigint var_panicCode_10386 = inCompiler->synthetizedAttribute_bigInteger () ;
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
-        var_interruptionPanicCode_10266 = GALGAS_interruptionPanicCode::constructor_code (var_panicCode_10386  COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+        var_interruptionPanicCode_10266 = GALGAS_interruptionPanicCode::class_func_code (var_panicCode_10386  COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
         outArgument_outEnumerationConstantList.addAssign_operation (var_interruptName_10219, var_panicCode_10386.readProperty_bigint ()  COMMA_SOURCE_FILE ("configuration.galgas", 285)) ;
       } break ;
       default:
@@ -554,18 +554,18 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_configuration_5F_key_parse (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
       switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
       } break ;
       default:
         break ;
@@ -579,18 +579,18 @@ void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_
 
 //---------------------------------------------------------------------------------------------------------------------*
 
-void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_indexing (C_Lexique_omnibus_5F_lexique * inCompiler) {
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
   nt_configuration_5F_key_indexing (inCompiler) ;
   bool repeatFlag_0 = true ;
   while (repeatFlag_0) {
     if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
-      inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
       switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
       case 1: {
       } break ;
       case 2: {
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
-        inCompiler->acceptTerminal (C_Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
       } break ;
       default:
         break ;
@@ -639,7 +639,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_noCode (UNUSED_LOCATION_ARGS) {
+GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::class_func_noCode (UNUSED_LOCATION_ARGS) {
   GALGAS_interruptionPanicCode result ;
   result.mEnum = kEnum_noCode ;
   return result ;
@@ -647,8 +647,8 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_noCode (U
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::constructor_code (const GALGAS_lbigint & inAssociatedValue0
-                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::class_func_code (const GALGAS_lbigint & inAssociatedValue0
+                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_interruptionPanicCode result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_code ;
@@ -746,9 +746,8 @@ typeComparisonResult GALGAS_interruptionPanicCode::objectCompare (const GALGAS_i
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_interruptionPanicCode ("interruptionPanicCode",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionPanicCode ("interruptionPanicCode",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -792,7 +791,7 @@ GALGAS_interruptionPanicCode GALGAS_interruptionPanicCode::extractObject (const 
 class cCollectionElement_interruptionConfigurationList : public cCollectionElement {
   public: GALGAS_interruptionConfigurationList_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_interruptionConfigurationList (const GALGAS_lstring & in_mInterruptName,
                                                             const GALGAS_interruptionPanicCode & in_mInterruptionPanicCode
                                                             COMMA_LOCATION_ARGS) ;
@@ -876,15 +875,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_interruptionConfigurationList (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                      const GALGAS_interruptionPanicCode & inOperand1
-                                                                                                      COMMA_LOCATION_ARGS) {
+GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                                     const GALGAS_interruptionPanicCode & inOperand1
+                                                                                                     COMMA_LOCATION_ARGS) {
   GALGAS_interruptionConfigurationList result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_interruptionConfigurationList (capCollectionElementArray ()) ;
@@ -1086,7 +1085,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::add_o
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                     Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::constructor_emptyList (THERE) ;
+  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1096,7 +1095,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::gette
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                     Compiler * inCompiler
                                                                                                     COMMA_LOCATION_ARGS) const {
-  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::constructor_emptyList (THERE) ;
+  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1106,7 +1105,7 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::gette
 GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                                   Compiler * inCompiler
                                                                                                   COMMA_LOCATION_ARGS) const {
-  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::constructor_emptyList (THERE) ;
+  GALGAS_interruptionConfigurationList result = GALGAS_interruptionConfigurationList::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1221,9 +1220,8 @@ GALGAS_interruptionPanicCode cEnumerator_interruptionConfigurationList::current_
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_interruptionConfigurationList ("interruptionConfigurationList",
-                                                      nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptionConfigurationList ("interruptionConfigurationList",
+                                                                                     nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1315,9 +1313,8 @@ acStrongPtr_class (THERE) {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractDeclarationAST ("abstractDeclarationAST",
-                                               nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclarationAST ("abstractDeclarationAST",
+                                                                              nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1398,7 +1395,7 @@ AC_GALGAS_weak_reference (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_abstractDeclarationAST_2D_weak GALGAS_abstractDeclarationAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_abstractDeclarationAST_2D_weak GALGAS_abstractDeclarationAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_abstractDeclarationAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -1426,9 +1423,8 @@ GALGAS_abstractDeclarationAST GALGAS_abstractDeclarationAST_2D_weak::bang_abstra
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak ("abstractDeclarationAST-weak",
-                                                       nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak ("abstractDeclarationAST-weak",
+                                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1472,7 +1468,7 @@ GALGAS_abstractDeclarationAST_2D_weak GALGAS_abstractDeclarationAST_2D_weak::ext
 class cCollectionElement_declarationListAST : public cCollectionElement {
   public: GALGAS_declarationListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_declarationListAST (const GALGAS_abstractDeclarationAST & in_mDeclaration
                                                  COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_declarationListAST (const GALGAS_declarationListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -1550,14 +1546,14 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_declarationListAST GALGAS_declarationListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_declarationListAST GALGAS_declarationListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_declarationListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_declarationListAST GALGAS_declarationListAST::constructor_listWithValue (const GALGAS_abstractDeclarationAST & inOperand0
-                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_declarationListAST GALGAS_declarationListAST::class_func_listWithValue (const GALGAS_abstractDeclarationAST & inOperand0
+                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_declarationListAST result ;
   if (inOperand0.isValid ()) {
     result = GALGAS_declarationListAST (capCollectionElementArray ()) ;
@@ -1737,7 +1733,7 @@ GALGAS_declarationListAST GALGAS_declarationListAST::add_operation (const GALGAS
 GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_declarationListAST result = GALGAS_declarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_declarationListAST result = GALGAS_declarationListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1747,7 +1743,7 @@ GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListWithRange (co
 GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_declarationListAST result = GALGAS_declarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_declarationListAST result = GALGAS_declarationListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1757,7 +1753,7 @@ GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListFromIndex (co
 GALGAS_declarationListAST GALGAS_declarationListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                             Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_declarationListAST result = GALGAS_declarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_declarationListAST result = GALGAS_declarationListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -1835,9 +1831,8 @@ GALGAS_abstractDeclarationAST cEnumerator_declarationListAST::current_mDeclarati
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_declarationListAST ("declarationListAST",
-                                           nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_declarationListAST ("declarationListAST",
+                                                                          nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2248,7 +2243,7 @@ void GALGAS_extendStaticArrayDeclarationDictAST::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_extendStaticArrayDeclarationDictAST GALGAS_extendStaticArrayDeclarationDictAST::constructor_emptyDict (LOCATION_ARGS) {
+GALGAS_extendStaticArrayDeclarationDictAST GALGAS_extendStaticArrayDeclarationDictAST::class_func_emptyDict (LOCATION_ARGS) {
   GALGAS_extendStaticArrayDeclarationDictAST result ;
   macroMyNew (result.mSharedDict, cSharedDictRoot_extendStaticArrayDeclarationDictAST (THERE)) ;
   return result ;
@@ -2638,9 +2633,8 @@ bool GALGAS_extendStaticArrayDeclarationDictAST::optional_searchKey (const GALGA
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_extendStaticArrayDeclarationDictAST ("extendStaticArrayDeclarationDictAST",
-                                                            nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticArrayDeclarationDictAST ("extendStaticArrayDeclarationDictAST",
+                                                                                           nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2684,7 +2678,7 @@ GALGAS_extendStaticArrayDeclarationDictAST GALGAS_extendStaticArrayDeclarationDi
 class cCollectionElement_requiredFunctionDeclarationListAST : public cCollectionElement {
   public: GALGAS_requiredFunctionDeclarationListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_requiredFunctionDeclarationListAST (const GALGAS_lstring & in_mName,
                                                                  const GALGAS_mode & in_mExecutionMode,
                                                                  const GALGAS_bool & in_mIsExported,
@@ -2786,18 +2780,18 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_requiredFunctionDeclarationListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                                const GALGAS_mode & inOperand1,
-                                                                                                                const GALGAS_bool & inOperand2,
-                                                                                                                const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                                const GALGAS_location & inOperand4
-                                                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                                               const GALGAS_mode & inOperand1,
+                                                                                                               const GALGAS_bool & inOperand2,
+                                                                                                               const GALGAS_routineFormalArgumentListAST & inOperand3,
+                                                                                                               const GALGAS_location & inOperand4
+                                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_requiredFunctionDeclarationListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     result = GALGAS_requiredFunctionDeclarationListAST (capCollectionElementArray ()) ;
@@ -3065,7 +3059,7 @@ GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationList
 GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                               Compiler * inCompiler
                                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -3075,7 +3069,7 @@ GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationList
 GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                               Compiler * inCompiler
                                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -3085,7 +3079,7 @@ GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationList
 GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                                             Compiler * inCompiler
                                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_requiredFunctionDeclarationListAST result = GALGAS_requiredFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -3311,9 +3305,8 @@ GALGAS_location cEnumerator_requiredFunctionDeclarationListAST::current_mEndOfPr
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_requiredFunctionDeclarationListAST ("requiredFunctionDeclarationListAST",
-                                                           nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredFunctionDeclarationListAST ("requiredFunctionDeclarationListAST",
+                                                                                          nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3357,7 +3350,7 @@ GALGAS_requiredFunctionDeclarationListAST GALGAS_requiredFunctionDeclarationList
 class cCollectionElement_externFunctionDeclarationListAST : public cCollectionElement {
   public: GALGAS_externFunctionDeclarationListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_externFunctionDeclarationListAST (const GALGAS_lstring & in_mExternProcedureName,
                                                                const GALGAS_mode & in_mMode,
                                                                const GALGAS_lstringlist & in_mAttributeList,
@@ -3471,20 +3464,20 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_externFunctionDeclarationListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                            const GALGAS_mode & inOperand1,
-                                                                                                            const GALGAS_lstringlist & inOperand2,
-                                                                                                            const GALGAS_routineFormalArgumentListAST & inOperand3,
-                                                                                                            const GALGAS_lstring & inOperand4,
-                                                                                                            const GALGAS_lstring & inOperand5,
-                                                                                                            const GALGAS_location & inOperand6
-                                                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                                           const GALGAS_mode & inOperand1,
+                                                                                                           const GALGAS_lstringlist & inOperand2,
+                                                                                                           const GALGAS_routineFormalArgumentListAST & inOperand3,
+                                                                                                           const GALGAS_lstring & inOperand4,
+                                                                                                           const GALGAS_lstring & inOperand5,
+                                                                                                           const GALGAS_location & inOperand6
+                                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_externFunctionDeclarationListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid ()) {
     result = GALGAS_externFunctionDeclarationListAST (capCollectionElementArray ()) ;
@@ -3796,7 +3789,7 @@ GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST:
 GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                                           Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -3806,7 +3799,7 @@ GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST:
 GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                                           Compiler * inCompiler
                                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -3816,7 +3809,7 @@ GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST:
 GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                                         Compiler * inCompiler
                                                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_externFunctionDeclarationListAST result = GALGAS_externFunctionDeclarationListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -4116,9 +4109,8 @@ GALGAS_location cEnumerator_externFunctionDeclarationListAST::current_mEndOfProc
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_externFunctionDeclarationListAST ("externFunctionDeclarationListAST",
-                                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externFunctionDeclarationListAST ("externFunctionDeclarationListAST",
+                                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4162,7 +4154,7 @@ GALGAS_externFunctionDeclarationListAST GALGAS_externFunctionDeclarationListAST:
 class cCollectionElement_taskListAST : public cCollectionElement {
   public: GALGAS_taskListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_taskListAST (const GALGAS_lstring & in_mTaskName,
                                           const GALGAS_lstringlist & in_mLowerPriorityTaskList,
                                           const GALGAS_lbigint & in_mStackSize,
@@ -4288,22 +4280,22 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_taskListAST GALGAS_taskListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_taskListAST GALGAS_taskListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_taskListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_taskListAST GALGAS_taskListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                  const GALGAS_lstringlist & inOperand1,
-                                                                  const GALGAS_lbigint & inOperand2,
-                                                                  const GALGAS_taskSetupListAST & inOperand3,
-                                                                  const GALGAS_taskSetupListAST & inOperand4,
-                                                                  const GALGAS_taskSetupListAST & inOperand5,
-                                                                  const GALGAS_syncInstructionBranchListAST & inOperand6,
-                                                                  const GALGAS_location & inOperand7,
-                                                                  const GALGAS_bool & inOperand8
-                                                                  COMMA_LOCATION_ARGS) {
+GALGAS_taskListAST GALGAS_taskListAST::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                 const GALGAS_lstringlist & inOperand1,
+                                                                 const GALGAS_lbigint & inOperand2,
+                                                                 const GALGAS_taskSetupListAST & inOperand3,
+                                                                 const GALGAS_taskSetupListAST & inOperand4,
+                                                                 const GALGAS_taskSetupListAST & inOperand5,
+                                                                 const GALGAS_syncInstructionBranchListAST & inOperand6,
+                                                                 const GALGAS_location & inOperand7,
+                                                                 const GALGAS_bool & inOperand8
+                                                                 COMMA_LOCATION_ARGS) {
   GALGAS_taskListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid () && inOperand5.isValid () && inOperand6.isValid () && inOperand7.isValid () && inOperand8.isValid ()) {
     result = GALGAS_taskListAST (capCollectionElementArray ()) ;
@@ -4659,7 +4651,7 @@ GALGAS_taskListAST GALGAS_taskListAST::add_operation (const GALGAS_taskListAST &
 GALGAS_taskListAST GALGAS_taskListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                 Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
+  GALGAS_taskListAST result = GALGAS_taskListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -4669,7 +4661,7 @@ GALGAS_taskListAST GALGAS_taskListAST::getter_subListWithRange (const GALGAS_ran
 GALGAS_taskListAST GALGAS_taskListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                 Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
+  GALGAS_taskListAST result = GALGAS_taskListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -4679,7 +4671,7 @@ GALGAS_taskListAST GALGAS_taskListAST::getter_subListFromIndex (const GALGAS_uin
 GALGAS_taskListAST GALGAS_taskListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_taskListAST result = GALGAS_taskListAST::constructor_emptyList (THERE) ;
+  GALGAS_taskListAST result = GALGAS_taskListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5053,9 +5045,8 @@ GALGAS_bool cEnumerator_taskListAST::current_mAutoStart (LOCATION_ARGS) const {
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_taskListAST ("taskListAST",
-                                    nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskListAST ("taskListAST",
+                                                                   nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5099,7 +5090,7 @@ GALGAS_taskListAST GALGAS_taskListAST::extractObject (const GALGAS_object & inOb
 class cCollectionElement_checkTargetListAST : public cCollectionElement {
   public: GALGAS_checkTargetListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_checkTargetListAST (const GALGAS_location & in_mTargetConstructLocation,
                                                  const GALGAS_lstringlist & in_mAcceptedTargetList
                                                  COMMA_LOCATION_ARGS) ;
@@ -5183,15 +5174,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_checkTargetListAST GALGAS_checkTargetListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_checkTargetListAST GALGAS_checkTargetListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_checkTargetListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_checkTargetListAST GALGAS_checkTargetListAST::constructor_listWithValue (const GALGAS_location & inOperand0,
-                                                                                const GALGAS_lstringlist & inOperand1
-                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_checkTargetListAST GALGAS_checkTargetListAST::class_func_listWithValue (const GALGAS_location & inOperand0,
+                                                                               const GALGAS_lstringlist & inOperand1
+                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_checkTargetListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_checkTargetListAST (capCollectionElementArray ()) ;
@@ -5393,7 +5384,7 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::add_operation (const GALGAS
 GALGAS_checkTargetListAST GALGAS_checkTargetListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::constructor_emptyList (THERE) ;
+  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5403,7 +5394,7 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::getter_subListWithRange (co
 GALGAS_checkTargetListAST GALGAS_checkTargetListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::constructor_emptyList (THERE) ;
+  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5413,7 +5404,7 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::getter_subListFromIndex (co
 GALGAS_checkTargetListAST GALGAS_checkTargetListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                             Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::constructor_emptyList (THERE) ;
+  GALGAS_checkTargetListAST result = GALGAS_checkTargetListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5528,9 +5519,8 @@ GALGAS_lstringlist cEnumerator_checkTargetListAST::current_mAcceptedTargetList (
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_checkTargetListAST ("checkTargetListAST",
-                                           nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkTargetListAST ("checkTargetListAST",
+                                                                          nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5574,7 +5564,7 @@ GALGAS_checkTargetListAST GALGAS_checkTargetListAST::extractObject (const GALGAS
 class cCollectionElement_driverDeclarationListAST : public cCollectionElement {
   public: GALGAS_driverDeclarationListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_driverDeclarationListAST (const GALGAS_driverDeclarationAST & in_mDriver
                                                        COMMA_LOCATION_ARGS) ;
   public: cCollectionElement_driverDeclarationListAST (const GALGAS_driverDeclarationListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
@@ -5652,14 +5642,14 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_driverDeclarationListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::constructor_listWithValue (const GALGAS_driverDeclarationAST & inOperand0
-                                                                                            COMMA_LOCATION_ARGS) {
+GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::class_func_listWithValue (const GALGAS_driverDeclarationAST & inOperand0
+                                                                                           COMMA_LOCATION_ARGS) {
   GALGAS_driverDeclarationListAST result ;
   if (inOperand0.isValid ()) {
     result = GALGAS_driverDeclarationListAST (capCollectionElementArray ()) ;
@@ -5839,7 +5829,7 @@ GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::add_operation (
 GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                           Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5849,7 +5839,7 @@ GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::getter_subListW
 GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                           Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const {
-  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5859,7 +5849,7 @@ GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::getter_subListF
 GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                         Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const {
-  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverDeclarationListAST result = GALGAS_driverDeclarationListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -5937,9 +5927,8 @@ GALGAS_driverDeclarationAST cEnumerator_driverDeclarationListAST::current_mDrive
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_driverDeclarationListAST ("driverDeclarationListAST",
-                                                 nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverDeclarationListAST ("driverDeclarationListAST",
+                                                                                nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5983,7 +5972,7 @@ GALGAS_driverDeclarationListAST GALGAS_driverDeclarationListAST::extractObject (
 class cCollectionElement_driverInstanciationListAST : public cCollectionElement {
   public: GALGAS_driverInstanciationListAST_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_driverInstanciationListAST (const GALGAS_lstring & in_mDriverName,
                                                          const GALGAS_driverInstanciationArgumentListAST & in_mDriverInstanciationArgumentList
                                                          COMMA_LOCATION_ARGS) ;
@@ -6067,15 +6056,15 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_driverInstanciationListAST (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::constructor_listWithValue (const GALGAS_lstring & inOperand0,
-                                                                                                const GALGAS_driverInstanciationArgumentListAST & inOperand1
-                                                                                                COMMA_LOCATION_ARGS) {
+GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::class_func_listWithValue (const GALGAS_lstring & inOperand0,
+                                                                                               const GALGAS_driverInstanciationArgumentListAST & inOperand1
+                                                                                               COMMA_LOCATION_ARGS) {
   GALGAS_driverInstanciationListAST result ;
   if (inOperand0.isValid () && inOperand1.isValid ()) {
     result = GALGAS_driverInstanciationListAST (capCollectionElementArray ()) ;
@@ -6277,7 +6266,7 @@ GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::add_operati
 GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::getter_subListWithRange (const GALGAS_range & inRange,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -6287,7 +6276,7 @@ GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::getter_subL
 GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -6297,7 +6286,7 @@ GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::getter_subL
 GALGAS_driverInstanciationListAST GALGAS_driverInstanciationListAST::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::constructor_emptyList (THERE) ;
+  GALGAS_driverInstanciationListAST result = GALGAS_driverInstanciationListAST::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -6412,9 +6401,8 @@ GALGAS_driverInstanciationArgumentListAST cEnumerator_driverInstanciationListAST
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_driverInstanciationListAST ("driverInstanciationListAST",
-                                                   nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciationListAST ("driverInstanciationListAST",
+                                                                                  nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6504,7 +6492,7 @@ GALGAS_controlRegisterUserAccesMapAST & GALGAS_controlRegisterUserAccesMapAST::o
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterUserAccesMapAST GALGAS_controlRegisterUserAccesMapAST::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_controlRegisterUserAccesMapAST GALGAS_controlRegisterUserAccesMapAST::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_controlRegisterUserAccesMapAST result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -6512,8 +6500,8 @@ GALGAS_controlRegisterUserAccesMapAST GALGAS_controlRegisterUserAccesMapAST::con
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterUserAccesMapAST GALGAS_controlRegisterUserAccesMapAST::constructor_mapWithMapToOverride (const GALGAS_controlRegisterUserAccesMapAST & inMapToOverride
-                                                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_controlRegisterUserAccesMapAST GALGAS_controlRegisterUserAccesMapAST::class_func_mapWithMapToOverride (const GALGAS_controlRegisterUserAccesMapAST & inMapToOverride
+                                                                                                              COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterUserAccesMapAST result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -6639,9 +6627,8 @@ bool GALGAS_controlRegisterUserAccesMapAST::optional_searchKey (const GALGAS_str
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST ("controlRegisterUserAccesMapAST",
-                                                       nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST ("controlRegisterUserAccesMapAST",
+                                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6727,7 +6714,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineKind GALGAS_routineKind::constructor_function (UNUSED_LOCATION_ARGS) {
+GALGAS_routineKind GALGAS_routineKind::class_func_function (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
   result.mEnum = kEnum_function ;
   return result ;
@@ -6735,7 +6722,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_function (UNUSED_LOCATION_ARG
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineKind GALGAS_routineKind::constructor_section (UNUSED_LOCATION_ARGS) {
+GALGAS_routineKind GALGAS_routineKind::class_func_section (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
   result.mEnum = kEnum_section ;
   return result ;
@@ -6743,7 +6730,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_section (UNUSED_LOCATION_ARGS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineKind GALGAS_routineKind::constructor_service (UNUSED_LOCATION_ARGS) {
+GALGAS_routineKind GALGAS_routineKind::class_func_service (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
   result.mEnum = kEnum_service ;
   return result ;
@@ -6751,7 +6738,7 @@ GALGAS_routineKind GALGAS_routineKind::constructor_service (UNUSED_LOCATION_ARGS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineKind GALGAS_routineKind::constructor_primitive (UNUSED_LOCATION_ARGS) {
+GALGAS_routineKind GALGAS_routineKind::class_func_primitive (UNUSED_LOCATION_ARGS) {
   GALGAS_routineKind result ;
   result.mEnum = kEnum_primitive ;
   return result ;
@@ -6850,9 +6837,8 @@ typeComparisonResult GALGAS_routineKind::objectCompare (const GALGAS_routineKind
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineKind ("routineKind",
-                                    nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineKind ("routineKind",
+                                                                   nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6969,7 +6955,7 @@ GALGAS_flatValuedObjectMap & GALGAS_flatValuedObjectMap::operator = (const GALGA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_flatValuedObjectMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -6977,8 +6963,8 @@ GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::constructor_emptyMap (LOC
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::constructor_mapWithMapToOverride (const GALGAS_flatValuedObjectMap & inMapToOverride
-                                                                                         COMMA_LOCATION_ARGS) {
+GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::class_func_mapWithMapToOverride (const GALGAS_flatValuedObjectMap & inMapToOverride
+                                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_flatValuedObjectMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -7267,9 +7253,8 @@ bool GALGAS_flatValuedObjectMap::optional_searchKey (const GALGAS_string & inKey
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_flatValuedObjectMap ("flatValuedObjectMap",
-                                            nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_flatValuedObjectMap ("flatValuedObjectMap",
+                                                                           nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7313,7 +7298,7 @@ GALGAS_flatValuedObjectMap GALGAS_flatValuedObjectMap::extractObject (const GALG
 class cCollectionElement_scopeStack : public cCollectionElement {
   public: GALGAS_scopeStack_2D_element mObject ;
 
-//--- Constructors
+//--- Class functions
   public: cCollectionElement_scopeStack (const GALGAS_scopeKind & in_mScopeKind,
                                          const GALGAS_bool & in_mFirstBranch,
                                          const GALGAS_referenceStateMap & in_mInitialStateMap,
@@ -7415,18 +7400,18 @@ AC_GALGAS_list (inSharedArray) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_scopeStack GALGAS_scopeStack::constructor_emptyList (UNUSED_LOCATION_ARGS) {
+GALGAS_scopeStack GALGAS_scopeStack::class_func_emptyList (UNUSED_LOCATION_ARGS) {
   return GALGAS_scopeStack (capCollectionElementArray ()) ;
 }
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_scopeStack GALGAS_scopeStack::constructor_listWithValue (const GALGAS_scopeKind & inOperand0,
-                                                                const GALGAS_bool & inOperand1,
-                                                                const GALGAS_referenceStateMap & inOperand2,
-                                                                const GALGAS_referenceStateMap & inOperand3,
-                                                                const GALGAS_lstringlist & inOperand4
-                                                                COMMA_LOCATION_ARGS) {
+GALGAS_scopeStack GALGAS_scopeStack::class_func_listWithValue (const GALGAS_scopeKind & inOperand0,
+                                                               const GALGAS_bool & inOperand1,
+                                                               const GALGAS_referenceStateMap & inOperand2,
+                                                               const GALGAS_referenceStateMap & inOperand3,
+                                                               const GALGAS_lstringlist & inOperand4
+                                                               COMMA_LOCATION_ARGS) {
   GALGAS_scopeStack result ;
   if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid () && inOperand3.isValid () && inOperand4.isValid ()) {
     result = GALGAS_scopeStack (capCollectionElementArray ()) ;
@@ -7694,7 +7679,7 @@ GALGAS_scopeStack GALGAS_scopeStack::add_operation (const GALGAS_scopeStack & in
 GALGAS_scopeStack GALGAS_scopeStack::getter_subListWithRange (const GALGAS_range & inRange,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
+  GALGAS_scopeStack result = GALGAS_scopeStack::class_func_emptyList (THERE) ;
   subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -7704,7 +7689,7 @@ GALGAS_scopeStack GALGAS_scopeStack::getter_subListWithRange (const GALGAS_range
 GALGAS_scopeStack GALGAS_scopeStack::getter_subListFromIndex (const GALGAS_uint & inIndex,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
-  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
+  GALGAS_scopeStack result = GALGAS_scopeStack::class_func_emptyList (THERE) ;
   subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -7714,7 +7699,7 @@ GALGAS_scopeStack GALGAS_scopeStack::getter_subListFromIndex (const GALGAS_uint 
 GALGAS_scopeStack GALGAS_scopeStack::getter_subListToIndex (const GALGAS_uint & inIndex,
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) const {
-  GALGAS_scopeStack result = GALGAS_scopeStack::constructor_emptyList (THERE) ;
+  GALGAS_scopeStack result = GALGAS_scopeStack::class_func_emptyList (THERE) ;
   subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
   return result ;
 }
@@ -7940,9 +7925,8 @@ GALGAS_lstringlist cEnumerator_scopeStack::current_mObjectList (LOCATION_ARGS) c
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_scopeStack ("scopeStack",
-                                   nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeStack ("scopeStack",
+                                                                  nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8068,7 +8052,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_LValueOperandAST GALGAS_LValueOperandAST::constructor_noOperand (UNUSED_LOCATION_ARGS) {
+GALGAS_LValueOperandAST GALGAS_LValueOperandAST::class_func_noOperand (UNUSED_LOCATION_ARGS) {
   GALGAS_LValueOperandAST result ;
   result.mEnum = kEnum_noOperand ;
   return result ;
@@ -8076,9 +8060,9 @@ GALGAS_LValueOperandAST GALGAS_LValueOperandAST::constructor_noOperand (UNUSED_L
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_LValueOperandAST GALGAS_LValueOperandAST::constructor_property (const GALGAS_lstring & inAssociatedValue0,
-                                                                       const GALGAS_LValueOperandAST & inAssociatedValue1
-                                                                       COMMA_LOCATION_ARGS) {
+GALGAS_LValueOperandAST GALGAS_LValueOperandAST::class_func_property (const GALGAS_lstring & inAssociatedValue0,
+                                                                      const GALGAS_LValueOperandAST & inAssociatedValue1
+                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_LValueOperandAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_property ;
@@ -8092,11 +8076,11 @@ GALGAS_LValueOperandAST GALGAS_LValueOperandAST::constructor_property (const GAL
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_LValueOperandAST GALGAS_LValueOperandAST::constructor_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
-                                                                          const GALGAS_location & inAssociatedValue1,
-                                                                          const GALGAS_bool & inAssociatedValue2,
-                                                                          const GALGAS_LValueOperandAST & inAssociatedValue3
-                                                                          COMMA_LOCATION_ARGS) {
+GALGAS_LValueOperandAST GALGAS_LValueOperandAST::class_func_arrayAccess (const GALGAS_expressionAST & inAssociatedValue0,
+                                                                         const GALGAS_location & inAssociatedValue1,
+                                                                         const GALGAS_bool & inAssociatedValue2,
+                                                                         const GALGAS_LValueOperandAST & inAssociatedValue3
+                                                                         COMMA_LOCATION_ARGS) {
   GALGAS_LValueOperandAST result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid () && inAssociatedValue3.isValid ()) {
     result.mEnum = kEnum_arrayAccess ;
@@ -8248,9 +8232,8 @@ typeComparisonResult GALGAS_LValueOperandAST::objectCompare (const GALGAS_LValue
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_LValueOperandAST ("LValueOperandAST",
-                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueOperandAST ("LValueOperandAST",
+                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8293,7 +8276,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_noValue (UNUSED_LOCATION_ARGS) {
+GALGAS_valuedObjectState GALGAS_valuedObjectState::class_func_noValue (UNUSED_LOCATION_ARGS) {
   GALGAS_valuedObjectState result ;
   result.mEnum = kEnum_noValue ;
   return result ;
@@ -8301,7 +8284,7 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_noValue (UNUSED_L
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_hasUnreadValue (UNUSED_LOCATION_ARGS) {
+GALGAS_valuedObjectState GALGAS_valuedObjectState::class_func_hasUnreadValue (UNUSED_LOCATION_ARGS) {
   GALGAS_valuedObjectState result ;
   result.mEnum = kEnum_hasUnreadValue ;
   return result ;
@@ -8309,7 +8292,7 @@ GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_hasUnreadValue (U
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObjectState GALGAS_valuedObjectState::constructor_hasReadValue (UNUSED_LOCATION_ARGS) {
+GALGAS_valuedObjectState GALGAS_valuedObjectState::class_func_hasReadValue (UNUSED_LOCATION_ARGS) {
   GALGAS_valuedObjectState result ;
   result.mEnum = kEnum_hasReadValue ;
   return result ;
@@ -8394,9 +8377,8 @@ typeComparisonResult GALGAS_valuedObjectState::objectCompare (const GALGAS_value
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_valuedObjectState ("valuedObjectState",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valuedObjectState ("valuedObjectState",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8644,9 +8626,9 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_driver (const GALGAS_omnibusType & inAssociatedValue0,
-                                                             const GALGAS_bool & inAssociatedValue1
-                                                             COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_driver (const GALGAS_omnibusType & inAssociatedValue0,
+                                                            const GALGAS_bool & inAssociatedValue1
+                                                            COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_driver ;
@@ -8660,8 +8642,8 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_driver (const GALGAS_omnibu
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_task (const GALGAS_omnibusType & inAssociatedValue0
-                                                           COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_task (const GALGAS_omnibusType & inAssociatedValue0
+                                                          COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_task ;
@@ -8675,8 +8657,8 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_task (const GALGAS_omnibusT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_globalConstant (const GALGAS_objectIR & inAssociatedValue0
-                                                                     COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_globalConstant (const GALGAS_objectIR & inAssociatedValue0
+                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid ()) {
     result.mEnum = kEnum_globalConstant ;
@@ -8690,10 +8672,10 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_globalConstant (const GALGA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_localConstant (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                    const GALGAS_lstring & inAssociatedValue1,
-                                                                    const GALGAS_bool & inAssociatedValue2
-                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_localConstant (const GALGAS_omnibusType & inAssociatedValue0,
+                                                                   const GALGAS_lstring & inAssociatedValue1,
+                                                                   const GALGAS_bool & inAssociatedValue2
+                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid () && inAssociatedValue2.isValid ()) {
     result.mEnum = kEnum_localConstant ;
@@ -8707,9 +8689,9 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_localConstant (const GALGAS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_localVariable (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                    const GALGAS_lstring & inAssociatedValue1
-                                                                    COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_localVariable (const GALGAS_omnibusType & inAssociatedValue0,
+                                                                   const GALGAS_lstring & inAssociatedValue1
+                                                                   COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_localVariable ;
@@ -8723,9 +8705,9 @@ GALGAS_valuedObject GALGAS_valuedObject::constructor_localVariable (const GALGAS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_valuedObject GALGAS_valuedObject::constructor_globalSyncInstance (const GALGAS_omnibusType & inAssociatedValue0,
-                                                                         const GALGAS_lstring & inAssociatedValue1
-                                                                         COMMA_LOCATION_ARGS) {
+GALGAS_valuedObject GALGAS_valuedObject::class_func_globalSyncInstance (const GALGAS_omnibusType & inAssociatedValue0,
+                                                                        const GALGAS_lstring & inAssociatedValue1
+                                                                        COMMA_LOCATION_ARGS) {
   GALGAS_valuedObject result ;
   if (inAssociatedValue0.isValid () && inAssociatedValue1.isValid ()) {
     result.mEnum = kEnum_globalSyncInstance ;
@@ -9004,9 +8986,8 @@ typeComparisonResult GALGAS_valuedObject::objectCompare (const GALGAS_valuedObje
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_valuedObject ("valuedObject",
-                                     nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_valuedObject ("valuedObject",
+                                                                    nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9049,7 +9030,7 @@ mEnum (kNotBuilt) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_scopeKind GALGAS_scopeKind::constructor_selectScope (UNUSED_LOCATION_ARGS) {
+GALGAS_scopeKind GALGAS_scopeKind::class_func_selectScope (UNUSED_LOCATION_ARGS) {
   GALGAS_scopeKind result ;
   result.mEnum = kEnum_selectScope ;
   return result ;
@@ -9057,7 +9038,7 @@ GALGAS_scopeKind GALGAS_scopeKind::constructor_selectScope (UNUSED_LOCATION_ARGS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_scopeKind GALGAS_scopeKind::constructor_repeatScope (UNUSED_LOCATION_ARGS) {
+GALGAS_scopeKind GALGAS_scopeKind::class_func_repeatScope (UNUSED_LOCATION_ARGS) {
   GALGAS_scopeKind result ;
   result.mEnum = kEnum_repeatScope ;
   return result ;
@@ -9128,9 +9109,8 @@ typeComparisonResult GALGAS_scopeKind::objectCompare (const GALGAS_scopeKind & i
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_scopeKind ("scopeKind",
-                                  nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_scopeKind ("scopeKind",
+                                                                 nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9229,7 +9209,7 @@ GALGAS_referenceStateMap & GALGAS_referenceStateMap::operator = (const GALGAS_re
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_referenceStateMap GALGAS_referenceStateMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_referenceStateMap GALGAS_referenceStateMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_referenceStateMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -9237,8 +9217,8 @@ GALGAS_referenceStateMap GALGAS_referenceStateMap::constructor_emptyMap (LOCATIO
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_referenceStateMap GALGAS_referenceStateMap::constructor_mapWithMapToOverride (const GALGAS_referenceStateMap & inMapToOverride
-                                                                                     COMMA_LOCATION_ARGS) {
+GALGAS_referenceStateMap GALGAS_referenceStateMap::class_func_mapWithMapToOverride (const GALGAS_referenceStateMap & inMapToOverride
+                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_referenceStateMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -9413,9 +9393,8 @@ bool GALGAS_referenceStateMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_referenceStateMap ("referenceStateMap",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_referenceStateMap ("referenceStateMap",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9499,7 +9478,7 @@ AC_GALGAS_graph () {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::constructor_emptyGraph (LOCATION_ARGS) {
+GALGAS_semanticTypePrecedenceGraph GALGAS_semanticTypePrecedenceGraph::class_func_emptyGraph (LOCATION_ARGS) {
   GALGAS_semanticTypePrecedenceGraph result ;
   result.makeNewEmptyGraph (THERE) ;
   return result ;
@@ -9633,9 +9612,8 @@ GALGAS_lstringlist GALGAS_semanticTypePrecedenceGraph::getter_accessibleNodesFro
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ("semanticTypePrecedenceGraph",
-                                                    nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticTypePrecedenceGraph ("semanticTypePrecedenceGraph",
+                                                                                   nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9681,7 +9659,7 @@ void extensionSetter_noteUINTType (GALGAS_semanticTypePrecedenceGraph & ioObject
                                    const GALGAS_location constinArgument_inErrorLocation,
                                    Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_lstring var_typeName_974 = GALGAS_lstring::constructor_new (GALGAS_string ("u").add_operation (constinArgument_inBitSize.getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 14)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)), constinArgument_inErrorLocation, inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)) ;
+  GALGAS_lstring var_typeName_974 = GALGAS_lstring::class_func_new (GALGAS_string ("u").add_operation (constinArgument_inBitSize.getter_string (SOURCE_FILE ("ordered-declaration-list.galgas", 14)), inCompiler COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)), constinArgument_inErrorLocation, inCompiler  COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 14)) ;
   {
   ioObject.setter_noteNode (var_typeName_974 COMMA_SOURCE_FILE ("ordered-declaration-list.galgas", 15)) ;
   }
@@ -9770,7 +9748,7 @@ GALGAS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST::constructor_new (LOCATION_ARGS) {
+GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST::class_func_new (LOCATION_ARGS) {
   GALGAS_compileTimeDeclarationBarrierAST result ;
   macroMyNew (result.mObjectPtr, cPtr_compileTimeDeclarationBarrierAST (THERE)) ;
   return result ;
@@ -9810,9 +9788,8 @@ acPtr_class * cPtr_compileTimeDeclarationBarrierAST::duplicate (LOCATION_ARGS) c
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_compileTimeDeclarationBarrierAST ("compileTimeDeclarationBarrierAST",
-                                                         & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeDeclarationBarrierAST ("compileTimeDeclarationBarrierAST",
+                                                                                        & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9893,7 +9870,7 @@ GALGAS_abstractDeclarationAST_2D_weak (inSource) {
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_compileTimeDeclarationBarrierAST_2D_weak GALGAS_compileTimeDeclarationBarrierAST_2D_weak::constructor_nil (LOCATION_ARGS) {
+GALGAS_compileTimeDeclarationBarrierAST_2D_weak GALGAS_compileTimeDeclarationBarrierAST_2D_weak::class_func_nil (LOCATION_ARGS) {
   GALGAS_compileTimeDeclarationBarrierAST_2D_weak result ;
   macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
   return result ;
@@ -9921,9 +9898,8 @@ GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST_
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_compileTimeDeclarationBarrierAST_2D_weak ("compileTimeDeclarationBarrierAST-weak",
-                                                                 & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeDeclarationBarrierAST_2D_weak ("compileTimeDeclarationBarrierAST-weak",
+                                                                                                & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10013,7 +9989,7 @@ GALGAS_panicRoutinePriorityMap & GALGAS_panicRoutinePriorityMap::operator = (con
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_panicRoutinePriorityMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -10021,8 +9997,8 @@ GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_empty
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::constructor_mapWithMapToOverride (const GALGAS_panicRoutinePriorityMap & inMapToOverride
-                                                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_panicRoutinePriorityMap GALGAS_panicRoutinePriorityMap::class_func_mapWithMapToOverride (const GALGAS_panicRoutinePriorityMap & inMapToOverride
+                                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_panicRoutinePriorityMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -10186,9 +10162,8 @@ bool GALGAS_panicRoutinePriorityMap::optional_searchKey (const GALGAS_string & i
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_panicRoutinePriorityMap ("panicRoutinePriorityMap",
-                                                nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap ("panicRoutinePriorityMap",
+                                                                               nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10332,7 +10307,7 @@ GALGAS_routineMapForContext & GALGAS_routineMapForContext::operator = (const GAL
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_routineMapForContext GALGAS_routineMapForContext::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_routineMapForContext result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -10340,8 +10315,8 @@ GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_emptyMap (L
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_routineMapForContext GALGAS_routineMapForContext::constructor_mapWithMapToOverride (const GALGAS_routineMapForContext & inMapToOverride
-                                                                                           COMMA_LOCATION_ARGS) {
+GALGAS_routineMapForContext GALGAS_routineMapForContext::class_func_mapWithMapToOverride (const GALGAS_routineMapForContext & inMapToOverride
+                                                                                          COMMA_LOCATION_ARGS) {
   GALGAS_routineMapForContext result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -10741,9 +10716,8 @@ bool GALGAS_routineMapForContext::optional_searchKey (const GALGAS_string & inKe
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_routineMapForContext ("routineMapForContext",
-                                             nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContext ("routineMapForContext",
+                                                                            nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10869,7 +10843,7 @@ GALGAS_guardMapForContext & GALGAS_guardMapForContext::operator = (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardMapForContext GALGAS_guardMapForContext::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_guardMapForContext GALGAS_guardMapForContext::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_guardMapForContext result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -10877,8 +10851,8 @@ GALGAS_guardMapForContext GALGAS_guardMapForContext::constructor_emptyMap (LOCAT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardMapForContext GALGAS_guardMapForContext::constructor_mapWithMapToOverride (const GALGAS_guardMapForContext & inMapToOverride
-                                                                                       COMMA_LOCATION_ARGS) {
+GALGAS_guardMapForContext GALGAS_guardMapForContext::class_func_mapWithMapToOverride (const GALGAS_guardMapForContext & inMapToOverride
+                                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_guardMapForContext result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -11188,9 +11162,8 @@ bool GALGAS_guardMapForContext::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_guardMapForContext ("guardMapForContext",
-                                           nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext ("guardMapForContext",
+                                                                          nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11298,7 +11271,7 @@ GALGAS_controlRegisterGroupMap & GALGAS_controlRegisterGroupMap::operator = (con
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_controlRegisterGroupMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -11306,8 +11279,8 @@ GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::constructor_empty
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::constructor_mapWithMapToOverride (const GALGAS_controlRegisterGroupMap & inMapToOverride
-                                                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_controlRegisterGroupMap GALGAS_controlRegisterGroupMap::class_func_mapWithMapToOverride (const GALGAS_controlRegisterGroupMap & inMapToOverride
+                                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_controlRegisterGroupMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -11527,9 +11500,8 @@ bool GALGAS_controlRegisterGroupMap::optional_searchKey (const GALGAS_string & i
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_controlRegisterGroupMap ("controlRegisterGroupMap",
-                                                nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupMap ("controlRegisterGroupMap",
+                                                                               nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11628,7 +11600,7 @@ GALGAS_globalConstantMap & GALGAS_globalConstantMap::operator = (const GALGAS_gl
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_globalConstantMap GALGAS_globalConstantMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_globalConstantMap GALGAS_globalConstantMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_globalConstantMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -11636,8 +11608,8 @@ GALGAS_globalConstantMap GALGAS_globalConstantMap::constructor_emptyMap (LOCATIO
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_globalConstantMap GALGAS_globalConstantMap::constructor_mapWithMapToOverride (const GALGAS_globalConstantMap & inMapToOverride
-                                                                                     COMMA_LOCATION_ARGS) {
+GALGAS_globalConstantMap GALGAS_globalConstantMap::class_func_mapWithMapToOverride (const GALGAS_globalConstantMap & inMapToOverride
+                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_globalConstantMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -11812,9 +11784,8 @@ bool GALGAS_globalConstantMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_globalConstantMap ("globalConstantMap",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalConstantMap ("globalConstantMap",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11922,7 +11893,7 @@ GALGAS_globalSyncInstanceMap & GALGAS_globalSyncInstanceMap::operator = (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_globalSyncInstanceMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -11930,8 +11901,8 @@ GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::constructor_emptyMap 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::constructor_mapWithMapToOverride (const GALGAS_globalSyncInstanceMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_globalSyncInstanceMap GALGAS_globalSyncInstanceMap::class_func_mapWithMapToOverride (const GALGAS_globalSyncInstanceMap & inMapToOverride
+                                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_globalSyncInstanceMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -12151,9 +12122,8 @@ bool GALGAS_globalSyncInstanceMap::optional_searchKey (const GALGAS_string & inK
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_globalSyncInstanceMap ("globalSyncInstanceMap",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceMap ("globalSyncInstanceMap",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12252,7 +12222,7 @@ GALGAS_staticlistMap & GALGAS_staticlistMap::operator = (const GALGAS_staticlist
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_staticlistMap GALGAS_staticlistMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_staticlistMap GALGAS_staticlistMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_staticlistMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -12260,8 +12230,8 @@ GALGAS_staticlistMap GALGAS_staticlistMap::constructor_emptyMap (LOCATION_ARGS) 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_staticlistMap GALGAS_staticlistMap::constructor_mapWithMapToOverride (const GALGAS_staticlistMap & inMapToOverride
-                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_staticlistMap GALGAS_staticlistMap::class_func_mapWithMapToOverride (const GALGAS_staticlistMap & inMapToOverride
+                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_staticlistMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -12414,9 +12384,8 @@ bool GALGAS_staticlistMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_staticlistMap ("staticlistMap",
-                                      nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap ("staticlistMap",
+                                                                     nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12515,7 +12484,7 @@ GALGAS_unifiedTypeMap & GALGAS_unifiedTypeMap::operator = (const GALGAS_unifiedT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_unifiedTypeMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -12523,8 +12492,8 @@ GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_emptyMap (LOCATION_ARGS
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::constructor_mapWithMapToOverride (const GALGAS_unifiedTypeMap & inMapToOverride
-                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_unifiedTypeMap GALGAS_unifiedTypeMap::class_func_mapWithMapToOverride (const GALGAS_unifiedTypeMap & inMapToOverride
+                                                                              COMMA_LOCATION_ARGS) {
   GALGAS_unifiedTypeMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -12677,9 +12646,8 @@ bool GALGAS_unifiedTypeMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_unifiedTypeMap ("unifiedTypeMap",
-                                       nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMap ("unifiedTypeMap",
+                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12778,7 +12746,7 @@ GALGAS_typeConstantMap & GALGAS_typeConstantMap::operator = (const GALGAS_typeCo
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeConstantMap GALGAS_typeConstantMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_typeConstantMap GALGAS_typeConstantMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_typeConstantMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -12786,8 +12754,8 @@ GALGAS_typeConstantMap GALGAS_typeConstantMap::constructor_emptyMap (LOCATION_AR
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeConstantMap GALGAS_typeConstantMap::constructor_mapWithMapToOverride (const GALGAS_typeConstantMap & inMapToOverride
-                                                                                 COMMA_LOCATION_ARGS) {
+GALGAS_typeConstantMap GALGAS_typeConstantMap::class_func_mapWithMapToOverride (const GALGAS_typeConstantMap & inMapToOverride
+                                                                                COMMA_LOCATION_ARGS) {
   GALGAS_typeConstantMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -12962,9 +12930,8 @@ bool GALGAS_typeConstantMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typeConstantMap ("typeConstantMap",
-                                        nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeConstantMap ("typeConstantMap",
+                                                                       nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13063,7 +13030,7 @@ GALGAS_typeConstructorMap & GALGAS_typeConstructorMap::operator = (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeConstructorMap GALGAS_typeConstructorMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_typeConstructorMap GALGAS_typeConstructorMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_typeConstructorMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -13071,8 +13038,8 @@ GALGAS_typeConstructorMap GALGAS_typeConstructorMap::constructor_emptyMap (LOCAT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeConstructorMap GALGAS_typeConstructorMap::constructor_mapWithMapToOverride (const GALGAS_typeConstructorMap & inMapToOverride
-                                                                                       COMMA_LOCATION_ARGS) {
+GALGAS_typeConstructorMap GALGAS_typeConstructorMap::class_func_mapWithMapToOverride (const GALGAS_typeConstructorMap & inMapToOverride
+                                                                                      COMMA_LOCATION_ARGS) {
   GALGAS_typeConstructorMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -13247,9 +13214,8 @@ bool GALGAS_typeConstructorMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typeConstructorMap ("typeConstructorMap",
-                                           nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeConstructorMap ("typeConstructorMap",
+                                                                          nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13348,7 +13314,7 @@ GALGAS_typePropertySetterMap & GALGAS_typePropertySetterMap::operator = (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typePropertySetterMap GALGAS_typePropertySetterMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_typePropertySetterMap GALGAS_typePropertySetterMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_typePropertySetterMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -13356,8 +13322,8 @@ GALGAS_typePropertySetterMap GALGAS_typePropertySetterMap::constructor_emptyMap 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typePropertySetterMap GALGAS_typePropertySetterMap::constructor_mapWithMapToOverride (const GALGAS_typePropertySetterMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_typePropertySetterMap GALGAS_typePropertySetterMap::class_func_mapWithMapToOverride (const GALGAS_typePropertySetterMap & inMapToOverride
+                                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_typePropertySetterMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -13545,9 +13511,8 @@ bool GALGAS_typePropertySetterMap::optional_searchKey (const GALGAS_string & inK
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typePropertySetterMap ("typePropertySetterMap",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typePropertySetterMap ("typePropertySetterMap",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13646,7 +13611,7 @@ GALGAS_typePropertyGetterMap & GALGAS_typePropertyGetterMap::operator = (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typePropertyGetterMap GALGAS_typePropertyGetterMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_typePropertyGetterMap GALGAS_typePropertyGetterMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_typePropertyGetterMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -13654,8 +13619,8 @@ GALGAS_typePropertyGetterMap GALGAS_typePropertyGetterMap::constructor_emptyMap 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typePropertyGetterMap GALGAS_typePropertyGetterMap::constructor_mapWithMapToOverride (const GALGAS_typePropertyGetterMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_typePropertyGetterMap GALGAS_typePropertyGetterMap::class_func_mapWithMapToOverride (const GALGAS_typePropertyGetterMap & inMapToOverride
+                                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_typePropertyGetterMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -13843,9 +13808,8 @@ bool GALGAS_typePropertyGetterMap::optional_searchKey (const GALGAS_string & inK
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_typePropertyGetterMap ("typePropertyGetterMap",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typePropertyGetterMap ("typePropertyGetterMap",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13944,7 +13908,7 @@ GALGAS_availableInterruptMap & GALGAS_availableInterruptMap::operator = (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_availableInterruptMap GALGAS_availableInterruptMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_availableInterruptMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -13952,8 +13916,8 @@ GALGAS_availableInterruptMap GALGAS_availableInterruptMap::constructor_emptyMap 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_availableInterruptMap GALGAS_availableInterruptMap::constructor_mapWithMapToOverride (const GALGAS_availableInterruptMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_availableInterruptMap GALGAS_availableInterruptMap::class_func_mapWithMapToOverride (const GALGAS_availableInterruptMap & inMapToOverride
+                                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_availableInterruptMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -14128,9 +14092,8 @@ bool GALGAS_availableInterruptMap::optional_searchKey (const GALGAS_string & inK
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_availableInterruptMap ("availableInterruptMap",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_availableInterruptMap ("availableInterruptMap",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14238,7 +14201,7 @@ GALGAS_infixOperatorMap & GALGAS_infixOperatorMap::operator = (const GALGAS_infi
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_infixOperatorMap GALGAS_infixOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_infixOperatorMap GALGAS_infixOperatorMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_infixOperatorMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -14246,8 +14209,8 @@ GALGAS_infixOperatorMap GALGAS_infixOperatorMap::constructor_emptyMap (LOCATION_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_infixOperatorMap GALGAS_infixOperatorMap::constructor_mapWithMapToOverride (const GALGAS_infixOperatorMap & inMapToOverride
-                                                                                   COMMA_LOCATION_ARGS) {
+GALGAS_infixOperatorMap GALGAS_infixOperatorMap::class_func_mapWithMapToOverride (const GALGAS_infixOperatorMap & inMapToOverride
+                                                                                  COMMA_LOCATION_ARGS) {
   GALGAS_infixOperatorMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -14467,9 +14430,8 @@ bool GALGAS_infixOperatorMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_infixOperatorMap ("infixOperatorMap",
-                                         nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap ("infixOperatorMap",
+                                                                        nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14586,7 +14548,7 @@ GALGAS_prefixOperatorMap & GALGAS_prefixOperatorMap::operator = (const GALGAS_pr
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_prefixOperatorMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -14594,8 +14556,8 @@ GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::constructor_emptyMap (LOCATIO
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::constructor_mapWithMapToOverride (const GALGAS_prefixOperatorMap & inMapToOverride
-                                                                                     COMMA_LOCATION_ARGS) {
+GALGAS_prefixOperatorMap GALGAS_prefixOperatorMap::class_func_mapWithMapToOverride (const GALGAS_prefixOperatorMap & inMapToOverride
+                                                                                    COMMA_LOCATION_ARGS) {
   GALGAS_prefixOperatorMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -14860,9 +14822,8 @@ bool GALGAS_prefixOperatorMap::optional_searchKey (const GALGAS_string & inKey,
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_prefixOperatorMap ("prefixOperatorMap",
-                                          nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap ("prefixOperatorMap",
+                                                                         nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14961,7 +14922,7 @@ GALGAS_assignmentOperatorMap & GALGAS_assignmentOperatorMap::operator = (const G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_assignmentOperatorMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -14969,8 +14930,8 @@ GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::constructor_emptyMap 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::constructor_mapWithMapToOverride (const GALGAS_assignmentOperatorMap & inMapToOverride
-                                                                                             COMMA_LOCATION_ARGS) {
+GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::class_func_mapWithMapToOverride (const GALGAS_assignmentOperatorMap & inMapToOverride
+                                                                                            COMMA_LOCATION_ARGS) {
   GALGAS_assignmentOperatorMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -15145,9 +15106,8 @@ bool GALGAS_assignmentOperatorMap::optional_searchKey (const GALGAS_string & inK
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_assignmentOperatorMap ("assignmentOperatorMap",
-                                              nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap ("assignmentOperatorMap",
+                                                                             nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15246,7 +15206,7 @@ GALGAS_implicitConversionToBooleanMap & GALGAS_implicitConversionToBooleanMap::o
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_implicitConversionToBooleanMap GALGAS_implicitConversionToBooleanMap::constructor_emptyMap (LOCATION_ARGS) {
+GALGAS_implicitConversionToBooleanMap GALGAS_implicitConversionToBooleanMap::class_func_emptyMap (LOCATION_ARGS) {
   GALGAS_implicitConversionToBooleanMap result ;
   result.makeNewEmptyMap (THERE) ;
   return result ;
@@ -15254,8 +15214,8 @@ GALGAS_implicitConversionToBooleanMap GALGAS_implicitConversionToBooleanMap::con
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_implicitConversionToBooleanMap GALGAS_implicitConversionToBooleanMap::constructor_mapWithMapToOverride (const GALGAS_implicitConversionToBooleanMap & inMapToOverride
-                                                                                                               COMMA_LOCATION_ARGS) {
+GALGAS_implicitConversionToBooleanMap GALGAS_implicitConversionToBooleanMap::class_func_mapWithMapToOverride (const GALGAS_implicitConversionToBooleanMap & inMapToOverride
+                                                                                                              COMMA_LOCATION_ARGS) {
   GALGAS_implicitConversionToBooleanMap result ;
   result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
   return result ;
@@ -15430,9 +15390,8 @@ bool GALGAS_implicitConversionToBooleanMap::optional_searchKey (const GALGAS_str
 //
 //--------------------------------------------------------------------------------------------------
 
-const C_galgas_type_descriptor
-kTypeDescriptor_GALGAS_implicitConversionToBooleanMap ("implicitConversionToBooleanMap",
-                                                       nullptr) ;
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap ("implicitConversionToBooleanMap",
+                                                                                      nullptr) ;
 
 //--------------------------------------------------------------------------------------------------
 
