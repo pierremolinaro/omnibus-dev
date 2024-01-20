@@ -68,13 +68,13 @@ cCollectionElement * cCollectionElement__32_lstringlist::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement__32_lstringlist::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue0" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue0" ":") ;
   mObject.mProperty_mValue_30_.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue1" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue1" ":") ;
   mObject.mProperty_mValue_31_.description (ioString, inIndentation) ;
 }
 
@@ -1758,621 +1758,621 @@ String Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inToken
   const cTokenFor_omnibus_5F_lexique * ptr = (const cTokenFor_omnibus_5F_lexique *) inTokenPtr ;
   String s ;
   if (ptr == nullptr) {
-    s.addString ("$$") ;
+    s.appendString ("$$") ;
   }else{
     switch (ptr->mTokenCode) {
     case kToken_:
-      s.addString ("$$") ;
+      s.appendString ("$$") ;
       break ;
     case kToken_identifier:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("identifier") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("identifier") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__40_attribute:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("@attribute") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("@attribute") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_integer:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("integer") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("integer") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
       break ;
     case kToken__22_string_22_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("\"string\"") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("\"string\"") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_comment:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("comment") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("comment") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_commentMark:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("commentMark") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("commentMark") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3F_selector_3A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("\?selector:") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("\?selector:") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__3F__21_selector_3A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("\?!selector:") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("\?!selector:") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21_selector_3A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!selector:") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!selector:") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21__3F_selector_3A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!\?selector:") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!\?selector:") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__24_type:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("$type") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("$type") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__A9_group:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("©group") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
-      s.addStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("©group") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE (' ') COMMA_HERE) ;
+      s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_addressof:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("addressof") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("addressof") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_assert:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("assert") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("assert") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_boot:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("boot") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("boot") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_case:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("case") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("case") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_convert:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("convert") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("convert") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_ctAssert:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("ctAssert") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("ctAssert") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_compiletime:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("compiletime") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("compiletime") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_driver:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("driver") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("driver") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_else:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("else") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("else") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_enum:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("enum") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("enum") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_event:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("event") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("event") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_extend:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("extend") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("extend") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_extern:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("extern") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("extern") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_for:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("for") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("for") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_func:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("func") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("func") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_guard:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("guard") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("guard") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_if:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("if") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("if") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_import:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("import") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("import") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_in:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("in") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("in") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_interrupt:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("interrupt") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("interrupt") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_let:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("let") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("let") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_llvm:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("llvm") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("llvm") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_no:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("no") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("no") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_not:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("not") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("not") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_opaque:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("opaque") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("opaque") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_option:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("option") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("option") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_panic:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("panic") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("panic") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_primitive:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("primitive") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("primitive") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_public:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("public") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("public") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_registers:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("registers") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("registers") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_required:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("required") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("required") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_safe:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("safe") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("safe") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_section:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("section") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("section") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_self:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("self") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("self") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_service:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("service") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("service") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_sizeof:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("sizeof") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("sizeof") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_startup:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("startup") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("startup") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_struct:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("struct") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("struct") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_staticArray:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("staticArray") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("staticArray") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_switch:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("switch") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("switch") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_sync:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("sync") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("sync") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_target:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("target") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("target") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_task:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("task") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("task") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_truncate:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("truncate") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("truncate") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_typealias:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("typealias") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("typealias") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_var:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("var") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("var") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_until:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("until") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("until") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_user:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("user") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("user") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_where:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("where") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("where") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_when:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("when") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("when") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_while:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("while") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("while") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken_yes:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("yes") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("yes") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (":") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (":") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (".") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (".") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (",") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (",") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7B_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("{") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("{") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("}") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("}") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__28_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("(") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("(") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__29_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (")") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (")") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5F_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("_") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("_") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3D__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("==") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("==") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2260_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("≠") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("≠") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("<") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("<") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2264_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("≤") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("≤") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (">") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (">") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2265_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("≥") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("≥") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5B_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("[") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("[") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("]") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("]") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5D__21_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("]!") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("]!") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C__3C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("<<") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("<<") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E__3E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (">>") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (">>") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("~") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("~") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C__7C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("||") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("||") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26__26_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("&&") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("&&") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__3E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("->") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("->") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E__2E__3C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("..<") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("..<") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2E__2E__2E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("...") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("...") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("|") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("|") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__7C__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("|=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("|=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("&") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("&") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__26__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("&=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("&=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5E_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("^") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("^") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__5E__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("^=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("^=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("+") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("+") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__25_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("+%") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("+%") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("+=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("+=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2B__25__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("+%=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("+%=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("-") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("-") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__25_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("-%") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("-%") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("-=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("-=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2D__25__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("-%=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("-%=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("*") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("*") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__25_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("*%") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("*%") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("*=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("*=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2A__25__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("*%=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("*%=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2F_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("/") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("/") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__2F_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!/") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!/") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__2F__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("/=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("/=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__2F__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!/=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!/=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__25_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("%") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("%") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__25_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!%") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!%") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__25__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("%=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("%=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__21__25__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("!%=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("!%=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3C__3C__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString ("<<=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString ("<<=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     case kToken__3E__3E__3D_:
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
-      s.addString (">>=") ;
-      s.addUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
+      s.appendString (">>=") ;
+      s.appendUnicodeChar (TO_UNICODE ('$') COMMA_HERE) ;
       break ;
     default:
       break ;

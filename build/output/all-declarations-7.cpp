@@ -268,11 +268,11 @@ const C_galgas_type_descriptor * cPtr_loadFromReferenceIR::classDescriptor (void
 
 void cPtr_loadFromReferenceIR::description (String & ioString,
                                             const int32_t inIndentation) const {
-  ioString.addString ("[@loadFromReferenceIR:") ;
+  ioString.appendString ("[@loadFromReferenceIR:") ;
   mProperty_mTargetValue.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1141,15 +1141,15 @@ const C_galgas_type_descriptor * cPtr_computeSubscriptedVolatileRegisterAddress:
 
 void cPtr_computeSubscriptedVolatileRegisterAddress::description (String & ioString,
                                                                   const int32_t inIndentation) const {
-  ioString.addString ("[@computeSubscriptedVolatileRegisterAddress:") ;
+  ioString.appendString ("[@computeSubscriptedVolatileRegisterAddress:") ;
   mProperty_mLLVMResultVarName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mIndexResult.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mAddressLLVMname.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mElementSize.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1531,15 +1531,15 @@ const C_galgas_type_descriptor * cPtr_enterRegisterAddressIR::classDescriptor (v
 
 void cPtr_enterRegisterAddressIR::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.addString ("[@enterRegisterAddressIR:") ;
+  ioString.appendString ("[@enterRegisterAddressIR:") ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mBaseAddress.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mAddressOffset.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mRegisterName.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1921,15 +1921,15 @@ const C_galgas_type_descriptor * cPtr_enterRegisterGroupSubscriptedAddressIR::cl
 
 void cPtr_enterRegisterGroupSubscriptedAddressIR::description (String & ioString,
                                                                const int32_t inIndentation) const {
-  ioString.addString ("[@enterRegisterGroupSubscriptedAddressIR:") ;
+  ioString.appendString ("[@enterRegisterGroupSubscriptedAddressIR:") ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mGroupName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mGroupSize.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mIndexIR.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2244,11 +2244,11 @@ const C_galgas_type_descriptor * cPtr_loadIndirectVolatileIR::classDescriptor (v
 
 void cPtr_loadIndirectVolatileIR::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.addString ("[@loadIndirectVolatileIR:") ;
+  ioString.appendString ("[@loadIndirectVolatileIR:") ;
   mProperty_mTargetValue.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mLLVMName.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3312,13 +3312,13 @@ const C_galgas_type_descriptor * cPtr_getComputedPropertyValueIR::classDescripto
 
 void cPtr_getComputedPropertyValueIR::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("[@getComputedPropertyValueIR:") ;
+  ioString.appendString ("[@getComputedPropertyValueIR:") ;
   mProperty_mReceiverIR.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mLLVMGetterName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mResultValueIR.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3664,13 +3664,13 @@ const C_galgas_type_descriptor * cPtr_storeComputedPropertyValueIR::classDescrip
 
 void cPtr_storeComputedPropertyValueIR::description (String & ioString,
                                                      const int32_t inIndentation) const {
-  ioString.addString ("[@storeComputedPropertyValueIR:") ;
+  ioString.appendString ("[@storeComputedPropertyValueIR:") ;
   mProperty_mReceiverIR.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mLLVMSetterName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mValueIR.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4024,13 +4024,13 @@ const C_galgas_type_descriptor * cPtr_getArrayElementReferenceIR::classDescripto
 
 void cPtr_getArrayElementReferenceIR::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("[@getArrayElementReferenceIR:") ;
+  ioString.appendString ("[@getArrayElementReferenceIR:") ;
   mProperty_mTarget.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mArray.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mIndex.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4407,15 +4407,15 @@ const C_galgas_type_descriptor * cPtr_selectInstructionIR::classDescriptor (void
 
 void cPtr_selectInstructionIR::description (String & ioString,
                                             const int32_t inIndentation) const {
-  ioString.addString ("[@selectInstructionIR:") ;
+  ioString.appendString ("[@selectInstructionIR:") ;
   mProperty_mTargetValue.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_m_5F_if_5F_variableLLVMName.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_m_5F_then_5F_variable.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_m_5F_else_5F_variable.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4773,13 +4773,13 @@ const C_galgas_type_descriptor * cPtr_testArrayIndexIR::classDescriptor (void) c
 
 void cPtr_testArrayIndexIR::description (String & ioString,
                                          const int32_t inIndentation) const {
-  ioString.addString ("[@testArrayIndexIR:") ;
+  ioString.appendString ("[@testArrayIndexIR:") ;
   mProperty_mIndex.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mErrorLocation.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mSize.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5063,9 +5063,9 @@ const C_galgas_type_descriptor * cPtr_sourceLocationIR::classDescriptor (void) c
 
 void cPtr_sourceLocationIR::description (String & ioString,
                                          const int32_t inIndentation) const {
-  ioString.addString ("[@sourceLocationIR:") ;
+  ioString.appendString ("[@sourceLocationIR:") ;
   mProperty_mSourceLocation.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5349,9 +5349,9 @@ const C_galgas_type_descriptor * cPtr_freeCommentIR::classDescriptor (void) cons
 
 void cPtr_freeCommentIR::description (String & ioString,
                                       const int32_t inIndentation) const {
-  ioString.addString ("[@freeCommentIR:") ;
+  ioString.appendString ("[@freeCommentIR:") ;
   mProperty_mComment.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5596,13 +5596,13 @@ cCollectionElement * cCollectionElement_routineAccessibilityIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_routineAccessibilityIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mRoutine" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mRoutine" ":") ;
   mObject.mProperty_mRoutine.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mAccessibleRoutineSet" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mAccessibleRoutineSet" ":") ;
   mObject.mProperty_mAccessibleRoutineSet.description (ioString, inIndentation) ;
 }
 
@@ -6111,9 +6111,9 @@ cCollectionElement * cCollectionElement_instructionListListIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_instructionListListIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mInstructionList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mInstructionList" ":") ;
   mObject.mProperty_mInstructionList.description (ioString, inIndentation) ;
 }
 
@@ -6766,15 +6766,15 @@ const C_galgas_type_descriptor * cPtr_ctInfixExpressionAST::classDescriptor (voi
 
 void cPtr_ctInfixExpressionAST::description (String & ioString,
                                              const int32_t inIndentation) const {
-  ioString.addString ("[@ctInfixExpressionAST:") ;
+  ioString.appendString ("[@ctInfixExpressionAST:") ;
   mProperty_mLeftExpression.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mOperatorLocation.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mInfixOperator.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mRightExpression.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7104,13 +7104,13 @@ const C_galgas_type_descriptor * cPtr_ctPrefixExpressionAST::classDescriptor (vo
 
 void cPtr_ctPrefixExpressionAST::description (String & ioString,
                                               const int32_t inIndentation) const {
-  ioString.addString ("[@ctPrefixExpressionAST:") ;
+  ioString.appendString ("[@ctPrefixExpressionAST:") ;
   mProperty_mOperatorLocation.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mPrefixOperator.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mExpression.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7345,7 +7345,7 @@ const C_galgas_type_descriptor * cPtr_ctTrueExpressionAST::classDescriptor (void
 
 void cPtr_ctTrueExpressionAST::description (String & ioString,
                                             const int32_t /* inIndentation */) const {
-  ioString.addString ("[@ctTrueExpressionAST]") ;
+  ioString.appendString ("[@ctTrueExpressionAST]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7580,7 +7580,7 @@ const C_galgas_type_descriptor * cPtr_ctFalseExpressionAST::classDescriptor (voi
 
 void cPtr_ctFalseExpressionAST::description (String & ioString,
                                              const int32_t /* inIndentation */) const {
-  ioString.addString ("[@ctFalseExpressionAST]") ;
+  ioString.appendString ("[@ctFalseExpressionAST]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8237,9 +8237,9 @@ cMapElement * cMapElement_ctMap::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_ctMap::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue" ":") ;
   mProperty_mValue.description (ioString, inIndentation) ;
 }
 
@@ -8526,9 +8526,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_genericFormalParameter_constant::description (String & ioString,
                                                                          const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8555,9 +8555,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_genericFormalParameter_type::description (String & ioString,
                                                                      const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8617,7 +8617,7 @@ void GALGAS_genericFormalParameter::method_constant (GALGAS_lstring & outAssocia
   if (mEnum != kEnum_constant) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @genericFormalParameter constant invoked with an invalid enum value") ;
+    s.appendString ("method @genericFormalParameter constant invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_genericFormalParameter_constant * ptr = (const cEnumAssociatedValues_genericFormalParameter_constant *) unsafePointer () ;
@@ -8633,7 +8633,7 @@ void GALGAS_genericFormalParameter::method_type (GALGAS_lstring & outAssociatedV
   if (mEnum != kEnum_type) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @genericFormalParameter type invoked with an invalid enum value") ;
+    s.appendString ("method @genericFormalParameter type invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_genericFormalParameter_type * ptr = (const cEnumAssociatedValues_genericFormalParameter_type *) unsafePointer () ;
@@ -8687,10 +8687,10 @@ GALGAS_bool GALGAS_genericFormalParameter::getter_isType (UNUSED_LOCATION_ARGS) 
 
 void GALGAS_genericFormalParameter::description (String & ioString,
                                                  const int32_t inIndentation) const {
-  ioString.addString ("<enum @genericFormalParameter: ") ;
-  ioString.addString (gEnumNameArrayFor_genericFormalParameter [mEnum]) ;
+  ioString.appendString ("<enum @genericFormalParameter: ") ;
+  ioString.appendString (gEnumNameArrayFor_genericFormalParameter [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8763,9 +8763,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_llvmStringDefinitionElement_variable::description (String & ioString,
                                                                               const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8792,9 +8792,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_llvmStringDefinitionElement_string::description (String & ioString,
                                                                             const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8854,7 +8854,7 @@ void GALGAS_llvmStringDefinitionElement::method_variable (GALGAS_lstring & outAs
   if (mEnum != kEnum_variable) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @llvmStringDefinitionElement variable invoked with an invalid enum value") ;
+    s.appendString ("method @llvmStringDefinitionElement variable invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_llvmStringDefinitionElement_variable * ptr = (const cEnumAssociatedValues_llvmStringDefinitionElement_variable *) unsafePointer () ;
@@ -8870,7 +8870,7 @@ void GALGAS_llvmStringDefinitionElement::method_string (GALGAS_lstring & outAsso
   if (mEnum != kEnum_string) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @llvmStringDefinitionElement string invoked with an invalid enum value") ;
+    s.appendString ("method @llvmStringDefinitionElement string invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_llvmStringDefinitionElement_string * ptr = (const cEnumAssociatedValues_llvmStringDefinitionElement_string *) unsafePointer () ;
@@ -8924,10 +8924,10 @@ GALGAS_bool GALGAS_llvmStringDefinitionElement::getter_isString (UNUSED_LOCATION
 
 void GALGAS_llvmStringDefinitionElement::description (String & ioString,
                                                       const int32_t inIndentation) const {
-  ioString.addString ("<enum @llvmStringDefinitionElement: ") ;
-  ioString.addString (gEnumNameArrayFor_llvmStringDefinitionElement [mEnum]) ;
+  ioString.appendString ("<enum @llvmStringDefinitionElement: ") ;
+  ioString.appendString (gEnumNameArrayFor_llvmStringDefinitionElement [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9047,9 +9047,9 @@ cCollectionElement * cCollectionElement_llvmStringDefinition::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_llvmStringDefinition::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mElement" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mElement" ":") ;
   mObject.mProperty_mElement.description (ioString, inIndentation) ;
 }
 
@@ -10135,7 +10135,7 @@ const C_galgas_type_descriptor * cPtr_simpleCopyAssignmentOperatorUsage::classDe
 
 void cPtr_simpleCopyAssignmentOperatorUsage::description (String & ioString,
                                                           const int32_t /* inIndentation */) const {
-  ioString.addString ("[@simpleCopyAssignmentOperatorUsage]") ;
+  ioString.appendString ("[@simpleCopyAssignmentOperatorUsage]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10311,9 +10311,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_llvmGenerationInstructionElement_string::description (String & ioString,
                                                                                  const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10340,9 +10340,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_llvmGenerationInstructionElement_symbol::description (String & ioString,
                                                                                  const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10369,9 +10369,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_llvmGenerationInstructionElement_type::description (String & ioString,
                                                                                const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10446,7 +10446,7 @@ void GALGAS_llvmGenerationInstructionElement::method_string (GALGAS_string & out
   if (mEnum != kEnum_string) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @llvmGenerationInstructionElement string invoked with an invalid enum value") ;
+    s.appendString ("method @llvmGenerationInstructionElement string invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_llvmGenerationInstructionElement_string * ptr = (const cEnumAssociatedValues_llvmGenerationInstructionElement_string *) unsafePointer () ;
@@ -10462,7 +10462,7 @@ void GALGAS_llvmGenerationInstructionElement::method_symbol (GALGAS_lstring & ou
   if (mEnum != kEnum_symbol) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @llvmGenerationInstructionElement symbol invoked with an invalid enum value") ;
+    s.appendString ("method @llvmGenerationInstructionElement symbol invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_llvmGenerationInstructionElement_symbol * ptr = (const cEnumAssociatedValues_llvmGenerationInstructionElement_symbol *) unsafePointer () ;
@@ -10478,7 +10478,7 @@ void GALGAS_llvmGenerationInstructionElement::method_type (GALGAS_lstring & outA
   if (mEnum != kEnum_type) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @llvmGenerationInstructionElement type invoked with an invalid enum value") ;
+    s.appendString ("method @llvmGenerationInstructionElement type invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_llvmGenerationInstructionElement_type * ptr = (const cEnumAssociatedValues_llvmGenerationInstructionElement_type *) unsafePointer () ;
@@ -10550,10 +10550,10 @@ GALGAS_bool GALGAS_llvmGenerationInstructionElement::getter_isType (UNUSED_LOCAT
 
 void GALGAS_llvmGenerationInstructionElement::description (String & ioString,
                                                            const int32_t inIndentation) const {
-  ioString.addString ("<enum @llvmGenerationInstructionElement: ") ;
-  ioString.addString (gEnumNameArrayFor_llvmGenerationInstructionElement [mEnum]) ;
+  ioString.appendString ("<enum @llvmGenerationInstructionElement: ") ;
+  ioString.appendString (gEnumNameArrayFor_llvmGenerationInstructionElement [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10673,9 +10673,9 @@ cCollectionElement * cCollectionElement_llvmGenerationInstructionElementList::co
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_llvmGenerationInstructionElementList::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mElement" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mElement" ":") ;
   mObject.mProperty_mElement.description (ioString, inIndentation) ;
 }
 
@@ -11331,9 +11331,9 @@ const C_galgas_type_descriptor * cPtr_llvmGenerationInstruction::classDescriptor
 
 void cPtr_llvmGenerationInstruction::description (String & ioString,
                                                   const int32_t inIndentation) const {
-  ioString.addString ("[@llvmGenerationInstruction:") ;
+  ioString.appendString ("[@llvmGenerationInstruction:") ;
   mProperty_mGenerationList.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11690,9 +11690,9 @@ cMapElement * cMapElement_assignmentGenerationVarMap::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_assignmentGenerationVarMap::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mValue" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mValue" ":") ;
   mProperty_mValue.description (ioString, inIndentation) ;
 }
 
@@ -12049,13 +12049,13 @@ void GALGAS_declarationListAST_2D_element::drop (void) {
 
 void GALGAS_declarationListAST_2D_element::description (String & ioString,
                                                         const int32_t inIndentation) const {
-  ioString.addString ("<struct @declarationListAST-element:") ;
+  ioString.appendString ("<struct @declarationListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mDeclaration.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12163,15 +12163,15 @@ void GALGAS_checkTargetListAST_2D_element::drop (void) {
 
 void GALGAS_checkTargetListAST_2D_element::description (String & ioString,
                                                         const int32_t inIndentation) const {
-  ioString.addString ("<struct @checkTargetListAST-element:") ;
+  ioString.appendString ("<struct @checkTargetListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mTargetConstructLocation.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mAcceptedTargetList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12303,21 +12303,21 @@ void GALGAS_scopeStack_2D_element::drop (void) {
 
 void GALGAS_scopeStack_2D_element::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.addString ("<struct @scopeStack-element:") ;
+  ioString.appendString ("<struct @scopeStack-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mScopeKind.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mFirstBranch.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mInitialStateMap.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mReferenceStateMap.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mObjectList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12417,13 +12417,13 @@ void GALGAS_declarationDecorationList_2D_element::drop (void) {
 
 void GALGAS_declarationDecorationList_2D_element::description (String & ioString,
                                                                const int32_t inIndentation) const {
-  ioString.addString ("<struct @declarationDecorationList-element:") ;
+  ioString.appendString ("<struct @declarationDecorationList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mDeclaration.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12523,13 +12523,13 @@ void GALGAS_operandIRList_2D_element::drop (void) {
 
 void GALGAS_operandIRList_2D_element::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("<struct @operandIRList-element:") ;
+  ioString.appendString ("<struct @operandIRList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mOperand.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12629,13 +12629,13 @@ void GALGAS_userLLVMTypeDefinitionListIR_2D_element::drop (void) {
 
 void GALGAS_userLLVMTypeDefinitionListIR_2D_element::description (String & ioString,
                                                                   const int32_t inIndentation) const {
-  ioString.addString ("<struct @userLLVMTypeDefinitionListIR-element:") ;
+  ioString.appendString ("<struct @userLLVMTypeDefinitionListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mType.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12743,15 +12743,15 @@ void GALGAS_sortedOperandIRList_2D_element::drop (void) {
 
 void GALGAS_sortedOperandIRList_2D_element::description (String & ioString,
                                                          const int32_t inIndentation) const {
-  ioString.addString ("<struct @sortedOperandIRList-element:") ;
+  ioString.appendString ("<struct @sortedOperandIRList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mOperand.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mIndex.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12851,13 +12851,13 @@ void GALGAS_controlRegisterBitSliceList_2D_element::drop (void) {
 
 void GALGAS_controlRegisterBitSliceList_2D_element::description (String & ioString,
                                                                  const int32_t inIndentation) const {
-  ioString.addString ("<struct @controlRegisterBitSliceList-element:") ;
+  ioString.appendString ("<struct @controlRegisterBitSliceList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mRegisterBitSlice.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12965,15 +12965,15 @@ void GALGAS_controlRegisterFieldList_2D_element::drop (void) {
 
 void GALGAS_controlRegisterFieldList_2D_element::description (String & ioString,
                                                               const int32_t inIndentation) const {
-  ioString.addString ("<struct @controlRegisterFieldList-element:") ;
+  ioString.appendString ("<struct @controlRegisterFieldList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mFieldBitCount.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mFieldName.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13081,15 +13081,15 @@ void GALGAS_controlRegisterByAddress_2D_element::drop (void) {
 
 void GALGAS_controlRegisterByAddress_2D_element::description (String & ioString,
                                                               const int32_t inIndentation) const {
-  ioString.addString ("<struct @controlRegisterByAddress-element:") ;
+  ioString.appendString ("<struct @controlRegisterByAddress-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mAddress.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mHTML.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13205,17 +13205,17 @@ void GALGAS_controlRegisterByName_2D_element::drop (void) {
 
 void GALGAS_controlRegisterByName_2D_element::description (String & ioString,
                                                            const int32_t inIndentation) const {
-  ioString.addString ("<struct @controlRegisterByName-element:") ;
+  ioString.appendString ("<struct @controlRegisterByName-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mAddress.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mHTML.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mName.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13323,15 +13323,15 @@ void GALGAS_staticListValueListAST_2D_element::drop (void) {
 
 void GALGAS_staticListValueListAST_2D_element::description (String & ioString,
                                                             const int32_t inIndentation) const {
-  ioString.addString ("<struct @staticListValueListAST-element:") ;
+  ioString.appendString ("<struct @staticListValueListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mElement.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mLocation.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13439,15 +13439,15 @@ void GALGAS_extendStaticListElementAST_2D_element::drop (void) {
 
 void GALGAS_extendStaticListElementAST_2D_element::description (String & ioString,
                                                                 const int32_t inIndentation) const {
-  ioString.addString ("<struct @extendStaticListElementAST-element:") ;
+  ioString.appendString ("<struct @extendStaticListElementAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mExpression.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mEndOfExpression.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13555,15 +13555,15 @@ void GALGAS_extendStaticArrayDeclarationDictAST_2D_element::drop (void) {
 
 void GALGAS_extendStaticArrayDeclarationDictAST_2D_element::description (String & ioString,
                                                                          const int32_t inIndentation) const {
-  ioString.addString ("<struct @extendStaticArrayDeclarationDictAST-element:") ;
+  ioString.appendString ("<struct @extendStaticArrayDeclarationDictAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_key.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mStaticList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13719,27 +13719,27 @@ void GALGAS_taskSortedListIR_2D_element::drop (void) {
 
 void GALGAS_taskSortedListIR_2D_element::description (String & ioString,
                                                       const int32_t inIndentation) const {
-  ioString.addString ("<struct @taskSortedListIR-element:") ;
+  ioString.appendString ("<struct @taskSortedListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mTaskName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mStackSize.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mSetupOrderedList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mActivateOrderedList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDeactivateOrderedList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mTaskNameStringIndex.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mActivate.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13855,17 +13855,17 @@ void GALGAS_globalTaskVariableList_2D_element::drop (void) {
 
 void GALGAS_globalTaskVariableList_2D_element::description (String & ioString,
                                                             const int32_t inIndentation) const {
-  ioString.addString ("<struct @globalTaskVariableList-element:") ;
+  ioString.appendString ("<struct @globalTaskVariableList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mTaskName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mTaskTypeName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mInitialValue.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13973,15 +13973,15 @@ void GALGAS_routineLLVMNameDict_2D_element::drop (void) {
 
 void GALGAS_routineLLVMNameDict_2D_element::description (String & ioString,
                                                          const int32_t inIndentation) const {
-  ioString.addString ("<struct @routineLLVMNameDict-element:") ;
+  ioString.appendString ("<struct @routineLLVMNameDict-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_key.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_llvmName.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14097,17 +14097,17 @@ void GALGAS_sectionIRlist_2D_element::drop (void) {
 
 void GALGAS_sectionIRlist_2D_element::description (String & ioString,
                                                    const int32_t inIndentation) const {
-  ioString.addString ("<struct @sectionIRlist-element:") ;
+  ioString.appendString ("<struct @sectionIRlist-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mSectionCallName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mSectionImplementationName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_invocationFromAnyMode.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14223,17 +14223,17 @@ void GALGAS_primitiveAndServiceIRlist_2D_element::drop (void) {
 
 void GALGAS_primitiveAndServiceIRlist_2D_element::description (String & ioString,
                                                                const int32_t inIndentation) const {
-  ioString.addString ("<struct @primitiveAndServiceIRlist-element:") ;
+  ioString.appendString ("<struct @primitiveAndServiceIRlist-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mCallName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mImplementationName.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mHasReturnValue.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14333,13 +14333,13 @@ void GALGAS_panicSortedListIR_2D_element::drop (void) {
 
 void GALGAS_panicSortedListIR_2D_element::description (String & ioString,
                                                        const int32_t inIndentation) const {
-  ioString.addString ("<struct @panicSortedListIR-element:") ;
+  ioString.appendString ("<struct @panicSortedListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mPriority.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14439,13 +14439,13 @@ void GALGAS_primaryInExpressionAccessListAST_2D_element::drop (void) {
 
 void GALGAS_primaryInExpressionAccessListAST_2D_element::description (String & ioString,
                                                                       const int32_t inIndentation) const {
-  ioString.addString ("<struct @primaryInExpressionAccessListAST-element:") ;
+  ioString.appendString ("<struct @primaryInExpressionAccessListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mAccess.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14545,13 +14545,13 @@ void GALGAS_instructionListAST_2D_element::drop (void) {
 
 void GALGAS_instructionListAST_2D_element::description (String & ioString,
                                                         const int32_t inIndentation) const {
-  ioString.addString ("<struct @instructionListAST-element:") ;
+  ioString.appendString ("<struct @instructionListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mInstruction.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14667,17 +14667,17 @@ void GALGAS_syncInstructionBranchListAST_2D_element::drop (void) {
 
 void GALGAS_syncInstructionBranchListAST_2D_element::description (String & ioString,
                                                                   const int32_t inIndentation) const {
-  ioString.addString ("<struct @syncInstructionBranchListAST-element:") ;
+  ioString.appendString ("<struct @syncInstructionBranchListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mGuardedCommand.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mInstructionList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mEndOfBranch.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14785,15 +14785,15 @@ void GALGAS_syncInstructionBranchListIR_2D_element::drop (void) {
 
 void GALGAS_syncInstructionBranchListIR_2D_element::description (String & ioString,
                                                                  const int32_t inIndentation) const {
-  ioString.addString ("<struct @syncInstructionBranchListIR-element:") ;
+  ioString.appendString ("<struct @syncInstructionBranchListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mGuardedCommand.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mInstructionGenerationList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14893,13 +14893,13 @@ void GALGAS_guardedCommandIRList_2D_element::drop (void) {
 
 void GALGAS_guardedCommandIRList_2D_element::description (String & ioString,
                                                           const int32_t inIndentation) const {
-  ioString.addString ("<struct @guardedCommandIRList-element:") ;
+  ioString.appendString ("<struct @guardedCommandIRList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mGuardedCommand.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15007,15 +15007,15 @@ void GALGAS_procCallEffectiveParameterListIR_2D_element::drop (void) {
 
 void GALGAS_procCallEffectiveParameterListIR_2D_element::description (String & ioString,
                                                                       const int32_t inIndentation) const {
-  ioString.addString ("<struct @procCallEffectiveParameterListIR-element:") ;
+  ioString.appendString ("<struct @procCallEffectiveParameterListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mEffectiveParameterPassingMode.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mParameter.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15123,15 +15123,15 @@ void GALGAS_switchCaseListAST_2D_element::drop (void) {
 
 void GALGAS_switchCaseListAST_2D_element::description (String & ioString,
                                                        const int32_t inIndentation) const {
-  ioString.addString ("<struct @switchCaseListAST-element:") ;
+  ioString.appendString ("<struct @switchCaseListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mCaseIdentifiers.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mCaseInstructionList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15239,15 +15239,15 @@ void GALGAS_switchCaseListIR_2D_element::drop (void) {
 
 void GALGAS_switchCaseListIR_2D_element::description (String & ioString,
                                                       const int32_t inIndentation) const {
-  ioString.addString ("<struct @switchCaseListIR-element:") ;
+  ioString.appendString ("<struct @switchCaseListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mCaseIdentifierIndexes.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mCaseInstructionList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15347,13 +15347,13 @@ void GALGAS_accessInAssignmentListAST_2D_element::drop (void) {
 
 void GALGAS_accessInAssignmentListAST_2D_element::description (String & ioString,
                                                                const int32_t inIndentation) const {
-  ioString.addString ("<struct @accessInAssignmentListAST-element:") ;
+  ioString.appendString ("<struct @accessInAssignmentListAST-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mAccess.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15453,13 +15453,13 @@ void GALGAS_instructionListIR_2D_element::drop (void) {
 
 void GALGAS_instructionListIR_2D_element::description (String & ioString,
                                                        const int32_t inIndentation) const {
-  ioString.addString ("<struct @instructionListIR-element:") ;
+  ioString.appendString ("<struct @instructionListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mInstructionGeneration.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15559,13 +15559,13 @@ void GALGAS_instructionListListIR_2D_element::drop (void) {
 
 void GALGAS_instructionListListIR_2D_element::description (String & ioString,
                                                            const int32_t inIndentation) const {
-  ioString.addString ("<struct @instructionListListIR-element:") ;
+  ioString.appendString ("<struct @instructionListListIR-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mInstructionList.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15665,13 +15665,13 @@ void GALGAS_genericFormalParameterList_2D_element::drop (void) {
 
 void GALGAS_genericFormalParameterList_2D_element::description (String & ioString,
                                                                 const int32_t inIndentation) const {
-  ioString.addString ("<struct @genericFormalParameterList-element:") ;
+  ioString.appendString ("<struct @genericFormalParameterList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mParameter.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15771,13 +15771,13 @@ void GALGAS_llvmStringDefinition_2D_element::drop (void) {
 
 void GALGAS_llvmStringDefinition_2D_element::description (String & ioString,
                                                           const int32_t inIndentation) const {
-  ioString.addString ("<struct @llvmStringDefinition-element:") ;
+  ioString.appendString ("<struct @llvmStringDefinition-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mElement.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15877,13 +15877,13 @@ void GALGAS_llvmGenerationInstructionElementList_2D_element::drop (void) {
 
 void GALGAS_llvmGenerationInstructionElementList_2D_element::description (String & ioString,
                                                                           const int32_t inIndentation) const {
-  ioString.addString ("<struct @llvmGenerationInstructionElementList-element:") ;
+  ioString.appendString ("<struct @llvmGenerationInstructionElementList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mElement.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15983,13 +15983,13 @@ void GALGAS_llvmGenerationInstructionList_2D_element::drop (void) {
 
 void GALGAS_llvmGenerationInstructionList_2D_element::description (String & ioString,
                                                                    const int32_t inIndentation) const {
-  ioString.addString ("<struct @llvmGenerationInstructionList-element:") ;
+  ioString.appendString ("<struct @llvmGenerationInstructionList-element:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mInstruction.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -37745,18 +37745,18 @@ void cGrammar_omnibus_5F_grammar::_performSourceFileParsing_ (Compiler * inCompi
         }
       }else{
         String message ;
-        message.addString ("the '") ;
-        message.addString (filePath) ;
-        message.addString ("' file exists, but cannot be read") ;
+        message.appendString ("the '") ;
+        message.appendString (filePath) ;
+        message.appendString ("' file exists, but cannot be read") ;
         const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
         inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
       }
       macroDetachSharedObject (scanner) ;
     }else{
       String message ;
-      message.addString ("the '") ;
-      message.addString (filePath) ;
-      message.addString ("' file does not exist") ;
+      message.appendString ("the '") ;
+      message.appendString (filePath) ;
+      message.appendString ("' file does not exist") ;
       const GALGAS_location errorLocation (inFilePath.readProperty_location ()) ;
       inCompiler->semanticErrorAtLocation (errorLocation, message, TC_Array <C_FixItDescription> () COMMA_THERE) ;
     }

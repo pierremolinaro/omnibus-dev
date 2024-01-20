@@ -33,9 +33,9 @@ cMapElement * cMapElement_instanciedDriverMap::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_instanciedDriverMap::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDriverInstanciationArgumentMap" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDriverInstanciationArgumentMap" ":") ;
   mProperty_mDriverInstanciationArgumentMap.description (ioString, inIndentation) ;
 }
 
@@ -464,17 +464,17 @@ cCollectionElement * cCollectionElement_driverListIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_driverListIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDriverName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDriverName" ":") ;
   mObject.mProperty_mDriverName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mType" ":") ;
   mObject.mProperty_mType.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mInitialValueList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mInitialValueList" ":") ;
   mObject.mProperty_mInitialValueList.description (ioString, inIndentation) ;
 }
 
@@ -990,9 +990,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_staticListPropertyTypeAST_valueType::description (String & ioString,
                                                                              const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1023,11 +1023,11 @@ mAssociatedValue2 (inAssociatedValue2) {
 
 void cEnumAssociatedValues_staticListPropertyTypeAST_function::description (String & ioString,
                                                                             const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
   mAssociatedValue2.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1095,7 +1095,7 @@ void GALGAS_staticListPropertyTypeAST::method_valueType (GALGAS_lstring & outAss
   if (mEnum != kEnum_valueType) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @staticListPropertyTypeAST valueType invoked with an invalid enum value") ;
+    s.appendString ("method @staticListPropertyTypeAST valueType invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_staticListPropertyTypeAST_valueType * ptr = (const cEnumAssociatedValues_staticListPropertyTypeAST_valueType *) unsafePointer () ;
@@ -1115,7 +1115,7 @@ void GALGAS_staticListPropertyTypeAST::method_function (GALGAS_mode & outAssocia
     outAssociatedValue1.drop () ;
     outAssociatedValue2.drop () ;
     String s ;
-    s.addString ("method @staticListPropertyTypeAST function invoked with an invalid enum value") ;
+    s.appendString ("method @staticListPropertyTypeAST function invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_staticListPropertyTypeAST_function * ptr = (const cEnumAssociatedValues_staticListPropertyTypeAST_function *) unsafePointer () ;
@@ -1175,10 +1175,10 @@ GALGAS_bool GALGAS_staticListPropertyTypeAST::getter_isFunction (UNUSED_LOCATION
 
 void GALGAS_staticListPropertyTypeAST::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.addString ("<enum @staticListPropertyTypeAST: ") ;
-  ioString.addString (gEnumNameArrayFor_staticListPropertyTypeAST [mEnum]) ;
+  ioString.appendString ("<enum @staticListPropertyTypeAST: ") ;
+  ioString.appendString (gEnumNameArrayFor_staticListPropertyTypeAST [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1300,13 +1300,13 @@ cCollectionElement * cCollectionElement_staticListPropertyListAST::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_staticListPropertyListAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPropertyName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPropertyName" ":") ;
   mObject.mProperty_mPropertyName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPropertyType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPropertyType" ":") ;
   mObject.mProperty_mPropertyType.description (ioString, inIndentation) ;
 }
 
@@ -1774,13 +1774,13 @@ cCollectionElement * cCollectionElement_staticListValueListAST::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_staticListValueListAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mElement" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mElement" ":") ;
   mObject.mProperty_mElement.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mLocation" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mLocation" ":") ;
   mObject.mProperty_mLocation.description (ioString, inIndentation) ;
 }
 
@@ -2358,13 +2358,13 @@ cCollectionElement * cCollectionElement_extendStaticListElementAST::copy (void) 
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_extendStaticListElementAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mExpression" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mExpression" ":") ;
   mObject.mProperty_mExpression.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mEndOfExpression" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mEndOfExpression" ":") ;
   mObject.mProperty_mEndOfExpression.description (ioString, inIndentation) ;
 }
 
@@ -2783,9 +2783,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_extendStaticListExpressionAST_expression::description (String & ioString,
                                                                                   const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2814,10 +2814,10 @@ mAssociatedValue1 (inAssociatedValue1) {
 
 void cEnumAssociatedValues_extendStaticListExpressionAST_function::description (String & ioString,
                                                                                 const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2881,7 +2881,7 @@ void GALGAS_extendStaticListExpressionAST::method_expression (GALGAS_expressionA
   if (mEnum != kEnum_expression) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @extendStaticListExpressionAST expression invoked with an invalid enum value") ;
+    s.appendString ("method @extendStaticListExpressionAST expression invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_extendStaticListExpressionAST_expression * ptr = (const cEnumAssociatedValues_extendStaticListExpressionAST_expression *) unsafePointer () ;
@@ -2899,7 +2899,7 @@ void GALGAS_extendStaticListExpressionAST::method_function (GALGAS_lstring & out
     outAssociatedValue0.drop () ;
     outAssociatedValue1.drop () ;
     String s ;
-    s.addString ("method @extendStaticListExpressionAST function invoked with an invalid enum value") ;
+    s.appendString ("method @extendStaticListExpressionAST function invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_extendStaticListExpressionAST_function * ptr = (const cEnumAssociatedValues_extendStaticListExpressionAST_function *) unsafePointer () ;
@@ -2956,10 +2956,10 @@ GALGAS_bool GALGAS_extendStaticListExpressionAST::getter_isFunction (UNUSED_LOCA
 
 void GALGAS_extendStaticListExpressionAST::description (String & ioString,
                                                         const int32_t inIndentation) const {
-  ioString.addString ("<enum @extendStaticListExpressionAST: ") ;
-  ioString.addString (gEnumNameArrayFor_extendStaticListExpressionAST [mEnum]) ;
+  ioString.appendString ("<enum @extendStaticListExpressionAST: ") ;
+  ioString.appendString (gEnumNameArrayFor_extendStaticListExpressionAST [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3046,9 +3046,9 @@ cMapElement * cMapElement_staticListInitializationMap::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_staticListInitializationMap::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mInitializationList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mInitializationList" ":") ;
   mProperty_mInitializationList.description (ioString, inIndentation) ;
 }
 
@@ -3502,21 +3502,21 @@ cCollectionElement * cCollectionElement_routineTypedSignature::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_routineTypedSignature::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentPassingMode" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentPassingMode" ":") ;
   mObject.mProperty_mFormalArgumentPassingMode.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSelector" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSelector" ":") ;
   mObject.mProperty_mSelector.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTypeProxy" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTypeProxy" ":") ;
   mObject.mProperty_mTypeProxy.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentName" ":") ;
   mObject.mProperty_mFormalArgumentName.description (ioString, inIndentation) ;
 }
 
@@ -4214,13 +4214,13 @@ cCollectionElement * cCollectionElement_taskSetupListAST::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_taskSetupListAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mName" ":") ;
   mObject.mProperty_mName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDependanceList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDependanceList" ":") ;
   mObject.mProperty_mDependanceList.description (ioString, inIndentation) ;
 }
 
@@ -4690,17 +4690,17 @@ cCollectionElement * cCollectionElement_syncInstructionBranchListAST::copy (void
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_syncInstructionBranchListAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mGuardedCommand" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mGuardedCommand" ":") ;
   mObject.mProperty_mGuardedCommand.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mInstructionList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mInstructionList" ":") ;
   mObject.mProperty_mInstructionList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mEndOfBranch" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mEndOfBranch" ":") ;
   mObject.mProperty_mEndOfBranch.description (ioString, inIndentation) ;
 }
 
@@ -5424,33 +5424,33 @@ cCollectionElement * cCollectionElement_decoratedTaskList::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_decoratedTaskList::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskName" ":") ;
   mObject.mProperty_mTaskName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mStackSize" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mStackSize" ":") ;
   mObject.mProperty_mStackSize.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskSetupListAST" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskSetupListAST" ":") ;
   mObject.mProperty_mTaskSetupListAST.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskActivateListAST" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskActivateListAST" ":") ;
   mObject.mProperty_mTaskActivateListAST.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskDeactivateListAST" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskDeactivateListAST" ":") ;
   mObject.mProperty_mTaskDeactivateListAST.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mEndOfTaskDeclaration" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mEndOfTaskDeclaration" ":") ;
   mObject.mProperty_mEndOfTaskDeclaration.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mAutoStart" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mAutoStart" ":") ;
   mObject.mProperty_mAutoStart.description (ioString, inIndentation) ;
 }
 
@@ -6263,9 +6263,9 @@ const C_galgas_type_descriptor * cPtr_decoratedTaskListDeclaration::classDescrip
 
 void cPtr_decoratedTaskListDeclaration::description (String & ioString,
                                                      const int32_t inIndentation) const {
-  ioString.addString ("[@decoratedTaskListDeclaration:") ;
+  ioString.appendString ("[@decoratedTaskListDeclaration:") ;
   mProperty_mTaskList.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -6469,37 +6469,37 @@ cMapElement * cMapElement_taskMapIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_taskMapIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskType" ":") ;
   mProperty_mTaskType.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPriority" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPriority" ":") ;
   mProperty_mPriority.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mStackSize" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mStackSize" ":") ;
   mProperty_mStackSize.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSetupOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSetupOrderedList" ":") ;
   mProperty_mSetupOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mActivateOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mActivateOrderedList" ":") ;
   mProperty_mActivateOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDeactivateOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDeactivateOrderedList" ":") ;
   mProperty_mDeactivateOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskNameStringIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskNameStringIndex" ":") ;
   mProperty_mTaskNameStringIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mActivate" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mActivate" ":") ;
   mProperty_mActivate.description (ioString, inIndentation) ;
 }
 
@@ -7198,37 +7198,37 @@ cSortedListElement * cSortedListElement_taskSortedListIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cSortedListElement_taskSortedListIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskName" ":") ;
   mObject.mProperty_mTaskName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mPriority" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mPriority" ":") ;
   mObject.mProperty_mPriority.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mStackSize" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mStackSize" ":") ;
   mObject.mProperty_mStackSize.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSetupOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSetupOrderedList" ":") ;
   mObject.mProperty_mSetupOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mActivateOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mActivateOrderedList" ":") ;
   mObject.mProperty_mActivateOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDeactivateOrderedList" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDeactivateOrderedList" ":") ;
   mObject.mProperty_mDeactivateOrderedList.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mTaskNameStringIndex" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mTaskNameStringIndex" ":") ;
   mObject.mProperty_mTaskNameStringIndex.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mActivate" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mActivate" ":") ;
   mObject.mProperty_mActivate.description (ioString, inIndentation) ;
 }
 
@@ -8314,9 +8314,9 @@ GALGAS_bool GALGAS_mode::getter_isStartupMode (UNUSED_LOCATION_ARGS) const {
 
 void GALGAS_mode::description (String & ioString,
                                const int32_t /* inIndentation */) const {
-  ioString.addString ("<enum @mode: ") ;
-  ioString.addString (gEnumNameArrayFor_mode [mEnum]) ;
-  ioString.addString (">") ;
+  ioString.appendString ("<enum @mode: ") ;
+  ioString.appendString (gEnumNameArrayFor_mode [mEnum]) ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8442,21 +8442,21 @@ cCollectionElement * cCollectionElement_routineFormalArgumentListAST::copy (void
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_routineFormalArgumentListAST::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentPassingMode" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentPassingMode" ":") ;
   mObject.mProperty_mFormalArgumentPassingMode.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSelector" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSelector" ":") ;
   mObject.mProperty_mSelector.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentTypeName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentTypeName" ":") ;
   mObject.mProperty_mFormalArgumentTypeName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentName" ":") ;
   mObject.mProperty_mFormalArgumentName.description (ioString, inIndentation) ;
 }
 
@@ -9488,7 +9488,7 @@ static void internalDescription_routineLLVMNameDict (const cNode_routineLLVMName
                                  const int32_t inIndentation) {
   if (nullptr != inNode) {
     internalDescription_routineLLVMNameDict (inNode->mInfPtr, ioString, inIndentation) ;
-    ioString.addNL () ;
+    ioString.appendNewLine () ;
     inNode->description (ioString, inIndentation) ;
     internalDescription_routineLLVMNameDict (inNode->mSupPtr, ioString, inIndentation) ;
   }
@@ -9498,15 +9498,15 @@ static void internalDescription_routineLLVMNameDict (const cNode_routineLLVMName
 
 void GALGAS_routineLLVMNameDict::description (String & ioString,
                                              const int32_t inIndentation) const {
-  ioString.addString ("<dict @") ;
-  ioString.addString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.addString (":") ;
+  ioString.appendString ("<dict @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendString (":") ;
   if (isValid ()) {
     internalDescription_routineLLVMNameDict (mSharedDict->mRoot, ioString, inIndentation) ;
   }else{
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10170,17 +10170,17 @@ cCollectionElement * cCollectionElement_sectionIRlist::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_sectionIRlist::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSectionCallName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSectionCallName" ":") ;
   mObject.mProperty_mSectionCallName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSectionImplementationName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSectionImplementationName" ":") ;
   mObject.mProperty_mSectionImplementationName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("invocationFromAnyMode" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("invocationFromAnyMode" ":") ;
   mObject.mProperty_invocationFromAnyMode.description (ioString, inIndentation) ;
 }
 
@@ -10710,17 +10710,17 @@ cCollectionElement * cCollectionElement_primitiveAndServiceIRlist::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_primitiveAndServiceIRlist::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mCallName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mCallName" ":") ;
   mObject.mProperty_mCallName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mImplementationName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mImplementationName" ":") ;
   mObject.mProperty_mImplementationName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mHasReturnValue" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mHasReturnValue" ":") ;
   mObject.mProperty_mHasReturnValue.description (ioString, inIndentation) ;
 }
 
@@ -11434,17 +11434,17 @@ cCollectionElement * cCollectionElement_routineFormalArgumentListIR::copy (void)
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_routineFormalArgumentListIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentKind" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentKind" ":") ;
   mObject.mProperty_mFormalArgumentKind.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentType" ":") ;
   mObject.mProperty_mFormalArgumentType.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentName" ":") ;
   mObject.mProperty_mFormalArgumentName.description (ioString, inIndentation) ;
 }
 
@@ -12049,13 +12049,13 @@ cMapElement * cMapElement_externProcedureMapIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_externProcedureMapIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalArgumentListForGeneration" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalArgumentListForGeneration" ":") ;
   mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mReturnType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mReturnType" ":") ;
   mProperty_mReturnType.description (ioString, inIndentation) ;
 }
 
@@ -12597,17 +12597,17 @@ cMapElement * cMapElement_interruptMapIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cMapElement_interruptMapIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mSelfType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mSelfType" ":") ;
   mProperty_mSelfType.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mDriverName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mDriverName" ":") ;
   mProperty_mDriverName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mMode" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mMode" ":") ;
   mProperty_mMode.description (ioString, inIndentation) ;
 }
 
@@ -13039,9 +13039,9 @@ mAssociatedValue0 (inAssociatedValue0) {
 
 void cEnumAssociatedValues_guardKind_convenienceGuard::description (String & ioString,
                                                                     const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13094,7 +13094,7 @@ void GALGAS_guardKind::method_convenienceGuard (GALGAS_callInstructionAST & outA
   if (mEnum != kEnum_convenienceGuard) {
     outAssociatedValue0.drop () ;
     String s ;
-    s.addString ("method @guardKind convenienceGuard invoked with an invalid enum value") ;
+    s.appendString ("method @guardKind convenienceGuard invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_guardKind_convenienceGuard * ptr = (const cEnumAssociatedValues_guardKind_convenienceGuard *) unsafePointer () ;
@@ -13144,10 +13144,10 @@ GALGAS_bool GALGAS_guardKind::getter_isConvenienceGuard (UNUSED_LOCATION_ARGS) c
 
 void GALGAS_guardKind::description (String & ioString,
                                     const int32_t inIndentation) const {
-  ioString.addString ("<enum @guardKind: ") ;
-  ioString.addString (gEnumNameArrayFor_guardKind [mEnum]) ;
+  ioString.appendString ("<enum @guardKind: ") ;
+  ioString.appendString (gEnumNameArrayFor_guardKind [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13446,12 +13446,12 @@ mAssociatedValue3 (inAssociatedValue3) {
 
 void cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard::description (String & ioString,
                                                                                 const int32_t inIndentation) const {
-  ioString.addString ("(\n") ;
+  ioString.appendString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
   mAssociatedValue2.description (ioString, inIndentation) ;
   mAssociatedValue3.description (ioString, inIndentation) ;
-  ioString.addString (")") ;
+  ioString.appendString (")") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13522,7 +13522,7 @@ void GALGAS_guardKindGenerationIR::method_convenienceGuard (GALGAS_allocaList & 
     outAssociatedValue2.drop () ;
     outAssociatedValue3.drop () ;
     String s ;
-    s.addString ("method @guardKindGenerationIR convenienceGuard invoked with an invalid enum value") ;
+    s.appendString ("method @guardKindGenerationIR convenienceGuard invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard * ptr = (const cEnumAssociatedValues_guardKindGenerationIR_convenienceGuard *) unsafePointer () ;
@@ -13581,10 +13581,10 @@ GALGAS_bool GALGAS_guardKindGenerationIR::getter_isConvenienceGuard (UNUSED_LOCA
 
 void GALGAS_guardKindGenerationIR::description (String & ioString,
                                                 const int32_t inIndentation) const {
-  ioString.addString ("<enum @guardKindGenerationIR: ") ;
-  ioString.addString (gEnumNameArrayFor_guardKindGenerationIR [mEnum]) ;
+  ioString.appendString ("<enum @guardKindGenerationIR: ") ;
+  ioString.appendString (gEnumNameArrayFor_guardKindGenerationIR [mEnum]) ;
   mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13818,17 +13818,17 @@ cCollectionElement * cCollectionElement_allocaList::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_allocaList::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mVarLLVMName" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mVarLLVMName" ":") ;
   mObject.mProperty_mVarLLVMName.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mLLVMType" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mLLVMType" ":") ;
   mObject.mProperty_mLLVMType.description (ioString, inIndentation) ;
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mFormalInputArgument" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mFormalInputArgument" ":") ;
   mObject.mProperty_mFormalInputArgument.description (ioString, inIndentation) ;
 }
 
@@ -14354,9 +14354,9 @@ cCollectionElement * cCollectionElement_instructionListIR::copy (void) {
 //--------------------------------------------------------------------------------------------------
 
 void cCollectionElement_instructionListIR::description (String & ioString, const int32_t inIndentation) const {
-  ioString.addNL () ;
-  ioString.addStringMultiple ("| ", inIndentation) ;
-  ioString.addString ("mInstructionGeneration" ":") ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendString ("mInstructionGeneration" ":") ;
   mObject.mProperty_mInstructionGeneration.description (ioString, inIndentation) ;
 }
 
@@ -14895,9 +14895,9 @@ GALGAS_bool GALGAS_procFormalArgumentPassingMode::getter_isInputOutput (UNUSED_L
 
 void GALGAS_procFormalArgumentPassingMode::description (String & ioString,
                                                         const int32_t /* inIndentation */) const {
-  ioString.addString ("<enum @procFormalArgumentPassingMode: ") ;
-  ioString.addString (gEnumNameArrayFor_procFormalArgumentPassingMode [mEnum]) ;
-  ioString.addString (">") ;
+  ioString.appendString ("<enum @procFormalArgumentPassingMode: ") ;
+  ioString.appendString (gEnumNameArrayFor_procFormalArgumentPassingMode [mEnum]) ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------

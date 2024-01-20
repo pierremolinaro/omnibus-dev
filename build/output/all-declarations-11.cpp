@@ -537,9 +537,9 @@ const C_galgas_type_descriptor * cPtr_addressofControlRegisterAST::classDescript
 
 void cPtr_addressofControlRegisterAST::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.addString ("[@addressofControlRegisterAST:") ;
+  ioString.appendString ("[@addressofControlRegisterAST:") ;
   mProperty_mControlRegisterLValue.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -699,9 +699,9 @@ const C_galgas_type_descriptor * cPtr_addressofExpressionAST::classDescriptor (v
 
 void cPtr_addressofExpressionAST::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.addString ("[@addressofExpressionAST:") ;
+  ioString.appendString ("[@addressofExpressionAST:") ;
   mProperty_mLValue.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -891,11 +891,11 @@ const C_galgas_type_descriptor * cPtr_addressofInstructionIR::classDescriptor (v
 
 void cPtr_addressofInstructionIR::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.addString ("[@addressofInstructionIR:") ;
+  ioString.appendString ("[@addressofInstructionIR:") ;
   mProperty_mTarget.description (ioString, inIndentation+1) ;
-  ioString.addString (", ") ;
+  ioString.appendString (", ") ;
   mProperty_mLValue.description (ioString, inIndentation+1) ;
-  ioString.addString ("]") ;
+  ioString.appendString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1108,39 +1108,39 @@ void GALGAS_intermediateCodeStruct::drop (void) {
 
 void GALGAS_intermediateCodeStruct::description (String & ioString,
                                                  const int32_t inIndentation) const {
-  ioString.addString ("<struct @intermediateCodeStruct:") ;
+  ioString.appendString ("<struct @intermediateCodeStruct:") ;
   if (! isValid ()) {
-    ioString.addString (" not built") ;
+    ioString.appendString (" not built") ;
   }else{
     mProperty_mStaticEntityMap.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mInterruptMapIR.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mExternProcedureMapIR.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPanicSetupListIR.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mPanicLoopListIR.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mTaskMapIR.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mMaxBranchOfOnInstructions.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mDriverList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mStaticArrayMapForIntermediate.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mGlobalSyncInstanceMap.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mControlRegisterGroupArrayList.description (ioString, inIndentation+1) ;
-    ioString.addString (", ") ;
+    ioString.appendString (", ") ;
     mProperty_mRoutineListIR.description (ioString, inIndentation+1) ;
   }
-  ioString.addString (">") ;
+  ioString.appendString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2627,166 +2627,166 @@ GALGAS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (Compiler * in
                                                                    const GALGAS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
                                                                    COMMA_UNUSED_LOCATION_ARGS) {
   String result ;
-  result.addString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString ("</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Types defined by ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString ("</h1>\n<p>This document lists all ") ;
-  result.addString (in_GLOBAL_5F_TYPE_5F_MAP.getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).stringValue ()) ;
-  result.addString (" defined types, sorted by name.</p>\n<p>") ;
+  result.appendString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString ("</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Types defined by ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString ("</h1>\n<p>This document lists all ") ;
+  result.appendString (in_GLOBAL_5F_TYPE_5F_MAP.getter_count (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 53)).stringValue ()) ;
+  result.appendString (" defined types, sorted by name.</p>\n<p>") ;
   GALGAS_uint index_989_ (0) ;
   if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
     cEnumerator_stringset enumerator_989 (in_FIRST_5F_LETTER_5F_SET, kENUMERATION_UP) ;
     while (enumerator_989.hasCurrentObject ()) {
-      result.addString ("<a class=\"header_link\" href=\"#") ;
-      result.addString (enumerator_989.current_key (HERE).getter_characterAtIndex (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).stringValue ()) ;
-      result.addString ("\">") ;
-      result.addString (enumerator_989.current_key (HERE).stringValue ()) ;
-      result.addString ("</a>") ;
+      result.appendString ("<a class=\"header_link\" href=\"#") ;
+      result.appendString (enumerator_989.current_key (HERE).getter_characterAtIndex (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("typeDump.html.galgasTemplate", 56)).stringValue ()) ;
+      result.appendString ("\">") ;
+      result.appendString (enumerator_989.current_key (HERE).stringValue ()) ;
+      result.appendString ("</a>") ;
       if (enumerator_989.hasNextObject ()) {
-        result.addString (" - ") ;
+        result.appendString (" - ") ;
       }
       index_989_.increment () ;
       enumerator_989.gotoNextObject () ;
     }
   }
-  result.addString ("</p>\n<p>") ;
-  result.addString (in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue ()) ;
-  result.addString ("\n</p>\n") ;
+  result.appendString ("</p>\n<p>") ;
+  result.appendString (in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue ()) ;
+  result.appendString ("\n</p>\n") ;
   GALGAS_uint index_1174_ (0) ;
   if (in_GLOBAL_5F_TYPE_5F_MAP.isValid ()) {
     cEnumerator_unifiedTypeMap enumerator_1174 (in_GLOBAL_5F_TYPE_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_1174.hasCurrentObject ()) {
-      result.addString ("\n<h2>\n  <a name=\"") ;
-      result.addString (enumerator_1174.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("\">") ;
-      result.addString (enumerator_1174.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</a>\n</h2>\n<p>\nKind: ") ;
-      result.addString (callExtensionGetter_descriptionForHTMLFile ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).stringValue ()) ;
-      result.addString ("<br>\nDescription: ") ;
-      result.addString (callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 69)).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
-      result.addString ("<br>\nLLVM Base Name: ") ;
+      result.appendString ("\n<h2>\n  <a name=\"") ;
+      result.appendString (enumerator_1174.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("\">") ;
+      result.appendString (enumerator_1174.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</a>\n</h2>\n<p>\nKind: ") ;
+      result.appendString (callExtensionGetter_descriptionForHTMLFile ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 68)).stringValue ()) ;
+      result.appendString ("<br>\nDescription: ") ;
+      result.appendString (callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 69)).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
+      result.appendString ("<br>\nLLVM Base Name: ") ;
       const enumGalgasBool test_0 = GALGAS_bool (kIsEqual, callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 70)).readProperty_llvmBaseTypeName ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       switch (test_0) {
       case kBoolTrue : {
-        result.addString (GALGAS_string ("<i>none, compile time type</i>").stringValue ()) ;
+        result.appendString (GALGAS_string ("<i>none, compile time type</i>").stringValue ()) ;
         } break ;
       case kBoolFalse : {
-        result.addString (callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 70)).readProperty_llvmBaseTypeName ().stringValue ()) ;
+        result.appendString (callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 70)).readProperty_llvmBaseTypeName ().stringValue ()) ;
         } break ;
       default :
         break ;
       }
-      result.addString ("<br>\nLLVM Name: ") ;
+      result.appendString ("<br>\nLLVM Name: ") ;
       const enumGalgasBool test_1 = GALGAS_bool (kIsEqual, callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       switch (test_1) {
       case kBoolTrue : {
-        result.addString (GALGAS_string ("<i>none, compile time type</i>").stringValue ()) ;
+        result.appendString (GALGAS_string ("<i>none, compile time type</i>").stringValue ()) ;
         } break ;
       case kBoolFalse : {
-        result.addString (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).stringValue ()) ;
+        result.appendString (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) callExtensionGetter_definition ((const cPtr_unifiedTypeMapElementClass *) enumerator_1174.current_mElement (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).ptr (), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 71)).stringValue ()) ;
         } break ;
       default :
         break ;
       }
-      result.addString ("\n</p>\n") ;
+      result.appendString ("\n</p>\n") ;
       index_1174_.increment () ;
       enumerator_1174.gotoNextObject () ;
     }
   }
-  result.addString ("\n<p>\n<h2>\n  Routines\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Standalone routine Name</td>\n      <td class=\"result_title\">Visibility</td>\n      <td class=\"result_title\">Typed signature</td>\n      <td class=\"result_title\">Routine LLVM Name, by mode</td>\n    </tr>\n  ") ;
+  result.appendString ("\n<p>\n<h2>\n  Routines\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Standalone routine Name</td>\n      <td class=\"result_title\">Visibility</td>\n      <td class=\"result_title\">Typed signature</td>\n      <td class=\"result_title\">Routine LLVM Name, by mode</td>\n    </tr>\n  ") ;
   GALGAS_uint index_2119_ (0) ;
   if (in_ALL_5F_ROUTINE_5F_MAP.isValid ()) {
     cEnumerator_routineMapForContext enumerator_2119 (in_ALL_5F_ROUTINE_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_2119.hasCurrentObject ()) {
-      result.addString ("\n    <tr class=\"result_line\">\n      <td>") ;
-      result.addString (enumerator_2119.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</td>\n      <td>") ;
+      result.appendString ("\n    <tr class=\"result_line\">\n      <td>") ;
+      result.appendString (enumerator_2119.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</td>\n      <td>") ;
       const enumGalgasBool test_2 = enumerator_2119.current_mIsPublic (HERE).boolEnum () ;
       switch (test_2) {
       case kBoolTrue : {
-        result.addString (GALGAS_string ("public").stringValue ()) ;
+        result.appendString (GALGAS_string ("public").stringValue ()) ;
         } break ;
       case kBoolFalse : {
-        result.addString (GALGAS_string ("private").stringValue ()) ;
+        result.appendString (GALGAS_string ("private").stringValue ()) ;
         } break ;
       default :
         break ;
       }
-      result.addString ("</td>\n      <td>") ;
-      result.addString (extensionGetter_typedString (enumerator_2119.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue ()) ;
+      result.appendString ("</td>\n      <td>") ;
+      result.appendString (extensionGetter_typedString (enumerator_2119.current_mSignature (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue ()) ;
       const enumGalgasBool test_3 = enumerator_2119.current_mReturnTypeProxy (HERE).getter_isNull (SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).boolEnum () ;
       switch (test_3) {
       case kBoolTrue : {
         } break ;
       case kBoolFalse : {
-        result.addString (" -> ") ;
-        result.addString (extensionGetter_key (enumerator_2119.current_mReturnTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue ()) ;
+        result.appendString (" -> ") ;
+        result.appendString (extensionGetter_key (enumerator_2119.current_mReturnTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 89)).stringValue ()) ;
         } break ;
       default :
         break ;
       }
-      result.addString ("</td>\n      <td>") ;
+      result.appendString ("</td>\n      <td>") ;
       GALGAS_uint index_2478_ (0) ;
       if (enumerator_2119.current_mModeDictionary (HERE).isValid ()) {
         cEnumerator_routineLLVMNameDict enumerator_2478 (enumerator_2119.current_mModeDictionary (HERE), kENUMERATION_UP) ;
         while (enumerator_2478.hasCurrentObject ()) {
-          result.addString (extensionGetter_string (enumerator_2478.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 90)).stringValue ()) ;
-          result.addString (" : ") ;
-          result.addString (enumerator_2478.current_llvmName (HERE).stringValue ()) ;
+          result.appendString (extensionGetter_string (enumerator_2478.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("typeDump.html.galgasTemplate", 90)).stringValue ()) ;
+          result.appendString (" : ") ;
+          result.appendString (enumerator_2478.current_llvmName (HERE).stringValue ()) ;
           if (enumerator_2478.hasNextObject ()) {
-            result.addString ("<br>") ;
+            result.appendString ("<br>") ;
           }
           index_2478_.increment () ;
           enumerator_2478.gotoNextObject () ;
         }
       }
-      result.addString ("</td>\n    </tr>\n  ") ;
+      result.appendString ("</td>\n    </tr>\n  ") ;
       index_2119_.increment () ;
       enumerator_2119.gotoNextObject () ;
     }
   }
-  result.addString ("\n  </table>\n</p>\n<p>\n<h2>\n  Infix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Infix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  ") ;
+  result.appendString ("\n  </table>\n</p>\n<p>\n<h2>\n  Infix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Infix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  ") ;
   GALGAS_uint index_2836_ (0) ;
   if (in_INFIX_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_infixOperatorMap enumerator_2836 (in_INFIX_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_2836.hasCurrentObject ()) {
-      result.addString ("\n    <tr class=\"result_line\">\n      <td>") ;
-      result.addString (enumerator_2836.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</td>\n      <td>") ;
-      result.addString (enumerator_2836.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
-      result.addString ("</td>\n    </tr>\n  ") ;
+      result.appendString ("\n    <tr class=\"result_line\">\n      <td>") ;
+      result.appendString (enumerator_2836.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</td>\n      <td>") ;
+      result.appendString (enumerator_2836.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
+      result.appendString ("</td>\n    </tr>\n  ") ;
       index_2836_.increment () ;
       enumerator_2836.gotoNextObject () ;
     }
   }
-  result.addString ("\n  </table>\n</p>\n<p>\n<h2>\n  Prefix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Prefix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  ") ;
+  result.appendString ("\n  </table>\n</p>\n<p>\n<h2>\n  Prefix Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Prefix operator</td>\n      <td class=\"result_title\">Result Type</td>\n    </tr>\n  ") ;
   GALGAS_uint index_3259_ (0) ;
   if (in_PREFIX_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_prefixOperatorMap enumerator_3259 (in_PREFIX_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_3259.hasCurrentObject ()) {
-      result.addString ("\n    <tr class=\"result_line\">\n      <td>") ;
-      result.addString (enumerator_3259.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</td>\n      <td>") ;
-      result.addString (enumerator_3259.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
-      result.addString ("</td>\n    </tr>\n  ") ;
+      result.appendString ("\n    <tr class=\"result_line\">\n      <td>") ;
+      result.appendString (enumerator_3259.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</td>\n      <td>") ;
+      result.appendString (enumerator_3259.current_mResultType (HERE).readProperty_omnibusTypeDescriptionName ().stringValue ()) ;
+      result.appendString ("</td>\n    </tr>\n  ") ;
       index_3259_.increment () ;
       enumerator_3259.gotoNextObject () ;
     }
   }
-  result.addString ("\n  </table>\n</p>\n<h2>\n  Assignment Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Operator</td>\n    </tr>\n  ") ;
+  result.appendString ("\n  </table>\n</p>\n<h2>\n  Assignment Operators\n</h2>\n  <table class=\"result\">\n    <tr>\n      <td class=\"result_title\">Operator</td>\n    </tr>\n  ") ;
   GALGAS_uint index_3604_ (0) ;
   if (in_ASSIGNMENT_5F_OPERATOR_5F_MAP.isValid ()) {
     cEnumerator_assignmentOperatorMap enumerator_3604 (in_ASSIGNMENT_5F_OPERATOR_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_3604.hasCurrentObject ()) {
-      result.addString ("\n    <tr class=\"result_line\">\n      <td>") ;
-      result.addString (enumerator_3604.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</td>\n    </tr>\n  ") ;
+      result.appendString ("\n    <tr class=\"result_line\">\n      <td>") ;
+      result.appendString (enumerator_3604.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</td>\n    </tr>\n  ") ;
       index_3604_.increment () ;
       enumerator_3604.gotoNextObject () ;
     }
   }
-  result.addString ("\n  </table>\n</p>\n</div>\n</body>\n</html>\n") ;
+  result.appendString ("\n  </table>\n</p>\n</div>\n</body>\n</html>\n") ;
   return GALGAS_string (result) ;
 }
 
@@ -7467,23 +7467,23 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByNa
                                                                                     const GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   String result ;
-  result.addString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString (", sorted by name</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString (", sorted by name</h1>\n<p>This document lists all ") ;
-  result.addString (in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByNameDump.html.galgasTemplate", 78)).stringValue ()) ;
-  result.addString (" defined control registers, sorted by name.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n") ;
+  result.appendString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString (", sorted by name</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString (", sorted by name</h1>\n<p>This document lists all ") ;
+  result.appendString (in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByNameDump.html.galgasTemplate", 78)).stringValue ()) ;
+  result.appendString (" defined control registers, sorted by name.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n") ;
   GALGAS_uint index_1560_ (0) ;
   if (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME.isValid ()) {
     cEnumerator_controlRegisterByName enumerator_1560 (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME, kENUMERATION_UP) ;
     while (enumerator_1560.hasCurrentObject ()) {
-      result.addString (enumerator_1560.current_mHTML (HERE).stringValue ()) ;
+      result.appendString (enumerator_1560.current_mHTML (HERE).stringValue ()) ;
       index_1560_.increment () ;
       enumerator_1560.gotoNextObject () ;
     }
   }
-  result.addString ("\n</table>\n</div>\n</body>\n</html>\n") ;
+  result.appendString ("\n</table>\n</div>\n</body>\n</html>\n") ;
   return GALGAS_string (result) ;
 }
 
@@ -7499,23 +7499,23 @@ GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAd
                                                                                        const GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   String result ;
-  result.addString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString (", sorted by address</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString (", sorted by address</h1>\n<p>This document lists all ") ;
-  result.addString (in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByAddressDump.html.galgasTemplate", 78)).stringValue ()) ;
-  result.addString (" defined control registers, sorted by address.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n") ;
+  result.appendString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Control Registers of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString (", sorted by address</title>\n<style type=\"text/css\">body {\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntable.fields {\n  border-collapse: collapse ;\n  border-spacing: 1px 1px;\n}\n\ntd.fields {\n  border: 1px solid #333333 ;\n  text-align: center ;\n  padding : 4px ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntd.address {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.name {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntd.type {\n  font-family: Courier ;\n  padding : 4px ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Control Registers of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString (", sorted by address</h1>\n<p>This document lists all ") ;
+  result.appendString (in_CONTROL_5F_REGISTER_5F_COUNT.getter_string (SOURCE_FILE ("controlRegisterByAddressDump.html.galgasTemplate", 78)).stringValue ()) ;
+  result.appendString (" defined control registers, sorted by address.</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Control Register Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">Address</td><td class=\"result_title\">Value</td></tr>\n") ;
   GALGAS_uint index_1566_ (0) ;
   if (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS.isValid ()) {
     cEnumerator_controlRegisterByAddress enumerator_1566 (in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS, kENUMERATION_UP) ;
     while (enumerator_1566.hasCurrentObject ()) {
-      result.addString (enumerator_1566.current_mHTML (HERE).stringValue ()) ;
+      result.appendString (enumerator_1566.current_mHTML (HERE).stringValue ()) ;
       index_1566_.increment () ;
       enumerator_1566.gotoNextObject () ;
     }
   }
-  result.addString ("\n</table>\n</div>\n</body>\n</html>\n") ;
+  result.appendString ("\n</table>\n</div>\n</body>\n</html>\n") ;
   return GALGAS_string (result) ;
 }
 
@@ -7849,52 +7849,52 @@ GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (Compiler 
                                                                        const GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   String result ;
-  result.addString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString ("</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Global Constants of ") ;
-  result.addString (in_PROJECT_5F_NAME.stringValue ()) ;
-  result.addString ("</h1>\n<p>This document lists all ") ;
-  result.addString (in_GLOBAL_5F_CONSTANT_5F_MAP.getter_count (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).stringValue ()) ;
-  result.addString (" defined global constants, sorted by name.</p>\n<p>") ;
+  result.appendString ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n<html>\n<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<title>Global constants of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString ("</title>\n<style type=\"text/css\">body {\n  font-family: Georgia, sans-serif ;\n  font-size: small ;\n}\n\nh1 {\n  text-align: center ;\n}\n\n.selecteur {\n  color:green ;\n}\n\na.header_link {\n  background-color: #FFFFCC ;\n}\n\na:visited, a:link, a:active{\n  color: blue ;\n  text-decoration: underline ;\n}\n\na:hover {\n  color:green ;\n  background-color: #FFFF00 ;\n  text-decoration: none ;\n}\n\ntable.result {\n  border: 1px solid #666666 ;\n}\n\ntd.result_title {\n  font-weight: bold ;\n  text-align: center ;\n  background-color: yellow ;\n}\n\ntr.result_line {\n  background-color: #EEEEEE ;\n}\n\n</style>\n</head>\n<body>\n<div>\n<h1>Global Constants of ") ;
+  result.appendString (in_PROJECT_5F_NAME.stringValue ()) ;
+  result.appendString ("</h1>\n<p>This document lists all ") ;
+  result.appendString (in_GLOBAL_5F_CONSTANT_5F_MAP.getter_count (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 53)).stringValue ()) ;
+  result.appendString (" defined global constants, sorted by name.</p>\n<p>") ;
   GALGAS_uint index_1007_ (0) ;
   if (in_FIRST_5F_LETTER_5F_SET.isValid ()) {
     cEnumerator_stringset enumerator_1007 (in_FIRST_5F_LETTER_5F_SET, kENUMERATION_UP) ;
     while (enumerator_1007.hasCurrentObject ()) {
-      result.addString ("<a class=\"header_link\" href=\"#") ;
-      result.addString (enumerator_1007.current_key (HERE).getter_characterAtIndex (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).stringValue ()) ;
-      result.addString ("\">") ;
-      result.addString (enumerator_1007.current_key (HERE).stringValue ()) ;
-      result.addString ("</a>") ;
+      result.appendString ("<a class=\"header_link\" href=\"#") ;
+      result.appendString (enumerator_1007.current_key (HERE).getter_characterAtIndex (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_uint (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).getter_string (SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 56)).stringValue ()) ;
+      result.appendString ("\">") ;
+      result.appendString (enumerator_1007.current_key (HERE).stringValue ()) ;
+      result.appendString ("</a>") ;
       if (enumerator_1007.hasNextObject ()) {
-        result.addString (" - ") ;
+        result.appendString (" - ") ;
       }
       index_1007_.increment () ;
       enumerator_1007.gotoNextObject () ;
     }
   }
-  result.addString ("</p>\n<p>") ;
-  result.addString (in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue ()) ;
-  result.addString ("\n</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_title\">Value</td></tr>\n") ;
+  result.appendString ("</p>\n<p>") ;
+  result.appendString (in_TABLE_5F_OF_5F_TYPES_5F_STRING.stringValue ()) ;
+  result.appendString ("\n</p>\n<table class=\"result\">\n<tr><td class=\"result_title\">Constant Name</td><td class=\"result_title\">OMNIBUS Type</td><td class=\"result_title\">LLVM Type</td><td class=\"result_title\">Value</td></tr>\n") ;
   GALGAS_uint index_1392_ (0) ;
   if (in_GLOBAL_5F_CONSTANT_5F_MAP.isValid ()) {
     cEnumerator_globalConstantMap enumerator_1392 (in_GLOBAL_5F_CONSTANT_5F_MAP, kENUMERATION_UP) ;
     while (enumerator_1392.hasCurrentObject ()) {
-      result.addString ("<tr class=\"result_line\"><td><a name=\"") ;
-      result.addString (enumerator_1392.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("\">") ;
-      result.addString (enumerator_1392.current_lkey (HERE).readProperty_string ().stringValue ()) ;
-      result.addString ("</a></td><td>..<'$") ;
-      result.addString (extensionGetter_omnibusTypeDescriptionName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
-      result.addString ("</td><td>") ;
-      result.addString (extensionGetter_llvmTypeName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
-      result.addString ("</td><td>") ;
-      result.addString (extensionGetter_llvmName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
-      result.addString ("</td></tr>\n") ;
+      result.appendString ("<tr class=\"result_line\"><td><a name=\"") ;
+      result.appendString (enumerator_1392.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("\">") ;
+      result.appendString (enumerator_1392.current_lkey (HERE).readProperty_string ().stringValue ()) ;
+      result.appendString ("</a></td><td>..<'$") ;
+      result.appendString (extensionGetter_omnibusTypeDescriptionName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
+      result.appendString ("</td><td>") ;
+      result.appendString (extensionGetter_llvmTypeName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
+      result.appendString ("</td><td>") ;
+      result.appendString (extensionGetter_llvmName (enumerator_1392.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("globalConstantDump.html.galgasTemplate", 66)).stringValue ()) ;
+      result.appendString ("</td></tr>\n") ;
       index_1392_.increment () ;
       enumerator_1392.gotoNextObject () ;
     }
   }
-  result.addString ("\n</table>\n</div>\n</body>\n</html>\n") ;
+  result.appendString ("\n</table>\n</div>\n</body>\n</html>\n") ;
   return GALGAS_string (result) ;
 }
 

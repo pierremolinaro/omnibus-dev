@@ -435,7 +435,7 @@ class Lexique_omnibus_5F_lexique : public Lexique {
   public: String attributeValue_tokenString (void) const ;
 
 
-//--- Indexing keys
+//--- indexing keys
 
 //--- Parse lexical token
   protected: void internalParseLexicalToken (cTokenFor_omnibus_5F_lexique & token) ;
