@@ -2195,6 +2195,8 @@ class GALGAS_lstring function_routineMangledNameFromAST (const class GALGAS_stri
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_doNotDetectRecursiveCalls ;
 
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ;
+
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitControlRegisterHTMLDumpFile ;
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitDeclarationDependencyGraphFile ;
@@ -2205,27 +2207,25 @@ extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitRoutineInvocationG
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_emitTypeMap ;
 
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ;
+
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ;
+
+extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ;
+
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_listEmbeddedSampleFiles ;
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_listTargets ;
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_noDeadCodeElimination ;
 
-extern C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ;
-
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_31_ ;
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_32_ ;
 
-extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ;
-
-extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ;
-
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ_33_ ;
 
 extern C_BoolCommandLineOption gOption_omnibus_5F_options_printPasses ;
-
-extern C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ;
 
 //--------------------------------------------------------------------------------------------------
 //

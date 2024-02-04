@@ -1197,6 +1197,12 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_doNotDetectRecursiveCalls ("o
                                          "do-not-detect-recursive-calls",
                                          "Do not detect recursive calls") ;
 
+C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ("omnibus_options",
+                                         "noPanicGeneration",
+                                         0,
+                                         "no-panic-generation",
+                                         "Do not generate panic code") ;
+
 C_BoolCommandLineOption gOption_omnibus_5F_options_emitControlRegisterHTMLDumpFile ("omnibus_options",
                                          "emitControlRegisterHTMLDumpFile",
                                          0,
@@ -1227,6 +1233,24 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_emitTypeMap ("omnibus_options
                                          "emit-type-map",
                                          "Emit type map in an HTML file") ;
 
+C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ("omnibus_options",
+                                         "taskStrictPriorityOrder",
+                                         0,
+                                         "task-strict-priority-order",
+                                         "Ensure task strict priority order") ;
+
+C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ("omnibus_options",
+                                         "optimizationZ",
+                                         0,
+                                         "Oz",
+                                         "Like previous option but reduces code size further") ;
+
+C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ("omnibus_options",
+                                         "optimizationS",
+                                         0,
+                                         "Os",
+                                         "Like previous option with extra optimizations for size") ;
+
 C_BoolCommandLineOption gOption_omnibus_5F_options_listEmbeddedSampleFiles ("omnibus_options",
                                          "listEmbeddedSampleFiles",
                                          108,
@@ -1245,12 +1269,6 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_noDeadCodeElimination ("omnib
                                          "no-deadcode-elimination",
                                          "No dead code elimination") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ("omnibus_options",
-                                         "noPanicGeneration",
-                                         0,
-                                         "no-panic-generation",
-                                         "Do not generate panic code") ;
-
 C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_31_ ("omnibus_options",
                                          "optimization1",
                                          0,
@@ -1263,18 +1281,6 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_32_ ("omnibus_op
                                          "O2",
                                          "Optimization level 2") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ("omnibus_options",
-                                         "optimizationS",
-                                         0,
-                                         "Os",
-                                         "Like previous option with extra optimizations for size") ;
-
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ("omnibus_options",
-                                         "optimizationZ",
-                                         0,
-                                         "Oz",
-                                         "Like previous option but reduces code size further") ;
-
 C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ_33_ ("omnibus_options",
                                          "optimizationZ3",
                                          0,
@@ -1286,12 +1292,6 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_printPasses ("omnibus_options
                                          0,
                                          "print-passes",
                                          "Print pass information") ;
-
-C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ("omnibus_options",
-                                         "taskStrictPriorityOrder",
-                                         0,
-                                         "task-strict-priority-order",
-                                         "Ensure task strict priority order") ;
 
 //--------------------------------------------------------------------------------------------------
 //

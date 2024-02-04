@@ -25,6 +25,15 @@ void enterOptionsFor_omnibus_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"omnibus_options"
+    identifier:@"noPanicGeneration"
+    commandChar:0
+    commandString:@"no-panic-generation"
+    comment:@"Do not generate panic code"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"omnibus_options"
     identifier:@"emitControlRegisterHTMLDumpFile"
     commandChar:0
     commandString:@"emit-control-register-map"
@@ -70,6 +79,33 @@ void enterOptionsFor_omnibus_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"omnibus_options"
+    identifier:@"taskStrictPriorityOrder"
+    commandChar:0
+    commandString:@"task-strict-priority-order"
+    comment:@"Ensure task strict priority order"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"omnibus_options"
+    identifier:@"optimizationZ"
+    commandChar:0
+    commandString:@"Oz"
+    comment:@"Like previous option but reduces code size further"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"omnibus_options"
+    identifier:@"optimizationS"
+    commandChar:0
+    commandString:@"Os"
+    comment:@"Like previous option with extra optimizations for size"
+    defaultValue:@""
+  ] ;
+  [ioBoolOptionArray addObject:option] ;
+  option = [[OC_GGS_CommandLineOption alloc]
+    initWithDomainName:@"omnibus_options"
     identifier:@"listEmbeddedSampleFiles"
     commandChar:108
     commandString:@"list-embedded-samples"
@@ -97,15 +133,6 @@ void enterOptionsFor_omnibus_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"omnibus_options"
-    identifier:@"noPanicGeneration"
-    commandChar:0
-    commandString:@"no-panic-generation"
-    comment:@"Do not generate panic code"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"omnibus_options"
     identifier:@"optimization1"
     commandChar:0
     commandString:@"O1"
@@ -124,24 +151,6 @@ void enterOptionsFor_omnibus_5F_options (NSMutableArray * ioBoolOptionArray,
   [ioBoolOptionArray addObject:option] ;
   option = [[OC_GGS_CommandLineOption alloc]
     initWithDomainName:@"omnibus_options"
-    identifier:@"optimizationS"
-    commandChar:0
-    commandString:@"Os"
-    comment:@"Like previous option with extra optimizations for size"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"omnibus_options"
-    identifier:@"optimizationZ"
-    commandChar:0
-    commandString:@"Oz"
-    comment:@"Like previous option but reduces code size further"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"omnibus_options"
     identifier:@"optimizationZ3"
     commandChar:0
     commandString:@"O3"
@@ -155,15 +164,6 @@ void enterOptionsFor_omnibus_5F_options (NSMutableArray * ioBoolOptionArray,
     commandChar:0
     commandString:@"print-passes"
     comment:@"Print pass information"
-    defaultValue:@""
-  ] ;
-  [ioBoolOptionArray addObject:option] ;
-  option = [[OC_GGS_CommandLineOption alloc]
-    initWithDomainName:@"omnibus_options"
-    identifier:@"taskStrictPriorityOrder"
-    commandChar:0
-    commandString:@"task-strict-priority-order"
-    comment:@"Ensure task strict priority order"
     defaultValue:@""
   ] ;
   [ioBoolOptionArray addObject:option] ;

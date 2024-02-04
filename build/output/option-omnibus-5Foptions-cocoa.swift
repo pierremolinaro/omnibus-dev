@@ -19,6 +19,14 @@ func enterOptions (_ ioBoolOptionArray : inout [SWIFT_CommandLineOption],
   ))
   ioBoolOptionArray.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
+    identifier: "noPanicGeneration",
+    commandChar: "",
+    commandString: "no-panic-generation",
+    comment: "Do not generate panic code",
+    defaultValue: ""
+  ))
+  ioBoolOptionArray.append (SWIFT_CommandLineOption (
+    domainName: "omnibus_options",
     identifier: "emitControlRegisterHTMLDumpFile",
     commandChar: "",
     commandString: "emit-control-register-map",
@@ -59,6 +67,30 @@ func enterOptions (_ ioBoolOptionArray : inout [SWIFT_CommandLineOption],
   ))
   ioBoolOptionArray.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
+    identifier: "taskStrictPriorityOrder",
+    commandChar: "",
+    commandString: "task-strict-priority-order",
+    comment: "Ensure task strict priority order",
+    defaultValue: ""
+  ))
+  ioBoolOptionArray.append (SWIFT_CommandLineOption (
+    domainName: "omnibus_options",
+    identifier: "optimizationZ",
+    commandChar: "",
+    commandString: "Oz",
+    comment: "Like previous option but reduces code size further",
+    defaultValue: ""
+  ))
+  ioBoolOptionArray.append (SWIFT_CommandLineOption (
+    domainName: "omnibus_options",
+    identifier: "optimizationS",
+    commandChar: "",
+    commandString: "Os",
+    comment: "Like previous option with extra optimizations for size",
+    defaultValue: ""
+  ))
+  ioBoolOptionArray.append (SWIFT_CommandLineOption (
+    domainName: "omnibus_options",
     identifier: "listEmbeddedSampleFiles",
     commandChar: "l",
     commandString: "list-embedded-samples",
@@ -83,14 +115,6 @@ func enterOptions (_ ioBoolOptionArray : inout [SWIFT_CommandLineOption],
   ))
   ioBoolOptionArray.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
-    identifier: "noPanicGeneration",
-    commandChar: "",
-    commandString: "no-panic-generation",
-    comment: "Do not generate panic code",
-    defaultValue: ""
-  ))
-  ioBoolOptionArray.append (SWIFT_CommandLineOption (
-    domainName: "omnibus_options",
     identifier: "optimization1",
     commandChar: "",
     commandString: "O1",
@@ -107,22 +131,6 @@ func enterOptions (_ ioBoolOptionArray : inout [SWIFT_CommandLineOption],
   ))
   ioBoolOptionArray.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
-    identifier: "optimizationS",
-    commandChar: "",
-    commandString: "Os",
-    comment: "Like previous option with extra optimizations for size",
-    defaultValue: ""
-  ))
-  ioBoolOptionArray.append (SWIFT_CommandLineOption (
-    domainName: "omnibus_options",
-    identifier: "optimizationZ",
-    commandChar: "",
-    commandString: "Oz",
-    comment: "Like previous option but reduces code size further",
-    defaultValue: ""
-  ))
-  ioBoolOptionArray.append (SWIFT_CommandLineOption (
-    domainName: "omnibus_options",
     identifier: "optimizationZ3",
     commandChar: "",
     commandString: "O3",
@@ -135,14 +143,6 @@ func enterOptions (_ ioBoolOptionArray : inout [SWIFT_CommandLineOption],
     commandChar: "",
     commandString: "print-passes",
     comment: "Print pass information",
-    defaultValue: ""
-  ))
-  ioBoolOptionArray.append (SWIFT_CommandLineOption (
-    domainName: "omnibus_options",
-    identifier: "taskStrictPriorityOrder",
-    commandChar: "",
-    commandString: "task-strict-priority-order",
-    comment: "Ensure task strict priority order",
     defaultValue: ""
   ))
   ioStringOptionArray.append (SWIFT_CommandLineOption (
