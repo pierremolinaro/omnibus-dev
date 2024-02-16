@@ -97,7 +97,7 @@ scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #--- Compile omnibus
 print (MAGENTA() + BOLD () + "********** Compile OMNIBUS" + ENDC ())
-runCommand (["python", "../../../makefile-unix/build+debug.py"])
+runCommand (["python3", "../../../makefile-unix/build+debug.py"])
 #--- Compile omnibus sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :

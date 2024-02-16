@@ -98,7 +98,7 @@ os.chdir (scriptDir)
 #--- Compile omnibus
 print (MAGENTA() + BOLD () + "********** Compile OMNIBUS" + ENDC ())
 #runCommand (["galgas", "../../../+omnibus.galgasProject"])
-runCommand (["python", "../../../makefile-unix/build+release.py"])
+runCommand (["python3", "../../../makefile-unix/build+release.py"])
 #--- Compile omnibus sources
 for dirname, dirnames, filenames in os.walk (scriptDir):
   for file in filenames :

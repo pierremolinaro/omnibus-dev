@@ -14,7 +14,7 @@ import os
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #---
-returncode = subprocess.call (["python", "build.py", "run"])
+returncode = subprocess.call (["python3", "build.py", "run"])
 if returncode != 0 :
     sys.exit (returncode)
 

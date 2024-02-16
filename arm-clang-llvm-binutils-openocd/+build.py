@@ -75,7 +75,7 @@ class bcolors:
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 
 def myChDir (dir):
-  print bcolors.BOLD_BLUE + "+ chdir " + dir + bcolors.ENDC
+  print (bcolors.BOLD_BLUE + "+ chdir " + dir + bcolors.ENDC)
   os.chdir (dir)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
@@ -84,7 +84,7 @@ def myChDir (dir):
 # http://stackoverflow.com/questions/1868714/how-do-i-copy-an-entire-directory-of-files-into-an-existing-directory-using-pyth
 
 def myCopyTree (src, dst):
-  print bcolors.BOLD_BLUE + "+ copytree " + src + " " + dst + bcolors.ENDC
+  print (bcolors.BOLD_BLUE + "+ copytree " + src + " " + dst + bcolors.ENDC)
   for item in os.listdir (src):
     s = os.path.join (src, item)
     d = os.path.join (dst, item)
@@ -103,7 +103,7 @@ def myCopyTree (src, dst):
 
 def myDeleteDir (dir):
   while os.path.exists (dir):
-    print bcolors.BOLD_BLUE + "+ remove '" + dir + "' directory" + bcolors.ENDC
+    print (bcolors.BOLD_BLUE + "+ remove '" + dir + "' directory" + bcolors.ENDC)
     shutil.rmtree (dir, True) # Ignore errors
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
@@ -117,7 +117,7 @@ def runCommand (cmd, environnement=None) :
       str += " '" + s + "'"
     else:
       str += " " + s
-  print bcolors.BOLD_BLUE + str + bcolors.ENDC
+  print (bcolors.BOLD_BLUE + str + bcolors.ENDC)
   childProcess = subprocess.Popen (cmd, env=environnement)
   childProcess.wait ()
   if childProcess.returncode != 0 :
@@ -129,8 +129,8 @@ def runCommand (cmd, environnement=None) :
 
 def downloadArchive (archiveURL, archivePath, startTime):
   if not os.path.exists (archivePath):
-    print bcolors.BOLD_BLUE + "+Download " + os.path.basename (archivePath) + bcolors.ENDC
-    print "URL '" + archiveURL + "'"
+    print (bcolors.BOLD_BLUE + "+Download " + os.path.basename (archivePath) + bcolors.ENDC)
+    print ("URL '" + archiveURL + "'")
     runCommand (["curl", "-L", archiveURL, "-o", archivePath])
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
@@ -148,7 +148,7 @@ def displayDurationFromStartTime (startTime) :
   if durationInMinutes > 0:
     s += str (durationInMinutes) + "min"
   s += str (durationInSecondes) + "s"
-  print "Done at +" + s
+  print ("Done at +" + s)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————
 #  build
@@ -218,7 +218,7 @@ else:
   sys.exit (1)
 #   LLD_URL = BASE_URL + LLVM_VERSION + "/" + LLD + ".tar.xz"
 #   COMPILER_RT_URL = BASE_URL + LLVM_VERSION + "/" + COMPILER_RT + ".tar.xz"
-print  bcolors.BOLD_GREEN + "-------------- Download archives" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Download archives" + bcolors.ENDC)
 downloadArchive (LLVM_URL, LLVM_ARCHIVE_PATH, startTime)
 downloadArchive (CLANG_URL, CLANG_ARCHIVE_PATH, startTime)
 # downloadArchive (LLD_URL, LLD_ARCHIVE_PATH, startTime)
@@ -241,7 +241,7 @@ if not os.path.exists (ARCHIVE_DIR + "/teensy_loader_cli.c"):
   runCommand (["cp", ARCHIVE_DIR + "/teensy_loader_cli-master/teensy_loader_cli.c", ARCHIVE_DIR + "/teensy_loader_cli.c"])
   runCommand (["rm", "-fr", ARCHIVE_DIR + "/teensy_loader_cli-master"])
 #--------------------------------------------------------------------------- binutils
-print bcolors.BOLD_GREEN + "-------------- binutils" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- binutils" + bcolors.ENDC)
 if not os.path.exists (INSTALL_DIR + "/bin/" + TARGET + "-ar"):
   runCommand (["rm", "-f", BINUTILS + ".tar"])
   myDeleteDir (INSTALL_DIR)
@@ -275,7 +275,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/" + TARGET + "-ar"):
   myDeleteDir (scriptDir + "/" + BINUTILS)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- XZ
-print bcolors.BOLD_GREEN + "-------------- XZ" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- XZ" + bcolors.ENDC)
 if not os.path.exists (UTILITY_DIR + "/bin"):
   runCommand (["mkdir", "-p", UTILITY_DIR + "/bin"])
 if not os.path.exists (UTILITY_DIR + "/bin/xz"):
@@ -301,7 +301,7 @@ if not os.path.exists (UTILITY_DIR + "/bin/xz"):
   myDeleteDir (XZ)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- CMAKE
-print bcolors.BOLD_GREEN + "-------------- CMAKE" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- CMAKE" + bcolors.ENDC)
 if not os.path.exists (UTILITY_DIR + "/bin/cmake"):
   runCommand (["rm", "-fr", CMAKE, "build-cmake"])
   runCommand (["cp", CMAKE_ARCHIVE_PATH, CMAKE + ".tar.gz"])
@@ -320,7 +320,7 @@ if not os.path.exists (UTILITY_DIR + "/bin/cmake"):
   myDeleteDir ("build-cmake")
   myDeleteDir (CMAKE)
 #--------------------------------------------------------------------------- LLVM
-print bcolors.BOLD_GREEN + "-------------- llvm" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- llvm" + bcolors.ENDC)
 if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
   #--- LLVM
   myDeleteDir ("build-llvm-clang")
@@ -379,7 +379,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/llvm-dis"):
   myDeleteDir (LLVM)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- LIBUSB
-print bcolors.BOLD_GREEN + "-------------- LIBUSB" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- LIBUSB" + bcolors.ENDC)
 LIBUSB_INSTALL_DIR = scriptDir + "/libusb-product"
 if not os.path.exists (LIBUSB_INSTALL_DIR + "/lib/libusb-1.0.a"):
   runCommand (["rm", "-f", LIBUSB + ".tar"])
@@ -406,7 +406,7 @@ if not os.path.exists (LIBUSB_INSTALL_DIR + "/lib/libusb-1.0.a"):
   myDeleteDir (LIBUSB)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- OPENOCD
-print bcolors.BOLD_GREEN + "-------------- openocd" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- openocd" + bcolors.ENDC)
 if not os.path.exists (INSTALL_DIR + "/bin/openocd"):
   runCommand (["rm", "-f", OPENOCD + ".tar"])
   myDeleteDir ("build-openocd")
@@ -444,7 +444,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/openocd"):
   myDeleteDir (OPENOCD)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- TEENSY LOADER
-print bcolors.BOLD_GREEN + "-------------- TEENSY LOADER" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- TEENSY LOADER" + bcolors.ENDC)
 if not os.path.exists (INSTALL_DIR + "/bin/teensy_loader_cli"):
   BUILD_TEENSY_LOADER_COMMAND = [
     "gcc",
@@ -468,7 +468,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/teensy_loader_cli"):
   runCommand (BUILD_TEENSY_LOADER_COMMAND)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- ARM STACK COMPUTATIONS
-print bcolors.BOLD_GREEN + "-------------- ARM STACK COMPUTATIONS" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- ARM STACK COMPUTATIONS" + bcolors.ENDC)
 if not os.path.exists (INSTALL_DIR + "/bin/arm-stack-computations"):
   BUILD_ARM_STACK_COMPUTATIONS_COMMAND = [
     "g++",
@@ -488,7 +488,7 @@ if not os.path.exists (INSTALL_DIR + "/bin/arm-stack-computations"):
   runCommand (BUILD_ARM_STACK_COMPUTATIONS_COMMAND)
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- MANIFEST
-print bcolors.BOLD_GREEN + "-------------- MANIFEST" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- MANIFEST" + bcolors.ENDC)
 if not os.path.exists (PRODUCT_DIR):
   runCommand (["mkdir", PRODUCT_DIR])
 if not os.path.exists (PRODUCT_DIR + "/" + PRODUCT_NAME + ".txt"):
@@ -500,14 +500,14 @@ if not os.path.exists (PRODUCT_DIR + "/" + PRODUCT_NAME + ".txt"):
   runCommand (["cp", INSTALL_DIR + "/contents.txt", PRODUCT_DIR + "/" + PRODUCT_NAME + ".txt"])
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- Remove useless dirs
-print bcolors.BOLD_GREEN + "-------------- Remove useless dirs" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Remove useless dirs" + bcolors.ENDC)
 myDeleteDir (PRODUCT_NAME + "/arm-eabi/")
 myDeleteDir (PRODUCT_NAME + "/docs")
 myDeleteDir (PRODUCT_NAME + "/include")
 myDeleteDir (PRODUCT_NAME + "/lib")
 myDeleteDir (PRODUCT_NAME + "/share")
 #--------------------------------------------------------------------------- LIBGCC
-print bcolors.BOLD_GREEN + "-------------- OpenOCD files" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- OpenOCD files" + bcolors.ENDC)
 LIB_DIR = PRODUCT_NAME + "/libgcc"
 librairies = ["libgcc-armv7e-m.a", "libgcc-armv4.a"]
 runCommand (["mkdir", "-p", LIB_DIR])
@@ -518,32 +518,32 @@ for lib in librairies:
 runCommand (["cp", "-r", "+FILES/openocd-boards", PRODUCT_NAME])
 runCommand (["cp", "-r", "+FILES/openocd-interfaces", PRODUCT_NAME])
 #--------------------------------------------------------------------------- PRODUCT
-print bcolors.BOLD_GREEN + "-------------- PRODUCT" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- PRODUCT" + bcolors.ENDC)
 if not os.path.exists (PRODUCT_DIR + "/" + PRODUCT_NAME + ".tar.bz2"):
   runCommand (["tar", "cf", PRODUCT_NAME + ".tar", PRODUCT_NAME])
   runCommand (["bzip2", "-9", PRODUCT_NAME + ".tar"])
   runCommand (["mv", PRODUCT_NAME + ".tar.bz2", PRODUCT_DIR + "/" + PRODUCT_NAME + ".tar.bz2"])
   displayDurationFromStartTime (startTime)
 #--------------------------------------------------------------------------- Check teensy-loader
-print bcolors.BOLD_GREEN + "-------------- Check teensy_loader_cli" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Check teensy_loader_cli" + bcolors.ENDC)
 if  platform.system () == "Darwin" :
   runCommand (["otool", "-L", INSTALL_DIR + "/bin/teensy_loader_cli"])
 else:
   runCommand (["ldd", INSTALL_DIR + "/bin/teensy_loader_cli"])
 #--------------------------------------------------------------------------- Check openocd
-print bcolors.BOLD_GREEN + "-------------- Check openocd" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Check openocd" + bcolors.ENDC)
 if  platform.system () == "Darwin" :
   runCommand (["otool", "-L", INSTALL_DIR + "/bin/openocd"])
 else:
   runCommand (["ldd", INSTALL_DIR + "/bin/openocd"])
 #--------------------------------------------------------------------------- Check arm-stack-computations
-print bcolors.BOLD_GREEN + "-------------- Check arm-stack-computations" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Check arm-stack-computations" + bcolors.ENDC)
 if  platform.system () == "Darwin" :
   runCommand (["otool", "-L", INSTALL_DIR + "/bin/arm-stack-computations"])
 else:
   runCommand (["ldd", INSTALL_DIR + "/bin/arm-stack-computations"])
 #--------------------------------------------------------------------------- Done
-print bcolors.BOLD_GREEN + "-------------- Success!" + bcolors.ENDC
+print (bcolors.BOLD_GREEN + "-------------- Success!" + bcolors.ENDC)
 displayDurationFromStartTime (startTime)
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————

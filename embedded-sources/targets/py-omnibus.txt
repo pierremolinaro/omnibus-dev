@@ -20,7 +20,7 @@ def runProcess (command) :
   if childProcess.poll () == None :
     childProcess.wait ()
   if childProcess.returncode != 0 :
-    print makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ()
+    print (makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ())
     sys.exit (childProcess.returncode)
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -40,7 +40,7 @@ def runProcessAndGetOutput (command) :
   if childProcess.poll () == None :
     childProcess.wait ()
   if childProcess.returncode != 0 :
-    print makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ()
+    print (makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ())
     sys.exit (childProcess.returncode)
   return result
 
@@ -70,16 +70,16 @@ def downloadArchive (archiveURL, archivePath):
   #print "Downloading... " + archivePath + ".downloading"
   try:
     urllib.urlretrieve (archiveURL,  archivePath + ".downloading", downloadReportHook)
-    print ""
+    print ("")
     fileSize = os.path.getsize (archivePath + ".downloading")
     ok = fileSize > 1000000
     if ok:
       makefile.runHiddenCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
     else:
-      print makefile.BOLD_RED () + "Error: cannot download file" + makefile.ENDC ()
+      print (makefile.BOLD_RED () + "Error: cannot download file" + makefile.ENDC ())
       sys.exit (1)
   except:
-    print makefile.BOLD_RED () + "Error: no network connection" + makefile.ENDC ()
+    print (makefile.BOLD_RED () + "Error: no network connection" + makefile.ENDC ())
     sys.exit (1)
 
 #----------------------------------------------------------------------------------------------------------------------*
@@ -103,7 +103,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
   #--- Download compiler tool if needed
   if not os.path.exists (toolDirectory):
-    print makefile.BOLD_GREEN () + "Downloading compiler tool chain" + makefile.ENDC ()
+    print (makefile.BOLD_GREEN () + "Downloading compiler tool chain" + makefile.ENDC ())
     archiveName = os.path.basename (toolDirectory)
     archiveURL = archiveBaseURL + archiveName + ".tar.bz2"
     downloadArchive (archiveURL, toolDirectory)
@@ -233,7 +233,7 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
   #---------------------------------------------- Add stacks check rule
 #  checkStackResultFile = productDir + "/check-stacks-result.txt"
 #  rule = makefile.Rule ([checkStackResultFile], "Check stacks")
-#  rule.mCommand.append ("python")
+#  rule.mCommand.append ("python3")
 #  rule.mCommand += check_stack_utility
 #  rule.mDependences.append ("sources/provided-stacks.json")
 #  rule.mCommand += ["sources/provided-stacks.json"]
@@ -261,22 +261,22 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     s = runProcessAndGetOutput (displayObjectSize + [productELF])
     secondLine = s.split('\n')[1]
     numbers = [int(s) for s in secondLine.split() if s.isdigit()]
-    print "Code:        " + str (numbers [0]) + " bytes"
-    print "ROM data:    " + str (numbers [1]) + " bytes"
-    print "RAM + STACK: " + str (numbers [2]) + " bytes"
+    print ("Code:        " + str (numbers [0]) + " bytes")
+    print ("ROM data:    " + str (numbers [1]) + " bytes")
+    print ("RAM + STACK: " + str (numbers [2]) + " bytes")
   #----------------------------------------------- Run ?
   if goal == "run":
-    print makefile.BOLD_BLUE () + "Loading Teensy..." + makefile.ENDC ()
+    print (makefile.BOLD_BLUE () + "Loading Teensy..." + makefile.ENDC ())
     runProcess (runExecutableOnTarget + [productHEX])
-    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
+    print (makefile.BOLD_GREEN () + "Success" + makefile.ENDC ())
   elif goal == "display-object-size":
-    print makefile.BOLD_BLUE () + "Display Object Sizes" + makefile.ENDC ()
+    print (makefile.BOLD_BLUE () + "Display Object Sizes" + makefile.ENDC ())
     runProcess (displayObjectSize + objectList)
-    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
+    print (makefile.BOLD_GREEN () + "Success" + makefile.ENDC ())
   elif goal == "object-dump":
-    print makefile.BOLD_BLUE () + "Dump Object Code" + makefile.ENDC ()
+    print (makefile.BOLD_BLUE () + "Dump Object Code" + makefile.ENDC ())
     runProcess (dumpObjectCode + [productELF])
-    print makefile.BOLD_GREEN () + "Success" + makefile.ENDC ()
+    print (makefile.BOLD_GREEN () + "Success" + makefile.ENDC ())
 
 
 #----------------------------------------------------------------------------------------------------------------------*

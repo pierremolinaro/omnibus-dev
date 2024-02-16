@@ -11,7 +11,7 @@ import sys, os, subprocess, shutil
 scriptDir = os.path.dirname (os.path.abspath (sys.argv [0]))
 os.chdir (scriptDir)
 #----------------------------------------------------------------- Build
-returnCode = subprocess.call (["python", "build.py"], cwd=scriptDir + "/../makefile-macosx")
+returnCode = subprocess.call (["python3", "build.py"], cwd=scriptDir + "/../makefile-macosx")
 if returnCode != 0 :
   sys.exit (returnCode)
 #----------------------------------------------------------------- Get production rules in tex file

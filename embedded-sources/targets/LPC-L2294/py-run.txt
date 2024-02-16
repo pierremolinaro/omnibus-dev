@@ -35,7 +35,7 @@ os.chdir (scriptDir)
 sys.path.append (scriptDir + "/sources")
 import toolpath
 #--- Build project
-returncode = subprocess.call (["python", "build.py"])
+returncode = subprocess.call (["python3", "build.py"])
 if returncode != 0 :
   sys.exit (returncode)
 #---
@@ -51,7 +51,7 @@ openOCD = [
 str = "+"
 for s in openOCD :
   str += " " + s
-print BLUE () + str + ENDC ()
+print (BLUE () + str + ENDC ())
 openOCDProcess = subprocess.Popen (openOCD, cwd=scriptDir)
 #--- Wait for openOCD is listening on port 4444
 time.sleep (1)
@@ -87,8 +87,8 @@ if openOCDProcess.poll () == None :
 if openOCDProcess.poll () == None :
   openOCDProcess.wait ()
 if openOCDProcess.returncode == 0 :
-  print GREEN () + "Success" + ENDC ()
+  print (GREEN () + "Success" + ENDC ())
 else:
-  print RED () + "Error" + ENDC ()
+  print (RED () + "Error" + ENDC ())
 
 #----------------------------------------------------------------------------------------------------------------------*

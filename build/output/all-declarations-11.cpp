@@ -537,9 +537,9 @@ const C_galgas_type_descriptor * cPtr_addressofControlRegisterAST::classDescript
 
 void cPtr_addressofControlRegisterAST::description (String & ioString,
                                                     const int32_t inIndentation) const {
-  ioString.appendString ("[@addressofControlRegisterAST:") ;
+  ioString.appendCString ("[@addressofControlRegisterAST:") ;
   mProperty_mControlRegisterLValue.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -699,9 +699,9 @@ const C_galgas_type_descriptor * cPtr_addressofExpressionAST::classDescriptor (v
 
 void cPtr_addressofExpressionAST::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.appendString ("[@addressofExpressionAST:") ;
+  ioString.appendCString ("[@addressofExpressionAST:") ;
   mProperty_mLValue.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -891,11 +891,11 @@ const C_galgas_type_descriptor * cPtr_addressofInstructionIR::classDescriptor (v
 
 void cPtr_addressofInstructionIR::description (String & ioString,
                                                const int32_t inIndentation) const {
-  ioString.appendString ("[@addressofInstructionIR:") ;
+  ioString.appendCString ("[@addressofInstructionIR:") ;
   mProperty_mTarget.description (ioString, inIndentation+1) ;
-  ioString.appendString (", ") ;
+  ioString.appendCString (", ") ;
   mProperty_mLValue.description (ioString, inIndentation+1) ;
-  ioString.appendString ("]") ;
+  ioString.appendCString ("]") ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1108,39 +1108,39 @@ void GALGAS_intermediateCodeStruct::drop (void) {
 
 void GALGAS_intermediateCodeStruct::description (String & ioString,
                                                  const int32_t inIndentation) const {
-  ioString.appendString ("<struct @intermediateCodeStruct:") ;
+  ioString.appendCString ("<struct @intermediateCodeStruct:") ;
   if (! isValid ()) {
-    ioString.appendString (" not built") ;
+    ioString.appendCString (" not built") ;
   }else{
     mProperty_mStaticEntityMap.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mInterruptMapIR.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mExternProcedureMapIR.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPanicSetupListIR.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mPanicLoopListIR.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mTaskMapIR.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mMaxBranchOfOnInstructions.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mDriverList.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mStaticArrayMapForIntermediate.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mGlobalSyncInstanceMap.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mControlRegisterGroupArrayList.description (ioString, inIndentation+1) ;
-    ioString.appendString (", ") ;
+    ioString.appendCString (", ") ;
     mProperty_mRoutineListIR.description (ioString, inIndentation+1) ;
   }
-  ioString.appendString (">") ;
+  ioString.appendCString (">") ;
 }
 
 //--------------------------------------------------------------------------------------------------
