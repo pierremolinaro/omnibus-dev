@@ -163,7 +163,7 @@ void routine_print_3F_ (const class GALGAS_string constinArgument0,
 //
 //--------------------------------------------------------------------------------------------------
 
-extern C_BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
+extern BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
 
 //--------------------------------------------------------------------------------------------------
 //

@@ -1191,103 +1191,103 @@ GALGAS_intermediateCodeStruct GALGAS_intermediateCodeStruct::extractObject (cons
 //
 //--------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_doNotDetectRecursiveCalls ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_doNotDetectRecursiveCalls ("omnibus_options",
                                          "doNotDetectRecursiveCalls",
                                          114,
                                          "do-not-detect-recursive-calls",
                                          "Do not detect recursive calls") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_noPanicGeneration ("omnibus_options",
                                          "noPanicGeneration",
                                          0,
                                          "no-panic-generation",
                                          "Do not generate panic code") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_emitControlRegisterHTMLDumpFile ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_emitControlRegisterHTMLDumpFile ("omnibus_options",
                                          "emitControlRegisterHTMLDumpFile",
                                          0,
                                          "emit-control-register-map",
                                          "Emit control register map in an HTML file") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_emitDeclarationDependencyGraphFile ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_emitDeclarationDependencyGraphFile ("omnibus_options",
                                          "emitDeclarationDependencyGraphFile",
                                          100,
                                          "emit-declaration-dependency-graph",
                                          "Emit declaration dependency graph file") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_emitGlobalConstantHTMLDumpFile ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_emitGlobalConstantHTMLDumpFile ("omnibus_options",
                                          "emitGlobalConstantHTMLDumpFile",
                                          0,
                                          "emit-global-constant-map",
                                          "Emit global constant map in an HTML file") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_emitRoutineInvocationGraphFile ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_emitRoutineInvocationGraphFile ("omnibus_options",
                                          "emitRoutineInvocationGraphFile",
                                          105,
                                          "emit-routine-invocation-graph",
                                          "Emit routine invocation graph file") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_emitTypeMap ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_emitTypeMap ("omnibus_options",
                                          "emitTypeMap",
                                          116,
                                          "emit-type-map",
                                          "Emit type map in an HTML file") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_taskStrictPriorityOrder ("omnibus_options",
                                          "taskStrictPriorityOrder",
                                          0,
                                          "task-strict-priority-order",
                                          "Ensure task strict priority order") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ ("omnibus_options",
                                          "optimizationZ",
                                          0,
                                          "Oz",
                                          "Like previous option but reduces code size further") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_optimizationS ("omnibus_options",
                                          "optimizationS",
                                          0,
                                          "Os",
                                          "Like previous option with extra optimizations for size") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_listEmbeddedSampleFiles ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_listEmbeddedSampleFiles ("omnibus_options",
                                          "listEmbeddedSampleFiles",
                                          108,
                                          "list-embedded-samples",
                                          "List embedded sample files") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_listTargets ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_listTargets ("omnibus_options",
                                          "listTargets",
                                          76,
                                          "list-targets",
                                          "List targets") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_noDeadCodeElimination ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_noDeadCodeElimination ("omnibus_options",
                                          "noDeadCodeElimination",
                                          0,
                                          "no-deadcode-elimination",
                                          "No dead code elimination") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_31_ ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_optimization_31_ ("omnibus_options",
                                          "optimization1",
                                          0,
                                          "O1",
                                          "Optimization level 1") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimization_32_ ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_optimization_32_ ("omnibus_options",
                                          "optimization2",
                                          0,
                                          "O2",
                                          "Optimization level 2") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ_33_ ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_optimizationZ_33_ ("omnibus_options",
                                          "optimizationZ3",
                                          0,
                                          "O3",
                                          "Optimization level 3") ;
 
-C_BoolCommandLineOption gOption_omnibus_5F_options_printPasses ("omnibus_options",
+BoolCommandLineOption gOption_omnibus_5F_options_printPasses ("omnibus_options",
                                          "printPasses",
                                          0,
                                          "print-passes",
@@ -1305,21 +1305,21 @@ C_BoolCommandLineOption gOption_omnibus_5F_options_printPasses ("omnibus_options
 //
 //--------------------------------------------------------------------------------------------------
 
-C_StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedSampleFile ("omnibus_options",
+StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedSampleFile ("omnibus_options",
                                          "extractEmbeddedSampleFile",
                                          120,
                                          "extract-embedded-sample-code",
                                          "Extract an embedded sample file",
                                          "") ;
 
-C_StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedTargets ("omnibus_options",
+StringCommandLineOption gOption_omnibus_5F_options_extractEmbeddedTargets ("omnibus_options",
                                          "extractEmbeddedTargets",
                                          88,
                                          "extract-embedded-targets",
                                          "Extract embedded targets",
                                          "") ;
 
-C_StringCommandLineOption gOption_omnibus_5F_options_useDirAsTargetDir ("omnibus_options",
+StringCommandLineOption gOption_omnibus_5F_options_useDirAsTargetDir ("omnibus_options",
                                          "useDirAsTargetDir",
                                          84,
                                          "use-target-dir",
@@ -1332,7 +1332,7 @@ C_StringCommandLineOption gOption_omnibus_5F_options_useDirAsTargetDir ("omnibus
 //
 //--------------------------------------------------------------------------------------------------
 
-C_StringListCommandLineOption gOption_omnibus_5F_options_pathList ("omnibus_options",
+StringListCommandLineOption gOption_omnibus_5F_options_pathList ("omnibus_options",
                                          "pathList",
                                          0,
                                          "path",
@@ -1347,7 +1347,7 @@ C_StringListCommandLineOption gOption_omnibus_5F_options_pathList ("omnibus_opti
 //
 //--------------------------------------------------------------------------------------------------
 
-C_BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ("omnibus_option_not_appearing_in_cocoa",
+BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ("omnibus_option_not_appearing_in_cocoa",
                                          "performFlashing",
                                          102,
                                          "flash-target",
