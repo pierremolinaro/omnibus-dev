@@ -1,11 +1,348 @@
 #include "Compiler.h"
-#include "C_galgas_io.h"
+#include "galgas-input-output.h"
 #include "C_galgas_CLI_Options.h"
 #include "PrologueEpilogue.h"
 
 //--------------------------------------------------------------------------------------------------
 
 #include "all-declarations-5.h"
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_guardImplementationRoutineIR_2D_weak::objectCompare (const GALGAS_guardImplementationRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR_2D_weak::GALGAS_guardImplementationRoutineIR_2D_weak (void) :
+GALGAS_abstractRoutineIR_2D_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR_2D_weak & GALGAS_guardImplementationRoutineIR_2D_weak::operator = (const GALGAS_guardImplementationRoutineIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR_2D_weak::GALGAS_guardImplementationRoutineIR_2D_weak (const GALGAS_guardImplementationRoutineIR & inSource) :
+GALGAS_abstractRoutineIR_2D_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR_2D_weak GALGAS_guardImplementationRoutineIR_2D_weak::class_func_nil (LOCATION_ARGS) {
+  GALGAS_guardImplementationRoutineIR_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR GALGAS_guardImplementationRoutineIR_2D_weak::bang_guardImplementationRoutineIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_guardImplementationRoutineIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_guardImplementationRoutineIR) ;
+      result = GALGAS_guardImplementationRoutineIR ((cPtr_guardImplementationRoutineIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @guardImplementationRoutineIR-weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardImplementationRoutineIR_2D_weak ("guardImplementationRoutineIR-weak",
+                                                                                            & kTypeDescriptor_GALGAS_abstractRoutineIR_2D_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_guardImplementationRoutineIR_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardImplementationRoutineIR_2D_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_guardImplementationRoutineIR_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_guardImplementationRoutineIR_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_guardImplementationRoutineIR_2D_weak GALGAS_guardImplementationRoutineIR_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                        Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_guardImplementationRoutineIR_2D_weak result ;
+  const GALGAS_guardImplementationRoutineIR_2D_weak * p = (const GALGAS_guardImplementationRoutineIR_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_guardImplementationRoutineIR_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardImplementationRoutineIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_procFormalArgumentPassingMode::GALGAS_procFormalArgumentPassingMode (void) :
+mEnum (kNotBuilt) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentPassingMode::class_func_input (UNUSED_LOCATION_ARGS) {
+  GALGAS_procFormalArgumentPassingMode result ;
+  result.mEnum = kEnum_input ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentPassingMode::class_func_output (UNUSED_LOCATION_ARGS) {
+  GALGAS_procFormalArgumentPassingMode result ;
+  result.mEnum = kEnum_output ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentPassingMode::class_func_inputOutput (UNUSED_LOCATION_ARGS) {
+  GALGAS_procFormalArgumentPassingMode result ;
+  result.mEnum = kEnum_inputOutput ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_procFormalArgumentPassingMode::optional_input () const {
+  const bool ok = mEnum == kEnum_input ;
+  return ok ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_procFormalArgumentPassingMode::optional_output () const {
+  const bool ok = mEnum == kEnum_output ;
+  return ok ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_procFormalArgumentPassingMode::optional_inputOutput () const {
+  const bool ok = mEnum == kEnum_inputOutput ;
+  return ok ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+static const char * gEnumNameArrayFor_procFormalArgumentPassingMode [4] = {
+  "(not built)",
+  "input",
+  "output",
+  "inputOutput"
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procFormalArgumentPassingMode::getter_isInput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_input == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procFormalArgumentPassingMode::getter_isOutput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_output == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procFormalArgumentPassingMode::getter_isInputOutput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (kNotBuilt != mEnum, kEnum_inputOutput == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_procFormalArgumentPassingMode::description (String & ioString,
+                                                        const int32_t /* inIndentation */) const {
+  ioString.appendCString ("<enum @procFormalArgumentPassingMode: ") ;
+  ioString.appendCString (gEnumNameArrayFor_procFormalArgumentPassingMode [mEnum]) ;
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_procFormalArgumentPassingMode::objectCompare (const GALGAS_procFormalArgumentPassingMode & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mEnum < inOperand.mEnum) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mEnum > inOperand.mEnum) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @procFormalArgumentPassingMode generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentPassingMode ("procFormalArgumentPassingMode",
+                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_procFormalArgumentPassingMode::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_procFormalArgumentPassingMode ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_procFormalArgumentPassingMode::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_procFormalArgumentPassingMode (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_procFormalArgumentPassingMode GALGAS_procFormalArgumentPassingMode::extractObject (const GALGAS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GALGAS_procFormalArgumentPassingMode result ;
+  const GALGAS_procFormalArgumentPassingMode * p = (const GALGAS_procFormalArgumentPassingMode *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_procFormalArgumentPassingMode *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("procFormalArgumentPassingMode", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension Getter '@procFormalArgumentPassingMode formalPassingModeString'
+//
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_string extensionGetter_formalPassingModeString (const GALGAS_procFormalArgumentPassingMode & inObject,
+                                                       Compiler *
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const GALGAS_procFormalArgumentPassingMode temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_input:
+    {
+      result_result = GALGAS_string ("\?") ;
+    }
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_output:
+    {
+      result_result = GALGAS_string ("!") ;
+    }
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
+    {
+      result_result = GALGAS_string ("\?!") ;
+    }
+    break ;
+  }
+//---
+  return result_result ;
+}
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension Getter '@procFormalArgumentPassingMode requiredActualPassingModeForSelector'
+//
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_string extensionGetter_requiredActualPassingModeForSelector (const GALGAS_procFormalArgumentPassingMode & inObject,
+                                                                    const GALGAS_string & constinArgument_inSelector,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_string result_result ; // Returned variable
+  const GALGAS_procFormalArgumentPassingMode temp_0 = inObject ;
+  switch (temp_0.enumValue ()) {
+  case GALGAS_procFormalArgumentPassingMode::kNotBuilt:
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_input:
+    {
+      result_result = GALGAS_string ("!") ;
+    }
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_output:
+    {
+      result_result = GALGAS_string ("\?") ;
+    }
+    break ;
+  case GALGAS_procFormalArgumentPassingMode::kEnum_inputOutput:
+    {
+      result_result = GALGAS_string ("!\?") ;
+    }
+    break ;
+  }
+  enumGalgasBool test_1 = kBoolTrue ;
+  if (kBoolTrue == test_1) {
+    test_1 = GALGAS_bool (ComparisonKind::notEqual, constinArgument_inSelector.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    if (kBoolTrue == test_1) {
+      result_result.plusAssign_operation(constinArgument_inSelector.add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 39)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 39)) ;
+    }
+  }
+//---
+  return result_result ;
+}
+
+
+
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -19,7 +356,7 @@ GALGAS_string extensionGetter_typedString (const GALGAS_routineTypedSignature & 
   GALGAS_string result_result ; // Returned variable
   result_result = GALGAS_string ("(") ;
   const GALGAS_routineTypedSignature temp_0 = inObject ;
-  cEnumerator_routineTypedSignature enumerator_5080 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_routineTypedSignature enumerator_5080 (temp_0, EnumerationOrder::up) ;
   while (enumerator_5080.hasCurrentObject ()) {
     result_result.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_5080.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (enumerator_5080.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (extensionGetter_key (enumerator_5080.current_mTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)) ;
     enumerator_5080.gotoNextObject () ;
@@ -47,14 +384,14 @@ GALGAS_lstring extensionGetter_mangledName (const GALGAS_routineTypedSignature &
   GALGAS_string var_s_5507 = GALGAS_string::makeEmptyString () ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
-    test_0 = GALGAS_bool (kIsNotEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+    test_0 = GALGAS_bool (ComparisonKind::notEqual, constinArgument_inReceiverTypeName.objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
     if (kBoolTrue == test_0) {
       var_s_5507.plusAssign_operation(constinArgument_inReceiverTypeName.add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)) ;
     }
   }
   var_s_5507.plusAssign_operation(constinArgument_inFunctionName.readProperty_string ().add_operation (GALGAS_string ("("), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)) ;
   const GALGAS_routineTypedSignature temp_1 = inObject ;
-  cEnumerator_routineTypedSignature enumerator_5668 (temp_1, kENUMERATION_UP) ;
+  cEnumerator_routineTypedSignature enumerator_5668 (temp_1, EnumerationOrder::up) ;
   while (enumerator_5668.hasCurrentObject ()) {
     var_s_5507.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_5668.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (enumerator_5668.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)) ;
     enumerator_5668.gotoNextObject () ;
@@ -81,7 +418,7 @@ GALGAS_lstring extensionGetter_routineSignature (const GALGAS_routineFormalArgum
   GALGAS_lstring result_result ; // Returned variable
   GALGAS_string var_key_8093 = GALGAS_string ("(") ;
   const GALGAS_routineFormalArgumentListAST temp_0 = inObject ;
-  cEnumerator_routineFormalArgumentListAST enumerator_8147 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_routineFormalArgumentListAST enumerator_8147 (temp_0, EnumerationOrder::up) ;
   while (enumerator_8147.hasCurrentObject ()) {
     var_key_8093.plusAssign_operation(extensionGetter_formalPassingModeString (enumerator_8147.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (enumerator_8147.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (GALGAS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)) ;
     enumerator_8147.gotoNextObject () ;
@@ -111,7 +448,7 @@ class cCollectionElement_effectiveArgumentListAST : public cCollectionElement {
   public: cCollectionElement_effectiveArgumentListAST (const GALGAS_effectiveArgumentListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -168,7 +505,7 @@ void cCollectionElement_effectiveArgumentListAST::description (String & ioString
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_effectiveArgumentListAST::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_effectiveArgumentListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_effectiveArgumentListAST * operand = (cCollectionElement_effectiveArgumentListAST *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_effectiveArgumentListAST) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -494,7 +831,7 @@ GALGAS_lstring GALGAS_effectiveArgumentListAST::getter_mSelectorAtIndex (const G
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_effectiveArgumentListAST::cEnumerator_effectiveArgumentListAST (const GALGAS_effectiveArgumentListAST & inEnumeratedObject,
-                                                                            const typeEnumerationOrder inOrder) :
+                                                                            const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -596,7 +933,7 @@ class cCollectionElement_decoratedRegularRoutineList : public cCollectionElement
   public: cCollectionElement_decoratedRegularRoutineList (const GALGAS_decoratedRegularRoutineList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -708,7 +1045,7 @@ void cCollectionElement_decoratedRegularRoutineList::description (String & ioStr
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_decoratedRegularRoutineList::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_decoratedRegularRoutineList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_decoratedRegularRoutineList * operand = (cCollectionElement_decoratedRegularRoutineList *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_decoratedRegularRoutineList) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -1606,7 +1943,7 @@ GALGAS_lstring GALGAS_decoratedRegularRoutineList::getter_returnTypeNameAtIndex 
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_decoratedRegularRoutineList::cEnumerator_decoratedRegularRoutineList (const GALGAS_decoratedRegularRoutineList & inEnumeratedObject,
-                                                                                  const typeEnumerationOrder inOrder) :
+                                                                                  const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -1811,14 +2148,14 @@ GALGAS_routineAttributes GALGAS_routineAttributes::class_func_guard (UNUSED_LOCA
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_routineAttributes::objectCompare (const GALGAS_routineAttributes & inOperand) const {
-   typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_routineAttributes::objectCompare (const GALGAS_routineAttributes & inOperand) const {
+   ComparisonResult result = ComparisonResult::invalid ;
    if (mIsValid && inOperand.mIsValid) {
-     result = kOperandEqual ;
+     result = ComparisonResult::operandEqual ;
      if (mFlags < inOperand.mFlags) {
-       result = kFirstOperandLowerThanSecond ;
+       result = ComparisonResult::firstOperandLowerThanSecond ;
      }else if (mFlags > inOperand.mFlags) {
-       result = kFirstOperandGreaterThanSecond ;
+       result = ComparisonResult::firstOperandGreaterThanSecond ;
      }
    }
   return result ;
@@ -1998,7 +2335,7 @@ void extensionMethod_routineSemanticAnalysis (const GALGAS_decoratedRegularRouti
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_decoratedRegularRoutineList temp_0 = inObject ;
-  cEnumerator_decoratedRegularRoutineList enumerator_1485 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_decoratedRegularRoutineList enumerator_1485 (temp_0, EnumerationOrder::up) ;
   while (enumerator_1485.hasCurrentObject ()) {
     extensionMethod_semanticAnalysis (enumerator_1485.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 29)) ;
     enumerator_1485.gotoNextObject () ;
@@ -2017,13 +2354,13 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_allocaList temp_0 = inObject ;
-  cEnumerator_allocaList enumerator_4675 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_allocaList enumerator_4675 (temp_0, EnumerationOrder::up) ;
   while (enumerator_4675.hasCurrentObject ()) {
     ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  ").add_operation (enumerator_4675.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (GALGAS_string (" = alloca "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4675.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 121)) ;
     enumerator_4675.gotoNextObject () ;
   }
   const GALGAS_allocaList temp_1 = inObject ;
-  cEnumerator_allocaList enumerator_4818 (temp_1, kENUMERATION_UP) ;
+  cEnumerator_allocaList enumerator_4818 (temp_1, EnumerationOrder::up) ;
   while (enumerator_4818.hasCurrentObject ()) {
     enumGalgasBool test_2 = kBoolTrue ;
     if (kBoolTrue == test_2) {
@@ -2044,19 +2381,19 @@ void extensionMethod_generateAllocaList (const GALGAS_allocaList inObject,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_regularRoutineIR_2D_weak::objectCompare (const GALGAS_regularRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_regularRoutineIR_2D_weak::objectCompare (const GALGAS_regularRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2565,19 +2902,19 @@ GALGAS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_panicAST_2D_weak::objectCompare (const GALGAS_panicAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_panicAST_2D_weak::objectCompare (const GALGAS_panicAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2675,19 +3012,19 @@ GALGAS_panicAST_2D_weak GALGAS_panicAST_2D_weak::extractObject (const GALGAS_obj
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_decoratedPanicRoutine_2D_weak::objectCompare (const GALGAS_decoratedPanicRoutine_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_decoratedPanicRoutine_2D_weak::objectCompare (const GALGAS_decoratedPanicRoutine_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -2803,13 +3140,13 @@ class cSortedListElement_panicSortedListIR : public cSortedListElement {
   public: virtual cSortedListElement * copy (void) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Description
  public: virtual void description (String & ioString, const int32_t inIndentation) const ;
 
 //--- Virtual method that comparing element for sorting
-  public: virtual typeComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
+  public: virtual ComparisonResult compareForSorting (const cSortedListElement * inOperand) const ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -2845,7 +3182,7 @@ void cSortedListElement_panicSortedListIR::description (String & ioString, const
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cSortedListElement_panicSortedListIR::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cSortedListElement_panicSortedListIR::compare (const cCollectionElement * inOperand) const {
   cSortedListElement_panicSortedListIR * operand = (cSortedListElement_panicSortedListIR *) inOperand ;
   macroValidSharedObject (operand, cSortedListElement_panicSortedListIR) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -2859,11 +3196,11 @@ AC_GALGAS_sortedlist () {
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cSortedListElement_panicSortedListIR::compareForSorting (const cSortedListElement * inOperand) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cSortedListElement_panicSortedListIR::compareForSorting (const cSortedListElement * inOperand) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cSortedListElement_panicSortedListIR * operand = (const cSortedListElement_panicSortedListIR *) inOperand ;
   macroValidSharedObject (operand, cSortedListElement_panicSortedListIR) ;
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mObject.mProperty_mPriority.objectCompare (operand->mObject.mProperty_mPriority) ;
   }
   return result ;
@@ -2997,7 +3334,7 @@ void GALGAS_panicSortedListIR::method_greatest (GALGAS_bigint & outOperand0,
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_panicSortedListIR::cEnumerator_panicSortedListIR (const GALGAS_panicSortedListIR & inEnumeratedObject,
-                                                              const typeEnumerationOrder inOrder) :
+                                                              const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -3064,19 +3401,19 @@ GALGAS_panicSortedListIR GALGAS_panicSortedListIR::extractObject (const GALGAS_o
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_fileSpecificPanicRoutineIR_2D_weak::objectCompare (const GALGAS_fileSpecificPanicRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_fileSpecificPanicRoutineIR_2D_weak::objectCompare (const GALGAS_fileSpecificPanicRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3174,19 +3511,19 @@ GALGAS_fileSpecificPanicRoutineIR_2D_weak GALGAS_fileSpecificPanicRoutineIR_2D_w
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_universalModePanicRoutineIR_2D_weak::objectCompare (const GALGAS_universalModePanicRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_universalModePanicRoutineIR_2D_weak::objectCompare (const GALGAS_universalModePanicRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3284,19 +3621,19 @@ GALGAS_universalModePanicRoutineIR_2D_weak GALGAS_universalModePanicRoutineIR_2D
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_sectionModePanicRoutineIR_2D_weak::objectCompare (const GALGAS_sectionModePanicRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_sectionModePanicRoutineIR_2D_weak::objectCompare (const GALGAS_sectionModePanicRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3406,17 +3743,17 @@ GALGAS_sectionModePanicRoutineIR_2D_weak GALGAS_sectionModePanicRoutineIR_2D_wea
 
 
 
-typeComparisonResult GALGAS_ctExpressionAST::objectCompare (const GALGAS_ctExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_ctExpressionAST::objectCompare (const GALGAS_ctExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3487,19 +3824,19 @@ GALGAS_ctExpressionAST GALGAS_ctExpressionAST::extractObject (const GALGAS_objec
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeConvertToBooleanAST_2D_weak::objectCompare (const GALGAS_compileTimeConvertToBooleanAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeConvertToBooleanAST_2D_weak::objectCompare (const GALGAS_compileTimeConvertToBooleanAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -3610,7 +3947,7 @@ class cCollectionElement_llvmGenerationInstructionList : public cCollectionEleme
   public: cCollectionElement_llvmGenerationInstructionList (const GALGAS_llvmGenerationInstructionList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -3662,7 +3999,7 @@ void cCollectionElement_llvmGenerationInstructionList::description (String & ioS
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_llvmGenerationInstructionList::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_llvmGenerationInstructionList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_llvmGenerationInstructionList * operand = (cCollectionElement_llvmGenerationInstructionList *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_llvmGenerationInstructionList) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -3936,7 +4273,7 @@ GALGAS_abstractLLVMInstruction GALGAS_llvmGenerationInstructionList::getter_mIns
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_llvmGenerationInstructionList::cEnumerator_llvmGenerationInstructionList (const GALGAS_llvmGenerationInstructionList & inEnumeratedObject,
-                                                                                      const typeEnumerationOrder inOrder) :
+                                                                                      const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -4005,19 +4342,19 @@ GALGAS_llvmGenerationInstructionList GALGAS_llvmGenerationInstructionList::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmConvertToBooleanAST_2D_weak::objectCompare (const GALGAS_llvmConvertToBooleanAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmConvertToBooleanAST_2D_weak::objectCompare (const GALGAS_llvmConvertToBooleanAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4132,11 +4469,11 @@ void cEnumAssociatedValues_implicitBooleanConversionResult_compileTime::descript
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_implicitBooleanConversionResult_compileTime::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_implicitBooleanConversionResult_compileTime::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_implicitBooleanConversionResult_compileTime * ptr = dynamic_cast<const cEnumAssociatedValues_implicitBooleanConversionResult_compileTime *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
   return result ;
@@ -4161,11 +4498,11 @@ void cEnumAssociatedValues_implicitBooleanConversionResult_llvmVariable::descrip
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_implicitBooleanConversionResult_llvmVariable::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_implicitBooleanConversionResult_llvmVariable::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_implicitBooleanConversionResult_llvmVariable * ptr = dynamic_cast<const cEnumAssociatedValues_implicitBooleanConversionResult_llvmVariable *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
   return result ;
@@ -4294,13 +4631,13 @@ void GALGAS_implicitBooleanConversionResult::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_implicitBooleanConversionResult::objectCompare (const GALGAS_implicitBooleanConversionResult & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_implicitBooleanConversionResult::objectCompare (const GALGAS_implicitBooleanConversionResult & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
       result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
     }
@@ -4418,19 +4755,19 @@ void callExtensionMethod_generateConvertToBooleanCode (cPtr_abstractImplicitConv
 }
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_compileTimeImplicitConverterToBoolean_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_compileTimeImplicitConverterToBoolean_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4528,19 +4865,19 @@ GALGAS_compileTimeImplicitConverterToBoolean_2D_weak GALGAS_compileTimeImplicitC
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_llvmImplicitConverterToBoolean_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_llvmImplicitConverterToBoolean_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4662,19 +4999,19 @@ void extensionMethod_generateConvertToBooleanCode (const GALGAS_implicitConversi
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_expressionAST_2D_weak::objectCompare (const GALGAS_expressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_expressionAST_2D_weak::objectCompare (const GALGAS_expressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4817,19 +5154,19 @@ void callExtensionMethod_analyzeExpression (cPtr_expressionAST * inObject,
 }
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_convertExpressionAST_2D_weak::objectCompare (const GALGAS_convertExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_convertExpressionAST_2D_weak::objectCompare (const GALGAS_convertExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -4939,17 +5276,17 @@ GALGAS_convertExpressionAST_2D_weak GALGAS_convertExpressionAST_2D_weak::extract
 
 
 
-typeComparisonResult GALGAS_abstractInstructionIR::objectCompare (const GALGAS_abstractInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_abstractInstructionIR::objectCompare (const GALGAS_abstractInstructionIR & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5020,19 +5357,19 @@ GALGAS_abstractInstructionIR GALGAS_abstractInstructionIR::extractObject (const 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_abstractInstructionIR_2D_weak::objectCompare (const GALGAS_abstractInstructionIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_abstractInstructionIR_2D_weak::objectCompare (const GALGAS_abstractInstructionIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5130,19 +5467,19 @@ GALGAS_abstractInstructionIR_2D_weak GALGAS_abstractInstructionIR_2D_weak::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_extendExpressionAST_2D_weak::objectCompare (const GALGAS_extendExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_extendExpressionAST_2D_weak::objectCompare (const GALGAS_extendExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5240,19 +5577,19 @@ GALGAS_extendExpressionAST_2D_weak GALGAS_extendExpressionAST_2D_weak::extractOb
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_truncateExpressionAST_2D_weak::objectCompare (const GALGAS_truncateExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_truncateExpressionAST_2D_weak::objectCompare (const GALGAS_truncateExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5362,14 +5699,14 @@ GALGAS_truncateExpressionAST_2D_weak GALGAS_truncateExpressionAST_2D_weak::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_truncateInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_truncateInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_truncateInstructionIR * p = (const cPtr_truncateInstructionIR *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_truncateInstructionIR) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mTarget.objectCompare (p->mProperty_mTarget) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOperand.objectCompare (p->mProperty_mOperand) ;
   }
   return result ;
@@ -5378,17 +5715,17 @@ typeComparisonResult cPtr_truncateInstructionIR::dynamicObjectCompare (const acP
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_truncateInstructionIR::objectCompare (const GALGAS_truncateInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_truncateInstructionIR::objectCompare (const GALGAS_truncateInstructionIR & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5544,19 +5881,19 @@ GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::extractObject (const 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_truncateInstructionIR_2D_weak::objectCompare (const GALGAS_truncateInstructionIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_truncateInstructionIR_2D_weak::objectCompare (const GALGAS_truncateInstructionIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5654,19 +5991,19 @@ GALGAS_truncateInstructionIR_2D_weak GALGAS_truncateInstructionIR_2D_weak::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_addressofControlRegisterAST_2D_weak::objectCompare (const GALGAS_addressofControlRegisterAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_addressofControlRegisterAST_2D_weak::objectCompare (const GALGAS_addressofControlRegisterAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5764,19 +6101,19 @@ GALGAS_addressofControlRegisterAST_2D_weak GALGAS_addressofControlRegisterAST_2D
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_addressofExpressionAST_2D_weak::objectCompare (const GALGAS_addressofExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_addressofExpressionAST_2D_weak::objectCompare (const GALGAS_addressofExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5874,19 +6211,19 @@ GALGAS_addressofExpressionAST_2D_weak GALGAS_addressofExpressionAST_2D_weak::ext
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_addressofInstructionIR_2D_weak::objectCompare (const GALGAS_addressofInstructionIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_addressofInstructionIR_2D_weak::objectCompare (const GALGAS_addressofInstructionIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -5984,19 +6321,19 @@ GALGAS_addressofInstructionIR_2D_weak GALGAS_addressofInstructionIR_2D_weak::ext
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_sizeofExpressionAST_2D_weak::objectCompare (const GALGAS_sizeofExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_sizeofExpressionAST_2D_weak::objectCompare (const GALGAS_sizeofExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6094,19 +6431,19 @@ GALGAS_sizeofExpressionAST_2D_weak GALGAS_sizeofExpressionAST_2D_weak::extractOb
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_sizeofTypeAST_2D_weak::objectCompare (const GALGAS_sizeofTypeAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_sizeofTypeAST_2D_weak::objectCompare (const GALGAS_sizeofTypeAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6204,19 +6541,19 @@ GALGAS_sizeofTypeAST_2D_weak GALGAS_sizeofTypeAST_2D_weak::extractObject (const 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_sizeofInstructionIR_2D_weak::objectCompare (const GALGAS_sizeofInstructionIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_sizeofInstructionIR_2D_weak::objectCompare (const GALGAS_sizeofInstructionIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6327,7 +6664,7 @@ class cCollectionElement_primaryInExpressionAccessListAST : public cCollectionEl
   public: cCollectionElement_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -6379,7 +6716,7 @@ void cCollectionElement_primaryInExpressionAccessListAST::description (String & 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_primaryInExpressionAccessListAST::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_primaryInExpressionAccessListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_primaryInExpressionAccessListAST * operand = (cCollectionElement_primaryInExpressionAccessListAST *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_primaryInExpressionAccessListAST) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -6653,7 +6990,7 @@ GALGAS_primaryInExpressionAccessAST GALGAS_primaryInExpressionAccessListAST::get
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_primaryInExpressionAccessListAST::cEnumerator_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessListAST & inEnumeratedObject,
-                                                                                            const typeEnumerationOrder inOrder) :
+                                                                                            const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -6722,19 +7059,19 @@ GALGAS_primaryInExpressionAccessListAST GALGAS_primaryInExpressionAccessListAST:
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_typedConstantCallAST_2D_weak::objectCompare (const GALGAS_typedConstantCallAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_typedConstantCallAST_2D_weak::objectCompare (const GALGAS_typedConstantCallAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -6848,26 +7185,26 @@ GALGAS_typedConstantCallAST_2D_weak GALGAS_typedConstantCallAST_2D_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_ifExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_ifExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_ifExpressionAST * p = (const cPtr_ifExpressionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_ifExpressionAST) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIfExpression.objectCompare (p->mProperty_mIfExpression) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mIfExpressionEndLocation.objectCompare (p->mProperty_mIfExpressionEndLocation) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mThenExpression.objectCompare (p->mProperty_mThenExpression) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mThenExpressionEndLocation.objectCompare (p->mProperty_mThenExpressionEndLocation) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mElseExpression.objectCompare (p->mProperty_mElseExpression) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mElseExpressionEndLocation.objectCompare (p->mProperty_mElseExpressionEndLocation) ;
   }
   return result ;
@@ -6876,17 +7213,17 @@ typeComparisonResult cPtr_ifExpressionAST::dynamicObjectCompare (const acPtr_cla
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_ifExpressionAST::objectCompare (const GALGAS_ifExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_ifExpressionAST::objectCompare (const GALGAS_ifExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -7154,19 +7491,19 @@ GALGAS_ifExpressionAST GALGAS_ifExpressionAST::extractObject (const GALGAS_objec
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_ifExpressionAST_2D_weak::objectCompare (const GALGAS_ifExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_ifExpressionAST_2D_weak::objectCompare (const GALGAS_ifExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -7277,17 +7614,17 @@ GALGAS_ifExpressionAST_2D_weak GALGAS_ifExpressionAST_2D_weak::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_booleanShortCircuitAndOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_booleanShortCircuitAndOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_booleanShortCircuitAndOperatorExpressionAST * p = (const cPtr_booleanShortCircuitAndOperatorExpressionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_booleanShortCircuitAndOperatorExpressionAST) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mLeftExpression.objectCompare (p->mProperty_mLeftExpression) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOperatorLocation.objectCompare (p->mProperty_mOperatorLocation) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mRightExpression.objectCompare (p->mProperty_mRightExpression) ;
   }
   return result ;
@@ -7296,17 +7633,17 @@ typeComparisonResult cPtr_booleanShortCircuitAndOperatorExpressionAST::dynamicOb
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_booleanShortCircuitAndOperatorExpressionAST::objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_booleanShortCircuitAndOperatorExpressionAST::objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -7490,19 +7827,19 @@ GALGAS_booleanShortCircuitAndOperatorExpressionAST GALGAS_booleanShortCircuitAnd
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_booleanShortCircuitAndOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_booleanShortCircuitAndOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -7615,7 +7952,7 @@ class cCollectionElement_integerSliceFieldListAST : public cCollectionElement {
   public: cCollectionElement_integerSliceFieldListAST (const GALGAS_integerSliceFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -7677,7 +8014,7 @@ void cCollectionElement_integerSliceFieldListAST::description (String & ioString
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_integerSliceFieldListAST::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_integerSliceFieldListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_integerSliceFieldListAST * operand = (cCollectionElement_integerSliceFieldListAST *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_integerSliceFieldListAST) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -8055,7 +8392,7 @@ GALGAS_location GALGAS_integerSliceFieldListAST::getter_mExpressionLocationAtInd
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_integerSliceFieldListAST::cEnumerator_integerSliceFieldListAST (const GALGAS_integerSliceFieldListAST & inEnumeratedObject,
-                                                                            const typeEnumerationOrder inOrder) :
+                                                                            const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -8140,19 +8477,19 @@ GALGAS_integerSliceFieldListAST GALGAS_integerSliceFieldListAST::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_integerSliceExpressionAST_2D_weak::objectCompare (const GALGAS_integerSliceExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_integerSliceExpressionAST_2D_weak::objectCompare (const GALGAS_integerSliceExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8250,19 +8587,19 @@ GALGAS_integerSliceExpressionAST_2D_weak GALGAS_integerSliceExpressionAST_2D_wea
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_literalIntegerInExpressionAST_2D_weak::objectCompare (const GALGAS_literalIntegerInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_literalIntegerInExpressionAST_2D_weak::objectCompare (const GALGAS_literalIntegerInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8360,19 +8697,19 @@ GALGAS_literalIntegerInExpressionAST_2D_weak GALGAS_literalIntegerInExpressionAS
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_literalStringInExpressionAST_2D_weak::objectCompare (const GALGAS_literalStringInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_literalStringInExpressionAST_2D_weak::objectCompare (const GALGAS_literalStringInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8481,11 +8818,11 @@ GALGAS_literalStringInExpressionAST_2D_weak GALGAS_literalStringInExpressionAST_
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_literalBooleanInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_literalBooleanInExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_literalBooleanInExpressionAST * p = (const cPtr_literalBooleanInExpressionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_literalBooleanInExpressionAST) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mValue.objectCompare (p->mProperty_mValue) ;
   }
   return result ;
@@ -8494,17 +8831,17 @@ typeComparisonResult cPtr_literalBooleanInExpressionAST::dynamicObjectCompare (c
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_literalBooleanInExpressionAST::objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_literalBooleanInExpressionAST::objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8632,19 +8969,19 @@ GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_literalBooleanInExpressionAST_2D_weak::objectCompare (const GALGAS_literalBooleanInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_literalBooleanInExpressionAST_2D_weak::objectCompare (const GALGAS_literalBooleanInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8742,19 +9079,19 @@ GALGAS_literalBooleanInExpressionAST_2D_weak GALGAS_literalBooleanInExpressionAS
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_registerInExpressionAST_2D_weak::objectCompare (const GALGAS_registerInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_registerInExpressionAST_2D_weak::objectCompare (const GALGAS_registerInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -8867,7 +9204,7 @@ class cCollectionElement_registerIntegerFieldListAST : public cCollectionElement
   public: cCollectionElement_registerIntegerFieldListAST (const GALGAS_registerIntegerFieldListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -8929,7 +9266,7 @@ void cCollectionElement_registerIntegerFieldListAST::description (String & ioStr
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_registerIntegerFieldListAST::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_registerIntegerFieldListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_registerIntegerFieldListAST * operand = (cCollectionElement_registerIntegerFieldListAST *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_registerIntegerFieldListAST) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -9307,7 +9644,7 @@ GALGAS_location GALGAS_registerIntegerFieldListAST::getter_mExpressionLocationAt
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_registerIntegerFieldListAST::cEnumerator_registerIntegerFieldListAST (const GALGAS_registerIntegerFieldListAST & inEnumeratedObject,
-                                                                                  const typeEnumerationOrder inOrder) :
+                                                                                  const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -9392,19 +9729,19 @@ GALGAS_registerIntegerFieldListAST GALGAS_registerIntegerFieldListAST::extractOb
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_registerConstantExpressionAST_2D_weak::objectCompare (const GALGAS_registerConstantExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_registerConstantExpressionAST_2D_weak::objectCompare (const GALGAS_registerConstantExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -9519,11 +9856,11 @@ void cEnumAssociatedValues_primaryInExpressionAccessAST_property::description (S
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_property::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_property::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_primaryInExpressionAccessAST_property * ptr = dynamic_cast<const cEnumAssociatedValues_primaryInExpressionAccessAST_property *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
   return result ;
@@ -9551,14 +9888,14 @@ void cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice::descriptio
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice * ptr = dynamic_cast<const cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
   return result ;
@@ -9589,17 +9926,17 @@ void cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess::description
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess * ptr = dynamic_cast<const cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
@@ -9630,17 +9967,17 @@ void cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall::description (S
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall::compare (const cEnumAssociatedValues * inOperand) const {
+ComparisonResult cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall::compare (const cEnumAssociatedValues * inOperand) const {
   const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall * ptr = dynamic_cast<const cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall *> (inOperand) ;
   macroValidPointer (ptr) ;
-  typeComparisonResult result = kOperandEqual ;
-  if (result == kOperandEqual) {
+  ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
   }
-  if (result == kOperandEqual) {
+  if (result == ComparisonResult::operandEqual) {
     result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
   }
   return result ;
@@ -9897,13 +10234,13 @@ void GALGAS_primaryInExpressionAccessAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_primaryInExpressionAccessAST::objectCompare (const GALGAS_primaryInExpressionAccessAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_primaryInExpressionAccessAST::objectCompare (const GALGAS_primaryInExpressionAccessAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
       result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
     }
@@ -9955,19 +10292,19 @@ GALGAS_primaryInExpressionAccessAST GALGAS_primaryInExpressionAccessAST::extract
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_primaryInExpressionAST_2D_weak::objectCompare (const GALGAS_primaryInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_primaryInExpressionAST_2D_weak::objectCompare (const GALGAS_primaryInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -10065,19 +10402,19 @@ GALGAS_primaryInExpressionAST_2D_weak GALGAS_primaryInExpressionAST_2D_weak::ext
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_standaloneFunctionInExpressionAST_2D_weak::objectCompare (const GALGAS_standaloneFunctionInExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_standaloneFunctionInExpressionAST_2D_weak::objectCompare (const GALGAS_standaloneFunctionInExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -10189,7 +10526,7 @@ class cCollectionElement_functionCallEffectiveParameterListAST : public cCollect
   public: cCollectionElement_functionCallEffectiveParameterListAST (const GALGAS_functionCallEffectiveParameterListAST_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -10246,7 +10583,7 @@ void cCollectionElement_functionCallEffectiveParameterListAST::description (Stri
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_functionCallEffectiveParameterListAST::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_functionCallEffectiveParameterListAST::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_functionCallEffectiveParameterListAST * operand = (cCollectionElement_functionCallEffectiveParameterListAST *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_functionCallEffectiveParameterListAST) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -10572,7 +10909,7 @@ GALGAS_expressionAST GALGAS_functionCallEffectiveParameterListAST::getter_mExpre
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_functionCallEffectiveParameterListAST::cEnumerator_functionCallEffectiveParameterListAST (const GALGAS_functionCallEffectiveParameterListAST & inEnumeratedObject,
-                                                                                                      const typeEnumerationOrder inOrder) :
+                                                                                                      const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -10649,19 +10986,19 @@ GALGAS_functionCallEffectiveParameterListAST GALGAS_functionCallEffectiveParamet
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_constructorCallAST_2D_weak::objectCompare (const GALGAS_constructorCallAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_constructorCallAST_2D_weak::objectCompare (const GALGAS_constructorCallAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -11088,15 +11425,15 @@ void GALGAS_compileTimeInfixOperatorEnumeration::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeInfixOperatorEnumeration::objectCompare (const GALGAS_compileTimeInfixOperatorEnumeration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeInfixOperatorEnumeration::objectCompare (const GALGAS_compileTimeInfixOperatorEnumeration & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -11330,19 +11667,19 @@ GALGAS_omnibusInfixOperator extensionGetter_omnibusInfixOperator (const GALGAS_c
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeInfixOperatorAST_2D_weak::objectCompare (const GALGAS_compileTimeInfixOperatorAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeInfixOperatorAST_2D_weak::objectCompare (const GALGAS_compileTimeInfixOperatorAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -11440,19 +11777,19 @@ GALGAS_compileTimeInfixOperatorAST_2D_weak GALGAS_compileTimeInfixOperatorAST_2D
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimeInfixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimeInfixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -11550,19 +11887,19 @@ GALGAS_compileTimeInfixOperatorUsage_2D_weak GALGAS_compileTimeInfixOperatorUsag
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimeInfixInfEqualOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimeInfixInfEqualOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimeInfixInfEqualOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimeInfixInfEqualOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -12077,15 +12414,15 @@ void GALGAS_omnibusInfixOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_omnibusInfixOperator::objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_omnibusInfixOperator::objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -12148,7 +12485,7 @@ class cCollectionElement_genericFormalParameterList : public cCollectionElement 
   public: cCollectionElement_genericFormalParameterList (const GALGAS_genericFormalParameterList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -12200,7 +12537,7 @@ void cCollectionElement_genericFormalParameterList::description (String & ioStri
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cCollectionElement_genericFormalParameterList::compare (const cCollectionElement * inOperand) const {
+ComparisonResult cCollectionElement_genericFormalParameterList::compare (const cCollectionElement * inOperand) const {
   cCollectionElement_genericFormalParameterList * operand = (cCollectionElement_genericFormalParameterList *) inOperand ;
   macroValidSharedObject (operand, cCollectionElement_genericFormalParameterList) ;
   return mObject.objectCompare (operand->mObject) ;
@@ -12474,7 +12811,7 @@ GALGAS_genericFormalParameter GALGAS_genericFormalParameterList::getter_mParamet
 //--------------------------------------------------------------------------------------------------
 
 cEnumerator_genericFormalParameterList::cEnumerator_genericFormalParameterList (const GALGAS_genericFormalParameterList & inEnumeratedObject,
-                                                                                const typeEnumerationOrder inOrder) :
+                                                                                const EnumerationOrder inOrder) :
 cGenericAbstractEnumerator (inOrder) {
   inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
 }
@@ -12543,19 +12880,19 @@ GALGAS_genericFormalParameterList GALGAS_genericFormalParameterList::extractObje
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmInfixOperatorAST_2D_weak::objectCompare (const GALGAS_llvmInfixOperatorAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmInfixOperatorAST_2D_weak::objectCompare (const GALGAS_llvmInfixOperatorAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -12653,19 +12990,19 @@ GALGAS_llvmInfixOperatorAST_2D_weak GALGAS_llvmInfixOperatorAST_2D_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmInfixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmInfixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -12763,19 +13100,19 @@ GALGAS_llvmInfixOperatorUsage_2D_weak GALGAS_llvmInfixOperatorUsage_2D_weak::ext
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmInlineInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmInlineInfixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmInlineInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmInlineInfixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -12873,19 +13210,19 @@ GALGAS_llvmInlineInfixOperatorUsage_2D_weak GALGAS_llvmInlineInfixOperatorUsage_
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_infixOperatorRoutineIR_2D_weak::objectCompare (const GALGAS_infixOperatorRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_infixOperatorRoutineIR_2D_weak::objectCompare (const GALGAS_infixOperatorRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13046,11 +13383,11 @@ void extensionMethod_generateInfixOperatorCode (const GALGAS_infixOperatorMap in
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_inlineInfixOperatorUsage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_inlineInfixOperatorUsage::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_inlineInfixOperatorUsage * p = (const cPtr_inlineInfixOperatorUsage *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_inlineInfixOperatorUsage) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mLLVMOperation.objectCompare (p->mProperty_mLLVMOperation) ;
   }
   return result ;
@@ -13059,17 +13396,17 @@ typeComparisonResult cPtr_inlineInfixOperatorUsage::dynamicObjectCompare (const 
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_inlineInfixOperatorUsage::objectCompare (const GALGAS_inlineInfixOperatorUsage & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_inlineInfixOperatorUsage::objectCompare (const GALGAS_inlineInfixOperatorUsage & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13197,19 +13534,19 @@ GALGAS_inlineInfixOperatorUsage GALGAS_inlineInfixOperatorUsage::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_inlineInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_inlineInfixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_inlineInfixOperatorUsage_2D_weak::objectCompare (const GALGAS_inlineInfixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13433,20 +13770,20 @@ GALGAS_string extensionGetter_string (const GALGAS_omnibusInfixOperator & inObje
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_omnibusInfixOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_omnibusInfixOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_omnibusInfixOperatorExpressionAST * p = (const cPtr_omnibusInfixOperatorExpressionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_omnibusInfixOperatorExpressionAST) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mLeftExpression.objectCompare (p->mProperty_mLeftExpression) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOperatorLocation.objectCompare (p->mProperty_mOperatorLocation) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mInfixOperator.objectCompare (p->mProperty_mInfixOperator) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mRightExpression.objectCompare (p->mProperty_mRightExpression) ;
   }
   return result ;
@@ -13455,17 +13792,17 @@ typeComparisonResult cPtr_omnibusInfixOperatorExpressionAST::dynamicObjectCompar
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_omnibusInfixOperatorExpressionAST::objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_omnibusInfixOperatorExpressionAST::objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13677,19 +14014,19 @@ GALGAS_omnibusInfixOperatorExpressionAST GALGAS_omnibusInfixOperatorExpressionAS
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_omnibusInfixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13852,15 +14189,15 @@ void GALGAS_compileTimePrefixOperatorEnumeration::description (String & ioString
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimePrefixOperatorEnumeration::objectCompare (const GALGAS_compileTimePrefixOperatorEnumeration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimePrefixOperatorEnumeration::objectCompare (const GALGAS_compileTimePrefixOperatorEnumeration & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -13974,19 +14311,19 @@ GALGAS_prefixOperator extensionGetter_prefixOperator (const GALGAS_compileTimePr
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compiletimePrefixOperatorAST_2D_weak::objectCompare (const GALGAS_compiletimePrefixOperatorAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compiletimePrefixOperatorAST_2D_weak::objectCompare (const GALGAS_compiletimePrefixOperatorAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14084,19 +14421,19 @@ GALGAS_compiletimePrefixOperatorAST_2D_weak GALGAS_compiletimePrefixOperatorAST_
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_compileTimePrefixOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimePrefixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_compileTimePrefixOperatorUsage_2D_weak::objectCompare (const GALGAS_compileTimePrefixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14303,15 +14640,15 @@ void GALGAS_llvmPrefixOperatorEnumeration::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmPrefixOperatorEnumeration::objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmPrefixOperatorEnumeration::objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14445,19 +14782,19 @@ GALGAS_prefixOperator extensionGetter_prefixOperator (const GALGAS_llvmPrefixOpe
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmPrefixOperatorAST_2D_weak::objectCompare (const GALGAS_llvmPrefixOperatorAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmPrefixOperatorAST_2D_weak::objectCompare (const GALGAS_llvmPrefixOperatorAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14555,19 +14892,19 @@ GALGAS_llvmPrefixOperatorAST_2D_weak GALGAS_llvmPrefixOperatorAST_2D_weak::extra
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_llvmPrefixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmPrefixOperatorUsage_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_llvmPrefixOperatorUsage_2D_weak::objectCompare (const GALGAS_llvmPrefixOperatorUsage_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14665,19 +15002,19 @@ GALGAS_llvmPrefixOperatorUsage_2D_weak GALGAS_llvmPrefixOperatorUsage_2D_weak::e
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_prefixOperatorRoutineIR_2D_weak::objectCompare (const GALGAS_prefixOperatorRoutineIR_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_prefixOperatorRoutineIR_2D_weak::objectCompare (const GALGAS_prefixOperatorRoutineIR_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -14937,15 +15274,15 @@ void GALGAS_prefixOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_prefixOperator::objectCompare (const GALGAS_prefixOperator & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_prefixOperator::objectCompare (const GALGAS_prefixOperator & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     if (mEnum < inOperand.mEnum) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (mEnum > inOperand.mEnum) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -15008,17 +15345,17 @@ GALGAS_prefixOperator GALGAS_prefixOperator::extractObject (const GALGAS_object 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult cPtr_prefixOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
+ComparisonResult cPtr_prefixOperatorExpressionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
+  ComparisonResult result = ComparisonResult::operandEqual ;
   const cPtr_prefixOperatorExpressionAST * p = (const cPtr_prefixOperatorExpressionAST *) inOperandPtr ;
   macroValidSharedObject (p, cPtr_prefixOperatorExpressionAST) ;
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOperatorLocation.objectCompare (p->mProperty_mOperatorLocation) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mOp.objectCompare (p->mProperty_mOp) ;
   }
-  if (kOperandEqual == result) {
+  if (ComparisonResult::operandEqual == result) {
     result = mProperty_mExpression.objectCompare (p->mProperty_mExpression) ;
   }
   return result ;
@@ -15027,17 +15364,17 @@ typeComparisonResult cPtr_prefixOperatorExpressionAST::dynamicObjectCompare (con
 //--------------------------------------------------------------------------------------------------
 
 
-typeComparisonResult GALGAS_prefixOperatorExpressionAST::objectCompare (const GALGAS_prefixOperatorExpressionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_prefixOperatorExpressionAST::objectCompare (const GALGAS_prefixOperatorExpressionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -15221,19 +15558,19 @@ GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST::extractOb
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_prefixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_prefixOperatorExpressionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_prefixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_prefixOperatorExpressionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -15344,17 +15681,17 @@ GALGAS_prefixOperatorExpressionAST_2D_weak GALGAS_prefixOperatorExpressionAST_2D
 
 
 
-typeComparisonResult GALGAS_instructionAST::objectCompare (const GALGAS_instructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_instructionAST::objectCompare (const GALGAS_instructionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     const size_t myObjectPtr = size_t (mObjectPtr) ;
     const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -15450,19 +15787,19 @@ GALGAS_instructionAST GALGAS_instructionAST::extractObject (const GALGAS_object 
 
 //--------------------------------------------------------------------------------------------------
 
-typeComparisonResult GALGAS_instructionAST_2D_weak::objectCompare (const GALGAS_instructionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
+ComparisonResult GALGAS_instructionAST_2D_weak::objectCompare (const GALGAS_instructionAST_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
     cPtr_weakReference_proxy * myPtr = mProxyPtr ;
     const size_t myObjectPtr = size_t (myPtr) ;
     cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
     const size_t operandObjectPtr = size_t (operandPtr) ;
     if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
+      result = ComparisonResult::firstOperandLowerThanSecond ;
     }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
     }else{
-      result = kOperandEqual ;
+      result = ComparisonResult::operandEqual ;
     }
   }
   return result ;
@@ -15586,7 +15923,7 @@ void extensionMethod_noteInstructionListTypesInPrecedenceGraph (const GALGAS_ins
                                                                 Compiler * inCompiler
                                                                 COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_2445 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_instructionListAST enumerator_2445 (temp_0, EnumerationOrder::up) ;
   while (enumerator_2445.hasCurrentObject ()) {
     callExtensionMethod_noteInstructionTypesInPrecedenceGraph ((cPtr_instructionAST *) enumerator_2445.current_mInstruction (HERE).ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 56)) ;
     enumerator_2445.gotoNextObject () ;
@@ -15642,7 +15979,7 @@ void extensionMethod_analyzeBranchInstructionList (const GALGAS_instructionListA
   extensionSetter_openBranch (ioArgument_ioUniversalMap, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 97)) ;
   }
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4325 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_instructionListAST enumerator_4325 (temp_0, EnumerationOrder::up) ;
   while (enumerator_4325.hasCurrentObject ()) {
     {
     extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4325.current_mInstruction (HERE).readProperty_mInstructionLocation (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 99)) ;
@@ -15675,7 +16012,7 @@ void extensionMethod_analyzeRoutineInstructionList (const GALGAS_instructionList
                                                     Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_5506 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_instructionListAST enumerator_5506 (temp_0, EnumerationOrder::up) ;
   while (enumerator_5506.hasCurrentObject ()) {
     {
     extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_5506.current_mInstruction (HERE).readProperty_mInstructionLocation (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 130)) ;
@@ -15699,626 +16036,11 @@ void extensionMethod_instructionListLLVMCode (const GALGAS_instructionListIR inO
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_6521 (temp_0, kENUMERATION_UP) ;
+  cEnumerator_instructionListIR enumerator_6521 (temp_0, EnumerationOrder::up) ;
   while (enumerator_6521.hasCurrentObject ()) {
     callExtensionMethod_llvmInstructionCode ((cPtr_abstractInstructionIR *) enumerator_6521.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 155)) ;
     enumerator_6521.gotoNextObject () ;
   }
 }
 
-
-//--------------------------------------------------------------------------------------------------
-
-typeComparisonResult GALGAS_checkInstructionAST_2D_weak::objectCompare (const GALGAS_checkInstructionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST_2D_weak::GALGAS_checkInstructionAST_2D_weak (void) :
-GALGAS_instructionAST_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST_2D_weak & GALGAS_checkInstructionAST_2D_weak::operator = (const GALGAS_checkInstructionAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST_2D_weak::GALGAS_checkInstructionAST_2D_weak (const GALGAS_checkInstructionAST & inSource) :
-GALGAS_instructionAST_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST_2D_weak GALGAS_checkInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_checkInstructionAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST GALGAS_checkInstructionAST_2D_weak::bang_checkInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_checkInstructionAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_checkInstructionAST) ;
-      result = GALGAS_checkInstructionAST ((cPtr_checkInstructionAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @checkInstructionAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkInstructionAST_2D_weak ("checkInstructionAST-weak",
-                                                                                   & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_checkInstructionAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_checkInstructionAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_checkInstructionAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_checkInstructionAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_checkInstructionAST_2D_weak GALGAS_checkInstructionAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_checkInstructionAST_2D_weak result ;
-  const GALGAS_checkInstructionAST_2D_weak * p = (const GALGAS_checkInstructionAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_checkInstructionAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("checkInstructionAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @assertInstructionAST reference class
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_assertInstructionAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_instructionAST::printNonNullClassInstanceProperties () ;
-    mProperty_mExpression.printNonNullClassInstanceProperties ("mExpression") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-typeComparisonResult cPtr_assertInstructionAST::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_assertInstructionAST * p = (const cPtr_assertInstructionAST *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_assertInstructionAST) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mInstructionLocation.objectCompare (p->mProperty_mInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mExpression.objectCompare (p->mProperty_mExpression) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
-typeComparisonResult GALGAS_assertInstructionAST::objectCompare (const GALGAS_assertInstructionAST & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST::GALGAS_assertInstructionAST (void) :
-GALGAS_instructionAST () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST::GALGAS_assertInstructionAST (const cPtr_assertInstructionAST * inSourcePtr) :
-GALGAS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_assertInstructionAST) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST GALGAS_assertInstructionAST::class_func_new (const GALGAS_location & inAttribute_mInstructionLocation,
-                                                                         const GALGAS_expressionAST & inAttribute_mExpression
-                                                                         COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionAST result ;
-  if (inAttribute_mInstructionLocation.isValid () && inAttribute_mExpression.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_assertInstructionAST (inAttribute_mInstructionLocation, inAttribute_mExpression COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assertInstructionAST::setter_setMExpression (GALGAS_expressionAST inValue
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_assertInstructionAST * p = (cPtr_assertInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionAST) ;
-    p->mProperty_mExpression = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_expressionAST GALGAS_assertInstructionAST::readProperty_mExpression (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_expressionAST () ;
-  }else{
-    cPtr_assertInstructionAST * p = (cPtr_assertInstructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionAST) ;
-    return p->mProperty_mExpression ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @assertInstructionAST class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_assertInstructionAST::cPtr_assertInstructionAST (const GALGAS_location & in_mInstructionLocation,
-                                                      const GALGAS_expressionAST & in_mExpression
-                                                      COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (in_mInstructionLocation COMMA_THERE),
-mProperty_mExpression (in_mExpression) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_assertInstructionAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionAST ;
-}
-
-void cPtr_assertInstructionAST::description (String & ioString,
-                                             const int32_t inIndentation) const {
-  ioString.appendCString ("[@assertInstructionAST:") ;
-  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mExpression.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_assertInstructionAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_assertInstructionAST (mProperty_mInstructionLocation, mProperty_mExpression COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assertInstructionAST generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionAST ("assertInstructionAST",
-                                                                            & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_assertInstructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_assertInstructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assertInstructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST GALGAS_assertInstructionAST::extractObject (const GALGAS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionAST result ;
-  const GALGAS_assertInstructionAST * p = (const GALGAS_assertInstructionAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_assertInstructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assertInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-typeComparisonResult GALGAS_assertInstructionAST_2D_weak::objectCompare (const GALGAS_assertInstructionAST_2D_weak & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST_2D_weak::GALGAS_assertInstructionAST_2D_weak (void) :
-GALGAS_instructionAST_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST_2D_weak & GALGAS_assertInstructionAST_2D_weak::operator = (const GALGAS_assertInstructionAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST_2D_weak::GALGAS_assertInstructionAST_2D_weak (const GALGAS_assertInstructionAST & inSource) :
-GALGAS_instructionAST_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST_2D_weak GALGAS_assertInstructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_assertInstructionAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST GALGAS_assertInstructionAST_2D_weak::bang_assertInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_assertInstructionAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_assertInstructionAST) ;
-      result = GALGAS_assertInstructionAST ((cPtr_assertInstructionAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assertInstructionAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionAST_2D_weak ("assertInstructionAST-weak",
-                                                                                    & kTypeDescriptor_GALGAS_instructionAST_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_assertInstructionAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_assertInstructionAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assertInstructionAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionAST_2D_weak GALGAS_assertInstructionAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                        Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionAST_2D_weak result ;
-  const GALGAS_assertInstructionAST_2D_weak * p = (const GALGAS_assertInstructionAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_assertInstructionAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assertInstructionAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @assertInstructionIR reference class
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_assertInstructionIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mAssertInstructionLocation.printNonNullClassInstanceProperties ("mAssertInstructionLocation") ;
-    mProperty_mInstructionList.printNonNullClassInstanceProperties ("mInstructionList") ;
-    mProperty_mExpressionValue.printNonNullClassInstanceProperties ("mExpressionValue") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-typeComparisonResult cPtr_assertInstructionIR::dynamicObjectCompare (const acPtr_class * inOperandPtr) const {
-  typeComparisonResult result = kOperandEqual ;
-  const cPtr_assertInstructionIR * p = (const cPtr_assertInstructionIR *) inOperandPtr ;
-  macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-  if (kOperandEqual == result) {
-    result = mProperty_mAssertInstructionLocation.objectCompare (p->mProperty_mAssertInstructionLocation) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mInstructionList.objectCompare (p->mProperty_mInstructionList) ;
-  }
-  if (kOperandEqual == result) {
-    result = mProperty_mExpressionValue.objectCompare (p->mProperty_mExpressionValue) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
-typeComparisonResult GALGAS_assertInstructionIR::objectCompare (const GALGAS_assertInstructionIR & inOperand) const {
-  typeComparisonResult result = kOperandNotValid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = kFirstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = kFirstOperandGreaterThanSecond ;
-    }else{
-      result = kOperandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionIR::GALGAS_assertInstructionIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionIR::GALGAS_assertInstructionIR (const cPtr_assertInstructionIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_assertInstructionIR) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionIR GALGAS_assertInstructionIR::class_func_new (const GALGAS_location & inAttribute_mAssertInstructionLocation,
-                                                                       const GALGAS_instructionListIR & inAttribute_mInstructionList,
-                                                                       const GALGAS_objectIR & inAttribute_mExpressionValue
-                                                                       COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionIR result ;
-  if (inAttribute_mAssertInstructionLocation.isValid () && inAttribute_mInstructionList.isValid () && inAttribute_mExpressionValue.isValid ()) {
-    macroMyNew (result.mObjectPtr, cPtr_assertInstructionIR (inAttribute_mAssertInstructionLocation, inAttribute_mInstructionList, inAttribute_mExpressionValue COMMA_THERE)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assertInstructionIR::setter_setMAssertInstructionLocation (GALGAS_location inValue
-                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    p->mProperty_mAssertInstructionLocation = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assertInstructionIR::setter_setMInstructionList (GALGAS_instructionListIR inValue
-                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    p->mProperty_mInstructionList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assertInstructionIR::setter_setMExpressionValue (GALGAS_objectIR inValue
-                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    p->mProperty_mExpressionValue = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_location GALGAS_assertInstructionIR::readProperty_mAssertInstructionLocation (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_location () ;
-  }else{
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    return p->mProperty_mAssertInstructionLocation ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionListIR GALGAS_assertInstructionIR::readProperty_mInstructionList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_instructionListIR () ;
-  }else{
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    return p->mProperty_mInstructionList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_objectIR GALGAS_assertInstructionIR::readProperty_mExpressionValue (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_objectIR () ;
-  }else{
-    cPtr_assertInstructionIR * p = (cPtr_assertInstructionIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_assertInstructionIR) ;
-    return p->mProperty_mExpressionValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @assertInstructionIR class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_assertInstructionIR::cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
-                                                    const GALGAS_instructionListIR & in_mInstructionList,
-                                                    const GALGAS_objectIR & in_mExpressionValue
-                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mAssertInstructionLocation (in_mAssertInstructionLocation),
-mProperty_mInstructionList (in_mInstructionList),
-mProperty_mExpressionValue (in_mExpressionValue) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_assertInstructionIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionIR ;
-}
-
-void cPtr_assertInstructionIR::description (String & ioString,
-                                            const int32_t inIndentation) const {
-  ioString.appendCString ("[@assertInstructionIR:") ;
-  mProperty_mAssertInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mInstructionList.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mExpressionValue.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_assertInstructionIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_assertInstructionIR (mProperty_mAssertInstructionLocation, mProperty_mInstructionList, mProperty_mExpressionValue COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assertInstructionIR generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionIR ("assertInstructionIR",
-                                                                           & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_assertInstructionIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assertInstructionIR ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_assertInstructionIR::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assertInstructionIR (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assertInstructionIR GALGAS_assertInstructionIR::extractObject (const GALGAS_object & inObject,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_assertInstructionIR result ;
-  const GALGAS_assertInstructionIR * p = (const GALGAS_assertInstructionIR *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_assertInstructionIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assertInstructionIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 

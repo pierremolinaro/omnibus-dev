@@ -9,33 +9,650 @@
 #include "all-declarations-7.h"
 
 //--------------------------------------------------------------------------------------------------
-//  GRAMMAR omnibus_target_grammar
+//  GRAMMAR omnibus_grammar
 //--------------------------------------------------------------------------------------------------
 
-class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5F_specific_5F_syntax {
-//------------------------------------- 'configuration_key' non terminal
+class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
+//------------------------------------- 'assignment_combined_with_operator' non terminal
 //--- 'parse' label
-  public: virtual void nt_configuration_5F_key_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_configuration_5F_key_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_configuration_5F_key_ (const GALGAS_string inArgument0,
+  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_omnibusInfixOperator & outArgument0,
+                                                                       GALGAS_location & outArgument1,
+                                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compileTimeInfixOperator' non terminal
+//--- 'parse' label
+  public: virtual void nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compileTimeInfixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compileTimeInfixOperator_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
+                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compileTimePrefixOperator' non terminal
+//--- 'parse' label
+  public: virtual void nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compileTimePrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compileTimePrefixOperator_ (GALGAS_compileTimePrefixOperatorEnumeration & outArgument0,
+                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_ (GALGAS_ctExpressionAST & outArgument0,
+                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_addition' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_bitwise_and' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_bitwise_xor' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_comparison' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_equality' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_product' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_product_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_expression_shift' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_ (GALGAS_ctExpressionAST & outArgument0,
+                                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'compile_time_primary' non terminal
+//--- 'parse' label
+  public: virtual void nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_compile_5F_time_5F_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_compile_5F_time_5F_primary_ (GALGAS_ctExpressionAST & outArgument0,
+                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'control_register_lvalue' non terminal
+//--- 'parse' label
+  public: virtual void nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_control_5F_register_5F_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_control_5F_register_5F_lvalue_ (GALGAS_ast & ioArgument0,
+                                                          GALGAS_controlRegisterLValueAST & outArgument1,
+                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_declaration_ (GALGAS_ast & ioArgument0,
+                                        Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'effective_parameters' non terminal
+//--- 'parse' label
+  public: virtual void nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_effective_5F_parameters_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_effective_5F_parameters_ (GALGAS_ast & ioArgument0,
+                                                    GALGAS_effectiveArgumentListAST & outArgument1,
+                                                    GALGAS_location & outArgument2,
+                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_ (GALGAS_ast & ioArgument0,
+                                       GALGAS_expressionAST & outArgument1,
+                                       Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_access_list' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_access_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_access_5F_list_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_primaryInExpressionAccessListAST & outArgument1,
+                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_addition' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_addition_ (GALGAS_ast & ioArgument0,
+                                                   GALGAS_expressionAST & outArgument1,
+                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_bitwise_and' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_bitwise_5F_and_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_expressionAST & outArgument1,
+                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_bitwise_or' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_bitwise_5F_or_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_bitwise_5F_or_ (GALGAS_ast & ioArgument0,
+                                                        GALGAS_expressionAST & outArgument1,
+                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_bitwise_xor' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_bitwise_5F_xor_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_expressionAST & outArgument1,
+                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_comparison' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_comparison_ (GALGAS_ast & ioArgument0,
+                                                     GALGAS_expressionAST & outArgument1,
+                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_equality' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_equality_ (GALGAS_ast & ioArgument0,
+                                                   GALGAS_expressionAST & outArgument1,
+                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_if' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_if_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_if_ (GALGAS_ast & ioArgument0,
+                                             GALGAS_ifExpressionAST & outArgument1,
+                                             Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_logical_and' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_logical_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_logical_5F_and_ (GALGAS_ast & ioArgument0,
+                                                         GALGAS_expressionAST & outArgument1,
+                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_product' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_product_ (GALGAS_ast & ioArgument0,
+                                                  GALGAS_expressionAST & outArgument1,
+                                                  Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'expression_shift' non terminal
+//--- 'parse' label
+  public: virtual void nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_expression_5F_shift_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_expressionAST & outArgument1,
+                                                Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'function_declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_function_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_function_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                    const GALGAS_lstring inArgument1,
+                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'function_header' non terminal
+//--- 'parse' label
+  public: virtual void nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_function_5F_header_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_mode & outArgument1,
+                                               GALGAS_lstring & outArgument2,
+                                               GALGAS_lstringlist & outArgument3,
+                                               GALGAS_routineFormalArgumentListAST & outArgument4,
+                                               Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'generic_formal_arguments' non terminal
+//--- 'parse' label
+  public: virtual void nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_generic_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_generic_5F_formal_5F_arguments_ (GALGAS_genericFormalParameterList & outArgument0,
+                                                           Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'generic_where_clause' non terminal
+//--- 'parse' label
+  public: virtual void nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_generic_5F_where_5F_clause_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_generic_5F_where_5F_clause_ (GALGAS_ctExpressionAST & outArgument0,
+                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'guard' non terminal
+//--- 'parse' label
+  public: virtual void nt_guard_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_guard_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_guard_ (GALGAS_ast & ioArgument0,
+                                  const GALGAS_lstring inArgument1,
+                                  const GALGAS_string inArgument2,
+                                  Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'guarded_command' non terminal
+//--- 'parse' label
+  public: virtual void nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_guarded_5F_command_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_guarded_5F_command_ (GALGAS_ast & ioArgument0,
+                                               const GALGAS_bool inArgument1,
+                                               GALGAS_guardedCommandAST & outArgument2,
+                                               Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'if_instruction' non terminal
+//--- 'parse' label
+  public: virtual void nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_if_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_if_5F_instruction_ (GALGAS_ast & ioArgument0,
+                                              GALGAS_ifInstructionAST & outArgument1,
+                                              Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'import_file' non terminal
+//--- 'parse' label
+  public: virtual void nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_import_5F_file_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_import_5F_file_ (GALGAS_lstringlist & ioArgument0,
+                                           Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'instruction' non terminal
+//--- 'parse' label
+  public: virtual void nt_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_instruction_ (GALGAS_ast & ioArgument0,
+                                        GALGAS_instructionListAST & ioArgument1,
+                                        Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'instructionList' non terminal
+//--- 'parse' label
+  public: virtual void nt_instructionList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_instructionList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_instructionList_ (GALGAS_ast & ioArgument0,
+                                            GALGAS_instructionListAST & outArgument1,
+                                            Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'isr_in_driver' non terminal
+//--- 'parse' label
+  public: virtual void nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_isr_5F_in_5F_driver_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_isr_5F_in_5F_driver_ (GALGAS_ast & ioArgument0,
+                                                const GALGAS_lstring inArgument1,
+                                                Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'llvmPrefixOperator' non terminal
+//--- 'parse' label
+  public: virtual void nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_llvmPrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_llvmPrefixOperator_ (GALGAS_llvmPrefixOperatorEnumeration & outArgument0,
+                                               Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'llvm_function_header' non terminal
+//--- 'parse' label
+  public: virtual void nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_llvm_5F_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_llvm_5F_function_5F_header_ (GALGAS_lstring & outArgument0,
+                                                       GALGAS_lstring & outArgument1,
+                                                       GALGAS_genericFormalParameterList & outArgument2,
+                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'llvm_instruction' non terminal
+//--- 'parse' label
+  public: virtual void nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_llvm_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_llvm_5F_instruction_ (GALGAS_abstractLLVMInstruction & outArgument0,
+                                                Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'llvm_instruction_list' non terminal
+//--- 'parse' label
+  public: virtual void nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_llvm_5F_instruction_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGenerationInstructionList & outArgument0,
+                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'lvalue' non terminal
+//--- 'parse' label
+  public: virtual void nt_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_lvalue_ (GALGAS_ast & ioArgument0,
+                                   GALGAS_LValueAST & outArgument1,
+                                   Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'lvalue_operand' non terminal
+//--- 'parse' label
+  public: virtual void nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_lvalue_5F_operand_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_lvalue_5F_operand_ (GALGAS_ast & ioArgument0,
+                                              GALGAS_LValueOperandAST & outArgument1,
+                                              Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'mode' non terminal
+//--- 'parse' label
+  public: virtual void nt_mode_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_mode_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_mode_ (GALGAS_mode & outArgument0,
+                                 Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'primary' non terminal
+//--- 'parse' label
+  public: virtual void nt_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_primary_ (GALGAS_ast & ioArgument0,
+                                    GALGAS_expressionAST & outArgument1,
+                                    Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'private_or_public_struct_property_declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
+                                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'private_struct_property_declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                                         GALGAS_structurePropertyListAST & ioArgument1,
+                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'procedure_call' non terminal
+//--- 'parse' label
+  public: virtual void nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_procedure_5F_call_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_procedure_5F_call_ (GALGAS_ast & ioArgument0,
+                                              GALGAS_callInstructionAST & outArgument1,
+                                              Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'procedure_formal_arguments' non terminal
+//--- 'parse' label
+  public: virtual void nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_procedure_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_ast & ioArgument0,
+                                                             GALGAS_routineFormalArgumentListAST & outArgument1,
+                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'procedure_input_formal_arguments' non terminal
+//--- 'parse' label
+  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_ (GALGAS_ast & ioArgument0,
+                                                                      GALGAS_routineFormalArgumentListAST & outArgument1,
+                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'propertyGetterSetter' non terminal
+//--- 'parse' label
+  public: virtual void nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_propertyGetterSetter_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_propertyGetterSetter_ (GALGAS_ast & ioArgument0,
+                                                 const GALGAS_propertyVisibility inArgument1,
+                                                 const GALGAS_lstring inArgument2,
+                                                 const GALGAS_propertyAttributeList inArgument3,
+                                                 const GALGAS_lstring inArgument4,
+                                                 GALGAS_structurePropertyListAST & ioArgument5,
                                                  Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'configuration_start_symbol' non terminal
+//------------------------------------- 'registerDeclaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_configuration_5F_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_configuration_5F_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_registerDeclaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_configuration_5F_start_5F_symbol_ (GALGAS_ast & ioArgument0,
-                                                             GALGAS_lstringlist & outArgument1,
-                                                             GALGAS_location & outArgument2,
-                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_registerDeclaration_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_controlRegisterNameListAST & ioArgument1,
+                                                Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'start_symbol' non terminal
+//--- 'parse' label
+  public: virtual void nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_start_5F_symbol_ (GALGAS_ast & ioArgument0,
+                                            GALGAS_lstringlist & outArgument1,
+                                            GALGAS_location & outArgument2,
+                                            Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- Start symbol
   public: static void _performSourceFileParsing_ (Compiler * inCompiler,
@@ -65,1294 +682,365 @@ class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5
   public: static void performOnlySyntaxAnalysis (Compiler * inCompiler,
                                                  const String & inSourceFilePath) ;
 
-//------------------------------------- 'interruptConfigList' non terminal
+//------------------------------------- 'staticArrayProperty' non terminal
 //--- 'parse' label
-  public: virtual void nt_interruptConfigList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_interruptConfigList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_staticArrayProperty_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_interruptConfigList_ (GALGAS_interruptionConfigurationList & outArgument0,
-                                                GALGAS_enumerationConstantList & outArgument1,
+  public: virtual void nt_staticArrayProperty_ (GALGAS_ast & ioArgument0,
+                                                GALGAS_staticListPropertyListAST & ioArgument1,
                                                 Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'python_utility_tool_list' non terminal
+//------------------------------------- 'staticArray_exp' non terminal
 //--- 'parse' label
-  public: virtual void nt_python_5F_utility_5F_tool_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_python_5F_utility_5F_tool_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_staticArray_5F_exp_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_python_5F_utility_5F_tool_5F_list_ (GALGAS__32_lstringlist & outArgument0,
+  public: virtual void nt_staticArray_5F_exp_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_extendStaticListElementAST & ioArgument1,
+                                               Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//------------------------------------- 'struct_property_declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//--- indexing
+  public: virtual void nt_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+
+//----------- '' label
+  public: virtual void nt_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                              const GALGAS_propertyVisibility inArgument1,
+                                                              GALGAS_structurePropertyListAST & ioArgument2,
                                                               Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_0 (Lexique_omnibus_5F_lexique *) ;
+//------------------------------------- 'system_routine_declaration' non terminal
+//--- 'parse' label
+  public: virtual void nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_1 (Lexique_omnibus_5F_lexique *) ;
+//--- indexing
+  public: virtual void nt_system_5F_routine_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_2 (Lexique_omnibus_5F_lexique *) ;
+//----------- '' label
+  public: virtual void nt_system_5F_routine_5F_declaration_ (GALGAS_ast & ioArgument0,
+                                                             const GALGAS_lstring inArgument1,
+                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_3 (Lexique_omnibus_5F_lexique *) ;
+//------------------------------------- 'task_event' non terminal
+//--- 'parse' label
+  public: virtual void nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_4 (Lexique_omnibus_5F_lexique *) ;
+//--- indexing
+  public: virtual void nt_task_5F_event_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_5 (Lexique_omnibus_5F_lexique *) ;
+//----------- '' label
+  public: virtual void nt_task_5F_event_ (GALGAS_ast & ioArgument0,
+                                          const GALGAS_lstring inArgument1,
+                                          GALGAS_taskSetupListAST & ioArgument2,
+                                          GALGAS_taskSetupListAST & ioArgument3,
+                                          GALGAS_taskSetupListAST & ioArgument4,
+                                          Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_6 (Lexique_omnibus_5F_lexique *) ;
+//------------------------------------- 'type_definition' non terminal
+//--- 'parse' label
+  public: virtual void nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_7 (Lexique_omnibus_5F_lexique *) ;
+//--- indexing
+  public: virtual void nt_type_5F_definition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
-  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (Lexique_omnibus_5F_lexique *) ;
+//----------- '' label
+  public: virtual void nt_type_5F_definition_ (GALGAS_ast & ioArgument0,
+                                               GALGAS_lstring & outArgument1,
+                                               Lexique_omnibus_5F_lexique * inCompiler) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_0 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_1 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_2 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_3 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_4 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_5 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_6 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_7 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_8 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_9 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_10 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_11 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_12 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_13 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_14 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_15 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_16 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_17 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_18 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_19 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_20 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_21 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_22 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_23 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_24 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_25 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_26 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_27 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_28 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_29 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_30 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_31 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_32 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_33 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_34 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_35 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_36 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_37 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_38 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_39 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_40 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_41 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_42 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_43 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_44 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_45 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_46 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_47 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_48 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_49 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_50 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_51 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_52 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_53 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_54 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_55 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_56 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_57 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_58 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_59 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_60 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_61 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_62 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_63 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_64 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_65 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_66 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_67 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_68 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_69 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_70 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_71 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_72 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_73 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_74 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_75 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_76 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_77 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_78 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_79 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_80 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_81 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_82 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_83 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_84 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_85 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_86 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_87 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_88 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_89 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_90 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_91 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_92 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_93 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_94 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_95 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_96 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_97 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_98 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_99 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_100 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_101 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_102 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_103 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_104 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_105 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_106 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_107 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_108 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_109 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_110 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_111 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_112 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_113 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_114 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_115 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_116 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_117 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_118 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_119 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_120 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_121 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_122 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_123 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_124 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_125 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_126 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_127 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_128 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_129 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_130 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_131 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_132 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_133 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_134 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_135 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_136 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_137 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_138 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_139 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_140 (Lexique_omnibus_5F_lexique *) ;
+
+  public: virtual int32_t select_omnibus_5F_syntax_141 (Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @configurationDeclarationAST_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_configurationDeclarationAST_2D_weak : public GALGAS_abstractDeclarationAST_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_configurationDeclarationAST_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_configurationDeclarationAST_2D_weak (const class GALGAS_configurationDeclarationAST & inSource) ;
-
-  public: GALGAS_configurationDeclarationAST_2D_weak & operator = (const class GALGAS_configurationDeclarationAST & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_configurationDeclarationAST bang_configurationDeclarationAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_configurationDeclarationAST_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                           Compiler * inCompiler
-                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_configurationDeclarationAST_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_configurationDeclarationAST_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_configurationDeclarationAST_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_configurationDeclarationAST_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertDriver'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertDriver (class GALGAS_universalValuedObjectMap & ioObject,
-                                   const class GALGAS_lstring constin_inDriverName,
-                                   const class GALGAS_bool constin_inIsInstancied,
-                                   const class GALGAS_omnibusType constin_inDriverType,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertGlobalConstant'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertGlobalConstant (class GALGAS_universalValuedObjectMap & ioObject,
-                                           const class GALGAS_lstring constin_inConstantName,
-                                           const class GALGAS_objectIR constin_inConstantObjectIR,
-                                           class Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertGlobalSyncInstance (class GALGAS_universalValuedObjectMap & ioObject,
-                                               const class GALGAS_lstring constin_inSyncInstanceName,
-                                               const class GALGAS_omnibusType constin_inType,
-                                               class Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertLocalConstant'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
-                                          const class GALGAS_lstring constin_inLocalConstantName,
-                                          const class GALGAS_bool constin_inIsFormalInputArgument,
-                                          const class GALGAS_omnibusType constin_inType,
-                                          const class GALGAS_lstring constin_inOmnibusConstantName,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertUsedLocalConstant'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertUsedLocalConstant (class GALGAS_universalValuedObjectMap & ioObject,
-                                              const class GALGAS_lstring constin_inLocalConstantName,
-                                              const class GALGAS_bool constin_inIsFormalInputArgument,
-                                              const class GALGAS_omnibusType constin_inType,
-                                              const class GALGAS_lstring constin_inOmnibusConstantName,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertLocalVariable'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertLocalVariable (class GALGAS_universalValuedObjectMap & ioObject,
-                                          const class GALGAS_lstring constin_inLocalVariableName,
-                                          const class GALGAS_omnibusType constin_inType,
-                                          const class GALGAS_lstring constin_inOmnibusName,
-                                          const class GALGAS_valuedObjectState constin_inVariableInitialState,
-                                          const class GALGAS_bool constin_inObjectShouldBeValuedAtEndOfScope,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@universalValuedObjectMap searchEntity'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_searchEntity (const class GALGAS_universalValuedObjectMap inObject,
-                                   const class GALGAS_lstring constin_inValuedObjectName,
-                                   class GALGAS_valuedObject & out_outEntity,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@universalValuedObjectMap searchValuedObject'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_searchValuedObject (const class GALGAS_universalValuedObjectMap inObject,
-                                         const class GALGAS_lstring constin_inValuedObjectName,
-                                         const class GALGAS_mode constin_inMode,
-                                         const class GALGAS_stringset constin_inInitializedDriverSet,
-                                         class GALGAS_objectIR & out_outObjectIR,
-                                         class Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'llvmNameForGlobalSyncInstance'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_llvmNameForGlobalSyncInstance (const class GALGAS_string & constinArgument0,
-                                                            class Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap readAccess'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_readAccess (class GALGAS_universalValuedObjectMap & ioObject,
-                                 const class GALGAS_lstring constin_inValuedObjectName,
-                                 class Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_searchValuedObjectForReadAccess (class GALGAS_universalValuedObjectMap & ioObject,
-                                                      const class GALGAS_lstring constin_inValuedObjectName,
-                                                      class GALGAS_objectIR & out_outObjectIR,
-                                                      class Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_searchValuedObjectForWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
-                                                       const class GALGAS_lstring constin_inValuedObjectName,
-                                                       class GALGAS_objectIR & out_outObjectIR,
-                                                       class Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_searchValuedObjectForReadWriteAccess (class GALGAS_universalValuedObjectMap & ioObject,
-                                                           const class GALGAS_lstring constin_inValuedObjectName,
-                                                           class GALGAS_objectIR & out_outObjectIR,
-                                                           class Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@universalValuedObjectMap searchValuedObjectType'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_searchValuedObjectType (const class GALGAS_universalValuedObjectMap inObject,
-                                             const class GALGAS_semanticContext constin_inContext,
-                                             const class GALGAS_omnibusType constin_inSelfType,
-                                             const class GALGAS_LValueAST constin_inLValue,
-                                             class GALGAS_omnibusType & out_outType,
-                                             class Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@LValueOperandAST getValuedObjectType'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_getValuedObjectType (const class GALGAS_LValueOperandAST inObject,
-                                          const class GALGAS_semanticContext constin_inContext,
-                                          class GALGAS_omnibusType & io_ioType,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@semanticContext propertyGetterMap' (as function)
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_propertyGetterMap extensionGetter_propertyGetterMap (const class GALGAS_semanticContext & inObject,
-                                                                  const class GALGAS_omnibusType & constinArgument0,
-                                                                  class Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@universalValuedObjectMap checkLocalVariableFinalState'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_checkLocalVariableFinalState (const class GALGAS_universalValuedObjectMap inObject,
-                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                   class Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_openOverrideForSelectBlock (class GALGAS_universalValuedObjectMap & ioObject,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_openOverrideForRepeatBlock (class GALGAS_universalValuedObjectMap & ioObject,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap closeOverride'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_closeOverride (class GALGAS_universalValuedObjectMap & ioObject,
-                                    const class GALGAS_location constin_inErrorLocation,
-                                    class Compiler * inCompiler
-                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@staticEntityMap findOrAddStaticString'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_findOrAddStaticString (class GALGAS_staticEntityMap & ioObject,
-                                            class GALGAS_string in_inString,
-                                            class GALGAS_uint & out_outIndex,
-                                            class Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@omnibusType checkIsCompileTimeType'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_checkIsCompileTimeType (class cPtr_omnibusType * inObject,
-                                                 const class GALGAS_location constin_inErrorLocation,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@omnibusType checkIsNotCompileTimeType'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_checkIsNotCompileTimeType (class cPtr_omnibusType * inObject,
-                                                    const class GALGAS_location constin_inErrorLocation,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType isCompileTimeType'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bool callExtensionGetter_isCompileTimeType (const cPtr_omnibusType * inObject,
-                                                         class Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType instanciable'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bool callExtensionGetter_instanciable (const cPtr_omnibusType * inObject,
-                                                    class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType copyable'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bool callExtensionGetter_copyable (const cPtr_omnibusType * inObject,
-                                                class Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@omnibusType generateRetain'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_generateRetain (class cPtr_omnibusType * inObject,
-                                         const class GALGAS_string constin_inOmnibusName,
-                                         class GALGAS_string & io_ioLLVMcode,
-                                         class GALGAS_generationAdds & io_ioGenerationAdds,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType arcList'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusType * inObject,
-                                                            const class GALGAS_uintlist constin_inPropertyIndexPath,
-                                                            class Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@omnibusType generateInsulate'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_generateInsulate (class cPtr_omnibusType * inObject,
-                                           const class GALGAS_string constin_inOmnibusName,
-                                           class GALGAS_string & io_ioLLVMcode,
-                                           class GALGAS_generationAdds & io_ioGenerationAdds,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@omnibusType generateRelease'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_generateRelease (class cPtr_omnibusType * inObject,
-                                          const class GALGAS_string constin_inOmnibusName,
-                                          class GALGAS_string & io_ioLLVMcode,
-                                          class GALGAS_generationAdds & io_ioGenerationAdds,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType descriptionForHTMLFile'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_omnibusType * inObject,
-                                                                class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@omnibusType deinitNeeded'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bool callExtensionGetter_deinitNeeded (const cPtr_omnibusType * inObject,
-                                                    class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@unifiedTypeMapElementClass definition'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_omnibusType callExtensionGetter_definition (const cPtr_unifiedTypeMapElementClass * inObject,
-                                                         class Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolImplicitConverterToBoolean reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolImplicitConverterToBoolean : public GALGAS_abstractImplicitConverterToBoolean {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean (const class cPtr_compileTimeBoolImplicitConverterToBoolean * inSourcePtr) ;
-
-//--------------------------------- Property read access
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolImplicitConverterToBoolean extractObject (const GALGAS_object & inObject,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolImplicitConverterToBoolean class_func_new (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolImplicitConverterToBoolean & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolImplicitConverterToBoolean class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImplicitConverterToBoolean ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @compileTimeBoolImplicitConverterToBoolean class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method generateConvertToBooleanCode
-  public: virtual void method_generateConvertToBooleanCode (const class GALGAS_objectIR inReceiverOperand,
-           const class GALGAS_location inErrorLocation,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_implicitBooleanConversionResult & outResult,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-
-//--- Constructor
-  public: cPtr_compileTimeBoolImplicitConverterToBoolean (LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolImplicitConverterToBoolean_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak : public GALGAS_abstractImplicitConverterToBoolean_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak (const class GALGAS_compileTimeBoolImplicitConverterToBoolean & inSource) ;
-
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak & operator = (const class GALGAS_compileTimeBoolImplicitConverterToBoolean & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_compileTimeBoolImplicitConverterToBoolean bang_compileTimeBoolImplicitConverterToBoolean_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImplicitConverterToBoolean_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolNotOperator reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolNotOperator : public GALGAS_prefixOperatorUsage {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolNotOperator (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_compileTimeBoolNotOperator (const class cPtr_compileTimeBoolNotOperator * inSourcePtr) ;
-
-//--------------------------------- Property read access
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolNotOperator extractObject (const GALGAS_object & inObject,
-                                                                  Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolNotOperator class_func_new (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolNotOperator & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolNotOperator class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotOperator ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @compileTimeBoolNotOperator class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method generateCode
-  public: virtual void method_generateCode (const class GALGAS_objectIR inReceiverOperand,
-           const class GALGAS_location inOperatorLocation,
-           const class GALGAS_omnibusType inResultType,
-           const class GALGAS_bool inDoNotGeneratePanicCode,
-           const class GALGAS_bool inSafeMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResultValue,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-
-//--- Constructor
-  public: cPtr_compileTimeBoolNotOperator (LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolNotOperator_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolNotOperator_2D_weak : public GALGAS_prefixOperatorUsage_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolNotOperator_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_compileTimeBoolNotOperator_2D_weak (const class GALGAS_compileTimeBoolNotOperator & inSource) ;
-
-  public: GALGAS_compileTimeBoolNotOperator_2D_weak & operator = (const class GALGAS_compileTimeBoolNotOperator & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_compileTimeBoolNotOperator bang_compileTimeBoolNotOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolNotOperator_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolNotOperator_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolNotOperator_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolNotOperator_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotOperator_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolEqualOperator reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolEqualOperator : public GALGAS_omnibusInfixOperatorUsage {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolEqualOperator (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_compileTimeBoolEqualOperator (const class cPtr_compileTimeBoolEqualOperator * inSourcePtr) ;
-
-//--------------------------------- Property read access
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolEqualOperator extractObject (const GALGAS_object & inObject,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolEqualOperator class_func_new (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolEqualOperator & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolEqualOperator class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqualOperator ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @compileTimeBoolEqualOperator class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method generateCode
-  public: virtual void method_generateCode (const class GALGAS_objectIR inLeftOperand,
-           const class GALGAS_location inOperatorLocation,
-           const class GALGAS_objectIR inRightOperand,
-           const class GALGAS_omnibusType inResultType,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResultValue,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-
-//--- Constructor
-  public: cPtr_compileTimeBoolEqualOperator (LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @compileTimeBoolEqualOperator_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_compileTimeBoolEqualOperator_2D_weak : public GALGAS_omnibusInfixOperatorUsage_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_compileTimeBoolEqualOperator_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_compileTimeBoolEqualOperator_2D_weak (const class GALGAS_compileTimeBoolEqualOperator & inSource) ;
-
-  public: GALGAS_compileTimeBoolEqualOperator_2D_weak & operator = (const class GALGAS_compileTimeBoolEqualOperator & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_compileTimeBoolEqualOperator bang_compileTimeBoolEqualOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_compileTimeBoolEqualOperator_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                            Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_compileTimeBoolEqualOperator_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeBoolEqualOperator_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_compileTimeBoolEqualOperator_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqualOperator_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @fixedSizeArrayAssignmentOperatorUsage reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_fixedSizeArrayAssignmentOperatorUsage : public GALGAS_abstractAssignmentOperatorUsage {
-//--------------------------------- Default constructor
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage (const class cPtr_fixedSizeArrayAssignmentOperatorUsage * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_omnibusType readProperty_mElementType (void) const ;
-
-  public: class GALGAS_uint readProperty_mArraySize (void) const ;
-
-  public: class GALGAS_string readProperty_mAssignValueToElements_5F_functionName (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_fixedSizeArrayAssignmentOperatorUsage extractObject (const GALGAS_object & inObject,
-                                                                             Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_fixedSizeArrayAssignmentOperatorUsage class_func_new (const class GALGAS_omnibusType & inOperand0,
-                                                                                    const class GALGAS_uint & inOperand1,
-                                                                                    const class GALGAS_string & inOperand2
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_fixedSizeArrayAssignmentOperatorUsage & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMArraySize (class GALGAS_uint inArgument0
-                                                      COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMAssignValueToElements_5F_functionName (class GALGAS_string inArgument0
-                                                                                  COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMElementType (class GALGAS_omnibusType inArgument0
-                                                        COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_fixedSizeArrayAssignmentOperatorUsage class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssignmentOperatorUsage ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @fixedSizeArrayAssignmentOperatorUsage class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method generateCode
-  public: virtual void method_generateCode (class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_instructionListIR & ioInstructionListIR,
-           class GALGAS_allocaList & ioAllocaList,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_string inTargetLLVMName,
-           const class GALGAS_objectIR inSourcePossibleReference,
-           const class GALGAS_location inErrorLocation,
-           const class GALGAS_bool inTargetIsInitialized,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_omnibusType mProperty_mElementType ;
-  public: GALGAS_uint mProperty_mArraySize ;
-  public: GALGAS_string mProperty_mAssignValueToElements_5F_functionName ;
-
-//--- Constructor
-  public: cPtr_fixedSizeArrayAssignmentOperatorUsage (const GALGAS_omnibusType & in_mElementType,
-                                                      const GALGAS_uint & in_mArraySize,
-                                                      const GALGAS_string & in_mAssignValueToElements_5F_functionName
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @fixedSizeArrayAssignmentOperatorUsage_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak : public GALGAS_abstractAssignmentOperatorUsage_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak (const class GALGAS_fixedSizeArrayAssignmentOperatorUsage & inSource) ;
-
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak & operator = (const class GALGAS_fixedSizeArrayAssignmentOperatorUsage & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_fixedSizeArrayAssignmentOperatorUsage bang_fixedSizeArrayAssignmentOperatorUsage_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssignmentOperatorUsage_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @assignRepeatedValueToFixedSizeArrayElementsFunctionIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GALGAS_abstractRoutineIR {
-//--------------------------------- Default constructor
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_omnibusType readProperty_mFixedSizeArrayType (void) const ;
-
-  public: class GALGAS_omnibusType readProperty_mElementType (void) const ;
-
-  public: class GALGAS_uint readProperty_mArraySize (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR extractObject (const GALGAS_object & inObject,
-                                                                                             Compiler * inCompiler
-                                                                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR class_func_new (const class GALGAS_lstring & inOperand0,
-                                                                                                    const class GALGAS_bool & inOperand1,
-                                                                                                    const class GALGAS_bool & inOperand2,
-                                                                                                    const class GALGAS_omnibusType & inOperand3,
-                                                                                                    const class GALGAS_omnibusType & inOperand4,
-                                                                                                    const class GALGAS_uint & inOperand5
-                                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMArraySize (class GALGAS_uint inArgument0
-                                                      COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMElementType (class GALGAS_omnibusType inArgument0
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMFixedSizeArrayType (class GALGAS_omnibusType inArgument0
-                                                               COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_abstractRoutineIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method llvmCodeGeneration
-  public: virtual void method_llvmCodeGeneration (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_omnibusType mProperty_mFixedSizeArrayType ;
-  public: GALGAS_omnibusType mProperty_mElementType ;
-  public: GALGAS_uint mProperty_mArraySize ;
-
-//--- Constructor
-  public: cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR (const GALGAS_lstring & in_mRoutineMangledName,
-                                                                      const GALGAS_bool & in_isRequired,
-                                                                      const GALGAS_bool & in_warnsIfUnused,
-                                                                      const GALGAS_omnibusType & in_mFixedSizeArrayType,
-                                                                      const GALGAS_omnibusType & in_mElementType,
-                                                                      const GALGAS_uint & in_mArraySize
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak : public GALGAS_abstractRoutineIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak (const class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inSource) ;
-
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak & operator = (const class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR bang_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@typeOpaqueDeclarationAST noteTypesInPrecedenceGraph'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_typeOpaqueDeclarationAST * inObject,
-                                                     class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@controlRegisterGroupArrayList generateLLVMcode'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_generateLLVMcode (const class GALGAS_controlRegisterGroupArrayList inObject,
-                                       class GALGAS_string & io_ioLLVMcode,
-                                       const class GALGAS_uint constin_inPointerSize,
-                                       class Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'registerGroupAddressArrayLLVMname'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALGAS_string & constinArgument0,
-                                                                class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GALGAS_semanticContext constinArgument0,
-                                                                                 const class GALGAS_routineFormalArgumentListAST constinArgument1,
-                                                                                 class GALGAS_universalValuedObjectMap & ioArgument2,
-                                                                                 class GALGAS_routineFormalArgumentListIR & ioArgument3,
-                                                                                 const class GALGAS_bool constinArgument4,
-                                                                                 class Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-

@@ -10,6 +10,436 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+// Phase 1: @logicalRightShiftIR_2D_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_logicalRightShiftIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_logicalRightShiftIR_2D_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_logicalRightShiftIR_2D_weak (const class GALGAS_logicalRightShiftIR & inSource) ;
+
+  public: GALGAS_logicalRightShiftIR_2D_weak & operator = (const class GALGAS_logicalRightShiftIR & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_logicalRightShiftIR bang_logicalRightShiftIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_logicalRightShiftIR_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_logicalRightShiftIR_2D_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_logicalRightShiftIR_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_logicalRightShiftIR_2D_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_logicalRightShiftIR_2D_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@instructionListIR appendBinaryOperation'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendBinaryOperation (class GALGAS_instructionListIR & ioObject,
+                                            const class GALGAS_objectIR constin_inTarget,
+                                            const class GALGAS_omnibusType constin_inOperandType,
+                                            const class GALGAS_location constin_inLocation,
+                                            const class GALGAS_objectIR constin_inLeft,
+                                            const class GALGAS_llvmBinaryOperation constin_inOperation,
+                                            const class GALGAS_objectIR constin_inRight,
+                                            class Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @binaryOperationIR reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_binaryOperationIR : public GALGAS_abstractInstructionIR {
+//--------------------------------- Default constructor
+  public: GALGAS_binaryOperationIR (void) ;
+
+//--------------------------------- Constructor from pointer
+  public: GALGAS_binaryOperationIR (const class cPtr_binaryOperationIR * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_objectIR readProperty_mTarget (void) const ;
+
+  public: class GALGAS_omnibusType readProperty_mOperandType (void) const ;
+
+  public: class GALGAS_objectIR readProperty_mLeft (void) const ;
+
+  public: class GALGAS_llvmBinaryOperation readProperty_mOperation (void) const ;
+
+  public: class GALGAS_objectIR readProperty_mRight (void) const ;
+
+  public: class GALGAS_location readProperty_mLocation (void) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_binaryOperationIR extractObject (const GALGAS_object & inObject,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_binaryOperationIR class_func_new (const class GALGAS_objectIR & inOperand0,
+                                                                const class GALGAS_omnibusType & inOperand1,
+                                                                const class GALGAS_objectIR & inOperand2,
+                                                                const class GALGAS_llvmBinaryOperation & inOperand3,
+                                                                const class GALGAS_objectIR & inOperand4,
+                                                                const class GALGAS_location & inOperand5
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_binaryOperationIR & inOperand) const ;
+
+//--------------------------------- Setters
+  public: VIRTUAL_IN_DEBUG void setter_setMLeft (class GALGAS_objectIR inArgument0
+                                                 COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMLocation (class GALGAS_location inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMOperandType (class GALGAS_omnibusType inArgument0
+                                                        COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMOperation (class GALGAS_llvmBinaryOperation inArgument0
+                                                      COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMRight (class GALGAS_objectIR inArgument0
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMTarget (class GALGAS_objectIR inArgument0
+                                                   COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_binaryOperationIR class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @binaryOperationIR class
+//
+//--------------------------------------------------------------------------------------------------
+
+class cPtr_binaryOperationIR : public cPtr_abstractInstructionIR {
+
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (void) const override ;
+  #endif
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method enterCodeForDivisionWithZeroDivisorPanic
+  public: virtual void method_enterCodeForDivisionWithZeroDivisorPanic (const class GALGAS_string inOperation,
+           const class GALGAS_bigint inPanicCode,
+           class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           Compiler * COMMA_LOCATION_ARGS) ;
+
+//--- Extension method enterCodeForOverflowOperation
+  public: virtual void method_enterCodeForOverflowOperation (const class GALGAS_string inOperation,
+           const class GALGAS_bigint inPanicCode,
+           class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           Compiler * COMMA_LOCATION_ARGS) ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Properties
+  public: GALGAS_objectIR mProperty_mTarget ;
+  public: GALGAS_omnibusType mProperty_mOperandType ;
+  public: GALGAS_objectIR mProperty_mLeft ;
+  public: GALGAS_llvmBinaryOperation mProperty_mOperation ;
+  public: GALGAS_objectIR mProperty_mRight ;
+  public: GALGAS_location mProperty_mLocation ;
+
+//--- Constructor
+  public: cPtr_binaryOperationIR (const GALGAS_objectIR & in_mTarget,
+                                  const GALGAS_omnibusType & in_mOperandType,
+                                  const GALGAS_objectIR & in_mLeft,
+                                  const GALGAS_llvmBinaryOperation & in_mOperation,
+                                  const GALGAS_objectIR & in_mRight,
+                                  const GALGAS_location & in_mLocation
+                                  COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+
+//--- Attribute accessors
+//--- Description
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @binaryOperationIR_2D_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_binaryOperationIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_binaryOperationIR_2D_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_binaryOperationIR_2D_weak (const class GALGAS_binaryOperationIR & inSource) ;
+
+  public: GALGAS_binaryOperationIR_2D_weak & operator = (const class GALGAS_binaryOperationIR & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_binaryOperationIR bang_binaryOperationIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_binaryOperationIR_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_binaryOperationIR_2D_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_binaryOperationIR_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_binaryOperationIR_2D_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR_2D_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@instructionListIR appendShortCircuitAndOperation'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
+                                                     const class GALGAS_objectIR constin_inTargetOperand,
+                                                     const class GALGAS_string constin_inLeftOperandLLVMName,
+                                                     const class GALGAS_instructionListIR constin_inLeftInstructionList,
+                                                     const class GALGAS_string constin_inRightOperandLLVMName,
+                                                     const class GALGAS_instructionListIR constin_inRightInstructionList,
+                                                     const class GALGAS_location constin_inLocation,
+                                                     class Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @shortCircuitAndOperationIR reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
+//--------------------------------- Default constructor
+  public: GALGAS_shortCircuitAndOperationIR (void) ;
+
+//--------------------------------- Constructor from pointer
+  public: GALGAS_shortCircuitAndOperationIR (const class cPtr_shortCircuitAndOperationIR * inSourcePtr) ;
+
+//--------------------------------- Property read access
+  public: class GALGAS_objectIR readProperty_mTargetOperand (void) const ;
+
+  public: class GALGAS_string readProperty_mLeftOperandLLVMName (void) const ;
+
+  public: class GALGAS_instructionListIR readProperty_mLeftInstructionList (void) const ;
+
+  public: class GALGAS_string readProperty_mRightOperandLLVMName (void) const ;
+
+  public: class GALGAS_instructionListIR readProperty_mRightInstructionList (void) const ;
+
+  public: class GALGAS_location readProperty_mLocation (void) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_shortCircuitAndOperationIR extractObject (const GALGAS_object & inObject,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_shortCircuitAndOperationIR class_func_new (const class GALGAS_objectIR & inOperand0,
+                                                                         const class GALGAS_string & inOperand1,
+                                                                         const class GALGAS_instructionListIR & inOperand2,
+                                                                         const class GALGAS_string & inOperand3,
+                                                                         const class GALGAS_instructionListIR & inOperand4,
+                                                                         const class GALGAS_location & inOperand5
+                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR & inOperand) const ;
+
+//--------------------------------- Setters
+  public: VIRTUAL_IN_DEBUG void setter_setMLeftInstructionList (class GALGAS_instructionListIR inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMLeftOperandLLVMName (class GALGAS_string inArgument0
+                                                                COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMLocation (class GALGAS_location inArgument0
+                                                     COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMRightInstructionList (class GALGAS_instructionListIR inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMRightOperandLLVMName (class GALGAS_string inArgument0
+                                                                 COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMTargetOperand (class GALGAS_objectIR inArgument0
+                                                          COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_shortCircuitAndOperationIR class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @shortCircuitAndOperationIR class
+//
+//--------------------------------------------------------------------------------------------------
+
+class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
+
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (void) const override ;
+  #endif
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
+           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmInstructionCode
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
+           const class GALGAS_generationContext inGenerationContext,
+           class GALGAS_generationAdds & ioGenerationAdds,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Properties
+  public: GALGAS_objectIR mProperty_mTargetOperand ;
+  public: GALGAS_string mProperty_mLeftOperandLLVMName ;
+  public: GALGAS_instructionListIR mProperty_mLeftInstructionList ;
+  public: GALGAS_string mProperty_mRightOperandLLVMName ;
+  public: GALGAS_instructionListIR mProperty_mRightInstructionList ;
+  public: GALGAS_location mProperty_mLocation ;
+
+//--- Constructor
+  public: cPtr_shortCircuitAndOperationIR (const GALGAS_objectIR & in_mTargetOperand,
+                                           const GALGAS_string & in_mLeftOperandLLVMName,
+                                           const GALGAS_instructionListIR & in_mLeftInstructionList,
+                                           const GALGAS_string & in_mRightOperandLLVMName,
+                                           const GALGAS_instructionListIR & in_mRightInstructionList,
+                                           const GALGAS_location & in_mLocation
+                                           COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+
+//--- Attribute accessors
+//--- Description
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
 // Phase 1: @shortCircuitAndOperationIR_2D_weak weak reference class
 //
 //--------------------------------------------------------------------------------------------------
@@ -40,7 +470,7 @@ class GALGAS_shortCircuitAndOperationIR_2D_weak : public GALGAS_abstractInstruct
   public: static class GALGAS_shortCircuitAndOperationIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -107,7 +537,7 @@ class GALGAS_loadFromReferenceIR : public GALGAS_abstractInstructionIR {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_loadFromReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_loadFromReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMName (class GALGAS_string inArgument0
@@ -168,7 +598,7 @@ class cPtr_loadFromReferenceIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -206,7 +636,7 @@ class GALGAS_loadFromReferenceIR_2D_weak : public GALGAS_abstractInstructionIR_2
   public: static class GALGAS_loadFromReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_loadFromReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_loadFromReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -277,7 +707,7 @@ class GALGAS_storeToUniversalReferenceIR : public GALGAS_abstractInstructionIR {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeToUniversalReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeToUniversalReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMTargetVarName (class GALGAS_string inArgument0
@@ -348,7 +778,7 @@ class cPtr_storeToUniversalReferenceIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -386,7 +816,7 @@ class GALGAS_storeToUniversalReferenceIR_2D_weak : public GALGAS_abstractInstruc
   public: static class GALGAS_storeToUniversalReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeToUniversalReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeToUniversalReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -457,7 +887,7 @@ class GALGAS_storeFromTemporaryReferenceIR : public GALGAS_abstractInstructionIR
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeFromTemporaryReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeFromTemporaryReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMTargetVarName (class GALGAS_string inArgument0
@@ -523,7 +953,7 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -561,7 +991,7 @@ class GALGAS_storeFromTemporaryReferenceIR_2D_weak : public GALGAS_abstractInstr
   public: static class GALGAS_storeFromTemporaryReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeFromTemporaryReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeFromTemporaryReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -622,7 +1052,7 @@ class GALGAS_standaloneRoutineCallIR : public GALGAS_abstractInstructionIR {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_standaloneRoutineCallIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_standaloneRoutineCallIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMArgumentList (class GALGAS_procCallEffectiveParameterListIR inArgument0
@@ -698,7 +1128,7 @@ class cPtr_standaloneRoutineCallIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -736,7 +1166,7 @@ class GALGAS_standaloneRoutineCallIR_2D_weak : public GALGAS_abstractInstruction
   public: static class GALGAS_standaloneRoutineCallIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_standaloneRoutineCallIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_standaloneRoutineCallIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -803,7 +1233,7 @@ class GALGAS_releaseIR : public GALGAS_abstractInstructionIR {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_releaseIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_releaseIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMOmnibusName (class GALGAS_lstring inArgument0
@@ -864,7 +1294,7 @@ class cPtr_releaseIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -902,7 +1332,7 @@ class GALGAS_releaseIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
   public: static class GALGAS_releaseIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_releaseIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_releaseIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -978,7 +1408,7 @@ class GALGAS_computeSubscriptedVolatileRegisterAddress : public GALGAS_abstractI
                                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_computeSubscriptedVolatileRegisterAddress & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_computeSubscriptedVolatileRegisterAddress & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAddressLLVMname (class GALGAS_string inArgument0
@@ -1049,7 +1479,7 @@ class cPtr_computeSubscriptedVolatileRegisterAddress : public cPtr_abstractInstr
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1098,7 +1528,7 @@ class GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak : public GALGAS_a
   public: static class GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_computeSubscriptedVolatileRegisterAddress_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1174,7 +1604,7 @@ class GALGAS_enterRegisterAddressIR : public GALGAS_abstractInstructionIR {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAddressOffset (class GALGAS_bigint inArgument0
@@ -1245,7 +1675,7 @@ class cPtr_enterRegisterAddressIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1283,7 +1713,7 @@ class GALGAS_enterRegisterAddressIR_2D_weak : public GALGAS_abstractInstructionI
   public: static class GALGAS_enterRegisterAddressIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_enterRegisterAddressIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1359,7 +1789,7 @@ class GALGAS_enterRegisterGroupSubscriptedAddressIR : public GALGAS_abstractInst
                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterGroupSubscriptedAddressIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_enterRegisterGroupSubscriptedAddressIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMGroupName (class GALGAS_string inArgument0
@@ -1430,7 +1860,7 @@ class cPtr_enterRegisterGroupSubscriptedAddressIR : public cPtr_abstractInstruct
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1468,7 +1898,7 @@ class GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak : public GALGAS_abst
   public: static class GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_enterRegisterGroupSubscriptedAddressIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1535,7 +1965,7 @@ class GALGAS_loadIndirectVolatileIR : public GALGAS_abstractInstructionIR {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_loadIndirectVolatileIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_loadIndirectVolatileIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMName (class GALGAS_string inArgument0
@@ -1596,7 +2026,7 @@ class cPtr_loadIndirectVolatileIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1634,7 +2064,7 @@ class GALGAS_loadIndirectVolatileIR_2D_weak : public GALGAS_abstractInstructionI
   public: static class GALGAS_loadIndirectVolatileIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_loadIndirectVolatileIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_loadIndirectVolatileIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1705,7 +2135,7 @@ class GALGAS_storeIndirectVolatileIR : public GALGAS_abstractInstructionIR {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeIndirectVolatileIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeIndirectVolatileIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMName (class GALGAS_string inArgument0
@@ -1771,7 +2201,7 @@ class cPtr_storeIndirectVolatileIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1809,7 +2239,7 @@ class GALGAS_storeIndirectVolatileIR_2D_weak : public GALGAS_abstractInstruction
   public: static class GALGAS_storeIndirectVolatileIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeIndirectVolatileIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeIndirectVolatileIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1879,7 +2309,7 @@ class GALGAS_copyFromReferencesIR : public GALGAS_abstractInstructionIR {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_copyFromReferencesIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_copyFromReferencesIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSourceLLVMName (class GALGAS_string inArgument0
@@ -1945,7 +2375,7 @@ class cPtr_copyFromReferencesIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -1997,7 +2427,7 @@ class GALGAS_copyFromReferencesIR_2D_weak : public GALGAS_abstractInstructionIR_
   public: static class GALGAS_copyFromReferencesIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_copyFromReferencesIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_copyFromReferencesIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2099,7 +2529,7 @@ class GALGAS_getUniversalPropertyReferenceIR : public GALGAS_abstractInstruction
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getUniversalPropertyReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getUniversalPropertyReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMElementLLVMName (class GALGAS_string inArgument0
@@ -2175,7 +2605,7 @@ class cPtr_getUniversalPropertyReferenceIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2213,7 +2643,7 @@ class GALGAS_getUniversalPropertyReferenceIR_2D_weak : public GALGAS_abstractIns
   public: static class GALGAS_getUniversalPropertyReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getUniversalPropertyReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getUniversalPropertyReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2292,7 +2722,7 @@ class GALGAS_getUniversalArrayElementReferenceIR : public GALGAS_abstractInstruc
                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getUniversalArrayElementReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getUniversalArrayElementReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMElementLLVMName (class GALGAS_string inArgument0
@@ -2368,7 +2798,7 @@ class cPtr_getUniversalArrayElementReferenceIR : public cPtr_abstractInstruction
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2406,7 +2836,7 @@ class GALGAS_getUniversalArrayElementReferenceIR_2D_weak : public GALGAS_abstrac
   public: static class GALGAS_getUniversalArrayElementReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getUniversalArrayElementReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getUniversalArrayElementReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2479,7 +2909,7 @@ class GALGAS_getComputedPropertyValueIR : public GALGAS_abstractInstructionIR {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getComputedPropertyValueIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getComputedPropertyValueIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMGetterName (class GALGAS_string inArgument0
@@ -2550,7 +2980,7 @@ class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2588,7 +3018,7 @@ class GALGAS_getComputedPropertyValueIR_2D_weak : public GALGAS_abstractInstruct
   public: static class GALGAS_getComputedPropertyValueIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getComputedPropertyValueIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getComputedPropertyValueIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2659,7 +3089,7 @@ class GALGAS_storeComputedPropertyValueIR : public GALGAS_abstractInstructionIR 
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeComputedPropertyValueIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeComputedPropertyValueIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMSetterName (class GALGAS_string inArgument0
@@ -2730,7 +3160,7 @@ class cPtr_storeComputedPropertyValueIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2768,7 +3198,7 @@ class GALGAS_storeComputedPropertyValueIR_2D_weak : public GALGAS_abstractInstru
   public: static class GALGAS_storeComputedPropertyValueIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_storeComputedPropertyValueIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_storeComputedPropertyValueIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2841,7 +3271,7 @@ class GALGAS_getArrayElementReferenceIR : public GALGAS_abstractInstructionIR {
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getArrayElementReferenceIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getArrayElementReferenceIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMArray (class GALGAS_objectIR inArgument0
@@ -2907,7 +3337,7 @@ class cPtr_getArrayElementReferenceIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2945,7 +3375,7 @@ class GALGAS_getArrayElementReferenceIR_2D_weak : public GALGAS_abstractInstruct
   public: static class GALGAS_getArrayElementReferenceIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_getArrayElementReferenceIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_getArrayElementReferenceIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3020,7 +3450,7 @@ class GALGAS_selectInstructionIR : public GALGAS_abstractInstructionIR {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_selectInstructionIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_selectInstructionIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMTargetValue (class GALGAS_objectIR inArgument0
@@ -3091,7 +3521,7 @@ class cPtr_selectInstructionIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3129,7 +3559,7 @@ class GALGAS_selectInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2
   public: static class GALGAS_selectInstructionIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_selectInstructionIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_selectInstructionIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3201,7 +3631,7 @@ class GALGAS_testArrayIndexIR : public GALGAS_abstractInstructionIR {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_testArrayIndexIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_testArrayIndexIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMErrorLocation (class GALGAS_location inArgument0
@@ -3272,7 +3702,7 @@ class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3310,7 +3740,7 @@ class GALGAS_testArrayIndexIR_2D_weak : public GALGAS_abstractInstructionIR_2D_w
   public: static class GALGAS_testArrayIndexIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_testArrayIndexIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_testArrayIndexIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3362,7 +3792,7 @@ class GALGAS_sourceLocationIR : public GALGAS_abstractInstructionIR {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sourceLocationIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sourceLocationIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSourceLocation (class GALGAS_location inArgument0
@@ -3418,7 +3848,7 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3456,7 +3886,7 @@ class GALGAS_sourceLocationIR_2D_weak : public GALGAS_abstractInstructionIR_2D_w
   public: static class GALGAS_sourceLocationIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sourceLocationIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sourceLocationIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3519,7 +3949,7 @@ class GALGAS_freeCommentIR : public GALGAS_abstractInstructionIR {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_freeCommentIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_freeCommentIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMComment (class GALGAS_string inArgument0
@@ -3575,7 +4005,7 @@ class cPtr_freeCommentIR : public cPtr_abstractInstructionIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3613,7 +4043,7 @@ class GALGAS_freeCommentIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak
   public: static class GALGAS_freeCommentIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_freeCommentIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_freeCommentIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3799,7 +4229,7 @@ class GALGAS_routineAccessibilityIR : public AC_GALGAS_list {
 
 class cEnumerator_routineAccessibilityIR : public cGenericAbstractEnumerator {
   public: cEnumerator_routineAccessibilityIR (const GALGAS_routineAccessibilityIR & inEnumeratedObject,
-                                              const typeEnumerationOrder inOrder) ;
+                                              const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_abstractRoutineIR current_mRoutine (LOCATION_ARGS) const ;
@@ -3873,7 +4303,7 @@ class GALGAS_routineAccessibilityIR_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_routineAccessibilityIR_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_routineAccessibilityIR_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4016,7 +4446,7 @@ class GALGAS_instructionListListIR : public AC_GALGAS_list {
 
 class cEnumerator_instructionListListIR : public cGenericAbstractEnumerator {
   public: cEnumerator_instructionListListIR (const GALGAS_instructionListListIR & inEnumeratedObject,
-                                             const typeEnumerationOrder inOrder) ;
+                                             const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_instructionListIR current_mInstructionList (LOCATION_ARGS) const ;
@@ -4078,7 +4508,7 @@ class GALGAS_instructionListListIR_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_instructionListListIR_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_instructionListListIR_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4131,7 +4561,7 @@ class GALGAS_ctExpressionAST_2D_weak : public AC_GALGAS_weak_reference {
   public: static class GALGAS_ctExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4184,7 +4614,7 @@ class GALGAS_ctInfixExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_wea
   public: static class GALGAS_ctInfixExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctInfixExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctInfixExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4237,7 +4667,7 @@ class GALGAS_ctPrefixExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_we
   public: static class GALGAS_ctPrefixExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctPrefixExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctPrefixExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4290,7 +4720,7 @@ class GALGAS_ctTrueExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak
   public: static class GALGAS_ctTrueExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctTrueExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctTrueExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4343,7 +4773,7 @@ class GALGAS_ctFalseExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_wea
   public: static class GALGAS_ctFalseExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctFalseExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctFalseExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4396,7 +4826,7 @@ class GALGAS_ctIntExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2D_weak 
   public: static class GALGAS_ctIntExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctIntExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctIntExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4449,7 +4879,7 @@ class GALGAS_ctIdentifierExpressionAST_2D_weak : public GALGAS_ctExpressionAST_2
   public: static class GALGAS_ctIdentifierExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctIdentifierExpressionAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctIdentifierExpressionAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4558,7 +4988,7 @@ class GALGAS_ctCheckMap : public AC_GALGAS_map {
 
 class cEnumerator_ctCheckMap : public cGenericAbstractEnumerator {
   public: cEnumerator_ctCheckMap (const GALGAS_ctCheckMap & inEnumeratedObject,
-                                  const typeEnumerationOrder inOrder) ;
+                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -4584,7 +5014,7 @@ class cMapElement_ctCheckMap : public cMapElement {
                                   COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -4646,7 +5076,7 @@ class GALGAS_ctCheckMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctCheckMap_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctCheckMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4779,7 +5209,7 @@ class GALGAS_ctMap : public AC_GALGAS_map {
 
 class cEnumerator_ctMap : public cGenericAbstractEnumerator {
   public: cEnumerator_ctMap (const GALGAS_ctMap & inEnumeratedObject,
-                             const typeEnumerationOrder inOrder) ;
+                             const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -4808,7 +5238,7 @@ class cMapElement_ctMap : public cMapElement {
                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -4881,7 +5311,7 @@ class GALGAS_ctMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctMap_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4965,7 +5395,7 @@ class GALGAS_llvmStringDefinitionElement : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmStringDefinitionElement & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmStringDefinitionElement & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5017,7 +5447,7 @@ class cEnumAssociatedValues_llvmStringDefinitionElement_variable : public cEnumA
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_llvmStringDefinitionElement_variable (void) {}
 } ;
@@ -5033,7 +5463,7 @@ class cEnumAssociatedValues_llvmStringDefinitionElement_string : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_llvmStringDefinitionElement_string (void) {}
 } ;
@@ -5088,7 +5518,7 @@ class GALGAS_llvmStringDefinition_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmStringDefinition_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmStringDefinition_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5141,7 +5571,7 @@ class GALGAS_llvmGenericType_2D_weak : public GALGAS_abstractDeclarationAST_2D_w
   public: static class GALGAS_llvmGenericType_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenericType_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenericType_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5216,7 +5646,7 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak : public GALGAS_abstra
   public: static class GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5307,7 +5737,7 @@ class GALGAS_llvmAssignmentOperatorUsage : public GALGAS_abstractAssignmentOpera
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorUsage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorUsage & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
@@ -5403,7 +5833,7 @@ class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorU
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5441,7 +5871,7 @@ class GALGAS_llvmAssignmentOperatorUsage_2D_weak : public GALGAS_abstractAssignm
   public: static class GALGAS_llvmAssignmentOperatorUsage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorUsage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorUsage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5541,7 +5971,7 @@ class GALGAS_assignmentRoutineIR : public GALGAS_abstractRoutineIR {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignmentRoutineIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_assignmentRoutineIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAllocaList (class GALGAS_allocaList inArgument0
@@ -5625,7 +6055,7 @@ class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5663,7 +6093,7 @@ class GALGAS_assignmentRoutineIR_2D_weak : public GALGAS_abstractRoutineIR_2D_we
   public: static class GALGAS_assignmentRoutineIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignmentRoutineIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_assignmentRoutineIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5718,7 +6148,7 @@ class GALGAS_simpleAssignmentCopyRoutineIR : public GALGAS_abstractRoutineIR {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_simpleAssignmentCopyRoutineIR & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_simpleAssignmentCopyRoutineIR & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMTargetType (class GALGAS_omnibusType inArgument0
@@ -5777,7 +6207,7 @@ class cPtr_simpleAssignmentCopyRoutineIR : public cPtr_abstractRoutineIR {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5815,7 +6245,7 @@ class GALGAS_simpleAssignmentCopyRoutineIR_2D_weak : public GALGAS_abstractRouti
   public: static class GALGAS_simpleAssignmentCopyRoutineIR_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_simpleAssignmentCopyRoutineIR_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_simpleAssignmentCopyRoutineIR_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5864,7 +6294,7 @@ class GALGAS_simpleCopyAssignmentOperatorUsage : public GALGAS_abstractAssignmen
   public: static class GALGAS_simpleCopyAssignmentOperatorUsage class_func_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_simpleCopyAssignmentOperatorUsage & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_simpleCopyAssignmentOperatorUsage & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5920,7 +6350,7 @@ class cPtr_simpleCopyAssignmentOperatorUsage : public cPtr_abstractAssignmentOpe
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5958,7 +6388,7 @@ class GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak : public GALGAS_abstractA
   public: static class GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_simpleCopyAssignmentOperatorUsage_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6029,7 +6459,7 @@ class GALGAS_llvmGenerationInstructionElementList_2D_element : public AC_GALGAS_
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenerationInstructionElementList_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenerationInstructionElementList_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6082,7 +6512,7 @@ class GALGAS_abstractLLVMInstruction_2D_weak : public AC_GALGAS_weak_reference {
   public: static class GALGAS_abstractLLVMInstruction_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6135,7 +6565,7 @@ class GALGAS_llvmGenerationInstruction_2D_weak : public GALGAS_abstractLLVMInstr
   public: static class GALGAS_llvmGenerationInstruction_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenerationInstruction_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenerationInstruction_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6188,7 +6618,7 @@ class GALGAS_llvmVarInstruction_2D_weak : public GALGAS_abstractLLVMInstruction_
   public: static class GALGAS_llvmVarInstruction_2D_weak class_func_nil (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmVarInstruction_2D_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmVarInstruction_2D_weak & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6344,7 +6774,7 @@ class GALGAS_assignmentGenerationVarMap : public AC_GALGAS_map {
 
 class cEnumerator_assignmentGenerationVarMap : public cGenericAbstractEnumerator {
   public: cEnumerator_assignmentGenerationVarMap (const GALGAS_assignmentGenerationVarMap & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
+                                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -6373,7 +6803,7 @@ class cMapElement_assignmentGenerationVarMap : public cMapElement {
                                                   COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -6446,7 +6876,7 @@ class GALGAS_assignmentGenerationVarMap_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignmentGenerationVarMap_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_assignmentGenerationVarMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6497,1039 +6927,3 @@ void callExtensionMethod_generateIRCode (class cPtr_abstractLLVMInstruction * in
                                          class Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
-//--------------------------------------------------------------------------------------------------
-//  GRAMMAR omnibus_grammar
-//--------------------------------------------------------------------------------------------------
-
-class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
-//------------------------------------- 'assignment_combined_with_operator' non terminal
-//--- 'parse' label
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GALGAS_omnibusInfixOperator & outArgument0,
-                                                                       GALGAS_location & outArgument1,
-                                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compileTimeInfixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compileTimeInfixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compileTimeInfixOperator_ (GALGAS_compileTimeInfixOperatorEnumeration & outArgument0,
-                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compileTimePrefixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compileTimePrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compileTimePrefixOperator_ (GALGAS_compileTimePrefixOperatorEnumeration & outArgument0,
-                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_ (GALGAS_ctExpressionAST & outArgument0,
-                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_addition' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_bitwise_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_bitwise_xor' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_comparison' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_equality' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_product' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_shift' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_ (GALGAS_ctExpressionAST & outArgument0,
-                                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_primary' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_primary_ (GALGAS_ctExpressionAST & outArgument0,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'control_register_lvalue' non terminal
-//--- 'parse' label
-  public: virtual void nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_control_5F_register_5F_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_control_5F_register_5F_lvalue_ (GALGAS_ast & ioArgument0,
-                                                          GALGAS_controlRegisterLValueAST & outArgument1,
-                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_declaration_ (GALGAS_ast & ioArgument0,
-                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'effective_parameters' non terminal
-//--- 'parse' label
-  public: virtual void nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_effective_5F_parameters_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_effective_5F_parameters_ (GALGAS_ast & ioArgument0,
-                                                    GALGAS_effectiveArgumentListAST & outArgument1,
-                                                    GALGAS_location & outArgument2,
-                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_ (GALGAS_ast & ioArgument0,
-                                       GALGAS_expressionAST & outArgument1,
-                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_access_list' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_access_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_access_5F_list_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_primaryInExpressionAccessListAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_addition' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_addition_ (GALGAS_ast & ioArgument0,
-                                                   GALGAS_expressionAST & outArgument1,
-                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_and_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_or' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_or_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_or_ (GALGAS_ast & ioArgument0,
-                                                        GALGAS_expressionAST & outArgument1,
-                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_xor' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_xor_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_comparison' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_comparison_ (GALGAS_ast & ioArgument0,
-                                                     GALGAS_expressionAST & outArgument1,
-                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_equality' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_equality_ (GALGAS_ast & ioArgument0,
-                                                   GALGAS_expressionAST & outArgument1,
-                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_if' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_if_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_if_ (GALGAS_ast & ioArgument0,
-                                             GALGAS_ifExpressionAST & outArgument1,
-                                             Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_logical_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_logical_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_logical_5F_and_ (GALGAS_ast & ioArgument0,
-                                                         GALGAS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_product' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_product_ (GALGAS_ast & ioArgument0,
-                                                  GALGAS_expressionAST & outArgument1,
-                                                  Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_shift' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_shift_ (GALGAS_ast & ioArgument0,
-                                                GALGAS_expressionAST & outArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'function_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_function_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_function_5F_declaration_ (GALGAS_ast & ioArgument0,
-                                                    const GALGAS_lstring inArgument1,
-                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'function_header' non terminal
-//--- 'parse' label
-  public: virtual void nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_function_5F_header_ (GALGAS_ast & ioArgument0,
-                                               GALGAS_mode & outArgument1,
-                                               GALGAS_lstring & outArgument2,
-                                               GALGAS_lstringlist & outArgument3,
-                                               GALGAS_routineFormalArgumentListAST & outArgument4,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'generic_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_generic_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_generic_5F_formal_5F_arguments_ (GALGAS_genericFormalParameterList & outArgument0,
-                                                           Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'generic_where_clause' non terminal
-//--- 'parse' label
-  public: virtual void nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_generic_5F_where_5F_clause_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_generic_5F_where_5F_clause_ (GALGAS_ctExpressionAST & outArgument0,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'guard' non terminal
-//--- 'parse' label
-  public: virtual void nt_guard_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_guard_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_guard_ (GALGAS_ast & ioArgument0,
-                                  const GALGAS_lstring inArgument1,
-                                  const GALGAS_string inArgument2,
-                                  Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'guarded_command' non terminal
-//--- 'parse' label
-  public: virtual void nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_guarded_5F_command_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_guarded_5F_command_ (GALGAS_ast & ioArgument0,
-                                               const GALGAS_bool inArgument1,
-                                               GALGAS_guardedCommandAST & outArgument2,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'if_instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_if_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_if_5F_instruction_ (GALGAS_ast & ioArgument0,
-                                              GALGAS_ifInstructionAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'import_file' non terminal
-//--- 'parse' label
-  public: virtual void nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_import_5F_file_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_import_5F_file_ (GALGAS_lstringlist & ioArgument0,
-                                           Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_instruction_ (GALGAS_ast & ioArgument0,
-                                        GALGAS_instructionListAST & ioArgument1,
-                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instructionList' non terminal
-//--- 'parse' label
-  public: virtual void nt_instructionList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_instructionList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_instructionList_ (GALGAS_ast & ioArgument0,
-                                            GALGAS_instructionListAST & outArgument1,
-                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'isr_in_driver' non terminal
-//--- 'parse' label
-  public: virtual void nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_isr_5F_in_5F_driver_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_isr_5F_in_5F_driver_ (GALGAS_ast & ioArgument0,
-                                                const GALGAS_lstring inArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvmPrefixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvmPrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvmPrefixOperator_ (GALGAS_llvmPrefixOperatorEnumeration & outArgument0,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_function_header' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_function_5F_header_ (GALGAS_lstring & outArgument0,
-                                                       GALGAS_lstring & outArgument1,
-                                                       GALGAS_genericFormalParameterList & outArgument2,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_instruction_ (GALGAS_abstractLLVMInstruction & outArgument0,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_instruction_list' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_instruction_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_instruction_5F_list_ (GALGAS_llvmGenerationInstructionList & outArgument0,
-                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'lvalue' non terminal
-//--- 'parse' label
-  public: virtual void nt_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_lvalue_ (GALGAS_ast & ioArgument0,
-                                   GALGAS_LValueAST & outArgument1,
-                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'lvalue_operand' non terminal
-//--- 'parse' label
-  public: virtual void nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_lvalue_5F_operand_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_lvalue_5F_operand_ (GALGAS_ast & ioArgument0,
-                                              GALGAS_LValueOperandAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'mode' non terminal
-//--- 'parse' label
-  public: virtual void nt_mode_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_mode_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_mode_ (GALGAS_mode & outArgument0,
-                                 Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'primary' non terminal
-//--- 'parse' label
-  public: virtual void nt_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_primary_ (GALGAS_ast & ioArgument0,
-                                    GALGAS_expressionAST & outArgument1,
-                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'private_or_public_struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
-                                                                                         GALGAS_structurePropertyListAST & ioArgument1,
-                                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'private_struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
-                                                                         GALGAS_structurePropertyListAST & ioArgument1,
-                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_call' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_call_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_call_ (GALGAS_ast & ioArgument0,
-                                              GALGAS_callInstructionAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_formal_5F_arguments_ (GALGAS_ast & ioArgument0,
-                                                             GALGAS_routineFormalArgumentListAST & outArgument1,
-                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_input_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_ (GALGAS_ast & ioArgument0,
-                                                                      GALGAS_routineFormalArgumentListAST & outArgument1,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'propertyGetterSetter' non terminal
-//--- 'parse' label
-  public: virtual void nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_propertyGetterSetter_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_propertyGetterSetter_ (GALGAS_ast & ioArgument0,
-                                                 const GALGAS_propertyVisibility inArgument1,
-                                                 const GALGAS_lstring inArgument2,
-                                                 const GALGAS_propertyAttributeList inArgument3,
-                                                 const GALGAS_lstring inArgument4,
-                                                 GALGAS_structurePropertyListAST & ioArgument5,
-                                                 Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'registerDeclaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_registerDeclaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_registerDeclaration_ (GALGAS_ast & ioArgument0,
-                                                GALGAS_controlRegisterNameListAST & ioArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'start_symbol' non terminal
-//--- 'parse' label
-  public: virtual void nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_start_5F_symbol_ (GALGAS_ast & ioArgument0,
-                                            GALGAS_lstringlist & outArgument1,
-                                            GALGAS_location & outArgument2,
-                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- Start symbol
-  public: static void _performSourceFileParsing_ (Compiler * inCompiler,
-                                                  GALGAS_lstring inFileName,
-                                                  GALGAS_ast & ioArgument0,
-                                                  GALGAS_lstringlist & outArgument1,
-                                                  GALGAS_location & outArgument2
-                                                  COMMA_LOCATION_ARGS) ;
-
-  public: static void _performSourceStringParsing_ (Compiler * inCompiler,
-                                                    GALGAS_string inSourceString,
-                                                    GALGAS_string inNameString,
-                                                    GALGAS_ast & ioArgument0,
-                                                    GALGAS_lstringlist & outArgument1,
-                                                    GALGAS_location & outArgument2
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--- Indexing
-  public: static void performIndexing (Compiler * inCompiler,
-                                       const String & inSourceFilePath) ;
-
-//--- Only lexical analysis
-  public: static void performOnlyLexicalAnalysis (Compiler * inCompiler,
-                                                  const String & inSourceFilePath) ;
-
-//--- Only syntax analysis
-  public: static void performOnlySyntaxAnalysis (Compiler * inCompiler,
-                                                 const String & inSourceFilePath) ;
-
-//------------------------------------- 'staticArrayProperty' non terminal
-//--- 'parse' label
-  public: virtual void nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_staticArrayProperty_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_staticArrayProperty_ (GALGAS_ast & ioArgument0,
-                                                GALGAS_staticListPropertyListAST & ioArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'staticArray_exp' non terminal
-//--- 'parse' label
-  public: virtual void nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_staticArray_5F_exp_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_staticArray_5F_exp_ (GALGAS_ast & ioArgument0,
-                                               GALGAS_extendStaticListElementAST & ioArgument1,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_struct_5F_property_5F_declaration_ (GALGAS_ast & ioArgument0,
-                                                              const GALGAS_propertyVisibility inArgument1,
-                                                              GALGAS_structurePropertyListAST & ioArgument2,
-                                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'system_routine_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_system_5F_routine_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_system_5F_routine_5F_declaration_ (GALGAS_ast & ioArgument0,
-                                                             const GALGAS_lstring inArgument1,
-                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'task_event' non terminal
-//--- 'parse' label
-  public: virtual void nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_task_5F_event_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_task_5F_event_ (GALGAS_ast & ioArgument0,
-                                          const GALGAS_lstring inArgument1,
-                                          GALGAS_taskSetupListAST & ioArgument2,
-                                          GALGAS_taskSetupListAST & ioArgument3,
-                                          GALGAS_taskSetupListAST & ioArgument4,
-                                          Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'type_definition' non terminal
-//--- 'parse' label
-  public: virtual void nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_type_5F_definition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_type_5F_definition_ (GALGAS_ast & ioArgument0,
-                                               GALGAS_lstring & outArgument1,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_0 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_1 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_2 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_3 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_4 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_5 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_6 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_7 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_8 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_9 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_10 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_11 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_12 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_13 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_14 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_15 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_16 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_17 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_18 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_19 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_20 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_21 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_22 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_23 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_24 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_25 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_26 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_27 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_28 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_29 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_30 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_31 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_32 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_33 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_34 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_35 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_36 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_37 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_38 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_39 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_40 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_41 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_42 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_43 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_44 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_45 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_46 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_47 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_48 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_49 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_50 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_51 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_52 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_53 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_54 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_55 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_56 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_57 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_58 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_59 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_60 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_61 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_62 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_63 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_64 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_65 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_66 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_67 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_68 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_69 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_70 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_71 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_72 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_73 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_74 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_75 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_76 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_77 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_78 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_79 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_80 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_81 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_82 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_83 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_84 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_85 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_86 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_87 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_88 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_89 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_90 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_91 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_92 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_93 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_94 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_95 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_96 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_97 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_98 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_99 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_100 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_101 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_102 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_103 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_104 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_105 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_106 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_107 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_108 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_109 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_110 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_111 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_112 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_113 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_114 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_115 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_116 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_117 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_118 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_119 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_120 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_121 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_122 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_123 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_124 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_125 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_126 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_127 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_128 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_129 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_130 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_131 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_132 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_133 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_134 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_135 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_136 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_137 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_138 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_139 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_140 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_141 (Lexique_omnibus_5F_lexique *) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------

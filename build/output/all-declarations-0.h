@@ -148,7 +148,7 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 
 class cEnumerator__32_lstringlist : public cGenericAbstractEnumerator {
   public: cEnumerator__32_lstringlist (const GALGAS__32_lstringlist & inEnumeratedObject,
-                                       const typeEnumerationOrder inOrder) ;
+                                       const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mValue_30_ (LOCATION_ARGS) const ;
@@ -222,7 +222,7 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2379,7 +2379,7 @@ class GALGAS_abstractLLVMInstruction : public AC_GALGAS_reference_class {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_abstractLLVMInstruction & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2433,7 +2433,7 @@ class cPtr_abstractLLVMInstruction : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -2464,7 +2464,7 @@ class GALGAS_expressionAST : public AC_GALGAS_reference_class {
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_expressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_expressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2529,7 +2529,7 @@ class cPtr_expressionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -2566,7 +2566,7 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_addressofControlRegisterAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_addressofControlRegisterAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
@@ -2642,7 +2642,7 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_registerGroupIndexAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_registerGroupIndexAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2731,7 +2731,7 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_registerIndexAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_registerIndexAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2851,7 +2851,7 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterLValueAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterLValueAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2921,7 +2921,7 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -2958,7 +2958,7 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_addressofExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_addressofExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueAST inArgument0
@@ -3040,7 +3040,7 @@ class GALGAS_LValueOperandAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_LValueOperandAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_LValueOperandAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3150,7 +3150,7 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_LValueAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_LValueAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3220,7 +3220,7 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3253,7 +3253,7 @@ class GALGAS_instructionAST : public AC_GALGAS_reference_class {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_instructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_instructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInstructionLocation (class GALGAS_location inArgument0
@@ -3316,7 +3316,7 @@ class cPtr_instructionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -3354,7 +3354,7 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assertInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_assertInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
@@ -3421,7 +3421,7 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3462,7 +3462,7 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_assignmentInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_assignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
@@ -3534,7 +3534,7 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3584,7 +3584,7 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_bitbandInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_bitbandInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMBitExpression (class GALGAS_expressionAST inArgument0
@@ -3671,7 +3671,7 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3714,7 +3714,7 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
                                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_booleanShortCircuitAndOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLeftExpression (class GALGAS_expressionAST inArgument0
@@ -3797,7 +3797,7 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -3832,7 +3832,7 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_callInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_callInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMArguments (class GALGAS_effectiveArgumentListAST inArgument0
@@ -4000,7 +4000,7 @@ class GALGAS_effectiveArgumentListAST : public AC_GALGAS_list {
 
 class cEnumerator_effectiveArgumentListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_effectiveArgumentListAST (const GALGAS_effectiveArgumentListAST & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) ;
+                                                const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_effectiveArgumentPassingModeAST current_mEffectiveParameterKind (LOCATION_ARGS) const ;
@@ -4050,7 +4050,7 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -4091,7 +4091,7 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_checkInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_checkInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMCheckMessage (class GALGAS_lstring inArgument0
@@ -4163,7 +4163,7 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -4194,7 +4194,7 @@ class GALGAS_abstractDeclarationAST : public AC_GALGAS_reference_class {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_abstractDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_abstractDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4262,7 +4262,7 @@ class cPtr_abstractDeclarationAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -4308,7 +4308,7 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeConvertToBooleanAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_compileTimeConvertToBooleanAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMConverterName (class GALGAS_lstring inArgument0
@@ -4366,7 +4366,7 @@ class GALGAS_ctExpressionAST : public AC_GALGAS_reference_class {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4417,7 +4417,7 @@ class cPtr_ctExpressionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
@@ -4476,7 +4476,7 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -4534,7 +4534,7 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
@@ -4659,7 +4659,7 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorEnumeration & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_compileTimeInfixOperatorEnumeration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4797,7 +4797,7 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -4849,7 +4849,7 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compiletimePrefixOperatorAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_compiletimePrefixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
@@ -4932,7 +4932,7 @@ class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_compileTimePrefixOperatorEnumeration & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_compileTimePrefixOperatorEnumeration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5018,7 +5018,7 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5061,7 +5061,7 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_constructorCallAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_constructorCallAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMErrorLocation (class GALGAS_location inArgument0
@@ -5232,7 +5232,7 @@ class GALGAS_functionCallEffectiveParameterListAST : public AC_GALGAS_list {
 
 class cEnumerator_functionCallEffectiveParameterListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_functionCallEffectiveParameterListAST (const GALGAS_functionCallEffectiveParameterListAST & inEnumeratedObject,
-                                                             const typeEnumerationOrder inOrder) ;
+                                                             const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
@@ -5298,7 +5298,7 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5342,7 +5342,7 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAssignmentKind (class GALGAS_controlRegisterAssignmentOperatorKind inArgument0
@@ -5423,7 +5423,7 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentOperatorKind & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentOperatorKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5550,7 +5550,7 @@ class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5660,7 +5660,7 @@ class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWith
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (void) {}
 } ;
@@ -5712,7 +5712,7 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -5752,7 +5752,7 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterGroupDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterGroupDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMRegisterGroupList (class GALGAS_registerGroupListAST inArgument0
@@ -5958,7 +5958,7 @@ class GALGAS_controlRegisterDeclarationList : public AC_GALGAS_list {
 
 class cEnumerator_controlRegisterDeclarationList : public cGenericAbstractEnumerator {
   public: cEnumerator_controlRegisterDeclarationList (const GALGAS_controlRegisterDeclarationList & inEnumeratedObject,
-                                                      const typeEnumerationOrder inOrder) ;
+                                                      const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_controlRegisterNameListAST current_mRegisterArrayList (LOCATION_ARGS) const ;
@@ -6114,7 +6114,7 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 class cEnumerator_registerGroupListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_registerGroupListAST (const GALGAS_registerGroupListAST & inEnumeratedObject,
-                                            const typeEnumerationOrder inOrder) ;
+                                            const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mRegisterGroupName (LOCATION_ARGS) const ;
@@ -6180,7 +6180,7 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6223,7 +6223,7 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_convertExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_convertExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
@@ -6306,7 +6306,7 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6340,7 +6340,7 @@ class GALGAS_ctFalseExpressionAST : public GALGAS_ctExpressionAST {
   public: static class GALGAS_ctFalseExpressionAST class_func_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctFalseExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctFalseExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6394,7 +6394,7 @@ class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6431,7 +6431,7 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctIdentifierExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctIdentifierExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMIdentifier (class GALGAS_lstring inArgument0
@@ -6490,7 +6490,7 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6536,7 +6536,7 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctInfixExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctInfixExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_compileTimeInfixOperatorEnumeration inArgument0
@@ -6610,7 +6610,7 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6647,7 +6647,7 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctIntExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctIntExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMValue (class GALGAS_lbigint inArgument0
@@ -6706,7 +6706,7 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6749,7 +6749,7 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctPrefixExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctPrefixExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_ctExpressionAST inArgument0
@@ -6818,7 +6818,7 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6852,7 +6852,7 @@ class GALGAS_ctTrueExpressionAST : public GALGAS_ctExpressionAST {
   public: static class GALGAS_ctTrueExpressionAST class_func_new (LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ctTrueExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ctTrueExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6906,7 +6906,7 @@ class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -6946,7 +6946,7 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_enumerationDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_enumerationDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMCaseNameList (class GALGAS_enumerationConstantList inArgument0
@@ -7114,7 +7114,7 @@ class GALGAS_enumerationConstantList : public AC_GALGAS_list {
 
 class cEnumerator_enumerationConstantList : public cGenericAbstractEnumerator {
   public: cEnumerator_enumerationConstantList (const GALGAS_enumerationConstantList & inEnumeratedObject,
-                                               const typeEnumerationOrder inOrder) ;
+                                               const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mConstantName (LOCATION_ARGS) const ;
@@ -7176,7 +7176,7 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -7219,7 +7219,7 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_extendExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_extendExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
@@ -7302,7 +7302,7 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -7348,7 +7348,7 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_fixedSizeArrayTypeDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_fixedSizeArrayTypeDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMElementTypeName (class GALGAS_lstring inArgument0
@@ -7434,7 +7434,7 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -7490,7 +7490,7 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_forInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_forInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (class GALGAS_instructionListAST inArgument0
@@ -7654,7 +7654,7 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
 
 class cEnumerator_instructionListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_instructionListAST (const GALGAS_instructionListAST & inEnumeratedObject,
-                                          const typeEnumerationOrder inOrder) ;
+                                          const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_instructionAST current_mInstruction (LOCATION_ARGS) const ;
@@ -7721,7 +7721,7 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -7780,7 +7780,7 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_forLowerUpperBoundInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_forLowerUpperBoundInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMDoInstructionList (class GALGAS_instructionListAST inArgument0
@@ -7882,7 +7882,7 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -7943,7 +7943,7 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_functionDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_functionDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfFunctionDeclaration (class GALGAS_location inArgument0
@@ -8074,7 +8074,7 @@ class GALGAS_mode : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_mode & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_mode & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8334,7 +8334,7 @@ class GALGAS_routineFormalArgumentListAST : public AC_GALGAS_list {
 
 class cEnumerator_routineFormalArgumentListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_routineFormalArgumentListAST (const GALGAS_routineFormalArgumentListAST & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) ;
+                                                    const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_procFormalArgumentPassingMode current_mFormalArgumentPassingMode (LOCATION_ARGS) const ;
@@ -8412,7 +8412,7 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -8458,7 +8458,7 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_globalConstantDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_globalConstantDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
@@ -8544,7 +8544,7 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -8605,7 +8605,7 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_guardDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_guardDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfGuardDeclaration (class GALGAS_location inArgument0
@@ -8703,7 +8703,7 @@ class GALGAS_guardKind : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_guardKind & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_guardKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8751,7 +8751,7 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_guardKind_convenienceGuard (void) {}
 } ;
@@ -8819,7 +8819,7 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -8871,7 +8871,7 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ifExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ifExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMElseExpression (class GALGAS_expressionAST inArgument0
@@ -8969,7 +8969,7 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9028,7 +9028,7 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ifInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ifInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMElseInstructionList (class GALGAS_instructionListAST inArgument0
@@ -9130,7 +9130,7 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9173,7 +9173,7 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_integerSliceExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_integerSliceExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLocation (class GALGAS_location inArgument0
@@ -9363,7 +9363,7 @@ class GALGAS_integerSliceFieldListAST : public AC_GALGAS_list {
 
 class cEnumerator_integerSliceFieldListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_integerSliceFieldListAST (const GALGAS_integerSliceFieldListAST & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) ;
+                                                const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mSliceWidth (LOCATION_ARGS) const ;
@@ -9430,7 +9430,7 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9479,7 +9479,7 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_isrDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_isrDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMDriverName (class GALGAS_lstring inArgument0
@@ -9570,7 +9570,7 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9614,7 +9614,7 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_letInstructionWithAssignmentAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_letInstructionWithAssignmentAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMConstantName (class GALGAS_lstring inArgument0
@@ -9691,7 +9691,7 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9728,7 +9728,7 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_literalBooleanInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMValue (class GALGAS_bool inArgument0
@@ -9801,7 +9801,7 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9838,7 +9838,7 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_literalIntegerInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_literalIntegerInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLiteralInteger (class GALGAS_lbigint inArgument0
@@ -9911,7 +9911,7 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -9948,7 +9948,7 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_literalStringInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_literalStringInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLiteralString (class GALGAS_lstring inArgument0
@@ -10021,7 +10021,7 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -10082,7 +10082,7 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmAssignmentOperatorDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLLVMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
@@ -10252,7 +10252,7 @@ class GALGAS_genericFormalParameterList : public AC_GALGAS_list {
 
 class cEnumerator_genericFormalParameterList : public cGenericAbstractEnumerator {
   public: cEnumerator_genericFormalParameterList (const GALGAS_genericFormalParameterList & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
+                                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_genericFormalParameter current_mParameter (LOCATION_ARGS) const ;
@@ -10386,7 +10386,7 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
 
 class cEnumerator_llvmGenerationInstructionList : public cGenericAbstractEnumerator {
   public: cEnumerator_llvmGenerationInstructionList (const GALGAS_llvmGenerationInstructionList & inEnumeratedObject,
-                                                     const typeEnumerationOrder inOrder) ;
+                                                     const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_abstractLLVMInstruction current_mInstruction (LOCATION_ARGS) const ;
@@ -10461,7 +10461,7 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -10507,7 +10507,7 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmConvertToBooleanAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmConvertToBooleanAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMConverterName (class GALGAS_lstring inArgument0
@@ -10593,7 +10593,7 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -10630,7 +10630,7 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenerationInstruction & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenerationInstruction & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMGenerationList (class GALGAS_llvmGenerationInstructionElementList inArgument0
@@ -10776,7 +10776,7 @@ class GALGAS_llvmGenerationInstructionElementList : public AC_GALGAS_list {
 
 class cEnumerator_llvmGenerationInstructionElementList : public cGenericAbstractEnumerator {
   public: cEnumerator_llvmGenerationInstructionElementList (const GALGAS_llvmGenerationInstructionElementList & inEnumeratedObject,
-                                                            const typeEnumerationOrder inOrder) ;
+                                                            const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_llvmGenerationInstructionElement current_mElement (LOCATION_ARGS) const ;
@@ -10826,7 +10826,7 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -10872,7 +10872,7 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenericType & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenericType & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMBitSize (class GALGAS_bigint inArgument0
@@ -10958,7 +10958,7 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11025,7 +11025,7 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmInfixOperatorAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmInfixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_omnibusInfixOperator inArgument0
@@ -11146,7 +11146,7 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11198,7 +11198,7 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInstructionList (class GALGAS_llvmGenerationInstructionList inArgument0
@@ -11287,7 +11287,7 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -11381,7 +11381,7 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11418,7 +11418,7 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmVarInstruction & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmVarInstruction & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMVariableName (class GALGAS_lstring inArgument0
@@ -11480,7 +11480,7 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11526,7 +11526,7 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_omnibusInfixOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMInfixOperator (class GALGAS_omnibusInfixOperator inArgument0
@@ -11614,7 +11614,7 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11660,7 +11660,7 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_panicAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_panicAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfPanicInstructions (class GALGAS_location inArgument0
@@ -11750,7 +11750,7 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11788,7 +11788,7 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_panicInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_panicInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMCodeExpression (class GALGAS_expressionAST inArgument0
@@ -11855,7 +11855,7 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -11898,7 +11898,7 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_prefixOperatorExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_prefixOperatorExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMExpression (class GALGAS_expressionAST inArgument0
@@ -11978,7 +11978,7 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_prefixOperator & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_prefixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -12068,7 +12068,7 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -12108,7 +12108,7 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_primaryInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_primaryInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_primaryInExpressionAccessListAST inArgument0
@@ -12257,7 +12257,7 @@ class GALGAS_primaryInExpressionAccessListAST : public AC_GALGAS_list {
 
 class cEnumerator_primaryInExpressionAccessListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_primaryInExpressionAccessListAST (const GALGAS_primaryInExpressionAccessListAST & inEnumeratedObject,
-                                                        const typeEnumerationOrder inOrder) ;
+                                                        const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_primaryInExpressionAccessAST current_mAccess (LOCATION_ARGS) const ;
@@ -12348,7 +12348,7 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -12391,7 +12391,7 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_procedureCallInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_procedureCallInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_accessInAssignmentListAST inArgument0
@@ -12540,7 +12540,7 @@ class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
 
 class cEnumerator_accessInAssignmentListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_accessInAssignmentListAST (const GALGAS_accessInAssignmentListAST & inEnumeratedObject,
-                                                 const typeEnumerationOrder inOrder) ;
+                                                 const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_accessInAssignmentAST current_mAccess (LOCATION_ARGS) const ;
@@ -12610,7 +12610,7 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -12653,7 +12653,7 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_registerConstantExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_registerConstantExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMFieldValues (class GALGAS_registerIntegerFieldListAST inArgument0
@@ -12843,7 +12843,7 @@ class GALGAS_registerIntegerFieldListAST : public AC_GALGAS_list {
 
 class cEnumerator_registerIntegerFieldListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_registerIntegerFieldListAST (const GALGAS_registerIntegerFieldListAST & inEnumeratedObject,
-                                                   const typeEnumerationOrder inOrder) ;
+                                                   const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mFieldName (LOCATION_ARGS) const ;
@@ -12910,7 +12910,7 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -12950,7 +12950,7 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_registerInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_registerInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMControlRegisterLValue (class GALGAS_controlRegisterLValueAST inArgument0
@@ -13028,7 +13028,7 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13065,7 +13065,7 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sizeofExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sizeofExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMLValue (class GALGAS_LValueAST inArgument0
@@ -13138,7 +13138,7 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13175,7 +13175,7 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sizeofTypeAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sizeofTypeAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
@@ -13248,7 +13248,7 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13295,7 +13295,7 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sliceAssignmentInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sliceAssignmentInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSliceAssignmentList (class GALGAS_sliceAssignmentListAST inArgument0
@@ -13469,7 +13469,7 @@ class GALGAS_sliceAssignmentListAST : public AC_GALGAS_list {
 
 class cEnumerator_sliceAssignmentListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_sliceAssignmentListAST (const GALGAS_sliceAssignmentListAST & inEnumeratedObject,
-                                              const typeEnumerationOrder inOrder) ;
+                                              const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mSliceWidth (LOCATION_ARGS) const ;
@@ -13531,7 +13531,7 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13571,7 +13571,7 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
                                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_standAloneProcedureCallInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_standAloneProcedureCallInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSandAloneRoutineName (class GALGAS_lstring inArgument0
@@ -13651,7 +13651,7 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13694,7 +13694,7 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_standaloneFunctionInExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_standaloneFunctionInExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMArguments (class GALGAS_effectiveArgumentListAST inArgument0
@@ -13777,7 +13777,7 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -13820,7 +13820,7 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_staticListAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_staticListAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMPropertyList (class GALGAS_staticListPropertyListAST inArgument0
@@ -13991,7 +13991,7 @@ class GALGAS_staticListPropertyListAST : public AC_GALGAS_list {
 
 class cEnumerator_staticListPropertyListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_staticListPropertyListAST (const GALGAS_staticListPropertyListAST & inEnumeratedObject,
-                                                 const typeEnumerationOrder inOrder) ;
+                                                 const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mPropertyName (LOCATION_ARGS) const ;
@@ -14145,7 +14145,7 @@ class GALGAS_staticListValueListAST : public AC_GALGAS_list {
 
 class cEnumerator_staticListValueListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_staticListValueListAST (const GALGAS_staticListValueListAST & inEnumeratedObject,
-                                              const typeEnumerationOrder inOrder) ;
+                                              const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_extendStaticListElementAST current_mElement (LOCATION_ARGS) const ;
@@ -14214,7 +14214,7 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -14269,7 +14269,7 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_structureDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_structureDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAttributeListAST (class GALGAS_lstringlist inArgument0
@@ -14509,7 +14509,7 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
 class cEnumerator_structurePropertyListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_structurePropertyListAST (const GALGAS_structurePropertyListAST & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) ;
+                                                const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mPropertyName (LOCATION_ARGS) const ;
@@ -14584,7 +14584,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -14631,7 +14631,7 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_switchInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_switchInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_switch_5F_instruction (class GALGAS_location inArgument0
@@ -14805,7 +14805,7 @@ class GALGAS_switchCaseListAST : public AC_GALGAS_list {
 
 class cEnumerator_switchCaseListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_switchCaseListAST (const GALGAS_switchCaseListAST & inEnumeratedObject,
-                                         const typeEnumerationOrder inOrder) ;
+                                         const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstringlist current_mCaseIdentifiers (LOCATION_ARGS) const ;
@@ -14867,7 +14867,7 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -14907,7 +14907,7 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_syncDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_syncDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMStructurePropertyListAST (class GALGAS_structurePropertyListAST inArgument0
@@ -14983,7 +14983,7 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15024,7 +15024,7 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_syncInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_syncInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMBranchList (class GALGAS_syncInstructionBranchListAST inArgument0
@@ -15211,7 +15211,7 @@ class GALGAS_syncInstructionBranchListAST : public AC_GALGAS_list {
 
 class cEnumerator_syncInstructionBranchListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_syncInstructionBranchListAST (const GALGAS_syncInstructionBranchListAST & inEnumeratedObject,
-                                                    const typeEnumerationOrder inOrder) ;
+                                                    const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_guardedCommandAST current_mGuardedCommand (LOCATION_ARGS) const ;
@@ -15270,7 +15270,7 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15313,7 +15313,7 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_syncToolInstanceDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_syncToolInstanceDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMSourceExpression (class GALGAS_expressionAST inArgument0
@@ -15394,7 +15394,7 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15455,7 +15455,7 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_systemRoutineDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_systemRoutineDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
@@ -15566,7 +15566,7 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15618,7 +15618,7 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_taskSetupDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_taskSetupDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMDependanceList (class GALGAS_lstringlist inArgument0
@@ -15714,7 +15714,7 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15757,7 +15757,7 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_truncateExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_truncateExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOfExpression (class GALGAS_location inArgument0
@@ -15840,7 +15840,7 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15880,7 +15880,7 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_typeAliasDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_typeAliasDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAliasTypeName (class GALGAS_lstring inArgument0
@@ -15956,7 +15956,7 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -15996,7 +15996,7 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_typeDynamicArrayDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_typeDynamicArrayDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMDynamicArrayTypeName (class GALGAS_lstring inArgument0
@@ -16072,7 +16072,7 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16118,7 +16118,7 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_typeOpaqueDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_typeOpaqueDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAttributeList (class GALGAS_lstringlist inArgument0
@@ -16208,7 +16208,7 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16251,7 +16251,7 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_typedConstantCallAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_typedConstantCallAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMAccessList (class GALGAS_primaryInExpressionAccessListAST inArgument0
@@ -16334,7 +16334,7 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16375,7 +16375,7 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_varDeclarationInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_varDeclarationInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMTypeName (class GALGAS_lstring inArgument0
@@ -16447,7 +16447,7 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16491,7 +16491,7 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_varInstructionWithAssignmentAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_varInstructionWithAssignmentAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMOptionalTypeName (class GALGAS_lstring inArgument0
@@ -16568,7 +16568,7 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16615,7 +16615,7 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_whileInstructionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_whileInstructionAST & inOperand) const ;
 
 //--------------------------------- Setters
   public: VIRTUAL_IN_DEBUG void setter_setMEndOf_5F_test_5F_expression (class GALGAS_location inArgument0
@@ -16697,7 +16697,7 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual typeComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
+  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
 
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
@@ -16741,7 +16741,7 @@ class GALGAS_extendStaticArrayDeclarationDictAST : public AC_GALGAS_root {
   private: void insulate (LOCATION_ARGS) ;
 
 //--- Object compare
-  public: VIRTUAL_IN_DEBUG typeComparisonResult objectCompare (const GALGAS_extendStaticArrayDeclarationDictAST & inOperand) const ;
+  public: VIRTUAL_IN_DEBUG ComparisonResult objectCompare (const GALGAS_extendStaticArrayDeclarationDictAST & inOperand) const ;
 
 //--- Enumeration
   public: void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
@@ -16820,7 +16820,7 @@ class GALGAS_extendStaticArrayDeclarationDictAST : public AC_GALGAS_root {
 
 class cEnumerator_extendStaticArrayDeclarationDictAST : public cGenericAbstractEnumerator {
   public: cEnumerator_extendStaticArrayDeclarationDictAST (const GALGAS_extendStaticArrayDeclarationDictAST & inEnumeratedObject,
-                                                           const typeEnumerationOrder inOrder) ;
+                                                           const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_string current_key (LOCATION_ARGS) const ;
@@ -16850,7 +16850,7 @@ class cEnumAssociatedValues_LValueOperandAST_property : public cEnumAssociatedVa
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_LValueOperandAST_property (void) {}
 } ;
@@ -16872,7 +16872,7 @@ class cEnumAssociatedValues_LValueOperandAST_arrayAccess : public cEnumAssociate
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_LValueOperandAST_arrayAccess (void) {}
 } ;
@@ -16929,7 +16929,7 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterBitSlice & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterBitSlice & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -16983,7 +16983,7 @@ class cEnumAssociatedValues_controlRegisterBitSlice_unusedBits : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (void) {}
 } ;
@@ -17001,7 +17001,7 @@ class cEnumAssociatedValues_controlRegisterBitSlice_namedBit : public cEnumAssoc
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_namedBit (void) {}
 } ;
@@ -17059,7 +17059,7 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterGroupKindAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterGroupKindAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17115,7 +17115,7 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_single (void) {}
 } ;
@@ -17135,7 +17135,7 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (void) {}
 } ;
@@ -17193,7 +17193,7 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_controlRegisterKind & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_controlRegisterKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17253,7 +17253,7 @@ class cEnumAssociatedValues_controlRegisterKind_registerArray : public cEnumAsso
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_controlRegisterKind_registerArray (void) {}
 } ;
@@ -17324,7 +17324,7 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_effectiveArgumentPassingModeAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_effectiveArgumentPassingModeAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17406,7 +17406,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_input : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (void) {}
 } ;
@@ -17426,7 +17426,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType : publ
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (void) {}
 } ;
@@ -17444,7 +17444,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_output : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (void) {}
 } ;
@@ -17460,7 +17460,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput : public
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (void) {}
 } ;
@@ -17476,7 +17476,7 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVaria
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (void) {}
 } ;
@@ -17533,7 +17533,7 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_extendStaticListExpressionAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_extendStaticListExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17587,7 +17587,7 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_expression : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_expression (void) {}
 } ;
@@ -17605,7 +17605,7 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_function : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_function (void) {}
 } ;
@@ -17661,7 +17661,7 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_genericFormalParameter & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_genericFormalParameter & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17713,7 +17713,7 @@ class cEnumAssociatedValues_genericFormalParameter_constant : public cEnumAssoci
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_genericFormalParameter_constant (void) {}
 } ;
@@ -17729,7 +17729,7 @@ class cEnumAssociatedValues_genericFormalParameter_type : public cEnumAssociated
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_genericFormalParameter_type (void) {}
 } ;
@@ -17793,7 +17793,7 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_guardedCommandAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_guardedCommandAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17865,7 +17865,7 @@ class cEnumAssociatedValues_guardedCommandAST_boolean : public cEnumAssociatedVa
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolean (void) {}
 } ;
@@ -17893,7 +17893,7 @@ class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolAndSync (void) {}
 } ;
@@ -17953,7 +17953,7 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_llvmGenerationInstructionElement & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_llvmGenerationInstructionElement & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18013,7 +18013,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_string : public cEn
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_string (void) {}
 } ;
@@ -18029,7 +18029,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_symbol : public cEn
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (void) {}
 } ;
@@ -18045,7 +18045,7 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_type : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_type (void) {}
 } ;
@@ -18114,7 +18114,7 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_primaryInExpressionAccessAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_primaryInExpressionAccessAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18192,7 +18192,7 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_property (void) {}
 } ;
@@ -18210,7 +18210,7 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public c
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (void) {}
 } ;
@@ -18230,7 +18230,7 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (void) {}
 } ;
@@ -18250,7 +18250,7 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (void) {}
 } ;
@@ -18302,7 +18302,7 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_procFormalArgumentPassingMode & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_procFormalArgumentPassingMode & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18402,7 +18402,7 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_propertyKindAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_propertyKindAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18482,7 +18482,7 @@ class cEnumAssociatedValues_propertyKindAST_initializedStoredProperty : public c
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (void) {}
 } ;
@@ -18498,7 +18498,7 @@ class cEnumAssociatedValues_propertyKindAST_initializedConstantProperty : public
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (void) {}
 } ;
@@ -18516,7 +18516,7 @@ class cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (void) {}
 } ;
@@ -18534,7 +18534,7 @@ class cEnumAssociatedValues_propertyKindAST_writeComputedProperty : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_writeComputedProperty (void) {}
 } ;
@@ -18583,7 +18583,7 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_propertyVisibility & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_propertyVisibility & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18631,7 +18631,7 @@ class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociated
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_registerGroupIndexAST_index (void) {}
 } ;
@@ -18655,7 +18655,7 @@ class cEnumAssociatedValues_registerIndexAST_index : public cEnumAssociatedValue
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_registerIndexAST_index (void) {}
 } ;
@@ -18718,7 +18718,7 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_sliceTargetAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_sliceTargetAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18782,7 +18782,7 @@ class cEnumAssociatedValues_sliceTargetAST_varDeclaration : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_varDeclaration (void) {}
 } ;
@@ -18798,7 +18798,7 @@ class cEnumAssociatedValues_sliceTargetAST_letDeclaration : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_letDeclaration (void) {}
 } ;
@@ -18814,7 +18814,7 @@ class cEnumAssociatedValues_sliceTargetAST_lValue : public cEnumAssociatedValues
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_lValue (void) {}
 } ;
@@ -18872,7 +18872,7 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_staticListPropertyTypeAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_staticListPropertyTypeAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18928,7 +18928,7 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_valueType : public cEnumAs
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_valueType (void) {}
 } ;
@@ -18948,7 +18948,7 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_function : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual typeComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
+  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
 
   public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_function (void) {}
 } ;
@@ -19151,7 +19151,7 @@ class GALGAS_checkTargetListAST : public AC_GALGAS_list {
 
 class cEnumerator_checkTargetListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_checkTargetListAST (const GALGAS_checkTargetListAST & inEnumeratedObject,
-                                          const typeEnumerationOrder inOrder) ;
+                                          const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_location current_mTargetConstructLocation (LOCATION_ARGS) const ;
@@ -19286,7 +19286,7 @@ class GALGAS_controlRegisterBitSliceList : public AC_GALGAS_list {
 
 class cEnumerator_controlRegisterBitSliceList : public cGenericAbstractEnumerator {
   public: cEnumerator_controlRegisterBitSliceList (const GALGAS_controlRegisterBitSliceList & inEnumeratedObject,
-                                                   const typeEnumerationOrder inOrder) ;
+                                                   const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_controlRegisterBitSlice current_mRegisterBitSlice (LOCATION_ARGS) const ;
@@ -19496,7 +19496,7 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
 
 class cEnumerator_controlRegisterNameListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_controlRegisterNameListAST (const GALGAS_controlRegisterNameListAST & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
+                                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mRegisterName (LOCATION_ARGS) const ;
@@ -19634,7 +19634,7 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
 
 class cEnumerator_declarationListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_declarationListAST (const GALGAS_declarationListAST & inEnumeratedObject,
-                                          const typeEnumerationOrder inOrder) ;
+                                          const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_abstractDeclarationAST current_mDeclaration (LOCATION_ARGS) const ;
@@ -19768,7 +19768,7 @@ class GALGAS_driverDeclarationListAST : public AC_GALGAS_list {
 
 class cEnumerator_driverDeclarationListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_driverDeclarationListAST (const GALGAS_driverDeclarationListAST & inEnumeratedObject,
-                                                const typeEnumerationOrder inOrder) ;
+                                                const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_driverDeclarationAST current_mDriver (LOCATION_ARGS) const ;
@@ -19921,7 +19921,7 @@ class GALGAS_driverInstanciationArgumentListAST : public AC_GALGAS_list {
 
 class cEnumerator_driverInstanciationArgumentListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_driverInstanciationArgumentListAST (const GALGAS_driverInstanciationArgumentListAST & inEnumeratedObject,
-                                                          const typeEnumerationOrder inOrder) ;
+                                                          const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mSelector (LOCATION_ARGS) const ;
@@ -20075,7 +20075,7 @@ class GALGAS_driverInstanciationListAST : public AC_GALGAS_list {
 
 class cEnumerator_driverInstanciationListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_driverInstanciationListAST (const GALGAS_driverInstanciationListAST & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
+                                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mDriverName (LOCATION_ARGS) const ;
@@ -20229,7 +20229,7 @@ class GALGAS_extendStaticListElementAST : public AC_GALGAS_list {
 
 class cEnumerator_extendStaticListElementAST : public cGenericAbstractEnumerator {
   public: cEnumerator_extendStaticListElementAST (const GALGAS_extendStaticListElementAST & inEnumeratedObject,
-                                                  const typeEnumerationOrder inOrder) ;
+                                                  const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_extendStaticListExpressionAST current_mExpression (LOCATION_ARGS) const ;
@@ -20478,7 +20478,7 @@ class GALGAS_externFunctionDeclarationListAST : public AC_GALGAS_list {
 
 class cEnumerator_externFunctionDeclarationListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_externFunctionDeclarationListAST (const GALGAS_externFunctionDeclarationListAST & inEnumeratedObject,
-                                                        const typeEnumerationOrder inOrder) ;
+                                                        const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mExternProcedureName (LOCATION_ARGS) const ;
@@ -20637,7 +20637,7 @@ class GALGAS_propertyAttributeList : public AC_GALGAS_list {
 
 class cEnumerator_propertyAttributeList : public cGenericAbstractEnumerator {
   public: cEnumerator_propertyAttributeList (const GALGAS_propertyAttributeList & inEnumeratedObject,
-                                             const typeEnumerationOrder inOrder) ;
+                                             const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mAttributeName (LOCATION_ARGS) const ;
@@ -20848,7 +20848,7 @@ class GALGAS_requiredFunctionDeclarationListAST : public AC_GALGAS_list {
 
 class cEnumerator_requiredFunctionDeclarationListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_requiredFunctionDeclarationListAST (const GALGAS_requiredFunctionDeclarationListAST & inEnumeratedObject,
-                                                          const typeEnumerationOrder inOrder) ;
+                                                          const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mName (LOCATION_ARGS) const ;
@@ -21138,7 +21138,7 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 
 class cEnumerator_taskListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_taskListAST (const GALGAS_taskListAST & inEnumeratedObject,
-                                   const typeEnumerationOrder inOrder) ;
+                                   const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mTaskName (LOCATION_ARGS) const ;
@@ -21299,7 +21299,7 @@ class GALGAS_taskSetupListAST : public AC_GALGAS_list {
 
 class cEnumerator_taskSetupListAST : public cGenericAbstractEnumerator {
   public: cEnumerator_taskSetupListAST (const GALGAS_taskSetupListAST & inEnumeratedObject,
-                                        const typeEnumerationOrder inOrder) ;
+                                        const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_mName (LOCATION_ARGS) const ;
@@ -21396,7 +21396,7 @@ class GALGAS_controlRegisterUserAccesMapAST : public AC_GALGAS_map {
 
 class cEnumerator_controlRegisterUserAccesMapAST : public cGenericAbstractEnumerator {
   public: cEnumerator_controlRegisterUserAccesMapAST (const GALGAS_controlRegisterUserAccesMapAST & inEnumeratedObject,
-                                                      const typeEnumerationOrder inOrder) ;
+                                                      const EnumerationOrder inOrder) ;
 
 //--- Current element access
   public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
@@ -21422,7 +21422,7 @@ class cMapElement_controlRegisterUserAccesMapAST : public cMapElement {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual typeComparisonResult compare (const cCollectionElement * inOperand) const ;
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -21605,7 +21605,7 @@ class GALGAS_ast : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_ast & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_ast & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -21764,7 +21764,7 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
 //--------------------------------- Comparison
-  public: typeComparisonResult objectCompare (const GALGAS_driverDeclarationAST & inOperand) const ;
+  public: ComparisonResult objectCompare (const GALGAS_driverDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
