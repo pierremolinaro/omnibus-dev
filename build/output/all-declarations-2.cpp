@@ -835,6 +835,12 @@ GALGAS_globalTaskVariableList GALGAS_globalTaskVariableList::extractObject (cons
 // @abstractDecoratedDeclaration reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_abstractDecoratedDeclaration::cPtr_abstractDecoratedDeclaration (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -866,6 +872,17 @@ ComparisonResult GALGAS_abstractDecoratedDeclaration::objectCompare (const GALGA
 GALGAS_abstractDecoratedDeclaration::GALGAS_abstractDecoratedDeclaration (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_abstractDecoratedDeclaration GALGAS_abstractDecoratedDeclaration::init_28__29_ (Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  cPtr_abstractDecoratedDeclaration * object = nullptr ;
+  macroMyNew (object, cPtr_abstractDecoratedDeclaration (inCompiler COMMA_THERE)) ;
+  const GALGAS_abstractDecoratedDeclaration result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8821,6 +8838,13 @@ GALGAS_arcAssignmentList GALGAS_arcAssignmentList::extractObject (const GALGAS_o
 // @userLLVMTypeDefinitionIR reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_userLLVMTypeDefinitionIR::cPtr_userLLVMTypeDefinitionIR (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE),
+mProperty_mLLVMDefinedTypeName () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_userLLVMTypeDefinitionIR::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -8853,6 +8877,19 @@ ComparisonResult GALGAS_userLLVMTypeDefinitionIR::objectCompare (const GALGAS_us
 GALGAS_userLLVMTypeDefinitionIR::GALGAS_userLLVMTypeDefinitionIR (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_userLLVMTypeDefinitionIR GALGAS_userLLVMTypeDefinitionIR::init_28__29_ (const GALGAS_string & in_mLLVMDefinedTypeName,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_userLLVMTypeDefinitionIR * object = nullptr ;
+  macroMyNew (object, cPtr_userLLVMTypeDefinitionIR (inCompiler COMMA_THERE)) ;
+  object->mProperty_mLLVMDefinedTypeName = in_mLLVMDefinedTypeName ;
+  const GALGAS_userLLVMTypeDefinitionIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10648,6 +10685,12 @@ GALGAS_staticListInvokedFunctionSetMap GALGAS_staticListInvokedFunctionSetMap::e
 // @compiletimeBoolAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compiletimeBoolAST::cPtr_compiletimeBoolAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compiletimeBoolAST::printNonNullClassInstanceProperties (void) const {
     cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
@@ -10684,6 +10727,17 @@ ComparisonResult GALGAS_compiletimeBoolAST::objectCompare (const GALGAS_compilet
 GALGAS_compiletimeBoolAST::GALGAS_compiletimeBoolAST (void) :
 GALGAS_abstractDeclarationAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compiletimeBoolAST GALGAS_compiletimeBoolAST::init_28__29_ (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_compiletimeBoolAST * object = nullptr ;
+  macroMyNew (object, cPtr_compiletimeBoolAST (inCompiler COMMA_THERE)) ;
+  const GALGAS_compiletimeBoolAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10883,6 +10937,12 @@ GALGAS_compiletimeBoolAST_2D_weak GALGAS_compiletimeBoolAST_2D_weak::extractObje
 // @abstractImplicitConverterToBoolean reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_abstractImplicitConverterToBoolean::cPtr_abstractImplicitConverterToBoolean (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -10914,6 +10974,17 @@ ComparisonResult GALGAS_abstractImplicitConverterToBoolean::objectCompare (const
 GALGAS_abstractImplicitConverterToBoolean::GALGAS_abstractImplicitConverterToBoolean (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_abstractImplicitConverterToBoolean GALGAS_abstractImplicitConverterToBoolean::init_28__29_ (Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_abstractImplicitConverterToBoolean * object = nullptr ;
+  macroMyNew (object, cPtr_abstractImplicitConverterToBoolean (inCompiler COMMA_THERE)) ;
+  const GALGAS_abstractImplicitConverterToBoolean result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11086,6 +11157,12 @@ GALGAS_abstractImplicitConverterToBoolean_2D_weak GALGAS_abstractImplicitConvert
 // @prefixOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_prefixOperatorUsage::cPtr_prefixOperatorUsage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -11117,6 +11194,17 @@ ComparisonResult GALGAS_prefixOperatorUsage::objectCompare (const GALGAS_prefixO
 GALGAS_prefixOperatorUsage::GALGAS_prefixOperatorUsage (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_prefixOperatorUsage GALGAS_prefixOperatorUsage::init_28__29_ (Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  cPtr_prefixOperatorUsage * object = nullptr ;
+  macroMyNew (object, cPtr_prefixOperatorUsage (inCompiler COMMA_THERE)) ;
+  const GALGAS_prefixOperatorUsage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11289,6 +11377,12 @@ GALGAS_prefixOperatorUsage_2D_weak GALGAS_prefixOperatorUsage_2D_weak::extractOb
 // @omnibusInfixOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_omnibusInfixOperatorUsage::cPtr_omnibusInfixOperatorUsage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -11320,6 +11414,17 @@ ComparisonResult GALGAS_omnibusInfixOperatorUsage::objectCompare (const GALGAS_o
 GALGAS_omnibusInfixOperatorUsage::GALGAS_omnibusInfixOperatorUsage (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_omnibusInfixOperatorUsage GALGAS_omnibusInfixOperatorUsage::init_28__29_ (Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_omnibusInfixOperatorUsage * object = nullptr ;
+  macroMyNew (object, cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE)) ;
+  const GALGAS_omnibusInfixOperatorUsage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11492,6 +11597,12 @@ GALGAS_omnibusInfixOperatorUsage_2D_weak GALGAS_omnibusInfixOperatorUsage_2D_wea
 // @compileTimeBoolXorOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeBoolXorOperator::cPtr_compileTimeBoolXorOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeBoolXorOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -11528,6 +11639,17 @@ ComparisonResult GALGAS_compileTimeBoolXorOperator::objectCompare (const GALGAS_
 GALGAS_compileTimeBoolXorOperator::GALGAS_compileTimeBoolXorOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeBoolXorOperator GALGAS_compileTimeBoolXorOperator::init_28__29_ (Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeBoolXorOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeBoolXorOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeBoolXorOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11727,6 +11849,12 @@ GALGAS_compileTimeBoolXorOperator_2D_weak GALGAS_compileTimeBoolXorOperator_2D_w
 // @compileTimeBoolOrOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeBoolOrOperator::cPtr_compileTimeBoolOrOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeBoolOrOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -11763,6 +11891,17 @@ ComparisonResult GALGAS_compileTimeBoolOrOperator::objectCompare (const GALGAS_c
 GALGAS_compileTimeBoolOrOperator::GALGAS_compileTimeBoolOrOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeBoolOrOperator GALGAS_compileTimeBoolOrOperator::init_28__29_ (Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeBoolOrOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeBoolOrOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeBoolOrOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11962,6 +12101,12 @@ GALGAS_compileTimeBoolOrOperator_2D_weak GALGAS_compileTimeBoolOrOperator_2D_wea
 // @compileTimeIntAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntAST::cPtr_compileTimeIntAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntAST::printNonNullClassInstanceProperties (void) const {
     cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
@@ -11998,6 +12143,17 @@ ComparisonResult GALGAS_compileTimeIntAST::objectCompare (const GALGAS_compileTi
 GALGAS_compileTimeIntAST::GALGAS_compileTimeIntAST (void) :
 GALGAS_abstractDeclarationAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntAST GALGAS_compileTimeIntAST::init_28__29_ (Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntAST * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntAST (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12197,6 +12353,12 @@ GALGAS_compileTimeIntAST_2D_weak GALGAS_compileTimeIntAST_2D_weak::extractObject
 // @compileTimeIntModuloOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntModuloOperator::cPtr_compileTimeIntModuloOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntModuloOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -12233,6 +12395,17 @@ ComparisonResult GALGAS_compileTimeIntModuloOperator::objectCompare (const GALGA
 GALGAS_compileTimeIntModuloOperator::GALGAS_compileTimeIntModuloOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntModuloOperator GALGAS_compileTimeIntModuloOperator::init_28__29_ (Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntModuloOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntModuloOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntModuloOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12432,6 +12605,12 @@ GALGAS_compileTimeIntModuloOperator_2D_weak GALGAS_compileTimeIntModuloOperator_
 // @compileTimeIntModuloZeroOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntModuloZeroOperator::cPtr_compileTimeIntModuloZeroOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntModuloZeroOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -12468,6 +12647,17 @@ ComparisonResult GALGAS_compileTimeIntModuloZeroOperator::objectCompare (const G
 GALGAS_compileTimeIntModuloZeroOperator::GALGAS_compileTimeIntModuloZeroOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntModuloZeroOperator GALGAS_compileTimeIntModuloZeroOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntModuloZeroOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntModuloZeroOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntModuloZeroOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12667,6 +12857,12 @@ GALGAS_compileTimeIntModuloZeroOperator_2D_weak GALGAS_compileTimeIntModuloZeroO
 // @compileTimeIntDivideOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntDivideOperator::cPtr_compileTimeIntDivideOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntDivideOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -12703,6 +12899,17 @@ ComparisonResult GALGAS_compileTimeIntDivideOperator::objectCompare (const GALGA
 GALGAS_compileTimeIntDivideOperator::GALGAS_compileTimeIntDivideOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntDivideOperator GALGAS_compileTimeIntDivideOperator::init_28__29_ (Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntDivideOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntDivideOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntDivideOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12902,6 +13109,12 @@ GALGAS_compileTimeIntDivideOperator_2D_weak GALGAS_compileTimeIntDivideOperator_
 // @compileTimeIntDivideZeroOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntDivideZeroOperator::cPtr_compileTimeIntDivideZeroOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntDivideZeroOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -12938,6 +13151,17 @@ ComparisonResult GALGAS_compileTimeIntDivideZeroOperator::objectCompare (const G
 GALGAS_compileTimeIntDivideZeroOperator::GALGAS_compileTimeIntDivideZeroOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntDivideZeroOperator GALGAS_compileTimeIntDivideZeroOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntDivideZeroOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntDivideZeroOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntDivideZeroOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13137,6 +13361,12 @@ GALGAS_compileTimeIntDivideZeroOperator_2D_weak GALGAS_compileTimeIntDivideZeroO
 // @compileTimeIntMultiplyOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntMultiplyOperator::cPtr_compileTimeIntMultiplyOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntMultiplyOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -13173,6 +13403,17 @@ ComparisonResult GALGAS_compileTimeIntMultiplyOperator::objectCompare (const GAL
 GALGAS_compileTimeIntMultiplyOperator::GALGAS_compileTimeIntMultiplyOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntMultiplyOperator GALGAS_compileTimeIntMultiplyOperator::init_28__29_ (Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntMultiplyOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntMultiplyOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntMultiplyOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13372,6 +13613,12 @@ GALGAS_compileTimeIntMultiplyOperator_2D_weak GALGAS_compileTimeIntMultiplyOpera
 // @compileTimeIntSubtractOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntSubtractOperator::cPtr_compileTimeIntSubtractOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntSubtractOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -13408,6 +13655,17 @@ ComparisonResult GALGAS_compileTimeIntSubtractOperator::objectCompare (const GAL
 GALGAS_compileTimeIntSubtractOperator::GALGAS_compileTimeIntSubtractOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntSubtractOperator GALGAS_compileTimeIntSubtractOperator::init_28__29_ (Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntSubtractOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntSubtractOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntSubtractOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13607,6 +13865,12 @@ GALGAS_compileTimeIntSubtractOperator_2D_weak GALGAS_compileTimeIntSubtractOpera
 // @compileTimeIntEqualOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntEqualOperator::cPtr_compileTimeIntEqualOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntEqualOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -13643,6 +13907,17 @@ ComparisonResult GALGAS_compileTimeIntEqualOperator::objectCompare (const GALGAS
 GALGAS_compileTimeIntEqualOperator::GALGAS_compileTimeIntEqualOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntEqualOperator GALGAS_compileTimeIntEqualOperator::init_28__29_ (Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntEqualOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntEqualOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntEqualOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13842,6 +14117,12 @@ GALGAS_compileTimeIntEqualOperator_2D_weak GALGAS_compileTimeIntEqualOperator_2D
 // @compileTimeIntAddOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntAddOperator::cPtr_compileTimeIntAddOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntAddOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -13878,6 +14159,17 @@ ComparisonResult GALGAS_compileTimeIntAddOperator::objectCompare (const GALGAS_c
 GALGAS_compileTimeIntAddOperator::GALGAS_compileTimeIntAddOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntAddOperator GALGAS_compileTimeIntAddOperator::init_28__29_ (Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntAddOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntAddOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntAddOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14077,6 +14369,12 @@ GALGAS_compileTimeIntAddOperator_2D_weak GALGAS_compileTimeIntAddOperator_2D_wea
 // @compileTimeIntBitWiseAndOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntBitWiseAndOperator::cPtr_compileTimeIntBitWiseAndOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntBitWiseAndOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -14113,6 +14411,17 @@ ComparisonResult GALGAS_compileTimeIntBitWiseAndOperator::objectCompare (const G
 GALGAS_compileTimeIntBitWiseAndOperator::GALGAS_compileTimeIntBitWiseAndOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntBitWiseAndOperator GALGAS_compileTimeIntBitWiseAndOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntBitWiseAndOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntBitWiseAndOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntBitWiseAndOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14312,6 +14621,12 @@ GALGAS_compileTimeIntBitWiseAndOperator_2D_weak GALGAS_compileTimeIntBitWiseAndO
 // @compileTimeIntShiftLeftOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntShiftLeftOperator::cPtr_compileTimeIntShiftLeftOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntShiftLeftOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -14348,6 +14663,17 @@ ComparisonResult GALGAS_compileTimeIntShiftLeftOperator::objectCompare (const GA
 GALGAS_compileTimeIntShiftLeftOperator::GALGAS_compileTimeIntShiftLeftOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntShiftLeftOperator GALGAS_compileTimeIntShiftLeftOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntShiftLeftOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntShiftLeftOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntShiftLeftOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14547,6 +14873,12 @@ GALGAS_compileTimeIntShiftLeftOperator_2D_weak GALGAS_compileTimeIntShiftLeftOpe
 // @compileTimeIntShiftRightOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntShiftRightOperator::cPtr_compileTimeIntShiftRightOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntShiftRightOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -14583,6 +14915,17 @@ ComparisonResult GALGAS_compileTimeIntShiftRightOperator::objectCompare (const G
 GALGAS_compileTimeIntShiftRightOperator::GALGAS_compileTimeIntShiftRightOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntShiftRightOperator GALGAS_compileTimeIntShiftRightOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntShiftRightOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntShiftRightOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntShiftRightOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14782,6 +15125,12 @@ GALGAS_compileTimeIntShiftRightOperator_2D_weak GALGAS_compileTimeIntShiftRightO
 // @compileTimeIntLessThanOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntLessThanOperator::cPtr_compileTimeIntLessThanOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntLessThanOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -14818,6 +15167,17 @@ ComparisonResult GALGAS_compileTimeIntLessThanOperator::objectCompare (const GAL
 GALGAS_compileTimeIntLessThanOperator::GALGAS_compileTimeIntLessThanOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntLessThanOperator GALGAS_compileTimeIntLessThanOperator::init_28__29_ (Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntLessThanOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntLessThanOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntLessThanOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15017,6 +15377,12 @@ GALGAS_compileTimeIntLessThanOperator_2D_weak GALGAS_compileTimeIntLessThanOpera
 // @compileTimeIntLowerOrEqualOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntLowerOrEqualOperator::cPtr_compileTimeIntLowerOrEqualOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntLowerOrEqualOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -15053,6 +15419,17 @@ ComparisonResult GALGAS_compileTimeIntLowerOrEqualOperator::objectCompare (const
 GALGAS_compileTimeIntLowerOrEqualOperator::GALGAS_compileTimeIntLowerOrEqualOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntLowerOrEqualOperator GALGAS_compileTimeIntLowerOrEqualOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntLowerOrEqualOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntLowerOrEqualOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntLowerOrEqualOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15252,6 +15629,12 @@ GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak GALGAS_compileTimeIntLowerOrEq
 // @compileTimeIntXorOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntXorOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -15288,6 +15671,17 @@ ComparisonResult GALGAS_compileTimeIntXorOperator::objectCompare (const GALGAS_c
 GALGAS_compileTimeIntXorOperator::GALGAS_compileTimeIntXorOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator::init_28__29_ (Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntXorOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntXorOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntXorOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15487,6 +15881,12 @@ GALGAS_compileTimeIntXorOperator_2D_weak GALGAS_compileTimeIntXorOperator_2D_wea
 // @compileTimeIntBitWiseOrOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntBitWiseOrOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -15523,6 +15923,17 @@ ComparisonResult GALGAS_compileTimeIntBitWiseOrOperator::objectCompare (const GA
 GALGAS_compileTimeIntBitWiseOrOperator::GALGAS_compileTimeIntBitWiseOrOperator (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntBitWiseOrOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntBitWiseOrOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntBitWiseOrOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15722,6 +16133,12 @@ GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOpe
 // @compileTimeIntMinusOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntMinusOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -15758,6 +16175,17 @@ ComparisonResult GALGAS_compileTimeIntMinusOperator::objectCompare (const GALGAS
 GALGAS_compileTimeIntMinusOperator::GALGAS_compileTimeIntMinusOperator (void) :
 GALGAS_prefixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::init_28__29_ (Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntMinusOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntMinusOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntMinusOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15957,6 +16385,12 @@ GALGAS_compileTimeIntMinusOperator_2D_weak GALGAS_compileTimeIntMinusOperator_2D
 // @compileTimeIntComplementOperator reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeIntComplementOperator::cPtr_compileTimeIntComplementOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeIntComplementOperator::printNonNullClassInstanceProperties (void) const {
     cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -15993,6 +16427,17 @@ ComparisonResult GALGAS_compileTimeIntComplementOperator::objectCompare (const G
 GALGAS_compileTimeIntComplementOperator::GALGAS_compileTimeIntComplementOperator (void) :
 GALGAS_prefixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeIntComplementOperator GALGAS_compileTimeIntComplementOperator::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntComplementOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntComplementOperator (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeIntComplementOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16183,476 +16628,6 @@ GALGAS_compileTimeIntComplementOperator_2D_weak GALGAS_compileTimeIntComplementO
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntComplementOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @boolTypeAST reference class
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolTypeAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_boolTypeAST::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
-ComparisonResult GALGAS_boolTypeAST::objectCompare (const GALGAS_boolTypeAST & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST::GALGAS_boolTypeAST (void) :
-GALGAS_abstractDeclarationAST () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST::GALGAS_boolTypeAST (const cPtr_boolTypeAST * inSourcePtr) :
-GALGAS_abstractDeclarationAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolTypeAST) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST GALGAS_boolTypeAST::class_func_new (LOCATION_ARGS) {
-  GALGAS_boolTypeAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolTypeAST (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @boolTypeAST class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_boolTypeAST::cPtr_boolTypeAST (LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_boolTypeAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolTypeAST ;
-}
-
-void cPtr_boolTypeAST::description (String & ioString,
-                                    const int32_t /* inIndentation */) const {
-  ioString.appendCString ("[@boolTypeAST]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_boolTypeAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolTypeAST (THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @boolTypeAST generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolTypeAST ("boolTypeAST",
-                                                                   & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_boolTypeAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolTypeAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_boolTypeAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolTypeAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST GALGAS_boolTypeAST::extractObject (const GALGAS_object & inObject,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_boolTypeAST result ;
-  const GALGAS_boolTypeAST * p = (const GALGAS_boolTypeAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_boolTypeAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolTypeAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_boolTypeAST_2D_weak::objectCompare (const GALGAS_boolTypeAST_2D_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST_2D_weak::GALGAS_boolTypeAST_2D_weak (void) :
-GALGAS_abstractDeclarationAST_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST_2D_weak & GALGAS_boolTypeAST_2D_weak::operator = (const GALGAS_boolTypeAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST_2D_weak::GALGAS_boolTypeAST_2D_weak (const GALGAS_boolTypeAST & inSource) :
-GALGAS_abstractDeclarationAST_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST_2D_weak GALGAS_boolTypeAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_boolTypeAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST GALGAS_boolTypeAST_2D_weak::bang_boolTypeAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_boolTypeAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_boolTypeAST) ;
-      result = GALGAS_boolTypeAST ((cPtr_boolTypeAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @boolTypeAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolTypeAST_2D_weak ("boolTypeAST-weak",
-                                                                           & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_boolTypeAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolTypeAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_boolTypeAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolTypeAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolTypeAST_2D_weak GALGAS_boolTypeAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_boolTypeAST_2D_weak result ;
-  const GALGAS_boolTypeAST_2D_weak * p = (const GALGAS_boolTypeAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_boolTypeAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolTypeAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @boolImplicitConverterToBoolean reference class
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_boolImplicitConverterToBoolean::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
-ComparisonResult GALGAS_boolImplicitConverterToBoolean::objectCompare (const GALGAS_boolImplicitConverterToBoolean & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (void) :
-GALGAS_abstractImplicitConverterToBoolean () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (const cPtr_boolImplicitConverterToBoolean * inSourcePtr) :
-GALGAS_abstractImplicitConverterToBoolean (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolImplicitConverterToBoolean) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::class_func_new (LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @boolImplicitConverterToBoolean class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (LOCATION_ARGS) :
-cPtr_abstractImplicitConverterToBoolean (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_boolImplicitConverterToBoolean::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
-}
-
-void cPtr_boolImplicitConverterToBoolean::description (String & ioString,
-                                                       const int32_t /* inIndentation */) const {
-  ioString.appendCString ("[@boolImplicitConverterToBoolean]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @boolImplicitConverterToBoolean generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ("boolImplicitConverterToBoolean",
-                                                                                      & kTypeDescriptor_GALGAS_abstractImplicitConverterToBoolean) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolImplicitConverterToBoolean (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::extractObject (const GALGAS_object & inObject,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean result ;
-  const GALGAS_boolImplicitConverterToBoolean * p = (const GALGAS_boolImplicitConverterToBoolean *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolImplicitConverterToBoolean", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_boolImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_boolImplicitConverterToBoolean_2D_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean_2D_weak::GALGAS_boolImplicitConverterToBoolean_2D_weak (void) :
-GALGAS_abstractImplicitConverterToBoolean_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean_2D_weak & GALGAS_boolImplicitConverterToBoolean_2D_weak::operator = (const GALGAS_boolImplicitConverterToBoolean & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean_2D_weak::GALGAS_boolImplicitConverterToBoolean_2D_weak (const GALGAS_boolImplicitConverterToBoolean & inSource) :
-GALGAS_abstractImplicitConverterToBoolean_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean_2D_weak GALGAS_boolImplicitConverterToBoolean_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean_2D_weak::bang_boolImplicitConverterToBoolean_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_boolImplicitConverterToBoolean result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_boolImplicitConverterToBoolean) ;
-      result = GALGAS_boolImplicitConverterToBoolean ((cPtr_boolImplicitConverterToBoolean *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @boolImplicitConverterToBoolean-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean_2D_weak ("boolImplicitConverterToBoolean-weak",
-                                                                                              & kTypeDescriptor_GALGAS_abstractImplicitConverterToBoolean_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolImplicitConverterToBoolean_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean_2D_weak GALGAS_boolImplicitConverterToBoolean_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                            Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean_2D_weak result ;
-  const GALGAS_boolImplicitConverterToBoolean_2D_weak * p = (const GALGAS_boolImplicitConverterToBoolean_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolImplicitConverterToBoolean-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

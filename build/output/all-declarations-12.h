@@ -10,6 +10,20 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Extension setter '@semanticContext insertGetter'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertGetter (class GALGAS_semanticContext & ioObject,
+                                   const class GALGAS_lstring constin_inTypeName,
+                                   const class GALGAS_lstring constin_inGetterName,
+                                   const class GALGAS_propertyVisibility constin_inVisibility,
+                                   const class GALGAS_propertyGetterKind constin_inAccess,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension setter '@semanticContext addComputedPropertyGetter'
 //
 //--------------------------------------------------------------------------------------------------
@@ -644,194 +658,4 @@ class GALGAS_string function_assignmentOperatorFuncName (const class GALGAS_omni
 class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GALGAS_omnibusType & constinArgument0,
                                                                                   class Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'addIntegerInfixOperator???&?'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_addIntegerInfixOperator_3F__3F__3F__26__3F_ (const class GALGAS_omnibusInfixOperator constinArgument0,
-                                                          const class GALGAS_omnibusType constinArgument1,
-                                                          const class GALGAS_string constinArgument2,
-                                                          class GALGAS_infixOperatorMap & ioArgument3,
-                                                          const class GALGAS_omnibusType constinArgument4,
-                                                          class Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'copyableAttribute'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_copyableAttribute (class Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'minValueForInteger'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'maxValueForInteger'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
-                                                 const class GALGAS_uint & constinArgument1,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'instantiableAttribute'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_instantiableAttribute (class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'registerGroupNameFromOmnibusName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_lstring function_registerGroupNameFromOmnibusName (const class GALGAS_lstring & constinArgument0,
-                                                                class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Filewrapper 'controlRegisterDumpGenerationTemplate'
-//
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplate ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'
-//
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class Compiler * inCompiler,
-                                                                                    const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                                    const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                    const class GALGAS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'
-//
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class Compiler * inCompiler,
-                                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                                       const class GALGAS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                       const class GALGAS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
-                                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'buildControlRegisterMaps???&&&'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_buildControlRegisterMaps_3F__3F__3F__26__26__26_ (const class GALGAS_controlRegisterMap constinArgument0,
-                                                               const class GALGAS_bigint constinArgument1,
-                                                               const class GALGAS_string constinArgument2,
-                                                               class GALGAS_controlRegisterByAddress & ioArgument3,
-                                                               class GALGAS_controlRegisterByName & ioArgument4,
-                                                               class GALGAS_uint & ioArgument5,
-                                                               class Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'arrayIndexListFor'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_uintlist function_arrayIndexListFor (const class GALGAS_uint & constinArgument0,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'fieldIndexColumns'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_fieldIndexColumns (const class GALGAS_uint & constinArgument0,
-                                                class Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Filewrapper 'constantDumpGenerationTemplate'
-//
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Filewrapper template 'constantDumpGenerationTemplate dump'
-//
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class Compiler * inCompiler,
-                                                                       const class GALGAS_string & in_PROJECT_5F_NAME,
-                                                                       const class GALGAS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
-                                                                       const class GALGAS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                       const class GALGAS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'linkForGlobalConstant'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_string function_linkForGlobalConstant (const class GALGAS_string & constinArgument0,
-                                                    class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'retainRequiredDrivers&'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_retainRequiredDrivers_26_ (class GALGAS_ast & ioArgument0,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
 

@@ -28,6 +28,8 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -195,14 +197,23 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
     mProperty_mValue_31_ = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS__32_lstringlist_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS__32_lstringlist_2D_element (const GALGAS_lstring & in_mValue_30_,
                                              const GALGAS_lstring & in_mValue_31_) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS__32_lstringlist_2D_element init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                     const class GALGAS_lstring & inOperand1,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2370,6 +2381,10 @@ class GALGAS_abstractLLVMInstruction : public AC_GALGAS_reference_class {
 //--------------------------------- Property read access
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_abstractLLVMInstruction init_28__29_ (Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -2412,18 +2427,22 @@ class cPtr_abstractLLVMInstruction : public acStrongPtr_class {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkInstructionList
-  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & ioMap,
+  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & arg_ioMap,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method generateIRCode
-  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & ioVarMap,
-           class GALGAS_assignmentGenerationVarMap & ioTypeMap,
-           class GALGAS_stringlist & ioInstructionAsStringListIR,
-           class GALGAS_uint & ioTemporaryIndex,
-           class GALGAS_allocaList & ioAllocaList,
+  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & arg_ioVarMap,
+           class GALGAS_assignmentGenerationVarMap & arg_ioTypeMap,
+           class GALGAS_stringlist & arg_ioInstructionAsStringListIR,
+           class GALGAS_uint & arg_ioTemporaryIndex,
+           class GALGAS_allocaList & arg_ioAllocaList,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_abstractLLVMInstruction (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_abstractLLVMInstruction (LOCATION_ARGS) ;
@@ -2454,6 +2473,10 @@ class GALGAS_expressionAST : public AC_GALGAS_reference_class {
 
 //--------------------------------- Property read access
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_expressionAST init_28__29_ (Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2497,29 +2520,33 @@ class cPtr_expressionAST : public acStrongPtr_class {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_expressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_expressionAST (LOCATION_ARGS) ;
@@ -2552,6 +2579,11 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
   public: class GALGAS_controlRegisterLValueAST readProperty_mControlRegisterLValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_addressofControlRegisterAST init_28__29_ (const class GALGAS_controlRegisterLValueAST & inOperand0,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2621,6 +2653,8 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2710,6 +2744,8 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2820,8 +2856,11 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
     mProperty_mRegisterIndex = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_controlRegisterLValueAST (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_controlRegisterLValueAST (const GALGAS_lstring & in_mRegisterGroupName,
@@ -2830,6 +2869,14 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
                                            const GALGAS_registerIndexAST & in_mRegisterIndex) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_controlRegisterLValueAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                           const class GALGAS_registerGroupIndexAST & inOperand1,
+                                                                           const class GALGAS_lstring & inOperand2,
+                                                                           const class GALGAS_registerIndexAST & inOperand3,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2884,30 +2931,34 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
+
+
+//--- Default constructor
+  public: cPtr_addressofControlRegisterAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_addressofControlRegisterAST (const GALGAS_controlRegisterLValueAST & in_mControlRegisterLValue
@@ -2944,6 +2995,11 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_LValueAST readProperty_mLValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_addressofExpressionAST init_28__29_ (const class GALGAS_LValueAST & inOperand0,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3014,6 +3070,8 @@ class GALGAS_LValueOperandAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3123,14 +3181,23 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
     mProperty_mOperand = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_LValueAST (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_LValueAST (const GALGAS_lstring & in_mIdentifier,
                             const GALGAS_LValueOperandAST & in_mOperand) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_LValueAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                    const class GALGAS_LValueOperandAST & inOperand1,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3183,30 +3250,34 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
+
+
+//--- Default constructor
+  public: cPtr_addressofExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_addressofExpressionAST (const GALGAS_LValueAST & in_mLValue
@@ -3243,6 +3314,11 @@ class GALGAS_instructionAST : public AC_GALGAS_reference_class {
   public: class GALGAS_location readProperty_mInstructionLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_instructionAST init_28__29_ (const class GALGAS_location & inOperand0,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3289,23 +3365,27 @@ class cPtr_instructionAST : public acStrongPtr_class {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
   public: GALGAS_location mProperty_mInstructionLocation ;
+
+
+//--- Default constructor
+  public: cPtr_instructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_instructionAST (const GALGAS_location & in_mInstructionLocation
@@ -3339,6 +3419,12 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_assertInstructionAST init_28__2C__29_ (const class GALGAS_location & inOperand0,
+                                                               const class GALGAS_expressionAST & inOperand1,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3390,23 +3476,27 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
+
+
+//--- Default constructor
+  public: cPtr_assertInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_assertInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -3446,6 +3536,13 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_assignmentInstructionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                       const class GALGAS_LValueAST & inOperand1,
+                                                                       const class GALGAS_expressionAST & inOperand2,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3501,24 +3598,28 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_LValueAST mProperty_mTargetAST ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_assignmentInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_assignmentInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -3565,6 +3666,16 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mSourceExpressionLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_bitbandInstructionAST init_28__2C__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                const class GALGAS_controlRegisterLValueAST & inOperand1,
+                                                                                const class GALGAS_expressionAST & inOperand2,
+                                                                                const class GALGAS_location & inOperand3,
+                                                                                const class GALGAS_expressionAST & inOperand4,
+                                                                                const class GALGAS_location & inOperand5,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3632,19 +3743,19 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -3653,6 +3764,10 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
   public: GALGAS_location mProperty_mBitExpressionLocation ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
   public: GALGAS_location mProperty_mSourceExpressionLocation ;
+
+
+//--- Default constructor
+  public: cPtr_bitbandInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_bitbandInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -3698,6 +3813,13 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
   public: class GALGAS_expressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_booleanShortCircuitAndOperatorExpressionAST init_28__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                                          const class GALGAS_location & inOperand1,
+                                                                                          const class GALGAS_expressionAST & inOperand2,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3756,32 +3878,36 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mLeftExpression ;
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_expressionAST mProperty_mRightExpression ;
+
+
+//--- Default constructor
+  public: cPtr_booleanShortCircuitAndOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_booleanShortCircuitAndOperatorExpressionAST (const GALGAS_expressionAST & in_mLeftExpression,
@@ -3822,6 +3948,13 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOfArguments (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_callInstructionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                 const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                 const class GALGAS_location & inOperand2,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3879,6 +4012,8 @@ class GALGAS_effectiveArgumentListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4025,19 +4160,23 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method baseGuardAnalyze
-  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_guardKindGenerationIR & outConvenienceGuardGenerationIR,
+  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_guardKindGenerationIR & arg_outConvenienceGuardGenerationIR,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
   public: GALGAS_location mProperty_mEndOfArguments ;
+
+
+//--- Default constructor
+  public: cPtr_callInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_callInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -4075,6 +4214,13 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_checkInstructionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                  const class GALGAS_lstring & inOperand1,
+                                                                  const class GALGAS_expressionAST & inOperand2,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4130,24 +4276,28 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mCheckMessage ;
   public: GALGAS_expressionAST mProperty_mExpression ;
+
+
+//--- Default constructor
+  public: cPtr_checkInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_checkInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -4184,6 +4334,10 @@ class GALGAS_abstractDeclarationAST : public AC_GALGAS_reference_class {
 
 //--------------------------------- Property read access
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_abstractDeclarationAST init_28__29_ (Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4233,26 +4387,30 @@ class cPtr_abstractDeclarationAST : public acStrongPtr_class {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const = 0 ;
 
 //--- Extension method enterExtension
-  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & ioExtendStaticArrayDeclarationAST,
-           class GALGAS_abstractDeclarationAST & outNewDeclaration,
+  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & arg_ioExtendStaticArrayDeclarationAST,
+           class GALGAS_abstractDeclarationAST & arg_outNewDeclaration,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_abstractDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_abstractDeclarationAST (LOCATION_ARGS) ;
@@ -4291,6 +4449,14 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
   public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_compileTimeConvertToBooleanAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                 const class GALGAS_lstring & inOperand1,
+                                                                                 const class GALGAS_lstring & inOperand2,
+                                                                                 const class GALGAS_ctExpressionAST & inOperand3,
+                                                                                 Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4357,6 +4523,10 @@ class GALGAS_ctExpressionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Property read access
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_ctExpressionAST init_28__29_ (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -4399,15 +4569,19 @@ class cPtr_ctExpressionAST : public acStrongPtr_class {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) = 0 ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_ctExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctExpressionAST (LOCATION_ARGS) ;
@@ -4441,18 +4615,18 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -4460,6 +4634,10 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mConverterName ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
+
+
+//--- Default constructor
+  public: cPtr_compileTimeConvertToBooleanAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_compileTimeConvertToBooleanAST (const GALGAS_lstring & in_mReceiverName,
@@ -4513,6 +4691,18 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
   public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_compileTimeInfixOperatorAST init_28__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_compileTimeInfixOperatorEnumeration & inOperand0,
+                                                                                              const class GALGAS_location & inOperand1,
+                                                                                              const class GALGAS_lstring & inOperand2,
+                                                                                              const class GALGAS_lstring & inOperand3,
+                                                                                              const class GALGAS_lstring & inOperand4,
+                                                                                              const class GALGAS_lstring & inOperand5,
+                                                                                              const class GALGAS_ctExpressionAST & inOperand6,
+                                                                                              const class GALGAS_lstring & inOperand7,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4617,6 +4807,8 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4754,18 +4946,18 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -4777,6 +4969,10 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mRightTypeName ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mResultTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_compileTimeInfixOperatorAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_compileTimeInfixOperatorAST (const GALGAS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
@@ -4830,6 +5026,16 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
   public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_compiletimePrefixOperatorAST init_28__2C__2C__2C__2C__2C__29_ (const class GALGAS_compileTimePrefixOperatorEnumeration & inOperand0,
+                                                                                       const class GALGAS_location & inOperand1,
+                                                                                       const class GALGAS_lstring & inOperand2,
+                                                                                       const class GALGAS_lstring & inOperand3,
+                                                                                       const class GALGAS_ctExpressionAST & inOperand4,
+                                                                                       const class GALGAS_lstring & inOperand5,
+                                                                                       Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4915,6 +5121,8 @@ class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -4979,18 +5187,18 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -5000,6 +5208,10 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mResultTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_compiletimePrefixOperatorAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_compiletimePrefixOperatorAST (const GALGAS_compileTimePrefixOperatorEnumeration & in_mPrefixOperator,
@@ -5045,6 +5257,13 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mErrorLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_constructorCallAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                 const class GALGAS_functionCallEffectiveParameterListAST & inOperand1,
+                                                                 const class GALGAS_location & inOperand2,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5111,6 +5330,8 @@ class GALGAS_functionCallEffectiveParameterListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5257,32 +5478,36 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_functionCallEffectiveParameterListAST mProperty_mParameterList ;
   public: GALGAS_location mProperty_mErrorLocation ;
+
+
+//--- Default constructor
+  public: cPtr_constructorCallAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_constructorCallAST (const GALGAS_lstring & in_mTypeName,
@@ -5325,6 +5550,14 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_controlRegisterAssignmentInstructionAST init_28__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                          const class GALGAS_controlRegisterLValueAST & inOperand1,
+                                                                                          const class GALGAS_controlRegisterAssignmentOperatorKind & inOperand2,
+                                                                                          const class GALGAS_expressionAST & inOperand3,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5403,6 +5636,8 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5500,6 +5735,8 @@ class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5677,25 +5914,29 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_controlRegisterAssignmentOperatorKind mProperty_mAssignmentKind ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_controlRegisterAssignmentInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_controlRegisterAssignmentInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -5737,6 +5978,12 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
   public: class GALGAS_controlRegisterDeclarationList readProperty_mRegisters (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_controlRegisterGroupDeclarationAST init_28__2C__29_ (const class GALGAS_registerGroupListAST & inOperand0,
+                                                                             const class GALGAS_controlRegisterDeclarationList & inOperand1,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5801,6 +6048,8 @@ class GALGAS_controlRegisterDeclarationList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5994,6 +6243,8 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -6145,27 +6396,31 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteTypesInPrecedenceGraph
-  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Properties
   public: GALGAS_registerGroupListAST mProperty_mRegisterGroupList ;
   public: GALGAS_controlRegisterDeclarationList mProperty_mRegisters ;
+
+
+//--- Default constructor
+  public: cPtr_controlRegisterGroupDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_controlRegisterGroupDeclarationAST (const GALGAS_registerGroupListAST & in_mRegisterGroupList,
@@ -6207,6 +6462,13 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_convertExpressionAST init_28__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                   const class GALGAS_lstring & inOperand1,
+                                                                   const class GALGAS_location & inOperand2,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6265,32 +6527,36 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
+
+
+//--- Default constructor
+  public: cPtr_convertExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_convertExpressionAST (const GALGAS_expressionAST & in_mExpression,
@@ -6327,6 +6593,10 @@ class GALGAS_ctFalseExpressionAST : public GALGAS_ctExpressionAST {
 
 //--------------------------------- Property read access
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctFalseExpressionAST init_28__29_ (Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6373,15 +6643,19 @@ class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_ctFalseExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctFalseExpressionAST (LOCATION_ARGS) ;
@@ -6417,6 +6691,11 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
   public: class GALGAS_lstring readProperty_mIdentifier (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctIdentifierExpressionAST init_28__29_ (const class GALGAS_lstring & inOperand0,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6467,16 +6746,20 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
+
+
+//--- Default constructor
+  public: cPtr_ctIdentifierExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctIdentifierExpressionAST (const GALGAS_lstring & in_mIdentifier
@@ -6519,6 +6802,14 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
   public: class GALGAS_ctExpressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctInfixExpressionAST init_28__2C__2C__2C__29_ (const class GALGAS_ctExpressionAST & inOperand0,
+                                                                       const class GALGAS_location & inOperand1,
+                                                                       const class GALGAS_compileTimeInfixOperatorEnumeration & inOperand2,
+                                                                       const class GALGAS_ctExpressionAST & inOperand3,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6581,12 +6872,12 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -6594,6 +6885,10 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_compileTimeInfixOperatorEnumeration mProperty_mInfixOperator ;
   public: GALGAS_ctExpressionAST mProperty_mRightExpression ;
+
+
+//--- Default constructor
+  public: cPtr_ctInfixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctInfixExpressionAST (const GALGAS_ctExpressionAST & in_mLeftExpression,
@@ -6633,6 +6928,11 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
   public: class GALGAS_lbigint readProperty_mValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctIntExpressionAST init_28__29_ (const class GALGAS_lbigint & inOperand0,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6683,16 +6983,20 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lbigint mProperty_mValue ;
+
+
+//--- Default constructor
+  public: cPtr_ctIntExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctIntExpressionAST (const GALGAS_lbigint & in_mValue
@@ -6733,6 +7037,13 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
   public: class GALGAS_ctExpressionAST readProperty_mExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctPrefixExpressionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                    const class GALGAS_compileTimePrefixOperatorEnumeration & inOperand1,
+                                                                    const class GALGAS_ctExpressionAST & inOperand2,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6791,18 +7102,22 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_compileTimePrefixOperatorEnumeration mProperty_mPrefixOperator ;
   public: GALGAS_ctExpressionAST mProperty_mExpression ;
+
+
+//--- Default constructor
+  public: cPtr_ctPrefixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctPrefixExpressionAST (const GALGAS_location & in_mOperatorLocation,
@@ -6839,6 +7154,10 @@ class GALGAS_ctTrueExpressionAST : public GALGAS_ctExpressionAST {
 
 //--------------------------------- Property read access
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ctTrueExpressionAST init_28__29_ (Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6885,15 +7204,19 @@ class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkCompileTimeExpression
-  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap inMap,
+  public: virtual void method_checkCompileTimeExpression (const class GALGAS_ctCheckMap arg_inMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method computeCompileTimeExpression
-  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap inMap,
-           class GALGAS_bigint & outValue,
+  public: virtual void method_computeCompileTimeExpression (const class GALGAS_ctMap arg_inMap,
+           class GALGAS_bigint & arg_outValue,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_ctTrueExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ctTrueExpressionAST (LOCATION_ARGS) ;
@@ -6931,6 +7254,12 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_enumerationConstantList readProperty_mCaseNameList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_enumerationDeclarationAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                    const class GALGAS_enumerationConstantList & inOperand1,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -6993,6 +7322,8 @@ class GALGAS_enumerationConstantList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7145,23 +7476,27 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mEnumerationName ;
   public: GALGAS_enumerationConstantList mProperty_mCaseNameList ;
+
+
+//--- Default constructor
+  public: cPtr_enumerationDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_enumerationDeclarationAST (const GALGAS_lstring & in_mEnumerationName,
@@ -7203,6 +7538,13 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_extendExpressionAST init_28__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                  const class GALGAS_lstring & inOperand1,
+                                                                  const class GALGAS_location & inOperand2,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7261,32 +7603,36 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
+
+
+//--- Default constructor
+  public: cPtr_extendExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_extendExpressionAST (const GALGAS_expressionAST & in_mExpression,
@@ -7331,6 +7677,14 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
   public: class GALGAS_location readProperty_mSizeExpressionLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_fixedSizeArrayTypeDeclarationAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                   const class GALGAS_lstring & inOperand1,
+                                                                                   const class GALGAS_expressionAST & inOperand2,
+                                                                                   const class GALGAS_location & inOperand3,
+                                                                                   Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7399,18 +7753,18 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -7418,6 +7772,10 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
   public: GALGAS_lstring mProperty_mElementTypeName ;
   public: GALGAS_expressionAST mProperty_mSizeExpression ;
   public: GALGAS_location mProperty_mSizeExpressionLocation ;
+
+
+//--- Default constructor
+  public: cPtr_fixedSizeArrayTypeDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_fixedSizeArrayTypeDeclarationAST (const GALGAS_lstring & in_mFixedSizeArrayType,
@@ -7469,6 +7827,18 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_for_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_forInstructionAST init_28__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                    const class GALGAS_lstring & inOperand1,
+                                                                                    const class GALGAS_lstring & inOperand2,
+                                                                                    const class GALGAS_expressionAST & inOperand3,
+                                                                                    const class GALGAS_location & inOperand4,
+                                                                                    const class GALGAS_bool & inOperand5,
+                                                                                    const class GALGAS_instructionListAST & inOperand6,
+                                                                                    const class GALGAS_location & inOperand7,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7551,6 +7921,8 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7678,19 +8050,19 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -7701,6 +8073,10 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public: GALGAS_bool mProperty_mStaticWhileExpression ;
   public: GALGAS_instructionListAST mProperty_mDoInstructionList ;
   public: GALGAS_location mProperty_mEndOf_5F_for_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_forInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_forInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -7758,6 +8134,19 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_do_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_forLowerUpperBoundInstructionAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                                       const class GALGAS_lstring & inOperand1,
+                                                                                                       const class GALGAS_lstring & inOperand2,
+                                                                                                       const class GALGAS_expressionAST & inOperand3,
+                                                                                                       const class GALGAS_location & inOperand4,
+                                                                                                       const class GALGAS_expressionAST & inOperand5,
+                                                                                                       const class GALGAS_location & inOperand6,
+                                                                                                       const class GALGAS_instructionListAST & inOperand7,
+                                                                                                       const class GALGAS_location & inOperand8,
+                                                                                                       Compiler * inCompiler
+                                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -7837,19 +8226,19 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -7861,6 +8250,10 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
   public: GALGAS_location mProperty_mEndOf_5F_upperBoundExpression_5F_instruction ;
   public: GALGAS_instructionListAST mProperty_mDoInstructionList ;
   public: GALGAS_location mProperty_mEndOf_5F_do_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_forLowerUpperBoundInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_forLowerUpperBoundInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -7921,6 +8314,19 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_location readProperty_mEndOfFunctionDeclaration (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_functionDeclarationAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_mode & inOperand0,
+                                                                                             const class GALGAS_bool & inOperand1,
+                                                                                             const class GALGAS_lstring & inOperand2,
+                                                                                             const class GALGAS_lstring & inOperand3,
+                                                                                             const class GALGAS_lstringlist & inOperand4,
+                                                                                             const class GALGAS_routineFormalArgumentListAST & inOperand5,
+                                                                                             const class GALGAS_lstring & inOperand6,
+                                                                                             const class GALGAS_instructionListAST & inOperand7,
+                                                                                             const class GALGAS_location & inOperand8,
+                                                                                             Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8030,6 +8436,8 @@ class GALGAS_mode : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8177,6 +8585,8 @@ class GALGAS_routineFormalArgumentListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8367,18 +8777,18 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -8391,6 +8801,10 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mFunctionReturnTypeName ;
   public: GALGAS_instructionListAST mProperty_mFunctionInstructionList ;
   public: GALGAS_location mProperty_mEndOfFunctionDeclaration ;
+
+
+//--- Default constructor
+  public: cPtr_functionDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_functionDeclarationAST (const GALGAS_mode & in_mMode,
@@ -8441,6 +8855,14 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_globalConstantDeclarationAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_lstringlist & inOperand1,
+                                                                               const class GALGAS_lstring & inOperand2,
+                                                                               const class GALGAS_expressionAST & inOperand3,
+                                                                               Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8509,18 +8931,18 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -8528,6 +8950,10 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstringlist mProperty_mAttributeList ;
   public: GALGAS_lstring mProperty_mConstantTypeName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_globalConstantDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_globalConstantDeclarationAST (const GALGAS_lstring & in_mConstantName,
@@ -8583,6 +9009,19 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_location readProperty_mEndOfGuardDeclaration (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_guardDeclarationAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                          const class GALGAS_string & inOperand1,
+                                                                                          const class GALGAS_lstring & inOperand2,
+                                                                                          const class GALGAS_bool & inOperand3,
+                                                                                          const class GALGAS_lstringlist & inOperand4,
+                                                                                          const class GALGAS_routineFormalArgumentListAST & inOperand5,
+                                                                                          const class GALGAS_guardKind & inOperand6,
+                                                                                          const class GALGAS_instructionListAST & inOperand7,
+                                                                                          const class GALGAS_location & inOperand8,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8685,6 +9124,8 @@ class GALGAS_guardKind : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -8774,18 +9215,18 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -8798,6 +9239,10 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_guardKind mProperty_mGuardKind ;
   public: GALGAS_instructionListAST mProperty_mGuardInstructionList ;
   public: GALGAS_location mProperty_mEndOfGuardDeclaration ;
+
+
+//--- Default constructor
+  public: cPtr_guardDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_guardDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
@@ -8852,6 +9297,16 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mElseExpressionEndLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ifExpressionAST init_28__2C__2C__2C__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                          const class GALGAS_location & inOperand1,
+                                                                          const class GALGAS_expressionAST & inOperand2,
+                                                                          const class GALGAS_location & inOperand3,
+                                                                          const class GALGAS_expressionAST & inOperand4,
+                                                                          const class GALGAS_location & inOperand5,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -8922,26 +9377,26 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -8951,6 +9406,10 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
   public: GALGAS_location mProperty_mThenExpressionEndLocation ;
   public: GALGAS_expressionAST mProperty_mElseExpression ;
   public: GALGAS_location mProperty_mElseExpressionEndLocation ;
+
+
+//--- Default constructor
+  public: cPtr_ifExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ifExpressionAST (const GALGAS_expressionAST & in_mIfExpression,
@@ -9006,6 +9465,19 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_if_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ifInstructionAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                       const class GALGAS_expressionAST & inOperand1,
+                                                                                       const class GALGAS_location & inOperand2,
+                                                                                       const class GALGAS_bool & inOperand3,
+                                                                                       const class GALGAS_instructionListAST & inOperand4,
+                                                                                       const class GALGAS_location & inOperand5,
+                                                                                       const class GALGAS_instructionListAST & inOperand6,
+                                                                                       const class GALGAS_location & inOperand7,
+                                                                                       const class GALGAS_location & inOperand8,
+                                                                                       Compiler * inCompiler
+                                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9085,19 +9557,19 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -9109,6 +9581,10 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
   public: GALGAS_instructionListAST mProperty_mElseInstructionList ;
   public: GALGAS_location mProperty_mEndOfElseInstructionList ;
   public: GALGAS_location mProperty_mEndOf_5F_if_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_ifInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ifInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -9157,6 +9633,13 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_integerSliceExpressionAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                        const class GALGAS_integerSliceFieldListAST & inOperand1,
+                                                                        const class GALGAS_location & inOperand2,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9224,6 +9707,8 @@ class GALGAS_integerSliceFieldListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9389,32 +9874,36 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_integerSliceFieldListAST mProperty_mSliceValues ;
   public: GALGAS_location mProperty_mLocation ;
+
+
+//--- Default constructor
+  public: cPtr_integerSliceExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_integerSliceExpressionAST (const GALGAS_lstring & in_mTypeName,
@@ -9461,6 +9950,15 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_location readProperty_mEndOfISRDeclaration (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_isrDeclarationAST init_28__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                        const class GALGAS_mode & inOperand1,
+                                                                        const class GALGAS_lstring & inOperand2,
+                                                                        const class GALGAS_instructionListAST & inOperand3,
+                                                                        const class GALGAS_location & inOperand4,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9533,18 +10031,18 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -9553,6 +10051,10 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mDriverName ;
   public: GALGAS_instructionListAST mProperty_mISRInstructionList ;
   public: GALGAS_location mProperty_mEndOfISRDeclaration ;
+
+
+//--- Default constructor
+  public: cPtr_isrDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_isrDeclarationAST (const GALGAS_lstring & in_mISRName,
@@ -9597,6 +10099,14 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_letInstructionWithAssignmentAST init_28__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                  const class GALGAS_lstring & inOperand1,
+                                                                                  const class GALGAS_lstring & inOperand2,
+                                                                                  const class GALGAS_expressionAST & inOperand3,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9656,25 +10166,29 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mConstantName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_letInstructionWithAssignmentAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_letInstructionWithAssignmentAST (const GALGAS_location & in_mInstructionLocation,
@@ -9714,6 +10228,11 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_bool readProperty_mValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_literalBooleanInExpressionAST init_28__29_ (const class GALGAS_bool & inOperand0,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9764,30 +10283,34 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_bool mProperty_mValue ;
+
+
+//--- Default constructor
+  public: cPtr_literalBooleanInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_literalBooleanInExpressionAST (const GALGAS_bool & in_mValue
@@ -9824,6 +10347,11 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_lbigint readProperty_mLiteralInteger (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_literalIntegerInExpressionAST init_28__29_ (const class GALGAS_lbigint & inOperand0,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9874,30 +10402,34 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lbigint mProperty_mLiteralInteger ;
+
+
+//--- Default constructor
+  public: cPtr_literalIntegerInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_literalIntegerInExpressionAST (const GALGAS_lbigint & in_mLiteralInteger
@@ -9934,6 +10466,11 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_lstring readProperty_mLiteralString (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_literalStringInExpressionAST init_28__29_ (const class GALGAS_lstring & inOperand0,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -9984,30 +10521,34 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mLiteralString ;
+
+
+//--- Default constructor
+  public: cPtr_literalStringInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_literalStringInExpressionAST (const GALGAS_lstring & in_mLiteralString
@@ -10060,6 +10601,19 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
   public: class GALGAS_llvmGenerationInstructionList readProperty_mLLVMInstructionList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmAssignmentOperatorDeclarationAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                                           const class GALGAS_lstring & inOperand1,
+                                                                                                           const class GALGAS_lstring & inOperand2,
+                                                                                                           const class GALGAS_genericFormalParameterList & inOperand3,
+                                                                                                           const class GALGAS_lstring & inOperand4,
+                                                                                                           const class GALGAS_lstring & inOperand5,
+                                                                                                           const class GALGAS_genericFormalParameterList & inOperand6,
+                                                                                                           const class GALGAS_ctExpressionAST & inOperand7,
+                                                                                                           const class GALGAS_llvmGenerationInstructionList & inOperand8,
+                                                                                                           Compiler * inCompiler
+                                                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10149,6 +10703,8 @@ class GALGAS_genericFormalParameterList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10284,6 +10840,8 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -10416,18 +10974,18 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -10440,6 +10998,10 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
   public: GALGAS_genericFormalParameterList mProperty_mSourceGenericFormalParameterList ;
   public: GALGAS_ctExpressionAST mProperty_mWhereClause ;
   public: GALGAS_llvmGenerationInstructionList mProperty_mLLVMInstructionList ;
+
+
+//--- Default constructor
+  public: cPtr_llvmAssignmentOperatorDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmAssignmentOperatorDeclarationAST (const GALGAS_location & in_mOperatorLocation,
@@ -10490,6 +11052,14 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_llvmGenerationInstructionList readProperty_mInstructionList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmConvertToBooleanAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                          const class GALGAS_lstring & inOperand1,
+                                                                          const class GALGAS_lstring & inOperand2,
+                                                                          const class GALGAS_llvmGenerationInstructionList & inOperand3,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10558,18 +11128,18 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -10577,6 +11147,10 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_lstring mProperty_mConverterName ;
   public: GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
+
+
+//--- Default constructor
+  public: cPtr_llvmConvertToBooleanAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmConvertToBooleanAST (const GALGAS_lstring & in_mReceiverName,
@@ -10616,6 +11190,11 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
   public: class GALGAS_llvmGenerationInstructionElementList readProperty_mGenerationList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmGenerationInstruction init_28__29_ (const class GALGAS_llvmGenerationInstructionElementList & inOperand0,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10673,6 +11252,8 @@ class GALGAS_llvmGenerationInstructionElementList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10800,19 +11381,23 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkInstructionList
-  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & ioMap,
+  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & arg_ioMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method generateIRCode
-  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & ioVarMap,
-           class GALGAS_assignmentGenerationVarMap & ioTypeMap,
-           class GALGAS_stringlist & ioInstructionAsStringListIR,
-           class GALGAS_uint & ioTemporaryIndex,
-           class GALGAS_allocaList & ioAllocaList,
+  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & arg_ioVarMap,
+           class GALGAS_assignmentGenerationVarMap & arg_ioTypeMap,
+           class GALGAS_stringlist & arg_ioInstructionAsStringListIR,
+           class GALGAS_uint & arg_ioTemporaryIndex,
+           class GALGAS_allocaList & arg_ioAllocaList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_llvmGenerationInstructionElementList mProperty_mGenerationList ;
+
+
+//--- Default constructor
+  public: cPtr_llvmGenerationInstruction (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmGenerationInstruction (const GALGAS_llvmGenerationInstructionElementList & in_mGenerationList
@@ -10855,6 +11440,14 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_bigint readProperty_mBitSize (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmGenericType init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                  const class GALGAS_genericFormalParameterList & inOperand1,
+                                                                  const class GALGAS_ctExpressionAST & inOperand2,
+                                                                  const class GALGAS_bigint & inOperand3,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -10923,18 +11516,18 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -10942,6 +11535,10 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public: GALGAS_genericFormalParameterList mProperty_mGenericFormalParameterList ;
   public: GALGAS_ctExpressionAST mProperty_mWhereClause ;
   public: GALGAS_bigint mProperty_mBitSize ;
+
+
+//--- Default constructor
+  public: cPtr_llvmGenericType (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmGenericType (const GALGAS_lstring & in_mTypeName,
@@ -11001,6 +11598,21 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_llvmGenerationInstructionList readProperty_mInstructionList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmInfixOperatorAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_omnibusInfixOperator & inOperand0,
+                                                                                                   const class GALGAS_location & inOperand1,
+                                                                                                   const class GALGAS_lstring & inOperand2,
+                                                                                                   const class GALGAS_lstring & inOperand3,
+                                                                                                   const class GALGAS_genericFormalParameterList & inOperand4,
+                                                                                                   const class GALGAS_lstring & inOperand5,
+                                                                                                   const class GALGAS_lstring & inOperand6,
+                                                                                                   const class GALGAS_genericFormalParameterList & inOperand7,
+                                                                                                   const class GALGAS_lstring & inOperand8,
+                                                                                                   const class GALGAS_genericFormalParameterList & inOperand9,
+                                                                                                   const class GALGAS_llvmGenerationInstructionList & inOperand10,
+                                                                                                   Compiler * inCompiler
+                                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11097,18 +11709,18 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -11123,6 +11735,10 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mResultTypeName ;
   public: GALGAS_genericFormalParameterList mProperty_mResultGenericFormalParameterList ;
   public: GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
+
+
+//--- Default constructor
+  public: cPtr_llvmInfixOperatorAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmInfixOperatorAST (const GALGAS_omnibusInfixOperator & in_mInfixOperator,
@@ -11179,6 +11795,16 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_lstring readProperty_mResultTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmPrefixOperatorAST init_28__2C__2C__2C__2C__2C__29_ (const class GALGAS_llvmPrefixOperatorEnumeration & inOperand0,
+                                                                                const class GALGAS_location & inOperand1,
+                                                                                const class GALGAS_lstring & inOperand2,
+                                                                                const class GALGAS_lstring & inOperand3,
+                                                                                const class GALGAS_llvmGenerationInstructionList & inOperand4,
+                                                                                const class GALGAS_lstring & inOperand5,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11266,6 +11892,8 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -11342,18 +11970,18 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -11363,6 +11991,10 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mReceiverTypeName ;
   public: GALGAS_llvmGenerationInstructionList mProperty_mInstructionList ;
   public: GALGAS_lstring mProperty_mResultTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_llvmPrefixOperatorAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmPrefixOperatorAST (const GALGAS_llvmPrefixOperatorEnumeration & in_mPrefixOperator,
@@ -11404,6 +12036,11 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
   public: class GALGAS_lstring readProperty_mVariableName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_llvmVarInstruction init_28__29_ (const class GALGAS_lstring & inOperand0,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11454,19 +12091,23 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method checkInstructionList
-  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & ioMap,
+  public: virtual void method_checkInstructionList (class GALGAS_ctCheckMap & arg_ioMap,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method generateIRCode
-  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & ioVarMap,
-           class GALGAS_assignmentGenerationVarMap & ioTypeMap,
-           class GALGAS_stringlist & ioInstructionAsStringListIR,
-           class GALGAS_uint & ioTemporaryIndex,
-           class GALGAS_allocaList & ioAllocaList,
+  public: virtual void method_generateIRCode (class GALGAS_assignmentGenerationVarMap & arg_ioVarMap,
+           class GALGAS_assignmentGenerationVarMap & arg_ioTypeMap,
+           class GALGAS_stringlist & arg_ioInstructionAsStringListIR,
+           class GALGAS_uint & arg_ioTemporaryIndex,
+           class GALGAS_allocaList & arg_ioAllocaList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mVariableName ;
+
+
+//--- Default constructor
+  public: cPtr_llvmVarInstruction (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_llvmVarInstruction (const GALGAS_lstring & in_mVariableName
@@ -11509,6 +12150,14 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_expressionAST readProperty_mRightExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_omnibusInfixOperatorExpressionAST init_28__2C__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                                    const class GALGAS_location & inOperand1,
+                                                                                    const class GALGAS_omnibusInfixOperator & inOperand2,
+                                                                                    const class GALGAS_expressionAST & inOperand3,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11571,26 +12220,26 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -11598,6 +12247,10 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_omnibusInfixOperator mProperty_mInfixOperator ;
   public: GALGAS_expressionAST mProperty_mRightExpression ;
+
+
+//--- Default constructor
+  public: cPtr_omnibusInfixOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_omnibusInfixOperatorExpressionAST (const GALGAS_expressionAST & in_mLeftExpression,
@@ -11643,6 +12296,14 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_lbigint readProperty_mPriority (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_panicAST init_28__2C__2C__2C__29_ (const class GALGAS_bool & inOperand0,
+                                                           const class GALGAS_instructionListAST & inOperand1,
+                                                           const class GALGAS_location & inOperand2,
+                                                           const class GALGAS_lbigint & inOperand3,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11711,22 +12372,22 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteTypesInPrecedenceGraph
-  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Properties
@@ -11734,6 +12395,10 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_instructionListAST mProperty_mPanicInstructionList ;
   public: GALGAS_location mProperty_mEndOfPanicInstructions ;
   public: GALGAS_lbigint mProperty_mPriority ;
+
+
+//--- Default constructor
+  public: cPtr_panicAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_panicAST (const GALGAS_bool & in_mIsSetup,
@@ -11773,6 +12438,12 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mCodeExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_panicInstructionAST init_28__2C__29_ (const class GALGAS_location & inOperand0,
+                                                              const class GALGAS_expressionAST & inOperand1,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11824,23 +12495,27 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mCodeExpression ;
+
+
+//--- Default constructor
+  public: cPtr_panicInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_panicInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -11882,6 +12557,13 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_expressionAST readProperty_mExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_prefixOperatorExpressionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                          const class GALGAS_prefixOperator & inOperand1,
+                                                                          const class GALGAS_expressionAST & inOperand2,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -11957,6 +12639,8 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -12027,32 +12711,36 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mOperatorLocation ;
   public: GALGAS_prefixOperator mProperty_mOp ;
   public: GALGAS_expressionAST mProperty_mExpression ;
+
+
+//--- Default constructor
+  public: cPtr_prefixOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_prefixOperatorExpressionAST (const GALGAS_location & in_mOperatorLocation,
@@ -12093,6 +12781,12 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_primaryInExpressionAccessListAST readProperty_mAccessList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_primaryInExpressionAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                 const class GALGAS_primaryInExpressionAccessListAST & inOperand1,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12154,6 +12848,8 @@ class GALGAS_primaryInExpressionAccessListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12281,59 +12977,63 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzePrimaryExpressionNoSelf
-  public: virtual void method_analyzePrimaryExpressionNoSelf (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inOptionalTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzePrimaryExpressionNoSelf (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inOptionalTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Extension method analyzePrimaryExpressionWithSelf
-  public: virtual void method_analyzePrimaryExpressionWithSelf (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inOptionalTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzePrimaryExpressionWithSelf (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inOptionalTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mReceiverName ;
   public: GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
+
+
+//--- Default constructor
+  public: cPtr_primaryInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_primaryInExpressionAST (const GALGAS_lstring & in_mReceiverName,
@@ -12373,6 +13073,15 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
   public: class GALGAS_accessInAssignmentListAST readProperty_mAccessList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_procedureCallInstructionAST init_28__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                  const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                                  const class GALGAS_location & inOperand2,
+                                                                                  const class GALGAS_lstring & inOperand3,
+                                                                                  const class GALGAS_accessInAssignmentListAST & inOperand4,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12437,6 +13146,8 @@ class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12564,35 +13275,39 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method baseGuardAnalyze
-  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_guardKindGenerationIR & outConvenienceGuardGenerationIR,
+  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_guardKindGenerationIR & arg_outConvenienceGuardGenerationIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mIdentifier ;
   public: GALGAS_accessInAssignmentListAST mProperty_mAccessList ;
+
+
+//--- Default constructor
+  public: cPtr_procedureCallInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_procedureCallInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -12637,6 +13352,13 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_registerIntegerFieldListAST readProperty_mFieldValues (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_registerConstantExpressionAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_lstring & inOperand1,
+                                                                            const class GALGAS_registerIntegerFieldListAST & inOperand2,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12704,6 +13426,8 @@ class GALGAS_registerIntegerFieldListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12869,32 +13593,36 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mRegisterGroupName ;
   public: GALGAS_lstring mProperty_mRegisterName ;
   public: GALGAS_registerIntegerFieldListAST mProperty_mFieldValues ;
+
+
+//--- Default constructor
+  public: cPtr_registerConstantExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_registerConstantExpressionAST (const GALGAS_lstring & in_mRegisterGroupName,
@@ -12935,6 +13663,12 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_lstring readProperty_mFieldName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_registerInExpressionAST init_28__2C__29_ (const class GALGAS_controlRegisterLValueAST & inOperand0,
+                                                                  const class GALGAS_lstring & inOperand1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -12989,31 +13723,35 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_controlRegisterLValueAST mProperty_mControlRegisterLValue ;
   public: GALGAS_lstring mProperty_mFieldName ;
+
+
+//--- Default constructor
+  public: cPtr_registerInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_registerInExpressionAST (const GALGAS_controlRegisterLValueAST & in_mControlRegisterLValue,
@@ -13051,6 +13789,11 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_LValueAST readProperty_mLValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_sizeofExpressionAST init_28__29_ (const class GALGAS_LValueAST & inOperand0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13101,30 +13844,34 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_LValueAST mProperty_mLValue ;
+
+
+//--- Default constructor
+  public: cPtr_sizeofExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_sizeofExpressionAST (const GALGAS_LValueAST & in_mLValue
@@ -13161,6 +13908,11 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
   public: class GALGAS_lstring readProperty_mTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_sizeofTypeAST init_28__29_ (const class GALGAS_lstring & inOperand0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13211,30 +13963,34 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_sizeofTypeAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_sizeofTypeAST (const GALGAS_lstring & in_mTypeName
@@ -13277,6 +14033,15 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mSourceExpressionLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_sliceAssignmentInstructionAST init_28__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                    const class GALGAS_lstring & inOperand1,
+                                                                                    const class GALGAS_sliceAssignmentListAST & inOperand2,
+                                                                                    const class GALGAS_expressionAST & inOperand3,
+                                                                                    const class GALGAS_location & inOperand4,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13348,6 +14113,8 @@ class GALGAS_sliceAssignmentListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13494,19 +14261,19 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -13514,6 +14281,10 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
   public: GALGAS_sliceAssignmentListAST mProperty_mSliceAssignmentList ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
   public: GALGAS_location mProperty_mSourceExpressionLocation ;
+
+
+//--- Default constructor
+  public: cPtr_sliceAssignmentInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_sliceAssignmentInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -13554,6 +14325,14 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
   public: class GALGAS_lstring readProperty_mSandAloneRoutineName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_standAloneProcedureCallInstructionAST init_28__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                        const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                                        const class GALGAS_location & inOperand2,
+                                                                                        const class GALGAS_lstring & inOperand3,
+                                                                                        Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13607,34 +14386,38 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method baseGuardAnalyze
-  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_guardKindGenerationIR & outConvenienceGuardGenerationIR,
+  public: virtual void method_baseGuardAnalyze (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_guardKindGenerationIR & arg_outConvenienceGuardGenerationIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mSandAloneRoutineName ;
+
+
+//--- Default constructor
+  public: cPtr_standAloneProcedureCallInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_standAloneProcedureCallInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -13678,6 +14461,13 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mEndOfArguments (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_standaloneFunctionInExpressionAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                const class GALGAS_effectiveArgumentListAST & inOperand1,
+                                                                                const class GALGAS_location & inOperand2,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13736,32 +14526,36 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mStandaloneFunctionName ;
   public: GALGAS_effectiveArgumentListAST mProperty_mArguments ;
   public: GALGAS_location mProperty_mEndOfArguments ;
+
+
+//--- Default constructor
+  public: cPtr_standaloneFunctionInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_standaloneFunctionInExpressionAST (const GALGAS_lstring & in_mStandaloneFunctionName,
@@ -13804,6 +14598,13 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_staticListValueListAST readProperty_mValueList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_staticListAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                            const class GALGAS_staticListPropertyListAST & inOperand1,
+                                                            const class GALGAS_staticListValueListAST & inOperand2,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -13870,6 +14671,8 @@ class GALGAS_staticListPropertyListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14025,6 +14828,8 @@ class GALGAS_staticListValueListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -14176,29 +14981,33 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterExtension
-  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & ioExtendStaticArrayDeclarationAST,
-           class GALGAS_abstractDeclarationAST & outNewDeclaration,
+  public: virtual void method_enterExtension (class GALGAS_extendStaticArrayDeclarationDictAST & arg_ioExtendStaticArrayDeclarationAST,
+           class GALGAS_abstractDeclarationAST & arg_outNewDeclaration,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mStaticListName ;
   public: GALGAS_staticListPropertyListAST mProperty_mPropertyList ;
   public: GALGAS_staticListValueListAST mProperty_mValueList ;
+
+
+//--- Default constructor
+  public: cPtr_staticListAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_staticListAST (const GALGAS_lstring & in_mStaticListName,
@@ -14249,6 +15058,17 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_bool readProperty_mMayImplementDeinit (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_structureDeclarationAST init_28__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                      const class GALGAS_lstring & inOperand1,
+                                                                                      const class GALGAS_lstring & inOperand2,
+                                                                                      const class GALGAS_lstringlist & inOperand3,
+                                                                                      const class GALGAS_bool & inOperand4,
+                                                                                      const class GALGAS_structurePropertyListAST & inOperand5,
+                                                                                      const class GALGAS_bool & inOperand6,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14334,6 +15154,8 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14543,18 +15365,18 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -14565,6 +15387,10 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_bool mProperty_mGenerateAssignmentRoutine ;
   public: GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
   public: GALGAS_bool mProperty_mMayImplementDeinit ;
+
+
+//--- Default constructor
+  public: cPtr_structureDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_structureDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
@@ -14613,6 +15439,15 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_switch_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_switchInstructionAST init_28__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                           const class GALGAS_expressionAST & inOperand1,
+                                                                           const class GALGAS_location & inOperand2,
+                                                                           const class GALGAS_switchCaseListAST & inOperand3,
+                                                                           const class GALGAS_location & inOperand4,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14684,6 +15519,8 @@ class GALGAS_switchCaseListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14830,19 +15667,19 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -14850,6 +15687,10 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
   public: GALGAS_switchCaseListAST mProperty_mSwitchCaseList ;
   public: GALGAS_location mProperty_mEndOf_5F_switch_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_switchInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_switchInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -14892,6 +15733,12 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_structurePropertyListAST readProperty_mStructurePropertyListAST (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_syncDeclarationAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                             const class GALGAS_structurePropertyListAST & inOperand1,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -14952,23 +15799,27 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mSyncToolName ;
   public: GALGAS_structurePropertyListAST mProperty_mStructurePropertyListAST ;
+
+
+//--- Default constructor
+  public: cPtr_syncDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_syncDeclarationAST (const GALGAS_lstring & in_mSyncToolName,
@@ -15008,6 +15859,13 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_on_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_syncInstructionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                 const class GALGAS_syncInstructionBranchListAST & inOperand1,
+                                                                 const class GALGAS_location & inOperand2,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15072,6 +15930,8 @@ class GALGAS_syncInstructionBranchListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15237,24 +16097,28 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_syncInstructionBranchListAST mProperty_mBranchList ;
   public: GALGAS_location mProperty_mEndOf_5F_on_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_syncInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_syncInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -15297,6 +16161,13 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_syncToolInstanceDeclarationAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                             const class GALGAS_lstring & inOperand1,
+                                                                             const class GALGAS_expressionAST & inOperand2,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15361,24 +16232,28 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mSyncTypeName ;
   public: GALGAS_lstring mProperty_mSyncInstanceName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_syncToolInstanceDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_syncToolInstanceDeclarationAST (const GALGAS_lstring & in_mSyncTypeName,
@@ -15433,6 +16308,19 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
   public: class GALGAS_location readProperty_mEndOfInstructionListLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_systemRoutineDeclarationAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                                  const class GALGAS_lstring & inOperand1,
+                                                                                                  const class GALGAS_mode & inOperand2,
+                                                                                                  const class GALGAS_bool & inOperand3,
+                                                                                                  const class GALGAS_lstringlist & inOperand4,
+                                                                                                  const class GALGAS_routineFormalArgumentListAST & inOperand5,
+                                                                                                  const class GALGAS_lstring & inOperand6,
+                                                                                                  const class GALGAS_instructionListAST & inOperand7,
+                                                                                                  const class GALGAS_location & inOperand8,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15521,18 +16409,18 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -15545,6 +16433,10 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstring mProperty_mReturnTypeName ;
   public: GALGAS_instructionListAST mProperty_mInstructionList ;
   public: GALGAS_location mProperty_mEndOfInstructionListLocation ;
+
+
+//--- Default constructor
+  public: cPtr_systemRoutineDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_systemRoutineDeclarationAST (const GALGAS_lstring & in_mReceiverTypeName,
@@ -15599,6 +16491,16 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_location readProperty_mEndOfTaskSetupDeclaration (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_taskSetupDeclarationAST init_28__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                  const class GALGAS_string & inOperand1,
+                                                                                  const class GALGAS_lstring & inOperand2,
+                                                                                  const class GALGAS_lstringlist & inOperand3,
+                                                                                  const class GALGAS_instructionListAST & inOperand4,
+                                                                                  const class GALGAS_location & inOperand5,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15675,18 +16577,18 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -15696,6 +16598,10 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_lstringlist mProperty_mDependanceList ;
   public: GALGAS_instructionListAST mProperty_mTaskSetupInstructionList ;
   public: GALGAS_location mProperty_mEndOfTaskSetupDeclaration ;
+
+
+//--- Default constructor
+  public: cPtr_taskSetupDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_taskSetupDeclarationAST (const GALGAS_lstring & in_mTaskName,
@@ -15741,6 +16647,13 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
   public: class GALGAS_location readProperty_mEndOfExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_truncateExpressionAST init_28__2C__2C__29_ (const class GALGAS_expressionAST & inOperand0,
+                                                                    const class GALGAS_lstring & inOperand1,
+                                                                    const class GALGAS_location & inOperand2,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15799,32 +16712,36 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_expressionAST mProperty_mExpression ;
   public: GALGAS_lstring mProperty_mTypeName ;
   public: GALGAS_location mProperty_mEndOfExpression ;
+
+
+//--- Default constructor
+  public: cPtr_truncateExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_truncateExpressionAST (const GALGAS_expressionAST & in_mExpression,
@@ -15865,6 +16782,12 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_lstring readProperty_mOriginalTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_typeAliasDeclarationAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                  const class GALGAS_lstring & inOperand1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -15925,23 +16848,27 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mAliasTypeName ;
   public: GALGAS_lstring mProperty_mOriginalTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_typeAliasDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_typeAliasDeclarationAST (const GALGAS_lstring & in_mAliasTypeName,
@@ -15981,6 +16908,12 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
   public: class GALGAS_lstring readProperty_mElementTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_typeDynamicArrayDeclarationAST init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                         const class GALGAS_lstring & inOperand1,
+                                                                         Compiler * inCompiler
+                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16041,23 +16974,27 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mDynamicArrayTypeName ;
   public: GALGAS_lstring mProperty_mElementTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_typeDynamicArrayDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_typeDynamicArrayDeclarationAST (const GALGAS_lstring & in_mDynamicArrayTypeName,
@@ -16101,6 +17038,14 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
   public: class GALGAS_lstringlist readProperty_mAttributeList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_typeOpaqueDeclarationAST init_28__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                           const class GALGAS_expressionAST & inOperand1,
+                                                                           const class GALGAS_location & inOperand2,
+                                                                           const class GALGAS_lstringlist & inOperand3,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16169,22 +17114,22 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual class GALGAS_location getter_locationForErrorSignaling (Compiler * COMMA_LOCATION_ARGS) const override ;
 
 //--- Extension method enterInContext
-  public: virtual void method_enterInContext (class GALGAS_semanticContext & ioContext,
-           class GALGAS_declarationDecorationList & ioDecoratedDeclarationList,
-           class GALGAS_decoratedRegularRoutineList & ioDecoratedRoutineList,
-           class GALGAS_routineListIR & ioRoutineListIR,
-           class GALGAS_staticListInitializationMap & ioStaticListValueMap,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_controlRegisterUserAccesMapAST & ioControlRegisterUserAccesMapAST,
-           class GALGAS_userLLVMTypeDefinitionListIR & ioUserLLVMTypeDefinitionListIR,
+  public: virtual void method_enterInContext (class GALGAS_semanticContext & arg_ioContext,
+           class GALGAS_declarationDecorationList & arg_ioDecoratedDeclarationList,
+           class GALGAS_decoratedRegularRoutineList & arg_ioDecoratedRoutineList,
+           class GALGAS_routineListIR & arg_ioRoutineListIR,
+           class GALGAS_staticListInitializationMap & arg_ioStaticListValueMap,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_controlRegisterUserAccesMapAST & arg_ioControlRegisterUserAccesMapAST,
+           class GALGAS_userLLVMTypeDefinitionListIR & arg_ioUserLLVMTypeDefinitionListIR,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method enterInPrecedenceGraph
-  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_enterInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteTypesInPrecedenceGraph
-  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) ;
 
 //--- Properties
@@ -16192,6 +17137,10 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
   public: GALGAS_expressionAST mProperty_mSizeExpression ;
   public: GALGAS_location mProperty_mSizeExpressionLocation ;
   public: GALGAS_lstringlist mProperty_mAttributeList ;
+
+
+//--- Default constructor
+  public: cPtr_typeOpaqueDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_typeOpaqueDeclarationAST (const GALGAS_lstring & in_mOpaqueTypeName,
@@ -16235,6 +17184,13 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
   public: class GALGAS_primaryInExpressionAccessListAST readProperty_mAccessList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_typedConstantCallAST init_28__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                   const class GALGAS_lstring & inOperand1,
+                                                                   const class GALGAS_primaryInExpressionAccessListAST & inOperand2,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16293,32 +17249,36 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method addDependenceEdgeForStaticExpression
-  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring inConstantName,
-           class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_addDependenceEdgeForStaticExpression (const class GALGAS_lstring arg_inConstantName,
+           class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method analyzeExpression
-  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_omnibusType inTargetType,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
-           class GALGAS_objectIR & outResult,
+  public: virtual void method_analyzeExpression (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_omnibusType arg_inTargetType,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
+           class GALGAS_objectIR & arg_outResult,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteExpressionTypesInPrecedenceGraph
-  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteExpressionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_lstring mProperty_mConstructorName ;
   public: GALGAS_primaryInExpressionAccessListAST mProperty_mAccessList ;
+
+
+//--- Default constructor
+  public: cPtr_typedConstantCallAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_typedConstantCallAST (const GALGAS_lstring & in_mOptionalTypeName,
@@ -16359,6 +17319,13 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_lstring readProperty_mTypeName (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_varDeclarationInstructionAST init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                           const class GALGAS_lstring & inOperand1,
+                                                                           const class GALGAS_lstring & inOperand2,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16414,24 +17381,28 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mTypeName ;
+
+
+//--- Default constructor
+  public: cPtr_varDeclarationInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_varDeclarationInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -16474,6 +17445,14 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
   public: class GALGAS_expressionAST readProperty_mSourceExpression (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_varInstructionWithAssignmentAST init_28__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                                  const class GALGAS_lstring & inOperand1,
+                                                                                  const class GALGAS_lstring & inOperand2,
+                                                                                  const class GALGAS_expressionAST & inOperand3,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16533,25 +17512,29 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_lstring mProperty_mVarName ;
   public: GALGAS_lstring mProperty_mOptionalTypeName ;
   public: GALGAS_expressionAST mProperty_mSourceExpression ;
+
+
+//--- Default constructor
+  public: cPtr_varInstructionWithAssignmentAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_varInstructionWithAssignmentAST (const GALGAS_location & in_mInstructionLocation,
@@ -16597,6 +17580,15 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
   public: class GALGAS_location readProperty_mEndOf_5F_while_5F_instruction (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_whileInstructionAST init_28__2C__2C__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                          const class GALGAS_expressionAST & inOperand1,
+                                                                          const class GALGAS_location & inOperand2,
+                                                                          const class GALGAS_instructionListAST & inOperand3,
+                                                                          const class GALGAS_location & inOperand4,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16660,19 +17652,19 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -16680,6 +17672,10 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
   public: GALGAS_location mProperty_mEndOf_5F_test_5F_expression ;
   public: GALGAS_instructionListAST mProperty_mWhileInstructionList ;
   public: GALGAS_location mProperty_mEndOf_5F_while_5F_instruction ;
+
+
+//--- Default constructor
+  public: cPtr_whileInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_whileInstructionAST (const GALGAS_location & in_mInstructionLocation,
@@ -16747,6 +17743,8 @@ class GALGAS_extendStaticArrayDeclarationDictAST : public AC_GALGAS_root {
   public: void populateEnumerationArray (capCollectionElementArray & ioEnumerationArray) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -16909,6 +17907,8 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -17037,6 +18037,8 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -17172,6 +18174,8 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -17292,6 +18296,8 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -17513,6 +18519,8 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -17642,6 +18650,8 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -17765,6 +18775,8 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -17931,6 +18943,8 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -18083,6 +19097,8 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -18283,6 +19299,8 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -18370,6 +19388,8 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -18566,6 +19586,8 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -18693,6 +19715,8 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -18850,6 +19874,8 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -19031,6 +20057,8 @@ class GALGAS_checkTargetListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -19184,6 +20212,8 @@ class GALGAS_controlRegisterBitSliceList : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -19321,6 +20351,8 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -19532,6 +20564,8 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -19665,6 +20699,8 @@ class GALGAS_driverDeclarationListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -19800,6 +20836,8 @@ class GALGAS_driverInstanciationArgumentListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -19955,6 +20993,8 @@ class GALGAS_driverInstanciationListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -20108,6 +21148,8 @@ class GALGAS_extendStaticListElementAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -20267,6 +21309,8 @@ class GALGAS_externFunctionDeclarationListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -20517,6 +21561,8 @@ class GALGAS_propertyAttributeList : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -20673,6 +21719,8 @@ class GALGAS_requiredFunctionDeclarationListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -20891,6 +21939,8 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -21179,6 +22229,8 @@ class GALGAS_taskSetupListAST : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -21331,6 +22383,8 @@ class GALGAS_controlRegisterUserAccesMapAST : public AC_GALGAS_map {
   public: GALGAS_controlRegisterUserAccesMapAST & operator = (const GALGAS_controlRegisterUserAccesMapAST & inSource) ;
   
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -21571,8 +22625,11 @@ class GALGAS_ast : public AC_GALGAS_root {
     mProperty_mControlRegisterUserAccesMapAST = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_ast (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_ast (const GALGAS_declarationListAST & in_mDeclarationListAST,
@@ -21588,6 +22645,10 @@ class GALGAS_ast : public AC_GALGAS_root {
                       const GALGAS_controlRegisterUserAccesMapAST & in_mControlRegisterUserAccesMapAST) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ast init_28__29_ (Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -21723,8 +22784,11 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
     mProperty_mStartupEndLocation = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_driverDeclarationAST (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_driverDeclarationAST (const GALGAS_lstring & in_mDriverName,
@@ -21738,6 +22802,19 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
                                        const GALGAS_location & in_mStartupEndLocation) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_driverDeclarationAST init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                                           const class GALGAS_lstringlist & inOperand1,
+                                                                                           const class GALGAS_structurePropertyListAST & inOperand2,
+                                                                                           const class GALGAS_location & inOperand3,
+                                                                                           const class GALGAS_instructionListAST & inOperand4,
+                                                                                           const class GALGAS_location & inOperand5,
+                                                                                           const class GALGAS_location & inOperand6,
+                                                                                           const class GALGAS_instructionListAST & inOperand7,
+                                                                                           const class GALGAS_location & inOperand8,
+                                                                                           Compiler * inCompiler
+                                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;

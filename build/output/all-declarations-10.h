@@ -10,6 +10,20 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GALGAS_semanticContext constinArgument0,
+                                                                                 const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GALGAS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GALGAS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension getter '@effectiveArgumentListAST routineSignature' (as function)
 //
 //--------------------------------------------------------------------------------------------------
@@ -51,6 +65,13 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_location readProperty_mLocation (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_convertInstructionIR init_28__2C__2C__29_ (const class GALGAS_objectIR & inOperand0,
+                                                                   const class GALGAS_objectIR & inOperand1,
+                                                                   const class GALGAS_location & inOperand2,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -109,20 +130,24 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mTarget ;
   public: GALGAS_objectIR mProperty_mOperand ;
   public: GALGAS_location mProperty_mLocation ;
+
+
+//--- Default constructor
+  public: cPtr_convertInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_convertInstructionIR (const GALGAS_objectIR & in_mTarget,
@@ -163,6 +188,8 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
   public: GALGAS_convertInstructionIR bang_convertInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;

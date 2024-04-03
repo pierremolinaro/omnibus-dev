@@ -10,6 +10,243 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+// Phase 1: @prefixOperatorExpressionAST_2D_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_prefixOperatorExpressionAST_2D_weak : public GALGAS_expressionAST_2D_weak {
+//--------------------------------- Default constructor
+  public: GALGAS_prefixOperatorExpressionAST_2D_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_prefixOperatorExpressionAST_2D_weak (const class GALGAS_prefixOperatorExpressionAST & inSource) ;
+
+  public: GALGAS_prefixOperatorExpressionAST_2D_weak & operator = (const class GALGAS_prefixOperatorExpressionAST & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_prefixOperatorExpressionAST bang_prefixOperatorExpressionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_prefixOperatorExpressionAST_2D_weak extractObject (const GALGAS_object & inObject,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_prefixOperatorExpressionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_prefixOperatorExpressionAST_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_prefixOperatorExpressionAST_2D_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorExpressionAST_2D_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @instructionAST_2D_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_instructionAST_2D_weak : public AC_GALGAS_weak_reference {
+//--------------------------------- Default constructor
+  public: GALGAS_instructionAST_2D_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GALGAS_instructionAST_2D_weak (const class GALGAS_instructionAST & inSource) ;
+
+  public: GALGAS_instructionAST_2D_weak & operator = (const class GALGAS_instructionAST & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GALGAS_instructionAST bang_instructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_instructionAST_2D_weak extractObject (const GALGAS_object & inObject,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_instructionAST_2D_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_instructionAST_2D_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_instructionAST_2D_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST_2D_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Abstract extension method '@instructionAST noteInstructionTypesInPrecedenceGraph'
+//
+//--------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (class cPtr_instructionAST * inObject,
+                                                                class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+                                                                class Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Abstract extension method '@instructionAST instructionSemanticAnalysis'
+//
+//--------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_instructionSemanticAnalysis (class cPtr_instructionAST * inObject,
+                                                      const class GALGAS_omnibusType constin_inSelfType,
+                                                      const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                      const class GALGAS_semanticContext constin_inContext,
+                                                      const class GALGAS_mode constin_inMode,
+                                                      class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                      class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                      class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                      class GALGAS_allocaList & io_ioAllocaList,
+                                                      class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListAST analyzeBranchInstructionList'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_analyzeBranchInstructionList (const class GALGAS_instructionListAST inObject,
+                                                   const class GALGAS_omnibusType constin_inSelfType,
+                                                   const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                   class GALGAS_location in_inEndOfInstructionList,
+                                                   const class GALGAS_semanticContext constin_inContext,
+                                                   const class GALGAS_mode constin_inMode,
+                                                   class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                   class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                   class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                   class GALGAS_allocaList & io_ioAllocaList,
+                                                   class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                   class Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@instructionListIR appendSourceLineComment'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendSourceLineComment (class GALGAS_instructionListIR & ioObject,
+                                              const class GALGAS_location constin_inSourceLocation,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap closeBranch'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_closeBranch (class GALGAS_universalValuedObjectMap & ioObject,
+                                  const class GALGAS_location constin_inErrorLocation,
+                                  class Compiler * inCompiler
+                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@universalValuedObjectMap openBranch'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_openBranch (class GALGAS_universalValuedObjectMap & ioObject,
+                                 class Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListAST analyzeRoutineInstructionList'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_analyzeRoutineInstructionList (const class GALGAS_instructionListAST inObject,
+                                                    const class GALGAS_omnibusType constin_inSelfType,
+                                                    const class GALGAS_routineAttributes constin_inRoutineAttributes,
+                                                    const class GALGAS_semanticContext constin_inContext,
+                                                    const class GALGAS_mode constin_inMode,
+                                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
+                                                    class GALGAS_staticEntityMap & io_ioStaticEntityMap,
+                                                    class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
+                                                    class GALGAS_allocaList & io_ioAllocaList,
+                                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
+                                                    class Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR instructionListLLVMCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_instructionListLLVMCode (const class GALGAS_instructionListIR inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              const class GALGAS_generationContext constin_inGenerationContext,
+                                              class GALGAS_generationAdds & io_ioGenerationAdds,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Abstract extension method '@abstractInstructionIR llvmInstructionCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_llvmInstructionCode (class cPtr_abstractInstructionIR * inObject,
+                                              class GALGAS_string & io_ioLLVMcode,
+                                              const class GALGAS_generationContext constin_inGenerationContext,
+                                              class GALGAS_generationAdds & io_ioGenerationAdds,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 // Phase 1: @checkInstructionAST_2D_weak weak reference class
 //
 //--------------------------------------------------------------------------------------------------
@@ -27,6 +264,8 @@ class GALGAS_checkInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak 
   public: GALGAS_checkInstructionAST bang_checkInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -80,6 +319,8 @@ class GALGAS_assertInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak
   public: GALGAS_assertInstructionAST bang_assertInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -135,6 +376,13 @@ class GALGAS_assertInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_objectIR readProperty_mExpressionValue (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_assertInstructionIR init_28__2C__2C__29_ (const class GALGAS_location & inOperand0,
+                                                                  const class GALGAS_instructionListIR & inOperand1,
+                                                                  const class GALGAS_objectIR & inOperand2,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -193,20 +441,24 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mAssertInstructionLocation ;
   public: GALGAS_instructionListIR mProperty_mInstructionList ;
   public: GALGAS_objectIR mProperty_mExpressionValue ;
+
+
+//--- Default constructor
+  public: cPtr_assertInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_assertInstructionIR (const GALGAS_location & in_mAssertInstructionLocation,
@@ -247,6 +499,8 @@ class GALGAS_assertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2
   public: GALGAS_assertInstructionIR bang_assertInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -301,6 +555,8 @@ class GALGAS_assignmentInstructionAST_2D_weak : public GALGAS_instructionAST_2D_
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -353,6 +609,8 @@ class GALGAS_controlRegisterAssignmentInstructionAST_2D_weak : public GALGAS_ins
   public: GALGAS_controlRegisterAssignmentInstructionAST bang_controlRegisterAssignmentInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -421,14 +679,23 @@ class GALGAS_sliceAssignmentListAST_2D_element : public AC_GALGAS_root {
     mProperty_mSliceKind = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_sliceAssignmentListAST_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_sliceAssignmentListAST_2D_element (const GALGAS_lstring & in_mSliceWidth,
                                                     const GALGAS_sliceTargetAST & in_mSliceKind) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_sliceAssignmentListAST_2D_element init_28__2C__29_ (const class GALGAS_lstring & inOperand0,
+                                                                            const class GALGAS_sliceTargetAST & inOperand1,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -489,6 +756,8 @@ class GALGAS_sliceAssignmentInstructionAST_2D_weak : public GALGAS_instructionAS
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -541,6 +810,8 @@ class GALGAS_bitbandInstructionAST_2D_weak : public GALGAS_instructionAST_2D_wea
   public: GALGAS_bitbandInstructionAST bang_bitbandInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -604,6 +875,17 @@ class GALGAS_bitbandInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_bigint readProperty_mBitbandRegisterBitMultiplier (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_bitbandInstructionIR init_28__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_string & inOperand0,
+                                                                                   const class GALGAS_objectIR & inOperand1,
+                                                                                   const class GALGAS_objectIR & inOperand2,
+                                                                                   const class GALGAS_bigint & inOperand3,
+                                                                                   const class GALGAS_bigint & inOperand4,
+                                                                                   const class GALGAS_bigint & inOperand5,
+                                                                                   const class GALGAS_bigint & inOperand6,
+                                                                                   Compiler * inCompiler
+                                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -678,9 +960,9 @@ class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -691,6 +973,10 @@ class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
   public: GALGAS_bigint mProperty_mBitbandRegisterRelocationAddress ;
   public: GALGAS_bigint mProperty_mBitbandRegisterOffsetMultiplier ;
   public: GALGAS_bigint mProperty_mBitbandRegisterBitMultiplier ;
+
+
+//--- Default constructor
+  public: cPtr_bitbandInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_bitbandInstructionIR (const GALGAS_string & in_mRegisterAddressLLVMname,
@@ -735,6 +1021,8 @@ class GALGAS_bitbandInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
   public: GALGAS_bitbandInstructionIR bang_bitbandInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -789,6 +1077,8 @@ class GALGAS_varInstructionWithAssignmentAST_2D_weak : public GALGAS_instruction
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -841,6 +1131,8 @@ class GALGAS_varDeclarationInstructionAST_2D_weak : public GALGAS_instructionAST
   public: GALGAS_varDeclarationInstructionAST bang_varDeclarationInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -895,6 +1187,8 @@ class GALGAS_letInstructionWithAssignmentAST_2D_weak : public GALGAS_instruction
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -944,6 +1238,11 @@ class GALGAS_instructionNOP : public GALGAS_instructionAST {
 //--------------------------------- Property read access
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_instructionNOP init_28__29_ (const class GALGAS_location & inOperand0,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -990,22 +1289,26 @@ class cPtr_instructionNOP : public cPtr_instructionAST {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method instructionSemanticAnalysis
-  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType inSelfType,
-           const class GALGAS_routineAttributes inRoutineAttributes,
-           const class GALGAS_semanticContext inContext,
-           const class GALGAS_mode inMode,
-           class GALGAS_semanticTemporariesStruct & ioTemporaries,
-           class GALGAS_staticEntityMap & ioStaticEntityMap,
-           class GALGAS_universalValuedObjectMap & ioUniversalMap,
-           class GALGAS_allocaList & ioAllocaList,
-           class GALGAS_instructionListIR & ioInstructionGenerationList,
+  public: virtual void method_instructionSemanticAnalysis (const class GALGAS_omnibusType arg_inSelfType,
+           const class GALGAS_routineAttributes arg_inRoutineAttributes,
+           const class GALGAS_semanticContext arg_inContext,
+           const class GALGAS_mode arg_inMode,
+           class GALGAS_semanticTemporariesStruct & arg_ioTemporaries,
+           class GALGAS_staticEntityMap & arg_ioStaticEntityMap,
+           class GALGAS_universalValuedObjectMap & arg_ioUniversalMap,
+           class GALGAS_allocaList & arg_ioAllocaList,
+           class GALGAS_instructionListIR & arg_ioInstructionGenerationList,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method noteInstructionTypesInPrecedenceGraph
-  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & ioGraph,
+  public: virtual void method_noteInstructionTypesInPrecedenceGraph (class GALGAS_semanticTypePrecedenceGraph & arg_ioGraph,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_instructionNOP (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_instructionNOP (const GALGAS_location & in_mInstructionLocation
@@ -1044,6 +1347,8 @@ class GALGAS_instructionNOP_2D_weak : public GALGAS_instructionAST_2D_weak {
   public: GALGAS_instructionNOP bang_instructionNOP_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1098,6 +1403,8 @@ class GALGAS_panicInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak 
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -1150,6 +1457,12 @@ class GALGAS_panicInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_bigint readProperty_mPanicCode (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_panicInstructionIR init_28__2C__29_ (const class GALGAS_location & inOperand0,
+                                                             const class GALGAS_bigint & inOperand1,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1204,19 +1517,23 @@ class cPtr_panicInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mThrowLocation ;
   public: GALGAS_bigint mProperty_mPanicCode ;
+
+
+//--- Default constructor
+  public: cPtr_panicInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_panicInstructionIR (const GALGAS_location & in_mThrowLocation,
@@ -1256,6 +1573,8 @@ class GALGAS_panicInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2D
   public: GALGAS_panicInstructionIR bang_panicInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1309,6 +1628,8 @@ class GALGAS_ifInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak {
   public: GALGAS_ifInstructionAST bang_ifInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1366,6 +1687,14 @@ class GALGAS_ifInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_instructionListIR readProperty_mElseInstructionGenerationList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_ifInstructionIR init_28__2C__2C__2C__29_ (const class GALGAS_string & inOperand0,
+                                                                  const class GALGAS_location & inOperand1,
+                                                                  const class GALGAS_instructionListIR & inOperand2,
+                                                                  const class GALGAS_instructionListIR & inOperand3,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1428,14 +1757,14 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -1443,6 +1772,10 @@ class cPtr_ifInstructionIR : public cPtr_abstractInstructionIR {
   public: GALGAS_location mProperty_mLocation ;
   public: GALGAS_instructionListIR mProperty_mThenInstructionGenerationList ;
   public: GALGAS_instructionListIR mProperty_mElseInstructionGenerationList ;
+
+
+//--- Default constructor
+  public: cPtr_ifInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_ifInstructionIR (const GALGAS_string & in_mLLVMTestName,
@@ -1484,6 +1817,8 @@ class GALGAS_ifInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2D_we
   public: GALGAS_ifInstructionIR bang_ifInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1537,6 +1872,8 @@ class GALGAS_syncInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak {
   public: GALGAS_syncInstructionAST bang_syncInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1603,6 +1940,8 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -1794,6 +2133,8 @@ class GALGAS_syncInstructionBranchListIR : public AC_GALGAS_list {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -1961,14 +2302,23 @@ class GALGAS_syncInstructionBranchListIR_2D_element : public AC_GALGAS_root {
     mProperty_mInstructionGenerationList = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_syncInstructionBranchListIR_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_syncInstructionBranchListIR_2D_element (const GALGAS_guardedCommandIR & in_mGuardedCommand,
                                                          const GALGAS_instructionListIR & in_mInstructionGenerationList) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_syncInstructionBranchListIR_2D_element init_28__2C__29_ (const class GALGAS_guardedCommandIR & inOperand0,
+                                                                                 const class GALGAS_instructionListIR & inOperand1,
+                                                                                 Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2028,6 +2378,8 @@ class GALGAS_guardedCommandIRList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2168,13 +2520,21 @@ class GALGAS_guardedCommandIRList_2D_element : public AC_GALGAS_root {
     mProperty_mGuardedCommand = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_guardedCommandIRList_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_guardedCommandIRList_2D_element (const GALGAS_guardedCommandIR & in_mGuardedCommand) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_guardedCommandIRList_2D_element init_28__29_ (const class GALGAS_guardedCommandIR & inOperand0,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2234,6 +2594,12 @@ class GALGAS_syncInstructionIR : public GALGAS_abstractInstructionIR {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_syncInstructionIR init_28__2C__29_ (const class GALGAS_location & inOperand0,
+                                                            const class GALGAS_syncInstructionBranchListIR & inOperand1,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -2287,19 +2653,23 @@ class cPtr_syncInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_location mProperty_mSelectInstructionLocation ;
   public: GALGAS_syncInstructionBranchListIR mProperty_mOnInstructionBranchListIR ;
+
+
+//--- Default constructor
+  public: cPtr_syncInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_syncInstructionIR (const GALGAS_location & in_mSelectInstructionLocation,
@@ -2339,6 +2709,8 @@ class GALGAS_syncInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2D_
   public: GALGAS_syncInstructionIR bang_syncInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2392,6 +2764,8 @@ class GALGAS_whileInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak 
   public: GALGAS_whileInstructionAST bang_whileInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2449,6 +2823,14 @@ class GALGAS_whileInstructionIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_instructionListIR readProperty_mInstructionGenerationList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_whileInstructionIR init_28__2C__2C__2C__29_ (const class GALGAS_uint & inOperand0,
+                                                                     const class GALGAS_instructionListIR & inOperand1,
+                                                                     const class GALGAS_string & inOperand2,
+                                                                     const class GALGAS_instructionListIR & inOperand3,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2511,14 +2893,14 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -2526,6 +2908,10 @@ class cPtr_whileInstructionIR : public cPtr_abstractInstructionIR {
   public: GALGAS_instructionListIR mProperty_mTestInstructionGenerationList ;
   public: GALGAS_string mProperty_m_5F_while_5F_llvmName ;
   public: GALGAS_instructionListIR mProperty_mInstructionGenerationList ;
+
+
+//--- Default constructor
+  public: cPtr_whileInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_whileInstructionIR (const GALGAS_uint & in_mLabelIndex,
@@ -2567,6 +2953,8 @@ class GALGAS_whileInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2D
   public: GALGAS_whileInstructionIR bang_whileInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2620,6 +3008,8 @@ class GALGAS_forInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak {
   public: GALGAS_forInstructionAST bang_forInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2687,6 +3077,19 @@ class GALGAS_forInstructionOnArrayIR : public GALGAS_abstractInstructionIR {
   public: class GALGAS_stringset readProperty_mInvokedFunctionSet (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_forInstructionOnArrayIR init_28__2C__2C__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_string & inOperand0,
+                                                                                              const class GALGAS_lstring & inOperand1,
+                                                                                              const class GALGAS_objectIR & inOperand2,
+                                                                                              const class GALGAS_instructionListIR & inOperand3,
+                                                                                              const class GALGAS_string & inOperand4,
+                                                                                              const class GALGAS_instructionListIR & inOperand5,
+                                                                                              const class GALGAS_omnibusType & inOperand6,
+                                                                                              const class GALGAS_uint & inOperand7,
+                                                                                              const class GALGAS_stringset & inOperand8,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2769,14 +3172,14 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -2789,6 +3192,10 @@ class cPtr_forInstructionOnArrayIR : public cPtr_abstractInstructionIR {
   public: GALGAS_omnibusType mProperty_mElementType ;
   public: GALGAS_uint mProperty_mArraySize ;
   public: GALGAS_stringset mProperty_mInvokedFunctionSet ;
+
+
+//--- Default constructor
+  public: cPtr_forInstructionOnArrayIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_forInstructionOnArrayIR (const GALGAS_string & in_mEnumeratedValueName,
@@ -2835,6 +3242,8 @@ class GALGAS_forInstructionOnArrayIR_2D_weak : public GALGAS_abstractInstruction
   public: GALGAS_forInstructionOnArrayIR bang_forInstructionOnArrayIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2898,6 +3307,17 @@ class GALGAS_forInstructionOnLiteralStringIR : public GALGAS_abstractInstruction
   public: class GALGAS_instructionListIR readProperty_mDoInstructionList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_forInstructionOnLiteralStringIR init_28__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_string & inOperand0,
+                                                                                              const class GALGAS_location & inOperand1,
+                                                                                              const class GALGAS_objectIR & inOperand2,
+                                                                                              const class GALGAS_omnibusType & inOperand3,
+                                                                                              const class GALGAS_instructionListIR & inOperand4,
+                                                                                              const class GALGAS_objectIR & inOperand5,
+                                                                                              const class GALGAS_instructionListIR & inOperand6,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -2972,14 +3392,14 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -2990,6 +3410,10 @@ class cPtr_forInstructionOnLiteralStringIR : public cPtr_abstractInstructionIR {
   public: GALGAS_instructionListIR mProperty_mWhileInstructionList ;
   public: GALGAS_objectIR mProperty_mWhileExpressionResult ;
   public: GALGAS_instructionListIR mProperty_mDoInstructionList ;
+
+
+//--- Default constructor
+  public: cPtr_forInstructionOnLiteralStringIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_forInstructionOnLiteralStringIR (const GALGAS_string & in_mVarName,
@@ -3034,6 +3458,8 @@ class GALGAS_forInstructionOnLiteralStringIR_2D_weak : public GALGAS_abstractIns
   public: GALGAS_forInstructionOnLiteralStringIR bang_forInstructionOnLiteralStringIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3087,6 +3513,8 @@ class GALGAS_forLowerUpperBoundInstructionAST_2D_weak : public GALGAS_instructio
   public: GALGAS_forLowerUpperBoundInstructionAST bang_forLowerUpperBoundInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3150,6 +3578,17 @@ class GALGAS_forLowerUpperBoundInstructionIR : public GALGAS_abstractInstruction
   public: class GALGAS_instructionListIR readProperty_mInstructionList (void) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_forLowerUpperBoundInstructionIR init_28__2C__2C__2C__2C__2C__2C__29_ (const class GALGAS_string & inOperand0,
+                                                                                              const class GALGAS_omnibusType & inOperand1,
+                                                                                              const class GALGAS_bool & inOperand2,
+                                                                                              const class GALGAS_location & inOperand3,
+                                                                                              const class GALGAS_objectIR & inOperand4,
+                                                                                              const class GALGAS_objectIR & inOperand5,
+                                                                                              const class GALGAS_instructionListIR & inOperand6,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3224,14 +3663,14 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -3242,6 +3681,10 @@ class cPtr_forLowerUpperBoundInstructionIR : public cPtr_abstractInstructionIR {
   public: GALGAS_objectIR mProperty_mLowerExpressionResult ;
   public: GALGAS_objectIR mProperty_mUpperExpressionResult ;
   public: GALGAS_instructionListIR mProperty_mInstructionList ;
+
+
+//--- Default constructor
+  public: cPtr_forLowerUpperBoundInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_forLowerUpperBoundInstructionIR (const GALGAS_string & in_mVarName,
@@ -3286,6 +3729,8 @@ class GALGAS_forLowerUpperBoundInstructionIR_2D_weak : public GALGAS_abstractIns
   public: GALGAS_forLowerUpperBoundInstructionIR bang_forLowerUpperBoundInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3340,6 +3785,8 @@ class GALGAS_callInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -3392,6 +3839,8 @@ class GALGAS_standAloneProcedureCallInstructionAST_2D_weak : public GALGAS_callI
   public: GALGAS_standAloneProcedureCallInstructionAST bang_standAloneProcedureCallInstructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3457,6 +3906,8 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3585,13 +4036,21 @@ class GALGAS_accessInAssignmentListAST_2D_element : public AC_GALGAS_root {
     mProperty_mAccess = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_accessInAssignmentListAST_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_accessInAssignmentListAST_2D_element (const GALGAS_accessInAssignmentAST & in_mAccess) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_accessInAssignmentListAST_2D_element init_28__29_ (const class GALGAS_accessInAssignmentAST & inOperand0,
+                                                                           Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3651,6 +4110,8 @@ class GALGAS_procedureCallInstructionAST_2D_weak : public GALGAS_callInstruction
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -3705,6 +4166,8 @@ class GALGAS_procEffectiveParameterList : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3901,8 +4364,11 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
     mProperty_mParameterType = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_procEffectiveParameterList_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_procEffectiveParameterList_2D_element (const GALGAS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
@@ -3910,6 +4376,13 @@ class GALGAS_procEffectiveParameterList_2D_element : public AC_GALGAS_root {
                                                         const GALGAS_omnibusType & in_mParameterType) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_procEffectiveParameterList_2D_element init_28__2C__2C__29_ (const class GALGAS_effectiveArgumentPassingModeAST & inOperand0,
+                                                                                    const class GALGAS_lstring & inOperand1,
+                                                                                    const class GALGAS_omnibusType & inOperand2,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -3978,6 +4451,8 @@ class GALGAS_procEffectiveParameterPassingModeIR : public AC_GALGAS_root {
   public: inline enumeration enumValue (void) const { return mEnum ; }
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4065,14 +4540,23 @@ class GALGAS_procCallEffectiveParameterListIR_2D_element : public AC_GALGAS_root
     mProperty_mParameter = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_procCallEffectiveParameterListIR_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_procCallEffectiveParameterListIR_2D_element (const GALGAS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
                                                               const GALGAS_objectIR & in_mParameter) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_procCallEffectiveParameterListIR_2D_element init_28__2C__29_ (const class GALGAS_procEffectiveParameterPassingModeIR & inOperand0,
+                                                                                      const class GALGAS_objectIR & inOperand1,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4147,14 +4631,23 @@ class GALGAS_switchCaseListAST_2D_element : public AC_GALGAS_root {
     mProperty_mCaseInstructionList = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_switchCaseListAST_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_switchCaseListAST_2D_element (const GALGAS_lstringlist & in_mCaseIdentifiers,
                                                const GALGAS_instructionListAST & in_mCaseInstructionList) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_switchCaseListAST_2D_element init_28__2C__29_ (const class GALGAS_lstringlist & inOperand0,
+                                                                       const class GALGAS_instructionListAST & inOperand1,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4215,6 +4708,8 @@ class GALGAS_switchInstructionAST_2D_weak : public GALGAS_instructionAST_2D_weak
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -4268,6 +4763,8 @@ class GALGAS_switchCaseListIR : public AC_GALGAS_list {
                                                  COMMA_LOCATION_ARGS) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4436,14 +4933,23 @@ class GALGAS_switchCaseListIR_2D_element : public AC_GALGAS_root {
     mProperty_mCaseInstructionList = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_switchCaseListIR_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_switchCaseListIR_2D_element (const GALGAS_uintlist & in_mCaseIdentifierIndexes,
                                               const GALGAS_instructionListIR & in_mCaseInstructionList) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_switchCaseListIR_2D_element init_28__2C__29_ (const class GALGAS_uintlist & inOperand0,
+                                                                      const class GALGAS_instructionListIR & inOperand1,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4508,6 +5014,14 @@ class GALGAS_switchInstructionIR : public GALGAS_abstractInstructionIR {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_switchInstructionIR init_28__2C__2C__2C__29_ (const class GALGAS_uint & inOperand0,
+                                                                      const class GALGAS_instructionListIR & inOperand1,
+                                                                      const class GALGAS_objectIR & inOperand2,
+                                                                      const class GALGAS_switchCaseListIR & inOperand3,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -4569,14 +5083,14 @@ class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
@@ -4584,6 +5098,10 @@ class cPtr_switchInstructionIR : public cPtr_abstractInstructionIR {
   public: GALGAS_instructionListIR mProperty_mSwitchExpressionGenerationList ;
   public: GALGAS_objectIR mProperty_mSwitchExpression ;
   public: GALGAS_switchCaseListIR mProperty_mCaseGenerationList ;
+
+
+//--- Default constructor
+  public: cPtr_switchInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_switchInstructionIR (const GALGAS_uint & in_mLabelIndex,
@@ -4625,6 +5143,8 @@ class GALGAS_switchInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_2
   public: GALGAS_switchInstructionIR bang_switchInstructionIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4787,13 +5307,21 @@ class GALGAS_routineListIR_2D_element : public AC_GALGAS_root {
     mProperty_mRoutine = inValue ;
   }
 
-//--------------------------------- Virtual destructor (in debug mode)
+//--------------------------------- Virtual destructor
   public: virtual ~ GALGAS_routineListIR_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
   public: GALGAS_routineListIR_2D_element (const GALGAS_abstractRoutineIR & in_mRoutine) ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_routineListIR_2D_element init_28__29_ (const class GALGAS_abstractRoutineIR & inOperand0,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -4885,6 +5413,10 @@ class GALGAS_nopIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Property read access
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_nopIR init_28__29_ (Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -4930,12 +5462,16 @@ class cPtr_nopIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
+
+
+//--- Default constructor
+  public: cPtr_nopIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_nopIR (LOCATION_ARGS) ;
@@ -4973,6 +5509,8 @@ class GALGAS_nopIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
   public: GALGAS_nopIR bang_nopIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5039,6 +5577,12 @@ class GALGAS_freeStringIR : public GALGAS_abstractInstructionIR {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_freeStringIR init_28__2C__29_ (const class GALGAS_string & inOperand0,
+                                                       const class GALGAS_stringset & inOperand1,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -5092,19 +5636,23 @@ class cPtr_freeStringIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & ioInvokedRoutineSet,
-           class GALGAS_uint & ioMaxBranchOfOnInstructions,
+  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
+           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_string mProperty_mString ;
   public: GALGAS_stringset mProperty_mInvokedFunctionSet ;
+
+
+//--- Default constructor
+  public: cPtr_freeStringIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_freeStringIR (const GALGAS_string & in_mString,
@@ -5144,6 +5692,8 @@ class GALGAS_freeStringIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak 
   public: GALGAS_freeStringIR bang_freeStringIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
 
 //-- Start of type generic part
+
+//--------------------------------- Initializers
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -5210,6 +5760,12 @@ class GALGAS_extendIR : public GALGAS_abstractInstructionIR {
 
 //-- Start of type generic part
 
+//--------------------------------- Initializers
+  public: static GALGAS_extendIR init_28__2C__29_ (const class GALGAS_objectIR & inOperand0,
+                                                   const class GALGAS_objectIR & inOperand1,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
@@ -5263,14 +5819,18 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
 //--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
+  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
+           const class GALGAS_generationContext arg_inGenerationContext,
+           class GALGAS_generationAdds & arg_ioGenerationAdds,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
 //--- Properties
   public: GALGAS_objectIR mProperty_mResult ;
   public: GALGAS_objectIR mProperty_mSource ;
+
+
+//--- Default constructor
+  public: cPtr_extendIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
   public: cPtr_extendIR (const GALGAS_objectIR & in_mResult,
@@ -5290,711 +5850,4 @@ class cPtr_extendIR : public cPtr_abstractInstructionIR {
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @extendIR_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_extendIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_extendIR_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_extendIR_2D_weak (const class GALGAS_extendIR & inSource) ;
-
-  public: GALGAS_extendIR_2D_weak & operator = (const class GALGAS_extendIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_extendIR bang_extendIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_extendIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_extendIR_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_extendIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_extendIR_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendTrunc'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendTrunc (class GALGAS_instructionListIR & ioObject,
-                                  const class GALGAS_omnibusType constin_inResultType,
-                                  class GALGAS_objectIR & io_ioObject,
-                                  class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                  class Compiler * inCompiler
-                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @truncIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_truncIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_truncIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_truncIR (const class cPtr_truncIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_objectIR readProperty_mResult (void) const ;
-
-  public: class GALGAS_objectIR readProperty_mSource (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_truncIR extractObject (const GALGAS_object & inObject,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_truncIR class_func_new (const class GALGAS_objectIR & inOperand0,
-                                                      const class GALGAS_objectIR & inOperand1
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_truncIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMResult (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMSource (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_truncIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @truncIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_truncIR : public cPtr_abstractInstructionIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_objectIR mProperty_mResult ;
-  public: GALGAS_objectIR mProperty_mSource ;
-
-//--- Constructor
-  public: cPtr_truncIR (const GALGAS_objectIR & in_mResult,
-                        const GALGAS_objectIR & in_mSource
-                        COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'getNewTempValue?&!'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_getNewTempValue_3F__26__21_ (const class GALGAS_omnibusType constinArgument0,
-                                          class GALGAS_semanticTemporariesStruct & ioArgument1,
-                                          class GALGAS_objectIR & outArgument2,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @truncIR_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_truncIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_truncIR_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_truncIR_2D_weak (const class GALGAS_truncIR & inSource) ;
-
-  public: GALGAS_truncIR_2D_weak & operator = (const class GALGAS_truncIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_truncIR bang_truncIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_truncIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_truncIR_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_truncIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_truncIR_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendBoolToUInt'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendBoolToUInt (class GALGAS_instructionListIR & ioObject,
-                                       const class GALGAS_objectIR constin_inUIntResult,
-                                       const class GALGAS_objectIR constin_inBoolSource,
-                                       class Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @boolToUIntIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_boolToUIntIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_boolToUIntIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_boolToUIntIR (const class cPtr_boolToUIntIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_objectIR readProperty_mUIntResult (void) const ;
-
-  public: class GALGAS_objectIR readProperty_mBoolSource (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_boolToUIntIR extractObject (const GALGAS_object & inObject,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_boolToUIntIR class_func_new (const class GALGAS_objectIR & inOperand0,
-                                                           const class GALGAS_objectIR & inOperand1
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_boolToUIntIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMBoolSource (class GALGAS_objectIR inArgument0
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMUIntResult (class GALGAS_objectIR inArgument0
-                                                       COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_boolToUIntIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolToUIntIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @boolToUIntIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_boolToUIntIR : public cPtr_abstractInstructionIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_objectIR mProperty_mUIntResult ;
-  public: GALGAS_objectIR mProperty_mBoolSource ;
-
-//--- Constructor
-  public: cPtr_boolToUIntIR (const GALGAS_objectIR & in_mUIntResult,
-                             const GALGAS_objectIR & in_mBoolSource
-                             COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @boolToUIntIR_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_boolToUIntIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_boolToUIntIR_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_boolToUIntIR_2D_weak (const class GALGAS_boolToUIntIR & inSource) ;
-
-  public: GALGAS_boolToUIntIR_2D_weak & operator = (const class GALGAS_boolToUIntIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_boolToUIntIR bang_boolToUIntIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_boolToUIntIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_boolToUIntIR_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_boolToUIntIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_boolToUIntIR_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolToUIntIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendShiftLeft'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendShiftLeft (class GALGAS_instructionListIR & ioObject,
-                                      const class GALGAS_objectIR constin_inResult,
-                                      const class GALGAS_objectIR constin_inSource,
-                                      const class GALGAS_uint constin_inShiftAmount,
-                                      class Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @leftShiftIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_leftShiftIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_leftShiftIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_leftShiftIR (const class cPtr_leftShiftIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_objectIR readProperty_mResult (void) const ;
-
-  public: class GALGAS_objectIR readProperty_mSource (void) const ;
-
-  public: class GALGAS_uint readProperty_mShiftAmount (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_leftShiftIR extractObject (const GALGAS_object & inObject,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_leftShiftIR class_func_new (const class GALGAS_objectIR & inOperand0,
-                                                          const class GALGAS_objectIR & inOperand1,
-                                                          const class GALGAS_uint & inOperand2
-                                                          COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_leftShiftIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMResult (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMShiftAmount (class GALGAS_uint inArgument0
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMSource (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_leftShiftIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @leftShiftIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_leftShiftIR : public cPtr_abstractInstructionIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_objectIR mProperty_mResult ;
-  public: GALGAS_objectIR mProperty_mSource ;
-  public: GALGAS_uint mProperty_mShiftAmount ;
-
-//--- Constructor
-  public: cPtr_leftShiftIR (const GALGAS_objectIR & in_mResult,
-                            const GALGAS_objectIR & in_mSource,
-                            const GALGAS_uint & in_mShiftAmount
-                            COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @leftShiftIR_2D_weak weak reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_leftShiftIR_2D_weak : public GALGAS_abstractInstructionIR_2D_weak {
-//--------------------------------- Default constructor
-  public: GALGAS_leftShiftIR_2D_weak (void) ;
-
-//--------------------------------- Constructor and assignment from strong reference
-  public: GALGAS_leftShiftIR_2D_weak (const class GALGAS_leftShiftIR & inSource) ;
-
-  public: GALGAS_leftShiftIR_2D_weak & operator = (const class GALGAS_leftShiftIR & inSource) ;
-
-//--------------------------------- Bang operator
-  public: GALGAS_leftShiftIR bang_leftShiftIR_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_leftShiftIR_2D_weak extractObject (const GALGAS_object & inObject,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_leftShiftIR_2D_weak class_func_nil (LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_leftShiftIR_2D_weak & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_leftShiftIR_2D_weak class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_leftShiftIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendLogicalShiftRight'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendLogicalShiftRight (class GALGAS_instructionListIR & ioObject,
-                                              class GALGAS_objectIR & io_ioResult,
-                                              const class GALGAS_uint constin_inShiftAmount,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @logicalRightShiftIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_logicalRightShiftIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_logicalRightShiftIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_logicalRightShiftIR (const class cPtr_logicalRightShiftIR * inSourcePtr) ;
-
-//--------------------------------- Property read access
-  public: class GALGAS_objectIR readProperty_mResult (void) const ;
-
-  public: class GALGAS_objectIR readProperty_mSource (void) const ;
-
-  public: class GALGAS_uint readProperty_mShiftAmount (void) const ;
-
-//-- Start of type generic part
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_logicalRightShiftIR extractObject (const GALGAS_object & inObject,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_logicalRightShiftIR class_func_new (const class GALGAS_objectIR & inOperand0,
-                                                                  const class GALGAS_objectIR & inOperand1,
-                                                                  const class GALGAS_uint & inOperand2
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_logicalRightShiftIR & inOperand) const ;
-
-//--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMResult (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMShiftAmount (class GALGAS_uint inArgument0
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMSource (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Optional Methods
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_logicalRightShiftIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_logicalRightShiftIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @logicalRightShiftIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_logicalRightShiftIR : public cPtr_abstractInstructionIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-//--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & ioLLVMcode,
-           const class GALGAS_generationContext inGenerationContext,
-           class GALGAS_generationAdds & ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_objectIR mProperty_mResult ;
-  public: GALGAS_objectIR mProperty_mSource ;
-  public: GALGAS_uint mProperty_mShiftAmount ;
-
-//--- Constructor
-  public: cPtr_logicalRightShiftIR (const GALGAS_objectIR & in_mResult,
-                                    const GALGAS_objectIR & in_mSource,
-                                    const GALGAS_uint & in_mShiftAmount
-                                    COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendLoadWhenReference'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendLoadWhenReference (class GALGAS_instructionListIR & ioObject,
-                                              class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class GALGAS_objectIR & io_ioObject,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 

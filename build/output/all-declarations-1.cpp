@@ -1260,6 +1260,12 @@ GALGAS_interruptionConfigurationList GALGAS_interruptionConfigurationList::extra
 // @abstractDeclarationAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_abstractDeclarationAST::cPtr_abstractDeclarationAST (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -1291,6 +1297,17 @@ ComparisonResult GALGAS_abstractDeclarationAST::objectCompare (const GALGAS_abst
 GALGAS_abstractDeclarationAST::GALGAS_abstractDeclarationAST (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_abstractDeclarationAST GALGAS_abstractDeclarationAST::init_28__29_ (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) {
+  cPtr_abstractDeclarationAST * object = nullptr ;
+  macroMyNew (object, cPtr_abstractDeclarationAST (inCompiler COMMA_THERE)) ;
+  const GALGAS_abstractDeclarationAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9703,6 +9720,12 @@ GALGAS_string callExtensionGetter_keyRepresentationForErrorSignaling (const cPtr
 // @compileTimeDeclarationBarrierAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_compileTimeDeclarationBarrierAST::cPtr_compileTimeDeclarationBarrierAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_compileTimeDeclarationBarrierAST::printNonNullClassInstanceProperties (void) const {
     cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
@@ -9739,6 +9762,17 @@ ComparisonResult GALGAS_compileTimeDeclarationBarrierAST::objectCompare (const G
 GALGAS_compileTimeDeclarationBarrierAST::GALGAS_compileTimeDeclarationBarrierAST (void) :
 GALGAS_abstractDeclarationAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_compileTimeDeclarationBarrierAST GALGAS_compileTimeDeclarationBarrierAST::init_28__29_ (Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeDeclarationBarrierAST * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeDeclarationBarrierAST (inCompiler COMMA_THERE)) ;
+  const GALGAS_compileTimeDeclarationBarrierAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 

@@ -8,6 +8,414 @@
 #include "all-declarations-5.h"
 
 //--------------------------------------------------------------------------------------------------
+//
+//Class for element of '@instructionListIR' list
+//
+//--------------------------------------------------------------------------------------------------
+
+class cCollectionElement_instructionListIR : public cCollectionElement {
+  public: GALGAS_instructionListIR_2D_element mObject ;
+
+//--- Class functions
+  public: cCollectionElement_instructionListIR (const GALGAS_abstractInstructionIR & in_mInstructionGeneration
+                                                COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_instructionListIR (const GALGAS_instructionListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
+
+//--- Virtual method that checks that all attributes are valid
+  public: virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public: virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public: virtual void description (String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement_instructionListIR::cCollectionElement_instructionListIR (const GALGAS_abstractInstructionIR & in_mInstructionGeneration
+                                                                            COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mInstructionGeneration) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement_instructionListIR::cCollectionElement_instructionListIR (const GALGAS_instructionListIR_2D_element & inElement COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (inElement.mProperty_mInstructionGeneration) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool cCollectionElement_instructionListIR::isValid (void) const {
+  return true ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement * cCollectionElement_instructionListIR::copy (void) {
+  cCollectionElement * result = nullptr ;
+  macroMyNew (result, cCollectionElement_instructionListIR (mObject.mProperty_mInstructionGeneration COMMA_HERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cCollectionElement_instructionListIR::description (String & ioString, const int32_t inIndentation) const {
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendCString ("mInstructionGeneration" ":") ;
+  mObject.mProperty_mInstructionGeneration.description (ioString, inIndentation) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult cCollectionElement_instructionListIR::compare (const cCollectionElement * inOperand) const {
+  cCollectionElement_instructionListIR * operand = (cCollectionElement_instructionListIR *) inOperand ;
+  macroValidSharedObject (operand, cCollectionElement_instructionListIR) ;
+  return mObject.objectCompare (operand->mObject) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR::GALGAS_instructionListIR (void) :
+AC_GALGAS_list () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR::GALGAS_instructionListIR (const capCollectionElementArray & inSharedArray) :
+AC_GALGAS_list (inSharedArray) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
+  return GALGAS_instructionListIR (capCollectionElementArray ()) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::class_func_listWithValue (const GALGAS_abstractInstructionIR & inOperand0
+                                                                             COMMA_LOCATION_ARGS) {
+  GALGAS_instructionListIR result ;
+  if (inOperand0.isValid ()) {
+    result = GALGAS_instructionListIR (capCollectionElementArray ()) ;
+    capCollectionElement attributes ;
+    GALGAS_instructionListIR::makeAttributesFromObjects (attributes, inOperand0 COMMA_THERE) ;
+    result.appendObject (attributes) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                          const GALGAS_abstractInstructionIR & in_mInstructionGeneration
+                                                          COMMA_LOCATION_ARGS) {
+  cCollectionElement_instructionListIR * p = nullptr ;
+  macroMyNew (p, cCollectionElement_instructionListIR (in_mInstructionGeneration COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::addAssign_operation (const GALGAS_abstractInstructionIR & inOperand0
+                                                    COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement_instructionListIR (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_append (const GALGAS_abstractInstructionIR inOperand0,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement_instructionListIR (inOperand0 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_insertAtIndex (const GALGAS_abstractInstructionIR inOperand0,
+                                                     const GALGAS_uint inInsertionIndex,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    if (inInsertionIndex.isValid () && inOperand0.isValid ()) {
+      cCollectionElement * p = nullptr ;
+      macroMyNew (p, cCollectionElement_instructionListIR (inOperand0 COMMA_THERE)) ;
+      capCollectionElement attributes ;
+      attributes.setPointer (p) ;
+      macroDetachSharedObject (p) ;
+      insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+    }else{
+      drop () ;
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_removeAtIndex (GALGAS_abstractInstructionIR & outOperand0,
+                                                     const GALGAS_uint inRemoveIndex,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    if (inRemoveIndex.isValid ()) {
+      capCollectionElement attributes ;
+      removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+      cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+      if (nullptr == p) {
+        outOperand0.drop () ;
+        drop () ;
+      }else{
+        macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+        outOperand0 = p->mObject.mProperty_mInstructionGeneration ;
+      }
+    }else{
+      outOperand0.drop () ;
+      drop () ;    
+    }
+  }else{
+    outOperand0.drop () ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_popFirst (GALGAS_abstractInstructionIR & outOperand0,
+                                                Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    outOperand0 = p->mObject.mProperty_mInstructionGeneration ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_popLast (GALGAS_abstractInstructionIR & outOperand0,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    outOperand0 = p->mObject.mProperty_mInstructionGeneration ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::method_first (GALGAS_abstractInstructionIR & outOperand0,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    outOperand0 = p->mObject.mProperty_mInstructionGeneration ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::method_last (GALGAS_abstractInstructionIR & outOperand0,
+                                            Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    outOperand0 = p->mObject.mProperty_mInstructionGeneration ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::add_operation (const GALGAS_instructionListIR & inOperand,
+                                                                  Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) const {
+  GALGAS_instructionListIR result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListWithRange (const GALGAS_range & inRange,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_instructionListIR result = GALGAS_instructionListIR::class_func_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListFromIndex (const GALGAS_uint & inIndex,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const {
+  GALGAS_instructionListIR result = GALGAS_instructionListIR::class_func_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::getter_subListToIndex (const GALGAS_uint & inIndex,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
+  GALGAS_instructionListIR result = GALGAS_instructionListIR::class_func_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::plusAssign_operation (const GALGAS_instructionListIR inOperand,
+                                                     Compiler * /* inCompiler */
+                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_instructionListIR::setter_setMInstructionGenerationAtIndex (GALGAS_abstractInstructionIR inOperand,
+                                                                        GALGAS_uint inIndex,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mInstructionGeneration = inOperand ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_abstractInstructionIR GALGAS_instructionListIR::getter_mInstructionGenerationAtIndex (const GALGAS_uint & inIndex,
+                                                                                             Compiler * inCompiler
+                                                                                             COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_instructionListIR * p = (cCollectionElement_instructionListIR *) attributes.ptr () ;
+  GALGAS_abstractInstructionIR result ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+    result = p->mObject.mProperty_mInstructionGeneration ;
+  }
+  return result ;
+}
+
+
+
+//--------------------------------------------------------------------------------------------------
+
+cEnumerator_instructionListIR::cEnumerator_instructionListIR (const GALGAS_instructionListIR & inEnumeratedObject,
+                                                              const EnumerationOrder inOrder) :
+cGenericAbstractEnumerator (inOrder) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR_2D_element cEnumerator_instructionListIR::current (LOCATION_ARGS) const {
+  const cCollectionElement_instructionListIR * p = (const cCollectionElement_instructionListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+  return p->mObject ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_abstractInstructionIR cEnumerator_instructionListIR::current_mInstructionGeneration (LOCATION_ARGS) const {
+  const cCollectionElement_instructionListIR * p = (const cCollectionElement_instructionListIR *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_instructionListIR) ;
+  return p->mObject.mProperty_mInstructionGeneration ;
+}
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @instructionListIR generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionListIR ("instructionListIR",
+                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_instructionListIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionListIR ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_instructionListIR::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_instructionListIR (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_instructionListIR GALGAS_instructionListIR::extractObject (const GALGAS_object & inObject,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_instructionListIR result ;
+  const GALGAS_instructionListIR * p = (const GALGAS_instructionListIR *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_instructionListIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("instructionListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 ComparisonResult GALGAS_guardImplementationRoutineIR_2D_weak::objectCompare (const GALGAS_guardImplementationRoutineIR_2D_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -3733,6 +4141,12 @@ GALGAS_sectionModePanicRoutineIR_2D_weak GALGAS_sectionModePanicRoutineIR_2D_wea
 // @ctExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_ctExpressionAST::cPtr_ctExpressionAST (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_ctExpressionAST::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -3764,6 +4178,17 @@ ComparisonResult GALGAS_ctExpressionAST::objectCompare (const GALGAS_ctExpressio
 GALGAS_ctExpressionAST::GALGAS_ctExpressionAST (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_ctExpressionAST GALGAS_ctExpressionAST::init_28__29_ (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  cPtr_ctExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_ctExpressionAST (inCompiler COMMA_THERE)) ;
+  const GALGAS_ctExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5266,6 +5691,12 @@ GALGAS_convertExpressionAST_2D_weak GALGAS_convertExpressionAST_2D_weak::extract
 // @abstractInstructionIR reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_abstractInstructionIR::cPtr_abstractInstructionIR (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
+acStrongPtr_class (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_abstractInstructionIR::printNonNullClassInstanceProperties (void) const {
     acStrongPtr_class::printNonNullClassInstanceProperties () ;
@@ -5297,6 +5728,17 @@ ComparisonResult GALGAS_abstractInstructionIR::objectCompare (const GALGAS_abstr
 GALGAS_abstractInstructionIR::GALGAS_abstractInstructionIR (void) :
 AC_GALGAS_reference_class () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_abstractInstructionIR GALGAS_abstractInstructionIR::init_28__29_ (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) {
+  cPtr_abstractInstructionIR * object = nullptr ;
+  macroMyNew (object, cPtr_abstractInstructionIR (inCompiler COMMA_THERE)) ;
+  const GALGAS_abstractInstructionIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5689,6 +6131,14 @@ GALGAS_truncateExpressionAST_2D_weak GALGAS_truncateExpressionAST_2D_weak::extra
 // @truncateInstructionIR reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_truncateInstructionIR::cPtr_truncateInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mTarget (),
+mProperty_mOperand () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_truncateInstructionIR::printNonNullClassInstanceProperties (void) const {
     cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
@@ -5736,6 +6186,21 @@ ComparisonResult GALGAS_truncateInstructionIR::objectCompare (const GALGAS_trunc
 GALGAS_truncateInstructionIR::GALGAS_truncateInstructionIR (void) :
 GALGAS_abstractInstructionIR () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_truncateInstructionIR GALGAS_truncateInstructionIR::init_28__2C__29_ (const GALGAS_objectIR & in_mTarget,
+                                                                                const GALGAS_objectIR & in_mOperand,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_truncateInstructionIR * object = nullptr ;
+  macroMyNew (object, cPtr_truncateInstructionIR (inCompiler COMMA_THERE)) ;
+  object->mProperty_mTarget = in_mTarget ;
+  object->mProperty_mOperand = in_mOperand ;
+  const GALGAS_truncateInstructionIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7171,6 +7636,18 @@ GALGAS_typedConstantCallAST_2D_weak GALGAS_typedConstantCallAST_2D_weak::extract
 // @ifExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_ifExpressionAST::cPtr_ifExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (inCompiler COMMA_THERE),
+mProperty_mIfExpression (),
+mProperty_mIfExpressionEndLocation (),
+mProperty_mThenExpression (),
+mProperty_mThenExpressionEndLocation (),
+mProperty_mElseExpression (),
+mProperty_mElseExpressionEndLocation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_ifExpressionAST::printNonNullClassInstanceProperties (void) const {
     cPtr_expressionAST::printNonNullClassInstanceProperties () ;
@@ -7234,6 +7711,29 @@ ComparisonResult GALGAS_ifExpressionAST::objectCompare (const GALGAS_ifExpressio
 GALGAS_ifExpressionAST::GALGAS_ifExpressionAST (void) :
 GALGAS_expressionAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_ifExpressionAST GALGAS_ifExpressionAST::init_28__2C__2C__2C__2C__2C__29_ (const GALGAS_expressionAST & in_mIfExpression,
+                                                                                    const GALGAS_location & in_mIfExpressionEndLocation,
+                                                                                    const GALGAS_expressionAST & in_mThenExpression,
+                                                                                    const GALGAS_location & in_mThenExpressionEndLocation,
+                                                                                    const GALGAS_expressionAST & in_mElseExpression,
+                                                                                    const GALGAS_location & in_mElseExpressionEndLocation,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) {
+  cPtr_ifExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_ifExpressionAST (inCompiler COMMA_THERE)) ;
+  object->mProperty_mIfExpression = in_mIfExpression ;
+  object->mProperty_mIfExpressionEndLocation = in_mIfExpressionEndLocation ;
+  object->mProperty_mThenExpression = in_mThenExpression ;
+  object->mProperty_mThenExpressionEndLocation = in_mThenExpressionEndLocation ;
+  object->mProperty_mElseExpression = in_mElseExpression ;
+  object->mProperty_mElseExpressionEndLocation = in_mElseExpressionEndLocation ;
+  const GALGAS_ifExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7603,6 +8103,15 @@ GALGAS_ifExpressionAST_2D_weak GALGAS_ifExpressionAST_2D_weak::extractObject (co
 // @booleanShortCircuitAndOperatorExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_booleanShortCircuitAndOperatorExpressionAST::cPtr_booleanShortCircuitAndOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (inCompiler COMMA_THERE),
+mProperty_mLeftExpression (),
+mProperty_mOperatorLocation (),
+mProperty_mRightExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_booleanShortCircuitAndOperatorExpressionAST::printNonNullClassInstanceProperties (void) const {
     cPtr_expressionAST::printNonNullClassInstanceProperties () ;
@@ -7654,6 +8163,23 @@ ComparisonResult GALGAS_booleanShortCircuitAndOperatorExpressionAST::objectCompa
 GALGAS_booleanShortCircuitAndOperatorExpressionAST::GALGAS_booleanShortCircuitAndOperatorExpressionAST (void) :
 GALGAS_expressionAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_booleanShortCircuitAndOperatorExpressionAST GALGAS_booleanShortCircuitAndOperatorExpressionAST::init_28__2C__2C__29_ (const GALGAS_expressionAST & in_mLeftExpression,
+                                                                                                                                const GALGAS_location & in_mOperatorLocation,
+                                                                                                                                const GALGAS_expressionAST & in_mRightExpression,
+                                                                                                                                Compiler * inCompiler
+                                                                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_booleanShortCircuitAndOperatorExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_booleanShortCircuitAndOperatorExpressionAST (inCompiler COMMA_THERE)) ;
+  object->mProperty_mLeftExpression = in_mLeftExpression ;
+  object->mProperty_mOperatorLocation = in_mOperatorLocation ;
+  object->mProperty_mRightExpression = in_mRightExpression ;
+  const GALGAS_booleanShortCircuitAndOperatorExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8809,6 +9335,13 @@ GALGAS_literalStringInExpressionAST_2D_weak GALGAS_literalStringInExpressionAST_
 // @literalBooleanInExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_literalBooleanInExpressionAST::cPtr_literalBooleanInExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (inCompiler COMMA_THERE),
+mProperty_mValue () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_literalBooleanInExpressionAST::printNonNullClassInstanceProperties (void) const {
     cPtr_expressionAST::printNonNullClassInstanceProperties () ;
@@ -8852,6 +9385,19 @@ ComparisonResult GALGAS_literalBooleanInExpressionAST::objectCompare (const GALG
 GALGAS_literalBooleanInExpressionAST::GALGAS_literalBooleanInExpressionAST (void) :
 GALGAS_expressionAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_literalBooleanInExpressionAST GALGAS_literalBooleanInExpressionAST::init_28__29_ (const GALGAS_bool & in_mValue,
+                                                                                            Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) {
+  cPtr_literalBooleanInExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_literalBooleanInExpressionAST (inCompiler COMMA_THERE)) ;
+  object->mProperty_mValue = in_mValue ;
+  const GALGAS_literalBooleanInExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13374,6 +13920,13 @@ void extensionMethod_generateInfixOperatorCode (const GALGAS_infixOperatorMap in
 // @inlineInfixOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_inlineInfixOperatorUsage::cPtr_inlineInfixOperatorUsage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE),
+mProperty_mLLVMOperation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_inlineInfixOperatorUsage::printNonNullClassInstanceProperties (void) const {
     cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
@@ -13417,6 +13970,19 @@ ComparisonResult GALGAS_inlineInfixOperatorUsage::objectCompare (const GALGAS_in
 GALGAS_inlineInfixOperatorUsage::GALGAS_inlineInfixOperatorUsage (void) :
 GALGAS_omnibusInfixOperatorUsage () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_inlineInfixOperatorUsage GALGAS_inlineInfixOperatorUsage::init_28__29_ (const GALGAS_string & in_mLLVMOperation,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  cPtr_inlineInfixOperatorUsage * object = nullptr ;
+  macroMyNew (object, cPtr_inlineInfixOperatorUsage (inCompiler COMMA_THERE)) ;
+  object->mProperty_mLLVMOperation = in_mLLVMOperation ;
+  const GALGAS_inlineInfixOperatorUsage result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13758,6 +14324,16 @@ GALGAS_string extensionGetter_string (const GALGAS_omnibusInfixOperator & inObje
 // @omnibusInfixOperatorExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_omnibusInfixOperatorExpressionAST::cPtr_omnibusInfixOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (inCompiler COMMA_THERE),
+mProperty_mLeftExpression (),
+mProperty_mOperatorLocation (),
+mProperty_mInfixOperator (),
+mProperty_mRightExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_omnibusInfixOperatorExpressionAST::printNonNullClassInstanceProperties (void) const {
     cPtr_expressionAST::printNonNullClassInstanceProperties () ;
@@ -13813,6 +14389,25 @@ ComparisonResult GALGAS_omnibusInfixOperatorExpressionAST::objectCompare (const 
 GALGAS_omnibusInfixOperatorExpressionAST::GALGAS_omnibusInfixOperatorExpressionAST (void) :
 GALGAS_expressionAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_omnibusInfixOperatorExpressionAST GALGAS_omnibusInfixOperatorExpressionAST::init_28__2C__2C__2C__29_ (const GALGAS_expressionAST & in_mLeftExpression,
+                                                                                                                const GALGAS_location & in_mOperatorLocation,
+                                                                                                                const GALGAS_omnibusInfixOperator & in_mInfixOperator,
+                                                                                                                const GALGAS_expressionAST & in_mRightExpression,
+                                                                                                                Compiler * inCompiler
+                                                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_omnibusInfixOperatorExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_omnibusInfixOperatorExpressionAST (inCompiler COMMA_THERE)) ;
+  object->mProperty_mLeftExpression = in_mLeftExpression ;
+  object->mProperty_mOperatorLocation = in_mOperatorLocation ;
+  object->mProperty_mInfixOperator = in_mInfixOperator ;
+  object->mProperty_mRightExpression = in_mRightExpression ;
+  const GALGAS_omnibusInfixOperatorExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15334,6 +15929,15 @@ GALGAS_prefixOperator GALGAS_prefixOperator::extractObject (const GALGAS_object 
 // @prefixOperatorExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_prefixOperatorExpressionAST::cPtr_prefixOperatorExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_expressionAST (inCompiler COMMA_THERE),
+mProperty_mOperatorLocation (),
+mProperty_mOp (),
+mProperty_mExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 #ifndef DO_NOT_GENERATE_CHECKINGS
   void cPtr_prefixOperatorExpressionAST::printNonNullClassInstanceProperties (void) const {
     cPtr_expressionAST::printNonNullClassInstanceProperties () ;
@@ -15385,6 +15989,23 @@ ComparisonResult GALGAS_prefixOperatorExpressionAST::objectCompare (const GALGAS
 GALGAS_prefixOperatorExpressionAST::GALGAS_prefixOperatorExpressionAST (void) :
 GALGAS_expressionAST () {
 }
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+/* GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST::init_28__2C__2C__29_ (const GALGAS_location & in_mOperatorLocation,
+                                                                                                const GALGAS_prefixOperator & in_mOp,
+                                                                                                const GALGAS_expressionAST & in_mExpression,
+                                                                                                Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  cPtr_prefixOperatorExpressionAST * object = nullptr ;
+  macroMyNew (object, cPtr_prefixOperatorExpressionAST (inCompiler COMMA_THERE)) ;
+  object->mProperty_mOperatorLocation = in_mOperatorLocation ;
+  object->mProperty_mOp = in_mOp ;
+  object->mProperty_mExpression = in_mExpression ;
+  const GALGAS_prefixOperatorExpressionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+} */
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15555,492 +16176,4 @@ GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST::extractOb
   }
   return result ;
 }
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_prefixOperatorExpressionAST_2D_weak::objectCompare (const GALGAS_prefixOperatorExpressionAST_2D_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST_2D_weak::GALGAS_prefixOperatorExpressionAST_2D_weak (void) :
-GALGAS_expressionAST_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST_2D_weak & GALGAS_prefixOperatorExpressionAST_2D_weak::operator = (const GALGAS_prefixOperatorExpressionAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST_2D_weak::GALGAS_prefixOperatorExpressionAST_2D_weak (const GALGAS_prefixOperatorExpressionAST & inSource) :
-GALGAS_expressionAST_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST_2D_weak GALGAS_prefixOperatorExpressionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_prefixOperatorExpressionAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST GALGAS_prefixOperatorExpressionAST_2D_weak::bang_prefixOperatorExpressionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_prefixOperatorExpressionAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_prefixOperatorExpressionAST) ;
-      result = GALGAS_prefixOperatorExpressionAST ((cPtr_prefixOperatorExpressionAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @prefixOperatorExpressionAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorExpressionAST_2D_weak ("prefixOperatorExpressionAST-weak",
-                                                                                           & kTypeDescriptor_GALGAS_expressionAST_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_prefixOperatorExpressionAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_prefixOperatorExpressionAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_prefixOperatorExpressionAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_prefixOperatorExpressionAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_prefixOperatorExpressionAST_2D_weak GALGAS_prefixOperatorExpressionAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                                      Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) {
-  GALGAS_prefixOperatorExpressionAST_2D_weak result ;
-  const GALGAS_prefixOperatorExpressionAST_2D_weak * p = (const GALGAS_prefixOperatorExpressionAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_prefixOperatorExpressionAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("prefixOperatorExpressionAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @instructionAST reference class
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_instructionAST::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-    mProperty_mInstructionLocation.printNonNullClassInstanceProperties ("mInstructionLocation") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-
-
-ComparisonResult GALGAS_instructionAST::objectCompare (const GALGAS_instructionAST & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST::GALGAS_instructionAST (void) :
-AC_GALGAS_reference_class () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST::GALGAS_instructionAST (const cPtr_instructionAST * inSourcePtr) :
-AC_GALGAS_reference_class (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_instructionAST) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_instructionAST::setter_setMInstructionLocation (GALGAS_location inValue
-                                                            COMMA_UNUSED_LOCATION_ARGS) {
-  if (nullptr != mObjectPtr) {
-    cPtr_instructionAST * p = (cPtr_instructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_instructionAST) ;
-    p->mProperty_mInstructionLocation = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_location GALGAS_instructionAST::readProperty_mInstructionLocation (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_location () ;
-  }else{
-    cPtr_instructionAST * p = (cPtr_instructionAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_instructionAST) ;
-    return p->mProperty_mInstructionLocation ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @instructionAST class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_instructionAST::cPtr_instructionAST (const GALGAS_location & in_mInstructionLocation
-                                          COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE),
-mProperty_mInstructionLocation (in_mInstructionLocation) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @instructionAST generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST ("instructionAST",
-                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_instructionAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_instructionAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST GALGAS_instructionAST::extractObject (const GALGAS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_instructionAST result ;
-  const GALGAS_instructionAST * p = (const GALGAS_instructionAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_instructionAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_instructionAST_2D_weak::objectCompare (const GALGAS_instructionAST_2D_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST_2D_weak::GALGAS_instructionAST_2D_weak (void) :
-AC_GALGAS_weak_reference () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST_2D_weak & GALGAS_instructionAST_2D_weak::operator = (const GALGAS_instructionAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST_2D_weak::GALGAS_instructionAST_2D_weak (const GALGAS_instructionAST & inSource) :
-AC_GALGAS_weak_reference (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST_2D_weak GALGAS_instructionAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_instructionAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST GALGAS_instructionAST_2D_weak::bang_instructionAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_instructionAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_instructionAST) ;
-      result = GALGAS_instructionAST ((cPtr_instructionAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @instructionAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionAST_2D_weak ("instructionAST-weak",
-                                                                              nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_instructionAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_instructionAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_instructionAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionAST_2D_weak GALGAS_instructionAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                            Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_instructionAST_2D_weak result ;
-  const GALGAS_instructionAST_2D_weak * p = (const GALGAS_instructionAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_instructionAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Abstract extension method '@instructionAST noteInstructionTypesInPrecedenceGraph'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_noteInstructionTypesInPrecedenceGraph (cPtr_instructionAST * inObject,
-                                                                GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (nullptr != inObject) {
-    macroValidSharedObject (inObject, cPtr_instructionAST) ;
-    inObject->method_noteInstructionTypesInPrecedenceGraph (io_ioGraph, inCompiler COMMA_THERE) ;
-  }
-}
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListAST noteInstructionListTypesInPrecedenceGraph'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_noteInstructionListTypesInPrecedenceGraph (const GALGAS_instructionListAST inObject,
-                                                                GALGAS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                                Compiler * inCompiler
-                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_2445 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_2445.hasCurrentObject ()) {
-    callExtensionMethod_noteInstructionTypesInPrecedenceGraph ((cPtr_instructionAST *) enumerator_2445.current_mInstruction (HERE).ptr (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 56)) ;
-    enumerator_2445.gotoNextObject () ;
-  }
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Abstract extension method '@instructionAST instructionSemanticAnalysis'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_instructionSemanticAnalysis (cPtr_instructionAST * inObject,
-                                                      const GALGAS_omnibusType constin_inSelfType,
-                                                      const GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                      const GALGAS_semanticContext constin_inContext,
-                                                      const GALGAS_mode constin_inMode,
-                                                      GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                      GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                      GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                      GALGAS_allocaList & io_ioAllocaList,
-                                                      GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (nullptr != inObject) {
-    macroValidSharedObject (inObject, cPtr_instructionAST) ;
-    inObject->method_instructionSemanticAnalysis (constin_inSelfType, constin_inRoutineAttributes, constin_inContext, constin_inMode, io_ioTemporaries, io_ioStaticEntityMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, inCompiler COMMA_THERE) ;
-  }
-}
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListAST analyzeBranchInstructionList'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_analyzeBranchInstructionList (const GALGAS_instructionListAST inObject,
-                                                   const GALGAS_omnibusType constinArgument_inSelfType,
-                                                   const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
-                                                   GALGAS_location inArgument_inEndOfInstructionList,
-                                                   const GALGAS_semanticContext constinArgument_inContext,
-                                                   const GALGAS_mode constinArgument_inMode,
-                                                   GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                   GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
-                                                   GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
-                                                   GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                   GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                   Compiler * inCompiler
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  extensionSetter_openBranch (ioArgument_ioUniversalMap, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 97)) ;
-  }
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_4325 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_4325.hasCurrentObject ()) {
-    {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_4325.current_mInstruction (HERE).readProperty_mInstructionLocation (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 99)) ;
-    }
-    callExtensionMethod_instructionSemanticAnalysis ((cPtr_instructionAST *) enumerator_4325.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 100)) ;
-    enumerator_4325.gotoNextObject () ;
-  }
-  {
-  extensionSetter_closeBranch (ioArgument_ioUniversalMap, inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 113)) ;
-  }
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListAST analyzeRoutineInstructionList'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_analyzeRoutineInstructionList (const GALGAS_instructionListAST inObject,
-                                                    const GALGAS_omnibusType constinArgument_inSelfType,
-                                                    const GALGAS_routineAttributes constinArgument_inRoutineAttributes,
-                                                    const GALGAS_semanticContext constinArgument_inContext,
-                                                    const GALGAS_mode constinArgument_inMode,
-                                                    GALGAS_semanticTemporariesStruct & ioArgument_ioTemporaries,
-                                                    GALGAS_staticEntityMap & ioArgument_ioStaticEntityMap,
-                                                    GALGAS_universalValuedObjectMap & ioArgument_ioUniversalMap,
-                                                    GALGAS_allocaList & ioArgument_ioAllocaList,
-                                                    GALGAS_instructionListIR & ioArgument_ioInstructionGenerationList,
-                                                    Compiler * inCompiler
-                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListAST temp_0 = inObject ;
-  cEnumerator_instructionListAST enumerator_5506 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_5506.hasCurrentObject ()) {
-    {
-    extensionSetter_appendSourceLineComment (ioArgument_ioInstructionGenerationList, enumerator_5506.current_mInstruction (HERE).readProperty_mInstructionLocation (), inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 130)) ;
-    }
-    callExtensionMethod_instructionSemanticAnalysis ((cPtr_instructionAST *) enumerator_5506.current_mInstruction (HERE).ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 131)) ;
-    enumerator_5506.gotoNextObject () ;
-  }
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListIR instructionListLLVMCode'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_instructionListLLVMCode (const GALGAS_instructionListIR inObject,
-                                              GALGAS_string & ioArgument_ioLLVMcode,
-                                              const GALGAS_generationContext constinArgument_inGenerationContext,
-                                              GALGAS_generationAdds & ioArgument_ioGenerationAdds,
-                                              Compiler * inCompiler
-                                              COMMA_UNUSED_LOCATION_ARGS) {
-  const GALGAS_instructionListIR temp_0 = inObject ;
-  cEnumerator_instructionListIR enumerator_6521 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_6521.hasCurrentObject ()) {
-    callExtensionMethod_llvmInstructionCode ((cPtr_abstractInstructionIR *) enumerator_6521.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 155)) ;
-    enumerator_6521.gotoNextObject () ;
-  }
-}
-
 
