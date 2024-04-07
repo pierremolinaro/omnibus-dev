@@ -22,7 +22,7 @@ syntax omnibus_syntax (omnibus_lexique) {
     !importClauseList:@lstringlist outImportedFileList
     !endOfSourceFile:@location outEndOfSourceFile
   {
-    outImportedFileList = {}
+    outImportedFileList = §[]
     repeat
     while
       <declaration> !?ioAST

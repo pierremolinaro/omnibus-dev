@@ -27,7 +27,7 @@ syntax extension omnibus_syntax {
     end
     $=$
     <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@letInstructionWithAssignmentAST.new {
+    ioInstructionList += !@letInstructionWithAssignmentAST.init {
       !varName.location
       !varName
       !optionalTypeName
@@ -100,7 +100,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     error self.mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
   end
 #--- Declare local constant
-  let omnibusName = @lstring.new {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}
+  let omnibusName = @lstring.init {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}
   ioTemporaries.mTemporaryIndex += 1
   if [result omnibusTypeDescriptionName] != ctIntegerTypeName () then
     ioAllocaList += !llvmNameForLocalVariable (!omnibusName) ![result type] !false

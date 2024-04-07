@@ -29,7 +29,7 @@ syntax extension omnibus_syntax {
     $©group$ ?let registerGroupName
     $.$
     $identifier$ ?let registerName
-    var @registerIntegerFieldListAST integerFieldValues = {}
+    var @registerIntegerFieldListAST integerFieldValues = §[]
     repeat
       $!selector:$ ?let registerFieldName
       <expression> !?ioAST ?let expression
@@ -37,7 +37,7 @@ syntax extension omnibus_syntax {
     while
     end
     $}$
-    outExpression = @registerConstantExpressionAST.new {!registerGroupName !registerName !integerFieldValues}
+    outExpression = @registerConstantExpressionAST.init {!registerGroupName !registerName !integerFieldValues}
   }
 
   #·····················································································································
@@ -103,7 +103,7 @@ override method @registerConstantExpressionAST analyzeExpression
   ]
 #------------------------------------------------------ Valuated fields
   var @bigint accumulatedFieldStaticValues = 0
-  var @operandIRList operandList = {}
+  var @operandIRList operandList = §[]
   for (fieldName expression expressionLocation) in self.mFieldValues do
     if fieldName.string == "" then
       error fieldName : "anonymous selector not allowed here" : operandList
@@ -113,7 +113,7 @@ override method @registerConstantExpressionAST analyzeExpression
         ?let @uint fieldBitIndex
         ?let @uint fieldBitCount
       ]
-      let inferredTypeName = @lstring.new {!"u" + fieldBitCount !fieldName.location}
+      let inferredTypeName = @lstring.init {!"u" + fieldBitCount !fieldName.location}
       [inContext.mTypeMap searchType !lkey:inferredTypeName ?type:let inferredType]
     #--- Analyze expression
       [expression analyzeExpression

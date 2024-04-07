@@ -21,12 +21,12 @@ syntax extension omnibus_syntax {
       let operatorLocation = @location.here
       <expression_logical_and> !?ioAST ?let rightExpression
     #--- x or y equivalent to not (not x and not y)
-      let andExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
-        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOp !outExpression}
+      let andExpression = @booleanShortCircuitAndOperatorExpressionAST.init {
+        !@prefixOperatorExpressionAST.init {!operatorLocation !.notOp !outExpression}
         !operatorLocation
-        !@prefixOperatorExpressionAST.new {!operatorLocation !.notOp !rightExpression}
+        !@prefixOperatorExpressionAST.init {!operatorLocation !.notOp !rightExpression}
       }
-      outExpression = @prefixOperatorExpressionAST.new {
+      outExpression = @prefixOperatorExpressionAST.init {
         !operatorLocation
         !.notOp
         !andExpression
@@ -61,7 +61,7 @@ syntax extension omnibus_syntax {
       $&&$
       let operatorLocation = @location.here
       <expression_bitwise_or> !?ioAST ?let rightExpression
-      outExpression = @booleanShortCircuitAndOperatorExpressionAST.new {
+      outExpression = @booleanShortCircuitAndOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !rightExpression
@@ -78,7 +78,7 @@ syntax extension omnibus_syntax {
       $|$
       let operatorLocation = @location.here
       <expression_bitwise_xor> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.bitWiseOrOp
@@ -96,7 +96,7 @@ syntax extension omnibus_syntax {
       $^$
       let operatorLocation = @location.here
       <expression_bitwise_and> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.bitWiseXorOp
@@ -114,7 +114,7 @@ syntax extension omnibus_syntax {
       $&$
       let operatorLocation = @location.here
       <expression_equality> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.bitWiseAndOp
@@ -132,7 +132,7 @@ syntax extension omnibus_syntax {
       $==$
       let operatorLocation = @location.here
       <expression_comparison> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.equal
@@ -142,13 +142,13 @@ syntax extension omnibus_syntax {
       $≠$
       let operatorLocation = @location.here
       <expression_comparison> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST.new {
+      let expression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.equal
         !rightExpression
       }
-      outExpression = @prefixOperatorExpressionAST.new {
+      outExpression = @prefixOperatorExpressionAST.init {
         !operatorLocation
         !.notOp
         !expression
@@ -165,7 +165,7 @@ syntax extension omnibus_syntax {
       $≤$
       let operatorLocation = @location.here
       <expression_shift> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.infEqual
@@ -175,13 +175,13 @@ syntax extension omnibus_syntax {
       $≥$
       let operatorLocation = @location.here
       <expression_shift> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST.new {
+      let expression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.lessThan
         !rightExpression
       }
-      outExpression = @prefixOperatorExpressionAST.new {
+      outExpression = @prefixOperatorExpressionAST.init {
         !operatorLocation
         !.notOp
         !expression
@@ -190,7 +190,7 @@ syntax extension omnibus_syntax {
       $<$
       let operatorLocation = @location.here
       <expression_shift> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.lessThan
@@ -200,13 +200,13 @@ syntax extension omnibus_syntax {
       $>$
       let operatorLocation = @location.here
       <expression_shift> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST.new {
+      let expression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.infEqual
         !rightExpression
       }
-      outExpression = @prefixOperatorExpressionAST.new {
+      outExpression = @prefixOperatorExpressionAST.init {
         !operatorLocation
         !.notOp
         !expression
@@ -223,7 +223,7 @@ syntax extension omnibus_syntax {
       $<<$
       let operatorLocation = @location.here
       <expression_addition> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.leftShiftOp
@@ -233,7 +233,7 @@ syntax extension omnibus_syntax {
       $>>$
       let operatorLocation = @location.here
       <expression_addition> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.rightShiftOp
@@ -251,7 +251,7 @@ syntax extension omnibus_syntax {
       $+$
       let operatorLocation = @location.here
       <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.addOp
@@ -261,7 +261,7 @@ syntax extension omnibus_syntax {
       $+%$
       let operatorLocation = @location.here
       <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.addOpNoOvf
@@ -271,7 +271,7 @@ syntax extension omnibus_syntax {
       $-$
       let operatorLocation = @location.here
       <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.subOp
@@ -281,7 +281,7 @@ syntax extension omnibus_syntax {
       $-%$
       let operatorLocation = @location.here
       <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.subOpNoOvf
@@ -299,7 +299,7 @@ syntax extension omnibus_syntax {
       $*$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.mulOp
@@ -309,7 +309,7 @@ syntax extension omnibus_syntax {
       $*%$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.mulOpNoOvf
@@ -319,7 +319,7 @@ syntax extension omnibus_syntax {
       $%$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.modOp
@@ -329,7 +329,7 @@ syntax extension omnibus_syntax {
       $!%$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.modOpNoOvf
@@ -339,7 +339,7 @@ syntax extension omnibus_syntax {
       $/$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.divOp
@@ -349,7 +349,7 @@ syntax extension omnibus_syntax {
       $!/$
       let operatorLocation = @location.here
       <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST.new {
+      outExpression = @omnibusInfixOperatorExpressionAST.init {
         !outExpression
         !operatorLocation
         !.divOpNoOvf
@@ -364,7 +364,7 @@ syntax extension omnibus_syntax {
     $~$
     let operatorLocation = @location.here
     <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
+    outExpression = @prefixOperatorExpressionAST.init {
       !operatorLocation
       !.bitWiseComplement
       !expression
@@ -377,7 +377,7 @@ syntax extension omnibus_syntax {
     $not$
     let operatorLocation = @location.here
     <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
+    outExpression = @prefixOperatorExpressionAST.init {
       !operatorLocation
       !.notOp
       !expression
@@ -390,7 +390,7 @@ syntax extension omnibus_syntax {
     $-$
     let operatorLocation = @location.here
     <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
+    outExpression = @prefixOperatorExpressionAST.init {
       !operatorLocation
       !.minusOp
       !expression
@@ -403,7 +403,7 @@ syntax extension omnibus_syntax {
     $-%$
     let operatorLocation = @location.here
     <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST.new {
+    outExpression = @prefixOperatorExpressionAST.init {
       !operatorLocation
       !.minusNoOvf
       !expression

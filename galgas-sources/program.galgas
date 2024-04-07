@@ -30,7 +30,7 @@ message "a source text file with the .omnibus extension"
 
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
-  var @ast ast = .new
+  var @ast ast = .init
   grammar omnibus_grammar (
     !?ast
     ?importClauseList:let importedFileList
@@ -47,7 +47,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   )
 #--- Check target names are not duplicated
   if @uint.errorCount == 0 then
-    var @stringset targetNameSet = {}
+    var @stringset targetNameSet = §[]
     for (targetName) in ast.mTargetListAST do
       if [targetNameSet hasKey !targetName.string] then
         error targetName : "Duplicated target"
@@ -57,10 +57,10 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   end
 #--- Compile project for every target
   if @uint.errorCount == 0 then
-    if [ast.mTargetListAST length] == 0 then
+    if [ast.mTargetListAST count] == 0 then
       warning endOfSourceFile : "no target: only syntax analysis is performed"
-    elsif [ast.mTargetListAST length] > 1 then
-      warning endOfSourceFile : [[ast.mTargetListAST length] string] + " targets: only syntax analysis is performed"
+    elsif [ast.mTargetListAST count] > 1 then
+      warning endOfSourceFile : [[ast.mTargetListAST count] string] + " targets: only syntax analysis is performed"
     else
       for (targetName) in ast.mTargetListAST do
         compileProject (
@@ -93,7 +93,7 @@ private proc compileProject
   var @ast ast = inAST
   var @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #------------------------------------------------------------ Enter extensions
-  ast.mDeclarationListAST = {}
+  ast.mDeclarationListAST = §[]
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterExtension
       !?ast.mExtendStaticArrayDeclarationAST
@@ -118,13 +118,13 @@ private proc compileProject
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
   #--- Add compile time boolean type
-   ast.mDeclarationListAST += !@compiletimeBoolAST.new
+   ast.mDeclarationListAST += !@compiletimeBoolAST.init
   #--- Add compile time int type
-   ast.mDeclarationListAST += !@compileTimeIntAST.new
+   ast.mDeclarationListAST += !@compileTimeIntAST.init
   #--- Bool type
-    ast.mDeclarationListAST += !@boolTypeAST.new
+    ast.mDeclarationListAST += !@boolTypeAST.init
   #--- Add String type
-    ast.mDeclarationListAST += !@literalStringDeclarationAST.new
+    ast.mDeclarationListAST += !@literalStringDeclarationAST.init
   end
 #------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then
@@ -132,11 +132,11 @@ private proc compileProject
   end
 #------------------------------------------------------------ printPasses option
   if [option omnibus_options.printPasses value] & (@uint.errorCount == 0) then
-    print (!"    " + [ast.mDeclarationListAST length] + " declarations\n" )
+    print (!"    " + [ast.mDeclarationListAST count] + " declarations\n" )
     print (!"    Duration: " + [parsingTime string] + "\n")
   end
 #------------------------------------------------------------ Ordered declaration list
-  var @declarationListAST orderedDeclarationListAST = {}
+  var @declarationListAST orderedDeclarationListAST = §[]
   if @uint.errorCount == 0 then
     let @timer t = .start 
     if [option omnibus_options.printPasses value] then
@@ -165,14 +165,14 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic context
-  var @semanticContext semanticContext = .new
-  var @staticEntityMap globalLiteralStringMap = .new
-  var @staticListInitializationMap staticListValueMap = {}
+  var @semanticContext semanticContext = .init
+  var @staticEntityMap globalLiteralStringMap = .init
+  var @staticListInitializationMap staticListValueMap = §[]
   ast.mDeclarationListAST = orderedDeclarationListAST
-  var @declarationDecorationList decoratedDeclarationList = {}
-  var @decoratedRegularRoutineList decoratedRoutineList = {}
-  var @routineListIR routineListIR = {}
-  var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = {}
+  var @declarationDecorationList decoratedDeclarationList = §[]
+  var @decoratedRegularRoutineList decoratedRoutineList = §[]
+  var @routineListIR routineListIR = §[]
+  var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = §[]
   if @uint.errorCount == 0 then
     let @timer t = .start 
     buildSemanticContext (
@@ -191,7 +191,7 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic analysis
-  var @intermediateCodeStruct intermediateCodeStruct = .new
+  var @intermediateCodeStruct intermediateCodeStruct = .init
   if @uint.errorCount == 0 then
     let @timer t = .start 
     semanticAnalysis (
@@ -307,7 +307,7 @@ private proc recursiveImportFileSystemTargetFiles
           grammar omnibus_grammar (            !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.new {!absolutePath !path.location}
+          ) in @lstring.init {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -319,7 +319,7 @@ private proc recursiveImportFileSystemTargetFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.new {!absolutePath !path.location}
+          ) in @lstring.init {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -387,7 +387,7 @@ private proc recursiveImportFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.new {!absolutePath !path.location}
+          ) in @lstring.init {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory
@@ -399,7 +399,7 @@ private proc recursiveImportFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.new {!absolutePath !path.location}
+          ) in @lstring.init {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory

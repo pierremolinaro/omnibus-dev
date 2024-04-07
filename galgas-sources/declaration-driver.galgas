@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $driver$
     $identifier$ ?let driverName
-    var @lstringlist driverDependenceList = {}
+    var @lstringlist driverDependenceList = §[]
     select
     or
       $>$
@@ -75,14 +75,14 @@ syntax extension omnibus_syntax {
       end       
     end
     ${$
-    var @structurePropertyListAST propertyListAST = {}
+    var @structurePropertyListAST propertyListAST = §[]
     var bootHandled = false
     var bootLocation = @location.here
-    var @instructionListAST bootInstructionList = {}
+    var @instructionListAST bootInstructionList = §[]
     var bootEndLocation = @location.here
     var startupHandled = false
     var startupLocation = @location.here
-    var @instructionListAST startupInstructionList = {}
+    var @instructionListAST startupInstructionList = §[]
     var startupEndLocation = @location.here
     repeat
     while
@@ -123,7 +123,7 @@ syntax extension omnibus_syntax {
     end
     $}$
   #--- Declare driver
-    ioAST.mDriverDeclarationListAST += !@driverDeclarationAST.new {
+    ioAST.mDriverDeclarationListAST += !@driverDeclarationAST.init {
       !driverName
       !driverDependenceList
       !propertyListAST
@@ -142,7 +142,7 @@ syntax extension omnibus_syntax {
     $driver$
     $identifier$ ?let driverName
     $($
-    var @driverInstanciationArgumentListAST driverInstanciationArgumentList = {}
+    var @driverInstanciationArgumentListAST driverInstanciationArgumentList = §[]
     repeat
     while
       $!selector:$ ?let selector
@@ -187,25 +187,25 @@ override getter @implementedDriverAST locationForErrorSignaling -> @location out
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func omnibusTypeSpecificNameForDriver ?let @lstring inDriverName -> @lstring {
-  result = .new {!"driver." + inDriverName !inDriverName.location}
+  result = .init {!"driver." + inDriverName !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmDriverNameFromName ?let @lstring inDriverName -> @lstring {
-  result = .new {!"driver$" + inDriverName !inDriverName.location}
+  result = .init {!"driver$" + inDriverName !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func llvmBootRoutineNameFromDriver ?let @lstring inDriverName -> @lstring {
-  result = .new {!"boot." + inDriverName !inDriverName.location}
+  result = .init {!"boot." + inDriverName !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func llvmStartupRoutineNameFromDriver ?let @lstring inDriverName -> @lstring {
-  result = .new {!"startup." + inDriverName !inDriverName.location}
+  result = .init {!"startup." + inDriverName !inDriverName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -230,37 +230,37 @@ map @instanciedDriverMap {
 
 proc retainRequiredDrivers ?!@ast ioAST {
 #--- Check at most one drive has no dependence
-  var @lstringlist driverWithNoDependenceList = {}
+  var @lstringlist driverWithNoDependenceList = §[]
   for (declaration) in ioAST.mDriverDeclarationListAST do
-     if [declaration.mDriverDependanceList length] == 0 then
+     if [declaration.mDriverDependanceList count] == 0 then
        driverWithNoDependenceList += !declaration.mDriverName
      end
   end
-  if [driverWithNoDependenceList length] > 1 then
+  if [driverWithNoDependenceList count] > 1 then
     for (driverName) in driverWithNoDependenceList do
       error driverName : "almost one driver can have no dependence"
     end
   end
 #--- Build instancied driver map
-  var @instanciedDriverMap instanciedDriverMap = {}
+  var @instanciedDriverMap instanciedDriverMap = §[]
   for (driverName args) in ioAST.mRequiredDriverListAST do
-     var @driverInstanciationArgumentMap driverInstanciationArgumentMap = {}
+     var @driverInstanciationArgumentMap driverInstanciationArgumentMap = §[]
      for (selector expression) in args do
        [!?driverInstanciationArgumentMap insertKey !selector !expression]
      end
     [!?instanciedDriverMap insertKey !driverName !driverInstanciationArgumentMap]
   end
 #--- Append required drivers to declaration list AST (and init list AST)
-  var @stringset validDriverNames = {} # For checking all required drivers have been declared
+  var @stringset validDriverNames = §[] # For checking all required drivers have been declared
   for (declaration) in ioAST.mDriverDeclarationListAST do
     validDriverNames += !declaration.mDriverName.string
     let driverIsInstancied = [instanciedDriverMap hasKey !declaration.mDriverName.string]
   #--- Build driver instanciation property list
-    var @structurePropertyListAST driverPropertyListAST = {}
+    var @structurePropertyListAST driverPropertyListAST = §[]
     if driverIsInstancied then
       [instanciedDriverMap searchKey !declaration.mDriverName ?let driverInstanciationArgumentMap]
     #--- Build driver property list, adding init expression
-      var @stringset validArgumentSet = {}
+      var @stringset validArgumentSet = §[]
       for (propertyName propertyAttributeList * optionalPropertyTypeName propertyKind) in declaration.mPropertyListAST do
         let @propertyKindAST driverPropertyKind
         switch propertyKind 
@@ -294,16 +294,16 @@ proc retainRequiredDrivers ?!@ast ioAST {
       end
     end
   #---
-    ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@structureDeclarationAST.init {
       !omnibusTypeSpecificNameForDriver (!declaration.mDriverName)
       !omnibusTypeSpecificNameForDriver (!declaration.mDriverName)
       !llvmDriverNameFromName (!declaration.mDriverName)
-      !{}
+      !§[]
       !false # Do not generate assignment routine
       !driverPropertyListAST
       !false # Do not implement deinit
     }
-    ioAST.mDeclarationListAST += !@implementedDriverAST.new {
+    ioAST.mDeclarationListAST += !@implementedDriverAST.init {
       !declaration.mDriverName
       !declaration.mDriverDependanceList
       !driverIsInstancied
@@ -315,7 +315,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       !declaration.mStartupEndLocation
     }
   end
-  ioAST.mDriverDeclarationListAST = {}
+  ioAST.mDriverDeclarationListAST = §[]
 #--- Check all drivers named in instanciation constructs have been implemented
   for (unusedDriverName) in [instanciedDriverMap keySet] - validDriverNames do
     error [instanciedDriverMap locationForKey !unusedDriverName] : "undefined driver"
@@ -342,7 +342,7 @@ override method @implementedDriverAST enterInContext
   ]
   [!?ioContext.mValuedObjectMap insertDriver !self.mDriverName !self.mIsInstancied !driverType]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedRequiredDriver.new {!self.mDriverName}
+  ioDecoratedDeclarationList += !@decoratedRequiredDriver.init {!self.mDriverName}
 #---------------- Add boot routine
   ioDecoratedRoutineList +=
     !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
@@ -353,11 +353,11 @@ override method @implementedDriverAST enterInContext
     !exportedRoutine: false
     !routineAttributes: .none
     !routineMangledLLVMName: llvmBootRoutineNameFromDriver (!self.mDriverName)
-    !formalArgumentList: {}
+    !formalArgumentList: §[]
     !warningOnUnusedArgs: true
     !self.mBootInstructionList
     !self.mBootEndLocation
-    !returnTypeName:.new {!"" !self.mBootLocation}  # Empty string if no returned value
+    !returnTypeName:.init {!"" !self.mBootLocation}  # Empty string if no returned value
 #---------------- Add startup routine
   ioDecoratedRoutineList +=
     !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
@@ -368,11 +368,11 @@ override method @implementedDriverAST enterInContext
     !exportedRoutine: false
     !routineAttributes: .none
     !routineMangledLLVMName: llvmStartupRoutineNameFromDriver (!self.mDriverName)
-    !formalArgumentList: {}
+    !formalArgumentList: §[]
     !warningOnUnusedArgs: true
     !self.mStartupInstructionList
     !self.mStartupEndLocation
-    !returnTypeName: .new {!"" !self.mStartupLocation}  # Empty string if no returned value
+    !returnTypeName: .init {!"" !self.mStartupLocation}  # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -394,11 +394,11 @@ override method @decoratedRequiredDriver semanticAnalysis
     !lkey: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     ?type:let driverType
   ]
-  let typeName = @lstring.new {!driverType.omnibusTypeDescriptionName !self.mDriverName}
+  let typeName = @lstring.init {!driverType.omnibusTypeDescriptionName !self.mDriverName}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
-  [constructorMap searchKey !.new {!"()" !self.mDriverName.location} ?* ?let constructorValue]
+  [constructorMap searchKey !.init {!"()" !self.mDriverName.location} ?* ?let constructorValue]
   [constructorValue structure ?sortedOperandList:let sortedOperandList]
-  var @operandIRList initialValueList = {}
+  var @operandIRList initialValueList = §[]
   for (initialValue *) in sortedOperandList do
     initialValueList += !initialValue
   end

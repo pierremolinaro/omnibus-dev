@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $addressof$
     <control_register_lvalue> !?ioAST ?let registerLValue
-    outExpression = @addressofControlRegisterAST.new {!registerLValue}
+    outExpression = @addressofControlRegisterAST.init {!registerLValue}
   }
 
   #·····················································································································

@@ -73,7 +73,7 @@ syntax extension omnibus_syntax {
         !checkIndexExpression:checkIndexExpression
       }
     end
-    outRegisterLValue = .new {!registerGroupName !groupIndex !registerName !registerIndex}
+    outRegisterLValue = .init {!registerGroupName !groupIndex !registerName !registerIndex}
   }
 
   #·····················································································································
@@ -196,7 +196,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !indexExpression 
         !endOfIndex
         !checkIndexExpression
-        !arraySize:[baseAddresses length]
+        !arraySize:[baseAddresses count]
         !elementType:outRegisterType
         !?ioInstructionGenerationList
         ?let @objectIR groupIndexIR
@@ -205,7 +205,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !?ioTemporaries
         ?registerAddress
         !self.mRegisterGroupName.string
-        ![baseAddresses length]
+        ![baseAddresses count]
         !groupIndexIR
       ]
     end

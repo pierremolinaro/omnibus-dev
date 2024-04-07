@@ -25,7 +25,7 @@ syntax extension omnibus_syntax {
     $($
     <lvalue> !?ioAST ?let lvalue
     $)$
-    outExpression = @sizeofExpressionAST.new {!lvalue}
+    outExpression = @sizeofExpressionAST.init {!lvalue}
   }
 
   #·····················································································································
@@ -33,7 +33,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $sizeof$
     <type_definition> !?ioAST ?let typeName
-    outExpression = @sizeofTypeAST.new {!typeName}
+    outExpression = @sizeofTypeAST.init {!typeName}
   }
 
   #·····················································································································
@@ -104,7 +104,7 @@ override method @sizeofExpressionAST analyzeExpression
     ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@sizeofInstructionIR.new {
+    ioInstructionGenerationList += !@sizeofInstructionIR.init {
       !outResult
       !type
     }
@@ -137,7 +137,7 @@ override method @sizeofTypeAST analyzeExpression
     ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@sizeofInstructionIR.new {!outResult!type}
+    ioInstructionGenerationList += !@sizeofInstructionIR.init {!outResult!type}
   end
 }
 

@@ -41,7 +41,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forLowerUpperBoundInstructionAST.new {
+    ioInstructionList += !@forLowerUpperBoundInstructionAST.init {
       !varName.location
       !varName
       !typeName
@@ -168,14 +168,14 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   #---
     [!?ioUniversalMap openOverrideForRepeatBlock]
   #--- Enter iteration variable name
-    let enumeratedVarName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+    let enumeratedVarName = @lstring.init {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
     ioTemporaries.mTemporaryIndex += 1
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if self.mVarName.string != "" then
      [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
     end
   #--- Analyze instruction list
-    var @instructionListIR instructionGenerationList = {}
+    var @instructionListIR instructionGenerationList = §[]
     [self.mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -190,7 +190,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     ]
     [!?ioUniversalMap closeOverride !self.mEndOf_do_instruction]
   #--- Code generation
-    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.new {
+    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.init {
       !enumeratedVarName
       !type
       !unsigned
@@ -228,10 +228,10 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
 {
   let llvmType = [self.mType llvmTypeName]
   let llvmVarName = llvmNameForLocalVariable (!self.mVarName)
-  let testLabel = "for." + [self.mLocation locationIndex] + ".test"
-  let loopLabel = "for." + [self.mLocation locationIndex] + ".loop"
-  let endLabel  = "for." + [self.mLocation locationIndex] + ".end"
-  let testResult = "%for." + [self.mLocation locationIndex] + ".test.result"
+  let testLabel = "for." + [self.mLocation endLocationIndex] + ".test"
+  let loopLabel = "for." + [self.mLocation endLocationIndex] + ".loop"
+  let endLabel  = "for." + [self.mLocation endLocationIndex] + ".end"
+  let testResult = "%for." + [self.mLocation endLocationIndex] + ".test.result"
   let loadedVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".loaded")
   let currentVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".current")
   let nextVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".next")

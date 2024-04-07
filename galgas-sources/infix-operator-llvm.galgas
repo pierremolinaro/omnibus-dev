@@ -33,8 +33,8 @@ proc appendInfixOperatorDeclaration
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type --- type
-  var @llvmGenerationInstructionList llvmInstructionList = {}
-  var @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = §[]
+  var @llvmGenerationInstructionElementList instructionElements = §[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
   instructionElements += !.type {!name: ["LEFT" nowhere]}
@@ -42,24 +42,24 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  var @abstractDeclarationAST declaration = @llvmInfixOperatorAST.new {
+  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  var @abstractDeclarationAST declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere
     !["LEFT" nowhere]
     ![inTypeName nowhere]
-    !{}
+    !§[]
     !["RIGHT" nowhere]
     ![inTypeName nowhere]
-    !{}
+    !§[]
     ![inResultOmnibusTypeName nowhere]
-    !{}
+    !§[]
     !llvmInstructionList
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- Operator type --- ctInt
-  llvmInstructionList = {}
-  instructionElements = {}
+  llvmInstructionList = §[]
+  instructionElements = §[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
   instructionElements += !.type {!name: ["LEFT" nowhere]}
@@ -67,24 +67,24 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  declaration = @llvmInfixOperatorAST.new {
+  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere
     !["LEFT" nowhere]
     ![inTypeName nowhere]
-    !{}
+    !§[]
     !["RIGHT" nowhere]
     ![ctIntegerTypeName () nowhere]
-    !{}
+    !§[]
     ![inResultOmnibusTypeName nowhere]
-    !{}
+    !§[]
     !llvmInstructionList
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 #--- Operator ctInt --- type
-  llvmInstructionList = {}
-  instructionElements = {}
+  llvmInstructionList = §[]
+  instructionElements = §[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
   instructionElements += !.type {!name: ["RIGHT" nowhere]}
@@ -92,18 +92,18 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  declaration = @llvmInfixOperatorAST.new {
+  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere
     !["LEFT" nowhere]
     ![ctIntegerTypeName () nowhere]
-    !{}
+    !§[]
     !["RIGHT" nowhere]
     ![inTypeName nowhere]
-    !{}
+    !§[]
     ![inResultOmnibusTypeName nowhere]
-    !{}
+    !§[]
     !llvmInstructionList
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
@@ -132,7 +132,7 @@ syntax extension omnibus_syntax {
     ${$
     <llvm_instruction_list> ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@llvmInfixOperatorAST.new {
+    ioAST.mDeclarationListAST += !@llvmInfixOperatorAST.init {
       !infixOperator
       !operationLocation
       !leftVariableName
@@ -158,7 +158,7 @@ syntax extension omnibus_syntax {
 override method @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
+  let nodeName = @lstring.init {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mLeftTypeName]
   [!?ioGraph addEdge !nodeName !self.mRightTypeName]
@@ -200,17 +200,17 @@ override method @llvmInfixOperatorAST enterInContext
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
 #--- Generate function
   if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
-    let definition = @llvmInfixOperatorUsage.new {
+    let definition = @llvmInfixOperatorUsage.init {
       !infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType)
       !self.mLeftOperandName
       !self.mRightOperandName
       !self.mInstructionList
     }
     [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
-    var @assignmentGenerationVarMap varMap = {}
+    var @assignmentGenerationVarMap varMap = §[]
     [!?varMap insertKey !self.mLeftOperandName !"%" + self.mLeftOperandName]
     [!?varMap insertKey !self.mRightOperandName !"%" + self.mRightOperandName]
-    var @assignmentGenerationVarMap typeMap = {}
+    var @assignmentGenerationVarMap typeMap = §[]
     if not [leftType isCompileTimeType] then
       [!?typeMap insertKey !self.mLeftOperandName ![leftType llvmTypeName]]
     end
@@ -218,16 +218,16 @@ override method @llvmInfixOperatorAST enterInContext
       [!?typeMap insertKey !self.mRightOperandName ![rightType llvmTypeName]]
     end
     [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
-    var @llvmGenerationInstructionList instructionList = {}
-    instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
+    var @llvmGenerationInstructionList instructionList = §[]
+    instructionList += !@llvmVarInstruction.init {!["result" nowhere]}
     instructionList += self.mInstructionList
     [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
-    var @stringlist generatedInstructions = {}
-    var @allocaList allocaList = {}
+    var @stringlist generatedInstructions = §[]
+    var @allocaList allocaList = §[]
     var @uint temporaryIndex = 0
     [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
-    let routine = @infixOperatorRoutineIR.new {
-      !.new {!infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType) !self.mInfixOperatorLocation}
+    let routine = @infixOperatorRoutineIR.init {
+      !.init {!infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType) !self.mInfixOperatorLocation}
       !isRequired: true
       !warnsIfUnused: false
       !leftType
@@ -240,7 +240,7 @@ override method @llvmInfixOperatorAST enterInContext
     }
     ioRoutineListIR += !routine
   else # One argument is a compile time type
-    let definition = @llvmInlineInfixOperatorUsage.new {
+    let definition = @llvmInlineInfixOperatorUsage.init {
       !self.mLeftOperandName
       !self.mRightOperandName
       !self.mInstructionList
@@ -285,12 +285,12 @@ override method @llvmInfixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  var @procCallEffectiveParameterListIR argumentList = {}
+  var @procCallEffectiveParameterListIR argumentList = §[]
   argumentList += !.output !leftOperand
   argumentList += !.output !rightOperand
-  ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
+  ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
     !outResultValue
-    !.new {!self.mInfixMangledFunctionName !inOperatorLocation}
+    !.init {!self.mInfixMangledFunctionName !inOperatorLocation}
     !self.mInfixMangledFunctionName
     !argumentList
   }
@@ -329,21 +329,21 @@ override method @llvmInlineInfixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  var @assignmentGenerationVarMap varMap = {}
+  var @assignmentGenerationVarMap varMap = §[]
   [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
   [!?varMap insertKey !self.mRightOperandName ![rightOperand llvmName]]
   [!?varMap insertKey !["result" nowhere] ![outResultValue llvmName]]
-  var @assignmentGenerationVarMap typeMap = {}
+  var @assignmentGenerationVarMap typeMap = §[]
   if not [[leftOperand type] isCompileTimeType] then
     [!?typeMap insertKey !self.mLeftOperandName ![[leftOperand type] llvmTypeName]]
   end
   if not [[rightOperand type] isCompileTimeType] then
     [!?typeMap insertKey !self.mRightOperandName ![[rightOperand type] llvmTypeName]]
   end
-  var @stringlist generatedInstructions = {}
+  var @stringlist generatedInstructions = §[]
   [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
   for (str) in generatedInstructions do
-    [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
+    [!?ioInstructionGenerationList appendInstructionAsFreeString !str !§[]]
   end
 }
 

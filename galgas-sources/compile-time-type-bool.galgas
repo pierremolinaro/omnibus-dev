@@ -54,19 +54,19 @@ override method @compiletimeBoolAST enterInContext
   [!?ioContext.mTypeMap insertType ! ctBoolTypeName !type: ctBoolType]
  #--- Enter not prefix operator
   var key = prefixOperatorMapKey (!ctBoolType !.notOp !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolType !ctBoolType !@compileTimeBoolNotOperator.new]
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolType !ctBoolType !@compileTimeBoolNotOperator.init]
  #--- Enter | infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolOrOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolOrOperator.init]
  #--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolXorOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolXorOperator.init]
  #--- Enter == infix operator
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolEqualOperator.new]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolEqualOperator.init]
 #--- Implicit conversion to i1 for test expressions
-  key = @lstring.new {!ctBoolType.omnibusTypeDescriptionName !.nowhere}
-  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@compileTimeBoolImplicitConverterToBoolean.new]
+  key = @lstring.init {!ctBoolType.omnibusTypeDescriptionName !.nowhere}
+  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@compileTimeBoolImplicitConverterToBoolean.init]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

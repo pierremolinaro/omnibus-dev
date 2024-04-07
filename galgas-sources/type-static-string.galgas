@@ -51,7 +51,7 @@ override method @literalStringDeclarationAST enterInContext
   ]
 #--- Enter assignment operator
   let key = assignmentOperatorKey (!selfType !.nowhere !selfType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

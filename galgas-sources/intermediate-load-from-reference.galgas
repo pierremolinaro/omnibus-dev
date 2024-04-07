@@ -3,7 +3,7 @@ setter @instructionListIR appendLoadFromReference
   ?let @objectIR inTargetValue
   ?let @string inLLVMName
 {
-  self += !@loadFromReferenceIR.new {!inTargetValue !inLLVMName}
+  self += !@loadFromReferenceIR.init {!inTargetValue !inLLVMName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

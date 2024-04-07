@@ -5,7 +5,7 @@ setter @instructionListIR appendStoreTemporaryReference
   ?let @string inLLVMName
   ?let @objectIR inSourceValue
 {
-  self += !@storeFromTemporaryReferenceIR.new {!inTargetVarType !inLLVMName !inSourceValue}
+  self += !@storeFromTemporaryReferenceIR.init {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

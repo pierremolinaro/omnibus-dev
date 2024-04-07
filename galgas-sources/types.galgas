@@ -125,7 +125,7 @@ getter @omnibusType isCompileTimeType -> @bool {
 #·······················································································································
 
 func %once compileTimeIntegerType -> @omnibusType {
-  result = .new {
+  result = .init {
     !subscript:.noSubscript
     !attributes: .copyable
     !omnibusTypeDescriptionName: ctIntegerTypeName ()
@@ -137,7 +137,7 @@ func %once compileTimeIntegerType -> @omnibusType {
 #·······················································································································
 
 func %once compileTimeBoolType -> @omnibusType {
-  result = .new {
+  result = .init {
     !subscript:.noSubscript
     !attributes: .copyable
     !omnibusTypeDescriptionName: ctBoolTypeName ()
@@ -149,7 +149,7 @@ func %once compileTimeBoolType -> @omnibusType {
 #·······················································································································
 
 func %once boolType -> @omnibusType {
-  result = .new {
+  result = .init {
     !subscript:.noSubscript
     !attributes: .copyable | .instanciable
     !omnibusTypeDescriptionName: boolTypeName ()
@@ -161,7 +161,7 @@ func %once boolType -> @omnibusType {
 #·······················································································································
 
 func %once literalStringType -> @omnibusType {
-  result = .new {
+  result = .init {
     !subscript:.literalString
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:staticStringTypeName () 
@@ -173,7 +173,7 @@ func %once literalStringType -> @omnibusType {
 #·······················································································································
 
 func %once voidType -> @omnibusType {
-  result = .new {
+  result = .init {
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:""
@@ -209,7 +209,7 @@ method @omnibusType generateRetain
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
   else
-    let arcAssignmentList = [self arcList !{}]
+    let arcAssignmentList = [self arcList !§[]]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.retain." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
@@ -245,7 +245,7 @@ method @omnibusType generateInsulate
     ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @arc.insulate (" + llvmTypeName + " " + loadedVar + ")\n"
     ioLLVMcode += "  store " + llvmTypeName + " " + insulatedVar + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
   else
-    let arcAssignmentList = [self arcList !{}]
+    let arcAssignmentList = [self arcList !§[]]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
@@ -280,7 +280,7 @@ method @omnibusType generateRelease
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ") ;\n"
   else
-    let arcAssignmentList = [self arcList !{}]
+    let arcAssignmentList = [self arcList !§[]]
     for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
@@ -346,13 +346,13 @@ list @arcAssignmentList {
 #·······················································································································
 
 getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
-  result = {}
+  result = §[]
   if [self.kind isDynamicArrayType] then
     result += !"" !self !inPropertyIndexPath
   elsif [self.kind isStructure] then
     [self.kind structure ?propertyList:let @propertyList propertyList]
     for (* propertyType) in propertyList do (idx)
-      let indexPath = inPropertyIndexPath + {!idx}
+      let indexPath = inPropertyIndexPath + §[!idx]
       result += [propertyType arcList !indexPath]
     end
   end
@@ -394,7 +394,7 @@ proc buildTypeMapHTMLFile
 #------------------------------------ Build an HTML file that contains all types
   let @string typeDumpFilePath = inSourceFile.string + ".types.html"
   if [option omnibus_options.emitTypeMap value] then
-    var @stringset firstLetterSet = {}
+    var @stringset firstLetterSet = §[]
     for (lkey *) in inTypeMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end

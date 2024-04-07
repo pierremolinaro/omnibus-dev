@@ -23,7 +23,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  result = .new {!s !inRoutineName.location}
+  result = .init {!s !inRoutineName.location}
 }
 
 #·······················································································································
@@ -42,7 +42,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
     s += [passingMode matchingFormalArgument] + selector + ":"
   end
   s += ")"
-  result = .new {!s !inRoutineName.location}
+  result = .init {!s !inRoutineName.location}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

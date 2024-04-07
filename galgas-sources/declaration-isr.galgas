@@ -32,7 +32,7 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@isrDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@isrDeclarationAST.init {
       !isrName
       !mode
       !inDriverName
@@ -52,7 +52,7 @@ syntax extension omnibus_syntax {
 override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
   let s = receiverTypeName.string + "." + self.mISRName.string + "()"
-  [!?ioGraph addNode !.new {!s !self.mISRName.location} !self]
+  [!?ioGraph addNode !.init {!s !self.mISRName.location} !self]
 #---
   [self.mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   if receiverTypeName.string != "" then
@@ -88,10 +88,10 @@ override method @isrDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
-  ioDecoratedDeclarationList += !@decoratedISRDeclaration.new {!self.mISRName !self.mMode !self.mDriverName}
+  ioDecoratedDeclarationList += !@decoratedISRDeclaration.init {!self.mISRName !self.mMode !self.mDriverName}
 #----------------
   let driverLLVMBaseTypeName = llvmDriverNameFromName (!self.mDriverName)
-  let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !self.mISRName !{})
+  let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !self.mISRName !§[])
   ioDecoratedRoutineList +=
     !receiverTypeName: omnibusTypeSpecificNameForDriver (!self.mDriverName)
     !mode: self.mMode
@@ -101,7 +101,7 @@ override method @isrDeclarationAST enterInContext
     !exportedRoutine: false
     !routineAttributes:.mutatingRoutine
     !routineMangledLLVMName: isrRoutineMangledName
-    !formalArgumentList: {}
+    !formalArgumentList: §[]
     !warningOnUnusedArgs: true
     ! self.mISRInstructionList
     ! self.mEndOfISRDeclaration
@@ -160,7 +160,7 @@ method @interruptMapIR interruptCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
 #--- Generate interrupt routines
-  var @stringset definedInterrupts = {}
+  var @stringset definedInterrupts = §[]
   for interrupt in self do
     definedInterrupts += !interrupt.lkey.string
     let interruptImplementationName = if interrupt.mMode == .serviceMode then
@@ -175,7 +175,7 @@ method @interruptMapIR interruptCodeGeneration
     let llvmTypeName = [interrupt.mSelfType llvmTypeName]
   #--- Call Omnibus function
     let driverLLVMBaseTypeName = interrupt.mSelfType.llvmBaseTypeName
-    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !{})
+    let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !§[])
     let isrRoutineLLVMName = llvmNameForFunction (!isrRoutineMangledName)
     ioLLVMcode += "  call void @" + isrRoutineLLVMName + " (" + llvmTypeName + "* " + varName + ")\n"
   #--- Epilog

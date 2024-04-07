@@ -24,7 +24,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <type_definition> !?ioAST ?let typeName
     $($
-    var @functionCallEffectiveParameterListAST parameterList = {}
+    var @functionCallEffectiveParameterListAST parameterList = §[]
     repeat
     while
       $!selector:$ ?let selector
@@ -33,7 +33,7 @@ syntax extension omnibus_syntax {
     end
     let errorLocation = @location.here
     $)$
-    outExpression = @constructorCallAST.new {!typeName !parameterList !errorLocation}
+    outExpression = @constructorCallAST.init {!typeName !parameterList !errorLocation}
   }
 
 }
@@ -89,10 +89,10 @@ override method @constructorCallAST analyzeExpression
   constructorKey += ")"
 #--- Analyze constructor signature and init value
   let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
-  let typeName = @lstring.new {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
+  let typeName = @lstring.init {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
 #  let constructorMap = resultType.constructorMap2
-  [constructorMap searchKey !.new {!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
+  [constructorMap searchKey !.init {!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue
   case arrayValue (elementType size) :
@@ -119,9 +119,9 @@ override method @constructorCallAST analyzeExpression
         !staticTypeAllowed:false
       )
       if [result isStatic] then
-        let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+        let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  count]
         outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
-        var @operandIRList operandIRList = {}
+        var @operandIRList operandIRList = §[]
         for * in 0 ..< size do
           operandIRList += !result
         end
@@ -136,7 +136,7 @@ override method @constructorCallAST analyzeExpression
       end
       individualConstructor += ")"
       if constructorKey == individualConstructor then
-        var @operandIRList operandIRList = {}
+        var @operandIRList operandIRList = §[]
         var resultIsStatic = true
         for (mSelector mExpression) in self.mParameterList do
           [mExpression analyzeExpression
@@ -163,7 +163,7 @@ override method @constructorCallAST analyzeExpression
           resultIsStatic = resultIsStatic && [result isStatic]
         end
         if resultIsStatic then
-          let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  length]
+          let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  count]
           outResult = .llvmArrayStaticValues {!type:resultType !values:operandIRList !index:idx}
           ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
         else
@@ -176,17 +176,17 @@ override method @constructorCallAST analyzeExpression
   case null :
     outResult = .null {!type: resultType}
   case simple (value) :
-    if [self.mParameterList length] != 0 then
+    if [self.mParameterList count] != 0 then
       error self.mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end
   case structure (sortedOperandList) :
     var sortedOperandIRList = sortedOperandList
-    if [self.mParameterList length] != [constructorSignature length] then
-      error self.mErrorLocation : "this constructor call should name " + [constructorSignature length] + " parameter"
-        + if [constructorSignature length] > 1 then "s" else "" end
-        + " instead of " + [self.mParameterList length]
+    if [self.mParameterList count] != [constructorSignature count] then
+      error self.mErrorLocation : "this constructor call should name " + [constructorSignature count] + " parameter"
+        + if [constructorSignature count] > 1 then "s" else "" end
+        + " instead of " + [self.mParameterList count]
       : outResult
     else
       for (formal_mSelector formal_mType formal_mFieldIndex) in constructorSignature, (effective_mSelector effective_mExpression) in self.mParameterList do

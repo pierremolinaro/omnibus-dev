@@ -25,7 +25,7 @@ syntax extension omnibus_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $let$
-    var @lstringlist attributeList = {}
+    var @lstringlist attributeList = §[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -40,7 +40,7 @@ syntax extension omnibus_syntax {
     end
     $=$
     <expression> !?ioAST ?let @expressionAST expression
-    ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@globalConstantDeclarationAST.init {
       !constantName
       !attributeList
       !typeName
@@ -133,7 +133,7 @@ proc buildGlobalConstantMapHTMLFile
 #------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
-    var @stringset firstLetterSet = {}
+    var @stringset firstLetterSet = §[]
     for (lkey *) in inGlobalConstantMap do
       firstLetterSet += ![[lkey.string characterAtIndex!0] string]
     end

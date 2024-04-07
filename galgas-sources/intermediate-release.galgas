@@ -1,6 +1,6 @@
 
 setter @instructionListIR generateRelease ?let @omnibusType inType ?let @lstring in_omnibusName {
-  self += !@releaseIR.new {!inType !in_omnibusName}
+  self += !@releaseIR.init {!inType !in_omnibusName}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

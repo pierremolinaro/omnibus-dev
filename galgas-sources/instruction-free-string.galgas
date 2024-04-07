@@ -1,7 +1,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendInstructionAsFreeString ?let @string inString ?let @stringset inInvokedFunctionSet {
-  self += !@freeStringIR.new {!inString !inInvokedFunctionSet}
+  self += !@freeStringIR.init {!inString !inInvokedFunctionSet}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -32,7 +32,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $task$
     $identifier$ ?let taskName
-    var @lstringlist higherPriorityTaskList = {}
+    var @lstringlist higherPriorityTaskList = §[]
     select
     or
       $>$
@@ -59,11 +59,11 @@ syntax extension omnibus_syntax {
       autoStart = true
     end
     ${$
-    var @structurePropertyListAST taskVarList = {}
-    var @taskSetupListAST taskSetupList = {}
-    var @taskSetupListAST taskActivateList = {}
-    var @taskSetupListAST taskDeactivateList = {}
-    var @syncInstructionBranchListAST branchList = {}
+    var @structurePropertyListAST taskVarList = §[]
+    var @taskSetupListAST taskSetupList = §[]
+    var @taskSetupListAST taskActivateList = §[]
+    var @taskSetupListAST taskDeactivateList = §[]
+    var @syncInstructionBranchListAST branchList = §[]
     repeat
     while
       <private_struct_property_declaration> !?ioAST !?taskVarList
@@ -80,12 +80,12 @@ syntax extension omnibus_syntax {
       end
       ${$
       <instructionList> !?ioAST ?let instructionList
-      ioAST.mDeclarationListAST += !@functionDeclarationAST.new {
+      ioAST.mDeclarationListAST += !@functionDeclarationAST.init {
         !.userMode
         !false
         !taskName
         !procName
-        !{}
+        !§[]
         !formalArgumentList
         !returnTypeName
         !instructionList
@@ -123,11 +123,11 @@ syntax extension omnibus_syntax {
       !branchList
       !endOfTask
       !autoStart
-    ioAST.mDeclarationListAST += !@structureDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@structureDeclarationAST.init {
       !taskName
       !taskName
       !taskName
-      !{}
+      !§[]
       !false # Generate assignment routine
       !taskVarList
       !false
@@ -172,12 +172,12 @@ method @taskListAST enterInContext
 {
 #------------- Sort tasks following their relative priority
   var @taskListAST taskList = self
-  var @taskListAST sortedTaskList = {}
-  var @stringset handledTaskSet = {}
+  var @taskListAST sortedTaskList = §[]
+  var @stringset handledTaskSet = §[]
   var continue = true
-  loop ([taskList length]) while continue && ([taskList length] > 0) do
+  loop ([taskList count]) while continue && ([taskList count] > 0) do
     continue = false
-    var @taskListAST candidateTaskList = {}
+    var @taskListAST candidateTaskList = §[]
     var idx = 0
     for task in taskList do
       var allPrecedenceDefined = true
@@ -201,12 +201,12 @@ method @taskListAST enterInContext
         idx = idx + 1
       end
     end
-    if [option omnibus_options.taskStrictPriorityOrder value] && ([candidateTaskList length] > 1) then
+    if [option omnibus_options.taskStrictPriorityOrder value] && ([candidateTaskList count] > 1) then
       for task in candidateTaskList do
         error task.mTaskName : "this task does not respect a strict priority order"
       end
     end
-    if [candidateTaskList length] > 0 then
+    if [candidateTaskList count] > 0 then
       continue = true
       for task in candidateTaskList do
         handledTaskSet += !task.mTaskName.string
@@ -219,21 +219,21 @@ method @taskListAST enterInContext
     error name : "this task is out of priority order"
   end
 #---
-  var @decoratedTaskList decoratedTaskList = {}
+  var @decoratedTaskList decoratedTaskList = §[]
   for task in sortedTaskList do (taskIndex)
   #---- Add activate function
     [!?ioContext.mRoutineMap addFunctionWithoutArgument
       !omnibusTypeDescriptionName: task.mTaskName
       !llvmBaseTypeName: task.mTaskName
-      !methodName:.new {!"activate" !task.mTaskName.location}
+      !methodName:.init {!"activate" !task.mTaskName.location}
       !mode:.safeUserMode
       !resultTypeProxy:.null
       ?routineLLVMName:*
     ]
     let assemblerTaskName = [task.mTaskName assemblerRepresentation]
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
-    ioRoutineListIR += !@taskActivateFunctionIR.new {
-      !routineMangledNameFromAST (!task.mTaskName !["activate" nowhere] !{})
+    ioRoutineListIR += !@taskActivateFunctionIR.init {
+      !routineMangledNameFromAST (!task.mTaskName !["activate" nowhere] !§[])
       !isRequired:false
       !warnsIfUnused:false
       !assemblerTaskName
@@ -242,12 +242,12 @@ method @taskListAST enterInContext
     }
   #------------------------------------------- Analyze task guarded command
   #  Build a "task.loop" function that contains a sync instruction
-    var @instructionListAST taskListInstructionList = {}
-    if [task.mGuardedCommandList length] > 0 then
-      let syncInstruction = @syncInstructionAST.new {!task.mTaskName.location !task.mGuardedCommandList !task.mTaskName.location}
+    var @instructionListAST taskListInstructionList = §[]
+    if [task.mGuardedCommandList count] > 0 then
+      let syncInstruction = @syncInstructionAST.init {!task.mTaskName.location !task.mGuardedCommandList !task.mTaskName.location}
       taskListInstructionList += !syncInstruction
     end
-    let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! {})
+    let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! §[])
     ioDecoratedRoutineList +=
       !receiverTypeName: task.mTaskName
       !mode:.userMode
@@ -257,15 +257,15 @@ method @taskListAST enterInContext
       !exportedRoutine: false
       !routineAttributes: .mutatingRoutine
       !routineMangledLLVMName: routineMangledName
-      !formalArgumentList: {}
+      !formalArgumentList: §[]
       !warningOnUnusedArgs: true
       !taskListInstructionList
       !task.mTaskName.location
       !returnTypeName: ["" nowhere]
     [ioContext.mTypeMap searchType !lkey:task.mTaskName ?type:let taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
-    var initialValueList = @sortedOperandIRList {}
-    let typeName = @lstring.new {!taskType.omnibusTypeDescriptionName !task.mTaskName.location}
+    var initialValueList = @sortedOperandIRList §[]
+    let typeName = @lstring.init {!taskType.omnibusTypeDescriptionName !task.mTaskName.location}
     [ioContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
     for (* * initValue) in constructorMap do
 #    for (* * initValue) in [taskType constructorMap2] do
@@ -286,7 +286,7 @@ method @taskListAST enterInContext
       !task.mAutoStart
   end
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedTaskListDeclaration.new {!decoratedTaskList}
+  ioDecoratedDeclarationList += !@decoratedTaskListDeclaration.init {!decoratedTaskList}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -332,12 +332,12 @@ private proc analyzeOrderedTaskRoutines
   ?let @taskSetupListAST inTaskRoutineLISTAST
   !@stringlist outSetupOrderedList
 {
-  outSetupOrderedList = {}
-  if [inTaskRoutineLISTAST length] > 0 then
+  outSetupOrderedList = §[]
+  if [inTaskRoutineLISTAST count] > 0 then
   #--- Check there is exactly one entry without any precedence
     var @uint numberOfEntriesWithoutAnyPrecedence = 0
     for (* precedenceList) in inTaskRoutineLISTAST do
-      if [precedenceList length] == 0 then
+      if [precedenceList count] == 0 then
         numberOfEntriesWithoutAnyPrecedence += numberOfEntriesWithoutAnyPrecedence + 1
       end
     end
@@ -347,16 +347,16 @@ private proc analyzeOrderedTaskRoutines
       end
     elsif numberOfEntriesWithoutAnyPrecedence > 1 then
       for (name precedenceList) in inTaskRoutineLISTAST do
-        if [precedenceList length] == 0 then
+        if [precedenceList count] == 0 then
           error name : "Exactly one routine should have no precedence"
         end
       end    
     end
   #--- Signal unsorted entries as error
     var @taskSetupListAST taskSetupListAST = inTaskRoutineLISTAST
-    var @stringset precedenceSet = {}
+    var @stringset precedenceSet = §[]
     var continue = true
-    loop ([inTaskRoutineLISTAST length]) while continue && ([taskSetupListAST length] > 0) do
+    loop ([inTaskRoutineLISTAST count]) while continue && ([taskSetupListAST count] > 0) do
       continue = false
       var idx = 0
       for (name precedenceList) in taskSetupListAST do
@@ -498,7 +498,7 @@ method @taskMapIR generateCode
   end
   ioLLVMcode += "\n"
 #---------- Build ordered task list
-  var @taskSortedListIR orderedTaskList = {}
+  var @taskSortedListIR orderedTaskList = §[]
   for task in self do
     orderedTaskList +=
       !task.lkey.string

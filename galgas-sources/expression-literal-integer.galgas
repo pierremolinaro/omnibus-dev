@@ -16,7 +16,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $integer$ ?let @lbigint integerLiteral
-    outExpression = @literalIntegerInExpressionAST.new {!integerLiteral}
+    outExpression = @literalIntegerInExpressionAST.init {!integerLiteral}
   }
 
   #·····················································································································

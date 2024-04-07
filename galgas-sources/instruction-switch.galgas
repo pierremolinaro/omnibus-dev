@@ -30,10 +30,10 @@ syntax extension omnibus_syntax {
     <expression> !?ioAST ?let @expressionAST switchExpression
     let switchExpressionEndLocation = @location.here
     ${$
-    var @switchCaseListAST switchCaseList = {}
+    var @switchCaseListAST switchCaseList = §[]
     repeat
       $case$
-      var @lstringlist caseIdentifiers = {}
+      var @lstringlist caseIdentifiers = §[]
       repeat
         $identifier$ ?let caseIdf
         caseIdentifiers += !caseIdf
@@ -47,7 +47,7 @@ syntax extension omnibus_syntax {
     end
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@switchInstructionAST.new {
+    ioInstructionList += !@switchInstructionAST.init {
       !instructionLocation
       !switchExpression
       !switchExpressionEndLocation
@@ -87,7 +87,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
-  var @instructionListIR switchExpressionGenerationList = {}
+  var @instructionListIR switchExpressionGenerationList = §[]
   [self.mSwitchExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
@@ -106,7 +106,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?switchValueIR
   ]  
 #--- Check inferred type
-  let switchTypeName = @lstring.new {![switchValueIR type].omnibusTypeDescriptionName !self.mEndOf_test_expression}
+  let switchTypeName = @lstring.init {![switchValueIR type].omnibusTypeDescriptionName !self.mEndOf_test_expression}
   [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
 #  let enumConstantMap = [switchValueIR type].classConstantMap
   if not [[switchValueIR type].kind isEnumeration] then
@@ -118,10 +118,10 @@ override method @switchInstructionAST instructionSemanticAnalysis
   end
 #--- Analyse case list
   [!?ioUniversalMap openOverrideForSelectBlock]
-  var @stringset usedEnumerationValues = {}
-  var @switchCaseListIR switchCaseListIR = {}
+  var @stringset usedEnumerationValues = §[]
+  var @switchCaseListIR switchCaseListIR = §[]
   for (caseIdentifiers instructionList) in self.mSwitchCaseList do
-    var @uintlist caseIdentifierIndexList = {}
+    var @uintlist caseIdentifierIndexList = §[]
     for (caseIdf) in caseIdentifiers do
       [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
       caseIdentifierIndexList += !constantIdx
@@ -130,7 +130,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
       end
       usedEnumerationValues += !caseIdf
     end
-    var @instructionListIR instructionGenerationList = {}
+    var @instructionListIR instructionGenerationList = §[]
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -153,8 +153,8 @@ override method @switchInstructionAST instructionSemanticAnalysis
     end  
   end 
 #--- Code generation
-  ioInstructionGenerationList += !@switchInstructionIR.new {
-    ![self.mEndOf_test_expression locationIndex]
+  ioInstructionGenerationList += !@switchInstructionIR.init {
+    ![self.mEndOf_test_expression endLocationIndex]
     !switchExpressionGenerationList
     !switchValueIR
     !switchCaseListIR

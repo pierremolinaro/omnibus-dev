@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $opaque$
     $\$type$ ?let opaqueTypeName
-    var @lstringlist attributeList = {}
+    var @lstringlist attributeList = §[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -30,7 +30,7 @@ syntax extension omnibus_syntax {
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST.init {
       !opaqueTypeName
       !sizeExpression
       !sizeExpressionLocation
@@ -120,13 +120,13 @@ override method @typeOpaqueDeclarationAST enterInContext
   if not [sizeExpressionIR isLiteralInteger] then
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
-    var @constructorMap constructorMap = {}
+    var @constructorMap constructorMap = §[]
     if [opaqueTypeAttributes instanciable] then
-      [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
+      [!?constructorMap insertKey !["()" nowhere] !§[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
-    let opaqueType = @omnibusType.new {
+    let opaqueType = @omnibusType.init {
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:self.mOpaqueTypeName

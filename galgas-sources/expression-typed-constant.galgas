@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     let @lstring optionalTypeName
     select
-      optionalTypeName = .new {!"" !.here}
+      optionalTypeName = .init {!"" !.here}
     or
       <type_definition> !?ioAST ?optionalTypeName
     end
@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   #---
-    outExpression = @typedConstantCallAST.new {!optionalTypeName !constantName !accessList}
+    outExpression = @typedConstantCallAST.init {!optionalTypeName !constantName !accessList}
   }
 
   #·····················································································································
@@ -126,7 +126,7 @@ override method @typedConstantCallAST analyzeExpression
   if inferredResultType.kind == .void then
     error self.mConstructorName : "cannot infer type" : outResult
   else
-    let typeName = @lstring.new {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
+    let typeName = @lstring.init {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
 #    let classConstantMap = inferredResultType.classConstantMap
     [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
@@ -134,7 +134,7 @@ override method @typedConstantCallAST analyzeExpression
     outResult = .literalInteger {!type:resultType !value:value}
   end
 #--- Analyze access list
-  if [self.mAccessList length] > 0 then
+  if [self.mAccessList count] > 0 then
   #--- procAnalyzeAccesListInExpression works on reference, not value
   #    So we create articially a temporary reference for resulting value
     getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)

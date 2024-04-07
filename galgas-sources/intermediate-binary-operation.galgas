@@ -48,7 +48,7 @@ setter @instructionListIR appendBinaryOperation
   ?let @llvmBinaryOperation inOperation
   ?let @objectIR inRight
 {
-  self += !@binaryOperationIR.new {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
+  self += !@binaryOperationIR.init {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -91,7 +91,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += "  br i1 " + [self.mTarget llvmName] + ".hasOvf, label %" + labelName + ".ovf, label %" + labelName + ".noovf\n\n"
   ioLLVMcode += labelName + ".ovf:\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mLocation endLine] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + inPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".noovf:\n"
@@ -116,7 +116,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ioLLVMcode += "  br i1 " + [self.mRight llvmName] + ".isZero, label %" + labelName + ".divideByZero, label %" + labelName + ".ok\n\n"
   ioLLVMcode += labelName + ".divideByZero:\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mLocation endLine] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + inPanicCode + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".ok:\n"

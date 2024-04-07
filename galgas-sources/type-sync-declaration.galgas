@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
     $sync$
     $\$type$ ?let structureName
     ${$
-    var @structurePropertyListAST fieldList = {}
+    var @structurePropertyListAST fieldList = §[]
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
@@ -31,7 +31,7 @@ syntax extension omnibus_syntax {
       <guard> !?ioAST !receiverTypeName: structureName !receiverLLVMBaseTypeName: structureName.string
     end
     $}$
-    ioAST.mDeclarationListAST += !@syncDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@syncDeclarationAST.init {
       !structureName
       !fieldList
     }
@@ -97,9 +97,9 @@ override method @syncDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
-  var @propertyList propertyList = {}
-  var @sortedOperandIRList sortedOperandIRList = {}
-  var @constructorSignature constructorSignature = {}
+  var @propertyList propertyList = §[]
+  var @sortedOperandIRList sortedOperandIRList = §[]
+  var @constructorSignature constructorSignature = §[]
   var @string constructorKey = "("
   for property in self.mStructurePropertyListAST do
     [property enterPropertyInContext
@@ -118,15 +118,15 @@ override method @syncDeclarationAST enterInContext
   end
   constructorKey += ")"
 #---------------------------------------- Constructor map
-  var @constructorMap constructorMap = {}
+  var @constructorMap constructorMap = §[]
   [!?constructorMap insertKey
-    !.new {!constructorKey !self.mSyncToolName.location}
+    !.init {!constructorKey !self.mSyncToolName.location}
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
   [!?ioContext.mTypeConstructorMap insertKey !self.mSyncToolName !constructorMap]
 #---------------------------------------- Enter in type map
-  let structureType = @omnibusType.new {
+  let structureType = @omnibusType.init {
     !subscript:.noSubscript
     !attributes:.instanciable
     !omnibusTypeDescriptionName: self.mSyncToolName
@@ -135,7 +135,7 @@ override method @syncDeclarationAST enterInContext
   }
   [!?ioContext.mTypeMap insertType !self.mSyncToolName !type: structureType]
 #-------------------------------------------- GenerateLLVM type definitions
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.init {
     ![structureType llvmTypeName]
     !propertyList
   }

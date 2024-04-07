@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     $event$
     $@attribute$ ?let attribute
     $identifier$ ?let name
-    var @lstringlist dependenceList = {}
+    var @lstringlist dependenceList = §[]
     select
     or
       $>$
@@ -45,7 +45,7 @@ syntax extension omnibus_syntax {
     $}$
     if attribute.string == "onSetup" then
       ioTaskSetupListAST += !name !dependenceList # !instructionList !endOfInit
-      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.init {
         !inTaskName
         !"task.setup."
         !name
@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
       }
     elsif attribute.string == "onStart" then
       ioTaskActivateListAST += !name !dependenceList # !instructionList !endOfInit
-      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.init {
         !inTaskName
         !"task.activate."
         !name
@@ -65,7 +65,7 @@ syntax extension omnibus_syntax {
       }
     elsif attribute.string == "onTermination" then
       ioTaskDeactivateListAST += !name !dependenceList # !instructionList !endOfInit
-      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.new {
+      ioAST.mDeclarationListAST += !@taskSetupDeclarationAST.init {
         !inTaskName
         !"task.deactivate."
         !name
@@ -88,7 +88,7 @@ syntax extension omnibus_syntax {
 
 override method @taskSetupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let s = self.mQualifier + self.mTaskName.string + "." + self.mSetupName.string + "()"
-  [!?ioGraph addNode !.new {!s !self.mSetupName.location} !self]
+  [!?ioGraph addNode !.init {!s !self.mSetupName.location} !self]
 #---
   [!?ioGraph noteNode !self.mTaskName]
   [self.mTaskSetupInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -130,8 +130,8 @@ override method @taskSetupDeclarationAST enterInContext
     !warnIfUnused: true
     !exportedRoutine: false
     !routineAttributes: .mutatingRoutine
-    !routineMangledLLVMName: .new {!mangledName !self.mSetupName.location}
-    !formalArgumentList: {}
+    !routineMangledLLVMName: .init {!mangledName !self.mSetupName.location}
+    !formalArgumentList: §[]
     !warningOnUnusedArgs:true
     !self.mTaskSetupInstructionList
     !self.mEndOfTaskSetupDeclaration

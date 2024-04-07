@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
-  self += !@sourceLocationIR.new {!inSourceLocation}
+  self += !@sourceLocationIR.init {!inSourceLocation}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,7 +19,7 @@ override method @sourceLocationIR llvmInstructionCode
   if [self.mSourceLocation isNowhere] then
     ioLLVMcode += ";---------\n"
   else
-    ioLLVMcode += ";--------- " + [self.mSourceLocation line] + ":" + [[self.mSourceLocation file] lastPathComponent] + "\n"
+    ioLLVMcode += ";--------- " + [self.mSourceLocation endLine] + ":" + [[self.mSourceLocation file] lastPathComponent] + "\n"
   end
 }
 

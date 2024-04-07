@@ -157,7 +157,7 @@ syntax extension omnibus_syntax {
     ${$
     <compile_time_expression> ?let @ctExpressionAST expression
     $}$
-    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST.new {
+    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST.init {
       !infixOperator
       !operationLocation
       !leftArgument
@@ -180,7 +180,7 @@ syntax extension omnibus_syntax {
 override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
+  let nodeName = @lstring.init {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mLeftTypeName]
   [!?ioGraph addEdge !nodeName !self.mRightTypeName]
@@ -219,13 +219,13 @@ override method @compileTimeInfixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = {}
+  var @ctCheckMap ctCheckMap = §[]
   [!?ctCheckMap insertKey !self.mLeftOperandName]
   [!?ctCheckMap insertKey !self.mRightOperandName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
-  let definition = @compileTimeInfixOperatorUsage.new {
+  let definition = @compileTimeInfixOperatorUsage.init {
     !self.mLeftOperandName
     !self.mRightOperandName
     !self.mExpression
@@ -240,7 +240,7 @@ override method @compileTimeInfixOperatorAST enterInContext
     [ioContext.mInfixOperatorMap searchKey !lessThan_key ?* ?let lessThanOperatorUsage]
     if let eou = equalOperatorUsage as @compileTimeInfixOperatorUsage,
        let ltou = lessThanOperatorUsage as @compileTimeInfixOperatorUsage then
-      let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage.new {!eou !ltou}
+      let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage.init {!eou !ltou}
       let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !self.mInfixOperatorLocation !rightType)
       [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition] 
       end  
@@ -272,7 +272,7 @@ method @compileTimeInfixOperatorUsage eval
 {
   [inLeftOperand literalInteger ?1* ?value: let leftValue]
   [inRightOperand literalInteger ?1* ?value: let rightValue]
-  var @ctMap varMap = {}
+  var @ctMap varMap = §[]
   [!?varMap insertKey !self.mLeftOperandName !leftValue]
   [!?varMap insertKey !self.mRightOperandName !rightValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]

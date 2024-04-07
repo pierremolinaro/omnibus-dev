@@ -7,7 +7,7 @@ setter @instructionListIR testArrayIndex
 {
   [[inIndex type].kind integer ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
-  self += !@testArrayIndexIR.new {!inIndex !inErrorLocation !inSize}
+  self += !@testArrayIndexIR.init {!inIndex !inErrorLocation !inSize}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -37,7 +37,7 @@ override method @testArrayIndexIR llvmInstructionCode
   
     ioLLVMcode += testToZeroFailure + ":\n"
     ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mErrorLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation line] + ", "
+    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation endLine] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
   
@@ -55,7 +55,7 @@ override method @testArrayIndexIR llvmInstructionCode
   
     ioLLVMcode += testToSizeFailure + ":\n"
     ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mErrorLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation line] + ", "
+    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation endLine] + ", "
     ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
   

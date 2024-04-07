@@ -55,15 +55,15 @@ proc appendPrefixOperatorDeclaration_minus
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type
-  var @llvmGenerationInstructionList llvmInstructionList = {}
-  var @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = §[]
+  var @llvmGenerationInstructionElementList instructionElements = §[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = sub "}
   instructionElements += !.type {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: " 0, "}
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
+  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.init {
     !.minusOp
     !.nowhere
     !["SELF" nowhere]
@@ -72,7 +72,7 @@ proc appendPrefixOperatorDeclaration_minus
     ![inOmnibusReceiverTypeName nowhere]
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-  declaration = @llvmPrefixOperatorAST.new {
+  declaration = @llvmPrefixOperatorAST.init {
     !.minusOpNoOvf
     !.nowhere
     !["SELF" nowhere]
@@ -90,16 +90,16 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
 #--- Operator type
-  var @llvmGenerationInstructionList llvmInstructionList = {}
-  var @llvmGenerationInstructionElementList instructionElements = {}
+  var @llvmGenerationInstructionList llvmInstructionList = §[]
+  var @llvmGenerationInstructionElementList instructionElements = §[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
   instructionElements += !.string {!string: " = xor "}
   instructionElements += !.type {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: " "}
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: ", -1"}
-  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-  let @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.new {
+  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  let @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.init {
     !.bitWiseComplement
     !.nowhere
     !["SELF" nowhere]
@@ -150,7 +150,7 @@ syntax extension omnibus_syntax {
     ${$
     <llvm_instruction_list> ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@llvmPrefixOperatorAST.new {
+    ioAST.mDeclarationListAST += !@llvmPrefixOperatorAST.init {
       !prefixOperator
       !operationLocation
       !receiverName
@@ -171,7 +171,7 @@ syntax extension omnibus_syntax {
 override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
+  let nodeName = @lstring.init {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
   [!?ioGraph addEdge !nodeName !self.mResultTypeName]
@@ -207,28 +207,28 @@ override method @llvmPrefixOperatorAST enterInContext
 #--- Enter in infix operator map
   let prefixMangledFunctionName = prefixOperatorFunctionName (!receiverType !self.mPrefixOperator)
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
-  let definition = @llvmPrefixOperatorUsage.new {
+  let definition = @llvmPrefixOperatorUsage.init {
     !prefixMangledFunctionName
     !self.mReceiverName
     !self.mInstructionList
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
 #--- Generation routine
-  var @assignmentGenerationVarMap varMap = {}
+  var @assignmentGenerationVarMap varMap = §[]
   [!?varMap insertKey !self.mReceiverName !"%" + self.mReceiverName]
-  var @assignmentGenerationVarMap typeMap = {}
+  var @assignmentGenerationVarMap typeMap = §[]
   [!?typeMap insertKey !self.mReceiverName ![receiverType llvmTypeName]]
   [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
-  var @llvmGenerationInstructionList instructionList = {}
-  instructionList += !@llvmVarInstruction.new {!["result" nowhere]}
+  var @llvmGenerationInstructionList instructionList = §[]
+  instructionList += !@llvmVarInstruction.init {!["result" nowhere]}
   instructionList += self.mInstructionList
   [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
-  var @stringlist generatedInstructions = {}
-  var @allocaList allocaList = {}
+  var @stringlist generatedInstructions = §[]
+  var @allocaList allocaList = §[]
   var @uint temporaryIndex = 0
   [instructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
-  let routine = @prefixOperatorRoutineIR.new {
-    !.new {!prefixMangledFunctionName !self.mPrefixOperatorLocation}
+  let routine = @prefixOperatorRoutineIR.init {
+    !.init {!prefixMangledFunctionName !self.mPrefixOperatorLocation}
     !isRequired: true
     !warnsIfUnused: false
     !receiverType
@@ -270,11 +270,11 @@ override method @llvmPrefixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  var @procCallEffectiveParameterListIR argumentList = {}
+  var @procCallEffectiveParameterListIR argumentList = §[]
   argumentList += !.output !receiverOperand
-  ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
+  ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
     !outResultValue
-    !.new {!self.mPrefixMangledFunctionName !inOperatorLocation}
+    !.init {!self.mPrefixMangledFunctionName !inOperatorLocation}
     !self.mPrefixMangledFunctionName
     !argumentList
   }

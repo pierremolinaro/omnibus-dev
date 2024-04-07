@@ -4,7 +4,7 @@ setter @instructionListIR appendShiftLeft
   ?let @objectIR inSource
   ?let @uint inShiftAmount
 {
-  self += !@leftShiftIR.new {!inResult !inSource !inShiftAmount}
+  self += !@leftShiftIR.init {!inResult !inSource !inShiftAmount}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

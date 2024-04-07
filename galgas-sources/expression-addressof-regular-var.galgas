@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
     $($
     <lvalue> !?ioAST ?let lvalue
     $)$
-    outExpression = @addressofExpressionAST.new {!lvalue}
+    outExpression = @addressofExpressionAST.init {!lvalue}
   }
 
   #·····················································································································
@@ -85,7 +85,7 @@ override method @addressofExpressionAST analyzeExpression
     ]
     let resultType = [resultTypeProxy type]
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@addressofInstructionIR.new {
+    ioInstructionGenerationList += !@addressofInstructionIR.init {
       !outResult
       !lvalueIR
     }

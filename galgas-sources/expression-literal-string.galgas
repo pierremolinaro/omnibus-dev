@@ -16,7 +16,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $"string"$ ?let @lstring stringLiteral
-    outExpression = @literalStringInExpressionAST.new {!stringLiteral}
+    outExpression = @literalStringInExpressionAST.init {!stringLiteral}
   }
 
   #·····················································································································
@@ -31,7 +31,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !.new {!staticStringTypeName () !inConstantName.location}]
+  [!?ioGraph addEdge !inConstantName !.init {!staticStringTypeName () !inConstantName.location}]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

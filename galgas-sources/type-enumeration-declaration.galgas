@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     $enum$
     $\$type$ ?let enumerationName
     ${$
-    var @enumerationConstantList enumCaseList = {}
+    var @enumerationConstantList enumCaseList = §[]
     var idx = 0
     repeat
       $case$
@@ -36,7 +36,7 @@ syntax extension omnibus_syntax {
     while
     end
     $}$
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {!enumerationName !enumCaseList}
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.init {!enumerationName !enumCaseList}
   }
 
   #·····················································································································
@@ -93,7 +93,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Build constant map
-  var @constantMap enumConstantMap = {}
+  var @constantMap enumConstantMap = §[]
   var @bigint maxValue = 0
   for (name value) in self.mCaseNameList do
     [!?enumConstantMap insertKey !name !value !self.mEnumerationName]
@@ -113,25 +113,25 @@ override method @enumerationDeclarationAST enterInContext
   end
 #---------------- Property map: add uintN() accessor
   let integerTypeProxy = [ioContext.mTypeMap searchKey
-    !.new {!"u" + representationBitCount !self.mEnumerationName}
+    !.init {!"u" + representationBitCount !self.mEnumerationName}
   ]
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: self.mEnumerationName
     !llvmBaseTypeName:self.mEnumerationName
-    !propertyName: .new {!"u" + representationBitCount !self.mEnumerationName}
+    !propertyName: .init {!"u" + representationBitCount !self.mEnumerationName}
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:integerTypeProxy
     ?routineLLVMName: let conversionToUIntN
   ]
-  ioRoutineListIR += !@enumToUintRoutineIR.new {
+  ioRoutineListIR += !@enumToUintRoutineIR.init {
     !conversionToUIntN
     !isRequired:false
     !warnsIfUnused:false
     !"i" + representationBitCount # enumerationType llvmTypeName]
   }
 #---------------- Insert enumeration in type map
-  let enumerationType = @omnibusType.new {
+  let enumerationType = @omnibusType.init {
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName: self.mEnumerationName
@@ -141,7 +141,7 @@ override method @enumerationDeclarationAST enterInContext
   [!?ioContext.mTypeMap insertType !self.mEnumerationName !type:enumerationType]
 #--- Enter assignment operator
   let key = assignmentOperatorKey (!enumerationType !self.mEnumerationName.location !enumerationType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
 #---------------- Infix operators
 #  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
   let boolType = boolType ()

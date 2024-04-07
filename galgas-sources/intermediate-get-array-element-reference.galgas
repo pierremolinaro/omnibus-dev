@@ -9,7 +9,7 @@ setter @instructionListIR appendGetArrayElementReference
   [!?ioTemporaries newTempLLVMVar ?let llvmName]
 #  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
   outElementPtr = @objectIR.reference {!type:inElementType !llvmName:llvmName}
-  self += !@getArrayElementReferenceIR.new {!outElementPtr !inArrayIR !inIndexIR}
+  self += !@getArrayElementReferenceIR.init {!outElementPtr !inArrayIR !inIndexIR}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

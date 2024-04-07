@@ -44,7 +44,7 @@ getter @effectiveArgumentListAST mangledName
     s += [effectiveArgumentPassingMode matchingFormalArgument] + selector + ":"
   end
   s += ")"
-  result = .new {!s !inFunctionName.location}
+  result = .init {!s !inFunctionName.location}
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +56,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <effective_parameters> ?!@ast ioAST !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
-    outEffectiveParameterList = {}
+    outEffectiveParameterList = §[]
     $($
     repeat
     while
@@ -126,7 +126,7 @@ proc analyzeEffectiveParameters
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
 #--- Analyze effective parameters
-  var @procEffectiveParameterList parameterList = {}
+  var @procEffectiveParameterList parameterList = §[]
   for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
@@ -223,9 +223,9 @@ proc analyzeEffectiveParameters
     end
   end
 #--- Check parameters
-  if [inFormalSignature length] != [inEffectiveParameterList length] then
-    error inErrorLocation: "this routine requires " + [inFormalSignature length] + " argument(s), this call names "
-      + [inEffectiveParameterList length] + " argument(s)"
+  if [inFormalSignature count] != [inEffectiveParameterList count] then
+    error inErrorLocation: "this routine requires " + [inFormalSignature count] + " argument(s), this call names "
+      + [inEffectiveParameterList count] + " argument(s)"
   else
     for (formal_mFormalArgumentPassingMode formal_mSelector formal_mTypeProxy *) in inFormalSignature, (actual_mEffectiveParameterPassingMode actual_mSelector actual_mParameterType) in parameterList do
       if [formal_mTypeProxy type].omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then

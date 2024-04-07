@@ -57,21 +57,24 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Constructor from pointer
   public: GALGAS_convertInstructionIR (const class cPtr_convertInstructionIR * inSourcePtr) ;
 
-//--------------------------------- Property read access
+//--------------------------------- Property access
   public: class GALGAS_objectIR readProperty_mTarget (void) const ;
+  public: void setProperty_mTarget (const GALGAS_objectIR & inValue) ;
 
   public: class GALGAS_objectIR readProperty_mOperand (void) const ;
+  public: void setProperty_mOperand (const GALGAS_objectIR & inValue) ;
 
   public: class GALGAS_location readProperty_mLocation (void) const ;
+  public: void setProperty_mLocation (const GALGAS_location & inValue) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GALGAS_convertInstructionIR init_28__2C__2C__29_ (const class GALGAS_objectIR & inOperand0,
-                                                                   const class GALGAS_objectIR & inOperand1,
-                                                                   const class GALGAS_location & inOperand2,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
+  public: static GALGAS_convertInstructionIR init_21__21__21_ (const class GALGAS_objectIR & inOperand0,
+                                                               const class GALGAS_objectIR & inOperand1,
+                                                               const class GALGAS_location & inOperand2,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Object cloning
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
@@ -91,15 +94,6 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
   public: ComparisonResult objectCompare (const GALGAS_convertInstructionIR & inOperand) const ;
 
 //--------------------------------- Setters
-  public: VIRTUAL_IN_DEBUG void setter_setMLocation (class GALGAS_location inArgument0
-                                                     COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMOperand (class GALGAS_objectIR inArgument0
-                                                    COMMA_LOCATION_ARGS) ;
-
-  public: VIRTUAL_IN_DEBUG void setter_setMTarget (class GALGAS_objectIR inArgument0
-                                                   COMMA_LOCATION_ARGS) ;
-
 
 //--------------------------------- Instance Methods
 //--------------------------------- Class Methods
@@ -129,6 +123,14 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
   #endif
+
+//--------------------------------- Initializers
+  public: void convertInstructionIR_init_21__21__21_ (const class GALGAS_objectIR & inOperand0,
+                                                      const class GALGAS_objectIR & inOperand1,
+                                                      const class GALGAS_location & inOperand2,
+                                                      Compiler * inCompiler) ;
+
+
 //--- Extension method enterAccessibleEntities
   public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
            class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,

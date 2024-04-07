@@ -37,7 +37,7 @@ syntax extension omnibus_syntax {
   #--- Source expression
     <expression> !?ioAST ?let sourceExpression
   #---
-    ioInstructionList += !@controlRegisterAssignmentInstructionAST.new {
+    ioInstructionList += !@controlRegisterAssignmentInstructionAST.init {
       !registerLValue.mRegisterGroupName.location
       !registerLValue
       !assignmentKind

@@ -49,7 +49,7 @@ syntax extension omnibus_syntax {
     ${$
     <compile_time_expression> ?let @ctExpressionAST expression
     $}$
-    ioAST.mDeclarationListAST += !@compileTimeConvertToBooleanAST.new {
+    ioAST.mDeclarationListAST += !@compileTimeConvertToBooleanAST.init {
       !receiverName
       !receiverTypeName
       !converterName
@@ -65,7 +65,7 @@ syntax extension omnibus_syntax {
     ${$
     <llvm_instruction_list> ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@llvmConvertToBooleanAST.new {
+    ioAST.mDeclarationListAST += !@llvmConvertToBooleanAST.init {
       !receiverName
       !receiverTypeName
       !converterName
@@ -84,7 +84,7 @@ syntax extension omnibus_syntax {
 override method @compileTimeConvertToBooleanAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
+  let nodeName = @lstring.init {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
 }
@@ -100,7 +100,7 @@ override getter @compileTimeConvertToBooleanAST keyRepresentationForErrorSignali
 override method @llvmConvertToBooleanAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.new {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
+  let nodeName = @lstring.init {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
 }
@@ -133,12 +133,12 @@ override method @compileTimeConvertToBooleanAST enterInContext
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = {}
+  var @ctCheckMap ctCheckMap = §[]
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
-  let key = @lstring.new {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
-  let converter = @compileTimeImplicitConverterToBoolean.new {!self.mReceiverName !self.mExpression}
+  let key = @lstring.init {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
+  let converter = @compileTimeImplicitConverterToBoolean.init {!self.mReceiverName !self.mExpression}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
 }
 
@@ -162,8 +162,8 @@ override method @llvmConvertToBooleanAST enterInContext
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsNotCompileTimeType !self.mReceiverTypeName.location]
 #--- Enter in infix operator map  
-  let key = @lstring.new {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
-  let converter = @llvmImplicitConverterToBoolean.new {!self.mReceiverName !receiverType !self.mInstructionList}
+  let key = @lstring.init {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
+  let converter = @llvmImplicitConverterToBoolean.init {!self.mReceiverName !receiverType !self.mInstructionList}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
 }
 
@@ -226,7 +226,7 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
   !@implicitBooleanConversionResult outResult
 {
   [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
-  var @ctMap varMap = {}
+  var @ctMap varMap = §[]
   [!?varMap insertKey !self.mReceiverName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let result]
   outResult = .compileTime {!value: result != 0}
@@ -250,22 +250,22 @@ override method @llvmImplicitConverterToBoolean generateConvertToBooleanCode
   ?!alloca: @allocaList ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  if [self.mInstructionList length] == 0 then
+  if [self.mInstructionList count] == 0 then
     outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
   else
-    var @assignmentGenerationVarMap varMap = {}
+    var @assignmentGenerationVarMap varMap = §[]
     [!?varMap insertKey !self.mReceiverName ![inReceiverOperand llvmName]]
     let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
     [!?varMap insertKey !["result" nowhere] !resultLLVMName]
   
-    var @assignmentGenerationVarMap typeMap = {}
+    var @assignmentGenerationVarMap typeMap = §[]
     [!?typeMap insertKey !self.mReceiverName ![self.mReceiverType llvmTypeName]]
   
-    var @stringlist generatedInstructions = {}
+    var @stringlist generatedInstructions = §[]
     [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
     for (str) in generatedInstructions do
-      [!?ioInstructionGenerationList appendInstructionAsFreeString !str !{}]
+      [!?ioInstructionGenerationList appendInstructionAsFreeString !str !§[]]
     end
     outResult = .llvmVariable {!name: resultLLVMName}
   end
@@ -281,7 +281,7 @@ method @implicitConversionToBooleanMap generateConvertToBooleanCode
   ?!alloca:@allocaList ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  let key = @lstring.new {![inReceiverOperand omnibusTypeDescriptionName] !inErrorLocation}
+  let key = @lstring.init {![inReceiverOperand omnibusTypeDescriptionName] !inErrorLocation}
   [self searchKey !key ?let converter]
   [converter generateConvertToBooleanCode
     !inReceiverOperand

@@ -27,17 +27,17 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
     $\$type$ ?let typeName
-    var @integerSliceFieldListAST integerFieldValues = {}
+    var @integerSliceFieldListAST integerFieldValues = §[]
     repeat
       $!selector:$ ?let sliceWidth
       <expression> !?ioAST ?let expression
       integerFieldValues += !sliceWidth !expression !.here
     while
     end
-    if [integerFieldValues length] < 2 then
+    if [integerFieldValues count] < 2 then
       error .here : "this expression should contain two bit slices or more" : outExpression
     else
-      outExpression = @integerSliceExpressionAST.new {!typeName !integerFieldValues !.here}
+      outExpression = @integerSliceExpressionAST.init {!typeName !integerFieldValues !.here}
     end
     $}$
   }
@@ -112,7 +112,7 @@ override method @integerSliceExpressionAST analyzeExpression
     #------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
       var @bigint accumulatedFieldStaticValues = 0
-      var @operandIRList operandList = {}
+      var @operandIRList operandList = §[]
       for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
         let @uint sliceWidth
         let @lstring expressionTypeName
@@ -120,12 +120,12 @@ override method @integerSliceExpressionAST analyzeExpression
           error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
         elsif sliceWidthStr.string == "b" then
           sliceWidth = 1
-          expressionTypeName = .new {!boolTypeName () !self.mTypeName.location}
+          expressionTypeName = .init {!boolTypeName () !self.mTypeName.location}
         elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
           error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-          expressionTypeName = .new {!"u" + sliceWidth !self.mTypeName.location}
+          expressionTypeName = .init {!"u" + sliceWidth !self.mTypeName.location}
           if sliceWidth == 0 then
             error sliceWidthStr : "the bit slice width should be > 0"
           end

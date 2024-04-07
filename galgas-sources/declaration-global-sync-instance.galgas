@@ -27,7 +27,7 @@ syntax extension omnibus_syntax {
     end
     $=$
     <expression> !?ioAST ?let @expressionAST expression
-    ioAST.mDeclarationListAST += !@syncToolInstanceDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@syncToolInstanceDeclarationAST.init {
       !syncTypeName
       !syncInstanceName
       !expression
@@ -123,7 +123,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
 #---------------- Enter in valuated object map
   [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !self.mSyncInstanceName ![result type]]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedSyncInstance.new {!self.mSyncInstanceName !result}
+  ioDecoratedDeclarationList += !@decoratedSyncInstance.init {!self.mSyncInstanceName !result}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

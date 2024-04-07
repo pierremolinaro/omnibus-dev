@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $identifier$ ?let standaloneFunctionName
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-    outExpression = @standaloneFunctionInExpressionAST.new {!standaloneFunctionName !arguments !endOfArguments}
+    outExpression = @standaloneFunctionInExpressionAST.init {!standaloneFunctionName !arguments !endOfArguments}
   }
 
   #·····················································································································
@@ -96,7 +96,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 #--- Get called function signature
   let signature = [self.mArguments routineSignature !self.mStandaloneFunctionName.location]
 #--- Search function in map
-  let requiredFunctionMangledName = @lstring.new {!self.mStandaloneFunctionName.string + signature !self.mStandaloneFunctionName}
+  let requiredFunctionMangledName = @lstring.init {!self.mStandaloneFunctionName.string + signature !self.mStandaloneFunctionName}
 #--- Cannot call a function in guard
   [inContext.mRoutineMap searchKey
     !requiredFunctionMangledName
@@ -114,7 +114,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !requiredFunctionMangledName)
   #--- Analyze effective parameters
-    var @procCallEffectiveParameterListIR effectiveParameterListIR = {}
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = §[]
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -133,7 +133,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   #--- New LLVM variable for function call result
     getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
   #--- Code generation
-    ioInstructionGenerationList += !@standaloneRoutineCallIR.new {
+    ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
       !outFunctionCallReturnedValue
       !routineLLVMName
       !functionLLVMName

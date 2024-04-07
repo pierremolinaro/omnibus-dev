@@ -47,7 +47,7 @@ list @extendStaticListElementAST {
 
 #typealias @extendStaticArrayDeclarationDictAST = [@string : @staticListValueListAST] # key is static list name
 dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
-  @staticListValueListAST mStaticList
+  public var @staticListValueListAST mStaticList
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -62,13 +62,13 @@ syntax extension omnibus_syntax {
     $staticArray$
     $identifier$ ?let staticListName
     ${$
-    var @staticListPropertyListAST propertyList = {}
+    var @staticListPropertyListAST propertyList = §[]
     repeat
       <staticArrayProperty>!?ioAST !?propertyList
     while
     end
     $}$
-    ioAST.mDeclarationListAST += !@staticListAST.new {!staticListName !propertyList !{}}
+    ioAST.mDeclarationListAST += !@staticListAST.init {!staticListName !propertyList !§[]}
   }
 
   #·····················································································································
@@ -82,7 +82,7 @@ syntax extension omnibus_syntax {
     or
       $func$
       <mode> ?let mode
-      var @lstringlist attributeList = {}
+      var @lstringlist attributeList = §[]
       repeat
       while
         $@attribute$ ?let attribute
@@ -110,7 +110,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let staticListName
     $($
     repeat
-      var @extendStaticListElementAST expressions = {}
+      var @extendStaticListElementAST expressions = §[]
       repeat
         $!selector:$ ?let selector
         if selector.string != "" then
@@ -119,7 +119,7 @@ syntax extension omnibus_syntax {
         <staticArray_exp> !?ioAST !?expressions
       while
       end
-      var @staticListValueListAST expressionList = {}
+      var @staticListValueListAST expressionList = §[]
       if [ioAST.mExtendStaticArrayDeclarationAST hasKey !staticListName] then
         [ioAST.mExtendStaticArrayDeclarationAST searchKey !staticListName ?expressionList]
       end
@@ -161,7 +161,7 @@ override method @staticListAST enterExtension
 {
   if [ioExtendStaticArrayDeclarationAST hasKey !self.mStaticListName.string] then
     [!?ioExtendStaticArrayDeclarationAST removeKey !self.mStaticListName.string ? let elements]
-    outNewDeclaration = @staticListAST.new {
+    outNewDeclaration = @staticListAST.init {
       !self.mStaticListName
       !self.mPropertyList
       !self.mValueList + elements
@@ -227,25 +227,25 @@ override getter @staticListAST keyRepresentationForErrorSignaling -> @string {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func omnibusNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist " + inStaticListName !inStaticListName}
+  result = .init {!"staticlist " + inStaticListName !inStaticListName}
 }
 
 #·······················································································································
 
 private func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist-" + inStaticListName !inStaticListName}
+  result = .init {!"staticlist-" + inStaticListName !inStaticListName}
 }
 
 #·······················································································································
 
 private func omnibusNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new {!"staticlist element " + inStaticListName !inStaticListName}
+  result = .init {!"staticlist element " + inStaticListName !inStaticListName}
 }
 
 #·······················································································································
 
 private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = .new{!"staticlist-element-type-" + [inStaticListName assemblerRepresentation] !inStaticListName.location}
+  result = .init{!"staticlist-element-type-" + [inStaticListName assemblerRepresentation] !inStaticListName.location}
 }
 
 #·······················································································································
@@ -276,9 +276,9 @@ override method @staticListAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-  var @propertyList propertyList = {}
-#  @propertyGetterMap propertyGetterMap = {}
-  var @stringset propertyNameSet = {}
+  var @propertyList propertyList = §[]
+#  @propertyGetterMap propertyGetterMap = §[]
+  var @stringset propertyNameSet = §[]
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!self.mStaticListName)
   [!?ioContext.mTypeMap makeEntry !omnibusElementTypeName ?let elementTypeProxy]
 #-------------------------------------------------------------------- Build property list, map
@@ -313,7 +313,7 @@ override method @staticListAST enterInContext
         [ioContext.mTypeMap searchKey !returnTypeName]
       end
     #--- Enter routine type in type map
-      let propertyType = @omnibusType.new {
+      let propertyType = @omnibusType.init {
         !subscript:.noSubscript
         !attributes:.none
         !omnibusTypeDescriptionName:""
@@ -327,7 +327,7 @@ override method @staticListAST enterInContext
    #--- Enter property
       propertyList += !propertyName !propertyType
     #--- Enter in routine map
-      let routineMangledName = @lstring.new {
+      let routineMangledName = @lstring.init {
         !omnibusNameForStaticListElementType (!self.mStaticListName).string + "." + propertyName.string + [formalArgs routineSignature !propertyName]
         !propertyName
       }
@@ -336,12 +336,12 @@ override method @staticListAST enterInContext
         !true
         !signature
         !returnTypeProxy
-        !{!.userMode !routineLLVMName}
+        !§[!.userMode !routineLLVMName]
         !false
         !.userMode
       ]
     #--- Generate glue function
-      ioRoutineListIR += !@staticListIndirectRoutineIR.new {
+      ioRoutineListIR += !@staticListIndirectRoutineIR.init {
         !routineLLVMName
         !isRequired:true
         !warnsIfUnused:true
@@ -354,7 +354,7 @@ override method @staticListAST enterInContext
   end
   [!?ioContext.mStaticListMap insertKey !self.mStaticListName !propertyList]
 #-------------------------------------------------------------------- Enter element type in type map
-  let elementType = @omnibusType.new {
+  let elementType = @omnibusType.init {
     !subscript:.noSubscript
     !attributes:.none
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!self.mStaticListName)
@@ -363,12 +363,12 @@ override method @staticListAST enterInContext
   }
   [!?ioContext.mTypeMap insertType !omnibusElementTypeName !type:elementType]
 #-------------------------------------------------------------------- Enter static list values
-  var @stringlist stringValueList = {}
+  var @stringlist stringValueList = §[]
   for (element *) in self.mValueList do
-    if [propertyList length] != [element length] then
+    if [propertyList count] != [element count] then
       error self.mStaticListName
-      : [[propertyList length] string] + " expressions required, "
-      + [[element length] string] + " provided"
+      : [[propertyList count] string] + " expressions required, "
+      + [[element count] string] + " provided"
     else
       var staticValue = "{"
       for (operand endOfExp) in element, (* propertyType) in propertyList do
@@ -398,7 +398,7 @@ override method @staticListAST enterInContext
               ?returnTypeProxy:let functionReturnTypeProxy
             ]
             let argumentSignature = [formalArgs routineSignature !functionName]
-            let functionMangledName = @lstring.new {!functionName.string + argumentSignature !functionName}
+            let functionMangledName = @lstring.init {!functionName.string + argumentSignature !functionName}
             [ioContext.mRoutineMap searchKey
               !functionMangledName
               ?let unused candidateIsPublic
@@ -415,10 +415,10 @@ override method @staticListAST enterInContext
             elsif (functionReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
               error functionName : "this function should return no object"
             end
-            if [functionSignature length] != [candidateSignature length] then
+            if [functionSignature count] != [candidateSignature count] then
               error functionName
-              : "this function has " + [candidateSignature length] + " argument(s) ("
-              + [functionSignature length] + " required)"
+              : "this function has " + [candidateSignature count] + " argument(s) ("
+              + [functionSignature count] + " required)"
             else
               for required in functionSignature, candidate in candidateSignature do
                 if required.mTypeProxy != candidate.mTypeProxy then
@@ -440,16 +440,16 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- List type property map
   [!?ioContext insertGetter
     !omnibusTypeName: omnibusNameForStaticListType (!self.mStaticListName)
-    !.new {!"count" !self.mStaticListName.location}
+    !.init {!"count" !self.mStaticListName.location}
     !.isPublic
-    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[self.mValueList length]}}
+    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[self.mValueList count]}}
   ]
 #-------------------------------------------------------------------- Enter list type in type map
-  let arrayType = @omnibusType.new {
-    !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList length]}
+  let arrayType = @omnibusType.init {
+    !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList count]}
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!self.mStaticListName)
-    !kind:.staticArrayType {!elementType:elementType !size:[stringValueList length]}
+    !kind:.staticArrayType {!elementType:elementType !size:[stringValueList count]}
     !llvmBaseTypeName:llvmNameForStaticListType (!self.mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
@@ -467,16 +467,16 @@ override method @staticListAST enterInContext
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
   ]
 #---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedStaticList.new {!self.mStaticListName !self.mValueList}
+  ioDecoratedDeclarationList += !@decoratedStaticList.init {!self.mStaticListName !self.mValueList}
 #-------------------------------------------- GenerateLLVM type definitions
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.new {
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.init {
     ![elementType llvmTypeName]
     !propertyList
   }
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR.new {
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR.init {
     ![arrayType llvmTypeName]
     !elementType
-    ![stringValueList length]
+    ![stringValueList count]
   }
 }
 
@@ -505,7 +505,7 @@ override method @decoratedStaticList semanticAnalysis
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-  var @stringset invokedFunctionSet = {}
+  var @stringset invokedFunctionSet = §[]
   for (element *) in self.mValueList do
     for (operand *) in element do
       switch operand
@@ -542,7 +542,7 @@ method @staticListInitializationMap generateLLVMForStaticLists
         ioLLVMcode += llvmTitleComment (!"Static Arraies")
       end
       ioLLVMcode += llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
-      ioLLVMcode += [[initList length] string] + " x %" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
+      ioLLVMcode += [[initList count] string] + " x %" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
       for (value) in initList
       do
         ioLLVMcode += "  %" + llvmNameForStaticListElementType (![key nowhere]) + " " + value

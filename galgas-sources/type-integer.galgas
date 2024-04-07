@@ -93,7 +93,7 @@ override method @integerDeclarationAST enterInContext
       !resultTypeProxy:selfTypeProxy
       ?routineLLVMName: let routineLLVMName
     ]
-    ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+    ioRoutineListIR += !@integerBuiltinFunctionIR.init {
       !routineLLVMName
       !isRequired:false
       !warnsIfUnused:false
@@ -128,7 +128,7 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: var routineLLVMName
   ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+  ioRoutineListIR += !@integerBuiltinFunctionIR.init {
     !routineLLVMName
     !isRequired:false
     !warnsIfUnused:false
@@ -145,7 +145,7 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+  ioRoutineListIR += !@integerBuiltinFunctionIR.init {
     !routineLLVMName
     !isRequired:false
     !warnsIfUnused:false
@@ -162,7 +162,7 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+  ioRoutineListIR += !@integerBuiltinFunctionIR.init {
     !routineLLVMName
     !isRequired:false
     !warnsIfUnused:false
@@ -179,7 +179,7 @@ override method @integerDeclarationAST enterInContext
     !resultTypeProxy:selfTypeProxy
     ?routineLLVMName: routineLLVMName
   ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR.new {
+  ioRoutineListIR += !@integerBuiltinFunctionIR.init {
     !routineLLVMName
     !isRequired:false
     !warnsIfUnused:false
@@ -187,7 +187,7 @@ override method @integerDeclarationAST enterInContext
     !"ctpop"
   }
 #--------------------------------------- Class constant map
-  var @constantMap constantMap = {}
+  var @constantMap constantMap = §[]
   [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
   [!?ioContext.mTypeConstantMap insertKey
@@ -195,11 +195,11 @@ override method @integerDeclarationAST enterInContext
     !constantMap
   ]
 #--------------------------------------- Constructor map
-  var @constructorMap constructorMap = {} 
-  [!?constructorMap insertKey !["()" nowhere] !{} !.simple {!value:0}]
+  var @constructorMap constructorMap = §[] 
+  [!?constructorMap insertKey !["()" nowhere] !§[] !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 #--------------------------------------- Enter in type map
-  let integerType = @omnibusType.new {
+  let integerType = @omnibusType.init {
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:integerTypeName
@@ -227,12 +227,12 @@ override method @integerDeclarationAST enterInContext
 #  )
 #--------------------------------------- Assignment
   var key = assignmentOperatorKey (!integerType !.nowhere !integerType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
   key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.new]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
 #--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!integerType !integerType)
-  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR.new {
+  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR.init {
     ![functionName nowhere]
     !isRequired: false
     !warnsIfUnused: false
@@ -293,11 +293,11 @@ proc addIntegerInfixOperator
 {
   let ctIntType = compileTimeIntegerType ()
   var key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !inIntegerType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfixOperatorUsage.new {!inLLVMOp}]
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfixOperatorUsage.init {!inLLVMOp}]
   key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !ctIntType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_integer_compileTimeInt_operatorUsage.new {!inLLVMOp}]
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_integer_compileTimeInt_operatorUsage.init {!inLLVMOp}]
   key = infixOperatorMapKey (!ctIntType !inInfixOperator !.nowhere !inIntegerType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage.new {!inLLVMOp}] 
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage.init {!inLLVMOp}] 
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -338,7 +338,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
         + " " + [leftOperand llvmName] + ", " + [inRightOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !§[]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -379,7 +379,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[rightOperand type] llvmTypeName]
         + " " + [inLeftOperand llvmName] + ", " + [rightOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !{}]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !§[]]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

@@ -90,7 +90,7 @@ syntax extension omnibus_target_specific_syntax {
 
   rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
     <configuration_key> !"PYTHON_UTILITIES"
-    outPythonUtilityToolList = {}
+    outPythonUtilityToolList = §[]
     repeat
       while
       $"string"$ ?let relativePath
@@ -140,11 +140,11 @@ syntax extension omnibus_target_specific_syntax {
     let @lbigint bitbandRegisterBitMultiplier
     select
       $no$
-      bitbandRegisterBaseAddress = .new {!0 !.here}
-      bitbandRegisterEndAddress = .new {!0 !.here}
-      bitbandRegisterRelocationAddress = .new {!0 !.here}
-      bitbandRegisterOffsetMultiplier = .new {!0 !.here}
-      bitbandRegisterBitMultiplier= .new {!0 !.here}
+      bitbandRegisterBaseAddress = .init {!0 !.here}
+      bitbandRegisterEndAddress = .init {!0 !.here}
+      bitbandRegisterRelocationAddress = .init {!0 !.here}
+      bitbandRegisterOffsetMultiplier = .init {!0 !.here}
+      bitbandRegisterBitMultiplier= .init {!0 !.here}
     or
       $integer$ ?bitbandRegisterBaseAddress
       $integer$ ?bitbandRegisterEndAddress
@@ -183,27 +183,27 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"UNUSED_INTERRUPT"
     $"string"$ ?let undefinedInterruptHandler
     <configuration_key> !"CPP_FILES"
-    var @lstringlist C_definitionFiles = {}
+    var @lstringlist C_definitionFiles = §[]
     repeat
     while
       $"string"$ ?let fileRelativePath
       C_definitionFiles += !fileRelativePath
     end
     <configuration_key> !"S_FILES"
-    var @lstringlist S_definitionFiles = {}
+    var @lstringlist S_definitionFiles = §[]
     repeat
     while
       $"string"$ ?let fileRelativePath
       S_definitionFiles += !fileRelativePath
     end
     <configuration_key> !"LL_FILES"
-    var @lstringlist LL_definitionFiles = {}
+    var @lstringlist LL_definitionFiles = §[]
     repeat
     while
       $"string"$ ?let fileRelativePath
       LL_definitionFiles += !fileRelativePath
     end
-    outImportedFileList = {}
+    outImportedFileList = §[]
     <configuration_key> !"OMNIBUS_FILES"
     repeat
     while
@@ -217,7 +217,7 @@ syntax extension omnibus_target_specific_syntax {
     else
       ptrSize = [pointerSize.bigint uint]
     end
-    let parameters = @targetParameters.new {
+    let parameters = @targetParameters.init {
       !loc
       !python_utilityToolList
       !python_build
@@ -250,15 +250,15 @@ syntax extension omnibus_target_specific_syntax {
       !serviceEntryNoReturnedValue
       !serviceEntryReturnValue
    }
-   ioAST.mDeclarationListAST += !@configurationDeclarationAST.new {
+   ioAST.mDeclarationListAST += !@configurationDeclarationAST.init {
       !panicCodeTypeName
       !panicLineTypeName
       !parameters
       !interruptionConfigurationList
     }
     outEndOfSourceFile = .here
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.new {
-      !.new {!isrSlotTypeName () !xtrInterruptHandler.location}
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST.init {
+      !.init {!isrSlotTypeName () !xtrInterruptHandler.location}
       !interruptConstantList
     }
   }
@@ -269,8 +269,8 @@ syntax extension omnibus_target_specific_syntax {
     !@interruptionConfigurationList interruptionConfigurationList
     !@enumerationConstantList outEnumerationConstantList
   {
-    interruptionConfigurationList = {}
-    outEnumerationConstantList = {}
+    interruptionConfigurationList = §[]
+    outEnumerationConstantList = §[]
     <configuration_key> !"INTERRUPTS"
     repeat
     while
@@ -309,7 +309,7 @@ func %once isrSlotTypeName -> @string {
 #·······················································································································
 
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
+  let rootNode =  @lstring.init {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
   [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
   [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
@@ -377,7 +377,7 @@ override method @configurationDeclarationAST enterInContext
     error self.mPanicLineTypeName : "this type should be an unsigned integer type"
   end
 #--------------------------------- Interrupt panic codes
-  var @stringset panicCodeSet = {}
+  var @stringset panicCodeSet = §[]
   for (name panicCode) in self.mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
     switch panicCode

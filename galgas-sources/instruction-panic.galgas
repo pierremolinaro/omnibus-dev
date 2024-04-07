@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
     $panic$
     let loc = @location.here
     <expression> !?ioAST ?let @expressionAST codeExpression
-    ioInstructionList += !@panicInstructionAST.new {!loc !codeExpression}
+    ioInstructionList += !@panicInstructionAST.init {!loc !codeExpression}
   }
 
   #·····················································································································
@@ -53,7 +53,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
-  var @instructionListIR unusedInstructionListIR = {}
+  var @instructionListIR unusedInstructionListIR = §[]
   [self.mCodeExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:.none
@@ -69,7 +69,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
   ]
 #--- Expression type check
 #--- Expression is static ?
-  if ([unusedInstructionListIR length] > 0)
+  if ([unusedInstructionListIR count] > 0)
      || not [result isLiteralInteger]
      || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
     error self.mInstructionLocation : "throw expression should be a literal integer"
@@ -80,7 +80,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
       error self.mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName
     elsif not [option omnibus_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@panicInstructionIR.new {
+      ioInstructionGenerationList += !@panicInstructionIR.init {
         !self.mInstructionLocation
         !throwValue
       }
@@ -105,7 +105,7 @@ override method @panicInstructionIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mThrowLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mThrowLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mThrowLocation endLine] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + self.mPanicCode + ")\n"
 }
 

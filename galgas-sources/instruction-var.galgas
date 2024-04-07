@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let varName
     $=$
     <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST.new {
+    ioInstructionList += !@varInstructionWithAssignmentAST.init {
       !varName.location
       !varName
       !["" here]
@@ -66,7 +66,7 @@ syntax extension omnibus_syntax {
     $var$
     $identifier$ ?let varName
     <type_definition> !?ioAST ?let typeName
-    ioInstructionList += !@varDeclarationInstructionAST.new {
+    ioInstructionList += !@varDeclarationInstructionAST.init {
       !varName.location
       !varName
       !typeName
@@ -75,8 +75,8 @@ syntax extension omnibus_syntax {
     or
       $=$
       <expression> !?ioAST ?let @expressionAST sourceExpression
-      let assignmentTargetAST = @LValueAST.new {!varName !.noOperand}
-      ioInstructionList += !@assignmentInstructionAST.new {
+      let assignmentTargetAST = @LValueAST.init {!varName !.noOperand}
+      ioInstructionList += !@assignmentInstructionAST.init {
        !assignmentTargetAST.mIdentifier.location
        !assignmentTargetAST
        !sourceExpression
@@ -146,7 +146,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !staticTypeAllowed:false
   )
 #--- Declare local variable
-  let omnibusLocalVariableName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusLocalVariableName = @lstring.init {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex += 1
   [!?ioUniversalMap insertLocalVariable !self.mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
 #--- Code generation
@@ -185,7 +185,7 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
     error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable"
   end
 #--- Declare local variable
-  let omnibusName = @lstring.new {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusName = @lstring.init {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex += 1
   [!?ioUniversalMap insertLocalVariable !self.mVarName !targetType !omnibusName !.noValue !true]
 #--- Code generation

@@ -11,7 +11,7 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
 #·······················································································································
 
 setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @location inErrorLocation {
-  let typeName = @lstring.new {!"u" + inBitSize !inErrorLocation}
+  let typeName = @lstring.init {!"u" + inBitSize !inErrorLocation}
   [!?self noteNode !typeName]
 }
 
@@ -157,9 +157,9 @@ proc buildOrderedDeclarationList
   for (mValue) in [precedenceGraph undefinedNodeKeyList] do
   #--- Detect uXX types
     let Uxx = [mValue componentsSeparatedByString !"u"]
-    if ([Uxx length] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
+    if ([Uxx count] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[Uxx mValueAtIndex !1] decimalUnsignedNumber]
-      let declaration = @integerDeclarationAST.new {!false !n}
+      let declaration = @integerDeclarationAST.init {!false !n}
       [declaration enterInPrecedenceGraph !?precedenceGraph]
     #--- Add assignment operator declaration
       appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
@@ -167,9 +167,9 @@ proc buildOrderedDeclarationList
       addintegerTypeCount += 1
     else
       let Ixx = [mValue componentsSeparatedByString !"i"]
-      if ([Ixx length] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
+      if ([Ixx count] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
         let n = [[Ixx mValueAtIndex !1] decimalUnsignedNumber]
-        let declaration = @integerDeclarationAST.new {!true !n}
+        let declaration = @integerDeclarationAST.init {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
         appendSignedOperatorsTo (!mValue !?precedenceGraph)
@@ -179,7 +179,7 @@ proc buildOrderedDeclarationList
     end
   end
 #------------------------------------------  Add compile time barrier
-  let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST.new
+  let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST.init
   [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
@@ -192,7 +192,7 @@ proc buildOrderedDeclarationList
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #------------------------------------------  Get ordered declaration list
-  outSortedDeclarationListAST = {}
+  outSortedDeclarationListAST = §[]
   if [precedenceGraph undefinedNodeCount] > 0 then
     for (mValue) in  [precedenceGraph undefinedNodeReferenceList] do
       error mValue : mValue.string + " is not defined in declaration dependency graph"
@@ -204,9 +204,9 @@ proc buildOrderedDeclarationList
       ?let @declarationListAST unsortedSemanticDeclarationListAST
       ?*
     ]
-    if [unsortedSemanticDeclarationListAST length] > 0 then
+    if [unsortedSemanticDeclarationListAST count] > 0 then
       var s = "semantic analysis not performed, "
-            + [unsortedSemanticDeclarationListAST length]
+            + [unsortedSemanticDeclarationListAST count]
             + " declarations are involved in circular definition:"
       for (mDeclaration) in unsortedSemanticDeclarationListAST do
         s += "\n-  " + [mDeclaration keyRepresentationForErrorSignaling]

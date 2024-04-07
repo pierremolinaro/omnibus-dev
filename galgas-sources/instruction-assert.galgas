@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
     $assert$
     let loc = @location.here
     <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@assertInstructionAST.new {
+    ioInstructionList += !@assertInstructionAST.init {
       !loc
       !expression
     }
@@ -55,7 +55,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
-  var @instructionListIR instructionGenerationList = {}
+  var @instructionListIR instructionGenerationList = §[]
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -79,7 +79,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
   end
 #--- Code generation
   if not [option omnibus_options.noPanicGeneration value] then
-    ioInstructionGenerationList += !@assertInstructionIR.new {
+    ioInstructionGenerationList += !@assertInstructionIR.init {
       !self.mInstructionLocation
       !instructionGenerationList
       !expressionValue
@@ -111,7 +111,7 @@ override method @assertInstructionIR llvmInstructionCode
   ioLLVMcode += "  br i1 " + [self.mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
   ioLLVMcode += labelAssertEr + ":\n"
   ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mAssertInstructionLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mAssertInstructionLocation line] + ", "
+  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mAssertInstructionLocation endLine] + ", "
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelAssertOk + ":\n"

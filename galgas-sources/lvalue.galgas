@@ -46,7 +46,7 @@ syntax extension omnibus_syntax {
       receiver = ["" here]
     end
     <lvalue_operand> !?ioAST ?let operand
-    outAssignmentTargetAST = .new {!receiver !operand}
+    outAssignmentTargetAST = .init {!receiver !operand}
   }
   
   #·····················································································································
@@ -266,7 +266,7 @@ private proc analyzeVariableInLValue
       !nextOperand
     )
   end
-  outInternalRepresentation = .new {!currentType !currentLLVMName}
+  outInternalRepresentation = .init {!currentType !currentLLVMName}
 }
 
 #·······················································································································
@@ -446,7 +446,7 @@ private proc analyzeSelfLValue
       !nextOperand
     )
   end
-  outInternalRepresentation = .new {!currentType !currentLLVMName}
+  outInternalRepresentation = .init {!currentType !currentLLVMName}
 }
 
 #·······················································································································

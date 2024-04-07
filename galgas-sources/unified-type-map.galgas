@@ -16,7 +16,7 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
-  result = {}
+  result = §[]
   for (lkey element) in self do
     if [element.mDefinition isUnsolved] then
       result += !lkey
@@ -32,7 +32,7 @@ setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outE
   if let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
     outEntry = .element {!weakElement: element}
   else
-    let newElement = @unifiedTypeMapElementClass.new {!inLKey !.unsolved}
+    let newElement = @unifiedTypeMapElementClass.init {!inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
     outEntry = .element {!weakElement: newElement}
   end
@@ -46,7 +46,7 @@ setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEn
   elsif let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
     outEntry = .element {!weakElement: element}
   else
-    let newElement = @unifiedTypeMapElementClass.new {! inLKey !.unsolved}
+    let newElement = @unifiedTypeMapElementClass.init {! inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
     outEntry = .element {!weakElement: newElement}
   end
@@ -60,8 +60,8 @@ setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEn
   if let [self searchKey !inKey ?let @unifiedTypeMapElementClass element] then
     outEntry = .element {!weakElement: element}
   else
-    let newElement = @unifiedTypeMapElementClass.new {!.new {!inKey !.nowhere}!.unsolved}
-    [!?self internalInsertKey !.new {!inKey !.nowhere} !newElement]
+    let newElement = @unifiedTypeMapElementClass.init {!.init {!inKey !.nowhere}!.unsolved}
+    [!?self internalInsertKey !.init {!inKey !.nowhere} !newElement]
     outEntry = .element {!weakElement: newElement}
   end
 }
@@ -90,7 +90,7 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
       e.mDefinition = .solved {!type: inTypeDefinition}
     end
   else
-    let newElement = @unifiedTypeMapElementClass.new {! inTypeName !.solved {!type: inTypeDefinition}}
+    let newElement = @unifiedTypeMapElementClass.init {! inTypeName !.solved {!type: inTypeDefinition}}
     [!?self internalInsertKey !inTypeName !newElement]
   end
 }

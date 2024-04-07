@@ -8,7 +8,7 @@ setter @instructionListIR appendShortCircuitAndOperation
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
-  self += !@shortCircuitAndOperationIR.new {
+  self += !@shortCircuitAndOperationIR.init {
     !inTargetOperand
     !inLeftOperandLLVMName
     !inLeftInstructionList
@@ -46,9 +46,9 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel  = "and." + [self.mLocation locationIndex] + ".start"
-  let trueLabel  = "and." + [self.mLocation locationIndex] + ".true"
-  let falseLabel = "and." + [self.mLocation locationIndex] + ".false"
+  let startLabel  = "and." + [self.mLocation endLocationIndex] + ".start"
+  let trueLabel  = "and." + [self.mLocation endLocationIndex] + ".true"
+  let falseLabel = "and." + [self.mLocation endLocationIndex] + ".false"
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   [self.mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]

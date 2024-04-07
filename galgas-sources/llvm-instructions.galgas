@@ -40,12 +40,12 @@ list @llvmGenerationInstructionList {
 #·······················································································································
 
 setter @llvmGenerationInstructionList appendReturn ?let @lstring inReturnType ?let @lstring inReturnValue {
-  var @llvmGenerationInstructionElementList elements = {}
+  var @llvmGenerationInstructionElementList elements = §[]
   elements += !.string {!string: "ret "}
   elements += !.type {!name: inReturnType}
   elements += !.string {!string: " "}
   elements += !.symbol {!name: inReturnValue}
-  self += !@llvmGenerationInstruction.new {!elements}
+  self += !@llvmGenerationInstruction.init {!elements}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -57,7 +57,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <llvm_instruction_list> !@llvmGenerationInstructionList outInstructionList {
-    outInstructionList = {}
+    outInstructionList = §[]
     repeat
     while
       <llvm_instruction> ?let instruction
@@ -70,14 +70,14 @@ syntax extension omnibus_syntax {
   rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
     $var$
     $identifier$ ?let name
-    outInstruction = @llvmVarInstruction.new {!name}
+    outInstruction = @llvmVarInstruction.init {!name}
   }
   
   #·····················································································································
 
   rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
     $llvm$
-    var @llvmGenerationInstructionElementList elementList = {}
+    var @llvmGenerationInstructionElementList elementList = §[]
     repeat
       select
         $"string"$ ?let string
@@ -92,7 +92,7 @@ syntax extension omnibus_syntax {
     while
      $+$
     end
-    outInstruction = @llvmGenerationInstruction.new {!elementList}
+    outInstruction = @llvmGenerationInstruction.init {!elementList}
   }
   
   #·····················································································································

@@ -82,7 +82,7 @@ syntax extension omnibus_syntax {
 
   rule <declaration> ?!@ast ioAST {
     $registers$
-    var @registerGroupListAST registerGroupListAST = {}
+    var @registerGroupListAST registerGroupListAST = §[]
     repeat
       $©group$ ?let registerGroupName
       select
@@ -94,7 +94,7 @@ syntax extension omnibus_syntax {
         let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
         registerGroupListAST += !registerGroupName !groupKind
       or
-        var @lbigintlist groupBaseAddresses = {}
+        var @lbigintlist groupBaseAddresses = §[]
         $[$
         <expression> !?ioAST ?let groupSize
         let groupSizeExpressionLocation = @location.here
@@ -120,16 +120,16 @@ syntax extension omnibus_syntax {
 #      $,$
     end
     ${$
-    var @controlRegisterDeclarationList controlRegisterDeclarationList = {}
+    var @controlRegisterDeclarationList controlRegisterDeclarationList = §[]
     repeat
-      var @controlRegisterNameListAST registerDeclarationList = {}
+      var @controlRegisterNameListAST registerDeclarationList = §[]
       repeat
         <registerDeclaration> !?ioAST !?registerDeclarationList
       while
 #        $,$
       end
       $\$type$ ?let registerTypeName
-      var @controlRegisterBitSliceList registerBitSliceList = {}
+      var @controlRegisterBitSliceList registerBitSliceList = §[]
       select
       or
         ${$
@@ -141,7 +141,7 @@ syntax extension omnibus_syntax {
           or
             $identifier$ ?let bitName
             select
-              registerBitSlice = .namedBit {!name:bitName !count:.new{!1 !.here}}
+              registerBitSlice = .namedBit {!name:bitName !count:.init{!1 !.here}}
             or
               $:$
               $integer$ ?let @lbigint bitCount
@@ -158,7 +158,7 @@ syntax extension omnibus_syntax {
       controlRegisterDeclarationList += !registerDeclarationList !registerTypeName !registerBitSliceList !endOfBitSlice
     while
     end
-    ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.new {
+    ioAST.mDeclarationListAST += !@controlRegisterGroupDeclarationAST.init {
       !registerGroupListAST
       !controlRegisterDeclarationList
     }
@@ -248,7 +248,7 @@ syntax extension omnibus_syntax {
     $($
     repeat
       $identifier$ ?let registerName
-      let key = @lstring.new {!"#" + registerGroupName + ":" + registerName !registerName.location}
+      let key = @lstring.init {!"#" + registerGroupName + ":" + registerName !registerName.location}
       [!?ioAST.mControlRegisterUserAccesMapAST insertKey !key]
     while
       $,$
@@ -324,10 +324,10 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
     [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
   #--- Add dependency from the number of integer type name (i.e. $u32 --> $u5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"u"]
-    if ([split length] == 2) && ([split mValueAtIndex !0] == "") && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
+    if ([split count] == 2) && ([split mValueAtIndex !0] == "") && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
       if n > 0 then
-        let bitSizeTypeName = @lstring.new {!"u" + [n-1 significantBitCount] !reg.mRegisterTypeName}
+        let bitSizeTypeName = @lstring.init {!"u" + [n-1 significantBitCount] !reg.mRegisterTypeName}
         [!?ioGraph addEdge !nodeName !bitSizeTypeName]
       end
     end
@@ -342,7 +342,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
       end
     end
   #--- Add dependency from config node
-    let rootNode =  @lstring.new {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
+    let rootNode =  @lstring.init {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
     [!?ioGraph addEdge !nodeName !rootNode]
   #--- Add dependency from source expression
     for register in reg.mRegisterArrayList do
@@ -445,10 +445,10 @@ private proc buildControlRegisterSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
 #--- Build bit slice map
-  outRegisterFieldMap = {}
-  outRegisterBitSliceMap = {}
-  outControlRegisterFieldList = {} # Used for HTML file
-  if [inRegisterBitSliceList length] > 0 then
+  outRegisterFieldMap = §[]
+  outRegisterBitSliceMap = §[]
+  outControlRegisterFieldList = §[] # Used for HTML file
+  if [inRegisterBitSliceList count] > 0 then
     var @uint shiftCount = 0
     for > (mRegisterBitSlice) in inRegisterBitSliceList do
       switch mRegisterBitSlice
@@ -593,7 +593,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  var @controlRegisterMap regMap = {}
+  var @controlRegisterMap regMap = §[]
   for reg in self.mRegisters do
     [reg buildControlRegisterMapForGroup
       !?context:ioContext
@@ -602,7 +602,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     ]
   end
   for group in self.mRegisterGroupList do
-    var @controlRegisterMap registerMap = regMap # {}
+    var @controlRegisterMap registerMap = regMap # §[]
   #--- Check for user access
     for aRegister in regMap do
       let key = "#" + group.mRegisterGroupName + ":" + aRegister.lkey
@@ -633,13 +633,13 @@ override method @controlRegisterGroupDeclarationAST enterInContext
       else
         [groupArraySizeExpressionResult literalInteger ?1* ?value:groupSize]
       end
-      if [groupSize uint] != [baseAddresses length] then
+      if [groupSize uint] != [baseAddresses count] then
         error groupSizeExpressionLocation
-        : "the group size is " + groupSize + ", but " + [baseAddresses length] + " base addresses are defined"
+        : "the group size is " + groupSize + ", but " + [baseAddresses count] + " base addresses are defined"
       end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
-      ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.new {
+      ioDecoratedDeclarationList += !@decoratedControlRegisterArrayGroupDeclaration.init {
         !group.mRegisterGroupName
         !baseAddresses
       }
@@ -671,12 +671,12 @@ override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
-  if [self length] > 0 then
+  if [self count] > 0 then
     ioLLVMcode += llvmTitleComment (!"Control Register Group Arraies")
     let int = "i" + inPointerSize
     for (groupName baseAddresses) in self do
       ioLLVMcode += registerGroupAddressArrayLLVMname (!groupName)
-                 + " = private unnamed_addr constant [" + [baseAddresses length] + " x " + int + "] ["
+                 + " = private unnamed_addr constant [" + [baseAddresses count] + " x " + int + "] ["
       for (addr) in baseAddresses
       do
         ioLLVMcode += int + " " + [addr.bigint string]
@@ -727,8 +727,8 @@ proc buildControlRegisterMapHTMLFile
   let byAddressFilePath = inSourceFile.string + ".control-registers-sorted-by-address.html"
   let byNameFilePath = inSourceFile.string + ".control-registers-sorted-by-name.html"
   if [option omnibus_options.emitControlRegisterHTMLDumpFile value] then
-    var @controlRegisterByAddress controlRegisterByAddress = {}
-    var @controlRegisterByName controlRegisterByName = {}
+    var @controlRegisterByAddress controlRegisterByAddress = §[]
+    var @controlRegisterByName controlRegisterByName = §[]
     var @uint controlRegisterCount = 0
     for (group_lkey group_mGroupKind group_mControlRegisterMap) in inControlRegisterGroupMap do
       switch group_mGroupKind
@@ -791,7 +791,7 @@ private proc buildControlRegisterMaps
         + registerName
         + "</td><td class=\"type\">" + reg_mType.omnibusTypeDescriptionName + "</td><td class=\"address\">"
         + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
-      if [reg_mControlRegisterFieldList length] > 0 then
+      if [reg_mControlRegisterFieldList count] > 0 then
         s += "<table class=\"fields\">"
           + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
           + "<tr>"
@@ -813,7 +813,7 @@ private proc buildControlRegisterMaps
           +"</td><td class=\"type\">" + reg_mType.omnibusTypeDescriptionName + "</td><td class=\"address\">"
           + [address hexStringSeparatedBy !'_' !4]
           + "</td><td>"
-        if [reg_mControlRegisterFieldList length] > 0 then
+        if [reg_mControlRegisterFieldList count] > 0 then
           s += "<table class=\"fields\">"
             + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
           for > (mFieldBitCount mFieldName) in reg_mControlRegisterFieldList do
@@ -857,7 +857,7 @@ func fieldIndexColumns ?let @uint inBitCount -> @string  {
 #·······················································································································
 
 func arrayIndexListFor ?size:let @uint inSize -> @uintlist {
-  result = {}
+  result = §[]
   for i in 0 ..< inSize do
     result += !i
   end

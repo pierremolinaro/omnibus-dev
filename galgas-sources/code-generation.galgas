@@ -8,8 +8,8 @@
 
 struct @generationAdds {
   public var @uint mUniqueIndex = 0
-  public var @stringset mExternFunctionDeclarationSet = {}
-  public var @staticEntityMap mStaticEntityMap = .new {}
+  public var @stringset mExternFunctionDeclarationSet = §[]
+  public var @staticEntityMap mStaticEntityMap = .init {}
   public var @bool mUsesGuards = false
   public var @bool mNeedsDynamicMemoryAllocation = false
 }
@@ -165,9 +165,9 @@ private proc generateCodeFiles
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
 {
-  var @generationAdds generationAdds = .new
+  var @generationAdds generationAdds = .init
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
-  let @generationContext generationContext = .new {
+  let @generationContext generationContext = .init {
     !inPanicCodeType
     !inPanicLineType
     !inTargetParameters.mNopInstructionStringInLLVM.string
@@ -253,7 +253,7 @@ private proc generateCodeFiles
   ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-  var @primitiveAndServiceIRlist primitiveAndServiceList = {}
+  var @primitiveAndServiceIRlist primitiveAndServiceList = §[]
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
@@ -265,7 +265,7 @@ private proc generateCodeFiles
       !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- Routine list
-  var @sectionIRlist sectionIRlist = {}
+  var @sectionIRlist sectionIRlist = §[]
   for routine in inIntermediateCodeStruct.mRoutineListIR do
     [routine.mRoutine svcDeclarationGeneration
       !?primitiveAndServiceList
@@ -333,7 +333,7 @@ private proc generateCodeFiles
     end
   end
 #----------------------------------------- Global structured constants
-  if [generationAdds.mStaticEntityMap.mGlobalStructuredConstantList length] > 0 then
+  if [generationAdds.mStaticEntityMap.mGlobalStructuredConstantList count] > 0 then
     llvmCode += llvmTitleComment (!"Global structured constants")
     for (mType mOperandIRList) in generationAdds.mStaticEntityMap.mGlobalStructuredConstantList do (idx)
       llvmCode += "@gconst." + idx + " = private unnamed_addr constant " + [mType llvmTypeName]

@@ -5,52 +5,52 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @intermediateCodeStruct {
-  public var @staticEntityMap mStaticEntityMap = .new
-  public var @interruptMapIR mInterruptMapIR = {}
-  public var @externProcedureMapIR mExternProcedureMapIR = {}
-  public var @panicSortedListIR mPanicSetupListIR = {}
-  public var @panicSortedListIR mPanicLoopListIR = {}
-  public var @taskMapIR mTaskMapIR = {}
-  public var @globalTaskVariableList mGlobalTaskVariableList = {}
+  public var @staticEntityMap mStaticEntityMap = .init
+  public var @interruptMapIR mInterruptMapIR = §[]
+  public var @externProcedureMapIR mExternProcedureMapIR = §[]
+  public var @panicSortedListIR mPanicSetupListIR = §[]
+  public var @panicSortedListIR mPanicLoopListIR = §[]
+  public var @taskMapIR mTaskMapIR = §[]
+  public var @globalTaskVariableList mGlobalTaskVariableList = §[]
   public var @uint mMaxBranchOfOnInstructions = 0
-  public var @targetParameters mTargetParameters = .new {
+  public var @targetParameters mTargetParameters = .init {
     !.here
-    !{}
+    !§[]
     !["" nowhere]
     !["" nowhere]
     !0
     !false
-    !.new {!0 !.nowhere}
-    !.new {!0 !.nowhere}
+    !.init {!0 !.nowhere}
+    !.init {!0 !.nowhere}
     !["" nowhere]
-    !.new {!0 !.nowhere}
-    !.new {!0 !.nowhere}
-    !.new {!0 !.nowhere}
-    !.new {!0 !.nowhere}
-    !.new {!0 !.nowhere}
+    !.init {!0 !.nowhere}
+    !.init {!0 !.nowhere}
+    !.init {!0 !.nowhere}
+    !.init {!0 !.nowhere}
+    !.init {!0 !.nowhere}
     !["" nowhere]
-    !.new {!0 !.nowhere}
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !{}
-    !{}
-    !{}
+    !.init {!0 !.nowhere}
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
-    !.new {!0 !.nowhere}
+    !["" nowhere]
+    !§[]
+    !§[]
+    !§[]
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    !.init {!0 !.nowhere}
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
   }
-  public var @driverListIR mDriverList = {}
-  public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate = {}
-  public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap = {}
-  public var @controlRegisterGroupArrayList mControlRegisterGroupArrayList = {}
-  public var @routineListIR mRoutineListIR = {}
+  public var @driverListIR mDriverList = §[]
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate = §[]
+  public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap = §[]
+  public var @controlRegisterGroupArrayList mControlRegisterGroupArrayList = §[]
+  public var @routineListIR mRoutineListIR = §[]
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

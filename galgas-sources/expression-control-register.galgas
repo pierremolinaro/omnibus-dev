@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     end
 #    $)$
   #--- AST
-    outExpression = @registerInExpressionAST.new {!registerLValue !fieldName}
+    outExpression = @registerInExpressionAST.init {!registerLValue !fieldName}
   }
 
   #·····················································································································

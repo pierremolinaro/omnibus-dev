@@ -4,7 +4,7 @@ setter @instructionListIR appendStoreIndirectVolatileRegister
   ?let @string inLLVMName
   ?let @objectIR inSourceValue
 {
-  self += !@storeIndirectVolatileIR.new {!inTargetVarType !inLLVMName !inSourceValue}
+  self += !@storeIndirectVolatileIR.init {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
