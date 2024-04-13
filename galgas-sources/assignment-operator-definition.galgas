@@ -313,7 +313,7 @@ override method @llvmAssignmentOperatorUsage generateCode
       let s = "call void @" + [llvmRoutineName assemblerRepresentation]
             + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!llvmRoutineName]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[llvmRoutineName]]
     else
     [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
     var @assignmentGenerationVarMap varMap = §[]

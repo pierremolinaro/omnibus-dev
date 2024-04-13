@@ -468,8 +468,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
     [inContext.mGuardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
   #--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = §[
-      !.outputInput
-      !.reference {!type:currentType !llvmName:[currentObject llvmName]}
+      .init (.outputInput, .reference {!type:currentType !llvmName:[currentObject llvmName]})
     ]
   #--- Analyze effective parameters
     analyzeEffectiveParameters (

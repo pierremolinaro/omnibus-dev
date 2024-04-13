@@ -131,7 +131,7 @@ method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
   enterFormalArguments (
     !context:inContext
     !self.mProcFormalArgumentList
-    !?*
+    !? %from ()
     !?formalArguments
     !warningOnUnusedArgs: true
   )

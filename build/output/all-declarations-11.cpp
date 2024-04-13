@@ -7577,7 +7577,8 @@ GALGAS_generationAdds GALGAS_generationAdds::init (Compiler * inCompiler
 
 void GALGAS_generationAdds::setInitializedProperties (Compiler * inCompiler) {
   mProperty_mUniqueIndex = GALGAS_uint (uint32_t (0U)) ;
-  mProperty_mExternFunctionDeclarationSet = GALGAS_stringset::class_func_emptySet (SOURCE_FILE ("code-generation.galgas", 11)) ;
+GALGAS_stringset temp_0 = GALGAS_stringset::init (inCompiler COMMA_SOURCE_FILE ("code-generation.galgas", 11)) ;
+  mProperty_mExternFunctionDeclarationSet = temp_0 ;
   mProperty_mStaticEntityMap = GALGAS_staticEntityMap::init (inCompiler COMMA_HERE) ;
   mProperty_mUsesGuards = GALGAS_bool (false) ;
   mProperty_mNeedsDynamicMemoryAllocation = GALGAS_bool (false) ;

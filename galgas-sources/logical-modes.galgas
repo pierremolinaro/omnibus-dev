@@ -69,7 +69,7 @@ getter @mode isSafe -> @bool {
 #·······················································································································
 
 getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
-  result = §[!self !inRoutineNameForGeneration]
+  result = §[.init (self, inRoutineNameForGeneration)]
   switch self
   case serviceMode : # If routine is in service mode ...
     result += !.primitiveMode !inRoutineNameForGeneration # ... it may be called from primitive mode...
@@ -137,7 +137,7 @@ getter @mode routineLLVMDictionaryForSystemRoutine
   ?let @string inImplementationRoutineNameForGeneration
   -> @routineLLVMNameDict
 {
-  result = §[!self !inImplementationRoutineNameForGeneration]
+  result = §[.init (self, inImplementationRoutineNameForGeneration)]
   result += !.userMode !inUserRoutineNameForGeneration
   switch self 
   case serviceMode :

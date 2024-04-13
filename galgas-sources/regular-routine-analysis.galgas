@@ -3,19 +3,19 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @decoratedRegularRoutineList {
-  public var @lstring receiverTypeName %selector # Empty string if standalone function
-  public var @mode mode %selector
-  public var @bool isRequired %selector
-  public var @routineKind routineKind %selector
-  public var @bool warnIfUnused %selector
-  public var @bool exportedRoutine %selector
-  public var @routineAttributes routineAttributes %selector
-  public var @lstring routineMangledLLVMName %selector
-  public var @routineFormalArgumentListAST formalArgumentList %selector
-  public var @bool warningOnUnusedArgs %selector
+  public var @lstring receiverTypeName %initArgLabel # Empty string if standalone function
+  public var @mode mode %initArgLabel
+  public var @bool isRequired %initArgLabel
+  public var @routineKind routineKind %initArgLabel
+  public var @bool warnIfUnused %initArgLabel
+  public var @bool exportedRoutine %initArgLabel
+  public var @routineAttributes routineAttributes %initArgLabel
+  public var @lstring routineMangledLLVMName %initArgLabel
+  public var @routineFormalArgumentListAST formalArgumentList %initArgLabel
+  public var @bool warningOnUnusedArgs %initArgLabel
   public var @instructionListAST mInstructionList
   public var @location mEndOfRoutineDeclaration
-  public var @lstring returnTypeName %selector # Empty string if no returned value
+  public var @lstring returnTypeName %initArgLabel # Empty string if no returned value
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

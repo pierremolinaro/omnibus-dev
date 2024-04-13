@@ -349,8 +349,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     end
   #--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = §[
-      !.outputInput
-      !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
+      .init (.outputInput, .reference {!type:currentType !llvmName:currentLLVMAddressVar})
     ]
   #--- Analyze effective parameters
     analyzeEffectiveParameters (

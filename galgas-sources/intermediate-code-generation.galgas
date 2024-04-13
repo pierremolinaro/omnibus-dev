@@ -64,8 +64,8 @@ list @controlRegisterGroupArrayList {
 
 abstract refclass @abstractRoutineIR {
   public var @lstring mRoutineMangledName
-  public var @bool isRequired %selector
-  public var @bool warnsIfUnused %selector
+  public var @bool isRequired %initArgLabel
+  public var @bool warnsIfUnused %initArgLabel
 }
 
 #·······················································································································

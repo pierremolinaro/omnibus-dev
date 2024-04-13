@@ -518,10 +518,12 @@ method @structurePropertyListAST-element enterPropertyInContext
       !self.mPropertyName.location
     }
     let @routineFormalArgumentListAST formalArgumentList = §[
-      !.input
-      !["" nowhere]
-      !self.mPropertyTypeName
-      !.init {!"newValue" !endOfWriteInstructionList}
+      .init (
+        .input,
+        ["" nowhere],
+        self.mPropertyTypeName,
+        .init {!"newValue" !endOfWriteInstructionList}
+      )
     ]
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
@@ -699,13 +701,13 @@ override method @structureAssignmentOperatorUsage generateCode
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
   case reference (2*) :
     let assignmentFunctionLLVMName = assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
   case llvmStructureValue (* sortedOperandValues) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1

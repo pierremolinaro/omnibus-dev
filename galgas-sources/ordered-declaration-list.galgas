@@ -145,7 +145,7 @@ proc buildOrderedDeclarationList
   !orderedDeclarationList: @declarationListAST outSortedDeclarationListAST
 {
 #-------------------------------------- Build precedence graph
-  var @semanticTypePrecedenceGraph precedenceGraph = .emptyGraph
+  var @semanticTypePrecedenceGraph precedenceGraph = .init
   for (mDeclaration) in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"

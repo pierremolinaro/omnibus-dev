@@ -42,7 +42,7 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   var @abstractDeclarationAST declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere
@@ -67,7 +67,7 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere
@@ -92,7 +92,7 @@ proc appendInfixOperatorDeclaration
   instructionElements += !.symbol {!name: ["LEFT" nowhere]}
   instructionElements += !.string {!string: ", "}
   instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   declaration = @llvmInfixOperatorAST.init {
     !inInfixOperator
     !.nowhere

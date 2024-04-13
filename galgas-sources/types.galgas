@@ -5,11 +5,11 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @omnibusType {
-  public let @subscript subscript %selector
-  public let @omnibusTypeAttributes attributes %selector # as instanciable, copyable, ...
-  public let @string omnibusTypeDescriptionName %selector # used for type checking and type display
-  public let @typeKind kind %selector
-  public let @string llvmBaseTypeName %selector # used for type implementation, empty string if compile time type
+  public let @subscript subscript %initArgLabel
+  public let @omnibusTypeAttributes attributes %initArgLabel # as instanciable, copyable, ...
+  public let @string omnibusTypeDescriptionName %initArgLabel # used for type checking and type display
+  public let @typeKind kind %initArgLabel
+  public let @string llvmBaseTypeName %initArgLabel # used for type implementation, empty string if compile time type
 }
 
 #·······················································································································
@@ -352,7 +352,7 @@ getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignment
   elsif [self.kind isStructure] then
     [self.kind structure ?propertyList:let @propertyList propertyList]
     for (* propertyType) in propertyList do (idx)
-      let indexPath = inPropertyIndexPath + §[!idx]
+      let indexPath = inPropertyIndexPath + §[.init (idx)]
       result += [propertyType arcList !indexPath]
     end
   end
@@ -372,7 +372,7 @@ getter @omnibusType deinitNeeded -> @bool {
 
 #·······················································································································
 
-#shared map @unifiedTypeMap %selectors {
+#shared map @unifiedTypeMap %initArgLabels {
 #  public var @omnibusType type
 #
 #  insert insertType error message "the '%K' type is already declared in %L"

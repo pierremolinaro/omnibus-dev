@@ -336,7 +336,7 @@ override method @staticListAST enterInContext
         !true
         !signature
         !returnTypeProxy
-        !§[!.userMode !routineLLVMName]
+        !§[.init (.userMode, routineLLVMName)]
         !false
         !.userMode
       ]

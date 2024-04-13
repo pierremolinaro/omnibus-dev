@@ -61,7 +61,7 @@ syntax extension omnibus_syntax {
     or
       $else$
       <if_instruction> !?ioAST ?let ifInstruction
-      elseInstructionList = §[!ifInstruction]
+      elseInstructionList = §[.init (ifInstruction)]
     end
     let endOfElseBranch = @location.here
     outIfInstruction = .init {

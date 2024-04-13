@@ -62,7 +62,7 @@ proc appendPrefixOperatorDeclaration_minus
   instructionElements += !.type {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: " 0, "}
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
-  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   var @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.init {
     !.minusOp
     !.nowhere
@@ -98,7 +98,7 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
   instructionElements += !.string {!string: " "}
   instructionElements += !.symbol {!name: ["SELF" nowhere]}
   instructionElements += !.string {!string: ", -1"}
-  llvmInstructionList += !@llvmGenerationInstruction.init {!§[instructionElements]}
+  llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   let @abstractDeclarationAST declaration = @llvmPrefixOperatorAST.init {
     !.bitWiseComplement
     !.nowhere

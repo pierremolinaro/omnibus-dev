@@ -66,7 +66,7 @@ override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @lo
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @globalSyncInstanceMap { # %selectors {
+map @globalSyncInstanceMap {
   public var @omnibusType type
   public var @objectIR initialValue
 

@@ -37,7 +37,7 @@ before {
     else
       let targetDirectory = [targetDirectoryOption absolutePathFromPath !.stringWithCurrentDirectory]
       print (!"Targets in '" + targetDirectory + "' directory\n")
-      let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !§[!"omnibus-target"]]
+      let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !§[.init ("omnibus-target")]]
       for (f) in allConfigFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
           print (!"  " + [f stringByDeletingLastPathComponent] + '\n')
@@ -91,7 +91,7 @@ proc generateTarget
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
     !to:inProductDirectory + "/sources/linker.ld"
-    !§[!"!SYSTEMSTACKSIZE!" ![inTargetParameters.mSystemStackSize.bigint string]]
+    !§[.init ("!SYSTEMSTACKSIZE!", [inTargetParameters.mSystemStackSize.bigint string])]
   )
 #--- Copy build.py
   var opt_optimizationOption = "disable-opt"
@@ -129,7 +129,7 @@ proc generateTarget
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mPython_build
     !to:inProductDirectory + "/build.py"
-    !§[!"<<OPT_OPTIMIZATION_OPTION>>" !opt_optimizationOption, !"<<LLC_OPTIMIZATION_OPTION>>" !llc_optimizationOption]
+    !§[.init ("<<OPT_OPTIMIZATION_OPTION>>", opt_optimizationOption), .init ("<<LLC_OPTIMIZATION_OPTION>>", llc_optimizationOption)]
   )
 }
 

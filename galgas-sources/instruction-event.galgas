@@ -424,7 +424,7 @@ proc analyzeGuardCall
   else  
     outGuardMangledName = guardRoutineUserLLVMName
   #--- Analyze effective parameters
-    outEffectiveParameterListIR = §[!.outputInput !inReceiver]
+    outEffectiveParameterListIR = §[.init (.outputInput, inReceiver)]
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes

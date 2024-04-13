@@ -349,15 +349,18 @@ override method @dynArrayAppendFunctionIR llvmCodeGeneration
   ioGenerationAdds.mNeedsDynamicMemoryAllocation = true
   let elementType = [self.mElementTypeProxy type]
   let @routineFormalArgumentListAST argumentList = §[
-    !.input
-    !["" nowhere]
-    ![elementType.llvmBaseTypeName nowhere]
-    !["inValue" nowhere]
-  ,
-    !.input
-    !["atIndex" nowhere]
-    !["u32" nowhere]
-    !["inIndex" nowhere]
+    .init (
+      .input,
+      ["" nowhere],
+      [elementType.llvmBaseTypeName nowhere],
+      ["inValue" nowhere]
+    ),
+    .init (
+      .input,
+      ["atIndex" nowhere],
+      ["u32" nowhere],
+      ["inIndex" nowhere]
+    )
   ]
   let insertRoutineMangledName = routineMangledNameFromAST (
     ![self.mArrayTypeProxy type].llvmBaseTypeName
@@ -457,7 +460,7 @@ override method @dynamicArrayTypeAssignUsage generateCode
     let s = " call void  @" + [self.mAssignFunctionName assemblerRepresentation] 
         + " (" + targetTypeName + "* " + inTargetLLVMName 
           + ", " + targetTypeName + "* " + [inSourcePossibleReference llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!self.mAssignFunctionName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[self.mAssignFunctionName]]
   else # Not initialized, perform a store  
     var @objectIR sourceValue = inSourcePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]

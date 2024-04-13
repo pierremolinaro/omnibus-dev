@@ -233,7 +233,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     var s = "call void @" + [self.mAssignValueToElements_functionName assemblerRepresentation]
     s += " (" + arrayTypeName + "* " + inTargetLLVMName
     s += ", " + elementTypeName + " " + [sourceValue llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!self.mAssignValueToElements_functionName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[self.mAssignValueToElements_functionName]]
   case llvmArrayDynamicValues (1* @operandIRList values) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
@@ -261,13 +261,13 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
   case reference (2*) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[!assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
   case literalInteger (2*) :
     error inErrorLocation : "invalid fixed array assignment source (literalInteger)"
   case literalString (2*) :

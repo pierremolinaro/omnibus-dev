@@ -11,8 +11,8 @@ refclass @instructionNOP : @instructionAST {
 
 proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
 #--- NOP function parameters
-  let @lstringlist attributeList = §[![noUnusedWarningAttribute () nowhere]]
-  let instructionList = @instructionListAST §[!@instructionNOP.init {!.nowhere}]
+  let @lstringlist attributeList = §[.init ([noUnusedWarningAttribute () nowhere])]
+  let instructionList = @instructionListAST §[.init (@instructionNOP {!.nowhere})]
 #--- Enter in AST
   ioDeclarationListAST += !@functionDeclarationAST.init {
     !.anySafeMode

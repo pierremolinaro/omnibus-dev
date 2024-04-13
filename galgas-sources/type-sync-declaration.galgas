@@ -113,7 +113,7 @@ override method @syncDeclarationAST enterInContext
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
-      !?*
+      !? %from true
     ]
   end
   constructorKey += ")"

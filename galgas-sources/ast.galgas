@@ -4,7 +4,7 @@
 
 struct @ast {
   public var @declarationListAST mDeclarationListAST = §[]
-  public var @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST = §[]
+  public var @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST = ()
   public var @requiredFunctionDeclarationListAST mRequiredFunctionListAST = §[]
   public var @externFunctionDeclarationListAST mExternFunctionListAST = §[]
   public var @lstringlist mTargetListAST = §[]

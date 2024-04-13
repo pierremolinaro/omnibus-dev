@@ -329,10 +329,12 @@ setter @routineMapForContext addFunctionWithInputArgument
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST §[
-    !.input
-    ![inInputSelector nowhere]
-    ![[inInputArgumentTypeProxy key] nowhere]
-    ![inInputArgumentName nowhere]
+    .init (
+      .input,
+      [inInputSelector nowhere],
+      [[inInputArgumentTypeProxy key] nowhere],
+      [inInputArgumentName nowhere]
+    )
   ]
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
   let routineMangledName = @lstring.init {
@@ -370,15 +372,18 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   !routineLLVMName:@lstring outRoutineLLVMName
 {
   let argumentList = @routineFormalArgumentListAST §[
-    !.input
-    ![inInputSelector1 nowhere]
-    ![[inInputArgumentTypeProxy1 key] nowhere]
-    ![inInputArgumentName1 nowhere]
-  ,
-    !.input
-    ![inInputSelector2 nowhere]
-    ![[inInputArgumentTypeProxy2 key] nowhere]
-    ![inInputArgumentName2 nowhere]
+    .init (
+      .input,
+      [inInputSelector1 nowhere],
+      [[inInputArgumentTypeProxy1 key] nowhere],
+      [inInputArgumentName1 nowhere]
+    ),
+    .init (
+      .input,
+      [inInputSelector2 nowhere],
+      [[inInputArgumentTypeProxy2 key] nowhere],
+      [inInputArgumentName2 nowhere]
+    )
   ]
   outRoutineLLVMName = routineMangledNameFromAST (
     !inLLVMBaseTypeName
