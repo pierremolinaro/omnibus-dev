@@ -2,27 +2,27 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @genericFormalParameter {
+enum @genericFormalParameter %equatable {
   case constant (@lstring name)
   case type (@lstring name)
 }
 
 #·······················································································································
 
-list @genericFormalParameterList {
+list @genericFormalParameterList %equatable {
   public var @genericFormalParameter mParameter
 }
 
 #·······················································································································
 
-enum @llvmStringDefinitionElement {
+enum @llvmStringDefinitionElement %equatable {
   case variable (@lstring name)
   case string (@lstring value)
 }
 
 #·······················································································································
 
-list @llvmStringDefinition {
+list @llvmStringDefinition %equatable {
   public var @llvmStringDefinitionElement mElement
 }
 

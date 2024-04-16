@@ -230,7 +230,7 @@ enum @propertyGetterKind {
 
 #·······················································································································
 
-enum @propertyVisibility {
+enum @propertyVisibility %equatable {
   case isPublic
   case isPrivate
 }
@@ -343,7 +343,7 @@ map @globalConstantMap {
 
 #·······················································································································
 
-list @operandIRList {
+list @operandIRList %equatable {
   public var @objectIR mOperand
 }
 

@@ -36,7 +36,7 @@ method @decoratedRegularRoutineList routineSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @decoratedRegularRoutineList-element semanticAnalysis
+method @decoratedRegularRoutineList.@element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct

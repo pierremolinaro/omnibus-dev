@@ -9,321 +9,6 @@
 
 //--------------------------------------------------------------------------------------------------
 
-cMapElement_assignmentOperatorMap::cMapElement_assignmentOperatorMap (const GALGAS_assignmentOperatorMap_2D_element & inValue
-                                                                      COMMA_LOCATION_ARGS) :
-cMapElement (inValue.mProperty_lkey COMMA_THERE),
-mProperty_mOperatorUsage (inValue.mProperty_mOperatorUsage) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cMapElement_assignmentOperatorMap::cMapElement_assignmentOperatorMap (const GALGAS_lstring & inKey,
-                                                                      const GALGAS_abstractAssignmentOperatorUsage & in_mOperatorUsage
-                                                                      COMMA_LOCATION_ARGS) :
-cMapElement (inKey COMMA_THERE),
-mProperty_mOperatorUsage (in_mOperatorUsage) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool cMapElement_assignmentOperatorMap::isValid (void) const {
-  return mProperty_lkey.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cMapElement * cMapElement_assignmentOperatorMap::copy (void) {
-  cMapElement * result = nullptr ;
-  macroMyNew (result, cMapElement_assignmentOperatorMap (mProperty_lkey, mProperty_mOperatorUsage COMMA_HERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cMapElement_assignmentOperatorMap::description (String & ioString, const int32_t inIndentation) const {
-  ioString.appendNewLine () ;
-  ioString.appendStringMultiple ("| ", inIndentation) ;
-  ioString.appendCString ("mOperatorUsage" ":") ;
-  mProperty_mOperatorUsage.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_assignmentOperatorMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_assignmentOperatorMap * operand = (cMapElement_assignmentOperatorMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mOperatorUsage.objectCompare (operand->mProperty_mOperatorUsage) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap::GALGAS_assignmentOperatorMap (void) :
-AC_GALGAS_map () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap::GALGAS_assignmentOperatorMap (const GALGAS_assignmentOperatorMap & inSource) :
-AC_GALGAS_map (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap & GALGAS_assignmentOperatorMap::operator = (const GALGAS_assignmentOperatorMap & inSource) {
-  * ((AC_GALGAS_map *) this) = inSource ;
-  return * this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::init (Compiler * COMMA_LOCATION_ARGS) {
-  GALGAS_assignmentOperatorMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::class_func_emptyMap (LOCATION_ARGS) {
-  GALGAS_assignmentOperatorMap result ;
-  result.makeNewEmptyMap (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::class_func_mapWithMapToOverride (const GALGAS_assignmentOperatorMap & inMapToOverride
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_assignmentOperatorMap result ;
-  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::getter_overriddenMap (Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) const {
-  GALGAS_assignmentOperatorMap result ;
-  getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assignmentOperatorMap::enterElement (const GALGAS_assignmentOperatorMap_2D_element & inValue,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_assignmentOperatorMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@assignmentOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assignmentOperatorMap::addAssign_operation (const GALGAS_lstring & inKey,
-                                                        const GALGAS_abstractAssignmentOperatorUsage & inArgument0,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_assignmentOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@assignmentOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::add_operation (const GALGAS_assignmentOperatorMap & inOperand,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) const {
-  GALGAS_assignmentOperatorMap result = *this ;
-  cEnumerator_assignmentOperatorMap enumerator (inOperand, EnumerationOrder::up) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mOperatorUsage (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assignmentOperatorMap::setter_insertKey (GALGAS_lstring inKey,
-                                                     GALGAS_abstractAssignmentOperatorUsage inArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_assignmentOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "the '%K' assignment is already declared in %L" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const char * kSearchErrorMessage_assignmentOperatorMap_searchKey = "there is no '%K' assignment" ;
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assignmentOperatorMap::method_searchKey (GALGAS_lstring inKey,
-                                                     GALGAS_abstractAssignmentOperatorUsage & outArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
-  const cMapElement_assignmentOperatorMap * p = (const cMapElement_assignmentOperatorMap *) performSearch (inKey,
-                                                                                                           inCompiler,
-                                                                                                           kSearchErrorMessage_assignmentOperatorMap_searchKey
-                                                                                                           COMMA_THERE) ;
-  if (nullptr == p) {
-    outArgument0.drop () ;
-  }else{
-    macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-    outArgument0 = p->mProperty_mOperatorUsage ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_abstractAssignmentOperatorUsage GALGAS_assignmentOperatorMap::getter_mOperatorUsageForKey (const GALGAS_string & inKey,
-                                                                                                  Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) const {
-  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
-  const cMapElement_assignmentOperatorMap * p = (const cMapElement_assignmentOperatorMap *) attributes ;
-  GALGAS_abstractAssignmentOperatorUsage result ;
-  if (nullptr != p) {
-    macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-    result = p->mProperty_mOperatorUsage ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_assignmentOperatorMap::setter_setMOperatorUsageForKey (GALGAS_abstractAssignmentOperatorUsage inAttributeValue,
-                                                                   GALGAS_string inKey,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
-  cMapElement_assignmentOperatorMap * p = (cMapElement_assignmentOperatorMap *) attributes ;
-  if (nullptr != p) {
-    macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-    p->mProperty_mOperatorUsage = inAttributeValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cMapElement_assignmentOperatorMap * GALGAS_assignmentOperatorMap::readWriteAccessForWithInstruction (Compiler * inCompiler,
-                                                                                                     const GALGAS_string & inKey
-                                                                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * result = (cMapElement_assignmentOperatorMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
-  macroNullOrValidSharedObject (result, cMapElement_assignmentOperatorMap) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cEnumerator_assignmentOperatorMap::cEnumerator_assignmentOperatorMap (const GALGAS_assignmentOperatorMap & inEnumeratedObject,
-                                                                      const EnumerationOrder inOrder) :
-cGenericAbstractEnumerator (inOrder) {
-  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap_2D_element cEnumerator_assignmentOperatorMap::current (LOCATION_ARGS) const {
-  const cMapElement_assignmentOperatorMap * p = (const cMapElement_assignmentOperatorMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-  return GALGAS_assignmentOperatorMap_2D_element (p->mProperty_lkey, p->mProperty_mOperatorUsage) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_lstring cEnumerator_assignmentOperatorMap::current_lkey (LOCATION_ARGS) const {
-  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement) ;
-  return p->mProperty_lkey ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_abstractAssignmentOperatorUsage cEnumerator_assignmentOperatorMap::current_mOperatorUsage (LOCATION_ARGS) const {
-  const cMapElement_assignmentOperatorMap * p = (const cMapElement_assignmentOperatorMap *) currentObjectPtr (THERE) ;
-  macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-  return p->mProperty_mOperatorUsage ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GALGAS_assignmentOperatorMap::optional_searchKey (const GALGAS_string & inKey,
-                                                       GALGAS_abstractAssignmentOperatorUsage & outArgument0) const {
-  const cMapElement_assignmentOperatorMap * p = (const cMapElement_assignmentOperatorMap *) searchForKey (inKey) ;
-  const bool result = nullptr != p ;
-  if (result) {
-    macroValidSharedObject (p, cMapElement_assignmentOperatorMap) ;
-    outArgument0 = p->mProperty_mOperatorUsage ;
-  }else{
-    outArgument0.drop () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assignmentOperatorMap generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap ("assignmentOperatorMap",
-                                                                             nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_assignmentOperatorMap::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentOperatorMap ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_assignmentOperatorMap::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_assignmentOperatorMap (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_assignmentOperatorMap GALGAS_assignmentOperatorMap::extractObject (const GALGAS_object & inObject,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) {
-  GALGAS_assignmentOperatorMap result ;
-  const GALGAS_assignmentOperatorMap * p = (const GALGAS_assignmentOperatorMap *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_assignmentOperatorMap *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentOperatorMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 cMapElement_implicitConversionToBooleanMap::cMapElement_implicitConversionToBooleanMap (const GALGAS_implicitConversionToBooleanMap_2D_element & inValue
                                                                                         COMMA_LOCATION_ARGS) :
 cMapElement (inValue.mProperty_lkey COMMA_THERE),
@@ -360,17 +45,6 @@ void cMapElement_implicitConversionToBooleanMap::description (String & ioString,
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mConverter" ":") ;
   mProperty_mConverter.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_implicitConversionToBooleanMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_implicitConversionToBooleanMap * operand = (cMapElement_implicitConversionToBooleanMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mConverter.objectCompare (operand->mProperty_mConverter) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -679,17 +353,6 @@ void cMapElement_taskMap::description (String & ioString, const int32_t inIndent
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cMapElement_taskMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_taskMap * operand = (cMapElement_taskMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mTaskType.objectCompare (operand->mProperty_mTaskType) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_taskMap::GALGAS_taskMap (void) :
 AC_GALGAS_map () {
 }
@@ -969,7 +632,6 @@ class cCollectionElement_globalTaskVariableList : public cCollectionElement {
   public: cCollectionElement_globalTaskVariableList (const GALGAS_globalTaskVariableList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -1027,14 +689,6 @@ void cCollectionElement_globalTaskVariableList::description (String & ioString, 
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mInitialValue" ":") ;
   mObject.mProperty_mInitialValue.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_globalTaskVariableList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_globalTaskVariableList * operand = (cCollectionElement_globalTaskVariableList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_globalTaskVariableList) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1529,8 +1183,6 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_abstractDecoratedDeclaration::objectCompare (const GALGAS_abstractDecoratedDeclaration & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -1735,7 +1387,6 @@ class cCollectionElement_declarationDecorationList : public cCollectionElement {
   public: cCollectionElement_declarationDecorationList (const GALGAS_declarationDecorationList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -1783,14 +1434,6 @@ void cCollectionElement_declarationDecorationList::description (String & ioStrin
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mDeclaration" ":") ;
   mObject.mProperty_mDeclaration.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_declarationDecorationList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_declarationDecorationList * operand = (cCollectionElement_declarationDecorationList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_declarationDecorationList) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2196,20 +1839,6 @@ void cMapElement_constantMap::description (String & ioString, const int32_t inIn
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cMapElement_constantMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_constantMap * operand = (cMapElement_constantMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mClassTypeName.objectCompare (operand->mProperty_mClassTypeName) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_constantMap::GALGAS_constantMap (void) :
 AC_GALGAS_map () {
 }
@@ -2566,20 +2195,6 @@ void cMapElement_constructorMap::description (String & ioString, const int32_t i
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cMapElement_constructorMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_constructorMap * operand = (cMapElement_constructorMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mSignature.objectCompare (operand->mProperty_mSignature) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mInitValue.objectCompare (operand->mProperty_mInitValue) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_constructorMap::GALGAS_constructorMap (void) :
 AC_GALGAS_map () {
 }
@@ -2906,18 +2521,6 @@ void cEnumAssociatedValues_constructorValue_simple::description (String & ioStri
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_constructorValue_simple::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_constructorValue_simple * ptr = dynamic_cast<const cEnumAssociatedValues_constructorValue_simple *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 cEnumAssociatedValues_constructorValue_structure::cEnumAssociatedValues_constructorValue_structure (const GALGAS_sortedOperandIRList inAssociatedValue0
                                                                                                     COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -2931,18 +2534,6 @@ void cEnumAssociatedValues_constructorValue_structure::description (String & ioS
   ioString.appendCString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString.appendCString (")") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cEnumAssociatedValues_constructorValue_structure::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_constructorValue_structure * ptr = dynamic_cast<const cEnumAssociatedValues_constructorValue_structure *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -2963,21 +2554,6 @@ void cEnumAssociatedValues_constructorValue_arrayValue::description (String & io
   mAssociatedValue0.description (ioString, inIndentation) ;
   mAssociatedValue1.description (ioString, inIndentation) ;
   ioString.appendCString (")") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cEnumAssociatedValues_constructorValue_arrayValue::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_constructorValue_arrayValue * ptr = dynamic_cast<const cEnumAssociatedValues_constructorValue_arrayValue *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3178,21 +2754,6 @@ void GALGAS_constructorValue::description (String & ioString,
   ioString.appendCString (">") ;
 }
 
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_constructorValue::objectCompare (const GALGAS_constructorValue & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -3253,7 +2814,6 @@ class cCollectionElement_constructorSignature : public cCollectionElement {
   public: cCollectionElement_constructorSignature (const GALGAS_constructorSignature_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -3311,14 +2871,6 @@ void cCollectionElement_constructorSignature::description (String & ioString, co
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mFieldIndex" ":") ;
   mObject.mProperty_mFieldIndex.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_constructorSignature::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_constructorSignature * operand = (cCollectionElement_constructorSignature *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_constructorSignature) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -3844,20 +3396,6 @@ void cMapElement_propertyGetterMap::description (String & ioString, const int32_
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cMapElement_propertyGetterMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_propertyGetterMap * operand = (cMapElement_propertyGetterMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mVisibility.objectCompare (operand->mProperty_mVisibility) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mAccess.objectCompare (operand->mProperty_mAccess) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_propertyGetterMap::GALGAS_propertyGetterMap (void) :
 AC_GALGAS_map () {
 }
@@ -4187,21 +3725,6 @@ void cEnumAssociatedValues_propertyGetterKind_storedProperty::description (Strin
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_propertyGetterKind_storedProperty::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyGetterKind_storedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyGetterKind_storedProperty *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 cEnumAssociatedValues_propertyGetterKind_computedProperty::cEnumAssociatedValues_propertyGetterKind_computedProperty (const GALGAS_unifiedTypeMapEntry inAssociatedValue0,
                                                                                                                       const GALGAS_routineLLVMNameDict inAssociatedValue1
                                                                                                                       COMMA_LOCATION_ARGS) :
@@ -4222,21 +3745,6 @@ void cEnumAssociatedValues_propertyGetterKind_computedProperty::description (Str
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_propertyGetterKind_computedProperty::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyGetterKind_computedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyGetterKind_computedProperty *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 cEnumAssociatedValues_propertyGetterKind_constantProperty::cEnumAssociatedValues_propertyGetterKind_constantProperty (const GALGAS_objectIR inAssociatedValue0
                                                                                                                       COMMA_LOCATION_ARGS) :
 cEnumAssociatedValues (THERE),
@@ -4250,18 +3758,6 @@ void cEnumAssociatedValues_propertyGetterKind_constantProperty::description (Str
   ioString.appendCString ("(\n") ;
   mAssociatedValue0.description (ioString, inIndentation) ;
   ioString.appendCString (")") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cEnumAssociatedValues_propertyGetterKind_constantProperty::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertyGetterKind_constantProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertyGetterKind_constantProperty *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4446,21 +3942,6 @@ void GALGAS_propertyGetterKind::description (String & ioString,
   ioString.appendCString (">") ;
 }
 
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_propertyGetterKind::objectCompare (const GALGAS_propertyGetterKind & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -4672,20 +4153,6 @@ void cMapElement_propertySetterMap::description (String & ioString, const int32_
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mAccess" ":") ;
   mProperty_mAccess.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_propertySetterMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_propertySetterMap * operand = (cMapElement_propertySetterMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mVisibility.objectCompare (operand->mProperty_mVisibility) ;
-  }
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mAccess.objectCompare (operand->mProperty_mAccess) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5019,21 +4486,6 @@ void cEnumAssociatedValues_propertySetterKind_storedProperty::description (Strin
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_propertySetterKind_storedProperty::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertySetterKind_storedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertySetterKind_storedProperty *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 cEnumAssociatedValues_propertySetterKind_computedProperty::cEnumAssociatedValues_propertySetterKind_computedProperty (const GALGAS_unifiedTypeMapEntry inAssociatedValue0,
                                                                                                                       const GALGAS_routineLLVMNameDict inAssociatedValue1,
                                                                                                                       const GALGAS_routineLLVMNameDict inAssociatedValue2
@@ -5053,24 +4505,6 @@ void cEnumAssociatedValues_propertySetterKind_computedProperty::description (Str
   mAssociatedValue1.description (ioString, inIndentation) ;
   mAssociatedValue2.description (ioString, inIndentation) ;
   ioString.appendCString (")") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cEnumAssociatedValues_propertySetterKind_computedProperty::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_propertySetterKind_computedProperty * ptr = dynamic_cast<const cEnumAssociatedValues_propertySetterKind_computedProperty *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue2.objectCompare (ptr->mAssociatedValue2) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5212,21 +4646,6 @@ void GALGAS_propertySetterKind::description (String & ioString,
   ioString.appendCString (">") ;
 }
 
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_propertySetterKind::objectCompare (const GALGAS_propertySetterKind & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -5308,17 +4727,6 @@ void cMapElement_staticStringMap::description (String & ioString, const int32_t 
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mIndex" ":") ;
   mProperty_mIndex.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_staticStringMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_staticStringMap * operand = (cMapElement_staticStringMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mIndex.objectCompare (operand->mProperty_mIndex) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5601,7 +5009,6 @@ class cCollectionElement_globalStructuredConstantList : public cCollectionElemen
   public: cCollectionElement_globalStructuredConstantList (const GALGAS_globalStructuredConstantList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -5654,14 +5061,6 @@ void cCollectionElement_globalStructuredConstantList::description (String & ioSt
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mOperandIRList" ":") ;
   mObject.mProperty_mOperandIRList.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_globalStructuredConstantList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_globalStructuredConstantList * operand = (cCollectionElement_globalStructuredConstantList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_globalStructuredConstantList) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7668,21 +7067,6 @@ void cEnumAssociatedValues_subscript_staticSubscript::description (String & ioSt
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_subscript_staticSubscript::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_subscript_staticSubscript * ptr = dynamic_cast<const cEnumAssociatedValues_subscript_staticSubscript *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue1.objectCompare (ptr->mAssociatedValue1) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_subscript::GALGAS_subscript (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -7803,21 +7187,6 @@ void GALGAS_subscript::description (String & ioString,
   ioString.appendCString (">") ;
 }
 
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_subscript::objectCompare (const GALGAS_subscript & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9221,7 +8590,6 @@ class cCollectionElement_arcAssignmentList : public cCollectionElement {
   public: cCollectionElement_arcAssignmentList (const GALGAS_arcAssignmentList_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -9279,14 +8647,6 @@ void cCollectionElement_arcAssignmentList::description (String & ioString, const
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mPropertyIndexPath" ":") ;
   mObject.mProperty_mPropertyIndexPath.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_arcAssignmentList::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_arcAssignmentList * operand = (cCollectionElement_arcAssignmentList *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_arcAssignmentList) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9783,8 +9143,6 @@ mProperty_mLLVMDefinedTypeName () {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_userLLVMTypeDefinitionIR::objectCompare (const GALGAS_userLLVMTypeDefinitionIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -10031,7 +9389,6 @@ class cCollectionElement_userLLVMTypeDefinitionListIR : public cCollectionElemen
   public: cCollectionElement_userLLVMTypeDefinitionListIR (const GALGAS_userLLVMTypeDefinitionListIR_2D_element & inElement COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -10079,14 +9436,6 @@ void cCollectionElement_userLLVMTypeDefinitionListIR::description (String & ioSt
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mType" ":") ;
   mObject.mProperty_mType.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cCollectionElement_userLLVMTypeDefinitionListIR::compare (const cCollectionElement * inOperand) const {
-  cCollectionElement_userLLVMTypeDefinitionListIR * operand = (cCollectionElement_userLLVMTypeDefinitionListIR *) inOperand ;
-  macroValidSharedObject (operand, cCollectionElement_userLLVMTypeDefinitionListIR) ;
-  return mObject.objectCompare (operand->mObject) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10744,18 +10093,6 @@ void cEnumAssociatedValues_typeDefinition_solved::description (String & ioString
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cEnumAssociatedValues_typeDefinition_solved::compare (const cEnumAssociatedValues * inOperand) const {
-  const cEnumAssociatedValues_typeDefinition_solved * ptr = dynamic_cast<const cEnumAssociatedValues_typeDefinition_solved *> (inOperand) ;
-  macroValidPointer (ptr) ;
-  ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mAssociatedValue0.objectCompare (ptr->mAssociatedValue0) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GALGAS_typeDefinition::GALGAS_typeDefinition (void) :
 mAssociatedValues (),
 mEnum (kNotBuilt) {
@@ -10848,21 +10185,6 @@ void GALGAS_typeDefinition::description (String & ioString,
   ioString.appendCString (">") ;
 }
 
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_typeDefinition::objectCompare (const GALGAS_typeDefinition & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mEnum < inOperand.mEnum) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mEnum > inOperand.mEnum) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = mAssociatedValues.objectCompare (inOperand.mAssociatedValues) ;
-    }
-  }
-  return result ;
-}
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -11220,16 +10542,16 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7111 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6832_weakElement = extractPtr_7111->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7123 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6844_weakElement = extractPtr_7123->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_6858 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6832_weakElement.ptr ())) ;
-        if (nullptr == var_type_6858.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_6870 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6844_weakElement.ptr ())) ;
+        if (nullptr == var_type_6870.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6858.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6870.readProperty_mDefinition ().enumValue ()) {
           case GALGAS_typeDefinition::kNotBuilt:
             break ;
           case GALGAS_typeDefinition::kEnum_unsolved:
@@ -11241,9 +10563,9 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
             break ;
           case GALGAS_typeDefinition::kEnum_solved:
             {
-              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7034 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6858.readProperty_mDefinition ().unsafePointer ()) ;
-              const GALGAS_omnibusType extractedValue_7003_definition = extractPtr_7034->mAssociatedValue0 ;
-              result_result = extractedValue_7003_definition ;
+              const cEnumAssociatedValues_typeDefinition_solved * extractPtr_7046 = (const cEnumAssociatedValues_typeDefinition_solved *) (var_type_6870.readProperty_mDefinition ().unsafePointer ()) ;
+              const GALGAS_omnibusType extractedValue_7015_definition = extractPtr_7046->mAssociatedValue0 ;
+              result_result = extractedValue_7015_definition ;
             }
             break ;
           }
@@ -11287,16 +10609,16 @@ GALGAS_string extensionGetter_key (const GALGAS_unifiedTypeMapEntry & inObject,
     break ;
   case GALGAS_unifiedTypeMapEntry::kEnum_element:
     {
-      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7520 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
-      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7377_weakElement = extractPtr_7520->mAssociatedValue0 ;
+      const cEnumAssociatedValues_unifiedTypeMapEntry_element * extractPtr_7532 = (const cEnumAssociatedValues_unifiedTypeMapEntry_element *) (temp_0.unsafePointer ()) ;
+      const GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7389_weakElement = extractPtr_7532->mAssociatedValue0 ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_7403 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7377_weakElement.ptr ())) ;
-        if (nullptr == var_type_7403.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_7415 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7389_weakElement.ptr ())) ;
+        if (nullptr == var_type_7415.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_7403.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_7415.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {
@@ -11371,17 +10693,6 @@ void cMapElement_staticListInvokedFunctionSetMap::description (String & ioString
   ioString.appendStringMultiple ("| ", inIndentation) ;
   ioString.appendCString ("mInvokedFunctionSet" ":") ;
   mProperty_mInvokedFunctionSet.description (ioString, inIndentation) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult cMapElement_staticListInvokedFunctionSetMap::compare (const cCollectionElement * inOperand) const {
-  cMapElement_staticListInvokedFunctionSetMap * operand = (cMapElement_staticListInvokedFunctionSetMap *) inOperand ;
-  ComparisonResult result = mProperty_lkey.objectCompare (operand->mProperty_lkey) ;
-  if (ComparisonResult::operandEqual == result) {
-    result = mProperty_mInvokedFunctionSet.objectCompare (operand->mProperty_mInvokedFunctionSet) ;
-  }
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11666,13 +10977,6 @@ cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compiletimeBoolAST::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compiletimeBoolAST::objectCompare (const GALGAS_compiletimeBoolAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -11926,8 +11230,6 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_abstractImplicitConverterToBoolean::objectCompare (const GALGAS_abstractImplicitConverterToBoolean & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12134,8 +11436,6 @@ acStrongPtr_class (THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-
 
 ComparisonResult GALGAS_prefixOperatorUsage::objectCompare (const GALGAS_prefixOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -12344,8 +11644,6 @@ acStrongPtr_class (THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-
-
 ComparisonResult GALGAS_omnibusInfixOperatorUsage::objectCompare (const GALGAS_omnibusInfixOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12552,13 +11850,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeBoolXorOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeBoolXorOperator::objectCompare (const GALGAS_compileTimeBoolXorOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -12813,13 +12104,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeBoolOrOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeBoolOrOperator::objectCompare (const GALGAS_compileTimeBoolOrOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13072,13 +12356,6 @@ cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntAST::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntAST::objectCompare (const GALGAS_compileTimeIntAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -13333,13 +12610,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntModuloOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntModuloOperator::objectCompare (const GALGAS_compileTimeIntModuloOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13592,13 +12862,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntModuloZeroOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntModuloZeroOperator::objectCompare (const GALGAS_compileTimeIntModuloZeroOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -13853,13 +13116,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntDivideOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntDivideOperator::objectCompare (const GALGAS_compileTimeIntDivideOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14112,13 +13368,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntDivideZeroOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntDivideZeroOperator::objectCompare (const GALGAS_compileTimeIntDivideZeroOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -14373,13 +13622,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntMultiplyOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntMultiplyOperator::objectCompare (const GALGAS_compileTimeIntMultiplyOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14632,13 +13874,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntSubtractOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntSubtractOperator::objectCompare (const GALGAS_compileTimeIntSubtractOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -14893,13 +14128,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntEqualOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntEqualOperator::objectCompare (const GALGAS_compileTimeIntEqualOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15152,13 +14380,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntAddOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntAddOperator::objectCompare (const GALGAS_compileTimeIntAddOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -15413,13 +14634,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntBitWiseAndOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntBitWiseAndOperator::objectCompare (const GALGAS_compileTimeIntBitWiseAndOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15672,13 +14886,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntShiftLeftOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntShiftLeftOperator::objectCompare (const GALGAS_compileTimeIntShiftLeftOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -15933,13 +15140,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntShiftRightOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntShiftRightOperator::objectCompare (const GALGAS_compileTimeIntShiftRightOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -16192,13 +15392,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-
-ComparisonResult cPtr_compileTimeIntLessThanOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 
 ComparisonResult GALGAS_compileTimeIntLessThanOperator::objectCompare (const GALGAS_compileTimeIntLessThanOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -16453,13 +15646,6 @@ cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult cPtr_compileTimeIntLowerOrEqualOperator::dynamicObjectCompare (const acPtr_class * /* inOperandPtr */) const {
-  return ComparisonResult::operandEqual ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-
 ComparisonResult GALGAS_compileTimeIntLowerOrEqualOperator::objectCompare (const GALGAS_compileTimeIntLowerOrEqualOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -16580,6 +15766,875 @@ GALGAS_compileTimeIntLowerOrEqualOperator GALGAS_compileTimeIntLowerOrEqualOpera
       result = *p ;
     }else{
       inCompiler->castError ("compileTimeIntLowerOrEqualOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::objectCompare (const GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak (void) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak & GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::operator = (const GALGAS_compileTimeIntLowerOrEqualOperator & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak (const GALGAS_compileTimeIntLowerOrEqualOperator & inSource) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::class_func_nil (LOCATION_ARGS) {
+  GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::bang_compileTimeIntLowerOrEqualOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compileTimeIntLowerOrEqualOperator result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compileTimeIntLowerOrEqualOperator) ;
+      result = GALGAS_compileTimeIntLowerOrEqualOperator ((cPtr_compileTimeIntLowerOrEqualOperator *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntLowerOrEqualOperator-weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak ("compileTimeIntLowerOrEqualOperator-weak",
+                                                                                                  & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage_2D_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                                    Compiler * inCompiler
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak result ;
+  const GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak * p = (const GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntLowerOrEqualOperator_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntLowerOrEqualOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// @compileTimeIntXorOperator reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntXorOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntXorOperator::objectCompare (const GALGAS_compileTimeIntXorOperator & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator::GALGAS_compileTimeIntXorOperator (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntXorOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntXorOperator (inCompiler COMMA_THERE)) ;
+  object->compileTimeIntXorOperator_init (inCompiler) ;
+  const GALGAS_compileTimeIntXorOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_compileTimeIntXorOperator::
+compileTimeIntXorOperator_init (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator::GALGAS_compileTimeIntXorOperator (const cPtr_compileTimeIntXorOperator * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntXorOperator) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator::class_func_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntXorOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntXorOperator (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @compileTimeIntXorOperator class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntXorOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntXorOperator ;
+}
+
+void cPtr_compileTimeIntXorOperator::description (String & ioString,
+                                                  const int32_t /* inIndentation */) const {
+  ioString.appendCString ("[@compileTimeIntXorOperator]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_compileTimeIntXorOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_compileTimeIntXorOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntXorOperator generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntXorOperator ("compileTimeIntXorOperator",
+                                                                                 & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntXorOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntXorOperator ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntXorOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntXorOperator (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator::extractObject (const GALGAS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntXorOperator result ;
+  const GALGAS_compileTimeIntXorOperator * p = (const GALGAS_compileTimeIntXorOperator *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntXorOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntXorOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntXorOperator_2D_weak::objectCompare (const GALGAS_compileTimeIntXorOperator_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator_2D_weak::GALGAS_compileTimeIntXorOperator_2D_weak (void) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator_2D_weak & GALGAS_compileTimeIntXorOperator_2D_weak::operator = (const GALGAS_compileTimeIntXorOperator & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator_2D_weak::GALGAS_compileTimeIntXorOperator_2D_weak (const GALGAS_compileTimeIntXorOperator & inSource) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator_2D_weak GALGAS_compileTimeIntXorOperator_2D_weak::class_func_nil (LOCATION_ARGS) {
+  GALGAS_compileTimeIntXorOperator_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator GALGAS_compileTimeIntXorOperator_2D_weak::bang_compileTimeIntXorOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compileTimeIntXorOperator result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compileTimeIntXorOperator) ;
+      result = GALGAS_compileTimeIntXorOperator ((cPtr_compileTimeIntXorOperator *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntXorOperator-weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntXorOperator_2D_weak ("compileTimeIntXorOperator-weak",
+                                                                                         & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage_2D_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntXorOperator_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntXorOperator_2D_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntXorOperator_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntXorOperator_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntXorOperator_2D_weak GALGAS_compileTimeIntXorOperator_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntXorOperator_2D_weak result ;
+  const GALGAS_compileTimeIntXorOperator_2D_weak * p = (const GALGAS_compileTimeIntXorOperator_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntXorOperator_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntXorOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// @compileTimeIntBitWiseOrOperator reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntBitWiseOrOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntBitWiseOrOperator::objectCompare (const GALGAS_compileTimeIntBitWiseOrOperator & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator::GALGAS_compileTimeIntBitWiseOrOperator (void) :
+GALGAS_omnibusInfixOperatorUsage () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntBitWiseOrOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntBitWiseOrOperator (inCompiler COMMA_THERE)) ;
+  object->compileTimeIntBitWiseOrOperator_init (inCompiler) ;
+  const GALGAS_compileTimeIntBitWiseOrOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_compileTimeIntBitWiseOrOperator::
+compileTimeIntBitWiseOrOperator_init (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator::GALGAS_compileTimeIntBitWiseOrOperator (const cPtr_compileTimeIntBitWiseOrOperator * inSourcePtr) :
+GALGAS_omnibusInfixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntBitWiseOrOperator) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator::class_func_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntBitWiseOrOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntBitWiseOrOperator (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @compileTimeIntBitWiseOrOperator class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntBitWiseOrOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator ;
+}
+
+void cPtr_compileTimeIntBitWiseOrOperator::description (String & ioString,
+                                                        const int32_t /* inIndentation */) const {
+  ioString.appendCString ("[@compileTimeIntBitWiseOrOperator]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_compileTimeIntBitWiseOrOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_compileTimeIntBitWiseOrOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntBitWiseOrOperator generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator ("compileTimeIntBitWiseOrOperator",
+                                                                                       & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntBitWiseOrOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntBitWiseOrOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntBitWiseOrOperator (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator::extractObject (const GALGAS_object & inObject,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntBitWiseOrOperator result ;
+  const GALGAS_compileTimeIntBitWiseOrOperator * p = (const GALGAS_compileTimeIntBitWiseOrOperator *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntBitWiseOrOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntBitWiseOrOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::objectCompare (const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (void) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator_2D_weak & GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::operator = (const GALGAS_compileTimeIntBitWiseOrOperator & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (const GALGAS_compileTimeIntBitWiseOrOperator & inSource) :
+GALGAS_omnibusInfixOperatorUsage_2D_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::class_func_nil (LOCATION_ARGS) {
+  GALGAS_compileTimeIntBitWiseOrOperator_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::bang_compileTimeIntBitWiseOrOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compileTimeIntBitWiseOrOperator result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compileTimeIntBitWiseOrOperator) ;
+      result = GALGAS_compileTimeIntBitWiseOrOperator ((cPtr_compileTimeIntBitWiseOrOperator *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntBitWiseOrOperator-weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator_2D_weak ("compileTimeIntBitWiseOrOperator-weak",
+                                                                                               & kTypeDescriptor_GALGAS_omnibusInfixOperatorUsage_2D_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntBitWiseOrOperator_2D_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntBitWiseOrOperator_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntBitWiseOrOperator_2D_weak GALGAS_compileTimeIntBitWiseOrOperator_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                              Compiler * inCompiler
+                                                                                                              COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntBitWiseOrOperator_2D_weak result ;
+  const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak * p = (const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntBitWiseOrOperator_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntBitWiseOrOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// @compileTimeIntMinusOperator reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntMinusOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntMinusOperator::objectCompare (const GALGAS_compileTimeIntMinusOperator & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator::GALGAS_compileTimeIntMinusOperator (void) :
+GALGAS_prefixOperatorUsage () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
+  cPtr_compileTimeIntMinusOperator * object = nullptr ;
+  macroMyNew (object, cPtr_compileTimeIntMinusOperator (inCompiler COMMA_THERE)) ;
+  object->compileTimeIntMinusOperator_init (inCompiler) ;
+  const GALGAS_compileTimeIntMinusOperator result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_compileTimeIntMinusOperator::
+compileTimeIntMinusOperator_init (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator::GALGAS_compileTimeIntMinusOperator (const cPtr_compileTimeIntMinusOperator * inSourcePtr) :
+GALGAS_prefixOperatorUsage (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_compileTimeIntMinusOperator) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::class_func_new (LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator result ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @compileTimeIntMinusOperator class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_compileTimeIntMinusOperator::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ;
+}
+
+void cPtr_compileTimeIntMinusOperator::description (String & ioString,
+                                                    const int32_t /* inIndentation */) const {
+  ioString.appendCString ("[@compileTimeIntMinusOperator]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_compileTimeIntMinusOperator::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntMinusOperator generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ("compileTimeIntMinusOperator",
+                                                                                   & kTypeDescriptor_GALGAS_prefixOperatorUsage) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntMinusOperator::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntMinusOperator ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntMinusOperator::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntMinusOperator (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator::extractObject (const GALGAS_object & inObject,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator result ;
+  const GALGAS_compileTimeIntMinusOperator * p = (const GALGAS_compileTimeIntMinusOperator *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntMinusOperator *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntMinusOperator", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_compileTimeIntMinusOperator_2D_weak::objectCompare (const GALGAS_compileTimeIntMinusOperator_2D_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator_2D_weak::GALGAS_compileTimeIntMinusOperator_2D_weak (void) :
+GALGAS_prefixOperatorUsage_2D_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator_2D_weak & GALGAS_compileTimeIntMinusOperator_2D_weak::operator = (const GALGAS_compileTimeIntMinusOperator & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator_2D_weak::GALGAS_compileTimeIntMinusOperator_2D_weak (const GALGAS_compileTimeIntMinusOperator & inSource) :
+GALGAS_prefixOperatorUsage_2D_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator_2D_weak GALGAS_compileTimeIntMinusOperator_2D_weak::class_func_nil (LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator_2D_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator GALGAS_compileTimeIntMinusOperator_2D_weak::bang_compileTimeIntMinusOperator_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GALGAS_compileTimeIntMinusOperator result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_compileTimeIntMinusOperator) ;
+      result = GALGAS_compileTimeIntMinusOperator ((cPtr_compileTimeIntMinusOperator *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @compileTimeIntMinusOperator-weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeIntMinusOperator_2D_weak ("compileTimeIntMinusOperator-weak",
+                                                                                           & kTypeDescriptor_GALGAS_prefixOperatorUsage_2D_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_compileTimeIntMinusOperator_2D_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_compileTimeIntMinusOperator_2D_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_compileTimeIntMinusOperator_2D_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_compileTimeIntMinusOperator_2D_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_compileTimeIntMinusOperator_2D_weak GALGAS_compileTimeIntMinusOperator_2D_weak::extractObject (const GALGAS_object & inObject,
+                                                                                                      Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GALGAS_compileTimeIntMinusOperator_2D_weak result ;
+  const GALGAS_compileTimeIntMinusOperator_2D_weak * p = (const GALGAS_compileTimeIntMinusOperator_2D_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_compileTimeIntMinusOperator_2D_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("compileTimeIntMinusOperator-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

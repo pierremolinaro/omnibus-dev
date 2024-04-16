@@ -1,6 +1,6 @@
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @routineKind {
+enum @routineKind %equatable {
   case function
   case section
   case service

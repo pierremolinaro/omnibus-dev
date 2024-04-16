@@ -644,8 +644,7 @@ class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImpli
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -802,8 +801,7 @@ class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -960,8 +958,7 @@ class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -1142,8 +1139,7 @@ class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmen
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -1331,8 +1327,7 @@ class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_a
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -1424,4 +1419,18 @@ void extensionMethod_generateLLVMcode (const class GALGAS_controlRegisterGroupAr
 class GALGAS_string function_registerGroupAddressArrayLLVMname (const class GALGAS_string & constinArgument0,
                                                                 class Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GALGAS_semanticContext constinArgument0,
+                                                                                 const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GALGAS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GALGAS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 

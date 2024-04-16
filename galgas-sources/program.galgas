@@ -2,7 +2,7 @@
 
 case . "omnibus-target"
 message "a target definition text file with the .omnibus-target extension"
-%useGrammar omnibus_target_grammar
+grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
@@ -10,7 +10,7 @@ message "a target definition text file with the .omnibus-target extension"
 
 case . "omnibus-import"
 message "an imported text file with the .omnibus-import extension"
-%useGrammar omnibus_target_grammar
+grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
@@ -18,7 +18,7 @@ message "an imported text file with the .omnibus-import extension"
 
 case . "omnibus"
 message "a source text file with the .omnibus extension"
-%useGrammar omnibus_grammar
+grammar omnibus_grammar
 ?sourceFilePath:@lstring inSourceFile
 {
   if ([option .mode value] == "") & not [option .outputConcreteSyntaxTree value] then

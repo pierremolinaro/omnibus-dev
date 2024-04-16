@@ -28,7 +28,7 @@ boolset @omnibusTypeAttributes {
 
 #·······················································································································
 
-enum @typeKind {
+enum @typeKind %equatable {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString

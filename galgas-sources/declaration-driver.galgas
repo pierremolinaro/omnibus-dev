@@ -422,7 +422,7 @@ list @driverListIR {
 
 #·······················································································································
 
-method @driverListIR-element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
+method @driverListIR.@element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!self.mDriverName) + " = internal global "
   ioLLVMcode += [self.mType llvmTypeName] + " {"
   for (value) in self.mInitialValueList

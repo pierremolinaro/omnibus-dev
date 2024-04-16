@@ -80,7 +80,7 @@ method @externFunctionDeclarationListAST enterExternProcInContext
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST-element enterExternProcInContext
+method @externFunctionDeclarationListAST.@element enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
 #--- Signature
@@ -121,7 +121,7 @@ method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST-element externProcedureSemanticAnalysis
+method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -210,7 +210,7 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcod
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR-element llvmPrototypeGeneration  ?!@string ioLLVMcode {
+method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
   if self.mReturnType == .null then

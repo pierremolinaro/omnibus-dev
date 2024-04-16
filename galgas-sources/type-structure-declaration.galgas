@@ -306,14 +306,14 @@ override getter @structureDeclarationAST locationForErrorSignaling -> @location 
 #!  ENTER IN CONTEXT                                                                                                     
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @propertyList {
+list @propertyList %equatable {
   public var @string mPropertyName
   public var @omnibusType mType
 }
 
 #·······················································································································
 
-sortedlist @sortedOperandIRList {
+sortedlist @sortedOperandIRList %equatable {
   public var @objectIR mOperand
   public var @uint mIndex
 }{
@@ -322,7 +322,7 @@ sortedlist @sortedOperandIRList {
 
 #·······················································································································
 
-method @structurePropertyListAST-element enterPropertyInContext
+method @structurePropertyListAST.@element enterPropertyInContext
   ?!context:@semanticContext ioContext
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?receiverTypeName:let @lstring inReceiverTypeName

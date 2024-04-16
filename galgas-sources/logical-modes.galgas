@@ -2,7 +2,7 @@
 #  Logical modes                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @mode {
+enum @mode %comparable {
   case userMode
   case sectionMode
   case serviceMode

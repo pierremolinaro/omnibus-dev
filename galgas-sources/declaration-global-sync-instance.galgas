@@ -159,7 +159,7 @@ map @globalSyncInstanceMapIR {
 
 #·······················································································································
 
-method @globalSyncInstanceMapIR-element generateLLVM ?!@string ioLLVMcode {
+method @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!self.lkey.string) + " = internal global "
   ioLLVMcode += [[self.mInitialValue type] llvmTypeName] + " " + [self.mInitialValue llvmValue] + "\n"
 }

@@ -659,3 +659,57 @@ class GALGAS_string function_assignValueToFixedSizeArrayElements_5F_functionName
                                                                                   class Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) ;
 
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'addIntegerInfixOperator???&?'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_addIntegerInfixOperator_3F__3F__3F__26__3F_ (const class GALGAS_omnibusInfixOperator constinArgument0,
+                                                          const class GALGAS_omnibusType constinArgument1,
+                                                          const class GALGAS_string constinArgument2,
+                                                          class GALGAS_infixOperatorMap & ioArgument3,
+                                                          const class GALGAS_omnibusType constinArgument4,
+                                                          class Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'copyableAttribute'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_copyableAttribute (class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'minValueForInteger'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_bigint function_minValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'maxValueForInteger'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_bigint function_maxValueForInteger (const class GALGAS_bool & constinArgument0,
+                                                 const class GALGAS_uint & constinArgument1,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'instantiableAttribute'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_string function_instantiableAttribute (class Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+

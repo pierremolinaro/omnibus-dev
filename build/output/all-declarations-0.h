@@ -239,8 +239,6 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS__32_lstringlist_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2464,8 +2462,7 @@ class cPtr_abstractLLVMInstruction : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -2573,8 +2570,7 @@ class cPtr_expressionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -2690,8 +2686,6 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_registerGroupIndexAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2781,8 +2775,6 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_registerIndexAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2912,8 +2904,6 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterLValueAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2993,8 +2983,7 @@ class cPtr_addressofControlRegisterAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -3235,8 +3224,6 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_LValueAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3316,8 +3303,7 @@ class cPtr_addressofExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -3425,8 +3411,7 @@ class cPtr_instructionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -3545,8 +3530,7 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -3673,8 +3657,7 @@ class cPtr_assignmentInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -3825,8 +3808,7 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -3964,8 +3946,7 @@ class cPtr_booleanShortCircuitAndOperatorExpressionAST : public cPtr_expressionA
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -4241,8 +4222,7 @@ class cPtr_callInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -4369,8 +4349,7 @@ class cPtr_checkInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -4481,8 +4460,7 @@ class cPtr_abstractDeclarationAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -4649,8 +4627,7 @@ class cPtr_ctExpressionAST : public acStrongPtr_class {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override = 0 ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override = 0 ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override = 0 ;
 
 } ;
@@ -4721,8 +4698,7 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -5057,8 +5033,7 @@ class cPtr_compileTimeInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -5293,8 +5268,7 @@ class cPtr_compiletimePrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -5595,8 +5569,7 @@ class cPtr_constructorCallAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -5723,8 +5696,6 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterAssignmentOperatorKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5852,8 +5823,6 @@ class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_omnibusInfixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5963,8 +5932,6 @@ class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWith
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (void) { }
 } ;
 
@@ -6028,8 +5995,7 @@ class cPtr_controlRegisterAssignmentInstructionAST : public cPtr_instructionAST 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -6527,8 +6493,7 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -6666,8 +6631,7 @@ class cPtr_convertExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -6767,8 +6731,7 @@ class cPtr_ctFalseExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -6876,8 +6839,7 @@ class cPtr_ctIdentifierExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7009,8 +6971,7 @@ class cPtr_ctInfixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7118,8 +7079,7 @@ class cPtr_ctIntExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7243,8 +7203,7 @@ class cPtr_ctPrefixExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7344,8 +7303,7 @@ class cPtr_ctTrueExpressionAST : public cPtr_ctExpressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7636,8 +7594,7 @@ class cPtr_enumerationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7775,8 +7732,7 @@ class cPtr_extendExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -7920,8 +7876,7 @@ class cPtr_fixedSizeArrayTypeDeclarationAST : public cPtr_abstractDeclarationAST
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -8231,8 +8186,7 @@ class cPtr_forInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -8407,8 +8361,7 @@ class cPtr_forLowerUpperBoundInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -8961,8 +8914,7 @@ class cPtr_functionDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -9106,8 +9058,7 @@ class cPtr_globalConstantDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -9261,8 +9212,6 @@ class GALGAS_guardKind : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_guardKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9310,8 +9259,6 @@ class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedV
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_guardKind_convenienceGuard (void) { }
 } ;
 
@@ -9396,8 +9343,7 @@ class cPtr_guardDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -9559,8 +9505,7 @@ class cPtr_ifExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -9735,8 +9680,7 @@ class cPtr_ifInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10057,8 +10001,7 @@ class cPtr_integerSliceExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10210,8 +10153,7 @@ class cPtr_isrDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10346,8 +10288,7 @@ class cPtr_letInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10469,8 +10410,7 @@ class cPtr_literalBooleanInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10592,8 +10532,7 @@ class cPtr_literalIntegerInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -10715,8 +10654,7 @@ class cPtr_literalStringInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -11186,8 +11124,7 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -11331,8 +11268,7 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -11586,8 +11522,7 @@ class cPtr_llvmGenerationInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -11731,8 +11666,7 @@ class cPtr_llvmGenericType : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -11932,8 +11866,7 @@ class cPtr_llvmInfixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12072,8 +12005,6 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_llvmPrefixOperatorEnumeration & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -12182,8 +12113,7 @@ class cPtr_llvmPrefixOperatorAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12294,8 +12224,7 @@ class cPtr_llvmVarInstruction : public cPtr_abstractLLVMInstruction {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12441,8 +12370,7 @@ class cPtr_omnibusInfixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12590,8 +12518,7 @@ class cPtr_panicAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12710,8 +12637,7 @@ class cPtr_panicInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -12835,8 +12761,6 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_prefixOperator & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -12938,8 +12862,7 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -13240,8 +13163,7 @@ class cPtr_primaryInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -13530,8 +13452,7 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -13852,8 +13773,7 @@ class cPtr_registerConstantExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -13983,8 +13903,7 @@ class cPtr_registerInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -14106,8 +14025,7 @@ class cPtr_sizeofExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -14229,8 +14147,7 @@ class cPtr_sizeofTypeAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -14536,8 +14453,7 @@ class cPtr_sliceAssignmentInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -14675,8 +14591,7 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -14814,8 +14729,7 @@ class cPtr_standaloneFunctionInExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -15282,8 +15196,7 @@ class cPtr_staticListAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -15674,8 +15587,7 @@ class cPtr_structureDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -15981,8 +15893,7 @@ class cPtr_switchInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -16110,8 +16021,7 @@ class cPtr_syncDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -16421,8 +16331,7 @@ class cPtr_syncInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -16558,8 +16467,7 @@ class cPtr_syncToolInstanceDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -16743,8 +16651,7 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -16904,8 +16811,7 @@ class cPtr_taskSetupDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17043,8 +16949,7 @@ class cPtr_truncateExpressionAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17172,8 +17077,7 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17301,8 +17205,7 @@ class cPtr_typeDynamicArrayDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17450,8 +17353,7 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17589,8 +17491,7 @@ class cPtr_typedConstantCallAST : public cPtr_expressionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17717,8 +17618,7 @@ class cPtr_varDeclarationInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17853,8 +17753,7 @@ class cPtr_varInstructionWithAssignmentAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -17997,8 +17896,7 @@ class cPtr_whileInstructionAST : public cPtr_instructionAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -18239,8 +18137,6 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterBitSlice & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18294,8 +18190,6 @@ class cEnumAssociatedValues_controlRegisterBitSlice_unusedBits : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (void) { }
 } ;
 
@@ -18312,8 +18206,6 @@ class cEnumAssociatedValues_controlRegisterBitSlice_namedBit : public cEnumAssoc
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_namedBit (void) { }
 } ;
 
@@ -18371,8 +18263,6 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterGroupKindAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18428,8 +18318,6 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_single (void) { }
 } ;
 
@@ -18448,8 +18336,6 @@ class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (void) { }
 } ;
 
@@ -18507,8 +18393,6 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18568,8 +18452,6 @@ class cEnumAssociatedValues_controlRegisterKind_registerArray : public cEnumAsso
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_controlRegisterKind_registerArray (void) { }
 } ;
 
@@ -18640,8 +18522,6 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_effectiveArgumentPassingModeAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18723,8 +18603,6 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_input : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (void) { }
 } ;
 
@@ -18743,8 +18621,6 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType : publ
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (void) { }
 } ;
 
@@ -18761,8 +18637,6 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_output : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (void) { }
 } ;
 
@@ -18777,8 +18651,6 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput : public
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (void) { }
 } ;
 
@@ -18793,8 +18665,6 @@ class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVaria
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (void) { }
 } ;
 
@@ -18851,8 +18721,6 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_extendStaticListExpressionAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -18906,8 +18774,6 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_expression : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_expression (void) { }
 } ;
 
@@ -18924,8 +18790,6 @@ class cEnumAssociatedValues_extendStaticListExpressionAST_function : public cEnu
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_function (void) { }
 } ;
 
@@ -19115,8 +18979,6 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_guardedCommandAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -19188,8 +19050,6 @@ class cEnumAssociatedValues_guardedCommandAST_boolean : public cEnumAssociatedVa
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolean (void) { }
 } ;
 
@@ -19216,8 +19076,6 @@ class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolAndSync (void) { }
 } ;
 
@@ -19277,8 +19135,6 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_llvmGenerationInstructionElement & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -19338,8 +19194,6 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_string : public cEn
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_string (void) { }
 } ;
 
@@ -19354,8 +19208,6 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_symbol : public cEn
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (void) { }
 } ;
 
@@ -19370,8 +19222,6 @@ class cEnumAssociatedValues_llvmGenerationInstructionElement_type : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_type (void) { }
 } ;
 
@@ -19440,8 +19290,6 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_primaryInExpressionAccessAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -19519,8 +19367,6 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_property (void) { }
 } ;
 
@@ -19537,8 +19383,6 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public c
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (void) { }
 } ;
 
@@ -19557,8 +19401,6 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (void) { }
 } ;
 
@@ -19577,8 +19419,6 @@ class cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (void) { }
 } ;
 
@@ -19732,8 +19572,6 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_propertyKindAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -19813,8 +19651,6 @@ class cEnumAssociatedValues_propertyKindAST_initializedStoredProperty : public c
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (void) { }
 } ;
 
@@ -19829,8 +19665,6 @@ class cEnumAssociatedValues_propertyKindAST_initializedConstantProperty : public
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (void) { }
 } ;
 
@@ -19847,8 +19681,6 @@ class cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty : public cE
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (void) { }
 } ;
 
@@ -19865,8 +19697,6 @@ class cEnumAssociatedValues_propertyKindAST_writeComputedProperty : public cEnum
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_propertyKindAST_writeComputedProperty (void) { }
 } ;
 
@@ -19964,8 +19794,6 @@ class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociated
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_registerGroupIndexAST_index (void) { }
 } ;
 
@@ -19988,8 +19816,6 @@ class cEnumAssociatedValues_registerIndexAST_index : public cEnumAssociatedValue
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_registerIndexAST_index (void) { }
 } ;
 
@@ -20052,8 +19878,6 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_sliceTargetAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -20117,8 +19941,6 @@ class cEnumAssociatedValues_sliceTargetAST_varDeclaration : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_varDeclaration (void) { }
 } ;
 
@@ -20133,8 +19955,6 @@ class cEnumAssociatedValues_sliceTargetAST_letDeclaration : public cEnumAssociat
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_letDeclaration (void) { }
 } ;
 
@@ -20149,8 +19969,6 @@ class cEnumAssociatedValues_sliceTargetAST_lValue : public cEnumAssociatedValues
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_sliceTargetAST_lValue (void) { }
 } ;
 
@@ -20208,8 +20026,6 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_staticListPropertyTypeAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -20265,8 +20081,6 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_valueType : public cEnumAs
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_valueType (void) { }
 } ;
 
@@ -20285,8 +20099,6 @@ class cEnumAssociatedValues_staticListPropertyTypeAST_function : public cEnumAss
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_function (void) { }
 } ;
 
@@ -22888,7 +22700,6 @@ class cMapElement_controlRegisterUserAccesMapAST : public cMapElement {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -23077,8 +22888,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_ast & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -23252,8 +23061,6 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_driverDeclarationAST & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -23331,8 +23138,6 @@ class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_instructionListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 

@@ -16,7 +16,7 @@ list @accessInAssignmentListAST {
 
 #·······················································································································
 
-enum @LValueOperandAST {
+enum @LValueOperandAST %equatable {
   case noOperand
   case property (@lstring name @LValueOperandAST next)
   case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next)

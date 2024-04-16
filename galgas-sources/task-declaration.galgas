@@ -383,7 +383,7 @@ private proc analyzeOrderedTaskRoutines
 
 #·······················································································································
 
-method @decoratedTaskList-element taskSemanticAnalysis
+method @decoratedTaskList.@element taskSemanticAnalysis
   ?context:let @semanticContext inContext
   ?priority:let @uint inPriority
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries

@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @procFormalArgumentPassingMode {
+enum @procFormalArgumentPassingMode %equatable {
   case input
   case output
   case inputOutput
@@ -123,7 +123,7 @@ syntax extension omnibus_syntax {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 # La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
 
-list @routineTypedSignature {
+list @routineTypedSignature %equatable {
   public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
   public var @lstring mSelector
   public var @unifiedTypeMapEntry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction

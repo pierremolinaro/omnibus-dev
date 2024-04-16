@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @compileTimeInfixOperatorEnumeration {
+enum @compileTimeInfixOperatorEnumeration %equatable {
  case equal          # ==
  case lessThan       # <
 

@@ -760,8 +760,6 @@ class GALGAS_targetParameters : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_targetParameters & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -848,8 +846,7 @@ class cPtr_configurationDeclarationAST : public cPtr_abstractDeclarationAST {
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -905,8 +902,6 @@ class GALGAS_interruptionPanicCode : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_interruptionPanicCode & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -954,8 +949,6 @@ class cEnumAssociatedValues_interruptionPanicCode_code : public cEnumAssociatedV
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_interruptionPanicCode_code (void) { }
 } ;
 
@@ -1037,8 +1030,6 @@ class GALGAS_interruptionConfigurationList_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_interruptionConfigurationList_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1171,8 +1162,6 @@ class GALGAS_declarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_declarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1262,8 +1251,6 @@ class GALGAS_extendStaticArrayDeclarationDictAST_2D_element : public AC_GALGAS_r
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_extendStaticArrayDeclarationDictAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1389,8 +1376,6 @@ class GALGAS_requiredFunctionDeclarationListAST_2D_element : public AC_GALGAS_ro
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_requiredFunctionDeclarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1540,8 +1525,6 @@ class GALGAS_externFunctionDeclarationListAST_2D_element : public AC_GALGAS_root
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_externFunctionDeclarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1715,8 +1698,6 @@ class GALGAS_taskListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_taskListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1806,8 +1787,6 @@ class GALGAS_checkTargetListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_checkTargetListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1885,8 +1864,6 @@ class GALGAS_driverDeclarationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_driverDeclarationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -1976,8 +1953,6 @@ class GALGAS_driverInstanciationListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_driverInstanciationListAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2055,8 +2030,6 @@ class GALGAS_controlRegisterUserAccesMapAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterUserAccesMapAST_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2501,8 +2474,6 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_valuedObject & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2604,7 +2575,6 @@ class cMapElement_flatValuedObjectMap : public cMapElement {
                                            COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -2709,8 +2679,6 @@ class GALGAS_flatValuedObjectMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_flatValuedObjectMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -2999,8 +2967,6 @@ class GALGAS_scopeKind : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_scopeKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3171,7 +3137,6 @@ class cMapElement_referenceStateMap : public cMapElement {
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -3288,8 +3253,6 @@ class GALGAS_scopeStack_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_scopeStack_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3644,8 +3607,6 @@ class cEnumAssociatedValues_valuedObject_driver : public cEnumAssociatedValues {
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_driver (void) { }
 } ;
 
@@ -3660,8 +3621,6 @@ class cEnumAssociatedValues_valuedObject_task : public cEnumAssociatedValues {
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_task (void) { }
 } ;
 
@@ -3676,8 +3635,6 @@ class cEnumAssociatedValues_valuedObject_globalConstant : public cEnumAssociated
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_globalConstant (void) { }
 } ;
 
@@ -3696,8 +3653,6 @@ class cEnumAssociatedValues_valuedObject_localConstant : public cEnumAssociatedV
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_localConstant (void) { }
 } ;
 
@@ -3714,8 +3669,6 @@ class cEnumAssociatedValues_valuedObject_localVariable : public cEnumAssociatedV
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_localVariable (void) { }
 } ;
 
@@ -3732,8 +3685,6 @@ class cEnumAssociatedValues_valuedObject_globalSyncInstance : public cEnumAssoci
 
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
   public: virtual ~ cEnumAssociatedValues_valuedObject_globalSyncInstance (void) { }
 } ;
 
@@ -3806,8 +3757,6 @@ class GALGAS_referenceStateMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_referenceStateMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4070,8 +4019,7 @@ class cPtr_compileTimeDeclarationBarrierAST : public cPtr_abstractDeclarationAST
   public: virtual void description (String & ioString,
                                     const int32_t inIndentation) const override ;
 
-  public: virtual ComparisonResult dynamicObjectCompare (const acPtr_class * inOperandPtr) const override ;
-
+//--- Class descriptor
   public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
 
 } ;
@@ -4269,7 +4217,6 @@ class cMapElement_panicRoutinePriorityMap : public cMapElement {
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -4338,8 +4285,6 @@ class GALGAS_panicRoutinePriorityMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_panicRoutinePriorityMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5009,7 +4954,6 @@ class cMapElement_routineMapForContext : public cMapElement {
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -5150,8 +5094,6 @@ class GALGAS_routineMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_routineMapForContext_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5362,7 +5304,6 @@ class cMapElement_guardMapForContext : public cMapElement {
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -5479,8 +5420,6 @@ class GALGAS_guardMapForContext_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_guardMapForContext_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5690,8 +5629,6 @@ class GALGAS_registerGroupKind : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_registerGroupKind & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5998,7 +5935,6 @@ class cMapElement_controlRegisterGroupMap : public cMapElement {
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -6091,8 +6027,6 @@ class GALGAS_controlRegisterGroupMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_controlRegisterGroupMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6255,7 +6189,6 @@ class cMapElement_globalConstantMap : public cMapElement {
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -6336,8 +6269,6 @@ class GALGAS_globalConstantMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_globalConstantMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6516,7 +6447,6 @@ class cMapElement_globalSyncInstanceMap : public cMapElement {
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -6609,8 +6539,6 @@ class GALGAS_globalSyncInstanceMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_globalSyncInstanceMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6927,7 +6855,6 @@ class cMapElement_staticlistMap : public cMapElement {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -7008,8 +6935,6 @@ class GALGAS_staticlistMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_staticlistMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -7226,7 +7151,6 @@ class cMapElement_unifiedTypeMap : public cMapElement {
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -7307,8 +7231,6 @@ class GALGAS_unifiedTypeMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_unifiedTypeMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -7608,7 +7530,6 @@ class cMapElement_typeConstantMap : public cMapElement {
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -7689,8 +7610,6 @@ class GALGAS_typeConstantMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_typeConstantMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -7990,7 +7909,6 @@ class cMapElement_typeConstructorMap : public cMapElement {
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -8071,8 +7989,6 @@ class GALGAS_typeConstructorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_typeConstructorMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8376,7 +8292,6 @@ class cMapElement_typePropertySetterMap : public cMapElement {
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -8457,8 +8372,6 @@ class GALGAS_typePropertySetterMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_typePropertySetterMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8762,7 +8675,6 @@ class cMapElement_typePropertyGetterMap : public cMapElement {
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -8843,8 +8755,6 @@ class GALGAS_typePropertyGetterMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_typePropertyGetterMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9007,7 +8917,6 @@ class cMapElement_availableInterruptMap : public cMapElement {
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -9088,8 +8997,6 @@ class GALGAS_availableInterruptMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_availableInterruptMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9318,7 +9225,6 @@ class cMapElement_infixOperatorMap : public cMapElement {
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -9411,8 +9317,6 @@ class GALGAS_infixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_infixOperatorMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9657,7 +9561,6 @@ class cMapElement_prefixOperatorMap : public cMapElement {
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Virtual method for comparing elements
-  public: virtual ComparisonResult compare (const cCollectionElement * inOperand) const ;
 
 //--- Virtual method that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
@@ -9762,8 +9665,6 @@ class GALGAS_prefixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------- Implementation of getter 'description'
   public: VIRTUAL_IN_DEBUG void description (String & ioString,
                                              const int32_t inIndentation) const override ;
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_prefixOperatorMap_2D_element & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9783,4 +9684,296 @@ class GALGAS_prefixOperatorMap_2D_element : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2D_element ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @assignmentOperatorMap map
+//
+//--------------------------------------------------------------------------------------------------
+
+class cMapElement_assignmentOperatorMap ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const char * kSearchErrorMessage_assignmentOperatorMap_searchKey ;
+
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_assignmentOperatorMap : public AC_GALGAS_map {
+//--------------------------------- Default constructor
+  public: GALGAS_assignmentOperatorMap (void) ;
+
+//--------------------------------- Handle copy
+  public: GALGAS_assignmentOperatorMap (const GALGAS_assignmentOperatorMap & inSource) ;
+  public: GALGAS_assignmentOperatorMap & operator = (const GALGAS_assignmentOperatorMap & inSource) ;
+  
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_assignmentOperatorMap init (Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_assignmentOperatorMap extractObject (const GALGAS_object & inObject,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_assignmentOperatorMap class_func_emptyMap (LOCATION_ARGS) ;
+
+  public: static class GALGAS_assignmentOperatorMap class_func_mapWithMapToOverride (const class GALGAS_assignmentOperatorMap & inOperand0
+                                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- += operator (with list of field expressions)
+  public: VIRTUAL_IN_DEBUG void addAssign_operation (const class GALGAS_lstring & inOperand0,
+                                                     const class GALGAS_abstractAssignmentOperatorUsage & inOperand1,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+//--------------------------------- + operator
+  public: VIRTUAL_IN_DEBUG GALGAS_assignmentOperatorMap add_operation (const GALGAS_assignmentOperatorMap & inOperand,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Setters
+  public: VIRTUAL_IN_DEBUG void setter_insertKey (class GALGAS_lstring constinArgument0,
+                                                  class GALGAS_abstractAssignmentOperatorUsage constinArgument1,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) ;
+
+  public: VIRTUAL_IN_DEBUG void setter_setMOperatorUsageForKey (class GALGAS_abstractAssignmentOperatorUsage constinArgument0,
+                                                                class GALGAS_string constinArgument1,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------- Instance Methods
+  public: VIRTUAL_IN_DEBUG void method_searchKey (class GALGAS_lstring constinArgument0,
+                                                  class GALGAS_abstractAssignmentOperatorUsage & outArgument1,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_abstractAssignmentOperatorUsage getter_mOperatorUsageForKey (const class GALGAS_string & constinOperand0,
+                                                                                                     Compiler * inCompiler
+                                                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_assignmentOperatorMap getter_overriddenMap (Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const ;
+
+
+//--------------------------------- Optional Methods
+  public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
+                                                    class GALGAS_abstractAssignmentOperatorUsage & outOperand1) const ;
+
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+  public: VIRTUAL_IN_DEBUG cMapElement_assignmentOperatorMap * readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                                                  const GALGAS_string & inKey
+                                                                                                  COMMA_LOCATION_ARGS) ;
+
+
+//--- Append element
+  public: VIRTUAL_IN_DEBUG void enterElement (const class GALGAS_assignmentOperatorMap_2D_element & inValue,
+                                              Compiler * /* inCompiler */
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Friend
+  friend class cEnumerator_assignmentOperatorMap ;
+ 
+} ; // End of GALGAS_assignmentOperatorMap class
+
+//--------------------------------------------------------------------------------------------------
+//   Enumerator declaration                                                                      
+//--------------------------------------------------------------------------------------------------
+
+class cEnumerator_assignmentOperatorMap : public cGenericAbstractEnumerator {
+  public: cEnumerator_assignmentOperatorMap (const GALGAS_assignmentOperatorMap & inEnumeratedObject,
+                                             const EnumerationOrder inOrder) ;
+
+//--- Current element access
+  public: class GALGAS_lstring current_lkey (LOCATION_ARGS) const ;
+  public: class GALGAS_abstractAssignmentOperatorUsage current_mOperatorUsage (LOCATION_ARGS) const ;
+//--- Current element access
+  public: class GALGAS_assignmentOperatorMap_2D_element current (LOCATION_ARGS) const ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @abstractAssignmentOperatorUsage reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_abstractAssignmentOperatorUsage : public AC_GALGAS_reference_class {
+//--------------------------------- Default constructor
+  public: GALGAS_abstractAssignmentOperatorUsage (void) ;
+
+//--------------------------------- Constructor from pointer
+  public: GALGAS_abstractAssignmentOperatorUsage (const class cPtr_abstractAssignmentOperatorUsage * inSourcePtr) ;
+
+//--------------------------------- Property access
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_abstractAssignmentOperatorUsage init (Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_abstractAssignmentOperatorUsage extractObject (const GALGAS_object & inObject,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GALGAS_abstractAssignmentOperatorUsage & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_abstractAssignmentOperatorUsage class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractAssignmentOperatorUsage ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 2: class for element of '@assignmentOperatorMap' map
+//
+//--------------------------------------------------------------------------------------------------
+
+class cMapElement_assignmentOperatorMap : public cMapElement {
+//--- Map attributes
+  public: GALGAS_abstractAssignmentOperatorUsage mProperty_mOperatorUsage ;
+
+//--- Constructors
+  public: cMapElement_assignmentOperatorMap (const GALGAS_assignmentOperatorMap_2D_element & inValue
+                                             COMMA_LOCATION_ARGS) ;
+ 
+  public: cMapElement_assignmentOperatorMap (const GALGAS_lstring & inKey,
+                                             const GALGAS_abstractAssignmentOperatorUsage & in_mOperatorUsage
+                                             COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+
+//--- Virtual method that checks that all attributes are valid
+  public: virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public: virtual cMapElement * copy (void) ;
+
+//--- Description
+ public: virtual void description (String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @assignmentOperatorMap_2D_element struct
+//
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_assignmentOperatorMap_2D_element : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public: GALGAS_lstring mProperty_lkey ;
+  public: inline GALGAS_lstring readProperty_lkey (void) const {
+    return mProperty_lkey ;
+  }
+
+  public: GALGAS_abstractAssignmentOperatorUsage mProperty_mOperatorUsage ;
+  public: inline GALGAS_abstractAssignmentOperatorUsage readProperty_mOperatorUsage (void) const {
+    return mProperty_mOperatorUsage ;
+  }
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GALGAS_assignmentOperatorMap_2D_element (void) ;
+
+//--------------------------------- Property setters
+  public: inline void setter_setLkey (const GALGAS_lstring & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_lkey = inValue ;
+  }
+
+  public: inline void setter_setMOperatorUsage (const GALGAS_abstractAssignmentOperatorUsage & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mOperatorUsage = inValue ;
+  }
+
+//--------------------------------- Virtual destructor
+  public: virtual ~ GALGAS_assignmentOperatorMap_2D_element (void) ;
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
+
+//--------------------------------- Native constructor
+  public: GALGAS_assignmentOperatorMap_2D_element (const GALGAS_lstring & in_lkey,
+                                                   const GALGAS_abstractAssignmentOperatorUsage & in_mOperatorUsage) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GALGAS_assignmentOperatorMap_2D_element init_21__21_ (const class GALGAS_lstring & inOperand0,
+                                                                       const class GALGAS_abstractAssignmentOperatorUsage & inOperand1,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_assignmentOperatorMap_2D_element extractObject (const GALGAS_object & inObject,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_assignmentOperatorMap_2D_element class_func_new (const class GALGAS_lstring & inOperand0,
+                                                                               const class GALGAS_abstractAssignmentOperatorUsage & inOperand1,
+                                                                               class Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public: VIRTUAL_IN_DEBUG void description (String & ioString,
+                                             const int32_t inIndentation) const override ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Optional Methods
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_assignmentOperatorMap_2D_element class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap_2D_element ;
 
