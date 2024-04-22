@@ -86,6 +86,8 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
 
 //--------------------------------- Getters
 
+//--------------------------------- Read subscripts
+
 //--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
@@ -198,6 +200,8 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+
+//--------------------------------- Read subscripts
 
 //--------------------------------- Optional Methods
 
