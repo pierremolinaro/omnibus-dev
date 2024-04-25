@@ -283,7 +283,7 @@ override method @systemRoutineDeclarationAST enterInContext
 #---------------------------------------- Self type proxy
   [!?ioContext.mTypeMap makeOptionalEntry !self.mReceiverTypeName ?let selfTypeProxy]
 #  log mReceiverTypeName
-  let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
+  let receiverLLVMBaseTypeName = if [selfTypeProxy null] then "" else [selfTypeProxy type].llvmBaseTypeName end
 #--- Attributes
   var @stringset attributeSet = §[]
   for attribute in self.mAttributeList do

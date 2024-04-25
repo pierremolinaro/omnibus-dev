@@ -139,7 +139,7 @@ method @LValueAST analyzeLValue
   if self.mIdentifier.string == "" then # Receiver is "self"
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
-    elsif not [inRoutineAttributes mutatingRoutine] && not inIsAddressOf then
+    elsif not [inRoutineAttributes contains !.mutatingRoutine] && not inIsAddressOf then
       error self.mIdentifier
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
       : outInternalRepresentation

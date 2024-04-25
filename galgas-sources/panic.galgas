@@ -160,7 +160,7 @@ override method @panicAST enterInContext
     !routineKind: .function
     !warnIfUnused: false
     !exportedRoutine: false
-    !routineAttributes: .none
+    !routineAttributes: ()
     !routineMangledLLVMName: routineMangledName
     !formalArgumentList: arguments
     !warningOnUnusedArgs: false

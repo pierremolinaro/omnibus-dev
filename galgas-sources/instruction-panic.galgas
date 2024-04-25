@@ -56,7 +56,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
   var @instructionListIR unusedInstructionListIR = §[]
   [self.mCodeExpression analyzeExpression
     !self:inSelfType
-    !routineAttributes:.none
+    !routineAttributes: ()
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inMode

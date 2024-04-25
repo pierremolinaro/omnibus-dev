@@ -86,7 +86,7 @@ LLVM Name: %if [[type definition] llvmTypeName] == "" then !"<i>none, compile ti
     <tr class="result_line">
       <td>%!routine_lkey.string%</td>
       <td>%if routine_mIsPublic then !"public" else !"private" end%</td>
-      <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy isNull] then else % -> %![routine_mReturnTypeProxy key] end%</td>
+      <td>%![routine_mSignature typedString] if [routine_mReturnTypeProxy null] then else % -> %![routine_mReturnTypeProxy key] end%</td>
       <td>%for (mode_key mode_mRoutineLLVMName) in routine_mModeDictionary do ![mode_key string] % : % !mode_mRoutineLLVMName between %<br>% end%</td>
     </tr>
   %end%

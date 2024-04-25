@@ -23,12 +23,13 @@ enum @subscript {
 #·······················································································································
 
 boolset @omnibusTypeAttributes {
-  instanciable, copyable
+  case instanciable
+  case copyable
 }
 
 #·······················································································································
 
-enum @typeKind %equatable {
+enum @typeKind %equatable %testGetters {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
@@ -175,7 +176,7 @@ func %once literalStringType -> @omnibusType {
 func %once voidType -> @omnibusType {
   result = .init {
     !subscript:.noSubscript
-    !attributes:.none
+    !attributes: ()
     !omnibusTypeDescriptionName:""
     !kind:.void
     !llvmBaseTypeName:""
@@ -185,13 +186,13 @@ func %once voidType -> @omnibusType {
 #·······················································································································
 
 getter @omnibusType instanciable -> @bool {
-  result = [self.attributes instanciable]
+  result = [self.attributes contains !.instanciable]
 }
 
 #·······················································································································
 
 getter @omnibusType copyable -> @bool {
-  result = [self.attributes copyable]
+  result = [self.attributes contains !.copyable]
 }
 
 #·······················································································································

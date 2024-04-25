@@ -86,11 +86,11 @@ override method @typeOpaqueDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  var @omnibusTypeAttributes opaqueTypeAttributes = .none
+  var @omnibusTypeAttributes opaqueTypeAttributes = ()
   var copyable = false
   for (attribute) in self.mAttributeList do
     if attribute.string == instantiableAttribute () then
-      if [opaqueTypeAttributes instanciable] then
+      if [opaqueTypeAttributes contains !.instanciable] then
         error attribute : "duplicated attribute"
       else
         opaqueTypeAttributes = opaqueTypeAttributes | .instanciable
@@ -121,7 +121,7 @@ override method @typeOpaqueDeclarationAST enterInContext
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
     var @constructorMap constructorMap = §[]
-    if [opaqueTypeAttributes instanciable] then
+    if [opaqueTypeAttributes contains !.instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !§[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end

@@ -2,7 +2,7 @@
 #! @objectIR
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @objectIR %equatable {
+enum @objectIR %equatable %testGetters {
 #--- No object (for example, no return value for a procedure)
   case void
 #--- Reference

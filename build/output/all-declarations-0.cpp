@@ -11925,68 +11925,68 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_control_5F_register_5F_lv
                                                                                             GALGAS_controlRegisterLValueAST & outArgument_outRegisterLValue,
                                                                                             Lexique_omnibus_5F_lexique * inCompiler) {
   outArgument_outRegisterLValue.drop () ; // Release 'out' argument
-  GALGAS_lstring var_registerGroupName_1708 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerGroupName_1721 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__A9_group COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 35)) ;
-  GALGAS_registerGroupIndexAST var_groupIndex_1757 ;
+  GALGAS_registerGroupIndexAST var_groupIndex_1770 ;
   switch (select_omnibus_5F_syntax_119 (inCompiler)) {
   case 1: {
-    var_groupIndex_1757 = GALGAS_registerGroupIndexAST::class_func_noIndex (SOURCE_FILE ("lvalue-control-register.galgas", 38)) ;
+    var_groupIndex_1770 = GALGAS_registerGroupIndexAST::class_func_noIndex (SOURCE_FILE ("lvalue-control-register.galgas", 38)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 40)) ;
-    GALGAS_expressionAST var_expression_1856 ;
-    nt_expression_ (ioArgument_ioAST, var_expression_1856, inCompiler) ;
-    GALGAS_location var_endOfIndex_1877 = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 42)) ;
-    GALGAS_bool var_checkIndexExpression_1921 ;
+    GALGAS_expressionAST var_expression_1869 ;
+    nt_expression_ (ioArgument_ioAST, var_expression_1869, inCompiler) ;
+    GALGAS_location var_endOfIndex_1890 = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 42)) ;
+    GALGAS_bool var_checkIndexExpression_1934 ;
     switch (select_omnibus_5F_syntax_120 (inCompiler)) {
     case 1: {
       inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 45)) ;
-      var_checkIndexExpression_1921 = GALGAS_bool (true) ;
+      var_checkIndexExpression_1934 = GALGAS_bool (true) ;
     } break ;
     case 2: {
       inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5D__21_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 48)) ;
-      var_checkIndexExpression_1921 = GALGAS_bool (true) ;
+      var_checkIndexExpression_1934 = GALGAS_bool (true) ;
     } break ;
     default:
       break ;
     }
-    var_groupIndex_1757 = GALGAS_registerGroupIndexAST::class_func_index (var_expression_1856, var_endOfIndex_1877, var_checkIndexExpression_1921  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 51)) ;
+    var_groupIndex_1770 = GALGAS_registerGroupIndexAST::class_func_index (var_expression_1869, var_endOfIndex_1890, var_checkIndexExpression_1934  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 51)) ;
   } break ;
   default:
     break ;
   }
   inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2E_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 53)) ;
-  GALGAS_lstring var_registerName_2221 = inCompiler->synthetizedAttribute_tokenString () ;
+  GALGAS_lstring var_registerName_2234 = inCompiler->synthetizedAttribute_tokenString () ;
   inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 54)) ;
-  GALGAS_registerIndexAST var_registerIndex_2260 ;
+  GALGAS_registerIndexAST var_registerIndex_2273 ;
   switch (select_omnibus_5F_syntax_121 (inCompiler)) {
   case 1: {
-    var_registerIndex_2260 = GALGAS_registerIndexAST::class_func_noIndex (SOURCE_FILE ("lvalue-control-register.galgas", 57)) ;
+    var_registerIndex_2273 = GALGAS_registerIndexAST::class_func_noIndex (SOURCE_FILE ("lvalue-control-register.galgas", 57)) ;
   } break ;
   case 2: {
     inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5B_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 59)) ;
-    GALGAS_expressionAST var_expression_2365 ;
-    nt_expression_ (ioArgument_ioAST, var_expression_2365, inCompiler) ;
-    GALGAS_location var_endOfIndex_2386 = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 61)) ;
-    GALGAS_bool var_checkIndexExpression_2430 ;
+    GALGAS_expressionAST var_expression_2378 ;
+    nt_expression_ (ioArgument_ioAST, var_expression_2378, inCompiler) ;
+    GALGAS_location var_endOfIndex_2399 = GALGAS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 61)) ;
+    GALGAS_bool var_checkIndexExpression_2443 ;
     switch (select_omnibus_5F_syntax_122 (inCompiler)) {
     case 1: {
       inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5D_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 64)) ;
-      var_checkIndexExpression_2430 = GALGAS_bool (true) ;
+      var_checkIndexExpression_2443 = GALGAS_bool (true) ;
     } break ;
     case 2: {
       inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__5D__21_ COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 67)) ;
-      var_checkIndexExpression_2430 = GALGAS_bool (false) ;
+      var_checkIndexExpression_2443 = GALGAS_bool (false) ;
     } break ;
     default:
       break ;
     }
-    var_registerIndex_2260 = GALGAS_registerIndexAST::class_func_index (var_expression_2365, var_endOfIndex_2386, var_checkIndexExpression_2430  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 70)) ;
+    var_registerIndex_2273 = GALGAS_registerIndexAST::class_func_index (var_expression_2378, var_endOfIndex_2399, var_checkIndexExpression_2443  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 70)) ;
   } break ;
   default:
     break ;
   }
-  outArgument_outRegisterLValue = GALGAS_controlRegisterLValueAST::init_21__21__21__21_ (var_registerGroupName_1708, var_groupIndex_1757, var_registerName_2221, var_registerIndex_2260, inCompiler COMMA_HERE) ;
+  outArgument_outRegisterLValue = GALGAS_controlRegisterLValueAST::init_21__21__21__21_ (var_registerGroupName_1721, var_groupIndex_1770, var_registerName_2234, var_registerIndex_2273, inCompiler COMMA_HERE) ;
 }
 
 //------------------------------------------------------------------------------------------------

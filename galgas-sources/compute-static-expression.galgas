@@ -23,7 +23,7 @@ proc computeStaticExpression
   var @instructionListIR unusedInstructionListIR = §[]
   [inExpression analyzeExpression
     !self:voidType ()
-    !routineAttributes:.none
+    !routineAttributes: ()
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode

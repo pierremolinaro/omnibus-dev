@@ -41,14 +41,14 @@ struct @semanticContext {
 
   public var @omnibusType mPanicCodeType = .init {
     !subscript: .noSubscript
-    !attributes:.none
+    !attributes: ()
     !omnibusTypeDescriptionName: "<<unknown>>"
     !kind:.void
     !llvmBaseTypeName: "<<unknown>>"
   }
   public var @omnibusType mPanicLineType = .init {
     !subscript: .noSubscript
-    !attributes:.none
+    !attributes: ()
     !omnibusTypeDescriptionName: "<<unknown>>"
     !kind:.void
     !llvmBaseTypeName: "<<unknown>>"

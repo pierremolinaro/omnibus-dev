@@ -351,7 +351,7 @@ override method @implementedDriverAST enterInContext
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !routineAttributes: .none
+    !routineAttributes: ()
     !routineMangledLLVMName: llvmBootRoutineNameFromDriver (!self.mDriverName)
     !formalArgumentList: §[]
     !warningOnUnusedArgs: true
@@ -366,7 +366,7 @@ override method @implementedDriverAST enterInContext
     !routineKind: .function
     !warnIfUnused: true
     !exportedRoutine: false
-    !routineAttributes: .none
+    !routineAttributes: ()
     !routineMangledLLVMName: llvmStartupRoutineNameFromDriver (!self.mDriverName)
     !formalArgumentList: §[]
     !warningOnUnusedArgs: true

@@ -179,7 +179,7 @@ map @implicitConversionToBooleanMap { # Key is a type omnibus name
 
 #·······················································································································
 
-enum @implicitBooleanConversionResult {
+enum @implicitBooleanConversionResult %testGetters {
   case compileTime (@bool value)
   case llvmVariable (@string name) 
 }

@@ -138,8 +138,6 @@ class GALGAS__32_lstringlist : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -250,8 +248,6 @@ class GALGAS__32_lstringlist_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2414,8 +2410,6 @@ class GALGAS_abstractLLVMInstruction : public AC_GALGAS_reference_class {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2512,8 +2506,6 @@ class GALGAS_expressionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2631,8 +2623,6 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -2644,9 +2634,7 @@ class GALGAS_addressofControlRegisterAST : public GALGAS_expressionAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofControlRegisterAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                         Phase 1: @registerGroupIndexAST enum                                        *
-//
+//   enum registerGroupIndexAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
@@ -2654,24 +2642,34 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
   public: GALGAS_registerGroupIndexAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_noIndex,
-    kEnum_index
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_noIndex,
+    enum_index
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_index (class GALGAS_expressionAST & out_index,
+                                                              class GALGAS_location & out_endOfIndex,
+                                                              class GALGAS_bool & out_checkIndexExpression) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -2709,20 +2707,16 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupIndexAST_2D_index_3F_ getter_index (LOCATION_ARGS) const ;
+
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndex (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoIndex (LOCATION_ARGS) const ;
 
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_noIndex (LOCATION_ARGS) const ;
+
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_index (class GALGAS_expressionAST & outOperand0,
-                                                class GALGAS_location & outOperand1,
-                                                class GALGAS_bool & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_noIndex () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2735,9 +2729,7 @@ class GALGAS_registerGroupIndexAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupIndexAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                           Phase 1: @registerIndexAST enum                                           *
-//
+//   enum registerIndexAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_registerIndexAST : public AC_GALGAS_root {
@@ -2745,24 +2737,34 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
   public: GALGAS_registerIndexAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_noIndex,
-    kEnum_index
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_noIndex,
+    enum_index
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_index (class GALGAS_expressionAST & out_index,
+                                                              class GALGAS_location & out_endOfIndex,
+                                                              class GALGAS_bool & out_checkIndexExpression) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -2800,20 +2802,12 @@ class GALGAS_registerIndexAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIndex (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_registerIndexAST_2D_index_3F_ getter_index (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoIndex (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_noIndex (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_index (class GALGAS_expressionAST & outOperand0,
-                                                class GALGAS_location & outOperand1,
-                                                class GALGAS_bool & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_noIndex () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -2927,8 +2921,6 @@ class GALGAS_controlRegisterLValueAST : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3052,8 +3044,6 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3065,9 +3055,7 @@ class GALGAS_addressofExpressionAST : public GALGAS_expressionAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_addressofExpressionAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                           Phase 1: @LValueOperandAST enum                                           *
-//
+//   enum LValueOperandAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_LValueOperandAST : public AC_GALGAS_root {
@@ -3075,25 +3063,38 @@ class GALGAS_LValueOperandAST : public AC_GALGAS_root {
   public: GALGAS_LValueOperandAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_noOperand,
-    kEnum_property,
-    kEnum_arrayAccess
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_noOperand,
+    enum_property,
+    enum_arrayAccess
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_property (class GALGAS_lstring & out_name,
+                                                                 class GALGAS_LValueOperandAST & out_next) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_arrayAccess (class GALGAS_expressionAST & out_index,
+                                                                    class GALGAS_location & out_endOfIndex,
+                                                                    class GALGAS_bool & out_checkIndexExpression,
+                                                                    class GALGAS_LValueOperandAST & out_next) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -3144,26 +3145,14 @@ class GALGAS_LValueOperandAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_LValueOperandAST_2D_arrayAccess_3F_ getter_arrayAccess (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoOperand (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_noOperand (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_LValueOperandAST_2D_property_3F_ getter_property (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_arrayAccess (class GALGAS_expressionAST & outOperand0,
-                                                      class GALGAS_location & outOperand1,
-                                                      class GALGAS_bool & outOperand2,
-                                                      class GALGAS_LValueOperandAST & outOperand3) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_noOperand () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_property (class GALGAS_lstring & outOperand0,
-                                                   class GALGAS_LValueOperandAST & outOperand1) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3253,8 +3242,6 @@ class GALGAS_LValueAST : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3374,8 +3361,6 @@ class GALGAS_instructionAST : public AC_GALGAS_reference_class {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3489,8 +3474,6 @@ class GALGAS_assertInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3615,8 +3598,6 @@ class GALGAS_assignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -3760,8 +3741,6 @@ class GALGAS_bitbandInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -3901,8 +3880,6 @@ class GALGAS_booleanShortCircuitAndOperatorExpressionAST : public GALGAS_express
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -4031,8 +4008,6 @@ class GALGAS_callInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4175,8 +4150,6 @@ class GALGAS_effectiveArgumentListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -4318,8 +4291,6 @@ class GALGAS_checkInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -4431,8 +4402,6 @@ class GALGAS_abstractDeclarationAST : public AC_GALGAS_reference_class {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4568,8 +4537,6 @@ class GALGAS_compileTimeConvertToBooleanAST : public GALGAS_abstractDeclarationA
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -4619,8 +4586,6 @@ class GALGAS_ctExpressionAST : public AC_GALGAS_reference_class {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -4830,8 +4795,6 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -4843,9 +4806,7 @@ class GALGAS_compileTimeInfixOperatorAST : public GALGAS_abstractDeclarationAST 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOperatorAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                  Phase 1: @compileTimeInfixOperatorEnumeration enum                                 *
-//
+//   enum compileTimeInfixOperatorEnumeration
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
@@ -4853,31 +4814,41 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
   public: GALGAS_compileTimeInfixOperatorEnumeration (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_equal,
-    kEnum_lessThan,
-    kEnum_bitWiseAndOp,
-    kEnum_bitWiseOrOp,
-    kEnum_bitWiseXorOp,
-    kEnum_addOp,
-    kEnum_subOp,
-    kEnum_mulOp,
-    kEnum_divOp,
-    kEnum_modOp,
-    kEnum_divNoOvf,
-    kEnum_moduloNoOvf,
-    kEnum_leftShift,
-    kEnum_rightShift
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_equal,
+    enum_lessThan,
+    enum_bitWiseAndOp,
+    enum_bitWiseOrOp,
+    enum_bitWiseXorOp,
+    enum_addOp,
+    enum_subOp,
+    enum_mulOp,
+    enum_divOp,
+    enum_modOp,
+    enum_divNoOvf,
+    enum_moduloNoOvf,
+    enum_leftShift,
+    enum_rightShift
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -4932,66 +4903,36 @@ class GALGAS_compileTimeInfixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_addOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseAndOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseAndOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOrOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseOrOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseXorOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseXorOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivNoOvf (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_divNoOvf (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_divOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEqual (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_equal (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLeftShift (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_leftShift (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLessThan (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_lessThan (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_modOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModuloNoOvf (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_moduloNoOvf (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mulOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShift (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_rightShift (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_subOp (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_addOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseAndOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseOrOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseXorOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_divNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_divOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_equal () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_leftShift () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_lessThan () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_modOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_moduloNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_mulOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_rightShift () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_subOp () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5159,8 +5100,6 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5172,9 +5111,7 @@ class GALGAS_compiletimePrefixOperatorAST : public GALGAS_abstractDeclarationAST
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compiletimePrefixOperatorAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                 Phase 1: @compileTimePrefixOperatorEnumeration enum                                 *
-//
+//   enum compileTimePrefixOperatorEnumeration
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
@@ -5182,19 +5119,29 @@ class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
   public: GALGAS_compileTimePrefixOperatorEnumeration (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_notOp,
-    kEnum_minusOp
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_notOp,
+    enum_minusOp
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -5225,18 +5172,12 @@ class GALGAS_compileTimePrefixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_minusOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNotOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_notOp (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_notOp () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5383,8 +5324,6 @@ class GALGAS_constructorCallAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5525,8 +5464,6 @@ class GALGAS_functionCallEffectiveParameterListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5690,8 +5627,6 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -5703,9 +5638,7 @@ class GALGAS_controlRegisterAssignmentInstructionAST : public GALGAS_instruction
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssignmentInstructionAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                 Phase 1: @controlRegisterAssignmentOperatorKind enum                                *
-//
+//   enum controlRegisterAssignmentOperatorKind
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
@@ -5713,24 +5646,33 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
   public: GALGAS_controlRegisterAssignmentOperatorKind (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_assignment,
-    kEnum_assignmentWithOperator
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_assignment,
+    enum_assignmentWithOperator
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_assignmentWithOperator (class GALGAS_omnibusInfixOperator & out_infixOperator,
+                                                                               class GALGAS_location & out_operatorLocation) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -5766,19 +5708,12 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAssignment (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_assignment (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAssignmentWithOperator (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterAssignmentOperatorKind_2D_assignmentWithOperator_3F_ getter_assignmentWithOperator (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_assignment () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_assignmentWithOperator (class GALGAS_omnibusInfixOperator & outOperand0,
-                                                                 class GALGAS_location & outOperand1) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -5789,213 +5724,6 @@ class GALGAS_controlRegisterAssignmentOperatorKind : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssignmentOperatorKind ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                         Phase 1: @omnibusInfixOperator enum                                         *
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
-//--------------------------------- Default constructor
-  public: GALGAS_omnibusInfixOperator (void) ;
-
-//--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_equal,
-    kEnum_lessThan,
-    kEnum_infEqual,
-    kEnum_bitWiseAndOp,
-    kEnum_bitWiseOrOp,
-    kEnum_bitWiseXorOp,
-    kEnum_addOp,
-    kEnum_addOpNoOvf,
-    kEnum_subOp,
-    kEnum_subOpNoOvf,
-    kEnum_mulOp,
-    kEnum_mulOpNoOvf,
-    kEnum_divOp,
-    kEnum_divOpNoOvf,
-    kEnum_modOp,
-    kEnum_modOpNoOvf,
-    kEnum_leftShiftOp,
-    kEnum_rightShiftOp
-  } enumeration ;
-  
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
-
-//--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_omnibusInfixOperator extractObject (const GALGAS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_omnibusInfixOperator class_func_addOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_addOpNoOvf (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseAndOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseOrOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseXorOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_divOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_divOpNoOvf (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_equal (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_infEqual (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_leftShiftOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_lessThan (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_modOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_modOpNoOvf (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_mulOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_mulOpNoOvf (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_rightShiftOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_subOp (LOCATION_ARGS) ;
-
-  public: static class GALGAS_omnibusInfixOperator class_func_subOpNoOvf (LOCATION_ARGS) ;
-
-//--------------------------------- Implementation of getter 'description'
-  public: VIRTUAL_IN_DEBUG void description (String & ioString,
-                                             const int32_t inIndentation) const override ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAddOpNoOvf (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseAndOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseOrOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseXorOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDivOpNoOvf (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isEqual (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInfEqual (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLeftShiftOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLessThan (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isModOpNoOvf (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMulOpNoOvf (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRightShiftOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOp (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSubOpNoOvf (LOCATION_ARGS) const ;
-
-
-//--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_addOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_addOpNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseAndOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseOrOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseXorOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_divOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_divOpNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_equal () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_infEqual () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_leftShiftOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_lessThan () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_modOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_modOpNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_mulOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_mulOpNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_rightShiftOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_subOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_subOpNoOvf () const ;
-
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_omnibusInfixOperator class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperator ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @controlRegisterAssignmentOperatorKind enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator : public cEnumAssociatedValues {
-  public: const GALGAS_omnibusInfixOperator mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (const GALGAS_omnibusInfixOperator inAssociatedValue0,
-                                                                                              const GALGAS_location inAssociatedValue1
-                                                                                              COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterAssignmentOperatorKind_assignmentWithOperator (void) { }
-} ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -6114,8 +5842,6 @@ class GALGAS_controlRegisterGroupDeclarationAST : public GALGAS_abstractDeclarat
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -6296,8 +6022,6 @@ class GALGAS_controlRegisterDeclarationList : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -6463,8 +6187,6 @@ class GALGAS_registerGroupListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -6624,8 +6346,6 @@ class GALGAS_convertExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6749,8 +6469,6 @@ class GALGAS_ctFalseExpressionAST : public GALGAS_ctExpressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -6855,8 +6573,6 @@ class GALGAS_ctIdentifierExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -6981,8 +6697,6 @@ class GALGAS_ctInfixExpressionAST : public GALGAS_ctExpressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -7099,8 +6813,6 @@ class GALGAS_ctIntExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -7220,8 +6932,6 @@ class GALGAS_ctPrefixExpressionAST : public GALGAS_ctExpressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -7330,8 +7040,6 @@ class GALGAS_ctTrueExpressionAST : public GALGAS_ctExpressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -7442,8 +7150,6 @@ class GALGAS_enumerationDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -7585,8 +7291,6 @@ class GALGAS_enumerationConstantList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -7743,8 +7447,6 @@ class GALGAS_extendExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -7887,8 +7589,6 @@ class GALGAS_fixedSizeArrayTypeDeclarationAST : public GALGAS_abstractDeclaratio
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -8051,8 +7751,6 @@ class GALGAS_forInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -8174,8 +7872,6 @@ class GALGAS_instructionListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -8370,8 +8066,6 @@ class GALGAS_forLowerUpperBoundInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -8550,8 +8244,6 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -8563,9 +8255,7 @@ class GALGAS_functionDeclarationAST : public GALGAS_abstractDeclarationAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionDeclarationAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                                 Phase 1: @mode enum                                                 *
-//
+//   enum mode
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_mode : public AC_GALGAS_root {
@@ -8573,32 +8263,42 @@ class GALGAS_mode : public AC_GALGAS_root {
   public: GALGAS_mode (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_userMode,
-    kEnum_sectionMode,
-    kEnum_serviceMode,
-    kEnum_primitiveMode,
-    kEnum_guardMode,
-    kEnum_anyMode,
-    kEnum_anySafeMode,
-    kEnum_safeUserMode,
-    kEnum_safeSectionMode,
-    kEnum_safeServiceMode,
-    kEnum_safePrimitiveMode,
-    kEnum_safeGuardMode,
-    kEnum_panicMode,
-    kEnum_bootMode,
-    kEnum_startupMode
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_userMode,
+    enum_sectionMode,
+    enum_serviceMode,
+    enum_primitiveMode,
+    enum_guardMode,
+    enum_anyMode,
+    enum_anySafeMode,
+    enum_safeUserMode,
+    enum_safeSectionMode,
+    enum_safeServiceMode,
+    enum_safePrimitiveMode,
+    enum_safeGuardMode,
+    enum_panicMode,
+    enum_bootMode,
+    enum_startupMode
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -8655,70 +8355,38 @@ class GALGAS_mode : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAnyMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_anyMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isAnySafeMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_anySafeMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBootMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bootMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGuardMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_guardMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPanicMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_panicMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitiveMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_primitiveMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeGuardMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_safeGuardMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafePrimitiveMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_safePrimitiveMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeSectionMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_safeSectionMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeServiceMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_safeServiceMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSafeUserMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_safeUserMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSectionMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_sectionMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isServiceMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_serviceMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isStartupMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_startupMode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUserMode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_userMode (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_anyMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_anySafeMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_bootMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_guardMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_panicMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_primitiveMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_safeGuardMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_safePrimitiveMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_safeSectionMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_safeServiceMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_safeUserMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_sectionMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_serviceMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_startupMode () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_userMode () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -8898,8 +8566,6 @@ class GALGAS_routineFormalArgumentListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -9084,8 +8750,6 @@ class GALGAS_globalConstantDeclarationAST : public GALGAS_abstractDeclarationAST
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -9255,8 +8919,6 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -9268,9 +8930,7 @@ class GALGAS_guardDeclarationAST : public GALGAS_abstractDeclarationAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardDeclarationAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                               Phase 1: @guardKind enum                                              *
-//
+//   enum guardKind
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_guardKind : public AC_GALGAS_root {
@@ -9278,24 +8938,32 @@ class GALGAS_guardKind : public AC_GALGAS_root {
   public: GALGAS_guardKind (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_baseGuard,
-    kEnum_convenienceGuard
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_baseGuard,
+    enum_convenienceGuard
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_convenienceGuard (class GALGAS_callInstructionAST & out_base) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -9329,18 +8997,12 @@ class GALGAS_guardKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBaseGuard (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_baseGuard (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConvenienceGuard (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardKind_2D_convenienceGuard_3F_ getter_convenienceGuard (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_baseGuard () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_convenienceGuard (class GALGAS_callInstructionAST & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -9351,24 +9013,6 @@ class GALGAS_guardKind : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardKind ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @guardKind enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_guardKind_convenienceGuard : public cEnumAssociatedValues {
-  public: const GALGAS_callInstructionAST mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_guardKind_convenienceGuard (const GALGAS_callInstructionAST inAssociatedValue0
-                                                            COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_guardKind_convenienceGuard (void) { }
-} ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9528,8 +9172,6 @@ class GALGAS_ifExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -9705,8 +9347,6 @@ class GALGAS_ifInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -9854,8 +9494,6 @@ class GALGAS_integerSliceExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -10016,8 +9654,6 @@ class GALGAS_integerSliceFieldListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -10190,8 +9826,6 @@ class GALGAS_isrDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -10336,8 +9970,6 @@ class GALGAS_letInstructionWithAssignmentAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -10461,8 +10093,6 @@ class GALGAS_literalBooleanInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -10585,8 +10215,6 @@ class GALGAS_literalIntegerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -10708,8 +10336,6 @@ class GALGAS_literalStringInExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -10873,8 +10499,6 @@ class GALGAS_llvmAssignmentOperatorDeclarationAST : public GALGAS_abstractDeclar
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -10996,8 +10620,6 @@ class GALGAS_genericFormalParameterList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -11141,8 +10763,6 @@ class GALGAS_llvmGenerationInstructionList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -11324,8 +10944,6 @@ class GALGAS_llvmConvertToBooleanAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -11455,8 +11073,6 @@ class GALGAS_llvmGenerationInstruction : public GALGAS_abstractLLVMInstruction {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -11578,8 +11194,6 @@ class GALGAS_llvmGenerationInstructionElementList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -11727,8 +11341,6 @@ class GALGAS_llvmGenericType : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -11909,8 +11521,6 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -11920,6 +11530,163 @@ class GALGAS_llvmInfixOperatorAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorAST ;
+
+//--------------------------------------------------------------------------------------------------
+//   enum omnibusInfixOperator
+//--------------------------------------------------------------------------------------------------
+
+class GALGAS_omnibusInfixOperator : public AC_GALGAS_root {
+//--------------------------------- Default constructor
+  public: GALGAS_omnibusInfixOperator (void) ;
+
+//--------------------------------- Enumeration
+  public: enum class Enumeration {
+    invalid,
+    enum_equal,
+    enum_lessThan,
+    enum_infEqual,
+    enum_bitWiseAndOp,
+    enum_bitWiseOrOp,
+    enum_bitWiseXorOp,
+    enum_addOp,
+    enum_addOpNoOvf,
+    enum_subOp,
+    enum_subOpNoOvf,
+    enum_mulOp,
+    enum_mulOpNoOvf,
+    enum_divOp,
+    enum_divOpNoOvf,
+    enum_modOp,
+    enum_modOpNoOvf,
+    enum_leftShiftOp,
+    enum_rightShiftOp
+  } ;
+  
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GALGAS_omnibusInfixOperator extractObject (const GALGAS_object & inObject,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GALGAS_omnibusInfixOperator class_func_addOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_addOpNoOvf (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseAndOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseOrOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_bitWiseXorOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_divOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_divOpNoOvf (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_equal (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_infEqual (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_leftShiftOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_lessThan (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_modOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_modOpNoOvf (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_mulOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_mulOpNoOvf (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_rightShiftOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_subOp (LOCATION_ARGS) ;
+
+  public: static class GALGAS_omnibusInfixOperator class_func_subOpNoOvf (LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public: VIRTUAL_IN_DEBUG void description (String & ioString,
+                                             const int32_t inIndentation) const override ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_addOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_addOpNoOvf (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseAndOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseOrOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseXorOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_divOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_divOpNoOvf (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_equal (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_infEqual (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_leftShiftOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_lessThan (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_modOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_modOpNoOvf (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mulOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_mulOpNoOvf (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_rightShiftOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_subOp (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_subOpNoOvf (LOCATION_ARGS) const ;
+
+
+//--------------------------------- Read subscripts
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GALGAS_omnibusInfixOperator class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_omnibusInfixOperator ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -12086,8 +11853,6 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -12099,9 +11864,7 @@ class GALGAS_llvmPrefixOperatorAST : public GALGAS_abstractDeclarationAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                     Phase 1: @llvmPrefixOperatorEnumeration enum                                    *
-//
+//   enum llvmPrefixOperatorEnumeration
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
@@ -12109,21 +11872,31 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
   public: GALGAS_llvmPrefixOperatorEnumeration (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_notOp,
-    kEnum_bitWiseComplement,
-    kEnum_minusOp,
-    kEnum_minusOpNoOvf
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_notOp,
+    enum_bitWiseComplement,
+    enum_minusOp,
+    enum_minusOpNoOvf
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -12156,26 +11929,16 @@ class GALGAS_llvmPrefixOperatorEnumeration : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseComplement (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseComplement (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_minusOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOpNoOvf (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_minusOpNoOvf (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNotOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_notOp (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseComplement () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_minusOpNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_notOp () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -12312,8 +12075,6 @@ class GALGAS_llvmVarInstruction : public GALGAS_abstractLLVMInstruction {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -12439,8 +12200,6 @@ class GALGAS_omnibusInfixOperatorExpressionAST : public GALGAS_expressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -12588,8 +12347,6 @@ class GALGAS_panicAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -12725,8 +12482,6 @@ class GALGAS_panicInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -12854,8 +12609,6 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -12867,9 +12620,7 @@ class GALGAS_prefixOperatorExpressionAST : public GALGAS_expressionAST {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorExpressionAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                            Phase 1: @prefixOperator enum                                            *
-//
+//   enum prefixOperator
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_prefixOperator : public AC_GALGAS_root {
@@ -12877,21 +12628,31 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
   public: GALGAS_prefixOperator (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_notOp,
-    kEnum_minusOp,
-    kEnum_bitWiseComplement,
-    kEnum_minusNoOvf
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_notOp,
+    enum_minusOp,
+    enum_bitWiseComplement,
+    enum_minusNoOvf
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -12924,26 +12685,16 @@ class GALGAS_prefixOperator : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBitWiseComplement (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_bitWiseComplement (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusNoOvf (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_minusNoOvf (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isMinusOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_minusOp (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNotOp (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_notOp (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_bitWiseComplement () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_minusNoOvf () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_minusOp () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_notOp () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -13078,8 +12829,6 @@ class GALGAS_primaryInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -13201,8 +12950,6 @@ class GALGAS_primaryInExpressionAccessListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -13389,8 +13136,6 @@ class GALGAS_procedureCallInstructionAST : public GALGAS_callInstructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -13512,8 +13257,6 @@ class GALGAS_accessInAssignmentListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -13681,8 +13424,6 @@ class GALGAS_registerConstantExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -13843,8 +13584,6 @@ class GALGAS_registerIntegerFieldListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -14001,8 +13740,6 @@ class GALGAS_registerInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -14128,8 +13865,6 @@ class GALGAS_sizeofExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -14251,8 +13986,6 @@ class GALGAS_sizeofTypeAST : public GALGAS_expressionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -14392,8 +14125,6 @@ class GALGAS_sliceAssignmentInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -14535,8 +14266,6 @@ class GALGAS_sliceAssignmentListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -14692,8 +14421,6 @@ class GALGAS_standAloneProcedureCallInstructionAST : public GALGAS_callInstructi
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -14836,8 +14563,6 @@ class GALGAS_standaloneFunctionInExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -14975,8 +14700,6 @@ class GALGAS_staticListAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -15118,8 +14841,6 @@ class GALGAS_staticListPropertyListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -15283,8 +15004,6 @@ class GALGAS_staticListValueListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -15468,8 +15187,6 @@ class GALGAS_structureDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -15669,8 +15386,6 @@ class GALGAS_structurePropertyListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -15851,8 +15566,6 @@ class GALGAS_switchInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -15993,8 +15706,6 @@ class GALGAS_switchCaseListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -16149,8 +15860,6 @@ class GALGAS_syncDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -16280,8 +15989,6 @@ class GALGAS_syncInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -16443,8 +16150,6 @@ class GALGAS_syncInstructionBranchListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -16597,8 +16302,6 @@ class GALGAS_syncToolInstanceDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -16765,8 +16468,6 @@ class GALGAS_systemRoutineDeclarationAST : public GALGAS_abstractDeclarationAST 
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -16937,8 +16638,6 @@ class GALGAS_taskSetupDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -17084,8 +16783,6 @@ class GALGAS_truncateExpressionAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -17219,8 +16916,6 @@ class GALGAS_typeAliasDeclarationAST : public GALGAS_abstractDeclarationAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -17348,8 +17043,6 @@ class GALGAS_typeDynamicArrayDeclarationAST : public GALGAS_abstractDeclarationA
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -17488,8 +17181,6 @@ class GALGAS_typeOpaqueDeclarationAST : public GALGAS_abstractDeclarationAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -17634,8 +17325,6 @@ class GALGAS_typedConstantCallAST : public GALGAS_expressionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -17771,8 +17460,6 @@ class GALGAS_varDeclarationInstructionAST : public GALGAS_instructionAST {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -17904,8 +17591,6 @@ class GALGAS_varInstructionWithAssignmentAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18046,8 +17731,6 @@ class GALGAS_whileInstructionAST : public GALGAS_instructionAST {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18230,10 +17913,9 @@ class GALGAS_extendStaticArrayDeclarationDictAST : public AC_GALGAS_root {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0,
-                                                    class GALGAS_staticListValueListAST & outOperand1) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_extendStaticArrayDeclarationDictAST_2D_element_3F_ readSubscript__3F_ (const class GALGAS_string & in0,
+                                                                                                               Compiler * inCompiler
+                                                                                                               COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -18269,53 +17951,7 @@ class cEnumerator_extendStaticArrayDeclarationDictAST : public cGenericAbstractE
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticArrayDeclarationDictAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @LValueOperandAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_LValueOperandAST_property : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-  public: const GALGAS_LValueOperandAST mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_LValueOperandAST_property (const GALGAS_lstring inAssociatedValue0,
-                                                           const GALGAS_LValueOperandAST inAssociatedValue1
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public: virtual ~ cEnumAssociatedValues_LValueOperandAST_property (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_LValueOperandAST_arrayAccess : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_bool mAssociatedValue2 ;
-  public: const GALGAS_LValueOperandAST mAssociatedValue3 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_LValueOperandAST_arrayAccess (const GALGAS_expressionAST inAssociatedValue0,
-                                                              const GALGAS_location inAssociatedValue1,
-                                                              const GALGAS_bool inAssociatedValue2,
-                                                              const GALGAS_LValueOperandAST inAssociatedValue3
-                                                              COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public: virtual ~ cEnumAssociatedValues_LValueOperandAST_arrayAccess (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                        Phase 1: @controlRegisterBitSlice enum                                       *
-//
+//   enum controlRegisterBitSlice
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
@@ -18323,24 +17959,34 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
   public: GALGAS_controlRegisterBitSlice (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_unusedBits,
-    kEnum_namedBit
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_unusedBits,
+    enum_namedBit
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_unusedBits (class GALGAS_lbigint & out_count) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_namedBit (class GALGAS_lstring & out_name,
+                                                                 class GALGAS_lbigint & out_count) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -18381,19 +18027,12 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNamedBit (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterBitSlice_2D_namedBit_3F_ getter_namedBit (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUnusedBits (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterBitSlice_2D_unusedBits_3F_ getter_unusedBits (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_namedBit (class GALGAS_lstring & outOperand0,
-                                                   class GALGAS_lbigint & outOperand1) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_unusedBits (class GALGAS_lbigint & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18406,43 +18045,7 @@ class GALGAS_controlRegisterBitSlice : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @controlRegisterBitSlice enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterBitSlice_unusedBits : public cEnumAssociatedValues {
-  public: const GALGAS_lbigint mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (const GALGAS_lbigint inAssociatedValue0
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_unusedBits (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterBitSlice_namedBit : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-  public: const GALGAS_lbigint mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterBitSlice_namedBit (const GALGAS_lstring inAssociatedValue0,
-                                                                  const GALGAS_lbigint inAssociatedValue1
-                                                                  COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterBitSlice_namedBit (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                      Phase 1: @controlRegisterGroupKindAST enum                                     *
-//
+//   enum controlRegisterGroupKindAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
@@ -18450,24 +18053,35 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
   public: GALGAS_controlRegisterGroupKindAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_single,
-    kEnum_groupArray
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_single,
+    enum_groupArray
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_single (class GALGAS_lbigint & out_registerGroupBaseAddress) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_groupArray (class GALGAS_expressionAST & out_groupSizeExp,
+                                                                   class GALGAS_location & out_groupSizeExpLocation,
+                                                                   class GALGAS_lbigintlist & out_baseAddresses) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -18510,20 +18124,12 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGroupArray (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterGroupKindAST_2D_groupArray_3F_ getter_groupArray (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSingle (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterGroupKindAST_2D_single_3F_ getter_single (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_groupArray (class GALGAS_expressionAST & outOperand0,
-                                                     class GALGAS_location & outOperand1,
-                                                     class GALGAS_lbigintlist & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_single (class GALGAS_lbigint & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18536,45 +18142,7 @@ class GALGAS_controlRegisterGroupKindAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupKindAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @controlRegisterGroupKindAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterGroupKindAST_single : public cEnumAssociatedValues {
-  public: const GALGAS_lbigint mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterGroupKindAST_single (const GALGAS_lbigint inAssociatedValue0
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_single (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_lbigintlist mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (const GALGAS_expressionAST inAssociatedValue0,
-                                                                        const GALGAS_location inAssociatedValue1,
-                                                                        const GALGAS_lbigintlist inAssociatedValue2
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterGroupKindAST_groupArray (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                          Phase 1: @controlRegisterKind enum                                         *
-//
+//   enum controlRegisterKind
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_controlRegisterKind : public AC_GALGAS_root {
@@ -18582,24 +18150,35 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
   public: GALGAS_controlRegisterKind (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_scalar,
-    kEnum_registerArray
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_scalar,
+    enum_registerArray
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_registerArray (class GALGAS_expressionAST & out_arraySize,
+                                                                      class GALGAS_location & out_arraySizeLocation,
+                                                                      class GALGAS_expressionAST & out_arrayElementSize,
+                                                                      class GALGAS_location & out_arrayElementSizeLocation) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -18639,21 +18218,12 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRegisterArray (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterKind_2D_registerArray_3F_ getter_registerArray (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isScalar (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_scalar (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_registerArray (class GALGAS_expressionAST & outOperand0,
-                                                        class GALGAS_location & outOperand1,
-                                                        class GALGAS_expressionAST & outOperand2,
-                                                        class GALGAS_location & outOperand3) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_scalar () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18666,33 +18236,7 @@ class GALGAS_controlRegisterKind : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterKind ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @controlRegisterKind enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_controlRegisterKind_registerArray : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_expressionAST mAssociatedValue2 ;
-  public: const GALGAS_location mAssociatedValue3 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_controlRegisterKind_registerArray (const GALGAS_expressionAST inAssociatedValue0,
-                                                                   const GALGAS_location inAssociatedValue1,
-                                                                   const GALGAS_expressionAST inAssociatedValue2,
-                                                                   const GALGAS_location inAssociatedValue3
-                                                                   COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_controlRegisterKind_registerArray (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                    Phase 1: @effectiveArgumentPassingModeAST enum                                   *
-//
+//   enum effectiveArgumentPassingModeAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
@@ -18700,27 +18244,42 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
   public: GALGAS_effectiveArgumentPassingModeAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_input,
-    kEnum_inputWithType,
-    kEnum_output,
-    kEnum_outputInput,
-    kEnum_outputInputSelfVariable
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_input,
+    enum_inputWithType,
+    enum_output,
+    enum_outputInput,
+    enum_outputInputSelfVariable
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_input (class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_inputWithType (class GALGAS_bool & out_constant,
+                                                                      class GALGAS_lstring & out_typeName,
+                                                                      class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_output (class GALGAS_expressionAST & out_exp,
+                                                               class GALGAS_location & out_endOfExp) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_outputInput (class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_outputInputSelfVariable (class GALGAS_lstring & out_name) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -18786,33 +18345,18 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST_2D_input_3F_ getter_input (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInputWithType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST_2D_inputWithType_3F_ getter_inputWithType (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST_2D_output_3F_ getter_output (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutputInput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST_2D_outputInput_3F_ getter_outputInput (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutputInputSelfVariable (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_effectiveArgumentPassingModeAST_2D_outputInputSelfVariable_3F_ getter_outputInputSelfVariable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_input (class GALGAS_lstring & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_inputWithType (class GALGAS_bool & outOperand0,
-                                                        class GALGAS_lstring & outOperand1,
-                                                        class GALGAS_lstring & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_output (class GALGAS_expressionAST & outOperand0,
-                                                 class GALGAS_location & outOperand1) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_outputInput (class GALGAS_lstring & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_outputInputSelfVariable (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18825,89 +18369,7 @@ class GALGAS_effectiveArgumentPassingModeAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @effectiveArgumentPassingModeAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_effectiveArgumentPassingModeAST_input : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (const GALGAS_lstring inAssociatedValue0
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_input (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType : public cEnumAssociatedValues {
-  public: const GALGAS_bool mAssociatedValue0 ;
-  public: const GALGAS_lstring mAssociatedValue1 ;
-  public: const GALGAS_lstring mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (const GALGAS_bool inAssociatedValue0,
-                                                                               const GALGAS_lstring inAssociatedValue1,
-                                                                               const GALGAS_lstring inAssociatedValue2
-                                                                               COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_inputWithType (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_effectiveArgumentPassingModeAST_output : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (const GALGAS_expressionAST inAssociatedValue0,
-                                                                        const GALGAS_location inAssociatedValue1
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_output (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (const GALGAS_lstring inAssociatedValue0
-                                                                             COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInput (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (const GALGAS_lstring inAssociatedValue0
-                                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_effectiveArgumentPassingModeAST_outputInputSelfVariable (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                     Phase 1: @extendStaticListExpressionAST enum                                    *
-//
+//   enum extendStaticListExpressionAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
@@ -18915,24 +18377,34 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
   public: GALGAS_extendStaticListExpressionAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_expression,
-    kEnum_function
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_expression,
+    enum_function
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_expression (class GALGAS_expressionAST & out_exp) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_function (class GALGAS_lstring & out_functionName,
+                                                                 class GALGAS_routineFormalArgumentListAST & out_formalArgs) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -18973,19 +18445,12 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isExpression (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_extendStaticListExpressionAST_2D_expression_3F_ getter_expression (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_extendStaticListExpressionAST_2D_function_3F_ getter_function (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_expression (class GALGAS_expressionAST & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_function (class GALGAS_lstring & outOperand0,
-                                                   class GALGAS_routineFormalArgumentListAST & outOperand1) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -18998,43 +18463,7 @@ class GALGAS_extendStaticListExpressionAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticListExpressionAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @extendStaticListExpressionAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_extendStaticListExpressionAST_expression : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_extendStaticListExpressionAST_expression (const GALGAS_expressionAST inAssociatedValue0
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_expression (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_extendStaticListExpressionAST_function : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-  public: const GALGAS_routineFormalArgumentListAST mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_extendStaticListExpressionAST_function (const GALGAS_lstring inAssociatedValue0,
-                                                                        const GALGAS_routineFormalArgumentListAST inAssociatedValue1
-                                                                        COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_extendStaticListExpressionAST_function (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                        Phase 1: @genericFormalParameter enum                                        *
-//
+//   enum genericFormalParameter
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_genericFormalParameter : public AC_GALGAS_root {
@@ -19042,24 +18471,33 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
   public: GALGAS_genericFormalParameter (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_constant,
-    kEnum_type
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_constant,
+    enum_type
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_constant (class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_type (class GALGAS_lstring & out_name) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19100,18 +18538,12 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isConstant (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameter_2D_constant_3F_ getter_constant (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_genericFormalParameter_2D_type_3F_ getter_type (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_constant (class GALGAS_lstring & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_type (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19124,45 +18556,7 @@ class GALGAS_genericFormalParameter : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_genericFormalParameter ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @genericFormalParameter enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_genericFormalParameter_constant : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_genericFormalParameter_constant (const GALGAS_lstring inAssociatedValue0
-                                                                 COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public: virtual ~ cEnumAssociatedValues_genericFormalParameter_constant (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_genericFormalParameter_type : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_genericFormalParameter_type (const GALGAS_lstring inAssociatedValue0
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ComparisonResult compare (const cEnumAssociatedValues * inOperand) const ;
-
-  public: virtual ~ cEnumAssociatedValues_genericFormalParameter_type (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                           Phase 1: @guardedCommandAST enum                                          *
-//
+//   enum guardedCommandAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_guardedCommandAST : public AC_GALGAS_root {
@@ -19170,24 +18564,41 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
   public: GALGAS_guardedCommandAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_boolean,
-    kEnum_boolAndSync
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_boolean,
+    enum_boolAndSync
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_boolean (class GALGAS_bool & out_isExitCommand,
+                                                                class GALGAS_expressionAST & out_expression,
+                                                                class GALGAS_location & out_endOfExpression) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_boolAndSync (class GALGAS_bool & out_isExitCommand,
+                                                                    class GALGAS_expressionAST & out_expression,
+                                                                    class GALGAS_bool & out_warnsOnStaticExpression,
+                                                                    class GALGAS_location & out_endOfExpression,
+                                                                    class GALGAS_lbool & out_usesSelf,
+                                                                    class GALGAS_lstringlist & out_nameList,
+                                                                    class GALGAS_effectiveArgumentListAST & out_effectiveParameterListAST) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19242,26 +18653,12 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolAndSync (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandAST_2D_boolAndSync_3F_ getter_boolAndSync (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolean (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandAST_2D_boolean_3F_ getter_boolean (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_boolAndSync (class GALGAS_bool & outOperand0,
-                                                      class GALGAS_expressionAST & outOperand1,
-                                                      class GALGAS_bool & outOperand2,
-                                                      class GALGAS_location & outOperand3,
-                                                      class GALGAS_lbool & outOperand4,
-                                                      class GALGAS_lstringlist & outOperand5,
-                                                      class GALGAS_effectiveArgumentListAST & outOperand6) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_boolean (class GALGAS_bool & outOperand0,
-                                                  class GALGAS_expressionAST & outOperand1,
-                                                  class GALGAS_location & outOperand2) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19274,57 +18671,7 @@ class GALGAS_guardedCommandAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardedCommandAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @guardedCommandAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_guardedCommandAST_boolean : public cEnumAssociatedValues {
-  public: const GALGAS_bool mAssociatedValue0 ;
-  public: const GALGAS_expressionAST mAssociatedValue1 ;
-  public: const GALGAS_location mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_guardedCommandAST_boolean (const GALGAS_bool inAssociatedValue0,
-                                                           const GALGAS_expressionAST inAssociatedValue1,
-                                                           const GALGAS_location inAssociatedValue2
-                                                           COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolean (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_guardedCommandAST_boolAndSync : public cEnumAssociatedValues {
-  public: const GALGAS_bool mAssociatedValue0 ;
-  public: const GALGAS_expressionAST mAssociatedValue1 ;
-  public: const GALGAS_bool mAssociatedValue2 ;
-  public: const GALGAS_location mAssociatedValue3 ;
-  public: const GALGAS_lbool mAssociatedValue4 ;
-  public: const GALGAS_lstringlist mAssociatedValue5 ;
-  public: const GALGAS_effectiveArgumentListAST mAssociatedValue6 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_guardedCommandAST_boolAndSync (const GALGAS_bool inAssociatedValue0,
-                                                               const GALGAS_expressionAST inAssociatedValue1,
-                                                               const GALGAS_bool inAssociatedValue2,
-                                                               const GALGAS_location inAssociatedValue3,
-                                                               const GALGAS_lbool inAssociatedValue4,
-                                                               const GALGAS_lstringlist inAssociatedValue5,
-                                                               const GALGAS_effectiveArgumentListAST inAssociatedValue6
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_guardedCommandAST_boolAndSync (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                   Phase 1: @llvmGenerationInstructionElement enum                                   *
-//
+//   enum llvmGenerationInstructionElement
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
@@ -19332,25 +18679,35 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
   public: GALGAS_llvmGenerationInstructionElement (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_string,
-    kEnum_symbol,
-    kEnum_type
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_string,
+    enum_symbol,
+    enum_type
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_string (class GALGAS_string & out_string) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_symbol (class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_type (class GALGAS_lstring & out_name) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19396,22 +18753,14 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isString (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionElement_2D_string_3F_ getter_string (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSymbol (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionElement_2D_symbol_3F_ getter_symbol (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_llvmGenerationInstructionElement_2D_type_3F_ getter_type (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_string (class GALGAS_string & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_symbol (class GALGAS_lstring & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_type (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19424,55 +18773,7 @@ class GALGAS_llvmGenerationInstructionElement : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstructionElement ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @llvmGenerationInstructionElement enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_llvmGenerationInstructionElement_string : public cEnumAssociatedValues {
-  public: const GALGAS_string mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_string (const GALGAS_string inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_string (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_llvmGenerationInstructionElement_symbol : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (const GALGAS_lstring inAssociatedValue0
-                                                                         COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_symbol (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_llvmGenerationInstructionElement_type : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_llvmGenerationInstructionElement_type (const GALGAS_lstring inAssociatedValue0
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_llvmGenerationInstructionElement_type (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                     Phase 1: @primaryInExpressionAccessAST enum                                     *
-//
+//   enum primaryInExpressionAccessAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
@@ -19480,26 +18781,42 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
   public: GALGAS_primaryInExpressionAccessAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_property,
-    kEnum_integerSlice,
-    kEnum_arrayAccess,
-    kEnum_funcCall
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_property,
+    enum_integerSlice,
+    enum_arrayAccess,
+    enum_funcCall
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_property (class GALGAS_lstring & out_name) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_integerSlice (class GALGAS_lbigint & out_low,
+                                                                     class GALGAS_lbigint & out_high) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_arrayAccess (class GALGAS_expressionAST & out_index,
+                                                                    class GALGAS_location & out_endOfIndex,
+                                                                    class GALGAS_bool & out_checkIndexExpression) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_funcCall (class GALGAS_lstring & out_methodName,
+                                                                 class GALGAS_effectiveArgumentListAST & out_arguments,
+                                                                 class GALGAS_location & out_endOfArguments) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19562,31 +18879,16 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessAST_2D_arrayAccess_3F_ getter_arrayAccess (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFuncCall (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessAST_2D_funcCall_3F_ getter_funcCall (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIntegerSlice (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessAST_2D_integerSlice_3F_ getter_integerSlice (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_primaryInExpressionAccessAST_2D_property_3F_ getter_property (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_arrayAccess (class GALGAS_expressionAST & outOperand0,
-                                                      class GALGAS_location & outOperand1,
-                                                      class GALGAS_bool & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_funcCall (class GALGAS_lstring & outOperand0,
-                                                   class GALGAS_effectiveArgumentListAST & outOperand1,
-                                                   class GALGAS_location & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_integerSlice (class GALGAS_lbigint & outOperand0,
-                                                       class GALGAS_lbigint & outOperand1) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_property (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19599,79 +18901,7 @@ class GALGAS_primaryInExpressionAccessAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @primaryInExpressionAccessAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_primaryInExpressionAccessAST_property : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_property (const GALGAS_lstring inAssociatedValue0
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_property (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice : public cEnumAssociatedValues {
-  public: const GALGAS_lbigint mAssociatedValue0 ;
-  public: const GALGAS_lbigint mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (const GALGAS_lbigint inAssociatedValue0,
-                                                                           const GALGAS_lbigint inAssociatedValue1
-                                                                           COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_integerSlice (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_bool mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (const GALGAS_expressionAST inAssociatedValue0,
-                                                                          const GALGAS_location inAssociatedValue1,
-                                                                          const GALGAS_bool inAssociatedValue2
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_arrayAccess (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-  public: const GALGAS_effectiveArgumentListAST mAssociatedValue1 ;
-  public: const GALGAS_location mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (const GALGAS_lstring inAssociatedValue0,
-                                                                       const GALGAS_effectiveArgumentListAST inAssociatedValue1,
-                                                                       const GALGAS_location inAssociatedValue2
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_primaryInExpressionAccessAST_funcCall (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                     Phase 1: @procFormalArgumentPassingMode enum                                    *
-//
+//   enum procFormalArgumentPassingMode
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
@@ -19679,20 +18909,30 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
   public: GALGAS_procFormalArgumentPassingMode (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_input,
-    kEnum_output,
-    kEnum_inputOutput
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_input,
+    enum_output,
+    enum_inputOutput
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19725,22 +18965,14 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_input (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInputOutput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_inputOutput (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_output (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_input () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_inputOutput () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_output () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19753,9 +18985,7 @@ class GALGAS_procFormalArgumentPassingMode : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procFormalArgumentPassingMode ;
 
 //--------------------------------------------------------------------------------------------------
-//
-//                                            Phase 1: @propertyKindAST enum                                           *
-//
+//   enum propertyKindAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_propertyKindAST : public AC_GALGAS_root {
@@ -19763,28 +18993,41 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
   public: GALGAS_propertyKindAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_initializedStoredProperty,
-    kEnum_uninitializedStoredProperty,
-    kEnum_initializedConstantProperty,
-    kEnum_uninitializedConstantProperty,
-    kEnum_readOnlyComputedProperty,
-    kEnum_writeComputedProperty
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_initializedStoredProperty,
+    enum_uninitializedStoredProperty,
+    enum_initializedConstantProperty,
+    enum_uninitializedConstantProperty,
+    enum_readOnlyComputedProperty,
+    enum_writeComputedProperty
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_initializedStoredProperty (class GALGAS_expressionAST & out_initExpression) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_initializedConstantProperty (class GALGAS_expressionAST & out_initExpression) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_readOnlyComputedProperty (class GALGAS_instructionListAST & out_instructionList,
+                                                                                 class GALGAS_location & out_endOfInstructionList) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_writeComputedProperty (class GALGAS_instructionListAST & out_instructionList,
+                                                                              class GALGAS_location & out_endOfInstructionList) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -19845,36 +19088,20 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInitializedConstantProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ getter_initializedConstantProperty (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInitializedStoredProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ getter_initializedStoredProperty (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isReadOnlyComputedProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_propertyKindAST_2D_readOnlyComputedProperty_3F_ getter_readOnlyComputedProperty (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUninitializedConstantProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_uninitializedConstantProperty (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isUninitializedStoredProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_uninitializedStoredProperty (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isWriteComputedProperty (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_propertyKindAST_2D_writeComputedProperty_3F_ getter_writeComputedProperty (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_initializedConstantProperty (class GALGAS_expressionAST & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_initializedStoredProperty (class GALGAS_expressionAST & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_readOnlyComputedProperty (class GALGAS_instructionListAST & outOperand0,
-                                                                   class GALGAS_location & outOperand1) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_uninitializedConstantProperty () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_uninitializedStoredProperty () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_writeComputedProperty (class GALGAS_instructionListAST & outOperand0,
-                                                                class GALGAS_location & outOperand1) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -19887,73 +19114,7 @@ class GALGAS_propertyKindAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyKindAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @propertyKindAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_propertyKindAST_initializedStoredProperty : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (const GALGAS_expressionAST inAssociatedValue0
-                                                                           COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedStoredProperty (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_propertyKindAST_initializedConstantProperty : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (const GALGAS_expressionAST inAssociatedValue0
-                                                                             COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_propertyKindAST_initializedConstantProperty (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty : public cEnumAssociatedValues {
-  public: const GALGAS_instructionListAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (const GALGAS_instructionListAST inAssociatedValue0,
-                                                                          const GALGAS_location inAssociatedValue1
-                                                                          COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_propertyKindAST_readOnlyComputedProperty (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_propertyKindAST_writeComputedProperty : public cEnumAssociatedValues {
-  public: const GALGAS_instructionListAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_propertyKindAST_writeComputedProperty (const GALGAS_instructionListAST inAssociatedValue0,
-                                                                       const GALGAS_location inAssociatedValue1
-                                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_propertyKindAST_writeComputedProperty (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                          Phase 1: @propertyVisibility enum                                          *
-//
+//   enum propertyVisibility
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_propertyVisibility : public AC_GALGAS_root {
@@ -19961,19 +19122,29 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
   public: GALGAS_propertyVisibility (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_isPublic,
-    kEnum_isPrivate
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_isPublic,
+    enum_isPrivate
+  } ;
   
-//--------------------------------- Private data member
-  private: enumeration mEnum ;
+//--------------------------------- Private properties
+  private: Enumeration mEnum ;
+
+//--------------------------------- Associated value extraction
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -20004,18 +19175,12 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIsPrivate (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrivate (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isIsPublic (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPublic (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_isPrivate () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_isPublic () const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -20028,53 +19193,7 @@ class GALGAS_propertyVisibility : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyVisibility ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @registerGroupIndexAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_registerGroupIndexAST_index : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_bool mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_registerGroupIndexAST_index (const GALGAS_expressionAST inAssociatedValue0,
-                                                             const GALGAS_location inAssociatedValue1,
-                                                             const GALGAS_bool inAssociatedValue2
-                                                             COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_registerGroupIndexAST_index (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @registerIndexAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_registerIndexAST_index : public cEnumAssociatedValues {
-  public: const GALGAS_expressionAST mAssociatedValue0 ;
-  public: const GALGAS_location mAssociatedValue1 ;
-  public: const GALGAS_bool mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_registerIndexAST_index (const GALGAS_expressionAST inAssociatedValue0,
-                                                        const GALGAS_location inAssociatedValue1,
-                                                        const GALGAS_bool inAssociatedValue2
-                                                        COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_registerIndexAST_index (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                            Phase 1: @sliceTargetAST enum                                            *
-//
+//   enum sliceTargetAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_sliceTargetAST : public AC_GALGAS_root {
@@ -20082,26 +19201,36 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
   public: GALGAS_sliceTargetAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_discarded,
-    kEnum_varDeclaration,
-    kEnum_letDeclaration,
-    kEnum_lValue
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_discarded,
+    enum_varDeclaration,
+    enum_letDeclaration,
+    enum_lValue
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_varDeclaration (class GALGAS_lstring & out_varName) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_letDeclaration (class GALGAS_lstring & out_letName) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_lValue (class GALGAS_LValueAST & out_target) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -20149,26 +19278,16 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDiscarded (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_discarded (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_sliceTargetAST_2D_lValue_3F_ getter_lValue (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLetDeclaration (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_sliceTargetAST_2D_letDeclaration_3F_ getter_letDeclaration (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVarDeclaration (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_sliceTargetAST_2D_varDeclaration_3F_ getter_varDeclaration (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_discarded () const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_lValue (class GALGAS_LValueAST & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_letDeclaration (class GALGAS_lstring & outOperand0) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_varDeclaration (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -20181,55 +19300,7 @@ class GALGAS_sliceTargetAST : public AC_GALGAS_root {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST ;
 
 //--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @sliceTargetAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_sliceTargetAST_varDeclaration : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_varDeclaration (const GALGAS_lstring inAssociatedValue0
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_sliceTargetAST_varDeclaration (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_sliceTargetAST_letDeclaration : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_letDeclaration (const GALGAS_lstring inAssociatedValue0
-                                                               COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_sliceTargetAST_letDeclaration (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_sliceTargetAST_lValue : public cEnumAssociatedValues {
-  public: const GALGAS_LValueAST mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_sliceTargetAST_lValue (const GALGAS_LValueAST inAssociatedValue0
-                                                       COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_sliceTargetAST_lValue (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//                                       Phase 1: @staticListPropertyTypeAST enum                                      *
-//
+//   enum staticListPropertyTypeAST
 //--------------------------------------------------------------------------------------------------
 
 class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
@@ -20237,24 +19308,35 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
   public: GALGAS_staticListPropertyTypeAST (void) ;
 
 //--------------------------------- Enumeration
-  public: typedef enum {
-    kNotBuilt,
-    kEnum_valueType,
-    kEnum_function
-  } enumeration ;
+  public: enum class Enumeration {
+    invalid,
+    enum_valueType,
+    enum_function
+  } ;
   
-//--------------------------------- Private data member
-  private: AC_GALGAS_enumAssociatedValues mAssociatedValues ;
-  public: VIRTUAL_IN_DEBUG const cEnumAssociatedValues * unsafePointer (void) const {
-    return mAssociatedValues.unsafePointer () ;
-  }
+//--------------------------------- Private properties
+  private: AC_GALGAS_enumerationAssociatedValues mAssociatedValues ;
+  private: Enumeration mEnum ;
 
-  private: enumeration mEnum ;
+//--------------------------------- Associated value extraction
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_valueType (class GALGAS_lstring & out_type) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_function (class GALGAS_mode & out_mode,
+                                                                 class GALGAS_routineFormalArgumentListAST & out_formalArgs,
+                                                                 class GALGAS_lstring & out_returnType) const ;
 
 //--------------------------------- Accessors
-  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override { return kNotBuilt != mEnum ; }
-  public: VIRTUAL_IN_DEBUG inline void drop (void) override { mEnum = kNotBuilt ; }
-  public: inline enumeration enumValue (void) const { return mEnum ; }
+  public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
+    return Enumeration::invalid != mEnum ;
+  }
+
+  public: VIRTUAL_IN_DEBUG inline void drop (void) override {
+    mEnum = Enumeration::invalid ;
+    mAssociatedValues.drop () ;
+  }
+
+  public: inline Enumeration enumValue (void) const {
+    return mEnum ;
+  }
 
 //-- Start of type generic part
 
@@ -20297,20 +19379,12 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_staticListPropertyTypeAST_2D_function_3F_ getter_function (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isValueType (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_staticListPropertyTypeAST_2D_valueType_3F_ getter_valueType (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_function (class GALGAS_mode & outOperand0,
-                                                   class GALGAS_routineFormalArgumentListAST & outOperand1,
-                                                   class GALGAS_lstring & outOperand2) const ;
-
-  public: VIRTUAL_IN_DEBUG bool optional_valueType (class GALGAS_lstring & outOperand0) const ;
-
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -20321,42 +19395,6 @@ class GALGAS_staticListPropertyTypeAST : public AC_GALGAS_root {
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyTypeAST ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: @staticListPropertyTypeAST enum, associated values
-//
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_staticListPropertyTypeAST_valueType : public cEnumAssociatedValues {
-  public: const GALGAS_lstring mAssociatedValue0 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_staticListPropertyTypeAST_valueType (const GALGAS_lstring inAssociatedValue0
-                                                                     COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_valueType (void) { }
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-class cEnumAssociatedValues_staticListPropertyTypeAST_function : public cEnumAssociatedValues {
-  public: const GALGAS_mode mAssociatedValue0 ;
-  public: const GALGAS_routineFormalArgumentListAST mAssociatedValue1 ;
-  public: const GALGAS_lstring mAssociatedValue2 ;
-
-//--- Constructor
-  public: cEnumAssociatedValues_staticListPropertyTypeAST_function (const GALGAS_mode inAssociatedValue0,
-                                                                    const GALGAS_routineFormalArgumentListAST inAssociatedValue1,
-                                                                    const GALGAS_lstring inAssociatedValue2
-                                                                    COMMA_LOCATION_ARGS) ;
-
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const ;
-  public: virtual ~ cEnumAssociatedValues_staticListPropertyTypeAST_function (void) { }
-} ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -20546,8 +19584,6 @@ class GALGAS_checkTargetListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -20691,8 +19727,6 @@ class GALGAS_controlRegisterBitSliceList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -20913,8 +19947,6 @@ class GALGAS_controlRegisterNameListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -21062,8 +20094,6 @@ class GALGAS_declarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -21206,8 +20236,6 @@ class GALGAS_driverDeclarationListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -21370,8 +20398,6 @@ class GALGAS_driverInstanciationArgumentListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -21536,8 +20562,6 @@ class GALGAS_driverInstanciationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -21700,8 +20724,6 @@ class GALGAS_extendStaticListElementAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -21961,8 +20983,6 @@ class GALGAS_externFunctionDeclarationListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -22130,8 +21150,6 @@ class GALGAS_propertyAttributeList : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -22352,8 +21370,6 @@ class GALGAS_requiredFunctionDeclarationListAST : public AC_GALGAS_list {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -22654,8 +21670,6 @@ class GALGAS_taskListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -22826,8 +21840,6 @@ class GALGAS_taskSetupListAST : public AC_GALGAS_list {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
 
@@ -22927,9 +21939,9 @@ class GALGAS_controlRegisterUserAccesMapAST : public AC_GALGAS_map {
 
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
-  public: VIRTUAL_IN_DEBUG bool optional_searchKey (const class GALGAS_string & constinOperand0) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_controlRegisterUserAccesMapAST_2D_element_3F_ readSubscript__3F_ (const class GALGAS_string & in0,
+                                                                                                          Compiler * inCompiler
+                                                                                                          COMMA_LOCATION_ARGS) const ;
 
 
 //--------------------------------- Introspection
@@ -23182,8 +22194,6 @@ class GALGAS_ast : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -23357,8 +22367,6 @@ class GALGAS_driverDeclarationAST : public AC_GALGAS_root {
 
 //--------------------------------- Read subscripts
 
-//--------------------------------- Optional Methods
-
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -23435,8 +22443,6 @@ class GALGAS_instructionListAST_2D_element : public AC_GALGAS_root {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

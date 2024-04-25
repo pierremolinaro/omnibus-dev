@@ -18,7 +18,7 @@
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   result = §[]
   for (lkey element) in self do
-    if [element.mDefinition isUnsolved] then
+    if [element.mDefinition unsolved] then
       result += !lkey
     end
   end
@@ -27,10 +27,8 @@ getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
-#  if inLKey.string == "" then
-#    outEntry = .null
-  if let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
-    outEntry = .element {!weakElement: element}
+  if let node = self §[inLKey] then
+    outEntry = .element {!weakElement: node.mElement}
   else
     let newElement = @unifiedTypeMapElementClass.init {!inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
@@ -43,8 +41,8 @@ setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outE
 setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
   if inLKey.string == "" then
     outEntry = .null
-  elsif let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
-    outEntry = .element {!weakElement: element}
+  elsif let node = self §[inLKey] then
+    outEntry = .element {!weakElement: node.mElement}
   else
     let newElement = @unifiedTypeMapElementClass.init {! inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
@@ -55,10 +53,8 @@ setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEn
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEntry outEntry {
-#  if inKey == "" then
-#    outEntry = .null
-  if let [self searchKey !inKey ?let @unifiedTypeMapElementClass element] then
-    outEntry = .element {!weakElement: element}
+  if let node = self §[inKey] then
+    outEntry = .element {!weakElement: node.mElement}
   else
     let newElement = @unifiedTypeMapElementClass.init {!.init {!inKey !.nowhere}!.unsolved}
     [!?self internalInsertKey !.init {!inKey !.nowhere} !newElement]
@@ -71,8 +67,8 @@ setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEn
 getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   if inLKey.string == "" then
     result = .null
-  elsif let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
-    result = .element {!weakElement: element}
+  elsif let node = self §[inLKey] then
+    result = .element {!weakElement: node.mElement}
   else
     error inLKey : "there is not '@" + inLKey + "' type" : result
   end
@@ -81,12 +77,12 @@ getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusType inTypeDefinition {
-  if let [self searchKey !inTypeName ?let @unifiedTypeMapElementClass element] then
-    switch element.mDefinition
+  if let node = self §[inTypeName] then
+    switch node.mElement.mDefinition
     case solved (*) :
       error inTypeName : "type already defined"
     case unsolved :
-      var e = element
+      var e = node.mElement
       e.mDefinition = .solved {!type: inTypeDefinition}
     end
   else
@@ -99,8 +95,8 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
 
 method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
                                   !type: @omnibusType outTypeDefinition {
-  if let [self searchKey !inLKey ?let @unifiedTypeMapElementClass element] then
-    switch element.mDefinition
+  if let node = self §[inLKey] then
+    switch node.mElement.mDefinition
     case solved (definition) :
       outTypeDefinition = definition
     case unsolved :

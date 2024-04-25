@@ -90,7 +90,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   var @instructionListIR switchExpressionGenerationList = §[]
   [self.mSwitchExpression analyzeExpression
     !self:inSelfType
-    !routineAttributes:.none
+    !routineAttributes: ()
     !optionalTargetType:voidType ()
     !context:inContext
     !mode:inMode

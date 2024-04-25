@@ -315,7 +315,7 @@ override method @staticListAST enterInContext
     #--- Enter routine type in type map
       let propertyType = @omnibusType.init {
         !subscript:.noSubscript
-        !attributes:.none
+        !attributes: ()
         !omnibusTypeDescriptionName:""
         !kind:.function {
           !mode:mode
@@ -356,7 +356,7 @@ override method @staticListAST enterInContext
 #-------------------------------------------------------------------- Enter element type in type map
   let elementType = @omnibusType.init {
     !subscript:.noSubscript
-    !attributes:.none
+    !attributes: ()
     !omnibusTypeDescriptionName:omnibusNameForStaticListElementType (!self.mStaticListName)
     !kind:.structure {!propertyList:propertyList}
     !llvmBaseTypeName:llvmNameForStaticListElementType (!self.mStaticListName)

@@ -71,7 +71,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?ioTemporaries
     !?leftInstructionGenerationList
     !?alloca: ioAllocaList
-    ?let leftBooleanOperand
+    ?let @implicitBooleanConversionResult leftBooleanOperand
   ]
 #--- Analyze right expression
   var @instructionListIR rightInstructionGenerationList = §[]

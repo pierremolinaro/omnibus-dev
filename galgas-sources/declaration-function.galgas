@@ -254,7 +254,7 @@ override method @functionDeclarationAST enterInContext
     !routineKind: .function
     !warnIfUnused: warnIfUnused
     !exportedRoutine: exportedFunction
-    !routineAttributes: .none
+    !routineAttributes: ()
     !routineMangledLLVMName: functionLLVMName
     !formalArgumentList: self.mFunctionFormalArgumentList
     !warningOnUnusedArgs: true

@@ -10,6 +10,20 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GALGAS_semanticContext constinArgument0,
+                                                                                 const class GALGAS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GALGAS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GALGAS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GALGAS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension getter '@effectiveArgumentListAST routineSignature' (as function)
 //
 //--------------------------------------------------------------------------------------------------
@@ -87,8 +101,6 @@ class GALGAS_convertInstructionIR : public GALGAS_abstractInstructionIR {
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -202,8 +214,6 @@ class GALGAS_convertInstructionIR_2D_weak : public GALGAS_abstractInstructionIR_
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
-
-//--------------------------------- Optional Methods
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

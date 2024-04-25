@@ -62,8 +62,8 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @routineAttributes {
-  mutatingRoutine,
-  guard
+  case mutatingRoutine
+  case guard
 }
 
 #·······················································································································

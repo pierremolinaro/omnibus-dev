@@ -229,7 +229,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   [!?ioContext.mTypeMap makeEntry !self.mTargetTypeName ?let targetTypeProxy]
   let targetType = [targetTypeProxy type]
   [!?ioContext.mTypeMap makeEntry !self.mSourceTypeName ?let sourceTypeProxy]
-  let sourceType = [sourceTypeProxy type]
+  let @omnibusType sourceType = [sourceTypeProxy type]
 #---
   let key = assignmentOperatorKey (!targetType !self.mOperatorLocation !sourceType)
   let operatorUsage = @llvmAssignmentOperatorUsage.init {

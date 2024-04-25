@@ -94,7 +94,7 @@ override method @sizeofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if [inRoutineAttributes guard] then
+  if [inRoutineAttributes contains !.guard] then
     error self.mLValue.mIdentifier : "sizeof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue
@@ -128,7 +128,7 @@ override method @sizeofTypeAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if [inRoutineAttributes guard] then
+  if [inRoutineAttributes contains !.guard] then
     error self.mTypeName : "sizeof () cannot be used in guard" : outResult
   else
     let type = [[inContext.mTypeMap searchKey !self.mTypeName] type]
