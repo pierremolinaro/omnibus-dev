@@ -116,7 +116,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" : bitCount
   else
-    [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:bitCount]
+    [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:bitCount]
     if not unsigned then
       error self.mTypeName: "this type should be an unsigned integer type" : bitCount
     end
@@ -139,7 +139,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?sourceOperand]
 #--- If source operand is static type, check value and convert it to 'resultType'
   if [sourceOperand isLiteralInteger] then
-    [sourceOperand literalInteger ?1* ?value:let @bigint value]
+    [sourceOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if value >= (1 << bitCount) then
       error self.mSourceExpressionLocation : "static value too large" : sourceOperand
     else

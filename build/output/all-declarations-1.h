@@ -912,16 +912,18 @@ class GALGAS_interruptionPanicCode : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_code (class GALGAS_lbigint & outArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractCode (class GALGAS_lbigint & outArgument0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_interruptionPanicCode_2D_code_3F_ getter_code (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_interruptionPanicCode_2D_code_3F_ getter_getCode (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_noCode (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isCode (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoCode (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -2420,13 +2422,13 @@ class GALGAS_routineKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_function (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isFunction (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_primitive (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isPrimitive (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_section (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSection (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_service (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isService (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -2691,49 +2693,61 @@ class GALGAS_valuedObject : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_driver (class GALGAS_omnibusType & outArgument0,
-                                               class GALGAS_bool & outArgument1,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_globalConstant (class GALGAS_objectIR & outArgument0,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_globalSyncInstance (class GALGAS_omnibusType & outArgument0,
-                                                           class GALGAS_lstring & outArgument1,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_localConstant (class GALGAS_omnibusType & outArgument0,
-                                                      class GALGAS_lstring & outArgument1,
-                                                      class GALGAS_bool & outArgument2,
+  public: VIRTUAL_IN_DEBUG void method_extractDriver (class GALGAS_omnibusType & outArgument0,
+                                                      class GALGAS_bool & outArgument1,
                                                       Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_localVariable (class GALGAS_omnibusType & outArgument0,
-                                                      class GALGAS_lstring & outArgument1,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractGlobalConstant (class GALGAS_objectIR & outArgument0,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_task (class GALGAS_omnibusType & outArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractGlobalSyncInstance (class GALGAS_omnibusType & outArgument0,
+                                                                  class GALGAS_lstring & outArgument1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractLocalConstant (class GALGAS_omnibusType & outArgument0,
+                                                             class GALGAS_lstring & outArgument1,
+                                                             class GALGAS_bool & outArgument2,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractLocalVariable (class GALGAS_omnibusType & outArgument0,
+                                                             class GALGAS_lstring & outArgument1,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractTask (class GALGAS_omnibusType & outArgument0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_driver_3F_ getter_driver (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_driver_3F_ getter_getDriver (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_globalConstant_3F_ getter_globalConstant (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_globalConstant_3F_ getter_getGlobalConstant (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_globalSyncInstance_3F_ getter_globalSyncInstance (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_globalSyncInstance_3F_ getter_getGlobalSyncInstance (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_localConstant_3F_ getter_localConstant (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_localConstant_3F_ getter_getLocalConstant (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_localVariable_3F_ getter_localVariable (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_localVariable_3F_ getter_getLocalVariable (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_task_3F_ getter_task (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_valuedObject_2D_task_3F_ getter_getTask (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isDriver (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalConstant (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isGlobalSyncInstance (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalConstant (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLocalVariable (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isTask (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -2813,11 +2827,11 @@ class GALGAS_valuedObjectState : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_hasReadValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasReadValue (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_hasUnreadValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isHasUnreadValue (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_noValue (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNoValue (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -3335,9 +3349,9 @@ class GALGAS_scopeKind : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_repeatScope (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isRepeatScope (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_selectScope (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSelectScope (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -4357,66 +4371,88 @@ class GALGAS_objectIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_literalInteger (class GALGAS_omnibusType & outArgument0,
-                                                       class GALGAS_bigint & outArgument1,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_literalString (class GALGAS_uint & outArgument0,
-                                                      class GALGAS_uint & outArgument1,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_llvmArrayDynamicValues (class GALGAS_omnibusType & outArgument0,
-                                                               class GALGAS_operandIRList & outArgument1,
-                                                               Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_llvmArrayRepeatedDynamicValue (class GALGAS_omnibusType & outArgument0,
-                                                                      class GALGAS_uint & outArgument1,
-                                                                      class GALGAS_objectIR & outArgument2,
-                                                                      Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_llvmArrayRepeatedStaticValue (class GALGAS_omnibusType & outArgument0,
-                                                                     class GALGAS_uint & outArgument1,
-                                                                     class GALGAS_objectIR & outArgument2,
-                                                                     class GALGAS_uint & outArgument3,
-                                                                     Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_llvmArrayStaticValues (class GALGAS_omnibusType & outArgument0,
-                                                              class GALGAS_operandIRList & outArgument1,
-                                                              class GALGAS_uint & outArgument2,
+  public: VIRTUAL_IN_DEBUG void method_extractLiteralInteger (class GALGAS_omnibusType & outArgument0,
+                                                              class GALGAS_bigint & outArgument1,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_llvmNamedValue (class GALGAS_omnibusType & outArgument0,
-                                                       class GALGAS_string & outArgument1,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLiteralString (class GALGAS_uint & outArgument0,
+                                                             class GALGAS_uint & outArgument1,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_llvmStructureValue (class GALGAS_omnibusType & outArgument0,
-                                                           class GALGAS_sortedOperandIRList & outArgument1,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmArrayDynamicValues (class GALGAS_omnibusType & outArgument0,
+                                                                      class GALGAS_operandIRList & outArgument1,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_null (class GALGAS_omnibusType & outArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmArrayRepeatedDynamicValue (class GALGAS_omnibusType & outArgument0,
+                                                                             class GALGAS_uint & outArgument1,
+                                                                             class GALGAS_objectIR & outArgument2,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_reference (class GALGAS_omnibusType & outArgument0,
-                                                  class GALGAS_string & outArgument1,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmArrayRepeatedStaticValue (class GALGAS_omnibusType & outArgument0,
+                                                                            class GALGAS_uint & outArgument1,
+                                                                            class GALGAS_objectIR & outArgument2,
+                                                                            class GALGAS_uint & outArgument3,
+                                                                            Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_zero (class GALGAS_omnibusType & outArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmArrayStaticValues (class GALGAS_omnibusType & outArgument0,
+                                                                     class GALGAS_operandIRList & outArgument1,
+                                                                     class GALGAS_uint & outArgument2,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmNamedValue (class GALGAS_omnibusType & outArgument0,
+                                                              class GALGAS_string & outArgument1,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmStructureValue (class GALGAS_omnibusType & outArgument0,
+                                                                  class GALGAS_sortedOperandIRList & outArgument1,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractNull (class GALGAS_omnibusType & outArgument0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractReference (class GALGAS_omnibusType & outArgument0,
+                                                         class GALGAS_string & outArgument1,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractZero (class GALGAS_omnibusType & outArgument0,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_literalInteger_3F_ getter_getLiteralInteger (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_literalString_3F_ getter_getLiteralString (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayDynamicValues_3F_ getter_getLlvmArrayDynamicValues (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue_3F_ getter_getLlvmArrayRepeatedDynamicValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue_3F_ getter_getLlvmArrayRepeatedStaticValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayStaticValues_3F_ getter_getLlvmArrayStaticValues (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmNamedValue_3F_ getter_getLlvmNamedValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmStructureValue_3F_ getter_getLlvmStructureValue (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_null_3F_ getter_getNull (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_reference_3F_ getter_getReference (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_zero_3F_ getter_getZero (LOCATION_ARGS) const ;
+
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralInteger (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLiteralString (LOCATION_ARGS) const ;
@@ -4440,30 +4476,6 @@ class GALGAS_objectIR : public AC_GALGAS_root {
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isVoid (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isZero (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_literalInteger_3F_ getter_literalInteger (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_literalString_3F_ getter_literalString (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayDynamicValues_3F_ getter_llvmArrayDynamicValues (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue_3F_ getter_llvmArrayRepeatedDynamicValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue_3F_ getter_llvmArrayRepeatedStaticValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmArrayStaticValues_3F_ getter_llvmArrayStaticValues (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmNamedValue_3F_ getter_llvmNamedValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_llvmStructureValue_3F_ getter_llvmStructureValue (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_null_3F_ getter_null (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_reference_3F_ getter_reference (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_void (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_objectIR_2D_zero_3F_ getter_zero (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -6433,16 +6445,18 @@ class GALGAS_unifiedTypeMapEntry : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_element (class GALGAS_unifiedTypeMapElementClass_2D_weak & outArgument0,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractElement (class GALGAS_unifiedTypeMapElementClass_2D_weak & outArgument0,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMapEntry_2D_element_3F_ getter_element (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_unifiedTypeMapEntry_2D_element_3F_ getter_getElement (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_null (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isElement (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isNull (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -7519,20 +7533,24 @@ class GALGAS_registerGroupKind : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_arrayGroup (class GALGAS_lbigintlist & outArgument0,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractArrayGroup (class GALGAS_lbigintlist & outArgument0,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_single (class GALGAS_bigint & outArgument0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractSingle (class GALGAS_bigint & outArgument0,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupKind_2D_arrayGroup_3F_ getter_arrayGroup (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupKind_2D_arrayGroup_3F_ getter_getArrayGroup (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupKind_2D_single_3F_ getter_single (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_registerGroupKind_2D_single_3F_ getter_getSingle (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayGroup (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSingle (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts

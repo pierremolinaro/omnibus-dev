@@ -1959,24 +1959,24 @@ class GALGAS_implicitBooleanConversionResult : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_compileTime (class GALGAS_bool & outArgument0,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractCompileTime (class GALGAS_bool & outArgument0,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_llvmVariable (class GALGAS_string & outArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractLlvmVariable (class GALGAS_string & outArgument0,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_implicitBooleanConversionResult_2D_compileTime_3F_ getter_compileTime (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_implicitBooleanConversionResult_2D_compileTime_3F_ getter_getCompileTime (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_implicitBooleanConversionResult_2D_llvmVariable_3F_ getter_getLlvmVariable (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isCompileTime (LOCATION_ARGS) const ;
 
   public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isLlvmVariable (LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG class GALGAS_implicitBooleanConversionResult_2D_llvmVariable_3F_ getter_llvmVariable (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts

@@ -96,7 +96,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   if not [sizeExpressionIR isLiteralInteger] then
     error self.mSizeExpressionLocation : "array size expression is a literal interger expression"
   else
-    [sizeExpressionIR literalInteger ?1* ?value:let arraySize]
+    [sizeExpressionIR extractLiteralInteger ?1* ?value:let arraySize]
   #-------------------------------------------- Original type name
     let omnibusTypeDescriptionName = @lstring.init {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !self.mFixedSizeArrayType}
     let llvmBaseTypeName = @lstring.init {!elementType.llvmBaseTypeName + "-" + arraySize !self.mFixedSizeArrayType}

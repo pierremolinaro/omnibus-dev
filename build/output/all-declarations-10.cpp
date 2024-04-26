@@ -10295,24 +10295,24 @@ void cPtr_compileTimeInfixOperatorUsage::method_eval (const GALGAS_objectIR cons
                                                       GALGAS_bigint & outArgument_outResult,
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint var_leftValue_10766 ;
-  GALGAS_omnibusType joker_10750_1 ; // Joker input parameter
-  constinArgument_inLeftOperand.method_literalInteger (joker_10750_1, var_leftValue_10766, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 273)) ;
-  GALGAS_bigint var_rightValue_10826 ;
-  GALGAS_omnibusType joker_10810_1 ; // Joker input parameter
-  constinArgument_inRightOperand.method_literalInteger (joker_10810_1, var_rightValue_10826, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 274)) ;
+  GALGAS_bigint var_leftValue_10773 ;
+  GALGAS_omnibusType joker_10757_1 ; // Joker input parameter
+  constinArgument_inLeftOperand.method_extractLiteralInteger (joker_10757_1, var_leftValue_10773, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 273)) ;
+  GALGAS_bigint var_rightValue_10840 ;
+  GALGAS_omnibusType joker_10824_1 ; // Joker input parameter
+  constinArgument_inRightOperand.method_extractLiteralInteger (joker_10824_1, var_rightValue_10840, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 274)) ;
   GALGAS_ctMap temp_0 = GALGAS_ctMap::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 275)) ;
-  GALGAS_ctMap var_varMap_10851 = temp_0 ;
+  GALGAS_ctMap var_varMap_10865 = temp_0 ;
   {
   const GALGAS_compileTimeInfixOperatorUsage temp_1 = this ;
-  var_varMap_10851.setter_insertKey (temp_1.readProperty_mLeftOperandName (), var_leftValue_10766, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
+  var_varMap_10865.setter_insertKey (temp_1.readProperty_mLeftOperandName (), var_leftValue_10773, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
   }
   {
   const GALGAS_compileTimeInfixOperatorUsage temp_2 = this ;
-  var_varMap_10851.setter_insertKey (temp_2.readProperty_mRightOperandName (), var_rightValue_10826, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
+  var_varMap_10865.setter_insertKey (temp_2.readProperty_mRightOperandName (), var_rightValue_10840, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
   }
   const GALGAS_compileTimeInfixOperatorUsage temp_3 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_3.readProperty_mExpression ().ptr (), var_varMap_10851, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_3.readProperty_mExpression ().ptr (), var_varMap_10865, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
 }
 
 //--------------------------------------------------------------------------------------------------

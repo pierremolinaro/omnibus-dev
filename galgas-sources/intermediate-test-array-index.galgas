@@ -5,7 +5,7 @@ setter @instructionListIR testArrayIndex
   ?let @bigint inSize
   !@bool outGeneratePanicInstruction
 {
-  [[inIndex type].kind integer ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+  [[inIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
   self += !@testArrayIndexIR.init {!inIndex !inErrorLocation !inSize}
 }
@@ -25,7 +25,7 @@ override method @testArrayIndexIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [[self.mIndex type].kind integer ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+  [[self.mIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
 #--- Test index >= 0 (for signed index)
   if not isUnsigned then
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex

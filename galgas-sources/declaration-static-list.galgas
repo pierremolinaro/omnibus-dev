@@ -392,7 +392,7 @@ override method @staticListAST enterInContext
           if not [propertyType.kind isFunction] then
             error endOfExp : "a static expression is expected here"
           else
-            [propertyType.kind function
+            [propertyType.kind extractFunction
               ?mode:let mode
               ?signature:let functionSignature
               ?returnTypeProxy:let functionReturnTypeProxy

@@ -270,8 +270,8 @@ method @compileTimeInfixOperatorUsage eval
   ?let @objectIR inRightOperand
   !@bigint outResult
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   var @ctMap varMap = §[]
   [!?varMap insertKey !self.mLeftOperandName !leftValue]
   [!?varMap insertKey !self.mRightOperandName !rightValue]

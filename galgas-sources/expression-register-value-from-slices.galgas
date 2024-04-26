@@ -135,7 +135,7 @@ override method @registerConstantExpressionAST analyzeExpression
       ]  
     #--- Check expression type
       if [[expressionResult type].kind isCompileTimeInteger] then 
-        [expressionResult literalInteger ?1* ?value:let @bigint value]
+        [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
         if value < 0 then
           error expressionLocation: "this integer expression should be positive"
         elsif value < (1 << fieldBitCount) then
@@ -144,7 +144,7 @@ override method @registerConstantExpressionAST analyzeExpression
           error expressionLocation: "expression too large (should be < " + (1 << fieldBitCount) + ")"
         end
       elsif [[expressionResult type].kind isInteger] then 
-        [[expressionResult type].kind integer ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
+        [[expressionResult type].kind extractInteger ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
         if not unsigned then
           error expressionLocation: "an unsigned integer expression is required here"
         elsif expressionBitCount != fieldBitCount then

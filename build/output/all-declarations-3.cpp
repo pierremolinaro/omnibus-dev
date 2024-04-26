@@ -8,6 +8,149 @@
 #include "all-declarations-3.h"
 
 //--------------------------------------------------------------------------------------------------
+// @boolImplicitConverterToBoolean reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractImplicitConverterToBoolean (inCompiler COMMA_THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_boolImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_boolImplicitConverterToBoolean::objectCompare (const GALGAS_boolImplicitConverterToBoolean & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (void) :
+GALGAS_abstractImplicitConverterToBoolean () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::
+init (Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
+  cPtr_boolImplicitConverterToBoolean * object = nullptr ;
+  macroMyNew (object, cPtr_boolImplicitConverterToBoolean (inCompiler COMMA_THERE)) ;
+  object->boolImplicitConverterToBoolean_init (inCompiler) ;
+  const GALGAS_boolImplicitConverterToBoolean result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_boolImplicitConverterToBoolean::
+boolImplicitConverterToBoolean_init (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (const cPtr_boolImplicitConverterToBoolean * inSourcePtr) :
+GALGAS_abstractImplicitConverterToBoolean (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolImplicitConverterToBoolean) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::class_func_new (LOCATION_ARGS) {
+  GALGAS_boolImplicitConverterToBoolean result ;
+  macroMyNew (result.mObjectPtr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @boolImplicitConverterToBoolean class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (LOCATION_ARGS) :
+cPtr_abstractImplicitConverterToBoolean (THERE) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_boolImplicitConverterToBoolean::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
+}
+
+void cPtr_boolImplicitConverterToBoolean::description (String & ioString,
+                                                       const int32_t /* inIndentation */) const {
+  ioString.appendCString ("[@boolImplicitConverterToBoolean]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @boolImplicitConverterToBoolean generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ("boolImplicitConverterToBoolean",
+                                                                                      & kTypeDescriptor_GALGAS_abstractImplicitConverterToBoolean) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_boolImplicitConverterToBoolean (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::extractObject (const GALGAS_object & inObject,
+                                                                                            Compiler * inCompiler
+                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_boolImplicitConverterToBoolean result ;
+  const GALGAS_boolImplicitConverterToBoolean * p = (const GALGAS_boolImplicitConverterToBoolean *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("boolImplicitConverterToBoolean", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 ComparisonResult GALGAS_boolImplicitConverterToBoolean_2D_weak::objectCompare (const GALGAS_boolImplicitConverterToBoolean_2D_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -4062,9 +4205,9 @@ GALGAS_propertyKindAST GALGAS_propertyKindAST::class_func_writeComputedProperty 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyKindAST::method_initializedStoredProperty (GALGAS_expressionAST & outAssociatedValue_initExpression,
-                                                               Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyKindAST::method_extractInitializedStoredProperty (GALGAS_expressionAST & outAssociatedValue_initExpression,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_initializedStoredProperty) {
     outAssociatedValue_initExpression.drop () ;
     String s ;
@@ -4078,9 +4221,9 @@ void GALGAS_propertyKindAST::method_initializedStoredProperty (GALGAS_expression
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyKindAST::method_initializedConstantProperty (GALGAS_expressionAST & outAssociatedValue_initExpression,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyKindAST::method_extractInitializedConstantProperty (GALGAS_expressionAST & outAssociatedValue_initExpression,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_initializedConstantProperty) {
     outAssociatedValue_initExpression.drop () ;
     String s ;
@@ -4094,10 +4237,10 @@ void GALGAS_propertyKindAST::method_initializedConstantProperty (GALGAS_expressi
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyKindAST::method_readOnlyComputedProperty (GALGAS_instructionListAST & outAssociatedValue_instructionList,
-                                                              GALGAS_location & outAssociatedValue_endOfInstructionList,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyKindAST::method_extractReadOnlyComputedProperty (GALGAS_instructionListAST & outAssociatedValue_instructionList,
+                                                                     GALGAS_location & outAssociatedValue_endOfInstructionList,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_readOnlyComputedProperty) {
     outAssociatedValue_instructionList.drop () ;
     outAssociatedValue_endOfInstructionList.drop () ;
@@ -4113,10 +4256,10 @@ void GALGAS_propertyKindAST::method_readOnlyComputedProperty (GALGAS_instruction
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyKindAST::method_writeComputedProperty (GALGAS_instructionListAST & outAssociatedValue_instructionList,
-                                                           GALGAS_location & outAssociatedValue_endOfInstructionList,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyKindAST::method_extractWriteComputedProperty (GALGAS_instructionListAST & outAssociatedValue_instructionList,
+                                                                  GALGAS_location & outAssociatedValue_endOfInstructionList,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_writeComputedProperty) {
     outAssociatedValue_instructionList.drop () ;
     outAssociatedValue_endOfInstructionList.drop () ;
@@ -4132,7 +4275,7 @@ void GALGAS_propertyKindAST::method_writeComputedProperty (GALGAS_instructionLis
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ GALGAS_propertyKindAST::getter_initializedStoredProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ GALGAS_propertyKindAST::getter_getInitializedStoredProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ result ;
   if (mEnum == Enumeration::enum_initializedStoredProperty) {
     const auto ptr = (const GALGAS_propertyKindAST_2D_initializedStoredProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4150,13 +4293,9 @@ void GALGAS_propertyKindAST::getAssociatedValuesFor_initializedStoredProperty (G
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_propertyKindAST::getter_uninitializedStoredProperty (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uninitializedStoredProperty == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ GALGAS_propertyKindAST::getter_initializedConstantProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ GALGAS_propertyKindAST::getter_getInitializedConstantProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ result ;
   if (mEnum == Enumeration::enum_initializedConstantProperty) {
     const auto ptr = (const GALGAS_propertyKindAST_2D_initializedConstantProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4174,13 +4313,9 @@ void GALGAS_propertyKindAST::getAssociatedValuesFor_initializedConstantProperty 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_propertyKindAST::getter_uninitializedConstantProperty (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uninitializedConstantProperty == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyKindAST_2D_readOnlyComputedProperty_3F_ GALGAS_propertyKindAST::getter_readOnlyComputedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyKindAST_2D_readOnlyComputedProperty_3F_ GALGAS_propertyKindAST::getter_getReadOnlyComputedProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyKindAST_2D_readOnlyComputedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_readOnlyComputedProperty) {
     const auto ptr = (const GALGAS_propertyKindAST_2D_readOnlyComputedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4200,7 +4335,7 @@ void GALGAS_propertyKindAST::getAssociatedValuesFor_readOnlyComputedProperty (GA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyKindAST_2D_writeComputedProperty_3F_ GALGAS_propertyKindAST::getter_writeComputedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyKindAST_2D_writeComputedProperty_3F_ GALGAS_propertyKindAST::getter_getWriteComputedProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyKindAST_2D_writeComputedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_writeComputedProperty) {
     const auto ptr = (const GALGAS_propertyKindAST_2D_writeComputedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4229,6 +4364,42 @@ static const char * gEnumNameArrayFor_propertyKindAST [7] = {
   "readOnlyComputedProperty",
   "writeComputedProperty"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isInitializedStoredProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_initializedStoredProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isUninitializedStoredProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uninitializedStoredProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isInitializedConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_initializedConstantProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isUninitializedConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uninitializedConstantProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isReadOnlyComputedProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_readOnlyComputedProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyKindAST::getter_isWriteComputedProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_writeComputedProperty == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7178,12 +7349,12 @@ GALGAS_controlRegisterKind GALGAS_controlRegisterKind::class_func_registerArray 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterKind::method_registerArray (GALGAS_expressionAST & outAssociatedValue_arraySize,
-                                                       GALGAS_location & outAssociatedValue_arraySizeLocation,
-                                                       GALGAS_expressionAST & outAssociatedValue_arrayElementSize,
-                                                       GALGAS_location & outAssociatedValue_arrayElementSizeLocation,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterKind::method_extractRegisterArray (GALGAS_expressionAST & outAssociatedValue_arraySize,
+                                                              GALGAS_location & outAssociatedValue_arraySizeLocation,
+                                                              GALGAS_expressionAST & outAssociatedValue_arrayElementSize,
+                                                              GALGAS_location & outAssociatedValue_arrayElementSizeLocation,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_registerArray) {
     outAssociatedValue_arraySize.drop () ;
     outAssociatedValue_arraySizeLocation.drop () ;
@@ -7203,13 +7374,9 @@ void GALGAS_controlRegisterKind::method_registerArray (GALGAS_expressionAST & ou
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_controlRegisterKind::getter_scalar (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_scalar == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterKind_2D_registerArray_3F_ GALGAS_controlRegisterKind::getter_registerArray (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterKind_2D_registerArray_3F_ GALGAS_controlRegisterKind::getter_getRegisterArray (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterKind_2D_registerArray_3F_ result ;
   if (mEnum == Enumeration::enum_registerArray) {
     const auto ptr = (const GALGAS_controlRegisterKind_2D_registerArray *) mAssociatedValues.associatedValuesPointer () ;
@@ -7238,6 +7405,18 @@ static const char * gEnumNameArrayFor_controlRegisterKind [3] = {
   "scalar",
   "registerArray"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterKind::getter_isScalar (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_scalar == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterKind::getter_isRegisterArray (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_registerArray == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9049,9 +9228,9 @@ GALGAS_controlRegisterBitSlice GALGAS_controlRegisterBitSlice::class_func_namedB
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterBitSlice::method_unusedBits (GALGAS_lbigint & outAssociatedValue_count,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSlice::method_extractUnusedBits (GALGAS_lbigint & outAssociatedValue_count,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_unusedBits) {
     outAssociatedValue_count.drop () ;
     String s ;
@@ -9065,10 +9244,10 @@ void GALGAS_controlRegisterBitSlice::method_unusedBits (GALGAS_lbigint & outAsso
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterBitSlice::method_namedBit (GALGAS_lstring & outAssociatedValue_name,
-                                                      GALGAS_lbigint & outAssociatedValue_count,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterBitSlice::method_extractNamedBit (GALGAS_lstring & outAssociatedValue_name,
+                                                             GALGAS_lbigint & outAssociatedValue_count,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_namedBit) {
     outAssociatedValue_name.drop () ;
     outAssociatedValue_count.drop () ;
@@ -9084,7 +9263,7 @@ void GALGAS_controlRegisterBitSlice::method_namedBit (GALGAS_lstring & outAssoci
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterBitSlice_2D_unusedBits_3F_ GALGAS_controlRegisterBitSlice::getter_unusedBits (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterBitSlice_2D_unusedBits_3F_ GALGAS_controlRegisterBitSlice::getter_getUnusedBits (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterBitSlice_2D_unusedBits_3F_ result ;
   if (mEnum == Enumeration::enum_unusedBits) {
     const auto ptr = (const GALGAS_controlRegisterBitSlice_2D_unusedBits *) mAssociatedValues.associatedValuesPointer () ;
@@ -9102,7 +9281,7 @@ void GALGAS_controlRegisterBitSlice::getAssociatedValuesFor_unusedBits (GALGAS_l
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterBitSlice_2D_namedBit_3F_ GALGAS_controlRegisterBitSlice::getter_namedBit (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterBitSlice_2D_namedBit_3F_ GALGAS_controlRegisterBitSlice::getter_getNamedBit (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterBitSlice_2D_namedBit_3F_ result ;
   if (mEnum == Enumeration::enum_namedBit) {
     const auto ptr = (const GALGAS_controlRegisterBitSlice_2D_namedBit *) mAssociatedValues.associatedValuesPointer () ;
@@ -9127,6 +9306,18 @@ static const char * gEnumNameArrayFor_controlRegisterBitSlice [3] = {
   "unusedBits",
   "namedBit"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isUnusedBits (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_unusedBits == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterBitSlice::getter_isNamedBit (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_namedBit == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9223,9 +9414,9 @@ GALGAS_controlRegisterGroupKindAST GALGAS_controlRegisterGroupKindAST::class_fun
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterGroupKindAST::method_single (GALGAS_lbigint & outAssociatedValue_registerGroupBaseAddress,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterGroupKindAST::method_extractSingle (GALGAS_lbigint & outAssociatedValue_registerGroupBaseAddress,
+                                                               Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_single) {
     outAssociatedValue_registerGroupBaseAddress.drop () ;
     String s ;
@@ -9239,11 +9430,11 @@ void GALGAS_controlRegisterGroupKindAST::method_single (GALGAS_lbigint & outAsso
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterGroupKindAST::method_groupArray (GALGAS_expressionAST & outAssociatedValue_groupSizeExp,
-                                                            GALGAS_location & outAssociatedValue_groupSizeExpLocation,
-                                                            GALGAS_lbigintlist & outAssociatedValue_baseAddresses,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterGroupKindAST::method_extractGroupArray (GALGAS_expressionAST & outAssociatedValue_groupSizeExp,
+                                                                   GALGAS_location & outAssociatedValue_groupSizeExpLocation,
+                                                                   GALGAS_lbigintlist & outAssociatedValue_baseAddresses,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_groupArray) {
     outAssociatedValue_groupSizeExp.drop () ;
     outAssociatedValue_groupSizeExpLocation.drop () ;
@@ -9261,7 +9452,7 @@ void GALGAS_controlRegisterGroupKindAST::method_groupArray (GALGAS_expressionAST
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterGroupKindAST_2D_single_3F_ GALGAS_controlRegisterGroupKindAST::getter_single (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterGroupKindAST_2D_single_3F_ GALGAS_controlRegisterGroupKindAST::getter_getSingle (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterGroupKindAST_2D_single_3F_ result ;
   if (mEnum == Enumeration::enum_single) {
     const auto ptr = (const GALGAS_controlRegisterGroupKindAST_2D_single *) mAssociatedValues.associatedValuesPointer () ;
@@ -9279,7 +9470,7 @@ void GALGAS_controlRegisterGroupKindAST::getAssociatedValuesFor_single (GALGAS_l
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterGroupKindAST_2D_groupArray_3F_ GALGAS_controlRegisterGroupKindAST::getter_groupArray (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterGroupKindAST_2D_groupArray_3F_ GALGAS_controlRegisterGroupKindAST::getter_getGroupArray (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterGroupKindAST_2D_groupArray_3F_ result ;
   if (mEnum == Enumeration::enum_groupArray) {
     const auto ptr = (const GALGAS_controlRegisterGroupKindAST_2D_groupArray *) mAssociatedValues.associatedValuesPointer () ;
@@ -9306,6 +9497,18 @@ static const char * gEnumNameArrayFor_controlRegisterGroupKindAST [3] = {
   "single",
   "groupArray"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterGroupKindAST::getter_isSingle (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_single == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterGroupKindAST::getter_isGroupArray (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_groupArray == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11650,171 +11853,59 @@ GALGAS_llvmBinaryOperation GALGAS_llvmBinaryOperation::class_func_icmp_5F_sle (U
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_addNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_addNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_subNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_subNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_mulNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_mulNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_udivNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_udivNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_sdivNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sdivNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_uremNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uremNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_sremNoOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sremNoOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_uaddOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uaddOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_saddOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_saddOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_usubOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_usubOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_ssubOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ssubOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_umulOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_umulOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_smulOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_smulOVF == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_udivOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_udivOVF == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_sdivOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sdivOVF == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_uremOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uremOVF == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_sremOVF (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sremOVF == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_and (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_and == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_ior (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ior == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_xor (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_xor == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_shl (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_shl == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_ashr (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ashr == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_lshr (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_lshr == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_icmp_5F_eq (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_eq == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_icmp_5F_ult (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_ult == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_icmp_5F_ule (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_ule == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_icmp_5F_slt (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_slt == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_llvmBinaryOperation::getter_icmp_5F_sle (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_sle == mEnum) ;
-}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11849,6 +11940,174 @@ static const char * gEnumNameArrayFor_llvmBinaryOperation [29] = {
   "icmp_slt",
   "icmp_sle"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAddNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_addNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSubNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_subNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isMulNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_mulNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_udivNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sdivNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uremNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremNoOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sremNoOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uaddOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSaddOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_saddOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_usubOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSsubOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ssubOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_umulOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSmulOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_smulOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_udivOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSdivOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sdivOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isUremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_uremOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isSremOVF (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sremOVF == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAnd (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_and == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ior == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isXor (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_xor == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isShl (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_shl == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isAshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_ashr == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isLshr (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_lshr == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_eq (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_eq == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ult (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_ult == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_ule (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_ule == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_slt (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_slt == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_llvmBinaryOperation::getter_isIcmp_5F_sle (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_icmp_5F_sle == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12735,9 +12994,9 @@ GALGAS_registerGroupKind GALGAS_registerGroupKind::class_func_arrayGroup (const 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_registerGroupKind::method_single (GALGAS_bigint & outAssociatedValue_baseAddress,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
+void GALGAS_registerGroupKind::method_extractSingle (GALGAS_bigint & outAssociatedValue_baseAddress,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_single) {
     outAssociatedValue_baseAddress.drop () ;
     String s ;
@@ -12751,9 +13010,9 @@ void GALGAS_registerGroupKind::method_single (GALGAS_bigint & outAssociatedValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_registerGroupKind::method_arrayGroup (GALGAS_lbigintlist & outAssociatedValue_baseAddresses,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
+void GALGAS_registerGroupKind::method_extractArrayGroup (GALGAS_lbigintlist & outAssociatedValue_baseAddresses,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_arrayGroup) {
     outAssociatedValue_baseAddresses.drop () ;
     String s ;
@@ -12767,7 +13026,7 @@ void GALGAS_registerGroupKind::method_arrayGroup (GALGAS_lbigintlist & outAssoci
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerGroupKind_2D_single_3F_ GALGAS_registerGroupKind::getter_single (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerGroupKind_2D_single_3F_ GALGAS_registerGroupKind::getter_getSingle (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerGroupKind_2D_single_3F_ result ;
   if (mEnum == Enumeration::enum_single) {
     const auto ptr = (const GALGAS_registerGroupKind_2D_single *) mAssociatedValues.associatedValuesPointer () ;
@@ -12785,7 +13044,7 @@ void GALGAS_registerGroupKind::getAssociatedValuesFor_single (GALGAS_bigint & ou
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerGroupKind_2D_arrayGroup_3F_ GALGAS_registerGroupKind::getter_arrayGroup (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerGroupKind_2D_arrayGroup_3F_ GALGAS_registerGroupKind::getter_getArrayGroup (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerGroupKind_2D_arrayGroup_3F_ result ;
   if (mEnum == Enumeration::enum_arrayGroup) {
     const auto ptr = (const GALGAS_registerGroupKind_2D_arrayGroup *) mAssociatedValues.associatedValuesPointer () ;
@@ -12808,6 +13067,18 @@ static const char * gEnumNameArrayFor_registerGroupKind [3] = {
   "single",
   "arrayGroup"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_registerGroupKind::getter_isSingle (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_single == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_registerGroupKind::getter_isArrayGroup (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_arrayGroup == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15682,116 +15953,6 @@ GALGAS_driverInstanciationArgumentListAST GALGAS_driverInstanciationArgumentList
       result = *p ;
     }else{
       inCompiler->castError ("driverInstanciationArgumentListAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_implementedDriverAST_2D_weak::objectCompare (const GALGAS_implementedDriverAST_2D_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST_2D_weak::GALGAS_implementedDriverAST_2D_weak (void) :
-GALGAS_abstractDeclarationAST_2D_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST_2D_weak & GALGAS_implementedDriverAST_2D_weak::operator = (const GALGAS_implementedDriverAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST_2D_weak::GALGAS_implementedDriverAST_2D_weak (const GALGAS_implementedDriverAST & inSource) :
-GALGAS_abstractDeclarationAST_2D_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST_2D_weak GALGAS_implementedDriverAST_2D_weak::class_func_nil (LOCATION_ARGS) {
-  GALGAS_implementedDriverAST_2D_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST GALGAS_implementedDriverAST_2D_weak::bang_implementedDriverAST_2D_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GALGAS_implementedDriverAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_implementedDriverAST) ;
-      result = GALGAS_implementedDriverAST ((cPtr_implementedDriverAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @implementedDriverAST-weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implementedDriverAST_2D_weak ("implementedDriverAST-weak",
-                                                                                    & kTypeDescriptor_GALGAS_abstractDeclarationAST_2D_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_implementedDriverAST_2D_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_implementedDriverAST_2D_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_implementedDriverAST_2D_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_implementedDriverAST_2D_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_implementedDriverAST_2D_weak GALGAS_implementedDriverAST_2D_weak::extractObject (const GALGAS_object & inObject,
-                                                                                        Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GALGAS_implementedDriverAST_2D_weak result ;
-  const GALGAS_implementedDriverAST_2D_weak * p = (const GALGAS_implementedDriverAST_2D_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_implementedDriverAST_2D_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("implementedDriverAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

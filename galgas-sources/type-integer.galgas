@@ -321,8 +321,8 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   !@objectIR outResultValue
 {
 #--- Check right ctInt belong to left integer range
-  [[inLeftOperand type].kind integer ?min: let minValue ?max: let maxValue ?2*]
-  [inRightOperand literalInteger ?1* ?value:let value]
+  [[inLeftOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
+  [inRightOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
     error inOperatorLocation
     : "right operand is a compile time integer with an invalid value, lower than $"
@@ -362,8 +362,8 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   !@objectIR outResultValue
 {
 #--- Check right ctInt belong to right integer range
-  [[inRightOperand type].kind integer ?min: let minValue ?max: let maxValue ?2*]
-  [inLeftOperand literalInteger ?1* ?value:let value]
+  [[inRightOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
+  [inLeftOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
     error inOperatorLocation
     : "left operand is a compile time integer with an invalid value, lower than $"

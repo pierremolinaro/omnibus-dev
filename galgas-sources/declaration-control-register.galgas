@@ -518,7 +518,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
         : "control register address offset is not a static integer expression"
         : registerAddressOffset
     else
-      [addressOffsetExpressionResult literalInteger ?1* ?value:registerAddressOffset]
+      [addressOffsetExpressionResult extractLiteralInteger ?1* ?value:registerAddressOffset]
     end
     var @bigint arraySize
     let @uint elementArraySize
@@ -540,7 +540,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       if not [sizeExpressionResult isLiteralInteger] then
         error arraySizeLocation : "control register address is not a static integer expression" : arraySize
       else
-        [sizeExpressionResult literalInteger ?1* ?value:arraySize]
+        [sizeExpressionResult extractLiteralInteger ?1* ?value:arraySize]
         if arraySize < 2 then
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
@@ -561,7 +561,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
           : "element size is not a static integer expression"
           : elementArraySize
       else
-        [elementArraySizeExpressionResult literalInteger ?1* ?value:let elementArraySizeAsBigInt]
+        [elementArraySizeExpressionResult extractLiteralInteger ?1* ?value:let elementArraySizeAsBigInt]
         elementArraySize = [elementArraySizeAsBigInt uint]
       end
     end
@@ -631,7 +631,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
           : "control register group size is not a static integer expression"
           : groupSize
       else
-        [groupArraySizeExpressionResult literalInteger ?1* ?value:groupSize]
+        [groupArraySizeExpressionResult extractLiteralInteger ?1* ?value:groupSize]
       end
       if [groupSize uint] != [baseAddresses count] then
         error groupSizeExpressionLocation

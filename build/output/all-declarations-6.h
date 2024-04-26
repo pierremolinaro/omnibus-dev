@@ -2715,36 +2715,42 @@ class GALGAS_guardedCommandIR : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_boolAndSync (class GALGAS_bool & outArgument0,
-                                                    class GALGAS_instructionListIR & outArgument1,
-                                                    class GALGAS_string & outArgument2,
-                                                    class GALGAS_string & outArgument3,
-                                                    class GALGAS_instructionListIR & outArgument4,
-                                                    class GALGAS_procCallEffectiveParameterListIR & outArgument5,
+  public: VIRTUAL_IN_DEBUG void method_extractBoolAndSync (class GALGAS_bool & outArgument0,
+                                                           class GALGAS_instructionListIR & outArgument1,
+                                                           class GALGAS_string & outArgument2,
+                                                           class GALGAS_string & outArgument3,
+                                                           class GALGAS_instructionListIR & outArgument4,
+                                                           class GALGAS_procCallEffectiveParameterListIR & outArgument5,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractBooleanGuard (class GALGAS_bool & outArgument0,
+                                                            class GALGAS_instructionListIR & outArgument1,
+                                                            class GALGAS_string & outArgument2,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG void method_extractSync (class GALGAS_bool & outArgument0,
+                                                    class GALGAS_string & outArgument1,
+                                                    class GALGAS_instructionListIR & outArgument2,
+                                                    class GALGAS_procCallEffectiveParameterListIR & outArgument3,
                                                     Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_booleanGuard (class GALGAS_bool & outArgument0,
-                                                     class GALGAS_instructionListIR & outArgument1,
-                                                     class GALGAS_string & outArgument2,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const ;
-
-  public: VIRTUAL_IN_DEBUG void method_sync (class GALGAS_bool & outArgument0,
-                                             class GALGAS_string & outArgument1,
-                                             class GALGAS_instructionListIR & outArgument2,
-                                             class GALGAS_procCallEffectiveParameterListIR & outArgument3,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_boolAndSync_3F_ getter_boolAndSync (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_boolAndSync_3F_ getter_getBoolAndSync (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_booleanGuard_3F_ getter_booleanGuard (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_booleanGuard_3F_ getter_getBooleanGuard (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_sync_3F_ getter_sync (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_guardedCommandIR_2D_sync_3F_ getter_getSync (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBoolAndSync (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isBooleanGuard (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isSync (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -5160,22 +5166,26 @@ class GALGAS_accessInAssignmentAST : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_arrayAccess (class GALGAS_expressionAST & outArgument0,
-                                                    class GALGAS_location & outArgument1,
-                                                    class GALGAS_bool & outArgument2,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractArrayAccess (class GALGAS_expressionAST & outArgument0,
+                                                           class GALGAS_location & outArgument1,
+                                                           class GALGAS_bool & outArgument2,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG void method_property (class GALGAS_lstring & outArgument0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG void method_extractProperty (class GALGAS_lstring & outArgument0,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const ;
 
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST_2D_arrayAccess_3F_ getter_arrayAccess (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST_2D_arrayAccess_3F_ getter_getArrayAccess (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST_2D_property_3F_ getter_property (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_accessInAssignmentAST_2D_property_3F_ getter_getProperty (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isArrayAccess (LOCATION_ARGS) const ;
+
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isProperty (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -6455,11 +6465,11 @@ class GALGAS_procEffectiveParameterPassingModeIR : public AC_GALGAS_root {
 //--------------------------------- Class Methods
 
 //--------------------------------- Getters
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_input (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isInput (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_output (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutput (LOCATION_ARGS) const ;
 
-  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_outputInput (LOCATION_ARGS) const ;
+  public: VIRTUAL_IN_DEBUG class GALGAS_bool getter_isOutputInput (LOCATION_ARGS) const ;
 
 
 //--------------------------------- Read subscripts
@@ -9552,170 +9562,4 @@ class GALGAS_binaryOperationIR_2D_weak : public GALGAS_abstractInstructionIR_2D_
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_binaryOperationIR_2D_weak ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendShortCircuitAndOperation'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendShortCircuitAndOperation (class GALGAS_instructionListIR & ioObject,
-                                                     const class GALGAS_objectIR constin_inTargetOperand,
-                                                     const class GALGAS_string constin_inLeftOperandLLVMName,
-                                                     const class GALGAS_instructionListIR constin_inLeftInstructionList,
-                                                     const class GALGAS_string constin_inRightOperandLLVMName,
-                                                     const class GALGAS_instructionListIR constin_inRightInstructionList,
-                                                     const class GALGAS_location constin_inLocation,
-                                                     class Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 1: @shortCircuitAndOperationIR reference class
-//
-//--------------------------------------------------------------------------------------------------
-
-class GALGAS_shortCircuitAndOperationIR : public GALGAS_abstractInstructionIR {
-//--------------------------------- Default constructor
-  public: GALGAS_shortCircuitAndOperationIR (void) ;
-
-//--------------------------------- Constructor from pointer
-  public: GALGAS_shortCircuitAndOperationIR (const class cPtr_shortCircuitAndOperationIR * inSourcePtr) ;
-
-//--------------------------------- Property access
-  public: class GALGAS_objectIR readProperty_mTargetOperand (void) const ;
-  public: void setProperty_mTargetOperand (const GALGAS_objectIR & inValue) ;
-
-  public: class GALGAS_string readProperty_mLeftOperandLLVMName (void) const ;
-  public: void setProperty_mLeftOperandLLVMName (const GALGAS_string & inValue) ;
-
-  public: class GALGAS_instructionListIR readProperty_mLeftInstructionList (void) const ;
-  public: void setProperty_mLeftInstructionList (const GALGAS_instructionListIR & inValue) ;
-
-  public: class GALGAS_string readProperty_mRightOperandLLVMName (void) const ;
-  public: void setProperty_mRightOperandLLVMName (const GALGAS_string & inValue) ;
-
-  public: class GALGAS_instructionListIR readProperty_mRightInstructionList (void) const ;
-  public: void setProperty_mRightInstructionList (const GALGAS_instructionListIR & inValue) ;
-
-  public: class GALGAS_location readProperty_mLocation (void) const ;
-  public: void setProperty_mLocation (const GALGAS_location & inValue) ;
-
-//-- Start of type generic part
-
-//--------------------------------- Initializers
-  public: static GALGAS_shortCircuitAndOperationIR init_21__21__21__21__21__21_ (const class GALGAS_objectIR & inOperand0,
-                                                                                 const class GALGAS_string & inOperand1,
-                                                                                 const class GALGAS_instructionListIR & inOperand2,
-                                                                                 const class GALGAS_string & inOperand3,
-                                                                                 const class GALGAS_instructionListIR & inOperand4,
-                                                                                 const class GALGAS_location & inOperand5,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Object cloning
-  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
-
-//--------------------------------- Object extraction
-  public: static GALGAS_shortCircuitAndOperationIR extractObject (const GALGAS_object & inObject,
-                                                                  Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GALGAS_shortCircuitAndOperationIR class_func_new (const class GALGAS_objectIR & inOperand0,
-                                                                         const class GALGAS_string & inOperand1,
-                                                                         const class GALGAS_instructionListIR & inOperand2,
-                                                                         const class GALGAS_string & inOperand3,
-                                                                         const class GALGAS_instructionListIR & inOperand4,
-                                                                         const class GALGAS_location & inOperand5
-                                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GALGAS_shortCircuitAndOperationIR & inOperand) const ;
-
-//--------------------------------- Setters
-
-//--------------------------------- Instance Methods
-//--------------------------------- Class Methods
-
-//--------------------------------- Getters
-
-//--------------------------------- Read subscripts
-
-//--------------------------------- Introspection
-  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
- 
-} ; // End of GALGAS_shortCircuitAndOperationIR class
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ;
-
-//--------------------------------------------------------------------------------------------------
-//
-// Phase 2: pointer class for @shortCircuitAndOperationIR class
-//
-//--------------------------------------------------------------------------------------------------
-
-class cPtr_shortCircuitAndOperationIR : public cPtr_abstractInstructionIR {
-
-  #ifndef DO_NOT_GENERATE_CHECKINGS
-    public: virtual void printNonNullClassInstanceProperties (void) const override ;
-  #endif
-
-//--------------------------------- Initializers
-  public: void shortCircuitAndOperationIR_init_21__21__21__21__21__21_ (const class GALGAS_objectIR & inOperand0,
-                                                                        const class GALGAS_string & inOperand1,
-                                                                        const class GALGAS_instructionListIR & inOperand2,
-                                                                        const class GALGAS_string & inOperand3,
-                                                                        const class GALGAS_instructionListIR & inOperand4,
-                                                                        const class GALGAS_location & inOperand5,
-                                                                        Compiler * inCompiler) ;
-
-
-//--- Extension method enterAccessibleEntities
-  public: virtual void method_enterAccessibleEntities (class GALGAS_stringset & arg_ioInvokedRoutineSet,
-           class GALGAS_uint & arg_ioMaxBranchOfOnInstructions,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Extension method llvmInstructionCode
-  public: virtual void method_llvmInstructionCode (class GALGAS_string & arg_ioLLVMcode,
-           const class GALGAS_generationContext arg_inGenerationContext,
-           class GALGAS_generationAdds & arg_ioGenerationAdds,
-           Compiler * COMMA_LOCATION_ARGS) override ;
-
-//--- Properties
-  public: GALGAS_objectIR mProperty_mTargetOperand ;
-  public: GALGAS_string mProperty_mLeftOperandLLVMName ;
-  public: GALGAS_instructionListIR mProperty_mLeftInstructionList ;
-  public: GALGAS_string mProperty_mRightOperandLLVMName ;
-  public: GALGAS_instructionListIR mProperty_mRightInstructionList ;
-  public: GALGAS_location mProperty_mLocation ;
-
-
-//--- Default constructor
-  public: cPtr_shortCircuitAndOperationIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
-
-//--- Constructor
-  public: cPtr_shortCircuitAndOperationIR (const GALGAS_objectIR & in_mTargetOperand,
-                                           const GALGAS_string & in_mLeftOperandLLVMName,
-                                           const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                           const GALGAS_string & in_mRightOperandLLVMName,
-                                           const GALGAS_instructionListIR & in_mRightInstructionList,
-                                           const GALGAS_location & in_mLocation
-                                           COMMA_LOCATION_ARGS) ;
-
-//--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
-
-//--- Attribute accessors
-//--- Description
-  public: virtual void description (String & ioString,
-                                    const int32_t inIndentation) const override ;
-
-//--- Class descriptor
-  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
-
-} ;
 

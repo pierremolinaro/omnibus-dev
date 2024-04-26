@@ -105,7 +105,7 @@ override method @integerSliceExpressionAST analyzeExpression
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" :outResult
   else
-    [resultType.kind integer ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
+    [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
     if not unsigned then
       error self.mTypeName: "this type should be an unsigned integer type" :outResult
     else
@@ -177,7 +177,7 @@ override method @integerSliceExpressionAST analyzeExpression
             [expressionResult type].omnibusTypeDescriptionName + " expression"
           end
           if [expressionResult isLiteralInteger] then
-            [expressionResult literalInteger ?1* ?value:let @bigint value]
+            [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
             accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
           else
           #--- Perform an bit extend to register type or a trunc
@@ -202,7 +202,7 @@ override method @integerSliceExpressionAST analyzeExpression
         case compileTimeBool :
           error expressionLocation: "an unsigned integer expression is required here"
         case compileTimeInteger :
-          [expressionResult literalInteger ?1* ?value:let @bigint value]
+          [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
           if value < 0 then
             error expressionLocation: "this integer expression should be positive"
           elsif value < (1 << sliceWidth) then

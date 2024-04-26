@@ -179,7 +179,7 @@ map @implicitConversionToBooleanMap { # Key is a type omnibus name
 
 #·······················································································································
 
-enum @implicitBooleanConversionResult %testGetters {
+enum @implicitBooleanConversionResult {
   case compileTime (@bool value)
   case llvmVariable (@string name) 
 }
@@ -225,7 +225,7 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
   ?!alloca: @allocaList unused ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
   var @ctMap varMap = §[]
   [!?varMap insertKey !self.mReceiverName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let result]

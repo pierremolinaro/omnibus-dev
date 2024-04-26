@@ -269,7 +269,7 @@ method @taskListAST enterInContext
     [ioContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
     for (* * initValue) in constructorMap do
 #    for (* * initValue) in [taskType constructorMap2] do
-      [initValue structure ?sortedOperandList: initialValueList]
+      [initValue extractStructure ?sortedOperandList: initialValueList]
     end
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string 

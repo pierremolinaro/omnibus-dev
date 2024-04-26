@@ -74,8 +74,8 @@ override method @panicInstructionAST instructionSemanticAnalysis
      || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
     error self.mInstructionLocation : "throw expression should be a literal integer"
   else
-    [inContext.mPanicCodeType.kind integer ?min:let min ?max:let max ?2*]
-    [result literalInteger ?1* ?value:let throwValue]
+    [inContext.mPanicCodeType.kind extractInteger ?min:let min ?max:let max ?2*]
+    [result extractLiteralInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
       error self.mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName

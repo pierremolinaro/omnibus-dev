@@ -5,7 +5,7 @@ setter @instructionListIR appendLogicalShiftRight
   ?!@semanticTemporariesStruct ioTemporaries
 {
   if [ioResult isLiteralInteger] then
-    [ioResult literalInteger ?type:let @omnibusType type ?value:let @bigint value]
+    [ioResult extractLiteralInteger ?type:let @omnibusType type ?value:let @bigint value]
     ioResult = .literalInteger {!type:type !value:value >> inShiftAmount}
   else
     [!?self appendLoadWhenReference !?ioTemporaries !?ioResult]

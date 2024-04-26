@@ -6,7 +6,7 @@ setter @instructionListIR appendTrunc
   ?!@semanticTemporariesStruct ioTemporaries
 {
   if [ioObject isLiteralInteger] then
-    [ioObject literalInteger ?type:* ?value:let @bigint value]
+    [ioObject extractLiteralInteger ?type:* ?value:let @bigint value]
     ioObject = .literalInteger {!type:inResultType !value:value}
   else
     getNewTempValue (!inResultType !?ioTemporaries ?let result)

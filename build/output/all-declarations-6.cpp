@@ -8,6 +8,190 @@
 #include "all-declarations-6.h"
 
 //--------------------------------------------------------------------------------------------------
+// @assertInstructionAST reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_assertInstructionAST::cPtr_assertInstructionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (inCompiler COMMA_THERE),
+mProperty_mExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_assertInstructionAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_instructionAST::printNonNullClassInstanceProperties () ;
+    mProperty_mExpression.printNonNullClassInstanceProperties ("mExpression") ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GALGAS_assertInstructionAST::objectCompare (const GALGAS_assertInstructionAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_assertInstructionAST::GALGAS_assertInstructionAST (void) :
+GALGAS_instructionAST () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GALGAS_assertInstructionAST GALGAS_assertInstructionAST::
+init_21__21_ (const GALGAS_location & in_mInstructionLocation,
+              const GALGAS_expressionAST & in_mExpression,
+              Compiler * inCompiler
+              COMMA_LOCATION_ARGS) {
+  cPtr_assertInstructionAST * object = nullptr ;
+  macroMyNew (object, cPtr_assertInstructionAST (inCompiler COMMA_THERE)) ;
+  object->assertInstructionAST_init_21__21_ (in_mInstructionLocation, in_mExpression, inCompiler) ;
+  const GALGAS_assertInstructionAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_assertInstructionAST::
+assertInstructionAST_init_21__21_ (const GALGAS_location & in_mInstructionLocation,
+                                   const GALGAS_expressionAST & in_mExpression,
+                                   Compiler * /* inCompiler */) {
+  mProperty_mInstructionLocation = in_mInstructionLocation ;
+  mProperty_mExpression = in_mExpression ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_assertInstructionAST::GALGAS_assertInstructionAST (const cPtr_assertInstructionAST * inSourcePtr) :
+GALGAS_instructionAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_assertInstructionAST) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_assertInstructionAST GALGAS_assertInstructionAST::class_func_new (const GALGAS_location & in_mInstructionLocation,
+                                                                         const GALGAS_expressionAST & in_mExpression
+                                                                         COMMA_LOCATION_ARGS) {
+  GALGAS_assertInstructionAST result ;
+  macroMyNew (result.mObjectPtr, cPtr_assertInstructionAST (in_mInstructionLocation, in_mExpression COMMA_THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_expressionAST GALGAS_assertInstructionAST::readProperty_mExpression (void) const {
+  if (nullptr == mObjectPtr) {
+    return GALGAS_expressionAST () ;
+  }else{
+    cPtr_assertInstructionAST * p = (cPtr_assertInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_assertInstructionAST) ;
+    return p->mProperty_mExpression ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_assertInstructionAST::setProperty_mExpression (const GALGAS_expressionAST & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_assertInstructionAST * p = (cPtr_assertInstructionAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_assertInstructionAST) ;
+    p->mProperty_mExpression = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @assertInstructionAST class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_assertInstructionAST::cPtr_assertInstructionAST (const GALGAS_location & in_mInstructionLocation,
+                                                      const GALGAS_expressionAST & in_mExpression
+                                                      COMMA_LOCATION_ARGS) :
+cPtr_instructionAST (in_mInstructionLocation COMMA_THERE),
+mProperty_mExpression () {
+  mProperty_mInstructionLocation = in_mInstructionLocation ;
+  mProperty_mExpression = in_mExpression ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_assertInstructionAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_assertInstructionAST ;
+}
+
+void cPtr_assertInstructionAST::description (String & ioString,
+                                             const int32_t inIndentation) const {
+  ioString.appendCString ("[@assertInstructionAST:") ;
+  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mExpression.description (ioString, inIndentation+1) ;
+  ioString.appendCString ("]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_assertInstructionAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_assertInstructionAST (mProperty_mInstructionLocation, mProperty_mExpression COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @assertInstructionAST generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assertInstructionAST ("assertInstructionAST",
+                                                                            & kTypeDescriptor_GALGAS_instructionAST) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_assertInstructionAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_assertInstructionAST ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_assertInstructionAST::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_assertInstructionAST (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_assertInstructionAST GALGAS_assertInstructionAST::extractObject (const GALGAS_object & inObject,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_assertInstructionAST result ;
+  const GALGAS_assertInstructionAST * p = (const GALGAS_assertInstructionAST *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_assertInstructionAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("assertInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 ComparisonResult GALGAS_assertInstructionAST_2D_weak::objectCompare (const GALGAS_assertInstructionAST_2D_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -613,10 +797,10 @@ GALGAS_controlRegisterAssignmentOperatorKind GALGAS_controlRegisterAssignmentOpe
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_controlRegisterAssignmentOperatorKind::method_assignmentWithOperator (GALGAS_omnibusInfixOperator & outAssociatedValue_infixOperator,
-                                                                                  GALGAS_location & outAssociatedValue_operatorLocation,
-                                                                                  Compiler * inCompiler
-                                                                                  COMMA_LOCATION_ARGS) const {
+void GALGAS_controlRegisterAssignmentOperatorKind::method_extractAssignmentWithOperator (GALGAS_omnibusInfixOperator & outAssociatedValue_infixOperator,
+                                                                                         GALGAS_location & outAssociatedValue_operatorLocation,
+                                                                                         Compiler * inCompiler
+                                                                                         COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_assignmentWithOperator) {
     outAssociatedValue_infixOperator.drop () ;
     outAssociatedValue_operatorLocation.drop () ;
@@ -632,13 +816,9 @@ void GALGAS_controlRegisterAssignmentOperatorKind::method_assignmentWithOperator
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_controlRegisterAssignmentOperatorKind::getter_assignment (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_assignment == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_controlRegisterAssignmentOperatorKind_2D_assignmentWithOperator_3F_ GALGAS_controlRegisterAssignmentOperatorKind::getter_assignmentWithOperator (UNUSED_LOCATION_ARGS) const {
+GALGAS_controlRegisterAssignmentOperatorKind_2D_assignmentWithOperator_3F_ GALGAS_controlRegisterAssignmentOperatorKind::getter_getAssignmentWithOperator (UNUSED_LOCATION_ARGS) const {
   GALGAS_controlRegisterAssignmentOperatorKind_2D_assignmentWithOperator_3F_ result ;
   if (mEnum == Enumeration::enum_assignmentWithOperator) {
     const auto ptr = (const GALGAS_controlRegisterAssignmentOperatorKind_2D_assignmentWithOperator *) mAssociatedValues.associatedValuesPointer () ;
@@ -663,6 +843,18 @@ static const char * gEnumNameArrayFor_controlRegisterAssignmentOperatorKind [3] 
   "assignment",
   "assignmentWithOperator"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterAssignmentOperatorKind::getter_isAssignment (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_assignment == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_controlRegisterAssignmentOperatorKind::getter_isAssignmentWithOperator (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_assignmentWithOperator == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1484,9 +1676,9 @@ GALGAS_sliceTargetAST GALGAS_sliceTargetAST::class_func_lValue (const GALGAS_LVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_sliceTargetAST::method_varDeclaration (GALGAS_lstring & outAssociatedValue_varName,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_sliceTargetAST::method_extractVarDeclaration (GALGAS_lstring & outAssociatedValue_varName,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_varDeclaration) {
     outAssociatedValue_varName.drop () ;
     String s ;
@@ -1500,9 +1692,9 @@ void GALGAS_sliceTargetAST::method_varDeclaration (GALGAS_lstring & outAssociate
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_sliceTargetAST::method_letDeclaration (GALGAS_lstring & outAssociatedValue_letName,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_sliceTargetAST::method_extractLetDeclaration (GALGAS_lstring & outAssociatedValue_letName,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_letDeclaration) {
     outAssociatedValue_letName.drop () ;
     String s ;
@@ -1516,9 +1708,9 @@ void GALGAS_sliceTargetAST::method_letDeclaration (GALGAS_lstring & outAssociate
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_sliceTargetAST::method_lValue (GALGAS_LValueAST & outAssociatedValue_target,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_sliceTargetAST::method_extractLValue (GALGAS_LValueAST & outAssociatedValue_target,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_lValue) {
     outAssociatedValue_target.drop () ;
     String s ;
@@ -1532,13 +1724,9 @@ void GALGAS_sliceTargetAST::method_lValue (GALGAS_LValueAST & outAssociatedValue
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_sliceTargetAST::getter_discarded (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_discarded == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST_2D_varDeclaration_3F_ GALGAS_sliceTargetAST::getter_varDeclaration (UNUSED_LOCATION_ARGS) const {
+GALGAS_sliceTargetAST_2D_varDeclaration_3F_ GALGAS_sliceTargetAST::getter_getVarDeclaration (UNUSED_LOCATION_ARGS) const {
   GALGAS_sliceTargetAST_2D_varDeclaration_3F_ result ;
   if (mEnum == Enumeration::enum_varDeclaration) {
     const auto ptr = (const GALGAS_sliceTargetAST_2D_varDeclaration *) mAssociatedValues.associatedValuesPointer () ;
@@ -1556,7 +1744,7 @@ void GALGAS_sliceTargetAST::getAssociatedValuesFor_varDeclaration (GALGAS_lstrin
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST_2D_letDeclaration_3F_ GALGAS_sliceTargetAST::getter_letDeclaration (UNUSED_LOCATION_ARGS) const {
+GALGAS_sliceTargetAST_2D_letDeclaration_3F_ GALGAS_sliceTargetAST::getter_getLetDeclaration (UNUSED_LOCATION_ARGS) const {
   GALGAS_sliceTargetAST_2D_letDeclaration_3F_ result ;
   if (mEnum == Enumeration::enum_letDeclaration) {
     const auto ptr = (const GALGAS_sliceTargetAST_2D_letDeclaration *) mAssociatedValues.associatedValuesPointer () ;
@@ -1574,7 +1762,7 @@ void GALGAS_sliceTargetAST::getAssociatedValuesFor_letDeclaration (GALGAS_lstrin
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_sliceTargetAST_2D_lValue_3F_ GALGAS_sliceTargetAST::getter_lValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_sliceTargetAST_2D_lValue_3F_ GALGAS_sliceTargetAST::getter_getLValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_sliceTargetAST_2D_lValue_3F_ result ;
   if (mEnum == Enumeration::enum_lValue) {
     const auto ptr = (const GALGAS_sliceTargetAST_2D_lValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -1599,6 +1787,30 @@ static const char * gEnumNameArrayFor_sliceTargetAST [5] = {
   "letDeclaration",
   "lValue"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_sliceTargetAST::getter_isDiscarded (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_discarded == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_sliceTargetAST::getter_isVarDeclaration (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_varDeclaration == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_sliceTargetAST::getter_isLetDeclaration (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_letDeclaration == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_sliceTargetAST::getter_isLValue (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_lValue == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4449,11 +4661,11 @@ GALGAS_guardedCommandAST GALGAS_guardedCommandAST::class_func_boolAndSync (const
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_guardedCommandAST::method_boolean (GALGAS_bool & outAssociatedValue_isExitCommand,
-                                               GALGAS_expressionAST & outAssociatedValue_expression,
-                                               GALGAS_location & outAssociatedValue_endOfExpression,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_guardedCommandAST::method_extractBoolean (GALGAS_bool & outAssociatedValue_isExitCommand,
+                                                      GALGAS_expressionAST & outAssociatedValue_expression,
+                                                      GALGAS_location & outAssociatedValue_endOfExpression,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_boolean) {
     outAssociatedValue_isExitCommand.drop () ;
     outAssociatedValue_expression.drop () ;
@@ -4471,15 +4683,15 @@ void GALGAS_guardedCommandAST::method_boolean (GALGAS_bool & outAssociatedValue_
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_guardedCommandAST::method_boolAndSync (GALGAS_bool & outAssociatedValue_isExitCommand,
-                                                   GALGAS_expressionAST & outAssociatedValue_expression,
-                                                   GALGAS_bool & outAssociatedValue_warnsOnStaticExpression,
-                                                   GALGAS_location & outAssociatedValue_endOfExpression,
-                                                   GALGAS_lbool & outAssociatedValue_usesSelf,
-                                                   GALGAS_lstringlist & outAssociatedValue_nameList,
-                                                   GALGAS_effectiveArgumentListAST & outAssociatedValue_effectiveParameterListAST,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_guardedCommandAST::method_extractBoolAndSync (GALGAS_bool & outAssociatedValue_isExitCommand,
+                                                          GALGAS_expressionAST & outAssociatedValue_expression,
+                                                          GALGAS_bool & outAssociatedValue_warnsOnStaticExpression,
+                                                          GALGAS_location & outAssociatedValue_endOfExpression,
+                                                          GALGAS_lbool & outAssociatedValue_usesSelf,
+                                                          GALGAS_lstringlist & outAssociatedValue_nameList,
+                                                          GALGAS_effectiveArgumentListAST & outAssociatedValue_effectiveParameterListAST,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_boolAndSync) {
     outAssociatedValue_isExitCommand.drop () ;
     outAssociatedValue_expression.drop () ;
@@ -4505,7 +4717,7 @@ void GALGAS_guardedCommandAST::method_boolAndSync (GALGAS_bool & outAssociatedVa
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandAST_2D_boolean_3F_ GALGAS_guardedCommandAST::getter_boolean (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandAST_2D_boolean_3F_ GALGAS_guardedCommandAST::getter_getBoolean (UNUSED_LOCATION_ARGS) const {
   GALGAS_guardedCommandAST_2D_boolean_3F_ result ;
   if (mEnum == Enumeration::enum_boolean) {
     const auto ptr = (const GALGAS_guardedCommandAST_2D_boolean *) mAssociatedValues.associatedValuesPointer () ;
@@ -4527,7 +4739,7 @@ void GALGAS_guardedCommandAST::getAssociatedValuesFor_boolean (GALGAS_bool & out
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandAST_2D_boolAndSync_3F_ GALGAS_guardedCommandAST::getter_boolAndSync (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandAST_2D_boolAndSync_3F_ GALGAS_guardedCommandAST::getter_getBoolAndSync (UNUSED_LOCATION_ARGS) const {
   GALGAS_guardedCommandAST_2D_boolAndSync_3F_ result ;
   if (mEnum == Enumeration::enum_boolAndSync) {
     const auto ptr = (const GALGAS_guardedCommandAST_2D_boolAndSync *) mAssociatedValues.associatedValuesPointer () ;
@@ -4562,6 +4774,18 @@ static const char * gEnumNameArrayFor_guardedCommandAST [3] = {
   "boolean",
   "boolAndSync"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_guardedCommandAST::getter_isBoolean (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_boolean == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_guardedCommandAST::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_boolAndSync == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5008,11 +5232,11 @@ GALGAS_guardedCommandIR GALGAS_guardedCommandIR::class_func_boolAndSync (const G
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedValue_isExitCommand,
-                                                   GALGAS_instructionListIR & outAssociatedValue_instructionGenerationList,
-                                                   GALGAS_string & outAssociatedValue_boolGuardBoolLLVMName,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_guardedCommandIR::method_extractBooleanGuard (GALGAS_bool & outAssociatedValue_isExitCommand,
+                                                          GALGAS_instructionListIR & outAssociatedValue_instructionGenerationList,
+                                                          GALGAS_string & outAssociatedValue_boolGuardBoolLLVMName,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_booleanGuard) {
     outAssociatedValue_isExitCommand.drop () ;
     outAssociatedValue_instructionGenerationList.drop () ;
@@ -5030,12 +5254,12 @@ void GALGAS_guardedCommandIR::method_booleanGuard (GALGAS_bool & outAssociatedVa
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_guardedCommandIR::method_sync (GALGAS_bool & outAssociatedValue_isExitCommand,
-                                           GALGAS_string & outAssociatedValue_guardMangledName,
-                                           GALGAS_instructionListIR & outAssociatedValue_guardInstructionGenerationList,
-                                           GALGAS_procCallEffectiveParameterListIR & outAssociatedValue_effectiveParameterListIR,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_guardedCommandIR::method_extractSync (GALGAS_bool & outAssociatedValue_isExitCommand,
+                                                  GALGAS_string & outAssociatedValue_guardMangledName,
+                                                  GALGAS_instructionListIR & outAssociatedValue_guardInstructionGenerationList,
+                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue_effectiveParameterListIR,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_sync) {
     outAssociatedValue_isExitCommand.drop () ;
     outAssociatedValue_guardMangledName.drop () ;
@@ -5055,14 +5279,14 @@ void GALGAS_guardedCommandIR::method_sync (GALGAS_bool & outAssociatedValue_isEx
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedValue_isExitCommand,
-                                                  GALGAS_instructionListIR & outAssociatedValue_boolExpInstructionGenerationList,
-                                                  GALGAS_string & outAssociatedValue_boolGuardBoolLLVMName,
-                                                  GALGAS_string & outAssociatedValue_guardMangledName,
-                                                  GALGAS_instructionListIR & outAssociatedValue_guardInstructionGenerationList,
-                                                  GALGAS_procCallEffectiveParameterListIR & outAssociatedValue_effectiveParameterListIR,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) const {
+void GALGAS_guardedCommandIR::method_extractBoolAndSync (GALGAS_bool & outAssociatedValue_isExitCommand,
+                                                         GALGAS_instructionListIR & outAssociatedValue_boolExpInstructionGenerationList,
+                                                         GALGAS_string & outAssociatedValue_boolGuardBoolLLVMName,
+                                                         GALGAS_string & outAssociatedValue_guardMangledName,
+                                                         GALGAS_instructionListIR & outAssociatedValue_guardInstructionGenerationList,
+                                                         GALGAS_procCallEffectiveParameterListIR & outAssociatedValue_effectiveParameterListIR,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_boolAndSync) {
     outAssociatedValue_isExitCommand.drop () ;
     outAssociatedValue_boolExpInstructionGenerationList.drop () ;
@@ -5086,7 +5310,7 @@ void GALGAS_guardedCommandIR::method_boolAndSync (GALGAS_bool & outAssociatedVal
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR_2D_booleanGuard_3F_ GALGAS_guardedCommandIR::getter_booleanGuard (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandIR_2D_booleanGuard_3F_ GALGAS_guardedCommandIR::getter_getBooleanGuard (UNUSED_LOCATION_ARGS) const {
   GALGAS_guardedCommandIR_2D_booleanGuard_3F_ result ;
   if (mEnum == Enumeration::enum_booleanGuard) {
     const auto ptr = (const GALGAS_guardedCommandIR_2D_booleanGuard *) mAssociatedValues.associatedValuesPointer () ;
@@ -5108,7 +5332,7 @@ void GALGAS_guardedCommandIR::getAssociatedValuesFor_booleanGuard (GALGAS_bool &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR_2D_sync_3F_ GALGAS_guardedCommandIR::getter_sync (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandIR_2D_sync_3F_ GALGAS_guardedCommandIR::getter_getSync (UNUSED_LOCATION_ARGS) const {
   GALGAS_guardedCommandIR_2D_sync_3F_ result ;
   if (mEnum == Enumeration::enum_sync) {
     const auto ptr = (const GALGAS_guardedCommandIR_2D_sync *) mAssociatedValues.associatedValuesPointer () ;
@@ -5132,7 +5356,7 @@ void GALGAS_guardedCommandIR::getAssociatedValuesFor_sync (GALGAS_bool & out_isE
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_guardedCommandIR_2D_boolAndSync_3F_ GALGAS_guardedCommandIR::getter_boolAndSync (UNUSED_LOCATION_ARGS) const {
+GALGAS_guardedCommandIR_2D_boolAndSync_3F_ GALGAS_guardedCommandIR::getter_getBoolAndSync (UNUSED_LOCATION_ARGS) const {
   GALGAS_guardedCommandIR_2D_boolAndSync_3F_ result ;
   if (mEnum == Enumeration::enum_boolAndSync) {
     const auto ptr = (const GALGAS_guardedCommandIR_2D_boolAndSync *) mAssociatedValues.associatedValuesPointer () ;
@@ -5166,6 +5390,24 @@ static const char * gEnumNameArrayFor_guardedCommandIR [4] = {
   "sync",
   "boolAndSync"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_guardedCommandIR::getter_isBooleanGuard (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_booleanGuard == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_guardedCommandIR::getter_isSync (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_sync == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_guardedCommandIR::getter_isBoolAndSync (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_boolAndSync == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8645,9 +8887,9 @@ GALGAS_effectiveArgumentPassingModeAST GALGAS_effectiveArgumentPassingModeAST::c
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_effectiveArgumentPassingModeAST::method_input (GALGAS_lstring & outAssociatedValue_name,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_effectiveArgumentPassingModeAST::method_extractInput (GALGAS_lstring & outAssociatedValue_name,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_input) {
     outAssociatedValue_name.drop () ;
     String s ;
@@ -8661,11 +8903,11 @@ void GALGAS_effectiveArgumentPassingModeAST::method_input (GALGAS_lstring & outA
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_effectiveArgumentPassingModeAST::method_inputWithType (GALGAS_bool & outAssociatedValue_constant,
-                                                                   GALGAS_lstring & outAssociatedValue_typeName,
-                                                                   GALGAS_lstring & outAssociatedValue_name,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_effectiveArgumentPassingModeAST::method_extractInputWithType (GALGAS_bool & outAssociatedValue_constant,
+                                                                          GALGAS_lstring & outAssociatedValue_typeName,
+                                                                          GALGAS_lstring & outAssociatedValue_name,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_inputWithType) {
     outAssociatedValue_constant.drop () ;
     outAssociatedValue_typeName.drop () ;
@@ -8683,10 +8925,10 @@ void GALGAS_effectiveArgumentPassingModeAST::method_inputWithType (GALGAS_bool &
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_effectiveArgumentPassingModeAST::method_output (GALGAS_expressionAST & outAssociatedValue_exp,
-                                                            GALGAS_location & outAssociatedValue_endOfExp,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
+void GALGAS_effectiveArgumentPassingModeAST::method_extractOutput (GALGAS_expressionAST & outAssociatedValue_exp,
+                                                                   GALGAS_location & outAssociatedValue_endOfExp,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_output) {
     outAssociatedValue_exp.drop () ;
     outAssociatedValue_endOfExp.drop () ;
@@ -8702,9 +8944,9 @@ void GALGAS_effectiveArgumentPassingModeAST::method_output (GALGAS_expressionAST
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_effectiveArgumentPassingModeAST::method_outputInput (GALGAS_lstring & outAssociatedValue_name,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_effectiveArgumentPassingModeAST::method_extractOutputInput (GALGAS_lstring & outAssociatedValue_name,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_outputInput) {
     outAssociatedValue_name.drop () ;
     String s ;
@@ -8718,9 +8960,9 @@ void GALGAS_effectiveArgumentPassingModeAST::method_outputInput (GALGAS_lstring 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_effectiveArgumentPassingModeAST::method_outputInputSelfVariable (GALGAS_lstring & outAssociatedValue_name,
-                                                                             Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) const {
+void GALGAS_effectiveArgumentPassingModeAST::method_extractOutputInputSelfVariable (GALGAS_lstring & outAssociatedValue_name,
+                                                                                    Compiler * inCompiler
+                                                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_outputInputSelfVariable) {
     outAssociatedValue_name.drop () ;
     String s ;
@@ -8734,7 +8976,7 @@ void GALGAS_effectiveArgumentPassingModeAST::method_outputInputSelfVariable (GAL
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST_2D_input_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_input (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveArgumentPassingModeAST_2D_input_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_getInput (UNUSED_LOCATION_ARGS) const {
   GALGAS_effectiveArgumentPassingModeAST_2D_input_3F_ result ;
   if (mEnum == Enumeration::enum_input) {
     const auto ptr = (const GALGAS_effectiveArgumentPassingModeAST_2D_input *) mAssociatedValues.associatedValuesPointer () ;
@@ -8752,7 +8994,7 @@ void GALGAS_effectiveArgumentPassingModeAST::getAssociatedValuesFor_input (GALGA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST_2D_inputWithType_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_inputWithType (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveArgumentPassingModeAST_2D_inputWithType_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_getInputWithType (UNUSED_LOCATION_ARGS) const {
   GALGAS_effectiveArgumentPassingModeAST_2D_inputWithType_3F_ result ;
   if (mEnum == Enumeration::enum_inputWithType) {
     const auto ptr = (const GALGAS_effectiveArgumentPassingModeAST_2D_inputWithType *) mAssociatedValues.associatedValuesPointer () ;
@@ -8774,7 +9016,7 @@ void GALGAS_effectiveArgumentPassingModeAST::getAssociatedValuesFor_inputWithTyp
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST_2D_output_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_output (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveArgumentPassingModeAST_2D_output_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_getOutput (UNUSED_LOCATION_ARGS) const {
   GALGAS_effectiveArgumentPassingModeAST_2D_output_3F_ result ;
   if (mEnum == Enumeration::enum_output) {
     const auto ptr = (const GALGAS_effectiveArgumentPassingModeAST_2D_output *) mAssociatedValues.associatedValuesPointer () ;
@@ -8794,7 +9036,7 @@ void GALGAS_effectiveArgumentPassingModeAST::getAssociatedValuesFor_output (GALG
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST_2D_outputInput_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_outputInput (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveArgumentPassingModeAST_2D_outputInput_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_getOutputInput (UNUSED_LOCATION_ARGS) const {
   GALGAS_effectiveArgumentPassingModeAST_2D_outputInput_3F_ result ;
   if (mEnum == Enumeration::enum_outputInput) {
     const auto ptr = (const GALGAS_effectiveArgumentPassingModeAST_2D_outputInput *) mAssociatedValues.associatedValuesPointer () ;
@@ -8812,7 +9054,7 @@ void GALGAS_effectiveArgumentPassingModeAST::getAssociatedValuesFor_outputInput 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_effectiveArgumentPassingModeAST_2D_outputInputSelfVariable_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_outputInputSelfVariable (UNUSED_LOCATION_ARGS) const {
+GALGAS_effectiveArgumentPassingModeAST_2D_outputInputSelfVariable_3F_ GALGAS_effectiveArgumentPassingModeAST::getter_getOutputInputSelfVariable (UNUSED_LOCATION_ARGS) const {
   GALGAS_effectiveArgumentPassingModeAST_2D_outputInputSelfVariable_3F_ result ;
   if (mEnum == Enumeration::enum_outputInputSelfVariable) {
     const auto ptr = (const GALGAS_effectiveArgumentPassingModeAST_2D_outputInputSelfVariable *) mAssociatedValues.associatedValuesPointer () ;
@@ -8838,6 +9080,36 @@ static const char * gEnumNameArrayFor_effectiveArgumentPassingModeAST [6] = {
   "outputInput",
   "outputInputSelfVariable"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_effectiveArgumentPassingModeAST::getter_isInput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_input == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_effectiveArgumentPassingModeAST::getter_isInputWithType (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_inputWithType == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_effectiveArgumentPassingModeAST::getter_isOutput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_output == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_effectiveArgumentPassingModeAST::getter_isOutputInput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_outputInput == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_effectiveArgumentPassingModeAST::getter_isOutputInputSelfVariable (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_outputInputSelfVariable == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9475,21 +9747,9 @@ GALGAS_procEffectiveParameterPassingModeIR GALGAS_procEffectiveParameterPassingM
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_input (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_input == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_output (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_output == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_outputInput (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_outputInput == mEnum) ;
-}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9499,6 +9759,24 @@ static const char * gEnumNameArrayFor_procEffectiveParameterPassingModeIR [4] = 
   "output",
   "outputInput"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_isInput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_input == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_isOutput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_output == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_procEffectiveParameterPassingModeIR::getter_isOutputInput (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_outputInput == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11824,9 +12102,9 @@ GALGAS_accessInAssignmentAST GALGAS_accessInAssignmentAST::class_func_arrayAcces
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_accessInAssignmentAST::method_property (GALGAS_lstring & outAssociatedValue_name,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
+void GALGAS_accessInAssignmentAST::method_extractProperty (GALGAS_lstring & outAssociatedValue_name,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_property) {
     outAssociatedValue_name.drop () ;
     String s ;
@@ -11840,11 +12118,11 @@ void GALGAS_accessInAssignmentAST::method_property (GALGAS_lstring & outAssociat
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_accessInAssignmentAST::method_arrayAccess (GALGAS_expressionAST & outAssociatedValue_index,
-                                                       GALGAS_location & outAssociatedValue_endOfIndex,
-                                                       GALGAS_bool & outAssociatedValue_checkIndexExpression,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_accessInAssignmentAST::method_extractArrayAccess (GALGAS_expressionAST & outAssociatedValue_index,
+                                                              GALGAS_location & outAssociatedValue_endOfIndex,
+                                                              GALGAS_bool & outAssociatedValue_checkIndexExpression,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_arrayAccess) {
     outAssociatedValue_index.drop () ;
     outAssociatedValue_endOfIndex.drop () ;
@@ -11862,7 +12140,7 @@ void GALGAS_accessInAssignmentAST::method_arrayAccess (GALGAS_expressionAST & ou
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentAST_2D_property_3F_ GALGAS_accessInAssignmentAST::getter_property (UNUSED_LOCATION_ARGS) const {
+GALGAS_accessInAssignmentAST_2D_property_3F_ GALGAS_accessInAssignmentAST::getter_getProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_accessInAssignmentAST_2D_property_3F_ result ;
   if (mEnum == Enumeration::enum_property) {
     const auto ptr = (const GALGAS_accessInAssignmentAST_2D_property *) mAssociatedValues.associatedValuesPointer () ;
@@ -11880,7 +12158,7 @@ void GALGAS_accessInAssignmentAST::getAssociatedValuesFor_property (GALGAS_lstri
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_accessInAssignmentAST_2D_arrayAccess_3F_ GALGAS_accessInAssignmentAST::getter_arrayAccess (UNUSED_LOCATION_ARGS) const {
+GALGAS_accessInAssignmentAST_2D_arrayAccess_3F_ GALGAS_accessInAssignmentAST::getter_getArrayAccess (UNUSED_LOCATION_ARGS) const {
   GALGAS_accessInAssignmentAST_2D_arrayAccess_3F_ result ;
   if (mEnum == Enumeration::enum_arrayAccess) {
     const auto ptr = (const GALGAS_accessInAssignmentAST_2D_arrayAccess *) mAssociatedValues.associatedValuesPointer () ;
@@ -11907,6 +12185,18 @@ static const char * gEnumNameArrayFor_accessInAssignmentAST [3] = {
   "property",
   "arrayAccess"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_accessInAssignmentAST::getter_isProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_property == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_accessInAssignmentAST::getter_isArrayAccess (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_arrayAccess == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12035,11 +12325,11 @@ GALGAS_registerGroupIndexAST GALGAS_registerGroupIndexAST::class_func_index (con
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_registerGroupIndexAST::method_index (GALGAS_expressionAST & outAssociatedValue_index,
-                                                 GALGAS_location & outAssociatedValue_endOfIndex,
-                                                 GALGAS_bool & outAssociatedValue_checkIndexExpression,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_registerGroupIndexAST::method_extractIndex (GALGAS_expressionAST & outAssociatedValue_index,
+                                                        GALGAS_location & outAssociatedValue_endOfIndex,
+                                                        GALGAS_bool & outAssociatedValue_checkIndexExpression,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_index) {
     outAssociatedValue_index.drop () ;
     outAssociatedValue_endOfIndex.drop () ;
@@ -12057,13 +12347,9 @@ void GALGAS_registerGroupIndexAST::method_index (GALGAS_expressionAST & outAssoc
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_registerGroupIndexAST::getter_noIndex (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_noIndex == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerGroupIndexAST_2D_index_3F_ GALGAS_registerGroupIndexAST::getter_index (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerGroupIndexAST_2D_index_3F_ GALGAS_registerGroupIndexAST::getter_getIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerGroupIndexAST_2D_index_3F_ result ;
   if (mEnum == Enumeration::enum_index) {
     const auto ptr = (const GALGAS_registerGroupIndexAST_2D_index *) mAssociatedValues.associatedValuesPointer () ;
@@ -12191,11 +12477,11 @@ GALGAS_registerIndexAST GALGAS_registerIndexAST::class_func_index (const GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_registerIndexAST::method_index (GALGAS_expressionAST & outAssociatedValue_index,
-                                            GALGAS_location & outAssociatedValue_endOfIndex,
-                                            GALGAS_bool & outAssociatedValue_checkIndexExpression,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
+void GALGAS_registerIndexAST::method_extractIndex (GALGAS_expressionAST & outAssociatedValue_index,
+                                                   GALGAS_location & outAssociatedValue_endOfIndex,
+                                                   GALGAS_bool & outAssociatedValue_checkIndexExpression,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_index) {
     outAssociatedValue_index.drop () ;
     outAssociatedValue_endOfIndex.drop () ;
@@ -12213,13 +12499,9 @@ void GALGAS_registerIndexAST::method_index (GALGAS_expressionAST & outAssociated
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_registerIndexAST::getter_noIndex (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_noIndex == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_registerIndexAST_2D_index_3F_ GALGAS_registerIndexAST::getter_index (UNUSED_LOCATION_ARGS) const {
+GALGAS_registerIndexAST_2D_index_3F_ GALGAS_registerIndexAST::getter_getIndex (UNUSED_LOCATION_ARGS) const {
   GALGAS_registerIndexAST_2D_index_3F_ result ;
   if (mEnum == Enumeration::enum_index) {
     const auto ptr = (const GALGAS_registerIndexAST_2D_index *) mAssociatedValues.associatedValuesPointer () ;
@@ -12246,6 +12528,18 @@ static const char * gEnumNameArrayFor_registerIndexAST [3] = {
   "noIndex",
   "index"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_registerIndexAST::getter_isNoIndex (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_noIndex == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_registerIndexAST::getter_isIndex (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_index == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12419,94 +12713,94 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_1381__0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_1381__0) ;
+      GALGAS_omnibusType extractedValue_1368__0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_1368__0) ;
       result_result = GALGAS_string ("zeroinitializer") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_1426__0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_1426__0) ;
+      GALGAS_omnibusType extractedValue_1413__0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_1413__0) ;
       result_result = GALGAS_string ("null") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_1470__0 ;
-      GALGAS_bigint extractedValue_1480_value_1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_1470__0, extractedValue_1480_value_1) ;
-      result_result = extractedValue_1480_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 32)) ;
+      GALGAS_omnibusType extractedValue_1457__0 ;
+      GALGAS_bigint extractedValue_1467_value_1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_1457__0, extractedValue_1467_value_1) ;
+      result_result = extractedValue_1467_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 32)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_1536__0 ;
-      GALGAS_string extractedValue_1538_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_1536__0, extractedValue_1538_llvmName_1) ;
-      result_result = extractedValue_1538_llvmName_1 ;
+      GALGAS_omnibusType extractedValue_1523__0 ;
+      GALGAS_string extractedValue_1525_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_1523__0, extractedValue_1525_llvmName_1) ;
+      result_result = extractedValue_1525_llvmName_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_1586__0 ;
-      GALGAS_string extractedValue_1588_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_1586__0, extractedValue_1588_llvmName_1) ;
-      result_result = extractedValue_1588_llvmName_1 ;
+      GALGAS_omnibusType extractedValue_1573__0 ;
+      GALGAS_string extractedValue_1575_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_1573__0, extractedValue_1575_llvmName_1) ;
+      result_result = extractedValue_1575_llvmName_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_1645__0 ;
-      GALGAS_sortedOperandIRList extractedValue_1668_inValues_1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_1645__0, extractedValue_1668_inValues_1) ;
+      GALGAS_omnibusType extractedValue_1632__0 ;
+      GALGAS_sortedOperandIRList extractedValue_1655_inValues_1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_1632__0, extractedValue_1655_inValues_1) ;
       result_result = GALGAS_string ("{") ;
-      cEnumerator_sortedOperandIRList enumerator_1715 (extractedValue_1668_inValues_1, EnumerationOrder::up) ;
-      while (enumerator_1715.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1715.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)).add_operation (extensionGetter_llvmName (enumerator_1715.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)) ;
-        if (enumerator_1715.hasNextObject ()) {
+      cEnumerator_sortedOperandIRList enumerator_1702 (extractedValue_1655_inValues_1, EnumerationOrder::up) ;
+      while (enumerator_1702.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_1702.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)).add_operation (extensionGetter_llvmName (enumerator_1702.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 38)) ;
+        if (enumerator_1702.hasNextObject ()) {
           result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 39)) ;
         }
-        enumerator_1715.gotoNextObject () ;
+        enumerator_1702.gotoNextObject () ;
       }
       result_result.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 41)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_1887__0 ;
-      GALGAS_operandIRList extractedValue_1887__1 ;
-      GALGAS_uint extractedValue_1889_index_2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_1887__0, extractedValue_1887__1, extractedValue_1889_index_2) ;
-      result_result = GALGAS_string ("@gconst.").add_operation (extractedValue_1889_index_2.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 43)) ;
+      GALGAS_omnibusType extractedValue_1874__0 ;
+      GALGAS_operandIRList extractedValue_1874__1 ;
+      GALGAS_uint extractedValue_1876_index_2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_1874__0, extractedValue_1874__1, extractedValue_1876_index_2) ;
+      result_result = GALGAS_string ("@gconst.").add_operation (extractedValue_1876_index_2.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 43)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_1968__0 ;
-      GALGAS_uint extractedValue_1968__1 ;
-      GALGAS_objectIR extractedValue_1968__2 ;
-      GALGAS_uint extractedValue_1970_index_3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_1968__0, extractedValue_1968__1, extractedValue_1968__2, extractedValue_1970_index_3) ;
-      result_result = GALGAS_string ("@gconst.").add_operation (extractedValue_1970_index_3.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 45)) ;
+      GALGAS_omnibusType extractedValue_1955__0 ;
+      GALGAS_uint extractedValue_1955__1 ;
+      GALGAS_objectIR extractedValue_1955__2 ;
+      GALGAS_uint extractedValue_1957_index_3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_1955__0, extractedValue_1955__1, extractedValue_1955__2, extractedValue_1957_index_3) ;
+      result_result = GALGAS_string ("@gconst.").add_operation (extractedValue_1957_index_3.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 45)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 45)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_2040_size_0 ;
-      GALGAS_uint extractedValue_2051_index_1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_2040_size_0, extractedValue_2051_index_1) ;
-      GALGAS_string var_sizeStr_2068 = extractedValue_2040_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 47)) ;
-      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_2068, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (var_sizeStr_2068, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)) ;
-      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_2051_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)) ;
+      GALGAS_uint extractedValue_2027_size_0 ;
+      GALGAS_uint extractedValue_2038_index_1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_2027_size_0, extractedValue_2038_index_1) ;
+      GALGAS_string var_sizeStr_2055 = extractedValue_2027_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 47)) ;
+      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_2055, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (var_sizeStr_2055, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 48)) ;
+      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_2038_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 49)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_2288__0 ;
-      GALGAS_uint extractedValue_2288__1 ;
-      GALGAS_objectIR extractedValue_2288__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_2288__0, extractedValue_2288__1, extractedValue_2288__2) ;
+      GALGAS_omnibusType extractedValue_2275__0 ;
+      GALGAS_uint extractedValue_2275__1 ;
+      GALGAS_objectIR extractedValue_2275__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_2275__0, extractedValue_2275__1, extractedValue_2275__2) ;
       TC_Array <FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 51)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 51)) ;
       result_result.drop () ; // Release error dropped variable
@@ -12514,9 +12808,9 @@ GALGAS_string extensionGetter_llvmName (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_2420__0 ;
-      GALGAS_operandIRList extractedValue_2420__1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_2420__0, extractedValue_2420__1) ;
+      GALGAS_omnibusType extractedValue_2407__0 ;
+      GALGAS_operandIRList extractedValue_2407__1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_2407__0, extractedValue_2407__1) ;
       TC_Array <FixItDescription> fixItArray3 ;
       inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 53)), GALGAS_string ("<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 53)) ;
       result_result.drop () ; // Release error dropped variable
@@ -12553,112 +12847,112 @@ GALGAS_string extensionGetter_llvmValue (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_2781__0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_2781__0) ;
+      GALGAS_omnibusType extractedValue_2768__0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_2768__0) ;
       result_result = GALGAS_string ("zeroinitializer") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_2826__0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_2826__0) ;
+      GALGAS_omnibusType extractedValue_2813__0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_2813__0) ;
       result_result = GALGAS_string ("null") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_2870__0 ;
-      GALGAS_bigint extractedValue_2880_value_1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_2870__0, extractedValue_2880_value_1) ;
-      result_result = extractedValue_2880_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 64)) ;
+      GALGAS_omnibusType extractedValue_2857__0 ;
+      GALGAS_bigint extractedValue_2867_value_1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_2857__0, extractedValue_2867_value_1) ;
+      result_result = extractedValue_2867_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 64)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_2936__0 ;
-      GALGAS_string extractedValue_2938_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_2936__0, extractedValue_2938_llvmName_1) ;
-      result_result = extractedValue_2938_llvmName_1 ;
+      GALGAS_omnibusType extractedValue_2923__0 ;
+      GALGAS_string extractedValue_2925_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_2923__0, extractedValue_2925_llvmName_1) ;
+      result_result = extractedValue_2925_llvmName_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_2986__0 ;
-      GALGAS_string extractedValue_2988_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_2986__0, extractedValue_2988_llvmName_1) ;
-      result_result = extractedValue_2988_llvmName_1 ;
+      GALGAS_omnibusType extractedValue_2973__0 ;
+      GALGAS_string extractedValue_2975_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_2973__0, extractedValue_2975_llvmName_1) ;
+      result_result = extractedValue_2975_llvmName_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_3047_size_0 ;
-      GALGAS_uint extractedValue_3058_index_1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_3047_size_0, extractedValue_3058_index_1) ;
-      GALGAS_string var_sizeStr_3075 = extractedValue_3047_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 68)) ;
-      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_3075, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (var_sizeStr_3075, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)) ;
-      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_3058_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)) ;
+      GALGAS_uint extractedValue_3034_size_0 ;
+      GALGAS_uint extractedValue_3045_index_1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_3034_size_0, extractedValue_3045_index_1) ;
+      GALGAS_string var_sizeStr_3062 = extractedValue_3034_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 68)) ;
+      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_3062, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (var_sizeStr_3062, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 69)) ;
+      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_3045_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 70)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_3283__0 ;
-      GALGAS_sortedOperandIRList extractedValue_3306_inValues_1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_3283__0, extractedValue_3306_inValues_1) ;
+      GALGAS_omnibusType extractedValue_3270__0 ;
+      GALGAS_sortedOperandIRList extractedValue_3293_inValues_1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_3270__0, extractedValue_3293_inValues_1) ;
       result_result = GALGAS_string ("{") ;
-      cEnumerator_sortedOperandIRList enumerator_3353 (extractedValue_3306_inValues_1, EnumerationOrder::up) ;
-      while (enumerator_3353.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3353.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (extensionGetter_llvmValue (enumerator_3353.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)) ;
-        if (enumerator_3353.hasNextObject ()) {
+      cEnumerator_sortedOperandIRList enumerator_3340 (extractedValue_3293_inValues_1, EnumerationOrder::up) ;
+      while (enumerator_3340.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3340.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)).add_operation (extensionGetter_llvmValue (enumerator_3340.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 74)) ;
+        if (enumerator_3340.hasNextObject ()) {
           result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 75)) ;
         }
-        enumerator_3353.gotoNextObject () ;
+        enumerator_3340.gotoNextObject () ;
       }
       result_result.plusAssign_operation(GALGAS_string ("}"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 77)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_3525__0 ;
-      GALGAS_operandIRList extractedValue_3542_inValues_1 ;
-      GALGAS_uint extractedValue_3551__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_3525__0, extractedValue_3542_inValues_1, extractedValue_3551__2) ;
+      GALGAS_omnibusType extractedValue_3512__0 ;
+      GALGAS_operandIRList extractedValue_3529_inValues_1 ;
+      GALGAS_uint extractedValue_3538__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_3512__0, extractedValue_3529_inValues_1, extractedValue_3538__2) ;
       result_result = GALGAS_string ("[") ;
-      cEnumerator_operandIRList enumerator_3582 (extractedValue_3542_inValues_1, EnumerationOrder::up) ;
-      while (enumerator_3582.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3582.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (extensionGetter_llvmValue (enumerator_3582.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)) ;
-        if (enumerator_3582.hasNextObject ()) {
+      cEnumerator_operandIRList enumerator_3569 (extractedValue_3529_inValues_1, EnumerationOrder::up) ;
+      while (enumerator_3569.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (enumerator_3569.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)).add_operation (extensionGetter_llvmValue (enumerator_3569.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 81)) ;
+        if (enumerator_3569.hasNextObject ()) {
           result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 82)) ;
         }
-        enumerator_3582.gotoNextObject () ;
+        enumerator_3569.gotoNextObject () ;
       }
       result_result.plusAssign_operation(GALGAS_string ("]"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 84)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_3768__0 ;
-      GALGAS_uint extractedValue_3770_size_1 ;
-      GALGAS_objectIR extractedValue_3775_value_2 ;
-      GALGAS_uint extractedValue_3781__3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_3768__0, extractedValue_3770_size_1, extractedValue_3775_value_2, extractedValue_3781__3) ;
+      GALGAS_omnibusType extractedValue_3755__0 ;
+      GALGAS_uint extractedValue_3757_size_1 ;
+      GALGAS_objectIR extractedValue_3762_value_2 ;
+      GALGAS_uint extractedValue_3768__3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_3755__0, extractedValue_3757_size_1, extractedValue_3762_value_2, extractedValue_3768__3) ;
       result_result = GALGAS_string ("[") ;
-      cEnumerator_range enumerator_3822 (GALGAS_range (GALGAS_uint (uint32_t (0U)), extractedValue_3770_size_1.substract_operation (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 87))), EnumerationOrder::up) ;
-      while (enumerator_3822.hasCurrentObject ()) {
-        result_result.plusAssign_operation(extensionGetter_llvmTypeName (extractedValue_3775_value_2, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (extensionGetter_llvmValue (extractedValue_3775_value_2, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)) ;
-        if (enumerator_3822.hasNextObject ()) {
+      cEnumerator_range enumerator_3809 (GALGAS_range (GALGAS_uint (uint32_t (0U)), extractedValue_3757_size_1.substract_operation (GALGAS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 87))), EnumerationOrder::up) ;
+      while (enumerator_3809.hasCurrentObject ()) {
+        result_result.plusAssign_operation(extensionGetter_llvmTypeName (extractedValue_3762_value_2, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (GALGAS_string (" "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)).add_operation (extensionGetter_llvmValue (extractedValue_3762_value_2, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 88)) ;
+        if (enumerator_3809.hasNextObject ()) {
           result_result.plusAssign_operation(GALGAS_string (", "), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 89)) ;
         }
-        enumerator_3822.gotoNextObject () ;
+        enumerator_3809.gotoNextObject () ;
       }
       result_result.plusAssign_operation(GALGAS_string ("]"), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 91)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_3987__0 ;
-      GALGAS_uint extractedValue_3987__1 ;
-      GALGAS_objectIR extractedValue_3987__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_3987__0, extractedValue_3987__1, extractedValue_3987__2) ;
+      GALGAS_omnibusType extractedValue_3974__0 ;
+      GALGAS_uint extractedValue_3974__1 ;
+      GALGAS_objectIR extractedValue_3974__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_3974__0, extractedValue_3974__1, extractedValue_3974__2) ;
       TC_Array <FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 93)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 93)) ;
       result_result.drop () ; // Release error dropped variable
@@ -12666,9 +12960,9 @@ GALGAS_string extensionGetter_llvmValue (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_4120__0 ;
-      GALGAS_operandIRList extractedValue_4120__1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_4120__0, extractedValue_4120__1) ;
+      GALGAS_omnibusType extractedValue_4107__0 ;
+      GALGAS_operandIRList extractedValue_4107__1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_4107__0, extractedValue_4107__1) ;
       TC_Array <FixItDescription> fixItArray3 ;
       inCompiler->emitSemanticError (GALGAS_location::class_func_nowhere (SOURCE_FILE ("object-intermediate-representation.galgas", 95)), GALGAS_string ("<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n"), fixItArray3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 95)) ;
       result_result.drop () ; // Release error dropped variable
@@ -12705,92 +12999,92 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_4490_type_0 ;
-      GALGAS_string extractedValue_4495__1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_4490_type_0, extractedValue_4495__1) ;
-      result_result = extractedValue_4490_type_0 ;
+      GALGAS_omnibusType extractedValue_4477_type_0 ;
+      GALGAS_string extractedValue_4482__1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_4477_type_0, extractedValue_4482__1) ;
+      result_result = extractedValue_4477_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_4527_type_0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_4527_type_0) ;
-      result_result = extractedValue_4527_type_0 ;
+      GALGAS_omnibusType extractedValue_4514_type_0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_4514_type_0) ;
+      result_result = extractedValue_4514_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_4562_type_0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_4562_type_0) ;
-      result_result = extractedValue_4562_type_0 ;
+      GALGAS_omnibusType extractedValue_4549_type_0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_4549_type_0) ;
+      result_result = extractedValue_4549_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_4607_type_0 ;
-      GALGAS_bigint extractedValue_4612__1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_4607_type_0, extractedValue_4612__1) ;
-      result_result = extractedValue_4607_type_0 ;
+      GALGAS_omnibusType extractedValue_4594_type_0 ;
+      GALGAS_bigint extractedValue_4599__1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_4594_type_0, extractedValue_4599__1) ;
+      result_result = extractedValue_4594_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_4654_type_0 ;
-      GALGAS_string extractedValue_4659__1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_4654_type_0, extractedValue_4659__1) ;
-      result_result = extractedValue_4654_type_0 ;
+      GALGAS_omnibusType extractedValue_4641_type_0 ;
+      GALGAS_string extractedValue_4646__1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_4641_type_0, extractedValue_4646__1) ;
+      result_result = extractedValue_4641_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_4705_type_0 ;
-      GALGAS_sortedOperandIRList extractedValue_4710__1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_4705_type_0, extractedValue_4710__1) ;
-      result_result = extractedValue_4705_type_0 ;
+      GALGAS_omnibusType extractedValue_4692_type_0 ;
+      GALGAS_sortedOperandIRList extractedValue_4697__1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_4692_type_0, extractedValue_4697__1) ;
+      result_result = extractedValue_4692_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_4759_type_0 ;
-      GALGAS_operandIRList extractedValue_4764__1 ;
-      GALGAS_uint extractedValue_4766__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_4759_type_0, extractedValue_4764__1, extractedValue_4766__2) ;
-      result_result = extractedValue_4759_type_0 ;
+      GALGAS_omnibusType extractedValue_4746_type_0 ;
+      GALGAS_operandIRList extractedValue_4751__1 ;
+      GALGAS_uint extractedValue_4753__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_4746_type_0, extractedValue_4751__1, extractedValue_4753__2) ;
+      result_result = extractedValue_4746_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_4808__0 ;
-      GALGAS_uint extractedValue_4810__1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_4808__0, extractedValue_4810__1) ;
+      GALGAS_uint extractedValue_4795__0 ;
+      GALGAS_uint extractedValue_4797__1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_4795__0, extractedValue_4797__1) ;
       result_result = function_literalStringType (inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 111)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_4882_type_0 ;
-      GALGAS_uint extractedValue_4888__1 ;
-      GALGAS_objectIR extractedValue_4888__2 ;
-      GALGAS_uint extractedValue_4888__3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_4882_type_0, extractedValue_4888__1, extractedValue_4888__2, extractedValue_4888__3) ;
-      result_result = extractedValue_4882_type_0 ;
+      GALGAS_omnibusType extractedValue_4869_type_0 ;
+      GALGAS_uint extractedValue_4875__1 ;
+      GALGAS_objectIR extractedValue_4875__2 ;
+      GALGAS_uint extractedValue_4875__3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_4869_type_0, extractedValue_4875__1, extractedValue_4875__2, extractedValue_4875__3) ;
+      result_result = extractedValue_4869_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_4945_type_0 ;
-      GALGAS_uint extractedValue_4951__1 ;
-      GALGAS_objectIR extractedValue_4951__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_4945_type_0, extractedValue_4951__1, extractedValue_4951__2) ;
-      result_result = extractedValue_4945_type_0 ;
+      GALGAS_omnibusType extractedValue_4932_type_0 ;
+      GALGAS_uint extractedValue_4938__1 ;
+      GALGAS_objectIR extractedValue_4938__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_4932_type_0, extractedValue_4938__1, extractedValue_4938__2) ;
+      result_result = extractedValue_4932_type_0 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_5001_type_0 ;
-      GALGAS_operandIRList extractedValue_5006__1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_5001_type_0, extractedValue_5006__1) ;
-      result_result = extractedValue_5001_type_0 ;
+      GALGAS_omnibusType extractedValue_4988_type_0 ;
+      GALGAS_operandIRList extractedValue_4993__1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_4988_type_0, extractedValue_4993__1) ;
+      result_result = extractedValue_4988_type_0 ;
     }
     break ;
   }
@@ -12863,92 +13157,92 @@ GALGAS_objectIR extensionGetter_withType (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_5766__0 ;
-      GALGAS_string extractedValue_5768_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_5766__0, extractedValue_5768_llvmName_1) ;
-      result_result = GALGAS_objectIR::class_func_reference (constinArgument_inType, extractedValue_5768_llvmName_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 137)) ;
+      GALGAS_omnibusType extractedValue_5753__0 ;
+      GALGAS_string extractedValue_5755_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_5753__0, extractedValue_5755_llvmName_1) ;
+      result_result = GALGAS_objectIR::class_func_reference (constinArgument_inType, extractedValue_5755_llvmName_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 137)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_5851__0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_5851__0) ;
+      GALGAS_omnibusType extractedValue_5838__0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_5838__0) ;
       result_result = GALGAS_objectIR::class_func_null (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 139)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_5914__0 ;
-      GALGAS_bigint extractedValue_5924_value_1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_5914__0, extractedValue_5924_value_1) ;
-      result_result = GALGAS_objectIR::class_func_literalInteger (constinArgument_inType, extractedValue_5924_value_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 141)) ;
+      GALGAS_omnibusType extractedValue_5901__0 ;
+      GALGAS_bigint extractedValue_5911_value_1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_5901__0, extractedValue_5911_value_1) ;
+      result_result = GALGAS_objectIR::class_func_literalInteger (constinArgument_inType, extractedValue_5911_value_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 141)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_6015__0 ;
-      GALGAS_string extractedValue_6017_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_6015__0, extractedValue_6017_llvmName_1) ;
-      result_result = GALGAS_objectIR::class_func_llvmNamedValue (constinArgument_inType, extractedValue_6017_llvmName_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 143)) ;
+      GALGAS_omnibusType extractedValue_6002__0 ;
+      GALGAS_string extractedValue_6004_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_6002__0, extractedValue_6004_llvmName_1) ;
+      result_result = GALGAS_objectIR::class_func_llvmNamedValue (constinArgument_inType, extractedValue_6004_llvmName_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 143)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_6106__0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_6106__0) ;
+      GALGAS_omnibusType extractedValue_6093__0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_6093__0) ;
       result_result = GALGAS_objectIR::class_func_zero (constinArgument_inType  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 145)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_6173__0 ;
-      GALGAS_sortedOperandIRList extractedValue_6196_values_1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_6173__0, extractedValue_6196_values_1) ;
-      result_result = GALGAS_objectIR::class_func_llvmStructureValue (constinArgument_inType, extractedValue_6196_values_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 147)) ;
+      GALGAS_omnibusType extractedValue_6160__0 ;
+      GALGAS_sortedOperandIRList extractedValue_6183_values_1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_6160__0, extractedValue_6183_values_1) ;
+      result_result = GALGAS_objectIR::class_func_llvmStructureValue (constinArgument_inType, extractedValue_6183_values_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 147)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_6300_size_0 ;
-      GALGAS_uint extractedValue_6311_index_1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_6300_size_0, extractedValue_6311_index_1) ;
-      result_result = GALGAS_objectIR::class_func_literalString (extractedValue_6300_size_0, extractedValue_6311_index_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 149)) ;
+      GALGAS_uint extractedValue_6287_size_0 ;
+      GALGAS_uint extractedValue_6298_index_1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_6287_size_0, extractedValue_6298_index_1) ;
+      result_result = GALGAS_objectIR::class_func_literalString (extractedValue_6287_size_0, extractedValue_6298_index_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 149)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_6417__0 ;
-      GALGAS_uint extractedValue_6419_size_1 ;
-      GALGAS_objectIR extractedValue_6424_value_2 ;
-      GALGAS_uint extractedValue_6430_index_3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_6417__0, extractedValue_6419_size_1, extractedValue_6424_value_2, extractedValue_6430_index_3) ;
-      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedStaticValue (constinArgument_inType, extractedValue_6419_size_1, extractedValue_6424_value_2, extractedValue_6430_index_3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 151)) ;
+      GALGAS_omnibusType extractedValue_6404__0 ;
+      GALGAS_uint extractedValue_6406_size_1 ;
+      GALGAS_objectIR extractedValue_6411_value_2 ;
+      GALGAS_uint extractedValue_6417_index_3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_6404__0, extractedValue_6406_size_1, extractedValue_6411_value_2, extractedValue_6417_index_3) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedStaticValue (constinArgument_inType, extractedValue_6406_size_1, extractedValue_6411_value_2, extractedValue_6417_index_3  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 151)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_6579__0 ;
-      GALGAS_uint extractedValue_6581_size_1 ;
-      GALGAS_objectIR extractedValue_6586_value_2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_6579__0, extractedValue_6581_size_1, extractedValue_6586_value_2) ;
-      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedDynamicValue (constinArgument_inType, extractedValue_6581_size_1, extractedValue_6586_value_2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 153)) ;
+      GALGAS_omnibusType extractedValue_6566__0 ;
+      GALGAS_uint extractedValue_6568_size_1 ;
+      GALGAS_objectIR extractedValue_6573_value_2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_6566__0, extractedValue_6568_size_1, extractedValue_6573_value_2) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayRepeatedDynamicValue (constinArgument_inType, extractedValue_6568_size_1, extractedValue_6573_value_2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 153)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_6715__0 ;
-      GALGAS_operandIRList extractedValue_6732_values_1 ;
-      GALGAS_uint extractedValue_6739_index_2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_6715__0, extractedValue_6732_values_1, extractedValue_6739_index_2) ;
-      result_result = GALGAS_objectIR::class_func_llvmArrayStaticValues (constinArgument_inType, extractedValue_6732_values_1, extractedValue_6739_index_2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 155)) ;
+      GALGAS_omnibusType extractedValue_6702__0 ;
+      GALGAS_operandIRList extractedValue_6719_values_1 ;
+      GALGAS_uint extractedValue_6726_index_2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_6702__0, extractedValue_6719_values_1, extractedValue_6726_index_2) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayStaticValues (constinArgument_inType, extractedValue_6719_values_1, extractedValue_6726_index_2  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 155)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_6860__0 ;
-      GALGAS_operandIRList extractedValue_6877_values_1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_6860__0, extractedValue_6877_values_1) ;
-      result_result = GALGAS_objectIR::class_func_llvmArrayDynamicValues (constinArgument_inType, extractedValue_6877_values_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 157)) ;
+      GALGAS_omnibusType extractedValue_6847__0 ;
+      GALGAS_operandIRList extractedValue_6864_values_1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_6847__0, extractedValue_6864_values_1) ;
+      result_result = GALGAS_objectIR::class_func_llvmArrayDynamicValues (constinArgument_inType, extractedValue_6864_values_1  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 157)) ;
     }
     break ;
   }
@@ -12982,94 +13276,94 @@ GALGAS_string extensionGetter_name (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_7220__0 ;
-      GALGAS_string extractedValue_7222_llvmName_1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_7220__0, extractedValue_7222_llvmName_1) ;
-      result_result = extractedValue_7222_llvmName_1 ;
+      GALGAS_omnibusType extractedValue_7207__0 ;
+      GALGAS_string extractedValue_7209_llvmName_1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_7207__0, extractedValue_7209_llvmName_1) ;
+      result_result = extractedValue_7209_llvmName_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_7265__0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_7265__0) ;
+      GALGAS_omnibusType extractedValue_7252__0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_7252__0) ;
       result_result = GALGAS_string ("zeroinitializer") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_7310__0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_7310__0) ;
+      GALGAS_omnibusType extractedValue_7297__0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_7297__0) ;
       result_result = GALGAS_string ("null") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_7354__0 ;
-      GALGAS_bigint extractedValue_7364_value_1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_7354__0, extractedValue_7364_value_1) ;
-      result_result = extractedValue_7364_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 169)) ;
+      GALGAS_omnibusType extractedValue_7341__0 ;
+      GALGAS_bigint extractedValue_7351_value_1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_7341__0, extractedValue_7351_value_1) ;
+      result_result = extractedValue_7351_value_1.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 169)) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_7420__0 ;
-      GALGAS_string extractedValue_7422_name_1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_7420__0, extractedValue_7422_name_1) ;
-      result_result = extractedValue_7422_name_1 ;
+      GALGAS_omnibusType extractedValue_7407__0 ;
+      GALGAS_string extractedValue_7409_name_1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_7407__0, extractedValue_7409_name_1) ;
+      result_result = extractedValue_7409_name_1 ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_7471__0 ;
-      GALGAS_sortedOperandIRList extractedValue_7473__1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_7471__0, extractedValue_7473__1) ;
+      GALGAS_omnibusType extractedValue_7458__0 ;
+      GALGAS_sortedOperandIRList extractedValue_7460__1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_7458__0, extractedValue_7460__1) ;
       result_result = GALGAS_string ("{...}") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_7526__0 ;
-      GALGAS_operandIRList extractedValue_7526__1 ;
-      GALGAS_uint extractedValue_7526__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_7526__0, extractedValue_7526__1, extractedValue_7526__2) ;
+      GALGAS_omnibusType extractedValue_7513__0 ;
+      GALGAS_operandIRList extractedValue_7513__1 ;
+      GALGAS_uint extractedValue_7513__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_7513__0, extractedValue_7513__1, extractedValue_7513__2) ;
       result_result = GALGAS_string ("[...]") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_7580__0 ;
-      GALGAS_operandIRList extractedValue_7580__1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_7580__0, extractedValue_7580__1) ;
+      GALGAS_omnibusType extractedValue_7567__0 ;
+      GALGAS_operandIRList extractedValue_7567__1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_7567__0, extractedValue_7567__1) ;
       result_result = GALGAS_string ("[...]") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_7640__0 ;
-      GALGAS_uint extractedValue_7640__1 ;
-      GALGAS_objectIR extractedValue_7640__2 ;
-      GALGAS_uint extractedValue_7640__3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_7640__0, extractedValue_7640__1, extractedValue_7640__2, extractedValue_7640__3) ;
+      GALGAS_omnibusType extractedValue_7627__0 ;
+      GALGAS_uint extractedValue_7627__1 ;
+      GALGAS_objectIR extractedValue_7627__2 ;
+      GALGAS_uint extractedValue_7627__3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_7627__0, extractedValue_7627__1, extractedValue_7627__2, extractedValue_7627__3) ;
       result_result = GALGAS_string ("[...]") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_7701__0 ;
-      GALGAS_uint extractedValue_7701__1 ;
-      GALGAS_objectIR extractedValue_7701__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_7701__0, extractedValue_7701__1, extractedValue_7701__2) ;
+      GALGAS_omnibusType extractedValue_7688__0 ;
+      GALGAS_uint extractedValue_7688__1 ;
+      GALGAS_objectIR extractedValue_7688__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_7688__0, extractedValue_7688__1, extractedValue_7688__2) ;
       result_result = GALGAS_string ("[...]") ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_7752_size_0 ;
-      GALGAS_uint extractedValue_7763_index_1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_7752_size_0, extractedValue_7763_index_1) ;
-      GALGAS_string var_sizeStr_7780 = extractedValue_7752_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 177)) ;
-      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_7780, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (var_sizeStr_7780, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)) ;
-      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_7763_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)) ;
+      GALGAS_uint extractedValue_7739_size_0 ;
+      GALGAS_uint extractedValue_7750_index_1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_7739_size_0, extractedValue_7750_index_1) ;
+      GALGAS_string var_sizeStr_7767 = extractedValue_7739_size_0.getter_string (SOURCE_FILE ("object-intermediate-representation.galgas", 177)) ;
+      result_result = GALGAS_string ("getelementptr inbounds ([").add_operation (var_sizeStr_7767, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8], ["), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (var_sizeStr_7767, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)).add_operation (GALGAS_string (" x i8]* "), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 178)) ;
+      result_result.plusAssign_operation(function_literalCharacterArrayName (extractedValue_7750_index_1, inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)).add_operation (GALGAS_string (", i32 0, i32 0)"), inCompiler COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)), inCompiler  COMMA_SOURCE_FILE ("object-intermediate-representation.galgas", 179)) ;
     }
     break ;
   }
@@ -13103,91 +13397,91 @@ GALGAS_bool extensionGetter_isStatic (const GALGAS_objectIR & inObject,
     break ;
   case GALGAS_objectIR::Enumeration::enum_reference:
     {
-      GALGAS_omnibusType extractedValue_8231__0 ;
-      GALGAS_string extractedValue_8232__1 ;
-      temp_0.getAssociatedValuesFor_reference (extractedValue_8231__0, extractedValue_8232__1) ;
+      GALGAS_omnibusType extractedValue_8218__0 ;
+      GALGAS_string extractedValue_8219__1 ;
+      temp_0.getAssociatedValuesFor_reference (extractedValue_8218__0, extractedValue_8219__1) ;
       result_result = GALGAS_bool (false) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_zero:
     {
-      GALGAS_omnibusType extractedValue_8265__0 ;
-      temp_0.getAssociatedValuesFor_zero (extractedValue_8265__0) ;
+      GALGAS_omnibusType extractedValue_8252__0 ;
+      temp_0.getAssociatedValuesFor_zero (extractedValue_8252__0) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_null:
     {
-      GALGAS_omnibusType extractedValue_8297__0 ;
-      temp_0.getAssociatedValuesFor_null (extractedValue_8297__0) ;
+      GALGAS_omnibusType extractedValue_8284__0 ;
+      temp_0.getAssociatedValuesFor_null (extractedValue_8284__0) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalInteger:
     {
-      GALGAS_omnibusType extractedValue_8339__0 ;
-      GALGAS_bigint extractedValue_8341__1 ;
-      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_8339__0, extractedValue_8341__1) ;
+      GALGAS_omnibusType extractedValue_8326__0 ;
+      GALGAS_bigint extractedValue_8328__1 ;
+      temp_0.getAssociatedValuesFor_literalInteger (extractedValue_8326__0, extractedValue_8328__1) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GALGAS_omnibusType extractedValue_8383__0 ;
-      GALGAS_string extractedValue_8385__1 ;
-      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_8383__0, extractedValue_8385__1) ;
+      GALGAS_omnibusType extractedValue_8370__0 ;
+      GALGAS_string extractedValue_8372__1 ;
+      temp_0.getAssociatedValuesFor_llvmNamedValue (extractedValue_8370__0, extractedValue_8372__1) ;
       result_result = GALGAS_bool (false) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GALGAS_omnibusType extractedValue_8432__0 ;
-      GALGAS_sortedOperandIRList extractedValue_8434__1 ;
-      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_8432__0, extractedValue_8434__1) ;
+      GALGAS_omnibusType extractedValue_8419__0 ;
+      GALGAS_sortedOperandIRList extractedValue_8421__1 ;
+      temp_0.getAssociatedValuesFor_llvmStructureValue (extractedValue_8419__0, extractedValue_8421__1) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GALGAS_omnibusType extractedValue_8484__0 ;
-      GALGAS_operandIRList extractedValue_8484__1 ;
-      GALGAS_uint extractedValue_8484__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_8484__0, extractedValue_8484__1, extractedValue_8484__2) ;
+      GALGAS_omnibusType extractedValue_8471__0 ;
+      GALGAS_operandIRList extractedValue_8471__1 ;
+      GALGAS_uint extractedValue_8471__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_8471__0, extractedValue_8471__1, extractedValue_8471__2) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GALGAS_omnibusType extractedValue_8535__0 ;
-      GALGAS_operandIRList extractedValue_8535__1 ;
-      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_8535__0, extractedValue_8535__1) ;
+      GALGAS_omnibusType extractedValue_8522__0 ;
+      GALGAS_operandIRList extractedValue_8522__1 ;
+      temp_0.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_8522__0, extractedValue_8522__1) ;
       result_result = GALGAS_bool (false) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_literalString:
     {
-      GALGAS_uint extractedValue_8578__0 ;
-      GALGAS_uint extractedValue_8580__1 ;
-      temp_0.getAssociatedValuesFor_literalString (extractedValue_8578__0, extractedValue_8580__1) ;
+      GALGAS_uint extractedValue_8565__0 ;
+      GALGAS_uint extractedValue_8567__1 ;
+      temp_0.getAssociatedValuesFor_literalString (extractedValue_8565__0, extractedValue_8567__1) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GALGAS_omnibusType extractedValue_8637__0 ;
-      GALGAS_uint extractedValue_8637__1 ;
-      GALGAS_objectIR extractedValue_8637__2 ;
-      GALGAS_uint extractedValue_8637__3 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_8637__0, extractedValue_8637__1, extractedValue_8637__2, extractedValue_8637__3) ;
+      GALGAS_omnibusType extractedValue_8624__0 ;
+      GALGAS_uint extractedValue_8624__1 ;
+      GALGAS_objectIR extractedValue_8624__2 ;
+      GALGAS_uint extractedValue_8624__3 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_8624__0, extractedValue_8624__1, extractedValue_8624__2, extractedValue_8624__3) ;
       result_result = GALGAS_bool (true) ;
     }
     break ;
   case GALGAS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GALGAS_omnibusType extractedValue_8695__0 ;
-      GALGAS_uint extractedValue_8695__1 ;
-      GALGAS_objectIR extractedValue_8695__2 ;
-      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_8695__0, extractedValue_8695__1, extractedValue_8695__2) ;
+      GALGAS_omnibusType extractedValue_8682__0 ;
+      GALGAS_uint extractedValue_8682__1 ;
+      GALGAS_objectIR extractedValue_8682__2 ;
+      temp_0.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_8682__0, extractedValue_8682__1, extractedValue_8682__2) ;
       result_result = GALGAS_bool (false) ;
     }
     break ;
@@ -14590,19 +14884,19 @@ void extensionSetter_appendTrunc (GALGAS_instructionListIR & ioObject,
   if (kBoolTrue == test_0) {
     test_0 = ioArgument_ioObject.getter_isLiteralInteger (SOURCE_FILE ("intermediate-trunc.galgas", 8)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_bigint var_value_357 ;
-      GALGAS_omnibusType joker_330 ; // Joker input parameter
-      ioArgument_ioObject.method_literalInteger (joker_330, var_value_357, inCompiler COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 9)) ;
-      ioArgument_ioObject = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_value_357  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 10)) ;
+      GALGAS_bigint var_value_364 ;
+      GALGAS_omnibusType joker_337 ; // Joker input parameter
+      ioArgument_ioObject.method_extractLiteralInteger (joker_337, var_value_364, inCompiler COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 9)) ;
+      ioArgument_ioObject = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_value_364  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 10)) ;
     }
   }
   if (kBoolFalse == test_0) {
-    GALGAS_objectIR var_result_492 ;
+    GALGAS_objectIR var_result_499 ;
     {
-    routine_getNewTempValue_3F__26__21_ (constinArgument_inResultType, ioArgument_ioTemporaries, var_result_492, inCompiler  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 12)) ;
+    routine_getNewTempValue_3F__26__21_ (constinArgument_inResultType, ioArgument_ioTemporaries, var_result_499, inCompiler  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 12)) ;
     }
-    ioObject.addAssign_operation (GALGAS_truncIR::init_21__21_ (var_result_492, ioArgument_ioObject, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13)) ;
-    ioArgument_ioObject = var_result_492 ;
+    ioObject.addAssign_operation (GALGAS_truncIR::init_21__21_ (var_result_499, ioArgument_ioObject, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-trunc.galgas", 13)) ;
+    ioArgument_ioObject = var_result_499 ;
   }
 }
 
@@ -15644,21 +15938,21 @@ void extensionSetter_appendLogicalShiftRight (GALGAS_instructionListIR & ioObjec
   if (kBoolTrue == test_0) {
     test_0 = ioArgument_ioResult.getter_isLiteralInteger (SOURCE_FILE ("intermediate-logical-shift-right.galgas", 7)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_omnibusType var_type_238 ;
-      GALGAS_bigint var_value_262 ;
-      ioArgument_ioResult.method_literalInteger (var_type_238, var_value_262, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
-      ioArgument_ioResult = GALGAS_objectIR::class_func_literalInteger (var_type_238, var_value_262.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
+      GALGAS_omnibusType var_type_245 ;
+      GALGAS_bigint var_value_269 ;
+      ioArgument_ioResult.method_extractLiteralInteger (var_type_245, var_value_269, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
+      ioArgument_ioResult = GALGAS_objectIR::class_func_literalInteger (var_type_245, var_value_269.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
     }
   }
   if (kBoolFalse == test_0) {
     {
     extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 11)) ;
     }
-    GALGAS_objectIR var_source_422 = ioArgument_ioResult ;
+    GALGAS_objectIR var_source_429 = ioArgument_ioResult ;
     {
-    routine_getNewTempValue_3F__26__21_ (extensionGetter_type (var_source_422, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
+    routine_getNewTempValue_3F__26__21_ (extensionGetter_type (var_source_429, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
     }
-    ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::init_21__21__21_ (ioArgument_ioResult, var_source_422, constinArgument_inShiftAmount, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
+    ioObject.addAssign_operation (GALGAS_logicalRightShiftIR::init_21__21__21_ (ioArgument_ioResult, var_source_429, constinArgument_inShiftAmount, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
   }
 }
 
@@ -16139,366 +16433,6 @@ GALGAS_binaryOperationIR_2D_weak GALGAS_binaryOperationIR_2D_weak::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("binaryOperationIR-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListIR appendShortCircuitAndOperation'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendShortCircuitAndOperation (GALGAS_instructionListIR & ioObject,
-                                                     const GALGAS_objectIR constinArgument_inTargetOperand,
-                                                     const GALGAS_string constinArgument_inLeftOperandLLVMName,
-                                                     const GALGAS_instructionListIR constinArgument_inLeftInstructionList,
-                                                     const GALGAS_string constinArgument_inRightOperandLLVMName,
-                                                     const GALGAS_instructionListIR constinArgument_inRightInstructionList,
-                                                     const GALGAS_location constinArgument_inLocation,
-                                                     Compiler * inCompiler
-                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssign_operation (GALGAS_shortCircuitAndOperationIR::init_21__21__21__21__21__21_ (constinArgument_inTargetOperand, constinArgument_inLeftOperandLLVMName, constinArgument_inLeftInstructionList, constinArgument_inRightOperandLLVMName, constinArgument_inRightInstructionList, constinArgument_inLocation, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-short-circuit-and.galgas", 11)) ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-// @shortCircuitAndOperationIR reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_shortCircuitAndOperationIR::cPtr_shortCircuitAndOperationIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mTargetOperand (),
-mProperty_mLeftOperandLLVMName (),
-mProperty_mLeftInstructionList (),
-mProperty_mRightOperandLLVMName (),
-mProperty_mRightInstructionList (),
-mProperty_mLocation () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_shortCircuitAndOperationIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mTargetOperand.printNonNullClassInstanceProperties ("mTargetOperand") ;
-    mProperty_mLeftOperandLLVMName.printNonNullClassInstanceProperties ("mLeftOperandLLVMName") ;
-    mProperty_mLeftInstructionList.printNonNullClassInstanceProperties ("mLeftInstructionList") ;
-    mProperty_mRightOperandLLVMName.printNonNullClassInstanceProperties ("mRightOperandLLVMName") ;
-    mProperty_mRightInstructionList.printNonNullClassInstanceProperties ("mRightInstructionList") ;
-    mProperty_mLocation.printNonNullClassInstanceProperties ("mLocation") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_shortCircuitAndOperationIR::objectCompare (const GALGAS_shortCircuitAndOperationIR & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR::GALGAS_shortCircuitAndOperationIR (void) :
-GALGAS_abstractInstructionIR () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::
-init_21__21__21__21__21__21_ (const GALGAS_objectIR & in_mTargetOperand,
-                              const GALGAS_string & in_mLeftOperandLLVMName,
-                              const GALGAS_instructionListIR & in_mLeftInstructionList,
-                              const GALGAS_string & in_mRightOperandLLVMName,
-                              const GALGAS_instructionListIR & in_mRightInstructionList,
-                              const GALGAS_location & in_mLocation,
-                              Compiler * inCompiler
-                              COMMA_LOCATION_ARGS) {
-  cPtr_shortCircuitAndOperationIR * object = nullptr ;
-  macroMyNew (object, cPtr_shortCircuitAndOperationIR (inCompiler COMMA_THERE)) ;
-  object->shortCircuitAndOperationIR_init_21__21__21__21__21__21_ (in_mTargetOperand, in_mLeftOperandLLVMName, in_mLeftInstructionList, in_mRightOperandLLVMName, in_mRightInstructionList, in_mLocation, inCompiler) ;
-  const GALGAS_shortCircuitAndOperationIR result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_shortCircuitAndOperationIR::
-shortCircuitAndOperationIR_init_21__21__21__21__21__21_ (const GALGAS_objectIR & in_mTargetOperand,
-                                                         const GALGAS_string & in_mLeftOperandLLVMName,
-                                                         const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                                         const GALGAS_string & in_mRightOperandLLVMName,
-                                                         const GALGAS_instructionListIR & in_mRightInstructionList,
-                                                         const GALGAS_location & in_mLocation,
-                                                         Compiler * /* inCompiler */) {
-  mProperty_mTargetOperand = in_mTargetOperand ;
-  mProperty_mLeftOperandLLVMName = in_mLeftOperandLLVMName ;
-  mProperty_mLeftInstructionList = in_mLeftInstructionList ;
-  mProperty_mRightOperandLLVMName = in_mRightOperandLLVMName ;
-  mProperty_mRightInstructionList = in_mRightInstructionList ;
-  mProperty_mLocation = in_mLocation ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR::GALGAS_shortCircuitAndOperationIR (const cPtr_shortCircuitAndOperationIR * inSourcePtr) :
-GALGAS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_shortCircuitAndOperationIR) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::class_func_new (const GALGAS_objectIR & in_mTargetOperand,
-                                                                                     const GALGAS_string & in_mLeftOperandLLVMName,
-                                                                                     const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                                                                     const GALGAS_string & in_mRightOperandLLVMName,
-                                                                                     const GALGAS_instructionListIR & in_mRightInstructionList,
-                                                                                     const GALGAS_location & in_mLocation
-                                                                                     COMMA_LOCATION_ARGS) {
-  GALGAS_shortCircuitAndOperationIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_shortCircuitAndOperationIR (in_mTargetOperand, in_mLeftOperandLLVMName, in_mLeftInstructionList, in_mRightOperandLLVMName, in_mRightInstructionList, in_mLocation COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_objectIR GALGAS_shortCircuitAndOperationIR::readProperty_mTargetOperand (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_objectIR () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mTargetOperand ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mTargetOperand (const GALGAS_objectIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mTargetOperand = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_string GALGAS_shortCircuitAndOperationIR::readProperty_mLeftOperandLLVMName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_string () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mLeftOperandLLVMName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mLeftOperandLLVMName (const GALGAS_string & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mLeftOperandLLVMName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::readProperty_mLeftInstructionList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_instructionListIR () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mLeftInstructionList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mLeftInstructionList (const GALGAS_instructionListIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mLeftInstructionList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_string GALGAS_shortCircuitAndOperationIR::readProperty_mRightOperandLLVMName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_string () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mRightOperandLLVMName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mRightOperandLLVMName (const GALGAS_string & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mRightOperandLLVMName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_instructionListIR GALGAS_shortCircuitAndOperationIR::readProperty_mRightInstructionList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_instructionListIR () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mRightInstructionList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mRightInstructionList (const GALGAS_instructionListIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mRightInstructionList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_location GALGAS_shortCircuitAndOperationIR::readProperty_mLocation (void) const {
-  if (nullptr == mObjectPtr) {
-    return GALGAS_location () ;
-  }else{
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    return p->mProperty_mLocation ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GALGAS_shortCircuitAndOperationIR::setProperty_mLocation (const GALGAS_location & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_shortCircuitAndOperationIR * p = (cPtr_shortCircuitAndOperationIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_shortCircuitAndOperationIR) ;
-    p->mProperty_mLocation = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @shortCircuitAndOperationIR class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_shortCircuitAndOperationIR::cPtr_shortCircuitAndOperationIR (const GALGAS_objectIR & in_mTargetOperand,
-                                                                  const GALGAS_string & in_mLeftOperandLLVMName,
-                                                                  const GALGAS_instructionListIR & in_mLeftInstructionList,
-                                                                  const GALGAS_string & in_mRightOperandLLVMName,
-                                                                  const GALGAS_instructionListIR & in_mRightInstructionList,
-                                                                  const GALGAS_location & in_mLocation
-                                                                  COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mTargetOperand (),
-mProperty_mLeftOperandLLVMName (),
-mProperty_mLeftInstructionList (),
-mProperty_mRightOperandLLVMName (),
-mProperty_mRightInstructionList (),
-mProperty_mLocation () {
-  mProperty_mTargetOperand = in_mTargetOperand ;
-  mProperty_mLeftOperandLLVMName = in_mLeftOperandLLVMName ;
-  mProperty_mLeftInstructionList = in_mLeftInstructionList ;
-  mProperty_mRightOperandLLVMName = in_mRightOperandLLVMName ;
-  mProperty_mRightInstructionList = in_mRightInstructionList ;
-  mProperty_mLocation = in_mLocation ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_shortCircuitAndOperationIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ;
-}
-
-void cPtr_shortCircuitAndOperationIR::description (String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString.appendCString ("[@shortCircuitAndOperationIR:") ;
-  mProperty_mTargetOperand.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mLeftOperandLLVMName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mLeftInstructionList.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mRightOperandLLVMName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mRightInstructionList.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mLocation.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_shortCircuitAndOperationIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_shortCircuitAndOperationIR (mProperty_mTargetOperand, mProperty_mLeftOperandLLVMName, mProperty_mLeftInstructionList, mProperty_mRightOperandLLVMName, mProperty_mRightInstructionList, mProperty_mLocation COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @shortCircuitAndOperationIR generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ("shortCircuitAndOperationIR",
-                                                                                  & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_shortCircuitAndOperationIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_shortCircuitAndOperationIR ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_shortCircuitAndOperationIR::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_shortCircuitAndOperationIR (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_shortCircuitAndOperationIR GALGAS_shortCircuitAndOperationIR::extractObject (const GALGAS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GALGAS_shortCircuitAndOperationIR result ;
-  const GALGAS_shortCircuitAndOperationIR * p = (const GALGAS_shortCircuitAndOperationIR *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_shortCircuitAndOperationIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("shortCircuitAndOperationIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

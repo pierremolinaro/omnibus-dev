@@ -36,7 +36,7 @@ proc handleArraySubscriptNew
     !?indexResult
   ]  
   if [indexResult isLiteralInteger] then # Static expression
-    [indexResult literalInteger ?1* ?value:let @bigint indexValue]
+    [indexResult extractLiteralInteger ?1* ?value:let @bigint indexValue]
     if (indexValue < 0) || (indexValue >= inArraySize) then
       error inErrorLocation : "static index should be positive and < " + inArraySize : outIndexIR
     else

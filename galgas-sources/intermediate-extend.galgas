@@ -25,7 +25,7 @@ override method @extendIR llvmInstructionCode
   if [kind isLlvmType] then
     ioLLVMcode += "zext"
   else
-    [kind integer ?2* ?unsigned:let sourceIsUnsigned ?1*]
+    [kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?1*]
     ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
   end
   ioLLVMcode += " " + [self.mSource  llvmTypeName] + " " + [self.mSource llvmName] + " to " + [self.mResult llvmTypeName] + "\n"

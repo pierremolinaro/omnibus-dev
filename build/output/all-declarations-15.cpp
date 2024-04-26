@@ -634,10 +634,10 @@ void cPtr_compileTimeInfixOperatorUsage::method_generateCode (const GALGAS_objec
                                                               GALGAS_objectIR & outArgument_outResultValue,
                                                               Compiler * inCompiler
                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint var_result_11606 ;
+  GALGAS_bigint var_result_11620 ;
   const GALGAS_compileTimeInfixOperatorUsage temp_0 = this ;
-  callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_0.ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_11606, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 293)) ;
-  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_11606  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 294)) ;
+  callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_0.ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_11620, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 293)) ;
+  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_11620  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 294)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -655,18 +655,18 @@ void cPtr_compileTimeInfixInfEqualOperatorUsage::method_generateCode (const GALG
                                                                       GALGAS_objectIR & outArgument_outResultValue,
                                                                       Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint var_result_12598 ;
+  GALGAS_bigint var_result_12612 ;
   const GALGAS_compileTimeInfixInfEqualOperatorUsage temp_0 = this ;
-  callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_0.readProperty_mEqualOperatorUsage ().ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_12598, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 316)) ;
+  callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_0.readProperty_mEqualOperatorUsage ().ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_12612, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 316)) ;
   enumGalgasBool test_1 = kBoolTrue ;
   if (kBoolTrue == test_1) {
-    test_1 = GALGAS_bool (ComparisonKind::equal, var_result_12598.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 317)))).boolEnum () ;
+    test_1 = GALGAS_bool (ComparisonKind::equal, var_result_12612.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 317)))).boolEnum () ;
     if (kBoolTrue == test_1) {
       const GALGAS_compileTimeInfixInfEqualOperatorUsage temp_2 = this ;
-      callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_2.readProperty_mLessThanOperatorUsage ().ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_12598, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 318)) ;
+      callExtensionMethod_eval ((cPtr_compileTimeInfixOperatorUsage *) temp_2.readProperty_mLessThanOperatorUsage ().ptr (), constinArgument_inLeftOperand, constinArgument_inRightOperand, var_result_12612, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 318)) ;
     }
   }
-  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_12598  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 320)) ;
+  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_12612  COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 320)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -1301,19 +1301,19 @@ void cPtr_compileTimePrefixOperatorUsage::method_generateCode (const GALGAS_obje
                                                                GALGAS_objectIR & outArgument_outResultValue,
                                                                Compiler * inCompiler
                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_bigint var_receiverValue_7693 ;
-  GALGAS_omnibusType joker_7677_1 ; // Joker input parameter
-  constinArgument_inReceiverOperand.method_literalInteger (joker_7677_1, var_receiverValue_7693, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 175)) ;
+  GALGAS_bigint var_receiverValue_7700 ;
+  GALGAS_omnibusType joker_7684_1 ; // Joker input parameter
+  constinArgument_inReceiverOperand.method_extractLiteralInteger (joker_7684_1, var_receiverValue_7700, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 175)) ;
   GALGAS_ctMap temp_0 = GALGAS_ctMap::init (inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 176)) ;
-  GALGAS_ctMap var_varMap_7721 = temp_0 ;
+  GALGAS_ctMap var_varMap_7728 = temp_0 ;
   {
   const GALGAS_compileTimePrefixOperatorUsage temp_1 = this ;
-  var_varMap_7721.setter_insertKey (temp_1.readProperty_mReceiverOperandName (), var_receiverValue_7693, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 177)) ;
+  var_varMap_7728.setter_insertKey (temp_1.readProperty_mReceiverOperandName (), var_receiverValue_7700, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 177)) ;
   }
-  GALGAS_bigint var_result_7877 ;
+  GALGAS_bigint var_result_7884 ;
   const GALGAS_compileTimePrefixOperatorUsage temp_2 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mExpression ().ptr (), var_varMap_7721, var_result_7877, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 178)) ;
-  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_7877  COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 179)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mExpression ().ptr (), var_varMap_7728, var_result_7884, inCompiler COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 178)) ;
+  outArgument_outResultValue = GALGAS_objectIR::class_func_literalInteger (constinArgument_inResultType, var_result_7884  COMMA_SOURCE_FILE ("prefix-operator-compile-time.galgas", 179)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -2349,13 +2349,13 @@ void cPtr_sliceAssignmentInstructionAST::method_instructionSemanticAnalysis (con
     }
   }
   if (kBoolFalse == test_1) {
-    GALGAS_bool var_unsigned_4849 ;
-    GALGAS_bigint joker_4831_2 ; // Joker input parameter
-    GALGAS_bigint joker_4831_1 ; // Joker input parameter
-    var_resultType_4537.readProperty_kind ().method_integer (joker_4831_2, joker_4831_1, var_unsigned_4849, var_bitCount_4660, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 119)) ;
+    GALGAS_bool var_unsigned_4856 ;
+    GALGAS_bigint joker_4838_2 ; // Joker input parameter
+    GALGAS_bigint joker_4838_1 ; // Joker input parameter
+    var_resultType_4537.readProperty_kind ().method_extractInteger (joker_4838_2, joker_4838_1, var_unsigned_4856, var_bitCount_4660, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 119)) ;
     enumGalgasBool test_4 = kBoolTrue ;
     if (kBoolTrue == test_4) {
-      test_4 = var_unsigned_4849.operator_not (SOURCE_FILE ("instruction-slice-assignment.galgas", 120)).boolEnum () ;
+      test_4 = var_unsigned_4856.operator_not (SOURCE_FILE ("instruction-slice-assignment.galgas", 120)).boolEnum () ;
       if (kBoolTrue == test_4) {
         const GALGAS_sliceAssignmentInstructionAST temp_5 = this ;
         TC_Array <FixItDescription> fixItArray6 ;
@@ -2364,82 +2364,82 @@ void cPtr_sliceAssignmentInstructionAST::method_instructionSemanticAnalysis (con
       }
     }
   }
-  GALGAS_objectIR var_sourceOperand_5420 ;
+  GALGAS_objectIR var_sourceOperand_5427 ;
   const GALGAS_sliceAssignmentInstructionAST temp_7 = this ;
-  callExtensionMethod_analyzeExpression ((cPtr_expressionAST *) temp_7.readProperty_mSourceExpression ().ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_resultType_4537, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_5420, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 125)) ;
+  callExtensionMethod_analyzeExpression ((cPtr_expressionAST *) temp_7.readProperty_mSourceExpression ().ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_resultType_4537, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_sourceOperand_5427, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 125)) ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_sourceOperand_5420, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 139)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_sourceOperand_5427, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 139)) ;
   }
   enumGalgasBool test_8 = kBoolTrue ;
   if (kBoolTrue == test_8) {
-    test_8 = var_sourceOperand_5420.getter_isLiteralInteger (SOURCE_FILE ("instruction-slice-assignment.galgas", 141)).boolEnum () ;
+    test_8 = var_sourceOperand_5427.getter_isLiteralInteger (SOURCE_FILE ("instruction-slice-assignment.galgas", 141)).boolEnum () ;
     if (kBoolTrue == test_8) {
-      GALGAS_bigint var_value_5737 ;
-      GALGAS_omnibusType joker_5714_1 ; // Joker input parameter
-      var_sourceOperand_5420.method_literalInteger (joker_5714_1, var_value_5737, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 142)) ;
+      GALGAS_bigint var_value_5751 ;
+      GALGAS_omnibusType joker_5728_1 ; // Joker input parameter
+      var_sourceOperand_5427.method_extractLiteralInteger (joker_5728_1, var_value_5751, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 142)) ;
       enumGalgasBool test_9 = kBoolTrue ;
       if (kBoolTrue == test_9) {
-        test_9 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_value_5737.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 143)).left_shift_operation (var_bitCount_4660, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 143)))).boolEnum () ;
+        test_9 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_value_5751.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 143)).left_shift_operation (var_bitCount_4660, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 143)))).boolEnum () ;
         if (kBoolTrue == test_9) {
           const GALGAS_sliceAssignmentInstructionAST temp_10 = this ;
           TC_Array <FixItDescription> fixItArray11 ;
           inCompiler->emitSemanticError (temp_10.readProperty_mSourceExpressionLocation (), GALGAS_string ("static value too large"), fixItArray11  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 144)) ;
-          var_sourceOperand_5420.drop () ; // Release error dropped variable
+          var_sourceOperand_5427.drop () ; // Release error dropped variable
         }
       }
       if (kBoolFalse == test_9) {
-        var_sourceOperand_5420 = GALGAS_objectIR::class_func_literalInteger (var_resultType_4537, var_value_5737  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 146)) ;
+        var_sourceOperand_5427 = GALGAS_objectIR::class_func_literalInteger (var_resultType_4537, var_value_5751  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 146)) ;
       }
     }
   }
-  GALGAS_uint var_rightShiftAmount_5986 = var_bitCount_4660 ;
+  GALGAS_uint var_rightShiftAmount_6000 = var_bitCount_4660 ;
   const GALGAS_sliceAssignmentInstructionAST temp_12 = this ;
-  cEnumerator_sliceAssignmentListAST enumerator_6035 (temp_12.readProperty_mSliceAssignmentList (), EnumerationOrder::up) ;
-  while (enumerator_6035.hasCurrentObject ()) {
-    GALGAS_objectIR var_sourceOperandForSlicing_6086 = var_sourceOperand_5420 ;
-    GALGAS_lstring var_sliceTypeName_6167 ;
-    GALGAS_uint var_sliceWidth_6195 ;
+  cEnumerator_sliceAssignmentListAST enumerator_6049 (temp_12.readProperty_mSliceAssignmentList (), EnumerationOrder::up) ;
+  while (enumerator_6049.hasCurrentObject ()) {
+    GALGAS_objectIR var_sourceOperandForSlicing_6100 = var_sourceOperand_5427 ;
+    GALGAS_lstring var_sliceTypeName_6181 ;
+    GALGAS_uint var_sliceWidth_6209 ;
     enumGalgasBool test_13 = kBoolTrue ;
     if (kBoolTrue == test_13) {
-      test_13 = GALGAS_bool (ComparisonKind::equal, enumerator_6035.current_mSliceWidth (HERE).readProperty_string ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
+      test_13 = GALGAS_bool (ComparisonKind::equal, enumerator_6049.current_mSliceWidth (HERE).readProperty_string ().objectCompare (GALGAS_string::makeEmptyString ())).boolEnum () ;
       if (kBoolTrue == test_13) {
         TC_Array <FixItDescription> fixItArray14 ;
-        inCompiler->emitSemanticError (enumerator_6035.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("anonymous selector not allowed here"), fixItArray14  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 157)) ;
-        var_sliceWidth_6195.drop () ; // Release error dropped variable
-        var_sliceTypeName_6167.drop () ; // Release error dropped variable
+        inCompiler->emitSemanticError (enumerator_6049.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("anonymous selector not allowed here"), fixItArray14  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 157)) ;
+        var_sliceWidth_6209.drop () ; // Release error dropped variable
+        var_sliceTypeName_6181.drop () ; // Release error dropped variable
       }
     }
     if (kBoolFalse == test_13) {
       enumGalgasBool test_15 = kBoolTrue ;
       if (kBoolTrue == test_15) {
-        test_15 = GALGAS_bool (ComparisonKind::equal, enumerator_6035.current_mSliceWidth (HERE).readProperty_string ().objectCompare (GALGAS_string ("b"))).boolEnum () ;
+        test_15 = GALGAS_bool (ComparisonKind::equal, enumerator_6049.current_mSliceWidth (HERE).readProperty_string ().objectCompare (GALGAS_string ("b"))).boolEnum () ;
         if (kBoolTrue == test_15) {
-          var_sliceWidth_6195 = GALGAS_uint (uint32_t (1U)) ;
+          var_sliceWidth_6209 = GALGAS_uint (uint32_t (1U)) ;
           const GALGAS_sliceAssignmentInstructionAST temp_16 = this ;
-          var_sliceTypeName_6167 = GALGAS_lstring::init_21__21_ (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 160)), temp_16.readProperty_mTypeName ().readProperty_location (), inCompiler COMMA_HERE) ;
+          var_sliceTypeName_6181 = GALGAS_lstring::init_21__21_ (function_boolTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 160)), temp_16.readProperty_mTypeName ().readProperty_location (), inCompiler COMMA_HERE) ;
         }
       }
       if (kBoolFalse == test_15) {
         enumGalgasBool test_17 = kBoolTrue ;
         if (kBoolTrue == test_17) {
-          test_17 = enumerator_6035.current_mSliceWidth (HERE).readProperty_string ().getter_isDecimalUnsignedNumber (SOURCE_FILE ("instruction-slice-assignment.galgas", 161)).operator_not (SOURCE_FILE ("instruction-slice-assignment.galgas", 161)).boolEnum () ;
+          test_17 = enumerator_6049.current_mSliceWidth (HERE).readProperty_string ().getter_isDecimalUnsignedNumber (SOURCE_FILE ("instruction-slice-assignment.galgas", 161)).operator_not (SOURCE_FILE ("instruction-slice-assignment.galgas", 161)).boolEnum () ;
           if (kBoolTrue == test_17) {
             TC_Array <FixItDescription> fixItArray18 ;
-            inCompiler->emitSemanticError (enumerator_6035.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("the selector should be an unsigned integer value"), fixItArray18  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 162)) ;
-            var_sliceWidth_6195.drop () ; // Release error dropped variable
-            var_sliceTypeName_6167.drop () ; // Release error dropped variable
+            inCompiler->emitSemanticError (enumerator_6049.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("the selector should be an unsigned integer value"), fixItArray18  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 162)) ;
+            var_sliceWidth_6209.drop () ; // Release error dropped variable
+            var_sliceTypeName_6181.drop () ; // Release error dropped variable
           }
         }
         if (kBoolFalse == test_17) {
-          var_sliceWidth_6195 = enumerator_6035.current_mSliceWidth (HERE).readProperty_string ().getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 164)) ;
+          var_sliceWidth_6209 = enumerator_6049.current_mSliceWidth (HERE).readProperty_string ().getter_decimalUnsignedNumber (inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 164)) ;
           const GALGAS_sliceAssignmentInstructionAST temp_19 = this ;
-          var_sliceTypeName_6167 = GALGAS_lstring::init_21__21_ (GALGAS_string ("u").add_operation (var_sliceWidth_6195.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 165)), temp_19.readProperty_mTypeName ().readProperty_location (), inCompiler COMMA_HERE) ;
+          var_sliceTypeName_6181 = GALGAS_lstring::init_21__21_ (GALGAS_string ("u").add_operation (var_sliceWidth_6209.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 165)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 165)), temp_19.readProperty_mTypeName ().readProperty_location (), inCompiler COMMA_HERE) ;
           enumGalgasBool test_20 = kBoolTrue ;
           if (kBoolTrue == test_20) {
-            test_20 = GALGAS_bool (ComparisonKind::equal, var_sliceWidth_6195.objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
+            test_20 = GALGAS_bool (ComparisonKind::equal, var_sliceWidth_6209.objectCompare (GALGAS_uint (uint32_t (0U)))).boolEnum () ;
             if (kBoolTrue == test_20) {
               TC_Array <FixItDescription> fixItArray21 ;
-              inCompiler->emitSemanticError (enumerator_6035.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("the bit slice width should be > 0"), fixItArray21  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 167)) ;
+              inCompiler->emitSemanticError (enumerator_6049.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("the bit slice width should be > 0"), fixItArray21  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 167)) ;
             }
           }
         }
@@ -2447,74 +2447,74 @@ void cPtr_sliceAssignmentInstructionAST::method_instructionSemanticAnalysis (con
     }
     enumGalgasBool test_22 = kBoolTrue ;
     if (kBoolTrue == test_22) {
-      test_22 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_rightShiftAmount_5986.objectCompare (var_sliceWidth_6195)).boolEnum () ;
+      test_22 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_rightShiftAmount_6000.objectCompare (var_sliceWidth_6209)).boolEnum () ;
       if (kBoolTrue == test_22) {
-        var_rightShiftAmount_5986 = var_rightShiftAmount_5986.substract_operation (var_sliceWidth_6195, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 171)) ;
+        var_rightShiftAmount_6000 = var_rightShiftAmount_6000.substract_operation (var_sliceWidth_6209, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 171)) ;
       }
     }
     if (kBoolFalse == test_22) {
-      GALGAS_uint var_specifiedBitCount_7018 = var_bitCount_4660.add_operation (var_sliceWidth_6195, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 173)).substract_operation (var_rightShiftAmount_5986, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 173)) ;
+      GALGAS_uint var_specifiedBitCount_7032 = var_bitCount_4660.add_operation (var_sliceWidth_6209, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 173)).substract_operation (var_rightShiftAmount_6000, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 173)) ;
       TC_Array <FixItDescription> fixItArray23 ;
-      inCompiler->emitSemanticError (enumerator_6035.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("bit slice overflow: ").add_operation (var_specifiedBitCount_7018.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)).add_operation (GALGAS_string (" bits, should be "), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)).add_operation (var_bitCount_4660.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), fixItArray23  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)) ;
-      var_rightShiftAmount_5986 = GALGAS_uint (uint32_t (0U)) ;
+      inCompiler->emitSemanticError (enumerator_6049.current_mSliceWidth (HERE).readProperty_location (), GALGAS_string ("bit slice overflow: ").add_operation (var_specifiedBitCount_7032.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)).add_operation (GALGAS_string (" bits, should be "), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)).add_operation (var_bitCount_4660.getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)), fixItArray23  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 174)) ;
+      var_rightShiftAmount_6000 = GALGAS_uint (uint32_t (0U)) ;
     }
-    GALGAS_omnibusType var_sliceType_7226 = extensionGetter_type (extensionGetter_searchKey (constinArgument_inContext.readProperty_mTypeMap (), var_sliceTypeName_6167, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 177)) ;
+    GALGAS_omnibusType var_sliceType_7240 = extensionGetter_type (extensionGetter_searchKey (constinArgument_inContext.readProperty_mTypeMap (), var_sliceTypeName_6181, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 177)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 177)) ;
     {
-    extensionSetter_appendLogicalShiftRight (ioArgument_ioInstructionGenerationList, var_sourceOperandForSlicing_6086, var_rightShiftAmount_5986, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 179)) ;
+    extensionSetter_appendLogicalShiftRight (ioArgument_ioInstructionGenerationList, var_sourceOperandForSlicing_6100, var_rightShiftAmount_6000, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 179)) ;
     }
     {
-    extensionSetter_appendTrunc (ioArgument_ioInstructionGenerationList, var_sliceType_7226, var_sourceOperandForSlicing_6086, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 180)) ;
+    extensionSetter_appendTrunc (ioArgument_ioInstructionGenerationList, var_sliceType_7240, var_sourceOperandForSlicing_6100, ioArgument_ioTemporaries, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 180)) ;
     }
-    switch (enumerator_6035.current_mSliceKind (HERE).enumValue ()) {
+    switch (enumerator_6049.current_mSliceKind (HERE).enumValue ()) {
     case GALGAS_sliceTargetAST::Enumeration::invalid:
       break ;
     case GALGAS_sliceTargetAST::Enumeration::enum_discarded:
       break ;
     case GALGAS_sliceTargetAST::Enumeration::enum_varDeclaration:
       {
-        GALGAS_lstring extractedValue_7640_varName_0 ;
-        enumerator_6035.current_mSliceKind (HERE).getAssociatedValuesFor_varDeclaration (extractedValue_7640_varName_0) ;
-        GALGAS_lstring var_omnibusLocalVariableName_7693 = GALGAS_lstring::init_21__21_ (extractedValue_7640_varName_0.readProperty_string ().add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 186)).add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 186)), extractedValue_7640_varName_0.readProperty_location (), inCompiler COMMA_HERE) ;
+        GALGAS_lstring extractedValue_7654_varName_0 ;
+        enumerator_6049.current_mSliceKind (HERE).getAssociatedValuesFor_varDeclaration (extractedValue_7654_varName_0) ;
+        GALGAS_lstring var_omnibusLocalVariableName_7707 = GALGAS_lstring::init_21__21_ (extractedValue_7654_varName_0.readProperty_string ().add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 186)).add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 186)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 186)), extractedValue_7654_varName_0.readProperty_location (), inCompiler COMMA_HERE) ;
         ioArgument_ioTemporaries.mProperty_mTemporaryIndex.plusAssign_operation(GALGAS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 187)) ;
         {
-        extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, extractedValue_7640_varName_0, var_sliceType_7226, var_omnibusLocalVariableName_7693, GALGAS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("instruction-slice-assignment.galgas", 188)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 188)) ;
+        extensionSetter_insertLocalVariable (ioArgument_ioUniversalMap, extractedValue_7654_varName_0, var_sliceType_7240, var_omnibusLocalVariableName_7707, GALGAS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("instruction-slice-assignment.galgas", 188)), GALGAS_bool (false), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 188)) ;
         }
-        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (var_omnibusLocalVariableName_7693.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 190)), var_sliceType_7226, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 190)) ;
-        GALGAS_LValueRepresentation var_targetRef_8110 = GALGAS_LValueRepresentation::init_21__21_ (var_sliceType_7226, function_llvmNameForLocalVariable (var_omnibusLocalVariableName_7693.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 194)), inCompiler COMMA_HERE) ;
+        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (var_omnibusLocalVariableName_7707.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 190)), var_sliceType_7240, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 190)) ;
+        GALGAS_LValueRepresentation var_targetRef_8124 = GALGAS_LValueRepresentation::init_21__21_ (var_sliceType_7240, function_llvmNameForLocalVariable (var_omnibusLocalVariableName_7707.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 194)), inCompiler COMMA_HERE) ;
         {
-        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_7640_varName_0.readProperty_location (), var_sourceOperandForSlicing_6086, var_targetRef_8110, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 197)) ;
+        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_7654_varName_0.readProperty_location (), var_sourceOperandForSlicing_6100, var_targetRef_8124, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 197)) ;
         }
       }
       break ;
     case GALGAS_sliceTargetAST::Enumeration::enum_letDeclaration:
       {
-        GALGAS_lstring extractedValue_8547_letName_0 ;
-        enumerator_6035.current_mSliceKind (HERE).getAssociatedValuesFor_letDeclaration (extractedValue_8547_letName_0) ;
-        GALGAS_lstring var_omnibusLocalVariableName_8600 = GALGAS_lstring::init_21__21_ (extractedValue_8547_letName_0.readProperty_string ().add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 206)).add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 206)), extractedValue_8547_letName_0.readProperty_location (), inCompiler COMMA_HERE) ;
+        GALGAS_lstring extractedValue_8561_letName_0 ;
+        enumerator_6049.current_mSliceKind (HERE).getAssociatedValuesFor_letDeclaration (extractedValue_8561_letName_0) ;
+        GALGAS_lstring var_omnibusLocalVariableName_8614 = GALGAS_lstring::init_21__21_ (extractedValue_8561_letName_0.readProperty_string ().add_operation (GALGAS_string ("."), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 206)).add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("instruction-slice-assignment.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 206)), extractedValue_8561_letName_0.readProperty_location (), inCompiler COMMA_HERE) ;
         ioArgument_ioTemporaries.mProperty_mTemporaryIndex.plusAssign_operation(GALGAS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 207)) ;
         {
-        extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, extractedValue_8547_letName_0, GALGAS_bool (false), var_sliceType_7226, var_omnibusLocalVariableName_8600, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 208)) ;
+        extensionSetter_insertLocalConstant (ioArgument_ioUniversalMap, extractedValue_8561_letName_0, GALGAS_bool (false), var_sliceType_7240, var_omnibusLocalVariableName_8614, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 208)) ;
         }
-        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (var_omnibusLocalVariableName_8600.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 210)), var_sliceType_7226, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 210)) ;
-        GALGAS_LValueRepresentation var_targetRef_9000 = GALGAS_LValueRepresentation::init_21__21_ (var_sliceType_7226, function_llvmNameForLocalVariable (var_omnibusLocalVariableName_8600.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 214)), inCompiler COMMA_HERE) ;
+        ioArgument_ioAllocaList.addAssign_operation (function_llvmNameForLocalVariable (var_omnibusLocalVariableName_8614.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 210)), var_sliceType_7240, GALGAS_bool (false)  COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 210)) ;
+        GALGAS_LValueRepresentation var_targetRef_9014 = GALGAS_LValueRepresentation::init_21__21_ (var_sliceType_7240, function_llvmNameForLocalVariable (var_omnibusLocalVariableName_8614.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 214)), inCompiler COMMA_HERE) ;
         {
-        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_8547_letName_0.readProperty_location (), var_sourceOperandForSlicing_6086, var_targetRef_9000, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 217)) ;
+        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_8561_letName_0.readProperty_location (), var_sourceOperandForSlicing_6100, var_targetRef_9014, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 217)) ;
         }
       }
       break ;
     case GALGAS_sliceTargetAST::Enumeration::enum_lValue:
       {
-        GALGAS_LValueAST extractedValue_9442_target_0 ;
-        enumerator_6035.current_mSliceKind (HERE).getAssociatedValuesFor_lValue (extractedValue_9442_target_0) ;
-        GALGAS_LValueRepresentation var_lvalueIR_9871 ;
-        extensionMethod_analyzeLValue (extractedValue_9442_target_0, constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_9871, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 225)) ;
+        GALGAS_LValueAST extractedValue_9456_target_0 ;
+        enumerator_6049.current_mSliceKind (HERE).getAssociatedValuesFor_lValue (extractedValue_9456_target_0) ;
+        GALGAS_LValueRepresentation var_lvalueIR_9885 ;
+        extensionMethod_analyzeLValue (extractedValue_9456_target_0, constinArgument_inSelfType, GALGAS_bool (false), constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_lvalueIR_9885, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 225)) ;
         {
-        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_9442_target_0.readProperty_mIdentifier ().readProperty_location (), var_sourceOperandForSlicing_6086, var_lvalueIR_9871, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 239)) ;
+        extensionSetter_appendCopyFromReferences (ioArgument_ioInstructionGenerationList, constinArgument_inContext.readProperty_mAssignmentOperatorMap (), ioArgument_ioTemporaries, extractedValue_9456_target_0.readProperty_mIdentifier ().readProperty_location (), var_sourceOperandForSlicing_6100, var_lvalueIR_9885, inCompiler COMMA_SOURCE_FILE ("instruction-slice-assignment.galgas", 239)) ;
         }
       }
       break ;
     }
-    enumerator_6035.gotoNextObject () ;
+    enumerator_6049.gotoNextObject () ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -2570,14 +2570,14 @@ void cPtr_bitbandInstructionAST::method_instructionSemanticAnalysis (const GALGA
     }
     test_2 = test_3.boolEnum () ;
     if (kBoolTrue == test_2) {
-      GALGAS_bigint var_value_4734 ;
-      GALGAS_omnibusType joker_4711_1 ; // Joker input parameter
-      var_sourceExpressionOperand_4250.method_literalInteger (joker_4711_1, var_value_4734, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 99)) ;
+      GALGAS_bigint var_value_4741 ;
+      GALGAS_omnibusType joker_4718_1 ; // Joker input parameter
+      var_sourceExpressionOperand_4250.method_extractLiteralInteger (joker_4718_1, var_value_4741, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 99)) ;
       enumGalgasBool test_4 = kBoolTrue ;
       if (kBoolTrue == test_4) {
-        GALGAS_bool test_5 = GALGAS_bool (ComparisonKind::lowerThan, var_value_4734.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 100)))) ;
+        GALGAS_bool test_5 = GALGAS_bool (ComparisonKind::lowerThan, var_value_4741.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 100)))) ;
         if (kBoolTrue != test_5.boolEnum ()) {
-          test_5 = GALGAS_bool (ComparisonKind::greaterThan, var_value_4734.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 100)))) ;
+          test_5 = GALGAS_bool (ComparisonKind::greaterThan, var_value_4741.objectCompare (GALGAS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 100)))) ;
         }
         test_4 = test_5.boolEnum () ;
         if (kBoolTrue == test_4) {
@@ -2587,7 +2587,7 @@ void cPtr_bitbandInstructionAST::method_instructionSemanticAnalysis (const GALGA
         }
       }
       if (kBoolFalse == test_4) {
-        var_sourceExpressionOperand_4250 = GALGAS_objectIR::class_func_literalInteger (var_requiredSourceExpressionType_3782, var_value_4734  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 103)) ;
+        var_sourceExpressionOperand_4250 = GALGAS_objectIR::class_func_literalInteger (var_requiredSourceExpressionType_3782, var_value_4741  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 103)) ;
       }
     }
   }
@@ -2602,62 +2602,62 @@ void cPtr_bitbandInstructionAST::method_instructionSemanticAnalysis (const GALGA
       }
     }
   }
-  GALGAS_uint var_registerBitCount_5721 ;
-  GALGAS_string var_llvmRegisterAddressName_5787 ;
+  GALGAS_uint var_registerBitCount_5728 ;
+  GALGAS_string var_llvmRegisterAddressName_5794 ;
   const GALGAS_bitbandInstructionAST temp_11 = this ;
-  GALGAS_omnibusType joker_5679 ; // Joker input parameter
-  GALGAS_sliceMap joker_5742 ; // Joker input parameter
-  extensionMethod_controlRegisterLValueSemanticAnalysis (temp_11.readProperty_mControlRegisterLValue (), GALGAS_bool (false), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, joker_5679, var_registerBitCount_5721, joker_5742, var_llvmRegisterAddressName_5787, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 109)) ;
-  GALGAS_omnibusType var_requiredBitExpressionType_6029 ;
+  GALGAS_omnibusType joker_5686 ; // Joker input parameter
+  GALGAS_sliceMap joker_5749 ; // Joker input parameter
+  extensionMethod_controlRegisterLValueSemanticAnalysis (temp_11.readProperty_mControlRegisterLValue (), GALGAS_bool (false), constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, joker_5686, var_registerBitCount_5728, joker_5749, var_llvmRegisterAddressName_5794, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 109)) ;
+  GALGAS_omnibusType var_requiredBitExpressionType_6036 ;
   const GALGAS_bitbandInstructionAST temp_12 = this ;
-  extensionMethod_searchType (constinArgument_inContext.readProperty_mTypeMap (), GALGAS_lstring::init_21__21_ (GALGAS_string ("u").add_operation (var_registerBitCount_5721.substract_operation (GALGAS_uint (uint32_t (1U)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)).getter_significantBitCount (SOURCE_FILE ("instruction-bit-banding.galgas", 129)).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)), temp_12.readProperty_mBitExpressionLocation (), inCompiler COMMA_HERE), var_requiredBitExpressionType_6029, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 128)) ;
-  GALGAS_objectIR var_bitExpressionOperand_6485 ;
+  extensionMethod_searchType (constinArgument_inContext.readProperty_mTypeMap (), GALGAS_lstring::init_21__21_ (GALGAS_string ("u").add_operation (var_registerBitCount_5728.substract_operation (GALGAS_uint (uint32_t (1U)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)).getter_significantBitCount (SOURCE_FILE ("instruction-bit-banding.galgas", 129)).getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 129)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 129)), temp_12.readProperty_mBitExpressionLocation (), inCompiler COMMA_HERE), var_requiredBitExpressionType_6036, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 128)) ;
+  GALGAS_objectIR var_bitExpressionOperand_6492 ;
   const GALGAS_bitbandInstructionAST temp_13 = this ;
-  callExtensionMethod_analyzeExpression ((cPtr_expressionAST *) temp_13.readProperty_mBitExpression ().ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredBitExpressionType_6029, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_bitExpressionOperand_6485, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 133)) ;
+  callExtensionMethod_analyzeExpression ((cPtr_expressionAST *) temp_13.readProperty_mBitExpression ().ptr (), constinArgument_inSelfType, constinArgument_inRoutineAttributes, var_requiredBitExpressionType_6036, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, var_bitExpressionOperand_6492, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 133)) ;
   {
-  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_bitExpressionOperand_6485, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 147)) ;
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_bitExpressionOperand_6492, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 147)) ;
   }
   enumGalgasBool test_14 = kBoolTrue ;
   if (kBoolTrue == test_14) {
-    GALGAS_bool test_15 = GALGAS_bool (ComparisonKind::equal, extensionGetter_type (var_bitExpressionOperand_6485, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 152)).readProperty_omnibusTypeDescriptionName ().objectCompare (function_ctIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 152)))) ;
+    GALGAS_bool test_15 = GALGAS_bool (ComparisonKind::equal, extensionGetter_type (var_bitExpressionOperand_6492, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 152)).readProperty_omnibusTypeDescriptionName ().objectCompare (function_ctIntegerTypeName (inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 152)))) ;
     if (kBoolTrue == test_15.boolEnum ()) {
-      test_15 = var_bitExpressionOperand_6485.getter_isLiteralInteger (SOURCE_FILE ("instruction-bit-banding.galgas", 152)) ;
+      test_15 = var_bitExpressionOperand_6492.getter_isLiteralInteger (SOURCE_FILE ("instruction-bit-banding.galgas", 152)) ;
     }
     test_14 = test_15.boolEnum () ;
     if (kBoolTrue == test_14) {
-      GALGAS_bigint var_value_6948 ;
-      GALGAS_omnibusType joker_6925_1 ; // Joker input parameter
-      var_bitExpressionOperand_6485.method_literalInteger (joker_6925_1, var_value_6948, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 153)) ;
+      GALGAS_bigint var_value_6962 ;
+      GALGAS_omnibusType joker_6939_1 ; // Joker input parameter
+      var_bitExpressionOperand_6492.method_extractLiteralInteger (joker_6939_1, var_value_6962, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 153)) ;
       enumGalgasBool test_16 = kBoolTrue ;
       if (kBoolTrue == test_16) {
-        GALGAS_bool test_17 = GALGAS_bool (ComparisonKind::lowerThan, var_value_6948.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 154)))) ;
+        GALGAS_bool test_17 = GALGAS_bool (ComparisonKind::lowerThan, var_value_6962.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 154)))) ;
         if (kBoolTrue != test_17.boolEnum ()) {
-          test_17 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_value_6948.objectCompare (var_registerBitCount_5721.getter_bigint (SOURCE_FILE ("instruction-bit-banding.galgas", 154)))) ;
+          test_17 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_value_6962.objectCompare (var_registerBitCount_5728.getter_bigint (SOURCE_FILE ("instruction-bit-banding.galgas", 154)))) ;
         }
         test_16 = test_17.boolEnum () ;
         if (kBoolTrue == test_16) {
           const GALGAS_bitbandInstructionAST temp_18 = this ;
           TC_Array <FixItDescription> fixItArray19 ;
-          inCompiler->emitSemanticError (temp_18.readProperty_mBitExpressionLocation (), GALGAS_string ("static value should be >= 0 and <").add_operation (var_registerBitCount_5721.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 155)), fixItArray19  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 155)) ;
+          inCompiler->emitSemanticError (temp_18.readProperty_mBitExpressionLocation (), GALGAS_string ("static value should be >= 0 and <").add_operation (var_registerBitCount_5728.getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 155)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 155)), fixItArray19  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 155)) ;
         }
       }
       if (kBoolFalse == test_16) {
-        var_bitExpressionOperand_6485 = GALGAS_objectIR::class_func_literalInteger (var_requiredBitExpressionType_6029, var_value_6948  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 157)) ;
+        var_bitExpressionOperand_6492 = GALGAS_objectIR::class_func_literalInteger (var_requiredBitExpressionType_6036, var_value_6962  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 157)) ;
       }
     }
   }
   if (kBoolFalse == test_14) {
     enumGalgasBool test_20 = kBoolTrue ;
     if (kBoolTrue == test_20) {
-      test_20 = GALGAS_bool (ComparisonKind::notEqual, extensionGetter_type (var_bitExpressionOperand_6485, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 159)).readProperty_omnibusTypeDescriptionName ().objectCompare (var_requiredBitExpressionType_6029.readProperty_omnibusTypeDescriptionName ())).boolEnum () ;
+      test_20 = GALGAS_bool (ComparisonKind::notEqual, extensionGetter_type (var_bitExpressionOperand_6492, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 159)).readProperty_omnibusTypeDescriptionName ().objectCompare (var_requiredBitExpressionType_6036.readProperty_omnibusTypeDescriptionName ())).boolEnum () ;
       if (kBoolTrue == test_20) {
         const GALGAS_bitbandInstructionAST temp_21 = this ;
         TC_Array <FixItDescription> fixItArray22 ;
-        inCompiler->emitSemanticError (temp_21.readProperty_mBitExpressionLocation (), GALGAS_string ("bit expression type should be $").add_operation (var_requiredBitExpressionType_6029.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 160)), fixItArray22  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 160)) ;
+        inCompiler->emitSemanticError (temp_21.readProperty_mBitExpressionLocation (), GALGAS_string ("bit expression type should be $").add_operation (var_requiredBitExpressionType_6036.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 160)), fixItArray22  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 160)) ;
       }
     }
   }
-  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_bitbandInstructionIR::init_21__21__21__21__21__21__21_ (var_llvmRegisterAddressName_5787, var_bitExpressionOperand_6485, var_sourceExpressionOperand_4250, constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterBaseAddress ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterRelocationAddress ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterOffsetMultiplier ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterBitMultiplier ().readProperty_bigint (), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 163)) ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_bitbandInstructionIR::init_21__21__21__21__21__21__21_ (var_llvmRegisterAddressName_5794, var_bitExpressionOperand_6492, var_sourceExpressionOperand_4250, constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterBaseAddress ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterRelocationAddress ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterOffsetMultiplier ().readProperty_bigint (), constinArgument_inContext.readProperty_mTargetParameters ().readProperty_mBitbandRegisterBitMultiplier ().readProperty_bigint (), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 163)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -2670,24 +2670,24 @@ void cPtr_bitbandInstructionIR::method_llvmInstructionCode (GALGAS_string & ioAr
                                                             GALGAS_generationAdds & ioArgument_ioGenerationAdds,
                                                             Compiler * inCompiler
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GALGAS_string var_idx_9621 = ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 205)) ;
+  GALGAS_string var_idx_9635 = ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 205)) ;
   ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.plusAssign_operation(GALGAS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 206)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string (";--- Bit band\n"), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 207)) ;
   const GALGAS_bitbandInstructionIR temp_0 = this ;
   const GALGAS_bitbandInstructionIR temp_1 = this ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string (" = sub i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (temp_0.readProperty_mRegisterAddressLLVMname (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (temp_1.readProperty_mBitbandRegisterBaseAddress ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string (" = sub i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (temp_0.readProperty_mRegisterAddressLLVMname (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (temp_1.readProperty_mBitbandRegisterBaseAddress ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 208)) ;
   const GALGAS_bitbandInstructionIR temp_2 = this ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (".mul = mul i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (temp_2.readProperty_mBitbandRegisterOffsetMultiplier ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %byte.offset.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (".mul = mul i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (temp_2.readProperty_mBitbandRegisterOffsetMultiplier ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 209)) ;
   const GALGAS_bitbandInstructionIR temp_3 = this ;
   const GALGAS_bitbandInstructionIR temp_4 = this ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.offset.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (".mul = mul i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (extensionGetter_llvmName (temp_3.readProperty_mBitExpressionOperand (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (temp_4.readProperty_mBitbandRegisterBitMultiplier ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %offset.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (" = add i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul, %bit.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.offset.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (".mul = mul i32 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (extensionGetter_llvmName (temp_3.readProperty_mBitExpressionOperand (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (temp_4.readProperty_mBitbandRegisterBitMultiplier ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 210)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %offset.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (" = add i32 %byte.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul, %bit.offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)).add_operation (GALGAS_string (".mul\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 211)) ;
   const GALGAS_bitbandInstructionIR temp_5 = this ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.word.addr.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (" = add i32 %offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (temp_5.readProperty_mBitbandRegisterRelocationAddress ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %ptr.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" = inttoptr i32 %bit.word.addr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" to i32*\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %bit.word.addr.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (" = add i32 %offset."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string (", "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (temp_5.readProperty_mBitbandRegisterRelocationAddress ().getter_string (SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 212)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %ptr.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" = inttoptr i32 %bit.word.addr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)).add_operation (GALGAS_string (" to i32*\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 213)) ;
   const GALGAS_bitbandInstructionIR temp_6 = this ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %value.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" = zext i1 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (extensionGetter_llvmName (temp_6.readProperty_mSourceExpressionOperand (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" to i32\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store i32 %value.").add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (", i32* %ptr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (var_idx_9621, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  %value.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" = zext i1 "), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (extensionGetter_llvmName (temp_6.readProperty_mSourceExpressionOperand (), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)).add_operation (GALGAS_string (" to i32\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 214)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GALGAS_string ("  store i32 %value.").add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string (", i32* %ptr."), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (var_idx_9635, inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)).add_operation (GALGAS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)), inCompiler  COMMA_SOURCE_FILE ("instruction-bit-banding.galgas", 215)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -3020,19 +3020,19 @@ void cPtr_panicInstructionAST::method_instructionSemanticAnalysis (const GALGAS_
     }
   }
   if (kBoolFalse == test_5) {
-    GALGAS_bigint var_min_3805 ;
-    GALGAS_bigint var_max_3818 ;
-    GALGAS_bool joker_3822_2 ; // Joker input parameter
-    GALGAS_uint joker_3822_1 ; // Joker input parameter
-    constinArgument_inContext.readProperty_mPanicCodeType ().readProperty_kind ().method_integer (var_min_3805, var_max_3818, joker_3822_2, joker_3822_1, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 77)) ;
-    GALGAS_bigint var_throwValue_3869 ;
-    GALGAS_omnibusType joker_3854_1 ; // Joker input parameter
-    var_result_3439.method_literalInteger (joker_3854_1, var_throwValue_3869, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)) ;
+    GALGAS_bigint var_min_3812 ;
+    GALGAS_bigint var_max_3825 ;
+    GALGAS_bool joker_3829_2 ; // Joker input parameter
+    GALGAS_uint joker_3829_1 ; // Joker input parameter
+    constinArgument_inContext.readProperty_mPanicCodeType ().readProperty_kind ().method_extractInteger (var_min_3812, var_max_3825, joker_3829_2, joker_3829_1, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 77)) ;
+    GALGAS_bigint var_throwValue_3883 ;
+    GALGAS_omnibusType joker_3868_1 ; // Joker input parameter
+    var_result_3439.method_extractLiteralInteger (joker_3868_1, var_throwValue_3883, inCompiler COMMA_SOURCE_FILE ("instruction-panic.galgas", 78)) ;
     enumGalgasBool test_10 = kBoolTrue ;
     if (kBoolTrue == test_10) {
-      GALGAS_bool test_11 = GALGAS_bool (ComparisonKind::lowerThan, var_throwValue_3869.objectCompare (var_min_3805)) ;
+      GALGAS_bool test_11 = GALGAS_bool (ComparisonKind::lowerThan, var_throwValue_3883.objectCompare (var_min_3812)) ;
       if (kBoolTrue != test_11.boolEnum ()) {
-        test_11 = GALGAS_bool (ComparisonKind::greaterThan, var_throwValue_3869.objectCompare (var_max_3818)) ;
+        test_11 = GALGAS_bool (ComparisonKind::greaterThan, var_throwValue_3883.objectCompare (var_max_3825)) ;
       }
       test_10 = test_11.boolEnum () ;
       if (kBoolTrue == test_10) {
@@ -3047,7 +3047,7 @@ void cPtr_panicInstructionAST::method_instructionSemanticAnalysis (const GALGAS_
         test_14 = GALGAS_bool (gOption_omnibus_5F_options_noPanicGeneration.readProperty_value ()).operator_not (SOURCE_FILE ("instruction-panic.galgas", 82)).boolEnum () ;
         if (kBoolTrue == test_14) {
           const GALGAS_panicInstructionAST temp_15 = this ;
-          ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_panicInstructionIR::init_21__21_ (temp_15.readProperty_mInstructionLocation (), var_throwValue_3869, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("instruction-panic.galgas", 83)) ;
+          ioArgument_ioInstructionGenerationList.addAssign_operation (GALGAS_panicInstructionIR::init_21__21_ (temp_15.readProperty_mInstructionLocation (), var_throwValue_3883, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("instruction-panic.galgas", 83)) ;
         }
       }
     }
@@ -5126,14 +5126,14 @@ void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_
   if (kBoolTrue == test_0) {
     test_0 = var_indexResult_1203.getter_isLiteralInteger (SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 38)).boolEnum () ;
     if (kBoolTrue == test_0) {
-      GALGAS_bigint var_indexValue_1436 ;
-      GALGAS_omnibusType joker_1413_1 ; // Joker input parameter
-      var_indexResult_1203.method_literalInteger (joker_1413_1, var_indexValue_1436, inCompiler COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 39)) ;
+      GALGAS_bigint var_indexValue_1443 ;
+      GALGAS_omnibusType joker_1420_1 ; // Joker input parameter
+      var_indexResult_1203.method_extractLiteralInteger (joker_1420_1, var_indexValue_1443, inCompiler COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 39)) ;
       enumGalgasBool test_1 = kBoolTrue ;
       if (kBoolTrue == test_1) {
-        GALGAS_bool test_2 = GALGAS_bool (ComparisonKind::lowerThan, var_indexValue_1436.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 40)))) ;
+        GALGAS_bool test_2 = GALGAS_bool (ComparisonKind::lowerThan, var_indexValue_1443.objectCompare (GALGAS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 40)))) ;
         if (kBoolTrue != test_2.boolEnum ()) {
-          test_2 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_indexValue_1436.objectCompare (constinArgument_inArraySize)) ;
+          test_2 = GALGAS_bool (ComparisonKind::greaterOrEqual, var_indexValue_1443.objectCompare (constinArgument_inArraySize)) ;
         }
         test_1 = test_2.boolEnum () ;
         if (kBoolTrue == test_1) {
@@ -5143,7 +5143,7 @@ void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_
         }
       }
       if (kBoolFalse == test_1) {
-        outArgument_outIndexIR = GALGAS_objectIR::class_func_literalInteger (constinArgument_inElementType, var_indexValue_1436  COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 43)) ;
+        outArgument_outIndexIR = GALGAS_objectIR::class_func_literalInteger (constinArgument_inElementType, var_indexValue_1443  COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 43)) ;
       }
     }
   }
@@ -5160,13 +5160,13 @@ void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_
           }
           test_5 = test_6.boolEnum () ;
           if (kBoolTrue == test_5) {
-            GALGAS_bool var_generatePanicInstruction_1985 ;
+            GALGAS_bool var_generatePanicInstruction_1992 ;
             {
-            extensionSetter_testArrayIndex (ioArgument_ioInstructionGenerationList, var_indexResult_1203, constinArgument_inErrorLocation, constinArgument_inArraySize, var_generatePanicInstruction_1985, inCompiler COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 47)) ;
+            extensionSetter_testArrayIndex (ioArgument_ioInstructionGenerationList, var_indexResult_1203, constinArgument_inErrorLocation, constinArgument_inArraySize, var_generatePanicInstruction_1992, inCompiler COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 47)) ;
             }
             enumGalgasBool test_7 = kBoolTrue ;
             if (kBoolTrue == test_7) {
-              GALGAS_bool test_8 = var_generatePanicInstruction_1985 ;
+              GALGAS_bool test_8 = var_generatePanicInstruction_1992 ;
               if (kBoolTrue == test_8.boolEnum ()) {
                 test_8 = extensionGetter_isSafe (constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("subscript-in-assignment-and-expression.galgas", 53)) ;
               }
@@ -8546,13 +8546,13 @@ void cPtr_extendIR::method_llvmInstructionCode (GALGAS_string & ioArgument_ioLLV
     }
   }
   if (kBoolFalse == test_2) {
-    GALGAS_bool var_sourceIsUnsigned_857 ;
-    GALGAS_bigint joker_839_2 ; // Joker input parameter
-    GALGAS_bigint joker_839_1 ; // Joker input parameter
-    GALGAS_uint joker_874_1 ; // Joker input parameter
-    var_kind_729.method_integer (joker_839_2, joker_839_1, var_sourceIsUnsigned_857, joker_874_1, inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 28)) ;
+    GALGAS_bool var_sourceIsUnsigned_864 ;
+    GALGAS_bigint joker_846_2 ; // Joker input parameter
+    GALGAS_bigint joker_846_1 ; // Joker input parameter
+    GALGAS_uint joker_881_1 ; // Joker input parameter
+    var_kind_729.method_extractInteger (joker_846_2, joker_846_1, var_sourceIsUnsigned_864, joker_881_1, inCompiler COMMA_SOURCE_FILE ("intermediate-extend.galgas", 28)) ;
     GALGAS_string temp_3 ;
-    const enumGalgasBool test_4 = var_sourceIsUnsigned_857.boolEnum () ;
+    const enumGalgasBool test_4 = var_sourceIsUnsigned_864.boolEnum () ;
     if (kBoolTrue == test_4) {
       temp_3 = GALGAS_string ("zext") ;
     }else if (kBoolFalse == test_4) {

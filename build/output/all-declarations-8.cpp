@@ -9,6 +9,470 @@
 
 //--------------------------------------------------------------------------------------------------
 
+GALGAS_propertyKindAST_2D_initializedStoredProperty::GALGAS_propertyKindAST_2D_initializedStoredProperty (void) :
+mProperty_initExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty::~ GALGAS_propertyKindAST_2D_initializedStoredProperty (void) {
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty GALGAS_propertyKindAST_2D_initializedStoredProperty::init_21_ (const GALGAS_expressionAST & in_initExpression,
+                                                                                                                   Compiler * inCompiler
+                                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedStoredProperty result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_initExpression = in_initExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedStoredProperty::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty::GALGAS_propertyKindAST_2D_initializedStoredProperty (const GALGAS_expressionAST & inOperand0) :
+mProperty_initExpression (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty GALGAS_propertyKindAST_2D_initializedStoredProperty::class_func_new (const GALGAS_expressionAST & in_initExpression,
+                                                                                                                         Compiler * inCompiler
+                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedStoredProperty result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_initExpression = in_initExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedStoredProperty::isValid (void) const {
+  return mProperty_initExpression.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedStoredProperty::drop (void) {
+  mProperty_initExpression.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedStoredProperty::description (String & ioString,
+                                                                       const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @propertyKindAST-initializedStoredProperty:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_initExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @propertyKindAST-initializedStoredProperty generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedStoredProperty ("propertyKindAST-initializedStoredProperty",
+                                                                                                    nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_propertyKindAST_2D_initializedStoredProperty::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedStoredProperty ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_propertyKindAST_2D_initializedStoredProperty::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyKindAST_2D_initializedStoredProperty (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty GALGAS_propertyKindAST_2D_initializedStoredProperty::extractObject (const GALGAS_object & inObject,
+                                                                                                                        Compiler * inCompiler
+                                                                                                                        COMMA_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedStoredProperty result ;
+  const GALGAS_propertyKindAST_2D_initializedStoredProperty * p = (const GALGAS_propertyKindAST_2D_initializedStoredProperty *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyKindAST_2D_initializedStoredProperty *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyKindAST-initializedStoredProperty", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Optional @propertyKindAST_2D_initializedStoredProperty_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ (const GALGAS_propertyKindAST_2D_initializedStoredProperty & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::init_nil (void) {
+  GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GALGAS_propertyKindAST_2D_initializedStoredProperty () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::description (String & ioString,
+                                                                           const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @propertyKindAST-initializedStoredProperty? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ ("propertyKindAST-initializedStoredProperty?",
+                                                                                                        nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_::extractObject (const GALGAS_object & inObject,
+                                                                                                                                Compiler * inCompiler
+                                                                                                                                COMMA_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ result ;
+  const GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ * p = (const GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyKindAST_2D_initializedStoredProperty_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyKindAST-initializedStoredProperty?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty::GALGAS_propertyKindAST_2D_initializedConstantProperty (void) :
+mProperty_initExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty::~ GALGAS_propertyKindAST_2D_initializedConstantProperty (void) {
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty GALGAS_propertyKindAST_2D_initializedConstantProperty::init_21_ (const GALGAS_expressionAST & in_initExpression,
+                                                                                                                       Compiler * inCompiler
+                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedConstantProperty result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_initExpression = in_initExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedConstantProperty::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty::GALGAS_propertyKindAST_2D_initializedConstantProperty (const GALGAS_expressionAST & inOperand0) :
+mProperty_initExpression (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty GALGAS_propertyKindAST_2D_initializedConstantProperty::class_func_new (const GALGAS_expressionAST & in_initExpression,
+                                                                                                                             Compiler * inCompiler
+                                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedConstantProperty result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_initExpression = in_initExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedConstantProperty::isValid (void) const {
+  return mProperty_initExpression.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedConstantProperty::drop (void) {
+  mProperty_initExpression.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedConstantProperty::description (String & ioString,
+                                                                         const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @propertyKindAST-initializedConstantProperty:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_initExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @propertyKindAST-initializedConstantProperty generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedConstantProperty ("propertyKindAST-initializedConstantProperty",
+                                                                                                      nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_propertyKindAST_2D_initializedConstantProperty::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedConstantProperty ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_propertyKindAST_2D_initializedConstantProperty::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyKindAST_2D_initializedConstantProperty (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty GALGAS_propertyKindAST_2D_initializedConstantProperty::extractObject (const GALGAS_object & inObject,
+                                                                                                                            Compiler * inCompiler
+                                                                                                                            COMMA_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedConstantProperty result ;
+  const GALGAS_propertyKindAST_2D_initializedConstantProperty * p = (const GALGAS_propertyKindAST_2D_initializedConstantProperty *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyKindAST_2D_initializedConstantProperty *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyKindAST-initializedConstantProperty", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Optional @propertyKindAST_2D_initializedConstantProperty_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ (const GALGAS_propertyKindAST_2D_initializedConstantProperty & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::init_nil (void) {
+  GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GALGAS_propertyKindAST_2D_initializedConstantProperty () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::description (String & ioString,
+                                                                             const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @propertyKindAST-initializedConstantProperty? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ ("propertyKindAST-initializedConstantProperty?",
+                                                                                                          nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_::extractObject (const GALGAS_object & inObject,
+                                                                                                                                    Compiler * inCompiler
+                                                                                                                                    COMMA_LOCATION_ARGS) {
+  GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ result ;
+  const GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ * p = (const GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GALGAS_propertyKindAST_2D_initializedConstantProperty_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyKindAST-initializedConstantProperty?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GALGAS_propertyKindAST_2D_readOnlyComputedProperty::GALGAS_propertyKindAST_2D_readOnlyComputedProperty (void) :
 mProperty_instructionList (),
 mProperty_endOfInstructionList () {

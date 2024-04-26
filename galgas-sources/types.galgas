@@ -29,7 +29,7 @@ boolset @omnibusTypeAttributes {
 
 #·······················································································································
 
-enum @typeKind %equatable %testGetters {
+enum @typeKind %equatable {
   case void # No actual type, used for no annotation type, ...
   case boolean
   case literalString
@@ -351,7 +351,7 @@ getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignment
   if [self.kind isDynamicArrayType] then
     result += !"" !self !inPropertyIndexPath
   elsif [self.kind isStructure] then
-    [self.kind structure ?propertyList:let @propertyList propertyList]
+    [self.kind extractStructure ?propertyList:let @propertyList propertyList]
     for (* propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + §[.init (idx)]
       result += [propertyType arcList !indexPath]
@@ -364,7 +364,7 @@ getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignment
 getter @omnibusType deinitNeeded -> @bool {
   result = [self.kind isDynamicArrayType]
   if [self.kind isStructure] then
-    [self.kind structure ?propertyList:let @propertyList propertyList]
+    [self.kind extractStructure ?propertyList:let @propertyList propertyList]
     for (* propertyType) in propertyList while not result do
       result = [propertyType deinitNeeded]
     end

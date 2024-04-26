@@ -114,8 +114,6 @@ override method @compileTimeIntAST enterInContext
  #--- Enter >> infix operator
   key = infixOperatorMapKey (!ctInt !.rightShiftOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator.init]
-#--- Enter OLD integer operators
-#  enterLiteralIntegerOperators (!?context: ioContext)
 }
 
 #———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -137,11 +135,11 @@ override method @compileTimeIntModuloOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
     error inOperatorLocation : "compile time divide by zero" : outResultValue
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
   end
 }
@@ -163,11 +161,11 @@ override method @compileTimeIntModuloZeroOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
     outResultValue = .literalInteger {!type: inResultType !value: 0}
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
   end
 }
@@ -189,11 +187,11 @@ override method @compileTimeIntDivideOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
     error inOperatorLocation : "compile time divide by zero" : outResultValue
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
   end
 }
@@ -215,11 +213,11 @@ override method @compileTimeIntDivideZeroOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
     outResultValue = .literalInteger {!type: inResultType !value: 0}
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
   end
 }
@@ -241,8 +239,8 @@ override method @compileTimeIntMultiplyOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue * rightValue}
 }
 
@@ -263,8 +261,8 @@ override method @compileTimeIntSubtractOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue - rightValue}
 }
 
@@ -285,8 +283,8 @@ override method @compileTimeIntEqualOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
 }
 
@@ -307,8 +305,8 @@ override method @compileTimeIntAddOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue + rightValue}
 }
 
@@ -329,8 +327,8 @@ override method @compileTimeIntBitWiseAndOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue & rightValue}
 }
 
@@ -351,11 +349,11 @@ override method @compileTimeIntShiftLeftOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue < 0 then
     error inOperatorLocation : "compile time left shift right operand should be ≥ 0" : outResultValue
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue << rightValue}
   end
 }
@@ -377,11 +375,11 @@ override method @compileTimeIntShiftRightOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue < 0 then
     error inOperatorLocation : "compile time right shift right operand should be ≥ 0" : outResultValue
   else
-    [inLeftOperand literalInteger ?1* ?value: let leftValue]
+    [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue >> rightValue}
   end
 }
@@ -403,8 +401,8 @@ override method @compileTimeIntLessThanOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue < rightValue}
 }
 
@@ -425,8 +423,8 @@ override method @compileTimeIntLowerOrEqualOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue <= rightValue}
 }
 
@@ -447,8 +445,8 @@ override method @compileTimeIntXorOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
 }
 
@@ -469,8 +467,8 @@ override method @compileTimeIntBitWiseOrOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
 }
 
@@ -493,7 +491,7 @@ override method @compileTimeIntMinusOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
   outResultValue = .literalInteger {!type: inResultType !value: - receiverValue}
 }
 
@@ -514,7 +512,7 @@ override method @compileTimeIntComplementOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
   outResultValue = .literalInteger {!type: inResultType !value: ~ receiverValue}
 }
 

@@ -125,7 +125,7 @@ override method @typeOpaqueDeclarationAST enterInContext
       [!?constructorMap insertKey !["()" nowhere] !§[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
-    [sizeExpressionIR literalInteger ?1* ?value:let bitSize]
+    [sizeExpressionIR extractLiteralInteger ?1* ?value:let bitSize]
     let opaqueType = @omnibusType.init {
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes

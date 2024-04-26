@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-enum @registerGroupIndexAST %testGetters {
+enum @registerGroupIndexAST {
   case noIndex
   case index (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
@@ -160,7 +160,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   if inWriteAccess & readOnly then
     error self.mRegisterName
       : "this control register cannot be modified (declared with @ro attribute)"
-  elsif not userAccess && ([inMode userMode] || [inMode anyMode]) then
+  elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
     error self.mRegisterName : "this control register is not accessible in user mode"
   end
 #-------------------- Group index ?

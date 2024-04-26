@@ -86,7 +86,7 @@ override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBool
   ?!alloca:@allocaList unused ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
   outResult = .compileTime {!value: receiverValue != 0}
 }
 
@@ -109,7 +109,7 @@ override method @compileTimeBoolNotOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inReceiverOperand literalInteger ?1* ?value: let receiverValue]
+  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
   outResultValue = .literalInteger {!type: inResultType !value: if receiverValue == 0 then 1 else 0 end}
 }
 
@@ -132,8 +132,8 @@ override method @compileTimeBoolEqualOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
 }
 
@@ -154,8 +154,8 @@ override method @compileTimeBoolXorOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
 }
 
@@ -176,8 +176,8 @@ override method @compileTimeBoolOrOperator generateCode
   ?!@instructionListIR unused ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  [inLeftOperand literalInteger ?1* ?value: let leftValue]
-  [inRightOperand literalInteger ?1* ?value: let rightValue]
+  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
+  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
 }
 

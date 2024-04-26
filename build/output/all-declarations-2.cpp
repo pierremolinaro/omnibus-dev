@@ -2586,9 +2586,9 @@ GALGAS_constructorValue GALGAS_constructorValue::class_func_arrayValue (const GA
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_constructorValue::method_simple (GALGAS_bigint & outAssociatedValue_value,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
+void GALGAS_constructorValue::method_extractSimple (GALGAS_bigint & outAssociatedValue_value,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_simple) {
     outAssociatedValue_value.drop () ;
     String s ;
@@ -2602,9 +2602,9 @@ void GALGAS_constructorValue::method_simple (GALGAS_bigint & outAssociatedValue_
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_constructorValue::method_structure (GALGAS_sortedOperandIRList & outAssociatedValue_sortedOperandList,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
+void GALGAS_constructorValue::method_extractStructure (GALGAS_sortedOperandIRList & outAssociatedValue_sortedOperandList,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_structure) {
     outAssociatedValue_sortedOperandList.drop () ;
     String s ;
@@ -2618,10 +2618,10 @@ void GALGAS_constructorValue::method_structure (GALGAS_sortedOperandIRList & out
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_constructorValue::method_arrayValue (GALGAS_omnibusType & outAssociatedValue_elementType,
-                                                 GALGAS_uint & outAssociatedValue_size,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_constructorValue::method_extractArrayValue (GALGAS_omnibusType & outAssociatedValue_elementType,
+                                                        GALGAS_uint & outAssociatedValue_size,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_arrayValue) {
     outAssociatedValue_elementType.drop () ;
     outAssociatedValue_size.drop () ;
@@ -2637,13 +2637,9 @@ void GALGAS_constructorValue::method_arrayValue (GALGAS_omnibusType & outAssocia
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_constructorValue::getter_null (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_null == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_constructorValue_2D_simple_3F_ GALGAS_constructorValue::getter_simple (UNUSED_LOCATION_ARGS) const {
+GALGAS_constructorValue_2D_simple_3F_ GALGAS_constructorValue::getter_getSimple (UNUSED_LOCATION_ARGS) const {
   GALGAS_constructorValue_2D_simple_3F_ result ;
   if (mEnum == Enumeration::enum_simple) {
     const auto ptr = (const GALGAS_constructorValue_2D_simple *) mAssociatedValues.associatedValuesPointer () ;
@@ -2661,7 +2657,7 @@ void GALGAS_constructorValue::getAssociatedValuesFor_simple (GALGAS_bigint & out
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_constructorValue_2D_structure_3F_ GALGAS_constructorValue::getter_structure (UNUSED_LOCATION_ARGS) const {
+GALGAS_constructorValue_2D_structure_3F_ GALGAS_constructorValue::getter_getStructure (UNUSED_LOCATION_ARGS) const {
   GALGAS_constructorValue_2D_structure_3F_ result ;
   if (mEnum == Enumeration::enum_structure) {
     const auto ptr = (const GALGAS_constructorValue_2D_structure *) mAssociatedValues.associatedValuesPointer () ;
@@ -2679,7 +2675,7 @@ void GALGAS_constructorValue::getAssociatedValuesFor_structure (GALGAS_sortedOpe
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_constructorValue_2D_arrayValue_3F_ GALGAS_constructorValue::getter_arrayValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_constructorValue_2D_arrayValue_3F_ GALGAS_constructorValue::getter_getArrayValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_constructorValue_2D_arrayValue_3F_ result ;
   if (mEnum == Enumeration::enum_arrayValue) {
     const auto ptr = (const GALGAS_constructorValue_2D_arrayValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -2706,6 +2702,30 @@ static const char * gEnumNameArrayFor_constructorValue [5] = {
   "structure",
   "arrayValue"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_constructorValue::getter_isNull (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_null == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_constructorValue::getter_isSimple (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_simple == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_constructorValue::getter_isStructure (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_structure == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_constructorValue::getter_isArrayValue (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_arrayValue == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3727,10 +3747,10 @@ GALGAS_propertyGetterKind GALGAS_propertyGetterKind::class_func_constantProperty
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyGetterKind::method_storedProperty (GALGAS_omnibusType & outAssociatedValue_type,
-                                                       GALGAS_uint & outAssociatedValue_index,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyGetterKind::method_extractStoredProperty (GALGAS_omnibusType & outAssociatedValue_type,
+                                                              GALGAS_uint & outAssociatedValue_index,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_storedProperty) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_index.drop () ;
@@ -3746,10 +3766,10 @@ void GALGAS_propertyGetterKind::method_storedProperty (GALGAS_omnibusType & outA
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyGetterKind::method_computedProperty (GALGAS_unifiedTypeMapEntry & outAssociatedValue_typeProxy,
-                                                         GALGAS_routineLLVMNameDict & outAssociatedValue_modeDictionary,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyGetterKind::method_extractComputedProperty (GALGAS_unifiedTypeMapEntry & outAssociatedValue_typeProxy,
+                                                                GALGAS_routineLLVMNameDict & outAssociatedValue_modeDictionary,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_computedProperty) {
     outAssociatedValue_typeProxy.drop () ;
     outAssociatedValue_modeDictionary.drop () ;
@@ -3765,9 +3785,9 @@ void GALGAS_propertyGetterKind::method_computedProperty (GALGAS_unifiedTypeMapEn
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertyGetterKind::method_constantProperty (GALGAS_objectIR & outAssociatedValue_value,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+void GALGAS_propertyGetterKind::method_extractConstantProperty (GALGAS_objectIR & outAssociatedValue_value,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_constantProperty) {
     outAssociatedValue_value.drop () ;
     String s ;
@@ -3781,7 +3801,7 @@ void GALGAS_propertyGetterKind::method_constantProperty (GALGAS_objectIR & outAs
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyGetterKind_2D_storedProperty_3F_ GALGAS_propertyGetterKind::getter_storedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyGetterKind_2D_storedProperty_3F_ GALGAS_propertyGetterKind::getter_getStoredProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyGetterKind_2D_storedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_storedProperty) {
     const auto ptr = (const GALGAS_propertyGetterKind_2D_storedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -3801,7 +3821,7 @@ void GALGAS_propertyGetterKind::getAssociatedValuesFor_storedProperty (GALGAS_om
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyGetterKind_2D_computedProperty_3F_ GALGAS_propertyGetterKind::getter_computedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyGetterKind_2D_computedProperty_3F_ GALGAS_propertyGetterKind::getter_getComputedProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyGetterKind_2D_computedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_computedProperty) {
     const auto ptr = (const GALGAS_propertyGetterKind_2D_computedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -3821,7 +3841,7 @@ void GALGAS_propertyGetterKind::getAssociatedValuesFor_computedProperty (GALGAS_
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertyGetterKind_2D_constantProperty_3F_ GALGAS_propertyGetterKind::getter_constantProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertyGetterKind_2D_constantProperty_3F_ GALGAS_propertyGetterKind::getter_getConstantProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertyGetterKind_2D_constantProperty_3F_ result ;
   if (mEnum == Enumeration::enum_constantProperty) {
     const auto ptr = (const GALGAS_propertyGetterKind_2D_constantProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -3845,6 +3865,24 @@ static const char * gEnumNameArrayFor_propertyGetterKind [4] = {
   "computedProperty",
   "constantProperty"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyGetterKind::getter_isStoredProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_storedProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyGetterKind::getter_isComputedProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_computedProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyGetterKind::getter_isConstantProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_constantProperty == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3924,15 +3962,7 @@ GALGAS_propertyVisibility GALGAS_propertyVisibility::class_func_isPrivate (UNUSE
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_propertyVisibility::getter_isPublic (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_isPublic == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
-
-GALGAS_bool GALGAS_propertyVisibility::getter_isPrivate (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_isPrivate == mEnum) ;
-}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3941,6 +3971,18 @@ static const char * gEnumNameArrayFor_propertyVisibility [3] = {
   "isPublic",
   "isPrivate"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyVisibility::getter_isIsPublic (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_isPublic == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertyVisibility::getter_isIsPrivate (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_isPrivate == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4412,10 +4454,10 @@ GALGAS_propertySetterKind GALGAS_propertySetterKind::class_func_computedProperty
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertySetterKind::method_storedProperty (GALGAS_omnibusType & outAssociatedValue_type,
-                                                       GALGAS_uint & outAssociatedValue_index,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_propertySetterKind::method_extractStoredProperty (GALGAS_omnibusType & outAssociatedValue_type,
+                                                              GALGAS_uint & outAssociatedValue_index,
+                                                              Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_storedProperty) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_index.drop () ;
@@ -4431,11 +4473,11 @@ void GALGAS_propertySetterKind::method_storedProperty (GALGAS_omnibusType & outA
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMapEntry & outAssociatedValue_typeProxy,
-                                                         GALGAS_routineLLVMNameDict & outAssociatedValue_getterModeDictionary,
-                                                         GALGAS_routineLLVMNameDict & outAssociatedValue_setterModeDictionary,
-                                                         Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) const {
+void GALGAS_propertySetterKind::method_extractComputedProperty (GALGAS_unifiedTypeMapEntry & outAssociatedValue_typeProxy,
+                                                                GALGAS_routineLLVMNameDict & outAssociatedValue_getterModeDictionary,
+                                                                GALGAS_routineLLVMNameDict & outAssociatedValue_setterModeDictionary,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_computedProperty) {
     outAssociatedValue_typeProxy.drop () ;
     outAssociatedValue_getterModeDictionary.drop () ;
@@ -4453,7 +4495,7 @@ void GALGAS_propertySetterKind::method_computedProperty (GALGAS_unifiedTypeMapEn
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertySetterKind_2D_storedProperty_3F_ GALGAS_propertySetterKind::getter_storedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertySetterKind_2D_storedProperty_3F_ GALGAS_propertySetterKind::getter_getStoredProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertySetterKind_2D_storedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_storedProperty) {
     const auto ptr = (const GALGAS_propertySetterKind_2D_storedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4473,7 +4515,7 @@ void GALGAS_propertySetterKind::getAssociatedValuesFor_storedProperty (GALGAS_om
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_propertySetterKind_2D_computedProperty_3F_ GALGAS_propertySetterKind::getter_computedProperty (UNUSED_LOCATION_ARGS) const {
+GALGAS_propertySetterKind_2D_computedProperty_3F_ GALGAS_propertySetterKind::getter_getComputedProperty (UNUSED_LOCATION_ARGS) const {
   GALGAS_propertySetterKind_2D_computedProperty_3F_ result ;
   if (mEnum == Enumeration::enum_computedProperty) {
     const auto ptr = (const GALGAS_propertySetterKind_2D_computedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -4500,6 +4542,18 @@ static const char * gEnumNameArrayFor_propertySetterKind [3] = {
   "storedProperty",
   "computedProperty"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertySetterKind::getter_isStoredProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_storedProperty == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_propertySetterKind::getter_isComputedProperty (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_computedProperty == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5971,10 +6025,10 @@ GALGAS_objectIR GALGAS_objectIR::class_func_llvmArrayRepeatedDynamicValue (const
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_reference (GALGAS_omnibusType & outAssociatedValue_type,
-                                        GALGAS_string & outAssociatedValue_llvmName,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractReference (GALGAS_omnibusType & outAssociatedValue_type,
+                                               GALGAS_string & outAssociatedValue_llvmName,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_reference) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_llvmName.drop () ;
@@ -5990,9 +6044,9 @@ void GALGAS_objectIR::method_reference (GALGAS_omnibusType & outAssociatedValue_
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_null (GALGAS_omnibusType & outAssociatedValue_type,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractNull (GALGAS_omnibusType & outAssociatedValue_type,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_null) {
     outAssociatedValue_type.drop () ;
     String s ;
@@ -6006,10 +6060,10 @@ void GALGAS_objectIR::method_null (GALGAS_omnibusType & outAssociatedValue_type,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmNamedValue (GALGAS_omnibusType & outAssociatedValue_type,
-                                             GALGAS_string & outAssociatedValue_llvmName,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmNamedValue (GALGAS_omnibusType & outAssociatedValue_type,
+                                                    GALGAS_string & outAssociatedValue_llvmName,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmNamedValue) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_llvmName.drop () ;
@@ -6025,10 +6079,10 @@ void GALGAS_objectIR::method_llvmNamedValue (GALGAS_omnibusType & outAssociatedV
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_literalInteger (GALGAS_omnibusType & outAssociatedValue_type,
-                                             GALGAS_bigint & outAssociatedValue_value,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLiteralInteger (GALGAS_omnibusType & outAssociatedValue_type,
+                                                    GALGAS_bigint & outAssociatedValue_value,
+                                                    Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_literalInteger) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_value.drop () ;
@@ -6044,10 +6098,10 @@ void GALGAS_objectIR::method_literalInteger (GALGAS_omnibusType & outAssociatedV
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmStructureValue (GALGAS_omnibusType & outAssociatedValue_type,
-                                                 GALGAS_sortedOperandIRList & outAssociatedValue_values,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmStructureValue (GALGAS_omnibusType & outAssociatedValue_type,
+                                                        GALGAS_sortedOperandIRList & outAssociatedValue_values,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmStructureValue) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_values.drop () ;
@@ -6063,10 +6117,10 @@ void GALGAS_objectIR::method_llvmStructureValue (GALGAS_omnibusType & outAssocia
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_literalString (GALGAS_uint & outAssociatedValue_utf8Size,
-                                            GALGAS_uint & outAssociatedValue_index,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLiteralString (GALGAS_uint & outAssociatedValue_utf8Size,
+                                                   GALGAS_uint & outAssociatedValue_index,
+                                                   Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_literalString) {
     outAssociatedValue_utf8Size.drop () ;
     outAssociatedValue_index.drop () ;
@@ -6082,9 +6136,9 @@ void GALGAS_objectIR::method_literalString (GALGAS_uint & outAssociatedValue_utf
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_zero (GALGAS_omnibusType & outAssociatedValue_type,
-                                   Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractZero (GALGAS_omnibusType & outAssociatedValue_type,
+                                          Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_zero) {
     outAssociatedValue_type.drop () ;
     String s ;
@@ -6098,11 +6152,11 @@ void GALGAS_objectIR::method_zero (GALGAS_omnibusType & outAssociatedValue_type,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_omnibusType & outAssociatedValue_type,
-                                                    GALGAS_operandIRList & outAssociatedValue_values,
-                                                    GALGAS_uint & outAssociatedValue_index,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmArrayStaticValues (GALGAS_omnibusType & outAssociatedValue_type,
+                                                           GALGAS_operandIRList & outAssociatedValue_values,
+                                                           GALGAS_uint & outAssociatedValue_index,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmArrayStaticValues) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_values.drop () ;
@@ -6120,10 +6174,10 @@ void GALGAS_objectIR::method_llvmArrayStaticValues (GALGAS_omnibusType & outAsso
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_omnibusType & outAssociatedValue_type,
-                                                     GALGAS_operandIRList & outAssociatedValue_values,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmArrayDynamicValues (GALGAS_omnibusType & outAssociatedValue_type,
+                                                            GALGAS_operandIRList & outAssociatedValue_values,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmArrayDynamicValues) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_values.drop () ;
@@ -6139,12 +6193,12 @@ void GALGAS_objectIR::method_llvmArrayDynamicValues (GALGAS_omnibusType & outAss
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmArrayRepeatedStaticValue (GALGAS_omnibusType & outAssociatedValue_type,
-                                                           GALGAS_uint & outAssociatedValue_arraySize,
-                                                           GALGAS_objectIR & outAssociatedValue_value,
-                                                           GALGAS_uint & outAssociatedValue_index,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmArrayRepeatedStaticValue (GALGAS_omnibusType & outAssociatedValue_type,
+                                                                  GALGAS_uint & outAssociatedValue_arraySize,
+                                                                  GALGAS_objectIR & outAssociatedValue_value,
+                                                                  GALGAS_uint & outAssociatedValue_index,
+                                                                  Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmArrayRepeatedStaticValue) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_arraySize.drop () ;
@@ -6164,11 +6218,11 @@ void GALGAS_objectIR::method_llvmArrayRepeatedStaticValue (GALGAS_omnibusType & 
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_omnibusType & outAssociatedValue_type,
-                                                            GALGAS_uint & outAssociatedValue_arraySize,
-                                                            GALGAS_objectIR & outAssociatedValue_value,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
+void GALGAS_objectIR::method_extractLlvmArrayRepeatedDynamicValue (GALGAS_omnibusType & outAssociatedValue_type,
+                                                                   GALGAS_uint & outAssociatedValue_arraySize,
+                                                                   GALGAS_objectIR & outAssociatedValue_value,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmArrayRepeatedDynamicValue) {
     outAssociatedValue_type.drop () ;
     outAssociatedValue_arraySize.drop () ;
@@ -6186,13 +6240,9 @@ void GALGAS_objectIR::method_llvmArrayRepeatedDynamicValue (GALGAS_omnibusType &
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_objectIR::getter_void (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_void == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_reference_3F_ GALGAS_objectIR::getter_reference (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_reference_3F_ GALGAS_objectIR::getter_getReference (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_reference_3F_ result ;
   if (mEnum == Enumeration::enum_reference) {
     const auto ptr = (const GALGAS_objectIR_2D_reference *) mAssociatedValues.associatedValuesPointer () ;
@@ -6212,7 +6262,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_reference (GALGAS_omnibusType & out
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_null_3F_ GALGAS_objectIR::getter_null (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_null_3F_ GALGAS_objectIR::getter_getNull (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_null_3F_ result ;
   if (mEnum == Enumeration::enum_null) {
     const auto ptr = (const GALGAS_objectIR_2D_null *) mAssociatedValues.associatedValuesPointer () ;
@@ -6230,7 +6280,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_null (GALGAS_omnibusType & out_type
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmNamedValue_3F_ GALGAS_objectIR::getter_llvmNamedValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmNamedValue_3F_ GALGAS_objectIR::getter_getLlvmNamedValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmNamedValue_3F_ result ;
   if (mEnum == Enumeration::enum_llvmNamedValue) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmNamedValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -6250,7 +6300,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_llvmNamedValue (GALGAS_omnibusType 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_literalInteger_3F_ GALGAS_objectIR::getter_literalInteger (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_literalInteger_3F_ GALGAS_objectIR::getter_getLiteralInteger (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_literalInteger_3F_ result ;
   if (mEnum == Enumeration::enum_literalInteger) {
     const auto ptr = (const GALGAS_objectIR_2D_literalInteger *) mAssociatedValues.associatedValuesPointer () ;
@@ -6270,7 +6320,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_literalInteger (GALGAS_omnibusType 
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmStructureValue_3F_ GALGAS_objectIR::getter_llvmStructureValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmStructureValue_3F_ GALGAS_objectIR::getter_getLlvmStructureValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmStructureValue_3F_ result ;
   if (mEnum == Enumeration::enum_llvmStructureValue) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmStructureValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -6290,7 +6340,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_llvmStructureValue (GALGAS_omnibusT
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_literalString_3F_ GALGAS_objectIR::getter_literalString (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_literalString_3F_ GALGAS_objectIR::getter_getLiteralString (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_literalString_3F_ result ;
   if (mEnum == Enumeration::enum_literalString) {
     const auto ptr = (const GALGAS_objectIR_2D_literalString *) mAssociatedValues.associatedValuesPointer () ;
@@ -6310,7 +6360,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_literalString (GALGAS_uint & out_ut
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_zero_3F_ GALGAS_objectIR::getter_zero (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_zero_3F_ GALGAS_objectIR::getter_getZero (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_zero_3F_ result ;
   if (mEnum == Enumeration::enum_zero) {
     const auto ptr = (const GALGAS_objectIR_2D_zero *) mAssociatedValues.associatedValuesPointer () ;
@@ -6328,7 +6378,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_zero (GALGAS_omnibusType & out_type
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmArrayStaticValues_3F_ GALGAS_objectIR::getter_llvmArrayStaticValues (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmArrayStaticValues_3F_ GALGAS_objectIR::getter_getLlvmArrayStaticValues (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmArrayStaticValues_3F_ result ;
   if (mEnum == Enumeration::enum_llvmArrayStaticValues) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmArrayStaticValues *) mAssociatedValues.associatedValuesPointer () ;
@@ -6350,7 +6400,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_llvmArrayStaticValues (GALGAS_omnib
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmArrayDynamicValues_3F_ GALGAS_objectIR::getter_llvmArrayDynamicValues (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmArrayDynamicValues_3F_ GALGAS_objectIR::getter_getLlvmArrayDynamicValues (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmArrayDynamicValues_3F_ result ;
   if (mEnum == Enumeration::enum_llvmArrayDynamicValues) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmArrayDynamicValues *) mAssociatedValues.associatedValuesPointer () ;
@@ -6370,7 +6420,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_llvmArrayDynamicValues (GALGAS_omni
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue_3F_ GALGAS_objectIR::getter_llvmArrayRepeatedStaticValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue_3F_ GALGAS_objectIR::getter_getLlvmArrayRepeatedStaticValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue_3F_ result ;
   if (mEnum == Enumeration::enum_llvmArrayRepeatedStaticValue) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmArrayRepeatedStaticValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -6394,7 +6444,7 @@ void GALGAS_objectIR::getAssociatedValuesFor_llvmArrayRepeatedStaticValue (GALGA
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue_3F_ GALGAS_objectIR::getter_llvmArrayRepeatedDynamicValue (UNUSED_LOCATION_ARGS) const {
+GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue_3F_ GALGAS_objectIR::getter_getLlvmArrayRepeatedDynamicValue (UNUSED_LOCATION_ARGS) const {
   GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue_3F_ result ;
   if (mEnum == Enumeration::enum_llvmArrayRepeatedDynamicValue) {
     const auto ptr = (const GALGAS_objectIR_2D_llvmArrayRepeatedDynamicValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -6697,10 +6747,10 @@ GALGAS_subscript GALGAS_subscript::class_func_literalString (UNUSED_LOCATION_ARG
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_subscript::method_staticSubscript (GALGAS_omnibusType & outAssociatedValue_elementType,
-                                               GALGAS_bigint & outAssociatedValue_size,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_subscript::method_extractStaticSubscript (GALGAS_omnibusType & outAssociatedValue_elementType,
+                                                      GALGAS_bigint & outAssociatedValue_size,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_staticSubscript) {
     outAssociatedValue_elementType.drop () ;
     outAssociatedValue_size.drop () ;
@@ -6716,13 +6766,9 @@ void GALGAS_subscript::method_staticSubscript (GALGAS_omnibusType & outAssociate
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_subscript::getter_noSubscript (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_noSubscript == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_subscript_2D_staticSubscript_3F_ GALGAS_subscript::getter_staticSubscript (UNUSED_LOCATION_ARGS) const {
+GALGAS_subscript_2D_staticSubscript_3F_ GALGAS_subscript::getter_getStaticSubscript (UNUSED_LOCATION_ARGS) const {
   GALGAS_subscript_2D_staticSubscript_3F_ result ;
   if (mEnum == Enumeration::enum_staticSubscript) {
     const auto ptr = (const GALGAS_subscript_2D_staticSubscript *) mAssociatedValues.associatedValuesPointer () ;
@@ -6742,10 +6788,6 @@ void GALGAS_subscript::getAssociatedValuesFor_staticSubscript (GALGAS_omnibusTyp
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_subscript::getter_literalString (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_literalString == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 static const char * gEnumNameArrayFor_subscript [4] = {
@@ -6754,6 +6796,24 @@ static const char * gEnumNameArrayFor_subscript [4] = {
   "staticSubscript",
   "literalString"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_subscript::getter_isNoSubscript (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_noSubscript == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_subscript::getter_isStaticSubscript (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_staticSubscript == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_subscript::getter_isLiteralString (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_literalString == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6844,21 +6904,6 @@ GALGAS_omnibusTypeAttributes GALGAS_omnibusTypeAttributes::class_func_copyable (
 
 //--------------------------------------------------------------------------------------------------
 
-ComparisonResult GALGAS_omnibusTypeAttributes::objectCompare (const GALGAS_omnibusTypeAttributes & inOperand) const {
-   ComparisonResult result = ComparisonResult::invalid ;
-   if (mIsValid && inOperand.mIsValid) {
-     result = ComparisonResult::operandEqual ;
-     if (mFlags < inOperand.mFlags) {
-       result = ComparisonResult::firstOperandLowerThanSecond ;
-     }else if (mFlags > inOperand.mFlags) {
-       result = ComparisonResult::firstOperandGreaterThanSecond ;
-     }
-   }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GALGAS_omnibusTypeAttributes::isValid (void) const {
   return mIsValid ;
 }
@@ -6876,9 +6921,19 @@ GALGAS_bool GALGAS_omnibusTypeAttributes::getter_contains (const GALGAS_omnibusT
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_omnibusTypeAttributes::plusAssign_operation (const GALGAS_omnibusTypeAttributes inOperand,
-                                                      class Compiler * /* inCompiler */
-                                                      COMMA_UNUSED_LOCATION_ARGS) {
+void GALGAS_omnibusTypeAttributes::andAssign_operation (const GALGAS_omnibusTypeAttributes inOperand,
+                                                        class Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags &= inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GALGAS_omnibusTypeAttributes::orAssign_operation (const GALGAS_omnibusTypeAttributes inOperand,
+                                                       class Compiler * /* inCompiler */
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid () && inOperand.isValid ()) {
     mFlags |= inOperand.mFlags ;
   }
@@ -6886,9 +6941,19 @@ void GALGAS_omnibusTypeAttributes::plusAssign_operation (const GALGAS_omnibusTyp
 
 //--------------------------------------------------------------------------------------------------
 
+void GALGAS_omnibusTypeAttributes::xorAssign_operation (const GALGAS_omnibusTypeAttributes inOperand,
+                                                        class Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags ^= inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
 void GALGAS_omnibusTypeAttributes::minusAssign_operation (const GALGAS_omnibusTypeAttributes inOperand,
-                                                       class Compiler * /* inCompiler */
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
+                                                          class Compiler * /* inCompiler */
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid () && inOperand.isValid ()) {
     mFlags &= ~ inOperand.mFlags ;
   }
@@ -7210,9 +7275,9 @@ GALGAS_typeKind GALGAS_typeKind::class_func_function (const GALGAS_mode & inAsso
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_enumeration (GALGAS_uint & outAssociatedValue_bitCount,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractEnumeration (GALGAS_uint & outAssociatedValue_bitCount,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_enumeration) {
     outAssociatedValue_bitCount.drop () ;
     String s ;
@@ -7226,9 +7291,9 @@ void GALGAS_typeKind::method_enumeration (GALGAS_uint & outAssociatedValue_bitCo
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_structure (GALGAS_propertyList & outAssociatedValue_propertyList,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractStructure (GALGAS_propertyList & outAssociatedValue_propertyList,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_structure) {
     outAssociatedValue_propertyList.drop () ;
     String s ;
@@ -7242,12 +7307,12 @@ void GALGAS_typeKind::method_structure (GALGAS_propertyList & outAssociatedValue
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue_min,
-                                      GALGAS_bigint & outAssociatedValue_max,
-                                      GALGAS_bool & outAssociatedValue_unsigned,
-                                      GALGAS_uint & outAssociatedValue_bitCount,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractInteger (GALGAS_bigint & outAssociatedValue_min,
+                                             GALGAS_bigint & outAssociatedValue_max,
+                                             GALGAS_bool & outAssociatedValue_unsigned,
+                                             GALGAS_uint & outAssociatedValue_bitCount,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_integer) {
     outAssociatedValue_min.drop () ;
     outAssociatedValue_max.drop () ;
@@ -7267,9 +7332,9 @@ void GALGAS_typeKind::method_integer (GALGAS_bigint & outAssociatedValue_min,
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_llvmType (GALGAS_bigint & outAssociatedValue_bitSize,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractLlvmType (GALGAS_bigint & outAssociatedValue_bitSize,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_llvmType) {
     outAssociatedValue_bitSize.drop () ;
     String s ;
@@ -7283,11 +7348,11 @@ void GALGAS_typeKind::method_llvmType (GALGAS_bigint & outAssociatedValue_bitSiz
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_generic (GALGAS_genericFormalParameterList & outAssociatedValue_parameters,
-                                      GALGAS_ctExpressionAST & outAssociatedValue_whereClause,
-                                      GALGAS_llvmStringDefinition & outAssociatedValue_llvmNativeTypeNameExpression,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractGeneric (GALGAS_genericFormalParameterList & outAssociatedValue_parameters,
+                                             GALGAS_ctExpressionAST & outAssociatedValue_whereClause,
+                                             GALGAS_llvmStringDefinition & outAssociatedValue_llvmNativeTypeNameExpression,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_generic) {
     outAssociatedValue_parameters.drop () ;
     outAssociatedValue_whereClause.drop () ;
@@ -7305,9 +7370,9 @@ void GALGAS_typeKind::method_generic (GALGAS_genericFormalParameterList & outAss
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_opaque (GALGAS_bigint & outAssociatedValue_bitCount,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractOpaque (GALGAS_bigint & outAssociatedValue_bitCount,
+                                            Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_opaque) {
     outAssociatedValue_bitCount.drop () ;
     String s ;
@@ -7321,10 +7386,10 @@ void GALGAS_typeKind::method_opaque (GALGAS_bigint & outAssociatedValue_bitCount
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_staticArrayType (GALGAS_omnibusType & outAssociatedValue_elementType,
-                                              GALGAS_bigint & outAssociatedValue_size,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractStaticArrayType (GALGAS_omnibusType & outAssociatedValue_elementType,
+                                                     GALGAS_bigint & outAssociatedValue_size,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_staticArrayType) {
     outAssociatedValue_elementType.drop () ;
     outAssociatedValue_size.drop () ;
@@ -7340,9 +7405,9 @@ void GALGAS_typeKind::method_staticArrayType (GALGAS_omnibusType & outAssociated
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_dynamicArrayType (GALGAS_omnibusType & outAssociatedValue_elementType,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractDynamicArrayType (GALGAS_omnibusType & outAssociatedValue_elementType,
+                                                      Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_dynamicArrayType) {
     outAssociatedValue_elementType.drop () ;
     String s ;
@@ -7356,11 +7421,11 @@ void GALGAS_typeKind::method_dynamicArrayType (GALGAS_omnibusType & outAssociate
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeKind::method_function (GALGAS_mode & outAssociatedValue_mode,
-                                       GALGAS_routineTypedSignature & outAssociatedValue_signature,
-                                       GALGAS_unifiedTypeMapEntry & outAssociatedValue_returnTypeProxy,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) const {
+void GALGAS_typeKind::method_extractFunction (GALGAS_mode & outAssociatedValue_mode,
+                                              GALGAS_routineTypedSignature & outAssociatedValue_signature,
+                                              GALGAS_unifiedTypeMapEntry & outAssociatedValue_returnTypeProxy,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_function) {
     outAssociatedValue_mode.drop () ;
     outAssociatedValue_signature.drop () ;
@@ -7378,25 +7443,13 @@ void GALGAS_typeKind::method_function (GALGAS_mode & outAssociatedValue_mode,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_void (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_void == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_boolean (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_boolean == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_literalString (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_literalString == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_typeKind_2D_enumeration_3F_ GALGAS_typeKind::getter_enumeration (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_enumeration_3F_ GALGAS_typeKind::getter_getEnumeration (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_enumeration_3F_ result ;
   if (mEnum == Enumeration::enum_enumeration) {
     const auto ptr = (const GALGAS_typeKind_2D_enumeration *) mAssociatedValues.associatedValuesPointer () ;
@@ -7414,7 +7467,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_enumeration (GALGAS_uint & out_bitC
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_structure_3F_ GALGAS_typeKind::getter_structure (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_structure_3F_ GALGAS_typeKind::getter_getStructure (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_structure_3F_ result ;
   if (mEnum == Enumeration::enum_structure) {
     const auto ptr = (const GALGAS_typeKind_2D_structure *) mAssociatedValues.associatedValuesPointer () ;
@@ -7432,13 +7485,9 @@ void GALGAS_typeKind::getAssociatedValuesFor_structure (GALGAS_propertyList & ou
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_syncTool (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_syncTool == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_integer_3F_ GALGAS_typeKind::getter_integer (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_integer_3F_ GALGAS_typeKind::getter_getInteger (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_integer_3F_ result ;
   if (mEnum == Enumeration::enum_integer) {
     const auto ptr = (const GALGAS_typeKind_2D_integer *) mAssociatedValues.associatedValuesPointer () ;
@@ -7462,19 +7511,11 @@ void GALGAS_typeKind::getAssociatedValuesFor_integer (GALGAS_bigint & out_min,
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_compileTimeInteger (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_compileTimeInteger == mEnum) ;
-}
+//--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeKind::getter_compileTimeBool (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_compileTimeBool == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_typeKind_2D_llvmType_3F_ GALGAS_typeKind::getter_llvmType (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_llvmType_3F_ GALGAS_typeKind::getter_getLlvmType (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_llvmType_3F_ result ;
   if (mEnum == Enumeration::enum_llvmType) {
     const auto ptr = (const GALGAS_typeKind_2D_llvmType *) mAssociatedValues.associatedValuesPointer () ;
@@ -7492,7 +7533,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_llvmType (GALGAS_bigint & out_bitSi
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_generic_3F_ GALGAS_typeKind::getter_generic (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_generic_3F_ GALGAS_typeKind::getter_getGeneric (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_generic_3F_ result ;
   if (mEnum == Enumeration::enum_generic) {
     const auto ptr = (const GALGAS_typeKind_2D_generic *) mAssociatedValues.associatedValuesPointer () ;
@@ -7514,7 +7555,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_generic (GALGAS_genericFormalParame
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_opaque_3F_ GALGAS_typeKind::getter_opaque (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_opaque_3F_ GALGAS_typeKind::getter_getOpaque (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_opaque_3F_ result ;
   if (mEnum == Enumeration::enum_opaque) {
     const auto ptr = (const GALGAS_typeKind_2D_opaque *) mAssociatedValues.associatedValuesPointer () ;
@@ -7532,7 +7573,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_opaque (GALGAS_bigint & out_bitCoun
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_staticArrayType_3F_ GALGAS_typeKind::getter_staticArrayType (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_staticArrayType_3F_ GALGAS_typeKind::getter_getStaticArrayType (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_staticArrayType_3F_ result ;
   if (mEnum == Enumeration::enum_staticArrayType) {
     const auto ptr = (const GALGAS_typeKind_2D_staticArrayType *) mAssociatedValues.associatedValuesPointer () ;
@@ -7552,7 +7593,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_staticArrayType (GALGAS_omnibusType
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_dynamicArrayType_3F_ GALGAS_typeKind::getter_dynamicArrayType (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_dynamicArrayType_3F_ GALGAS_typeKind::getter_getDynamicArrayType (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_dynamicArrayType_3F_ result ;
   if (mEnum == Enumeration::enum_dynamicArrayType) {
     const auto ptr = (const GALGAS_typeKind_2D_dynamicArrayType *) mAssociatedValues.associatedValuesPointer () ;
@@ -7570,7 +7611,7 @@ void GALGAS_typeKind::getAssociatedValuesFor_dynamicArrayType (GALGAS_omnibusTyp
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeKind_2D_function_3F_ GALGAS_typeKind::getter_function (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeKind_2D_function_3F_ GALGAS_typeKind::getter_getFunction (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeKind_2D_function_3F_ result ;
   if (mEnum == Enumeration::enum_function) {
     const auto ptr = (const GALGAS_typeKind_2D_function *) mAssociatedValues.associatedValuesPointer () ;
@@ -9164,7 +9205,7 @@ GALGAS_lstringlist extensionGetter_unsolvedEntryList (const GALGAS_unifiedTypeMa
   while (enumerator_1188.hasCurrentObject ()) {
     enumGalgasBool test_2 = kBoolTrue ;
     if (kBoolTrue == test_2) {
-      test_2 = enumerator_1188.current_mElement (HERE).readProperty_mDefinition ().getter_unsolved (SOURCE_FILE ("unified-type-map.galgas", 21)).boolEnum () ;
+      test_2 = enumerator_1188.current_mElement (HERE).readProperty_mDefinition ().getter_isUnsolved (SOURCE_FILE ("unified-type-map.galgas", 21)).boolEnum () ;
       if (kBoolTrue == test_2) {
         result_result.addAssign_operation (enumerator_1188.current_lkey (HERE)  COMMA_SOURCE_FILE ("unified-type-map.galgas", 22)) ;
       }
@@ -9193,20 +9234,20 @@ void extensionSetter_makeEntry (GALGAS_unifiedTypeMap & ioObject,
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_unifiedTypeMap temp_1 = ioObject ;
-    const GALGAS_unifiedTypeMap_2D_element var_node_1508 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+    const GALGAS_unifiedTypeMap_2D_element var_node_1510 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
     if (!temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
       test_0 = kBoolFalse ;
     }
     if (kBoolTrue == test_0) {
-      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_1508.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 31)) ;
+      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_1510.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 31)) ;
     }
   }
   if (kBoolFalse == test_0) {
-    GALGAS_unifiedTypeMapElementClass var_newElement_1604 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inLKey, GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 33)), inCompiler COMMA_HERE) ;
+    GALGAS_unifiedTypeMapElementClass var_newElement_1606 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inLKey, GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 33)), inCompiler COMMA_HERE) ;
     {
-    ioObject.setter_internalInsertKey (constinArgument_inLKey, var_newElement_1604, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 34)) ;
+    ioObject.setter_internalInsertKey (constinArgument_inLKey, var_newElement_1606, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 34)) ;
     }
-    outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_1604  COMMA_SOURCE_FILE ("unified-type-map.galgas", 35)) ;
+    outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_1606  COMMA_SOURCE_FILE ("unified-type-map.galgas", 35)) ;
   }
 }
 
@@ -9234,20 +9275,20 @@ void extensionSetter_makeOptionalEntry (GALGAS_unifiedTypeMap & ioObject,
     enumGalgasBool test_1 = kBoolTrue ;
     if (kBoolTrue == test_1) {
       const GALGAS_unifiedTypeMap temp_2 = ioObject ;
-      const GALGAS_unifiedTypeMap_2D_element var_node_2062 = temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+      const GALGAS_unifiedTypeMap_2D_element var_node_2064 = temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
       if (!temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
         test_1 = kBoolFalse ;
       }
       if (kBoolTrue == test_1) {
-        outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_2062.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 45)) ;
+        outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_2064.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 45)) ;
       }
     }
     if (kBoolFalse == test_1) {
-      GALGAS_unifiedTypeMapElementClass var_newElement_2158 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inLKey, GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 47)), inCompiler COMMA_HERE) ;
+      GALGAS_unifiedTypeMapElementClass var_newElement_2160 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inLKey, GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 47)), inCompiler COMMA_HERE) ;
       {
-      ioObject.setter_internalInsertKey (constinArgument_inLKey, var_newElement_2158, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 48)) ;
+      ioObject.setter_internalInsertKey (constinArgument_inLKey, var_newElement_2160, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 48)) ;
       }
-      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_2158  COMMA_SOURCE_FILE ("unified-type-map.galgas", 49)) ;
+      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_2160  COMMA_SOURCE_FILE ("unified-type-map.galgas", 49)) ;
     }
   }
 }
@@ -9268,20 +9309,20 @@ void extensionSetter_makeEntryFromString (GALGAS_unifiedTypeMap & ioObject,
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_unifiedTypeMap temp_1 = ioObject ;
-    const GALGAS_unifiedTypeMap_2D_element var_node_2563 = temp_1.readSubscript__3F_ (constinArgument_inKey, inCompiler COMMA_HERE).unwrappedValue () ;
+    const GALGAS_unifiedTypeMap_2D_element var_node_2565 = temp_1.readSubscript__3F_ (constinArgument_inKey, inCompiler COMMA_HERE).unwrappedValue () ;
     if (!temp_1.readSubscript__3F_ (constinArgument_inKey, inCompiler COMMA_HERE).isValuated ()) {
       test_0 = kBoolFalse ;
     }
     if (kBoolTrue == test_0) {
-      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_2563.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 57)) ;
+      outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_2565.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 57)) ;
     }
   }
   if (kBoolFalse == test_0) {
-    GALGAS_unifiedTypeMapElementClass var_newElement_2658 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (GALGAS_lstring::init_21__21_ (constinArgument_inKey, GALGAS_location::class_func_nowhere (SOURCE_FILE ("unified-type-map.galgas", 59)), inCompiler COMMA_HERE), GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 59)), inCompiler COMMA_HERE) ;
+    GALGAS_unifiedTypeMapElementClass var_newElement_2660 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (GALGAS_lstring::init_21__21_ (constinArgument_inKey, GALGAS_location::class_func_nowhere (SOURCE_FILE ("unified-type-map.galgas", 59)), inCompiler COMMA_HERE), GALGAS_typeDefinition::class_func_unsolved (SOURCE_FILE ("unified-type-map.galgas", 59)), inCompiler COMMA_HERE) ;
     {
-    ioObject.setter_internalInsertKey (GALGAS_lstring::init_21__21_ (constinArgument_inKey, GALGAS_location::class_func_nowhere (SOURCE_FILE ("unified-type-map.galgas", 60)), inCompiler COMMA_HERE), var_newElement_2658, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 60)) ;
+    ioObject.setter_internalInsertKey (GALGAS_lstring::init_21__21_ (constinArgument_inKey, GALGAS_location::class_func_nowhere (SOURCE_FILE ("unified-type-map.galgas", 60)), inCompiler COMMA_HERE), var_newElement_2660, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 60)) ;
     }
-    outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_2658  COMMA_SOURCE_FILE ("unified-type-map.galgas", 61)) ;
+    outArgument_outEntry = GALGAS_unifiedTypeMapEntry::class_func_element (var_newElement_2660  COMMA_SOURCE_FILE ("unified-type-map.galgas", 61)) ;
   }
 }
 
@@ -9308,12 +9349,12 @@ GALGAS_unifiedTypeMapEntry extensionGetter_searchKey (const GALGAS_unifiedTypeMa
     enumGalgasBool test_1 = kBoolTrue ;
     if (kBoolTrue == test_1) {
       const GALGAS_unifiedTypeMap temp_2 = inObject ;
-      const GALGAS_unifiedTypeMap_2D_element var_node_3134 = temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+      const GALGAS_unifiedTypeMap_2D_element var_node_3136 = temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
       if (!temp_2.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
         test_1 = kBoolFalse ;
       }
       if (kBoolTrue == test_1) {
-        result_result = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_3134.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 71)) ;
+        result_result = GALGAS_unifiedTypeMapEntry::class_func_element (var_node_3136.readProperty_mElement ()  COMMA_SOURCE_FILE ("unified-type-map.galgas", 71)) ;
       }
     }
     if (kBoolFalse == test_1) {
@@ -9343,35 +9384,35 @@ void extensionSetter_insertType (GALGAS_unifiedTypeMap & ioObject,
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_unifiedTypeMap temp_1 = ioObject ;
-    const GALGAS_unifiedTypeMap_2D_element var_node_3528 = temp_1.readSubscript__3F_ (constinArgument_inTypeName.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+    const GALGAS_unifiedTypeMap_2D_element var_node_3530 = temp_1.readSubscript__3F_ (constinArgument_inTypeName.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
     if (!temp_1.readSubscript__3F_ (constinArgument_inTypeName.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
       test_0 = kBoolFalse ;
     }
     if (kBoolTrue == test_0) {
-      switch (var_node_3528.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
+      switch (var_node_3530.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
       case GALGAS_typeDefinition::Enumeration::invalid:
         break ;
       case GALGAS_typeDefinition::Enumeration::enum_solved:
         {
-          GALGAS_omnibusType extractedValue_3613__0 ;
-          var_node_3528.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_3613__0) ;
+          GALGAS_omnibusType extractedValue_3615__0 ;
+          var_node_3530.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_3615__0) ;
           TC_Array <FixItDescription> fixItArray2 ;
           inCompiler->emitSemanticError (constinArgument_inTypeName.readProperty_location (), GALGAS_string ("type already defined"), fixItArray2  COMMA_SOURCE_FILE ("unified-type-map.galgas", 83)) ;
         }
         break ;
       case GALGAS_typeDefinition::Enumeration::enum_unsolved:
         {
-          GALGAS_unifiedTypeMapElementClass var_e_3696 = var_node_3528.readProperty_mElement () ;
-          var_e_3696.setProperty_mDefinition (GALGAS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 86))) ;
+          GALGAS_unifiedTypeMapElementClass var_e_3698 = var_node_3530.readProperty_mElement () ;
+          var_e_3698.setProperty_mDefinition (GALGAS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 86))) ;
         }
         break ;
       }
     }
   }
   if (kBoolFalse == test_0) {
-    GALGAS_unifiedTypeMapElementClass var_newElement_3793 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inTypeName, GALGAS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 89)), inCompiler COMMA_HERE) ;
+    GALGAS_unifiedTypeMapElementClass var_newElement_3795 = GALGAS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inTypeName, GALGAS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 89)), inCompiler COMMA_HERE) ;
     {
-    ioObject.setter_internalInsertKey (constinArgument_inTypeName, var_newElement_3793, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 90)) ;
+    ioObject.setter_internalInsertKey (constinArgument_inTypeName, var_newElement_3795, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 90)) ;
     }
   }
 }
@@ -9392,19 +9433,19 @@ void extensionMethod_searchType (const GALGAS_unifiedTypeMap inObject,
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     const GALGAS_unifiedTypeMap temp_1 = inObject ;
-    const GALGAS_unifiedTypeMap_2D_element var_node_4219 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+    const GALGAS_unifiedTypeMap_2D_element var_node_4221 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
     if (!temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
       test_0 = kBoolFalse ;
     }
     if (kBoolTrue == test_0) {
-      switch (var_node_4219.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
+      switch (var_node_4221.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
       case GALGAS_typeDefinition::Enumeration::invalid:
         break ;
       case GALGAS_typeDefinition::Enumeration::enum_solved:
         {
-          GALGAS_omnibusType extractedValue_4300_definition_0 ;
-          var_node_4219.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_4300_definition_0) ;
-          outArgument_outTypeDefinition = extractedValue_4300_definition_0 ;
+          GALGAS_omnibusType extractedValue_4302_definition_0 ;
+          var_node_4221.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_4302_definition_0) ;
+          outArgument_outTypeDefinition = extractedValue_4302_definition_0 ;
         }
         break ;
       case GALGAS_typeDefinition::Enumeration::enum_unsolved:
@@ -9458,9 +9499,9 @@ GALGAS_typeDefinition GALGAS_typeDefinition::class_func_solved (const GALGAS_omn
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_typeDefinition::method_solved (GALGAS_omnibusType & outAssociatedValue_type,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) const {
+void GALGAS_typeDefinition::method_extractSolved (GALGAS_omnibusType & outAssociatedValue_type,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_solved) {
     outAssociatedValue_type.drop () ;
     String s ;
@@ -9474,13 +9515,9 @@ void GALGAS_typeDefinition::method_solved (GALGAS_omnibusType & outAssociatedVal
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_typeDefinition::getter_unsolved (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_unsolved == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_typeDefinition_2D_solved_3F_ GALGAS_typeDefinition::getter_solved (UNUSED_LOCATION_ARGS) const {
+GALGAS_typeDefinition_2D_solved_3F_ GALGAS_typeDefinition::getter_getSolved (UNUSED_LOCATION_ARGS) const {
   GALGAS_typeDefinition_2D_solved_3F_ result ;
   if (mEnum == Enumeration::enum_solved) {
     const auto ptr = (const GALGAS_typeDefinition_2D_solved *) mAssociatedValues.associatedValuesPointer () ;
@@ -9503,6 +9540,18 @@ static const char * gEnumNameArrayFor_typeDefinition [3] = {
   "unsolved",
   "solved"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_typeDefinition::getter_isUnsolved (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_unsolved == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_typeDefinition::getter_isSolved (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_solved == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9700,9 +9749,9 @@ GALGAS_unifiedTypeMapEntry GALGAS_unifiedTypeMapEntry::class_func_element (const
 
 //--------------------------------------------------------------------------------------------------
 
-void GALGAS_unifiedTypeMapEntry::method_element (GALGAS_unifiedTypeMapElementClass_2D_weak & outAssociatedValue_weakElement,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) const {
+void GALGAS_unifiedTypeMapEntry::method_extractElement (GALGAS_unifiedTypeMapElementClass_2D_weak & outAssociatedValue_weakElement,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_element) {
     outAssociatedValue_weakElement.drop () ;
     String s ;
@@ -9716,13 +9765,9 @@ void GALGAS_unifiedTypeMapEntry::method_element (GALGAS_unifiedTypeMapElementCla
 
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_bool GALGAS_unifiedTypeMapEntry::getter_null (UNUSED_LOCATION_ARGS) const {
-  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_null == mEnum) ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
-GALGAS_unifiedTypeMapEntry_2D_element_3F_ GALGAS_unifiedTypeMapEntry::getter_element (UNUSED_LOCATION_ARGS) const {
+GALGAS_unifiedTypeMapEntry_2D_element_3F_ GALGAS_unifiedTypeMapEntry::getter_getElement (UNUSED_LOCATION_ARGS) const {
   GALGAS_unifiedTypeMapEntry_2D_element_3F_ result ;
   if (mEnum == Enumeration::enum_element) {
     const auto ptr = (const GALGAS_unifiedTypeMapEntry_2D_element *) mAssociatedValues.associatedValuesPointer () ;
@@ -9745,6 +9790,18 @@ static const char * gEnumNameArrayFor_unifiedTypeMapEntry [3] = {
   "null",
   "element"
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_unifiedTypeMapEntry::getter_isNull (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_null == mEnum) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GALGAS_bool GALGAS_unifiedTypeMapEntry::getter_isElement (UNUSED_LOCATION_ARGS) const {
+  return GALGAS_bool (Enumeration::invalid != mEnum, Enumeration::enum_element == mEnum) ;
+}
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9846,16 +9903,16 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
     break ;
   case GALGAS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6522_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6522_weakElement_0) ;
+      GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_6524_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6524_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_6548 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6522_weakElement_0.ptr ())) ;
-        if (nullptr == var_type_6548.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_6550 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6524_weakElement_0.ptr ())) ;
+        if (nullptr == var_type_6550.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6548.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6550.readProperty_mDefinition ().enumValue ()) {
           case GALGAS_typeDefinition::Enumeration::invalid:
             break ;
           case GALGAS_typeDefinition::Enumeration::enum_unsolved:
@@ -9867,9 +9924,9 @@ GALGAS_omnibusType extensionGetter_type (const GALGAS_unifiedTypeMapEntry & inOb
             break ;
           case GALGAS_typeDefinition::Enumeration::enum_solved:
             {
-              GALGAS_omnibusType extractedValue_6693_definition_0 ;
-              var_type_6548.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6693_definition_0) ;
-              result_result = extractedValue_6693_definition_0 ;
+              GALGAS_omnibusType extractedValue_6695_definition_0 ;
+              var_type_6550.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6695_definition_0) ;
+              result_result = extractedValue_6695_definition_0 ;
             }
             break ;
           }
@@ -9913,16 +9970,16 @@ GALGAS_string extensionGetter_key (const GALGAS_unifiedTypeMapEntry & inObject,
     break ;
   case GALGAS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7067_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_7067_weakElement_0) ;
+      GALGAS_unifiedTypeMapElementClass_2D_weak extractedValue_7069_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_7069_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GALGAS_unifiedTypeMapElementClass var_type_7093 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7067_weakElement_0.ptr ())) ;
-        if (nullptr == var_type_7093.ptr ()) {
+        GALGAS_unifiedTypeMapElementClass var_type_7095 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_7069_weakElement_0.ptr ())) ;
+        if (nullptr == var_type_7095.ptr ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_7093.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_7095.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {
@@ -16451,149 +16508,6 @@ GALGAS_boolTypeAST_2D_weak GALGAS_boolTypeAST_2D_weak::extractObject (const GALG
       result = *p ;
     }else{
       inCompiler->castError ("boolTypeAST-weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @boolImplicitConverterToBoolean reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractImplicitConverterToBoolean (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GALGAS_boolImplicitConverterToBoolean::objectCompare (const GALGAS_boolImplicitConverterToBoolean & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (void) :
-GALGAS_abstractImplicitConverterToBoolean () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::
-init (Compiler * inCompiler
-          COMMA_LOCATION_ARGS) {
-  cPtr_boolImplicitConverterToBoolean * object = nullptr ;
-  macroMyNew (object, cPtr_boolImplicitConverterToBoolean (inCompiler COMMA_THERE)) ;
-  object->boolImplicitConverterToBoolean_init (inCompiler) ;
-  const GALGAS_boolImplicitConverterToBoolean result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_boolImplicitConverterToBoolean::
-boolImplicitConverterToBoolean_init (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean::GALGAS_boolImplicitConverterToBoolean (const cPtr_boolImplicitConverterToBoolean * inSourcePtr) :
-GALGAS_abstractImplicitConverterToBoolean (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_boolImplicitConverterToBoolean) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::class_func_new (LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @boolImplicitConverterToBoolean class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (LOCATION_ARGS) :
-cPtr_abstractImplicitConverterToBoolean (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_boolImplicitConverterToBoolean::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
-}
-
-void cPtr_boolImplicitConverterToBoolean::description (String & ioString,
-                                                       const int32_t /* inIndentation */) const {
-  ioString.appendCString ("[@boolImplicitConverterToBoolean]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @boolImplicitConverterToBoolean generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ("boolImplicitConverterToBoolean",
-                                                                                      & kTypeDescriptor_GALGAS_abstractImplicitConverterToBoolean) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GALGAS_boolImplicitConverterToBoolean::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_boolImplicitConverterToBoolean ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GALGAS_boolImplicitConverterToBoolean::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GALGAS_boolImplicitConverterToBoolean (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GALGAS_boolImplicitConverterToBoolean GALGAS_boolImplicitConverterToBoolean::extractObject (const GALGAS_object & inObject,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GALGAS_boolImplicitConverterToBoolean result ;
-  const GALGAS_boolImplicitConverterToBoolean * p = (const GALGAS_boolImplicitConverterToBoolean *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GALGAS_boolImplicitConverterToBoolean *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("boolImplicitConverterToBoolean", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

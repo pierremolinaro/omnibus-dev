@@ -23,7 +23,7 @@ setter @instructionListIR appendCopyFromReferences
     )
     [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
   else # Call a copy routine
-    [inSourcePossibleReference reference ?type:let sourceType ?llvmName:let sourceLLVMName]
+    [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName:let sourceLLVMName]
     if sourceType.omnibusTypeDescriptionName != inTargetReference.type.omnibusTypeDescriptionName then
       error inErrorLocation
       : "object of type " + inTargetReference.type.omnibusTypeDescriptionName

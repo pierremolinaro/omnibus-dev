@@ -315,7 +315,7 @@ override method @llvmAssignmentOperatorUsage generateCode
             + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
       [!?ioInstructionListIR appendInstructionAsFreeString !s !§[llvmRoutineName]]
     else
-    [inSourcePossibleReference reference ?type:let sourceType ?llvmName: let srcLLVMName]
+    [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName: let srcLLVMName]
     var @assignmentGenerationVarMap varMap = §[]
     [!?varMap insertKey !self.mTargetVarName !inTargetLLVMName]
     [!?varMap insertKey !self.mSourceVarName !srcLLVMName]

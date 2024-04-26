@@ -18,7 +18,7 @@
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   result = §[]
   for (lkey element) in self do
-    if [element.mDefinition unsolved] then
+    if [element.mDefinition isUnsolved] then
       result += !lkey
     end
   end

@@ -355,7 +355,7 @@ override method @configurationDeclarationAST enterInContext
   ]
   ioContext.mPanicCodeType = panicCodeType
   if [ioContext.mPanicCodeType.kind isInteger] then
-    [ioContext.mPanicCodeType.kind integer ?2* ?unsigned:let unsigned ?1*]
+    [ioContext.mPanicCodeType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
     end
@@ -369,7 +369,7 @@ override method @configurationDeclarationAST enterInContext
   ]
   ioContext.mPanicLineType = panicLineType
   if [ioContext.mPanicLineType.kind isInteger] then
-    [ioContext.mPanicLineType.kind integer ?2* ?unsigned:let unsigned ?1*]
+    [ioContext.mPanicLineType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error self.mPanicLineTypeName : "this type should be an unsigned integer type"
     end
