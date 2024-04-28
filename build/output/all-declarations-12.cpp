@@ -9725,6 +9725,23 @@ void GGS_LValueOperandAST_2E_property_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_LValueOperandAST_2E_property_3F_::objectCompare (const GGS_LValueOperandAST_2E_property_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_LValueOperandAST_2E_property_3F_::description (String & ioString,
                                                         const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -11049,6 +11066,23 @@ void GGS_objectIR_2E_reference_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_objectIR_2E_reference_3F_::objectCompare (const GGS_objectIR_2E_reference_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_objectIR_2E_reference_3F_::description (String & ioString,
                                                  const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -11289,6 +11323,23 @@ void GGS_objectIR_2E_null_3F_::drop (void) {
   mValue = GGS_objectIR_2E_null () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_objectIR_2E_null_3F_::objectCompare (const GGS_objectIR_2E_null_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_objectIR_2E_null_3F_::description (String & ioString,
@@ -11546,6 +11597,23 @@ void GGS_objectIR_2E_llvmNamedValue_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_objectIR_2E_llvmNamedValue_3F_::objectCompare (const GGS_objectIR_2E_llvmNamedValue_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_objectIR_2E_llvmNamedValue_3F_::description (String & ioString,
                                                       const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -11799,6 +11867,23 @@ void GGS_objectIR_2E_literalInteger_3F_::drop (void) {
   mValue = GGS_objectIR_2E_literalInteger () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_objectIR_2E_literalInteger_3F_::objectCompare (const GGS_objectIR_2E_literalInteger_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_objectIR_2E_literalInteger_3F_::description (String & ioString,
@@ -12056,6 +12141,23 @@ void GGS_objectIR_2E_llvmStructureValue_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_objectIR_2E_llvmStructureValue_3F_::objectCompare (const GGS_objectIR_2E_llvmStructureValue_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_objectIR_2E_llvmStructureValue_3F_::description (String & ioString,
                                                           const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -12296,6 +12398,23 @@ void GGS_objectIR_2E_zero_3F_::drop (void) {
   mValue = GGS_objectIR_2E_zero () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_objectIR_2E_zero_3F_::objectCompare (const GGS_objectIR_2E_zero_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_objectIR_2E_zero_3F_::description (String & ioString,
@@ -12566,6 +12685,23 @@ void GGS_objectIR_2E_llvmArrayStaticValues_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_objectIR_2E_llvmArrayStaticValues_3F_::objectCompare (const GGS_objectIR_2E_llvmArrayStaticValues_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_objectIR_2E_llvmArrayStaticValues_3F_::description (String & ioString,
                                                              const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -12819,6 +12955,23 @@ void GGS_objectIR_2E_llvmArrayDynamicValues_3F_::drop (void) {
   mValue = GGS_objectIR_2E_llvmArrayDynamicValues () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_objectIR_2E_llvmArrayDynamicValues_3F_::objectCompare (const GGS_objectIR_2E_llvmArrayDynamicValues_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_objectIR_2E_llvmArrayDynamicValues_3F_::description (String & ioString,
@@ -13102,6 +13255,23 @@ void GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::objectCompare (const GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::description (String & ioString,
                                                                     const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -13368,6 +13538,23 @@ void GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_::drop (void) {
   mValue = GGS_objectIR_2E_llvmArrayRepeatedDynamicValue () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_::objectCompare (const GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_::description (String & ioString,
@@ -14439,6 +14626,23 @@ void GGS_genericFormalParameter_2E_constant_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_genericFormalParameter_2E_constant_3F_::objectCompare (const GGS_genericFormalParameter_2E_constant_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_genericFormalParameter_2E_constant_3F_::description (String & ioString,
                                                               const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -14679,6 +14883,23 @@ void GGS_genericFormalParameter_2E_type_3F_::drop (void) {
   mValue = GGS_genericFormalParameter_2E_type () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_genericFormalParameter_2E_type_3F_::objectCompare (const GGS_genericFormalParameter_2E_type_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_genericFormalParameter_2E_type_3F_::description (String & ioString,
@@ -14923,6 +15144,23 @@ void GGS_llvmStringDefinitionElement_2E_variable_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_llvmStringDefinitionElement_2E_variable_3F_::objectCompare (const GGS_llvmStringDefinitionElement_2E_variable_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_llvmStringDefinitionElement_2E_variable_3F_::description (String & ioString,
                                                                    const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
@@ -15163,6 +15401,23 @@ void GGS_llvmStringDefinitionElement_2E_string_3F_::drop (void) {
   mValue = GGS_llvmStringDefinitionElement_2E_string () ;
 }
 
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_llvmStringDefinitionElement_2E_string_3F_::objectCompare (const GGS_llvmStringDefinitionElement_2E_string_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
 //--------------------------------------------------------------------------------------------------
 
 void GGS_llvmStringDefinitionElement_2E_string_3F_::description (String & ioString,
@@ -16855,307 +17110,6 @@ GGS_configurationDeclarationAST GGS_configurationDeclarationAST::extractObject (
       result = *p ;
     }else{
       inCompiler->castError ("configurationDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_semanticContext::GGS_semanticContext (void) :
-mProperty_mTargetParameters (),
-mProperty_mPanicCodeType (),
-mProperty_mPanicLineType (),
-mProperty_mPanicSetupRoutinePriorityMap (),
-mProperty_mPanicLoopRoutinePriorityMap (),
-mProperty_mRoutineMap (),
-mProperty_mGuardMap (),
-mProperty_mControlRegisterGroupMap (),
-mProperty_mGlobalConstantMap (),
-mProperty_mGlobalSyncInstanceMap (),
-mProperty_mStaticListMap (),
-mProperty_mRequiredRoutineSet (),
-mProperty_mTypeMap (),
-mProperty_mTypeConstantMap (),
-mProperty_mTypeConstructorMap (),
-mProperty_mTypePropertySetterMap (),
-mProperty_mTypePropertyGetterMap (),
-mProperty_mAvailableInterruptMap (),
-mProperty_mInfixOperatorMap (),
-mProperty_mPrefixOperatorMap (),
-mProperty_mAssignmentOperatorMap (),
-mProperty_mImplicitConversionToBooleanMap (),
-mProperty_mTaskMap (),
-mProperty_mGlobalTaskVariableList (),
-mProperty_mValuedObjectMap () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_semanticContext::~ GGS_semanticContext (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_semanticContext GGS_semanticContext::init (Compiler * inCompiler
-                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_semanticContext result ;
-  result.setInitializedProperties (inCompiler) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_semanticContext::setInitializedProperties (Compiler * inCompiler) {
-GGS__32_lstringlist temp_0 = GGS__32_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 10)) ;
-GGS_lstringlist temp_1 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 29)) ;
-GGS_lstringlist temp_2 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 30)) ;
-GGS_lstringlist temp_3 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 31)) ;
-  mProperty_mTargetParameters = GGS_targetParameters::init_21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21_ (GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("context.galgas", 9)), temp_0, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 11)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 12)), GGS_uint (uint32_t (0U)), GGS_bool (false), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 15)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 15)), inCompiler COMMA_HERE), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 16)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 16)), inCompiler COMMA_HERE), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 17)), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 18)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 18)), inCompiler COMMA_HERE), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 19)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 19)), inCompiler COMMA_HERE), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 20)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 20)), inCompiler COMMA_HERE), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 21)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 21)), inCompiler COMMA_HERE), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 22)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 22)), inCompiler COMMA_HERE), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 23)), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 24)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 24)), inCompiler COMMA_HERE), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 25)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 26)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 27)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 28)), temp_1, temp_2, temp_3, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 32)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 33)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 34)), GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("context.galgas", 35)), GGS_location::class_func_nowhere (SOURCE_FILE ("context.galgas", 35)), inCompiler COMMA_HERE), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 36)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 37)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 38)), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("context.galgas", 39)), inCompiler COMMA_HERE) ;
-  mProperty_mPanicCodeType = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("context.galgas", 43)), GGS_omnibusTypeAttributes::init (inCompiler COMMA_HERE), GGS_string ("<<unknown>>"), GGS_typeKind::class_func_void (SOURCE_FILE ("context.galgas", 46)), GGS_string ("<<unknown>>"), inCompiler COMMA_HERE) ;
-  mProperty_mPanicLineType = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("context.galgas", 50)), GGS_omnibusTypeAttributes::init (inCompiler COMMA_HERE), GGS_string ("<<unknown>>"), GGS_typeKind::class_func_void (SOURCE_FILE ("context.galgas", 53)), GGS_string ("<<unknown>>"), inCompiler COMMA_HERE) ;
-GGS_panicRoutinePriorityMap temp_4 = GGS_panicRoutinePriorityMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 56)) ;
-  mProperty_mPanicSetupRoutinePriorityMap = temp_4 ;
-GGS_panicRoutinePriorityMap temp_5 = GGS_panicRoutinePriorityMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 57)) ;
-  mProperty_mPanicLoopRoutinePriorityMap = temp_5 ;
-GGS_routineMapForContext temp_6 = GGS_routineMapForContext::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 59)) ;
-  mProperty_mRoutineMap = temp_6 ;
-GGS_guardMapForContext temp_7 = GGS_guardMapForContext::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 60)) ;
-  mProperty_mGuardMap = temp_7 ;
-GGS_controlRegisterGroupMap temp_8 = GGS_controlRegisterGroupMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 62)) ;
-  mProperty_mControlRegisterGroupMap = temp_8 ;
-GGS_globalConstantMap temp_9 = GGS_globalConstantMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 63)) ;
-  mProperty_mGlobalConstantMap = temp_9 ;
-GGS_globalSyncInstanceMap temp_10 = GGS_globalSyncInstanceMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 64)) ;
-  mProperty_mGlobalSyncInstanceMap = temp_10 ;
-GGS_staticlistMap temp_11 = GGS_staticlistMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 65)) ;
-  mProperty_mStaticListMap = temp_11 ;
-GGS_stringset temp_12 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 67)) ;
-  mProperty_mRequiredRoutineSet = temp_12 ;
-GGS_unifiedTypeMap temp_13 = GGS_unifiedTypeMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 70)) ;
-  mProperty_mTypeMap = temp_13 ;
-GGS_typeConstantMap temp_14 = GGS_typeConstantMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 71)) ;
-  mProperty_mTypeConstantMap = temp_14 ;
-GGS_typeConstructorMap temp_15 = GGS_typeConstructorMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 72)) ;
-  mProperty_mTypeConstructorMap = temp_15 ;
-GGS_typePropertySetterMap temp_16 = GGS_typePropertySetterMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 73)) ;
-  mProperty_mTypePropertySetterMap = temp_16 ;
-GGS_typePropertyGetterMap temp_17 = GGS_typePropertyGetterMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 74)) ;
-  mProperty_mTypePropertyGetterMap = temp_17 ;
-GGS_availableInterruptMap temp_18 = GGS_availableInterruptMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 77)) ;
-  mProperty_mAvailableInterruptMap = temp_18 ;
-GGS_infixOperatorMap temp_19 = GGS_infixOperatorMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 80)) ;
-  mProperty_mInfixOperatorMap = temp_19 ;
-GGS_prefixOperatorMap temp_20 = GGS_prefixOperatorMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 81)) ;
-  mProperty_mPrefixOperatorMap = temp_20 ;
-GGS_assignmentOperatorMap temp_21 = GGS_assignmentOperatorMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 82)) ;
-  mProperty_mAssignmentOperatorMap = temp_21 ;
-GGS_implicitConversionToBooleanMap temp_22 = GGS_implicitConversionToBooleanMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 84)) ;
-  mProperty_mImplicitConversionToBooleanMap = temp_22 ;
-GGS_taskMap temp_23 = GGS_taskMap::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 87)) ;
-  mProperty_mTaskMap = temp_23 ;
-GGS_globalTaskVariableList temp_24 = GGS_globalTaskVariableList::init (inCompiler COMMA_SOURCE_FILE ("context.galgas", 88)) ;
-  mProperty_mGlobalTaskVariableList = temp_24 ;
-  mProperty_mValuedObjectMap = GGS_universalValuedObjectMap::init (inCompiler COMMA_HERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_semanticContext::GGS_semanticContext (const GGS_targetParameters & inOperand0,
-                                          const GGS_omnibusType & inOperand1,
-                                          const GGS_omnibusType & inOperand2,
-                                          const GGS_panicRoutinePriorityMap & inOperand3,
-                                          const GGS_panicRoutinePriorityMap & inOperand4,
-                                          const GGS_routineMapForContext & inOperand5,
-                                          const GGS_guardMapForContext & inOperand6,
-                                          const GGS_controlRegisterGroupMap & inOperand7,
-                                          const GGS_globalConstantMap & inOperand8,
-                                          const GGS_globalSyncInstanceMap & inOperand9,
-                                          const GGS_staticlistMap & inOperand10,
-                                          const GGS_stringset & inOperand11,
-                                          const GGS_unifiedTypeMap & inOperand12,
-                                          const GGS_typeConstantMap & inOperand13,
-                                          const GGS_typeConstructorMap & inOperand14,
-                                          const GGS_typePropertySetterMap & inOperand15,
-                                          const GGS_typePropertyGetterMap & inOperand16,
-                                          const GGS_availableInterruptMap & inOperand17,
-                                          const GGS_infixOperatorMap & inOperand18,
-                                          const GGS_prefixOperatorMap & inOperand19,
-                                          const GGS_assignmentOperatorMap & inOperand20,
-                                          const GGS_implicitConversionToBooleanMap & inOperand21,
-                                          const GGS_taskMap & inOperand22,
-                                          const GGS_globalTaskVariableList & inOperand23,
-                                          const GGS_universalValuedObjectMap & inOperand24) :
-mProperty_mTargetParameters (inOperand0),
-mProperty_mPanicCodeType (inOperand1),
-mProperty_mPanicLineType (inOperand2),
-mProperty_mPanicSetupRoutinePriorityMap (inOperand3),
-mProperty_mPanicLoopRoutinePriorityMap (inOperand4),
-mProperty_mRoutineMap (inOperand5),
-mProperty_mGuardMap (inOperand6),
-mProperty_mControlRegisterGroupMap (inOperand7),
-mProperty_mGlobalConstantMap (inOperand8),
-mProperty_mGlobalSyncInstanceMap (inOperand9),
-mProperty_mStaticListMap (inOperand10),
-mProperty_mRequiredRoutineSet (inOperand11),
-mProperty_mTypeMap (inOperand12),
-mProperty_mTypeConstantMap (inOperand13),
-mProperty_mTypeConstructorMap (inOperand14),
-mProperty_mTypePropertySetterMap (inOperand15),
-mProperty_mTypePropertyGetterMap (inOperand16),
-mProperty_mAvailableInterruptMap (inOperand17),
-mProperty_mInfixOperatorMap (inOperand18),
-mProperty_mPrefixOperatorMap (inOperand19),
-mProperty_mAssignmentOperatorMap (inOperand20),
-mProperty_mImplicitConversionToBooleanMap (inOperand21),
-mProperty_mTaskMap (inOperand22),
-mProperty_mGlobalTaskVariableList (inOperand23),
-mProperty_mValuedObjectMap (inOperand24) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_semanticContext GGS_semanticContext::class_func_new (Compiler * inCompiler
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_semanticContext result ;
-  result.setInitializedProperties (inCompiler) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_semanticContext::isValid (void) const {
-  return mProperty_mTargetParameters.isValid () && mProperty_mPanicCodeType.isValid () && mProperty_mPanicLineType.isValid () && mProperty_mPanicSetupRoutinePriorityMap.isValid () && mProperty_mPanicLoopRoutinePriorityMap.isValid () && mProperty_mRoutineMap.isValid () && mProperty_mGuardMap.isValid () && mProperty_mControlRegisterGroupMap.isValid () && mProperty_mGlobalConstantMap.isValid () && mProperty_mGlobalSyncInstanceMap.isValid () && mProperty_mStaticListMap.isValid () && mProperty_mRequiredRoutineSet.isValid () && mProperty_mTypeMap.isValid () && mProperty_mTypeConstantMap.isValid () && mProperty_mTypeConstructorMap.isValid () && mProperty_mTypePropertySetterMap.isValid () && mProperty_mTypePropertyGetterMap.isValid () && mProperty_mAvailableInterruptMap.isValid () && mProperty_mInfixOperatorMap.isValid () && mProperty_mPrefixOperatorMap.isValid () && mProperty_mAssignmentOperatorMap.isValid () && mProperty_mImplicitConversionToBooleanMap.isValid () && mProperty_mTaskMap.isValid () && mProperty_mGlobalTaskVariableList.isValid () && mProperty_mValuedObjectMap.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_semanticContext::drop (void) {
-  mProperty_mTargetParameters.drop () ;
-  mProperty_mPanicCodeType.drop () ;
-  mProperty_mPanicLineType.drop () ;
-  mProperty_mPanicSetupRoutinePriorityMap.drop () ;
-  mProperty_mPanicLoopRoutinePriorityMap.drop () ;
-  mProperty_mRoutineMap.drop () ;
-  mProperty_mGuardMap.drop () ;
-  mProperty_mControlRegisterGroupMap.drop () ;
-  mProperty_mGlobalConstantMap.drop () ;
-  mProperty_mGlobalSyncInstanceMap.drop () ;
-  mProperty_mStaticListMap.drop () ;
-  mProperty_mRequiredRoutineSet.drop () ;
-  mProperty_mTypeMap.drop () ;
-  mProperty_mTypeConstantMap.drop () ;
-  mProperty_mTypeConstructorMap.drop () ;
-  mProperty_mTypePropertySetterMap.drop () ;
-  mProperty_mTypePropertyGetterMap.drop () ;
-  mProperty_mAvailableInterruptMap.drop () ;
-  mProperty_mInfixOperatorMap.drop () ;
-  mProperty_mPrefixOperatorMap.drop () ;
-  mProperty_mAssignmentOperatorMap.drop () ;
-  mProperty_mImplicitConversionToBooleanMap.drop () ;
-  mProperty_mTaskMap.drop () ;
-  mProperty_mGlobalTaskVariableList.drop () ;
-  mProperty_mValuedObjectMap.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_semanticContext::description (String & ioString,
-                                       const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @semanticContext:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPanicCodeType.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPanicLineType.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPanicSetupRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPanicLoopRoutinePriorityMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRoutineMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mGuardMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mControlRegisterGroupMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mGlobalConstantMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mGlobalSyncInstanceMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mStaticListMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRequiredRoutineSet.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTypeMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTypeConstantMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTypeConstructorMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTypePropertySetterMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTypePropertyGetterMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAvailableInterruptMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mInfixOperatorMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPrefixOperatorMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAssignmentOperatorMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mImplicitConversionToBooleanMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTaskMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mGlobalTaskVariableList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mValuedObjectMap.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @semanticContext generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_semanticContext ("semanticContext",
-                                                                       nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_semanticContext::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_semanticContext ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_semanticContext::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_semanticContext (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_semanticContext GGS_semanticContext::extractObject (const GGS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GGS_semanticContext result ;
-  const GGS_semanticContext * p = (const GGS_semanticContext *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_semanticContext *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("semanticContext", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

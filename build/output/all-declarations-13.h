@@ -839,13 +839,3 @@ class GGS_string function_linkForGlobalConstant (const class GGS_string & consti
                                                  class Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'retainRequiredDrivers&'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_retainRequiredDrivers_26_ (class GGS_ast & ioArgument0,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
-

@@ -10,6 +10,16 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Routine 'retainRequiredDrivers&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_retainRequiredDrivers_26_ (class GGS_ast & ioArgument0,
+                                        class Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Function 'omnibusNameForStaticListType'
 //
 //--------------------------------------------------------------------------------------------------
@@ -398,16 +408,4 @@ class GGS_bigint function_panicCodeForTooLargeArrayIndex (class Compiler * inCom
 
 class GGS_bigint function_panicCodeForClosedSync (class Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'infixOperatorFunctionName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_infixOperatorFunctionName (const class GGS_omnibusType & constinArgument0,
-                                                     const class GGS_omnibusInfixOperator & constinArgument1,
-                                                     const class GGS_omnibusType & constinArgument2,
-                                                     class Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
 

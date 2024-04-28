@@ -9,6 +9,184 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Overriding extension method '@llvmInfixOperatorAST enterInPrecedenceGraph'
+//
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_llvmInfixOperatorAST::method_enterInPrecedenceGraph (GGS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
+                                                               Compiler * inCompiler
+                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  const GGS_llvmInfixOperatorAST temp_0 = this ;
+  const GGS_llvmInfixOperatorAST temp_1 = this ;
+  const GGS_llvmInfixOperatorAST temp_2 = this ;
+  const GGS_llvmInfixOperatorAST temp_3 = this ;
+  GGS_lstring var_nodeName_6404 = GGS_lstring::init_21__21_ (extensionGetter_string (temp_0.readProperty_mInfixOperator (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 161)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 161)).add_operation (temp_1.readProperty_mLeftTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 161)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 161)).add_operation (temp_2.readProperty_mRightTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 161)), temp_3.readProperty_mInfixOperatorLocation (), inCompiler COMMA_HERE) ;
+  {
+  const GGS_llvmInfixOperatorAST temp_4 = this ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_6404, temp_4, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 162)) ;
+  }
+  {
+  const GGS_llvmInfixOperatorAST temp_5 = this ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_6404, temp_5.readProperty_mLeftTypeName () COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 163)) ;
+  }
+  {
+  const GGS_llvmInfixOperatorAST temp_6 = this ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_6404, temp_6.readProperty_mRightTypeName () COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 164)) ;
+  }
+  {
+  const GGS_llvmInfixOperatorAST temp_7 = this ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_6404, temp_7.readProperty_mResultTypeName () COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 165)) ;
+  }
+}
+//--------------------------------------------------------------------------------------------------
+//
+//Overriding extension getter '@llvmInfixOperatorAST keyRepresentationForErrorSignaling'
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_string cPtr_llvmInfixOperatorAST::getter_keyRepresentationForErrorSignaling (Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_string result_outRepresentation ; // Returned variable
+  const GGS_llvmInfixOperatorAST temp_0 = this ;
+  const GGS_llvmInfixOperatorAST temp_1 = this ;
+  const GGS_llvmInfixOperatorAST temp_2 = this ;
+  result_outRepresentation = temp_0.readProperty_mLeftTypeName ().readProperty_string ().add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 171)).add_operation (extensionGetter_string (temp_1.readProperty_mInfixOperator (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 171)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 171)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 171)).add_operation (temp_2.readProperty_mRightTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 171)) ;
+//---
+  return result_outRepresentation ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//Overriding extension method '@llvmInfixOperatorAST enterInContext'
+//
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_llvmInfixOperatorAST::method_enterInContext (GGS_semanticContext & ioArgument_ioContext,
+                                                       GGS_declarationDecorationList & /* ioArgument_ioDecoratedDeclarationList */,
+                                                       GGS_decoratedRegularRoutineList & /* ioArgument_ioDecoratedRoutineList */,
+                                                       GGS_routineListIR & ioArgument_ioRoutineListIR,
+                                                       GGS_staticListInitializationMap & /* ioArgument_ioStaticListValueMap */,
+                                                       GGS_staticEntityMap & /* ioArgument_ioStaticEntityMap */,
+                                                       GGS_controlRegisterUserAccesMapAST & /* ioArgument_ioControlRegisterUserAccesMapAST */,
+                                                       GGS_userLLVMTypeDefinitionListIR & /* ioArgument_ioUserLLVMTypeDefinitionListIR */,
+                                                       Compiler * inCompiler
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_unifiedTypeMapEntry var_leftTypeProxy_8056 ;
+  {
+  const GGS_llvmInfixOperatorAST temp_0 = this ;
+  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_0.readProperty_mLeftTypeName (), var_leftTypeProxy_8056, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 189)) ;
+  }
+  GGS_omnibusType var_leftType_8077 = extensionGetter_type (var_leftTypeProxy_8056, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 190)) ;
+  GGS_unifiedTypeMapEntry var_rightTypeProxy_8169 ;
+  {
+  const GGS_llvmInfixOperatorAST temp_1 = this ;
+  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_1.readProperty_mRightTypeName (), var_rightTypeProxy_8169, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 191)) ;
+  }
+  GGS_omnibusType var_rightType_8191 = extensionGetter_type (var_rightTypeProxy_8169, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 192)) ;
+  GGS_unifiedTypeMapEntry var_resultTypeProxy_8286 ;
+  {
+  const GGS_llvmInfixOperatorAST temp_2 = this ;
+  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_2.readProperty_mResultTypeName (), var_resultTypeProxy_8286, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 193)) ;
+  }
+  GGS_omnibusType var_resultType_8309 = extensionGetter_type (var_resultTypeProxy_8286, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 194)) ;
+  enumGalgasBool test_3 = kBoolTrue ;
+  if (kBoolTrue == test_3) {
+    test_3 = callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_leftType_8077.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 195)).operator_and (callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_rightType_8191.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 195)) COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 195)).boolEnum () ;
+    if (kBoolTrue == test_3) {
+      const GGS_llvmInfixOperatorAST temp_4 = this ;
+      TC_Array <FixItDescription> fixItArray5 ;
+      inCompiler->emitSemanticError (temp_4.readProperty_mInfixOperatorLocation (), GGS_string ("one of the two argument types should not be a compile time type"), fixItArray5  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 196)) ;
+    }
+  }
+  const GGS_llvmInfixOperatorAST temp_6 = this ;
+  callExtensionMethod_checkIsNotCompileTimeType ((cPtr_omnibusType *) var_resultType_8309.ptr (), temp_6.readProperty_mResultTypeName ().readProperty_location (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 198)) ;
+  const GGS_llvmInfixOperatorAST temp_7 = this ;
+  const GGS_llvmInfixOperatorAST temp_8 = this ;
+  GGS_lstring var_key_8641 = function_infixOperatorMapKey (var_leftType_8077, temp_7.readProperty_mInfixOperator (), temp_8.readProperty_mInfixOperatorLocation (), var_rightType_8191, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 200)) ;
+  enumGalgasBool test_9 = kBoolTrue ;
+  if (kBoolTrue == test_9) {
+    test_9 = callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_leftType_8077.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 202)).operator_not (SOURCE_FILE ("infix-operator-llvm.galgas", 202)).operator_and (callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_rightType_8191.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 202)).operator_not (SOURCE_FILE ("infix-operator-llvm.galgas", 202)) COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 202)).boolEnum () ;
+    if (kBoolTrue == test_9) {
+      const GGS_llvmInfixOperatorAST temp_10 = this ;
+      const GGS_llvmInfixOperatorAST temp_11 = this ;
+      const GGS_llvmInfixOperatorAST temp_12 = this ;
+      const GGS_llvmInfixOperatorAST temp_13 = this ;
+      GGS_llvmInfixOperatorUsage var_definition_8850 = GGS_llvmInfixOperatorUsage::init_21__21__21__21_ (function_infixOperatorFunctionName (var_leftType_8077, temp_10.readProperty_mInfixOperator (), var_rightType_8191, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 204)), temp_11.readProperty_mLeftOperandName (), temp_12.readProperty_mRightOperandName (), temp_13.readProperty_mInstructionList (), inCompiler COMMA_HERE) ;
+      {
+      ioArgument_ioContext.mProperty_mInfixOperatorMap.setter_insertKey (var_key_8641, var_resultType_8309, var_definition_8850, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 209)) ;
+      }
+      GGS_assignmentGenerationVarMap temp_14 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 210)) ;
+      GGS_assignmentGenerationVarMap var_varMap_9176 = temp_14 ;
+      {
+      const GGS_llvmInfixOperatorAST temp_15 = this ;
+      const GGS_llvmInfixOperatorAST temp_16 = this ;
+      var_varMap_9176.setter_insertKey (temp_15.readProperty_mLeftOperandName (), GGS_string ("%").add_operation (temp_16.readProperty_mLeftOperandName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 211)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 211)) ;
+      }
+      {
+      const GGS_llvmInfixOperatorAST temp_17 = this ;
+      const GGS_llvmInfixOperatorAST temp_18 = this ;
+      var_varMap_9176.setter_insertKey (temp_17.readProperty_mRightOperandName (), GGS_string ("%").add_operation (temp_18.readProperty_mRightOperandName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 212)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 212)) ;
+      }
+      GGS_assignmentGenerationVarMap temp_19 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 213)) ;
+      GGS_assignmentGenerationVarMap var_typeMap_9381 = temp_19 ;
+      enumGalgasBool test_20 = kBoolTrue ;
+      if (kBoolTrue == test_20) {
+        test_20 = callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_leftType_8077.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 214)).operator_not (SOURCE_FILE ("infix-operator-llvm.galgas", 214)).boolEnum () ;
+        if (kBoolTrue == test_20) {
+          {
+          const GGS_llvmInfixOperatorAST temp_21 = this ;
+          var_typeMap_9381.setter_insertKey (temp_21.readProperty_mLeftOperandName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_leftType_8077.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 215)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 215)) ;
+          }
+        }
+      }
+      enumGalgasBool test_22 = kBoolTrue ;
+      if (kBoolTrue == test_22) {
+        test_22 = callExtensionGetter_isCompileTimeType ((const cPtr_omnibusType *) var_rightType_8191.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 217)).operator_not (SOURCE_FILE ("infix-operator-llvm.galgas", 217)).boolEnum () ;
+        if (kBoolTrue == test_22) {
+          {
+          const GGS_llvmInfixOperatorAST temp_23 = this ;
+          var_typeMap_9381.setter_insertKey (temp_23.readProperty_mRightOperandName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_rightType_8191.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 218)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 218)) ;
+          }
+        }
+      }
+      {
+      var_typeMap_9381.setter_insertKey (GGS_string ("result").getter_nowhere (SOURCE_FILE ("infix-operator-llvm.galgas", 220)), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_resultType_8309.ptr (), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 220)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 220)) ;
+      }
+      GGS_llvmGenerationInstructionList temp_24 = GGS_llvmGenerationInstructionList::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 221)) ;
+      GGS_llvmGenerationInstructionList var_instructionList_9768 = temp_24 ;
+      var_instructionList_9768.addAssign_operation (GGS_llvmVarInstruction::init_21_ (GGS_string ("result").getter_nowhere (SOURCE_FILE ("infix-operator-llvm.galgas", 222)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 222)) ;
+      const GGS_llvmInfixOperatorAST temp_25 = this ;
+      var_instructionList_9768.plusAssign_operation(temp_25.readProperty_mInstructionList (), inCompiler  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 223)) ;
+      {
+      extensionSetter_appendReturn (var_instructionList_9768, GGS_string ("result").getter_nowhere (SOURCE_FILE ("infix-operator-llvm.galgas", 224)), GGS_string ("result").getter_nowhere (SOURCE_FILE ("infix-operator-llvm.galgas", 224)), inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 224)) ;
+      }
+      GGS_stringlist temp_26 = GGS_stringlist::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 225)) ;
+      GGS_stringlist var_generatedInstructions_10003 = temp_26 ;
+      GGS_allocaList temp_27 = GGS_allocaList::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 226)) ;
+      GGS_allocaList var_allocaList_10051 = temp_27 ;
+      GGS_uint var_temporaryIndex_10082 = GGS_uint (uint32_t (0U)) ;
+      extensionMethod_generateIRCode (var_instructionList_9768, var_varMap_9176, var_typeMap_9381, var_generatedInstructions_10003, var_temporaryIndex_10082, var_allocaList_10051, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 228)) ;
+      const GGS_llvmInfixOperatorAST temp_28 = this ;
+      const GGS_llvmInfixOperatorAST temp_29 = this ;
+      const GGS_llvmInfixOperatorAST temp_30 = this ;
+      const GGS_llvmInfixOperatorAST temp_31 = this ;
+      GGS_infixOperatorRoutineIR var_routine_10217 = GGS_infixOperatorRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21__21__21__21__21__21_ (GGS_lstring::init_21__21_ (function_infixOperatorFunctionName (var_leftType_8077, temp_28.readProperty_mInfixOperator (), var_rightType_8191, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 230)), temp_29.readProperty_mInfixOperatorLocation (), inCompiler COMMA_HERE), GGS_bool (true), GGS_bool (false), var_leftType_8077, temp_30.readProperty_mLeftOperandName ().readProperty_string (), var_rightType_8191, temp_31.readProperty_mRightOperandName ().readProperty_string (), var_resultType_8309, var_generatedInstructions_10003, var_allocaList_10051, inCompiler COMMA_HERE) ;
+      ioArgument_ioRoutineListIR.addAssign_operation (var_routine_10217  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 241)) ;
+    }
+  }
+  if (kBoolFalse == test_9) {
+    const GGS_llvmInfixOperatorAST temp_32 = this ;
+    const GGS_llvmInfixOperatorAST temp_33 = this ;
+    const GGS_llvmInfixOperatorAST temp_34 = this ;
+    GGS_llvmInlineInfixOperatorUsage var_definition_10687 = GGS_llvmInlineInfixOperatorUsage::init_21__21__21_ (temp_32.readProperty_mLeftOperandName (), temp_33.readProperty_mRightOperandName (), temp_34.readProperty_mInstructionList (), inCompiler COMMA_HERE) ;
+    {
+    ioArgument_ioContext.mProperty_mInfixOperatorMap.setter_insertKey (var_key_8641, var_resultType_8309, var_definition_10687, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 248)) ;
+    }
+  }
+}
+//--------------------------------------------------------------------------------------------------
+//
 //Overriding extension method '@llvmInfixOperatorUsage generateCode'
 //
 //--------------------------------------------------------------------------------------------------

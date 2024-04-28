@@ -10,6 +10,18 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Function 'infixOperatorFunctionName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_infixOperatorFunctionName (const class GGS_omnibusType & constinArgument0,
+                                                     const class GGS_omnibusInfixOperator & constinArgument1,
+                                                     const class GGS_omnibusType & constinArgument2,
+                                                     class Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Function 'prefixOperatorFunctionName'
 //
 //--------------------------------------------------------------------------------------------------

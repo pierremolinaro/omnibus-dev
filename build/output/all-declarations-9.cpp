@@ -4089,6 +4089,23 @@ void GGS_unifiedTypeMapElementClass_3F_::drop (void) {
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_unifiedTypeMapElementClass_3F_::objectCompare (const GGS_unifiedTypeMapElementClass_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
 void GGS_unifiedTypeMapElementClass_3F_::description (String & ioString,
                                                       const int32_t inIndentation) const {
   ioString.appendCString ("<optional @") ;
