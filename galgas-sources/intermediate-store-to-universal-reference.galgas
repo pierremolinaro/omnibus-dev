@@ -1,5 +1,5 @@
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendStoreToUniversalReference
   ?let @string inLLVMVarName
@@ -9,7 +9,7 @@ setter @instructionListIR appendStoreToUniversalReference
   self += !@storeToUniversalReferenceIR.init {!inLLVMVarName !inTargetVarType !inSourceValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @storeToUniversalReferenceIR : @abstractInstructionIR {
   public var @string mLLVMTargetVarName
@@ -151,4 +151,4 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

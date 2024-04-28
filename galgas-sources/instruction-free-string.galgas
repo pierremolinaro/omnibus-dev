@@ -1,17 +1,17 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendInstructionAsFreeString ?let @string inString ?let @stringset inInvokedFunctionSet {
   self += !@freeStringIR.init {!inString !inInvokedFunctionSet}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @freeStringIR : @abstractInstructionIR {
   public var @string mString
   public var @stringset mInvokedFunctionSet
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @freeStringIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -21,7 +21,7 @@ override method @freeStringIR llvmInstructionCode
   ioLLVMcode += "  " + self.mString + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @freeStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -30,4 +30,4 @@ override method @freeStringIR enterAccessibleEntities
   ioInvokedRoutineSet += self.mInvokedFunctionSet
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

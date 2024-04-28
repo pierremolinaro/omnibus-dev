@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntAST : @abstractDeclarationAST {
 }
@@ -11,9 +11,9 @@ override getter @compileTimeIntAST locationForErrorSignaling -> @location outLoc
   outLocation = .nowhere
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeIntAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -29,15 +29,15 @@ override getter @compileTimeIntAST keyRepresentationForErrorSignaling -> @string
   outRepresentation = ctIntegerTypeName ()
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctIntegerTypeName ->@string {
   result = "ctInt"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeIntAST enterInContext
   ?!context:@semanticContext ioContext
@@ -116,9 +116,9 @@ override method @compileTimeIntAST enterInContext
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator.init]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  COMPILE TIME INFIX OPERATORS
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
 }
@@ -144,7 +144,7 @@ override method @compileTimeIntModuloOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
 }
@@ -170,7 +170,7 @@ override method @compileTimeIntModuloZeroOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
 }
@@ -196,7 +196,7 @@ override method @compileTimeIntDivideOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
 }
@@ -222,7 +222,7 @@ override method @compileTimeIntDivideZeroOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
 }
@@ -244,7 +244,7 @@ override method @compileTimeIntMultiplyOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue * rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
 }
@@ -266,7 +266,7 @@ override method @compileTimeIntSubtractOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue - rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
 }
@@ -288,7 +288,7 @@ override method @compileTimeIntEqualOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
 }
@@ -310,7 +310,7 @@ override method @compileTimeIntAddOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue + rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
 }
@@ -332,7 +332,7 @@ override method @compileTimeIntBitWiseAndOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue & rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
 }
@@ -358,7 +358,7 @@ override method @compileTimeIntShiftLeftOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
 }
@@ -384,7 +384,7 @@ override method @compileTimeIntShiftRightOperator generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
 }
@@ -406,7 +406,7 @@ override method @compileTimeIntLessThanOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue < rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntLowerOrEqualOperator : @omnibusInfixOperatorUsage {
 }
@@ -428,7 +428,7 @@ override method @compileTimeIntLowerOrEqualOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue <= rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
 }
@@ -450,7 +450,7 @@ override method @compileTimeIntXorOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
 }
@@ -472,9 +472,9 @@ override method @compileTimeIntBitWiseOrOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  COMPILE TIME PREFIX OPERATOR
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntMinusOperator : @prefixOperatorUsage {
 }
@@ -495,7 +495,7 @@ override method @compileTimeIntMinusOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: - receiverValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeIntComplementOperator : @prefixOperatorUsage {
 }
@@ -516,4 +516,4 @@ override method @compileTimeIntComplementOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: ~ receiverValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

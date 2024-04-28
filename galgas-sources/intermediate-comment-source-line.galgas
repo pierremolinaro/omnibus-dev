@@ -3,13 +3,13 @@ setter @instructionListIR appendSourceLineComment ?let @location inSourceLocatio
   self += !@sourceLocationIR.init {!inSourceLocation}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @sourceLocationIR : @abstractInstructionIR {
   public var @location mSourceLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sourceLocationIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -23,4 +23,4 @@ override method @sourceLocationIR llvmInstructionCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

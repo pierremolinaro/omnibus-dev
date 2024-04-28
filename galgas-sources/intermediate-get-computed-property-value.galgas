@@ -11,7 +11,7 @@ setter @instructionListIR appendGetComputedPropertyValue
   self += !@getComputedPropertyValueIR.init {!inReceiverIR !inLLVMGetterName !outResultValueIR}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @getComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mReceiverIR
@@ -40,4 +40,4 @@ override method @getComputedPropertyValueIR enterAccessibleEntities
   ioInvokedRoutineSet += !self.mLLVMGetterName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

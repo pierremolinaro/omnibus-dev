@@ -6,14 +6,14 @@ setter @instructionListIR appendLoadFromReference
   self += !@loadFromReferenceIR.init {!inTargetValue !inLLVMName}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @loadFromReferenceIR : @abstractInstructionIR {
   public var @objectIR mTargetValue
   public var @string mLLVMName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @loadFromReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -24,4 +24,4 @@ override method @loadFromReferenceIR llvmInstructionCode
   ioLLVMcode += "  " + [self.mTargetValue llvmName] + " = load " + llvmType + ", " + llvmType + " * " + self.mLLVMName + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

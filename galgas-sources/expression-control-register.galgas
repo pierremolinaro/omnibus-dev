@@ -1,6 +1,6 @@
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #! AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @registerInExpressionAST : @expressionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
@@ -45,9 +45,9 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   [self.mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! NOTE TYPES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]

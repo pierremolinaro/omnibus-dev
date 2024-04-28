@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
   public var @location mOperatorLocation
@@ -20,7 +20,7 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
   outLocation = self.mOperatorLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
 #  @llvmGenerationInstructionList llvmInstructionList = §[]
@@ -57,7 +57,7 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #  }
 #}
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #func buildAssignmentOperatorFrom_ctInt ?let @string inTypeName -> @abstractDeclarationAST {
 #  @llvmGenerationInstructionList llvmInstructionList = §[]
@@ -84,9 +84,9 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #  }
 #}
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
@@ -138,9 +138,9 @@ syntax extension omnibus_syntax {
 
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -157,9 +157,9 @@ override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorS
   outRepresentation = "Assignment " + self.mTargetTypeName + " = " + self.mSourceTypeName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!   Assignment operator
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignmentOperatorFuncName ?let @omnibusType inTargetType ?let @omnibusType inSourceType  -> @string {
   result = "assign." + inTargetType.llvmBaseTypeName + ".ref.from." + inSourceType.llvmBaseTypeName + ".ref"
@@ -176,9 +176,9 @@ func assignmentOperatorKey ?let @omnibusType inTargetType
   }
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract refclass @abstractAssignmentOperatorUsage {
 }
@@ -278,9 +278,9 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #   CODE GENERATION
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mTargetType
@@ -358,7 +358,7 @@ setter @instructionListIR appendAssignmentIR
   self += instructions
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @assignmentRoutineIR : @abstractRoutineIR {
   public var @omnibusType mTargetType
@@ -387,7 +387,7 @@ override method @assignmentRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
   public var @omnibusType mTargetType
@@ -412,7 +412,7 @@ override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 }
@@ -443,4 +443,4 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
   [!?ioInstructionListIR appendInstructionAsFreeString !s !§[]]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

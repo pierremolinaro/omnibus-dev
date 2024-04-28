@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   public var @expressionAST mLeftExpression
@@ -8,9 +8,9 @@ refclass @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   public var @expressionAST mRightExpression
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -20,18 +20,18 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
   [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -120,4 +120,4 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -10,7 +10,7 @@ setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
   self += !@computeSubscriptedVolatileRegisterAddress.init {!outLLVMResultVarName !inIndexIR !inAddressLLVMname !inElementSize}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
   public var @string mLLVMResultVarName
@@ -19,7 +19,7 @@ refclass @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
   public var @uint mElementSize
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
   ?!@string ioLLVMcode
@@ -43,4 +43,4 @@ override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
              + ", " + scriptedRegisterOffsetName + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

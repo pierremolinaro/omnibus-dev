@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
   public var @lstring mFixedSizeArrayType
@@ -9,9 +9,9 @@ refclass @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
   public var @location mSizeExpressionLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
@@ -38,9 +38,9 @@ syntax extension omnibus_syntax {
 
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mFixedSizeArrayType !self]
@@ -62,9 +62,9 @@ override getter @fixedSizeArrayTypeDeclarationAST locationForErrorSignaling -> @
   outLocation = self.mFixedSizeArrayType.location
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -181,30 +181,30 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignValueToFixedSizeArrayElements_functionName ?let @omnibusType inFixedSizeArrayType -> @string {
   result = "assign.value.to.fixed.size.array." + inFixedSizeArrayType.llvmBaseTypeName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! USER LLVM TYPE DEFINITION
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   public var @omnibusType mElementType
   public var @bigint mSize
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type [" + self.mSize + " x " + [self.mElementType llvmTypeName] + "]\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: STATIC ARRAY ASSIGNMENT
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mElementType
@@ -285,7 +285,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
@@ -320,7 +320,7 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
   ioLLVMcode += "}\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
@@ -406,4 +406,4 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

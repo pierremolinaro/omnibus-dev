@@ -8,7 +8,7 @@ setter @instructionListIR appendSelectOperation
   self += !@selectInstructionIR.init {!inTargetValue !in_if_variableLLVMName !in_then_variable !in_else_variable}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @selectInstructionIR : @abstractInstructionIR {
   public var @objectIR mTargetValue
@@ -17,7 +17,7 @@ refclass @selectInstructionIR : @abstractInstructionIR {
   public var @objectIR m_else_variable
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @selectInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -30,4 +30,4 @@ override method @selectInstructionIR llvmInstructionCode
   ioLLVMcode += [[self.m_else_variable type] llvmTypeName] + " " + [self.m_else_variable llvmName] + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

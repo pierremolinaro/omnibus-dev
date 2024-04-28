@@ -10,7 +10,7 @@ setter @instructionListIR testArrayIndex
   self += !@testArrayIndexIR.init {!inIndex !inErrorLocation !inSize}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @testArrayIndexIR : @abstractInstructionIR {
   public var @objectIR mIndex
@@ -18,7 +18,7 @@ refclass @testArrayIndexIR : @abstractInstructionIR {
   public var @bigint mSize
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @testArrayIndexIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -65,7 +65,7 @@ override method @testArrayIndexIR llvmInstructionCode
   ioGenerationAdds.mUniqueIndex += 1
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @testArrayIndexIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -76,4 +76,4 @@ override method @testArrayIndexIR enterAccessibleEntities
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

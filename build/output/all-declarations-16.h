@@ -14,8 +14,8 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_codeOptimization_3F__26_intermediateCode (const class GALGAS_string constinArgument0,
-                                                       class GALGAS_intermediateCodeStruct & ioArgument1,
+void routine_codeOptimization_3F__26_intermediateCode (const class GGS_string constinArgument0,
+                                                       class GGS_intermediateCodeStruct & ioArgument1,
                                                        class Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
@@ -25,8 +25,8 @@ void routine_codeOptimization_3F__26_intermediateCode (const class GALGAS_string
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_displayInvocationGraph_3F__3F_ (const class GALGAS_routineListIR constinArgument0,
-                                             const class GALGAS_string constinArgument1,
+void routine_displayInvocationGraph_3F__3F_ (const class GGS_routineListIR constinArgument0,
+                                             const class GGS_string constinArgument1,
                                              class Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
@@ -36,8 +36,8 @@ void routine_displayInvocationGraph_3F__3F_ (const class GALGAS_routineListIR co
 //
 //--------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_asSeparatorLine (class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
+class GGS_string function_asSeparatorLine (class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -45,9 +45,9 @@ class GALGAS_string function_asSeparatorLine (class Compiler * inCompiler
 //
 //--------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_asTitleComment (const class GALGAS_string & constinArgument0,
-                                             class Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+class GGS_string function_asTitleComment (const class GGS_string & constinArgument0,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -55,17 +55,17 @@ class GALGAS_string function_asTitleComment (const class GALGAS_string & constin
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GALGAS_string constinArgument0,
-                                                                                                                                                                                                          const class GALGAS_string constinArgument1,
-                                                                                                                                                                                                          const class GALGAS_location constinArgument2,
-                                                                                                                                                                                                          const class GALGAS_intermediateCodeStruct constinArgument3,
-                                                                                                                                                                                                          const class GALGAS_userLLVMTypeDefinitionListIR constinArgument4,
-                                                                                                                                                                                                          const class GALGAS_lstring constinArgument5,
-                                                                                                                                                                                                          const class GALGAS_omnibusType constinArgument6,
-                                                                                                                                                                                                          const class GALGAS_omnibusType constinArgument7,
-                                                                                                                                                                                                          const class GALGAS_availableInterruptMap constinArgument8,
-                                                                                                                                                                                                          const class GALGAS_staticListInitializationMap constinArgument9,
-                                                                                                                                                                                                          const class GALGAS_targetParameters constinArgument10,
+void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GGS_string constinArgument0,
+                                                                                                                                                                                                          const class GGS_string constinArgument1,
+                                                                                                                                                                                                          const class GGS_location constinArgument2,
+                                                                                                                                                                                                          const class GGS_intermediateCodeStruct constinArgument3,
+                                                                                                                                                                                                          const class GGS_userLLVMTypeDefinitionListIR constinArgument4,
+                                                                                                                                                                                                          const class GGS_lstring constinArgument5,
+                                                                                                                                                                                                          const class GGS_omnibusType constinArgument6,
+                                                                                                                                                                                                          const class GGS_omnibusType constinArgument7,
+                                                                                                                                                                                                          const class GGS_availableInterruptMap constinArgument8,
+                                                                                                                                                                                                          const class GGS_staticListInitializationMap constinArgument9,
+                                                                                                                                                                                                          const class GGS_targetParameters constinArgument10,
                                                                                                                                                                                                           class Compiler * inCompiler
                                                                                                                                                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -75,16 +75,16 @@ void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCo
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GALGAS_string constinArgument0,
-                                                                                                                                                                                                      const class GALGAS_string constinArgument1,
-                                                                                                                                                                                                      const class GALGAS_intermediateCodeStruct constinArgument2,
-                                                                                                                                                                                                      const class GALGAS_userLLVMTypeDefinitionListIR constinArgument3,
-                                                                                                                                                                                                      const class GALGAS_lstring constinArgument4,
-                                                                                                                                                                                                      const class GALGAS_omnibusType constinArgument5,
-                                                                                                                                                                                                      const class GALGAS_omnibusType constinArgument6,
-                                                                                                                                                                                                      const class GALGAS_availableInterruptMap constinArgument7,
-                                                                                                                                                                                                      const class GALGAS_staticListInitializationMap constinArgument8,
-                                                                                                                                                                                                      const class GALGAS_targetParameters constinArgument9,
+void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GGS_string constinArgument0,
+                                                                                                                                                                                                      const class GGS_string constinArgument1,
+                                                                                                                                                                                                      const class GGS_intermediateCodeStruct constinArgument2,
+                                                                                                                                                                                                      const class GGS_userLLVMTypeDefinitionListIR constinArgument3,
+                                                                                                                                                                                                      const class GGS_lstring constinArgument4,
+                                                                                                                                                                                                      const class GGS_omnibusType constinArgument5,
+                                                                                                                                                                                                      const class GGS_omnibusType constinArgument6,
+                                                                                                                                                                                                      const class GGS_availableInterruptMap constinArgument7,
+                                                                                                                                                                                                      const class GGS_staticListInitializationMap constinArgument8,
+                                                                                                                                                                                                      const class GGS_targetParameters constinArgument9,
                                                                                                                                                                                                       class Compiler * inCompiler
                                                                                                                                                                                                       COMMA_LOCATION_ARGS) ;
 
@@ -94,10 +94,10 @@ void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateTarget_3F_currentDir_3F_productDirectory_3F_targetName_3F_targetParameters (const class GALGAS_string constinArgument0,
-                                                                                                 const class GALGAS_string constinArgument1,
-                                                                                                 const class GALGAS_lstring constinArgument2,
-                                                                                                 const class GALGAS_targetParameters constinArgument3,
+void routine_generateTarget_3F_currentDir_3F_productDirectory_3F_targetName_3F_targetParameters (const class GGS_string constinArgument0,
+                                                                                                 const class GGS_string constinArgument1,
+                                                                                                 const class GGS_lstring constinArgument2,
+                                                                                                 const class GGS_targetParameters constinArgument3,
                                                                                                  class Compiler * inCompiler
                                                                                                  COMMA_LOCATION_ARGS) ;
 

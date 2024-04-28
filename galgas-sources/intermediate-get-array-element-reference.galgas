@@ -12,7 +12,7 @@ setter @instructionListIR appendGetArrayElementReference
   self += !@getArrayElementReferenceIR.init {!outElementPtr !inArrayIR !inIndexIR}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @getArrayElementReferenceIR : @abstractInstructionIR {
   public var @objectIR mTarget
@@ -20,7 +20,7 @@ refclass @getArrayElementReferenceIR : @abstractInstructionIR {
   public var @objectIR mIndex
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @getArrayElementReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -34,4 +34,4 @@ override method @getArrayElementReferenceIR llvmInstructionCode
              + " ; Element of index " + [self.mIndex llvmName] + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

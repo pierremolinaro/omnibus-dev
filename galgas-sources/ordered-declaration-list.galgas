@@ -1,8 +1,8 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #                                                                                                                       
 #    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T                                                     
 #                                                                                                                       
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @semanticTypePrecedenceGraph (@declarationListAST) {
   insert addNode error message "the '%K' symbol is already declared at %L"
@@ -15,17 +15,17 @@ setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @loca
   [!?self noteNode !typeName]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
 }
@@ -64,7 +64,7 @@ override method @compileTimeDeclarationBarrierAST enterInContext
 {
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
 #--- ==
@@ -100,7 +100,7 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
   appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
 #--- ==
@@ -136,7 +136,7 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
   appendPrefixOperatorDeclaration_minus (!inTypeName !?ioPrecedenceGraph)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildOrderedDeclarationList
   ?ast: let @ast inAST
@@ -222,4 +222,4 @@ proc buildOrderedDeclarationList
 #  end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

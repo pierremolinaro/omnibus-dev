@@ -38,7 +38,7 @@ enum @llvmBinaryOperation {
 #  case icmp_sge
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendBinaryOperation
   ?let @objectIR inTarget
@@ -51,7 +51,7 @@ setter @instructionListIR appendBinaryOperation
   self += !@binaryOperationIR.init {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @binaryOperationIR : @abstractInstructionIR {
   public var @objectIR mTarget
@@ -62,7 +62,7 @@ refclass @binaryOperationIR : @abstractInstructionIR {
   public var @location mLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @binaryOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -73,7 +73,7 @@ override method @binaryOperationIR enterAccessibleEntities
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @binaryOperationIR enterCodeForOverflowOperation 
   ?let @string inOperation
@@ -100,7 +100,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic 
   ?let @string inOperation
@@ -123,7 +123,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ioLLVMcode += "  " + [self.mTarget llvmName] + " = " + inOperation + " " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -261,4 +261,4 @@ override method @binaryOperationIR llvmInstructionCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

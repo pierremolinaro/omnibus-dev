@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @externFunctionDeclarationListAST {
   public var @lstring mExternProcedureName
@@ -12,9 +12,9 @@ list @externFunctionDeclarationListAST {
   public var @location mEndOfProcLocation
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
@@ -51,9 +51,9 @@ syntax extension omnibus_syntax {
 
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* * * mProcFormalArgumentList mReturnTypeName * *) in self do
@@ -66,9 +66,9 @@ method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticT
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #   ENTER IN CONTEXT                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST enterExternProcInContext
   ?!context:@semanticContext ioContext
@@ -78,7 +78,7 @@ method @externFunctionDeclarationListAST enterExternProcInContext
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST.@element enterExternProcInContext
   ?!context:@semanticContext ioContext
@@ -101,9 +101,9 @@ method @externFunctionDeclarationListAST.@element enterExternProcInContext
   ]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTIC ANALYSIS                                                                                                    
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
@@ -119,7 +119,7 @@ method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
@@ -156,9 +156,9 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
   }
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  CODE GENERATION                                                                                                      
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @externRoutineIR : @abstractRoutineIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -195,7 +195,7 @@ override method @externRoutineIR llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern Omnibus function declaration\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -203,12 +203,12 @@ map @externProcedureMapIR {
   insert insertKey error message "extern procedure %K is already declared"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
@@ -235,4 +235,4 @@ method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMc
   ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern Omnibus function declaration\n\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

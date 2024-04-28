@@ -14,10 +14,10 @@
 //
 //--------------------------------------------------------------------------------------------------
 
-class GALGAS_string extensionGetter_passingModeForActualSelector (const class GALGAS_effectiveArgumentPassingModeAST & inObject,
-                                                                  const class GALGAS_lstring & constinArgument0,
-                                                                  class Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) ;
+class GGS_string extensionGetter_passingModeForActualSelector (const class GGS_effectiveArgumentPassingModeAST & inObject,
+                                                               const class GGS_lstring & constinArgument0,
+                                                               class Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -25,8 +25,8 @@ class GALGAS_string extensionGetter_passingModeForActualSelector (const class GA
 //
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_LValueAST inObject,
-                                                            class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GGS_LValueAST inObject,
+                                                            class GGS_semanticTypePrecedenceGraph & io_ioGraph,
                                                             class Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -36,18 +36,18 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GALGAS_L
 //
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
-                                    const class GALGAS_omnibusType constin_inSelfType,
-                                    const class GALGAS_bool constin_inIsAddressOf,
-                                    const class GALGAS_routineAttributes constin_inRoutineAttributes,
-                                    const class GALGAS_semanticContext constin_inContext,
-                                    const class GALGAS_mode constin_inMode,
-                                    class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                    class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                    class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                    class GALGAS_allocaList & io_ioAllocaList,
-                                    class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                    class GALGAS_LValueRepresentation & out_outInternalRepresentation,
+void extensionMethod_analyzeLValue (const class GGS_LValueAST inObject,
+                                    const class GGS_omnibusType constin_inSelfType,
+                                    const class GGS_bool constin_inIsAddressOf,
+                                    const class GGS_routineAttributes constin_inRoutineAttributes,
+                                    const class GGS_semanticContext constin_inContext,
+                                    const class GGS_mode constin_inMode,
+                                    class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                    class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                    class GGS_universalValuedObjectMap & io_ioUniversalMap,
+                                    class GGS_allocaList & io_ioAllocaList,
+                                    class GGS_instructionListIR & io_ioInstructionGenerationList,
+                                    class GGS_LValueRepresentation & out_outInternalRepresentation,
                                     class Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
@@ -57,8 +57,8 @@ void extensionMethod_analyzeLValue (const class GALGAS_LValueAST inObject,
 //
 //--------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_mutatingAttribute (class Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) ;
+class GGS_string function_mutatingAttribute (class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -66,17 +66,17 @@ class GALGAS_string function_mutatingAttribute (class Compiler * inCompiler
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_analyzeSelfLValue_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__21_ (const class GALGAS_omnibusType constinArgument0,
-                                                                                                                                                                      const class GALGAS_routineAttributes constinArgument1,
-                                                                                                                                                                      const class GALGAS_semanticContext constinArgument2,
-                                                                                                                                                                      const class GALGAS_mode constinArgument3,
-                                                                                                                                                                      class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                                                                                                                      class GALGAS_staticEntityMap & ioArgument5,
-                                                                                                                                                                      class GALGAS_universalValuedObjectMap & ioArgument6,
-                                                                                                                                                                      class GALGAS_allocaList & ioArgument7,
-                                                                                                                                                                      class GALGAS_instructionListIR & ioArgument8,
-                                                                                                                                                                      const class GALGAS_LValueOperandAST constinArgument9,
-                                                                                                                                                                      class GALGAS_LValueRepresentation & outArgument10,
+void routine_analyzeSelfLValue_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__21_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                      const class GGS_routineAttributes constinArgument1,
+                                                                                                                                                                      const class GGS_semanticContext constinArgument2,
+                                                                                                                                                                      const class GGS_mode constinArgument3,
+                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument4,
+                                                                                                                                                                      class GGS_staticEntityMap & ioArgument5,
+                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument6,
+                                                                                                                                                                      class GGS_allocaList & ioArgument7,
+                                                                                                                                                                      class GGS_instructionListIR & ioArgument8,
+                                                                                                                                                                      const class GGS_LValueOperandAST constinArgument9,
+                                                                                                                                                                      class GGS_LValueRepresentation & outArgument10,
                                                                                                                                                                       class Compiler * inCompiler
                                                                                                                                                                       COMMA_LOCATION_ARGS) ;
 
@@ -86,21 +86,21 @@ void routine_analyzeSelfLValue_3F_self_3F_routineAttributes_3F_context_3F_mode_2
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_analyzeVariableInLValue_3F_self_3F_readAccess_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F_variableName_3F_llvmName_3F_type_3F__21_ (const class GALGAS_omnibusType constinArgument0,
-                                                                                                                                                                                                                              const class GALGAS_bool constinArgument1,
-                                                                                                                                                                                                                              const class GALGAS_routineAttributes constinArgument2,
-                                                                                                                                                                                                                              const class GALGAS_semanticContext constinArgument3,
-                                                                                                                                                                                                                              const class GALGAS_mode constinArgument4,
-                                                                                                                                                                                                                              class GALGAS_semanticTemporariesStruct & ioArgument5,
-                                                                                                                                                                                                                              class GALGAS_staticEntityMap & ioArgument6,
-                                                                                                                                                                                                                              class GALGAS_universalValuedObjectMap & ioArgument7,
-                                                                                                                                                                                                                              class GALGAS_allocaList & ioArgument8,
-                                                                                                                                                                                                                              class GALGAS_instructionListIR & ioArgument9,
-                                                                                                                                                                                                                              const class GALGAS_lstring constinArgument10,
-                                                                                                                                                                                                                              const class GALGAS_string constinArgument11,
-                                                                                                                                                                                                                              const class GALGAS_omnibusType constinArgument12,
-                                                                                                                                                                                                                              const class GALGAS_LValueOperandAST constinArgument13,
-                                                                                                                                                                                                                              class GALGAS_LValueRepresentation & outArgument14,
+void routine_analyzeVariableInLValue_3F_self_3F_readAccess_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F_variableName_3F_llvmName_3F_type_3F__21_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                              const class GGS_bool constinArgument1,
+                                                                                                                                                                                                                              const class GGS_routineAttributes constinArgument2,
+                                                                                                                                                                                                                              const class GGS_semanticContext constinArgument3,
+                                                                                                                                                                                                                              const class GGS_mode constinArgument4,
+                                                                                                                                                                                                                              class GGS_semanticTemporariesStruct & ioArgument5,
+                                                                                                                                                                                                                              class GGS_staticEntityMap & ioArgument6,
+                                                                                                                                                                                                                              class GGS_universalValuedObjectMap & ioArgument7,
+                                                                                                                                                                                                                              class GGS_allocaList & ioArgument8,
+                                                                                                                                                                                                                              class GGS_instructionListIR & ioArgument9,
+                                                                                                                                                                                                                              const class GGS_lstring constinArgument10,
+                                                                                                                                                                                                                              const class GGS_string constinArgument11,
+                                                                                                                                                                                                                              const class GGS_omnibusType constinArgument12,
+                                                                                                                                                                                                                              const class GGS_LValueOperandAST constinArgument13,
+                                                                                                                                                                                                                              class GGS_LValueRepresentation & outArgument14,
                                                                                                                                                                                                                               class Compiler * inCompiler
                                                                                                                                                                                                                               COMMA_LOCATION_ARGS) ;
 
@@ -110,8 +110,8 @@ void routine_analyzeVariableInLValue_3F_self_3F_readAccess_3F_routineAttributes_
 //
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_controlRegisterLValueAST inObject,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GGS_controlRegisterLValueAST inObject,
+                                                           class GGS_semanticTypePrecedenceGraph & io_ioGraph,
                                                            class Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -121,9 +121,9 @@ void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GALGAS_co
 //
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_controlRegisterLValueAST inObject,
-                                                           const class GALGAS_lstring constin_inConstantName,
-                                                           class GALGAS_semanticTypePrecedenceGraph & io_ioGraph,
+void extensionMethod_addDependenceEdgeForStaticExpression (const class GGS_controlRegisterLValueAST inObject,
+                                                           const class GGS_lstring constin_inConstantName,
+                                                           class GGS_semanticTypePrecedenceGraph & io_ioGraph,
                                                            class Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
@@ -133,21 +133,21 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const class GALGAS_co
 //
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_controlRegisterLValueAST inObject,
-                                                            const class GALGAS_bool constin_inWriteAccess,
-                                                            const class GALGAS_omnibusType constin_inSelfType,
-                                                            const class GALGAS_routineAttributes constin_inRoutineAttributes,
-                                                            const class GALGAS_semanticContext constin_inContext,
-                                                            const class GALGAS_mode constin_inMode,
-                                                            class GALGAS_semanticTemporariesStruct & io_ioTemporaries,
-                                                            class GALGAS_staticEntityMap & io_ioStaticEntityMap,
-                                                            class GALGAS_universalValuedObjectMap & io_ioUniversalMap,
-                                                            class GALGAS_allocaList & io_ioAllocaList,
-                                                            class GALGAS_instructionListIR & io_ioInstructionGenerationList,
-                                                            class GALGAS_omnibusType & out_outRegisterType,
-                                                            class GALGAS_uint & out_outRegisterTypeBitCount,
-                                                            class GALGAS_sliceMap & out_outSliceMap,
-                                                            class GALGAS_string & out_outllvmRegisterAddressName,
+void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GGS_controlRegisterLValueAST inObject,
+                                                            const class GGS_bool constin_inWriteAccess,
+                                                            const class GGS_omnibusType constin_inSelfType,
+                                                            const class GGS_routineAttributes constin_inRoutineAttributes,
+                                                            const class GGS_semanticContext constin_inContext,
+                                                            const class GGS_mode constin_inMode,
+                                                            class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                                            class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                                            class GGS_universalValuedObjectMap & io_ioUniversalMap,
+                                                            class GGS_allocaList & io_ioAllocaList,
+                                                            class GGS_instructionListIR & io_ioInstructionGenerationList,
+                                                            class GGS_omnibusType & out_outRegisterType,
+                                                            class GGS_uint & out_outRegisterTypeBitCount,
+                                                            class GGS_sliceMap & out_outSliceMap,
+                                                            class GGS_string & out_outllvmRegisterAddressName,
                                                             class Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
@@ -157,21 +157,21 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const class GALGAS_c
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (const class GALGAS_omnibusType constinArgument0,
-                                                                                                                                                                                               const class GALGAS_routineAttributes constinArgument1,
-                                                                                                                                                                                               const class GALGAS_semanticContext constinArgument2,
-                                                                                                                                                                                               const class GALGAS_mode constinArgument3,
-                                                                                                                                                                                               class GALGAS_semanticTemporariesStruct & ioArgument4,
-                                                                                                                                                                                               class GALGAS_staticEntityMap & ioArgument5,
-                                                                                                                                                                                               class GALGAS_universalValuedObjectMap & ioArgument6,
-                                                                                                                                                                                               class GALGAS_allocaList & ioArgument7,
-                                                                                                                                                                                               const class GALGAS_expressionAST constinArgument8,
-                                                                                                                                                                                               const class GALGAS_location constinArgument9,
-                                                                                                                                                                                               const class GALGAS_bool constinArgument10,
-                                                                                                                                                                                               const class GALGAS_bigint constinArgument11,
-                                                                                                                                                                                               const class GALGAS_omnibusType constinArgument12,
-                                                                                                                                                                                               class GALGAS_instructionListIR & ioArgument13,
-                                                                                                                                                                                               class GALGAS_objectIR & outArgument14,
+void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                               const class GGS_routineAttributes constinArgument1,
+                                                                                                                                                                                               const class GGS_semanticContext constinArgument2,
+                                                                                                                                                                                               const class GGS_mode constinArgument3,
+                                                                                                                                                                                               class GGS_semanticTemporariesStruct & ioArgument4,
+                                                                                                                                                                                               class GGS_staticEntityMap & ioArgument5,
+                                                                                                                                                                                               class GGS_universalValuedObjectMap & ioArgument6,
+                                                                                                                                                                                               class GGS_allocaList & ioArgument7,
+                                                                                                                                                                                               const class GGS_expressionAST constinArgument8,
+                                                                                                                                                                                               const class GGS_location constinArgument9,
+                                                                                                                                                                                               const class GGS_bool constinArgument10,
+                                                                                                                                                                                               const class GGS_bigint constinArgument11,
+                                                                                                                                                                                               const class GGS_omnibusType constinArgument12,
+                                                                                                                                                                                               class GGS_instructionListIR & ioArgument13,
+                                                                                                                                                                                               class GGS_objectIR & outArgument14,
                                                                                                                                                                                                class Compiler * inCompiler
                                                                                                                                                                                                COMMA_LOCATION_ARGS) ;
 
@@ -182,9 +182,9 @@ void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_
 //--------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR * inObject,
-                                                   class GALGAS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
-                                                   class GALGAS_sectionIRlist & io_ioSectionList,
-                                                   class GALGAS_generationAdds & io_ioGenerationAdds,
+                                                   class GGS_primitiveAndServiceIRlist & io_ioPrimitiveAndServiceList,
+                                                   class GGS_sectionIRlist & io_ioSectionList,
+                                                   class GGS_generationAdds & io_ioGenerationAdds,
                                                    Compiler * inCompiler
                                                    COMMA_LOCATION_ARGS) ;
 
@@ -195,8 +195,8 @@ void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR 
 //--------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR * inObject,
-                                                  class GALGAS_stringset & io_ioInvokedRoutineSet,
-                                                  class GALGAS_uint & io_ioMaxBranchOfOnInstructions,
+                                                  class GGS_stringset & io_ioInvokedRoutineSet,
+                                                  class GGS_uint & io_ioMaxBranchOfOnInstructions,
                                                   Compiler * inCompiler
                                                   COMMA_LOCATION_ARGS) ;
 
@@ -207,11 +207,11 @@ void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR *
 //--------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterCodeForOverflowOperation (class cPtr_binaryOperationIR * inObject,
-                                                        const class GALGAS_string constin_inOperation,
-                                                        const class GALGAS_bigint constin_inPanicCode,
-                                                        class GALGAS_string & io_ioLLVMcode,
-                                                        const class GALGAS_generationContext constin_inGenerationContext,
-                                                        class GALGAS_generationAdds & io_ioGenerationAdds,
+                                                        const class GGS_string constin_inOperation,
+                                                        const class GGS_bigint constin_inPanicCode,
+                                                        class GGS_string & io_ioLLVMcode,
+                                                        const class GGS_generationContext constin_inGenerationContext,
+                                                        class GGS_generationAdds & io_ioGenerationAdds,
                                                         Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
@@ -221,9 +221,9 @@ void callExtensionMethod_enterCodeForOverflowOperation (class cPtr_binaryOperati
 //
 //--------------------------------------------------------------------------------------------------
 
-class GALGAS_string function_panicRoutineNameForLocationFile (const class GALGAS_location & constinArgument0,
-                                                              class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+class GGS_string function_panicRoutineNameForLocationFile (const class GGS_location & constinArgument0,
+                                                           class Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -232,11 +232,11 @@ class GALGAS_string function_panicRoutineNameForLocationFile (const class GALGAS
 //--------------------------------------------------------------------------------------------------
 
 void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (class cPtr_binaryOperationIR * inObject,
-                                                                   const class GALGAS_string constin_inOperation,
-                                                                   const class GALGAS_bigint constin_inPanicCode,
-                                                                   class GALGAS_string & io_ioLLVMcode,
-                                                                   const class GALGAS_generationContext constin_inGenerationContext,
-                                                                   class GALGAS_generationAdds & io_ioGenerationAdds,
+                                                                   const class GGS_string constin_inOperation,
+                                                                   const class GGS_bigint constin_inPanicCode,
+                                                                   class GGS_string & io_ioLLVMcode,
+                                                                   const class GGS_generationContext constin_inGenerationContext,
+                                                                   class GGS_generationAdds & io_ioGenerationAdds,
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 

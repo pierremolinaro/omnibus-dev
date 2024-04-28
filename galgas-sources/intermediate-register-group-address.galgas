@@ -10,7 +10,7 @@ setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
   self += !@enterRegisterGroupSubscriptedAddressIR.init {!out_llvmName !inGroupName !inGroupSize !inIndexIR}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
   public var @string mLLVMName
@@ -19,7 +19,7 @@ refclass @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
   public var @objectIR mIndexIR
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -33,4 +33,4 @@ override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
   ioLLVMcode += "  " + self.mLLVMName + " = load i32, i32* " + self.mLLVMName + ".addr\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

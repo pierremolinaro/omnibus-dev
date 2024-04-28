@@ -1,4 +1,4 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendStoreTemporaryReference
   ?let @omnibusType inTargetVarType
@@ -8,7 +8,7 @@ setter @instructionListIR appendStoreTemporaryReference
   self += !@storeFromTemporaryReferenceIR.init {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @storeFromTemporaryReferenceIR : @abstractInstructionIR {
   public var @omnibusType mTargetVarType
@@ -16,7 +16,7 @@ refclass @storeFromTemporaryReferenceIR : @abstractInstructionIR {
   public var @objectIR mSourceValue
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeFromTemporaryReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -27,4 +27,4 @@ override method @storeFromTemporaryReferenceIR llvmInstructionCode
   ioLLVMcode += "  store " + llvmType + " " + [self.mSourceValue llvmName] + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

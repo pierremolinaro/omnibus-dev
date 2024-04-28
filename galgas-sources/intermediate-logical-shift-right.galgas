@@ -15,7 +15,7 @@ setter @instructionListIR appendLogicalShiftRight
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @logicalRightShiftIR : @abstractInstructionIR {
   public var @objectIR mResult
@@ -23,7 +23,7 @@ refclass @logicalRightShiftIR : @abstractInstructionIR {
   public var @uint mShiftAmount
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @logicalRightShiftIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -34,4 +34,4 @@ override method @logicalRightShiftIR llvmInstructionCode
   ioLLVMcode += "lshr " + [self.mResult  llvmTypeName] + " " + [self.mSource llvmName] + ", " + self.mShiftAmount + "\n"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

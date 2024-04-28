@@ -1,27 +1,27 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @integerDeclarationAST : @abstractDeclarationAST {
   public var @bool mIsSigned
   public var @uint mSize
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
   outName = if self.mIsSigned then "i" else "u" end + self.mSize
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -33,15 +33,15 @@ override method @integerDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "integer " + [self typeName]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  UTILITIES                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
   if inIsUnsigned then
@@ -61,9 +61,9 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -282,7 +282,7 @@ override method @integerDeclarationAST enterInContext
   addIntegerInfixOperator (!.mulOpNoOvf !integerType !"mul" !?ioContext.mInfixOperatorMap !integerType)
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc addIntegerInfixOperator
   ?let @omnibusInfixOperator inInfixOperator
@@ -300,9 +300,9 @@ proc addIntegerInfixOperator
   [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage.init {!inLLVMOp}] 
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
@@ -341,9 +341,9 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !§[]]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
@@ -382,9 +382,9 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !§[]]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: BUILTIN FUNCTIONS
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @integerBuiltinFunctionIR : @abstractRoutineIR {
   public var @string mLLVMTypeName
@@ -409,4 +409,4 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
     !self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName + " (" + self.mLLVMTypeName + ")"
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

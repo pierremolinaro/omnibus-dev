@@ -3,14 +3,14 @@ setter @instructionListIR generateRelease ?let @omnibusType inType ?let @lstring
   self += !@releaseIR.init {!inType !in_omnibusName}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @releaseIR : @abstractInstructionIR {
   public var @omnibusType mType
   public var @lstring mOmnibusName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @releaseIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -20,4 +20,4 @@ override method @releaseIR llvmInstructionCode
   [self.mType generateRelease !self.mOmnibusName !?ioLLVMcode !?ioGenerationAdds]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

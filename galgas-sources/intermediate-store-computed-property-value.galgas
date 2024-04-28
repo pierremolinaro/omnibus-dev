@@ -7,7 +7,7 @@ setter @instructionListIR appendStoreComputedPropertyValue
   self += !@storeComputedPropertyValueIR.init {!inReceiverIR !inLLVMSetterName !inValueIR}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @storeComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mReceiverIR
@@ -36,4 +36,4 @@ override method @storeComputedPropertyValueIR enterAccessibleEntities
   ioInvokedRoutineSet += !self.mLLVMSetterName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

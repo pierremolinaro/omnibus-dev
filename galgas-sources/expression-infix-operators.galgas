@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @omnibusInfixOperator {
   case equal
@@ -48,7 +48,7 @@ getter @omnibusInfixOperator string -> @string {
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @omnibusInfixOperatorExpressionAST : @expressionAST {
   public var @expressionAST mLeftExpression
@@ -57,9 +57,9 @@ refclass @omnibusInfixOperatorExpressionAST : @expressionAST {
   public var @expressionAST mRightExpression
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -69,18 +69,18 @@ override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExp
   [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  NOTE TYPES                                                                                                           
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  SEMANTICS                                                                                                            
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @omnibusInfixOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -136,7 +136,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
   ]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #func getInfixOperatorMap
 #  ?let @omnibusInfixOperator inOp
@@ -222,13 +222,13 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 #  end
 #}
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #abstract class @omnibusInfixOperatorDescription {
 #  @llvmBinaryOperation mOperator
 #}
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #abstract method @omnibusInfixOperatorDescription generateInfixOperatorCode
 #  ?!@semanticTemporariesStruct ioTemporaries
@@ -239,7 +239,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 #  ?let @omnibusType inResultType
 #  !@objectIR outResultValue
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #getter @omnibusInfixOperatorDescription performStaticOperation
 #  ?let @bigint inLeft
@@ -281,4 +281,4 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 #  end
 #}
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————

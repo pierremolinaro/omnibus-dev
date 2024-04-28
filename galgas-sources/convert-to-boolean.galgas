@@ -1,6 +1,6 @@
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  AST                                                                                                                  
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeConvertToBooleanAST : @abstractDeclarationAST {
   public var @lstring mReceiverName
@@ -15,7 +15,7 @@ override getter @compileTimeConvertToBooleanAST locationForErrorSignaling -> @lo
   outLocation = self.mReceiverTypeName.location
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @llvmConvertToBooleanAST : @abstractDeclarationAST {
   public var @lstring mReceiverName
@@ -30,9 +30,9 @@ override getter @llvmConvertToBooleanAST locationForErrorSignaling -> @location 
   outLocation = self.mReceiverTypeName.location
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  SYNTAX                                                                                                               
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
   
@@ -77,9 +77,9 @@ syntax extension omnibus_syntax {
 
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #  PRECEDENCE GRAPH                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeConvertToBooleanAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -95,7 +95,7 @@ override getter @compileTimeConvertToBooleanAST keyRepresentationForErrorSignali
   outRepresentation = self.mReceiverTypeName.string + "." + self.mConverterName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmConvertToBooleanAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -111,9 +111,9 @@ override getter @llvmConvertToBooleanAST keyRepresentationForErrorSignaling -> @
   outRepresentation = self.mReceiverTypeName.string + "." + self.mConverterName
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  ENTER IN CONTEXT                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeConvertToBooleanAST enterInContext
   ?!context:@semanticContext ioContext
@@ -142,7 +142,7 @@ override method @compileTimeConvertToBooleanAST enterInContext
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmConvertToBooleanAST enterInContext
   ?!context:@semanticContext ioContext
@@ -167,9 +167,9 @@ override method @llvmConvertToBooleanAST enterInContext
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 #!  GENERATE CODE                                                                                                     
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @implicitConversionToBooleanMap { # Key is a type omnibus name
   public var @abstractImplicitConverterToBoolean mConverter
@@ -208,7 +208,7 @@ abstract method @abstractImplicitConverterToBoolean generateConvertToBooleanCode
   ?!alloca:@allocaList ioAllocaList
   !@implicitBooleanConversionResult outResult
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @compileTimeImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
   public var @lstring mReceiverName
@@ -232,7 +232,7 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
   outResult = .compileTime {!value: result != 0}
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 refclass @llvmImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
   public var @lstring mReceiverName
@@ -271,7 +271,7 @@ override method @llvmImplicitConverterToBoolean generateConvertToBooleanCode
   end
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @implicitConversionToBooleanMap generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
@@ -293,4 +293,4 @@ method @implicitConversionToBooleanMap generateConvertToBooleanCode
   ]
 }
 
-#———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+#—————————————————————————————————————————————————————————————————————————————————————————————————
