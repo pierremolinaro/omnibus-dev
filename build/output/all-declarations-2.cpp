@@ -8421,7 +8421,7 @@ GGS_unifiedTypeMapEntry GGS_unifiedTypeMapEntry::class_func_null (UNUSED_LOCATIO
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_unifiedTypeMapEntry GGS_unifiedTypeMapEntry::class_func_element (const GGS_unifiedTypeMapElementClass_2E_weak & inAssociatedValue0
+GGS_unifiedTypeMapEntry GGS_unifiedTypeMapEntry::class_func_element (const GGS_unifiedTypeMapElementClass_3F_ & inAssociatedValue0
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
   GGS_unifiedTypeMapEntry result ;
   result.mEnum = Enumeration::enum_element ;
@@ -8436,7 +8436,7 @@ GGS_unifiedTypeMapEntry GGS_unifiedTypeMapEntry::class_func_element (const GGS_u
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_unifiedTypeMapEntry::method_extractElement (GGS_unifiedTypeMapElementClass_2E_weak & outAssociatedValue_weakElement,
+void GGS_unifiedTypeMapEntry::method_extractElement (GGS_unifiedTypeMapElementClass_3F_ & outAssociatedValue_weakElement,
                                                      Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) const {
   if (mEnum != Enumeration::enum_element) {
@@ -8465,7 +8465,7 @@ GGS_unifiedTypeMapEntry_2E_element_3F_ GGS_unifiedTypeMapEntry::getter_getElemen
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_unifiedTypeMapEntry::getAssociatedValuesFor_element (GGS_unifiedTypeMapElementClass_2E_weak & out_weakElement) const {
+void GGS_unifiedTypeMapEntry::getAssociatedValuesFor_element (GGS_unifiedTypeMapElementClass_3F_ & out_weakElement) const {
   const auto ptr = (const GGS_unifiedTypeMapEntry_2E_element *) mAssociatedValues.associatedValuesPointer () ;
   out_weakElement = ptr->mProperty_weakElement ;
 }
@@ -8590,16 +8590,16 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_2E_weak extractedValue_6150_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6150_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6145_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6145_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GGS_unifiedTypeMapElementClass var_type_6176 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6150_weakElement_0.ptr ())) ;
-        if (nullptr == var_type_6176.ptr ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6171 = extractedValue_6145_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6145_weakElement_0.isValuated ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6176.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6171.readProperty_mDefinition ().enumValue ()) {
           case GGS_typeDefinition::Enumeration::invalid:
             break ;
           case GGS_typeDefinition::Enumeration::enum_unsolved:
@@ -8611,9 +8611,9 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
             break ;
           case GGS_typeDefinition::Enumeration::enum_solved:
             {
-              GGS_omnibusType extractedValue_6321_definition_0 ;
-              var_type_6176.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6321_definition_0) ;
-              result_result = extractedValue_6321_definition_0 ;
+              GGS_omnibusType extractedValue_6316_definition_0 ;
+              var_type_6171.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6316_definition_0) ;
+              result_result = extractedValue_6316_definition_0 ;
             }
             break ;
           }
@@ -8657,16 +8657,16 @@ GGS_string extensionGetter_key (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_2E_weak extractedValue_6673_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6673_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6668_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6668_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        GGS_unifiedTypeMapElementClass var_type_6699 (dynamic_cast <const cPtr_unifiedTypeMapElementClass *> (extractedValue_6673_weakElement_0.ptr ())) ;
-        if (nullptr == var_type_6699.ptr ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6694 = extractedValue_6668_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6668_weakElement_0.isValuated ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_6699.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_6694.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {
@@ -16885,6 +16885,116 @@ GGS_dynArrayLengthFunctionIR_2E_weak GGS_dynArrayLengthFunctionIR_2E_weak::extra
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayLengthFunctionIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_dynArrayAppendFunctionIR_2E_weak::objectCompare (const GGS_dynArrayAppendFunctionIR_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (void) :
+GGS_abstractRoutineIR_2E_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak & GGS_dynArrayAppendFunctionIR_2E_weak::operator = (const GGS_dynArrayAppendFunctionIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (const GGS_dynArrayAppendFunctionIR & inSource) :
+GGS_abstractRoutineIR_2E_weak (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_dynArrayAppendFunctionIR_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR GGS_dynArrayAppendFunctionIR_2E_weak::bang_dynArrayAppendFunctionIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_dynArrayAppendFunctionIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_dynArrayAppendFunctionIR) ;
+      result = GGS_dynArrayAppendFunctionIR ((cPtr_dynArrayAppendFunctionIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @dynArrayAppendFunctionIR.weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ("dynArrayAppendFunctionIR.weak",
+                                                                                        & kTypeDescriptor_GALGAS_abstractRoutineIR_2E_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_dynArrayAppendFunctionIR_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_dynArrayAppendFunctionIR_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_dynArrayAppendFunctionIR_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_dynArrayAppendFunctionIR_2E_weak result ;
+  const GGS_dynArrayAppendFunctionIR_2E_weak * p = (const GGS_dynArrayAppendFunctionIR_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_dynArrayAppendFunctionIR_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("dynArrayAppendFunctionIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

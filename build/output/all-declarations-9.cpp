@@ -3165,7 +3165,7 @@ GGS_string cPtr_omnibusType::getter_llvmTypeName (Compiler * inCompiler
       temp_0.readProperty_kind ().getAssociatedValuesFor_function (extractedValue_3137__0, extractedValue_3139_signature_1, extractedValue_3149_returnTypeProxy_2) ;
       enumGalgasBool test_5 = kBoolTrue ;
       if (kBoolTrue == test_5) {
-        test_5 = GGS_bool (ComparisonKind::equal, extractedValue_3149_returnTypeProxy_2.objectCompare (GGS_unifiedTypeMapEntry::class_func_null (SOURCE_FILE ("types.galgas", 85)))).boolEnum () ;
+        test_5 = extractedValue_3149_returnTypeProxy_2.getter_isNull (SOURCE_FILE ("types.galgas", 85)).boolEnum () ;
         if (kBoolTrue == test_5) {
           result_result = GGS_string ("void") ;
         }
@@ -4031,6 +4031,127 @@ GGS_unifiedTypeMapElementClass GGS_unifiedTypeMapElementClass::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 //
+//Optional @unifiedTypeMapElementClass_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapElementClass_3F_::GGS_unifiedTypeMapElementClass_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapElementClass_3F_::GGS_unifiedTypeMapElementClass_3F_ (const GGS_unifiedTypeMapElementClass & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapElementClass_3F_ GGS_unifiedTypeMapElementClass_3F_::init_nil (void) {
+  GGS_unifiedTypeMapElementClass_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_unifiedTypeMapElementClass_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_unifiedTypeMapElementClass_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapElementClass_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_unifiedTypeMapElementClass () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapElementClass_3F_::description (String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @unifiedTypeMapElementClass? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapElementClass_3F_ ("unifiedTypeMapElementClass?",
+                                                                                      nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_unifiedTypeMapElementClass_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_unifiedTypeMapElementClass_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_unifiedTypeMapElementClass_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_unifiedTypeMapElementClass_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapElementClass_3F_ GGS_unifiedTypeMapElementClass_3F_::extractObject (const GGS_object & inObject,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GGS_unifiedTypeMapElementClass_3F_ result ;
+  const GGS_unifiedTypeMapElementClass_3F_ * p = (const GGS_unifiedTypeMapElementClass_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_unifiedTypeMapElementClass_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("unifiedTypeMapElementClass?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension getter '@unifiedTypeMapElementClass definition'
 //
 //--------------------------------------------------------------------------------------------------
@@ -4051,9 +4172,9 @@ GGS_omnibusType cPtr_unifiedTypeMapElementClass::getter_definition (Compiler * i
     break ;
   case GGS_typeDefinition::Enumeration::enum_solved:
     {
-      GGS_omnibusType extractedValue_5735_definition_0 ;
-      temp_0.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_5735_definition_0) ;
-      result_result = extractedValue_5735_definition_0 ;
+      GGS_omnibusType extractedValue_5730_definition_0 ;
+      temp_0.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_5730_definition_0) ;
+      result_result = extractedValue_5730_definition_0 ;
     }
     break ;
   }

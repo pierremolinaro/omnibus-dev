@@ -80,7 +80,7 @@ proc checkRequiredProcedures
         : "function signature should be " + [requiredTypedSignature typedString] + " (as required by required function declaration)"    
       end
     #--- Check return type
-      if implementedReturnTypeProxy != .null then
+      if not [implementedReturnTypeProxy isNull] then
         error errorLocation : "function should not return a value (as required by required function declaration)"    
 #      elsif requiredFunction.mIsSafe && not implementedIsSafe then
 #        error errorLocation : "function should be @safe (as required by required function declaration)"    

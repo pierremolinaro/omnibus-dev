@@ -410,9 +410,9 @@ override method @staticListAST enterInContext
             ]
           #--- Check mode
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
-            if (functionReturnTypeProxy == .null) && (candidateReturnTypeProxy != .null) then
+            if [functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-            elsif (functionReturnTypeProxy != .null) && (candidateReturnTypeProxy == .null) then
+            elsif not[functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
               error functionName : "this function should return no object"
             end
             if [functionSignature count] != [candidateSignature count] then
@@ -573,7 +573,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "define internal "
-  if self.mReturnTypeProxy == .null then
+  if [self.mReturnTypeProxy isNull] then
     ioLLVMcode += "void"
   else
     ioLLVMcode += [[self.mReturnTypeProxy type] llvmTypeName]
@@ -603,7 +603,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 #--- Indirect function LLVM type name
   var @string llvmFunctionTypeName
-  if self.mReturnTypeProxy == .null then
+  if [self.mReturnTypeProxy isNull] then
     llvmFunctionTypeName = "void"
   else
     llvmFunctionTypeName = [[self.mReturnTypeProxy type] llvmTypeName]
@@ -630,7 +630,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName 
   ioLLVMcode += ", " + receiverLLVMTypeName + "* %self, i32 0, i32 " + self.mPropertyIndex + "\n"
   ioLLVMcode += "  %f = load " + llvmFunctionTypeName + ", " + llvmFunctionTypeName + "* %ptr\n"
-  if self.mReturnTypeProxy == .null then
+  if [self.mReturnTypeProxy isNull] then
     ioLLVMcode += "  call void"
   else
     ioLLVMcode += "  %result = call " + [[self.mReturnTypeProxy type] llvmTypeName]
@@ -654,7 +654,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   end
   ioLLVMcode += ")\n"
 #--- Epilog
-  if self.mReturnTypeProxy == .null then
+  if [self.mReturnTypeProxy isNull] then
     ioLLVMcode += "  ret void\n"
   else
     ioLLVMcode += "  ret " + [[self.mReturnTypeProxy type] llvmTypeName] + " %result\n"

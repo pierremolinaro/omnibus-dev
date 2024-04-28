@@ -14361,6 +14361,248 @@ GGS_typeDefinition_2E_solved_3F_ GGS_typeDefinition_2E_solved_3F_::extractObject
 
 //--------------------------------------------------------------------------------------------------
 
+GGS_unifiedTypeMapEntry_2E_element::GGS_unifiedTypeMapEntry_2E_element (void) :
+mProperty_weakElement () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element::~ GGS_unifiedTypeMapEntry_2E_element (void) {
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element GGS_unifiedTypeMapEntry_2E_element::init_21_ (const GGS_unifiedTypeMapElementClass_3F_ & in_weakElement,
+                                                                                 Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_unifiedTypeMapEntry_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_weakElement = in_weakElement ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapEntry_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element::GGS_unifiedTypeMapEntry_2E_element (const GGS_unifiedTypeMapElementClass_3F_ & inOperand0) :
+mProperty_weakElement (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element GGS_unifiedTypeMapEntry_2E_element::class_func_new (const GGS_unifiedTypeMapElementClass_3F_ & in_weakElement,
+                                                                                       Compiler * inCompiler
+                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_unifiedTypeMapEntry_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_weakElement = in_weakElement ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_unifiedTypeMapEntry_2E_element::objectCompare (const GGS_unifiedTypeMapEntry_2E_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_weakElement.objectCompare (inOperand.mProperty_weakElement) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_unifiedTypeMapEntry_2E_element::isValid (void) const {
+  return mProperty_weakElement.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapEntry_2E_element::drop (void) {
+  mProperty_weakElement.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapEntry_2E_element::description (String & ioString,
+                                                      const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @unifiedTypeMapEntry.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_weakElement.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @unifiedTypeMapEntry.element generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapEntry_2E_element ("unifiedTypeMapEntry.element",
+                                                                                      nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_unifiedTypeMapEntry_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_unifiedTypeMapEntry_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_unifiedTypeMapEntry_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_unifiedTypeMapEntry_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element GGS_unifiedTypeMapEntry_2E_element::extractObject (const GGS_object & inObject,
+                                                                                      Compiler * inCompiler
+                                                                                      COMMA_LOCATION_ARGS) {
+  GGS_unifiedTypeMapEntry_2E_element result ;
+  const GGS_unifiedTypeMapEntry_2E_element * p = (const GGS_unifiedTypeMapEntry_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_unifiedTypeMapEntry_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("unifiedTypeMapEntry.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Optional @unifiedTypeMapEntry_2E_element_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element_3F_::GGS_unifiedTypeMapEntry_2E_element_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element_3F_::GGS_unifiedTypeMapEntry_2E_element_3F_ (const GGS_unifiedTypeMapEntry_2E_element & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element_3F_ GGS_unifiedTypeMapEntry_2E_element_3F_::init_nil (void) {
+  GGS_unifiedTypeMapEntry_2E_element_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_unifiedTypeMapEntry_2E_element_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_unifiedTypeMapEntry_2E_element_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapEntry_2E_element_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_unifiedTypeMapEntry_2E_element () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_unifiedTypeMapEntry_2E_element_3F_::description (String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @unifiedTypeMapEntry.element? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapEntry_2E_element_3F_ ("unifiedTypeMapEntry.element?",
+                                                                                          nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_unifiedTypeMapEntry_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_unifiedTypeMapEntry_2E_element_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_unifiedTypeMapEntry_2E_element_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_unifiedTypeMapEntry_2E_element_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry_2E_element_3F_ GGS_unifiedTypeMapEntry_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GGS_unifiedTypeMapEntry_2E_element_3F_ result ;
+  const GGS_unifiedTypeMapEntry_2E_element_3F_ * p = (const GGS_unifiedTypeMapEntry_2E_element_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_unifiedTypeMapEntry_2E_element_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("unifiedTypeMapEntry.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GGS_enumerationConstantList_2E_element::GGS_enumerationConstantList_2E_element (void) :
 mProperty_mConstantName (),
 mProperty_mConstantValue () {
@@ -16333,338 +16575,6 @@ GGS_sliceMap_2E_element GGS_sliceMap_2E_element::extractObject (const GGS_object
       result = *p ;
     }else{
       inCompiler->castError ("sliceMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @sliceMap_2E_element_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_::GGS_sliceMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_::GGS_sliceMap_2E_element_3F_ (const GGS_sliceMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_ GGS_sliceMap_2E_element_3F_::init_nil (void) {
-  GGS_sliceMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_sliceMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_sliceMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_sliceMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element_3F_::description (String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @sliceMap.element? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2E_element_3F_ ("sliceMap.element?",
-                                                                               nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_sliceMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sliceMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_sliceMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_sliceMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_ GGS_sliceMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GGS_sliceMap_2E_element_3F_ result ;
-  const GGS_sliceMap_2E_element_3F_ * p = (const GGS_sliceMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_sliceMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sliceMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mType (),
-mProperty_mIsReadOnly (),
-mProperty_mUserAccess (),
-mProperty_mRegisterFieldAccessMap (),
-mProperty_mRegisterFieldMap (),
-mProperty_mAddressOffset (),
-mProperty_mControlRegisterFieldList (),
-mProperty_mRegisterBitCount (),
-mProperty_mArraySize (),
-mProperty_mElementArraySize () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::~ GGS_controlRegisterMap_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::init_21__21__21__21__21__21__21__21__21__21__21_ (const GGS_lstring & in_lkey,
-                                                                                                                       const GGS_omnibusType & in_mType,
-                                                                                                                       const GGS_bool & in_mIsReadOnly,
-                                                                                                                       const GGS_bool & in_mUserAccess,
-                                                                                                                       const GGS_sliceMap & in_mRegisterFieldAccessMap,
-                                                                                                                       const GGS_controlRegisterFieldMap & in_mRegisterFieldMap,
-                                                                                                                       const GGS_bigint & in_mAddressOffset,
-                                                                                                                       const GGS_controlRegisterFieldList & in_mControlRegisterFieldList,
-                                                                                                                       const GGS_uint & in_mRegisterBitCount,
-                                                                                                                       const GGS_uint & in_mArraySize,
-                                                                                                                       const GGS_uint & in_mElementArraySize,
-                                                                                                                       Compiler * inCompiler
-                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mType = in_mType ;
-  result.mProperty_mIsReadOnly = in_mIsReadOnly ;
-  result.mProperty_mUserAccess = in_mUserAccess ;
-  result.mProperty_mRegisterFieldAccessMap = in_mRegisterFieldAccessMap ;
-  result.mProperty_mRegisterFieldMap = in_mRegisterFieldMap ;
-  result.mProperty_mAddressOffset = in_mAddressOffset ;
-  result.mProperty_mControlRegisterFieldList = in_mControlRegisterFieldList ;
-  result.mProperty_mRegisterBitCount = in_mRegisterBitCount ;
-  result.mProperty_mArraySize = in_mArraySize ;
-  result.mProperty_mElementArraySize = in_mElementArraySize ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (const GGS_lstring & inOperand0,
-                                                                      const GGS_omnibusType & inOperand1,
-                                                                      const GGS_bool & inOperand2,
-                                                                      const GGS_bool & inOperand3,
-                                                                      const GGS_sliceMap & inOperand4,
-                                                                      const GGS_controlRegisterFieldMap & inOperand5,
-                                                                      const GGS_bigint & inOperand6,
-                                                                      const GGS_controlRegisterFieldList & inOperand7,
-                                                                      const GGS_uint & inOperand8,
-                                                                      const GGS_uint & inOperand9,
-                                                                      const GGS_uint & inOperand10) :
-mProperty_lkey (inOperand0),
-mProperty_mType (inOperand1),
-mProperty_mIsReadOnly (inOperand2),
-mProperty_mUserAccess (inOperand3),
-mProperty_mRegisterFieldAccessMap (inOperand4),
-mProperty_mRegisterFieldMap (inOperand5),
-mProperty_mAddressOffset (inOperand6),
-mProperty_mControlRegisterFieldList (inOperand7),
-mProperty_mRegisterBitCount (inOperand8),
-mProperty_mArraySize (inOperand9),
-mProperty_mElementArraySize (inOperand10) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::class_func_new (const GGS_lstring & in_lkey,
-                                                                                     const GGS_omnibusType & in_mType,
-                                                                                     const GGS_bool & in_mIsReadOnly,
-                                                                                     const GGS_bool & in_mUserAccess,
-                                                                                     const GGS_sliceMap & in_mRegisterFieldAccessMap,
-                                                                                     const GGS_controlRegisterFieldMap & in_mRegisterFieldMap,
-                                                                                     const GGS_bigint & in_mAddressOffset,
-                                                                                     const GGS_controlRegisterFieldList & in_mControlRegisterFieldList,
-                                                                                     const GGS_uint & in_mRegisterBitCount,
-                                                                                     const GGS_uint & in_mArraySize,
-                                                                                     const GGS_uint & in_mElementArraySize,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mType = in_mType ;
-  result.mProperty_mIsReadOnly = in_mIsReadOnly ;
-  result.mProperty_mUserAccess = in_mUserAccess ;
-  result.mProperty_mRegisterFieldAccessMap = in_mRegisterFieldAccessMap ;
-  result.mProperty_mRegisterFieldMap = in_mRegisterFieldMap ;
-  result.mProperty_mAddressOffset = in_mAddressOffset ;
-  result.mProperty_mControlRegisterFieldList = in_mControlRegisterFieldList ;
-  result.mProperty_mRegisterBitCount = in_mRegisterBitCount ;
-  result.mProperty_mArraySize = in_mArraySize ;
-  result.mProperty_mElementArraySize = in_mElementArraySize ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddressOffset.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mType.drop () ;
-  mProperty_mIsReadOnly.drop () ;
-  mProperty_mUserAccess.drop () ;
-  mProperty_mRegisterFieldAccessMap.drop () ;
-  mProperty_mRegisterFieldMap.drop () ;
-  mProperty_mAddressOffset.drop () ;
-  mProperty_mControlRegisterFieldList.drop () ;
-  mProperty_mRegisterBitCount.drop () ;
-  mProperty_mArraySize.drop () ;
-  mProperty_mElementArraySize.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::description (String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @controlRegisterMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mType.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mUserAccess.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterFieldAccessMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterFieldMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAddressOffset.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mControlRegisterFieldList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterBitCount.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mArraySize.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mElementArraySize.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @controlRegisterMap.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap_2E_element ("controlRegisterMap.element",
-                                                                                     nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_controlRegisterMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element result ;
-  const GGS_controlRegisterMap_2E_element * p = (const GGS_controlRegisterMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

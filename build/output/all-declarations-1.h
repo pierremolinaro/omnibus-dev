@@ -2874,6 +2874,8 @@ class GGS_LValueOperandAST_2E_arrayAccess_3F_ : public AC_GALGAS_root {
                                                                         Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_LValueOperandAST_2E_arrayAccess_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3038,6 +3040,8 @@ class GGS_LValueOperandAST_2E_property_3F_ : public AC_GALGAS_root {
                                                                      Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_LValueOperandAST_2E_property_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5463,7 +5467,7 @@ class GGS_unifiedTypeMapEntry : public AC_GALGAS_root {
   private: Enumeration mEnum ;
 
 //--------------------------------- Associated value extraction
-  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_element (class GGS_unifiedTypeMapElementClass_2E_weak & out_weakElement) const ;
+  public: VIRTUAL_IN_DEBUG void getAssociatedValuesFor_element (class GGS_unifiedTypeMapElementClass_3F_ & out_weakElement) const ;
 
 //--------------------------------- Accessors
   public: VIRTUAL_IN_DEBUG inline bool isValid (void) const override {
@@ -5492,7 +5496,7 @@ class GGS_unifiedTypeMapEntry : public AC_GALGAS_root {
                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_unifiedTypeMapEntry class_func_element (const class GGS_unifiedTypeMapElementClass_2E_weak & inOperand0
+  public: static class GGS_unifiedTypeMapEntry class_func_element (const class GGS_unifiedTypeMapElementClass_3F_ & inOperand0
                                                                    COMMA_LOCATION_ARGS) ;
 
   public: static class GGS_unifiedTypeMapEntry class_func_null (LOCATION_ARGS) ;
@@ -5506,7 +5510,7 @@ class GGS_unifiedTypeMapEntry : public AC_GALGAS_root {
 //--------------------------------- Setters
 
 //--------------------------------- Instance Methods
-  public: VIRTUAL_IN_DEBUG void method_extractElement (class GGS_unifiedTypeMapElementClass_2E_weak & outArgument0,
+  public: VIRTUAL_IN_DEBUG void method_extractElement (class GGS_unifiedTypeMapElementClass_3F_ & outArgument0,
                                                        Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const ;
 

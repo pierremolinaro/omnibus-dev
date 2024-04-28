@@ -82,7 +82,7 @@ getter @omnibusType llvmTypeName -> @string {
   case dynamicArrayType (*) :
     result = "%ptrtype" # "i" + ptrSize
   case function (* signature returnTypeProxy) :
-    if returnTypeProxy == .null then
+    if [returnTypeProxy isNull] then
       result = "void"
     else
       result = [[returnTypeProxy type] llvmTypeName]

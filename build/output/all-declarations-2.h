@@ -4582,6 +4582,8 @@ class GGS_objectIR_2E_literalInteger_3F_ : public AC_GALGAS_root {
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_literalInteger_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4746,6 +4748,8 @@ class GGS_objectIR_2E_literalString_3F_ : public AC_GALGAS_root {
                                                                   Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_literalString_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -4910,6 +4914,8 @@ class GGS_objectIR_2E_llvmArrayDynamicValues_3F_ : public AC_GALGAS_root {
                                                                            Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmArrayDynamicValues_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5086,6 +5092,8 @@ class GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_ : public AC_GALGAS_root 
                                                                                   Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5274,6 +5282,8 @@ class GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ : public AC_GALGAS_root {
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5450,6 +5460,8 @@ class GGS_objectIR_2E_llvmArrayStaticValues_3F_ : public AC_GALGAS_root {
                                                                           Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmArrayStaticValues_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5614,6 +5626,8 @@ class GGS_objectIR_2E_llvmNamedValue_3F_ : public AC_GALGAS_root {
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmNamedValue_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5778,6 +5792,8 @@ class GGS_objectIR_2E_llvmStructureValue_3F_ : public AC_GALGAS_root {
                                                                        Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_llvmStructureValue_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -5930,6 +5946,8 @@ class GGS_objectIR_2E_null_3F_ : public AC_GALGAS_root {
                                                          Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_null_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6094,6 +6112,8 @@ class GGS_objectIR_2E_reference_3F_ : public AC_GALGAS_root {
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_reference_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -6246,6 +6266,8 @@ class GGS_objectIR_2E_zero_3F_ : public AC_GALGAS_root {
                                                          Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_objectIR_2E_zero_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -7887,6 +7909,8 @@ class GGS_typeKind_2E_dynamicArrayType_3F_ : public AC_GALGAS_root {
                                                                      Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_dynamicArrayType_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8039,6 +8063,8 @@ class GGS_typeKind_2E_enumeration_3F_ : public AC_GALGAS_root {
                                                                 Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_enumeration_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8215,6 +8241,8 @@ class GGS_typeKind_2E_function_3F_ : public AC_GALGAS_root {
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_function_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8534,6 +8562,8 @@ class GGS_typeKind_2E_generic_3F_ : public AC_GALGAS_root {
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_generic_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8722,6 +8752,8 @@ class GGS_typeKind_2E_integer_3F_ : public AC_GALGAS_root {
                                                             Compiler * inCompiler
                                                             COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_integer_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -8874,6 +8906,8 @@ class GGS_typeKind_2E_llvmType_3F_ : public AC_GALGAS_root {
                                                              Compiler * inCompiler
                                                              COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_llvmType_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9026,6 +9060,8 @@ class GGS_typeKind_2E_opaque_3F_ : public AC_GALGAS_root {
                                                            Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_opaque_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9190,6 +9226,8 @@ class GGS_typeKind_2E_staticArrayType_3F_ : public AC_GALGAS_root {
                                                                     Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_staticArrayType_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -9342,6 +9380,8 @@ class GGS_typeKind_2E_structure_3F_ : public AC_GALGAS_root {
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_typeKind_2E_structure_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -10098,21 +10138,44 @@ void extensionSetter_makeEntry (class GGS_unifiedTypeMap & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-// Phase 1: @unifiedTypeMapElementClass_2E_weak weak reference class
+// Phase 1: unifiedTypeMapElementClass? optional
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_unifiedTypeMapElementClass_2E_weak : public AC_GALGAS_weak_reference {
+class GGS_unifiedTypeMapElementClass_3F_ : public AC_GALGAS_root {
+//--------------------------------- Private property
+  private: GGS_unifiedTypeMapElementClass mValue ;
+  private: OptionalState mState ;
+
 //--------------------------------- Default constructor
-  public: GGS_unifiedTypeMapElementClass_2E_weak (void) ;
+  public: GGS_unifiedTypeMapElementClass_3F_ (void) ;
 
-//--------------------------------- Constructor and assignment from strong reference
-  public: GGS_unifiedTypeMapElementClass_2E_weak (const class GGS_unifiedTypeMapElementClass & inSource) ;
+//--------------------------------- Dedicaced constructors
+  public: GGS_unifiedTypeMapElementClass_3F_ (const GGS_unifiedTypeMapElementClass & inValue) ;
+  public: static GGS_unifiedTypeMapElementClass_3F_ init_nil (void) ;
 
-  public: GGS_unifiedTypeMapElementClass_2E_weak & operator = (const class GGS_unifiedTypeMapElementClass & inSource) ;
+  public: bool isValuated (void) const ;
+  public: inline GGS_unifiedTypeMapElementClass unwrappedValue (void) const {
+    return mValue ;
+  }
 
-//--------------------------------- Bang operator
-  public: GGS_unifiedTypeMapElementClass bang_unifiedTypeMapElementClass_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (mState != OptionalState::invalid, mState == OptionalState::isNil) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (mState != OptionalState::invalid, mState == OptionalState::valuated) ;
+  }
+
+  
+//--- Methods that every type should implement
+  public: virtual bool isValid (void) const override ;
+  
+  public: virtual void drop (void) override ;
+
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
 
 //-- Start of type generic part
 
@@ -10122,15 +10185,12 @@ class GGS_unifiedTypeMapElementClass_2E_weak : public AC_GALGAS_weak_reference {
   protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
 
 //--------------------------------- Object extraction
-  public: static GGS_unifiedTypeMapElementClass_2E_weak extractObject (const GGS_object & inObject,
-                                                                       Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_unifiedTypeMapElementClass_2E_weak class_func_nil (LOCATION_ARGS) ;
+  public: static GGS_unifiedTypeMapElementClass_3F_ extractObject (const GGS_object & inObject,
+                                                                   Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
-  public: ComparisonResult objectCompare (const GGS_unifiedTypeMapElementClass_2E_weak & inOperand) const ;
+  public: ComparisonResult objectCompare (const GGS_unifiedTypeMapElementClass_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -10144,12 +10204,12 @@ class GGS_unifiedTypeMapElementClass_2E_weak : public AC_GALGAS_weak_reference {
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_unifiedTypeMapElementClass_2E_weak class
+} ; // End of GGS_unifiedTypeMapElementClass_3F_ class
 
 
 //--------------------------------------------------------------------------------------------------
 
-extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapElementClass_2E_weak ;
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapElementClass_3F_ ;
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -10362,14 +10422,69 @@ extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typeDefinition_2E_s
 
 //--------------------------------------------------------------------------------------------------
 //
+// Phase 1: @unifiedTypeMapElementClass_2E_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_unifiedTypeMapElementClass_2E_weak : public AC_GALGAS_weak_reference {
+//--------------------------------- Default constructor
+  public: GGS_unifiedTypeMapElementClass_2E_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GGS_unifiedTypeMapElementClass_2E_weak (const class GGS_unifiedTypeMapElementClass & inSource) ;
+
+  public: GGS_unifiedTypeMapElementClass_2E_weak & operator = (const class GGS_unifiedTypeMapElementClass & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GGS_unifiedTypeMapElementClass bang_unifiedTypeMapElementClass_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GGS_unifiedTypeMapElementClass_2E_weak extractObject (const GGS_object & inObject,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GGS_unifiedTypeMapElementClass_2E_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_unifiedTypeMapElementClass_2E_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GGS_unifiedTypeMapElementClass_2E_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_unifiedTypeMapElementClass_2E_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
 // Phase 1: @unifiedTypeMapEntry_2E_element struct
 //
 //--------------------------------------------------------------------------------------------------
 
 class GGS_unifiedTypeMapEntry_2E_element : public AC_GALGAS_root {
 //--------------------------------- Properties
-  public: GGS_unifiedTypeMapElementClass_2E_weak mProperty_weakElement ;
-  public: inline GGS_unifiedTypeMapElementClass_2E_weak readProperty_weakElement (void) const {
+  public: GGS_unifiedTypeMapElementClass_3F_ mProperty_weakElement ;
+  public: inline GGS_unifiedTypeMapElementClass_3F_ readProperty_weakElement (void) const {
     return mProperty_weakElement ;
   }
 
@@ -10381,7 +10496,7 @@ class GGS_unifiedTypeMapEntry_2E_element : public AC_GALGAS_root {
   public: GGS_unifiedTypeMapEntry_2E_element (void) ;
 
 //--------------------------------- Property setters
-  public: inline void setter_setWeakElement (const GGS_unifiedTypeMapElementClass_2E_weak & inValue COMMA_UNUSED_LOCATION_ARGS) {
+  public: inline void setter_setWeakElement (const GGS_unifiedTypeMapElementClass_3F_ & inValue COMMA_UNUSED_LOCATION_ARGS) {
     mProperty_weakElement = inValue ;
   }
 
@@ -10392,12 +10507,12 @@ class GGS_unifiedTypeMapEntry_2E_element : public AC_GALGAS_root {
   private: void setInitializedProperties (Compiler * inCompiler) ;
 
 //--------------------------------- Native constructor
-  public: GGS_unifiedTypeMapEntry_2E_element (const GGS_unifiedTypeMapElementClass_2E_weak & in_weakElement) ;
+  public: GGS_unifiedTypeMapEntry_2E_element (const GGS_unifiedTypeMapElementClass_3F_ & in_weakElement) ;
 
 //-- Start of type generic part
 
 //--------------------------------- Initializers
-  public: static GGS_unifiedTypeMapEntry_2E_element init_21_ (const class GGS_unifiedTypeMapElementClass_2E_weak & inOperand0,
+  public: static GGS_unifiedTypeMapEntry_2E_element init_21_ (const class GGS_unifiedTypeMapElementClass_3F_ & inOperand0,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
@@ -10410,7 +10525,7 @@ class GGS_unifiedTypeMapEntry_2E_element : public AC_GALGAS_root {
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_unifiedTypeMapEntry_2E_element class_func_new (const class GGS_unifiedTypeMapElementClass_2E_weak & inOperand0,
+  public: static class GGS_unifiedTypeMapEntry_2E_element class_func_new (const class GGS_unifiedTypeMapElementClass_3F_ & inOperand0,
                                                                           class Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
@@ -10492,6 +10607,8 @@ class GGS_unifiedTypeMapEntry_2E_element_3F_ : public AC_GALGAS_root {
                                                                        Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_unifiedTypeMapEntry_2E_element_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -17444,4 +17561,197 @@ class GGS_dynArrayLengthFunctionIR_2E_weak : public GGS_abstractRoutineIR_2E_wea
 //--------------------------------------------------------------------------------------------------
 
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayLengthFunctionIR_2E_weak ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayAppendFunctionIR reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_dynArrayAppendFunctionIR : public GGS_abstractRoutineIR {
+//--------------------------------- Default constructor
+  public: GGS_dynArrayAppendFunctionIR (void) ;
+
+//--------------------------------- Constructor from pointer
+  public: GGS_dynArrayAppendFunctionIR (const class cPtr_dynArrayAppendFunctionIR * inSourcePtr) ;
+
+//--------------------------------- Property access
+  public: class GGS_unifiedTypeMapEntry readProperty_mArrayTypeProxy (void) const ;
+  public: void setProperty_mArrayTypeProxy (const GGS_unifiedTypeMapEntry & inValue) ;
+
+  public: class GGS_unifiedTypeMapEntry readProperty_mElementTypeProxy (void) const ;
+  public: void setProperty_mElementTypeProxy (const GGS_unifiedTypeMapEntry & inValue) ;
+
+  public: class GGS_string readProperty_mInsertFunctionMangledName (void) const ;
+  public: void setProperty_mInsertFunctionMangledName (const GGS_string & inValue) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_dynArrayAppendFunctionIR init_21__21_isRequired_21_warnsIfUnused_21__21__21_ (const class GGS_lstring & inOperand0,
+                                                                                                   const class GGS_bool & inOperand1,
+                                                                                                   const class GGS_bool & inOperand2,
+                                                                                                   const class GGS_unifiedTypeMapEntry & inOperand3,
+                                                                                                   const class GGS_unifiedTypeMapEntry & inOperand4,
+                                                                                                   const class GGS_string & inOperand5,
+                                                                                                   Compiler * inCompiler
+                                                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GGS_dynArrayAppendFunctionIR extractObject (const GGS_object & inObject,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GGS_dynArrayAppendFunctionIR class_func_new (const class GGS_lstring & inOperand0,
+                                                                    const class GGS_bool & inOperand1,
+                                                                    const class GGS_bool & inOperand2,
+                                                                    const class GGS_unifiedTypeMapEntry & inOperand3,
+                                                                    const class GGS_unifiedTypeMapEntry & inOperand4,
+                                                                    const class GGS_string & inOperand5
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_dynArrayAppendFunctionIR & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GGS_dynArrayAppendFunctionIR class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 2: pointer class for @dynArrayAppendFunctionIR class
+//
+//--------------------------------------------------------------------------------------------------
+
+class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
+
+  #ifndef DO_NOT_GENERATE_CHECKINGS
+    public: virtual void printNonNullClassInstanceProperties (void) const override ;
+  #endif
+
+//--------------------------------- Initializers
+  public: void dynArrayAppendFunctionIR_init_21__21_isRequired_21_warnsIfUnused_21__21__21_ (const class GGS_lstring & inOperand0,
+                                                                                             const class GGS_bool & inOperand1,
+                                                                                             const class GGS_bool & inOperand2,
+                                                                                             const class GGS_unifiedTypeMapEntry & inOperand3,
+                                                                                             const class GGS_unifiedTypeMapEntry & inOperand4,
+                                                                                             const class GGS_string & inOperand5,
+                                                                                             Compiler * inCompiler) ;
+
+
+//--- Extension method enterAccessibleEntities
+  public: virtual void method_enterAccessibleEntities (class GGS_stringset & arg_ioInvokedRoutineSet,
+           class GGS_uint & arg_ioMaxBranchOfOnInstructions,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Extension method llvmCodeGeneration
+  public: virtual void method_llvmCodeGeneration (class GGS_string & arg_ioLLVMcode,
+           const class GGS_generationContext arg_inGenerationContext,
+           class GGS_generationAdds & arg_ioGenerationAdds,
+           Compiler * COMMA_LOCATION_ARGS) override ;
+
+//--- Properties
+  public: GGS_unifiedTypeMapEntry mProperty_mArrayTypeProxy ;
+  public: GGS_unifiedTypeMapEntry mProperty_mElementTypeProxy ;
+  public: GGS_string mProperty_mInsertFunctionMangledName ;
+
+
+//--- Default constructor
+  public: cPtr_dynArrayAppendFunctionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
+
+//--- Constructor
+  public: cPtr_dynArrayAppendFunctionIR (const GGS_lstring & in_mRoutineMangledName,
+                                         const GGS_bool & in_isRequired,
+                                         const GGS_bool & in_warnsIfUnused,
+                                         const GGS_unifiedTypeMapEntry & in_mArrayTypeProxy,
+                                         const GGS_unifiedTypeMapEntry & in_mElementTypeProxy,
+                                         const GGS_string & in_mInsertFunctionMangledName
+                                         COMMA_LOCATION_ARGS) ;
+
+//--- Duplication
+  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+
+//--- Attribute accessors
+//--- Description
+  public: virtual void description (String & ioString,
+                                    const int32_t inIndentation) const override ;
+
+//--- Class descriptor
+  public: virtual const C_galgas_type_descriptor * classDescriptor (void) const override ;
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+// Phase 1: @dynArrayAppendFunctionIR_2E_weak weak reference class
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_dynArrayAppendFunctionIR_2E_weak : public GGS_abstractRoutineIR_2E_weak {
+//--------------------------------- Default constructor
+  public: GGS_dynArrayAppendFunctionIR_2E_weak (void) ;
+
+//--------------------------------- Constructor and assignment from strong reference
+  public: GGS_dynArrayAppendFunctionIR_2E_weak (const class GGS_dynArrayAppendFunctionIR & inSource) ;
+
+  public: GGS_dynArrayAppendFunctionIR_2E_weak & operator = (const class GGS_dynArrayAppendFunctionIR & inSource) ;
+
+//--------------------------------- Bang operator
+  public: GGS_dynArrayAppendFunctionIR bang_dynArrayAppendFunctionIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GGS_dynArrayAppendFunctionIR_2E_weak extractObject (const GGS_object & inObject,
+                                                                     Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- GALGAS class functions
+  public: static class GGS_dynArrayAppendFunctionIR_2E_weak class_func_nil (LOCATION_ARGS) ;
+
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_dynArrayAppendFunctionIR_2E_weak & inOperand) const ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
+ 
+} ; // End of GGS_dynArrayAppendFunctionIR_2E_weak class
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ;
 

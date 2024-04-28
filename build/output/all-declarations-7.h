@@ -3391,6 +3391,8 @@ class GGS_genericFormalParameter_2E_constant_3F_ : public AC_GALGAS_root {
                                                                            Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_genericFormalParameter_2E_constant_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3543,6 +3545,8 @@ class GGS_genericFormalParameter_2E_type_3F_ : public AC_GALGAS_root {
                                                                        Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_genericFormalParameter_2E_type_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3792,6 +3796,8 @@ class GGS_llvmStringDefinitionElement_2E_string_3F_ : public AC_GALGAS_root {
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_llvmStringDefinitionElement_2E_string_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 
@@ -3944,6 +3950,8 @@ class GGS_llvmStringDefinitionElement_2E_variable_3F_ : public AC_GALGAS_root {
                                                                                 Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) ;
 
+//--------------------------------- Comparison
+  public: ComparisonResult objectCompare (const GGS_llvmStringDefinitionElement_2E_variable_3F_ & inOperand) const ;
 
 //--------------------------------- Setters
 

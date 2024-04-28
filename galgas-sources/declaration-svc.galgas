@@ -581,14 +581,14 @@ override method @systemUserRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare "
-  if self.mReturnTypeProxy == .null then
+  if [self.mReturnTypeProxy isNull] then
     ioLLVMcode += "void"
   else
     ioLLVMcode += [[self.mReturnTypeProxy type] llvmTypeName]
   end
   ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
   var first = true
-  if self.mReceiverTypeProxy != .null then
+  if not [self.mReceiverTypeProxy isNull] then
     ioLLVMcode += [[self.mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
     first = false
   end

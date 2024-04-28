@@ -173,7 +173,7 @@ override method @externRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare"
-  if self.mReturnType == .null then
+  if [self.mReturnType isNull] then
     ioLLVMcode += " void"
   else
       ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
@@ -213,7 +213,7 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcod
 method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
-  if self.mReturnType == .null then
+  if [self.mReturnType isNull] then
     ioLLVMcode += " void"
   else
       ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]

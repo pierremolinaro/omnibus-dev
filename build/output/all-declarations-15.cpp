@@ -9,6 +9,41 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Overriding extension method '@llvmInfixOperatorUsage generateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_llvmInfixOperatorUsage::method_generateCode (const GGS_objectIR constinArgument_inLeftOperand,
+                                                       const GGS_location constinArgument_inOperatorLocation,
+                                                       const GGS_objectIR constinArgument_inRightOperand,
+                                                       const GGS_omnibusType constinArgument_inResultType,
+                                                       GGS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                       GGS_allocaList & /* ioArgument_ioAllocaList */,
+                                                       GGS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                       GGS_objectIR & outArgument_outResultValue,
+                                                       Compiler * inCompiler
+                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_objectIR var_leftOperand_11895 = constinArgument_inLeftOperand ;
+  {
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_leftOperand_11895, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 277)) ;
+  }
+  GGS_objectIR var_rightOperand_12030 = constinArgument_inRightOperand ;
+  {
+  extensionSetter_appendLoadWhenReference (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_rightOperand_12030, inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 282)) ;
+  }
+  {
+  routine_getNewTempValue_3F__26__21_ (constinArgument_inResultType, ioArgument_ioTemporaries, outArgument_outResultValue, inCompiler  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 287)) ;
+  }
+  GGS_procCallEffectiveParameterListIR temp_0 = GGS_procCallEffectiveParameterListIR::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 288)) ;
+  GGS_procCallEffectiveParameterListIR var_argumentList_12302 = temp_0 ;
+  var_argumentList_12302.addAssign_operation (GGS_procEffectiveParameterPassingModeIR::class_func_output (SOURCE_FILE ("infix-operator-llvm.galgas", 289)), var_leftOperand_11895  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 289)) ;
+  var_argumentList_12302.addAssign_operation (GGS_procEffectiveParameterPassingModeIR::class_func_output (SOURCE_FILE ("infix-operator-llvm.galgas", 290)), var_rightOperand_12030  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 290)) ;
+  const GGS_llvmInfixOperatorUsage temp_1 = this ;
+  const GGS_llvmInfixOperatorUsage temp_2 = this ;
+  ioArgument_ioInstructionGenerationList.addAssign_operation (GGS_standaloneRoutineCallIR::init_21__21__21__21_ (outArgument_outResultValue, GGS_lstring::init_21__21_ (temp_1.readProperty_mInfixMangledFunctionName (), constinArgument_inOperatorLocation, inCompiler COMMA_HERE), temp_2.readProperty_mInfixMangledFunctionName (), var_argumentList_12302, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("infix-operator-llvm.galgas", 291)) ;
+}
+//--------------------------------------------------------------------------------------------------
+//
 //Overriding extension method '@llvmInlineInfixOperatorUsage generateCode'
 //
 //--------------------------------------------------------------------------------------------------
@@ -3655,7 +3690,7 @@ void cPtr_standAloneProcedureCallInstructionAST::method_instructionSemanticAnaly
   constinArgument_inContext.readProperty_mRoutineMap ().method_searchKey (GGS_lstring::init_21__21_ (var_requiredFunctionMangledName_7152, temp_3.readProperty_mSandAloneRoutineName ().readProperty_location (), inCompiler COMMA_HERE), var_implementedPublic_7412, var_formalSignature_7439, var_formalReturnTypeProxy_7464, var_implementedModeDictionary_7523, var_implementedIsExported_7565, var_implementedMode_7603, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 171)) ;
   enumGalgasBool test_4 = kBoolTrue ;
   if (kBoolTrue == test_4) {
-    test_4 = GGS_bool (ComparisonKind::notEqual, var_formalReturnTypeProxy_7464.objectCompare (GGS_unifiedTypeMapEntry::class_func_null (SOURCE_FILE ("instruction-procedure-call.galgas", 181)))).boolEnum () ;
+    test_4 = var_formalReturnTypeProxy_7464.getter_isNull (SOURCE_FILE ("instruction-procedure-call.galgas", 181)).boolEnum () ;
     if (kBoolTrue == test_4) {
       const GGS_standAloneProcedureCallInstructionAST temp_5 = this ;
       TC_Array <FixItDescription> fixItArray6 ;
@@ -3929,7 +3964,7 @@ void cPtr_procedureCallInstructionAST::method_instructionSemanticAnalysis (const
       GGS_string var_functionLLVMName_14229 = function_checkModeAndReturnsRoutineLLVMName (var_implementedModeDictionary_14096, constinArgument_inMode, extractedValue_13743_methodName_0, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 345)) ;
       enumGalgasBool test_20 = kBoolTrue ;
       if (kBoolTrue == test_20) {
-        test_20 = GGS_bool (ComparisonKind::notEqual, var_formalReturnTypeProxy_14035.objectCompare (GGS_unifiedTypeMapEntry::class_func_null (SOURCE_FILE ("instruction-procedure-call.galgas", 347)))).boolEnum () ;
+        test_20 = var_formalReturnTypeProxy_14035.getter_isNull (SOURCE_FILE ("instruction-procedure-call.galgas", 347)).boolEnum () ;
         if (kBoolTrue == test_20) {
           TC_Array <FixItDescription> fixItArray21 ;
           inCompiler->emitSemanticError (extractedValue_13743_methodName_0.readProperty_location (), GGS_string ("cannot be called in instruction, returns a value"), fixItArray21  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 348)) ;

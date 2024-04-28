@@ -108,7 +108,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     ?let unused implementedMode
   ]
 #--- Check routine is actually a function
-  if formalReturnTypeProxy == .null then
+  if [formalReturnTypeProxy isNull] then
     error requiredFunctionMangledName : "this function does not return any value" : outFunctionCallReturnedValue
   else
   #--- Check modes
