@@ -178,7 +178,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     ?let unused implementedMode
   ]
 #--- Check return type proxy is null
-  if [formalReturnTypeProxy isNull] then
+  if not [formalReturnTypeProxy isNull] then
     error self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
   end
 #--- Check modes
@@ -344,7 +344,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !methodName)
   #--- Check routine does not return any value
-    if [formalReturnTypeProxy isNull] then
+    if not [formalReturnTypeProxy isNull] then
       error methodName : "cannot be called in instruction, returns a value"
     end
   #--- Add receiver as first parameter

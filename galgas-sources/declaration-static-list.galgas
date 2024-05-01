@@ -412,7 +412,7 @@ override method @staticListAST enterInContext
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
             if [functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-            elsif not[functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
+            elsif not [functionReturnTypeProxy isNull] && [candidateReturnTypeProxy isNull] then
               error functionName : "this function should return no object"
             end
             if [functionSignature count] != [candidateSignature count] then

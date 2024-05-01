@@ -1,18 +1,16 @@
 #! /usr/bin/env python3
 # -*- coding: UTF-8 -*-
-
-#----------------------------------------------------------------------------------------------------------------------*
-# https://docs.python.org/2/library/subprocess.html#module-subprocess
+#-----------------------------------------------------------------------------------------
 
 import sys, os, subprocess, urllib
 
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
 
 import makefile
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   Run process and wait for termination                                                                               *
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
+#   Run process and wait for termination
+#-----------------------------------------------------------------------------------------
 
 def runProcess (command) :
   childProcess = subprocess.Popen (command)
@@ -23,13 +21,13 @@ def runProcess (command) :
     print (makefile.BOLD_RED () + "Error " + str (childProcess.returncode) + makefile.ENDC ())
     sys.exit (childProcess.returncode)
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   Run process, get output and wait for termination                                                                   *
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
+#   Run process, get output and wait for termination
+#-----------------------------------------------------------------------------------------
 
 def runProcessAndGetOutput (command) :
   result = ""
-  childProcess = subprocess.Popen (command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+  childProcess = subprocess.Popen (command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
   while True:
     out = childProcess.stdout.read(1)
     if out == '' and childProcess.poll() != None:
@@ -44,45 +42,25 @@ def runProcessAndGetOutput (command) :
     sys.exit (childProcess.returncode)
   return result
 
-#----------------------------------------------------------------------------------------------------------------------*
-#   ARCHIVE DOWNLOAD                                                                                                   *
-#----------------------------------------------------------------------------------------------------------------------*
-
-downloadProgression = 0.0
-
-def downloadReportHook (a, b, fileSize) :
-  global downloadProgression
-  newProgression = min (100.0, float(a * b) / fileSize * 100.0)
-  if newProgression > downloadProgression :
-    downloadProgression = downloadProgression + 1.0
-    sys.stdout.write(".")
-    sys.stdout.flush()
-
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
+#   ARCHIVE DOWNLOAD
+#-----------------------------------------------------------------------------------------
 
 def downloadArchive (archiveURL, archivePath):
-  global downloadProgression
-  downloadProgression = 0.0
   makefile.runHiddenCommand (["rm", "-f", archivePath + ".downloading"])
   makefile.runHiddenCommand (["rm", "-f", archivePath + ".tar.bz2"])
   makefile.runHiddenCommand (["mkdir", "-p", os.path.dirname (archivePath)])
-  #print "URL: "+ archiveURL
-  #print "Downloading... " + archivePath + ".downloading"
-  try:
-    urllib.urlretrieve (archiveURL,  archivePath + ".downloading", downloadReportHook)
-    print ("")
-    fileSize = os.path.getsize (archivePath + ".downloading")
-    ok = fileSize > 1000000
-    if ok:
-      makefile.runHiddenCommand (["mv", archivePath + ".downloading", archivePath + ".tar.bz2"])
-    else:
-      print (makefile.BOLD_RED () + "Error: cannot download file" + makefile.ENDC ())
-      sys.exit (1)
-  except:
-    print (makefile.BOLD_RED () + "Error: no network connection" + makefile.ENDC ())
-    sys.exit (1)
+  runProcess ([
+    "/usr/bin/curl",
+    "-k", # Turn off curl's verification of certificate
+    "-L", # Follow
+    "--fail", # No file if failure
+    archiveURL,
+    "-o", # Output file
+    archivePath + ".tar.bz2"
+  ])
 
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
 
 def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceList, \
                  objectDir, LLCcompiler, llvmOptimizerCompiler, \
@@ -279,4 +257,4 @@ def runMakefile (toolDirectory, archiveBaseURL, LLVMsourceList, assemblerSourceL
     print (makefile.BOLD_GREEN () + "Success" + makefile.ENDC ())
 
 
-#----------------------------------------------------------------------------------------------------------------------*
+#-----------------------------------------------------------------------------------------
