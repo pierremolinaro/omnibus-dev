@@ -763,6 +763,7 @@ GGS_abstractDeclarationAST_2E_weak::GGS_abstractDeclarationAST_2E_weak (const GG
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_abstractDeclarationAST_2E_weak GGS_abstractDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -9033,6 +9034,7 @@ GGS_compileTimeDeclarationBarrierAST_2E_weak & GGS_compileTimeDeclarationBarrier
 GGS_compileTimeDeclarationBarrierAST_2E_weak::GGS_compileTimeDeclarationBarrierAST_2E_weak (const GGS_compileTimeDeclarationBarrierAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 

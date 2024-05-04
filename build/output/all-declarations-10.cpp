@@ -8,6 +8,239 @@
 #include "all-declarations-10.h"
 
 //--------------------------------------------------------------------------------------------------
+// @externRoutineIR reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_externRoutineIR::cPtr_externRoutineIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractRoutineIR (inCompiler COMMA_THERE),
+mProperty_mFormalArgumentListForGeneration (),
+mProperty_mReturnType () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_externRoutineIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractRoutineIR::printNonNullClassInstanceProperties () ;
+    mProperty_mFormalArgumentListForGeneration.printNonNullClassInstanceProperties ("mFormalArgumentListForGeneration") ;
+    mProperty_mReturnType.printNonNullClassInstanceProperties ("mReturnType") ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_externRoutineIR::objectCompare (const GGS_externRoutineIR & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externRoutineIR::GGS_externRoutineIR (void) :
+GGS_abstractRoutineIR () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GGS_externRoutineIR GGS_externRoutineIR::
+init_21__21_isRequired_21_warnsIfUnused_21__21_ (const GGS_lstring & in_mRoutineMangledName,
+                                                 const GGS_bool & in_isRequired,
+                                                 const GGS_bool & in_warnsIfUnused,
+                                                 const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
+                                                 const GGS_unifiedTypeMapEntry & in_mReturnType,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  cPtr_externRoutineIR * object = nullptr ;
+  macroMyNew (object, cPtr_externRoutineIR (inCompiler COMMA_THERE)) ;
+  object->externRoutineIR_init_21__21_isRequired_21_warnsIfUnused_21__21_ (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused, in_mFormalArgumentListForGeneration, in_mReturnType, inCompiler) ;
+  const GGS_externRoutineIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_externRoutineIR::
+externRoutineIR_init_21__21_isRequired_21_warnsIfUnused_21__21_ (const GGS_lstring & in_mRoutineMangledName,
+                                                                 const GGS_bool & in_isRequired,
+                                                                 const GGS_bool & in_warnsIfUnused,
+                                                                 const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
+                                                                 const GGS_unifiedTypeMapEntry & in_mReturnType,
+                                                                 Compiler * /* inCompiler */) {
+  mProperty_mRoutineMangledName = in_mRoutineMangledName ;
+  mProperty_isRequired = in_isRequired ;
+  mProperty_warnsIfUnused = in_warnsIfUnused ;
+  mProperty_mFormalArgumentListForGeneration = in_mFormalArgumentListForGeneration ;
+  mProperty_mReturnType = in_mReturnType ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externRoutineIR::GGS_externRoutineIR (const cPtr_externRoutineIR * inSourcePtr) :
+GGS_abstractRoutineIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_externRoutineIR) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GGS_externRoutineIR GGS_externRoutineIR::class_func_new (const GGS_lstring & in_mRoutineMangledName,
+                                                         const GGS_bool & in_isRequired,
+                                                         const GGS_bool & in_warnsIfUnused,
+                                                         const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
+                                                         const GGS_unifiedTypeMapEntry & in_mReturnType
+                                                         COMMA_LOCATION_ARGS) {
+  GGS_externRoutineIR result ;
+  macroMyNew (result.mObjectPtr, cPtr_externRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused, in_mFormalArgumentListForGeneration, in_mReturnType COMMA_THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineFormalArgumentListIR GGS_externRoutineIR::readProperty_mFormalArgumentListForGeneration (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_routineFormalArgumentListIR () ;
+  }else{
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    return p->mProperty_mFormalArgumentListForGeneration ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_externRoutineIR::setProperty_mFormalArgumentListForGeneration (const GGS_routineFormalArgumentListIR & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    p->mProperty_mFormalArgumentListForGeneration = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapEntry GGS_externRoutineIR::readProperty_mReturnType (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_unifiedTypeMapEntry () ;
+  }else{
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    return p->mProperty_mReturnType ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_externRoutineIR::setProperty_mReturnType (const GGS_unifiedTypeMapEntry & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_externRoutineIR) ;
+    p->mProperty_mReturnType = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @externRoutineIR class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_externRoutineIR::cPtr_externRoutineIR (const GGS_lstring & in_mRoutineMangledName,
+                                            const GGS_bool & in_isRequired,
+                                            const GGS_bool & in_warnsIfUnused,
+                                            const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
+                                            const GGS_unifiedTypeMapEntry & in_mReturnType
+                                            COMMA_LOCATION_ARGS) :
+cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
+mProperty_mFormalArgumentListForGeneration (),
+mProperty_mReturnType () {
+  mProperty_mRoutineMangledName = in_mRoutineMangledName ;
+  mProperty_isRequired = in_isRequired ;
+  mProperty_warnsIfUnused = in_warnsIfUnused ;
+  mProperty_mFormalArgumentListForGeneration = in_mFormalArgumentListForGeneration ;
+  mProperty_mReturnType = in_mReturnType ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_externRoutineIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_externRoutineIR ;
+}
+
+void cPtr_externRoutineIR::description (String & ioString,
+                                        const int32_t inIndentation) const {
+  ioString.appendCString ("[@externRoutineIR:") ;
+  mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_isRequired.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mReturnType.description (ioString, inIndentation+1) ;
+  ioString.appendCString ("]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_externRoutineIR::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_externRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnType COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @externRoutineIR generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externRoutineIR ("externRoutineIR",
+                                                                       & kTypeDescriptor_GALGAS_abstractRoutineIR) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_externRoutineIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_externRoutineIR ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_externRoutineIR::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_externRoutineIR (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externRoutineIR GGS_externRoutineIR::extractObject (const GGS_object & inObject,
+                                                        Compiler * inCompiler
+                                                        COMMA_LOCATION_ARGS) {
+  GGS_externRoutineIR result ;
+  const GGS_externRoutineIR * p = (const GGS_externRoutineIR *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_externRoutineIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("externRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 GGS_externProcedureMapIR_2E_element::GGS_externProcedureMapIR_2E_element (void) :
 mProperty_lkey (),
@@ -5644,6 +5877,7 @@ GGS_convertInstructionIR_2E_weak & GGS_convertInstructionIR_2E_weak::operator = 
 GGS_convertInstructionIR_2E_weak::GGS_convertInstructionIR_2E_weak (const GGS_convertInstructionIR & inSource) :
 GGS_abstractInstructionIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15685,446 +15919,6 @@ GGS_forInstructionAST GGS_forInstructionAST::extractObject (const GGS_object & i
       result = *p ;
     }else{
       inCompiler->castError ("forInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @forInstructionOnArrayIR reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_forInstructionOnArrayIR::cPtr_forInstructionOnArrayIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mEnumeratedValueName (),
-mProperty_mIteratedObjectName (),
-mProperty_mIteratedObject (),
-mProperty_mWhileInstructionList (),
-mProperty_mWhileExpressionBooleanResult_5F_llvmName (),
-mProperty_mDoInstructionList (),
-mProperty_mElementType (),
-mProperty_mArraySize (),
-mProperty_mInvokedFunctionSet () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_forInstructionOnArrayIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mEnumeratedValueName.printNonNullClassInstanceProperties ("mEnumeratedValueName") ;
-    mProperty_mIteratedObjectName.printNonNullClassInstanceProperties ("mIteratedObjectName") ;
-    mProperty_mIteratedObject.printNonNullClassInstanceProperties ("mIteratedObject") ;
-    mProperty_mWhileInstructionList.printNonNullClassInstanceProperties ("mWhileInstructionList") ;
-    mProperty_mWhileExpressionBooleanResult_5F_llvmName.printNonNullClassInstanceProperties ("mWhileExpressionBooleanResult_llvmName") ;
-    mProperty_mDoInstructionList.printNonNullClassInstanceProperties ("mDoInstructionList") ;
-    mProperty_mElementType.printNonNullClassInstanceProperties ("mElementType") ;
-    mProperty_mArraySize.printNonNullClassInstanceProperties ("mArraySize") ;
-    mProperty_mInvokedFunctionSet.printNonNullClassInstanceProperties ("mInvokedFunctionSet") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_forInstructionOnArrayIR::objectCompare (const GGS_forInstructionOnArrayIR & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_forInstructionOnArrayIR::GGS_forInstructionOnArrayIR (void) :
-GGS_abstractInstructionIR () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GGS_forInstructionOnArrayIR GGS_forInstructionOnArrayIR::
-init_21__21__21__21__21__21__21__21__21_ (const GGS_string & in_mEnumeratedValueName,
-                                          const GGS_lstring & in_mIteratedObjectName,
-                                          const GGS_objectIR & in_mIteratedObject,
-                                          const GGS_instructionListIR & in_mWhileInstructionList,
-                                          const GGS_string & in_mWhileExpressionBooleanResult_5F_llvmName,
-                                          const GGS_instructionListIR & in_mDoInstructionList,
-                                          const GGS_omnibusType & in_mElementType,
-                                          const GGS_uint & in_mArraySize,
-                                          const GGS_stringset & in_mInvokedFunctionSet,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  cPtr_forInstructionOnArrayIR * object = nullptr ;
-  macroMyNew (object, cPtr_forInstructionOnArrayIR (inCompiler COMMA_THERE)) ;
-  object->forInstructionOnArrayIR_init_21__21__21__21__21__21__21__21__21_ (in_mEnumeratedValueName, in_mIteratedObjectName, in_mIteratedObject, in_mWhileInstructionList, in_mWhileExpressionBooleanResult_5F_llvmName, in_mDoInstructionList, in_mElementType, in_mArraySize, in_mInvokedFunctionSet, inCompiler) ;
-  const GGS_forInstructionOnArrayIR result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_forInstructionOnArrayIR::
-forInstructionOnArrayIR_init_21__21__21__21__21__21__21__21__21_ (const GGS_string & in_mEnumeratedValueName,
-                                                                  const GGS_lstring & in_mIteratedObjectName,
-                                                                  const GGS_objectIR & in_mIteratedObject,
-                                                                  const GGS_instructionListIR & in_mWhileInstructionList,
-                                                                  const GGS_string & in_mWhileExpressionBooleanResult_5F_llvmName,
-                                                                  const GGS_instructionListIR & in_mDoInstructionList,
-                                                                  const GGS_omnibusType & in_mElementType,
-                                                                  const GGS_uint & in_mArraySize,
-                                                                  const GGS_stringset & in_mInvokedFunctionSet,
-                                                                  Compiler * /* inCompiler */) {
-  mProperty_mEnumeratedValueName = in_mEnumeratedValueName ;
-  mProperty_mIteratedObjectName = in_mIteratedObjectName ;
-  mProperty_mIteratedObject = in_mIteratedObject ;
-  mProperty_mWhileInstructionList = in_mWhileInstructionList ;
-  mProperty_mWhileExpressionBooleanResult_5F_llvmName = in_mWhileExpressionBooleanResult_5F_llvmName ;
-  mProperty_mDoInstructionList = in_mDoInstructionList ;
-  mProperty_mElementType = in_mElementType ;
-  mProperty_mArraySize = in_mArraySize ;
-  mProperty_mInvokedFunctionSet = in_mInvokedFunctionSet ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_forInstructionOnArrayIR::GGS_forInstructionOnArrayIR (const cPtr_forInstructionOnArrayIR * inSourcePtr) :
-GGS_abstractInstructionIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_forInstructionOnArrayIR) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GGS_forInstructionOnArrayIR GGS_forInstructionOnArrayIR::class_func_new (const GGS_string & in_mEnumeratedValueName,
-                                                                         const GGS_lstring & in_mIteratedObjectName,
-                                                                         const GGS_objectIR & in_mIteratedObject,
-                                                                         const GGS_instructionListIR & in_mWhileInstructionList,
-                                                                         const GGS_string & in_mWhileExpressionBooleanResult_5F_llvmName,
-                                                                         const GGS_instructionListIR & in_mDoInstructionList,
-                                                                         const GGS_omnibusType & in_mElementType,
-                                                                         const GGS_uint & in_mArraySize,
-                                                                         const GGS_stringset & in_mInvokedFunctionSet
-                                                                         COMMA_LOCATION_ARGS) {
-  GGS_forInstructionOnArrayIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_forInstructionOnArrayIR (in_mEnumeratedValueName, in_mIteratedObjectName, in_mIteratedObject, in_mWhileInstructionList, in_mWhileExpressionBooleanResult_5F_llvmName, in_mDoInstructionList, in_mElementType, in_mArraySize, in_mInvokedFunctionSet COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_string GGS_forInstructionOnArrayIR::readProperty_mEnumeratedValueName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_string () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mEnumeratedValueName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mEnumeratedValueName (const GGS_string & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mEnumeratedValueName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring GGS_forInstructionOnArrayIR::readProperty_mIteratedObjectName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_lstring () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mIteratedObjectName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mIteratedObjectName (const GGS_lstring & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mIteratedObjectName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_objectIR GGS_forInstructionOnArrayIR::readProperty_mIteratedObject (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_objectIR () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mIteratedObject ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mIteratedObject (const GGS_objectIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mIteratedObject = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionListIR GGS_forInstructionOnArrayIR::readProperty_mWhileInstructionList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_instructionListIR () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mWhileInstructionList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mWhileInstructionList (const GGS_instructionListIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mWhileInstructionList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_string GGS_forInstructionOnArrayIR::readProperty_mWhileExpressionBooleanResult_5F_llvmName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_string () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mWhileExpressionBooleanResult_5F_llvmName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mWhileExpressionBooleanResult_5F_llvmName (const GGS_string & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mWhileExpressionBooleanResult_5F_llvmName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionListIR GGS_forInstructionOnArrayIR::readProperty_mDoInstructionList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_instructionListIR () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mDoInstructionList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mDoInstructionList (const GGS_instructionListIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mDoInstructionList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_omnibusType GGS_forInstructionOnArrayIR::readProperty_mElementType (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_omnibusType () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mElementType ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mElementType (const GGS_omnibusType & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mElementType = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_uint GGS_forInstructionOnArrayIR::readProperty_mArraySize (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_uint () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mArraySize ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mArraySize (const GGS_uint & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mArraySize = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_stringset GGS_forInstructionOnArrayIR::readProperty_mInvokedFunctionSet (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_stringset () ;
-  }else{
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    return p->mProperty_mInvokedFunctionSet ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_forInstructionOnArrayIR::setProperty_mInvokedFunctionSet (const GGS_stringset & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_forInstructionOnArrayIR * p = (cPtr_forInstructionOnArrayIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_forInstructionOnArrayIR) ;
-    p->mProperty_mInvokedFunctionSet = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @forInstructionOnArrayIR class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_forInstructionOnArrayIR::cPtr_forInstructionOnArrayIR (const GGS_string & in_mEnumeratedValueName,
-                                                            const GGS_lstring & in_mIteratedObjectName,
-                                                            const GGS_objectIR & in_mIteratedObject,
-                                                            const GGS_instructionListIR & in_mWhileInstructionList,
-                                                            const GGS_string & in_mWhileExpressionBooleanResult_5F_llvmName,
-                                                            const GGS_instructionListIR & in_mDoInstructionList,
-                                                            const GGS_omnibusType & in_mElementType,
-                                                            const GGS_uint & in_mArraySize,
-                                                            const GGS_stringset & in_mInvokedFunctionSet
-                                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
-mProperty_mEnumeratedValueName (),
-mProperty_mIteratedObjectName (),
-mProperty_mIteratedObject (),
-mProperty_mWhileInstructionList (),
-mProperty_mWhileExpressionBooleanResult_5F_llvmName (),
-mProperty_mDoInstructionList (),
-mProperty_mElementType (),
-mProperty_mArraySize (),
-mProperty_mInvokedFunctionSet () {
-  mProperty_mEnumeratedValueName = in_mEnumeratedValueName ;
-  mProperty_mIteratedObjectName = in_mIteratedObjectName ;
-  mProperty_mIteratedObject = in_mIteratedObject ;
-  mProperty_mWhileInstructionList = in_mWhileInstructionList ;
-  mProperty_mWhileExpressionBooleanResult_5F_llvmName = in_mWhileExpressionBooleanResult_5F_llvmName ;
-  mProperty_mDoInstructionList = in_mDoInstructionList ;
-  mProperty_mElementType = in_mElementType ;
-  mProperty_mArraySize = in_mArraySize ;
-  mProperty_mInvokedFunctionSet = in_mInvokedFunctionSet ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_forInstructionOnArrayIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnArrayIR ;
-}
-
-void cPtr_forInstructionOnArrayIR::description (String & ioString,
-                                                const int32_t inIndentation) const {
-  ioString.appendCString ("[@forInstructionOnArrayIR:") ;
-  mProperty_mEnumeratedValueName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mIteratedObjectName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mIteratedObject.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mWhileInstructionList.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mWhileExpressionBooleanResult_5F_llvmName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mDoInstructionList.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mElementType.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mArraySize.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mInvokedFunctionSet.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_forInstructionOnArrayIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_forInstructionOnArrayIR (mProperty_mEnumeratedValueName, mProperty_mIteratedObjectName, mProperty_mIteratedObject, mProperty_mWhileInstructionList, mProperty_mWhileExpressionBooleanResult_5F_llvmName, mProperty_mDoInstructionList, mProperty_mElementType, mProperty_mArraySize, mProperty_mInvokedFunctionSet COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @forInstructionOnArrayIR generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_forInstructionOnArrayIR ("forInstructionOnArrayIR",
-                                                                               & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_forInstructionOnArrayIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_forInstructionOnArrayIR ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_forInstructionOnArrayIR::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_forInstructionOnArrayIR (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_forInstructionOnArrayIR GGS_forInstructionOnArrayIR::extractObject (const GGS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GGS_forInstructionOnArrayIR result ;
-  const GGS_forInstructionOnArrayIR * p = (const GGS_forInstructionOnArrayIR *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_forInstructionOnArrayIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("forInstructionOnArrayIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

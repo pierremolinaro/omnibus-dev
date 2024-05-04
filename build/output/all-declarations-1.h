@@ -99,9 +99,15 @@ class GGS_interruptionPanicCode_2E_code_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_interruptionPanicCode_2E_code_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_interruptionPanicCode_2E_code_3F_ (const GGS_interruptionPanicCode_2E_code & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_interruptionPanicCode_2E_code_3F_ (const GGS_interruptionPanicCode_2E_code & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_interruptionPanicCode_2E_code_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_interruptionPanicCode_2E_code unwrappedValue (void) const {
@@ -262,8 +268,43 @@ class GGS_abstractDeclarationAST_2E_weak : public AC_GALGAS_weak_reference {
 
   public: GGS_abstractDeclarationAST_2E_weak & operator = (const class GGS_abstractDeclarationAST & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_abstractDeclarationAST_2E_weak init_nil (void) {
+    GGS_abstractDeclarationAST_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_abstractDeclarationAST bang_abstractDeclarationAST_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_abstractDeclarationAST unwrappedValue (void) const {
+    GGS_abstractDeclarationAST result ;
+    if (isValid ()) {
+      const cPtr_abstractDeclarationAST * p = (cPtr_abstractDeclarationAST *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_abstractDeclarationAST (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -482,9 +523,15 @@ class GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ : public AC_GALGAS_
 //--------------------------------- Default constructor
   public: GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ (const GGS_extendStaticArrayDeclarationDictAST_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ (const GGS_extendStaticArrayDeclarationDictAST_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_extendStaticArrayDeclarationDictAST_2E_element unwrappedValue (void) const {
@@ -1334,9 +1381,15 @@ class GGS_controlRegisterUserAccesMapAST_2E_element_3F_ : public AC_GALGAS_root 
 //--------------------------------- Default constructor
   public: GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (const GGS_controlRegisterUserAccesMapAST_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (const GGS_controlRegisterUserAccesMapAST_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_controlRegisterUserAccesMapAST_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_controlRegisterUserAccesMapAST_2E_element unwrappedValue (void) const {
@@ -2068,9 +2121,15 @@ class GGS_flatValuedObjectMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_flatValuedObjectMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_flatValuedObjectMap_2E_element_3F_ (const GGS_flatValuedObjectMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_flatValuedObjectMap_2E_element_3F_ (const GGS_flatValuedObjectMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_flatValuedObjectMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_flatValuedObjectMap_2E_element unwrappedValue (void) const {
@@ -2835,9 +2894,15 @@ class GGS_LValueOperandAST_2E_arrayAccess_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_LValueOperandAST_2E_arrayAccess_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_LValueOperandAST_2E_arrayAccess_3F_ (const GGS_LValueOperandAST_2E_arrayAccess & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_LValueOperandAST_2E_arrayAccess_3F_ (const GGS_LValueOperandAST_2E_arrayAccess & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_LValueOperandAST_2E_arrayAccess_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_LValueOperandAST_2E_arrayAccess unwrappedValue (void) const {
@@ -3001,9 +3066,15 @@ class GGS_LValueOperandAST_2E_property_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_LValueOperandAST_2E_property_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_LValueOperandAST_2E_property_3F_ (const GGS_LValueOperandAST_2E_property & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_LValueOperandAST_2E_property_3F_ (const GGS_LValueOperandAST_2E_property & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_LValueOperandAST_2E_property_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_LValueOperandAST_2E_property unwrappedValue (void) const {
@@ -3238,9 +3309,15 @@ class GGS_valuedObject_2E_driver_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_driver_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_driver_3F_ (const GGS_valuedObject_2E_driver & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_driver_3F_ (const GGS_valuedObject_2E_driver & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_driver_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_driver unwrappedValue (void) const {
@@ -3646,9 +3723,15 @@ class GGS_valuedObject_2E_globalConstant_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_globalConstant_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_globalConstant_3F_ (const GGS_valuedObject_2E_globalConstant & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_globalConstant_3F_ (const GGS_valuedObject_2E_globalConstant & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_globalConstant_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_globalConstant unwrappedValue (void) const {
@@ -3808,9 +3891,15 @@ class GGS_valuedObject_2E_globalSyncInstance_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_globalSyncInstance_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_globalSyncInstance_3F_ (const GGS_valuedObject_2E_globalSyncInstance & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_globalSyncInstance_3F_ (const GGS_valuedObject_2E_globalSyncInstance & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_globalSyncInstance_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_globalSyncInstance unwrappedValue (void) const {
@@ -3982,9 +4071,15 @@ class GGS_valuedObject_2E_localConstant_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_localConstant_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_localConstant_3F_ (const GGS_valuedObject_2E_localConstant & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_localConstant_3F_ (const GGS_valuedObject_2E_localConstant & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_localConstant_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_localConstant unwrappedValue (void) const {
@@ -4144,9 +4239,15 @@ class GGS_valuedObject_2E_localVariable_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_localVariable_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_localVariable_3F_ (const GGS_valuedObject_2E_localVariable & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_localVariable_3F_ (const GGS_valuedObject_2E_localVariable & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_localVariable_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_localVariable unwrappedValue (void) const {
@@ -4294,9 +4395,15 @@ class GGS_valuedObject_2E_task_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_valuedObject_2E_task_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_valuedObject_2E_task_3F_ (const GGS_valuedObject_2E_task & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_valuedObject_2E_task_3F_ (const GGS_valuedObject_2E_task & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_valuedObject_2E_task_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_valuedObject_2E_task unwrappedValue (void) const {
@@ -4456,9 +4563,15 @@ class GGS_referenceStateMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_referenceStateMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_referenceStateMap_2E_element_3F_ (const GGS_referenceStateMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_referenceStateMap_2E_element_3F_ (const GGS_referenceStateMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_referenceStateMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_referenceStateMap_2E_element unwrappedValue (void) const {
@@ -4777,8 +4890,43 @@ class GGS_compileTimeDeclarationBarrierAST_2E_weak : public GGS_abstractDeclarat
 
   public: GGS_compileTimeDeclarationBarrierAST_2E_weak & operator = (const class GGS_compileTimeDeclarationBarrierAST & inSource) ;
 
+//--------------------------------- Constructor and assignment from optional reference
+
+//--------------------------------- nil initializer
+  public: inline static GGS_compileTimeDeclarationBarrierAST_2E_weak init_nil (void) {
+    GGS_compileTimeDeclarationBarrierAST_2E_weak result ;
+    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    return result ;
+  }
+
 //--------------------------------- Bang operator
   public: GGS_compileTimeDeclarationBarrierAST bang_compileTimeDeclarationBarrierAST_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const ;
+
+//--------------------------------- isValuated
+  public: inline bool isValuated (void) const {
+    return isValid () && (ptr () != nullptr) ;
+  }
+
+//--------------------------------- Unwrapped value
+  public: inline GGS_compileTimeDeclarationBarrierAST unwrappedValue (void) const {
+    GGS_compileTimeDeclarationBarrierAST result ;
+    if (isValid ()) {
+      const cPtr_compileTimeDeclarationBarrierAST * p = (cPtr_compileTimeDeclarationBarrierAST *) ptr () ;
+      if (nullptr != p) {
+        result = GGS_compileTimeDeclarationBarrierAST (p) ;
+      }
+    }
+    return result ;
+  }
+
+//--------------------------------- GALGAS read only properties
+  public: inline GGS_bool readProperty_isNil (void) const {
+    return GGS_bool (isValid (), ptr () == nullptr) ;
+  }
+
+  public: inline GGS_bool readProperty_isSome (void) const {
+    return GGS_bool (isValid (), ptr () != nullptr) ;
+  }
 
 //-- Start of type generic part
 
@@ -5059,9 +5207,15 @@ class GGS_panicRoutinePriorityMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_panicRoutinePriorityMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_panicRoutinePriorityMap_2E_element_3F_ (const GGS_panicRoutinePriorityMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_panicRoutinePriorityMap_2E_element_3F_ (const GGS_panicRoutinePriorityMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_panicRoutinePriorityMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_panicRoutinePriorityMap_2E_element unwrappedValue (void) const {
@@ -5942,9 +6096,15 @@ class GGS_routineMapForContext_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_routineMapForContext_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_routineMapForContext_2E_element_3F_ (const GGS_routineMapForContext_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_routineMapForContext_2E_element_3F_ (const GGS_routineMapForContext_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_routineMapForContext_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_routineMapForContext_2E_element unwrappedValue (void) const {
@@ -6339,9 +6499,15 @@ class GGS_guardMapForContext_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_guardMapForContext_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_guardMapForContext_2E_element_3F_ (const GGS_guardMapForContext_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_guardMapForContext_2E_element_3F_ (const GGS_guardMapForContext_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_guardMapForContext_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_guardMapForContext_2E_element unwrappedValue (void) const {
@@ -7018,9 +7184,15 @@ class GGS_controlRegisterGroupMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_controlRegisterGroupMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_controlRegisterGroupMap_2E_element_3F_ (const GGS_controlRegisterGroupMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_controlRegisterGroupMap_2E_element_3F_ (const GGS_controlRegisterGroupMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_controlRegisterGroupMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_controlRegisterGroupMap_2E_element unwrappedValue (void) const {
@@ -7334,9 +7506,15 @@ class GGS_globalConstantMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_globalConstantMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_globalConstantMap_2E_element_3F_ (const GGS_globalConstantMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_globalConstantMap_2E_element_3F_ (const GGS_globalConstantMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_globalConstantMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_globalConstantMap_2E_element unwrappedValue (void) const {
@@ -7677,9 +7855,15 @@ class GGS_globalSyncInstanceMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_globalSyncInstanceMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_globalSyncInstanceMap_2E_element_3F_ (const GGS_globalSyncInstanceMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_globalSyncInstanceMap_2E_element_3F_ (const GGS_globalSyncInstanceMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_globalSyncInstanceMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_globalSyncInstanceMap_2E_element unwrappedValue (void) const {
@@ -8147,9 +8331,15 @@ class GGS_staticlistMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_staticlistMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_staticlistMap_2E_element_3F_ (const GGS_staticlistMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_staticlistMap_2E_element_3F_ (const GGS_staticlistMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_staticlistMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_staticlistMap_2E_element unwrappedValue (void) const {
@@ -8517,9 +8707,15 @@ class GGS_unifiedTypeMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_unifiedTypeMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_unifiedTypeMap_2E_element_3F_ (const GGS_unifiedTypeMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_unifiedTypeMap_2E_element_3F_ (const GGS_unifiedTypeMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_unifiedTypeMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_unifiedTypeMap_2E_element unwrappedValue (void) const {
@@ -8970,9 +9166,15 @@ class GGS_typeConstantMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_typeConstantMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_typeConstantMap_2E_element_3F_ (const GGS_typeConstantMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_typeConstantMap_2E_element_3F_ (const GGS_typeConstantMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_typeConstantMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_typeConstantMap_2E_element unwrappedValue (void) const {
@@ -9423,9 +9625,15 @@ class GGS_typeConstructorMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_typeConstructorMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_typeConstructorMap_2E_element_3F_ (const GGS_typeConstructorMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_typeConstructorMap_2E_element_3F_ (const GGS_typeConstructorMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_typeConstructorMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_typeConstructorMap_2E_element unwrappedValue (void) const {
@@ -9880,9 +10088,15 @@ class GGS_typePropertySetterMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_typePropertySetterMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_typePropertySetterMap_2E_element_3F_ (const GGS_typePropertySetterMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_typePropertySetterMap_2E_element_3F_ (const GGS_typePropertySetterMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_typePropertySetterMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_typePropertySetterMap_2E_element unwrappedValue (void) const {
@@ -10337,9 +10551,15 @@ class GGS_typePropertyGetterMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_typePropertyGetterMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_typePropertyGetterMap_2E_element_3F_ (const GGS_typePropertyGetterMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_typePropertyGetterMap_2E_element_3F_ (const GGS_typePropertyGetterMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_typePropertyGetterMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_typePropertyGetterMap_2E_element unwrappedValue (void) const {
@@ -10653,9 +10873,15 @@ class GGS_availableInterruptMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_availableInterruptMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_availableInterruptMap_2E_element_3F_ (const GGS_availableInterruptMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_availableInterruptMap_2E_element_3F_ (const GGS_availableInterruptMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_availableInterruptMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_availableInterruptMap_2E_element unwrappedValue (void) const {
@@ -11046,9 +11272,15 @@ class GGS_infixOperatorMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_infixOperatorMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_infixOperatorMap_2E_element_3F_ (const GGS_infixOperatorMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_infixOperatorMap_2E_element_3F_ (const GGS_infixOperatorMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_infixOperatorMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_infixOperatorMap_2E_element unwrappedValue (void) const {
@@ -11466,9 +11698,15 @@ class GGS_prefixOperatorMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_prefixOperatorMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_prefixOperatorMap_2E_element_3F_ (const GGS_prefixOperatorMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_prefixOperatorMap_2E_element_3F_ (const GGS_prefixOperatorMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_prefixOperatorMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_prefixOperatorMap_2E_element unwrappedValue (void) const {
@@ -11832,9 +12070,15 @@ class GGS_assignmentOperatorMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_assignmentOperatorMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_assignmentOperatorMap_2E_element_3F_ (const GGS_assignmentOperatorMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_assignmentOperatorMap_2E_element_3F_ (const GGS_assignmentOperatorMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_assignmentOperatorMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_assignmentOperatorMap_2E_element unwrappedValue (void) const {
@@ -12198,9 +12442,15 @@ class GGS_implicitConversionToBooleanMap_2E_element_3F_ : public AC_GALGAS_root 
 //--------------------------------- Default constructor
   public: GGS_implicitConversionToBooleanMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_implicitConversionToBooleanMap_2E_element_3F_ (const GGS_implicitConversionToBooleanMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_implicitConversionToBooleanMap_2E_element_3F_ (const GGS_implicitConversionToBooleanMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_implicitConversionToBooleanMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_implicitConversionToBooleanMap_2E_element unwrappedValue (void) const {
@@ -12514,9 +12764,15 @@ class GGS_taskMap_2E_element_3F_ : public AC_GALGAS_root {
 //--------------------------------- Default constructor
   public: GGS_taskMap_2E_element_3F_ (void) ;
 
-//--------------------------------- Dedicaced constructors
-  public: GGS_taskMap_2E_element_3F_ (const GGS_taskMap_2E_element & inValue) ;
+//--------------------------------- Constructor from unwrapped type
+  public: GGS_taskMap_2E_element_3F_ (const GGS_taskMap_2E_element & inSource) ;
+
+//--------------------------------- Constructor from weak type
+
+//--------------------------------- nil initializer
   public: static GGS_taskMap_2E_element_3F_ init_nil (void) ;
+
+  public: inline bool isNil (void) const { return mState == OptionalState::isNil ; }
 
   public: bool isValuated (void) const ;
   public: inline GGS_taskMap_2E_element unwrappedValue (void) const {

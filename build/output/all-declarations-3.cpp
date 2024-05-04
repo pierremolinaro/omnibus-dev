@@ -9,6 +9,117 @@
 
 //--------------------------------------------------------------------------------------------------
 
+ComparisonResult GGS_dynArrayAppendFunctionIR_2E_weak::objectCompare (const GGS_dynArrayAppendFunctionIR_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (void) :
+GGS_abstractRoutineIR_2E_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak & GGS_dynArrayAppendFunctionIR_2E_weak::operator = (const GGS_dynArrayAppendFunctionIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (const GGS_dynArrayAppendFunctionIR & inSource) :
+GGS_abstractRoutineIR_2E_weak (inSource) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_dynArrayAppendFunctionIR_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR GGS_dynArrayAppendFunctionIR_2E_weak::bang_dynArrayAppendFunctionIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_dynArrayAppendFunctionIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_dynArrayAppendFunctionIR) ;
+      result = GGS_dynArrayAppendFunctionIR ((cPtr_dynArrayAppendFunctionIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @dynArrayAppendFunctionIR.weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ("dynArrayAppendFunctionIR.weak",
+                                                                                        & kTypeDescriptor_GALGAS_abstractRoutineIR_2E_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_dynArrayAppendFunctionIR_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_dynArrayAppendFunctionIR_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_dynArrayAppendFunctionIR_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_dynArrayAppendFunctionIR_2E_weak result ;
+  const GGS_dynArrayAppendFunctionIR_2E_weak * p = (const GGS_dynArrayAppendFunctionIR_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_dynArrayAppendFunctionIR_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("dynArrayAppendFunctionIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 ComparisonResult GGS_dynArrayInsertFunctionIR_2E_weak::objectCompare (const GGS_dynArrayInsertFunctionIR_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -50,6 +161,7 @@ GGS_dynArrayInsertFunctionIR_2E_weak & GGS_dynArrayInsertFunctionIR_2E_weak::ope
 GGS_dynArrayInsertFunctionIR_2E_weak::GGS_dynArrayInsertFunctionIR_2E_weak (const GGS_dynArrayInsertFunctionIR & inSource) :
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -161,6 +273,7 @@ GGS_dynamicArrayTypeAssignUsage_2E_weak::GGS_dynamicArrayTypeAssignUsage_2E_weak
 GGS_abstractAssignmentOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_dynamicArrayTypeAssignUsage_2E_weak GGS_dynamicArrayTypeAssignUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -270,6 +383,7 @@ GGS_dynamicArrayTypeAssignGenericFunctionIR_2E_weak & GGS_dynamicArrayTypeAssign
 GGS_dynamicArrayTypeAssignGenericFunctionIR_2E_weak::GGS_dynamicArrayTypeAssignGenericFunctionIR_2E_weak (const GGS_dynamicArrayTypeAssignGenericFunctionIR & inSource) :
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -854,6 +968,7 @@ GGS_enumerationDeclarationAST_2E_weak::GGS_enumerationDeclarationAST_2E_weak (co
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_enumerationDeclarationAST_2E_weak GGS_enumerationDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -963,6 +1078,7 @@ GGS_enumToUintRoutineIR_2E_weak & GGS_enumToUintRoutineIR_2E_weak::operator = (c
 GGS_enumToUintRoutineIR_2E_weak::GGS_enumToUintRoutineIR_2E_weak (const GGS_enumToUintRoutineIR & inSource) :
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1738,6 +1854,7 @@ GGS_structureDeclarationAST_2E_weak & GGS_structureDeclarationAST_2E_weak::opera
 GGS_structureDeclarationAST_2E_weak::GGS_structureDeclarationAST_2E_weak (const GGS_structureDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3668,6 +3785,7 @@ GGS_userLLVMSructureTypeDefinitionIR_2E_weak::GGS_userLLVMSructureTypeDefinition
 GGS_userLLVMTypeDefinitionIR_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_userLLVMSructureTypeDefinitionIR_2E_weak GGS_userLLVMSructureTypeDefinitionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -3777,6 +3895,7 @@ GGS_structureAssignmentOperatorUsage_2E_weak & GGS_structureAssignmentOperatorUs
 GGS_structureAssignmentOperatorUsage_2E_weak::GGS_structureAssignmentOperatorUsage_2E_weak (const GGS_structureAssignmentOperatorUsage & inSource) :
 GGS_abstractAssignmentOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3888,6 +4007,7 @@ GGS_structureTypeAssignFunctionIR_2E_weak::GGS_structureTypeAssignFunctionIR_2E_
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_structureTypeAssignFunctionIR_2E_weak GGS_structureTypeAssignFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -3997,6 +4117,7 @@ GGS_syncDeclarationAST_2E_weak & GGS_syncDeclarationAST_2E_weak::operator = (con
 GGS_syncDeclarationAST_2E_weak::GGS_syncDeclarationAST_2E_weak (const GGS_syncDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4316,6 +4437,7 @@ GGS_integerDeclarationAST_2E_weak & GGS_integerDeclarationAST_2E_weak::operator 
 GGS_integerDeclarationAST_2E_weak::GGS_integerDeclarationAST_2E_weak (const GGS_integerDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -4640,6 +4762,7 @@ GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2E_weak::GGS_inlin
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2E_weak GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4926,6 +5049,7 @@ GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2E_weak::GGS_inlin
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2E_weak GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -5035,6 +5159,7 @@ GGS_integerBuiltinFunctionIR_2E_weak & GGS_integerBuiltinFunctionIR_2E_weak::ope
 GGS_integerBuiltinFunctionIR_2E_weak::GGS_integerBuiltinFunctionIR_2E_weak (const GGS_integerBuiltinFunctionIR & inSource) :
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5289,6 +5414,7 @@ GGS_literalStringDeclarationAST_2E_weak::GGS_literalStringDeclarationAST_2E_weak
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_literalStringDeclarationAST_2E_weak GGS_literalStringDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -5398,6 +5524,7 @@ GGS_typeOpaqueDeclarationAST_2E_weak & GGS_typeOpaqueDeclarationAST_2E_weak::ope
 GGS_typeOpaqueDeclarationAST_2E_weak::GGS_typeOpaqueDeclarationAST_2E_weak (const GGS_typeOpaqueDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8406,6 +8533,7 @@ GGS_controlRegisterGroupDeclarationAST_2E_weak::GGS_controlRegisterGroupDeclarat
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterGroupDeclarationAST_2E_weak GGS_controlRegisterGroupDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -11276,6 +11404,7 @@ GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak::GGS_decoratedControlR
 GGS_abstractDecoratedDeclaration_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -12552,6 +12681,7 @@ GGS_globalConstantDeclarationAST_2E_weak::GGS_globalConstantDeclarationAST_2E_we
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_globalConstantDeclarationAST_2E_weak GGS_globalConstantDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -12680,6 +12810,7 @@ GGS_syncToolInstanceDeclarationAST_2E_weak::GGS_syncToolInstanceDeclarationAST_2
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_syncToolInstanceDeclarationAST_2E_weak GGS_syncToolInstanceDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -12789,6 +12920,7 @@ GGS_decoratedSyncInstance_2E_weak & GGS_decoratedSyncInstance_2E_weak::operator 
 GGS_decoratedSyncInstance_2E_weak::GGS_decoratedSyncInstance_2E_weak (const GGS_decoratedSyncInstance & inSource) :
 GGS_abstractDecoratedDeclaration_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14070,6 +14202,7 @@ GGS_implementedDriverAST_2E_weak::GGS_implementedDriverAST_2E_weak (const GGS_im
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_implementedDriverAST_2E_weak GGS_implementedDriverAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -14799,6 +14932,7 @@ GGS_decoratedRequiredDriver_2E_weak & GGS_decoratedRequiredDriver_2E_weak::opera
 GGS_decoratedRequiredDriver_2E_weak::GGS_decoratedRequiredDriver_2E_weak (const GGS_decoratedRequiredDriver & inSource) :
 GGS_abstractDecoratedDeclaration_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 

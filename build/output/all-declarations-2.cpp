@@ -51,6 +51,7 @@ GGS_abstractDecoratedDeclaration_2E_weak::GGS_abstractDecoratedDeclaration_2E_we
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_abstractDecoratedDeclaration_2E_weak GGS_abstractDecoratedDeclaration_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -6608,6 +6609,7 @@ GGS_omnibusType_2E_weak::GGS_omnibusType_2E_weak (const GGS_omnibusType & inSour
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_omnibusType_2E_weak GGS_omnibusType_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -7378,6 +7380,7 @@ GGS_userLLVMTypeDefinitionIR_2E_weak & GGS_userLLVMTypeDefinitionIR_2E_weak::ope
 GGS_userLLVMTypeDefinitionIR_2E_weak::GGS_userLLVMTypeDefinitionIR_2E_weak (const GGS_userLLVMTypeDefinitionIR & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8335,6 +8338,25 @@ GGS_unifiedTypeMapElementClass_2E_weak::GGS_unifiedTypeMapElementClass_2E_weak (
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_unifiedTypeMapElementClass_2E_weak::GGS_unifiedTypeMapElementClass_2E_weak (const class GGS_unifiedTypeMapElementClass_3F_ & inSource) :
+AC_GALGAS_weak_reference () {
+  if (inSource.isValid ()) {
+    if (inSource.isNil ()) {
+      macroMyNew (mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    }else if (inSource.isValuated ()) {
+      const GGS_unifiedTypeMapElementClass v = inSource.unwrappedValue () ;
+      acStrongPtr_class * ptr = (acStrongPtr_class *) v.ptr () ;
+      if (ptr != nullptr) {
+        cPtr_weakReference_proxy * proxy = ptr->getProxy () ;
+        macroAssignSharedObject (mProxyPtr, proxy) ;
+      }
+    }
+  }
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_unifiedTypeMapElementClass_2E_weak GGS_unifiedTypeMapElementClass_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -9200,6 +9222,7 @@ GGS_compiletimeBoolAST_2E_weak::GGS_compiletimeBoolAST_2E_weak (const GGS_compil
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compiletimeBoolAST_2E_weak GGS_compiletimeBoolAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -9406,6 +9429,7 @@ GGS_abstractImplicitConverterToBoolean_2E_weak & GGS_abstractImplicitConverterTo
 GGS_abstractImplicitConverterToBoolean_2E_weak::GGS_abstractImplicitConverterToBoolean_2E_weak (const GGS_abstractImplicitConverterToBoolean & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9614,6 +9638,7 @@ GGS_prefixOperatorUsage_2E_weak::GGS_prefixOperatorUsage_2E_weak (const GGS_pref
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_prefixOperatorUsage_2E_weak GGS_prefixOperatorUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -9820,6 +9845,7 @@ GGS_omnibusInfixOperatorUsage_2E_weak & GGS_omnibusInfixOperatorUsage_2E_weak::o
 GGS_omnibusInfixOperatorUsage_2E_weak::GGS_omnibusInfixOperatorUsage_2E_weak (const GGS_omnibusInfixOperatorUsage & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10074,6 +10100,7 @@ GGS_compileTimeBoolXorOperator_2E_weak::GGS_compileTimeBoolXorOperator_2E_weak (
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeBoolXorOperator_2E_weak GGS_compileTimeBoolXorOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -10326,6 +10353,7 @@ GGS_compileTimeBoolOrOperator_2E_weak & GGS_compileTimeBoolOrOperator_2E_weak::o
 GGS_compileTimeBoolOrOperator_2E_weak::GGS_compileTimeBoolOrOperator_2E_weak (const GGS_compileTimeBoolOrOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10580,6 +10608,7 @@ GGS_compileTimeIntAST_2E_weak::GGS_compileTimeIntAST_2E_weak (const GGS_compileT
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntAST_2E_weak GGS_compileTimeIntAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -10832,6 +10861,7 @@ GGS_compileTimeIntModuloOperator_2E_weak & GGS_compileTimeIntModuloOperator_2E_w
 GGS_compileTimeIntModuloOperator_2E_weak::GGS_compileTimeIntModuloOperator_2E_weak (const GGS_compileTimeIntModuloOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11086,6 +11116,7 @@ GGS_compileTimeIntModuloZeroOperator_2E_weak::GGS_compileTimeIntModuloZeroOperat
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntModuloZeroOperator_2E_weak GGS_compileTimeIntModuloZeroOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -11338,6 +11369,7 @@ GGS_compileTimeIntDivideOperator_2E_weak & GGS_compileTimeIntDivideOperator_2E_w
 GGS_compileTimeIntDivideOperator_2E_weak::GGS_compileTimeIntDivideOperator_2E_weak (const GGS_compileTimeIntDivideOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11592,6 +11624,7 @@ GGS_compileTimeIntDivideZeroOperator_2E_weak::GGS_compileTimeIntDivideZeroOperat
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntDivideZeroOperator_2E_weak GGS_compileTimeIntDivideZeroOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -11844,6 +11877,7 @@ GGS_compileTimeIntMultiplyOperator_2E_weak & GGS_compileTimeIntMultiplyOperator_
 GGS_compileTimeIntMultiplyOperator_2E_weak::GGS_compileTimeIntMultiplyOperator_2E_weak (const GGS_compileTimeIntMultiplyOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12098,6 +12132,7 @@ GGS_compileTimeIntSubtractOperator_2E_weak::GGS_compileTimeIntSubtractOperator_2
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntSubtractOperator_2E_weak GGS_compileTimeIntSubtractOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -12350,6 +12385,7 @@ GGS_compileTimeIntEqualOperator_2E_weak & GGS_compileTimeIntEqualOperator_2E_wea
 GGS_compileTimeIntEqualOperator_2E_weak::GGS_compileTimeIntEqualOperator_2E_weak (const GGS_compileTimeIntEqualOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12604,6 +12640,7 @@ GGS_compileTimeIntAddOperator_2E_weak::GGS_compileTimeIntAddOperator_2E_weak (co
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntAddOperator_2E_weak GGS_compileTimeIntAddOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -12856,6 +12893,7 @@ GGS_compileTimeIntBitWiseAndOperator_2E_weak & GGS_compileTimeIntBitWiseAndOpera
 GGS_compileTimeIntBitWiseAndOperator_2E_weak::GGS_compileTimeIntBitWiseAndOperator_2E_weak (const GGS_compileTimeIntBitWiseAndOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13110,6 +13148,7 @@ GGS_compileTimeIntShiftLeftOperator_2E_weak::GGS_compileTimeIntShiftLeftOperator
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntShiftLeftOperator_2E_weak GGS_compileTimeIntShiftLeftOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -13362,6 +13401,7 @@ GGS_compileTimeIntShiftRightOperator_2E_weak & GGS_compileTimeIntShiftRightOpera
 GGS_compileTimeIntShiftRightOperator_2E_weak::GGS_compileTimeIntShiftRightOperator_2E_weak (const GGS_compileTimeIntShiftRightOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13616,6 +13656,7 @@ GGS_compileTimeIntLessThanOperator_2E_weak::GGS_compileTimeIntLessThanOperator_2
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntLessThanOperator_2E_weak GGS_compileTimeIntLessThanOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -13868,6 +13909,7 @@ GGS_compileTimeIntLowerOrEqualOperator_2E_weak & GGS_compileTimeIntLowerOrEqualO
 GGS_compileTimeIntLowerOrEqualOperator_2E_weak::GGS_compileTimeIntLowerOrEqualOperator_2E_weak (const GGS_compileTimeIntLowerOrEqualOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14122,6 +14164,7 @@ GGS_compileTimeIntXorOperator_2E_weak::GGS_compileTimeIntXorOperator_2E_weak (co
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntXorOperator_2E_weak GGS_compileTimeIntXorOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -14374,6 +14417,7 @@ GGS_compileTimeIntBitWiseOrOperator_2E_weak & GGS_compileTimeIntBitWiseOrOperato
 GGS_compileTimeIntBitWiseOrOperator_2E_weak::GGS_compileTimeIntBitWiseOrOperator_2E_weak (const GGS_compileTimeIntBitWiseOrOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14628,6 +14672,7 @@ GGS_compileTimeIntMinusOperator_2E_weak::GGS_compileTimeIntMinusOperator_2E_weak
 GGS_prefixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeIntMinusOperator_2E_weak GGS_compileTimeIntMinusOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -14880,6 +14925,7 @@ GGS_compileTimeIntComplementOperator_2E_weak & GGS_compileTimeIntComplementOpera
 GGS_compileTimeIntComplementOperator_2E_weak::GGS_compileTimeIntComplementOperator_2E_weak (const GGS_compileTimeIntComplementOperator & inSource) :
 GGS_prefixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15134,6 +15180,7 @@ GGS_boolTypeAST_2E_weak::GGS_boolTypeAST_2E_weak (const GGS_boolTypeAST & inSour
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_boolTypeAST_2E_weak GGS_boolTypeAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -15386,6 +15433,7 @@ GGS_boolImplicitConverterToBoolean_2E_weak & GGS_boolImplicitConverterToBoolean_
 GGS_boolImplicitConverterToBoolean_2E_weak::GGS_boolImplicitConverterToBoolean_2E_weak (const GGS_boolImplicitConverterToBoolean & inSource) :
 GGS_abstractImplicitConverterToBoolean_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15640,6 +15688,7 @@ GGS_boolNotOperator_2E_weak::GGS_boolNotOperator_2E_weak (const GGS_boolNotOpera
 GGS_prefixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_boolNotOperator_2E_weak GGS_boolNotOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -15749,6 +15798,7 @@ GGS_typeAliasDeclarationAST_2E_weak & GGS_typeAliasDeclarationAST_2E_weak::opera
 GGS_typeAliasDeclarationAST_2E_weak::GGS_typeAliasDeclarationAST_2E_weak (const GGS_typeAliasDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15957,6 +16007,7 @@ GGS_fixedSizeArrayTypeDeclarationAST_2E_weak::GGS_fixedSizeArrayTypeDeclarationA
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_fixedSizeArrayTypeDeclarationAST_2E_weak GGS_fixedSizeArrayTypeDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -16066,6 +16117,7 @@ GGS_userLLVMStaticArrayTypeDefinitionIR_2E_weak & GGS_userLLVMStaticArrayTypeDef
 GGS_userLLVMStaticArrayTypeDefinitionIR_2E_weak::GGS_userLLVMStaticArrayTypeDefinitionIR_2E_weak (const GGS_userLLVMStaticArrayTypeDefinitionIR & inSource) :
 GGS_userLLVMTypeDefinitionIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16274,6 +16326,7 @@ GGS_abstractAssignmentOperatorUsage_2E_weak::GGS_abstractAssignmentOperatorUsage
 AC_GALGAS_weak_reference (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_abstractAssignmentOperatorUsage_2E_weak GGS_abstractAssignmentOperatorUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -16383,6 +16436,7 @@ GGS_abstractRoutineIR_2E_weak & GGS_abstractRoutineIR_2E_weak::operator = (const
 GGS_abstractRoutineIR_2E_weak::GGS_abstractRoutineIR_2E_weak (const GGS_abstractRoutineIR & inSource) :
 AC_GALGAS_weak_reference (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16494,6 +16548,7 @@ GGS_staticArrayTypeAssignFunctionIR_2E_weak::GGS_staticArrayTypeAssignFunctionIR
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticArrayTypeAssignFunctionIR_2E_weak GGS_staticArrayTypeAssignFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -16603,6 +16658,7 @@ GGS_typeDynamicArrayDeclarationAST_2E_weak & GGS_typeDynamicArrayDeclarationAST_
 GGS_typeDynamicArrayDeclarationAST_2E_weak::GGS_typeDynamicArrayDeclarationAST_2E_weak (const GGS_typeDynamicArrayDeclarationAST & inSource) :
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16714,6 +16770,7 @@ GGS_dynArrayRemoveAllFunctionIR_2E_weak::GGS_dynArrayRemoveAllFunctionIR_2E_weak
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_dynArrayRemoveAllFunctionIR_2E_weak GGS_dynArrayRemoveAllFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -16824,6 +16881,7 @@ GGS_dynArrayLengthFunctionIR_2E_weak::GGS_dynArrayLengthFunctionIR_2E_weak (cons
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_dynArrayLengthFunctionIR_2E_weak GGS_dynArrayLengthFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -16885,116 +16943,6 @@ GGS_dynArrayLengthFunctionIR_2E_weak GGS_dynArrayLengthFunctionIR_2E_weak::extra
       result = *p ;
     }else{
       inCompiler->castError ("dynArrayLengthFunctionIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_dynArrayAppendFunctionIR_2E_weak::objectCompare (const GGS_dynArrayAppendFunctionIR_2E_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (void) :
-GGS_abstractRoutineIR_2E_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR_2E_weak & GGS_dynArrayAppendFunctionIR_2E_weak::operator = (const GGS_dynArrayAppendFunctionIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR_2E_weak::GGS_dynArrayAppendFunctionIR_2E_weak (const GGS_dynArrayAppendFunctionIR & inSource) :
-GGS_abstractRoutineIR_2E_weak (inSource) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::class_func_nil (LOCATION_ARGS) {
-  GGS_dynArrayAppendFunctionIR_2E_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR GGS_dynArrayAppendFunctionIR_2E_weak::bang_dynArrayAppendFunctionIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GGS_dynArrayAppendFunctionIR result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_dynArrayAppendFunctionIR) ;
-      result = GGS_dynArrayAppendFunctionIR ((cPtr_dynArrayAppendFunctionIR *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @dynArrayAppendFunctionIR.weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ("dynArrayAppendFunctionIR.weak",
-                                                                                        & kTypeDescriptor_GALGAS_abstractRoutineIR_2E_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_dynArrayAppendFunctionIR_2E_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_dynArrayAppendFunctionIR_2E_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_dynArrayAppendFunctionIR_2E_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_dynArrayAppendFunctionIR_2E_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_dynArrayAppendFunctionIR_2E_weak GGS_dynArrayAppendFunctionIR_2E_weak::extractObject (const GGS_object & inObject,
-                                                                                          Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GGS_dynArrayAppendFunctionIR_2E_weak result ;
-  const GGS_dynArrayAppendFunctionIR_2E_weak * p = (const GGS_dynArrayAppendFunctionIR_2E_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_dynArrayAppendFunctionIR_2E_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("dynArrayAppendFunctionIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

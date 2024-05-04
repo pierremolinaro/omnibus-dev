@@ -990,6 +990,7 @@ GGS_configurationDeclarationAST_2E_weak::GGS_configurationDeclarationAST_2E_weak
 GGS_abstractDeclarationAST_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_configurationDeclarationAST_2E_weak GGS_configurationDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4051,6 +4052,23 @@ mState (OptionalState::valuated) {
 
 //--------------------------------------------------------------------------------------------------
 
+GGS_unifiedTypeMapElementClass_3F_::GGS_unifiedTypeMapElementClass_3F_ (const GGS_unifiedTypeMapElementClass_2E_weak & inSource) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+  if (inSource.isValid ()) {
+    const acStrongPtr_class * p = inSource.ptr () ;
+    if (p == nullptr) {
+      mState = OptionalState::isNil ;
+    }else{
+      mValue = * ((GGS_unifiedTypeMapElementClass *) p) ;
+      mState = OptionalState::valuated ;
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
 GGS_unifiedTypeMapElementClass_3F_ GGS_unifiedTypeMapElementClass_3F_::init_nil (void) {
   GGS_unifiedTypeMapElementClass_3F_ result ;
   result.mState = OptionalState::isNil ;
@@ -4557,6 +4575,7 @@ GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak::GGS_compileTimeBoolImplic
 GGS_abstractImplicitConverterToBoolean_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -4810,6 +4829,7 @@ GGS_compileTimeBoolNotOperator_2E_weak::GGS_compileTimeBoolNotOperator_2E_weak (
 GGS_prefixOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_compileTimeBoolNotOperator_2E_weak GGS_compileTimeBoolNotOperator_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -5062,6 +5082,7 @@ GGS_compileTimeBoolEqualOperator_2E_weak & GGS_compileTimeBoolEqualOperator_2E_w
 GGS_compileTimeBoolEqualOperator_2E_weak::GGS_compileTimeBoolEqualOperator_2E_weak (const GGS_compileTimeBoolEqualOperator & inSource) :
 GGS_omnibusInfixOperatorUsage_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6116,6 +6137,7 @@ GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak::GGS_fixedSizeArrayAssignmentO
 GGS_abstractAssignmentOperatorUsage_2E_weak (inSource) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak::class_func_nil (LOCATION_ARGS) {
@@ -6403,6 +6425,7 @@ GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak & GGS_assignRe
 GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak::GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak (const GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR & inSource) :
 GGS_abstractRoutineIR_2E_weak (inSource) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15241,237 +15264,4 @@ void extensionMethod_externProcedureSemanticAnalysis (const GGS_externFunctionDe
   ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GGS_externRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21_ (temp_7.readProperty_mRoutineNameForGeneration (), GGS_bool (false), GGS_bool (false), var_formalArguments_5153, var_returnType_5353, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
 }
 
-
-//--------------------------------------------------------------------------------------------------
-// @externRoutineIR reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_externRoutineIR::cPtr_externRoutineIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (inCompiler COMMA_THERE),
-mProperty_mFormalArgumentListForGeneration (),
-mProperty_mReturnType () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_externRoutineIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractRoutineIR::printNonNullClassInstanceProperties () ;
-    mProperty_mFormalArgumentListForGeneration.printNonNullClassInstanceProperties ("mFormalArgumentListForGeneration") ;
-    mProperty_mReturnType.printNonNullClassInstanceProperties ("mReturnType") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_externRoutineIR::objectCompare (const GGS_externRoutineIR & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externRoutineIR::GGS_externRoutineIR (void) :
-GGS_abstractRoutineIR () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GGS_externRoutineIR GGS_externRoutineIR::
-init_21__21_isRequired_21_warnsIfUnused_21__21_ (const GGS_lstring & in_mRoutineMangledName,
-                                                 const GGS_bool & in_isRequired,
-                                                 const GGS_bool & in_warnsIfUnused,
-                                                 const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                 const GGS_unifiedTypeMapEntry & in_mReturnType,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  cPtr_externRoutineIR * object = nullptr ;
-  macroMyNew (object, cPtr_externRoutineIR (inCompiler COMMA_THERE)) ;
-  object->externRoutineIR_init_21__21_isRequired_21_warnsIfUnused_21__21_ (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused, in_mFormalArgumentListForGeneration, in_mReturnType, inCompiler) ;
-  const GGS_externRoutineIR result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_externRoutineIR::
-externRoutineIR_init_21__21_isRequired_21_warnsIfUnused_21__21_ (const GGS_lstring & in_mRoutineMangledName,
-                                                                 const GGS_bool & in_isRequired,
-                                                                 const GGS_bool & in_warnsIfUnused,
-                                                                 const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                                 const GGS_unifiedTypeMapEntry & in_mReturnType,
-                                                                 Compiler * /* inCompiler */) {
-  mProperty_mRoutineMangledName = in_mRoutineMangledName ;
-  mProperty_isRequired = in_isRequired ;
-  mProperty_warnsIfUnused = in_warnsIfUnused ;
-  mProperty_mFormalArgumentListForGeneration = in_mFormalArgumentListForGeneration ;
-  mProperty_mReturnType = in_mReturnType ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externRoutineIR::GGS_externRoutineIR (const cPtr_externRoutineIR * inSourcePtr) :
-GGS_abstractRoutineIR (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_externRoutineIR) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GGS_externRoutineIR GGS_externRoutineIR::class_func_new (const GGS_lstring & in_mRoutineMangledName,
-                                                         const GGS_bool & in_isRequired,
-                                                         const GGS_bool & in_warnsIfUnused,
-                                                         const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                                         const GGS_unifiedTypeMapEntry & in_mReturnType
-                                                         COMMA_LOCATION_ARGS) {
-  GGS_externRoutineIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_externRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused, in_mFormalArgumentListForGeneration, in_mReturnType COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineFormalArgumentListIR GGS_externRoutineIR::readProperty_mFormalArgumentListForGeneration (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_routineFormalArgumentListIR () ;
-  }else{
-    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_externRoutineIR) ;
-    return p->mProperty_mFormalArgumentListForGeneration ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_externRoutineIR::setProperty_mFormalArgumentListForGeneration (const GGS_routineFormalArgumentListIR & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_externRoutineIR) ;
-    p->mProperty_mFormalArgumentListForGeneration = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_unifiedTypeMapEntry GGS_externRoutineIR::readProperty_mReturnType (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_unifiedTypeMapEntry () ;
-  }else{
-    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_externRoutineIR) ;
-    return p->mProperty_mReturnType ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_externRoutineIR::setProperty_mReturnType (const GGS_unifiedTypeMapEntry & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_externRoutineIR * p = (cPtr_externRoutineIR *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_externRoutineIR) ;
-    p->mProperty_mReturnType = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @externRoutineIR class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_externRoutineIR::cPtr_externRoutineIR (const GGS_lstring & in_mRoutineMangledName,
-                                            const GGS_bool & in_isRequired,
-                                            const GGS_bool & in_warnsIfUnused,
-                                            const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                            const GGS_unifiedTypeMapEntry & in_mReturnType
-                                            COMMA_LOCATION_ARGS) :
-cPtr_abstractRoutineIR (in_mRoutineMangledName, in_isRequired, in_warnsIfUnused COMMA_THERE),
-mProperty_mFormalArgumentListForGeneration (),
-mProperty_mReturnType () {
-  mProperty_mRoutineMangledName = in_mRoutineMangledName ;
-  mProperty_isRequired = in_isRequired ;
-  mProperty_warnsIfUnused = in_warnsIfUnused ;
-  mProperty_mFormalArgumentListForGeneration = in_mFormalArgumentListForGeneration ;
-  mProperty_mReturnType = in_mReturnType ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_externRoutineIR::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_externRoutineIR ;
-}
-
-void cPtr_externRoutineIR::description (String & ioString,
-                                        const int32_t inIndentation) const {
-  ioString.appendCString ("[@externRoutineIR:") ;
-  mProperty_mRoutineMangledName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_isRequired.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_warnsIfUnused.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mFormalArgumentListForGeneration.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mReturnType.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_externRoutineIR::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_externRoutineIR (mProperty_mRoutineMangledName, mProperty_isRequired, mProperty_warnsIfUnused, mProperty_mFormalArgumentListForGeneration, mProperty_mReturnType COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @externRoutineIR generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externRoutineIR ("externRoutineIR",
-                                                                       & kTypeDescriptor_GALGAS_abstractRoutineIR) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_externRoutineIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_externRoutineIR ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_externRoutineIR::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_externRoutineIR (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externRoutineIR GGS_externRoutineIR::extractObject (const GGS_object & inObject,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  GGS_externRoutineIR result ;
-  const GGS_externRoutineIR * p = (const GGS_externRoutineIR *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_externRoutineIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("externRoutineIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
 

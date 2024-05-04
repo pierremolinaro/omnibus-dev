@@ -9,6 +9,522 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Optional @controlRegisterUserAccesMapAST_2E_element_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterUserAccesMapAST_2E_element_3F_::GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterUserAccesMapAST_2E_element_3F_::GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (const GGS_controlRegisterUserAccesMapAST_2E_element & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterUserAccesMapAST_2E_element_3F_ GGS_controlRegisterUserAccesMapAST_2E_element_3F_::init_nil (void) {
+  GGS_controlRegisterUserAccesMapAST_2E_element_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterUserAccesMapAST_2E_element_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterUserAccesMapAST_2E_element_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterUserAccesMapAST_2E_element_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_controlRegisterUserAccesMapAST_2E_element () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterUserAccesMapAST_2E_element_3F_::description (String & ioString,
+                                                                     const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @controlRegisterUserAccesMapAST.element? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST_2E_element_3F_ ("controlRegisterUserAccesMapAST.element?",
+                                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterUserAccesMapAST_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST_2E_element_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterUserAccesMapAST_2E_element_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterUserAccesMapAST_2E_element_3F_ GGS_controlRegisterUserAccesMapAST_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                                                    Compiler * inCompiler
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterUserAccesMapAST_2E_element_3F_ result ;
+  const GGS_controlRegisterUserAccesMapAST_2E_element_3F_ * p = (const GGS_controlRegisterUserAccesMapAST_2E_element_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterUserAccesMapAST_2E_element_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterUserAccesMapAST.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (void) :
+mProperty_lkey (),
+mProperty_mBitIndex (),
+mProperty_mBitCount () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element::~ GGS_controlRegisterFieldMap_2E_element (void) {
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::init_21__21__21_ (const GGS_lstring & in_lkey,
+                                                                                                 const GGS_uint & in_mBitIndex,
+                                                                                                 const GGS_uint & in_mBitCount,
+                                                                                                 Compiler * inCompiler
+                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterFieldMap_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mBitIndex = in_mBitIndex ;
+  result.mProperty_mBitCount = in_mBitCount ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterFieldMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (const GGS_lstring & inOperand0,
+                                                                                const GGS_uint & inOperand1,
+                                                                                const GGS_uint & inOperand2) :
+mProperty_lkey (inOperand0),
+mProperty_mBitIndex (inOperand1),
+mProperty_mBitCount (inOperand2) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                                               const GGS_uint & in_mBitIndex,
+                                                                                               const GGS_uint & in_mBitCount,
+                                                                                               Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterFieldMap_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mBitIndex = in_mBitIndex ;
+  result.mProperty_mBitCount = in_mBitCount ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterFieldMap_2E_element::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mBitIndex.isValid () && mProperty_mBitCount.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterFieldMap_2E_element::drop (void) {
+  mProperty_lkey.drop () ;
+  mProperty_mBitIndex.drop () ;
+  mProperty_mBitCount.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterFieldMap_2E_element::description (String & ioString,
+                                                          const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @controlRegisterFieldMap.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_lkey.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mBitIndex.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mBitCount.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @controlRegisterFieldMap.element generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element ("controlRegisterFieldMap.element",
+                                                                                          nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterFieldMap_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterFieldMap_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterFieldMap_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::extractObject (const GGS_object & inObject,
+                                                                                              Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterFieldMap_2E_element result ;
+  const GGS_controlRegisterFieldMap_2E_element * p = (const GGS_controlRegisterFieldMap_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterFieldMap_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterFieldMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Optional @controlRegisterFieldMap_2E_element_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element_3F_::GGS_controlRegisterFieldMap_2E_element_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element_3F_::GGS_controlRegisterFieldMap_2E_element_3F_ (const GGS_controlRegisterFieldMap_2E_element & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element_3F_ GGS_controlRegisterFieldMap_2E_element_3F_::init_nil (void) {
+  GGS_controlRegisterFieldMap_2E_element_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterFieldMap_2E_element_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterFieldMap_2E_element_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterFieldMap_2E_element_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_controlRegisterFieldMap_2E_element () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterFieldMap_2E_element_3F_::description (String & ioString,
+                                                              const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @controlRegisterFieldMap.element? generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element_3F_ ("controlRegisterFieldMap.element?",
+                                                                                              nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterFieldMap_2E_element_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterFieldMap_2E_element_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterFieldMap_2E_element_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element_3F_ GGS_controlRegisterFieldMap_2E_element_3F_::extractObject (const GGS_object & inObject,
+                                                                                                      Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterFieldMap_2E_element_3F_ result ;
+  const GGS_controlRegisterFieldMap_2E_element_3F_ * p = (const GGS_controlRegisterFieldMap_2E_element_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterFieldMap_2E_element_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterFieldMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (void) :
+mProperty_lkey (),
+mProperty_mAccessOperator (),
+mProperty_mAccessRightOperand (),
+mProperty_mResultType () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element::~ GGS_sliceMap_2E_element (void) {
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_sliceMap_2E_element GGS_sliceMap_2E_element::init_21__21__21__21_ (const GGS_lstring & in_lkey,
+                                                                       const GGS_llvmBinaryOperation & in_mAccessOperator,
+                                                                       const GGS_bigint & in_mAccessRightOperand,
+                                                                       const GGS_omnibusType & in_mResultType,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_sliceMap_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mAccessOperator = in_mAccessOperator ;
+  result.mProperty_mAccessRightOperand = in_mAccessRightOperand ;
+  result.mProperty_mResultType = in_mResultType ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_sliceMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (const GGS_lstring & inOperand0,
+                                                  const GGS_llvmBinaryOperation & inOperand1,
+                                                  const GGS_bigint & inOperand2,
+                                                  const GGS_omnibusType & inOperand3) :
+mProperty_lkey (inOperand0),
+mProperty_mAccessOperator (inOperand1),
+mProperty_mAccessRightOperand (inOperand2),
+mProperty_mResultType (inOperand3) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element GGS_sliceMap_2E_element::class_func_new (const GGS_lstring & in_lkey,
+                                                                 const GGS_llvmBinaryOperation & in_mAccessOperator,
+                                                                 const GGS_bigint & in_mAccessRightOperand,
+                                                                 const GGS_omnibusType & in_mResultType,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_sliceMap_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_lkey = in_lkey ;
+  result.mProperty_mAccessOperator = in_mAccessOperator ;
+  result.mProperty_mAccessRightOperand = in_mAccessRightOperand ;
+  result.mProperty_mResultType = in_mResultType ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_sliceMap_2E_element::isValid (void) const {
+  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mResultType.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_sliceMap_2E_element::drop (void) {
+  mProperty_lkey.drop () ;
+  mProperty_mAccessOperator.drop () ;
+  mProperty_mAccessRightOperand.drop () ;
+  mProperty_mResultType.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_sliceMap_2E_element::description (String & ioString,
+                                           const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @sliceMap.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_lkey.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mAccessOperator.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mAccessRightOperand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mResultType.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @sliceMap.element generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2E_element ("sliceMap.element",
+                                                                           nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_sliceMap_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sliceMap_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_sliceMap_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_sliceMap_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element GGS_sliceMap_2E_element::extractObject (const GGS_object & inObject,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) {
+  GGS_sliceMap_2E_element result ;
+  const GGS_sliceMap_2E_element * p = (const GGS_sliceMap_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_sliceMap_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sliceMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
 //Optional @sliceMap_2E_element_3F_
 //
 //--------------------------------------------------------------------------------------------------
@@ -26,6 +542,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -359,6 +876,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterMap_2E_element_3F_ GGS_controlRegisterMap_2E_element_3F_::init_nil (void) {
@@ -610,6 +1128,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -863,6 +1382,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_globalSyncInstanceMap_2E_element_3F_ GGS_globalSyncInstanceMap_2E_element_3F_::init_nil (void) {
@@ -983,6 +1503,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1579,6 +2100,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_driverInstanciationArgumentMap_2E_element_3F_ GGS_driverInstanciationArgumentMap_2E_element_3F_::init_nil (void) {
@@ -1821,6 +2343,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_instanciedDriverMap_2E_element_3F_ GGS_instanciedDriverMap_2E_element_3F_::init_nil (void) {
@@ -2052,6 +2575,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2304,6 +2828,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -2668,6 +3193,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_extendStaticListExpressionAST_2E_function_3F_ GGS_extendStaticListExpressionAST_2E_function_3F_::init_nil (void) {
@@ -2909,6 +3435,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3152,6 +3679,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticListInitializationMap_2E_element_3F_ GGS_staticListInitializationMap_2E_element_3F_::init_nil (void) {
@@ -3393,6 +3921,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -3948,6 +4477,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_taskMap_2E_element_3F_ GGS_taskMap_2E_element_3F_::init_nil (void) {
@@ -4260,6 +4790,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_taskMapIR_2E_element_3F_ GGS_taskMapIR_2E_element_3F_::init_nil (void) {
@@ -4552,6 +5083,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_routineMapForContext_2E_element_3F_ GGS_routineMapForContext_2E_element_3F_::init_nil (void) {
@@ -4824,6 +5356,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_externProcedureMapIR_2E_element_3F_ GGS_externProcedureMapIR_2E_element_3F_::init_nil (void) {
@@ -5086,6 +5619,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_interruptMapIR_2E_element_3F_ GGS_interruptMapIR_2E_element_3F_::init_nil (void) {
@@ -5317,6 +5851,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -5589,6 +6124,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -6385,6 +6921,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_panicRoutinePriorityMap_2E_element_3F_ GGS_panicRoutinePriorityMap_2E_element_3F_::init_nil (void) {
@@ -6626,6 +7163,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7121,6 +7659,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_primaryInExpressionAccessAST_2E_property_3F_ GGS_primaryInExpressionAccessAST_2E_property_3F_::init_nil (void) {
@@ -7362,6 +7901,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7614,6 +8154,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -7988,6 +8529,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_infixOperatorMap_2E_element_3F_ GGS_infixOperatorMap_2E_element_3F_::init_nil (void) {
@@ -8249,6 +8791,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -8603,6 +9146,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceTargetAST_2E_varDeclaration_3F_ GGS_sliceTargetAST_2E_varDeclaration_3F_::init_nil (void) {
@@ -8835,6 +9379,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceTargetAST_2E_letDeclaration_3F_ GGS_sliceTargetAST_2E_letDeclaration_3F_::init_nil (void) {
@@ -9066,6 +9611,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -9430,6 +9976,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_accessInAssignmentAST_2E_property_3F_ GGS_accessInAssignmentAST_2E_property_3F_::init_nil (void) {
@@ -9685,6 +10232,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_LValueOperandAST_2E_property_3F_ GGS_LValueOperandAST_2E_property_3F_::init_nil (void) {
@@ -9933,6 +10481,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -10186,6 +10735,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_ GGS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_::init_nil (void) {
@@ -10418,6 +10968,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_outputInput_3F_ GGS_effectiveArgumentPassingModeAST_2E_outputInput_3F_::init_nil (void) {
@@ -10649,6 +11200,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11026,6 +11578,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_reference_3F_ GGS_objectIR_2E_reference_3F_::init_nil (void) {
@@ -11284,6 +11837,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -11557,6 +12111,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmNamedValue_3F_ GGS_objectIR_2E_llvmNamedValue_3F_::init_nil (void) {
@@ -11828,6 +12383,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12101,6 +12657,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmStructureValue_3F_ GGS_objectIR_2E_llvmStructureValue_3F_::init_nil (void) {
@@ -12359,6 +12916,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -12645,6 +13203,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayStaticValues_3F_ GGS_objectIR_2E_llvmArrayStaticValues_3F_::init_nil (void) {
@@ -12916,6 +13475,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -13215,6 +13775,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::init_nil (void) {
@@ -13499,6 +14060,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14102,6 +14664,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_ctCheckMap_2E_element_3F_ GGS_ctCheckMap_2E_element_3F_::init_nil (void) {
@@ -14344,6 +14907,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_ctMap_2E_element_3F_ GGS_ctMap_2E_element_3F_::init_nil (void) {
@@ -14585,6 +15149,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -14845,6 +15410,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_genericFormalParameter_2E_type_3F_ GGS_genericFormalParameter_2E_type_3F_::init_nil (void) {
@@ -15103,6 +15669,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -15363,6 +15930,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_llvmStringDefinitionElement_2E_string_3F_ GGS_llvmStringDefinitionElement_2E_string_3F_::init_nil (void) {
@@ -15622,6 +16190,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_assignmentOperatorMap_2E_element_3F_ GGS_assignmentOperatorMap_2E_element_3F_::init_nil (void) {
@@ -15854,6 +16423,7 @@ mValue (inSource),
 mState (OptionalState::valuated) {
 }
 
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_llvmGenerationInstructionElement_2E_symbol_3F_ GGS_llvmGenerationInstructionElement_2E_symbol_3F_::init_nil (void) {
@@ -16085,6 +16655,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16327,6 +16898,7 @@ AC_GALGAS_root (),
 mValue (inSource),
 mState (OptionalState::valuated) {
 }
+
 
 //--------------------------------------------------------------------------------------------------
 
@@ -16835,281 +17407,6 @@ GGS_targetParameters GGS_targetParameters::extractObject (const GGS_object & inO
       result = *p ;
     }else{
       inCompiler->castError ("targetParameters", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @configurationDeclarationAST reference class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_configurationDeclarationAST::cPtr_configurationDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (inCompiler COMMA_THERE),
-mProperty_mPanicCodeTypeName (),
-mProperty_mPanicLineTypeName (),
-mProperty_mTargetParameters (),
-mProperty_mInterruptionConfigurationList () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_configurationDeclarationAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-    mProperty_mPanicCodeTypeName.printNonNullClassInstanceProperties ("mPanicCodeTypeName") ;
-    mProperty_mPanicLineTypeName.printNonNullClassInstanceProperties ("mPanicLineTypeName") ;
-    mProperty_mTargetParameters.printNonNullClassInstanceProperties ("mTargetParameters") ;
-    mProperty_mInterruptionConfigurationList.printNonNullClassInstanceProperties ("mInterruptionConfigurationList") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_configurationDeclarationAST::objectCompare (const GGS_configurationDeclarationAST & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_configurationDeclarationAST::GGS_configurationDeclarationAST (void) :
-GGS_abstractDeclarationAST () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GGS_configurationDeclarationAST GGS_configurationDeclarationAST::
-init_21__21__21__21_ (const GGS_lstring & in_mPanicCodeTypeName,
-                      const GGS_lstring & in_mPanicLineTypeName,
-                      const GGS_targetParameters & in_mTargetParameters,
-                      const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList,
-                      Compiler * inCompiler
-                      COMMA_LOCATION_ARGS) {
-  cPtr_configurationDeclarationAST * object = nullptr ;
-  macroMyNew (object, cPtr_configurationDeclarationAST (inCompiler COMMA_THERE)) ;
-  object->configurationDeclarationAST_init_21__21__21__21_ (in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mTargetParameters, in_mInterruptionConfigurationList, inCompiler) ;
-  const GGS_configurationDeclarationAST result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_configurationDeclarationAST::
-configurationDeclarationAST_init_21__21__21__21_ (const GGS_lstring & in_mPanicCodeTypeName,
-                                                  const GGS_lstring & in_mPanicLineTypeName,
-                                                  const GGS_targetParameters & in_mTargetParameters,
-                                                  const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList,
-                                                  Compiler * /* inCompiler */) {
-  mProperty_mPanicCodeTypeName = in_mPanicCodeTypeName ;
-  mProperty_mPanicLineTypeName = in_mPanicLineTypeName ;
-  mProperty_mTargetParameters = in_mTargetParameters ;
-  mProperty_mInterruptionConfigurationList = in_mInterruptionConfigurationList ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_configurationDeclarationAST::GGS_configurationDeclarationAST (const cPtr_configurationDeclarationAST * inSourcePtr) :
-GGS_abstractDeclarationAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_configurationDeclarationAST) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GGS_configurationDeclarationAST GGS_configurationDeclarationAST::class_func_new (const GGS_lstring & in_mPanicCodeTypeName,
-                                                                                 const GGS_lstring & in_mPanicLineTypeName,
-                                                                                 const GGS_targetParameters & in_mTargetParameters,
-                                                                                 const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList
-                                                                                 COMMA_LOCATION_ARGS) {
-  GGS_configurationDeclarationAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_configurationDeclarationAST (in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mTargetParameters, in_mInterruptionConfigurationList COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring GGS_configurationDeclarationAST::readProperty_mPanicCodeTypeName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_lstring () ;
-  }else{
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    return p->mProperty_mPanicCodeTypeName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_configurationDeclarationAST::setProperty_mPanicCodeTypeName (const GGS_lstring & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    p->mProperty_mPanicCodeTypeName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring GGS_configurationDeclarationAST::readProperty_mPanicLineTypeName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_lstring () ;
-  }else{
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    return p->mProperty_mPanicLineTypeName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_configurationDeclarationAST::setProperty_mPanicLineTypeName (const GGS_lstring & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    p->mProperty_mPanicLineTypeName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_targetParameters GGS_configurationDeclarationAST::readProperty_mTargetParameters (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_targetParameters () ;
-  }else{
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    return p->mProperty_mTargetParameters ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_configurationDeclarationAST::setProperty_mTargetParameters (const GGS_targetParameters & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    p->mProperty_mTargetParameters = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList GGS_configurationDeclarationAST::readProperty_mInterruptionConfigurationList (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_interruptionConfigurationList () ;
-  }else{
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    return p->mProperty_mInterruptionConfigurationList ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_configurationDeclarationAST::setProperty_mInterruptionConfigurationList (const GGS_interruptionConfigurationList & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
-    p->mProperty_mInterruptionConfigurationList = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @configurationDeclarationAST class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_configurationDeclarationAST::cPtr_configurationDeclarationAST (const GGS_lstring & in_mPanicCodeTypeName,
-                                                                    const GGS_lstring & in_mPanicLineTypeName,
-                                                                    const GGS_targetParameters & in_mTargetParameters,
-                                                                    const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList
-                                                                    COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE),
-mProperty_mPanicCodeTypeName (),
-mProperty_mPanicLineTypeName (),
-mProperty_mTargetParameters (),
-mProperty_mInterruptionConfigurationList () {
-  mProperty_mPanicCodeTypeName = in_mPanicCodeTypeName ;
-  mProperty_mPanicLineTypeName = in_mPanicLineTypeName ;
-  mProperty_mTargetParameters = in_mTargetParameters ;
-  mProperty_mInterruptionConfigurationList = in_mInterruptionConfigurationList ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_configurationDeclarationAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_configurationDeclarationAST ;
-}
-
-void cPtr_configurationDeclarationAST::description (String & ioString,
-                                                    const int32_t inIndentation) const {
-  ioString.appendCString ("[@configurationDeclarationAST:") ;
-  mProperty_mPanicCodeTypeName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mPanicLineTypeName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mInterruptionConfigurationList.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_configurationDeclarationAST::duplicate (LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_configurationDeclarationAST (mProperty_mPanicCodeTypeName, mProperty_mPanicLineTypeName, mProperty_mTargetParameters, mProperty_mInterruptionConfigurationList COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @configurationDeclarationAST generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_configurationDeclarationAST ("configurationDeclarationAST",
-                                                                                   & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_configurationDeclarationAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_configurationDeclarationAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_configurationDeclarationAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_configurationDeclarationAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_configurationDeclarationAST GGS_configurationDeclarationAST::extractObject (const GGS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GGS_configurationDeclarationAST result ;
-  const GGS_configurationDeclarationAST * p = (const GGS_configurationDeclarationAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_configurationDeclarationAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("configurationDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

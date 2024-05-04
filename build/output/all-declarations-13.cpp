@@ -8,6 +8,281 @@
 #include "all-declarations-13.h"
 
 //--------------------------------------------------------------------------------------------------
+// @configurationDeclarationAST reference class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_configurationDeclarationAST::cPtr_configurationDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE),
+mProperty_mPanicCodeTypeName (),
+mProperty_mPanicLineTypeName (),
+mProperty_mTargetParameters (),
+mProperty_mInterruptionConfigurationList () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_configurationDeclarationAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
+    mProperty_mPanicCodeTypeName.printNonNullClassInstanceProperties ("mPanicCodeTypeName") ;
+    mProperty_mPanicLineTypeName.printNonNullClassInstanceProperties ("mPanicLineTypeName") ;
+    mProperty_mTargetParameters.printNonNullClassInstanceProperties ("mTargetParameters") ;
+    mProperty_mInterruptionConfigurationList.printNonNullClassInstanceProperties ("mInterruptionConfigurationList") ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_configurationDeclarationAST::objectCompare (const GGS_configurationDeclarationAST & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_configurationDeclarationAST::GGS_configurationDeclarationAST (void) :
+GGS_abstractDeclarationAST () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GGS_configurationDeclarationAST GGS_configurationDeclarationAST::
+init_21__21__21__21_ (const GGS_lstring & in_mPanicCodeTypeName,
+                      const GGS_lstring & in_mPanicLineTypeName,
+                      const GGS_targetParameters & in_mTargetParameters,
+                      const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList,
+                      Compiler * inCompiler
+                      COMMA_LOCATION_ARGS) {
+  cPtr_configurationDeclarationAST * object = nullptr ;
+  macroMyNew (object, cPtr_configurationDeclarationAST (inCompiler COMMA_THERE)) ;
+  object->configurationDeclarationAST_init_21__21__21__21_ (in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mTargetParameters, in_mInterruptionConfigurationList, inCompiler) ;
+  const GGS_configurationDeclarationAST result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_configurationDeclarationAST::
+configurationDeclarationAST_init_21__21__21__21_ (const GGS_lstring & in_mPanicCodeTypeName,
+                                                  const GGS_lstring & in_mPanicLineTypeName,
+                                                  const GGS_targetParameters & in_mTargetParameters,
+                                                  const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList,
+                                                  Compiler * /* inCompiler */) {
+  mProperty_mPanicCodeTypeName = in_mPanicCodeTypeName ;
+  mProperty_mPanicLineTypeName = in_mPanicLineTypeName ;
+  mProperty_mTargetParameters = in_mTargetParameters ;
+  mProperty_mInterruptionConfigurationList = in_mInterruptionConfigurationList ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_configurationDeclarationAST::GGS_configurationDeclarationAST (const cPtr_configurationDeclarationAST * inSourcePtr) :
+GGS_abstractDeclarationAST (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_configurationDeclarationAST) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GGS_configurationDeclarationAST GGS_configurationDeclarationAST::class_func_new (const GGS_lstring & in_mPanicCodeTypeName,
+                                                                                 const GGS_lstring & in_mPanicLineTypeName,
+                                                                                 const GGS_targetParameters & in_mTargetParameters,
+                                                                                 const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList
+                                                                                 COMMA_LOCATION_ARGS) {
+  GGS_configurationDeclarationAST result ;
+  macroMyNew (result.mObjectPtr, cPtr_configurationDeclarationAST (in_mPanicCodeTypeName, in_mPanicLineTypeName, in_mTargetParameters, in_mInterruptionConfigurationList COMMA_THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_lstring GGS_configurationDeclarationAST::readProperty_mPanicCodeTypeName (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_lstring () ;
+  }else{
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    return p->mProperty_mPanicCodeTypeName ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_configurationDeclarationAST::setProperty_mPanicCodeTypeName (const GGS_lstring & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    p->mProperty_mPanicCodeTypeName = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_lstring GGS_configurationDeclarationAST::readProperty_mPanicLineTypeName (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_lstring () ;
+  }else{
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    return p->mProperty_mPanicLineTypeName ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_configurationDeclarationAST::setProperty_mPanicLineTypeName (const GGS_lstring & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    p->mProperty_mPanicLineTypeName = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_targetParameters GGS_configurationDeclarationAST::readProperty_mTargetParameters (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_targetParameters () ;
+  }else{
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    return p->mProperty_mTargetParameters ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_configurationDeclarationAST::setProperty_mTargetParameters (const GGS_targetParameters & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    p->mProperty_mTargetParameters = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_interruptionConfigurationList GGS_configurationDeclarationAST::readProperty_mInterruptionConfigurationList (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_interruptionConfigurationList () ;
+  }else{
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    return p->mProperty_mInterruptionConfigurationList ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_configurationDeclarationAST::setProperty_mInterruptionConfigurationList (const GGS_interruptionConfigurationList & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_configurationDeclarationAST * p = (cPtr_configurationDeclarationAST *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_configurationDeclarationAST) ;
+    p->mProperty_mInterruptionConfigurationList = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @configurationDeclarationAST class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_configurationDeclarationAST::cPtr_configurationDeclarationAST (const GGS_lstring & in_mPanicCodeTypeName,
+                                                                    const GGS_lstring & in_mPanicLineTypeName,
+                                                                    const GGS_targetParameters & in_mTargetParameters,
+                                                                    const GGS_interruptionConfigurationList & in_mInterruptionConfigurationList
+                                                                    COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (THERE),
+mProperty_mPanicCodeTypeName (),
+mProperty_mPanicLineTypeName (),
+mProperty_mTargetParameters (),
+mProperty_mInterruptionConfigurationList () {
+  mProperty_mPanicCodeTypeName = in_mPanicCodeTypeName ;
+  mProperty_mPanicLineTypeName = in_mPanicLineTypeName ;
+  mProperty_mTargetParameters = in_mTargetParameters ;
+  mProperty_mInterruptionConfigurationList = in_mInterruptionConfigurationList ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * cPtr_configurationDeclarationAST::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_configurationDeclarationAST ;
+}
+
+void cPtr_configurationDeclarationAST::description (String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString.appendCString ("[@configurationDeclarationAST:") ;
+  mProperty_mPanicCodeTypeName.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mPanicLineTypeName.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mTargetParameters.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mInterruptionConfigurationList.description (ioString, inIndentation+1) ;
+  ioString.appendCString ("]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_configurationDeclarationAST::duplicate (LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_configurationDeclarationAST (mProperty_mPanicCodeTypeName, mProperty_mPanicLineTypeName, mProperty_mTargetParameters, mProperty_mInterruptionConfigurationList COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @configurationDeclarationAST generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_configurationDeclarationAST ("configurationDeclarationAST",
+                                                                                   & kTypeDescriptor_GALGAS_abstractDeclarationAST) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_configurationDeclarationAST::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_configurationDeclarationAST ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_configurationDeclarationAST::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_configurationDeclarationAST (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_configurationDeclarationAST GGS_configurationDeclarationAST::extractObject (const GGS_object & inObject,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) {
+  GGS_configurationDeclarationAST result ;
+  const GGS_configurationDeclarationAST * p = (const GGS_configurationDeclarationAST *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_configurationDeclarationAST *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("configurationDeclarationAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 
 GGS_semanticContext::GGS_semanticContext (void) :
 mProperty_mTargetParameters (),
@@ -9278,179 +9553,3 @@ void cPtr_syncToolInstanceDeclarationAST::method_enterInContext (GGS_semanticCon
   const GGS_syncToolInstanceDeclarationAST temp_11 = this ;
   ioArgument_ioDecoratedDeclarationList.addAssign_operation (GGS_decoratedSyncInstance::init_21__21_ (temp_11.readProperty_mSyncInstanceName (), var_result_4668, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-global-sync-instance.galgas", 126)) ;
 }
-//--------------------------------------------------------------------------------------------------
-//
-//Overriding extension method '@decoratedSyncInstance semanticAnalysis'
-//
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_decoratedSyncInstance::method_semanticAnalysis (const GGS_semanticContext /* constinArgument_inContext */,
-                                                          GGS_semanticTemporariesStruct & /* ioArgument_ioTemporaries */,
-                                                          GGS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
-                                                          Compiler * inCompiler
-                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  const GGS_decoratedSyncInstance temp_0 = this ;
-  const GGS_decoratedSyncInstance temp_1 = this ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mGlobalSyncInstanceMap.setter_insertKey (temp_0.readProperty_mSyncInstanceName (), temp_1.readProperty_mExpressionGeneratedCode (), inCompiler COMMA_SOURCE_FILE ("declaration-global-sync-instance.galgas", 145)) ;
-  }
-}
-//--------------------------------------------------------------------------------------------------
-//
-//Overriding extension method '@implementedDriverAST enterInPrecedenceGraph'
-//
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_implementedDriverAST::method_enterInPrecedenceGraph (GGS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
-                                                               Compiler * inCompiler
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  {
-  const GGS_implementedDriverAST temp_0 = this ;
-  const GGS_implementedDriverAST temp_1 = this ;
-  ioArgument_ioGraph.setter_addNode (temp_0.readProperty_mDriverName (), temp_1, inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 165)) ;
-  }
-  {
-  const GGS_implementedDriverAST temp_2 = this ;
-  const GGS_implementedDriverAST temp_3 = this ;
-  ioArgument_ioGraph.setter_addEdge (temp_2.readProperty_mDriverName (), function_omnibusTypeSpecificNameForDriver (temp_3.readProperty_mDriverName (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 166)) COMMA_SOURCE_FILE ("declaration-driver.galgas", 166)) ;
-  }
-  const GGS_implementedDriverAST temp_4 = this ;
-  cEnumerator_lstringlist enumerator_6060 (temp_4.readProperty_mDriverDependanceList (), EnumerationOrder::up) ;
-  while (enumerator_6060.hasCurrentObject ()) {
-    {
-    const GGS_implementedDriverAST temp_5 = this ;
-    ioArgument_ioGraph.setter_addEdge (temp_5.readProperty_mDriverName (), enumerator_6060.current_mValue (HERE) COMMA_SOURCE_FILE ("declaration-driver.galgas", 168)) ;
-    }
-    enumerator_6060.gotoNextObject () ;
-  }
-  {
-  const GGS_implementedDriverAST temp_6 = this ;
-  ioArgument_ioGraph.setter_addEdge (temp_6.readProperty_mDriverName (), function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 170)) COMMA_SOURCE_FILE ("declaration-driver.galgas", 170)) ;
-  }
-}
-//--------------------------------------------------------------------------------------------------
-//
-//Overriding extension getter '@implementedDriverAST keyRepresentationForErrorSignaling'
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_string cPtr_implementedDriverAST::getter_keyRepresentationForErrorSignaling (Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_string result_outRepresentation ; // Returned variable
-  const GGS_implementedDriverAST temp_0 = this ;
-  result_outRepresentation = GGS_string ("driver ").add_operation (temp_0.readProperty_mDriverName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 176)) ;
-//---
-  return result_outRepresentation ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Overriding extension getter '@implementedDriverAST locationForErrorSignaling'
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_location cPtr_implementedDriverAST::getter_locationForErrorSignaling (Compiler */* inCompiler */
-                                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_location result_outLocation ; // Returned variable
-  const GGS_implementedDriverAST temp_0 = this ;
-  result_outLocation = temp_0.readProperty_mDriverName ().readProperty_location () ;
-//---
-  return result_outLocation ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'omnibusTypeSpecificNameForDriver'
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring function_omnibusTypeSpecificNameForDriver (const GGS_lstring & constinArgument_inDriverName,
-                                                       Compiler * inCompiler
-                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_lstring result_result ; // Returned variable
-  result_result = GGS_lstring::init_21__21_ (GGS_string ("driver.").add_operation (constinArgument_inDriverName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 190)), constinArgument_inDriverName.readProperty_location (), inCompiler COMMA_HERE) ;
-//---
-  return result_result ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//  Function introspection                                                                       
-//--------------------------------------------------------------------------------------------------
-
-static const C_galgas_type_descriptor * functionArgs_omnibusTypeSpecificNameForDriver [2] = {
-  & kTypeDescriptor_GALGAS_lstring,
-  nullptr
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-static GGS_object functionWithGenericHeader_omnibusTypeSpecificNameForDriver (Compiler * inCompiler,
-                                                                              const cObjectArray & inEffectiveParameterArray,
-                                                                              const GGS_location & /* inErrorLocation */
-                                                                              COMMA_LOCATION_ARGS) {
-  const GGS_lstring operand0 = GGS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                           inCompiler
-                                                           COMMA_THERE) ;
-  return function_omnibusTypeSpecificNameForDriver (operand0,
-                                                    inCompiler
-                                                    COMMA_THERE).getter_object (THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-C_galgas_function_descriptor functionDescriptor_omnibusTypeSpecificNameForDriver ("omnibusTypeSpecificNameForDriver",
-                                                                                  functionWithGenericHeader_omnibusTypeSpecificNameForDriver,
-                                                                                  & kTypeDescriptor_GALGAS_lstring,
-                                                                                  1,
-                                                                                  functionArgs_omnibusTypeSpecificNameForDriver) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'llvmDriverNameFromName'
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring function_llvmDriverNameFromName (const GGS_lstring & constinArgument_inDriverName,
-                                             Compiler * inCompiler
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_lstring result_result ; // Returned variable
-  result_result = GGS_lstring::init_21__21_ (GGS_string ("driver$").add_operation (constinArgument_inDriverName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 196)), constinArgument_inDriverName.readProperty_location (), inCompiler COMMA_HERE) ;
-//---
-  return result_result ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//  Function introspection                                                                       
-//--------------------------------------------------------------------------------------------------
-
-static const C_galgas_type_descriptor * functionArgs_llvmDriverNameFromName [2] = {
-  & kTypeDescriptor_GALGAS_lstring,
-  nullptr
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-static GGS_object functionWithGenericHeader_llvmDriverNameFromName (Compiler * inCompiler,
-                                                                    const cObjectArray & inEffectiveParameterArray,
-                                                                    const GGS_location & /* inErrorLocation */
-                                                                    COMMA_LOCATION_ARGS) {
-  const GGS_lstring operand0 = GGS_lstring::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
-                                                           inCompiler
-                                                           COMMA_THERE) ;
-  return function_llvmDriverNameFromName (operand0,
-                                          inCompiler
-                                          COMMA_THERE).getter_object (THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-C_galgas_function_descriptor functionDescriptor_llvmDriverNameFromName ("llvmDriverNameFromName",
-                                                                        functionWithGenericHeader_llvmDriverNameFromName,
-                                                                        & kTypeDescriptor_GALGAS_lstring,
-                                                                        1,
-                                                                        functionArgs_llvmDriverNameFromName) ;
-
