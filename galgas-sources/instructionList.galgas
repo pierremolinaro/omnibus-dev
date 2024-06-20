@@ -63,7 +63,7 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 
 boolset @routineAttributes {
   case mutatingRoutine
-  case guard
+  case isGuard
 }
 
 #·······················································································································

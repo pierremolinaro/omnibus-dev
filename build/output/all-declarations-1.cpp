@@ -626,20 +626,6 @@ GGS_interruptionConfigurationList GGS_interruptionConfigurationList::extractObje
 // @abstractDeclarationAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractDeclarationAST::cPtr_abstractDeclarationAST (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_abstractDeclarationAST::objectCompare (const GGS_abstractDeclarationAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -672,10 +658,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @abstractDeclarationAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractDeclarationAST::cPtr_abstractDeclarationAST (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractDeclarationAST::cPtr_abstractDeclarationAST (Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -8852,20 +8850,6 @@ GGS_string callExtensionGetter_keyRepresentationForErrorSignaling (const cPtr_ab
 // @compileTimeDeclarationBarrierAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeDeclarationBarrierAST::cPtr_compileTimeDeclarationBarrierAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeDeclarationBarrierAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeDeclarationBarrierAST::objectCompare (const GGS_compileTimeDeclarationBarrierAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -8915,9 +8899,9 @@ GGS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeDeclarationBarrierAST GGS_compileTimeDeclarationBarrierAST::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeDeclarationBarrierAST GGS_compileTimeDeclarationBarrierAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeDeclarationBarrierAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeDeclarationBarrierAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeDeclarationBarrierAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -8925,8 +8909,12 @@ GGS_compileTimeDeclarationBarrierAST GGS_compileTimeDeclarationBarrierAST::class
 //Pointer class for @compileTimeDeclarationBarrierAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeDeclarationBarrierAST::cPtr_compileTimeDeclarationBarrierAST (LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeDeclarationBarrierAST::cPtr_compileTimeDeclarationBarrierAST (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8942,12 +8930,20 @@ void cPtr_compileTimeDeclarationBarrierAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeDeclarationBarrierAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeDeclarationBarrierAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeDeclarationBarrierAST (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeDeclarationBarrierAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeDeclarationBarrierAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -15839,20 +15835,6 @@ GGS_globalTaskVariableList GGS_globalTaskVariableList::extractObject (const GGS_
 // @abstractDecoratedDeclaration reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractDecoratedDeclaration::cPtr_abstractDecoratedDeclaration (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_abstractDecoratedDeclaration::objectCompare (const GGS_abstractDecoratedDeclaration & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15885,10 +15867,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @abstractDecoratedDeclaration class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractDecoratedDeclaration::cPtr_abstractDecoratedDeclaration (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractDecoratedDeclaration::cPtr_abstractDecoratedDeclaration (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //

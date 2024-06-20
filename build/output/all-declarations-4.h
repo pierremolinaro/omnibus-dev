@@ -806,7 +806,8 @@ class GGS_decoratedStaticList : public GGS_abstractDecoratedDeclaration {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_decoratedStaticList class_func_new (const class GGS_lstring & inOperand0,
-                                                               const class GGS_staticListValueListAST & inOperand1
+                                                               const class GGS_staticListValueListAST & inOperand1,
+                                                               class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -865,11 +866,12 @@ class cPtr_decoratedStaticList : public cPtr_abstractDecoratedDeclaration {
 
 //--- Constructor
   public: cPtr_decoratedStaticList (const GGS_lstring & in_mStaticListName,
-                                    const GGS_staticListValueListAST & in_mValueList
+                                    const GGS_staticListValueListAST & in_mValueList,
+                                    Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -1162,7 +1164,8 @@ class GGS_staticListIndirectRoutineIR : public GGS_abstractRoutineIR {
                                                                        const class GGS_unifiedTypeMapEntry & inOperand3,
                                                                        const class GGS_routineTypedSignature & inOperand4,
                                                                        const class GGS_unifiedTypeMapEntry & inOperand5,
-                                                                       const class GGS_uint & inOperand6
+                                                                       const class GGS_uint & inOperand6,
+                                                                       class Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1233,11 +1236,12 @@ class cPtr_staticListIndirectRoutineIR : public cPtr_abstractRoutineIR {
                                             const GGS_unifiedTypeMapEntry & in_mStaticListElementType,
                                             const GGS_routineTypedSignature & in_mFormalArgumentListForGeneration,
                                             const GGS_unifiedTypeMapEntry & in_mReturnTypeProxy,
-                                            const GGS_uint & in_mPropertyIndex
+                                            const GGS_uint & in_mPropertyIndex,
+                                            Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -1603,7 +1607,7 @@ class GGS_routineAttributes : public AC_GALGAS_root {
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_routineAttributes class_func_guard (LOCATION_ARGS) ;
+  public: static class GGS_routineAttributes class_func_isGuard (LOCATION_ARGS) ;
 
   public: static class GGS_routineAttributes class_func_mutatingRoutine (LOCATION_ARGS) ;
 
@@ -1706,7 +1710,8 @@ class GGS_decoratedTaskListDeclaration : public GGS_abstractDecoratedDeclaration
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_decoratedTaskListDeclaration class_func_new (const class GGS_decoratedTaskList & inOperand0
+  public: static class GGS_decoratedTaskListDeclaration class_func_new (const class GGS_decoratedTaskList & inOperand0,
+                                                                        class Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2025,11 +2030,12 @@ class cPtr_decoratedTaskListDeclaration : public cPtr_abstractDecoratedDeclarati
   public: cPtr_decoratedTaskListDeclaration (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_decoratedTaskListDeclaration (const GGS_decoratedTaskList & in_mTaskList
+  public: cPtr_decoratedTaskListDeclaration (const GGS_decoratedTaskList & in_mTaskList,
+                                             Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -2090,7 +2096,8 @@ class GGS_taskActivateFunctionIR : public GGS_abstractRoutineIR {
                                                                   const class GGS_bool & inOperand2,
                                                                   const class GGS_string & inOperand3,
                                                                   const class GGS_string & inOperand4,
-                                                                  const class GGS_uint & inOperand5
+                                                                  const class GGS_uint & inOperand5,
+                                                                  class Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2158,11 +2165,12 @@ class cPtr_taskActivateFunctionIR : public cPtr_abstractRoutineIR {
                                        const GGS_bool & in_warnsIfUnused,
                                        const GGS_string & in_mAssemblerTaskName,
                                        const GGS_string & in_mActivateServiceInvocationName,
-                                       const GGS_uint & in_mTaskIndex
+                                       const GGS_uint & in_mTaskIndex,
+                                       Compiler * inCompiler
                                        COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -4888,7 +4896,8 @@ class GGS_systemUserRoutineIR : public GGS_abstractRoutineIR {
                                                                const class GGS_routineTypedSignature & inOperand4,
                                                                const class GGS_unifiedTypeMapEntry & inOperand5,
                                                                const class GGS_bool & inOperand6,
-                                                               const class GGS_unifiedTypeMapEntry & inOperand7
+                                                               const class GGS_unifiedTypeMapEntry & inOperand7,
+                                                               class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4973,11 +4982,12 @@ class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
                                     const GGS_routineTypedSignature & in_mFormalArgumentList,
                                     const GGS_unifiedTypeMapEntry & in_mReceiverTypeProxy,
                                     const GGS_bool & in_mIsSection,
-                                    const GGS_unifiedTypeMapEntry & in_mReturnTypeProxy
+                                    const GGS_unifiedTypeMapEntry & in_mReturnTypeProxy,
+                                    Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5466,7 +5476,8 @@ class GGS_externRoutineIR : public GGS_abstractRoutineIR {
                                                            const class GGS_bool & inOperand1,
                                                            const class GGS_bool & inOperand2,
                                                            const class GGS_routineFormalArgumentListIR & inOperand3,
-                                                           const class GGS_unifiedTypeMapEntry & inOperand4
+                                                           const class GGS_unifiedTypeMapEntry & inOperand4,
+                                                           class Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -5531,11 +5542,12 @@ class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
                                 const GGS_bool & in_isRequired,
                                 const GGS_bool & in_warnsIfUnused,
                                 const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
-                                const GGS_unifiedTypeMapEntry & in_mReturnType
+                                const GGS_unifiedTypeMapEntry & in_mReturnType,
+                                Compiler * inCompiler
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5993,7 +6005,8 @@ class GGS_decoratedISRDeclaration : public GGS_abstractDecoratedDeclaration {
 //--------------------------------- GALGAS class functions
   public: static class GGS_decoratedISRDeclaration class_func_new (const class GGS_lstring & inOperand0,
                                                                    const class GGS_mode & inOperand1,
-                                                                   const class GGS_lstring & inOperand2
+                                                                   const class GGS_lstring & inOperand2,
+                                                                   class Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -6055,11 +6068,12 @@ class cPtr_decoratedISRDeclaration : public cPtr_abstractDecoratedDeclaration {
 //--- Constructor
   public: cPtr_decoratedISRDeclaration (const GGS_lstring & in_mISRName,
                                         const GGS_mode & in_mMode,
-                                        const GGS_lstring & in_mDriverName
+                                        const GGS_lstring & in_mDriverName,
+                                        Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -6737,7 +6751,8 @@ class GGS_decoratedGuardDeclaration : public GGS_abstractDecoratedDeclaration {
                                                                      const class GGS_routineFormalArgumentListAST & inOperand4,
                                                                      const class GGS_guardKind & inOperand5,
                                                                      const class GGS_instructionListAST & inOperand6,
-                                                                     const class GGS_location & inOperand7
+                                                                     const class GGS_location & inOperand7,
+                                                                     class Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -6814,11 +6829,12 @@ class cPtr_decoratedGuardDeclaration : public cPtr_abstractDecoratedDeclaration 
                                           const GGS_routineFormalArgumentListAST & in_mGuardFormalArgumentList,
                                           const GGS_guardKind & in_mGuardKind,
                                           const GGS_instructionListAST & in_mGuardInstructionList,
-                                          const GGS_location & in_mEndOfGuardDeclaration
+                                          const GGS_location & in_mEndOfGuardDeclaration,
+                                          Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -7751,7 +7767,8 @@ class GGS_guardUserRoutineIR : public GGS_abstractRoutineIR {
                                                               const class GGS_string & inOperand3,
                                                               const class GGS_routineFormalArgumentListIR & inOperand4,
                                                               const class GGS_omnibusType & inOperand5,
-                                                              const class GGS_guardKindGenerationIR & inOperand6
+                                                              const class GGS_guardKindGenerationIR & inOperand6,
+                                                              class Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -7833,11 +7850,12 @@ class cPtr_guardUserRoutineIR : public cPtr_abstractRoutineIR {
                                    const GGS_string & in_mMangledImplementationGuardName,
                                    const GGS_routineFormalArgumentListIR & in_mFormalArgumentListForGeneration,
                                    const GGS_omnibusType & in_mReceiverType,
-                                   const GGS_guardKindGenerationIR & in_mGuardKindGenerationIR
+                                   const GGS_guardKindGenerationIR & in_mGuardKindGenerationIR,
+                                   Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8120,11 +8138,10 @@ class cPtr_abstractInstructionIR : public acStrongPtr_class {
 //--- Properties
 
 
-//--- Default constructor
-  public: cPtr_abstractInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_abstractInstructionIR (LOCATION_ARGS) ;
+  public: cPtr_abstractInstructionIR (Compiler * inCompiler
+                                      COMMA_LOCATION_ARGS) ;
 
 //--- Attribute accessors
 //--- Description
@@ -8272,7 +8289,8 @@ class GGS_guardImplementationRoutineIR : public GGS_abstractRoutineIR {
                                                                         const class GGS_omnibusType & inOperand4,
                                                                         const class GGS_guardKindGenerationIR & inOperand5,
                                                                         const class GGS_allocaList & inOperand6,
-                                                                        const class GGS_instructionListIR & inOperand7
+                                                                        const class GGS_instructionListIR & inOperand7,
+                                                                        class Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8351,11 +8369,12 @@ class cPtr_guardImplementationRoutineIR : public cPtr_abstractRoutineIR {
                                              const GGS_omnibusType & in_mReceiverType,
                                              const GGS_guardKindGenerationIR & in_mGuardKindGenerationIR,
                                              const GGS_allocaList & in_mAllocaList,
-                                             const GGS_instructionListIR & in_mInstructionGenerationList
+                                             const GGS_instructionListIR & in_mInstructionGenerationList,
+                                             Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description

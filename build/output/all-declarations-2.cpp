@@ -7217,22 +7217,6 @@ GGS_arcAssignmentList GGS_arcAssignmentList::extractObject (const GGS_object & i
 // @userLLVMTypeDefinitionIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_userLLVMTypeDefinitionIR::cPtr_userLLVMTypeDefinitionIR (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE),
-mProperty_mLLVMDefinedTypeName () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_userLLVMTypeDefinitionIR::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-    mProperty_mLLVMDefinedTypeName.printNonNullClassInstanceProperties ("mLLVMDefinedTypeName") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_userLLVMTypeDefinitionIR::objectCompare (const GGS_userLLVMTypeDefinitionIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -7287,13 +7271,30 @@ void GGS_userLLVMTypeDefinitionIR::setProperty_mLLVMDefinedTypeName (const GGS_s
 //Pointer class for @userLLVMTypeDefinitionIR class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_userLLVMTypeDefinitionIR::cPtr_userLLVMTypeDefinitionIR (const GGS_string & in_mLLVMDefinedTypeName
+cPtr_userLLVMTypeDefinitionIR::cPtr_userLLVMTypeDefinitionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE),
+mProperty_mLLVMDefinedTypeName () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_userLLVMTypeDefinitionIR::cPtr_userLLVMTypeDefinitionIR (const GGS_string & in_mLLVMDefinedTypeName,
+                                                              Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE),
+acStrongPtr_class (inCompiler COMMA_THERE),
 mProperty_mLLVMDefinedTypeName () {
   mProperty_mLLVMDefinedTypeName = in_mLLVMDefinedTypeName ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_userLLVMTypeDefinitionIR::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+    mProperty_mLLVMDefinedTypeName.printNonNullClassInstanceProperties ("mLLVMDefinedTypeName") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9039,20 +9040,6 @@ GGS_staticListInvokedFunctionSetMap GGS_staticListInvokedFunctionSetMap::extract
 // @compiletimeBoolAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compiletimeBoolAST::cPtr_compiletimeBoolAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compiletimeBoolAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compiletimeBoolAST::objectCompare (const GGS_compiletimeBoolAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -9102,9 +9089,9 @@ GGS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compiletimeBoolAST GGS_compiletimeBoolAST::class_func_new (LOCATION_ARGS) {
+GGS_compiletimeBoolAST GGS_compiletimeBoolAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compiletimeBoolAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_compiletimeBoolAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compiletimeBoolAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -9112,8 +9099,12 @@ GGS_compiletimeBoolAST GGS_compiletimeBoolAST::class_func_new (LOCATION_ARGS) {
 //Pointer class for @compiletimeBoolAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compiletimeBoolAST::cPtr_compiletimeBoolAST (LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compiletimeBoolAST::cPtr_compiletimeBoolAST (Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9129,12 +9120,20 @@ void cPtr_compiletimeBoolAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compiletimeBoolAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compiletimeBoolAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compiletimeBoolAST (THERE)) ;
+  macroMyNew (ptr, cPtr_compiletimeBoolAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compiletimeBoolAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9293,20 +9292,6 @@ GGS_compiletimeBoolAST_2E_weak GGS_compiletimeBoolAST_2E_weak::extractObject (co
 // @abstractImplicitConverterToBoolean reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractImplicitConverterToBoolean::cPtr_abstractImplicitConverterToBoolean (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_abstractImplicitConverterToBoolean::objectCompare (const GGS_abstractImplicitConverterToBoolean & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -9339,10 +9324,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @abstractImplicitConverterToBoolean class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractImplicitConverterToBoolean::cPtr_abstractImplicitConverterToBoolean (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractImplicitConverterToBoolean::cPtr_abstractImplicitConverterToBoolean (Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9501,20 +9498,6 @@ GGS_abstractImplicitConverterToBoolean_2E_weak GGS_abstractImplicitConverterToBo
 // @prefixOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_prefixOperatorUsage::cPtr_prefixOperatorUsage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_prefixOperatorUsage::objectCompare (const GGS_prefixOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -9547,10 +9530,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @prefixOperatorUsage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_prefixOperatorUsage::cPtr_prefixOperatorUsage (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_prefixOperatorUsage::cPtr_prefixOperatorUsage (Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9709,20 +9704,6 @@ GGS_prefixOperatorUsage_2E_weak GGS_prefixOperatorUsage_2E_weak::extractObject (
 // @omnibusInfixOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_omnibusInfixOperatorUsage::cPtr_omnibusInfixOperatorUsage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_omnibusInfixOperatorUsage::objectCompare (const GGS_omnibusInfixOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -9755,10 +9736,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @omnibusInfixOperatorUsage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_omnibusInfixOperatorUsage::cPtr_omnibusInfixOperatorUsage (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_omnibusInfixOperatorUsage::cPtr_omnibusInfixOperatorUsage (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -9917,20 +9910,6 @@ GGS_omnibusInfixOperatorUsage_2E_weak GGS_omnibusInfixOperatorUsage_2E_weak::ext
 // @compileTimeBoolXorOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeBoolXorOperator::cPtr_compileTimeBoolXorOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeBoolXorOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeBoolXorOperator::objectCompare (const GGS_compileTimeBoolXorOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -9980,9 +9959,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeBoolXorOperator GGS_compileTimeBoolXorOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeBoolXorOperator GGS_compileTimeBoolXorOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeBoolXorOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeBoolXorOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeBoolXorOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -9990,8 +9969,12 @@ GGS_compileTimeBoolXorOperator GGS_compileTimeBoolXorOperator::class_func_new (L
 //Pointer class for @compileTimeBoolXorOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeBoolXorOperator::cPtr_compileTimeBoolXorOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeBoolXorOperator::cPtr_compileTimeBoolXorOperator (Compiler * inCompiler
+                                                                  COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10007,12 +9990,20 @@ void cPtr_compileTimeBoolXorOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeBoolXorOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeBoolXorOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeBoolXorOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeBoolXorOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeBoolXorOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -10171,20 +10162,6 @@ GGS_compileTimeBoolXorOperator_2E_weak GGS_compileTimeBoolXorOperator_2E_weak::e
 // @compileTimeBoolOrOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeBoolOrOperator::cPtr_compileTimeBoolOrOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeBoolOrOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeBoolOrOperator::objectCompare (const GGS_compileTimeBoolOrOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -10234,9 +10211,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeBoolOrOperator GGS_compileTimeBoolOrOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeBoolOrOperator GGS_compileTimeBoolOrOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeBoolOrOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeBoolOrOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeBoolOrOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -10244,8 +10221,12 @@ GGS_compileTimeBoolOrOperator GGS_compileTimeBoolOrOperator::class_func_new (LOC
 //Pointer class for @compileTimeBoolOrOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeBoolOrOperator::cPtr_compileTimeBoolOrOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeBoolOrOperator::cPtr_compileTimeBoolOrOperator (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10261,12 +10242,20 @@ void cPtr_compileTimeBoolOrOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeBoolOrOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeBoolOrOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeBoolOrOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeBoolOrOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeBoolOrOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -10425,20 +10414,6 @@ GGS_compileTimeBoolOrOperator_2E_weak GGS_compileTimeBoolOrOperator_2E_weak::ext
 // @compileTimeIntAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntAST::cPtr_compileTimeIntAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntAST::objectCompare (const GGS_compileTimeIntAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -10488,9 +10463,9 @@ GGS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntAST GGS_compileTimeIntAST::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntAST GGS_compileTimeIntAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -10498,8 +10473,12 @@ GGS_compileTimeIntAST GGS_compileTimeIntAST::class_func_new (LOCATION_ARGS) {
 //Pointer class for @compileTimeIntAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntAST::cPtr_compileTimeIntAST (LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntAST::cPtr_compileTimeIntAST (Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10515,12 +10494,20 @@ void cPtr_compileTimeIntAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntAST (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -10679,20 +10666,6 @@ GGS_compileTimeIntAST_2E_weak GGS_compileTimeIntAST_2E_weak::extractObject (cons
 // @compileTimeIntModuloOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntModuloOperator::cPtr_compileTimeIntModuloOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntModuloOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntModuloOperator::objectCompare (const GGS_compileTimeIntModuloOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -10742,9 +10715,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntModuloOperator GGS_compileTimeIntModuloOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntModuloOperator GGS_compileTimeIntModuloOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntModuloOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntModuloOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntModuloOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -10752,8 +10725,12 @@ GGS_compileTimeIntModuloOperator GGS_compileTimeIntModuloOperator::class_func_ne
 //Pointer class for @compileTimeIntModuloOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntModuloOperator::cPtr_compileTimeIntModuloOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntModuloOperator::cPtr_compileTimeIntModuloOperator (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10769,12 +10746,20 @@ void cPtr_compileTimeIntModuloOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntModuloOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntModuloOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntModuloOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntModuloOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntModuloOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -10933,20 +10918,6 @@ GGS_compileTimeIntModuloOperator_2E_weak GGS_compileTimeIntModuloOperator_2E_wea
 // @compileTimeIntModuloZeroOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntModuloZeroOperator::cPtr_compileTimeIntModuloZeroOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntModuloZeroOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntModuloZeroOperator::objectCompare (const GGS_compileTimeIntModuloZeroOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -10996,9 +10967,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntModuloZeroOperator GGS_compileTimeIntModuloZeroOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntModuloZeroOperator GGS_compileTimeIntModuloZeroOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntModuloZeroOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntModuloZeroOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntModuloZeroOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -11006,8 +10977,12 @@ GGS_compileTimeIntModuloZeroOperator GGS_compileTimeIntModuloZeroOperator::class
 //Pointer class for @compileTimeIntModuloZeroOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntModuloZeroOperator::cPtr_compileTimeIntModuloZeroOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntModuloZeroOperator::cPtr_compileTimeIntModuloZeroOperator (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11023,12 +10998,20 @@ void cPtr_compileTimeIntModuloZeroOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntModuloZeroOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntModuloZeroOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntModuloZeroOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntModuloZeroOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntModuloZeroOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -11187,20 +11170,6 @@ GGS_compileTimeIntModuloZeroOperator_2E_weak GGS_compileTimeIntModuloZeroOperato
 // @compileTimeIntDivideOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntDivideOperator::cPtr_compileTimeIntDivideOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntDivideOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntDivideOperator::objectCompare (const GGS_compileTimeIntDivideOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -11250,9 +11219,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntDivideOperator GGS_compileTimeIntDivideOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntDivideOperator GGS_compileTimeIntDivideOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntDivideOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntDivideOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntDivideOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -11260,8 +11229,12 @@ GGS_compileTimeIntDivideOperator GGS_compileTimeIntDivideOperator::class_func_ne
 //Pointer class for @compileTimeIntDivideOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntDivideOperator::cPtr_compileTimeIntDivideOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntDivideOperator::cPtr_compileTimeIntDivideOperator (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11277,12 +11250,20 @@ void cPtr_compileTimeIntDivideOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntDivideOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntDivideOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntDivideOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntDivideOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntDivideOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -11441,20 +11422,6 @@ GGS_compileTimeIntDivideOperator_2E_weak GGS_compileTimeIntDivideOperator_2E_wea
 // @compileTimeIntDivideZeroOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntDivideZeroOperator::cPtr_compileTimeIntDivideZeroOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntDivideZeroOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntDivideZeroOperator::objectCompare (const GGS_compileTimeIntDivideZeroOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -11504,9 +11471,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntDivideZeroOperator GGS_compileTimeIntDivideZeroOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntDivideZeroOperator GGS_compileTimeIntDivideZeroOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntDivideZeroOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntDivideZeroOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntDivideZeroOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -11514,8 +11481,12 @@ GGS_compileTimeIntDivideZeroOperator GGS_compileTimeIntDivideZeroOperator::class
 //Pointer class for @compileTimeIntDivideZeroOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntDivideZeroOperator::cPtr_compileTimeIntDivideZeroOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntDivideZeroOperator::cPtr_compileTimeIntDivideZeroOperator (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11531,12 +11502,20 @@ void cPtr_compileTimeIntDivideZeroOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntDivideZeroOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntDivideZeroOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntDivideZeroOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntDivideZeroOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntDivideZeroOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -11695,20 +11674,6 @@ GGS_compileTimeIntDivideZeroOperator_2E_weak GGS_compileTimeIntDivideZeroOperato
 // @compileTimeIntMultiplyOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntMultiplyOperator::cPtr_compileTimeIntMultiplyOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntMultiplyOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntMultiplyOperator::objectCompare (const GGS_compileTimeIntMultiplyOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -11758,9 +11723,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntMultiplyOperator GGS_compileTimeIntMultiplyOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntMultiplyOperator GGS_compileTimeIntMultiplyOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntMultiplyOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMultiplyOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMultiplyOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -11768,8 +11733,12 @@ GGS_compileTimeIntMultiplyOperator GGS_compileTimeIntMultiplyOperator::class_fun
 //Pointer class for @compileTimeIntMultiplyOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntMultiplyOperator::cPtr_compileTimeIntMultiplyOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntMultiplyOperator::cPtr_compileTimeIntMultiplyOperator (Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11785,12 +11754,20 @@ void cPtr_compileTimeIntMultiplyOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntMultiplyOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntMultiplyOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntMultiplyOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntMultiplyOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntMultiplyOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -11949,20 +11926,6 @@ GGS_compileTimeIntMultiplyOperator_2E_weak GGS_compileTimeIntMultiplyOperator_2E
 // @compileTimeIntSubtractOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntSubtractOperator::cPtr_compileTimeIntSubtractOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntSubtractOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntSubtractOperator::objectCompare (const GGS_compileTimeIntSubtractOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12012,9 +11975,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntSubtractOperator GGS_compileTimeIntSubtractOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntSubtractOperator GGS_compileTimeIntSubtractOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntSubtractOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntSubtractOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntSubtractOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -12022,8 +11985,12 @@ GGS_compileTimeIntSubtractOperator GGS_compileTimeIntSubtractOperator::class_fun
 //Pointer class for @compileTimeIntSubtractOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntSubtractOperator::cPtr_compileTimeIntSubtractOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntSubtractOperator::cPtr_compileTimeIntSubtractOperator (Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12039,12 +12006,20 @@ void cPtr_compileTimeIntSubtractOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntSubtractOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntSubtractOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntSubtractOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntSubtractOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntSubtractOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -12203,20 +12178,6 @@ GGS_compileTimeIntSubtractOperator_2E_weak GGS_compileTimeIntSubtractOperator_2E
 // @compileTimeIntEqualOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntEqualOperator::cPtr_compileTimeIntEqualOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntEqualOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntEqualOperator::objectCompare (const GGS_compileTimeIntEqualOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12266,9 +12227,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntEqualOperator GGS_compileTimeIntEqualOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntEqualOperator GGS_compileTimeIntEqualOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntEqualOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntEqualOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntEqualOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -12276,8 +12237,12 @@ GGS_compileTimeIntEqualOperator GGS_compileTimeIntEqualOperator::class_func_new 
 //Pointer class for @compileTimeIntEqualOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntEqualOperator::cPtr_compileTimeIntEqualOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntEqualOperator::cPtr_compileTimeIntEqualOperator (Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12293,12 +12258,20 @@ void cPtr_compileTimeIntEqualOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntEqualOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntEqualOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntEqualOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntEqualOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntEqualOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -12457,20 +12430,6 @@ GGS_compileTimeIntEqualOperator_2E_weak GGS_compileTimeIntEqualOperator_2E_weak:
 // @compileTimeIntAddOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntAddOperator::cPtr_compileTimeIntAddOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntAddOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntAddOperator::objectCompare (const GGS_compileTimeIntAddOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12520,9 +12479,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntAddOperator GGS_compileTimeIntAddOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntAddOperator GGS_compileTimeIntAddOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntAddOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntAddOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntAddOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -12530,8 +12489,12 @@ GGS_compileTimeIntAddOperator GGS_compileTimeIntAddOperator::class_func_new (LOC
 //Pointer class for @compileTimeIntAddOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntAddOperator::cPtr_compileTimeIntAddOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntAddOperator::cPtr_compileTimeIntAddOperator (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12547,12 +12510,20 @@ void cPtr_compileTimeIntAddOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntAddOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntAddOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntAddOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntAddOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntAddOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -12711,20 +12682,6 @@ GGS_compileTimeIntAddOperator_2E_weak GGS_compileTimeIntAddOperator_2E_weak::ext
 // @compileTimeIntBitWiseAndOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntBitWiseAndOperator::cPtr_compileTimeIntBitWiseAndOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntBitWiseAndOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntBitWiseAndOperator::objectCompare (const GGS_compileTimeIntBitWiseAndOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -12774,9 +12731,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntBitWiseAndOperator GGS_compileTimeIntBitWiseAndOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntBitWiseAndOperator GGS_compileTimeIntBitWiseAndOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntBitWiseAndOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntBitWiseAndOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntBitWiseAndOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -12784,8 +12741,12 @@ GGS_compileTimeIntBitWiseAndOperator GGS_compileTimeIntBitWiseAndOperator::class
 //Pointer class for @compileTimeIntBitWiseAndOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntBitWiseAndOperator::cPtr_compileTimeIntBitWiseAndOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntBitWiseAndOperator::cPtr_compileTimeIntBitWiseAndOperator (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12801,12 +12762,20 @@ void cPtr_compileTimeIntBitWiseAndOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntBitWiseAndOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntBitWiseAndOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntBitWiseAndOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntBitWiseAndOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntBitWiseAndOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -12965,20 +12934,6 @@ GGS_compileTimeIntBitWiseAndOperator_2E_weak GGS_compileTimeIntBitWiseAndOperato
 // @compileTimeIntShiftLeftOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntShiftLeftOperator::cPtr_compileTimeIntShiftLeftOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntShiftLeftOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntShiftLeftOperator::objectCompare (const GGS_compileTimeIntShiftLeftOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13028,9 +12983,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntShiftLeftOperator GGS_compileTimeIntShiftLeftOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntShiftLeftOperator GGS_compileTimeIntShiftLeftOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntShiftLeftOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntShiftLeftOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntShiftLeftOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -13038,8 +12993,12 @@ GGS_compileTimeIntShiftLeftOperator GGS_compileTimeIntShiftLeftOperator::class_f
 //Pointer class for @compileTimeIntShiftLeftOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntShiftLeftOperator::cPtr_compileTimeIntShiftLeftOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntShiftLeftOperator::cPtr_compileTimeIntShiftLeftOperator (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13055,12 +13014,20 @@ void cPtr_compileTimeIntShiftLeftOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntShiftLeftOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntShiftLeftOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntShiftLeftOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntShiftLeftOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntShiftLeftOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -13219,20 +13186,6 @@ GGS_compileTimeIntShiftLeftOperator_2E_weak GGS_compileTimeIntShiftLeftOperator_
 // @compileTimeIntShiftRightOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntShiftRightOperator::cPtr_compileTimeIntShiftRightOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntShiftRightOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntShiftRightOperator::objectCompare (const GGS_compileTimeIntShiftRightOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13282,9 +13235,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntShiftRightOperator GGS_compileTimeIntShiftRightOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntShiftRightOperator GGS_compileTimeIntShiftRightOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntShiftRightOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntShiftRightOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntShiftRightOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -13292,8 +13245,12 @@ GGS_compileTimeIntShiftRightOperator GGS_compileTimeIntShiftRightOperator::class
 //Pointer class for @compileTimeIntShiftRightOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntShiftRightOperator::cPtr_compileTimeIntShiftRightOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntShiftRightOperator::cPtr_compileTimeIntShiftRightOperator (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13309,12 +13266,20 @@ void cPtr_compileTimeIntShiftRightOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntShiftRightOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntShiftRightOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntShiftRightOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntShiftRightOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntShiftRightOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -13473,20 +13438,6 @@ GGS_compileTimeIntShiftRightOperator_2E_weak GGS_compileTimeIntShiftRightOperato
 // @compileTimeIntLessThanOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntLessThanOperator::cPtr_compileTimeIntLessThanOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntLessThanOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntLessThanOperator::objectCompare (const GGS_compileTimeIntLessThanOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13536,9 +13487,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntLessThanOperator GGS_compileTimeIntLessThanOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntLessThanOperator GGS_compileTimeIntLessThanOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntLessThanOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntLessThanOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntLessThanOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -13546,8 +13497,12 @@ GGS_compileTimeIntLessThanOperator GGS_compileTimeIntLessThanOperator::class_fun
 //Pointer class for @compileTimeIntLessThanOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntLessThanOperator::cPtr_compileTimeIntLessThanOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntLessThanOperator::cPtr_compileTimeIntLessThanOperator (Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13563,12 +13518,20 @@ void cPtr_compileTimeIntLessThanOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntLessThanOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntLessThanOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntLessThanOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntLessThanOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntLessThanOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -13727,20 +13690,6 @@ GGS_compileTimeIntLessThanOperator_2E_weak GGS_compileTimeIntLessThanOperator_2E
 // @compileTimeIntLowerOrEqualOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntLowerOrEqualOperator::cPtr_compileTimeIntLowerOrEqualOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntLowerOrEqualOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntLowerOrEqualOperator::objectCompare (const GGS_compileTimeIntLowerOrEqualOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -13790,9 +13739,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntLowerOrEqualOperator GGS_compileTimeIntLowerOrEqualOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntLowerOrEqualOperator GGS_compileTimeIntLowerOrEqualOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntLowerOrEqualOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntLowerOrEqualOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntLowerOrEqualOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -13800,8 +13749,12 @@ GGS_compileTimeIntLowerOrEqualOperator GGS_compileTimeIntLowerOrEqualOperator::c
 //Pointer class for @compileTimeIntLowerOrEqualOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntLowerOrEqualOperator::cPtr_compileTimeIntLowerOrEqualOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntLowerOrEqualOperator::cPtr_compileTimeIntLowerOrEqualOperator (Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13817,12 +13770,20 @@ void cPtr_compileTimeIntLowerOrEqualOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntLowerOrEqualOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntLowerOrEqualOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntLowerOrEqualOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntLowerOrEqualOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntLowerOrEqualOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -13981,20 +13942,6 @@ GGS_compileTimeIntLowerOrEqualOperator_2E_weak GGS_compileTimeIntLowerOrEqualOpe
 // @compileTimeIntXorOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntXorOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntXorOperator::objectCompare (const GGS_compileTimeIntXorOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14044,9 +13991,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntXorOperator GGS_compileTimeIntXorOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntXorOperator GGS_compileTimeIntXorOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntXorOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntXorOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntXorOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -14054,8 +14001,12 @@ GGS_compileTimeIntXorOperator GGS_compileTimeIntXorOperator::class_func_new (LOC
 //Pointer class for @compileTimeIntXorOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntXorOperator::cPtr_compileTimeIntXorOperator (Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14071,12 +14022,20 @@ void cPtr_compileTimeIntXorOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntXorOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntXorOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntXorOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntXorOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntXorOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -14235,20 +14194,6 @@ GGS_compileTimeIntXorOperator_2E_weak GGS_compileTimeIntXorOperator_2E_weak::ext
 // @compileTimeIntBitWiseOrOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntBitWiseOrOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntBitWiseOrOperator::objectCompare (const GGS_compileTimeIntBitWiseOrOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14298,9 +14243,9 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntBitWiseOrOperator GGS_compileTimeIntBitWiseOrOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntBitWiseOrOperator GGS_compileTimeIntBitWiseOrOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntBitWiseOrOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntBitWiseOrOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntBitWiseOrOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -14308,8 +14253,12 @@ GGS_compileTimeIntBitWiseOrOperator GGS_compileTimeIntBitWiseOrOperator::class_f
 //Pointer class for @compileTimeIntBitWiseOrOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (LOCATION_ARGS) :
-cPtr_omnibusInfixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntBitWiseOrOperator::cPtr_compileTimeIntBitWiseOrOperator (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) :
+cPtr_omnibusInfixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14325,12 +14274,20 @@ void cPtr_compileTimeIntBitWiseOrOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntBitWiseOrOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntBitWiseOrOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntBitWiseOrOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntBitWiseOrOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntBitWiseOrOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_omnibusInfixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -14489,20 +14446,6 @@ GGS_compileTimeIntBitWiseOrOperator_2E_weak GGS_compileTimeIntBitWiseOrOperator_
 // @compileTimeIntMinusOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntMinusOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntMinusOperator::objectCompare (const GGS_compileTimeIntMinusOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14552,9 +14495,9 @@ GGS_prefixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntMinusOperator GGS_compileTimeIntMinusOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntMinusOperator GGS_compileTimeIntMinusOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntMinusOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntMinusOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -14562,8 +14505,12 @@ GGS_compileTimeIntMinusOperator GGS_compileTimeIntMinusOperator::class_func_new 
 //Pointer class for @compileTimeIntMinusOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntMinusOperator::cPtr_compileTimeIntMinusOperator (Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14579,12 +14526,20 @@ void cPtr_compileTimeIntMinusOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntMinusOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntMinusOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntMinusOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntMinusOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntMinusOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -14743,20 +14698,6 @@ GGS_compileTimeIntMinusOperator_2E_weak GGS_compileTimeIntMinusOperator_2E_weak:
 // @compileTimeIntComplementOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntComplementOperator::cPtr_compileTimeIntComplementOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_compileTimeIntComplementOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_compileTimeIntComplementOperator::objectCompare (const GGS_compileTimeIntComplementOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -14806,9 +14747,9 @@ GGS_prefixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_compileTimeIntComplementOperator GGS_compileTimeIntComplementOperator::class_func_new (LOCATION_ARGS) {
+GGS_compileTimeIntComplementOperator GGS_compileTimeIntComplementOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_compileTimeIntComplementOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntComplementOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_compileTimeIntComplementOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -14816,8 +14757,12 @@ GGS_compileTimeIntComplementOperator GGS_compileTimeIntComplementOperator::class
 //Pointer class for @compileTimeIntComplementOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_compileTimeIntComplementOperator::cPtr_compileTimeIntComplementOperator (LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_compileTimeIntComplementOperator::cPtr_compileTimeIntComplementOperator (Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14833,12 +14778,20 @@ void cPtr_compileTimeIntComplementOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_compileTimeIntComplementOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_compileTimeIntComplementOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_compileTimeIntComplementOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_compileTimeIntComplementOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_compileTimeIntComplementOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -14997,20 +14950,6 @@ GGS_compileTimeIntComplementOperator_2E_weak GGS_compileTimeIntComplementOperato
 // @boolTypeAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolTypeAST::cPtr_boolTypeAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolTypeAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_boolTypeAST::objectCompare (const GGS_boolTypeAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15060,9 +14999,9 @@ GGS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_boolTypeAST GGS_boolTypeAST::class_func_new (LOCATION_ARGS) {
+GGS_boolTypeAST GGS_boolTypeAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_boolTypeAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolTypeAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_boolTypeAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -15070,8 +15009,12 @@ GGS_boolTypeAST GGS_boolTypeAST::class_func_new (LOCATION_ARGS) {
 //Pointer class for @boolTypeAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolTypeAST::cPtr_boolTypeAST (LOCATION_ARGS) :
-cPtr_abstractDeclarationAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_boolTypeAST::cPtr_boolTypeAST (Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) :
+cPtr_abstractDeclarationAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15087,12 +15030,20 @@ void cPtr_boolTypeAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_boolTypeAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_boolTypeAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolTypeAST (THERE)) ;
+  macroMyNew (ptr, cPtr_boolTypeAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_boolTypeAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDeclarationAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -15251,20 +15202,6 @@ GGS_boolTypeAST_2E_weak GGS_boolTypeAST_2E_weak::extractObject (const GGS_object
 // @boolImplicitConverterToBoolean reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractImplicitConverterToBoolean (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_boolImplicitConverterToBoolean::objectCompare (const GGS_boolImplicitConverterToBoolean & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15314,9 +15251,9 @@ GGS_abstractImplicitConverterToBoolean (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_boolImplicitConverterToBoolean GGS_boolImplicitConverterToBoolean::class_func_new (LOCATION_ARGS) {
+GGS_boolImplicitConverterToBoolean GGS_boolImplicitConverterToBoolean::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_boolImplicitConverterToBoolean result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_boolImplicitConverterToBoolean (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -15324,8 +15261,12 @@ GGS_boolImplicitConverterToBoolean GGS_boolImplicitConverterToBoolean::class_fun
 //Pointer class for @boolImplicitConverterToBoolean class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (LOCATION_ARGS) :
-cPtr_abstractImplicitConverterToBoolean (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_boolImplicitConverterToBoolean::cPtr_boolImplicitConverterToBoolean (Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) :
+cPtr_abstractImplicitConverterToBoolean (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15341,12 +15282,20 @@ void cPtr_boolImplicitConverterToBoolean::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_boolImplicitConverterToBoolean::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (THERE)) ;
+  macroMyNew (ptr, cPtr_boolImplicitConverterToBoolean (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_boolImplicitConverterToBoolean::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractImplicitConverterToBoolean::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -15505,20 +15454,6 @@ GGS_boolImplicitConverterToBoolean_2E_weak GGS_boolImplicitConverterToBoolean_2E
 // @boolNotOperator reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolNotOperator::cPtr_boolNotOperator (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_boolNotOperator::printNonNullClassInstanceProperties (void) const {
-    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_boolNotOperator::objectCompare (const GGS_boolNotOperator & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15568,9 +15503,9 @@ GGS_prefixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_boolNotOperator GGS_boolNotOperator::class_func_new (LOCATION_ARGS) {
+GGS_boolNotOperator GGS_boolNotOperator::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_boolNotOperator result ;
-  macroMyNew (result.mObjectPtr, cPtr_boolNotOperator (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_boolNotOperator (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -15578,8 +15513,12 @@ GGS_boolNotOperator GGS_boolNotOperator::class_func_new (LOCATION_ARGS) {
 //Pointer class for @boolNotOperator class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_boolNotOperator::cPtr_boolNotOperator (LOCATION_ARGS) :
-cPtr_prefixOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_boolNotOperator::cPtr_boolNotOperator (Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) :
+cPtr_prefixOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15595,12 +15534,20 @@ void cPtr_boolNotOperator::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_boolNotOperator::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_boolNotOperator::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_boolNotOperator (THERE)) ;
+  macroMyNew (ptr, cPtr_boolNotOperator (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_boolNotOperator::printNonNullClassInstanceProperties (void) const {
+    cPtr_prefixOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -15870,20 +15817,6 @@ GGS_typeAliasDeclarationAST_2E_weak GGS_typeAliasDeclarationAST_2E_weak::extract
 // @expressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_expressionAST::cPtr_expressionAST (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_expressionAST::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_expressionAST::objectCompare (const GGS_expressionAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -15916,10 +15849,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @expressionAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_expressionAST::cPtr_expressionAST (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_expressionAST::cPtr_expressionAST (Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_expressionAST::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -16189,20 +16134,6 @@ GGS_userLLVMStaticArrayTypeDefinitionIR_2E_weak GGS_userLLVMStaticArrayTypeDefin
 // @abstractAssignmentOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractAssignmentOperatorUsage::cPtr_abstractAssignmentOperatorUsage (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_abstractAssignmentOperatorUsage::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_abstractAssignmentOperatorUsage::objectCompare (const GGS_abstractAssignmentOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -16235,10 +16166,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @abstractAssignmentOperatorUsage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractAssignmentOperatorUsage::cPtr_abstractAssignmentOperatorUsage (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractAssignmentOperatorUsage::cPtr_abstractAssignmentOperatorUsage (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractAssignmentOperatorUsage::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //

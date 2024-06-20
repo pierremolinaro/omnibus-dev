@@ -6325,10 +6325,10 @@ void cPtr_llvmGenericType::method_enterInPrecedenceGraph (GGS_semanticTypePreced
                                                           Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmGenericType temp_0 = this ;
-  GGS_lstring var_nodeName_5773 = temp_0.readProperty_mTypeName () ;
+  GGS_lstring var_nodeName_4995 = temp_0.readProperty_mTypeName () ;
   {
   const GGS_llvmGenericType temp_1 = this ;
-  ioArgument_ioGraph.setter_addNode (var_nodeName_5773, temp_1, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 169)) ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_4995, temp_1, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 146)) ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -6341,7 +6341,7 @@ GGS_string cPtr_llvmGenericType::getter_keyRepresentationForErrorSignaling (Comp
                                                                             COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_string result_outRepresentation ; // Returned variable
   const GGS_llvmGenericType temp_0 = this ;
-  result_outRepresentation = GGS_string ("Generic type ").add_operation (temp_0.readProperty_mTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 175)) ;
+  result_outRepresentation = GGS_string ("Generic type ").add_operation (temp_0.readProperty_mTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 152)) ;
 //---
   return result_outRepresentation ;
 }
@@ -6363,24 +6363,24 @@ void cPtr_llvmGenericType::method_enterInContext (GGS_semanticContext & ioArgume
                                                   GGS_userLLVMTypeDefinitionListIR & /* ioArgument_ioUserLLVMTypeDefinitionListIR */,
                                                   Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_ctCheckMap temp_0 = GGS_ctCheckMap::init (inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 217)) ;
-  GGS_ctCheckMap var_formalGenericConstantParameterMap_7811 = temp_0 ;
+  GGS_ctCheckMap temp_0 = GGS_ctCheckMap::init (inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 194)) ;
+  GGS_ctCheckMap var_formalGenericConstantParameterMap_7033 = temp_0 ;
   const GGS_llvmGenericType temp_1 = this ;
-  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mGenericFormalParameterList (), var_formalGenericConstantParameterMap_7811, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 218)) ;
+  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mGenericFormalParameterList (), var_formalGenericConstantParameterMap_7033, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 195)) ;
   const GGS_llvmGenericType temp_2 = this ;
-  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_7811, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 220)) ;
+  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_7033, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 197)) ;
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
     const GGS_llvmGenericType temp_4 = this ;
-    test_3 = GGS_bool (ComparisonKind::equal, temp_4.readProperty_mGenericFormalParameterList ().getter_count (SOURCE_FILE ("llvm-generic-type.galgas", 224)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
+    test_3 = GGS_bool (ComparisonKind::equal, temp_4.readProperty_mGenericFormalParameterList ().getter_count (SOURCE_FILE ("llvm-generic-type.galgas", 201)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
     if (kBoolTrue == test_3) {
       const GGS_llvmGenericType temp_5 = this ;
       const GGS_llvmGenericType temp_6 = this ;
       const GGS_llvmGenericType temp_7 = this ;
-      GGS_omnibusType var_llvmType_8263 = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("llvm-generic-type.galgas", 226)), GGS_omnibusTypeAttributes::class_func_instanciable (SOURCE_FILE ("llvm-generic-type.galgas", 227)).operator_or (GGS_omnibusTypeAttributes::class_func_copyable (SOURCE_FILE ("llvm-generic-type.galgas", 227)) COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 227)), temp_5.readProperty_mTypeName ().readProperty_string (), GGS_typeKind::class_func_llvmType (temp_6.readProperty_mBitSize ()  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 229)), GGS_string ("i").add_operation (temp_7.readProperty_mBitSize ().getter_string (SOURCE_FILE ("llvm-generic-type.galgas", 230)), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 230)), inCompiler COMMA_HERE) ;
+      GGS_omnibusType var_llvmType_7485 = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("llvm-generic-type.galgas", 203)), GGS_omnibusTypeAttributes::class_func_instanciable (SOURCE_FILE ("llvm-generic-type.galgas", 204)).operator_or (GGS_omnibusTypeAttributes::class_func_copyable (SOURCE_FILE ("llvm-generic-type.galgas", 204)) COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 204)), temp_5.readProperty_mTypeName ().readProperty_string (), GGS_typeKind::class_func_llvmType (temp_6.readProperty_mBitSize ()  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 206)), GGS_string ("i").add_operation (temp_7.readProperty_mBitSize ().getter_string (SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_HERE) ;
       {
       const GGS_llvmGenericType temp_8 = this ;
-      extensionSetter_insertType (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mTypeName (), var_llvmType_8263, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 232)) ;
+      extensionSetter_insertType (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mTypeName (), var_llvmType_7485, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 209)) ;
       }
     }
   }

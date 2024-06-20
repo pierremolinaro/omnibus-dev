@@ -10,6 +10,46 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Filewrapper 'constantDumpGenerationTemplate'
+//
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper template 'constantDumpGenerationTemplate dump'
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class Compiler * inCompiler,
+                                                                    const class GGS_string & in_PROJECT_5F_NAME,
+                                                                    const class GGS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
+                                                                    const class GGS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                    const class GGS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
+                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'linkForGlobalConstant'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_linkForGlobalConstant (const class GGS_string & constinArgument0,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Routine 'retainRequiredDrivers&'
 //
 //--------------------------------------------------------------------------------------------------

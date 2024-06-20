@@ -57,7 +57,8 @@ class GGS_dynArrayAppendFunctionIR : public GGS_abstractRoutineIR {
                                                                     const class GGS_bool & inOperand2,
                                                                     const class GGS_unifiedTypeMapEntry & inOperand3,
                                                                     const class GGS_unifiedTypeMapEntry & inOperand4,
-                                                                    const class GGS_string & inOperand5
+                                                                    const class GGS_string & inOperand5,
+                                                                    class Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -130,11 +131,12 @@ class cPtr_dynArrayAppendFunctionIR : public cPtr_abstractRoutineIR {
                                          const GGS_bool & in_warnsIfUnused,
                                          const GGS_unifiedTypeMapEntry & in_mArrayTypeProxy,
                                          const GGS_unifiedTypeMapEntry & in_mElementTypeProxy,
-                                         const GGS_string & in_mInsertFunctionMangledName
+                                         const GGS_string & in_mInsertFunctionMangledName,
+                                         Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -275,7 +277,8 @@ class GGS_dynArrayInsertFunctionIR : public GGS_abstractRoutineIR {
   public: static class GGS_dynArrayInsertFunctionIR class_func_new (const class GGS_lstring & inOperand0,
                                                                     const class GGS_bool & inOperand1,
                                                                     const class GGS_bool & inOperand2,
-                                                                    const class GGS_unifiedTypeMapEntry & inOperand3
+                                                                    const class GGS_unifiedTypeMapEntry & inOperand3,
+                                                                    class Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -342,11 +345,12 @@ class cPtr_dynArrayInsertFunctionIR : public cPtr_abstractRoutineIR {
   public: cPtr_dynArrayInsertFunctionIR (const GGS_lstring & in_mRoutineMangledName,
                                          const GGS_bool & in_isRequired,
                                          const GGS_bool & in_warnsIfUnused,
-                                         const GGS_unifiedTypeMapEntry & in_mElementTypeProxy
+                                         const GGS_unifiedTypeMapEntry & in_mElementTypeProxy,
+                                         Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -486,7 +490,8 @@ class GGS_dynamicArrayTypeAssignUsage : public GGS_abstractAssignmentOperatorUsa
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_dynamicArrayTypeAssignUsage class_func_new (const class GGS_omnibusType & inOperand0,
-                                                                       const class GGS_string & inOperand1
+                                                                       const class GGS_string & inOperand1,
+                                                                       class Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -550,11 +555,12 @@ class cPtr_dynamicArrayTypeAssignUsage : public cPtr_abstractAssignmentOperatorU
 
 //--- Constructor
   public: cPtr_dynamicArrayTypeAssignUsage (const GGS_omnibusType & in_mDynamicArrayType,
-                                            const GGS_string & in_mAssignFunctionName
+                                            const GGS_string & in_mAssignFunctionName,
+                                            Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -690,7 +696,8 @@ class GGS_dynamicArrayTypeAssignGenericFunctionIR : public GGS_abstractRoutineIR
 //--------------------------------- GALGAS class functions
   public: static class GGS_dynamicArrayTypeAssignGenericFunctionIR class_func_new (const class GGS_lstring & inOperand0,
                                                                                    const class GGS_bool & inOperand1,
-                                                                                   const class GGS_bool & inOperand2
+                                                                                   const class GGS_bool & inOperand2,
+                                                                                   class Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -749,11 +756,12 @@ class cPtr_dynamicArrayTypeAssignGenericFunctionIR : public cPtr_abstractRoutine
 //--- Constructor
   public: cPtr_dynamicArrayTypeAssignGenericFunctionIR (const GGS_lstring & in_mRoutineMangledName,
                                                         const GGS_bool & in_isRequired,
-                                                        const GGS_bool & in_warnsIfUnused
+                                                        const GGS_bool & in_warnsIfUnused,
+                                                        Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -1073,7 +1081,8 @@ class GGS_enumToUintRoutineIR : public GGS_abstractRoutineIR {
   public: static class GGS_enumToUintRoutineIR class_func_new (const class GGS_lstring & inOperand0,
                                                                const class GGS_bool & inOperand1,
                                                                const class GGS_bool & inOperand2,
-                                                               const class GGS_string & inOperand3
+                                                               const class GGS_string & inOperand3,
+                                                               class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -1135,11 +1144,12 @@ class cPtr_enumToUintRoutineIR : public cPtr_abstractRoutineIR {
   public: cPtr_enumToUintRoutineIR (const GGS_lstring & in_mRoutineMangledName,
                                     const GGS_bool & in_isRequired,
                                     const GGS_bool & in_warnsIfUnused,
-                                    const GGS_string & in_mEnumerationLLVMTypeName
+                                    const GGS_string & in_mEnumerationLLVMTypeName,
+                                    Compiler * inCompiler
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -2410,7 +2420,8 @@ class GGS_userLLVMSructureTypeDefinitionIR : public GGS_userLLVMTypeDefinitionIR
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_userLLVMSructureTypeDefinitionIR class_func_new (const class GGS_string & inOperand0,
-                                                                            const class GGS_propertyList & inOperand1
+                                                                            const class GGS_propertyList & inOperand1,
+                                                                            class Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2466,11 +2477,12 @@ class cPtr_userLLVMSructureTypeDefinitionIR : public cPtr_userLLVMTypeDefinition
 
 //--- Constructor
   public: cPtr_userLLVMSructureTypeDefinitionIR (const GGS_string & in_mLLVMDefinedTypeName,
-                                                 const GGS_propertyList & in_mPropertyList
+                                                 const GGS_propertyList & in_mPropertyList,
+                                                 Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -2605,7 +2617,8 @@ class GGS_structureAssignmentOperatorUsage : public GGS_abstractAssignmentOperat
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_structureAssignmentOperatorUsage class_func_new (const class GGS_omnibusType & inOperand0
+  public: static class GGS_structureAssignmentOperatorUsage class_func_new (const class GGS_omnibusType & inOperand0,
+                                                                            class Compiler * inCompiler
                                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2666,11 +2679,12 @@ class cPtr_structureAssignmentOperatorUsage : public cPtr_abstractAssignmentOper
   public: cPtr_structureAssignmentOperatorUsage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_structureAssignmentOperatorUsage (const GGS_omnibusType & in_mStructureType
+  public: cPtr_structureAssignmentOperatorUsage (const GGS_omnibusType & in_mStructureType,
+                                                 Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -2811,7 +2825,8 @@ class GGS_structureTypeAssignFunctionIR : public GGS_abstractRoutineIR {
   public: static class GGS_structureTypeAssignFunctionIR class_func_new (const class GGS_lstring & inOperand0,
                                                                          const class GGS_bool & inOperand1,
                                                                          const class GGS_bool & inOperand2,
-                                                                         const class GGS_omnibusType & inOperand3
+                                                                         const class GGS_omnibusType & inOperand3,
+                                                                         class Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -2873,11 +2888,12 @@ class cPtr_structureTypeAssignFunctionIR : public cPtr_abstractRoutineIR {
   public: cPtr_structureTypeAssignFunctionIR (const GGS_lstring & in_mRoutineMangledName,
                                               const GGS_bool & in_isRequired,
                                               const GGS_bool & in_warnsIfUnused,
-                                              const GGS_omnibusType & in_mStructureType
+                                              const GGS_omnibusType & in_mStructureType,
+                                              Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3107,7 +3123,8 @@ class GGS_integerDeclarationAST : public GGS_abstractDeclarationAST {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_integerDeclarationAST class_func_new (const class GGS_bool & inOperand0,
-                                                                 const class GGS_uint & inOperand1
+                                                                 const class GGS_uint & inOperand1,
+                                                                 class Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3184,11 +3201,12 @@ class cPtr_integerDeclarationAST : public cPtr_abstractDeclarationAST {
 
 //--- Constructor
   public: cPtr_integerDeclarationAST (const GGS_bool & in_mIsSigned,
-                                      const GGS_uint & in_mSize
+                                      const GGS_uint & in_mSize,
+                                      Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3333,7 +3351,8 @@ class GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage : public GGS
                                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage class_func_new (const class GGS_string & inOperand0
+  public: static class GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage class_func_new (const class GGS_string & inOperand0,
+                                                                                                     class Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3394,11 +3413,12 @@ class cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage : public cP
   public: cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (const GGS_string & in_mLLVMOperation
+  public: cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (const GGS_string & in_mLLVMOperation,
+                                                                          Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3533,7 +3553,8 @@ class GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage : public GGS
                                                                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage class_func_new (const class GGS_string & inOperand0
+  public: static class GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage class_func_new (const class GGS_string & inOperand0,
+                                                                                                     class Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3594,11 +3615,12 @@ class cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage : public cP
   public: cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (const GGS_string & in_mLLVMOperation
+  public: cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (const GGS_string & in_mLLVMOperation,
+                                                                          Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3744,7 +3766,8 @@ class GGS_integerBuiltinFunctionIR : public GGS_abstractRoutineIR {
                                                                     const class GGS_bool & inOperand1,
                                                                     const class GGS_bool & inOperand2,
                                                                     const class GGS_string & inOperand3,
-                                                                    const class GGS_string & inOperand4
+                                                                    const class GGS_string & inOperand4,
+                                                                    class Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -3809,11 +3832,12 @@ class cPtr_integerBuiltinFunctionIR : public cPtr_abstractRoutineIR {
                                          const GGS_bool & in_isRequired,
                                          const GGS_bool & in_warnsIfUnused,
                                          const GGS_string & in_mLLVMTypeName,
-                                         const GGS_string & in_mIntrinsicName
+                                         const GGS_string & in_mIntrinsicName,
+                                         Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3944,7 +3968,8 @@ class GGS_literalStringDeclarationAST : public GGS_abstractDeclarationAST {
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_literalStringDeclarationAST class_func_new (LOCATION_ARGS) ;
+  public: static class GGS_literalStringDeclarationAST class_func_new (Compiler * inCompiler
+                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_literalStringDeclarationAST & inOperand) const ;
@@ -4008,14 +4033,13 @@ class cPtr_literalStringDeclarationAST : public cPtr_abstractDeclarationAST {
 //--- Properties
 
 
-//--- Default constructor
-  public: cPtr_literalStringDeclarationAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_literalStringDeclarationAST (LOCATION_ARGS) ;
+  public: cPtr_literalStringDeclarationAST (Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -7431,7 +7455,8 @@ class GGS_decoratedControlRegisterArrayGroupDeclaration : public GGS_abstractDec
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_decoratedControlRegisterArrayGroupDeclaration class_func_new (const class GGS_lstring & inOperand0,
-                                                                                         const class GGS_lbigintlist & inOperand1
+                                                                                         const class GGS_lbigintlist & inOperand1,
+                                                                                         class Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -7490,11 +7515,12 @@ class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractD
 
 //--- Constructor
   public: cPtr_decoratedControlRegisterArrayGroupDeclaration (const GGS_lstring & in_mGroupName,
-                                                              const GGS_lbigintlist & in_mBaseAddresses
+                                                              const GGS_lbigintlist & in_mBaseAddresses,
+                                                              Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8327,7 +8353,8 @@ class GGS_decoratedSyncInstance : public GGS_abstractDecoratedDeclaration {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_decoratedSyncInstance class_func_new (const class GGS_lstring & inOperand0,
-                                                                 const class GGS_objectIR & inOperand1
+                                                                 const class GGS_objectIR & inOperand1,
+                                                                 class Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8386,11 +8413,12 @@ class cPtr_decoratedSyncInstance : public cPtr_abstractDecoratedDeclaration {
 
 //--- Constructor
   public: cPtr_decoratedSyncInstance (const GGS_lstring & in_mSyncInstanceName,
-                                      const GGS_objectIR & in_mExpressionGeneratedCode
+                                      const GGS_objectIR & in_mExpressionGeneratedCode,
+                                      Compiler * inCompiler
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8852,7 +8880,8 @@ class GGS_implementedDriverAST : public GGS_abstractDeclarationAST {
                                                                 const class GGS_location & inOperand5,
                                                                 const class GGS_location & inOperand6,
                                                                 const class GGS_instructionListAST & inOperand7,
-                                                                const class GGS_location & inOperand8
+                                                                const class GGS_location & inOperand8,
+                                                                class Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -8947,11 +8976,12 @@ class cPtr_implementedDriverAST : public cPtr_abstractDeclarationAST {
                                      const GGS_location & in_mBootEndLocation,
                                      const GGS_location & in_mStartupLocation,
                                      const GGS_instructionListAST & in_mStartupInstructionList,
-                                     const GGS_location & in_mStartupEndLocation
+                                     const GGS_location & in_mStartupEndLocation,
+                                     Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -9730,7 +9760,8 @@ class GGS_decoratedRequiredDriver : public GGS_abstractDecoratedDeclaration {
                                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_decoratedRequiredDriver class_func_new (const class GGS_lstring & inOperand0
+  public: static class GGS_decoratedRequiredDriver class_func_new (const class GGS_lstring & inOperand0,
+                                                                   class Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -9786,11 +9817,12 @@ class cPtr_decoratedRequiredDriver : public cPtr_abstractDecoratedDeclaration {
   public: cPtr_decoratedRequiredDriver (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_decoratedRequiredDriver (const GGS_lstring & in_mDriverName
+  public: cPtr_decoratedRequiredDriver (const GGS_lstring & in_mDriverName,
+                                        Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description

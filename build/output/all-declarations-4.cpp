@@ -4418,22 +4418,6 @@ GGS_decoratedTaskList GGS_decoratedTaskList::extractObject (const GGS_object & i
 // @decoratedTaskListDeclaration reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_decoratedTaskListDeclaration::cPtr_decoratedTaskListDeclaration (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractDecoratedDeclaration (inCompiler COMMA_THERE),
-mProperty_mTaskList () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_decoratedTaskListDeclaration::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties () ;
-    mProperty_mTaskList.printNonNullClassInstanceProperties ("mTaskList") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_decoratedTaskListDeclaration::objectCompare (const GGS_decoratedTaskListDeclaration & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4486,10 +4470,11 @@ GGS_abstractDecoratedDeclaration (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_decoratedTaskListDeclaration GGS_decoratedTaskListDeclaration::class_func_new (const GGS_decoratedTaskList & in_mTaskList
+GGS_decoratedTaskListDeclaration GGS_decoratedTaskListDeclaration::class_func_new (const GGS_decoratedTaskList & in_mTaskList,
+                                                                                   Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   GGS_decoratedTaskListDeclaration result ;
-  macroMyNew (result.mObjectPtr, cPtr_decoratedTaskListDeclaration (in_mTaskList COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_decoratedTaskListDeclaration (in_mTaskList,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -4519,9 +4504,17 @@ void GGS_decoratedTaskListDeclaration::setProperty_mTaskList (const GGS_decorate
 //Pointer class for @decoratedTaskListDeclaration class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_decoratedTaskListDeclaration::cPtr_decoratedTaskListDeclaration (const GGS_decoratedTaskList & in_mTaskList
+cPtr_decoratedTaskListDeclaration::cPtr_decoratedTaskListDeclaration (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractDecoratedDeclaration (inCompiler COMMA_THERE),
+mProperty_mTaskList () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_decoratedTaskListDeclaration::cPtr_decoratedTaskListDeclaration (const GGS_decoratedTaskList & in_mTaskList,
+                                                                      Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) :
-cPtr_abstractDecoratedDeclaration (THERE),
+cPtr_abstractDecoratedDeclaration (inCompiler COMMA_THERE),
 mProperty_mTaskList () {
   mProperty_mTaskList = in_mTaskList ;
 }
@@ -4541,12 +4534,21 @@ void cPtr_decoratedTaskListDeclaration::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_decoratedTaskListDeclaration::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_decoratedTaskListDeclaration::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_decoratedTaskListDeclaration (mProperty_mTaskList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_decoratedTaskListDeclaration (mProperty_mTaskList, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_decoratedTaskListDeclaration::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties () ;
+    mProperty_mTaskList.printNonNullClassInstanceProperties ("mTaskList") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -14980,7 +14982,7 @@ GGS_routineAttributes GGS_routineAttributes::class_func_mutatingRoutine (UNUSED_
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineAttributes GGS_routineAttributes::class_func_guard (UNUSED_LOCATION_ARGS) {
+GGS_routineAttributes GGS_routineAttributes::class_func_isGuard (UNUSED_LOCATION_ARGS) {
   return GGS_routineAttributes (uint64_t (1) << 1) ;
 }
 
@@ -15108,7 +15110,7 @@ void GGS_routineAttributes::description (String & ioString,
       ioString.appendCString (" mutatingRoutine") ;
     }
     if ((mFlags & (uint64_t (1) << 1)) != 0) {
-      ioString.appendCString (" guard") ;
+      ioString.appendCString (" isGuard") ;
     }
   }
   ioString.appendCString (">") ;

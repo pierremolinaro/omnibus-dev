@@ -10,6 +10,20 @@
 
 //--------------------------------------------------------------------------------------------------
 //
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GGS_semanticContext constinArgument0,
+                                                                                 const class GGS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GGS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GGS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GGS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension getter '@effectiveArgumentListAST routineSignature' (as function)
 //
 //--------------------------------------------------------------------------------------------------
@@ -73,7 +87,8 @@ class GGS_convertInstructionIR : public GGS_abstractInstructionIR {
 //--------------------------------- GALGAS class functions
   public: static class GGS_convertInstructionIR class_func_new (const class GGS_objectIR & inOperand0,
                                                                 const class GGS_objectIR & inOperand1,
-                                                                const class GGS_location & inOperand2
+                                                                const class GGS_location & inOperand2,
+                                                                class Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -140,11 +155,12 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
 //--- Constructor
   public: cPtr_convertInstructionIR (const GGS_objectIR & in_mTarget,
                                      const GGS_objectIR & in_mOperand,
-                                     const GGS_location & in_mLocation
+                                     const GGS_location & in_mLocation,
+                                     Compiler * inCompiler
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description

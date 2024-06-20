@@ -63,7 +63,7 @@ override method @addressofExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-  if [inRoutineAttributes contains !.guard] then
+  if [inRoutineAttributes contains !.isGuard] then
     error self.mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
   else
   #--- Analyze LValue

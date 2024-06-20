@@ -178,7 +178,7 @@ override method @primaryInExpressionAST analyzeExpression
 {
 #--- object access, with ou without self
   if self.mReceiverName.string != "" then
-    if [inRoutineAttributes contains !.guard] then
+    if [inRoutineAttributes contains !.isGuard] then
       error self.mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
     else 
       [self analyzePrimaryExpressionNoSelf
@@ -391,7 +391,7 @@ proc procAnalyzeAccesListInExpression
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if [inRoutineAttributes contains !.guard] then
+      if [inRoutineAttributes contains !.isGuard] then
         error errorLocation : "a method cannot be called in guard" : ioResult
       else
         handleFunctionCallInExpression (
@@ -470,7 +470,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
         !?instructionListIR:ioInstructionGenerationList
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
-      if [inRoutineAttributes contains !.guard] then
+      if [inRoutineAttributes contains !.isGuard] then
         error errorLocation : "a method cannot be called in guard" : outResult
       else
         handleFunctionCallInExpression (

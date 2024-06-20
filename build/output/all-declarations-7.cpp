@@ -8,6 +8,117 @@
 #include "all-declarations-7.h"
 
 //--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_copyFromReferencesIR_2E_weak::objectCompare (const GGS_copyFromReferencesIR_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR_2E_weak::GGS_copyFromReferencesIR_2E_weak (void) :
+GGS_abstractInstructionIR_2E_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR_2E_weak & GGS_copyFromReferencesIR_2E_weak::operator = (const GGS_copyFromReferencesIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR_2E_weak::GGS_copyFromReferencesIR_2E_weak (const GGS_copyFromReferencesIR & inSource) :
+GGS_abstractInstructionIR_2E_weak (inSource) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR_2E_weak GGS_copyFromReferencesIR_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_copyFromReferencesIR_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR GGS_copyFromReferencesIR_2E_weak::bang_copyFromReferencesIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_copyFromReferencesIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_copyFromReferencesIR) ;
+      result = GGS_copyFromReferencesIR ((cPtr_copyFromReferencesIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @copyFromReferencesIR.weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_copyFromReferencesIR_2E_weak ("copyFromReferencesIR.weak",
+                                                                                    & kTypeDescriptor_GALGAS_abstractInstructionIR_2E_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_copyFromReferencesIR_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_copyFromReferencesIR_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_copyFromReferencesIR_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_copyFromReferencesIR_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_copyFromReferencesIR_2E_weak GGS_copyFromReferencesIR_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_copyFromReferencesIR_2E_weak result ;
+  const GGS_copyFromReferencesIR_2E_weak * p = (const GGS_copyFromReferencesIR_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_copyFromReferencesIR_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("copyFromReferencesIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 //
 //Extension method '@instructionListIR referenceFromPossibleValue'
 //
@@ -421,26 +532,6 @@ void extensionSetter_appendGetComputedPropertyValue (GGS_instructionListIR & ioO
 // @getComputedPropertyValueIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_getComputedPropertyValueIR::cPtr_getComputedPropertyValueIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mReceiverIR (),
-mProperty_mLLVMGetterName (),
-mProperty_mResultValueIR () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_getComputedPropertyValueIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mReceiverIR.printNonNullClassInstanceProperties ("mReceiverIR") ;
-    mProperty_mLLVMGetterName.printNonNullClassInstanceProperties ("mLLVMGetterName") ;
-    mProperty_mResultValueIR.printNonNullClassInstanceProperties ("mResultValueIR") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_getComputedPropertyValueIR::objectCompare (const GGS_getComputedPropertyValueIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -501,10 +592,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 
 GGS_getComputedPropertyValueIR GGS_getComputedPropertyValueIR::class_func_new (const GGS_objectIR & in_mReceiverIR,
                                                                                const GGS_string & in_mLLVMGetterName,
-                                                                               const GGS_objectIR & in_mResultValueIR
+                                                                               const GGS_objectIR & in_mResultValueIR,
+                                                                               Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) {
   GGS_getComputedPropertyValueIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_getComputedPropertyValueIR (in_mReceiverIR, in_mLLVMGetterName, in_mResultValueIR COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_getComputedPropertyValueIR (in_mReceiverIR, in_mLLVMGetterName, in_mResultValueIR,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -578,11 +670,21 @@ void GGS_getComputedPropertyValueIR::setProperty_mResultValueIR (const GGS_objec
 //Pointer class for @getComputedPropertyValueIR class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_getComputedPropertyValueIR::cPtr_getComputedPropertyValueIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mReceiverIR (),
+mProperty_mLLVMGetterName (),
+mProperty_mResultValueIR () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_getComputedPropertyValueIR::cPtr_getComputedPropertyValueIR (const GGS_objectIR & in_mReceiverIR,
                                                                   const GGS_string & in_mLLVMGetterName,
-                                                                  const GGS_objectIR & in_mResultValueIR
+                                                                  const GGS_objectIR & in_mResultValueIR,
+                                                                  Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mReceiverIR (),
 mProperty_mLLVMGetterName (),
 mProperty_mResultValueIR () {
@@ -610,12 +712,23 @@ void cPtr_getComputedPropertyValueIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_getComputedPropertyValueIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_getComputedPropertyValueIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_getComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mLLVMGetterName, mProperty_mResultValueIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mLLVMGetterName, mProperty_mResultValueIR, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_getComputedPropertyValueIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mReceiverIR.printNonNullClassInstanceProperties ("mReceiverIR") ;
+    mProperty_mLLVMGetterName.printNonNullClassInstanceProperties ("mLLVMGetterName") ;
+    mProperty_mResultValueIR.printNonNullClassInstanceProperties ("mResultValueIR") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -790,26 +903,6 @@ void extensionSetter_appendStoreComputedPropertyValue (GGS_instructionListIR & i
 // @storeComputedPropertyValueIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_storeComputedPropertyValueIR::cPtr_storeComputedPropertyValueIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mReceiverIR (),
-mProperty_mLLVMSetterName (),
-mProperty_mValueIR () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_storeComputedPropertyValueIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mReceiverIR.printNonNullClassInstanceProperties ("mReceiverIR") ;
-    mProperty_mLLVMSetterName.printNonNullClassInstanceProperties ("mLLVMSetterName") ;
-    mProperty_mValueIR.printNonNullClassInstanceProperties ("mValueIR") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_storeComputedPropertyValueIR::objectCompare (const GGS_storeComputedPropertyValueIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -870,10 +963,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 
 GGS_storeComputedPropertyValueIR GGS_storeComputedPropertyValueIR::class_func_new (const GGS_objectIR & in_mReceiverIR,
                                                                                    const GGS_string & in_mLLVMSetterName,
-                                                                                   const GGS_objectIR & in_mValueIR
+                                                                                   const GGS_objectIR & in_mValueIR,
+                                                                                   Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) {
   GGS_storeComputedPropertyValueIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_storeComputedPropertyValueIR (in_mReceiverIR, in_mLLVMSetterName, in_mValueIR COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_storeComputedPropertyValueIR (in_mReceiverIR, in_mLLVMSetterName, in_mValueIR,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -947,11 +1041,21 @@ void GGS_storeComputedPropertyValueIR::setProperty_mValueIR (const GGS_objectIR 
 //Pointer class for @storeComputedPropertyValueIR class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_storeComputedPropertyValueIR::cPtr_storeComputedPropertyValueIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mReceiverIR (),
+mProperty_mLLVMSetterName (),
+mProperty_mValueIR () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_storeComputedPropertyValueIR::cPtr_storeComputedPropertyValueIR (const GGS_objectIR & in_mReceiverIR,
                                                                       const GGS_string & in_mLLVMSetterName,
-                                                                      const GGS_objectIR & in_mValueIR
+                                                                      const GGS_objectIR & in_mValueIR,
+                                                                      Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mReceiverIR (),
 mProperty_mLLVMSetterName (),
 mProperty_mValueIR () {
@@ -979,12 +1083,23 @@ void cPtr_storeComputedPropertyValueIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_storeComputedPropertyValueIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_storeComputedPropertyValueIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_storeComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mLLVMSetterName, mProperty_mValueIR COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_storeComputedPropertyValueIR (mProperty_mReceiverIR, mProperty_mLLVMSetterName, mProperty_mValueIR, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_storeComputedPropertyValueIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mReceiverIR.printNonNullClassInstanceProperties ("mReceiverIR") ;
+    mProperty_mLLVMSetterName.printNonNullClassInstanceProperties ("mLLVMSetterName") ;
+    mProperty_mValueIR.printNonNullClassInstanceProperties ("mValueIR") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -1167,26 +1282,6 @@ void extensionSetter_appendGetArrayElementReference (GGS_instructionListIR & ioO
 // @getArrayElementReferenceIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_getArrayElementReferenceIR::cPtr_getArrayElementReferenceIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mTarget (),
-mProperty_mArray (),
-mProperty_mIndex () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_getArrayElementReferenceIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mTarget.printNonNullClassInstanceProperties ("mTarget") ;
-    mProperty_mArray.printNonNullClassInstanceProperties ("mArray") ;
-    mProperty_mIndex.printNonNullClassInstanceProperties ("mIndex") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_getArrayElementReferenceIR::objectCompare (const GGS_getArrayElementReferenceIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -1247,10 +1342,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 
 GGS_getArrayElementReferenceIR GGS_getArrayElementReferenceIR::class_func_new (const GGS_objectIR & in_mTarget,
                                                                                const GGS_objectIR & in_mArray,
-                                                                               const GGS_objectIR & in_mIndex
+                                                                               const GGS_objectIR & in_mIndex,
+                                                                               Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) {
   GGS_getArrayElementReferenceIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_getArrayElementReferenceIR (in_mTarget, in_mArray, in_mIndex COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_getArrayElementReferenceIR (in_mTarget, in_mArray, in_mIndex,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -1324,11 +1420,21 @@ void GGS_getArrayElementReferenceIR::setProperty_mIndex (const GGS_objectIR & in
 //Pointer class for @getArrayElementReferenceIR class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_getArrayElementReferenceIR::cPtr_getArrayElementReferenceIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mTarget (),
+mProperty_mArray (),
+mProperty_mIndex () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_getArrayElementReferenceIR::cPtr_getArrayElementReferenceIR (const GGS_objectIR & in_mTarget,
                                                                   const GGS_objectIR & in_mArray,
-                                                                  const GGS_objectIR & in_mIndex
+                                                                  const GGS_objectIR & in_mIndex,
+                                                                  Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mTarget (),
 mProperty_mArray (),
 mProperty_mIndex () {
@@ -1356,12 +1462,23 @@ void cPtr_getArrayElementReferenceIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_getArrayElementReferenceIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_getArrayElementReferenceIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_getArrayElementReferenceIR (mProperty_mTarget, mProperty_mArray, mProperty_mIndex COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_getArrayElementReferenceIR (mProperty_mTarget, mProperty_mArray, mProperty_mIndex, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_getArrayElementReferenceIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mTarget.printNonNullClassInstanceProperties ("mTarget") ;
+    mProperty_mArray.printNonNullClassInstanceProperties ("mArray") ;
+    mProperty_mIndex.printNonNullClassInstanceProperties ("mIndex") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -1537,28 +1654,6 @@ void extensionSetter_appendSelectOperation (GGS_instructionListIR & ioObject,
 // @selectInstructionIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_selectInstructionIR::cPtr_selectInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mTargetValue (),
-mProperty_m_5F_if_5F_variableLLVMName (),
-mProperty_m_5F_then_5F_variable (),
-mProperty_m_5F_else_5F_variable () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_selectInstructionIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mTargetValue.printNonNullClassInstanceProperties ("mTargetValue") ;
-    mProperty_m_5F_if_5F_variableLLVMName.printNonNullClassInstanceProperties ("m_if_variableLLVMName") ;
-    mProperty_m_5F_then_5F_variable.printNonNullClassInstanceProperties ("m_then_variable") ;
-    mProperty_m_5F_else_5F_variable.printNonNullClassInstanceProperties ("m_else_variable") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_selectInstructionIR::objectCompare (const GGS_selectInstructionIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -1623,10 +1718,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 GGS_selectInstructionIR GGS_selectInstructionIR::class_func_new (const GGS_objectIR & in_mTargetValue,
                                                                  const GGS_string & in_m_5F_if_5F_variableLLVMName,
                                                                  const GGS_objectIR & in_m_5F_then_5F_variable,
-                                                                 const GGS_objectIR & in_m_5F_else_5F_variable
+                                                                 const GGS_objectIR & in_m_5F_else_5F_variable,
+                                                                 Compiler * inCompiler
                                                                  COMMA_LOCATION_ARGS) {
   GGS_selectInstructionIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_selectInstructionIR (in_mTargetValue, in_m_5F_if_5F_variableLLVMName, in_m_5F_then_5F_variable, in_m_5F_else_5F_variable COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_selectInstructionIR (in_mTargetValue, in_m_5F_if_5F_variableLLVMName, in_m_5F_then_5F_variable, in_m_5F_else_5F_variable,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -1722,12 +1818,23 @@ void GGS_selectInstructionIR::setProperty_m_5F_else_5F_variable (const GGS_objec
 //Pointer class for @selectInstructionIR class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_selectInstructionIR::cPtr_selectInstructionIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mTargetValue (),
+mProperty_m_5F_if_5F_variableLLVMName (),
+mProperty_m_5F_then_5F_variable (),
+mProperty_m_5F_else_5F_variable () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_selectInstructionIR::cPtr_selectInstructionIR (const GGS_objectIR & in_mTargetValue,
                                                     const GGS_string & in_m_5F_if_5F_variableLLVMName,
                                                     const GGS_objectIR & in_m_5F_then_5F_variable,
-                                                    const GGS_objectIR & in_m_5F_else_5F_variable
+                                                    const GGS_objectIR & in_m_5F_else_5F_variable,
+                                                    Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mTargetValue (),
 mProperty_m_5F_if_5F_variableLLVMName (),
 mProperty_m_5F_then_5F_variable (),
@@ -1759,12 +1866,24 @@ void cPtr_selectInstructionIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_selectInstructionIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_selectInstructionIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_selectInstructionIR (mProperty_mTargetValue, mProperty_m_5F_if_5F_variableLLVMName, mProperty_m_5F_then_5F_variable, mProperty_m_5F_else_5F_variable COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_selectInstructionIR (mProperty_mTargetValue, mProperty_m_5F_if_5F_variableLLVMName, mProperty_m_5F_then_5F_variable, mProperty_m_5F_else_5F_variable, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_selectInstructionIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mTargetValue.printNonNullClassInstanceProperties ("mTargetValue") ;
+    mProperty_m_5F_if_5F_variableLLVMName.printNonNullClassInstanceProperties ("m_if_variableLLVMName") ;
+    mProperty_m_5F_then_5F_variable.printNonNullClassInstanceProperties ("m_then_variable") ;
+    mProperty_m_5F_else_5F_variable.printNonNullClassInstanceProperties ("m_else_variable") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -1951,26 +2070,6 @@ void extensionSetter_testArrayIndex (GGS_instructionListIR & ioObject,
 // @testArrayIndexIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mIndex (),
-mProperty_mErrorLocation (),
-mProperty_mSize () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_testArrayIndexIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mIndex.printNonNullClassInstanceProperties ("mIndex") ;
-    mProperty_mErrorLocation.printNonNullClassInstanceProperties ("mErrorLocation") ;
-    mProperty_mSize.printNonNullClassInstanceProperties ("mSize") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_testArrayIndexIR::objectCompare (const GGS_testArrayIndexIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2031,10 +2130,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 
 GGS_testArrayIndexIR GGS_testArrayIndexIR::class_func_new (const GGS_objectIR & in_mIndex,
                                                            const GGS_location & in_mErrorLocation,
-                                                           const GGS_bigint & in_mSize
+                                                           const GGS_bigint & in_mSize,
+                                                           Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   GGS_testArrayIndexIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_testArrayIndexIR (in_mIndex, in_mErrorLocation, in_mSize COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_testArrayIndexIR (in_mIndex, in_mErrorLocation, in_mSize,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2108,11 +2208,21 @@ void GGS_testArrayIndexIR::setProperty_mSize (const GGS_bigint & inValue) {
 //Pointer class for @testArrayIndexIR class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mIndex (),
+mProperty_mErrorLocation (),
+mProperty_mSize () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (const GGS_objectIR & in_mIndex,
                                               const GGS_location & in_mErrorLocation,
-                                              const GGS_bigint & in_mSize
+                                              const GGS_bigint & in_mSize,
+                                              Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mIndex (),
 mProperty_mErrorLocation (),
 mProperty_mSize () {
@@ -2140,12 +2250,23 @@ void cPtr_testArrayIndexIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_testArrayIndexIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_testArrayIndexIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_testArrayIndexIR (mProperty_mIndex, mProperty_mErrorLocation, mProperty_mSize COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_testArrayIndexIR (mProperty_mIndex, mProperty_mErrorLocation, mProperty_mSize, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_testArrayIndexIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mIndex.printNonNullClassInstanceProperties ("mIndex") ;
+    mProperty_mErrorLocation.printNonNullClassInstanceProperties ("mErrorLocation") ;
+    mProperty_mSize.printNonNullClassInstanceProperties ("mSize") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -2318,22 +2439,6 @@ void extensionSetter_appendSourceLineComment (GGS_instructionListIR & ioObject,
 // @sourceLocationIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_sourceLocationIR::cPtr_sourceLocationIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mSourceLocation () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_sourceLocationIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mSourceLocation.printNonNullClassInstanceProperties ("mSourceLocation") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_sourceLocationIR::objectCompare (const GGS_sourceLocationIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2386,10 +2491,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_sourceLocationIR GGS_sourceLocationIR::class_func_new (const GGS_location & in_mSourceLocation
+GGS_sourceLocationIR GGS_sourceLocationIR::class_func_new (const GGS_location & in_mSourceLocation,
+                                                           Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
   GGS_sourceLocationIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_sourceLocationIR (in_mSourceLocation COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_sourceLocationIR (in_mSourceLocation,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2419,9 +2525,17 @@ void GGS_sourceLocationIR::setProperty_mSourceLocation (const GGS_location & inV
 //Pointer class for @sourceLocationIR class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_sourceLocationIR::cPtr_sourceLocationIR (const GGS_location & in_mSourceLocation
+cPtr_sourceLocationIR::cPtr_sourceLocationIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mSourceLocation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_sourceLocationIR::cPtr_sourceLocationIR (const GGS_location & in_mSourceLocation,
+                                              Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mSourceLocation () {
   mProperty_mSourceLocation = in_mSourceLocation ;
 }
@@ -2441,12 +2555,21 @@ void cPtr_sourceLocationIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_sourceLocationIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_sourceLocationIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_sourceLocationIR (mProperty_mSourceLocation COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_sourceLocationIR (mProperty_mSourceLocation, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_sourceLocationIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mSourceLocation.printNonNullClassInstanceProperties ("mSourceLocation") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -2619,22 +2742,6 @@ void extensionSetter_appendFreeComment (GGS_instructionListIR & ioObject,
 // @freeCommentIR reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_freeCommentIR::cPtr_freeCommentIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
-mProperty_mComment () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_freeCommentIR::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
-    mProperty_mComment.printNonNullClassInstanceProperties ("mComment") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_freeCommentIR::objectCompare (const GGS_freeCommentIR & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -2687,10 +2794,11 @@ GGS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_freeCommentIR GGS_freeCommentIR::class_func_new (const GGS_string & in_mComment
+GGS_freeCommentIR GGS_freeCommentIR::class_func_new (const GGS_string & in_mComment,
+                                                     Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) {
   GGS_freeCommentIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_freeCommentIR (in_mComment COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_freeCommentIR (in_mComment,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -2720,9 +2828,17 @@ void GGS_freeCommentIR::setProperty_mComment (const GGS_string & inValue) {
 //Pointer class for @freeCommentIR class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_freeCommentIR::cPtr_freeCommentIR (const GGS_string & in_mComment
+cPtr_freeCommentIR::cPtr_freeCommentIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mComment () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_freeCommentIR::cPtr_freeCommentIR (const GGS_string & in_mComment,
+                                        Compiler * inCompiler
                                         COMMA_LOCATION_ARGS) :
-cPtr_abstractInstructionIR (THERE),
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
 mProperty_mComment () {
   mProperty_mComment = in_mComment ;
 }
@@ -2742,12 +2858,21 @@ void cPtr_freeCommentIR::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_freeCommentIR::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_freeCommentIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_freeCommentIR (mProperty_mComment COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_freeCommentIR (mProperty_mComment, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_freeCommentIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mComment.printNonNullClassInstanceProperties ("mComment") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -3962,28 +4087,6 @@ GGS_ctExpressionAST_2E_weak GGS_ctExpressionAST_2E_weak::extractObject (const GG
 // @ctInfixExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctInfixExpressionAST::cPtr_ctInfixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (inCompiler COMMA_THERE),
-mProperty_mLeftExpression (),
-mProperty_mOperatorLocation (),
-mProperty_mInfixOperator (),
-mProperty_mRightExpression () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_ctInfixExpressionAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
-    mProperty_mLeftExpression.printNonNullClassInstanceProperties ("mLeftExpression") ;
-    mProperty_mOperatorLocation.printNonNullClassInstanceProperties ("mOperatorLocation") ;
-    mProperty_mInfixOperator.printNonNullClassInstanceProperties ("mInfixOperator") ;
-    mProperty_mRightExpression.printNonNullClassInstanceProperties ("mRightExpression") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_ctInfixExpressionAST::objectCompare (const GGS_ctInfixExpressionAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4048,10 +4151,11 @@ GGS_ctExpressionAST (inSourcePtr) {
 GGS_ctInfixExpressionAST GGS_ctInfixExpressionAST::class_func_new (const GGS_ctExpressionAST & in_mLeftExpression,
                                                                    const GGS_location & in_mOperatorLocation,
                                                                    const GGS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
-                                                                   const GGS_ctExpressionAST & in_mRightExpression
+                                                                   const GGS_ctExpressionAST & in_mRightExpression,
+                                                                   Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) {
   GGS_ctInfixExpressionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_ctInfixExpressionAST (in_mLeftExpression, in_mOperatorLocation, in_mInfixOperator, in_mRightExpression COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_ctInfixExpressionAST (in_mLeftExpression, in_mOperatorLocation, in_mInfixOperator, in_mRightExpression,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -4147,12 +4251,23 @@ void GGS_ctInfixExpressionAST::setProperty_mRightExpression (const GGS_ctExpress
 //Pointer class for @ctInfixExpressionAST class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_ctInfixExpressionAST::cPtr_ctInfixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_ctExpressionAST (inCompiler COMMA_THERE),
+mProperty_mLeftExpression (),
+mProperty_mOperatorLocation (),
+mProperty_mInfixOperator (),
+mProperty_mRightExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_ctInfixExpressionAST::cPtr_ctInfixExpressionAST (const GGS_ctExpressionAST & in_mLeftExpression,
                                                       const GGS_location & in_mOperatorLocation,
                                                       const GGS_compileTimeInfixOperatorEnumeration & in_mInfixOperator,
-                                                      const GGS_ctExpressionAST & in_mRightExpression
+                                                      const GGS_ctExpressionAST & in_mRightExpression,
+                                                      Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (THERE),
+cPtr_ctExpressionAST (inCompiler COMMA_THERE),
 mProperty_mLeftExpression (),
 mProperty_mOperatorLocation (),
 mProperty_mInfixOperator (),
@@ -4184,12 +4299,24 @@ void cPtr_ctInfixExpressionAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_ctInfixExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_ctInfixExpressionAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_ctInfixExpressionAST (mProperty_mLeftExpression, mProperty_mOperatorLocation, mProperty_mInfixOperator, mProperty_mRightExpression COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_ctInfixExpressionAST (mProperty_mLeftExpression, mProperty_mOperatorLocation, mProperty_mInfixOperator, mProperty_mRightExpression, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_ctInfixExpressionAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
+    mProperty_mLeftExpression.printNonNullClassInstanceProperties ("mLeftExpression") ;
+    mProperty_mOperatorLocation.printNonNullClassInstanceProperties ("mOperatorLocation") ;
+    mProperty_mInfixOperator.printNonNullClassInstanceProperties ("mInfixOperator") ;
+    mProperty_mRightExpression.printNonNullClassInstanceProperties ("mRightExpression") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -4348,26 +4475,6 @@ GGS_ctInfixExpressionAST_2E_weak GGS_ctInfixExpressionAST_2E_weak::extractObject
 // @ctPrefixExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctPrefixExpressionAST::cPtr_ctPrefixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (inCompiler COMMA_THERE),
-mProperty_mOperatorLocation (),
-mProperty_mPrefixOperator (),
-mProperty_mExpression () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_ctPrefixExpressionAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
-    mProperty_mOperatorLocation.printNonNullClassInstanceProperties ("mOperatorLocation") ;
-    mProperty_mPrefixOperator.printNonNullClassInstanceProperties ("mPrefixOperator") ;
-    mProperty_mExpression.printNonNullClassInstanceProperties ("mExpression") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_ctPrefixExpressionAST::objectCompare (const GGS_ctPrefixExpressionAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4428,10 +4535,11 @@ GGS_ctExpressionAST (inSourcePtr) {
 
 GGS_ctPrefixExpressionAST GGS_ctPrefixExpressionAST::class_func_new (const GGS_location & in_mOperatorLocation,
                                                                      const GGS_compileTimePrefixOperatorEnumeration & in_mPrefixOperator,
-                                                                     const GGS_ctExpressionAST & in_mExpression
+                                                                     const GGS_ctExpressionAST & in_mExpression,
+                                                                     Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) {
   GGS_ctPrefixExpressionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_ctPrefixExpressionAST (in_mOperatorLocation, in_mPrefixOperator, in_mExpression COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_ctPrefixExpressionAST (in_mOperatorLocation, in_mPrefixOperator, in_mExpression,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -4505,11 +4613,21 @@ void GGS_ctPrefixExpressionAST::setProperty_mExpression (const GGS_ctExpressionA
 //Pointer class for @ctPrefixExpressionAST class
 //--------------------------------------------------------------------------------------------------
 
+cPtr_ctPrefixExpressionAST::cPtr_ctPrefixExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_ctExpressionAST (inCompiler COMMA_THERE),
+mProperty_mOperatorLocation (),
+mProperty_mPrefixOperator (),
+mProperty_mExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
 cPtr_ctPrefixExpressionAST::cPtr_ctPrefixExpressionAST (const GGS_location & in_mOperatorLocation,
                                                         const GGS_compileTimePrefixOperatorEnumeration & in_mPrefixOperator,
-                                                        const GGS_ctExpressionAST & in_mExpression
+                                                        const GGS_ctExpressionAST & in_mExpression,
+                                                        Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (THERE),
+cPtr_ctExpressionAST (inCompiler COMMA_THERE),
 mProperty_mOperatorLocation (),
 mProperty_mPrefixOperator (),
 mProperty_mExpression () {
@@ -4537,12 +4655,23 @@ void cPtr_ctPrefixExpressionAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_ctPrefixExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_ctPrefixExpressionAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_ctPrefixExpressionAST (mProperty_mOperatorLocation, mProperty_mPrefixOperator, mProperty_mExpression COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_ctPrefixExpressionAST (mProperty_mOperatorLocation, mProperty_mPrefixOperator, mProperty_mExpression, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_ctPrefixExpressionAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
+    mProperty_mOperatorLocation.printNonNullClassInstanceProperties ("mOperatorLocation") ;
+    mProperty_mPrefixOperator.printNonNullClassInstanceProperties ("mPrefixOperator") ;
+    mProperty_mExpression.printNonNullClassInstanceProperties ("mExpression") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -4701,20 +4830,6 @@ GGS_ctPrefixExpressionAST_2E_weak GGS_ctPrefixExpressionAST_2E_weak::extractObje
 // @ctTrueExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctTrueExpressionAST::cPtr_ctTrueExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_ctTrueExpressionAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_ctTrueExpressionAST::objectCompare (const GGS_ctTrueExpressionAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -4764,9 +4879,9 @@ GGS_ctExpressionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_ctTrueExpressionAST GGS_ctTrueExpressionAST::class_func_new (LOCATION_ARGS) {
+GGS_ctTrueExpressionAST GGS_ctTrueExpressionAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_ctTrueExpressionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_ctTrueExpressionAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_ctTrueExpressionAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -4774,8 +4889,12 @@ GGS_ctTrueExpressionAST GGS_ctTrueExpressionAST::class_func_new (LOCATION_ARGS) 
 //Pointer class for @ctTrueExpressionAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctTrueExpressionAST::cPtr_ctTrueExpressionAST (LOCATION_ARGS) :
-cPtr_ctExpressionAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_ctTrueExpressionAST::cPtr_ctTrueExpressionAST (Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) :
+cPtr_ctExpressionAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -4791,12 +4910,20 @@ void cPtr_ctTrueExpressionAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_ctTrueExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_ctTrueExpressionAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_ctTrueExpressionAST (THERE)) ;
+  macroMyNew (ptr, cPtr_ctTrueExpressionAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_ctTrueExpressionAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -4955,20 +5082,6 @@ GGS_ctTrueExpressionAST_2E_weak GGS_ctTrueExpressionAST_2E_weak::extractObject (
 // @ctFalseExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctFalseExpressionAST::cPtr_ctFalseExpressionAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_ctExpressionAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_ctFalseExpressionAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_ctFalseExpressionAST::objectCompare (const GGS_ctFalseExpressionAST & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -5018,9 +5131,9 @@ GGS_ctExpressionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_ctFalseExpressionAST GGS_ctFalseExpressionAST::class_func_new (LOCATION_ARGS) {
+GGS_ctFalseExpressionAST GGS_ctFalseExpressionAST::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_ctFalseExpressionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_ctFalseExpressionAST (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_ctFalseExpressionAST (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -5028,8 +5141,12 @@ GGS_ctFalseExpressionAST GGS_ctFalseExpressionAST::class_func_new (LOCATION_ARGS
 //Pointer class for @ctFalseExpressionAST class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_ctFalseExpressionAST::cPtr_ctFalseExpressionAST (LOCATION_ARGS) :
-cPtr_ctExpressionAST (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_ctFalseExpressionAST::cPtr_ctFalseExpressionAST (Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) :
+cPtr_ctExpressionAST (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5045,12 +5162,20 @@ void cPtr_ctFalseExpressionAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_ctFalseExpressionAST::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_ctFalseExpressionAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_ctFalseExpressionAST (THERE)) ;
+  macroMyNew (ptr, cPtr_ctFalseExpressionAST (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_ctFalseExpressionAST::printNonNullClassInstanceProperties (void) const {
+    cPtr_ctExpressionAST::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -6993,24 +7118,24 @@ void extensionMethod_buildFormalGenericConstantMap (const GGS_genericFormalParam
                                                     Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_genericFormalParameterList temp_0 = inObject ;
-  cEnumerator_genericFormalParameterList enumerator_6541 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_6541.hasCurrentObject ()) {
-    switch (enumerator_6541.current_mParameter (HERE).enumValue ()) {
+  cEnumerator_genericFormalParameterList enumerator_5763 (temp_0, EnumerationOrder::up) ;
+  while (enumerator_5763.hasCurrentObject ()) {
+    switch (enumerator_5763.current_mParameter (HERE).enumValue ()) {
     case GGS_genericFormalParameter::Enumeration::invalid:
       break ;
     case GGS_genericFormalParameter::Enumeration::enum_type:
       break ;
     case GGS_genericFormalParameter::Enumeration::enum_constant:
       {
-        GGS_lstring extractedValue_6620_constantName_0 ;
-        enumerator_6541.current_mParameter (HERE).getAssociatedValuesFor_constant (extractedValue_6620_constantName_0) ;
+        GGS_lstring extractedValue_5842_constantName_0 ;
+        enumerator_5763.current_mParameter (HERE).getAssociatedValuesFor_constant (extractedValue_5842_constantName_0) ;
         {
-        ioArgument_ioMap.setter_insertKey (extractedValue_6620_constantName_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 187)) ;
+        ioArgument_ioMap.setter_insertKey (extractedValue_5842_constantName_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 164)) ;
         }
       }
       break ;
     }
-    enumerator_6541.gotoNextObject () ;
+    enumerator_5763.gotoNextObject () ;
   }
 }
 
@@ -7026,22 +7151,22 @@ void extensionMethod_checkCompileTimeExpression (const GGS_llvmStringDefinition 
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmStringDefinition temp_0 = inObject ;
-  cEnumerator_llvmStringDefinition enumerator_6903 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_6903.hasCurrentObject ()) {
-    switch (enumerator_6903.current_mElement (HERE).enumValue ()) {
+  cEnumerator_llvmStringDefinition enumerator_6125 (temp_0, EnumerationOrder::up) ;
+  while (enumerator_6125.hasCurrentObject ()) {
+    switch (enumerator_6125.current_mElement (HERE).enumValue ()) {
     case GGS_llvmStringDefinitionElement::Enumeration::invalid:
       break ;
     case GGS_llvmStringDefinitionElement::Enumeration::enum_string:
       break ;
     case GGS_llvmStringDefinitionElement::Enumeration::enum_variable:
       {
-        GGS_lstring extractedValue_6984_name_0 ;
-        enumerator_6903.current_mElement (HERE).getAssociatedValuesFor_variable (extractedValue_6984_name_0) ;
-        constinArgument_inMap.method_searchKey (extractedValue_6984_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 199)) ;
+        GGS_lstring extractedValue_6206_name_0 ;
+        enumerator_6125.current_mElement (HERE).getAssociatedValuesFor_variable (extractedValue_6206_name_0) ;
+        constinArgument_inMap.method_searchKey (extractedValue_6206_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 176)) ;
       }
       break ;
     }
-    enumerator_6903.gotoNextObject () ;
+    enumerator_6125.gotoNextObject () ;
   }
 }
 
@@ -7545,20 +7670,6 @@ GGS_simpleAssignmentCopyRoutineIR_2E_weak GGS_simpleAssignmentCopyRoutineIR_2E_w
 // @simpleCopyAssignmentOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_simpleCopyAssignmentOperatorUsage::cPtr_simpleCopyAssignmentOperatorUsage (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractAssignmentOperatorUsage (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_simpleCopyAssignmentOperatorUsage::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractAssignmentOperatorUsage::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_simpleCopyAssignmentOperatorUsage::objectCompare (const GGS_simpleCopyAssignmentOperatorUsage & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -7608,9 +7719,9 @@ GGS_abstractAssignmentOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_simpleCopyAssignmentOperatorUsage GGS_simpleCopyAssignmentOperatorUsage::class_func_new (LOCATION_ARGS) {
+GGS_simpleCopyAssignmentOperatorUsage GGS_simpleCopyAssignmentOperatorUsage::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
   GGS_simpleCopyAssignmentOperatorUsage result ;
-  macroMyNew (result.mObjectPtr, cPtr_simpleCopyAssignmentOperatorUsage (THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_simpleCopyAssignmentOperatorUsage (inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -7618,8 +7729,12 @@ GGS_simpleCopyAssignmentOperatorUsage GGS_simpleCopyAssignmentOperatorUsage::cla
 //Pointer class for @simpleCopyAssignmentOperatorUsage class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_simpleCopyAssignmentOperatorUsage::cPtr_simpleCopyAssignmentOperatorUsage (LOCATION_ARGS) :
-cPtr_abstractAssignmentOperatorUsage (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_simpleCopyAssignmentOperatorUsage::cPtr_simpleCopyAssignmentOperatorUsage (Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) :
+cPtr_abstractAssignmentOperatorUsage (inCompiler COMMA_THERE) {
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7635,12 +7750,20 @@ void cPtr_simpleCopyAssignmentOperatorUsage::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_simpleCopyAssignmentOperatorUsage::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_simpleCopyAssignmentOperatorUsage::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_simpleCopyAssignmentOperatorUsage (THERE)) ;
+  macroMyNew (ptr, cPtr_simpleCopyAssignmentOperatorUsage (inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_simpleCopyAssignmentOperatorUsage::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractAssignmentOperatorUsage::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -8445,20 +8568,6 @@ GGS_llvmGenerationInstructionElementList GGS_llvmGenerationInstructionElementLis
 // @abstractLLVMInstruction reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractLLVMInstruction::cPtr_abstractLLVMInstruction (Compiler * /* inCompiler */ COMMA_LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_abstractLLVMInstruction::printNonNullClassInstanceProperties (void) const {
-    acStrongPtr_class::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_abstractLLVMInstruction::objectCompare (const GGS_abstractLLVMInstruction & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -8491,10 +8600,22 @@ AC_GALGAS_reference_class (inSourcePtr) {
 //Pointer class for @abstractLLVMInstruction class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_abstractLLVMInstruction::cPtr_abstractLLVMInstruction (LOCATION_ARGS) :
-acStrongPtr_class (THERE) {
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractLLVMInstruction::cPtr_abstractLLVMInstruction (Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractLLVMInstruction::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -8653,22 +8774,6 @@ GGS_abstractLLVMInstruction_2E_weak GGS_abstractLLVMInstruction_2E_weak::extract
 // @llvmGenerationInstruction reference class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_llvmGenerationInstruction::cPtr_llvmGenerationInstruction (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_abstractLLVMInstruction (inCompiler COMMA_THERE),
-mProperty_mGenerationList () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_llvmGenerationInstruction::printNonNullClassInstanceProperties (void) const {
-    cPtr_abstractLLVMInstruction::printNonNullClassInstanceProperties () ;
-    mProperty_mGenerationList.printNonNullClassInstanceProperties ("mGenerationList") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_llvmGenerationInstruction::objectCompare (const GGS_llvmGenerationInstruction & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
   if (isValid () && inOperand.isValid ()) {
@@ -8721,10 +8826,11 @@ GGS_abstractLLVMInstruction (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_llvmGenerationInstruction GGS_llvmGenerationInstruction::class_func_new (const GGS_llvmGenerationInstructionElementList & in_mGenerationList
+GGS_llvmGenerationInstruction GGS_llvmGenerationInstruction::class_func_new (const GGS_llvmGenerationInstructionElementList & in_mGenerationList,
+                                                                             Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) {
   GGS_llvmGenerationInstruction result ;
-  macroMyNew (result.mObjectPtr, cPtr_llvmGenerationInstruction (in_mGenerationList COMMA_THERE)) ;
+  macroMyNew (result.mObjectPtr, cPtr_llvmGenerationInstruction (in_mGenerationList,  inCompiler COMMA_THERE)) ;
   return result ;
 }
 
@@ -8754,9 +8860,17 @@ void GGS_llvmGenerationInstruction::setProperty_mGenerationList (const GGS_llvmG
 //Pointer class for @llvmGenerationInstruction class
 //--------------------------------------------------------------------------------------------------
 
-cPtr_llvmGenerationInstruction::cPtr_llvmGenerationInstruction (const GGS_llvmGenerationInstructionElementList & in_mGenerationList
+cPtr_llvmGenerationInstruction::cPtr_llvmGenerationInstruction (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractLLVMInstruction (inCompiler COMMA_THERE),
+mProperty_mGenerationList () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_llvmGenerationInstruction::cPtr_llvmGenerationInstruction (const GGS_llvmGenerationInstructionElementList & in_mGenerationList,
+                                                                Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) :
-cPtr_abstractLLVMInstruction (THERE),
+cPtr_abstractLLVMInstruction (inCompiler COMMA_THERE),
 mProperty_mGenerationList () {
   mProperty_mGenerationList = in_mGenerationList ;
 }
@@ -8776,12 +8890,21 @@ void cPtr_llvmGenerationInstruction::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-acPtr_class * cPtr_llvmGenerationInstruction::duplicate (LOCATION_ARGS) const {
+acPtr_class * cPtr_llvmGenerationInstruction::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
   acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_llvmGenerationInstruction (mProperty_mGenerationList COMMA_THERE)) ;
+  macroMyNew (ptr, cPtr_llvmGenerationInstruction (mProperty_mGenerationList, inCompiler COMMA_THERE)) ;
   return ptr ;
 }
 
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_llvmGenerationInstruction::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractLLVMInstruction::printNonNullClassInstanceProperties () ;
+    mProperty_mGenerationList.printNonNullClassInstanceProperties ("mGenerationList") ;
+  }
+#endif
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -17103,127 +17226,6 @@ GGS_globalTaskVariableList_2E_element GGS_globalTaskVariableList_2E_element::ext
       result = *p ;
     }else{
       inCompiler->castError ("globalTaskVariableList.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element::GGS_routineLLVMNameDict_2E_element (void) :
-mProperty_key (),
-mProperty_llvmName () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element::~ GGS_routineLLVMNameDict_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element GGS_routineLLVMNameDict_2E_element::init_21__21_ (const GGS_mode & in_key,
-                                                                                     const GGS_string & in_llvmName,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_key = in_key ;
-  result.mProperty_llvmName = in_llvmName ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element::GGS_routineLLVMNameDict_2E_element (const GGS_mode & inOperand0,
-                                                                        const GGS_string & inOperand1) :
-mProperty_key (inOperand0),
-mProperty_llvmName (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element GGS_routineLLVMNameDict_2E_element::class_func_new (const GGS_mode & in_key,
-                                                                                       const GGS_string & in_llvmName,
-                                                                                       Compiler * inCompiler
-                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_key = in_key ;
-  result.mProperty_llvmName = in_llvmName ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_routineLLVMNameDict_2E_element::isValid (void) const {
-  return mProperty_key.isValid () && mProperty_llvmName.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict_2E_element::drop (void) {
-  mProperty_key.drop () ;
-  mProperty_llvmName.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict_2E_element::description (String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @routineLLVMNameDict.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_key.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_llvmName.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @routineLLVMNameDict.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineLLVMNameDict_2E_element ("routineLLVMNameDict.element",
-                                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_routineLLVMNameDict_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineLLVMNameDict_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_routineLLVMNameDict_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_routineLLVMNameDict_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element GGS_routineLLVMNameDict_2E_element::extractObject (const GGS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict_2E_element result ;
-  const GGS_routineLLVMNameDict_2E_element * p = (const GGS_routineLLVMNameDict_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_routineLLVMNameDict_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineLLVMNameDict.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

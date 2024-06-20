@@ -172,7 +172,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       var @instructionListIR guardInstructionGenerationList = §[]
       [expression analyzeExpression
         !self:inSelfType
-        !routineAttributes: inRoutineAttributes | .guard
+        !routineAttributes: inRoutineAttributes | .isGuard
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode
@@ -207,7 +207,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
     #--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
-        !routineAttributes:.guard
+        !routineAttributes:.isGuard
         !optionalTargetType:voidType ()
         !context:inContext
         !mode:inMode

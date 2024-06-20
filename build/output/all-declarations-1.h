@@ -3181,7 +3181,8 @@ class GGS_omnibusType : public AC_GALGAS_reference_class {
                                                        const class GGS_omnibusTypeAttributes & inOperand1,
                                                        const class GGS_string & inOperand2,
                                                        const class GGS_typeKind & inOperand3,
-                                                       const class GGS_string & inOperand4
+                                                       const class GGS_string & inOperand4,
+                                                       class Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -4792,7 +4793,8 @@ class GGS_compileTimeDeclarationBarrierAST : public GGS_abstractDeclarationAST {
                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- GALGAS class functions
-  public: static class GGS_compileTimeDeclarationBarrierAST class_func_new (LOCATION_ARGS) ;
+  public: static class GGS_compileTimeDeclarationBarrierAST class_func_new (Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_compileTimeDeclarationBarrierAST & inOperand) const ;
@@ -4856,14 +4858,13 @@ class cPtr_compileTimeDeclarationBarrierAST : public cPtr_abstractDeclarationAST
 //--- Properties
 
 
-//--- Default constructor
-  public: cPtr_compileTimeDeclarationBarrierAST (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_compileTimeDeclarationBarrierAST (LOCATION_ARGS) ;
+  public: cPtr_compileTimeDeclarationBarrierAST (Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (LOCATION_ARGS) const override ;
+  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8549,7 +8550,8 @@ class GGS_unifiedTypeMapElementClass : public AC_GALGAS_reference_class {
 
 //--------------------------------- GALGAS class functions
   public: static class GGS_unifiedTypeMapElementClass class_func_new (const class GGS_lstring & inOperand0,
-                                                                      const class GGS_typeDefinition & inOperand1
+                                                                      const class GGS_typeDefinition & inOperand1,
+                                                                      class Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
@@ -13188,11 +13190,10 @@ class cPtr_abstractDecoratedDeclaration : public acStrongPtr_class {
 //--- Properties
 
 
-//--- Default constructor
-  public: cPtr_abstractDecoratedDeclaration (Compiler * inCompiler COMMA_LOCATION_ARGS) ;
 
 //--- Constructor
-  public: cPtr_abstractDecoratedDeclaration (LOCATION_ARGS) ;
+  public: cPtr_abstractDecoratedDeclaration (Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //--- Attribute accessors
 //--- Description

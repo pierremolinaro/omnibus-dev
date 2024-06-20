@@ -88,7 +88,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   !result:@objectIR outFunctionCallReturnedValue
 {
 #--- Cannot call a function in guard
-  if [inRoutineAttributes contains !.guard] then
+  if [inRoutineAttributes contains !.isGuard] then
     error self.mStandaloneFunctionName.location : "a routine cannot be called in guard"
   end
 #--- Get function name and map containing the function definition
