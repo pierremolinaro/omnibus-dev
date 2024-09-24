@@ -193,7 +193,7 @@ void routine_generatePrimitiveAndServiceDispatcher_3F__3F__26__3F__3F_targetPara
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_routineTypedSignature_32__3F__3F__21_ (class GGS_unifiedTypeMap inArgument0,
+void routine_routineTypedSignature_32__3F__3F__21_ (const class GGS_unifiedTypeMap constinArgument0,
                                                     const class GGS_routineFormalArgumentListAST constinArgument1,
                                                     class GGS_routineTypedSignature & outArgument2,
                                                     class Compiler * inCompiler

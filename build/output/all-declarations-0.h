@@ -314,125 +314,125 @@ class Lexique_omnibus_5F_lexique : public Lexique {
 
 
 //--- Terminal symbols enumeration
-  public: enum {kToken_,
-   kToken_identifier /* 1 */ ,
-   kToken__40_attribute /* 2 */ ,
-   kToken_integer /* 3 */ ,
-   kToken__22_string_22_ /* 4 */ ,
-   kToken_comment /* 5 */ ,
-   kToken_commentMark /* 6 */ ,
-   kToken__3F_selector_3A_ /* 7 */ ,
-   kToken__3F__21_selector_3A_ /* 8 */ ,
-   kToken__21_selector_3A_ /* 9 */ ,
-   kToken__21__3F_selector_3A_ /* 10 */ ,
-   kToken__24_type /* 11 */ ,
-   kToken__A9_group /* 12 */ ,
-   kToken_addressof /* 13 */ ,
-   kToken_assert /* 14 */ ,
-   kToken_boot /* 15 */ ,
-   kToken_case /* 16 */ ,
-   kToken_convert /* 17 */ ,
-   kToken_ctAssert /* 18 */ ,
-   kToken_compiletime /* 19 */ ,
-   kToken_driver /* 20 */ ,
-   kToken_else /* 21 */ ,
-   kToken_enum /* 22 */ ,
-   kToken_event /* 23 */ ,
-   kToken_extend /* 24 */ ,
-   kToken_extern /* 25 */ ,
-   kToken_for /* 26 */ ,
-   kToken_func /* 27 */ ,
-   kToken_guard /* 28 */ ,
-   kToken_if /* 29 */ ,
-   kToken_import /* 30 */ ,
-   kToken_in /* 31 */ ,
-   kToken_interrupt /* 32 */ ,
-   kToken_let /* 33 */ ,
-   kToken_llvm /* 34 */ ,
-   kToken_no /* 35 */ ,
-   kToken_not /* 36 */ ,
-   kToken_opaque /* 37 */ ,
-   kToken_option /* 38 */ ,
-   kToken_panic /* 39 */ ,
-   kToken_primitive /* 40 */ ,
-   kToken_public /* 41 */ ,
-   kToken_registers /* 42 */ ,
-   kToken_required /* 43 */ ,
-   kToken_safe /* 44 */ ,
-   kToken_section /* 45 */ ,
-   kToken_self /* 46 */ ,
-   kToken_service /* 47 */ ,
-   kToken_sizeof /* 48 */ ,
-   kToken_startup /* 49 */ ,
-   kToken_struct /* 50 */ ,
-   kToken_staticArray /* 51 */ ,
-   kToken_switch /* 52 */ ,
-   kToken_sync /* 53 */ ,
-   kToken_target /* 54 */ ,
-   kToken_task /* 55 */ ,
-   kToken_truncate /* 56 */ ,
-   kToken_typealias /* 57 */ ,
-   kToken_var /* 58 */ ,
-   kToken_until /* 59 */ ,
-   kToken_user /* 60 */ ,
-   kToken_where /* 61 */ ,
-   kToken_when /* 62 */ ,
-   kToken_while /* 63 */ ,
-   kToken_yes /* 64 */ ,
-   kToken__3A_ /* 65 */ ,
-   kToken__2E_ /* 66 */ ,
-   kToken__2C_ /* 67 */ ,
-   kToken__7B_ /* 68 */ ,
-   kToken__7D_ /* 69 */ ,
-   kToken__3D_ /* 70 */ ,
-   kToken__28_ /* 71 */ ,
-   kToken__29_ /* 72 */ ,
-   kToken__5F_ /* 73 */ ,
-   kToken__3D__3D_ /* 74 */ ,
-   kToken__2260_ /* 75 */ ,
-   kToken__3C_ /* 76 */ ,
-   kToken__2264_ /* 77 */ ,
-   kToken__3E_ /* 78 */ ,
-   kToken__2265_ /* 79 */ ,
-   kToken__5B_ /* 80 */ ,
-   kToken__5D_ /* 81 */ ,
-   kToken__5D__21_ /* 82 */ ,
-   kToken__3C__3C_ /* 83 */ ,
-   kToken__3E__3E_ /* 84 */ ,
-   kToken__7E_ /* 85 */ ,
-   kToken__7C__7C_ /* 86 */ ,
-   kToken__26__26_ /* 87 */ ,
-   kToken__2D__3E_ /* 88 */ ,
-   kToken__2E__2E__3C_ /* 89 */ ,
-   kToken__2E__2E__2E_ /* 90 */ ,
-   kToken__7C_ /* 91 */ ,
-   kToken__7C__3D_ /* 92 */ ,
-   kToken__26_ /* 93 */ ,
-   kToken__26__3D_ /* 94 */ ,
-   kToken__5E_ /* 95 */ ,
-   kToken__5E__3D_ /* 96 */ ,
-   kToken__2B_ /* 97 */ ,
-   kToken__2B__25_ /* 98 */ ,
-   kToken__2B__3D_ /* 99 */ ,
-   kToken__2B__25__3D_ /* 100 */ ,
-   kToken__2D_ /* 101 */ ,
-   kToken__2D__25_ /* 102 */ ,
-   kToken__2D__3D_ /* 103 */ ,
-   kToken__2D__25__3D_ /* 104 */ ,
-   kToken__2A_ /* 105 */ ,
-   kToken__2A__25_ /* 106 */ ,
-   kToken__2A__3D_ /* 107 */ ,
-   kToken__2A__25__3D_ /* 108 */ ,
-   kToken__2F_ /* 109 */ ,
-   kToken__21__2F_ /* 110 */ ,
-   kToken__2F__3D_ /* 111 */ ,
-   kToken__21__2F__3D_ /* 112 */ ,
-   kToken__25_ /* 113 */ ,
-   kToken__21__25_ /* 114 */ ,
-   kToken__25__3D_ /* 115 */ ,
-   kToken__21__25__3D_ /* 116 */ ,
-   kToken__3C__3C__3D_ /* 117 */ ,
-   kToken__3E__3E__3D_ /* 118 */ } ;
+  public: const static int32_t kToken_ = 0 ;
+  public: static const int32_t kToken_identifier = 1 ;
+  public: static const int32_t kToken__40_attribute = 2 ;
+  public: static const int32_t kToken_integer = 3 ;
+  public: static const int32_t kToken__22_string_22_ = 4 ;
+  public: static const int32_t kToken_comment = 5 ;
+  public: static const int32_t kToken_commentMark = 6 ;
+  public: static const int32_t kToken__3F_selector_3A_ = 7 ;
+  public: static const int32_t kToken__3F__21_selector_3A_ = 8 ;
+  public: static const int32_t kToken__21_selector_3A_ = 9 ;
+  public: static const int32_t kToken__21__3F_selector_3A_ = 10 ;
+  public: static const int32_t kToken__24_type = 11 ;
+  public: static const int32_t kToken__A9_group = 12 ;
+  public: static const int32_t kToken_addressof = 13 ;
+  public: static const int32_t kToken_assert = 14 ;
+  public: static const int32_t kToken_boot = 15 ;
+  public: static const int32_t kToken_case = 16 ;
+  public: static const int32_t kToken_convert = 17 ;
+  public: static const int32_t kToken_ctAssert = 18 ;
+  public: static const int32_t kToken_compiletime = 19 ;
+  public: static const int32_t kToken_driver = 20 ;
+  public: static const int32_t kToken_else = 21 ;
+  public: static const int32_t kToken_enum = 22 ;
+  public: static const int32_t kToken_event = 23 ;
+  public: static const int32_t kToken_extend = 24 ;
+  public: static const int32_t kToken_extern = 25 ;
+  public: static const int32_t kToken_for = 26 ;
+  public: static const int32_t kToken_func = 27 ;
+  public: static const int32_t kToken_guard = 28 ;
+  public: static const int32_t kToken_if = 29 ;
+  public: static const int32_t kToken_import = 30 ;
+  public: static const int32_t kToken_in = 31 ;
+  public: static const int32_t kToken_interrupt = 32 ;
+  public: static const int32_t kToken_let = 33 ;
+  public: static const int32_t kToken_llvm = 34 ;
+  public: static const int32_t kToken_no = 35 ;
+  public: static const int32_t kToken_not = 36 ;
+  public: static const int32_t kToken_opaque = 37 ;
+  public: static const int32_t kToken_option = 38 ;
+  public: static const int32_t kToken_panic = 39 ;
+  public: static const int32_t kToken_primitive = 40 ;
+  public: static const int32_t kToken_public = 41 ;
+  public: static const int32_t kToken_registers = 42 ;
+  public: static const int32_t kToken_required = 43 ;
+  public: static const int32_t kToken_safe = 44 ;
+  public: static const int32_t kToken_section = 45 ;
+  public: static const int32_t kToken_self = 46 ;
+  public: static const int32_t kToken_service = 47 ;
+  public: static const int32_t kToken_sizeof = 48 ;
+  public: static const int32_t kToken_startup = 49 ;
+  public: static const int32_t kToken_struct = 50 ;
+  public: static const int32_t kToken_staticArray = 51 ;
+  public: static const int32_t kToken_switch = 52 ;
+  public: static const int32_t kToken_sync = 53 ;
+  public: static const int32_t kToken_target = 54 ;
+  public: static const int32_t kToken_task = 55 ;
+  public: static const int32_t kToken_truncate = 56 ;
+  public: static const int32_t kToken_typealias = 57 ;
+  public: static const int32_t kToken_var = 58 ;
+  public: static const int32_t kToken_until = 59 ;
+  public: static const int32_t kToken_user = 60 ;
+  public: static const int32_t kToken_where = 61 ;
+  public: static const int32_t kToken_when = 62 ;
+  public: static const int32_t kToken_while = 63 ;
+  public: static const int32_t kToken_yes = 64 ;
+  public: static const int32_t kToken__3A_ = 65 ;
+  public: static const int32_t kToken__2E_ = 66 ;
+  public: static const int32_t kToken__2C_ = 67 ;
+  public: static const int32_t kToken__7B_ = 68 ;
+  public: static const int32_t kToken__7D_ = 69 ;
+  public: static const int32_t kToken__3D_ = 70 ;
+  public: static const int32_t kToken__28_ = 71 ;
+  public: static const int32_t kToken__29_ = 72 ;
+  public: static const int32_t kToken__5F_ = 73 ;
+  public: static const int32_t kToken__3D__3D_ = 74 ;
+  public: static const int32_t kToken__2260_ = 75 ;
+  public: static const int32_t kToken__3C_ = 76 ;
+  public: static const int32_t kToken__2264_ = 77 ;
+  public: static const int32_t kToken__3E_ = 78 ;
+  public: static const int32_t kToken__2265_ = 79 ;
+  public: static const int32_t kToken__5B_ = 80 ;
+  public: static const int32_t kToken__5D_ = 81 ;
+  public: static const int32_t kToken__5D__21_ = 82 ;
+  public: static const int32_t kToken__3C__3C_ = 83 ;
+  public: static const int32_t kToken__3E__3E_ = 84 ;
+  public: static const int32_t kToken__7E_ = 85 ;
+  public: static const int32_t kToken__7C__7C_ = 86 ;
+  public: static const int32_t kToken__26__26_ = 87 ;
+  public: static const int32_t kToken__2D__3E_ = 88 ;
+  public: static const int32_t kToken__2E__2E__3C_ = 89 ;
+  public: static const int32_t kToken__2E__2E__2E_ = 90 ;
+  public: static const int32_t kToken__7C_ = 91 ;
+  public: static const int32_t kToken__7C__3D_ = 92 ;
+  public: static const int32_t kToken__26_ = 93 ;
+  public: static const int32_t kToken__26__3D_ = 94 ;
+  public: static const int32_t kToken__5E_ = 95 ;
+  public: static const int32_t kToken__5E__3D_ = 96 ;
+  public: static const int32_t kToken__2B_ = 97 ;
+  public: static const int32_t kToken__2B__25_ = 98 ;
+  public: static const int32_t kToken__2B__3D_ = 99 ;
+  public: static const int32_t kToken__2B__25__3D_ = 100 ;
+  public: static const int32_t kToken__2D_ = 101 ;
+  public: static const int32_t kToken__2D__25_ = 102 ;
+  public: static const int32_t kToken__2D__3D_ = 103 ;
+  public: static const int32_t kToken__2D__25__3D_ = 104 ;
+  public: static const int32_t kToken__2A_ = 105 ;
+  public: static const int32_t kToken__2A__25_ = 106 ;
+  public: static const int32_t kToken__2A__3D_ = 107 ;
+  public: static const int32_t kToken__2A__25__3D_ = 108 ;
+  public: static const int32_t kToken__2F_ = 109 ;
+  public: static const int32_t kToken__21__2F_ = 110 ;
+  public: static const int32_t kToken__2F__3D_ = 111 ;
+  public: static const int32_t kToken__21__2F__3D_ = 112 ;
+  public: static const int32_t kToken__25_ = 113 ;
+  public: static const int32_t kToken__21__25_ = 114 ;
+  public: static const int32_t kToken__25__3D_ = 115 ;
+  public: static const int32_t kToken__21__25__3D_ = 116 ;
+  public: static const int32_t kToken__3C__3C__3D_ = 117 ;
+  public: static const int32_t kToken__3E__3E__3D_ = 118 ;
 
 //--- Key words table 'keyWordList'
   public: static int32_t search_into_keyWordList (const String & inSearchedString) ;

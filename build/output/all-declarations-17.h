@@ -78,8 +78,8 @@ void routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile
 //--------------------------------------------------------------------------------------------------
 
 void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
-                                                                                                         class GGS_string inArgument1,
-                                                                                                         class GGS_lstringlist inArgument2,
+                                                                                                         const class GGS_string constinArgument1,
+                                                                                                         const class GGS_lstringlist constinArgument2,
                                                                                                          class GGS_stringset & ioArgument3,
                                                                                                          class Compiler * inCompiler
                                                                                                          COMMA_LOCATION_ARGS) ;
@@ -105,7 +105,7 @@ void routine_addTargetSpecificFiles_3F_forTarget_26_toAST_3F_currentDirectory_26
 
 void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
                                                                                                                        const class GGS_string constinArgument1,
-                                                                                                                       class GGS_lstringlist inArgument2,
+                                                                                                                       const class GGS_lstringlist constinArgument2,
                                                                                                                        class GGS_stringset & ioArgument3,
                                                                                                                        class Compiler * inCompiler
                                                                                                                        COMMA_LOCATION_ARGS) ;
@@ -118,7 +118,7 @@ void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_im
 
 void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
                                                                                                                         const class GGS_string constinArgument1,
-                                                                                                                        class GGS_lstringlist inArgument2,
+                                                                                                                        const class GGS_lstringlist constinArgument2,
                                                                                                                         class GGS_stringset & ioArgument3,
                                                                                                                         class Compiler * inCompiler
                                                                                                                         COMMA_LOCATION_ARGS) ;

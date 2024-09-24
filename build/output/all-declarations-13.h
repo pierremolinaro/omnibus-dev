@@ -45,7 +45,7 @@ void extensionSetter_addComputedPropertyGetter (class GGS_semanticContext & ioOb
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_getterLLVMName (class GGS_string inArgument0,
+class GGS_string function_getterLLVMName (const class GGS_string & constinArgument0,
                                           const class GGS_string & constinArgument1,
                                           class Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
@@ -131,7 +131,7 @@ class GGS_omnibusType function_boolType (class Compiler * inCompiler
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_setterLLVMName (class GGS_string inArgument0,
+class GGS_string function_setterLLVMName (const class GGS_string & constinArgument0,
                                           const class GGS_string & constinArgument1,
                                           class Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
@@ -473,7 +473,7 @@ void routine_buildControlRegisterMapHTMLFile_3F__3F_sourceFile (const class GGS_
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (class GGS_globalConstantMap inArgument0,
+void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (const class GGS_globalConstantMap constinArgument0,
                                                                const class GGS_lstring constinArgument1,
                                                                class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;

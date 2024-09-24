@@ -9114,7 +9114,7 @@ void callExtensionMethod_instructionSemanticAnalysis (class cPtr_instructionAST 
 void extensionMethod_analyzeBranchInstructionList (const class GGS_instructionListAST inObject,
                                                    const class GGS_omnibusType constin_inSelfType,
                                                    const class GGS_routineAttributes constin_inRoutineAttributes,
-                                                   class GGS_location in_inEndOfInstructionList,
+                                                   const class GGS_location constin_inEndOfInstructionList,
                                                    const class GGS_semanticContext constin_inContext,
                                                    const class GGS_mode constin_inMode,
                                                    class GGS_semanticTemporariesStruct & io_ioTemporaries,

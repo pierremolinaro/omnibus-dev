@@ -253,7 +253,7 @@ void cPtr_globalConstantDeclarationAST::method_enterInContext (GGS_semanticConte
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (GGS_globalConstantMap inArgument_inGlobalConstantMap,
+void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (const GGS_globalConstantMap constinArgument_inGlobalConstantMap,
                                                                const GGS_lstring constinArgument_inSourceFile,
                                                                Compiler * inCompiler
                                                                COMMA_UNUSED_LOCATION_ARGS) {
@@ -264,14 +264,14 @@ void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (GGS_globalConstan
     if (kBoolTrue == test_0) {
       GGS_stringset temp_1 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 136)) ;
       GGS_stringset var_firstLetterSet_6034 = temp_1 ;
-      cEnumerator_globalConstantMap enumerator_6069 (inArgument_inGlobalConstantMap, EnumerationOrder::up) ;
+      cEnumerator_globalConstantMap enumerator_6069 (constinArgument_inGlobalConstantMap, EnumerationOrder::up) ;
       while (enumerator_6069.hasCurrentObject ()) {
         var_firstLetterSet_6034.addAssign_operation (enumerator_6069.current_lkey (HERE).readProperty_string ().getter_characterAtIndex (GGS_uint (uint32_t (0U)), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 138)).getter_string (SOURCE_FILE ("declaration-global-constant.galgas", 138))  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 138)) ;
         enumerator_6069.gotoNextObject () ;
       }
       GGS_string var_tableOfTypeString_6189 = GGS_string::makeEmptyString () ;
       GGS_char var_currentFirstLetter_6226 = GGS_char (TO_UNICODE (32)) ;
-      cEnumerator_globalConstantMap enumerator_6270 (inArgument_inGlobalConstantMap, EnumerationOrder::up) ;
+      cEnumerator_globalConstantMap enumerator_6270 (constinArgument_inGlobalConstantMap, EnumerationOrder::up) ;
       while (enumerator_6270.hasCurrentObject ()) {
         enumGalgasBool test_2 = kBoolTrue ;
         if (kBoolTrue == test_2) {
@@ -284,7 +284,7 @@ void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (GGS_globalConstan
         var_tableOfTypeString_6189.plusAssign_operation(function_linkForGlobalConstant (enumerator_6270.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 147)).add_operation (GGS_string ("<br>"), inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 147)), inCompiler  COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 147)) ;
         enumerator_6270.gotoNextObject () ;
       }
-      GGS_string var_typeDumpString_6677 = GGS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.readProperty_string ().getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 150)), inArgument_inGlobalConstantMap, var_firstLetterSet_6034, var_tableOfTypeString_6189 COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 149))) ;
+      GGS_string var_typeDumpString_6677 = GGS_string (filewrapperTemplate_constantDumpGenerationTemplate_dump (inCompiler, constinArgument_inSourceFile.readProperty_string ().getter_lastPathComponent (SOURCE_FILE ("declaration-global-constant.galgas", 150)), constinArgument_inGlobalConstantMap, var_firstLetterSet_6034, var_tableOfTypeString_6189 COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 149))) ;
       GGS_bool joker_6934 ; // Joker input parameter
       var_typeDumpString_6677.method_writeToFileWhenDifferentContents (var_typeDumpFilePath_5877, joker_6934, inCompiler COMMA_SOURCE_FILE ("declaration-global-constant.galgas", 155)) ;
     }
@@ -4328,7 +4328,7 @@ void routine_routineTypedSignature_26__3F__21_ (GGS_unifiedTypeMap & ioArgument_
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_routineTypedSignature_32__3F__3F__21_ (GGS_unifiedTypeMap inArgument_inTypeMap,
+void routine_routineTypedSignature_32__3F__3F__21_ (const GGS_unifiedTypeMap constinArgument_inTypeMap,
                                                     const GGS_routineFormalArgumentListAST constinArgument_inFormalArgumentList,
                                                     GGS_routineTypedSignature & outArgument_outSignature,
                                                     Compiler * inCompiler
@@ -4338,7 +4338,7 @@ void routine_routineTypedSignature_32__3F__3F__21_ (GGS_unifiedTypeMap inArgumen
   outArgument_outSignature = temp_0 ;
   cEnumerator_routineFormalArgumentListAST enumerator_6756 (constinArgument_inFormalArgumentList, EnumerationOrder::up) ;
   while (enumerator_6756.hasCurrentObject ()) {
-    GGS_unifiedTypeMapEntry var_typeProxy_6811 = extensionGetter_searchKey (inArgument_inTypeMap, enumerator_6756.current_mFormalArgumentTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 182)) ;
+    GGS_unifiedTypeMapEntry var_typeProxy_6811 = extensionGetter_searchKey (constinArgument_inTypeMap, enumerator_6756.current_mFormalArgumentTypeName (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 182)) ;
     outArgument_outSignature.addAssign_operation (enumerator_6756.current_mFormalArgumentPassingMode (HERE), enumerator_6756.current_mSelector (HERE), var_typeProxy_6811, enumerator_6756.current_mFormalArgumentName (HERE)  COMMA_SOURCE_FILE ("formal-arguments.galgas", 183)) ;
     enumerator_6756.gotoNextObject () ;
   }

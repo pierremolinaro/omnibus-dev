@@ -641,11 +641,11 @@ void routine_addTargetSpecificFiles_3F_forTarget_26_toAST_3F_currentDirectory_26
 
 void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_importClauseList_26_importedFilePathSet (GGS_ast & ioArgument_ioAST,
                                                                                                                         const GGS_string constinArgument_inTargetDirectory,
-                                                                                                                        GGS_lstringlist inArgument_inImportedClauseList,
+                                                                                                                        const GGS_lstringlist constinArgument_inImportedClauseList,
                                                                                                                         GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                                         Compiler * inCompiler
                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_11660 (inArgument_inImportedClauseList, EnumerationOrder::up) ;
+  cEnumerator_lstringlist enumerator_11660 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
   while (enumerator_11660.hasCurrentObject ()) {
     GGS_string var_absolutePath_11701 = constinArgument_inTargetDirectory.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 302)).add_operation (enumerator_11660.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 302)) ;
     enumGalgasBool test_0 = kBoolTrue ;
@@ -710,11 +710,11 @@ void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_i
 
 void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (GGS_ast & ioArgument_ioAST,
                                                                                                                        const GGS_string constinArgument_inCurrentDirectory,
-                                                                                                                       GGS_lstringlist inArgument_inImportedClauseList,
+                                                                                                                       const GGS_lstringlist constinArgument_inImportedClauseList,
                                                                                                                        GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                                        Compiler * inCompiler
                                                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_13510 (inArgument_inImportedClauseList, EnumerationOrder::up) ;
+  cEnumerator_lstringlist enumerator_13510 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
   while (enumerator_13510.hasCurrentObject ()) {
     GGS_string var_fullPath_13551 = constinArgument_inCurrentDirectory.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 348)).add_operation (enumerator_13510.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 348)) ;
     GGS_filewrapper var_fw_13615 = GGS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
@@ -755,14 +755,14 @@ void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_im
 //--------------------------------------------------------------------------------------------------
 
 void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (GGS_ast & ioArgument_ioAST,
-                                                                                                         GGS_string inArgument_inCurrentDirectory,
-                                                                                                         GGS_lstringlist inArgument_inImportedClauseList,
+                                                                                                         const GGS_string constinArgument_inCurrentDirectory,
+                                                                                                         const GGS_lstringlist constinArgument_inImportedClauseList,
                                                                                                          GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                          Compiler * inCompiler
                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_14749 (inArgument_inImportedClauseList, EnumerationOrder::up) ;
+  cEnumerator_lstringlist enumerator_14749 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
   while (enumerator_14749.hasCurrentObject ()) {
-    GGS_string var_absolutePath_14790 = enumerator_14749.current_mValue (HERE).readProperty_string ().getter_absolutePathFromPath (inArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 381)) ;
+    GGS_string var_absolutePath_14790 = enumerator_14749.current_mValue (HERE).readProperty_string ().getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 381)) ;
     enumGalgasBool test_0 = kBoolTrue ;
     if (kBoolTrue == test_0) {
       test_0 = var_absolutePath_14790.getter_fileExists (SOURCE_FILE ("program.galgas", 382)).boolEnum () ;
@@ -781,7 +781,7 @@ void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList
                 GGS_location joker_15234 ; // Joker input parameter
                 cGrammar_omnibus_5F_grammar::_performSourceFileParsing_ (inCompiler, GGS_lstring::init_21__21_ (var_absolutePath_14790, enumerator_14749.current_mValue (HERE).readProperty_location (), inCompiler COMMA_HERE), ioArgument_ioAST, var_importedFileList_15205, joker_15234  COMMA_SOURCE_FILE ("program.galgas", 386)) ;
                 {
-                routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_15205, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 391)) ;
+                routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, constinArgument_inCurrentDirectory, var_importedFileList_15205, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 391)) ;
                 }
               }
             }
@@ -795,7 +795,7 @@ void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList
                   GGS_location joker_15736 ; // Joker input parameter
                   cGrammar_omnibus_5F_target_5F_grammar::_performSourceFileParsing_ (inCompiler, GGS_lstring::init_21__21_ (var_absolutePath_14790, enumerator_14749.current_mValue (HERE).readProperty_location (), inCompiler COMMA_HERE), ioArgument_ioAST, var_importedFileList_15707, joker_15736  COMMA_SOURCE_FILE ("program.galgas", 398)) ;
                   {
-                  routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_15707, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 403)) ;
+                  routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, constinArgument_inCurrentDirectory, var_importedFileList_15707, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 403)) ;
                   }
                 }
               }
@@ -829,7 +829,7 @@ void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList
                   GGS_location joker_16639 ; // Joker input parameter
                   cGrammar_omnibus_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16201.getter_textFileContentsAtPath (enumerator_14749.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 424)), enumerator_14749.current_mValue (HERE).readProperty_string (), ioArgument_ioAST, var_importedFileList_16608, joker_16639  COMMA_SOURCE_FILE ("program.galgas", 420)) ;
                   {
-                  routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_16608, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 425)) ;
+                  routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, constinArgument_inCurrentDirectory, var_importedFileList_16608, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 425)) ;
                   }
                 }
               }
@@ -843,7 +843,7 @@ void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList
                     GGS_location joker_17167 ; // Joker input parameter
                     cGrammar_omnibus_5F_target_5F_grammar::_performSourceStringParsing_ (inCompiler, var_fw_16201.getter_textFileContentsAtPath (enumerator_14749.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 436)), enumerator_14749.current_mValue (HERE).readProperty_string (), ioArgument_ioAST, var_importedFileList_17136, joker_17167  COMMA_SOURCE_FILE ("program.galgas", 432)) ;
                     {
-                    routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, inArgument_inCurrentDirectory, var_importedFileList_17136, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 437)) ;
+                    routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (ioArgument_ioAST, constinArgument_inCurrentDirectory, var_importedFileList_17136, ioArgument_ioImportedFileAbsolutePathSet, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 437)) ;
                     }
                   }
                 }

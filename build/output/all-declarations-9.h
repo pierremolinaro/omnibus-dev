@@ -447,7 +447,7 @@ void extensionSetter_closeOverride (class GGS_universalValuedObjectMap & ioObjec
 //--------------------------------------------------------------------------------------------------
 
 void extensionSetter_findOrAddStaticString (class GGS_staticEntityMap & ioObject,
-                                            class GGS_string in_inString,
+                                            const class GGS_string constin_inString,
                                             class GGS_uint & out_outIndex,
                                             class Compiler * inCompiler
                                             COMMA_LOCATION_ARGS) ;

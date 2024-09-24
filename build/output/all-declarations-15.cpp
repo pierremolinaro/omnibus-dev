@@ -6479,12 +6479,12 @@ C_galgas_function_descriptor functionDescriptor_llvmNameForFunction ("llvmNameFo
 //
 //--------------------------------------------------------------------------------------------------
 
-GGS_string function_getterLLVMName (GGS_string inArgument_inReceiverLLVMTypeName,
+GGS_string function_getterLLVMName (const GGS_string & constinArgument_inReceiverLLVMTypeName,
                                     const GGS_string & constinArgument_inPropertyName,
                                     Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GGS_string result_result ; // Returned variable
-  result_result = GGS_string ("get.").add_operation (inArgument_inReceiverLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)).add_operation (constinArgument_inPropertyName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)) ;
+  result_result = GGS_string ("get.").add_operation (constinArgument_inReceiverLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)).add_operation (constinArgument_inPropertyName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 148)) ;
 //---
   return result_result ;
 }
@@ -6532,12 +6532,12 @@ C_galgas_function_descriptor functionDescriptor_getterLLVMName ("getterLLVMName"
 //
 //--------------------------------------------------------------------------------------------------
 
-GGS_string function_setterLLVMName (GGS_string inArgument_inReceiverLLVMTypeName,
+GGS_string function_setterLLVMName (const GGS_string & constinArgument_inReceiverLLVMTypeName,
                                     const GGS_string & constinArgument_inPropertyName,
                                     Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   GGS_string result_result ; // Returned variable
-  result_result = GGS_string ("set.").add_operation (inArgument_inReceiverLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)).add_operation (constinArgument_inPropertyName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)) ;
+  result_result = GGS_string ("set.").add_operation (constinArgument_inReceiverLLVMTypeName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)).add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)).add_operation (constinArgument_inPropertyName, inCompiler COMMA_SOURCE_FILE ("generated-code-prefixes.galgas", 156)) ;
 //---
   return result_result ;
 }

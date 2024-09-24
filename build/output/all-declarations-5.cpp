@@ -13434,7 +13434,7 @@ void callExtensionMethod_instructionSemanticAnalysis (cPtr_instructionAST * inOb
 void extensionMethod_analyzeBranchInstructionList (const GGS_instructionListAST inObject,
                                                    const GGS_omnibusType constinArgument_inSelfType,
                                                    const GGS_routineAttributes constinArgument_inRoutineAttributes,
-                                                   GGS_location inArgument_inEndOfInstructionList,
+                                                   const GGS_location constinArgument_inEndOfInstructionList,
                                                    const GGS_semanticContext constinArgument_inContext,
                                                    const GGS_mode constinArgument_inMode,
                                                    GGS_semanticTemporariesStruct & ioArgument_ioTemporaries,
@@ -13457,7 +13457,7 @@ void extensionMethod_analyzeBranchInstructionList (const GGS_instructionListAST 
     enumerator_4161.gotoNextObject () ;
   }
   {
-  extensionSetter_closeBranch (ioArgument_ioUniversalMap, inArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 113)) ;
+  extensionSetter_closeBranch (ioArgument_ioUniversalMap, constinArgument_inEndOfInstructionList, inCompiler COMMA_SOURCE_FILE ("instructionList.galgas", 113)) ;
   }
 }
 
