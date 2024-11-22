@@ -10,7 +10,7 @@ setter @instructionListIR appendStoreTemporaryReference
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @storeFromTemporaryReferenceIR : @abstractInstructionIR {
+class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
   public var @omnibusType mTargetVarType
   public var @string mLLVMTargetVarName
   public var @objectIR mSourceValue

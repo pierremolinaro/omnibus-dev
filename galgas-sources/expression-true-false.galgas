@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @literalBooleanInExpressionAST : @expressionAST {
+class @literalBooleanInExpressionAST : @expressionAST {
   public var @bool mValue
 }
 

@@ -1,6 +1,6 @@
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @standaloneRoutineCallIR : @abstractInstructionIR {
+class @standaloneRoutineCallIR : @abstractInstructionIR {
   public var @objectIR mResult
   public var @lstring mFunctionMangledName
   public var @string mFunctionNameForGeneration

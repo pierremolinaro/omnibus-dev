@@ -8,7 +8,7 @@ setter @instructionListIR appendLoadFromReference
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @loadFromReferenceIR : @abstractInstructionIR {
+class @loadFromReferenceIR : @abstractInstructionIR {
   public var @objectIR mTargetValue
   public var @string mLLVMName
 }

@@ -12,7 +12,7 @@ setter @instructionListIR testArrayIndex
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @testArrayIndexIR : @abstractInstructionIR {
+class @testArrayIndexIR : @abstractInstructionIR {
   public var @objectIR mIndex
   public var @location mErrorLocation
   public var @bigint mSize

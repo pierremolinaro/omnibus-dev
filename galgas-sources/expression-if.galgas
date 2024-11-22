@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @ifExpressionAST : @expressionAST {
+class @ifExpressionAST : @expressionAST {
   public var @expressionAST mIfExpression
   public var @location mIfExpressionEndLocation
   public var @expressionAST mThenExpression

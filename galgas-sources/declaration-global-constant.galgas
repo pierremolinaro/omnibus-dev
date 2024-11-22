@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @globalConstantDeclarationAST : @abstractDeclarationAST {
+class @globalConstantDeclarationAST : @abstractDeclarationAST {
   public var @lstring mConstantName
   public var @lstringlist mAttributeList
   public var @lstring mConstantTypeName # Empty string if no type annotation

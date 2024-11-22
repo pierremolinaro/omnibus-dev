@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @systemRoutineDeclarationAST : @abstractDeclarationAST {
+class @systemRoutineDeclarationAST : @abstractDeclarationAST {
   public var @lstring mReceiverTypeName
   public var @lstring mSystemRoutineName
   public var @mode mMode
@@ -540,7 +540,7 @@ proc generatePrimitiveAndServiceDispatcher
 #! SYSTEM USER ROUTINE IR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @systemUserRoutineIR : @abstractRoutineIR {
+class @systemUserRoutineIR : @abstractRoutineIR {
   public var @string mMangledImplementationName
   public var @routineTypedSignature mFormalArgumentList
   public var @unifiedTypeMapEntry mReceiverTypeProxy

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @convertExpressionAST : @expressionAST {
+class @convertExpressionAST : @expressionAST {
   public var @expressionAST mExpression
   public var @lstring mTypeName
   public var @location mEndOfExpression
@@ -144,7 +144,7 @@ override method @convertExpressionAST analyzeExpression
 #! @convertInstructionIR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @convertInstructionIR : @abstractInstructionIR {
+class @convertInstructionIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @objectIR mOperand
   public var @location mLocation

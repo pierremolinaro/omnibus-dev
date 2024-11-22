@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @literalIntegerInExpressionAST : @expressionAST {
+class @literalIntegerInExpressionAST : @expressionAST {
   public var @lbigint mLiteralInteger
 }
 

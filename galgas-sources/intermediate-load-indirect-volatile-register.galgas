@@ -8,7 +8,7 @@ setter @instructionListIR appendLoadIndirectVolatileRegister
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @loadIndirectVolatileIR : @abstractInstructionIR {
+class @loadIndirectVolatileIR : @abstractInstructionIR {
   public var @objectIR mTargetValue
   public var @string mLLVMName
 }

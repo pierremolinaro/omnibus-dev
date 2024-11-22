@@ -2,13 +2,13 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @sizeofExpressionAST : @expressionAST {
+class @sizeofExpressionAST : @expressionAST {
   public var @LValueAST mLValue
 }
 
 #·······················································································································
 
-refclass @sizeofTypeAST : @expressionAST {
+class @sizeofTypeAST : @expressionAST {
   public var @lstring mTypeName
 }
 
@@ -147,7 +147,7 @@ override method @sizeofTypeAST analyzeExpression
 #! @sizeofInstructionIR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @sizeofInstructionIR : @abstractInstructionIR {
+class @sizeofInstructionIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @omnibusType mSourceType
 }

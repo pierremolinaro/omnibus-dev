@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @letInstructionWithAssignmentAST : @instructionAST {
+class @letInstructionWithAssignmentAST : @instructionAST {
   public var @lstring mConstantName
   public var @lstring mOptionalTypeName
   public var @expressionAST mSourceExpression

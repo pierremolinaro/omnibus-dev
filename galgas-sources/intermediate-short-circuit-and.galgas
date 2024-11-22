@@ -20,7 +20,7 @@ setter @instructionListIR appendShortCircuitAndOperation
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @shortCircuitAndOperationIR : @abstractInstructionIR {
+class @shortCircuitAndOperationIR : @abstractInstructionIR {
   public var @objectIR mTargetOperand
   public var @string mLeftOperandLLVMName
   public var @instructionListIR mLeftInstructionList

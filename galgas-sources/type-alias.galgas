@@ -2,7 +2,7 @@
 #!  AST                                                                                                               
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @typeAliasDeclarationAST : @abstractDeclarationAST {
+class @typeAliasDeclarationAST : @abstractDeclarationAST {
   public var @lstring mAliasTypeName
   public var @lstring mOriginalTypeName
 }

@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
+class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   public var @expressionAST mLeftExpression
   public var @location mOperatorLocation
   public var @expressionAST mRightExpression

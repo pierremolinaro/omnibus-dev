@@ -12,7 +12,7 @@ setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
+class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
   public var @string mLLVMResultVarName
   public var @objectIR mIndexResult
   public var @string mAddressLLVMname

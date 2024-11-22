@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @assertInstructionAST : @instructionAST {
+class @assertInstructionAST : @instructionAST {
   public var @expressionAST mExpression
 }
 
@@ -91,7 +91,7 @@ override method @assertInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @assertInstructionIR : @abstractInstructionIR {
+class @assertInstructionIR : @abstractInstructionIR {
   public var @location mAssertInstructionLocation
   public var @instructionListIR mInstructionList
   public var @objectIR mExpressionValue

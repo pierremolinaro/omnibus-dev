@@ -13,7 +13,7 @@ setter @instructionListIR appendGetComputedPropertyValue
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @getComputedPropertyValueIR : @abstractInstructionIR {
+class @getComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mReceiverIR
   public var @string mLLVMGetterName
   public var @objectIR mResultValueIR

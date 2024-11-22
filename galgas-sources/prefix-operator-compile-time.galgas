@@ -27,7 +27,7 @@ getter @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
 
 #·······················································································································
 
-refclass @compiletimePrefixOperatorAST : @abstractDeclarationAST {
+class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
   public var @compileTimePrefixOperatorEnumeration mPrefixOperator
   public var @location mPrefixOperatorLocation
   public var @lstring mReceiverName
@@ -154,7 +154,7 @@ override method @compiletimePrefixOperatorAST enterInContext
 #   PREFIX OPERATOR USAGE
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
+class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
   public var @location mPrefixOperatorLocation
   public var @lstring mReceiverOperandName
   public var @ctExpressionAST mExpression

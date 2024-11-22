@@ -12,7 +12,7 @@ setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
+class @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
   public var @string mLLVMName
   public var @string mGroupName
   public var @uint mGroupSize

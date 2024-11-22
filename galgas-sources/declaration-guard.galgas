@@ -9,7 +9,7 @@ enum @guardKind {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @guardDeclarationAST : @abstractDeclarationAST {
+class @guardDeclarationAST : @abstractDeclarationAST {
   public var @lstring mReceiverTypeName # Empty string if standalone
   public var @string mReceiverLLVMBaseTypeName
   public var @lstring mGuardName
@@ -217,7 +217,7 @@ map @guardMapForContext {
 #!  SEMANTIC ANALYSIS                                                                                                    
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
+class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
   public var @lstring mReceiverTypeName
   public var @lstring mGuardName
   public var @bool mIsPublic
@@ -512,7 +512,7 @@ enum @guardKindGenerationIR {
 
 #·······················································································································
 
-refclass @guardUserRoutineIR : @abstractRoutineIR {
+class @guardUserRoutineIR : @abstractRoutineIR {
   public var @string mMangledImplementationGuardName
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @omnibusType mReceiverType
@@ -566,7 +566,7 @@ override method @guardUserRoutineIR llvmCodeGeneration
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @guardImplementationRoutineIR : @abstractRoutineIR {
+class @guardImplementationRoutineIR : @abstractRoutineIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @omnibusType mReceiverType
   public var @guardKindGenerationIR mGuardKindGenerationIR

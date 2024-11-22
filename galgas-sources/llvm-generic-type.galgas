@@ -28,7 +28,7 @@ list @llvmStringDefinition %equatable {
 
 #·······················································································································
 
-refclass @llvmGenericType : @abstractDeclarationAST {
+class @llvmGenericType : @abstractDeclarationAST {
   public var @lstring mTypeName
   public var @genericFormalParameterList mGenericFormalParameterList
   public var @ctExpressionAST mWhereClause

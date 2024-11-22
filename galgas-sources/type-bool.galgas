@@ -8,7 +8,7 @@ func %once boolTypeName -> @string {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @boolTypeAST : @abstractDeclarationAST {
+class @boolTypeAST : @abstractDeclarationAST {
 }
 
 #·······················································································································
@@ -100,7 +100,7 @@ override method @boolTypeAST enterInContext
 #  IMPLICIT CONVERSION TO i1
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
+class @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
 #·······················································································································
@@ -120,7 +120,7 @@ override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
 #  COMPILE TIME PREFIX OPERATOR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @boolNotOperator : @prefixOperatorUsage {
+class @boolNotOperator : @prefixOperatorUsage {
 }
 
 #·······················································································································

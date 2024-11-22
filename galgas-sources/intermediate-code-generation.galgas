@@ -62,7 +62,7 @@ list @controlRegisterGroupArrayList {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract refclass @abstractRoutineIR {
+abstract class @abstractRoutineIR {
   public var @lstring mRoutineMangledName
   public var @bool isRequired %initArgLabel
   public var @bool warnsIfUnused %initArgLabel

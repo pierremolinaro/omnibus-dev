@@ -4,7 +4,7 @@
 #
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @omnibusType {
+class @omnibusType {
   public let @subscript subscript %initArgLabel
   public let @omnibusTypeAttributes attributes %initArgLabel # as instanciable, copyable, ...
   public let @string omnibusTypeDescriptionName %initArgLabel # used for type checking and type display
@@ -458,7 +458,7 @@ proc declareLLVMTypes
 #! USER LLVM TYPE DEFINITION
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract refclass @userLLVMTypeDefinitionIR {
+abstract class @userLLVMTypeDefinitionIR {
   public var @string mLLVMDefinedTypeName
 }
 

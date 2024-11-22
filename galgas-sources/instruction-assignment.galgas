@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @assignmentInstructionAST : @instructionAST {
+class @assignmentInstructionAST : @instructionAST {
   public var @LValueAST mTargetAST
   public var @expressionAST mSourceExpression
 }

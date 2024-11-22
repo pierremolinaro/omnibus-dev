@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @checkInstructionAST : @instructionAST {
+class @checkInstructionAST : @instructionAST {
   public var @lstring mCheckMessage
   public var @expressionAST mExpression
 }

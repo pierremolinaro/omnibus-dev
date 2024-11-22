@@ -6117,12 +6117,12 @@ void cPtr_ctInfixExpressionAST::method_computeCompileTimeExpression (const GGS_c
                                                                      GGS_bigint & outArgument_outValue,
                                                                      Compiler * inCompiler
                                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bigint var_left_16081 ;
+  GGS_bigint var_left_16060 ;
   const GGS_ctInfixExpressionAST temp_0 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_0.readProperty_mLeftExpression ().ptr (), constinArgument_inMap, var_left_16081, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 471)) ;
-  GGS_bigint var_right_16161 ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_0.readProperty_mLeftExpression ().ptr (), constinArgument_inMap, var_left_16060, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 471)) ;
+  GGS_bigint var_right_16140 ;
   const GGS_ctInfixExpressionAST temp_1 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_1.readProperty_mRightExpression ().ptr (), constinArgument_inMap, var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 472)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_1.readProperty_mRightExpression ().ptr (), constinArgument_inMap, var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 472)) ;
   const GGS_ctInfixExpressionAST temp_2 = this ;
   switch (temp_2.readProperty_mInfixOperator ().enumValue ()) {
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::invalid:
@@ -6130,7 +6130,7 @@ void cPtr_ctInfixExpressionAST::method_computeCompileTimeExpression (const GGS_c
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_equal:
     {
       GGS_bigint temp_3 ;
-      const enumGalgasBool test_4 = GGS_bool (ComparisonKind::equal, var_left_16081.objectCompare (var_right_16161)).boolEnum () ;
+      const enumGalgasBool test_4 = GGS_bool (ComparisonKind::equal, var_left_16060.objectCompare (var_right_16140)).boolEnum () ;
       if (kBoolTrue == test_4) {
         temp_3 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 474)) ;
       }else if (kBoolFalse == test_4) {
@@ -6142,7 +6142,7 @@ void cPtr_ctInfixExpressionAST::method_computeCompileTimeExpression (const GGS_c
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_lessThan:
     {
       GGS_bigint temp_5 ;
-      const enumGalgasBool test_6 = GGS_bool (ComparisonKind::lowerThan, var_left_16081.objectCompare (var_right_16161)).boolEnum () ;
+      const enumGalgasBool test_6 = GGS_bool (ComparisonKind::lowerThan, var_left_16060.objectCompare (var_right_16140)).boolEnum () ;
       if (kBoolTrue == test_6) {
         temp_5 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 475)) ;
       }else if (kBoolFalse == test_6) {
@@ -6153,62 +6153,62 @@ void cPtr_ctInfixExpressionAST::method_computeCompileTimeExpression (const GGS_c
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_bitWiseAndOp:
     {
-      outArgument_outValue = var_left_16081.operator_and (var_right_16161 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 476)) ;
+      outArgument_outValue = var_left_16060.operator_and (var_right_16140 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 476)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_bitWiseOrOp:
     {
-      outArgument_outValue = var_left_16081.operator_or (var_right_16161 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 477)) ;
+      outArgument_outValue = var_left_16060.operator_or (var_right_16140 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 477)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_bitWiseXorOp:
     {
-      outArgument_outValue = var_left_16081.operator_xor (var_right_16161 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 478)) ;
+      outArgument_outValue = var_left_16060.operator_xor (var_right_16140 COMMA_SOURCE_FILE ("compile-time-expression.galgas", 478)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_addOp:
     {
-      outArgument_outValue = var_left_16081.add_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 479)) ;
+      outArgument_outValue = var_left_16060.add_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 479)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_subOp:
     {
-      outArgument_outValue = var_left_16081.substract_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 480)) ;
+      outArgument_outValue = var_left_16060.substract_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 480)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_mulOp:
     {
-      outArgument_outValue = var_left_16081.multiply_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 481)) ;
+      outArgument_outValue = var_left_16060.multiply_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 481)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_divOp:
     {
-      outArgument_outValue = var_left_16081.divide_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 482)) ;
+      outArgument_outValue = var_left_16060.divide_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 482)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_divNoOvf:
     {
-      outArgument_outValue = var_left_16081.divide_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 483)) ;
+      outArgument_outValue = var_left_16060.divide_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 483)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_modOp:
     {
-      outArgument_outValue = var_left_16081.modulo_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 484)) ;
+      outArgument_outValue = var_left_16060.modulo_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 484)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_moduloNoOvf:
     {
-      outArgument_outValue = var_left_16081.modulo_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 485)) ;
+      outArgument_outValue = var_left_16060.modulo_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 485)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_leftShift:
     {
-      outArgument_outValue = var_left_16081.left_shift_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 486)) ;
+      outArgument_outValue = var_left_16060.left_shift_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 486)) ;
     }
     break ;
   case GGS_compileTimeInfixOperatorEnumeration::Enumeration::enum_rightShift:
     {
-      outArgument_outValue = var_left_16081.right_shift_operation (var_right_16161, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 487)) ;
+      outArgument_outValue = var_left_16060.right_shift_operation (var_right_16140, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 487)) ;
     }
     break ;
   }
@@ -6223,22 +6223,22 @@ void cPtr_ctPrefixExpressionAST::method_computeCompileTimeExpression (const GGS_
                                                                       GGS_bigint & outArgument_outValue,
                                                                       Compiler * inCompiler
                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bigint var_exp_17189 ;
+  GGS_bigint var_exp_17168 ;
   const GGS_ctPrefixExpressionAST temp_0 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_0.readProperty_mExpression ().ptr (), constinArgument_inMap, var_exp_17189, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 497)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_0.readProperty_mExpression ().ptr (), constinArgument_inMap, var_exp_17168, inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 497)) ;
   const GGS_ctPrefixExpressionAST temp_1 = this ;
   switch (temp_1.readProperty_mPrefixOperator ().enumValue ()) {
   case GGS_compileTimePrefixOperatorEnumeration::Enumeration::invalid:
     break ;
   case GGS_compileTimePrefixOperatorEnumeration::Enumeration::enum_minusOp:
     {
-      outArgument_outValue = var_exp_17189.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 499)) ;
+      outArgument_outValue = var_exp_17168.operator_unary_minus (inCompiler COMMA_SOURCE_FILE ("compile-time-expression.galgas", 499)) ;
     }
     break ;
   case GGS_compileTimePrefixOperatorEnumeration::Enumeration::enum_notOp:
     {
       GGS_bigint temp_2 ;
-      const enumGalgasBool test_3 = GGS_bool (ComparisonKind::equal, var_exp_17189.objectCompare (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 500)))).boolEnum () ;
+      const enumGalgasBool test_3 = GGS_bool (ComparisonKind::equal, var_exp_17168.objectCompare (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 500)))).boolEnum () ;
       if (kBoolTrue == test_3) {
         temp_2 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("compile-time-expression.galgas", 500)) ;
       }else if (kBoolFalse == test_3) {
@@ -6325,10 +6325,10 @@ void cPtr_llvmGenericType::method_enterInPrecedenceGraph (GGS_semanticTypePreced
                                                           Compiler * inCompiler
                                                           COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmGenericType temp_0 = this ;
-  GGS_lstring var_nodeName_4995 = temp_0.readProperty_mTypeName () ;
+  GGS_lstring var_nodeName_4992 = temp_0.readProperty_mTypeName () ;
   {
   const GGS_llvmGenericType temp_1 = this ;
-  ioArgument_ioGraph.setter_addNode (var_nodeName_4995, temp_1, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 146)) ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_4992, temp_1, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 146)) ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -6364,11 +6364,11 @@ void cPtr_llvmGenericType::method_enterInContext (GGS_semanticContext & ioArgume
                                                   Compiler * inCompiler
                                                   COMMA_UNUSED_LOCATION_ARGS) {
   GGS_ctCheckMap temp_0 = GGS_ctCheckMap::init (inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 194)) ;
-  GGS_ctCheckMap var_formalGenericConstantParameterMap_7033 = temp_0 ;
+  GGS_ctCheckMap var_formalGenericConstantParameterMap_7030 = temp_0 ;
   const GGS_llvmGenericType temp_1 = this ;
-  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mGenericFormalParameterList (), var_formalGenericConstantParameterMap_7033, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 195)) ;
+  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mGenericFormalParameterList (), var_formalGenericConstantParameterMap_7030, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 195)) ;
   const GGS_llvmGenericType temp_2 = this ;
-  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_7033, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 197)) ;
+  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_7030, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 197)) ;
   enumGalgasBool test_3 = kBoolTrue ;
   if (kBoolTrue == test_3) {
     const GGS_llvmGenericType temp_4 = this ;
@@ -6377,10 +6377,10 @@ void cPtr_llvmGenericType::method_enterInContext (GGS_semanticContext & ioArgume
       const GGS_llvmGenericType temp_5 = this ;
       const GGS_llvmGenericType temp_6 = this ;
       const GGS_llvmGenericType temp_7 = this ;
-      GGS_omnibusType var_llvmType_7485 = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("llvm-generic-type.galgas", 203)), GGS_omnibusTypeAttributes::class_func_instanciable (SOURCE_FILE ("llvm-generic-type.galgas", 204)).operator_or (GGS_omnibusTypeAttributes::class_func_copyable (SOURCE_FILE ("llvm-generic-type.galgas", 204)) COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 204)), temp_5.readProperty_mTypeName ().readProperty_string (), GGS_typeKind::class_func_llvmType (temp_6.readProperty_mBitSize ()  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 206)), GGS_string ("i").add_operation (temp_7.readProperty_mBitSize ().getter_string (SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_HERE) ;
+      GGS_omnibusType var_llvmType_7482 = GGS_omnibusType::init_21_subscript_21_attributes_21_omnibusTypeDescriptionName_21_kind_21_llvmBaseTypeName (GGS_subscript::class_func_noSubscript (SOURCE_FILE ("llvm-generic-type.galgas", 203)), GGS_omnibusTypeAttributes::class_func_instanciable (SOURCE_FILE ("llvm-generic-type.galgas", 204)).operator_or (GGS_omnibusTypeAttributes::class_func_copyable (SOURCE_FILE ("llvm-generic-type.galgas", 204)) COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 204)), temp_5.readProperty_mTypeName ().readProperty_string (), GGS_typeKind::class_func_llvmType (temp_6.readProperty_mBitSize ()  COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 206)), GGS_string ("i").add_operation (temp_7.readProperty_mBitSize ().getter_string (SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 207)), inCompiler COMMA_HERE) ;
       {
       const GGS_llvmGenericType temp_8 = this ;
-      extensionSetter_insertType (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mTypeName (), var_llvmType_7485, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 209)) ;
+      extensionSetter_insertType (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mTypeName (), var_llvmType_7482, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 209)) ;
       }
     }
   }
@@ -6413,18 +6413,18 @@ void cPtr_llvmAssignmentOperatorDeclarationAST::method_enterInPrecedenceGraph (G
   const GGS_llvmAssignmentOperatorDeclarationAST temp_0 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_1 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_2 = this ;
-  GGS_lstring var_nodeName_6257 = GGS_lstring::init_21__21_ (temp_0.readProperty_mTargetTypeName ().readProperty_string ().add_operation (GGS_string (" = "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 148)).add_operation (temp_1.readProperty_mSourceTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 148)), temp_2.readProperty_mOperatorLocation (), inCompiler COMMA_HERE) ;
+  GGS_lstring var_nodeName_6254 = GGS_lstring::init_21__21_ (temp_0.readProperty_mTargetTypeName ().readProperty_string ().add_operation (GGS_string (" = "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 148)).add_operation (temp_1.readProperty_mSourceTypeName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 148)), temp_2.readProperty_mOperatorLocation (), inCompiler COMMA_HERE) ;
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_3 = this ;
-  ioArgument_ioGraph.setter_addNode (var_nodeName_6257, temp_3, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 149)) ;
+  ioArgument_ioGraph.setter_addNode (var_nodeName_6254, temp_3, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 149)) ;
   }
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_4 = this ;
-  ioArgument_ioGraph.setter_addEdge (var_nodeName_6257, temp_4.readProperty_mTargetTypeName () COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 150)) ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_6254, temp_4.readProperty_mTargetTypeName () COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 150)) ;
   }
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_5 = this ;
-  ioArgument_ioGraph.setter_addEdge (var_nodeName_6257, temp_5.readProperty_mSourceTypeName () COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 151)) ;
+  ioArgument_ioGraph.setter_addEdge (var_nodeName_6254, temp_5.readProperty_mSourceTypeName () COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 151)) ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -6573,46 +6573,46 @@ void cPtr_llvmAssignmentOperatorDeclarationAST::method_enterInContext (GGS_seman
                                                                        Compiler * inCompiler
                                                                        COMMA_UNUSED_LOCATION_ARGS) {
   GGS_ctCheckMap temp_0 = GGS_ctCheckMap::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 219)) ;
-  GGS_ctCheckMap var_formalGenericConstantParameterMap_9791 = temp_0 ;
+  GGS_ctCheckMap var_formalGenericConstantParameterMap_9785 = temp_0 ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_1 = this ;
-  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mTargetGenericFormalParameterList (), var_formalGenericConstantParameterMap_9791, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 220)) ;
+  extensionMethod_buildFormalGenericConstantMap (temp_1.readProperty_mTargetGenericFormalParameterList (), var_formalGenericConstantParameterMap_9785, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 220)) ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_2 = this ;
-  extensionMethod_buildFormalGenericConstantMap (temp_2.readProperty_mSourceGenericFormalParameterList (), var_formalGenericConstantParameterMap_9791, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 221)) ;
+  extensionMethod_buildFormalGenericConstantMap (temp_2.readProperty_mSourceGenericFormalParameterList (), var_formalGenericConstantParameterMap_9785, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 221)) ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_3 = this ;
-  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_3.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_9791, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 223)) ;
+  callExtensionMethod_checkCompileTimeExpression ((cPtr_ctExpressionAST *) temp_3.readProperty_mWhereClause ().ptr (), var_formalGenericConstantParameterMap_9785, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 223)) ;
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_4 = this ;
-  var_formalGenericConstantParameterMap_9791.setter_insertKey (temp_4.readProperty_mTargetVariableName (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 225)) ;
+  var_formalGenericConstantParameterMap_9785.setter_insertKey (temp_4.readProperty_mTargetVariableName (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 225)) ;
   }
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_5 = this ;
-  var_formalGenericConstantParameterMap_9791.setter_insertKey (temp_5.readProperty_mSourceVariableName (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 226)) ;
+  var_formalGenericConstantParameterMap_9785.setter_insertKey (temp_5.readProperty_mSourceVariableName (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 226)) ;
   }
   const GGS_llvmAssignmentOperatorDeclarationAST temp_6 = this ;
-  extensionMethod_checkInstructionList (temp_6.readProperty_mLLVMInstructionList (), var_formalGenericConstantParameterMap_9791, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 227)) ;
-  GGS_unifiedTypeMapEntry var_targetTypeProxy_10495 ;
+  extensionMethod_checkInstructionList (temp_6.readProperty_mLLVMInstructionList (), var_formalGenericConstantParameterMap_9785, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 227)) ;
+  GGS_unifiedTypeMapEntry var_targetTypeProxy_10489 ;
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_7 = this ;
-  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_7.readProperty_mTargetTypeName (), var_targetTypeProxy_10495, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 229)) ;
+  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_7.readProperty_mTargetTypeName (), var_targetTypeProxy_10489, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 229)) ;
   }
-  GGS_omnibusType var_targetType_10518 = extensionGetter_type (var_targetTypeProxy_10495, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 230)) ;
-  GGS_unifiedTypeMapEntry var_sourceTypeProxy_10615 ;
+  GGS_omnibusType var_targetType_10512 = extensionGetter_type (var_targetTypeProxy_10489, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 230)) ;
+  GGS_unifiedTypeMapEntry var_sourceTypeProxy_10609 ;
   {
   const GGS_llvmAssignmentOperatorDeclarationAST temp_8 = this ;
-  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mSourceTypeName (), var_sourceTypeProxy_10615, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 231)) ;
+  extensionSetter_makeEntry (ioArgument_ioContext.mProperty_mTypeMap, temp_8.readProperty_mSourceTypeName (), var_sourceTypeProxy_10609, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 231)) ;
   }
-  GGS_omnibusType var_sourceType_10651 = extensionGetter_type (var_sourceTypeProxy_10615, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 232)) ;
+  GGS_omnibusType var_sourceType_10645 = extensionGetter_type (var_sourceTypeProxy_10609, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 232)) ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_9 = this ;
-  GGS_lstring var_key_10698 = function_assignmentOperatorKey (var_targetType_10518, temp_9.readProperty_mOperatorLocation (), var_sourceType_10651, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 234)) ;
+  GGS_lstring var_key_10692 = function_assignmentOperatorKey (var_targetType_10512, temp_9.readProperty_mOperatorLocation (), var_sourceType_10645, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 234)) ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_10 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_11 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_12 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_13 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_14 = this ;
   const GGS_llvmAssignmentOperatorDeclarationAST temp_15 = this ;
-  GGS_llvmAssignmentOperatorUsage var_operatorUsage_10782 = GGS_llvmAssignmentOperatorUsage::init_21__21__21__21__21__21__21__21_ (var_targetType_10518, temp_10.readProperty_mTargetVariableName (), temp_11.readProperty_mTargetGenericFormalParameterList (), var_sourceType_10651, temp_12.readProperty_mSourceVariableName (), temp_13.readProperty_mSourceGenericFormalParameterList (), temp_14.readProperty_mWhereClause (), temp_15.readProperty_mLLVMInstructionList (), inCompiler COMMA_HERE) ;
+  GGS_llvmAssignmentOperatorUsage var_operatorUsage_10776 = GGS_llvmAssignmentOperatorUsage::init_21__21__21__21__21__21__21__21_ (var_targetType_10512, temp_10.readProperty_mTargetVariableName (), temp_11.readProperty_mTargetGenericFormalParameterList (), var_sourceType_10645, temp_12.readProperty_mSourceVariableName (), temp_13.readProperty_mSourceGenericFormalParameterList (), temp_14.readProperty_mWhereClause (), temp_15.readProperty_mLLVMInstructionList (), inCompiler COMMA_HERE) ;
   {
-  ioArgument_ioContext.mProperty_mAssignmentOperatorMap.setter_insertKey (var_key_10698, var_operatorUsage_10782, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 245)) ;
+  ioArgument_ioContext.mProperty_mAssignmentOperatorMap.setter_insertKey (var_key_10692, var_operatorUsage_10776, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 245)) ;
   }
   enumGalgasBool test_16 = kBoolTrue ;
   if (kBoolTrue == test_16) {
@@ -6624,48 +6624,48 @@ void cPtr_llvmAssignmentOperatorDeclarationAST::method_enterInContext (GGS_seman
     }
     GGS_bool test_20 = test_18 ;
     if (kBoolTrue == test_20.boolEnum ()) {
-      test_20 = var_sourceType_10651.readProperty_kind ().getter_isCompileTimeInteger (SOURCE_FILE ("assignment-operator-definition.galgas", 254)).operator_not (SOURCE_FILE ("assignment-operator-definition.galgas", 254)) ;
+      test_20 = var_sourceType_10645.readProperty_kind ().getter_isCompileTimeInteger (SOURCE_FILE ("assignment-operator-definition.galgas", 254)).operator_not (SOURCE_FILE ("assignment-operator-definition.galgas", 254)) ;
     }
     GGS_bool test_21 = test_20 ;
     if (kBoolTrue == test_21.boolEnum ()) {
-      test_21 = var_sourceType_10651.readProperty_kind ().getter_isCompileTimeBool (SOURCE_FILE ("assignment-operator-definition.galgas", 255)).operator_not (SOURCE_FILE ("assignment-operator-definition.galgas", 255)) ;
+      test_21 = var_sourceType_10645.readProperty_kind ().getter_isCompileTimeBool (SOURCE_FILE ("assignment-operator-definition.galgas", 255)).operator_not (SOURCE_FILE ("assignment-operator-definition.galgas", 255)) ;
     }
     test_16 = test_21.boolEnum () ;
     if (kBoolTrue == test_16) {
       GGS_assignmentGenerationVarMap temp_22 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 256)) ;
-      GGS_assignmentGenerationVarMap var_varMap_11514 = temp_22 ;
+      GGS_assignmentGenerationVarMap var_varMap_11508 = temp_22 ;
       {
       const GGS_llvmAssignmentOperatorDeclarationAST temp_23 = this ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_24 = this ;
-      var_varMap_11514.setter_insertKey (temp_23.readProperty_mTargetVariableName (), GGS_string ("%").add_operation (temp_24.readProperty_mTargetVariableName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 257)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 257)) ;
+      var_varMap_11508.setter_insertKey (temp_23.readProperty_mTargetVariableName (), GGS_string ("%").add_operation (temp_24.readProperty_mTargetVariableName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 257)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 257)) ;
       }
       {
       const GGS_llvmAssignmentOperatorDeclarationAST temp_25 = this ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_26 = this ;
-      var_varMap_11514.setter_insertKey (temp_25.readProperty_mSourceVariableName (), GGS_string ("%").add_operation (temp_26.readProperty_mSourceVariableName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 258)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 258)) ;
+      var_varMap_11508.setter_insertKey (temp_25.readProperty_mSourceVariableName (), GGS_string ("%").add_operation (temp_26.readProperty_mSourceVariableName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 258)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 258)) ;
       }
       GGS_assignmentGenerationVarMap temp_27 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 259)) ;
-      GGS_assignmentGenerationVarMap var_typeMap_11729 = temp_27 ;
+      GGS_assignmentGenerationVarMap var_typeMap_11723 = temp_27 ;
       {
       const GGS_llvmAssignmentOperatorDeclarationAST temp_28 = this ;
-      var_typeMap_11729.setter_insertKey (temp_28.readProperty_mTargetVariableName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_targetType_10518.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 260)) ;
+      var_typeMap_11723.setter_insertKey (temp_28.readProperty_mTargetVariableName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_targetType_10512.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 260)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 260)) ;
       }
       {
       const GGS_llvmAssignmentOperatorDeclarationAST temp_29 = this ;
-      var_typeMap_11729.setter_insertKey (temp_29.readProperty_mSourceVariableName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_sourceType_10651.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 261)) ;
+      var_typeMap_11723.setter_insertKey (temp_29.readProperty_mSourceVariableName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_sourceType_10645.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 261)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 261)) ;
       }
       GGS_stringlist temp_30 = GGS_stringlist::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 262)) ;
-      GGS_stringlist var_generatedInstructions_11921 = temp_30 ;
+      GGS_stringlist var_generatedInstructions_11915 = temp_30 ;
       GGS_allocaList temp_31 = GGS_allocaList::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 263)) ;
-      GGS_allocaList var_allocaList_11969 = temp_31 ;
-      GGS_uint var_temporaryIndex_12000 = GGS_uint (uint32_t (0U)) ;
+      GGS_allocaList var_allocaList_11963 = temp_31 ;
+      GGS_uint var_temporaryIndex_11994 = GGS_uint (uint32_t (0U)) ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_32 = this ;
-      extensionMethod_generateIRCode (temp_32.readProperty_mLLVMInstructionList (), var_varMap_11514, var_typeMap_11729, var_generatedInstructions_11921, var_temporaryIndex_12000, var_allocaList_11969, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 265)) ;
+      extensionMethod_generateIRCode (temp_32.readProperty_mLLVMInstructionList (), var_varMap_11508, var_typeMap_11723, var_generatedInstructions_11915, var_temporaryIndex_11994, var_allocaList_11963, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 265)) ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_33 = this ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_34 = this ;
       const GGS_llvmAssignmentOperatorDeclarationAST temp_35 = this ;
-      GGS_assignmentRoutineIR var_routine_12145 = GGS_assignmentRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21__21__21__21__21_ (GGS_lstring::init_21__21_ (function_assignmentOperatorFuncName (var_targetType_10518, var_sourceType_10651, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 267)), temp_33.readProperty_mOperatorLocation (), inCompiler COMMA_HERE), GGS_bool (false), GGS_bool (false), var_targetType_10518, temp_34.readProperty_mTargetVariableName ().readProperty_string (), var_sourceType_10651, temp_35.readProperty_mSourceVariableName ().readProperty_string (), var_generatedInstructions_11921, var_allocaList_11969, inCompiler COMMA_HERE) ;
-      ioArgument_ioRoutineListIR.addAssign_operation (var_routine_12145  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 277)) ;
+      GGS_assignmentRoutineIR var_routine_12139 = GGS_assignmentRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21__21__21__21__21_ (GGS_lstring::init_21__21_ (function_assignmentOperatorFuncName (var_targetType_10512, var_sourceType_10645, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 267)), temp_33.readProperty_mOperatorLocation (), inCompiler COMMA_HERE), GGS_bool (false), GGS_bool (false), var_targetType_10512, temp_34.readProperty_mTargetVariableName ().readProperty_string (), var_sourceType_10645, temp_35.readProperty_mSourceVariableName ().readProperty_string (), var_generatedInstructions_11915, var_allocaList_11963, inCompiler COMMA_HERE) ;
+      ioArgument_ioRoutineListIR.addAssign_operation (var_routine_12139  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 277)) ;
     }
   }
 }
@@ -6703,50 +6703,50 @@ void cPtr_llvmAssignmentOperatorUsage::method_generateCode (GGS_semanticTemporar
     }
     test_0 = test_5.boolEnum () ;
     if (kBoolTrue == test_0) {
-      GGS_string var_llvmRoutineName_14037 = function_assignmentOperatorFuncName (constinArgument_inTargetType, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 312)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 312)) ;
-      GGS_string var_s_14142 = GGS_string ("call void @").add_operation (var_llvmRoutineName_14037.getter_assemblerRepresentation (SOURCE_FILE ("assignment-operator-definition.galgas", 313)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 313)).add_operation (GGS_string (" ("), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 313)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (extensionGetter_llvmName (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (GGS_string (")"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)) ;
+      GGS_string var_llvmRoutineName_14028 = function_assignmentOperatorFuncName (constinArgument_inTargetType, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 312)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 312)) ;
+      GGS_string var_s_14133 = GGS_string ("call void @").add_operation (var_llvmRoutineName_14028.getter_assemblerRepresentation (SOURCE_FILE ("assignment-operator-definition.galgas", 313)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 313)).add_operation (GGS_string (" ("), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 313)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 314)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (extensionGetter_llvmName (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)).add_operation (GGS_string (")"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 315)) ;
       {
       GGS_stringset temp_6 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 316)) ;
-      temp_6.enterElement (var_llvmRoutineName_14037, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 316)) ;
-      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_14142, temp_6, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 316)) ;
+      temp_6.enterElement (var_llvmRoutineName_14028, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 316)) ;
+      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_14133, temp_6, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 316)) ;
       }
     }
   }
   if (kBoolFalse == test_0) {
-    GGS_omnibusType var_sourceType_14550 ;
-    GGS_string var_srcLLVMName_14576 ;
-    constinArgument_inSourcePossibleReference.method_extractReference (var_sourceType_14550, var_srcLLVMName_14576, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 318)) ;
+    GGS_omnibusType var_sourceType_14541 ;
+    GGS_string var_srcLLVMName_14567 ;
+    constinArgument_inSourcePossibleReference.method_extractReference (var_sourceType_14541, var_srcLLVMName_14567, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 318)) ;
     GGS_assignmentGenerationVarMap temp_7 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 319)) ;
-    GGS_assignmentGenerationVarMap var_varMap_14625 = temp_7 ;
+    GGS_assignmentGenerationVarMap var_varMap_14616 = temp_7 ;
     {
     const GGS_llvmAssignmentOperatorUsage temp_8 = this ;
-    var_varMap_14625.setter_insertKey (temp_8.readProperty_mTargetVarName (), constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 320)) ;
+    var_varMap_14616.setter_insertKey (temp_8.readProperty_mTargetVarName (), constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 320)) ;
     }
     {
     const GGS_llvmAssignmentOperatorUsage temp_9 = this ;
-    var_varMap_14625.setter_insertKey (temp_9.readProperty_mSourceVarName (), var_srcLLVMName_14576, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 321)) ;
+    var_varMap_14616.setter_insertKey (temp_9.readProperty_mSourceVarName (), var_srcLLVMName_14567, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 321)) ;
     }
     GGS_assignmentGenerationVarMap temp_10 = GGS_assignmentGenerationVarMap::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 322)) ;
-    GGS_assignmentGenerationVarMap var_typeMap_14797 = temp_10 ;
+    GGS_assignmentGenerationVarMap var_typeMap_14788 = temp_10 ;
     {
     const GGS_llvmAssignmentOperatorUsage temp_11 = this ;
-    var_typeMap_14797.setter_insertKey (temp_11.readProperty_mTargetVarName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 323)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 323)) ;
+    var_typeMap_14788.setter_insertKey (temp_11.readProperty_mTargetVarName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 323)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 323)) ;
     }
     {
     const GGS_llvmAssignmentOperatorUsage temp_12 = this ;
-    var_typeMap_14797.setter_insertKey (temp_12.readProperty_mSourceVarName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_sourceType_14550.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 324)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 324)) ;
+    var_typeMap_14788.setter_insertKey (temp_12.readProperty_mSourceVarName (), callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) var_sourceType_14541.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 324)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 324)) ;
     }
     GGS_stringlist temp_13 = GGS_stringlist::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 325)) ;
-    GGS_stringlist var_generatedInstructions_14982 = temp_13 ;
+    GGS_stringlist var_generatedInstructions_14973 = temp_13 ;
     const GGS_llvmAssignmentOperatorUsage temp_14 = this ;
-    extensionMethod_generateIRCode (temp_14.readProperty_mInstructionList (), var_varMap_14625, var_typeMap_14797, var_generatedInstructions_14982, ioArgument_ioTemporaries.mProperty_mTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 326)) ;
-    cEnumerator_stringlist enumerator_15150 (var_generatedInstructions_14982, EnumerationOrder::up) ;
-    while (enumerator_15150.hasCurrentObject ()) {
+    extensionMethod_generateIRCode (temp_14.readProperty_mInstructionList (), var_varMap_14616, var_typeMap_14788, var_generatedInstructions_14973, ioArgument_ioTemporaries.mProperty_mTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 326)) ;
+    cEnumerator_stringlist enumerator_15141 (var_generatedInstructions_14973, EnumerationOrder::up) ;
+    while (enumerator_15141.hasCurrentObject ()) {
       {
       GGS_stringset temp_15 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 328)) ;
-      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, enumerator_15150.current_mValue (HERE), temp_15, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 328)) ;
+      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, enumerator_15141.current_mValue (HERE), temp_15, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 328)) ;
       }
-      enumerator_15150.gotoNextObject () ;
+      enumerator_15141.gotoNextObject () ;
     }
   }
 }
@@ -6771,10 +6771,10 @@ void cPtr_assignmentRoutineIR::method_llvmCodeGeneration (GGS_string & ioArgumen
   const GGS_assignmentRoutineIR temp_5 = this ;
   extensionMethod_generateAllocaList (temp_5.readProperty_mAllocaList (), ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 382)) ;
   const GGS_assignmentRoutineIR temp_6 = this ;
-  cEnumerator_stringlist enumerator_17272 (temp_6.readProperty_mGeneratedInstructions (), EnumerationOrder::up) ;
-  while (enumerator_17272.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ").add_operation (enumerator_17272.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)) ;
-    enumerator_17272.gotoNextObject () ;
+  cEnumerator_stringlist enumerator_17260 (temp_6.readProperty_mGeneratedInstructions (), EnumerationOrder::up) ;
+  while (enumerator_17260.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ").add_operation (enumerator_17260.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)) ;
+    enumerator_17260.gotoNextObject () ;
   }
   ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 386)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 387)) ;
@@ -6791,14 +6791,14 @@ void cPtr_simpleAssignmentCopyRoutineIR::method_llvmCodeGeneration (GGS_string &
                                                                     Compiler * inCompiler
                                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_simpleAssignmentCopyRoutineIR temp_0 = this ;
-  GGS_string var_typeName_17948 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.readProperty_mTargetType ().ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 403)) ;
-  GGS_string var_targetVarName_17997 = GGS_string ("%targetPtr") ;
-  GGS_string var_sourceVarName_18032 = GGS_string ("%sourcePtr") ;
+  GGS_string var_typeName_17933 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.readProperty_mTargetType ().ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 403)) ;
+  GGS_string var_targetVarName_17982 = GGS_string ("%targetPtr") ;
+  GGS_string var_sourceVarName_18017 = GGS_string ("%sourcePtr") ;
   const GGS_simpleAssignmentCopyRoutineIR temp_1 = this ;
   ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("define internal void @").add_operation (temp_1.readProperty_mRoutineMangledName ().readProperty_string ().getter_assemblerRepresentation (SOURCE_FILE ("assignment-operator-definition.galgas", 406)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 406)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 406)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string (" (").add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (var_targetVarName_17997, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (var_sourceVarName_18032, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (GGS_string (") nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  %value = load ").add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (var_sourceVarName_18032, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)) ;
-  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  store ").add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string (" %value, "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (var_typeName_17948, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (var_targetVarName_17997, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string (" (").add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (var_targetVarName_17982, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)).add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (var_sourceVarName_18017, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)).add_operation (GGS_string (") nounwind {\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 408)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 407)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  %value = load ").add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (var_sourceVarName_18017, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 409)) ;
+  ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  store ").add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string (" %value, "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (var_typeName_17933, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (var_targetVarName_17982, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 410)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 411)) ;
   ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 412)) ;
 }
@@ -6818,25 +6818,25 @@ void cPtr_simpleCopyAssignmentOperatorUsage::method_generateCode (GGS_semanticTe
                                                                   const GGS_bool /* constinArgument_inTargetIsInitialized */,
                                                                   Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_objectIR var_sourceValue_19307 = constinArgument_inSourcePossibleReference ;
+  GGS_objectIR var_sourceValue_19289 = constinArgument_inSourcePossibleReference ;
   enumGalgasBool test_0 = kBoolTrue ;
   if (kBoolTrue == test_0) {
     test_0 = constinArgument_inSourcePossibleReference.getter_isReference (SOURCE_FILE ("assignment-operator-definition.galgas", 434)).boolEnum () ;
     if (kBoolTrue == test_0) {
       {
-      routine_getNewTempValue_3F__26__21_ (constinArgument_inTargetType, ioArgument_ioTemporaries, var_sourceValue_19307, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 435)) ;
+      routine_getNewTempValue_3F__26__21_ (constinArgument_inTargetType, ioArgument_ioTemporaries, var_sourceValue_19289, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 435)) ;
       }
-      GGS_string var_s_19470 = extensionGetter_llvmName (var_sourceValue_19307, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)).add_operation (extensionGetter_llvmName (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)) ;
+      GGS_string var_s_19452 = extensionGetter_llvmName (var_sourceValue_19289, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 436)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)).add_operation (extensionGetter_llvmName (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 437)) ;
       {
       GGS_stringset temp_1 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 438)) ;
-      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_19470, temp_1, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 438)) ;
+      extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_19452, temp_1, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 438)) ;
       }
     }
   }
-  GGS_string var_s_19729 = GGS_string ("store ").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (extensionGetter_llvmName (var_sourceValue_19307, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)).add_operation (constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)) ;
+  GGS_string var_s_19711 = GGS_string ("store ").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (extensionGetter_llvmName (var_sourceValue_19289, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 441)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inTargetType.ptr (), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)).add_operation (constinArgument_inTargetLLVMName, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 442)) ;
   {
   GGS_stringset temp_2 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 443)) ;
-  extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_19729, temp_2, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 443)) ;
+  extensionSetter_appendInstructionAsFreeString (ioArgument_ioInstructionListIR, var_s_19711, temp_2, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 443)) ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -6863,29 +6863,29 @@ void cPtr_llvmGenerationInstruction::method_checkInstructionList (GGS_ctCheckMap
                                                                   Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmGenerationInstruction temp_0 = this ;
-  cEnumerator_llvmGenerationInstructionElementList enumerator_5023 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
-  while (enumerator_5023.hasCurrentObject ()) {
-    switch (enumerator_5023.current_mElement (HERE).enumValue ()) {
+  cEnumerator_llvmGenerationInstructionElementList enumerator_5014 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
+  while (enumerator_5014.hasCurrentObject ()) {
+    switch (enumerator_5014.current_mElement (HERE).enumValue ()) {
     case GGS_llvmGenerationInstructionElement::Enumeration::invalid:
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_string:
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_symbol:
       {
-        GGS_lstring extractedValue_5117_name_0 ;
-        enumerator_5023.current_mElement (HERE).getAssociatedValuesFor_symbol (extractedValue_5117_name_0) ;
-        ioArgument_ioMap.method_searchKey (extractedValue_5117_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 130)) ;
+        GGS_lstring extractedValue_5108_name_0 ;
+        enumerator_5014.current_mElement (HERE).getAssociatedValuesFor_symbol (extractedValue_5108_name_0) ;
+        ioArgument_ioMap.method_searchKey (extractedValue_5108_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 130)) ;
       }
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_type:
       {
-        GGS_lstring extractedValue_5170_name_0 ;
-        enumerator_5023.current_mElement (HERE).getAssociatedValuesFor_type (extractedValue_5170_name_0) ;
-        ioArgument_ioMap.method_searchKey (extractedValue_5170_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 132)) ;
+        GGS_lstring extractedValue_5161_name_0 ;
+        enumerator_5014.current_mElement (HERE).getAssociatedValuesFor_type (extractedValue_5161_name_0) ;
+        ioArgument_ioMap.method_searchKey (extractedValue_5161_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 132)) ;
       }
       break ;
     }
-    enumerator_5023.gotoNextObject () ;
+    enumerator_5014.gotoNextObject () ;
   }
 }
 //--------------------------------------------------------------------------------------------------
@@ -6901,42 +6901,42 @@ void cPtr_llvmGenerationInstruction::method_generateIRCode (GGS_assignmentGenera
                                                             GGS_allocaList & /* ioArgument_ioAllocaList */,
                                                             Compiler * inCompiler
                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_string var_s_6966 = GGS_string::makeEmptyString () ;
+  GGS_string var_s_6957 = GGS_string::makeEmptyString () ;
   const GGS_llvmGenerationInstruction temp_0 = this ;
-  cEnumerator_llvmGenerationInstructionElementList enumerator_6981 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
-  while (enumerator_6981.hasCurrentObject ()) {
-    switch (enumerator_6981.current_mElement (HERE).enumValue ()) {
+  cEnumerator_llvmGenerationInstructionElementList enumerator_6972 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
+  while (enumerator_6972.hasCurrentObject ()) {
+    switch (enumerator_6972.current_mElement (HERE).enumValue ()) {
     case GGS_llvmGenerationInstructionElement::Enumeration::invalid:
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_string:
       {
-        GGS_string extractedValue_7056_value_0 ;
-        enumerator_6981.current_mElement (HERE).getAssociatedValuesFor_string (extractedValue_7056_value_0) ;
-        var_s_6966.plusAssign_operation(extractedValue_7056_value_0, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 185)) ;
+        GGS_string extractedValue_7047_value_0 ;
+        enumerator_6972.current_mElement (HERE).getAssociatedValuesFor_string (extractedValue_7047_value_0) ;
+        var_s_6957.plusAssign_operation(extractedValue_7047_value_0, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 185)) ;
       }
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_symbol:
       {
-        GGS_lstring extractedValue_7101_name_0 ;
-        enumerator_6981.current_mElement (HERE).getAssociatedValuesFor_symbol (extractedValue_7101_name_0) ;
-        GGS_string var_value_7147 ;
-        ioArgument_ioVarMap.method_searchKey (extractedValue_7101_name_0, var_value_7147, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 187)) ;
-        var_s_6966.plusAssign_operation(var_value_7147, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 188)) ;
+        GGS_lstring extractedValue_7092_name_0 ;
+        enumerator_6972.current_mElement (HERE).getAssociatedValuesFor_symbol (extractedValue_7092_name_0) ;
+        GGS_string var_value_7138 ;
+        ioArgument_ioVarMap.method_searchKey (extractedValue_7092_name_0, var_value_7138, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 187)) ;
+        var_s_6957.plusAssign_operation(var_value_7138, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 188)) ;
       }
       break ;
     case GGS_llvmGenerationInstructionElement::Enumeration::enum_type:
       {
-        GGS_lstring extractedValue_7188_name_0 ;
-        enumerator_6981.current_mElement (HERE).getAssociatedValuesFor_type (extractedValue_7188_name_0) ;
-        GGS_string var_value_7235 ;
-        ioArgument_ioTypeMap.method_searchKey (extractedValue_7188_name_0, var_value_7235, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 190)) ;
-        var_s_6966.plusAssign_operation(var_value_7235, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 191)) ;
+        GGS_lstring extractedValue_7179_name_0 ;
+        enumerator_6972.current_mElement (HERE).getAssociatedValuesFor_type (extractedValue_7179_name_0) ;
+        GGS_string var_value_7226 ;
+        ioArgument_ioTypeMap.method_searchKey (extractedValue_7179_name_0, var_value_7226, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 190)) ;
+        var_s_6957.plusAssign_operation(var_value_7226, inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 191)) ;
       }
       break ;
     }
-    enumerator_6981.gotoNextObject () ;
+    enumerator_6972.gotoNextObject () ;
   }
-  ioArgument_ioInstructionAsStringListIR.addAssign_operation (var_s_6966  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 194)) ;
+  ioArgument_ioInstructionAsStringListIR.addAssign_operation (var_s_6957  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 194)) ;
 }
 //--------------------------------------------------------------------------------------------------
 //
@@ -6951,11 +6951,11 @@ void cPtr_llvmVarInstruction::method_generateIRCode (GGS_assignmentGenerationVar
                                                      GGS_allocaList & /* ioArgument_ioAllocaList */,
                                                      Compiler * inCompiler
                                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_string var_newTemporaryVariable_7711 = GGS_string ("%temp").add_operation (ioArgument_ioTemporaryIndex.getter_string (SOURCE_FILE ("llvm-instructions.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 206)) ;
+  GGS_string var_newTemporaryVariable_7702 = GGS_string ("%temp").add_operation (ioArgument_ioTemporaryIndex.getter_string (SOURCE_FILE ("llvm-instructions.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 206)) ;
   ioArgument_ioTemporaryIndex.plusAssign_operation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("llvm-instructions.galgas", 207)) ;
   {
   const GGS_llvmVarInstruction temp_0 = this ;
-  ioArgument_ioVarMap.setter_insertKey (temp_0.readProperty_mVariableName (), var_newTemporaryVariable_7711, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 208)) ;
+  ioArgument_ioVarMap.setter_insertKey (temp_0.readProperty_mVariableName (), var_newTemporaryVariable_7702, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas", 208)) ;
   }
 }
 #include "project_header.h"

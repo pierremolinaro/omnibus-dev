@@ -5812,22 +5812,22 @@ void extensionMethod_buildProcedureCallAccessList (const GGS_LValueOperandAST in
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_property:
     {
-      GGS_lstring extractedValue_3041_name_0 ;
-      GGS_LValueOperandAST extractedValue_3064_next_1 ;
-      temp_0.getAssociatedValuesFor_property (extractedValue_3041_name_0, extractedValue_3064_next_1) ;
-      ioArgument_ioAccessList.addAssign_operation (GGS_accessInAssignmentAST::class_func_property (extractedValue_3041_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3064_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 73)) ;
+      GGS_lstring extractedValue_3032_name_0 ;
+      GGS_LValueOperandAST extractedValue_3055_next_1 ;
+      temp_0.getAssociatedValuesFor_property (extractedValue_3032_name_0, extractedValue_3055_next_1) ;
+      ioArgument_ioAccessList.addAssign_operation (GGS_accessInAssignmentAST::class_func_property (extractedValue_3032_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_3055_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 73)) ;
     }
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_arrayAccess:
     {
-      GGS_expressionAST extractedValue_3206_index_0 ;
-      GGS_location extractedValue_3222_endOfIndex_1 ;
-      GGS_bool extractedValue_3239_checkIndexExpression_2 ;
-      GGS_LValueOperandAST extractedValue_3278_next_3 ;
-      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3206_index_0, extractedValue_3222_endOfIndex_1, extractedValue_3239_checkIndexExpression_2, extractedValue_3278_next_3) ;
-      ioArgument_ioAccessList.addAssign_operation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3206_index_0, extractedValue_3222_endOfIndex_1, extractedValue_3239_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3278_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 76)) ;
+      GGS_expressionAST extractedValue_3197_index_0 ;
+      GGS_location extractedValue_3213_endOfIndex_1 ;
+      GGS_bool extractedValue_3230_checkIndexExpression_2 ;
+      GGS_LValueOperandAST extractedValue_3269_next_3 ;
+      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3197_index_0, extractedValue_3213_endOfIndex_1, extractedValue_3230_checkIndexExpression_2, extractedValue_3269_next_3) ;
+      ioArgument_ioAccessList.addAssign_operation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3197_index_0, extractedValue_3213_endOfIndex_1, extractedValue_3230_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_3269_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 76)) ;
     }
     break ;
   }
@@ -10920,12 +10920,12 @@ void extensionMethod_llvmRoutineGeneration (const GGS_routineListIR inObject,
                                             Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_routineListIR temp_0 = inObject ;
-  cEnumerator_routineListIR enumerator_3794 (temp_0, EnumerationOrder::up) ;
-  while (enumerator_3794.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GGS_string ("Routine ").add_operation (enumerator_3794.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)) ;
+  cEnumerator_routineListIR enumerator_3791 (temp_0, EnumerationOrder::up) ;
+  while (enumerator_3791.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GGS_string ("Routine ").add_operation (enumerator_3791.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)) ;
     ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GGS_uint (uint32_t (0U)) ;
-    callExtensionMethod_llvmCodeGeneration ((cPtr_abstractRoutineIR *) enumerator_3794.current (HERE).readProperty_mRoutine ().ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 111)) ;
-    enumerator_3794.gotoNextObject () ;
+    callExtensionMethod_llvmCodeGeneration ((cPtr_abstractRoutineIR *) enumerator_3791.current (HERE).readProperty_mRoutine ().ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 111)) ;
+    enumerator_3791.gotoNextObject () ;
   }
 }
 

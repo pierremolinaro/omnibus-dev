@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @taskSetupDeclarationAST : @abstractDeclarationAST {
+class @taskSetupDeclarationAST : @abstractDeclarationAST {
   public var @lstring mTaskName
   public var @string mQualifier
   public var @lstring mSetupName

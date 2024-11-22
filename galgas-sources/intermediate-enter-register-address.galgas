@@ -12,7 +12,7 @@ setter @instructionListIR appendEnterRegisterAddress
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @enterRegisterAddressIR : @abstractInstructionIR {
+class @enterRegisterAddressIR : @abstractInstructionIR {
   public var @string mLLVMName
   public var @bigint mBaseAddress
   public var @bigint mAddressOffset

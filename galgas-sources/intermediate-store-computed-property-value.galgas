@@ -9,7 +9,7 @@ setter @instructionListIR appendStoreComputedPropertyValue
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @storeComputedPropertyValueIR : @abstractInstructionIR {
+class @storeComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mReceiverIR
   public var @string mLLVMSetterName
   public var @objectIR mValueIR

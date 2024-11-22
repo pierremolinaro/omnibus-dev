@@ -133,7 +133,7 @@ method @allocaList generateAllocaList ?!@string ioLLVMcode {
 #! CODE GENERATION
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @regularRoutineIR : @abstractRoutineIR {
+class @regularRoutineIR : @abstractRoutineIR {
   public var @omnibusType mReceiverType # .void if standalone function
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @allocaList mAllocaList

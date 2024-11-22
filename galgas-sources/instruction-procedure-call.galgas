@@ -2,20 +2,20 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract refclass @callInstructionAST : @instructionAST {
+abstract class @callInstructionAST : @instructionAST {
   public var @effectiveArgumentListAST mArguments
   public var @location mEndOfArguments
 }
 
 #·······················································································································
 
-refclass @standAloneProcedureCallInstructionAST : @callInstructionAST {
+class @standAloneProcedureCallInstructionAST : @callInstructionAST {
   public var @lstring mSandAloneRoutineName
 }
 
 #·······················································································································
 
-refclass @procedureCallInstructionAST : @callInstructionAST {
+class @procedureCallInstructionAST : @callInstructionAST {
   public var @lstring mIdentifier
   public var @accessInAssignmentListAST mAccessList
 }

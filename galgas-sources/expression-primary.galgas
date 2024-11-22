@@ -17,7 +17,7 @@ list @primaryInExpressionAccessListAST {
 
 #·······················································································································
 
-refclass @primaryInExpressionAST : @expressionAST {
+class @primaryInExpressionAST : @expressionAST {
   public var @lstring mReceiverName
   public var @primaryInExpressionAccessListAST mAccessList
 }

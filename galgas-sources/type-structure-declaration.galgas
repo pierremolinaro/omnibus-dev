@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @structureDeclarationAST : @abstractDeclarationAST {
+class @structureDeclarationAST : @abstractDeclarationAST {
   public var @lstring mReceiverTypeName
   public var @lstring mOmnibusTypeSpecificName
   public var @lstring mLLVMBaseTypeName
@@ -639,7 +639,7 @@ override method @structureDeclarationAST enterInContext
 #! USER LLVM TYPE DEFINITION
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   public var @propertyList mPropertyList
 }
 
@@ -657,7 +657,7 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 #! CODE GENERATION: ASSIGNMENT
 
-refclass @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mStructureType
 }
 
@@ -735,7 +735,7 @@ override method @structureAssignmentOperatorUsage generateCode
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @structureTypeAssignFunctionIR : @abstractRoutineIR {
+class @structureTypeAssignFunctionIR : @abstractRoutineIR {
   public var @omnibusType mStructureType
 }
 

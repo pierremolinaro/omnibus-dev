@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @functionDeclarationAST : @abstractDeclarationAST {
+class @functionDeclarationAST : @abstractDeclarationAST {
   public var @mode mMode
   public var @bool mPublicFunction
   public var @lstring mReceiverTypeName # Empty string if standalone

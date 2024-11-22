@@ -8613,16 +8613,16 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6145_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6145_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6142_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6142_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        const GGS_unifiedTypeMapElementClass var_type_6171 = extractedValue_6145_weakElement_0.unwrappedValue () ;
-        if (!extractedValue_6145_weakElement_0.isValuated ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6168 = extractedValue_6142_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6142_weakElement_0.isValuated ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          switch (var_type_6171.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6168.readProperty_mDefinition ().enumValue ()) {
           case GGS_typeDefinition::Enumeration::invalid:
             break ;
           case GGS_typeDefinition::Enumeration::enum_unsolved:
@@ -8634,9 +8634,9 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
             break ;
           case GGS_typeDefinition::Enumeration::enum_solved:
             {
-              GGS_omnibusType extractedValue_6316_definition_0 ;
-              var_type_6171.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6316_definition_0) ;
-              result_result = extractedValue_6316_definition_0 ;
+              GGS_omnibusType extractedValue_6313_definition_0 ;
+              var_type_6168.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6313_definition_0) ;
+              result_result = extractedValue_6313_definition_0 ;
             }
             break ;
           }
@@ -8680,16 +8680,16 @@ GGS_string extensionGetter_key (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6668_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6668_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6665_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6665_weakElement_0) ;
       enumGalgasBool test_2 = kBoolTrue ;
       if (kBoolTrue == test_2) {
-        const GGS_unifiedTypeMapElementClass var_type_6694 = extractedValue_6668_weakElement_0.unwrappedValue () ;
-        if (!extractedValue_6668_weakElement_0.isValuated ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6691 = extractedValue_6665_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6665_weakElement_0.isValuated ()) {
           test_2 = kBoolFalse ;
         }
         if (kBoolTrue == test_2) {
-          result_result = var_type_6694.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_6691.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (kBoolFalse == test_2) {

@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @extendExpressionAST : @expressionAST {
+class @extendExpressionAST : @expressionAST {
   public var @expressionAST mExpression
   public var @lstring mTypeName
   public var @location mEndOfExpression

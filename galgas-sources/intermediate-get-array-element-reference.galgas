@@ -14,7 +14,7 @@ setter @instructionListIR appendGetArrayElementReference
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @getArrayElementReferenceIR : @abstractInstructionIR {
+class @getArrayElementReferenceIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @objectIR mArray
   public var @objectIR mIndex

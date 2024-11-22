@@ -8,7 +8,7 @@ setter @instructionListIR appendExtend
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @extendIR : @abstractInstructionIR {
+class @extendIR : @abstractInstructionIR {
   public var @objectIR mResult
   public var @objectIR mSource
 }

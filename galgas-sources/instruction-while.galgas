@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @whileInstructionAST : @instructionAST {
+class @whileInstructionAST : @instructionAST {
   public var @expressionAST m_while_Expression
   public var @location mEndOf_test_expression
   public var @instructionListAST mWhileInstructionList
@@ -133,7 +133,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @whileInstructionIR : @abstractInstructionIR {
+class @whileInstructionIR : @abstractInstructionIR {
   public var @uint mLabelIndex
   public var @instructionListIR mTestInstructionGenerationList
   public var @string m_while_llvmName

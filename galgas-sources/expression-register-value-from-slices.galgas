@@ -10,7 +10,7 @@ list @registerIntegerFieldListAST {
 
 #·······················································································································
 
-refclass @registerConstantExpressionAST : @expressionAST {
+class @registerConstantExpressionAST : @expressionAST {
   public var @lstring mRegisterGroupName
   public var @lstring mRegisterName
   public var @registerIntegerFieldListAST mFieldValues

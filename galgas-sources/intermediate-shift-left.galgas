@@ -9,7 +9,7 @@ setter @instructionListIR appendShiftLeft
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @leftShiftIR : @abstractInstructionIR {
+class @leftShiftIR : @abstractInstructionIR {
   public var @objectIR mResult
   public var @objectIR mSource
   public var @uint mShiftAmount

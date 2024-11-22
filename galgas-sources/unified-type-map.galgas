@@ -118,7 +118,7 @@ map @unifiedTypeMap {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @unifiedTypeMapElementClass {
+class @unifiedTypeMapElementClass {
   public var @lstring mTypeName
   public var @typeDefinition mDefinition
 }

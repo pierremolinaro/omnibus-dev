@@ -50,7 +50,7 @@ getter @omnibusInfixOperator string -> @string {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @omnibusInfixOperatorExpressionAST : @expressionAST {
+class @omnibusInfixOperatorExpressionAST : @expressionAST {
   public var @expressionAST mLeftExpression
   public var @location mOperatorLocation
   public var @omnibusInfixOperator mInfixOperator

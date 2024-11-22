@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @truncateExpressionAST : @expressionAST {
+class @truncateExpressionAST : @expressionAST {
   public var @expressionAST mExpression
   public var @lstring mTypeName
   public var @location mEndOfExpression
@@ -136,7 +136,7 @@ override method @truncateExpressionAST analyzeExpression
 #! @truncateInstructionIR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @truncateInstructionIR : @abstractInstructionIR {
+class @truncateInstructionIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @objectIR mOperand
 }

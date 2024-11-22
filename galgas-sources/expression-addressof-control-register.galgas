@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @addressofControlRegisterAST : @expressionAST {
+class @addressofControlRegisterAST : @expressionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
 }
 

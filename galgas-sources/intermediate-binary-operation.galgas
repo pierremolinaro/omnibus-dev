@@ -53,7 +53,7 @@ setter @instructionListIR appendBinaryOperation
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @binaryOperationIR : @abstractInstructionIR {
+class @binaryOperationIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @omnibusType mOperandType
   public var @objectIR mLeft

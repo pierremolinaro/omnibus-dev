@@ -9,7 +9,7 @@ setter @instructionListIR appendStoreIndirectVolatileRegister
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @storeIndirectVolatileIR : @abstractInstructionIR {
+class @storeIndirectVolatileIR : @abstractInstructionIR {
   public var @omnibusType mTargetVarType
   public var @string mLLVMName
   public var @objectIR mSourceValue

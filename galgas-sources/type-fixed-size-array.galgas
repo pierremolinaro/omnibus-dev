@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
+class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
   public var @lstring mFixedSizeArrayType
   public var @lstring mElementTypeName
   public var @expressionAST mSizeExpression
@@ -191,7 +191,7 @@ func assignValueToFixedSizeArrayElements_functionName ?let @omnibusType inFixedS
 #! USER LLVM TYPE DEFINITION
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
+class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   public var @omnibusType mElementType
   public var @bigint mSize
 }
@@ -206,7 +206,7 @@ override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string 
 #! CODE GENERATION: STATIC ARRAY ASSIGNMENT
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
+class @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mElementType
   public var @uint mArraySize
   public var @string mAssignValueToElements_functionName
@@ -287,7 +287,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
+class @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
   public var @omnibusType mElementType
   public var @uint mArraySize
@@ -322,7 +322,7 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
+class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
 }
 

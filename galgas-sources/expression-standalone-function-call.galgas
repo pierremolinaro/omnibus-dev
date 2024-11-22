@@ -2,7 +2,7 @@
 #! AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @standaloneFunctionInExpressionAST : @expressionAST {
+class @standaloneFunctionInExpressionAST : @expressionAST {
   public var @lstring mStandaloneFunctionName
   public var @effectiveArgumentListAST mArguments
   public var @location mEndOfArguments

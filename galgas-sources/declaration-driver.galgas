@@ -38,7 +38,7 @@ list @driverInstanciationListAST {
 
 #·······················································································································
 
-refclass @implementedDriverAST : @abstractDeclarationAST {
+class @implementedDriverAST : @abstractDeclarationAST {
   public var @lstring mDriverName
   public var @lstringlist mDriverDependanceList
   public var @bool mIsInstancied
@@ -379,7 +379,7 @@ override method @implementedDriverAST enterInContext
 #   SEMANTICS                                                                                                           
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @decoratedRequiredDriver : @abstractDecoratedDeclaration {
+class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
   public var @lstring mDriverName
 }
 

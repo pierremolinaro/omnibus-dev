@@ -11,7 +11,7 @@ enum @prefixOperator {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @prefixOperatorExpressionAST : @expressionAST {
+class @prefixOperatorExpressionAST : @expressionAST {
   public var @location mOperatorLocation
   public var @prefixOperator mOp
   public var @expressionAST mExpression

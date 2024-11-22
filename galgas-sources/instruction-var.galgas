@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @varInstructionWithAssignmentAST : @instructionAST {
+class @varInstructionWithAssignmentAST : @instructionAST {
   public var @lstring mVarName
   public var @lstring mOptionalTypeName
   public var @expressionAST mSourceExpression
@@ -10,7 +10,7 @@ refclass @varInstructionWithAssignmentAST : @instructionAST {
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @varDeclarationInstructionAST : @instructionAST {
+class @varDeclarationInstructionAST : @instructionAST {
   public var @lstring mVarName
   public var @lstring mTypeName
 }

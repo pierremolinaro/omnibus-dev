@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @ifInstructionAST : @instructionAST {
+class @ifInstructionAST : @instructionAST {
   public var @expressionAST mTestExpression
   public var @location mTestExpressionEndLocation
   public var @bool mStaticIfExpression
@@ -187,7 +187,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @ifInstructionIR : @abstractInstructionIR {
+class @ifInstructionIR : @abstractInstructionIR {
   public var @string mLLVMTestName
   public var @location mLocation
   public var @instructionListIR mThenInstructionGenerationList

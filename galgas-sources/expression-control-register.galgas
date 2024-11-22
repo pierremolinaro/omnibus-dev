@@ -2,7 +2,7 @@
 #! AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @registerInExpressionAST : @expressionAST {
+class @registerInExpressionAST : @expressionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
   public var @lstring mFieldName # Empty string if no field access
 }

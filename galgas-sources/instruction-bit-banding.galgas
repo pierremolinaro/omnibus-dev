@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @bitbandInstructionAST : @instructionAST {
+class @bitbandInstructionAST : @instructionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
   public var @expressionAST mBitExpression
   public var @location mBitExpressionLocation
@@ -175,7 +175,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #  CODE GENERATION                                                                                                      
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @bitbandInstructionIR : @abstractInstructionIR {
+class @bitbandInstructionIR : @abstractInstructionIR {
   public var @string mRegisterAddressLLVMname
   public var @objectIR mBitExpressionOperand
   public var @objectIR mSourceExpressionOperand

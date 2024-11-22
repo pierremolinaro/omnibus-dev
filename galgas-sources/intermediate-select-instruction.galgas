@@ -10,7 +10,7 @@ setter @instructionListIR appendSelectOperation
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @selectInstructionIR : @abstractInstructionIR {
+class @selectInstructionIR : @abstractInstructionIR {
   public var @objectIR mTargetValue
   public var @string m_if_variableLLVMName
   public var @objectIR m_then_variable

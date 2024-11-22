@@ -11,7 +11,7 @@ setter @instructionListIR appendGetUniversalPropertyReference
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @getUniversalPropertyReferenceIR : @abstractInstructionIR {
+class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
   public var @omnibusType mType
   public var @string mLLVMName
   public var @string mElementLLVMName

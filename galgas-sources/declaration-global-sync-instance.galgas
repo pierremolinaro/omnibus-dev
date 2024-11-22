@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
+class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
   public var @lstring mSyncTypeName
   public var @lstring mSyncInstanceName
   public var @expressionAST mSourceExpression
@@ -130,7 +130,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
 #  SEMANTIC ANALYSIS                                                                                                    
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @decoratedSyncInstance : @abstractDecoratedDeclaration {
+class @decoratedSyncInstance : @abstractDecoratedDeclaration {
   public var @lstring mSyncInstanceName
   public var @objectIR mExpressionGeneratedCode
 }

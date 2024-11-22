@@ -11,7 +11,7 @@ map @infixOperatorMap {
 
 #·······················································································································
 
-abstract refclass @omnibusInfixOperatorUsage {
+abstract class @omnibusInfixOperatorUsage {
 }
 
 #·······················································································································
@@ -56,7 +56,7 @@ method @infixOperatorMap generateInfixOperatorCode
 #  INLINE INFIX OPERATOR
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @inlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
+class @inlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
 }
 

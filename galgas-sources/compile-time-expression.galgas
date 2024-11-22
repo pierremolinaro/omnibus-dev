@@ -2,12 +2,12 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract refclass @ctExpressionAST {
+abstract class @ctExpressionAST {
 }
 
 #·······················································································································
 
-refclass @ctInfixExpressionAST : @ctExpressionAST {
+class @ctInfixExpressionAST : @ctExpressionAST {
   public var @ctExpressionAST mLeftExpression
   public var @location mOperatorLocation
   public var @compileTimeInfixOperatorEnumeration mInfixOperator
@@ -16,7 +16,7 @@ refclass @ctInfixExpressionAST : @ctExpressionAST {
 
 #·······················································································································
 
-refclass @ctPrefixExpressionAST : @ctExpressionAST {
+class @ctPrefixExpressionAST : @ctExpressionAST {
   public var @location mOperatorLocation
   public var @compileTimePrefixOperatorEnumeration mPrefixOperator
   public var @ctExpressionAST mExpression
@@ -24,23 +24,23 @@ refclass @ctPrefixExpressionAST : @ctExpressionAST {
 
 #·······················································································································
 
-refclass @ctTrueExpressionAST : @ctExpressionAST {
+class @ctTrueExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-refclass @ctFalseExpressionAST : @ctExpressionAST {
+class @ctFalseExpressionAST : @ctExpressionAST {
 }
 
 #·······················································································································
 
-refclass @ctIntExpressionAST : @ctExpressionAST {
+class @ctIntExpressionAST : @ctExpressionAST {
   public var @lbigint mValue
 }
 
 #·······················································································································
 
-refclass @ctIdentifierExpressionAST : @ctExpressionAST {
+class @ctIdentifierExpressionAST : @ctExpressionAST {
   public var @lstring mIdentifier
 }
 

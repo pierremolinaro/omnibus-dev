@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @integerDeclarationAST : @abstractDeclarationAST {
+class @integerDeclarationAST : @abstractDeclarationAST {
   public var @bool mIsSigned
   public var @uint mSize
 }
@@ -304,7 +304,7 @@ proc addIntegerInfixOperator
 #! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
+class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
 }
 
@@ -345,7 +345,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
 #! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
+class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
 }
 
@@ -386,7 +386,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
 #! CODE GENERATION: BUILTIN FUNCTIONS
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @integerBuiltinFunctionIR : @abstractRoutineIR {
+class @integerBuiltinFunctionIR : @abstractRoutineIR {
   public var @string mLLVMTypeName
   public var @string mIntrinsicName
 }

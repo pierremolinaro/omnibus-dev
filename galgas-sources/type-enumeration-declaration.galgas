@@ -9,7 +9,7 @@ list @enumerationConstantList {
 
 #·······················································································································
 
-refclass @enumerationDeclarationAST : @abstractDeclarationAST {
+class @enumerationDeclarationAST : @abstractDeclarationAST {
   public var @lstring mEnumerationName
   public var @enumerationConstantList mCaseNameList
 }
@@ -194,7 +194,7 @@ override method @enumerationDeclarationAST enterInContext
 #!  CODE GENERATION                                                                                                    
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @enumToUintRoutineIR : @abstractRoutineIR {
+class @enumToUintRoutineIR : @abstractRoutineIR {
   public var @string mEnumerationLLVMTypeName
 }
 

@@ -63,7 +63,7 @@ struct @targetParameters {
 
 #·······················································································································
 
-refclass @configurationDeclarationAST : @abstractDeclarationAST {
+class @configurationDeclarationAST : @abstractDeclarationAST {
   public var @lstring mPanicCodeTypeName
   public var @lstring mPanicLineTypeName
   public var @targetParameters mTargetParameters

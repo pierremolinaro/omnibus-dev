@@ -2,7 +2,7 @@
 #!  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract refclass @instructionAST {
+abstract class @instructionAST {
   public var @location mInstructionLocation
 }
 

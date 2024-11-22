@@ -2,7 +2,7 @@
 #  AST                                                                                                                  
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @llvmInfixOperatorAST : @abstractDeclarationAST {
+class @llvmInfixOperatorAST : @abstractDeclarationAST {
   public var @omnibusInfixOperator mInfixOperator
   public var @location mInfixOperatorLocation
   public var @lstring mLeftOperandName
@@ -253,7 +253,7 @@ override method @llvmInfixOperatorAST enterInContext
 #   INFIX OPERATOR USAGE
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
+class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @string mInfixMangledFunctionName
   public var @lstring mLeftOperandName
   public var @lstring mRightOperandName
@@ -298,7 +298,7 @@ override method @llvmInfixOperatorUsage generateCode
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
+class @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @lstring mLeftOperandName
   public var @lstring mRightOperandName
   public var @llvmGenerationInstructionList mInstructionList
@@ -351,7 +351,7 @@ override method @llvmInlineInfixOperatorUsage generateCode
 #   CODE GENERATION
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
-refclass @infixOperatorRoutineIR : @abstractRoutineIR {
+class @infixOperatorRoutineIR : @abstractRoutineIR {
   public var @omnibusType mTargetType
   public var @string mTargetVarName
   public var @omnibusType mSourceType
