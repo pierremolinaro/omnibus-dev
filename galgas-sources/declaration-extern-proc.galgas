@@ -127,11 +127,11 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
 #--- Analyse formal arguments
-  var @routineFormalArgumentListIR formalArguments = §[]
+  var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
     !context:inContext
     !self.mProcFormalArgumentList
-    !? %from ()
+    !? %from @()
     !?formalArguments
     !warningOnUnusedArgs: true
   )
@@ -147,7 +147,7 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
     !formalArguments
     !returnType
   ]  
-  ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR.init {
+  ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR {
     !self.mRoutineNameForGeneration
     !isRequired:false # Is not root
     !warnsIfUnused:false

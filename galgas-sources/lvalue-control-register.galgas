@@ -73,7 +73,7 @@ syntax extension omnibus_syntax {
         !checkIndexExpression:checkIndexExpression
       }
     end
-    outRegisterLValue = .init {!registerGroupName !groupIndex !registerName !registerIndex}
+    outRegisterLValue = @{!registerGroupName !groupIndex !registerName !registerIndex}
   }
 
   #·····················································································································

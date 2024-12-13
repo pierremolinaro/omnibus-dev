@@ -29,7 +29,7 @@ setter @instructionListIR appendCopyFromReferences
       : "object of type " + inTargetReference.type.omnibusTypeDescriptionName
         + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName
     end
-    self += !@copyFromReferencesIR.init {!inTargetReference !sourceLLVMName}
+    self += !@copyFromReferencesIR {!inTargetReference !sourceLLVMName}
   end
 }
 

@@ -7,7 +7,7 @@ setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
   ?let @objectIR inIndexIR
 {
   [!?ioTemporaries newTempLLVMVar ?out_llvmName]
-  self += !@enterRegisterGroupSubscriptedAddressIR.init {!out_llvmName !inGroupName !inGroupSize !inIndexIR}
+  self += !@enterRegisterGroupSubscriptedAddressIR {!out_llvmName !inGroupName !inGroupSize !inIndexIR}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

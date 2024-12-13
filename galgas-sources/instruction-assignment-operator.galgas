@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
   #--- Right expression
     <expression> !?ioAST ?let @expressionAST rightExpression
   #--- Build source expression
-    var @primaryInExpressionAccessListAST expressionAccessList = §[]
+    var @primaryInExpressionAccessListAST expressionAccessList = @[]
     [lvalue.mOperand buildExpressionAccessList !?expressionAccessList]
 #    for (access) in lvalue.mAccessList do
 #      switch access
@@ -65,15 +65,15 @@ syntax extension omnibus_syntax {
 #        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
 #      end
 #    end
-    let leftExpression = @primaryInExpressionAST.init {!lvalue.mIdentifier !expressionAccessList}
-    let expression = @omnibusInfixOperatorExpressionAST.init {
+    let leftExpression = @primaryInExpressionAST {!lvalue.mIdentifier !expressionAccessList}
+    let expression = @omnibusInfixOperatorExpressionAST {
       !leftExpression
       !operatorLocation
       !infixOperator
       !rightExpression
     }
   #--- Build assignment instruction
-    ioInstructionList += !@assignmentInstructionAST.init {
+    ioInstructionList += !@assignmentInstructionAST {
       !instructionLocation
       !lvalue
       !expression

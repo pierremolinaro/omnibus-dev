@@ -47,7 +47,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 #--- Analyze left expression
-  var @instructionListIR leftInstructionGenerationList = §[]
+  var @instructionListIR leftInstructionGenerationList = @[]
   [self.mLeftExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -74,7 +74,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     ?let @implicitBooleanConversionResult leftBooleanOperand
   ]
 #--- Analyze right expression
-  var @instructionListIR rightInstructionGenerationList = §[]
+  var @instructionListIR rightInstructionGenerationList = @[]
   [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes

@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
-  self += !@sourceLocationIR.init {!inSourceLocation}
+  self += !@sourceLocationIR {!inSourceLocation}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

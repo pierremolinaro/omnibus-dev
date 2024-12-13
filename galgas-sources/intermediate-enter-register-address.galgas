@@ -7,7 +7,7 @@ setter @instructionListIR appendEnterRegisterAddress
   ?let @string inRegisterName
 {
   [!?ioTemporaries newTempLLVMVar ?out_llvmName]
-  self += !@enterRegisterAddressIR.init {!out_llvmName !inBaseAddress !inAddressOffset !inRegisterName}
+  self += !@enterRegisterAddressIR {!out_llvmName !inBaseAddress !inAddressOffset !inRegisterName}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

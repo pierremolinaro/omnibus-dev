@@ -48,7 +48,7 @@ setter @instructionListIR appendBinaryOperation
   ?let @llvmBinaryOperation inOperation
   ?let @objectIR inRight
 {
-  self += !@binaryOperationIR.init {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
+  self += !@binaryOperationIR {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

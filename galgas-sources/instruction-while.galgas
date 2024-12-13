@@ -27,7 +27,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@whileInstructionAST.init {
+    ioInstructionList += !@whileInstructionAST {
       !instructionLocation
       !testExpression
       !testExpressionEndLocation
@@ -65,7 +65,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #--- Analyze test expression
-  var @instructionListIR testInstructionGenerationList = §[]
+  var @instructionListIR testInstructionGenerationList = @[]
   [self.m_while_Expression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -105,7 +105,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 #    error mEndOf_test_expression : "test expression type should not be static"
 #  end
 #--- Analyze instruction list
-  var @instructionListIR instructionGenerationList = §[]
+  var @instructionListIR instructionGenerationList = @[]
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [self.mWhileInstructionList analyzeBranchInstructionList
     !self:inSelfType
@@ -121,7 +121,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ]
   [!?ioUniversalMap closeOverride !self.mEndOf_while_instruction]
 #--- Code generation
-  ioInstructionGenerationList += !@whileInstructionIR.init {
+  ioInstructionGenerationList += !@whileInstructionIR {
     ![self.mEndOf_test_expression endLocationIndex]
     !testInstructionGenerationList
     ![booleanResult llvmName]

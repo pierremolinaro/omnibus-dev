@@ -56,39 +56,39 @@ override method @boolTypeAST enterInContext
   [!?ioContext.mTypeMap insertType ! boolTypeName !type: boolType]
  #--- Enter not prefix operator
   var key = prefixOperatorMapKey (!boolType !.notOp !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator.init]
+  [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator ()]
  #--- Enter | infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"or"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"or"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"or"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
  #--- Enter ^ infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"xor"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"xor"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"xor"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
  #--- Enter == infix operator
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"icmp eq"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !boolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"icmp eq"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage.init {!"icmp eq"}]
+  [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
 #--- Implicit conversion to i1 for test expressions
-  key = @lstring.init {!boolType.omnibusTypeDescriptionName !.nowhere}
-  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean.init]
+  key = @lstring {!boolType.omnibusTypeDescriptionName !.nowhere}
+  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean ()]
 #--- Enter assignment operator
   key = assignmentOperatorKey (!boolType !.nowhere !boolType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
   key = assignmentOperatorKey (!boolType !.nowhere !ctBoolType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage.init]
+  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
 #--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!boolType !boolType)
-  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR.init {
+  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
     ![functionName nowhere]
     !isRequired: false
     !warnsIfUnused: false
@@ -139,7 +139,7 @@ override method @boolNotOperator generateCode
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?receiverOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   let s = [outResultValue llvmName] + " = xor i1 1, " + [receiverOperand llvmName]
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !§[]]
+  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

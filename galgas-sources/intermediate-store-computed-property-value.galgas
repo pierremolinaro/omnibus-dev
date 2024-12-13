@@ -4,7 +4,7 @@ setter @instructionListIR appendStoreComputedPropertyValue
   ?let @string inLLVMSetterName
   ?let @objectIR inValueIR
 {
-  self += !@storeComputedPropertyValueIR.init {!inReceiverIR !inLLVMSetterName !inValueIR}
+  self += !@storeComputedPropertyValueIR {!inReceiverIR !inLLVMSetterName !inValueIR}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

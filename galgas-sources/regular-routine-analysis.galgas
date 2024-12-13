@@ -54,12 +54,12 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
   [!?universalMap openBranch]
 #--- Return value ?
   if self.returnTypeName.string != "" then
-    let resultVarName = @lstring.init {!functionResultVariableName () !self.returnTypeName.location}
+    let resultVarName = @lstring {!functionResultVariableName () !self.returnTypeName.location}
     let resultType = [[inContext.mTypeMap searchKey !self.returnTypeName] type]
     [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
   end
 #--- Analyse formal arguments
-  var @routineFormalArgumentListIR formalArguments = §[]
+  var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
     !context:inContext
     !self.formalArgumentList
@@ -68,8 +68,8 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
     !warningOnUnusedArgs: self.warningOnUnusedArgs
   )
 #--- Analyze instruction list
-  var @allocaList allocaList = §[]
-  var @instructionListIR instructionGenerationList = §[]
+  var @allocaList allocaList = @[]
+  var @instructionListIR instructionGenerationList = @[]
   [self.mInstructionList analyzeRoutineInstructionList
     !self:receiverType
     !routineAttributes: self.routineAttributes
@@ -91,7 +91,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
   else
     [[inContext.mTypeMap searchKey !self.returnTypeName] type]
   end
-  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR.init {
+  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR {
     !self.routineMangledLLVMName
     !isRequired:self.isRequired
     !warnsIfUnused:self.warnIfUnused

@@ -29,7 +29,7 @@ syntax extension omnibus_syntax {
     $=$
     <expression> !?ioAST ?let sourceExpression
   #--- AST
-    ioInstructionList += !@bitbandInstructionAST.init {
+    ioInstructionList += !@bitbandInstructionAST {
       !registerLValue.mRegisterGroupName.location
       !registerLValue
       !bitExpression
@@ -72,7 +72,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Source Expression
 #--- Inferred source expression type
   [inContext.mTypeMap searchType
-    !lkey:.init {!"u1" !self.mSourceExpressionLocation}
+    !lkey: @{!"u1" !self.mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
   ]
 #--- Compute source expression
@@ -126,7 +126,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 #-------------------- Bit Expression
 #--- Inferred bit expression type
   [inContext.mTypeMap searchType
-    !lkey:.init {!"u" + [registerBitCount-1 significantBitCount] !self.mBitExpressionLocation}
+    !lkey: @{!"u" + [registerBitCount-1 significantBitCount] !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 #--- Compute bit expression
@@ -160,7 +160,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     error self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
   end
 #-------------------- Generate code
-  ioInstructionGenerationList += !@bitbandInstructionIR.init {
+  ioInstructionGenerationList += !@bitbandInstructionIR {
     !llvmRegisterAddressName
     !bitExpressionOperand
     !sourceExpressionOperand

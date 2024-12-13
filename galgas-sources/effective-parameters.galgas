@@ -44,7 +44,7 @@ getter @effectiveArgumentListAST mangledName
     s += [effectiveArgumentPassingMode matchingFormalArgument] + selector + ":"
   end
   s += ")"
-  result = .init {!s !inFunctionName.location}
+  result = @{!s !inFunctionName.location}
 }
 
 #-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,7 +56,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <effective_parameters> ?!@ast ioAST !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
-    outEffectiveParameterList = §[]
+    outEffectiveParameterList = @[]
     $($
     repeat
     while
@@ -126,7 +126,7 @@ proc analyzeEffectiveParameters
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
 #--- Analyze effective parameters
-  var @procEffectiveParameterList parameterList = §[]
+  var @procEffectiveParameterList parameterList = @[]
   for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :

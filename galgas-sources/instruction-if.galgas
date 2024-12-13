@@ -52,7 +52,7 @@ syntax extension omnibus_syntax {
     let endOfThenBranch = @location.here
     let @instructionListAST elseInstructionList
     select
-      elseInstructionList = §[]
+      elseInstructionList = @[]
     or
       $else$
       ${$
@@ -61,10 +61,10 @@ syntax extension omnibus_syntax {
     or
       $else$
       <if_instruction> !?ioAST ?let ifInstruction
-      elseInstructionList = §[.init (ifInstruction)]
+      elseInstructionList = @[@(ifInstruction)]
     end
     let endOfElseBranch = @location.here
-    outIfInstruction = .init {
+    outIfInstruction = @{
       !instructionLocation
       !testExpression
       !testExpressionEndLocation
@@ -146,7 +146,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   end
   [!?ioUniversalMap openOverrideForSelectBlock]
 #--- Analyze 'then' instruction list
-  var @instructionListIR thenInstructionGenerationList = §[]
+  var @instructionListIR thenInstructionGenerationList = @[]
   [self.mThenInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -160,7 +160,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?instructionListIR:thenInstructionGenerationList
   ]
 #--- Analyze 'else' instruction list
-  var @instructionListIR elseInstructionGenerationList = §[]
+  var @instructionListIR elseInstructionGenerationList = @[]
   [self.mElseInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -175,7 +175,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   ]
   [!?ioUniversalMap closeOverride !self.mEndOf_if_instruction]
 #--- Code generation
-  ioInstructionGenerationList += !@ifInstructionIR.init {
+  ioInstructionGenerationList += !@ifInstructionIR {
     ![booleanResult llvmName]
     !self.mTestExpressionEndLocation
     !thenInstructionGenerationList

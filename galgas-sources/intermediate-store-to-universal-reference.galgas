@@ -6,7 +6,7 @@ setter @instructionListIR appendStoreToUniversalReference
   ?let @omnibusType inTargetVarType
   ?let @objectIR inSourceValue
 {
-  self += !@storeToUniversalReferenceIR.init {!inLLVMVarName !inTargetVarType !inSourceValue}
+  self += !@storeToUniversalReferenceIR {!inLLVMVarName !inTargetVarType !inSourceValue}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

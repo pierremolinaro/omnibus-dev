@@ -18,12 +18,12 @@ proc computeStaticExpression
     [ioContext.mTypeMap searchType !lkey:inOptionalTypeName ?type:annotationType]
   end
 #---
-  var @semanticTemporariesStruct unusedSemanticTemporariesStruct = .init
-  var @allocaList unusedAllocaList = §[]
-  var @instructionListIR unusedInstructionListIR = §[]
+  var @semanticTemporariesStruct unusedSemanticTemporariesStruct = @()
+  var @allocaList unusedAllocaList = @[]
+  var @instructionListIR unusedInstructionListIR = @[]
   [inExpression analyzeExpression
     !self:voidType ()
-    !routineAttributes: ()
+    !routineAttributes: @()
     !optionalTargetType:annotationType
     !context:ioContext
     !mode:.bootMode

@@ -11,7 +11,7 @@ setter @instructionListIR appendLogicalShiftRight
     [!?self appendLoadWhenReference !?ioTemporaries !?ioResult]
     let source = ioResult
     getNewTempValue (![source type] !?ioTemporaries ?ioResult)
-    self += !@logicalRightShiftIR.init {!ioResult !source !inShiftAmount}
+    self += !@logicalRightShiftIR {!ioResult !source !inShiftAmount}
   end
 }
 

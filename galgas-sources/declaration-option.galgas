@@ -9,7 +9,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast unused ioAST {
     $option$
     $"string"$ ?let constantName
-    var @stringlist suggestionList = §[]
+    var @stringlist suggestionList = @[]
     var found = false
     for (domain identifier) in @application.boolOptionNameList while not found do       let invocationString = @application.boolOptionInvocationString {!domain !identifier}
       suggestionList += !"\"" + invocationString + "\""

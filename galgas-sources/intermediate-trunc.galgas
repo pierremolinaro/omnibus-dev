@@ -10,7 +10,7 @@ setter @instructionListIR appendTrunc
     ioObject = .literalInteger {!type:inResultType !value:value}
   else
     getNewTempValue (!inResultType !?ioTemporaries ?let result)
-    self += !@truncIR.init {!result !ioObject}
+    self += !@truncIR {!result !ioObject}
     ioObject = result
   end
 }

@@ -1,6 +1,6 @@
 
 setter @instructionListIR appendFreeComment ?let @string inComment {
-  self += !@freeCommentIR.init {!inComment}
+  self += !@freeCommentIR {!inComment}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

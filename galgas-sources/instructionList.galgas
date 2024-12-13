@@ -21,7 +21,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <instructionList> ?!@ast ioAST !@instructionListAST outInstructionList {
-    outInstructionList = §[]
+    outInstructionList = @[]
     repeat
     while
       <instruction> !?ioAST !?outInstructionList

@@ -39,7 +39,7 @@ syntax extension omnibus_syntax {
       $safe$
       mode = .safeSectionMode
     end
-    var @lstringlist attributeList = §[]
+    var @lstringlist attributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -55,7 +55,7 @@ syntax extension omnibus_syntax {
     end
     ${$
     <instructionList> !?ioAST ?let instructionList
-    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST {
       !inReceiverTypeName
       !name
       !mode
@@ -90,7 +90,7 @@ syntax extension omnibus_syntax {
       $safe$
       mode = .safePrimitiveMode
     end
-    var @lstringlist attributeList = §[]
+    var @lstringlist attributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -100,7 +100,7 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST {
       !inReceiverTypeName
       !name
       !mode
@@ -132,7 +132,7 @@ syntax extension omnibus_syntax {
       $safe$
       mode = .safeServiceMode
     end
-    var @lstringlist attributeList = §[]
+    var @lstringlist attributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -142,7 +142,7 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@systemRoutineDeclarationAST {
       !inReceiverTypeName
       !name
       !mode
@@ -173,7 +173,7 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  let nodeKey = @lstring.init {!s !self.mSystemRoutineName.location}
+  let nodeKey = @lstring {!s !self.mSystemRoutineName.location}
   [!?ioGraph addNode !nodeKey !self]
 
   for (* * formalArgumentTypeName *) in self.mFormalArgumentList do
@@ -232,7 +232,7 @@ private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeNam
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  result = .init {!s !inGuardName.location}
+  result = @{!s !inGuardName.location}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -263,7 +263,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  result = .init {!s !inGuardName.location}
+  result = @{!s !inGuardName.location}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -285,7 +285,7 @@ override method @systemRoutineDeclarationAST enterInContext
 #  log mReceiverTypeName
   let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
 #--- Attributes
-  var @stringset attributeSet = §[]
+  var @stringset attributeSet = @[]
   for attribute in self.mAttributeList do
     attributeSet += !attribute.mValue.string
   end
@@ -370,7 +370,7 @@ override method @systemRoutineDeclarationAST enterInContext
     !self.mEndOfInstructionListLocation
     !returnTypeName: self.mReturnTypeName  # Empty string if no returned value
 #--- 
-  ioRoutineListIR += !@systemUserRoutineIR.init {
+  ioRoutineListIR += !@systemUserRoutineIR {
     !userRoutineMangledName
     !isRequired:false
     !warnsIfUnused:false

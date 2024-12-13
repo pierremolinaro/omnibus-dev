@@ -11,16 +11,16 @@ class @instructionNOP : @instructionAST {
 
 proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
 #--- NOP function parameters
-  let @lstringlist attributeList = §[.init ([noUnusedWarningAttribute () nowhere])]
-  let instructionList = @instructionListAST §[.init (@instructionNOP {!.nowhere})]
+  let @lstringlist attributeList = @[@([noUnusedWarningAttribute () nowhere])]
+  let instructionList = @instructionListAST @[@(@instructionNOP {!.nowhere})]
 #--- Enter in AST
-  ioDeclarationListAST += !@functionDeclarationAST.init {
+  ioDeclarationListAST += !@functionDeclarationAST {
     !.anySafeMode
     !true # is public
     !["" nowhere]
     !["nop" nowhere]
     !attributeList
-    !§[]
+    !@[]
     !["" nowhere] # returnTypeName
     !instructionList
     !.nowhere

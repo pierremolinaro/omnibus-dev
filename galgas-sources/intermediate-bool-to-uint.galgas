@@ -3,7 +3,7 @@ setter @instructionListIR appendBoolToUInt
   ?let @objectIR inUIntResult
   ?let @objectIR inBoolSource
 {
-  self += !@boolToUIntIR.init {!inUIntResult !inBoolSource}
+  self += !@boolToUIntIR {!inUIntResult !inBoolSource}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

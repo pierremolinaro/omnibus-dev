@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
     $panic$
     let loc = @location.here
     <expression> !?ioAST ?let @expressionAST codeExpression
-    ioInstructionList += !@panicInstructionAST.init {!loc !codeExpression}
+    ioInstructionList += !@panicInstructionAST {!loc !codeExpression}
   }
 
   #·····················································································································
@@ -53,10 +53,10 @@ override method @panicInstructionAST instructionSemanticAnalysis
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
 #--- Analyze expression
-  var @instructionListIR unusedInstructionListIR = §[]
+  var @instructionListIR unusedInstructionListIR = @[]
   [self.mCodeExpression analyzeExpression
     !self:inSelfType
-    !routineAttributes: ()
+    !routineAttributes: @()
     !optionalTargetType:inContext.mPanicCodeType
     !context:inContext
     !mode:inMode
@@ -80,7 +80,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
       error self.mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName
     elsif not [option omnibus_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@panicInstructionIR.init {
+      ioInstructionGenerationList += !@panicInstructionIR {
         !self.mInstructionLocation
         !throwValue
       }

@@ -3,7 +3,7 @@ setter @instructionListIR appendExtend
   ?let @objectIR inResult
   ?let @objectIR inSource
 {
-  self += !@extendIR.init {!inResult !inSource}
+  self += !@extendIR {!inResult !inSource}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

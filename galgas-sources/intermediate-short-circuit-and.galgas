@@ -8,7 +8,7 @@ setter @instructionListIR appendShortCircuitAndOperation
   ?let @instructionListIR inRightInstructionList
   ?let @location inLocation
 {
-  self += !@shortCircuitAndOperationIR.init {
+  self += !@shortCircuitAndOperationIR {
     !inTargetOperand
     !inLeftOperandLLVMName
     !inLeftInstructionList

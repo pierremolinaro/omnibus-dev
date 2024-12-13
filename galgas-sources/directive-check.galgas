@@ -25,7 +25,7 @@ syntax extension omnibus_syntax {
     end
     $($
     <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@checkInstructionAST.init {!checkMessage.location !checkMessage !expression}
+    ioInstructionList += !@checkInstructionAST {!checkMessage.location !checkMessage !expression}
     $)$
   }
 
@@ -57,7 +57,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
 #--- Analyze expression
-  var @instructionListIR instructionGenerationList = §[]
+  var @instructionListIR instructionGenerationList = @[]
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes

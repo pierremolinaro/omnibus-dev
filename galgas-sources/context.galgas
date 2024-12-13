@@ -5,90 +5,90 @@
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticContext {
-  public var @targetParameters mTargetParameters = .init {
+  public var @targetParameters mTargetParameters = @{
     !.here
-    !§[]
+    !@[]
     !["" nowhere]
     !["" nowhere]
     !0
     !false
-    !.init {!0 !.nowhere}
-    !.init {!0 !.nowhere}
+    ! @{!0 !.nowhere}
+    ! @{!0 !.nowhere}
     !["" nowhere]
-    !.init {!0 !.nowhere}
-    !.init {!0 !.nowhere}
-    !.init {!0 !.nowhere}
-    !.init {!0 !.nowhere}
-    !.init {!0 !.nowhere}
+    ! @{!0 !.nowhere}
+    ! @{!0 !.nowhere}
+    ! @{!0 !.nowhere}
+    ! @{!0 !.nowhere}
+    ! @{!0 !.nowhere}
     !["" nowhere]
-    !.init {!0 !.nowhere}
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !§[]
-    !§[]
-    !§[]
+    ! @{!0 !.nowhere}
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
-    !.init {!0 !.nowhere}
+    !["" nowhere]
+    !@[]
+    !@[]
+    !@[]
+    !["" nowhere]
+    !["" nowhere]
+    !["" nowhere]
+    ! @{!0 !.nowhere}
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
     !["" nowhere]
   }
 
-  public var @omnibusType mPanicCodeType = .init {
+  public var @omnibusType mPanicCodeType = @{
     !subscript: .noSubscript
-    !attributes: ()
+    !attributes: @()
     !omnibusTypeDescriptionName: "<<unknown>>"
     !kind:.void
     !llvmBaseTypeName: "<<unknown>>"
   }
-  public var @omnibusType mPanicLineType = .init {
+  public var @omnibusType mPanicLineType = @{
     !subscript: .noSubscript
-    !attributes: ()
+    !attributes: @()
     !omnibusTypeDescriptionName: "<<unknown>>"
     !kind:.void
     !llvmBaseTypeName: "<<unknown>>"
   }
-  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = §[]
-  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = §[]
+  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = @[]
+  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = @[]
 
-  public var @routineMapForContext mRoutineMap = §[]
-  public var @guardMapForContext mGuardMap = §[]
+  public var @routineMapForContext mRoutineMap = @[]
+  public var @guardMapForContext mGuardMap = @[]
   
-  public var @controlRegisterGroupMap mControlRegisterGroupMap = §[]
-  public var @globalConstantMap mGlobalConstantMap = §[]
-  public var @globalSyncInstanceMap mGlobalSyncInstanceMap = §[]
-  public var @staticlistMap mStaticListMap = §[]
+  public var @controlRegisterGroupMap mControlRegisterGroupMap = @[]
+  public var @globalConstantMap mGlobalConstantMap = @[]
+  public var @globalSyncInstanceMap mGlobalSyncInstanceMap = @[]
+  public var @staticlistMap mStaticListMap = @[]
 
-  public var @stringset mRequiredRoutineSet = §[]
+  public var @stringset mRequiredRoutineSet = @[]
 
 #--- Types
-  public var @unifiedTypeMap mTypeMap = §[]
-  public var @typeConstantMap mTypeConstantMap = §[]
-  public var @typeConstructorMap mTypeConstructorMap = §[]
-  private var @typePropertySetterMap mTypePropertySetterMap = §[]
-  private var @typePropertyGetterMap mTypePropertyGetterMap = §[]
+  public var @unifiedTypeMap mTypeMap = @[]
+  public var @typeConstantMap mTypeConstantMap = @[]
+  public var @typeConstructorMap mTypeConstructorMap = @[]
+  private var @typePropertySetterMap mTypePropertySetterMap = @[]
+  private var @typePropertyGetterMap mTypePropertyGetterMap = @[]
 
 #--- Interrupts
-  public var @availableInterruptMap mAvailableInterruptMap = §[]
+  public var @availableInterruptMap mAvailableInterruptMap = @[]
 
 #--- Operator maps  
-  public var @infixOperatorMap mInfixOperatorMap = §[]
-  public var @prefixOperatorMap mPrefixOperatorMap = §[]
-  public var @assignmentOperatorMap mAssignmentOperatorMap = §[]
+  public var @infixOperatorMap mInfixOperatorMap = @[]
+  public var @prefixOperatorMap mPrefixOperatorMap = @[]
+  public var @assignmentOperatorMap mAssignmentOperatorMap = @[]
   
-  public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap = §[]
+  public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap = @[]
 
 #--- Tasks
-  public var @taskMap mTaskMap = §[]
-  public var @globalTaskVariableList mGlobalTaskVariableList = §[]
+  public var @taskMap mTaskMap = @[]
+  public var @globalTaskVariableList mGlobalTaskVariableList = @[]
 
 #--- Entity map
-  public var @universalValuedObjectMap mValuedObjectMap = .init
+  public var @universalValuedObjectMap mValuedObjectMap = @()
 }
 
 #·······················································································································
@@ -177,7 +177,7 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
   with inTypeName.string in !?self.mTypePropertyGetterMap do
     [!?mGetterMap insertKey !inGetterName !inVisibility !inAccess]
   else
-    var @propertyGetterMap getterMap = §[]
+    var @propertyGetterMap getterMap = @[]
     [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
     [!?self.mTypePropertyGetterMap insertKey !inTypeName !getterMap]
   end
@@ -189,7 +189,7 @@ getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGe
   with inType.omnibusTypeDescriptionName in self.mTypePropertyGetterMap do
     result = mGetterMap
   else
-    result = §[]
+    result = @[]
   end
 }
 
@@ -208,9 +208,9 @@ setter @semanticContext addComputedPropertyGetter
   if [self.mTypePropertyGetterMap hasKey !inTypeName.string] then
     [self.mTypePropertyGetterMap searchKey !inTypeName ?getterMap]
   else
-    getterMap = §[]
+    getterMap = @[]
   end
-  outRoutineLLVMName = .init {!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
+  outRoutineLLVMName = @{!getterLLVMName (!inLLVMBaseTypeName !inPropertyName) !inPropertyName}
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
   [!?getterMap insertKey
     !inPropertyName
@@ -264,7 +264,7 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
   with inTypeName.string in !?self.mTypePropertySetterMap do
     [!?mSetterMap insertKey !inSetterName !inVisibility !inAccess]
   else
-    var @propertySetterMap setterMap = §[]
+    var @propertySetterMap setterMap = @[]
     [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
     [!?self.mTypePropertySetterMap insertKey !inTypeName !setterMap]
   end
@@ -276,7 +276,7 @@ getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySe
   with inType.omnibusTypeDescriptionName in self.mTypePropertySetterMap do
     result = mSetterMap
   else
-    result = §[]
+    result = @[]
   end
 }
 
@@ -303,8 +303,8 @@ enum @propertySetterKind {
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @staticEntityMap {
-  public var @staticStringMap mStaticStringMap = §[]
-  public var @globalStructuredConstantList mGlobalStructuredConstantList = §[]
+  public var @staticStringMap mStaticStringMap = @[]
+  public var @globalStructuredConstantList mGlobalStructuredConstantList = @[]
 }
 
 #·······················································································································
@@ -386,11 +386,11 @@ proc buildSemanticContext
   !@routineListIR outRoutineListIR
   !@userLLVMTypeDefinitionListIR outUserLLVMTypeDefinitionListIR
 {
-  outSemanticContext = .init
-  outDecoratedDeclarationList = §[]
-  outDecoratedRoutineList = §[]
-  outRoutineListIR = §[]
-  outUserLLVMTypeDefinitionListIR = §[]
+  outSemanticContext = @()
+  outDecoratedDeclarationList = @[]
+  outDecoratedRoutineList = @[]
+  outRoutineListIR = @[]
+  outUserLLVMTypeDefinitionListIR = @[]
 #--- Enter required routines
   for requiredProc in inAST.mRequiredFunctionListAST do
     let procedureMangledName = routineMangledNameFromAST (

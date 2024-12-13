@@ -5,7 +5,7 @@ setter @instructionListIR appendSelectOperation
   ?let @objectIR in_then_variable
   ?let @objectIR in_else_variable
 {
-  self += !@selectInstructionIR.init {!inTargetValue !in_if_variableLLVMName !in_then_variable !in_else_variable}
+  self += !@selectInstructionIR {!inTargetValue !in_if_variableLLVMName !in_then_variable !in_else_variable}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

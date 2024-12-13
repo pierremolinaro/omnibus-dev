@@ -16,7 +16,7 @@
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
-  result = §[]
+  result = @[]
   for (lkey element) in self do
     if [element.mDefinition isUnsolved] then
       result += !lkey
@@ -27,10 +27,10 @@ getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
-  if let node = self §[inLKey] then
+  if let node = self @[inLKey] then
     outEntry = .element {!weakElement: node.mElement}
   else
-    let newElement = @unifiedTypeMapElementClass.init {!inLKey !.unsolved}
+    let newElement = @unifiedTypeMapElementClass {!inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
     outEntry = .element {!weakElement: newElement}
   end
@@ -41,10 +41,10 @@ setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outE
 setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
   if inLKey.string == "" then
     outEntry = .null
-  elsif let node = self §[inLKey] then
+  elsif let node = self @[inLKey] then
     outEntry = .element {!weakElement: node.mElement}
   else
-    let newElement = @unifiedTypeMapElementClass.init {! inLKey !.unsolved}
+    let newElement = @unifiedTypeMapElementClass {! inLKey !.unsolved}
     [!?self internalInsertKey !inLKey !newElement]
     outEntry = .element {!weakElement: newElement}
   end
@@ -53,11 +53,11 @@ setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEn
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEntry outEntry {
-  if let node = self §[inKey] then
+  if let node = self @[inKey] then
     outEntry = .element {!weakElement: node.mElement}
   else
-    let newElement = @unifiedTypeMapElementClass.init {!.init {!inKey !.nowhere}!.unsolved}
-    [!?self internalInsertKey !.init {!inKey !.nowhere} !newElement]
+    let newElement = @unifiedTypeMapElementClass {! @{!inKey !.nowhere}!.unsolved}
+    [!?self internalInsertKey ! @{!inKey !.nowhere} !newElement]
     outEntry = .element {!weakElement: newElement}
   end
 }
@@ -67,7 +67,7 @@ setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEn
 getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   if inLKey.string == "" then
     result = .null
-  elsif let node = self §[inLKey] then
+  elsif let node = self @[inLKey] then
     result = .element {!weakElement: node.mElement}
   else
     error inLKey : "there is not '@" + inLKey + "' type" : result
@@ -77,7 +77,7 @@ getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusType inTypeDefinition {
-  if let node = self §[inTypeName] then
+  if let node = self @[inTypeName] then
     switch node.mElement.mDefinition
     case solved (*) :
       error inTypeName : "type already defined"
@@ -86,7 +86,7 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
       e.mDefinition = .solved {!type: inTypeDefinition}
     end
   else
-    let newElement = @unifiedTypeMapElementClass.init {! inTypeName !.solved {!type: inTypeDefinition}}
+    let newElement = @unifiedTypeMapElementClass {! inTypeName !.solved {!type: inTypeDefinition}}
     [!?self internalInsertKey !inTypeName !newElement]
   end
 }
@@ -95,7 +95,7 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
 
 method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
                                   !type: @omnibusType outTypeDefinition {
-  if let node = self §[inLKey] then
+  if let node = self @[inLKey] then
     switch node.mElement.mDefinition
     case solved (definition) :
       outTypeDefinition = definition

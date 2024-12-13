@@ -76,7 +76,7 @@ syntax extension omnibus_syntax {
     ${$
     <compile_time_expression> ?let @ctExpressionAST expression
     $}$
-    ioAST.mDeclarationListAST += !@compiletimePrefixOperatorAST.init {
+    ioAST.mDeclarationListAST += !@compiletimePrefixOperatorAST {
       !prefixOperator
       !operationLocation
       !receiverName
@@ -97,7 +97,7 @@ syntax extension omnibus_syntax {
 override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring.init {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
+  let nodeName = @lstring {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
   [!?ioGraph addEdge !nodeName !self.mResultTypeName]
@@ -132,12 +132,12 @@ override method @compiletimePrefixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = §[]
+  var @ctCheckMap ctCheckMap = @[]
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
-  let definition = @compileTimePrefixOperatorUsage.init {
+  let definition = @compileTimePrefixOperatorUsage {
     !self.mPrefixOperatorLocation
     !self.mReceiverName
     !self.mExpression
@@ -173,7 +173,7 @@ override method @compileTimePrefixOperatorUsage generateCode
   !@objectIR outResultValue
 {
   [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
-  var @ctMap varMap = §[]
+  var @ctMap varMap = @[]
   [!?varMap insertKey !self.mReceiverOperandName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
   outResultValue = .literalInteger {!type: inResultType !value: result}

@@ -16,14 +16,14 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $yes$
-    outExpression = @literalBooleanInExpressionAST.init {!true}
+    outExpression = @literalBooleanInExpressionAST {!true}
   }
 
   #·····················································································································
 
   rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
     $no$
-    outExpression = @literalBooleanInExpressionAST.init {!false}
+    outExpression = @literalBooleanInExpressionAST {!false}
   }
 
   #·····················································································································

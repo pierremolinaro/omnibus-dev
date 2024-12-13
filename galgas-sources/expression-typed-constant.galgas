@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     let @lstring optionalTypeName
     select
-      optionalTypeName = .init {!"" !.here}
+      optionalTypeName = @{!"" !.here}
     or
       <type_definition> !?ioAST ?optionalTypeName
     end
@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   #---
-    outExpression = @typedConstantCallAST.init {!optionalTypeName !constantName !accessList}
+    outExpression = @typedConstantCallAST {!optionalTypeName !constantName !accessList}
   }
 
   #·····················································································································
@@ -126,7 +126,7 @@ override method @typedConstantCallAST analyzeExpression
   if inferredResultType.kind == .void then
     error self.mConstructorName : "cannot infer type" : outResult
   else
-    let typeName = @lstring.init {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
+    let typeName = @lstring {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
 #    let classConstantMap = inferredResultType.classConstantMap
     [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]

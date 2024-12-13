@@ -24,7 +24,7 @@ syntax extension omnibus_syntax {
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <type_definition> !?ioAST ?let typeName
     $($
-    var @functionCallEffectiveParameterListAST parameterList = §[]
+    var @functionCallEffectiveParameterListAST parameterList = @[]
     repeat
     while
       $!selector:$ ?let selector
@@ -33,7 +33,7 @@ syntax extension omnibus_syntax {
     end
     let errorLocation = @location.here
     $)$
-    outExpression = @constructorCallAST.init {!typeName !parameterList !errorLocation}
+    outExpression = @constructorCallAST {!typeName !parameterList !errorLocation}
   }
 
 }
@@ -89,10 +89,10 @@ override method @constructorCallAST analyzeExpression
   constructorKey += ")"
 #--- Analyze constructor signature and init value
   let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
-  let typeName = @lstring.init {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
+  let typeName = @lstring {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
 #  let constructorMap = resultType.constructorMap2
-  [constructorMap searchKey !.init {!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
+  [constructorMap searchKey ! @{!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
 #--- Examine init value
   switch initValue
   case arrayValue (elementType size) :
@@ -121,7 +121,7 @@ override method @constructorCallAST analyzeExpression
       if [result isStatic] then
         let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  count]
         outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
-        var @operandIRList operandIRList = §[]
+        var @operandIRList operandIRList = @[]
         for * in 0 ..< size do
           operandIRList += !result
         end
@@ -136,7 +136,7 @@ override method @constructorCallAST analyzeExpression
       end
       individualConstructor += ")"
       if constructorKey == individualConstructor then
-        var @operandIRList operandIRList = §[]
+        var @operandIRList operandIRList = @[]
         var resultIsStatic = true
         for (mSelector mExpression) in self.mParameterList do
           [mExpression analyzeExpression

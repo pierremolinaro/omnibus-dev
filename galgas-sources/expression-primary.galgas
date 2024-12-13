@@ -35,7 +35,7 @@ syntax extension omnibus_syntax {
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   #--- AST
-    outExpression = @primaryInExpressionAST.init {!receiver !accessList}
+    outExpression = @primaryInExpressionAST {!receiver !accessList}
   }
 
   #·····················································································································
@@ -46,13 +46,13 @@ syntax extension omnibus_syntax {
   #--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   #--- AST
-    outExpression = @primaryInExpressionAST.init {!receiver !accessList}
+    outExpression = @primaryInExpressionAST {!receiver !accessList}
   }
 
   #·····················································································································
 
   rule <expression_access_list> ?!@ast ioAST !@primaryInExpressionAccessListAST outAccessList {
-     outAccessList = §[]
+     outAccessList = @[]
     repeat
     while
       $.$
@@ -510,7 +510,7 @@ proc handleSliceInExpression
   #--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
   #--- Truncate source value
-    let resultIntegerName = @lstring.init {!"u" + (inHigh.bigint - inLow.bigint + 1) !inLow.location}
+    let resultIntegerName = @lstring {!"u" + (inHigh.bigint - inLow.bigint + 1) !inLow.location}
     [inContext.mTypeMap searchType !lkey:resultIntegerName ?type:let sliceType]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end
@@ -651,7 +651,7 @@ private proc handleFunctionCallInExpression
   #--- If receiver is a value, create a reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]
   #--- Add receiver as first parameter
-    var @procCallEffectiveParameterListIR effectiveParameterListIR = §[]
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
     effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
   #--- Analyze effective parameters
     analyzeEffectiveParameters (
@@ -673,7 +673,7 @@ private proc handleFunctionCallInExpression
     getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
   #--- Generate call
     let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].llvmBaseTypeName !inMethodName !inArguments)
-    ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
+    ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !callReturnedResult
       !routineMangledName
       !functionLLVMName

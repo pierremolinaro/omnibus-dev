@@ -45,7 +45,7 @@ syntax extension omnibus_syntax {
       elseExpression = else_if_expression
     end
     let @location elseExpressionEndLocation = .here
-    outExpression = @ifExpressionAST.init {
+    outExpression = @ifExpressionAST {
       !ifExpression !ifExpressionEndLocation
       !thenExpression !thenExpressionEndLocation
       !elseExpression !elseExpressionEndLocation

@@ -55,65 +55,65 @@ override method @compileTimeIntAST enterInContext
   [!?ioContext.mTypeMap insertType ! ctIntegerTypeName !type: ctInt]
  #--- Enter ~ prefix operator
   var key = prefixOperatorMapKey (!ctInt !.bitWiseComplement !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntComplementOperator.init]
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntComplementOperator ()]
  #--- Enter - prefix operator
   key = prefixOperatorMapKey (!ctInt !.minusOp !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator.init]
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator ()]
  #--- Enter -% prefix operator
   key = prefixOperatorMapKey (!ctInt !.minusNoOvf !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator.init]
+  [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator ()]
  #--- Enter & infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseAndOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseAndOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseAndOperator ()]
  #--- Enter | infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseOrOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseOrOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseOrOperator ()]
  #--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseXorOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntXorOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntXorOperator ()]
  #--- Enter + infix operator
   key = infixOperatorMapKey (!ctInt !.addOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator ()]
  #--- Enter +% infix operator
   key = infixOperatorMapKey (!ctInt !.addOpNoOvf !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator ()]
  #--- Enter - infix operator
   key = infixOperatorMapKey (!ctInt !.subOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator ()]
  #--- Enter -% infix operator
   key = infixOperatorMapKey (!ctInt !.subOpNoOvf !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator ()]
  #--- Enter * infix operator
   key = infixOperatorMapKey (!ctInt !.mulOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntMultiplyOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntMultiplyOperator ()]
  #--- Enter / infix operator
   key = infixOperatorMapKey (!ctInt !.divOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideOperator ()]
  #--- Enter !/ infix operator
   key = infixOperatorMapKey (!ctInt !.divOpNoOvf !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideZeroOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideZeroOperator ()]
  #--- Enter % infix operator
   key = infixOperatorMapKey (!ctInt !.modOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloOperator ()]
  #--- Enter !% infix operator
   key = infixOperatorMapKey (!ctInt !.modOpNoOvf !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloZeroOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloZeroOperator ()]
  #--- Enter == infix operator
   let ctBoolType = compileTimeBoolType ()
   key = infixOperatorMapKey (!ctInt !.equal !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntEqualOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntEqualOperator ()]
  #--- Enter < infix operator
   key = infixOperatorMapKey (!ctInt !.lessThan !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLessThanOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLessThanOperator ()]
  #--- Enter ≤ infix operator
   key = infixOperatorMapKey (!ctInt !.infEqual !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLowerOrEqualOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLowerOrEqualOperator ()]
  #--- Enter << infix operator
   key = infixOperatorMapKey (!ctInt !.leftShiftOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftLeftOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftLeftOperator ()]
  #--- Enter >> infix operator
   key = infixOperatorMapKey (!ctInt !.rightShiftOp !.nowhere !ctInt)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator.init]
+  [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator ()]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

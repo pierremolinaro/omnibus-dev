@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
 #  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
-#    outStringDefinition = §[]
+#    outStringDefinition = @[]
 #    repeat
 #      select
 #        $"string"$ ?let string
@@ -67,7 +67,7 @@ syntax extension omnibus_syntax {
   #·····················································································································
 
   rule <generic_formal_arguments> !@genericFormalParameterList outGenericFormalParameterList {
-    outGenericFormalParameterList = §[]
+    outGenericFormalParameterList = @[]
     select
     or
       $<$
@@ -90,7 +90,7 @@ syntax extension omnibus_syntax {
 
   rule <generic_where_clause> !@ctExpressionAST outWhereClause {
     select
-      outWhereClause = @ctTrueExpressionAST.init
+      outWhereClause = @ctTrueExpressionAST ()
     or
       $where$
       <compile_time_expression> ?outWhereClause
@@ -123,7 +123,7 @@ syntax extension omnibus_syntax {
 #      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString !typeName}
 #    end
     $}$
-    ioAST.mDeclarationListAST += !@llvmGenericType.init {
+    ioAST.mDeclarationListAST += !@llvmGenericType {
       !typeName
       !genericFormalParameterList
       !whereClause
@@ -191,7 +191,7 @@ override method @llvmGenericType enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Build formal generic constant parameter map
-  var @ctCheckMap formalGenericConstantParameterMap = §[]
+  var @ctCheckMap formalGenericConstantParameterMap = @[]
   [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
   [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
@@ -199,7 +199,7 @@ override method @llvmGenericType enterInContext
 #  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 #---
   if [self.mGenericFormalParameterList count] == 0 then
-    let llvmType = @omnibusType.init {
+    let llvmType = @omnibusType {
       !subscript:.noSubscript
       !attributes: .instanciable | .copyable
       !omnibusTypeDescriptionName: self.mTypeName
@@ -212,10 +212,10 @@ override method @llvmGenericType enterInContext
     ]
   else
 #    let genericType = @omnibusType.new {
-#      !propertyGetterMap: §[]
-#      !propertySetterMap: §[]
-#      !classConstantMap:§[]
-#      !constructorMap:§[]
+#      !propertyGetterMap: @[]
+#      !propertySetterMap: @[]
+#      !classConstantMap:@[]
+#      !constructorMap:@[]
 #      !subscript:.noSubscript
 #      !attributes: .none
 #      !omnibusTypeDescriptionName: mTypeName

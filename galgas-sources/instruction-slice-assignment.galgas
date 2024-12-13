@@ -36,7 +36,7 @@ syntax extension omnibus_syntax {
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
     $\$type$ ?let typeName
-    var @sliceAssignmentListAST sliceAssignmentListAST = §[]
+    var @sliceAssignmentListAST sliceAssignmentListAST = @[]
     repeat
       $?selector:$ ?let sliceWidth
       let @sliceTargetAST sliceKind
@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
     $=$
     <expression> !?ioAST ?let sourceExpression
   #--- AST
-    ioInstructionList += !@sliceAssignmentInstructionAST.init {
+    ioInstructionList += !@sliceAssignmentInstructionAST {
       !typeName.location
       !typeName
       !sliceAssignmentListAST
@@ -157,12 +157,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
-      sliceTypeName = .init {!boolTypeName () !self.mTypeName.location}
+      sliceTypeName = @{!boolTypeName () !self.mTypeName.location}
     elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
       error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = .init {!"u" + sliceWidth !self.mTypeName.location}
+      sliceTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
       end
@@ -183,13 +183,13 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     case discarded :
     case varDeclaration (varName) :
     #--- Declare local variable
-      let omnibusLocalVariableName = @lstring.init {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
+      let omnibusLocalVariableName = @lstring {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
       ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalVariable !varName !sliceType !omnibusLocalVariableName !.hasUnreadValue !false]
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     #--- Target reference
-      let targetRef = @LValueRepresentation.init {
+      let targetRef = @LValueRepresentation {
         !sliceType
         !llvmNameForLocalVariable (!omnibusLocalVariableName)
       }
@@ -203,13 +203,13 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       ]
     case letDeclaration (letName) :
     #--- Declare local constant
-      let omnibusLocalVariableName = @lstring.init {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
+      let omnibusLocalVariableName = @lstring {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
       ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !omnibusLocalVariableName]
     #--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     #--- Target reference
-      let targetRef = @LValueRepresentation.init {
+      let targetRef = @LValueRepresentation {
         !sliceType
         !llvmNameForLocalVariable (!omnibusLocalVariableName)
        }

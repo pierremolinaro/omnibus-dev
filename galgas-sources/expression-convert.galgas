@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     <expression> !?ioAST ?outExpression
     let endOfExpression = @location.here
     $)$
-    outExpression = @convertExpressionAST.init {
+    outExpression = @convertExpressionAST {
       !outExpression
       !typeName
       !endOfExpression
@@ -124,12 +124,12 @@ override method @convertExpressionAST analyzeExpression
     end
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     if [option omnibus_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@truncateInstructionIR.init {
+      ioInstructionGenerationList += !@truncateInstructionIR {
         !outResult
         !expressionResult
       }
     else
-      ioInstructionGenerationList += !@convertInstructionIR.init {
+      ioInstructionGenerationList += !@convertInstructionIR {
         !outResult
         !expressionResult
         !self.mTypeName.location

@@ -40,16 +40,16 @@ syntax extension omnibus_syntax {
     <lvalue> !?ioAST ?let assignmentTargetAST
     <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
     if (assignmentTargetAST.mOperand == .noOperand) & (assignmentTargetAST.mIdentifier.string != "") then
-      outInstruction = @standAloneProcedureCallInstructionAST.init {
+      outInstruction = @standAloneProcedureCallInstructionAST {
         !instructionLocation
         !arguments
         !endOfArguments
         !assignmentTargetAST.mIdentifier
       }
     else
-      var @accessInAssignmentListAST accessList = §[]
+      var @accessInAssignmentListAST accessList = @[]
       [assignmentTargetAST.mOperand buildProcedureCallAccessList !?accessList]
-      outInstruction = @procedureCallInstructionAST.init {
+      outInstruction = @procedureCallInstructionAST {
         !instructionLocation
         !arguments
         !endOfArguments
@@ -169,7 +169,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   let requiredFunctionMangledName = self.mSandAloneRoutineName.string + calledRoutineSignature
 #   log "keys " : [inContext.mRoutineMap keyList]
   [inContext.mRoutineMap searchKey
-    !.init {!requiredFunctionMangledName !self.mSandAloneRoutineName}
+    ! @{!requiredFunctionMangledName !self.mSandAloneRoutineName}
     ?let unused implementedPublic
     ?let formalSignature
     ?let formalReturnTypeProxy # null if no returned value
@@ -184,7 +184,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 #--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !self.mSandAloneRoutineName)
 #--- Analyze effective parameters
-  var @procCallEffectiveParameterListIR effectiveParameterListIR = §[]
+  var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
   analyzeEffectiveParameters (
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -208,7 +208,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !self.mArguments
   )
 #--- Code generation
-  ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
+  ioInstructionGenerationList += !@standaloneRoutineCallIR {
     !.void
     !routineMangledName
     !functionLLVMName
@@ -348,8 +348,8 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       error methodName : "cannot be called in instruction, returns a value"
     end
   #--- Add receiver as first parameter
-    var @procCallEffectiveParameterListIR effectiveParameterListIR = §[
-      .init (.outputInput, .reference {!type:currentType !llvmName:currentLLVMAddressVar})
+    var @procCallEffectiveParameterListIR effectiveParameterListIR = @[
+      @(.outputInput, .reference {!type:currentType !llvmName:currentLLVMAddressVar})
     ]
   #--- Analyze effective parameters
     analyzeEffectiveParameters (
@@ -368,7 +368,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !?effectiveIR:effectiveParameterListIR
     )
   #--- Generate call
-    ioInstructionGenerationList += !@standaloneRoutineCallIR.init {
+    ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !.void
       !methodMangledName
       !functionLLVMName

@@ -11,7 +11,7 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
 #·······················································································································
 
 setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @location inErrorLocation {
-  let typeName = @lstring.init {!"u" + inBitSize !inErrorLocation}
+  let typeName = @lstring {!"u" + inBitSize !inErrorLocation}
   [!?self noteNode !typeName]
 }
 
@@ -145,7 +145,7 @@ proc buildOrderedDeclarationList
   !orderedDeclarationList: @declarationListAST outSortedDeclarationListAST
 {
 #-------------------------------------- Build precedence graph
-  var @semanticTypePrecedenceGraph precedenceGraph = .init
+  var @semanticTypePrecedenceGraph precedenceGraph = @()
   for (mDeclaration) in inAST.mDeclarationListAST do
     [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
 #    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
@@ -159,7 +159,7 @@ proc buildOrderedDeclarationList
     let Uxx = [mValue componentsSeparatedByString !"u"]
     if ([Uxx count] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[Uxx mValueAtIndex !1] decimalUnsignedNumber]
-      let declaration = @integerDeclarationAST.init {!false !n}
+      let declaration = @integerDeclarationAST {!false !n}
       [declaration enterInPrecedenceGraph !?precedenceGraph]
     #--- Add assignment operator declaration
       appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
@@ -169,7 +169,7 @@ proc buildOrderedDeclarationList
       let Ixx = [mValue componentsSeparatedByString !"i"]
       if ([Ixx count] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
         let n = [[Ixx mValueAtIndex !1] decimalUnsignedNumber]
-        let declaration = @integerDeclarationAST.init {!true !n}
+        let declaration = @integerDeclarationAST {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       #--- Add assignment operator declaration
         appendSignedOperatorsTo (!mValue !?precedenceGraph)
@@ -179,7 +179,7 @@ proc buildOrderedDeclarationList
     end
   end
 #------------------------------------------  Add compile time barrier
-  let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST.init
+  let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST ()
   [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
 #------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
@@ -192,7 +192,7 @@ proc buildOrderedDeclarationList
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 #------------------------------------------  Get ordered declaration list
-  outSortedDeclarationListAST = §[]
+  outSortedDeclarationListAST = @[]
   if [precedenceGraph undefinedNodeCount] > 0 then
     for (mValue) in  [precedenceGraph undefinedNodeReferenceList] do
       error mValue : mValue.string + " is not defined in declaration dependency graph"

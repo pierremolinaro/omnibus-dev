@@ -30,7 +30,7 @@ grammar omnibus_grammar
 
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
 #--- Parsing
-  var @ast ast = .init
+  var @ast ast = @{}
   grammar omnibus_grammar (
     !?ast
     ?importClauseList:let importedFileList
@@ -47,7 +47,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   )
 #--- Check target names are not duplicated
   if @uint.errorCount == 0 then
-    var @stringset targetNameSet = §[]
+    var @stringset targetNameSet = @[]
     for (targetName) in ast.mTargetListAST do
       if [targetNameSet hasKey !targetName.string] then
         error targetName : "Duplicated target"
@@ -93,7 +93,7 @@ private proc compileProject
   var @ast ast = inAST
   var @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
 #------------------------------------------------------------ Enter extensions
-  ast.mDeclarationListAST = §[]
+  ast.mDeclarationListAST = @[]
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterExtension
       !?ast.mExtendStaticArrayDeclarationAST
@@ -118,13 +118,13 @@ private proc compileProject
   if @uint.errorCount == 0 then
   #------------------------------------------------------------ Add Predefined types
   #--- Add compile time boolean type
-   ast.mDeclarationListAST += !@compiletimeBoolAST.init
+   ast.mDeclarationListAST += !@compiletimeBoolAST {}
   #--- Add compile time int type
-   ast.mDeclarationListAST += !@compileTimeIntAST.init
+   ast.mDeclarationListAST += !@compileTimeIntAST {}
   #--- Bool type
-    ast.mDeclarationListAST += !@boolTypeAST.init
+    ast.mDeclarationListAST += !@boolTypeAST {}
   #--- Add String type
-    ast.mDeclarationListAST += !@literalStringDeclarationAST.init
+    ast.mDeclarationListAST += !@literalStringDeclarationAST {}
   end
 #------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then
@@ -136,7 +136,7 @@ private proc compileProject
     print (!"    Duration: " + [parsingTime string] + "\n")
   end
 #------------------------------------------------------------ Ordered declaration list
-  var @declarationListAST orderedDeclarationListAST = §[]
+  var @declarationListAST orderedDeclarationListAST = @[]
   if @uint.errorCount == 0 then
     let @timer t = .start 
     if [option omnibus_options.printPasses value] then
@@ -165,14 +165,14 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic context
-  var @semanticContext semanticContext = .init
-  var @staticEntityMap globalLiteralStringMap = .init
-  var @staticListInitializationMap staticListValueMap = §[]
+  var @semanticContext semanticContext = @{}
+  var @staticEntityMap globalLiteralStringMap = @{}
+  var @staticListInitializationMap staticListValueMap = @[]
   ast.mDeclarationListAST = orderedDeclarationListAST
-  var @declarationDecorationList decoratedDeclarationList = §[]
-  var @decoratedRegularRoutineList decoratedRoutineList = §[]
-  var @routineListIR routineListIR = §[]
-  var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = §[]
+  var @declarationDecorationList decoratedDeclarationList = @[]
+  var @decoratedRegularRoutineList decoratedRoutineList = @[]
+  var @routineListIR routineListIR = @[]
+  var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = @[]
   if @uint.errorCount == 0 then
     let @timer t = .start 
     buildSemanticContext (
@@ -191,7 +191,7 @@ private proc compileProject
     end
   end
 #------------------------------------------------------------ Semantic analysis
-  var @intermediateCodeStruct intermediateCodeStruct = .init
+  var @intermediateCodeStruct intermediateCodeStruct = @{}
   if @uint.errorCount == 0 then
     let @timer t = .start 
     semanticAnalysis (
@@ -304,10 +304,11 @@ private proc recursiveImportFileSystemTargetFiles
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet += !absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
-          grammar omnibus_grammar (            !?ioAST
+          grammar omnibus_grammar (
+            !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.init {!absolutePath !path.location}
+          ) in @lstring {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -319,7 +320,7 @@ private proc recursiveImportFileSystemTargetFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.init {!absolutePath !path.location}
+          ) in @lstring {!absolutePath !path.location}
           recursiveImportFileSystemTargetFiles (
             !?ast:ioAST
             !targetDirectory:inTargetDirectory
@@ -387,7 +388,7 @@ private proc recursiveImportFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.init {!absolutePath !path.location}
+          ) in @lstring {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory
@@ -399,7 +400,7 @@ private proc recursiveImportFiles
             !?ioAST
             ?importClauseList:let importedFileList
             ?endOfSourceFile:*
-          ) in @lstring.init {!absolutePath !path.location}
+          ) in @lstring {!absolutePath !path.location}
           recursiveImportFiles (
             !?ast:ioAST
             !currentDirectory:inCurrentDirectory

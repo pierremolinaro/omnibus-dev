@@ -53,7 +53,7 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-    ioAST.mDeclarationListAST += !@functionDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@functionDeclarationAST {
       !mode
       !publicAccess
       !inReceiverTypeName
@@ -130,7 +130,7 @@ syntax extension omnibus_syntax {
     $func$
     $identifier$ ?outProcName
     <mode> ?outMode
-    outAttributeList = §[]
+    outAttributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -157,7 +157,7 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
     s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
   end
   s += ")"
-  let nodeName = @lstring.init {!s !self.mFunctionName.location}
+  let nodeName = @lstring {!s !self.mFunctionName.location}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
 #---
@@ -254,7 +254,7 @@ override method @functionDeclarationAST enterInContext
     !routineKind: .function
     !warnIfUnused: warnIfUnused
     !exportedRoutine: exportedFunction
-    !routineAttributes: ()
+    !routineAttributes: @()
     !routineMangledLLVMName: functionLLVMName
     !formalArgumentList: self.mFunctionFormalArgumentList
     !warningOnUnusedArgs: true
@@ -296,8 +296,8 @@ setter @routineMapForContext addFunctionWithoutArgument
   ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
-  let @routineFormalArgumentListAST formalArguments = §[]
-  let routineMangledName = @lstring.init {
+  let @routineFormalArgumentListAST formalArguments = @[]
+  let routineMangledName = @lstring {
     !inOmnibusTypeDescriptionName + "." + inMethodName.string + [formalArguments routineSignature !inMethodName]
     !inMethodName
   }
@@ -306,7 +306,7 @@ setter @routineMapForContext addFunctionWithoutArgument
   [!?self insertKey
     !routineMangledName
     !true
-    !§[]
+    !@[]
     !inResultType
     !modeDictionary
     !false
@@ -328,8 +328,8 @@ setter @routineMapForContext addFunctionWithInputArgument
   ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
-  let argumentList = @routineFormalArgumentListAST §[
-    .init (
+  let argumentList = @routineFormalArgumentListAST @[
+    @(
       .input,
       [inInputSelector nowhere],
       [[inInputArgumentTypeProxy key] nowhere],
@@ -337,7 +337,7 @@ setter @routineMapForContext addFunctionWithInputArgument
     )
   ]
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let routineMangledName = @lstring.init {
+  let routineMangledName = @lstring {
     !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName]
     !inMethodName
   }
@@ -371,14 +371,14 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
   !routineLLVMName:@lstring outRoutineLLVMName
 {
-  let argumentList = @routineFormalArgumentListAST §[
-    .init (
+  let argumentList = @routineFormalArgumentListAST @[
+    @(
       .input,
       [inInputSelector1 nowhere],
       [[inInputArgumentTypeProxy1 key] nowhere],
       [inInputArgumentName1 nowhere]
     ),
-    .init (
+    @(
       .input,
       [inInputSelector2 nowhere],
       [[inInputArgumentTypeProxy2 key] nowhere],
@@ -387,11 +387,11 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ]
   outRoutineLLVMName = routineMangledNameFromAST (
     !inLLVMBaseTypeName
-    !.init {!inMethodName !.nowhere}
+    ! @{!inMethodName !.nowhere}
     !argumentList
   )
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let routineMangledName = @lstring.init {
+  let routineMangledName = @lstring {
     !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName]
     !inMethodName
   }

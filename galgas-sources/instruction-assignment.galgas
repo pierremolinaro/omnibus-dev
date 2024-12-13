@@ -21,7 +21,7 @@ syntax extension omnibus_syntax {
     $=$
     <expression> !?ioAST ?let sourceExpression
   #--- AST
-    ioInstructionList += !@assignmentInstructionAST.init {
+    ioInstructionList += !@assignmentInstructionAST {
       !assignmentTargetAST.mIdentifier.location
       !assignmentTargetAST
       !sourceExpression
@@ -72,7 +72,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     ?result: let @objectIR sourceOperandPossibleReference
   ]
 #--- Analyze LValue
-  var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = §[]
+  var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
   [self.mTargetAST analyzeLValueInAssignment
     !self: inSelfType
     !routineAttributes:inRoutineAttributes
@@ -235,7 +235,7 @@ private proc analyzeVariableInLValueInAssignment
       !nextOperand
     )
   end
-  outInternalRepresentation = .init {!currentType !currentLLVMName}
+  outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
 #·······················································································································
@@ -276,7 +276,7 @@ private proc handlePropertyAccessInAssignment
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?resultValueIR]
   #--- Append pending computed property store
     let setterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!setterModeDictionary !inMode !inPropertyName)
-    var @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = §[]
+    var @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
     var tempValueIR = resultValueIR
     [!?pendingStoreComputedPropertyInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?tempValueIR]
     [!?pendingStoreComputedPropertyInstructionGenerationList appendStoreComputedPropertyValue
@@ -463,7 +463,7 @@ private proc analyzeSelfLValueInAssignment
       !nextOperand
     )
   end
-  outInternalRepresentation = .init {!currentType !currentLLVMName}
+  outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
 #·······················································································································

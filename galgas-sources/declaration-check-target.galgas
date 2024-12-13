@@ -10,7 +10,7 @@ syntax extension omnibus_syntax {
     $ctAssert$
     $target$
     let targetConstructLocation = @location.here
-    var @lstringlist acceptedTargetList = §[]
+    var @lstringlist acceptedTargetList = @[]
     repeat
       $"string"$ ?let targetName
       acceptedTargetList += !targetName

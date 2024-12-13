@@ -21,7 +21,7 @@ func %once compileTimeDeclarationBarrier -> @lstring {
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func registerGroupNameFromOmnibusName ?let @lstring inName -> @lstring {
-  result = .init {!"registers " + inName !inName.location}
+  result = @{!"registers " + inName !inName.location}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -49,7 +49,7 @@ func infixOperatorMapKey ?let @omnibusType inLeftType
 {
   var s = inLeftType.omnibusTypeDescriptionName + " " + inInfixOperator
   s += " " + inRightType.omnibusTypeDescriptionName
-  result = .init {!s !inOperatorLocation}
+  result = @{!s !inOperatorLocation}
 }
 
 #·······················································································································
@@ -99,7 +99,7 @@ func prefixOperatorMapKey ?let @omnibusType inReceiverType
    case bitWiseComplement : s = "~"
   end
   s += " " + inReceiverType.omnibusTypeDescriptionName
-  result = .init {!s !inOperatorLocation}
+  result = @{!s !inOperatorLocation}
 }
 
 #·······················································································································
@@ -161,7 +161,7 @@ func setterLLVMName ?@string inReceiverLLVMTypeName ?let @string inPropertyName 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring {
-  result = .init {!"interrupt.service." + inName !inName.location}
+  result = @{!"interrupt.service." + inName !inName.location}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

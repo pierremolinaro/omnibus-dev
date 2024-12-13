@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $opaque$
     $\$type$ ?let opaqueTypeName
-    var @lstringlist attributeList = §[]
+    var @lstringlist attributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -30,7 +30,7 @@ syntax extension omnibus_syntax {
     <expression> !?ioAST ?let sizeExpression
     let sizeExpressionLocation = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST {
       !opaqueTypeName
       !sizeExpression
       !sizeExpressionLocation
@@ -86,7 +86,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  var @omnibusTypeAttributes opaqueTypeAttributes = ()
+  var @omnibusTypeAttributes opaqueTypeAttributes = @()
   var copyable = false
   for (attribute) in self.mAttributeList do
     if attribute.string == instantiableAttribute () then
@@ -120,13 +120,13 @@ override method @typeOpaqueDeclarationAST enterInContext
   if not [sizeExpressionIR isLiteralInteger] then
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
-    var @constructorMap constructorMap = §[]
+    var @constructorMap constructorMap = @[]
     if [opaqueTypeAttributes contains !.instanciable] then
-      [!?constructorMap insertKey !["()" nowhere] !§[] !.simple {!value:0}]
+      [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR extractLiteralInteger ?1* ?value:let bitSize]
-    let opaqueType = @omnibusType.init {
+    let opaqueType = @omnibusType {
       !subscript:.noSubscript
       !attributes:opaqueTypeAttributes
       !omnibusTypeDescriptionName:self.mOpaqueTypeName

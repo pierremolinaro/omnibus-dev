@@ -44,13 +44,13 @@ syntax extension omnibus_syntax {
     $event$
     let @lbool usesSelf
     select
-      usesSelf = .init {!false !.here}
+      usesSelf = @{!false !.here}
     or
       $self$
-      usesSelf = .init {!true !.here}
+      usesSelf = @{!true !.here}
       $.$
     end
-    var @lstringlist nameList = §[]
+    var @lstringlist nameList = @[]
     repeat
       $identifier$ ?let name
       nameList += !name
@@ -60,7 +60,7 @@ syntax extension omnibus_syntax {
     <effective_parameters> !?ioAST ?let effectiveParameterList ?*
     outGuardedCommand = .boolAndSync {
       !isExitCommand:inIsExitCommand
-      !expression:@literalBooleanInExpressionAST.init {!true}
+      !expression:@literalBooleanInExpressionAST {!true}
       !warnsOnStaticExpression:false
       !endOfExpression:endOfExp
       !usesSelf:usesSelf
@@ -84,13 +84,13 @@ syntax extension omnibus_syntax {
       $event$
       let @lbool usesSelf
       select
-        usesSelf = .init {!false !.here}
+        usesSelf = @{!false !.here}
       or
         $self$
-        usesSelf = .init {!true !.here}
+        usesSelf = @{!true !.here}
         $.$
       end
-      var @lstringlist nameList = §[]
+      var @lstringlist nameList = @[]
       repeat
         $identifier$ ?let name
         nameList += !name
@@ -116,7 +116,7 @@ syntax extension omnibus_syntax {
     $sync$
     ${$
     let startLocation = @location.here
-    var @syncInstructionBranchListAST instructionBranchList = §[]
+    var @syncInstructionBranchListAST instructionBranchList = @[]
     repeat
     while
       $when$
@@ -132,7 +132,7 @@ syntax extension omnibus_syntax {
 #      instructionBranchList += !guardedCommand !instructionList !.here
     end
     $}$
-    ioInstructionList += !@syncInstructionAST.init {!startLocation !instructionBranchList !.here}
+    ioInstructionList += !@syncInstructionAST {!startLocation !instructionBranchList !.here}
   }
   
   #·····················································································································
@@ -165,11 +165,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 #-------------------- Guards
-  var @guardedCommandIRList guardedCommandIRList = §[]
+  var @guardedCommandIRList guardedCommandIRList = @[]
   for (guardedCommand * *) in self.mBranchList do
     switch guardedCommand
     case boolean (isContinue expression endOfExpression) :
-      var @instructionListIR guardInstructionGenerationList = §[]
+      var @instructionListIR guardInstructionGenerationList = @[]
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes: inRoutineAttributes | .isGuard
@@ -203,7 +203,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         !boolGuardBoolLLVMName: [booleanResult llvmName]
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
-      var @instructionListIR boolExpInstructionGenerationList = §[]
+      var @instructionListIR boolExpInstructionGenerationList = @[]
     #--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
@@ -245,7 +245,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
 #        !?boolExpressionResult
 #      ]
     #--- Analyze synchronization
-      var @instructionListIR guardInstructionGenerationList = §[]
+      var @instructionListIR guardInstructionGenerationList = @[]
       let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
       let @lstring guardMangledName
       if usesSelf.bool then # self.p1.p2. … (…)
@@ -375,9 +375,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
   end
 #-------------------- Instruction lists
   [!?ioUniversalMap openOverrideForSelectBlock]
-  var @syncInstructionBranchListIR syncInstructionBranchListIR = §[]
+  var @syncInstructionBranchListIR syncInstructionBranchListIR = @[]
   for (* instructionList endOfBranch) in self.mBranchList, (guardedCommandIR) in guardedCommandIRList do
-    var @instructionListIR branchInstructionGenerationList = §[]
+    var @instructionListIR branchInstructionGenerationList = @[]
     [instructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -394,7 +394,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
   end
   [!?ioUniversalMap closeOverride !self.mEndOf_on_instruction]
 #-------------------- Code generation
-  ioInstructionGenerationList += !@syncInstructionIR.init {!self.mInstructionLocation !syncInstructionBranchListIR}
+  ioInstructionGenerationList += !@syncInstructionIR {!self.mInstructionLocation !syncInstructionBranchListIR}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -424,7 +424,7 @@ proc analyzeGuardCall
   else  
     outGuardMangledName = guardRoutineUserLLVMName
   #--- Analyze effective parameters
-    outEffectiveParameterListIR = §[.init (.outputInput, inReceiver)]
+    outEffectiveParameterListIR = @[@(.outputInput, inReceiver)]
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes

@@ -8,8 +8,8 @@
 
 struct @generationAdds {
   public var @uint mUniqueIndex = 0
-  public var @stringset mExternFunctionDeclarationSet = §[]
-  public var @staticEntityMap mStaticEntityMap = .init {}
+  public var @stringset mExternFunctionDeclarationSet = @[]
+  public var @staticEntityMap mStaticEntityMap =  @()
   public var @bool mUsesGuards = false
   public var @bool mNeedsDynamicMemoryAllocation = false
 }
@@ -165,9 +165,9 @@ private proc generateCodeFiles
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
 {
-  var @generationAdds generationAdds = .init
+  var @generationAdds generationAdds = @()
   generationAdds.mStaticEntityMap = inIntermediateCodeStruct.mStaticEntityMap
-  let @generationContext generationContext = .init {
+  let @generationContext generationContext = @{
     !inPanicCodeType
     !inPanicLineType
     !inTargetParameters.mNopInstructionStringInLLVM.string
@@ -253,7 +253,7 @@ private proc generateCodeFiles
   ]
 #----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
-  var @primitiveAndServiceIRlist primitiveAndServiceList = §[]
+  var @primitiveAndServiceIRlist primitiveAndServiceList = @[]
 #----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
@@ -265,7 +265,7 @@ private proc generateCodeFiles
       !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- Routine list
-  var @sectionIRlist sectionIRlist = §[]
+  var @sectionIRlist sectionIRlist = @[]
   for routine in inIntermediateCodeStruct.mRoutineListIR do
     [routine.mRoutine svcDeclarationGeneration
       !?primitiveAndServiceList

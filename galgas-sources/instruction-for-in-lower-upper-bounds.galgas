@@ -41,7 +41,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forLowerUpperBoundInstructionAST.init {
+    ioInstructionList += !@forLowerUpperBoundInstructionAST {
       !varName.location
       !varName
       !typeName
@@ -168,14 +168,14 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   #---
     [!?ioUniversalMap openOverrideForRepeatBlock]
   #--- Enter iteration variable name
-    let enumeratedVarName = @lstring.init {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+    let enumeratedVarName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
     ioTemporaries.mTemporaryIndex += 1
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if self.mVarName.string != "" then
      [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
     end
   #--- Analyze instruction list
-    var @instructionListIR instructionGenerationList = §[]
+    var @instructionListIR instructionGenerationList = @[]
     [self.mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -190,7 +190,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     ]
     [!?ioUniversalMap closeOverride !self.mEndOf_do_instruction]
   #--- Code generation
-    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR.init {
+    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR {
       !enumeratedVarName
       !type
       !unsigned

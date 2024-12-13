@@ -7,7 +7,7 @@ setter @instructionListIR testArrayIndex
 {
   [[inIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
-  self += !@testArrayIndexIR.init {!inIndex !inErrorLocation !inSize}
+  self += !@testArrayIndexIR {!inIndex !inErrorLocation !inSize}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

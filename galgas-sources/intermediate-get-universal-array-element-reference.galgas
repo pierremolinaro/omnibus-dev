@@ -6,7 +6,7 @@ setter @instructionListIR appendGetUniversalArrayElementReference
   ?let @string inElementLLVMName
   ?let @objectIR inIndexIR
 {
-  self += !@getUniversalArrayElementReferenceIR.init {!inType !inLLVMName !inElementType !inElementLLVMName !inIndexIR}
+  self += !@getUniversalArrayElementReferenceIR {!inType !inLLVMName !inElementType !inElementLLVMName !inIndexIR}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

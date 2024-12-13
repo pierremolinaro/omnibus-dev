@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     var staticWhileExpression = false
     let @expressionAST whileExpression
     select
-      whileExpression = @literalBooleanInExpressionAST.init {!true}
+      whileExpression = @literalBooleanInExpressionAST {!true}
       staticWhileExpression = true
     or
       $while$
@@ -49,7 +49,7 @@ syntax extension omnibus_syntax {
     <instructionList> !?ioAST ?let instructionList
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forInstructionAST.init {
+    ioInstructionList += !@forInstructionAST {
       !varName.location
       !varName
       !iteratedObject
@@ -103,14 +103,14 @@ override method @forInstructionAST instructionSemanticAnalysis
     iteratedElementType = elementType
   end
 #---
-  let omnibusName = @lstring.init {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex += 1
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !iteratedElementType !false
 #--- Analyze instruction list
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [!?ioUniversalMap insertLocalConstant !self.mVarName !false !iteratedElementType !omnibusName]
 #------------------------------------ Analyze while expression
-  var @instructionListIR whileExpression_GenerationList = §[]
+  var @instructionListIR whileExpression_GenerationList = @[]
   [self.mWhileExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -150,7 +150,7 @@ override method @forInstructionAST instructionSemanticAnalysis
 #    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
 #  end
 #------------------------------------ "DO" instruction list
-  var @instructionListIR doInstructionList_GenerationList = §[]
+  var @instructionListIR doInstructionList_GenerationList = @[]
   [self.mDoInstructionList analyzeBranchInstructionList
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -168,7 +168,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   switch iteratedType.subscript
   case noSubscript :
   case literalString :
-    ioInstructionGenerationList += !@forInstructionOnLiteralStringIR.init {
+    ioInstructionGenerationList += !@forInstructionOnLiteralStringIR {
       !omnibusName
       !self.mIteratedObject.location
       !iteratedObjectPointer
@@ -179,11 +179,11 @@ override method @forInstructionAST instructionSemanticAnalysis
     }
   case staticSubscript (elementType size) :
   #--- Static array map ? If yes, enter invoked function set
-    var @stringset invokedFunctionSet = §[]
+    var @stringset invokedFunctionSet = @[]
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !self.mIteratedObject] then
       [ioTemporaries.mStaticArrayMapForTemporaries searchKey !self.mIteratedObject ?invokedFunctionSet]
     end
-    ioInstructionGenerationList += !@forInstructionOnArrayIR.init {
+    ioInstructionGenerationList += !@forInstructionOnArrayIR {
       !omnibusName
       !self.mIteratedObject
       !iteratedObjectPointer

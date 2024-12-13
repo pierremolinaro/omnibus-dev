@@ -3,7 +3,7 @@ setter @instructionListIR appendLoadIndirectVolatileRegister
   ?let @objectIR inTargetValue
   ?let @string inLLVMName
 {
-  self += !@loadIndirectVolatileIR.init {!inTargetValue !inLLVMName}
+  self += !@loadIndirectVolatileIR {!inTargetValue !inLLVMName}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

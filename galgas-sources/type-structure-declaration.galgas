@@ -91,14 +91,14 @@ syntax extension omnibus_syntax {
       <expression> !?ioAST ?let initExpression
       ioPropertyListAST +=
         !propertyName
-        !§[]
+        !@[]
         !inVisibility
         !typeName 
         !.initializedConstantProperty{!initExpression:initExpression}
     or
       ioPropertyListAST +=
         !propertyName
-        !§[]
+        !@[]
         !inVisibility
         !typeName 
         !.uninitializedConstantProperty
@@ -114,7 +114,7 @@ syntax extension omnibus_syntax {
   {
     $var$
     $identifier$ ?let propertyName
-    var @propertyAttributeList propertyAttributeList = §[]
+    var @propertyAttributeList propertyAttributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
@@ -124,7 +124,7 @@ syntax extension omnibus_syntax {
     select
       <type_definition> !?ioAST  ?let typeName
       select
-        ioPropertyListAST += !propertyName !§[] !inVisibility !typeName !.uninitializedStoredProperty
+        ioPropertyListAST += !propertyName !@[] !inVisibility !typeName !.uninitializedStoredProperty
       or
        <propertyGetterSetter>
          !?ioAST
@@ -234,14 +234,14 @@ syntax extension omnibus_syntax {
   rule <declaration> ?!@ast ioAST {
     $struct$
     $\$type$ ?let structureName
-    var @lstringlist attributeList = §[]
+    var @lstringlist attributeList = @[]
     repeat
     while
       $@attribute$ ?let attribute
       attributeList += !attribute
     end 
     ${$
-    var @structurePropertyListAST fieldList = §[]
+    var @structurePropertyListAST fieldList = @[]
     repeat
     while
       <private_or_public_struct_property_declaration> !?ioAST !?fieldList
@@ -249,7 +249,7 @@ syntax extension omnibus_syntax {
       <function_declaration> !?ioAST !receiverTypeName: structureName
     end
     $}$
-    ioAST.mDeclarationListAST += !@structureDeclarationAST.init {
+    ioAST.mDeclarationListAST += !@structureDeclarationAST {
       !structureName
       !structureName
       !structureName
@@ -336,7 +336,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
   ?!@bool canBeCopied
 {
 #---------- Attributes
-  var @lbigint explicitAlignment = .init {!0 !.nowhere}
+  var @lbigint explicitAlignment = @{!0 !.nowhere}
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
@@ -477,7 +477,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
         !modeDictionary:modeDictionary
       }
     ]
-    let functionLLVMName = @lstring.init {
+    let functionLLVMName = @lstring {
       !llvmRoutineName
       !self.mPropertyName.location
     }
@@ -488,9 +488,9 @@ method @structurePropertyListAST.@element enterPropertyInContext
       !routineKind: .function
       !warnIfUnused: false
       !exportedRoutine: false
-      !routineAttributes: ()
+      !routineAttributes: @()
       !routineMangledLLVMName: functionLLVMName
-      !formalArgumentList: §[]
+      !formalArgumentList: @[]
       !warningOnUnusedArgs: false 
       !instructionList
       !endOfInstructionList
@@ -513,16 +513,16 @@ method @structurePropertyListAST.@element enterPropertyInContext
         !setterModeDictionary: setterModeDictionary
       }
     ]
-    let functionLLVMName = @lstring.init {
+    let functionLLVMName = @lstring {
       !llvmSetterRoutineName
       !self.mPropertyName.location
     }
-    let @routineFormalArgumentListAST formalArgumentList = §[
-      .init (
+    let @routineFormalArgumentListAST formalArgumentList = @[
+      @(
         .input,
         ["" nowhere],
         self.mPropertyTypeName,
-        .init {!"newValue" !endOfWriteInstructionList}
+        @{!"newValue" !endOfWriteInstructionList}
       )
     ]
     ioDecoratedRoutineList +=
@@ -555,10 +555,10 @@ override method @structureDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
 #---------------------------------------- Properties
-  var @propertyList propertyList = §[]
-#  @propertyGetterMap propertyGetterMap = §[]
-  var @sortedOperandIRList sortedOperandIRList = §[]
-  var @constructorSignature constructorSignature = §[]
+  var @propertyList propertyList = @[]
+#  @propertyGetterMap propertyGetterMap = @[]
+  var @sortedOperandIRList sortedOperandIRList = @[]
+  var @constructorSignature constructorSignature = @[]
   var @string constructorKey = "("
   var canBeCopied = true
   for property in self.mStructurePropertyListAST do
@@ -579,9 +579,9 @@ override method @structureDeclarationAST enterInContext
   end
   constructorKey += ")"
 #---------------------------------------- Constructor map
-  var @constructorMap constructorMap = §[]
+  var @constructorMap constructorMap = @[]
   [!?constructorMap insertKey
-    !.init {!constructorKey !self.mReceiverTypeName.location}
+    ! @{!constructorKey !self.mReceiverTypeName.location}
     !constructorSignature
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
@@ -604,7 +604,7 @@ override method @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 #---------------------------------------- Enter in type map
-  let structureType = @omnibusType.init {
+  let structureType = @omnibusType {
     !subscript:.noSubscript
     !attributes:typeAttributes
     !omnibusTypeDescriptionName:self.mOmnibusTypeSpecificName
@@ -616,14 +616,14 @@ override method @structureDeclarationAST enterInContext
     !type:structureType
   ]
 #-------------------------------------------- GenerateLLVM type definition
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR.init {
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
     ![structureType llvmTypeName]
     !propertyList
   }
 #----------------- Assignment
 #--- Enter assignment function from references
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!structureType !structureType)
-  ioRoutineListIR += !@structureTypeAssignFunctionIR.init {
+  ioRoutineListIR += !@structureTypeAssignFunctionIR {
     ![assignmentFunctionLLVMName nowhere]
     !isRequired: false
     !warnsIfUnused: false
@@ -631,7 +631,7 @@ override method @structureDeclarationAST enterInContext
   }
 #--- Enter assignment operator
   let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
-  let operatorUsage = @structureAssignmentOperatorUsage.init {!structureType}
+  let operatorUsage = @structureAssignmentOperatorUsage {!structureType}
   [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
 }
 
@@ -674,7 +674,7 @@ override method @structureAssignmentOperatorUsage generateCode
     ?initializedTarget: let @bool inTargetIsInitialized
 {
   let structTypeName = [inTargetType llvmTypeName]
-  let arcAssignmentList = [inTargetType arcList !§[]]
+  let arcAssignmentList = [inTargetType arcList !@[]]
   if not inTargetIsInitialized then
    for (propertyName propertyType indexPath) in arcAssignmentList do 
       let llvmPropertyPtrName = "%arc.init." + [inErrorLocation endLocationIndex]
@@ -683,10 +683,10 @@ override method @structureAssignmentOperatorUsage generateCode
         s += ", i32 " + idx
       end
       s += " ; " + propertyName + "\n"
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
       let propertyTypeLLVMName = [propertyType llvmTypeName]
       s = "store " + propertyTypeLLVMName + " null, " + propertyTypeLLVMName + "* " + llvmPropertyPtrName 
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
     end
   end
   switch inSourcePossibleReference
@@ -701,22 +701,22 @@ override method @structureAssignmentOperatorUsage generateCode
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case reference (2*) :
     let assignmentFunctionLLVMName = assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
         + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
           + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !§[assignmentFunctionLLVMName]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case llvmStructureValue (* sortedOperandValues) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
     for (operand idx) in sortedOperandValues do
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
       s = "store " + [operand llvmTypeName] + " " + [operand llvmName] + ", " + [operand llvmTypeName] + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !§[]]    
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]    
     end
   case literalInteger (2*) :
     error inErrorLocation : "invalid structure assignment «literalInteger»"
@@ -746,7 +746,7 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let arcAssignmentList = [self.mStructureType arcList !§[]]
+  let arcAssignmentList = [self.mStructureType arcList !@[]]
   let structureTypeLLVMTypeName = [self.mStructureType llvmTypeName]
   ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (" + structureTypeLLVMTypeName + " * %inTarget, "

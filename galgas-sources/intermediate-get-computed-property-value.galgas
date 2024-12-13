@@ -8,7 +8,7 @@ setter @instructionListIR appendGetComputedPropertyValue
 {
  [!?ioTemporaries newTempLLVMVar ?let result_llvmName]
  outResultValueIR = .llvmNamedValue {!type:inResultType !llvmName:result_llvmName}
-  self += !@getComputedPropertyValueIR.init {!inReceiverIR !inLLVMGetterName !outResultValueIR}
+  self += !@getComputedPropertyValueIR {!inReceiverIR !inLLVMGetterName !outResultValueIR}
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
