@@ -13,8 +13,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "performFlashing",
     commandChar: "f",
     commandString: "flash-target",
-    comment: "After successful compilation, flash target",
-    defaultValue: ""
+    comment: "After successful compilation, flash target"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "galgas_cli_options",
@@ -22,8 +21,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "quiet_output",
     commandChar: "q",
     commandString: "quiet",
-    comment: "Quiet output",
-    defaultValue: ""
+    comment: "Quiet output"
   ))
   return array
 }

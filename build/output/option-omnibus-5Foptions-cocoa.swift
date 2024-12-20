@@ -13,8 +13,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "doNotDetectRecursiveCalls",
     commandChar: "r",
     commandString: "do-not-detect-recursive-calls",
-    comment: "Do not detect recursive calls",
-    defaultValue: ""
+    comment: "Do not detect recursive calls"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -22,8 +21,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "noPanicGeneration",
     commandChar: "",
     commandString: "no-panic-generation",
-    comment: "Do not generate panic code",
-    defaultValue: ""
+    comment: "Do not generate panic code"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -31,8 +29,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "emitControlRegisterHTMLDumpFile",
     commandChar: "",
     commandString: "emit-control-register-map",
-    comment: "Emit control register map in an HTML file",
-    defaultValue: ""
+    comment: "Emit control register map in an HTML file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -40,8 +37,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "emitDeclarationDependencyGraphFile",
     commandChar: "d",
     commandString: "emit-declaration-dependency-graph",
-    comment: "Emit declaration dependency graph file",
-    defaultValue: ""
+    comment: "Emit declaration dependency graph file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -49,8 +45,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "emitGlobalConstantHTMLDumpFile",
     commandChar: "",
     commandString: "emit-global-constant-map",
-    comment: "Emit global constant map in an HTML file",
-    defaultValue: ""
+    comment: "Emit global constant map in an HTML file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -58,8 +53,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "emitRoutineInvocationGraphFile",
     commandChar: "i",
     commandString: "emit-routine-invocation-graph",
-    comment: "Emit routine invocation graph file",
-    defaultValue: ""
+    comment: "Emit routine invocation graph file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -67,8 +61,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "emitTypeMap",
     commandChar: "t",
     commandString: "emit-type-map",
-    comment: "Emit type map in an HTML file",
-    defaultValue: ""
+    comment: "Emit type map in an HTML file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -76,8 +69,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "taskStrictPriorityOrder",
     commandChar: "",
     commandString: "task-strict-priority-order",
-    comment: "Ensure task strict priority order",
-    defaultValue: ""
+    comment: "Ensure task strict priority order"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -85,8 +77,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "optimizationZ",
     commandChar: "",
     commandString: "Oz",
-    comment: "Like previous option but reduces code size further",
-    defaultValue: ""
+    comment: "Like previous option but reduces code size further"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -94,8 +85,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "optimizationS",
     commandChar: "",
     commandString: "Os",
-    comment: "Like previous option with extra optimizations for size",
-    defaultValue: ""
+    comment: "Like previous option with extra optimizations for size"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -103,8 +93,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "listEmbeddedSampleFiles",
     commandChar: "l",
     commandString: "list-embedded-samples",
-    comment: "List embedded sample files",
-    defaultValue: ""
+    comment: "List embedded sample files"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -112,8 +101,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "listTargets",
     commandChar: "L",
     commandString: "list-targets",
-    comment: "List targets",
-    defaultValue: ""
+    comment: "List targets"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -121,8 +109,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "noDeadCodeElimination",
     commandChar: "",
     commandString: "no-deadcode-elimination",
-    comment: "No dead code elimination",
-    defaultValue: ""
+    comment: "No dead code elimination"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -130,8 +117,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "optimization1",
     commandChar: "",
     commandString: "O1",
-    comment: "Optimization level 1",
-    defaultValue: ""
+    comment: "Optimization level 1"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -139,8 +125,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "optimization2",
     commandChar: "",
     commandString: "O2",
-    comment: "Optimization level 2",
-    defaultValue: ""
+    comment: "Optimization level 2"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -148,8 +133,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "optimizationZ3",
     commandChar: "",
     commandString: "O3",
-    comment: "Optimization level 3",
-    defaultValue: ""
+    comment: "Optimization level 3"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -157,8 +141,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "printPasses",
     commandChar: "",
     commandString: "print-passes",
-    comment: "Print pass information",
-    defaultValue: ""
+    comment: "Print pass information"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -166,8 +149,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "extractEmbeddedSampleFile",
     commandChar: "x",
     commandString: "extract-embedded-sample-code",
-    comment: "Extract an embedded sample file",
-    defaultValue: ""
+    comment: "Extract an embedded sample file"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -175,8 +157,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "extractEmbeddedTargets",
     commandChar: "X",
     commandString: "extract-embedded-targets",
-    comment: "Extract embedded targets",
-    defaultValue: ""
+    comment: "Extract embedded targets"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -184,8 +165,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "useDirAsTargetDir",
     commandChar: "T",
     commandString: "use-target-dir",
-    comment: "Use directory as target definition directory, instead of using embedded targets",
-    defaultValue: ""
+    comment: "Use directory as target definition directory, instead of using embedded targets"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_options",
@@ -193,8 +173,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "pathList",
     commandChar: "",
     commandString: "path",
-    comment: "Search pathes for source files",
-    defaultValue: ""
+    comment: "Search pathes for source files"
   ))
   array.append (SWIFT_CommandLineOption (
     domainName: "galgas_cli_options",
@@ -202,8 +181,7 @@ func enterOptions () -> [SWIFT_CommandLineOption] {
     identifier: "quiet_output",
     commandChar: "q",
     commandString: "quiet",
-    comment: "Quiet output",
-    defaultValue: ""
+    comment: "Quiet output"
   ))
   return array
 }
