@@ -156,8 +156,8 @@ class SWIFT_Tokenizer_0_omnibus_lexique : SWIFT_Lexique_omnibus_lexique, SWIFT_T
 //   Global functions
 //--------------------------------------------------------------------------------------------------
 
-@MainActor func tokenizerFor (extension inExtension : String) -> SWIFT_Tokenizer_Protocol? {
-  var result : SWIFT_Tokenizer_Protocol? = nil
+@MainActor func tokenizerFor (extension inExtension : String) -> (any SWIFT_Tokenizer_Protocol)? {
+  var result : (any SWIFT_Tokenizer_Protocol)? = nil
   if inExtension == "omnibus" {
     result = SWIFT_Tokenizer_0_omnibus_lexique ()
   }else if inExtension == "omnibus-import" {
@@ -170,7 +170,7 @@ class SWIFT_Tokenizer_0_omnibus_lexique : SWIFT_Lexique_omnibus_lexique, SWIFT_T
 
 //--------------------------------------------------------------------------------------------------
 
-@MainActor func tokenizers () -> [SWIFT_Tokenizer_Protocol] {
+@MainActor func tokenizers () -> [any SWIFT_Tokenizer_Protocol] {
   return [
     SWIFT_Tokenizer_0_omnibus_lexique ()
   ]

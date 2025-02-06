@@ -157,11 +157,12 @@ static const UInt16 * gPopUpData_0_omnibus_5F_lexique [2] = {
 
 OC_Lexique * tokenizerForExtension (const NSString * inExtension) {
   OC_Lexique * result = nil ;
-  if ([inExtension isEqualToString:@"omnibus"]) {
+  NSString * uppercasedExtension = [inExtension uppercaseString] ;
+  if ([uppercasedExtension isEqualToString:@"OMNIBUS"]) {
     result = [OC_Tokenizer_0_omnibus_lexique new] ;
-  }else if ([inExtension isEqualToString:@"omnibus-import"]) {
+  }else if ([uppercasedExtension isEqualToString:@"OMNIBUS-IMPORT"]) {
     result = [OC_Tokenizer_0_omnibus_lexique new] ;
-  }else if ([inExtension isEqualToString:@"omnibus-target"]) {
+  }else if ([uppercasedExtension isEqualToString:@"OMNIBUS-TARGET"]) {
     result = [OC_Tokenizer_0_omnibus_lexique new] ;
   }
   return result ;
