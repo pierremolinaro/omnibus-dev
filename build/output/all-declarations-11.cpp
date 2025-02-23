@@ -2493,10 +2493,10 @@ GGS_string extensionGetter_passingModeForActualSelector (const GGS_effectiveArgu
     }
     break ;
   }
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     test_1 = GGS_bool (ComparisonKind::notEqual, constinArgument_inSelector.readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       result_result.plusAssign_operation(constinArgument_inSelector.readProperty_string ().add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 141)), inCompiler  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 141)) ;
     }
   }
@@ -2543,37 +2543,37 @@ void extensionMethod_analyzeLValue (const GGS_LValueAST inObject,
                                     Compiler * inCompiler
                                     COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outInternalRepresentation.drop () ; // Release 'out' argument
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_LValueAST temp_1 = inObject ;
     test_0 = GGS_bool (ComparisonKind::equal, temp_1.readProperty_mIdentifier ().readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      enumGalgasBool test_2 = kBoolTrue ;
-      if (kBoolTrue == test_2) {
+    if (GalgasBool::boolTrue == test_0) {
+      GalgasBool test_2 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_2) {
         test_2 = GGS_bool (ComparisonKind::equal, constinArgument_inSelfType.readProperty_kind ().objectCompare (GGS_typeKind::class_func_void (SOURCE_FILE ("lvalue.galgas", 140)))).boolEnum () ;
-        if (kBoolTrue == test_2) {
+        if (GalgasBool::boolTrue == test_2) {
           const GGS_LValueAST temp_3 = inObject ;
           TC_Array <FixItDescription> fixItArray4 ;
           inCompiler->emitSemanticError (temp_3.readProperty_mIdentifier ().readProperty_location (), GGS_string ("self is not available in this context"), fixItArray4  COMMA_SOURCE_FILE ("lvalue.galgas", 141)) ;
           outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
         }
       }
-      if (kBoolFalse == test_2) {
-        enumGalgasBool test_5 = kBoolTrue ;
-        if (kBoolTrue == test_5) {
+      if (GalgasBool::boolFalse == test_2) {
+        GalgasBool test_5 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_5) {
           GGS_bool test_6 = constinArgument_inRoutineAttributes.getter_contains (GGS_routineAttributes::class_func_mutatingRoutine (SOURCE_FILE ("lvalue.galgas", 142)) COMMA_SOURCE_FILE ("lvalue.galgas", 142)).operator_not (SOURCE_FILE ("lvalue.galgas", 142)) ;
-          if (kBoolTrue == test_6.boolEnum ()) {
+          if (GalgasBool::boolTrue == test_6.boolEnum ()) {
             test_6 = constinArgument_inIsAddressOf.operator_not (SOURCE_FILE ("lvalue.galgas", 142)) ;
           }
           test_5 = test_6.boolEnum () ;
-          if (kBoolTrue == test_5) {
+          if (GalgasBool::boolTrue == test_5) {
             const GGS_LValueAST temp_7 = inObject ;
             TC_Array <FixItDescription> fixItArray8 ;
             inCompiler->emitSemanticError (temp_7.readProperty_mIdentifier ().readProperty_location (), GGS_string ("cannot mutate properties, current method is not declared with @").add_operation (function_mutatingAttribute (inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 144)), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 144)).add_operation (GGS_string (" attribute"), inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 144)), fixItArray8  COMMA_SOURCE_FILE ("lvalue.galgas", 143)) ;
             outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
           }
         }
-        if (kBoolFalse == test_5) {
+        if (GalgasBool::boolFalse == test_5) {
           {
           const GGS_LValueAST temp_9 = inObject ;
           routine_analyzeSelfLValue_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_9.readProperty_mOperand (), outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("lvalue.galgas", 147)) ;
@@ -2582,7 +2582,7 @@ void extensionMethod_analyzeLValue (const GGS_LValueAST inObject,
       }
     }
   }
-  if (kBoolFalse == test_0) {
+  if (GalgasBool::boolFalse == test_0) {
     GGS_valuedObject var_entity_6578 ;
     const GGS_LValueAST temp_10 = inObject ;
     extensionMethod_searchEntity (ioArgument_ioUniversalMap, temp_10.readProperty_mIdentifier (), var_entity_6578, inCompiler COMMA_SOURCE_FILE ("lvalue.galgas", 162)) ;
@@ -2795,28 +2795,28 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
   GGS_controlRegisterFieldMap joker_6017 ; // Joker input parameter
   GGS_controlRegisterFieldList joker_6055 ; // Joker input parameter
   var_controlRegisterMap_5806.method_searchKey (temp_1.readProperty_mRegisterName (), outArgument_outRegisterType, var_readOnly_5961, var_userAccess_5985, outArgument_outSliceMap, joker_6017, var_addressOffset_6037, joker_6055, outArgument_outRegisterTypeBitCount, var_registerArraySize_6102, var_registerElementSize_6155, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 146)) ;
-  enumGalgasBool test_2 = kBoolTrue ;
-  if (kBoolTrue == test_2) {
+  GalgasBool test_2 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_2) {
     test_2 = constinArgument_inWriteAccess.operator_and (var_readOnly_5961 COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 160)).boolEnum () ;
-    if (kBoolTrue == test_2) {
+    if (GalgasBool::boolTrue == test_2) {
       const GGS_controlRegisterLValueAST temp_3 = inObject ;
       TC_Array <FixItDescription> fixItArray4 ;
       inCompiler->emitSemanticError (temp_3.readProperty_mRegisterName ().readProperty_location (), GGS_string ("this control register cannot be modified (declared with @ro attribute)"), fixItArray4  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 161)) ;
     }
   }
-  if (kBoolFalse == test_2) {
-    enumGalgasBool test_5 = kBoolTrue ;
-    if (kBoolTrue == test_5) {
+  if (GalgasBool::boolFalse == test_2) {
+    GalgasBool test_5 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_5) {
       GGS_bool test_6 = var_userAccess_5985.operator_not (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
-      if (kBoolTrue == test_6.boolEnum ()) {
+      if (GalgasBool::boolTrue == test_6.boolEnum ()) {
         GGS_bool test_7 = constinArgument_inMode.getter_isUserMode (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
-        if (kBoolTrue != test_7.boolEnum ()) {
+        if (GalgasBool::boolTrue != test_7.boolEnum ()) {
           test_7 = constinArgument_inMode.getter_isAnyMode (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
         }
         test_6 = test_7 ;
       }
       test_5 = test_6.boolEnum () ;
-      if (kBoolTrue == test_5) {
+      if (GalgasBool::boolTrue == test_5) {
         const GGS_controlRegisterLValueAST temp_8 = inObject ;
         TC_Array <FixItDescription> fixItArray9 ;
         inCompiler->emitSemanticError (temp_8.readProperty_mRegisterName ().readProperty_location (), GGS_string ("this control register is not accessible in user mode"), fixItArray9  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 164)) ;
@@ -2831,18 +2831,18 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
     {
       GGS_bigint extractedValue_6654_baseAddress_0 ;
       var_groupKind_5791.getAssociatedValuesFor_single (extractedValue_6654_baseAddress_0) ;
-      enumGalgasBool test_10 = kBoolTrue ;
-      if (kBoolTrue == test_10) {
+      GalgasBool test_10 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_10) {
         const GGS_controlRegisterLValueAST temp_11 = inObject ;
         test_10 = temp_11.readProperty_mGroupIndex ().getter_isIndex (SOURCE_FILE ("lvalue-control-register.galgas", 170)).boolEnum () ;
-        if (kBoolTrue == test_10) {
+        if (GalgasBool::boolTrue == test_10) {
           const GGS_controlRegisterLValueAST temp_12 = inObject ;
           TC_Array <FixItDescription> fixItArray13 ;
           inCompiler->emitSemanticError (temp_12.readProperty_mRegisterGroupName ().readProperty_location (), GGS_string ("subscripting not allowed, group is not an array"), fixItArray13  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 171)) ;
           var_registerAddress_6596.drop () ; // Release error dropped variable
         }
       }
-      if (kBoolFalse == test_10) {
+      if (GalgasBool::boolFalse == test_10) {
         const GGS_controlRegisterLValueAST temp_14 = inObject ;
         const GGS_controlRegisterLValueAST temp_15 = inObject ;
         GGS_string var_regName_6833 = temp_14.readProperty_mRegisterGroupName ().readProperty_string ().add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)).add_operation (temp_15.readProperty_mRegisterName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)) ;
@@ -2894,14 +2894,14 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
     break ;
   case GGS_registerIndexAST::Enumeration::enum_noIndex:
     {
-      enumGalgasBool test_21 = kBoolTrue ;
-      if (kBoolTrue == test_21) {
+      GalgasBool test_21 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_21) {
         test_21 = GGS_bool (ComparisonKind::equal, var_registerArraySize_6102.objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
-        if (kBoolTrue == test_21) {
+        if (GalgasBool::boolTrue == test_21) {
           outArgument_outllvmRegisterAddressName = var_registerAddress_6596 ;
         }
       }
-      if (kBoolFalse == test_21) {
+      if (GalgasBool::boolFalse == test_21) {
         const GGS_controlRegisterLValueAST temp_22 = inObject ;
         TC_Array <FixItDescription> fixItArray23 ;
         inCompiler->emitSemanticError (temp_22.readProperty_mRegisterName ().readProperty_location (), GGS_string ("the control register is an array"), fixItArray23  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 219)) ;

@@ -5,7 +5,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-func enterOptions () -> [SWIFT_CommandLineOption] {
+func enterOptionsFor_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa () -> [SWIFT_CommandLineOption] {
   var array = [SWIFT_CommandLineOption] ()
   array.append (SWIFT_CommandLineOption (
     domainName: "omnibus_option_not_appearing_in_cocoa",

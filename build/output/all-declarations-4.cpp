@@ -1665,14 +1665,14 @@ void extensionMethod_generateLLVMForStaticLists (const GGS_staticListInitializat
   const GGS_staticListInitializationMap temp_0 = inObject ;
   cEnumerator_staticListInitializationMap enumerator_22709 (temp_0, EnumerationOrder::up) ;
   while (enumerator_22709.hasCurrentObject ()) {
-    enumGalgasBool test_1 = kBoolTrue ;
-    if (kBoolTrue == test_1) {
+    GalgasBool test_1 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_1) {
       test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_22709.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-static-list.galgas", 539)).boolEnum () ;
-      if (kBoolTrue == test_1) {
-        enumGalgasBool test_2 = kBoolTrue ;
-        if (kBoolTrue == test_2) {
+      if (GalgasBool::boolTrue == test_1) {
+        GalgasBool test_2 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_2) {
           test_2 = var_first_22685.boolEnum () ;
-          if (kBoolTrue == test_2) {
+          if (GalgasBool::boolTrue == test_2) {
             var_first_22685 = GGS_bool (false) ;
             ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GGS_string ("Static Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas", 542)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas", 542)) ;
           }
@@ -3476,7 +3476,7 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
     bool loop_6367 = true ;
     while (loop_6367) {
       GGS_bool test_3 = var_continue_6349 ;
-      if (kBoolTrue == test_3.boolEnum ()) {
+      if (GalgasBool::boolTrue == test_3.boolEnum ()) {
         test_3 = GGS_bool (ComparisonKind::greaterThan, var_taskList_6249.getter_count (SOURCE_FILE ("task-declaration.galgas", 178)).objectCompare (GGS_uint (uint32_t (0U)))) ;
       }
       loop_6367 = test_3.isValid () ;
@@ -3507,10 +3507,10 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
               }
             }
           }
-          enumGalgasBool test_6 = kBoolTrue ;
-          if (kBoolTrue == test_6) {
+          GalgasBool test_6 = GalgasBool::boolTrue ;
+          if (GalgasBool::boolTrue == test_6) {
             test_6 = var_allPrecedenceDefined_6555.boolEnum () ;
-            if (kBoolTrue == test_6) {
+            if (GalgasBool::boolTrue == test_6) {
               var_candidateTaskList_6477.addAssign_operation (enumerator_6533.current (HERE).readProperty_mTaskName (), enumerator_6533.current (HERE).readProperty_mLowerPriorityTaskList (), enumerator_6533.current (HERE).readProperty_mStackSize (), enumerator_6533.current (HERE).readProperty_mTaskSetupListAST (), enumerator_6533.current (HERE).readProperty_mTaskActivateListAST (), enumerator_6533.current (HERE).readProperty_mTaskDeactivateListAST (), enumerator_6533.current (HERE).readProperty_mGuardedCommandList (), enumerator_6533.current (HERE).readProperty_mEndOfTaskDeclaration (), enumerator_6533.current (HERE).readProperty_mAutoStart ()  COMMA_SOURCE_FILE ("task-declaration.galgas", 188)) ;
               var_continue_6349 = GGS_bool (true) ;
               {
@@ -3527,19 +3527,19 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
               }
             }
           }
-          if (kBoolFalse == test_6) {
+          if (GalgasBool::boolFalse == test_6) {
             var_idx_6509 = var_idx_6509.add_operation (GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 201)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 201)) ;
           }
           enumerator_6533.gotoNextObject () ;
         }
-        enumGalgasBool test_7 = kBoolTrue ;
-        if (kBoolTrue == test_7) {
+        GalgasBool test_7 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_7) {
           GGS_bool test_8 = GGS_bool (gOption_omnibus_5F_options_taskStrictPriorityOrder.readProperty_value ()) ;
-          if (kBoolTrue == test_8.boolEnum ()) {
+          if (GalgasBool::boolTrue == test_8.boolEnum ()) {
             test_8 = GGS_bool (ComparisonKind::greaterThan, var_candidateTaskList_6477.getter_count (SOURCE_FILE ("task-declaration.galgas", 204)).objectCompare (GGS_uint (uint32_t (1U)))) ;
           }
           test_7 = test_8.boolEnum () ;
-          if (kBoolTrue == test_7) {
+          if (GalgasBool::boolTrue == test_7) {
             cEnumerator_taskListAST enumerator_7365 (var_candidateTaskList_6477, EnumerationOrder::up) ;
             while (enumerator_7365.hasCurrentObject ()) {
               TC_Array <FixItDescription> fixItArray9 ;
@@ -3548,10 +3548,10 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
             }
           }
         }
-        enumGalgasBool test_10 = kBoolTrue ;
-        if (kBoolTrue == test_10) {
+        GalgasBool test_10 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_10) {
           test_10 = GGS_bool (ComparisonKind::greaterThan, var_candidateTaskList_6477.getter_count (SOURCE_FILE ("task-declaration.galgas", 209)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
-          if (kBoolTrue == test_10) {
+          if (GalgasBool::boolTrue == test_10) {
             var_continue_6349 = GGS_bool (true) ;
             cEnumerator_taskListAST enumerator_7570 (var_candidateTaskList_6477, EnumerationOrder::up) ;
             while (enumerator_7570.hasCurrentObject ()) {
@@ -3585,10 +3585,10 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
     ioArgument_ioRoutineListIR.addAssign_operation (GGS_taskActivateFunctionIR::init_21__21_isRequired_21_warnsIfUnused_21__21__21_ (function_routineMangledNameFromAST (enumerator_7903.current (HERE).readProperty_mTaskName ().readProperty_string (), GGS_string ("activate").getter_nowhere (SOURCE_FILE ("task-declaration.galgas", 236)), temp_13, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 236)), GGS_bool (false), GGS_bool (false), var_assemblerTaskName_8262, var_activateTaskCallName_8331, index_7891, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("task-declaration.galgas", 235)) ;
     GGS_instructionListAST temp_14 = GGS_instructionListAST::init (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 245)) ;
     GGS_instructionListAST var_taskListInstructionList_8833 = temp_14 ;
-    enumGalgasBool test_15 = kBoolTrue ;
-    if (kBoolTrue == test_15) {
+    GalgasBool test_15 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_15) {
       test_15 = GGS_bool (ComparisonKind::greaterThan, enumerator_7903.current (HERE).readProperty_mGuardedCommandList ().getter_count (SOURCE_FILE ("task-declaration.galgas", 246)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
-      if (kBoolTrue == test_15) {
+      if (GalgasBool::boolTrue == test_15) {
         GGS_syncInstructionAST var_syncInstruction_8922 = GGS_syncInstructionAST::init_21__21__21_ (enumerator_7903.current (HERE).readProperty_mTaskName ().readProperty_location (), enumerator_7903.current (HERE).readProperty_mGuardedCommandList (), enumerator_7903.current (HERE).readProperty_mTaskName ().readProperty_location (), inCompiler COMMA_HERE) ;
         var_taskListInstructionList_8833.addAssign_operation (var_syncInstruction_8922  COMMA_SOURCE_FILE ("task-declaration.galgas", 248)) ;
       }
@@ -6000,20 +6000,20 @@ void extensionMethod_generateCode (const GGS_taskMapIR inObject,
     GGS_string var_taskLoopLabel_22386 = GGS_string ("loop.").add_operation (enumerator_19956.current (HERE).readProperty_mTaskName ().getter_assemblerRepresentation (SOURCE_FILE ("task-declaration.galgas", 559)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 559)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  br label %").add_operation (var_taskLoopLabel_22386, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 560)).add_operation (GGS_string ("\n\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 560)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 560)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(var_taskLoopLabel_22386.add_operation (GGS_string (":\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 561)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 561)) ;
-    enumGalgasBool test_2 = kBoolTrue ;
-    if (kBoolTrue == test_2) {
+    GalgasBool test_2 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_2) {
       test_2 = enumerator_19956.current (HERE).readProperty_mActivate ().operator_not (SOURCE_FILE ("task-declaration.galgas", 562)).boolEnum () ;
-      if (kBoolTrue == test_2) {
+      if (GalgasBool::boolTrue == test_2) {
         ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @").add_operation (var_waitForActivationCallName_18594, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 563)).add_operation (GGS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 563)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 563)) ;
       }
     }
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @").add_operation (function_activateNameForTaskType (enumerator_19956.current (HERE).readProperty_mTaskName (), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 565)).getter_assemblerRepresentation (SOURCE_FILE ("task-declaration.galgas", 565)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 565)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 565)).add_operation (var_effectiveParameter_20261, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 565)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 565)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 565)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @func.").add_operation (function_llvmNameForFunction (enumerator_19956.current (HERE).readProperty_mTaskName ().add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)).add_operation (function_llvmNameForTaskLoopFunction (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)).add_operation (GGS_string ("()"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)).add_operation (var_effectiveParameter_20261, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 566)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 566)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void ").add_operation (function_deactivateNameForTaskType (enumerator_19956.current (HERE).readProperty_mTaskName (), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 567)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 567)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 567)).add_operation (var_effectiveParameter_20261, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 567)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 567)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 567)) ;
-    enumGalgasBool test_3 = kBoolTrue ;
-    if (kBoolTrue == test_3) {
+    GalgasBool test_3 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_3) {
       test_3 = enumerator_19956.current (HERE).readProperty_mActivate ().boolEnum () ;
-      if (kBoolTrue == test_3) {
+      if (GalgasBool::boolTrue == test_3) {
         ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @").add_operation (var_waitForActivationCallName_18594, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 569)).add_operation (GGS_string (" ()\n"), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 569)), inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 569)) ;
       }
     }
@@ -9555,10 +9555,10 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GGS_externFunctionDeclara
       }
       enumerator_2385.gotoNextObject () ;
     }
-    enumGalgasBool test_1 = kBoolTrue ;
-    if (kBoolTrue == test_1) {
+    GalgasBool test_1 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_1) {
       test_1 = GGS_bool (ComparisonKind::notEqual, enumerator_2335.current_mReturnTypeName (HERE).readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-      if (kBoolTrue == test_1) {
+      if (GalgasBool::boolTrue == test_1) {
         {
         ioArgument_ioGraph.setter_noteNode (enumerator_2335.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 64)) ;
         }
@@ -11231,10 +11231,10 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
   while (enumerator_6935.hasCurrentObject ()) {
     var_definedInterrupts_6892.addAssign_operation (enumerator_6935.current (HERE).readProperty_lkey ().readProperty_string ()  COMMA_SOURCE_FILE ("declaration-isr.galgas", 165)) ;
     GGS_string temp_2 ;
-    const enumGalgasBool test_3 = GGS_bool (ComparisonKind::equal, enumerator_6935.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 166)))).boolEnum () ;
-    if (kBoolTrue == test_3) {
+    const GalgasBool test_3 = GGS_bool (ComparisonKind::equal, enumerator_6935.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 166)))).boolEnum () ;
+    if (GalgasBool::boolTrue == test_3) {
       temp_2 = function_llvmNameForServiceInterrupt (enumerator_6935.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 167)).readProperty_string () ;
-    }else if (kBoolFalse == test_3) {
+    }else if (GalgasBool::boolFalse == test_3) {
       temp_2 = function_llvmNameForSectionInterrupt (enumerator_6935.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 169)) ;
     }
     GGS_string var_interruptImplementationName_6999 = temp_2 ;
@@ -11249,10 +11249,10 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @").add_operation (var_isrRoutineLLVMName_7736, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (GGS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (var_llvmTypeName_7474, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (var_varName_7405, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)).add_operation (GGS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 180)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 182)) ;
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 183)) ;
-    enumGalgasBool test_5 = kBoolTrue ;
-    if (kBoolTrue == test_5) {
+    GalgasBool test_5 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_5) {
       test_5 = GGS_bool (ComparisonKind::equal, enumerator_6935.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas", 185)))).boolEnum () ;
-      if (kBoolTrue == test_5) {
+      if (GalgasBool::boolTrue == test_5) {
         GGS_string var_interruptHandlerName_8073 = function_llvmNameForServiceInterrupt (enumerator_6935.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 186)).readProperty_string () ;
         GGS_string var_isrName_8158 = function_llvmNameForSectionInterrupt (enumerator_6935.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 187)) ;
         GGS_string var_s_31__8230 = constinArgument_inXTRInterruptHandlerString.getter_stringByReplacingStringByString (GGS_string ("!ISR!"), var_isrName_8158, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 188)) ;
@@ -11264,10 +11264,10 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
   }
   cEnumerator_availableInterruptMap enumerator_8499 (constinArgument_inGenerationContext.readProperty_mAvailableInterruptMap (), EnumerationOrder::up) ;
   while (enumerator_8499.hasCurrentObject ()) {
-    enumGalgasBool test_6 = kBoolTrue ;
-    if (kBoolTrue == test_6) {
+    GalgasBool test_6 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_6) {
       test_6 = var_definedInterrupts_6892.getter_hasKey (enumerator_8499.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-isr.galgas", 195)).operator_not (SOURCE_FILE ("declaration-isr.galgas", 195)).boolEnum () ;
-      if (kBoolTrue == test_6) {
+      if (GalgasBool::boolTrue == test_6) {
         switch (enumerator_8499.current_mInterruptionPanicCode (HERE).enumValue ()) {
         case GGS_interruptionPanicCode::Enumeration::invalid:
           break ;
@@ -11281,15 +11281,15 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
           {
             GGS_lbigint extractedValue_8836_value_0 ;
             enumerator_8499.current_mInterruptionPanicCode (HERE).getAssociatedValuesFor_code (extractedValue_8836_value_0) ;
-            enumGalgasBool test_7 = kBoolTrue ;
-            if (kBoolTrue == test_7) {
+            GalgasBool test_7 = GalgasBool::boolTrue ;
+            if (GalgasBool::boolTrue == test_7) {
               test_7 = GGS_bool (gOption_omnibus_5F_options_noPanicGeneration.readProperty_value ()).boolEnum () ;
-              if (kBoolTrue == test_7) {
+              if (GalgasBool::boolTrue == test_7) {
                 GGS_string var_s_8924 = constinArgument_inUndefinedInterruptString.getter_stringByReplacingStringByString (GGS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_8499.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 202)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 202)) ;
                 ioArgument_ioAScode.plusAssign_operation(var_s_8924, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 203)) ;
               }
             }
-            if (kBoolFalse == test_7) {
+            if (GalgasBool::boolFalse == test_7) {
               GGS_string var_name_9093 = function_llvmNameForSectionInterrupt (enumerator_8499.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 205)) ;
               ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GGS_string ("Panic code for ").add_operation (var_name_9093, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 206)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 206)) ;
               ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("define void @").add_operation (var_name_9093, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)).add_operation (GGS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)).add_operation (GGS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas", 207)) ;
@@ -13200,10 +13200,10 @@ GGS_string extensionGetter_requiredActualPassingModeForSelector (const GGS_procF
     }
     break ;
   }
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     test_1 = GGS_bool (ComparisonKind::notEqual, constinArgument_inSelector.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       result_result.plusAssign_operation(constinArgument_inSelector.add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 39)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 39)) ;
     }
   }
@@ -13252,10 +13252,10 @@ GGS_lstring extensionGetter_mangledName (const GGS_routineTypedSignature & inObj
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
   GGS_string var_s_5399 = GGS_string::makeEmptyString () ;
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     test_0 = GGS_bool (ComparisonKind::notEqual, constinArgument_inReceiverTypeName.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       var_s_5399.plusAssign_operation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)) ;
     }
   }
@@ -14947,212 +14947,6 @@ GGS_decoratedRegularRoutineList GGS_decoratedRegularRoutineList::extractObject (
       result = *p ;
     }else{
       inCompiler->castError ("decoratedRegularRoutineList", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes::GGS_routineAttributes (void) :
-AC_GALGAS_root (),
-mFlags (0),
-mIsValid (false) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes::GGS_routineAttributes (const uint64_t inFlags) :
-AC_GALGAS_root (),
-mFlags (inFlags),
-mIsValid (true) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
-  return GGS_routineAttributes (0) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::class_func_mutatingRoutine (UNUSED_LOCATION_ARGS) {
-  return GGS_routineAttributes (uint64_t (1) << 0) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::class_func_isGuard (UNUSED_LOCATION_ARGS) {
-  return GGS_routineAttributes (uint64_t (1) << 1) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_routineAttributes::isValid (void) const {
-  return mIsValid ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_routineAttributes::getter_contains (const GGS_routineAttributes & inOperand
-                                                 COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_bool result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = GGS_bool ((mFlags & inOperand.mFlags) != 0) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineAttributes::andAssign_operation (const GGS_routineAttributes inOperand,
-                                                 class Compiler * /* inCompiler */
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inOperand.isValid ()) {
-    mFlags &= inOperand.mFlags ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineAttributes::orAssign_operation (const GGS_routineAttributes inOperand,
-                                                class Compiler * /* inCompiler */
-                                                COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inOperand.isValid ()) {
-    mFlags |= inOperand.mFlags ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineAttributes::xorAssign_operation (const GGS_routineAttributes inOperand,
-                                                 class Compiler * /* inCompiler */
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inOperand.isValid ()) {
-    mFlags ^= inOperand.mFlags ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineAttributes::minusAssign_operation (const GGS_routineAttributes inOperand,
-                                                   class Compiler * /* inCompiler */
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inOperand.isValid ()) {
-    mFlags &= ~ inOperand.mFlags ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::operator_or (const GGS_routineAttributes & inOperand
-                                                          COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_routineAttributes result ;
-  if (mIsValid && inOperand.mIsValid) {
-    result = GGS_routineAttributes (mFlags | inOperand.mFlags) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::operator_and (const GGS_routineAttributes & inOperand
-                                                           COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_routineAttributes result ;
-  if (mIsValid && inOperand.mIsValid) {
-    result = GGS_routineAttributes (mFlags & inOperand.mFlags) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::operator_xor (const GGS_routineAttributes & inOperand
-                                                           COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_routineAttributes result ;
-  if (mIsValid && inOperand.mIsValid) {
-    result = GGS_routineAttributes (mFlags ^ inOperand.mFlags) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::substract_operation (const GGS_routineAttributes & inOperand,
-                                                                  Compiler * /* inCompiler */
-                                                                  COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_routineAttributes result ;
-  if (mIsValid && inOperand.mIsValid) {
-    result = GGS_routineAttributes (mFlags & ~ inOperand.mFlags) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
-  GGS_routineAttributes result ;
-  if (mIsValid) {
-    result = GGS_routineAttributes (uint64_t (0x3) ^ mFlags) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineAttributes::description (String & ioString,
-                                         const int32_t /* inIndentation */) const {
-  ioString.appendCString ("<boolset @routineAttributes:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    if ((mFlags & (uint64_t (1) << 0)) != 0) {
-      ioString.appendCString (" mutatingRoutine") ;
-    }
-    if ((mFlags & (uint64_t (1) << 1)) != 0) {
-      ioString.appendCString (" isGuard") ;
-    }
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @routineAttributes generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineAttributes ("routineAttributes",
-                                                                         nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_routineAttributes::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineAttributes ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_routineAttributes::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_routineAttributes (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineAttributes GGS_routineAttributes::extractObject (const GGS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GGS_routineAttributes result ;
-  const GGS_routineAttributes * p = (const GGS_routineAttributes *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_routineAttributes *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineAttributes", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

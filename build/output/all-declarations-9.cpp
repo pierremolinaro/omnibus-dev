@@ -1544,16 +1544,16 @@ void extensionMethod_searchValuedObject (const GGS_universalValuedObjectMap inOb
     {
       GGS_omnibusType extractedValue_4781_type_0 ;
       var_entity_4731.getAssociatedValuesFor_task (extractedValue_4781_type_0) ;
-      enumGalgasBool test_1 = kBoolTrue ;
-      if (kBoolTrue == test_1) {
+      GalgasBool test_1 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_1) {
         test_1 = GGS_bool (ComparisonKind::equal, constinArgument_inMode.objectCompare (GGS_mode::class_func_bootMode (SOURCE_FILE ("universal-map.galgas", 144)))).boolEnum () ;
-        if (kBoolTrue == test_1) {
+        if (GalgasBool::boolTrue == test_1) {
           TC_Array <FixItDescription> fixItArray2 ;
           inCompiler->emitSemanticError (constinArgument_inValuedObjectName.readProperty_location (), GGS_string ("cannot call a task entry in a boot routine"), fixItArray2  COMMA_SOURCE_FILE ("universal-map.galgas", 145)) ;
           outArgument_outObjectIR.drop () ; // Release error dropped variable
         }
       }
-      if (kBoolFalse == test_1) {
+      if (GalgasBool::boolFalse == test_1) {
         outArgument_outObjectIR = GGS_objectIR::class_func_reference (extractedValue_4781_type_0, function_llvmNameForGlobalVariable (constinArgument_inValuedObjectName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 147))  COMMA_SOURCE_FILE ("universal-map.galgas", 147)) ;
       }
     }
@@ -1563,36 +1563,36 @@ void extensionMethod_searchValuedObject (const GGS_universalValuedObjectMap inOb
       GGS_omnibusType extractedValue_5060_type_0 ;
       GGS_bool extractedValue_5065_instancied_1 ;
       var_entity_4731.getAssociatedValuesFor_driver (extractedValue_5060_type_0, extractedValue_5065_instancied_1) ;
-      enumGalgasBool test_3 = kBoolTrue ;
-      if (kBoolTrue == test_3) {
+      GalgasBool test_3 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_3) {
         test_3 = GGS_bool (ComparisonKind::equal, constinArgument_inMode.objectCompare (GGS_mode::class_func_bootMode (SOURCE_FILE ("universal-map.galgas", 150)))).boolEnum () ;
-        if (kBoolTrue == test_3) {
+        if (GalgasBool::boolTrue == test_3) {
           TC_Array <FixItDescription> fixItArray4 ;
           inCompiler->emitSemanticError (constinArgument_inValuedObjectName.readProperty_location (), GGS_string ("cannot call a driver in a boot routine"), fixItArray4  COMMA_SOURCE_FILE ("universal-map.galgas", 151)) ;
           outArgument_outObjectIR.drop () ; // Release error dropped variable
         }
       }
-      if (kBoolFalse == test_3) {
-        enumGalgasBool test_5 = kBoolTrue ;
-        if (kBoolTrue == test_5) {
+      if (GalgasBool::boolFalse == test_3) {
+        GalgasBool test_5 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_5) {
           test_5 = extractedValue_5065_instancied_1.operator_not (SOURCE_FILE ("universal-map.galgas", 152)).boolEnum () ;
-          if (kBoolTrue == test_5) {
+          if (GalgasBool::boolTrue == test_5) {
             TC_Array <FixItDescription> fixItArray6 ;
             inCompiler->emitSemanticError (constinArgument_inValuedObjectName.readProperty_location (), GGS_string ("the driver should be instancied"), fixItArray6  COMMA_SOURCE_FILE ("universal-map.galgas", 153)) ;
             outArgument_outObjectIR.drop () ; // Release error dropped variable
           }
         }
-        if (kBoolFalse == test_5) {
-          enumGalgasBool test_7 = kBoolTrue ;
-          if (kBoolTrue == test_7) {
+        if (GalgasBool::boolFalse == test_5) {
+          GalgasBool test_7 = GalgasBool::boolTrue ;
+          if (GalgasBool::boolTrue == test_7) {
             test_7 = constinArgument_inInitializedDriverSet.getter_hasKey (constinArgument_inValuedObjectName.readProperty_string () COMMA_SOURCE_FILE ("universal-map.galgas", 154)).operator_not (SOURCE_FILE ("universal-map.galgas", 154)).boolEnum () ;
-            if (kBoolTrue == test_7) {
+            if (GalgasBool::boolTrue == test_7) {
               TC_Array <FixItDescription> fixItArray8 ;
               inCompiler->emitSemanticError (constinArgument_inValuedObjectName.readProperty_location (), GGS_string ("the driver should be named in driver dependence list"), fixItArray8  COMMA_SOURCE_FILE ("universal-map.galgas", 155)) ;
               outArgument_outObjectIR.drop () ; // Release error dropped variable
             }
           }
-          if (kBoolFalse == test_7) {
+          if (GalgasBool::boolFalse == test_7) {
             outArgument_outObjectIR = GGS_objectIR::class_func_reference (extractedValue_5060_type_0, function_llvmNameForGlobalVariable (constinArgument_inValuedObjectName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 157))  COMMA_SOURCE_FILE ("universal-map.galgas", 157)) ;
           }
         }
@@ -1667,10 +1667,10 @@ void extensionSetter_readAccess (GGS_universalValuedObjectMap & ioObject,
       GGS_lstring extractedValue_6611__1 ;
       GGS_bool extractedValue_6611__2 ;
       var_property_6459.getAssociatedValuesFor_localConstant (extractedValue_6611__0, extractedValue_6611__1, extractedValue_6611__2) ;
-      enumGalgasBool test_1 = kBoolTrue ;
-      if (kBoolTrue == test_1) {
+      GalgasBool test_1 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_1) {
         test_1 = GGS_bool (ComparisonKind::equal, var_valueState_6440.objectCompare (GGS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 182)))).boolEnum () ;
-        if (kBoolTrue == test_1) {
+        if (GalgasBool::boolTrue == test_1) {
           {
           ioObject.mProperty_mInternalPropertyAndRoutineMap.setter_setMObjectStateForKey (GGS_valuedObjectState::class_func_hasReadValue (SOURCE_FILE ("universal-map.galgas", 183)), constinArgument_inValuedObjectName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 183)) ;
           }
@@ -1740,14 +1740,14 @@ void extensionSetter_searchValuedObjectForReadAccess (GGS_universalValuedObjectM
       GGS_omnibusType extractedValue_7618_type_0 ;
       GGS_bool extractedValue_7623_instancied_1 ;
       var_property_7428.getAssociatedValuesFor_driver (extractedValue_7618_type_0, extractedValue_7623_instancied_1) ;
-      enumGalgasBool test_1 = kBoolTrue ;
-      if (kBoolTrue == test_1) {
+      GalgasBool test_1 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_1) {
         test_1 = extractedValue_7623_instancied_1.boolEnum () ;
-        if (kBoolTrue == test_1) {
+        if (GalgasBool::boolTrue == test_1) {
           outArgument_outObjectIR = GGS_objectIR::class_func_reference (extractedValue_7618_type_0, function_llvmNameForGlobalVariable (constinArgument_inValuedObjectName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 208))  COMMA_SOURCE_FILE ("universal-map.galgas", 208)) ;
         }
       }
-      if (kBoolFalse == test_1) {
+      if (GalgasBool::boolFalse == test_1) {
         TC_Array <FixItDescription> fixItArray2 ;
         inCompiler->emitSemanticError (constinArgument_inValuedObjectName.readProperty_location (), GGS_string ("the driver should be instancied"), fixItArray2  COMMA_SOURCE_FILE ("universal-map.galgas", 210)) ;
         outArgument_outObjectIR.drop () ; // Release error dropped variable
@@ -1768,10 +1768,10 @@ void extensionSetter_searchValuedObjectForReadAccess (GGS_universalValuedObjectM
       GGS_bool extractedValue_7993__2 ;
       var_property_7428.getAssociatedValuesFor_localConstant (extractedValue_7967_type_0, extractedValue_7981_omnibusName_1, extractedValue_7993__2) ;
       outArgument_outObjectIR = GGS_objectIR::class_func_reference (extractedValue_7967_type_0, function_llvmNameForLocalVariable (extractedValue_7981_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 215))  COMMA_SOURCE_FILE ("universal-map.galgas", 215)) ;
-      enumGalgasBool test_3 = kBoolTrue ;
-      if (kBoolTrue == test_3) {
+      GalgasBool test_3 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_3) {
         test_3 = GGS_bool (ComparisonKind::equal, var_valueState_7409.objectCompare (GGS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 216)))).boolEnum () ;
-        if (kBoolTrue == test_3) {
+        if (GalgasBool::boolTrue == test_3) {
           {
           ioObject.mProperty_mInternalPropertyAndRoutineMap.setter_setMObjectStateForKey (GGS_valuedObjectState::class_func_hasReadValue (SOURCE_FILE ("universal-map.galgas", 217)), constinArgument_inValuedObjectName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 217)) ;
           }
@@ -2039,14 +2039,14 @@ void extensionMethod_searchValuedObjectType (const GGS_universalValuedObjectMap 
                                              Compiler * inCompiler
                                              COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outType.drop () ; // Release 'out' argument
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     test_0 = GGS_bool (ComparisonKind::equal, constinArgument_inLValue.readProperty_mIdentifier ().readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       outArgument_outType = constinArgument_inSelfType ;
     }
   }
-  if (kBoolFalse == test_0) {
+  if (GalgasBool::boolFalse == test_0) {
     GGS_valuedObject var_property_12251 ;
     const GGS_universalValuedObjectMap temp_1 = inObject ;
     GGS_valuedObjectState joker_12242_2 ; // Joker input parameter
@@ -2232,10 +2232,10 @@ void extensionMethod_checkLocalVariableFinalState (const GGS_universalValuedObje
         GGS_lstring extractedValue_14543_omnibusName_1 ;
         GGS_bool extractedValue_14561_isFormalInputArg_2 ;
         enumerator_14318.current (HERE).readProperty_mValuedObject ().getAssociatedValuesFor_localConstant (extractedValue_14529_type_0, extractedValue_14543_omnibusName_1, extractedValue_14561_isFormalInputArg_2) ;
-        enumGalgasBool test_1 = kBoolTrue ;
-        if (kBoolTrue == test_1) {
+        GalgasBool test_1 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_1) {
           test_1 = extractedValue_14561_isFormalInputArg_2.operator_not (SOURCE_FILE ("universal-map.galgas", 372)).boolEnum () ;
-          if (kBoolTrue == test_1) {
+          if (GalgasBool::boolTrue == test_1) {
             {
             extensionSetter_generateRelease (ioArgument_ioInstructionGenerationList, extractedValue_14529_type_0, extractedValue_14543_omnibusName_1, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 373)) ;
             }
@@ -2248,14 +2248,14 @@ void extensionMethod_checkLocalVariableFinalState (const GGS_universalValuedObje
         GGS_omnibusType extractedValue_14869_type_0 ;
         GGS_lstring extractedValue_14883_omnibusName_1 ;
         enumerator_14318.current (HERE).readProperty_mValuedObject ().getAssociatedValuesFor_localVariable (extractedValue_14869_type_0, extractedValue_14883_omnibusName_1) ;
-        enumGalgasBool test_2 = kBoolTrue ;
-        if (kBoolTrue == test_2) {
+        GalgasBool test_2 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_2) {
           GGS_bool test_3 = GGS_bool (ComparisonKind::equal, enumerator_14318.current (HERE).readProperty_mObjectState ().objectCompare (GGS_valuedObjectState::class_func_noValue (SOURCE_FILE ("universal-map.galgas", 376)))) ;
-          if (kBoolTrue == test_3.boolEnum ()) {
+          if (GalgasBool::boolTrue == test_3.boolEnum ()) {
             test_3 = enumerator_14318.current (HERE).readProperty_mObjectShouldBeValuedAtEndOfScope () ;
           }
           test_2 = test_3.boolEnum () ;
-          if (kBoolTrue == test_2) {
+          if (GalgasBool::boolTrue == test_2) {
             TC_Array <FixItDescription> fixItArray4 ;
             inCompiler->emitSemanticError (enumerator_14318.current (HERE).readProperty_lkey ().readProperty_location (), GGS_string ("'").add_operation (enumerator_14318.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 377)).add_operation (GGS_string ("' should be valued at the end of routine"), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 377)), fixItArray4  COMMA_SOURCE_FILE ("universal-map.galgas", 377)) ;
           }
@@ -2429,10 +2429,10 @@ void extensionSetter_closeBranch (GGS_universalValuedObjectMap & ioObject,
   {
   ioObject.mProperty_mScopeStack.setter_popLast (var_scopeKind_17287, var_firstBranch_17302, var_initialStateMap_17319, var_referenceStateMap_17340, var_localObjectList_17363, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 436)) ;
   }
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     test_0 = var_firstBranch_17302.boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       GGS_referenceStateMap temp_1 = GGS_referenceStateMap::init (inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 438)) ;
       GGS_referenceStateMap var_newReferenceStateMap_17429 = temp_1 ;
       const GGS_universalValuedObjectMap temp_2 = ioObject ;
@@ -2476,7 +2476,7 @@ void extensionSetter_closeBranch (GGS_universalValuedObjectMap & ioObject,
       ioObject.mProperty_mScopeStack.addAssign_operation (var_scopeKind_17287, GGS_bool (false), var_initialStateMap_17319, var_newReferenceStateMap_17429, var_localObjectList_17363  COMMA_SOURCE_FILE ("universal-map.galgas", 451)) ;
     }
   }
-  if (kBoolFalse == test_0) {
+  if (GalgasBool::boolFalse == test_0) {
     switch (var_scopeKind_17287.enumValue ()) {
     case GGS_scopeKind::Enumeration::invalid:
       break ;
@@ -2489,30 +2489,30 @@ void extensionSetter_closeBranch (GGS_universalValuedObjectMap & ioObject,
           GGS_bool joker_18184_2 ; // Joker input parameter
           GGS_valuedObject joker_18184_1 ; // Joker input parameter
           temp_3.readProperty_mInternalPropertyAndRoutineMap ().method_searchKey (enumerator_18059.current_lkey (HERE), var_currentObjectState_18165, joker_18184_2, joker_18184_1, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 456)) ;
-          enumGalgasBool test_4 = kBoolTrue ;
-          if (kBoolTrue == test_4) {
+          GalgasBool test_4 = GalgasBool::boolTrue ;
+          if (GalgasBool::boolTrue == test_4) {
             test_4 = GGS_bool (ComparisonKind::equal, enumerator_18059.current_mState (HERE).objectCompare (var_currentObjectState_18165)).boolEnum () ;
-            if (kBoolTrue == test_4) {
+            if (GalgasBool::boolTrue == test_4) {
             }
           }
-          if (kBoolFalse == test_4) {
-            enumGalgasBool test_5 = kBoolTrue ;
-            if (kBoolTrue == test_5) {
+          if (GalgasBool::boolFalse == test_4) {
+            GalgasBool test_5 = GalgasBool::boolTrue ;
+            if (GalgasBool::boolTrue == test_5) {
               test_5 = GGS_bool (ComparisonKind::equal, var_currentObjectState_18165.objectCompare (GGS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 458)))).operator_and (GGS_bool (ComparisonKind::equal, enumerator_18059.current_mState (HERE).objectCompare (GGS_valuedObjectState::class_func_hasReadValue (SOURCE_FILE ("universal-map.galgas", 458)))) COMMA_SOURCE_FILE ("universal-map.galgas", 458)).boolEnum () ;
-              if (kBoolTrue == test_5) {
+              if (GalgasBool::boolTrue == test_5) {
               }
             }
-            if (kBoolFalse == test_5) {
-              enumGalgasBool test_6 = kBoolTrue ;
-              if (kBoolTrue == test_6) {
+            if (GalgasBool::boolFalse == test_5) {
+              GalgasBool test_6 = GalgasBool::boolTrue ;
+              if (GalgasBool::boolTrue == test_6) {
                 test_6 = GGS_bool (ComparisonKind::equal, var_currentObjectState_18165.objectCompare (GGS_valuedObjectState::class_func_hasReadValue (SOURCE_FILE ("universal-map.galgas", 459)))).operator_and (GGS_bool (ComparisonKind::equal, enumerator_18059.current_mState (HERE).objectCompare (GGS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 459)))) COMMA_SOURCE_FILE ("universal-map.galgas", 459)).boolEnum () ;
-                if (kBoolTrue == test_6) {
+                if (GalgasBool::boolTrue == test_6) {
                   {
                   var_referenceStateMap_17340.setter_setMStateForKey (GGS_valuedObjectState::class_func_hasReadValue (SOURCE_FILE ("universal-map.galgas", 460)), enumerator_18059.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 460)) ;
                   }
                 }
               }
-              if (kBoolFalse == test_6) {
+              if (GalgasBool::boolFalse == test_6) {
                 TC_Array <FixItDescription> fixItArray7 ;
                 inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("invalid state for object '").add_operation (enumerator_18059.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)).add_operation (GGS_string ("': found "), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)).add_operation (extensionGetter_string (var_currentObjectState_18165, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)).add_operation (GGS_string (", required "), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)).add_operation (extensionGetter_string (enumerator_18059.current_mState (HERE), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 463)), fixItArray7  COMMA_SOURCE_FILE ("universal-map.galgas", 462)) ;
               }
@@ -2532,10 +2532,10 @@ void extensionSetter_closeBranch (GGS_universalValuedObjectMap & ioObject,
           GGS_bool joker_18982_2 ; // Joker input parameter
           GGS_valuedObject joker_18982_1 ; // Joker input parameter
           temp_8.readProperty_mInternalPropertyAndRoutineMap ().method_searchKey (enumerator_18860.current_lkey (HERE), var_currentObjectState_18963, joker_18982_2, joker_18982_1, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 469)) ;
-          enumGalgasBool test_9 = kBoolTrue ;
-          if (kBoolTrue == test_9) {
+          GalgasBool test_9 = GalgasBool::boolTrue ;
+          if (GalgasBool::boolTrue == test_9) {
             test_9 = GGS_bool (ComparisonKind::notEqual, enumerator_18860.current_mState (HERE).objectCompare (var_currentObjectState_18963)).boolEnum () ;
-            if (kBoolTrue == test_9) {
+            if (GalgasBool::boolTrue == test_9) {
               TC_Array <FixItDescription> fixItArray10 ;
               inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("invalid state for object '").add_operation (enumerator_18860.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)).add_operation (GGS_string ("': found "), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)).add_operation (extensionGetter_string (var_currentObjectState_18963, inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)).add_operation (GGS_string (", required "), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)).add_operation (extensionGetter_string (enumerator_18860.current_mState (HERE), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 472)), fixItArray10  COMMA_SOURCE_FILE ("universal-map.galgas", 471)) ;
             }
@@ -2600,10 +2600,10 @@ void extensionSetter_closeOverride (GGS_universalValuedObjectMap & ioObject,
         GGS_lstring extractedValue_20214__1 ;
         GGS_bool extractedValue_20214__2 ;
         var_possibleValuedObject_20021.getAssociatedValuesFor_localConstant (extractedValue_20214__0, extractedValue_20214__1, extractedValue_20214__2) ;
-        enumGalgasBool test_2 = kBoolTrue ;
-        if (kBoolTrue == test_2) {
+        GalgasBool test_2 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_2) {
           test_2 = GGS_bool (ComparisonKind::equal, var_currentObjectState_19947.objectCompare (GGS_valuedObjectState::class_func_hasUnreadValue (SOURCE_FILE ("universal-map.galgas", 502)))).boolEnum () ;
-          if (kBoolTrue == test_2) {
+          if (GalgasBool::boolTrue == test_2) {
             TC_Array <FixItDescription> fixItArray3 ;
             inCompiler->emitSemanticWarning (constinArgument_inErrorLocation, GGS_string ("'").add_operation (enumerator_19839.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 503)).add_operation (GGS_string ("' is never read"), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 503)), fixItArray3  COMMA_SOURCE_FILE ("universal-map.galgas", 503)) ;
           }
@@ -2615,14 +2615,14 @@ void extensionSetter_closeOverride (GGS_universalValuedObjectMap & ioObject,
         GGS_omnibusType extractedValue_20370__0 ;
         GGS_lstring extractedValue_20371__1 ;
         var_possibleValuedObject_20021.getAssociatedValuesFor_localVariable (extractedValue_20370__0, extractedValue_20371__1) ;
-        enumGalgasBool test_4 = kBoolTrue ;
-        if (kBoolTrue == test_4) {
+        GalgasBool test_4 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_4) {
           GGS_bool test_5 = GGS_bool (ComparisonKind::equal, var_currentObjectState_19947.objectCompare (GGS_valuedObjectState::class_func_noValue (SOURCE_FILE ("universal-map.galgas", 506)))) ;
-          if (kBoolTrue == test_5.boolEnum ()) {
+          if (GalgasBool::boolTrue == test_5.boolEnum ()) {
             test_5 = var_objectShouldBeValuedAtEndOfScope_19977 ;
           }
           test_4 = test_5.boolEnum () ;
-          if (kBoolTrue == test_4) {
+          if (GalgasBool::boolTrue == test_4) {
             TC_Array <FixItDescription> fixItArray6 ;
             inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("'").add_operation (enumerator_19839.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 507)).add_operation (GGS_string ("' should be valued at the end of routine"), inCompiler COMMA_SOURCE_FILE ("universal-map.galgas", 507)), fixItArray6  COMMA_SOURCE_FILE ("universal-map.galgas", 507)) ;
           }
@@ -3036,16 +3036,16 @@ void extensionSetter_findOrAddStaticString (GGS_staticEntityMap & ioObject,
                                             Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outIndex.drop () ; // Release 'out' argument
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_staticEntityMap temp_1 = ioObject ;
     test_0 = temp_1.readProperty_mStaticStringMap ().getter_hasKey (constinArgument_inString COMMA_SOURCE_FILE ("context.galgas", 328)).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       const GGS_staticEntityMap temp_2 = ioObject ;
       temp_2.readProperty_mStaticStringMap ().method_searchKey (constinArgument_inString.getter_nowhere (SOURCE_FILE ("context.galgas", 329)), outArgument_outIndex, inCompiler COMMA_SOURCE_FILE ("context.galgas", 329)) ;
     }
   }
-  if (kBoolFalse == test_0) {
+  if (GalgasBool::boolFalse == test_0) {
     const GGS_staticEntityMap temp_3 = ioObject ;
     outArgument_outIndex = temp_3.readProperty_mStaticStringMap ().getter_count (SOURCE_FILE ("context.galgas", 331)) ;
     {
@@ -3166,14 +3166,14 @@ GGS_string cPtr_omnibusType::getter_llvmTypeName (Compiler * inCompiler
       GGS_routineTypedSignature extractedValue_3136_signature_1 ;
       GGS_unifiedTypeMapEntry extractedValue_3146_returnTypeProxy_2 ;
       temp_0.readProperty_kind ().getAssociatedValuesFor_function (extractedValue_3134__0, extractedValue_3136_signature_1, extractedValue_3146_returnTypeProxy_2) ;
-      enumGalgasBool test_5 = kBoolTrue ;
-      if (kBoolTrue == test_5) {
+      GalgasBool test_5 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_5) {
         test_5 = extractedValue_3146_returnTypeProxy_2.getter_isNull (SOURCE_FILE ("types.galgas", 85)).boolEnum () ;
-        if (kBoolTrue == test_5) {
+        if (GalgasBool::boolTrue == test_5) {
           result_result = GGS_string ("void") ;
         }
       }
-      if (kBoolFalse == test_5) {
+      if (GalgasBool::boolFalse == test_5) {
         result_result = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) extensionGetter_type (extractedValue_3146_returnTypeProxy_2, inCompiler COMMA_SOURCE_FILE ("types.galgas", 88)).ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 88)) ;
       }
       result_result.plusAssign_operation(GGS_string ("("), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 90)) ;
@@ -3228,12 +3228,12 @@ GGS_string callExtensionGetter_llvmTypeName (const cPtr_omnibusType * inObject,
 void cPtr_omnibusType::method_checkIsCompileTimeType (const GGS_location constinArgument_inErrorLocation,
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_omnibusType temp_1 = this ;
     const GGS_omnibusType temp_2 = this ;
     test_0 = temp_1.readProperty_kind ().getter_isCompileTimeBool (SOURCE_FILE ("types.galgas", 107)).operator_or (temp_2.readProperty_kind ().getter_isCompileTimeInteger (SOURCE_FILE ("types.galgas", 107)) COMMA_SOURCE_FILE ("types.galgas", 107)).operator_not (SOURCE_FILE ("types.galgas", 107)).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       TC_Array <FixItDescription> fixItArray3 ;
       inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("this type should be a compile time type"), fixItArray3  COMMA_SOURCE_FILE ("types.galgas", 108)) ;
     }
@@ -3260,12 +3260,12 @@ void callExtensionMethod_checkIsCompileTimeType (cPtr_omnibusType * inObject,
 void cPtr_omnibusType::method_checkIsNotCompileTimeType (const GGS_location constinArgument_inErrorLocation,
                                                          Compiler * inCompiler
                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_omnibusType temp_1 = this ;
     const GGS_omnibusType temp_2 = this ;
     test_0 = temp_1.readProperty_kind ().getter_isCompileTimeBool (SOURCE_FILE ("types.galgas", 115)).operator_or (temp_2.readProperty_kind ().getter_isCompileTimeInteger (SOURCE_FILE ("types.galgas", 115)) COMMA_SOURCE_FILE ("types.galgas", 115)).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       TC_Array <FixItDescription> fixItArray3 ;
       inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("this type should not be a compile time type"), fixItArray3  COMMA_SOURCE_FILE ("types.galgas", 116)) ;
     }
@@ -3385,18 +3385,18 @@ void cPtr_omnibusType::method_generateRetain (const GGS_string constinArgument_i
   const GGS_omnibusType temp_0 = this ;
   GGS_string var_llvmTypeName_7077 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 205)) ;
   GGS_string var_LLVMVariable_7118 = function_llvmNameForLocalVariable (constinArgument_inOmnibusName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 206)) ;
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     const GGS_omnibusType temp_2 = this ;
     test_1 = temp_2.readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 207)).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       GGS_string var_tempLLVMVariable_7225 = GGS_string ("%temp.").add_operation (constinArgument_inOmnibusName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)).add_operation (GGS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)).add_operation (ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("types.galgas", 208)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 208)) ;
       ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.plusAssign_operation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 209)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ").add_operation (var_tempLLVMVariable_7225, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GGS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_llvmTypeName_7077, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_llvmTypeName_7077, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (var_LLVMVariable_7118, inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 210)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 210)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @arc.retain (").add_operation (var_llvmTypeName_7077, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (var_tempLLVMVariable_7225, inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)).add_operation (GGS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 211)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 211)) ;
     }
   }
-  if (kBoolFalse == test_1) {
+  if (GalgasBool::boolFalse == test_1) {
     const GGS_omnibusType temp_3 = this ;
     GGS_uintlist temp_4 = GGS_uintlist::init (inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)) ;
     GGS_arcAssignmentList var_arcAssignmentList_7609 = callExtensionGetter_arcList ((const cPtr_omnibusType *) temp_3.ptr (), temp_4, inCompiler COMMA_SOURCE_FILE ("types.galgas", 213)) ;
@@ -3449,11 +3449,11 @@ void cPtr_omnibusType::method_generateInsulate (const GGS_string constinArgument
   const GGS_omnibusType temp_0 = this ;
   GGS_string var_llvmTypeName_8770 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 239)) ;
   GGS_string var_LLVMVariable_8811 = function_llvmNameForLocalVariable (constinArgument_inOmnibusName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 240)) ;
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     const GGS_omnibusType temp_2 = this ;
     test_1 = temp_2.readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 241)).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       GGS_string var_loadedVar_8918 = GGS_string ("%temp.").add_operation (constinArgument_inOmnibusName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (GGS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)).add_operation (ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("types.galgas", 242)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 242)) ;
       GGS_string var_insulatedVar_9037 = GGS_string ("%temp.").add_operation (constinArgument_inOmnibusName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 243)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)).add_operation (GGS_string (".insulated."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)).add_operation (ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("types.galgas", 243)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 243)) ;
       ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.plusAssign_operation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 244)) ;
@@ -3462,7 +3462,7 @@ void cPtr_omnibusType::method_generateInsulate (const GGS_string constinArgument
       ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  store ").add_operation (var_llvmTypeName_8770, inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (var_insulatedVar_9037, inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (var_llvmTypeName_8770, inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (var_LLVMVariable_8811, inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 247)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 247)) ;
     }
   }
-  if (kBoolFalse == test_1) {
+  if (GalgasBool::boolFalse == test_1) {
     const GGS_omnibusType temp_3 = this ;
     GGS_uintlist temp_4 = GGS_uintlist::init (inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)) ;
     GGS_arcAssignmentList var_arcAssignmentList_9566 = callExtensionGetter_arcList ((const cPtr_omnibusType *) temp_3.ptr (), temp_4, inCompiler COMMA_SOURCE_FILE ("types.galgas", 249)) ;
@@ -3516,18 +3516,18 @@ void cPtr_omnibusType::method_generateRelease (const GGS_string constinArgument_
   const GGS_omnibusType temp_0 = this ;
   GGS_string var_llvmTypeName_11010 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_0.ptr (), inCompiler COMMA_SOURCE_FILE ("types.galgas", 276)) ;
   GGS_string var_LLVMVariable_11051 = function_llvmNameForLocalVariable (constinArgument_inOmnibusName, inCompiler COMMA_SOURCE_FILE ("types.galgas", 277)) ;
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     const GGS_omnibusType temp_2 = this ;
     test_1 = temp_2.readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 278)).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       GGS_string var_tempLLVMVariable_11158 = GGS_string ("%temp.").add_operation (constinArgument_inOmnibusName.getter_assemblerRepresentation (SOURCE_FILE ("types.galgas", 279)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 279)).add_operation (GGS_string (".loaded."), inCompiler COMMA_SOURCE_FILE ("types.galgas", 279)).add_operation (ioArgument_ioGenerationAdds.readProperty_mUniqueIndex ().getter_string (SOURCE_FILE ("types.galgas", 279)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 279)) ;
       ioArgument_ioGenerationAdds.mProperty_mUniqueIndex.plusAssign_operation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 280)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ").add_operation (var_tempLLVMVariable_11158, inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (GGS_string (" = load "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (var_llvmTypeName_11010, inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (var_llvmTypeName_11010, inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (var_LLVMVariable_11051, inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 281)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 281)) ;
       ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  call void @arc.release (").add_operation (var_llvmTypeName_11010, inCompiler COMMA_SOURCE_FILE ("types.galgas", 282)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 282)).add_operation (var_tempLLVMVariable_11158, inCompiler COMMA_SOURCE_FILE ("types.galgas", 282)).add_operation (GGS_string (") ;\n"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 282)), inCompiler  COMMA_SOURCE_FILE ("types.galgas", 282)) ;
     }
   }
-  if (kBoolFalse == test_1) {
+  if (GalgasBool::boolFalse == test_1) {
     const GGS_omnibusType temp_3 = this ;
     GGS_uintlist temp_4 = GGS_uintlist::init (inCompiler COMMA_SOURCE_FILE ("types.galgas", 284)) ;
     GGS_arcAssignmentList var_arcAssignmentList_11548 = callExtensionGetter_arcList ((const cPtr_omnibusType *) temp_3.ptr (), temp_4, inCompiler COMMA_SOURCE_FILE ("types.galgas", 284)) ;
@@ -3619,17 +3619,17 @@ GGS_string cPtr_omnibusType::getter_descriptionForHTMLFile (Compiler * inCompile
       GGS_uint extractedValue_12938_bitCount_3 ;
       temp_0.readProperty_kind ().getAssociatedValuesFor_integer (extractedValue_12913__0, extractedValue_12915__1, extractedValue_12923_unsigned_2, extractedValue_12938_bitCount_3) ;
       GGS_string temp_1 ;
-      const enumGalgasBool test_2 = GGS_bool (ComparisonKind::greaterThan, extractedValue_12938_bitCount_3.objectCompare (GGS_uint (uint32_t (1U)))).boolEnum () ;
-      if (kBoolTrue == test_2) {
+      const GalgasBool test_2 = GGS_bool (ComparisonKind::greaterThan, extractedValue_12938_bitCount_3.objectCompare (GGS_uint (uint32_t (1U)))).boolEnum () ;
+      if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_string ("s") ;
-      }else if (kBoolFalse == test_2) {
+      }else if (GalgasBool::boolFalse == test_2) {
         temp_1 = GGS_string::makeEmptyString () ;
       }
       GGS_string temp_3 ;
-      const enumGalgasBool test_4 = extractedValue_12923_unsigned_2.boolEnum () ;
-      if (kBoolTrue == test_4) {
+      const GalgasBool test_4 = extractedValue_12923_unsigned_2.boolEnum () ;
+      if (GalgasBool::boolTrue == test_4) {
         temp_3 = GGS_string ("unsigned") ;
-      }else if (kBoolFalse == test_4) {
+      }else if (GalgasBool::boolFalse == test_4) {
         temp_3 = GGS_string ("signed") ;
       }
       result_result = GGS_string ("Integer (").add_operation (extractedValue_12938_bitCount_3.getter_string (SOURCE_FILE ("types.galgas", 318)), inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)).add_operation (GGS_string (" bit"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)).add_operation (temp_1, inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)).add_operation (GGS_string (", "), inCompiler COMMA_SOURCE_FILE ("types.galgas", 318)).add_operation (temp_3, inCompiler COMMA_SOURCE_FILE ("types.galgas", 319)).add_operation (GGS_string (")"), inCompiler COMMA_SOURCE_FILE ("types.galgas", 319)) ;
@@ -3723,21 +3723,21 @@ GGS_arcAssignmentList cPtr_omnibusType::getter_arcList (const GGS_uintlist const
   GGS_arcAssignmentList result_result ; // Returned variable
   GGS_arcAssignmentList temp_0 = GGS_arcAssignmentList::init (inCompiler COMMA_SOURCE_FILE ("types.galgas", 350)) ;
   result_result = temp_0 ;
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     const GGS_omnibusType temp_2 = this ;
     test_1 = temp_2.readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 351)).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       const GGS_omnibusType temp_3 = this ;
       result_result.addAssign_operation (GGS_string::makeEmptyString (), temp_3, constinArgument_inPropertyIndexPath  COMMA_SOURCE_FILE ("types.galgas", 352)) ;
     }
   }
-  if (kBoolFalse == test_1) {
-    enumGalgasBool test_4 = kBoolTrue ;
-    if (kBoolTrue == test_4) {
+  if (GalgasBool::boolFalse == test_1) {
+    GalgasBool test_4 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_4) {
       const GGS_omnibusType temp_5 = this ;
       test_4 = temp_5.readProperty_kind ().getter_isStructure (SOURCE_FILE ("types.galgas", 353)).boolEnum () ;
-      if (kBoolTrue == test_4) {
+      if (GalgasBool::boolTrue == test_4) {
         GGS_propertyList var_propertyList_14259 ;
         const GGS_omnibusType temp_6 = this ;
         temp_6.readProperty_kind ().method_extractStructure (var_propertyList_14259, inCompiler COMMA_SOURCE_FILE ("types.galgas", 354)) ;
@@ -3784,11 +3784,11 @@ GGS_bool cPtr_omnibusType::getter_deinitNeeded (Compiler * inCompiler
   GGS_bool result_result ; // Returned variable
   const GGS_omnibusType temp_0 = this ;
   result_result = temp_0.readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("types.galgas", 365)) ;
-  enumGalgasBool test_1 = kBoolTrue ;
-  if (kBoolTrue == test_1) {
+  GalgasBool test_1 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_1) {
     const GGS_omnibusType temp_2 = this ;
     test_1 = temp_2.readProperty_kind ().getter_isStructure (SOURCE_FILE ("types.galgas", 366)).boolEnum () ;
-    if (kBoolTrue == test_1) {
+    if (GalgasBool::boolTrue == test_1) {
       GGS_propertyList var_propertyList_14750 ;
       const GGS_omnibusType temp_3 = this ;
       temp_3.readProperty_kind ().method_extractStructure (var_propertyList_14750, inCompiler COMMA_SOURCE_FILE ("types.galgas", 367)) ;
@@ -10535,11 +10535,11 @@ void extensionMethod_generateLLVMcode (const GGS_controlRegisterGroupArrayList i
                                        const GGS_uint constinArgument_inPointerSize,
                                        Compiler * inCompiler
                                        COMMA_UNUSED_LOCATION_ARGS) {
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_controlRegisterGroupArrayList temp_1 = inObject ;
     test_0 = GGS_bool (ComparisonKind::greaterThan, temp_1.getter_count (SOURCE_FILE ("declaration-control-register.galgas", 674)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       ioArgument_ioLLVMcode.plusAssign_operation(function_llvmTitleComment (GGS_string ("Control Register Group Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 675)), inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 675)) ;
       GGS_string var_int_27863 = GGS_string ("i").add_operation (constinArgument_inPointerSize.getter_string (SOURCE_FILE ("declaration-control-register.galgas", 676)), inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 676)) ;
       const GGS_controlRegisterGroupArrayList temp_2 = inObject ;

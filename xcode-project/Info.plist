@@ -27,8 +27,8 @@
  <key>CFBundleDocumentTypes</key>
  <array>
   <dict>
-      <key>CFBundleTypeIconFile</key>
-      <string>omnibus_icns</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>omnibus_icns</string>
       <key>CFBundleTypeIconSystemGenerated</key>
       <integer>0</integer>
       <key>CFBundleTypeName</key>
@@ -45,12 +45,12 @@
       <string>OC_GGS_Document</string>
   </dict>
   <dict>
-      <key>CFBundleTypeIconFile</key>
-      <string>omnibus-import_icns</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>omnibus-import_icns</string>
       <key>CFBundleTypeIconSystemGenerated</key>
       <integer>0</integer>
       <key>CFBundleTypeName</key>
-      <string>omnibus Source</string>
+      <string>omnibus-import Source</string>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>LSHandlerRank</key>
@@ -63,12 +63,12 @@
       <string>OC_GGS_Document</string>
   </dict>
   <dict>
-      <key>CFBundleTypeIconFile</key>
-      <string>omnibus-target_icns</string>
+			<key>CFBundleTypeIconFile</key>
+			<string>omnibus-target_icns</string>
       <key>CFBundleTypeIconSystemGenerated</key>
       <integer>0</integer>
       <key>CFBundleTypeName</key>
-      <string>omnibus Source</string>
+      <string>omnibus-target Source</string>
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>LSHandlerRank</key>
@@ -94,7 +94,7 @@
     <key>UTTypeIcons</key>
     <dict>
       <key>UTTypeIconBadgeName</key>
-      <string>galgasDocuments</string>
+      <string>omnibus_icns</string>
     </dict>
     <key>UTTypeIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus</string>
@@ -116,7 +116,7 @@
     <key>UTTypeIcons</key>
     <dict>
       <key>UTTypeIconBadgeName</key>
-      <string>galgasDocuments</string>
+      <string>omnibus-import_icns</string>
     </dict>
     <key>UTTypeIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus-import</string>
@@ -138,7 +138,7 @@
     <key>UTTypeIcons</key>
     <dict>
       <key>UTTypeIconBadgeName</key>
-      <string>galgasDocuments</string>
+      <string>omnibus-target_icns</string>
     </dict>
     <key>UTTypeIdentifier</key>
     <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus-target</string>

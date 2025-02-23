@@ -28,10 +28,10 @@ void extensionMethod_externProcedureSemanticAnalysis (const GGS_externFunctionDe
   }
   const GGS_externFunctionDeclarationListAST_2E_element temp_2 = inObject ;
   GGS_unifiedTypeMapEntry temp_3 ;
-  const enumGalgasBool test_4 = GGS_bool (ComparisonKind::equal, temp_2.readProperty_mReturnTypeName ().readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-  if (kBoolTrue == test_4) {
+  const GalgasBool test_4 = GGS_bool (ComparisonKind::equal, temp_2.readProperty_mReturnTypeName ().readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
+  if (GalgasBool::boolTrue == test_4) {
     temp_3 = GGS_unifiedTypeMapEntry::class_func_null (SOURCE_FILE ("declaration-extern-proc.galgas", 140)) ;
-  }else if (kBoolFalse == test_4) {
+  }else if (GalgasBool::boolFalse == test_4) {
     const GGS_externFunctionDeclarationListAST_2E_element temp_5 = inObject ;
     temp_3 = extensionGetter_searchKey (constinArgument_inContext.readProperty_mTypeMap (), temp_5.readProperty_mReturnTypeName (), inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 142)) ;
   }
@@ -9012,10 +9012,10 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
       GGS_omnibusType extractedValue_10049_type_0 ;
       GGS_bool extractedValue_10054_instancied_1 ;
       var_entity_9437.getAssociatedValuesFor_driver (extractedValue_10049_type_0, extractedValue_10054_instancied_1) ;
-      enumGalgasBool test_3 = kBoolTrue ;
-      if (kBoolTrue == test_3) {
+      GalgasBool test_3 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_3) {
         test_3 = extractedValue_10054_instancied_1.operator_not (SOURCE_FILE ("expression-primary.galgas", 251)).boolEnum () ;
-        if (kBoolTrue == test_3) {
+        if (GalgasBool::boolTrue == test_3) {
           const GGS_primaryInExpressionAST temp_4 = this ;
           TC_Array <FixItDescription> fixItArray5 ;
           inCompiler->emitSemanticError (temp_4.readProperty_mReceiverName ().readProperty_location (), GGS_string ("the driver should be instancied"), fixItArray5  COMMA_SOURCE_FILE ("expression-primary.galgas", 252)) ;
@@ -9172,16 +9172,16 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionWithSelf (const
         GGS_effectiveArgumentListAST extractedValue_18014_arguments_1 ;
         GGS_location extractedValue_18034_errorLocation_2 ;
         enumerator_16731.current_mAccess (HERE).getAssociatedValuesFor_funcCall (extractedValue_17977_methodName_0, extractedValue_18014_arguments_1, extractedValue_18034_errorLocation_2) ;
-        enumGalgasBool test_1 = kBoolTrue ;
-        if (kBoolTrue == test_1) {
+        GalgasBool test_1 = GalgasBool::boolTrue ;
+        if (GalgasBool::boolTrue == test_1) {
           test_1 = constinArgument_inRoutineAttributes.getter_contains (GGS_routineAttributes::class_func_isGuard (SOURCE_FILE ("expression-primary.galgas", 473)) COMMA_SOURCE_FILE ("expression-primary.galgas", 473)).boolEnum () ;
-          if (kBoolTrue == test_1) {
+          if (GalgasBool::boolTrue == test_1) {
             TC_Array <FixItDescription> fixItArray2 ;
             inCompiler->emitSemanticError (extractedValue_18034_errorLocation_2, GGS_string ("a method cannot be called in guard"), fixItArray2  COMMA_SOURCE_FILE ("expression-primary.galgas", 474)) ;
             outArgument_outResult.drop () ; // Release error dropped variable
           }
         }
-        if (kBoolFalse == test_1) {
+        if (GalgasBool::boolFalse == test_1) {
           {
           routine_handleFunctionCallInExpression_3F__26__3F_self_3F_context_3F_mode_3F_routineAttributes_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__26_ (extractedValue_17977_methodName_0, outArgument_outResult, constinArgument_inSelfType, constinArgument_inContext, constinArgument_inMode, constinArgument_inRoutineAttributes, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_18014_arguments_1, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 476)) ;
           }
@@ -14008,22 +14008,22 @@ void extensionMethod_analyzeLValueInAssignment (const GGS_LValueAST inObject,
                                                 Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outInternalRepresentation.drop () ; // Release 'out' argument
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     const GGS_LValueAST temp_1 = inObject ;
     test_0 = GGS_bool (ComparisonKind::equal, temp_1.readProperty_mIdentifier ().readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
-    if (kBoolTrue == test_0) {
-      enumGalgasBool test_2 = kBoolTrue ;
-      if (kBoolTrue == test_2) {
+    if (GalgasBool::boolTrue == test_0) {
+      GalgasBool test_2 = GalgasBool::boolTrue ;
+      if (GalgasBool::boolTrue == test_2) {
         test_2 = GGS_bool (ComparisonKind::equal, constinArgument_inSelfType.readProperty_kind ().objectCompare (GGS_typeKind::class_func_void (SOURCE_FILE ("instruction-assignment.galgas", 122)))).boolEnum () ;
-        if (kBoolTrue == test_2) {
+        if (GalgasBool::boolTrue == test_2) {
           const GGS_LValueAST temp_3 = inObject ;
           TC_Array <FixItDescription> fixItArray4 ;
           inCompiler->emitSemanticError (temp_3.readProperty_mIdentifier ().readProperty_location (), GGS_string ("self is not available in this context"), fixItArray4  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 123)) ;
           outArgument_outInternalRepresentation.drop () ; // Release error dropped variable
         }
       }
-      if (kBoolFalse == test_2) {
+      if (GalgasBool::boolFalse == test_2) {
         {
         const GGS_LValueAST temp_5 = inObject ;
         routine_analyzeSelfLValueInAssignment_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_pendingStoreComputedPropertyList_3F__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, ioArgument_ioPendingStoreComputedPropertyInstructionGenerationListList, temp_5.readProperty_mOperand (), outArgument_outInternalRepresentation, inCompiler  COMMA_SOURCE_FILE ("instruction-assignment.galgas", 125)) ;
@@ -14031,7 +14031,7 @@ void extensionMethod_analyzeLValueInAssignment (const GGS_LValueAST inObject,
       }
     }
   }
-  if (kBoolFalse == test_0) {
+  if (GalgasBool::boolFalse == test_0) {
     GGS_valuedObject var_entity_6139 ;
     const GGS_LValueAST temp_6 = inObject ;
     extensionMethod_searchEntity (ioArgument_ioUniversalMap, temp_6.readProperty_mIdentifier (), var_entity_6139, inCompiler COMMA_SOURCE_FILE ("instruction-assignment.galgas", 141)) ;

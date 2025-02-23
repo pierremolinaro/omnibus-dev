@@ -8,6 +8,212 @@
 #include "all-declarations-5.h"
 
 //--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes::GGS_routineAttributes (void) :
+AC_GALGAS_root (),
+mFlags (0),
+mIsValid (false) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes::GGS_routineAttributes (const uint64_t inFlags) :
+AC_GALGAS_root (),
+mFlags (inFlags),
+mIsValid (true) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
+  return GGS_routineAttributes (0) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::class_func_mutatingRoutine (UNUSED_LOCATION_ARGS) {
+  return GGS_routineAttributes (uint64_t (1) << 0) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::class_func_isGuard (UNUSED_LOCATION_ARGS) {
+  return GGS_routineAttributes (uint64_t (1) << 1) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_routineAttributes::isValid (void) const {
+  return mIsValid ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_bool GGS_routineAttributes::getter_contains (const GGS_routineAttributes & inOperand
+                                                 COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_bool result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = GGS_bool ((mFlags & inOperand.mFlags) != 0) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_routineAttributes::andAssign_operation (const GGS_routineAttributes inOperand,
+                                                 class Compiler * /* inCompiler */
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags &= inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_routineAttributes::orAssign_operation (const GGS_routineAttributes inOperand,
+                                                class Compiler * /* inCompiler */
+                                                COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags |= inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_routineAttributes::xorAssign_operation (const GGS_routineAttributes inOperand,
+                                                 class Compiler * /* inCompiler */
+                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags ^= inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_routineAttributes::minusAssign_operation (const GGS_routineAttributes inOperand,
+                                                   class Compiler * /* inCompiler */
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  if (isValid () && inOperand.isValid ()) {
+    mFlags &= ~ inOperand.mFlags ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::operator_or (const GGS_routineAttributes & inOperand
+                                                          COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_routineAttributes result ;
+  if (mIsValid && inOperand.mIsValid) {
+    result = GGS_routineAttributes (mFlags | inOperand.mFlags) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::operator_and (const GGS_routineAttributes & inOperand
+                                                           COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_routineAttributes result ;
+  if (mIsValid && inOperand.mIsValid) {
+    result = GGS_routineAttributes (mFlags & inOperand.mFlags) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::operator_xor (const GGS_routineAttributes & inOperand
+                                                           COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_routineAttributes result ;
+  if (mIsValid && inOperand.mIsValid) {
+    result = GGS_routineAttributes (mFlags ^ inOperand.mFlags) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::substract_operation (const GGS_routineAttributes & inOperand,
+                                                                  Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_routineAttributes result ;
+  if (mIsValid && inOperand.mIsValid) {
+    result = GGS_routineAttributes (mFlags & ~ inOperand.mFlags) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::operator_tilde (UNUSED_LOCATION_ARGS) const {
+  GGS_routineAttributes result ;
+  if (mIsValid) {
+    result = GGS_routineAttributes (uint64_t (0x3) ^ mFlags) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_routineAttributes::description (String & ioString,
+                                         const int32_t /* inIndentation */) const {
+  ioString.appendCString ("<boolset @routineAttributes:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    if ((mFlags & (uint64_t (1) << 0)) != 0) {
+      ioString.appendCString (" mutatingRoutine") ;
+    }
+    if ((mFlags & (uint64_t (1) << 1)) != 0) {
+      ioString.appendCString (" isGuard") ;
+    }
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @routineAttributes generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineAttributes ("routineAttributes",
+                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_routineAttributes::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_routineAttributes ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_routineAttributes::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_routineAttributes (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAttributes GGS_routineAttributes::extractObject (const GGS_object & inObject,
+                                                            Compiler * inCompiler
+                                                            COMMA_LOCATION_ARGS) {
+  GGS_routineAttributes result ;
+  const GGS_routineAttributes * p = (const GGS_routineAttributes *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_routineAttributes *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("routineAttributes", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 //
 //Extension method '@decoratedRegularRoutineList routineSemanticAnalysis'
 //
@@ -47,14 +253,14 @@ void extensionMethod_generateAllocaList (const GGS_allocaList inObject,
   const GGS_allocaList temp_1 = inObject ;
   cEnumerator_allocaList enumerator_4726 (temp_1, EnumerationOrder::up) ;
   while (enumerator_4726.hasCurrentObject ()) {
-    enumGalgasBool test_2 = kBoolTrue ;
-    if (kBoolTrue == test_2) {
+    GalgasBool test_2 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_2) {
       GGS_bool test_3 = enumerator_4726.current_mLLVMType (HERE).readProperty_kind ().getter_isDynamicArrayType (SOURCE_FILE ("regular-routine-analysis.galgas", 125)) ;
-      if (kBoolTrue == test_3.boolEnum ()) {
+      if (GalgasBool::boolTrue == test_3.boolEnum ()) {
         test_3 = enumerator_4726.current_mFormalInputArgument (HERE).operator_not (SOURCE_FILE ("regular-routine-analysis.galgas", 125)) ;
       }
       test_2 = test_3.boolEnum () ;
-      if (kBoolTrue == test_2) {
+      if (GalgasBool::boolTrue == test_2) {
         ioArgument_ioLLVMcode.plusAssign_operation(GGS_string (";--- init dynamic array type '").add_operation (enumerator_4726.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)).add_operation (GGS_string ("'\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 126)) ;
         ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  store ").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4726.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GGS_string (" null, "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_4726.current_mLLVMType (HERE).ptr (), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (enumerator_4726.current_mVarLLVMName (HERE), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)).add_operation (GGS_string (" ; init ARC value\n"), inCompiler COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)), inCompiler  COMMA_SOURCE_FILE ("regular-routine-analysis.galgas", 127)) ;
       }
@@ -2366,10 +2572,10 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
       GGS_bool extractedValue_8930_value_0 ;
       temp_0.getAssociatedValuesFor_compileTime (extractedValue_8930_value_0) ;
       GGS_bigint temp_1 ;
-      const enumGalgasBool test_2 = extractedValue_8930_value_0.boolEnum () ;
-      if (kBoolTrue == test_2) {
+      const GalgasBool test_2 = extractedValue_8930_value_0.boolEnum () ;
+      if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
-      }else if (kBoolFalse == test_2) {
+      }else if (GalgasBool::boolFalse == test_2) {
         temp_1 = GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
       }
       result_result = temp_1.getter_string (SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
@@ -16339,270 +16545,6 @@ GGS_varDeclarationInstructionAST_2E_weak GGS_varDeclarationInstructionAST_2E_wea
       result = *p ;
     }else{
       inCompiler->castError ("varDeclarationInstructionAST.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_letInstructionWithAssignmentAST_2E_weak::objectCompare (const GGS_letInstructionWithAssignmentAST_2E_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST_2E_weak::GGS_letInstructionWithAssignmentAST_2E_weak (void) :
-GGS_instructionAST_2E_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST_2E_weak & GGS_letInstructionWithAssignmentAST_2E_weak::operator = (const GGS_letInstructionWithAssignmentAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST_2E_weak::GGS_letInstructionWithAssignmentAST_2E_weak (const GGS_letInstructionWithAssignmentAST & inSource) :
-GGS_instructionAST_2E_weak (inSource) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST_2E_weak GGS_letInstructionWithAssignmentAST_2E_weak::class_func_nil (LOCATION_ARGS) {
-  GGS_letInstructionWithAssignmentAST_2E_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST GGS_letInstructionWithAssignmentAST_2E_weak::bang_letInstructionWithAssignmentAST_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GGS_letInstructionWithAssignmentAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_letInstructionWithAssignmentAST) ;
-      result = GGS_letInstructionWithAssignmentAST ((cPtr_letInstructionWithAssignmentAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @letInstructionWithAssignmentAST.weak generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST_2E_weak ("letInstructionWithAssignmentAST.weak",
-                                                                                               & kTypeDescriptor_GALGAS_instructionAST_2E_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_letInstructionWithAssignmentAST_2E_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST_2E_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_letInstructionWithAssignmentAST_2E_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_letInstructionWithAssignmentAST_2E_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST_2E_weak GGS_letInstructionWithAssignmentAST_2E_weak::extractObject (const GGS_object & inObject,
-                                                                                                        Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GGS_letInstructionWithAssignmentAST_2E_weak result ;
-  const GGS_letInstructionWithAssignmentAST_2E_weak * p = (const GGS_letInstructionWithAssignmentAST_2E_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_letInstructionWithAssignmentAST_2E_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("letInstructionWithAssignmentAST.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @instructionNOP reference class
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_instructionNOP::objectCompare (const GGS_instructionNOP & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionNOP::GGS_instructionNOP (void) :
-GGS_instructionAST () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GGS_instructionNOP GGS_instructionNOP::
-init_21_ (const GGS_location & in_mInstructionLocation,
-          Compiler * inCompiler
-          COMMA_LOCATION_ARGS) {
-  cPtr_instructionNOP * object = nullptr ;
-  macroMyNew (object, cPtr_instructionNOP (inCompiler COMMA_THERE)) ;
-  object->instructionNOP_init_21_ (in_mInstructionLocation, inCompiler) ;
-  const GGS_instructionNOP result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_instructionNOP::
-instructionNOP_init_21_ (const GGS_location & in_mInstructionLocation,
-                         Compiler * /* inCompiler */) {
-  mProperty_mInstructionLocation = in_mInstructionLocation ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionNOP::GGS_instructionNOP (const cPtr_instructionNOP * inSourcePtr) :
-GGS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_instructionNOP) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionNOP GGS_instructionNOP::class_func_new (const GGS_location & in_mInstructionLocation,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  GGS_instructionNOP result ;
-  macroMyNew (result.mObjectPtr, cPtr_instructionNOP (in_mInstructionLocation,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @instructionNOP class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_instructionNOP::cPtr_instructionNOP (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (inCompiler COMMA_THERE) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cPtr_instructionNOP::cPtr_instructionNOP (const GGS_location & in_mInstructionLocation,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (in_mInstructionLocation, inCompiler COMMA_THERE) {
-  mProperty_mInstructionLocation = in_mInstructionLocation ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_instructionNOP::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionNOP ;
-}
-
-void cPtr_instructionNOP::description (String & ioString,
-                                       const int32_t inIndentation) const {
-  ioString.appendCString ("[@instructionNOP:") ;
-  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_instructionNOP::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_instructionNOP (mProperty_mInstructionLocation, inCompiler COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_instructionNOP::printNonNullClassInstanceProperties (void) const {
-    cPtr_instructionAST::printNonNullClassInstanceProperties () ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @instructionNOP generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instructionNOP ("instructionNOP",
-                                                                      & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_instructionNOP::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_instructionNOP ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_instructionNOP::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_instructionNOP (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionNOP GGS_instructionNOP::extractObject (const GGS_object & inObject,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) {
-  GGS_instructionNOP result ;
-  const GGS_instructionNOP * p = (const GGS_instructionNOP *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_instructionNOP *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("instructionNOP", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

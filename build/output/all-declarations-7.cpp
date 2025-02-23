@@ -8,6 +8,238 @@
 #include "all-declarations-7.h"
 
 //--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR appendStoreIndirectVolatileRegister'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendStoreIndirectVolatileRegister (GGS_instructionListIR & ioObject,
+                                                          const GGS_omnibusType constinArgument_inTargetVarType,
+                                                          const GGS_string constinArgument_inLLVMName,
+                                                          const GGS_objectIR constinArgument_inSourceValue,
+                                                          Compiler * inCompiler
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssign_operation (GGS_storeIndirectVolatileIR::init_21__21__21_ (constinArgument_inTargetVarType, constinArgument_inLLVMName, constinArgument_inSourceValue, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-store-indirect-volatile-register.galgas", 7)) ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_storeIndirectVolatileIR_2E_weak::objectCompare (const GGS_storeIndirectVolatileIR_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR_2E_weak::GGS_storeIndirectVolatileIR_2E_weak (void) :
+GGS_abstractInstructionIR_2E_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR_2E_weak & GGS_storeIndirectVolatileIR_2E_weak::operator = (const GGS_storeIndirectVolatileIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR_2E_weak::GGS_storeIndirectVolatileIR_2E_weak (const GGS_storeIndirectVolatileIR & inSource) :
+GGS_abstractInstructionIR_2E_weak (inSource) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR_2E_weak GGS_storeIndirectVolatileIR_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_storeIndirectVolatileIR_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR GGS_storeIndirectVolatileIR_2E_weak::bang_storeIndirectVolatileIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_storeIndirectVolatileIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_storeIndirectVolatileIR) ;
+      result = GGS_storeIndirectVolatileIR ((cPtr_storeIndirectVolatileIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//     @storeIndirectVolatileIR.weak generic code implementation
+//
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_storeIndirectVolatileIR_2E_weak ("storeIndirectVolatileIR.weak",
+                                                                                       & kTypeDescriptor_GALGAS_abstractInstructionIR_2E_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_storeIndirectVolatileIR_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_storeIndirectVolatileIR_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_storeIndirectVolatileIR_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_storeIndirectVolatileIR_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_storeIndirectVolatileIR_2E_weak GGS_storeIndirectVolatileIR_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                        Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GGS_storeIndirectVolatileIR_2E_weak result ;
+  const GGS_storeIndirectVolatileIR_2E_weak * p = (const GGS_storeIndirectVolatileIR_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_storeIndirectVolatileIR_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("storeIndirectVolatileIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR appendLoadWhenReference'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendLoadWhenReference (GGS_instructionListIR & ioObject,
+                                              GGS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                              GGS_objectIR & ioArgument_ioObject,
+                                              Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  switch (ioArgument_ioObject.enumValue ()) {
+  case GGS_objectIR::Enumeration::invalid:
+    break ;
+  case GGS_objectIR::Enumeration::enum_void:
+    {
+      TC_Array <FixItDescription> fixItArray0 ;
+      inCompiler->emitSemanticError (GGS_location::class_func_nowhere (SOURCE_FILE ("intermediate-load-when-reference.galgas", 9)), GGS_string ("<<@instructionListIR appendLoadWhenReference void>>"), fixItArray0  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 9)) ;
+      ioArgument_ioObject.drop () ; // Release error dropped variable
+    }
+    break ;
+  case GGS_objectIR::Enumeration::enum_reference:
+    {
+      GGS_omnibusType extractedValue_369_type_0 ;
+      GGS_string extractedValue_374_llvmName_1 ;
+      ioArgument_ioObject.getAssociatedValuesFor_reference (extractedValue_369_type_0, extractedValue_374_llvmName_1) ;
+      GGS_objectIR var_resultingValue_434 ;
+      {
+      routine_getNewTempValue_3F__26__21_ (extractedValue_369_type_0, ioArgument_ioTemporaries, var_resultingValue_434, inCompiler  COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 11)) ;
+      }
+      {
+      extensionSetter_appendLoadFromReference (ioObject, var_resultingValue_434, extractedValue_374_llvmName_1, inCompiler COMMA_SOURCE_FILE ("intermediate-load-when-reference.galgas", 12)) ;
+      }
+      ioArgument_ioObject = var_resultingValue_434 ;
+    }
+    break ;
+  case GGS_objectIR::Enumeration::enum_literalInteger:
+    break ;
+  case GGS_objectIR::Enumeration::enum_null:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmNamedValue:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmStructureValue:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmArrayStaticValues:
+    break ;
+  case GGS_objectIR::Enumeration::enum_literalString:
+    break ;
+  case GGS_objectIR::Enumeration::enum_zero:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
+    break ;
+  case GGS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
+    break ;
+  }
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR appendCopyFromReferences'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendCopyFromReferences (GGS_instructionListIR & ioObject,
+                                               const GGS_assignmentOperatorMap constinArgument_inAssignmentOperatorMap,
+                                               GGS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                               const GGS_location constinArgument_inErrorLocation,
+                                               const GGS_objectIR constinArgument_inSourcePossibleReference,
+                                               const GGS_LValueRepresentation constinArgument_inTargetReference,
+                                               Compiler * inCompiler
+                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
+    test_0 = constinArgument_inSourcePossibleReference.getter_isReference (SOURCE_FILE ("intermediate-copy-from-references.galgas", 11)).operator_not (SOURCE_FILE ("intermediate-copy-from-references.galgas", 11)).boolEnum () ;
+    if (GalgasBool::boolTrue == test_0) {
+      GGS_objectIR var_loadedResultValue_470 = constinArgument_inSourcePossibleReference ;
+      {
+      extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, var_loadedResultValue_470, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 13)) ;
+      }
+      GGS_objectIR var_result_614 = function_checkAssignmentCompatibility (constinArgument_inAssignmentOperatorMap, var_loadedResultValue_470, constinArgument_inTargetReference.readProperty_type (), constinArgument_inErrorLocation, GGS_bool (false), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 17)) ;
+      {
+      extensionSetter_appendStoreToUniversalReference (ioObject, constinArgument_inTargetReference.readProperty_llvmName (), constinArgument_inTargetReference.readProperty_type (), var_result_614, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 24)) ;
+      }
+    }
+  }
+  if (GalgasBool::boolFalse == test_0) {
+    GGS_omnibusType var_sourceType_1034 ;
+    GGS_string var_sourceLLVMName_1059 ;
+    constinArgument_inSourcePossibleReference.method_extractReference (var_sourceType_1034, var_sourceLLVMName_1059, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;
+    GalgasBool test_1 = GalgasBool::boolTrue ;
+    if (GalgasBool::boolTrue == test_1) {
+      test_1 = GGS_bool (ComparisonKind::notEqual, var_sourceType_1034.readProperty_omnibusTypeDescriptionName ().objectCompare (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName ())).boolEnum () ;
+      if (GalgasBool::boolTrue == test_1) {
+        TC_Array <FixItDescription> fixItArray2 ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("object of type ").add_operation (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (GGS_string (" cannot be assigned from expression of type "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (var_sourceType_1034.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)) ;
+      }
+    }
+    ioObject.addAssign_operation (GGS_copyFromReferencesIR::init_21__21_ (constinArgument_inTargetReference, var_sourceLLVMName_1059, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 32)) ;
+  }
+}
+
+
+//--------------------------------------------------------------------------------------------------
 
 ComparisonResult GGS_copyFromReferencesIR_2E_weak::objectCompare (const GGS_copyFromReferencesIR_2E_weak & inOperand) const {
   ComparisonResult result = ComparisonResult::invalid ;
@@ -230,10 +462,10 @@ void extensionSetter_referenceFromPossibleValue (GGS_instructionListIR & ioObjec
     }
     break ;
   }
-  enumGalgasBool test_0 = kBoolTrue ;
-  if (kBoolTrue == test_0) {
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
     test_0 = var_performStore_296.boolEnum () ;
-    if (kBoolTrue == test_0) {
+    if (GalgasBool::boolTrue == test_0) {
       GGS_string var_llvmTemporaryName_1123 = function_llvmNameForLocalVariable (GGS_string ("temp.").add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)) ;
       ioArgument_ioTemporaries.mProperty_mTemporaryIndex.plusAssign_operation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 39)) ;
       ioArgument_ioAllocaList.addAssign_operation (var_llvmTemporaryName_1123, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)), GGS_bool (false)  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)) ;
@@ -2058,7 +2290,7 @@ void extensionSetter_testArrayIndex (GGS_instructionListIR & ioObject,
   GGS_uint joker_241_1 ; // Joker input parameter
   extensionGetter_type (constinArgument_inIndex, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)).readProperty_kind ().method_extractInteger (joker_199_1, var_max_212, var_isUnsigned_230, joker_241_1, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)) ;
   GGS_bool test_0 = var_isUnsigned_230.operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 9)) ;
-  if (kBoolTrue != test_0.boolEnum ()) {
+  if (GalgasBool::boolTrue != test_0.boolEnum ()) {
     test_0 = GGS_bool (ComparisonKind::greaterOrEqual, var_max_212.objectCompare (constinArgument_inSize)) ;
   }
   outArgument_outGeneratePanicInstruction = test_0 ;
@@ -16914,318 +17146,6 @@ GGS_extendStaticArrayDeclarationDictAST_2E_element_3F_ GGS_extendStaticArrayDecl
       result = *p ;
     }else{
       inCompiler->castError ("extendStaticArrayDeclarationDictAST.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element::GGS_taskSortedListIR_2E_element (void) :
-mProperty_mTaskName (),
-mProperty_mPriority (),
-mProperty_mStackSize (),
-mProperty_mSetupOrderedList (),
-mProperty_mActivateOrderedList (),
-mProperty_mDeactivateOrderedList (),
-mProperty_mTaskNameStringIndex (),
-mProperty_mActivate () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element::~ GGS_taskSortedListIR_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element GGS_taskSortedListIR_2E_element::init_21__21__21__21__21__21__21__21_ (const GGS_string & in_mTaskName,
-                                                                                                       const GGS_uint & in_mPriority,
-                                                                                                       const GGS_bigint & in_mStackSize,
-                                                                                                       const GGS_stringlist & in_mSetupOrderedList,
-                                                                                                       const GGS_stringlist & in_mActivateOrderedList,
-                                                                                                       const GGS_stringlist & in_mDeactivateOrderedList,
-                                                                                                       const GGS_uint & in_mTaskNameStringIndex,
-                                                                                                       const GGS_bool & in_mActivate,
-                                                                                                       Compiler * inCompiler
-                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_taskSortedListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mPriority = in_mPriority ;
-  result.mProperty_mStackSize = in_mStackSize ;
-  result.mProperty_mSetupOrderedList = in_mSetupOrderedList ;
-  result.mProperty_mActivateOrderedList = in_mActivateOrderedList ;
-  result.mProperty_mDeactivateOrderedList = in_mDeactivateOrderedList ;
-  result.mProperty_mTaskNameStringIndex = in_mTaskNameStringIndex ;
-  result.mProperty_mActivate = in_mActivate ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_taskSortedListIR_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element::GGS_taskSortedListIR_2E_element (const GGS_string & inOperand0,
-                                                                  const GGS_uint & inOperand1,
-                                                                  const GGS_bigint & inOperand2,
-                                                                  const GGS_stringlist & inOperand3,
-                                                                  const GGS_stringlist & inOperand4,
-                                                                  const GGS_stringlist & inOperand5,
-                                                                  const GGS_uint & inOperand6,
-                                                                  const GGS_bool & inOperand7) :
-mProperty_mTaskName (inOperand0),
-mProperty_mPriority (inOperand1),
-mProperty_mStackSize (inOperand2),
-mProperty_mSetupOrderedList (inOperand3),
-mProperty_mActivateOrderedList (inOperand4),
-mProperty_mDeactivateOrderedList (inOperand5),
-mProperty_mTaskNameStringIndex (inOperand6),
-mProperty_mActivate (inOperand7) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element GGS_taskSortedListIR_2E_element::class_func_new (const GGS_string & in_mTaskName,
-                                                                                 const GGS_uint & in_mPriority,
-                                                                                 const GGS_bigint & in_mStackSize,
-                                                                                 const GGS_stringlist & in_mSetupOrderedList,
-                                                                                 const GGS_stringlist & in_mActivateOrderedList,
-                                                                                 const GGS_stringlist & in_mDeactivateOrderedList,
-                                                                                 const GGS_uint & in_mTaskNameStringIndex,
-                                                                                 const GGS_bool & in_mActivate,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_taskSortedListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mPriority = in_mPriority ;
-  result.mProperty_mStackSize = in_mStackSize ;
-  result.mProperty_mSetupOrderedList = in_mSetupOrderedList ;
-  result.mProperty_mActivateOrderedList = in_mActivateOrderedList ;
-  result.mProperty_mDeactivateOrderedList = in_mDeactivateOrderedList ;
-  result.mProperty_mTaskNameStringIndex = in_mTaskNameStringIndex ;
-  result.mProperty_mActivate = in_mActivate ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_taskSortedListIR_2E_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupOrderedList.isValid () && mProperty_mActivateOrderedList.isValid () && mProperty_mDeactivateOrderedList.isValid () && mProperty_mTaskNameStringIndex.isValid () && mProperty_mActivate.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_taskSortedListIR_2E_element::drop (void) {
-  mProperty_mTaskName.drop () ;
-  mProperty_mPriority.drop () ;
-  mProperty_mStackSize.drop () ;
-  mProperty_mSetupOrderedList.drop () ;
-  mProperty_mActivateOrderedList.drop () ;
-  mProperty_mDeactivateOrderedList.drop () ;
-  mProperty_mTaskNameStringIndex.drop () ;
-  mProperty_mActivate.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_taskSortedListIR_2E_element::description (String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @taskSortedListIR.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_mTaskName.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mPriority.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mStackSize.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mSetupOrderedList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mActivateOrderedList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mDeactivateOrderedList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTaskNameStringIndex.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mActivate.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @taskSortedListIR.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSortedListIR_2E_element ("taskSortedListIR.element",
-                                                                                   nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_taskSortedListIR_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_taskSortedListIR_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_taskSortedListIR_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_taskSortedListIR_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_taskSortedListIR_2E_element GGS_taskSortedListIR_2E_element::extractObject (const GGS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GGS_taskSortedListIR_2E_element result ;
-  const GGS_taskSortedListIR_2E_element * p = (const GGS_taskSortedListIR_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_taskSortedListIR_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("taskSortedListIR.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element::GGS_globalTaskVariableList_2E_element (void) :
-mProperty_mTaskName (),
-mProperty_mTaskTypeName (),
-mProperty_mInitialValue () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element::~ GGS_globalTaskVariableList_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element GGS_globalTaskVariableList_2E_element::init_21__21__21_ (const GGS_string & in_mTaskName,
-                                                                                               const GGS_string & in_mTaskTypeName,
-                                                                                               const GGS_objectIR & in_mInitialValue,
-                                                                                               Compiler * inCompiler
-                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_globalTaskVariableList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mTaskTypeName = in_mTaskTypeName ;
-  result.mProperty_mInitialValue = in_mInitialValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalTaskVariableList_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element::GGS_globalTaskVariableList_2E_element (const GGS_string & inOperand0,
-                                                                              const GGS_string & inOperand1,
-                                                                              const GGS_objectIR & inOperand2) :
-mProperty_mTaskName (inOperand0),
-mProperty_mTaskTypeName (inOperand1),
-mProperty_mInitialValue (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element GGS_globalTaskVariableList_2E_element::class_func_new (const GGS_string & in_mTaskName,
-                                                                                             const GGS_string & in_mTaskTypeName,
-                                                                                             const GGS_objectIR & in_mInitialValue,
-                                                                                             Compiler * inCompiler
-                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_globalTaskVariableList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mTaskTypeName = in_mTaskTypeName ;
-  result.mProperty_mInitialValue = in_mInitialValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_globalTaskVariableList_2E_element::isValid (void) const {
-  return mProperty_mTaskName.isValid () && mProperty_mTaskTypeName.isValid () && mProperty_mInitialValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalTaskVariableList_2E_element::drop (void) {
-  mProperty_mTaskName.drop () ;
-  mProperty_mTaskTypeName.drop () ;
-  mProperty_mInitialValue.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalTaskVariableList_2E_element::description (String & ioString,
-                                                         const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @globalTaskVariableList.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_mTaskName.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mTaskTypeName.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mInitialValue.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @globalTaskVariableList.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalTaskVariableList_2E_element ("globalTaskVariableList.element",
-                                                                                         nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_globalTaskVariableList_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_globalTaskVariableList_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_globalTaskVariableList_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_globalTaskVariableList_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalTaskVariableList_2E_element GGS_globalTaskVariableList_2E_element::extractObject (const GGS_object & inObject,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_globalTaskVariableList_2E_element result ;
-  const GGS_globalTaskVariableList_2E_element * p = (const GGS_globalTaskVariableList_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_globalTaskVariableList_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("globalTaskVariableList.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

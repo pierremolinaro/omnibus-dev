@@ -4520,10 +4520,10 @@ GGS_string cPtr_integerDeclarationAST::getter_typeName (Compiler * inCompiler
   GGS_string result_outName ; // Returned variable
   const GGS_integerDeclarationAST temp_0 = this ;
   GGS_string temp_1 ;
-  const enumGalgasBool test_2 = temp_0.readProperty_mIsSigned ().boolEnum () ;
-  if (kBoolTrue == test_2) {
+  const GalgasBool test_2 = temp_0.readProperty_mIsSigned ().boolEnum () ;
+  if (GalgasBool::boolTrue == test_2) {
     temp_1 = GGS_string ("i") ;
-  }else if (kBoolFalse == test_2) {
+  }else if (GalgasBool::boolFalse == test_2) {
     temp_1 = GGS_string ("u") ;
   }
   const GGS_integerDeclarationAST temp_3 = this ;
