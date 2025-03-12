@@ -19,7 +19,7 @@ void routine_generateTarget_3F_currentDir_3F_productDirectory_3F_targetName_3F_t
                                                                                                  const GGS_targetParameters constinArgument_inTargetParameters,
                                                                                                  Compiler * inCompiler
                                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator__32_lstringlist enumerator_3455 (constinArgument_inTargetParameters.readProperty_mPython_5F_utilityToolList (), EnumerationOrder::up) ;
+  UpEnumerator__32_lstringlist enumerator_3455 (constinArgument_inTargetParameters.readProperty_mPython_5F_utilityToolList ()) ;
   while (enumerator_3455.hasCurrentObject ()) {
     {
     routine_copyExecutableFile_3F_currentDir_3F_from_3F_to (constinArgument_inCurrentDirectory, constinArgument_inTargetName.readProperty_string ().add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)).add_operation (enumerator_3455.current_mValue_30_ (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 85)), constinArgument_inProductDirectory.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)).add_operation (enumerator_3455.current_mValue_31_ (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 86)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 83)) ;
@@ -151,7 +151,7 @@ void routine_copyExecutableFileWithSubstitutions_3F_currentDir_3F_from_3F_to_3F_
     GGS_string var_targetDefinitionDir_6801 = GGS_string (gOption_omnibus_5F_options_useDirAsTargetDir.readProperty_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 167)) ;
     var_s_6597 = GGS_string::class_func_stringWithContentsOfFile (var_targetDefinitionDir_6801.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 168)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 168)) ;
   }
-  cEnumerator__32_stringlist enumerator_7036 (constinArgument_inSubstitutions, EnumerationOrder::up) ;
+  UpEnumerator__32_stringlist enumerator_7036 (constinArgument_inSubstitutions) ;
   while (enumerator_7036.hasCurrentObject ()) {
     var_s_6597 = var_s_6597.getter_stringByReplacingStringByString (enumerator_7036.current_mValue_30_ (HERE), enumerator_7036.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 171)) ;
     enumerator_7036.gotoNextObject () ;
@@ -186,7 +186,7 @@ void routine_copyFileWithSubstitutions_3F_currentDir_3F_from_3F_to_3F_ (const GG
     GGS_string var_targetDefinitionDir_7777 = GGS_string (gOption_omnibus_5F_options_useDirAsTargetDir.readProperty_value ()).getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("target-generation.galgas", 189)) ;
     var_s_7573 = GGS_string::class_func_stringWithContentsOfFile (var_targetDefinitionDir_7777.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)).add_operation (constinArgument_inSourceFileNamePath, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 190)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 190)) ;
   }
-  cEnumerator__32_stringlist enumerator_8012 (constinArgument_inSubstitutions, EnumerationOrder::up) ;
+  UpEnumerator__32_stringlist enumerator_8012 (constinArgument_inSubstitutions) ;
   while (enumerator_8012.hasCurrentObject ()) {
     var_s_7573 = var_s_7573.getter_stringByReplacingStringByString (enumerator_8012.current_mValue_30_ (HERE), enumerator_8012.current_mValue_31_ (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 193)) ;
     enumerator_8012.gotoNextObject () ;
@@ -286,7 +286,7 @@ void routine_importFilesAndCompile_3F_sourceFilePath (const GGS_lstring constinA
     if (GalgasBool::boolTrue == test_0) {
       GGS_stringset temp_1 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("program.galgas", 50)) ;
       GGS_stringset var_targetNameSet_1747 = temp_1 ;
-      cEnumerator_lstringlist enumerator_1776 (var_ast_1137.readProperty_mTargetListAST (), EnumerationOrder::up) ;
+      UpEnumerator_lstringlist enumerator_1776 (var_ast_1137.readProperty_mTargetListAST ()) ;
       while (enumerator_1776.hasCurrentObject ()) {
         GalgasBool test_2 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_2) {
@@ -323,7 +323,7 @@ void routine_importFilesAndCompile_3F_sourceFilePath (const GGS_lstring constinA
           }
         }
         if (GalgasBool::boolFalse == test_7) {
-          cEnumerator_lstringlist enumerator_2357 (var_ast_1137.readProperty_mTargetListAST (), EnumerationOrder::up) ;
+          UpEnumerator_lstringlist enumerator_2357 (var_ast_1137.readProperty_mTargetListAST ()) ;
           while (enumerator_2357.hasCurrentObject ()) {
             {
             routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile_3F_currentDirectory_3F_importedFilePathSet (constinArgument_inSourceFile, var_ast_1137, enumerator_2357.current_mValue (HERE), var_endOfSourceFile_1253, var_currentDirectory_1410, var_importedFileAbsolutePathSet_1336, inCompiler  COMMA_SOURCE_FILE ("program.galgas", 66)) ;
@@ -365,16 +365,16 @@ void routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile
   GGS_stringset var_sourceFileAbsolutePathSet_3252 = constinArgument_inImportedFileAbsolutePathSet ;
   GGS_declarationListAST temp_1 = GGS_declarationListAST::init (inCompiler COMMA_SOURCE_FILE ("program.galgas", 96)) ;
   var_ast_3223.mProperty_mDeclarationListAST = temp_1 ;
-  cEnumerator_declarationListAST enumerator_3428 (constinArgument_inAST.readProperty_mDeclarationListAST (), EnumerationOrder::up) ;
+  UpEnumerator_declarationListAST enumerator_3428 (constinArgument_inAST.readProperty_mDeclarationListAST ()) ;
   while (enumerator_3428.hasCurrentObject ()) {
     GGS_abstractDeclarationAST var_newDeclaration_3561 ;
     callExtensionMethod_enterExtension ((cPtr_abstractDeclarationAST *) enumerator_3428.current_mDeclaration (HERE).ptr (), var_ast_3223.mProperty_mExtendStaticArrayDeclarationAST, var_newDeclaration_3561, inCompiler COMMA_SOURCE_FILE ("program.galgas", 98)) ;
     var_ast_3223.mProperty_mDeclarationListAST.addAssign_operation (var_newDeclaration_3561  COMMA_SOURCE_FILE ("program.galgas", 102)) ;
     enumerator_3428.gotoNextObject () ;
   }
-  cEnumerator_extendStaticArrayDeclarationDictAST enumerator_3657 (var_ast_3223.readProperty_mExtendStaticArrayDeclarationAST (), EnumerationOrder::up) ;
+  UpEnumerator_extendStaticArrayDeclarationDictAST enumerator_3657 (var_ast_3223.readProperty_mExtendStaticArrayDeclarationAST ()) ;
   while (enumerator_3657.hasCurrentObject ()) {
-    cEnumerator_staticListValueListAST enumerator_3724 (enumerator_3657.current_mStaticList (HERE), EnumerationOrder::up) ;
+    UpEnumerator_staticListValueListAST enumerator_3724 (enumerator_3657.current_mStaticList (HERE)) ;
     while (enumerator_3724.hasCurrentObject ()) {
       TC_Array <FixItDescription> fixItArray2 ;
       inCompiler->emitSemanticError (enumerator_3724.current_mLocation (HERE), GGS_string ("'").add_operation (enumerator_3657.current_key (HERE), inCompiler COMMA_SOURCE_FILE ("program.galgas", 106)).add_operation (GGS_string ("' static list is not defined"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 106)), fixItArray2  COMMA_SOURCE_FILE ("program.galgas", 106)) ;
@@ -453,10 +453,10 @@ void routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile
   if (GalgasBool::boolTrue == test_10) {
     test_10 = GGS_bool (ComparisonKind::equal, GGS_uint::class_func_errorCount (SOURCE_FILE ("program.galgas", 156)).objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
     if (GalgasBool::boolTrue == test_10) {
-      cEnumerator_checkTargetListAST enumerator_5926 (var_ast_3223.readProperty_mCheckTargetListAST (), EnumerationOrder::up) ;
+      UpEnumerator_checkTargetListAST enumerator_5926 (var_ast_3223.readProperty_mCheckTargetListAST ()) ;
       while (enumerator_5926.hasCurrentObject ()) {
         GGS_bool var_accepted_5986 = GGS_bool (false) ;
-        cEnumerator_lstringlist enumerator_6014 (enumerator_5926.current_mAcceptedTargetList (HERE), EnumerationOrder::up) ;
+        UpEnumerator_lstringlist enumerator_6014 (enumerator_5926.current_mAcceptedTargetList (HERE)) ;
         bool bool_11 = var_accepted_5986.operator_not (SOURCE_FILE ("program.galgas", 159)).isValidAndTrue () ;
         if (enumerator_6014.hasCurrentObject () && bool_11) {
           while (enumerator_6014.hasCurrentObject () && bool_11) {
@@ -645,7 +645,7 @@ void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_i
                                                                                                                         GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                                         Compiler * inCompiler
                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_11644 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
+  UpEnumerator_lstringlist enumerator_11644 (constinArgument_inImportedClauseList) ;
   while (enumerator_11644.hasCurrentObject ()) {
     GGS_string var_absolutePath_11685 = constinArgument_inTargetDirectory.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 302)).add_operation (enumerator_11644.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 302)) ;
     GalgasBool test_0 = GalgasBool::boolTrue ;
@@ -714,7 +714,7 @@ void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_im
                                                                                                                        GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                                        Compiler * inCompiler
                                                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_13485 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
+  UpEnumerator_lstringlist enumerator_13485 (constinArgument_inImportedClauseList) ;
   while (enumerator_13485.hasCurrentObject ()) {
     GGS_string var_fullPath_13526 = constinArgument_inCurrentDirectory.add_operation (GGS_string ("/"), inCompiler COMMA_SOURCE_FILE ("program.galgas", 349)).add_operation (enumerator_13485.current_mValue (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("program.galgas", 349)) ;
     GGS_filewrapper var_fw_13590 = GGS_filewrapper (gWrapperDirectory_0_targetTemplates) ;
@@ -760,7 +760,7 @@ void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList
                                                                                                          GGS_stringset & ioArgument_ioImportedFileAbsolutePathSet,
                                                                                                          Compiler * inCompiler
                                                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  cEnumerator_lstringlist enumerator_14724 (constinArgument_inImportedClauseList, EnumerationOrder::up) ;
+  UpEnumerator_lstringlist enumerator_14724 (constinArgument_inImportedClauseList) ;
   while (enumerator_14724.hasCurrentObject ()) {
     GGS_string var_absolutePath_14765 = enumerator_14724.current_mValue (HERE).readProperty_string ().getter_absolutePathFromPath (constinArgument_inCurrentDirectory COMMA_SOURCE_FILE ("program.galgas", 382)) ;
     GalgasBool test_0 = GalgasBool::boolTrue ;
@@ -6740,7 +6740,7 @@ void cPtr_llvmAssignmentOperatorUsage::method_generateCode (GGS_semanticTemporar
     GGS_stringlist var_generatedInstructions_14944 = temp_13 ;
     const GGS_llvmAssignmentOperatorUsage temp_14 = this ;
     extensionMethod_generateIRCode (temp_14.readProperty_mInstructionList (), var_varMap_14587, var_typeMap_14759, var_generatedInstructions_14944, ioArgument_ioTemporaries.mProperty_mTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 326)) ;
-    cEnumerator_stringlist enumerator_15112 (var_generatedInstructions_14944, EnumerationOrder::up) ;
+    UpEnumerator_stringlist enumerator_15112 (var_generatedInstructions_14944) ;
     while (enumerator_15112.hasCurrentObject ()) {
       {
       GGS_stringset temp_15 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 328)) ;
@@ -6771,7 +6771,7 @@ void cPtr_assignmentRoutineIR::method_llvmCodeGeneration (GGS_string & ioArgumen
   const GGS_assignmentRoutineIR temp_5 = this ;
   extensionMethod_generateAllocaList (temp_5.readProperty_mAllocaList (), ioArgument_ioLLVMcode, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 382)) ;
   const GGS_assignmentRoutineIR temp_6 = this ;
-  cEnumerator_stringlist enumerator_17231 (temp_6.readProperty_mGeneratedInstructions (), EnumerationOrder::up) ;
+  UpEnumerator_stringlist enumerator_17231 (temp_6.readProperty_mGeneratedInstructions ()) ;
   while (enumerator_17231.hasCurrentObject ()) {
     ioArgument_ioLLVMcode.plusAssign_operation(GGS_string ("  ").add_operation (enumerator_17231.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)).add_operation (GGS_string ("\n"), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)), inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 384)) ;
     enumerator_17231.gotoNextObject () ;
@@ -6863,7 +6863,7 @@ void cPtr_llvmGenerationInstruction::method_checkInstructionList (GGS_ctCheckMap
                                                                   Compiler * inCompiler
                                                                   COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmGenerationInstruction temp_0 = this ;
-  cEnumerator_llvmGenerationInstructionElementList enumerator_4999 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
+  UpEnumerator_llvmGenerationInstructionElementList enumerator_4999 (temp_0.readProperty_mGenerationList ()) ;
   while (enumerator_4999.hasCurrentObject ()) {
     switch (enumerator_4999.current_mElement (HERE).enumValue ()) {
     case GGS_llvmGenerationInstructionElement::Enumeration::invalid:
@@ -6903,7 +6903,7 @@ void cPtr_llvmGenerationInstruction::method_generateIRCode (GGS_assignmentGenera
                                                             COMMA_UNUSED_LOCATION_ARGS) {
   GGS_string var_s_6942 = GGS_string::makeEmptyString () ;
   const GGS_llvmGenerationInstruction temp_0 = this ;
-  cEnumerator_llvmGenerationInstructionElementList enumerator_6957 (temp_0.readProperty_mGenerationList (), EnumerationOrder::up) ;
+  UpEnumerator_llvmGenerationInstructionElementList enumerator_6957 (temp_0.readProperty_mGenerationList ()) ;
   while (enumerator_6957.hasCurrentObject ()) {
     switch (enumerator_6957.current_mElement (HERE).enumValue ()) {
     case GGS_llvmGenerationInstructionElement::Enumeration::invalid:
@@ -7022,7 +7022,7 @@ static void routine_before (Compiler * inCompiler
             {
             routine_print_3F_ (GGS_string ("Embedded targets:\n"), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 30)) ;
             }
-            cEnumerator_stringlist enumerator_1399 (var_embeddedFiles_1312, EnumerationOrder::up) ;
+            UpEnumerator_stringlist enumerator_1399 (var_embeddedFiles_1312) ;
             while (enumerator_1399.hasCurrentObject ()) {
               GalgasBool test_2 = GalgasBool::boolTrue ;
               if (GalgasBool::boolTrue == test_2) {
@@ -7046,7 +7046,7 @@ static void routine_before (Compiler * inCompiler
           GGS_stringlist temp_3 = GGS_stringlist::init (inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 40)) ;
           temp_3.enterElement (GGS_stringlist_2E_element::init_21_ (GGS_string ("omnibus-target"), inCompiler COMMA_HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 40)) ;
           GGS_stringlist var_allConfigFiles_1830 = var_targetDirectory_1662.getter_regularFilesWithExtensions (GGS_bool (true), temp_3 COMMA_SOURCE_FILE ("target-generation.galgas", 40)) ;
-          cEnumerator_stringlist enumerator_1933 (var_allConfigFiles_1830, EnumerationOrder::up) ;
+          UpEnumerator_stringlist enumerator_1933 (var_allConfigFiles_1830) ;
           while (enumerator_1933.hasCurrentObject ()) {
             GalgasBool test_4 = GalgasBool::boolTrue ;
             if (GalgasBool::boolTrue == test_4) {
@@ -7068,7 +7068,7 @@ static void routine_before (Compiler * inCompiler
       test_5 = GGS_bool (ComparisonKind::notEqual, var_path_2166.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
       if (GalgasBool::boolTrue == test_5) {
         GGS_stringlist var_embeddedFiles_2256 = var_fw_1093.getter_allTextFilePathes (SOURCE_FILE ("target-generation.galgas", 51)) ;
-        cEnumerator_stringlist enumerator_2304 (var_embeddedFiles_2256, EnumerationOrder::up) ;
+        UpEnumerator_stringlist enumerator_2304 (var_embeddedFiles_2256) ;
         while (enumerator_2304.hasCurrentObject ()) {
           GGS_string var_filePath_2337 = var_path_2166.add_operation (enumerator_2304.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)) ;
           {
@@ -7094,7 +7094,7 @@ static void routine_before (Compiler * inCompiler
         {
         routine_print_3F_ (GGS_string ("Embedded sample code:\n"), inCompiler  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 17)) ;
         }
-        cEnumerator_stringlist enumerator_747 (var_files_668, EnumerationOrder::up) ;
+        UpEnumerator_stringlist enumerator_747 (var_files_668) ;
         while (enumerator_747.hasCurrentObject ()) {
           {
           routine_print_3F_ (GGS_string ("  ").add_operation (enumerator_747.current_mValue (HERE).getter_subStringFromIndex (GGS_uint (uint32_t (1U)) COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GGS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;

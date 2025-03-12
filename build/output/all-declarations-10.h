@@ -106,8 +106,7 @@ class GGS_convertInstructionIR : public GGS_abstractInstructionIR {
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_convertInstructionIR class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -255,8 +254,7 @@ class GGS_convertInstructionIR_2E_weak : public GGS_abstractInstructionIR_2E_wea
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_convertInstructionIR_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 

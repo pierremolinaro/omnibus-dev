@@ -210,21 +210,3 @@ void routine_handleNextOperand_3F_self_26__26__3F__3F_routineAttributes_3F_conte
                                                                                                                                                                           class Compiler * inCompiler
                                                                                                                                                                           COMMA_LOCATION_ARGS) ;
 
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'memoryAllocSectionName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_memoryAllocSectionName (class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'memoryFreeSectionName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_memoryFreeSectionName (class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-

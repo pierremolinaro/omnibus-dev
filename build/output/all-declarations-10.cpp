@@ -8,6 +8,195 @@
 #include "all-declarations-10.h"
 
 //--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element::GGS_externFunctionDeclarationListAST_2E_element (void) :
+mProperty_mExternProcedureName (),
+mProperty_mMode (),
+mProperty_mAttributeList (),
+mProperty_mProcFormalArgumentList (),
+mProperty_mReturnTypeName (),
+mProperty_mRoutineNameForGeneration (),
+mProperty_mEndOfProcLocation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element::GGS_externFunctionDeclarationListAST_2E_element (const GGS_externFunctionDeclarationListAST_2E_element & inSource) :
+mProperty_mExternProcedureName (inSource.mProperty_mExternProcedureName),
+mProperty_mMode (inSource.mProperty_mMode),
+mProperty_mAttributeList (inSource.mProperty_mAttributeList),
+mProperty_mProcFormalArgumentList (inSource.mProperty_mProcFormalArgumentList),
+mProperty_mReturnTypeName (inSource.mProperty_mReturnTypeName),
+mProperty_mRoutineNameForGeneration (inSource.mProperty_mRoutineNameForGeneration),
+mProperty_mEndOfProcLocation (inSource.mProperty_mEndOfProcLocation) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element & GGS_externFunctionDeclarationListAST_2E_element::operator = (const GGS_externFunctionDeclarationListAST_2E_element & inSource) {
+  mProperty_mExternProcedureName = inSource.mProperty_mExternProcedureName ;
+  mProperty_mMode = inSource.mProperty_mMode ;
+  mProperty_mAttributeList = inSource.mProperty_mAttributeList ;
+  mProperty_mProcFormalArgumentList = inSource.mProperty_mProcFormalArgumentList ;
+  mProperty_mReturnTypeName = inSource.mProperty_mReturnTypeName ;
+  mProperty_mRoutineNameForGeneration = inSource.mProperty_mRoutineNameForGeneration ;
+  mProperty_mEndOfProcLocation = inSource.mProperty_mEndOfProcLocation ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element GGS_externFunctionDeclarationListAST_2E_element::init_21__21__21__21__21__21__21_ (const GGS_lstring & in_mExternProcedureName,
+                                                                                                                                   const GGS_mode & in_mMode,
+                                                                                                                                   const GGS_lstringlist & in_mAttributeList,
+                                                                                                                                   const GGS_routineFormalArgumentListAST & in_mProcFormalArgumentList,
+                                                                                                                                   const GGS_lstring & in_mReturnTypeName,
+                                                                                                                                   const GGS_lstring & in_mRoutineNameForGeneration,
+                                                                                                                                   const GGS_location & in_mEndOfProcLocation,
+                                                                                                                                   Compiler * inCompiler
+                                                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_externFunctionDeclarationListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mExternProcedureName = in_mExternProcedureName ;
+  result.mProperty_mMode = in_mMode ;
+  result.mProperty_mAttributeList = in_mAttributeList ;
+  result.mProperty_mProcFormalArgumentList = in_mProcFormalArgumentList ;
+  result.mProperty_mReturnTypeName = in_mReturnTypeName ;
+  result.mProperty_mRoutineNameForGeneration = in_mRoutineNameForGeneration ;
+  result.mProperty_mEndOfProcLocation = in_mEndOfProcLocation ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_externFunctionDeclarationListAST_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element::GGS_externFunctionDeclarationListAST_2E_element (const GGS_lstring & inOperand0,
+                                                                                                  const GGS_mode & inOperand1,
+                                                                                                  const GGS_lstringlist & inOperand2,
+                                                                                                  const GGS_routineFormalArgumentListAST & inOperand3,
+                                                                                                  const GGS_lstring & inOperand4,
+                                                                                                  const GGS_lstring & inOperand5,
+                                                                                                  const GGS_location & inOperand6) :
+mProperty_mExternProcedureName (inOperand0),
+mProperty_mMode (inOperand1),
+mProperty_mAttributeList (inOperand2),
+mProperty_mProcFormalArgumentList (inOperand3),
+mProperty_mReturnTypeName (inOperand4),
+mProperty_mRoutineNameForGeneration (inOperand5),
+mProperty_mEndOfProcLocation (inOperand6) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element GGS_externFunctionDeclarationListAST_2E_element::class_func_new (const GGS_lstring & in_mExternProcedureName,
+                                                                                                                 const GGS_mode & in_mMode,
+                                                                                                                 const GGS_lstringlist & in_mAttributeList,
+                                                                                                                 const GGS_routineFormalArgumentListAST & in_mProcFormalArgumentList,
+                                                                                                                 const GGS_lstring & in_mReturnTypeName,
+                                                                                                                 const GGS_lstring & in_mRoutineNameForGeneration,
+                                                                                                                 const GGS_location & in_mEndOfProcLocation,
+                                                                                                                 Compiler * inCompiler
+                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_externFunctionDeclarationListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mExternProcedureName = in_mExternProcedureName ;
+  result.mProperty_mMode = in_mMode ;
+  result.mProperty_mAttributeList = in_mAttributeList ;
+  result.mProperty_mProcFormalArgumentList = in_mProcFormalArgumentList ;
+  result.mProperty_mReturnTypeName = in_mReturnTypeName ;
+  result.mProperty_mRoutineNameForGeneration = in_mRoutineNameForGeneration ;
+  result.mProperty_mEndOfProcLocation = in_mEndOfProcLocation ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_externFunctionDeclarationListAST_2E_element::isValid (void) const {
+  return mProperty_mExternProcedureName.isValid () && mProperty_mMode.isValid () && mProperty_mAttributeList.isValid () && mProperty_mProcFormalArgumentList.isValid () && mProperty_mReturnTypeName.isValid () && mProperty_mRoutineNameForGeneration.isValid () && mProperty_mEndOfProcLocation.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_externFunctionDeclarationListAST_2E_element::drop (void) {
+  mProperty_mExternProcedureName.drop () ;
+  mProperty_mMode.drop () ;
+  mProperty_mAttributeList.drop () ;
+  mProperty_mProcFormalArgumentList.drop () ;
+  mProperty_mReturnTypeName.drop () ;
+  mProperty_mRoutineNameForGeneration.drop () ;
+  mProperty_mEndOfProcLocation.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_externFunctionDeclarationListAST_2E_element::description (String & ioString,
+                                                                   const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @externFunctionDeclarationListAST.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mExternProcedureName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mMode.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mAttributeList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mProcFormalArgumentList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mReturnTypeName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mRoutineNameForGeneration.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mEndOfProcLocation.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @externFunctionDeclarationListAST.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externFunctionDeclarationListAST_2E_element ("externFunctionDeclarationListAST.element",
+                                                                                                   nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_externFunctionDeclarationListAST_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_externFunctionDeclarationListAST_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_externFunctionDeclarationListAST_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_externFunctionDeclarationListAST_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externFunctionDeclarationListAST_2E_element GGS_externFunctionDeclarationListAST_2E_element::extractObject (const GGS_object & inObject,
+                                                                                                                Compiler * inCompiler
+                                                                                                                COMMA_LOCATION_ARGS) {
+  GGS_externFunctionDeclarationListAST_2E_element result ;
+  const GGS_externFunctionDeclarationListAST_2E_element * p = (const GGS_externFunctionDeclarationListAST_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_externFunctionDeclarationListAST_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("externFunctionDeclarationListAST.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 //
 //Extension method '@externFunctionDeclarationListAST.element externProcedureSemanticAnalysis'
 //
@@ -239,9 +428,7 @@ acPtr_class * cPtr_externRoutineIR::duplicate (Compiler * inCompiler COMMA_LOCAT
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @externRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externRoutineIR ("externRoutineIR",
@@ -290,7 +477,19 @@ mProperty_mReturnType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_externProcedureMapIR_2E_element::~ GGS_externProcedureMapIR_2E_element (void) {
+GGS_externProcedureMapIR_2E_element::GGS_externProcedureMapIR_2E_element (const GGS_externProcedureMapIR_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mFormalArgumentListForGeneration (inSource.mProperty_mFormalArgumentListForGeneration),
+mProperty_mReturnType (inSource.mProperty_mReturnType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_externProcedureMapIR_2E_element & GGS_externProcedureMapIR_2E_element::operator = (const GGS_externProcedureMapIR_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mFormalArgumentListForGeneration = inSource.mProperty_mFormalArgumentListForGeneration ;
+  mProperty_mReturnType = inSource.mProperty_mReturnType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -370,9 +569,7 @@ void GGS_externProcedureMapIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @externProcedureMapIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureMapIR_2E_element ("externProcedureMapIR.element",
@@ -680,9 +877,7 @@ acPtr_class * cPtr_isrDeclarationAST::duplicate (Compiler * inCompiler COMMA_LOC
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @isrDeclarationAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_isrDeclarationAST ("isrDeclarationAST",
@@ -924,9 +1119,7 @@ acPtr_class * cPtr_decoratedISRDeclaration::duplicate (Compiler * inCompiler COM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @decoratedISRDeclaration generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedISRDeclaration ("decoratedISRDeclaration",
@@ -1366,9 +1559,7 @@ acPtr_class * cPtr_guardDeclarationAST::duplicate (Compiler * inCompiler COMMA_L
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardDeclarationAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardDeclarationAST ("guardDeclarationAST",
@@ -1775,9 +1966,7 @@ acPtr_class * cPtr_decoratedGuardDeclaration::duplicate (Compiler * inCompiler C
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @decoratedGuardDeclaration generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedGuardDeclaration ("decoratedGuardDeclaration",
@@ -1929,9 +2118,7 @@ mProperty_mEndOfArguments () {
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @callInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_callInstructionAST ("callInstructionAST",
@@ -2230,9 +2417,7 @@ acPtr_class * cPtr_guardUserRoutineIR::duplicate (Compiler * inCompiler COMMA_LO
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardUserRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardUserRoutineIR ("guardUserRoutineIR",
@@ -2564,9 +2749,7 @@ acPtr_class * cPtr_guardImplementationRoutineIR::duplicate (Compiler * inCompile
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardImplementationRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardImplementationRoutineIR ("guardImplementationRoutineIR",
@@ -2606,9 +2789,7 @@ GGS_guardImplementationRoutineIR GGS_guardImplementationRoutineIR::extractObject
 }
 
 //--------------------------------------------------------------------------------------------------
-//
-//Extension Getter '@effectiveArgumentListAST routineSignature'
-//
+//  Extension Getter '@effectiveArgumentListAST routineSignature'
 //--------------------------------------------------------------------------------------------------
 
 GGS_lstring extensionGetter_routineSignature (const GGS_effectiveArgumentListAST & inObject,
@@ -2618,7 +2799,7 @@ GGS_lstring extensionGetter_routineSignature (const GGS_effectiveArgumentListAST
   GGS_lstring result_result ; // Returned variable
   GGS_string var_key_8380 = GGS_string ("(") ;
   const GGS_effectiveArgumentListAST temp_0 = inObject ;
-  cEnumerator_effectiveArgumentListAST enumerator_8409 (temp_0, EnumerationOrder::up) ;
+  UpEnumerator_effectiveArgumentListAST enumerator_8409 (temp_0) ;
   while (enumerator_8409.hasCurrentObject ()) {
     var_key_8380.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8409.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8409.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
     enumerator_8409.gotoNextObject () ;
@@ -2652,7 +2833,39 @@ mProperty_returnTypeName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_decoratedRegularRoutineList_2E_element::~ GGS_decoratedRegularRoutineList_2E_element (void) {
+GGS_decoratedRegularRoutineList_2E_element::GGS_decoratedRegularRoutineList_2E_element (const GGS_decoratedRegularRoutineList_2E_element & inSource) :
+mProperty_receiverTypeName (inSource.mProperty_receiverTypeName),
+mProperty_mode (inSource.mProperty_mode),
+mProperty_isRequired (inSource.mProperty_isRequired),
+mProperty_routineKind (inSource.mProperty_routineKind),
+mProperty_warnIfUnused (inSource.mProperty_warnIfUnused),
+mProperty_exportedRoutine (inSource.mProperty_exportedRoutine),
+mProperty_routineAttributes (inSource.mProperty_routineAttributes),
+mProperty_routineMangledLLVMName (inSource.mProperty_routineMangledLLVMName),
+mProperty_formalArgumentList (inSource.mProperty_formalArgumentList),
+mProperty_warningOnUnusedArgs (inSource.mProperty_warningOnUnusedArgs),
+mProperty_mInstructionList (inSource.mProperty_mInstructionList),
+mProperty_mEndOfRoutineDeclaration (inSource.mProperty_mEndOfRoutineDeclaration),
+mProperty_returnTypeName (inSource.mProperty_returnTypeName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_decoratedRegularRoutineList_2E_element & GGS_decoratedRegularRoutineList_2E_element::operator = (const GGS_decoratedRegularRoutineList_2E_element & inSource) {
+  mProperty_receiverTypeName = inSource.mProperty_receiverTypeName ;
+  mProperty_mode = inSource.mProperty_mode ;
+  mProperty_isRequired = inSource.mProperty_isRequired ;
+  mProperty_routineKind = inSource.mProperty_routineKind ;
+  mProperty_warnIfUnused = inSource.mProperty_warnIfUnused ;
+  mProperty_exportedRoutine = inSource.mProperty_exportedRoutine ;
+  mProperty_routineAttributes = inSource.mProperty_routineAttributes ;
+  mProperty_routineMangledLLVMName = inSource.mProperty_routineMangledLLVMName ;
+  mProperty_formalArgumentList = inSource.mProperty_formalArgumentList ;
+  mProperty_warningOnUnusedArgs = inSource.mProperty_warningOnUnusedArgs ;
+  mProperty_mInstructionList = inSource.mProperty_mInstructionList ;
+  mProperty_mEndOfRoutineDeclaration = inSource.mProperty_mEndOfRoutineDeclaration ;
+  mProperty_returnTypeName = inSource.mProperty_returnTypeName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2822,9 +3035,7 @@ void GGS_decoratedRegularRoutineList_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @decoratedRegularRoutineList.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedRegularRoutineList_2E_element ("decoratedRegularRoutineList.element",
@@ -3255,9 +3466,7 @@ acPtr_class * cPtr_regularRoutineIR::duplicate (Compiler * inCompiler COMMA_LOCA
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @regularRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_regularRoutineIR ("regularRoutineIR",
@@ -3532,9 +3741,7 @@ acPtr_class * cPtr_panicAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARG
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @panicAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicAST ("panicAST",
@@ -3767,9 +3974,7 @@ acPtr_class * cPtr_decoratedPanicRoutine::duplicate (Compiler * inCompiler COMMA
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @decoratedPanicRoutine generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_decoratedPanicRoutine ("decoratedPanicRoutine",
@@ -3969,9 +4174,7 @@ acPtr_class * cPtr_fileSpecificPanicRoutineIR::duplicate (Compiler * inCompiler 
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @fileSpecificPanicRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fileSpecificPanicRoutineIR ("fileSpecificPanicRoutineIR",
@@ -4138,9 +4341,7 @@ acPtr_class * cPtr_universalModePanicRoutineIR::duplicate (Compiler * inCompiler
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @universalModePanicRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_universalModePanicRoutineIR ("universalModePanicRoutineIR",
@@ -4373,9 +4574,7 @@ acPtr_class * cPtr_sectionModePanicRoutineIR::duplicate (Compiler * inCompiler C
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sectionModePanicRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sectionModePanicRoutineIR ("sectionModePanicRoutineIR",
@@ -4650,9 +4849,7 @@ acPtr_class * cPtr_compileTimeConvertToBooleanAST::duplicate (Compiler * inCompi
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimeConvertToBooleanAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeConvertToBooleanAST ("compileTimeConvertToBooleanAST",
@@ -4927,9 +5124,7 @@ acPtr_class * cPtr_llvmConvertToBooleanAST::duplicate (Compiler * inCompiler COM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmConvertToBooleanAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmConvertToBooleanAST ("llvmConvertToBooleanAST",
@@ -5138,9 +5333,7 @@ acPtr_class * cPtr_compileTimeImplicitConverterToBoolean::duplicate (Compiler * 
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimeImplicitConverterToBoolean generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeImplicitConverterToBoolean ("compileTimeImplicitConverterToBoolean",
@@ -5382,9 +5575,7 @@ acPtr_class * cPtr_llvmImplicitConverterToBoolean::duplicate (Compiler * inCompi
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmImplicitConverterToBoolean generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmImplicitConverterToBoolean ("llvmImplicitConverterToBoolean",
@@ -5626,9 +5817,7 @@ acPtr_class * cPtr_convertExpressionAST::duplicate (Compiler * inCompiler COMMA_
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @convertExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertExpressionAST ("convertExpressionAST",
@@ -5870,9 +6059,7 @@ acPtr_class * cPtr_convertInstructionIR::duplicate (Compiler * inCompiler COMMA_
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @convertInstructionIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionIR ("convertInstructionIR",
@@ -5981,9 +6168,7 @@ GGS_convertInstructionIR GGS_convertInstructionIR_2E_weak::bang_convertInstructi
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @convertInstructionIR.weak generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionIR_2E_weak ("convertInstructionIR.weak",
@@ -6225,9 +6410,7 @@ acPtr_class * cPtr_extendExpressionAST::duplicate (Compiler * inCompiler COMMA_L
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @extendExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendExpressionAST ("extendExpressionAST",
@@ -6469,9 +6652,7 @@ acPtr_class * cPtr_truncateExpressionAST::duplicate (Compiler * inCompiler COMMA
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @truncateExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_truncateExpressionAST ("truncateExpressionAST",
@@ -6521,7 +6702,21 @@ mProperty_mRegisterIndex () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterLValueAST::~ GGS_controlRegisterLValueAST (void) {
+GGS_controlRegisterLValueAST::GGS_controlRegisterLValueAST (const GGS_controlRegisterLValueAST & inSource) :
+mProperty_mRegisterGroupName (inSource.mProperty_mRegisterGroupName),
+mProperty_mGroupIndex (inSource.mProperty_mGroupIndex),
+mProperty_mRegisterName (inSource.mProperty_mRegisterName),
+mProperty_mRegisterIndex (inSource.mProperty_mRegisterIndex) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterLValueAST & GGS_controlRegisterLValueAST::operator = (const GGS_controlRegisterLValueAST & inSource) {
+  mProperty_mRegisterGroupName = inSource.mProperty_mRegisterGroupName ;
+  mProperty_mGroupIndex = inSource.mProperty_mGroupIndex ;
+  mProperty_mRegisterName = inSource.mProperty_mRegisterName ;
+  mProperty_mRegisterIndex = inSource.mProperty_mRegisterIndex ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6610,9 +6805,7 @@ void GGS_controlRegisterLValueAST::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterLValueAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterLValueAST ("controlRegisterLValueAST",
@@ -6660,7 +6853,17 @@ mProperty_mOperand () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_LValueAST::~ GGS_LValueAST (void) {
+GGS_LValueAST::GGS_LValueAST (const GGS_LValueAST & inSource) :
+mProperty_mIdentifier (inSource.mProperty_mIdentifier),
+mProperty_mOperand (inSource.mProperty_mOperand) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueAST & GGS_LValueAST::operator = (const GGS_LValueAST & inSource) {
+  mProperty_mIdentifier = inSource.mProperty_mIdentifier ;
+  mProperty_mOperand = inSource.mProperty_mOperand ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6731,9 +6934,7 @@ void GGS_LValueAST::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @LValueAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueAST ("LValueAST",
@@ -6781,7 +6982,17 @@ mProperty_llvmName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_LValueRepresentation::~ GGS_LValueRepresentation (void) {
+GGS_LValueRepresentation::GGS_LValueRepresentation (const GGS_LValueRepresentation & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_llvmName (inSource.mProperty_llvmName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueRepresentation & GGS_LValueRepresentation::operator = (const GGS_LValueRepresentation & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_llvmName = inSource.mProperty_llvmName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6852,9 +7063,7 @@ void GGS_LValueRepresentation::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @LValueRepresentation generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueRepresentation ("LValueRepresentation",
@@ -7030,9 +7239,7 @@ acPtr_class * cPtr_sizeofExpressionAST::duplicate (Compiler * inCompiler COMMA_L
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sizeofExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofExpressionAST ("sizeofExpressionAST",
@@ -7208,9 +7415,7 @@ acPtr_class * cPtr_sizeofTypeAST::duplicate (Compiler * inCompiler COMMA_LOCATIO
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sizeofTypeAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofTypeAST ("sizeofTypeAST",
@@ -7419,9 +7624,7 @@ acPtr_class * cPtr_sizeofInstructionIR::duplicate (Compiler * inCompiler COMMA_L
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sizeofInstructionIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sizeofInstructionIR ("sizeofInstructionIR",
@@ -7663,9 +7866,7 @@ acPtr_class * cPtr_typedConstantCallAST::duplicate (Compiler * inCompiler COMMA_
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @typedConstantCallAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_typedConstantCallAST ("typedConstantCallAST",
@@ -7907,9 +8108,7 @@ acPtr_class * cPtr_integerSliceExpressionAST::duplicate (Compiler * inCompiler C
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @integerSliceExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerSliceExpressionAST ("integerSliceExpressionAST",
@@ -8085,9 +8284,7 @@ acPtr_class * cPtr_literalIntegerInExpressionAST::duplicate (Compiler * inCompil
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @literalIntegerInExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalIntegerInExpressionAST ("literalIntegerInExpressionAST",
@@ -8263,9 +8460,7 @@ acPtr_class * cPtr_literalStringInExpressionAST::duplicate (Compiler * inCompile
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @literalStringInExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_literalStringInExpressionAST ("literalStringInExpressionAST",
@@ -8474,9 +8669,7 @@ acPtr_class * cPtr_registerInExpressionAST::duplicate (Compiler * inCompiler COM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @registerInExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerInExpressionAST ("registerInExpressionAST",
@@ -8718,9 +8911,7 @@ acPtr_class * cPtr_registerConstantExpressionAST::duplicate (Compiler * inCompil
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @registerConstantExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerConstantExpressionAST ("registerConstantExpressionAST",
@@ -8929,9 +9120,7 @@ acPtr_class * cPtr_primaryInExpressionAST::duplicate (Compiler * inCompiler COMM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAST ("primaryInExpressionAST",
@@ -9131,7 +9320,7 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionWithSelf (const
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult = GGS_objectIR::class_func_reference (constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 432))  COMMA_SOURCE_FILE ("expression-primary.galgas", 432)) ;
   const GGS_primaryInExpressionAST temp_0 = this ;
-  cEnumerator_primaryInExpressionAccessListAST enumerator_16731 (temp_0.readProperty_mAccessList (), EnumerationOrder::up) ;
+  UpEnumerator_primaryInExpressionAccessListAST enumerator_16731 (temp_0.readProperty_mAccessList ()) ;
   while (enumerator_16731.hasCurrentObject ()) {
     switch (enumerator_16731.current_mAccess (HERE).enumValue ()) {
     case GGS_primaryInExpressionAccessAST::Enumeration::invalid:
@@ -9418,9 +9607,7 @@ acPtr_class * cPtr_standaloneFunctionInExpressionAST::duplicate (Compiler * inCo
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @standaloneFunctionInExpressionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_standaloneFunctionInExpressionAST ("standaloneFunctionInExpressionAST",
@@ -9662,9 +9849,7 @@ acPtr_class * cPtr_constructorCallAST::duplicate (Compiler * inCompiler COMMA_LO
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @constructorCallAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_constructorCallAST ("constructorCallAST",
@@ -10071,9 +10256,7 @@ acPtr_class * cPtr_compileTimeInfixOperatorAST::duplicate (Compiler * inCompiler
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimeInfixOperatorAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOperatorAST ("compileTimeInfixOperatorAST",
@@ -10315,9 +10498,7 @@ acPtr_class * cPtr_compileTimeInfixOperatorUsage::duplicate (Compiler * inCompil
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimeInfixOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixOperatorUsage ("compileTimeInfixOperatorUsage",
@@ -10571,9 +10752,7 @@ acPtr_class * cPtr_compileTimeInfixInfEqualOperatorUsage::duplicate (Compiler * 
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimeInfixInfEqualOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeInfixInfEqualOperatorUsage ("compileTimeInfixInfEqualOperatorUsage",
@@ -11079,9 +11258,7 @@ acPtr_class * cPtr_llvmInfixOperatorAST::duplicate (Compiler * inCompiler COMMA_
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmInfixOperatorAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorAST ("llvmInfixOperatorAST",
@@ -11356,9 +11533,7 @@ acPtr_class * cPtr_llvmInfixOperatorUsage::duplicate (Compiler * inCompiler COMM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmInfixOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInfixOperatorUsage ("llvmInfixOperatorUsage",
@@ -11600,9 +11775,7 @@ acPtr_class * cPtr_llvmInlineInfixOperatorUsage::duplicate (Compiler * inCompile
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmInlineInfixOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmInlineInfixOperatorUsage ("llvmInlineInfixOperatorUsage",
@@ -12000,9 +12173,7 @@ acPtr_class * cPtr_infixOperatorRoutineIR::duplicate (Compiler * inCompiler COMM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @infixOperatorRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorRoutineIR ("infixOperatorRoutineIR",
@@ -12343,9 +12514,7 @@ acPtr_class * cPtr_compiletimePrefixOperatorAST::duplicate (Compiler * inCompile
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compiletimePrefixOperatorAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compiletimePrefixOperatorAST ("compiletimePrefixOperatorAST",
@@ -12587,9 +12756,7 @@ acPtr_class * cPtr_compileTimePrefixOperatorUsage::duplicate (Compiler * inCompi
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @compileTimePrefixOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimePrefixOperatorUsage ("compileTimePrefixOperatorUsage",
@@ -12930,9 +13097,7 @@ acPtr_class * cPtr_llvmPrefixOperatorAST::duplicate (Compiler * inCompiler COMMA
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmPrefixOperatorAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorAST ("llvmPrefixOperatorAST",
@@ -13174,9 +13339,7 @@ acPtr_class * cPtr_llvmPrefixOperatorUsage::duplicate (Compiler * inCompiler COM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @llvmPrefixOperatorUsage generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmPrefixOperatorUsage ("llvmPrefixOperatorUsage",
@@ -13508,9 +13671,7 @@ acPtr_class * cPtr_prefixOperatorRoutineIR::duplicate (Compiler * inCompiler COM
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @prefixOperatorRoutineIR generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorRoutineIR ("prefixOperatorRoutineIR",
@@ -13727,9 +13888,7 @@ acPtr_class * cPtr_checkInstructionAST::duplicate (Compiler * inCompiler COMMA_L
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @checkInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_checkInstructionAST ("checkInstructionAST",
@@ -13946,9 +14105,7 @@ acPtr_class * cPtr_assignmentInstructionAST::duplicate (Compiler * inCompiler CO
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @assignmentInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentInstructionAST ("assignmentInstructionAST",
@@ -14320,9 +14477,7 @@ acPtr_class * cPtr_controlRegisterAssignmentInstructionAST::duplicate (Compiler 
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterAssignmentInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterAssignmentInstructionAST ("controlRegisterAssignmentInstructionAST",
@@ -14605,9 +14760,7 @@ acPtr_class * cPtr_sliceAssignmentInstructionAST::duplicate (Compiler * inCompil
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceAssignmentInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentInstructionAST ("sliceAssignmentInstructionAST",
@@ -14923,9 +15076,7 @@ acPtr_class * cPtr_bitbandInstructionAST::duplicate (Compiler * inCompiler COMMA
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @bitbandInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_bitbandInstructionAST ("bitbandInstructionAST",
@@ -15175,9 +15326,7 @@ acPtr_class * cPtr_varInstructionWithAssignmentAST::duplicate (Compiler * inComp
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @varInstructionWithAssignmentAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varInstructionWithAssignmentAST ("varInstructionWithAssignmentAST",
@@ -15394,9 +15543,7 @@ acPtr_class * cPtr_varDeclarationInstructionAST::duplicate (Compiler * inCompile
 #endif
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @varDeclarationInstructionAST generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_varDeclarationInstructionAST ("varDeclarationInstructionAST",
@@ -15430,258 +15577,6 @@ GGS_varDeclarationInstructionAST GGS_varDeclarationInstructionAST::extractObject
       result = *p ;
     }else{
       inCompiler->castError ("varDeclarationInstructionAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// @letInstructionWithAssignmentAST reference class
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_letInstructionWithAssignmentAST::objectCompare (const GGS_letInstructionWithAssignmentAST & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    const size_t myObjectPtr = size_t (mObjectPtr) ;
-    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST::GGS_letInstructionWithAssignmentAST (void) :
-GGS_instructionAST () {
-}
-
-//--- Synthetized initializer ----------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST GGS_letInstructionWithAssignmentAST::
-init_21__21__21__21_ (const GGS_location & in_mInstructionLocation,
-                      const GGS_lstring & in_mConstantName,
-                      const GGS_lstring & in_mOptionalTypeName,
-                      const GGS_expressionAST & in_mSourceExpression,
-                      Compiler * inCompiler
-                      COMMA_LOCATION_ARGS) {
-  cPtr_letInstructionWithAssignmentAST * object = nullptr ;
-  macroMyNew (object, cPtr_letInstructionWithAssignmentAST (inCompiler COMMA_THERE)) ;
-  object->letInstructionWithAssignmentAST_init_21__21__21__21_ (in_mInstructionLocation, in_mConstantName, in_mOptionalTypeName, in_mSourceExpression, inCompiler) ;
-  const GGS_letInstructionWithAssignmentAST result (object) ;
-  macroDetachSharedObject (object) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void cPtr_letInstructionWithAssignmentAST::
-letInstructionWithAssignmentAST_init_21__21__21__21_ (const GGS_location & in_mInstructionLocation,
-                                                      const GGS_lstring & in_mConstantName,
-                                                      const GGS_lstring & in_mOptionalTypeName,
-                                                      const GGS_expressionAST & in_mSourceExpression,
-                                                      Compiler * /* inCompiler */) {
-  mProperty_mInstructionLocation = in_mInstructionLocation ;
-  mProperty_mConstantName = in_mConstantName ;
-  mProperty_mOptionalTypeName = in_mOptionalTypeName ;
-  mProperty_mSourceExpression = in_mSourceExpression ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST::GGS_letInstructionWithAssignmentAST (const cPtr_letInstructionWithAssignmentAST * inSourcePtr) :
-GGS_instructionAST (inSourcePtr) {
-  macroNullOrValidSharedObject (inSourcePtr, cPtr_letInstructionWithAssignmentAST) ;
-}
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST GGS_letInstructionWithAssignmentAST::class_func_new (const GGS_location & in_mInstructionLocation,
-                                                                                         const GGS_lstring & in_mConstantName,
-                                                                                         const GGS_lstring & in_mOptionalTypeName,
-                                                                                         const GGS_expressionAST & in_mSourceExpression,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_LOCATION_ARGS) {
-  GGS_letInstructionWithAssignmentAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_letInstructionWithAssignmentAST (in_mInstructionLocation, in_mConstantName, in_mOptionalTypeName, in_mSourceExpression,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring GGS_letInstructionWithAssignmentAST::readProperty_mConstantName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_lstring () ;
-  }else{
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    return p->mProperty_mConstantName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_letInstructionWithAssignmentAST::setProperty_mConstantName (const GGS_lstring & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    p->mProperty_mConstantName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_lstring GGS_letInstructionWithAssignmentAST::readProperty_mOptionalTypeName (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_lstring () ;
-  }else{
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    return p->mProperty_mOptionalTypeName ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_letInstructionWithAssignmentAST::setProperty_mOptionalTypeName (const GGS_lstring & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    p->mProperty_mOptionalTypeName = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_expressionAST GGS_letInstructionWithAssignmentAST::readProperty_mSourceExpression (void) const {
-  if (nullptr == mObjectPtr) {
-    return GGS_expressionAST () ;
-  }else{
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    return p->mProperty_mSourceExpression ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_letInstructionWithAssignmentAST::setProperty_mSourceExpression (const GGS_expressionAST & inValue) {
-  if (nullptr != mObjectPtr) {
-    cPtr_letInstructionWithAssignmentAST * p = (cPtr_letInstructionWithAssignmentAST *) mObjectPtr ;
-    macroValidSharedObject (p, cPtr_letInstructionWithAssignmentAST) ;
-    p->mProperty_mSourceExpression = inValue ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-//Pointer class for @letInstructionWithAssignmentAST class
-//--------------------------------------------------------------------------------------------------
-
-cPtr_letInstructionWithAssignmentAST::cPtr_letInstructionWithAssignmentAST (Compiler * inCompiler COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (inCompiler COMMA_THERE),
-mProperty_mConstantName (),
-mProperty_mOptionalTypeName (),
-mProperty_mSourceExpression () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cPtr_letInstructionWithAssignmentAST::cPtr_letInstructionWithAssignmentAST (const GGS_location & in_mInstructionLocation,
-                                                                            const GGS_lstring & in_mConstantName,
-                                                                            const GGS_lstring & in_mOptionalTypeName,
-                                                                            const GGS_expressionAST & in_mSourceExpression,
-                                                                            Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) :
-cPtr_instructionAST (in_mInstructionLocation, inCompiler COMMA_THERE),
-mProperty_mConstantName (),
-mProperty_mOptionalTypeName (),
-mProperty_mSourceExpression () {
-  mProperty_mInstructionLocation = in_mInstructionLocation ;
-  mProperty_mConstantName = in_mConstantName ;
-  mProperty_mOptionalTypeName = in_mOptionalTypeName ;
-  mProperty_mSourceExpression = in_mSourceExpression ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * cPtr_letInstructionWithAssignmentAST::classDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
-}
-
-void cPtr_letInstructionWithAssignmentAST::description (String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString.appendCString ("[@letInstructionWithAssignmentAST:") ;
-  mProperty_mInstructionLocation.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mConstantName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mOptionalTypeName.description (ioString, inIndentation+1) ;
-  ioString.appendCString (", ") ;
-  mProperty_mSourceExpression.description (ioString, inIndentation+1) ;
-  ioString.appendCString ("]") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-acPtr_class * cPtr_letInstructionWithAssignmentAST::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  acPtr_class * ptr = nullptr ;
-  macroMyNew (ptr, cPtr_letInstructionWithAssignmentAST (mProperty_mInstructionLocation, mProperty_mConstantName, mProperty_mOptionalTypeName, mProperty_mSourceExpression, inCompiler COMMA_THERE)) ;
-  return ptr ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-#ifndef DO_NOT_GENERATE_CHECKINGS
-  void cPtr_letInstructionWithAssignmentAST::printNonNullClassInstanceProperties (void) const {
-    cPtr_instructionAST::printNonNullClassInstanceProperties () ;
-    mProperty_mConstantName.printNonNullClassInstanceProperties ("mConstantName") ;
-    mProperty_mOptionalTypeName.printNonNullClassInstanceProperties ("mOptionalTypeName") ;
-    mProperty_mSourceExpression.printNonNullClassInstanceProperties ("mSourceExpression") ;
-  }
-#endif
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @letInstructionWithAssignmentAST generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ("letInstructionWithAssignmentAST",
-                                                                                       & kTypeDescriptor_GALGAS_instructionAST) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_letInstructionWithAssignmentAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_letInstructionWithAssignmentAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_letInstructionWithAssignmentAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_letInstructionWithAssignmentAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_letInstructionWithAssignmentAST GGS_letInstructionWithAssignmentAST::extractObject (const GGS_object & inObject,
-                                                                                        Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) {
-  GGS_letInstructionWithAssignmentAST result ;
-  const GGS_letInstructionWithAssignmentAST * p = (const GGS_letInstructionWithAssignmentAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_letInstructionWithAssignmentAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("letInstructionWithAssignmentAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

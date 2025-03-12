@@ -191,8 +191,7 @@ class GGS_configurationDeclarationAST_2E_weak : public GGS_abstractDeclarationAS
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_configurationDeclarationAST_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -631,8 +630,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean : public GGS_abstractImplici
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolImplicitConverterToBoolean class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -767,8 +765,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak : public GGS_abstrac
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -821,8 +818,7 @@ class GGS_compileTimeBoolNotOperator : public GGS_prefixOperatorUsage {
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolNotOperator class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -959,8 +955,7 @@ class GGS_compileTimeBoolNotOperator_2E_weak : public GGS_prefixOperatorUsage_2E
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolNotOperator_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1013,8 +1008,7 @@ class GGS_compileTimeBoolEqualOperator : public GGS_omnibusInfixOperatorUsage {
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolEqualOperator class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1151,8 +1145,7 @@ class GGS_compileTimeBoolEqualOperator_2E_weak : public GGS_omnibusInfixOperator
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_compileTimeBoolEqualOperator_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1220,8 +1213,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage : public GGS_abstractAssignmentO
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_fixedSizeArrayAssignmentOperatorUsage class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1369,8 +1361,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak : public GGS_abstractAss
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1444,8 +1435,7 @@ class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GGS_abs
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 
@@ -1594,8 +1584,7 @@ class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak : public
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
-} ; // End of GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak class
-
+} ;
 
 //--------------------------------------------------------------------------------------------------
 

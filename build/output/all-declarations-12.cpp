@@ -8,6 +8,679 @@
 #include "all-declarations-12.h"
 
 //--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element::GGS_propertyList_2E_element (void) :
+mProperty_mPropertyName (),
+mProperty_mType () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element::GGS_propertyList_2E_element (const GGS_propertyList_2E_element & inSource) :
+mProperty_mPropertyName (inSource.mProperty_mPropertyName),
+mProperty_mType (inSource.mProperty_mType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element & GGS_propertyList_2E_element::operator = (const GGS_propertyList_2E_element & inSource) {
+  mProperty_mPropertyName = inSource.mProperty_mPropertyName ;
+  mProperty_mType = inSource.mProperty_mType ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_propertyList_2E_element GGS_propertyList_2E_element::init_21__21_ (const GGS_string & in_mPropertyName,
+                                                                       const GGS_omnibusType & in_mType,
+                                                                       Compiler * inCompiler
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_propertyList_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mPropertyName = in_mPropertyName ;
+  result.mProperty_mType = in_mType ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_propertyList_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element::GGS_propertyList_2E_element (const GGS_string & inOperand0,
+                                                          const GGS_omnibusType & inOperand1) :
+mProperty_mPropertyName (inOperand0),
+mProperty_mType (inOperand1) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element GGS_propertyList_2E_element::class_func_new (const GGS_string & in_mPropertyName,
+                                                                         const GGS_omnibusType & in_mType,
+                                                                         Compiler * inCompiler
+                                                                         COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_propertyList_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mPropertyName = in_mPropertyName ;
+  result.mProperty_mType = in_mType ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_propertyList_2E_element::objectCompare (const GGS_propertyList_2E_element & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_mPropertyName.objectCompare (inOperand.mProperty_mPropertyName) ;
+  }
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_mType.objectCompare (inOperand.mProperty_mType) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_propertyList_2E_element::isValid (void) const {
+  return mProperty_mPropertyName.isValid () && mProperty_mType.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_propertyList_2E_element::drop (void) {
+  mProperty_mPropertyName.drop () ;
+  mProperty_mType.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_propertyList_2E_element::description (String & ioString,
+                                               const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @propertyList.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mPropertyName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mType.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @propertyList.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_propertyList_2E_element ("propertyList.element",
+                                                                               nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_propertyList_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_propertyList_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_propertyList_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_propertyList_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_propertyList_2E_element GGS_propertyList_2E_element::extractObject (const GGS_object & inObject,
+                                                                        Compiler * inCompiler
+                                                                        COMMA_LOCATION_ARGS) {
+  GGS_propertyList_2E_element result ;
+  const GGS_propertyList_2E_element * p = (const GGS_propertyList_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_propertyList_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("propertyList.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element::GGS_controlRegisterNameListAST_2E_element (void) :
+mProperty_mRegisterName (),
+mProperty_mControlRegisterKind (),
+mProperty_mIsReadOnly (),
+mProperty_mRegisterOffset (),
+mProperty_mRegisterOffsetLocation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element::GGS_controlRegisterNameListAST_2E_element (const GGS_controlRegisterNameListAST_2E_element & inSource) :
+mProperty_mRegisterName (inSource.mProperty_mRegisterName),
+mProperty_mControlRegisterKind (inSource.mProperty_mControlRegisterKind),
+mProperty_mIsReadOnly (inSource.mProperty_mIsReadOnly),
+mProperty_mRegisterOffset (inSource.mProperty_mRegisterOffset),
+mProperty_mRegisterOffsetLocation (inSource.mProperty_mRegisterOffsetLocation) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element & GGS_controlRegisterNameListAST_2E_element::operator = (const GGS_controlRegisterNameListAST_2E_element & inSource) {
+  mProperty_mRegisterName = inSource.mProperty_mRegisterName ;
+  mProperty_mControlRegisterKind = inSource.mProperty_mControlRegisterKind ;
+  mProperty_mIsReadOnly = inSource.mProperty_mIsReadOnly ;
+  mProperty_mRegisterOffset = inSource.mProperty_mRegisterOffset ;
+  mProperty_mRegisterOffsetLocation = inSource.mProperty_mRegisterOffsetLocation ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element GGS_controlRegisterNameListAST_2E_element::init_21__21__21__21__21_ (const GGS_lstring & in_mRegisterName,
+                                                                                                               const GGS_controlRegisterKind & in_mControlRegisterKind,
+                                                                                                               const GGS_bool & in_mIsReadOnly,
+                                                                                                               const GGS_expressionAST & in_mRegisterOffset,
+                                                                                                               const GGS_location & in_mRegisterOffsetLocation,
+                                                                                                               Compiler * inCompiler
+                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterNameListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mRegisterName = in_mRegisterName ;
+  result.mProperty_mControlRegisterKind = in_mControlRegisterKind ;
+  result.mProperty_mIsReadOnly = in_mIsReadOnly ;
+  result.mProperty_mRegisterOffset = in_mRegisterOffset ;
+  result.mProperty_mRegisterOffsetLocation = in_mRegisterOffsetLocation ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterNameListAST_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element::GGS_controlRegisterNameListAST_2E_element (const GGS_lstring & inOperand0,
+                                                                                      const GGS_controlRegisterKind & inOperand1,
+                                                                                      const GGS_bool & inOperand2,
+                                                                                      const GGS_expressionAST & inOperand3,
+                                                                                      const GGS_location & inOperand4) :
+mProperty_mRegisterName (inOperand0),
+mProperty_mControlRegisterKind (inOperand1),
+mProperty_mIsReadOnly (inOperand2),
+mProperty_mRegisterOffset (inOperand3),
+mProperty_mRegisterOffsetLocation (inOperand4) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element GGS_controlRegisterNameListAST_2E_element::class_func_new (const GGS_lstring & in_mRegisterName,
+                                                                                                     const GGS_controlRegisterKind & in_mControlRegisterKind,
+                                                                                                     const GGS_bool & in_mIsReadOnly,
+                                                                                                     const GGS_expressionAST & in_mRegisterOffset,
+                                                                                                     const GGS_location & in_mRegisterOffsetLocation,
+                                                                                                     Compiler * inCompiler
+                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterNameListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mRegisterName = in_mRegisterName ;
+  result.mProperty_mControlRegisterKind = in_mControlRegisterKind ;
+  result.mProperty_mIsReadOnly = in_mIsReadOnly ;
+  result.mProperty_mRegisterOffset = in_mRegisterOffset ;
+  result.mProperty_mRegisterOffsetLocation = in_mRegisterOffsetLocation ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterNameListAST_2E_element::isValid (void) const {
+  return mProperty_mRegisterName.isValid () && mProperty_mControlRegisterKind.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mRegisterOffset.isValid () && mProperty_mRegisterOffsetLocation.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterNameListAST_2E_element::drop (void) {
+  mProperty_mRegisterName.drop () ;
+  mProperty_mControlRegisterKind.drop () ;
+  mProperty_mIsReadOnly.drop () ;
+  mProperty_mRegisterOffset.drop () ;
+  mProperty_mRegisterOffsetLocation.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterNameListAST_2E_element::description (String & ioString,
+                                                             const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @controlRegisterNameListAST.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mRegisterName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mControlRegisterKind.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mRegisterOffset.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mRegisterOffsetLocation.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @controlRegisterNameListAST.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterNameListAST_2E_element ("controlRegisterNameListAST.element",
+                                                                                             nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterNameListAST_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterNameListAST_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterNameListAST_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterNameListAST_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterNameListAST_2E_element GGS_controlRegisterNameListAST_2E_element::extractObject (const GGS_object & inObject,
+                                                                                                    Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterNameListAST_2E_element result ;
+  const GGS_controlRegisterNameListAST_2E_element * p = (const GGS_controlRegisterNameListAST_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterNameListAST_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterNameListAST.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits::GGS_controlRegisterBitSlice_2E_unusedBits (void) :
+mProperty_count () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits::GGS_controlRegisterBitSlice_2E_unusedBits (const GGS_controlRegisterBitSlice_2E_unusedBits & inSource) :
+mProperty_count (inSource.mProperty_count) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits & GGS_controlRegisterBitSlice_2E_unusedBits::operator = (const GGS_controlRegisterBitSlice_2E_unusedBits & inSource) {
+  mProperty_count = inSource.mProperty_count ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits GGS_controlRegisterBitSlice_2E_unusedBits::init_21_ (const GGS_lbigint & in_count,
+                                                                                               Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_unusedBits result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_count = in_count ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_unusedBits::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits::GGS_controlRegisterBitSlice_2E_unusedBits (const GGS_lbigint & inOperand0) :
+mProperty_count (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits GGS_controlRegisterBitSlice_2E_unusedBits::class_func_new (const GGS_lbigint & in_count,
+                                                                                                     Compiler * inCompiler
+                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_unusedBits result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_count = in_count ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterBitSlice_2E_unusedBits::isValid (void) const {
+  return mProperty_count.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_unusedBits::drop (void) {
+  mProperty_count.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_unusedBits::description (String & ioString,
+                                                             const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @controlRegisterBitSlice.unusedBits:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_count.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @controlRegisterBitSlice.unusedBits generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_unusedBits ("controlRegisterBitSlice.unusedBits",
+                                                                                             nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterBitSlice_2E_unusedBits::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_unusedBits ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterBitSlice_2E_unusedBits::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterBitSlice_2E_unusedBits (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits GGS_controlRegisterBitSlice_2E_unusedBits::extractObject (const GGS_object & inObject,
+                                                                                                    Compiler * inCompiler
+                                                                                                    COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_unusedBits result ;
+  const GGS_controlRegisterBitSlice_2E_unusedBits * p = (const GGS_controlRegisterBitSlice_2E_unusedBits *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterBitSlice_2E_unusedBits *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterBitSlice.unusedBits", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Optional @controlRegisterBitSlice_2E_unusedBits_3F_
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits_3F_::GGS_controlRegisterBitSlice_2E_unusedBits_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits_3F_::GGS_controlRegisterBitSlice_2E_unusedBits_3F_ (const GGS_controlRegisterBitSlice_2E_unusedBits & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits_3F_ GGS_controlRegisterBitSlice_2E_unusedBits_3F_::init_nil (void) {
+  GGS_controlRegisterBitSlice_2E_unusedBits_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterBitSlice_2E_unusedBits_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterBitSlice_2E_unusedBits_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_unusedBits_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_controlRegisterBitSlice_2E_unusedBits () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_unusedBits_3F_::description (String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @controlRegisterBitSlice.unusedBits? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_unusedBits_3F_ ("controlRegisterBitSlice.unusedBits?",
+                                                                                                 nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterBitSlice_2E_unusedBits_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_unusedBits_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterBitSlice_2E_unusedBits_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterBitSlice_2E_unusedBits_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_unusedBits_3F_ GGS_controlRegisterBitSlice_2E_unusedBits_3F_::extractObject (const GGS_object & inObject,
+                                                                                                            Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_unusedBits_3F_ result ;
+  const GGS_controlRegisterBitSlice_2E_unusedBits_3F_ * p = (const GGS_controlRegisterBitSlice_2E_unusedBits_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterBitSlice_2E_unusedBits_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterBitSlice.unusedBits?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit::GGS_controlRegisterBitSlice_2E_namedBit (void) :
+mProperty_name (),
+mProperty_count () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit::GGS_controlRegisterBitSlice_2E_namedBit (const GGS_controlRegisterBitSlice_2E_namedBit & inSource) :
+mProperty_name (inSource.mProperty_name),
+mProperty_count (inSource.mProperty_count) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit & GGS_controlRegisterBitSlice_2E_namedBit::operator = (const GGS_controlRegisterBitSlice_2E_namedBit & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  mProperty_count = inSource.mProperty_count ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit GGS_controlRegisterBitSlice_2E_namedBit::init_21__21_ (const GGS_lstring & in_name,
+                                                                                               const GGS_lbigint & in_count,
+                                                                                               Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_namedBit result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_name = in_name ;
+  result.mProperty_count = in_count ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_namedBit::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit::GGS_controlRegisterBitSlice_2E_namedBit (const GGS_lstring & inOperand0,
+                                                                                  const GGS_lbigint & inOperand1) :
+mProperty_name (inOperand0),
+mProperty_count (inOperand1) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit GGS_controlRegisterBitSlice_2E_namedBit::class_func_new (const GGS_lstring & in_name,
+                                                                                                 const GGS_lbigint & in_count,
+                                                                                                 Compiler * inCompiler
+                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_namedBit result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_name = in_name ;
+  result.mProperty_count = in_count ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_controlRegisterBitSlice_2E_namedBit::isValid (void) const {
+  return mProperty_name.isValid () && mProperty_count.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_namedBit::drop (void) {
+  mProperty_name.drop () ;
+  mProperty_count.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_controlRegisterBitSlice_2E_namedBit::description (String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @controlRegisterBitSlice.namedBit:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_name.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_count.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @controlRegisterBitSlice.namedBit generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_namedBit ("controlRegisterBitSlice.namedBit",
+                                                                                           nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_controlRegisterBitSlice_2E_namedBit::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_namedBit ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_controlRegisterBitSlice_2E_namedBit::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_controlRegisterBitSlice_2E_namedBit (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterBitSlice_2E_namedBit GGS_controlRegisterBitSlice_2E_namedBit::extractObject (const GGS_object & inObject,
+                                                                                                Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GGS_controlRegisterBitSlice_2E_namedBit result ;
+  const GGS_controlRegisterBitSlice_2E_namedBit * p = (const GGS_controlRegisterBitSlice_2E_namedBit *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_controlRegisterBitSlice_2E_namedBit *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("controlRegisterBitSlice.namedBit", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
 //
 //Optional @controlRegisterBitSlice_2E_namedBit_3F_
 //
@@ -88,9 +761,7 @@ void GGS_controlRegisterBitSlice_2E_namedBit_3F_::description (String & ioString
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterBitSlice.namedBit? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice_2E_namedBit_3F_ ("controlRegisterBitSlice.namedBit?",
@@ -137,7 +808,15 @@ mProperty_registerGroupBaseAddress () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupKindAST_2E_single::~ GGS_controlRegisterGroupKindAST_2E_single (void) {
+GGS_controlRegisterGroupKindAST_2E_single::GGS_controlRegisterGroupKindAST_2E_single (const GGS_controlRegisterGroupKindAST_2E_single & inSource) :
+mProperty_registerGroupBaseAddress (inSource.mProperty_registerGroupBaseAddress) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterGroupKindAST_2E_single & GGS_controlRegisterGroupKindAST_2E_single::operator = (const GGS_controlRegisterGroupKindAST_2E_single & inSource) {
+  mProperty_registerGroupBaseAddress = inSource.mProperty_registerGroupBaseAddress ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -199,9 +878,7 @@ void GGS_controlRegisterGroupKindAST_2E_single::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterGroupKindAST.single generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupKindAST_2E_single ("controlRegisterGroupKindAST.single",
@@ -321,9 +998,7 @@ void GGS_controlRegisterGroupKindAST_2E_single_3F_::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterGroupKindAST.single? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupKindAST_2E_single_3F_ ("controlRegisterGroupKindAST.single?",
@@ -371,7 +1046,17 @@ mProperty_mControlRegisterGroupKind () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_registerGroupListAST_2E_element::~ GGS_registerGroupListAST_2E_element (void) {
+GGS_registerGroupListAST_2E_element::GGS_registerGroupListAST_2E_element (const GGS_registerGroupListAST_2E_element & inSource) :
+mProperty_mRegisterGroupName (inSource.mProperty_mRegisterGroupName),
+mProperty_mControlRegisterGroupKind (inSource.mProperty_mControlRegisterGroupKind) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_registerGroupListAST_2E_element & GGS_registerGroupListAST_2E_element::operator = (const GGS_registerGroupListAST_2E_element & inSource) {
+  mProperty_mRegisterGroupName = inSource.mProperty_mRegisterGroupName ;
+  mProperty_mControlRegisterGroupKind = inSource.mProperty_mControlRegisterGroupKind ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -442,9 +1127,7 @@ void GGS_registerGroupListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @registerGroupListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerGroupListAST_2E_element ("registerGroupListAST.element",
@@ -491,7 +1174,15 @@ mProperty_lkey () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterUserAccesMapAST_2E_element::~ GGS_controlRegisterUserAccesMapAST_2E_element (void) {
+GGS_controlRegisterUserAccesMapAST_2E_element::GGS_controlRegisterUserAccesMapAST_2E_element (const GGS_controlRegisterUserAccesMapAST_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterUserAccesMapAST_2E_element & GGS_controlRegisterUserAccesMapAST_2E_element::operator = (const GGS_controlRegisterUserAccesMapAST_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -553,9 +1244,7 @@ void GGS_controlRegisterUserAccesMapAST_2E_element::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterUserAccesMapAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST_2E_element ("controlRegisterUserAccesMapAST.element",
@@ -675,9 +1364,7 @@ void GGS_controlRegisterUserAccesMapAST_2E_element_3F_::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterUserAccesMapAST.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterUserAccesMapAST_2E_element_3F_ ("controlRegisterUserAccesMapAST.element?",
@@ -726,7 +1413,19 @@ mProperty_mBitCount () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterFieldMap_2E_element::~ GGS_controlRegisterFieldMap_2E_element (void) {
+GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (const GGS_controlRegisterFieldMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mBitIndex (inSource.mProperty_mBitIndex),
+mProperty_mBitCount (inSource.mProperty_mBitCount) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterFieldMap_2E_element & GGS_controlRegisterFieldMap_2E_element::operator = (const GGS_controlRegisterFieldMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mBitIndex = inSource.mProperty_mBitIndex ;
+  mProperty_mBitCount = inSource.mProperty_mBitCount ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -806,9 +1505,7 @@ void GGS_controlRegisterFieldMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterFieldMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element ("controlRegisterFieldMap.element",
@@ -928,9 +1625,7 @@ void GGS_controlRegisterFieldMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterFieldMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element_3F_ ("controlRegisterFieldMap.element?",
@@ -980,7 +1675,21 @@ mProperty_mResultType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sliceMap_2E_element::~ GGS_sliceMap_2E_element (void) {
+GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (const GGS_sliceMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mAccessOperator (inSource.mProperty_mAccessOperator),
+mProperty_mAccessRightOperand (inSource.mProperty_mAccessRightOperand),
+mProperty_mResultType (inSource.mProperty_mResultType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceMap_2E_element & GGS_sliceMap_2E_element::operator = (const GGS_sliceMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mAccessOperator = inSource.mProperty_mAccessOperator ;
+  mProperty_mAccessRightOperand = inSource.mProperty_mAccessRightOperand ;
+  mProperty_mResultType = inSource.mProperty_mResultType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -1069,9 +1778,7 @@ void GGS_sliceMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2E_element ("sliceMap.element",
@@ -1191,9 +1898,7 @@ void GGS_sliceMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceMap_2E_element_3F_ ("sliceMap.element?",
@@ -1250,7 +1955,35 @@ mProperty_mElementArraySize () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterMap_2E_element::~ GGS_controlRegisterMap_2E_element (void) {
+GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (const GGS_controlRegisterMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mType (inSource.mProperty_mType),
+mProperty_mIsReadOnly (inSource.mProperty_mIsReadOnly),
+mProperty_mUserAccess (inSource.mProperty_mUserAccess),
+mProperty_mRegisterFieldAccessMap (inSource.mProperty_mRegisterFieldAccessMap),
+mProperty_mRegisterFieldMap (inSource.mProperty_mRegisterFieldMap),
+mProperty_mAddressOffset (inSource.mProperty_mAddressOffset),
+mProperty_mControlRegisterFieldList (inSource.mProperty_mControlRegisterFieldList),
+mProperty_mRegisterBitCount (inSource.mProperty_mRegisterBitCount),
+mProperty_mArraySize (inSource.mProperty_mArraySize),
+mProperty_mElementArraySize (inSource.mProperty_mElementArraySize) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterMap_2E_element & GGS_controlRegisterMap_2E_element::operator = (const GGS_controlRegisterMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mType = inSource.mProperty_mType ;
+  mProperty_mIsReadOnly = inSource.mProperty_mIsReadOnly ;
+  mProperty_mUserAccess = inSource.mProperty_mUserAccess ;
+  mProperty_mRegisterFieldAccessMap = inSource.mProperty_mRegisterFieldAccessMap ;
+  mProperty_mRegisterFieldMap = inSource.mProperty_mRegisterFieldMap ;
+  mProperty_mAddressOffset = inSource.mProperty_mAddressOffset ;
+  mProperty_mControlRegisterFieldList = inSource.mProperty_mControlRegisterFieldList ;
+  mProperty_mRegisterBitCount = inSource.mProperty_mRegisterBitCount ;
+  mProperty_mArraySize = inSource.mProperty_mArraySize ;
+  mProperty_mElementArraySize = inSource.mProperty_mElementArraySize ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -1402,9 +2135,7 @@ void GGS_controlRegisterMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap_2E_element ("controlRegisterMap.element",
@@ -1524,9 +2255,7 @@ void GGS_controlRegisterMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterMap_2E_element_3F_ ("controlRegisterMap.element?",
@@ -1575,7 +2304,19 @@ mProperty_mControlRegisterMap () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupMap_2E_element::~ GGS_controlRegisterGroupMap_2E_element (void) {
+GGS_controlRegisterGroupMap_2E_element::GGS_controlRegisterGroupMap_2E_element (const GGS_controlRegisterGroupMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mGroupKind (inSource.mProperty_mGroupKind),
+mProperty_mControlRegisterMap (inSource.mProperty_mControlRegisterMap) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterGroupMap_2E_element & GGS_controlRegisterGroupMap_2E_element::operator = (const GGS_controlRegisterGroupMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mGroupKind = inSource.mProperty_mGroupKind ;
+  mProperty_mControlRegisterMap = inSource.mProperty_mControlRegisterMap ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -1655,9 +2396,7 @@ void GGS_controlRegisterGroupMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterGroupMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element ("controlRegisterGroupMap.element",
@@ -1777,9 +2516,7 @@ void GGS_controlRegisterGroupMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterGroupMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element_3F_ ("controlRegisterGroupMap.element?",
@@ -1828,7 +2565,19 @@ mProperty_initialValue () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_globalSyncInstanceMap_2E_element::~ GGS_globalSyncInstanceMap_2E_element (void) {
+GGS_globalSyncInstanceMap_2E_element::GGS_globalSyncInstanceMap_2E_element (const GGS_globalSyncInstanceMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_type (inSource.mProperty_type),
+mProperty_initialValue (inSource.mProperty_initialValue) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalSyncInstanceMap_2E_element & GGS_globalSyncInstanceMap_2E_element::operator = (const GGS_globalSyncInstanceMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_initialValue = inSource.mProperty_initialValue ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -1908,9 +2657,7 @@ void GGS_globalSyncInstanceMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @globalSyncInstanceMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceMap_2E_element ("globalSyncInstanceMap.element",
@@ -2030,9 +2777,7 @@ void GGS_globalSyncInstanceMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @globalSyncInstanceMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceMap_2E_element_3F_ ("globalSyncInstanceMap.element?",
@@ -2152,9 +2897,7 @@ void GGS_globalSyncInstanceMapIR_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @globalSyncInstanceMapIR.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalSyncInstanceMapIR_2E_element_3F_ ("globalSyncInstanceMapIR.element?",
@@ -2201,7 +2944,15 @@ mProperty_mDriver () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_driverDeclarationListAST_2E_element::~ GGS_driverDeclarationListAST_2E_element (void) {
+GGS_driverDeclarationListAST_2E_element::GGS_driverDeclarationListAST_2E_element (const GGS_driverDeclarationListAST_2E_element & inSource) :
+mProperty_mDriver (inSource.mProperty_mDriver) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_driverDeclarationListAST_2E_element & GGS_driverDeclarationListAST_2E_element::operator = (const GGS_driverDeclarationListAST_2E_element & inSource) {
+  mProperty_mDriver = inSource.mProperty_mDriver ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2263,9 +3014,7 @@ void GGS_driverDeclarationListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @driverDeclarationListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverDeclarationListAST_2E_element ("driverDeclarationListAST.element",
@@ -2313,7 +3062,17 @@ mProperty_mExpression () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_driverInstanciationArgumentListAST_2E_element::~ GGS_driverInstanciationArgumentListAST_2E_element (void) {
+GGS_driverInstanciationArgumentListAST_2E_element::GGS_driverInstanciationArgumentListAST_2E_element (const GGS_driverInstanciationArgumentListAST_2E_element & inSource) :
+mProperty_mSelector (inSource.mProperty_mSelector),
+mProperty_mExpression (inSource.mProperty_mExpression) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_driverInstanciationArgumentListAST_2E_element & GGS_driverInstanciationArgumentListAST_2E_element::operator = (const GGS_driverInstanciationArgumentListAST_2E_element & inSource) {
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  mProperty_mExpression = inSource.mProperty_mExpression ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2384,9 +3143,7 @@ void GGS_driverInstanciationArgumentListAST_2E_element::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @driverInstanciationArgumentListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciationArgumentListAST_2E_element ("driverInstanciationArgumentListAST.element",
@@ -2434,7 +3191,17 @@ mProperty_mDriverInstanciationArgumentList () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_driverInstanciationListAST_2E_element::~ GGS_driverInstanciationListAST_2E_element (void) {
+GGS_driverInstanciationListAST_2E_element::GGS_driverInstanciationListAST_2E_element (const GGS_driverInstanciationListAST_2E_element & inSource) :
+mProperty_mDriverName (inSource.mProperty_mDriverName),
+mProperty_mDriverInstanciationArgumentList (inSource.mProperty_mDriverInstanciationArgumentList) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_driverInstanciationListAST_2E_element & GGS_driverInstanciationListAST_2E_element::operator = (const GGS_driverInstanciationListAST_2E_element & inSource) {
+  mProperty_mDriverName = inSource.mProperty_mDriverName ;
+  mProperty_mDriverInstanciationArgumentList = inSource.mProperty_mDriverInstanciationArgumentList ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2505,9 +3272,7 @@ void GGS_driverInstanciationListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @driverInstanciationListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciationListAST_2E_element ("driverInstanciationListAST.element",
@@ -2555,7 +3320,17 @@ mProperty_mExpression () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_driverInstanciationArgumentMap_2E_element::~ GGS_driverInstanciationArgumentMap_2E_element (void) {
+GGS_driverInstanciationArgumentMap_2E_element::GGS_driverInstanciationArgumentMap_2E_element (const GGS_driverInstanciationArgumentMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mExpression (inSource.mProperty_mExpression) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_driverInstanciationArgumentMap_2E_element & GGS_driverInstanciationArgumentMap_2E_element::operator = (const GGS_driverInstanciationArgumentMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mExpression = inSource.mProperty_mExpression ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2626,9 +3401,7 @@ void GGS_driverInstanciationArgumentMap_2E_element::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @driverInstanciationArgumentMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciationArgumentMap_2E_element ("driverInstanciationArgumentMap.element",
@@ -2748,9 +3521,7 @@ void GGS_driverInstanciationArgumentMap_2E_element_3F_::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @driverInstanciationArgumentMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_driverInstanciationArgumentMap_2E_element_3F_ ("driverInstanciationArgumentMap.element?",
@@ -2798,7 +3569,17 @@ mProperty_mDriverInstanciationArgumentMap () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_instanciedDriverMap_2E_element::~ GGS_instanciedDriverMap_2E_element (void) {
+GGS_instanciedDriverMap_2E_element::GGS_instanciedDriverMap_2E_element (const GGS_instanciedDriverMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mDriverInstanciationArgumentMap (inSource.mProperty_mDriverInstanciationArgumentMap) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instanciedDriverMap_2E_element & GGS_instanciedDriverMap_2E_element::operator = (const GGS_instanciedDriverMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mDriverInstanciationArgumentMap = inSource.mProperty_mDriverInstanciationArgumentMap ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -2869,9 +3650,7 @@ void GGS_instanciedDriverMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @instanciedDriverMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instanciedDriverMap_2E_element ("instanciedDriverMap.element",
@@ -2991,9 +3770,7 @@ void GGS_instanciedDriverMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @instanciedDriverMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_instanciedDriverMap_2E_element_3F_ ("instanciedDriverMap.element?",
@@ -3040,7 +3817,15 @@ mProperty_type () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListPropertyTypeAST_2E_valueType::~ GGS_staticListPropertyTypeAST_2E_valueType (void) {
+GGS_staticListPropertyTypeAST_2E_valueType::GGS_staticListPropertyTypeAST_2E_valueType (const GGS_staticListPropertyTypeAST_2E_valueType & inSource) :
+mProperty_type (inSource.mProperty_type) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticListPropertyTypeAST_2E_valueType & GGS_staticListPropertyTypeAST_2E_valueType::operator = (const GGS_staticListPropertyTypeAST_2E_valueType & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -3102,9 +3887,7 @@ void GGS_staticListPropertyTypeAST_2E_valueType::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListPropertyTypeAST.valueType generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyTypeAST_2E_valueType ("staticListPropertyTypeAST.valueType",
@@ -3224,9 +4007,7 @@ void GGS_staticListPropertyTypeAST_2E_valueType_3F_::description (String & ioStr
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListPropertyTypeAST.valueType? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyTypeAST_2E_valueType_3F_ ("staticListPropertyTypeAST.valueType?",
@@ -3275,7 +4056,19 @@ mProperty_returnType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListPropertyTypeAST_2E_function::~ GGS_staticListPropertyTypeAST_2E_function (void) {
+GGS_staticListPropertyTypeAST_2E_function::GGS_staticListPropertyTypeAST_2E_function (const GGS_staticListPropertyTypeAST_2E_function & inSource) :
+mProperty_mode (inSource.mProperty_mode),
+mProperty_formalArgs (inSource.mProperty_formalArgs),
+mProperty_returnType (inSource.mProperty_returnType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticListPropertyTypeAST_2E_function & GGS_staticListPropertyTypeAST_2E_function::operator = (const GGS_staticListPropertyTypeAST_2E_function & inSource) {
+  mProperty_mode = inSource.mProperty_mode ;
+  mProperty_formalArgs = inSource.mProperty_formalArgs ;
+  mProperty_returnType = inSource.mProperty_returnType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -3355,9 +4148,7 @@ void GGS_staticListPropertyTypeAST_2E_function::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListPropertyTypeAST.function generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyTypeAST_2E_function ("staticListPropertyTypeAST.function",
@@ -3477,9 +4268,7 @@ void GGS_staticListPropertyTypeAST_2E_function_3F_::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListPropertyTypeAST.function? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyTypeAST_2E_function_3F_ ("staticListPropertyTypeAST.function?",
@@ -3527,7 +4316,17 @@ mProperty_mPropertyType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListPropertyListAST_2E_element::~ GGS_staticListPropertyListAST_2E_element (void) {
+GGS_staticListPropertyListAST_2E_element::GGS_staticListPropertyListAST_2E_element (const GGS_staticListPropertyListAST_2E_element & inSource) :
+mProperty_mPropertyName (inSource.mProperty_mPropertyName),
+mProperty_mPropertyType (inSource.mProperty_mPropertyType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticListPropertyListAST_2E_element & GGS_staticListPropertyListAST_2E_element::operator = (const GGS_staticListPropertyListAST_2E_element & inSource) {
+  mProperty_mPropertyName = inSource.mProperty_mPropertyName ;
+  mProperty_mPropertyType = inSource.mProperty_mPropertyType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -3598,9 +4397,7 @@ void GGS_staticListPropertyListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListPropertyListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListPropertyListAST_2E_element ("staticListPropertyListAST.element",
@@ -3648,7 +4445,17 @@ mProperty_formalArgs () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_extendStaticListExpressionAST_2E_function::~ GGS_extendStaticListExpressionAST_2E_function (void) {
+GGS_extendStaticListExpressionAST_2E_function::GGS_extendStaticListExpressionAST_2E_function (const GGS_extendStaticListExpressionAST_2E_function & inSource) :
+mProperty_functionName (inSource.mProperty_functionName),
+mProperty_formalArgs (inSource.mProperty_formalArgs) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_extendStaticListExpressionAST_2E_function & GGS_extendStaticListExpressionAST_2E_function::operator = (const GGS_extendStaticListExpressionAST_2E_function & inSource) {
+  mProperty_functionName = inSource.mProperty_functionName ;
+  mProperty_formalArgs = inSource.mProperty_formalArgs ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -3719,9 +4526,7 @@ void GGS_extendStaticListExpressionAST_2E_function::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @extendStaticListExpressionAST.function generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticListExpressionAST_2E_function ("extendStaticListExpressionAST.function",
@@ -3841,9 +4646,7 @@ void GGS_extendStaticListExpressionAST_2E_function_3F_::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @extendStaticListExpressionAST.function? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_extendStaticListExpressionAST_2E_function_3F_ ("extendStaticListExpressionAST.function?",
@@ -3891,7 +4694,17 @@ mProperty_mStaticListPropertyList () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticlistMap_2E_element::~ GGS_staticlistMap_2E_element (void) {
+GGS_staticlistMap_2E_element::GGS_staticlistMap_2E_element (const GGS_staticlistMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mStaticListPropertyList (inSource.mProperty_mStaticListPropertyList) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticlistMap_2E_element & GGS_staticlistMap_2E_element::operator = (const GGS_staticlistMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mStaticListPropertyList = inSource.mProperty_mStaticListPropertyList ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -3962,9 +4775,7 @@ void GGS_staticlistMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticlistMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap_2E_element ("staticlistMap.element",
@@ -4084,9 +4895,7 @@ void GGS_staticlistMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticlistMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticlistMap_2E_element_3F_ ("staticlistMap.element?",
@@ -4134,7 +4943,17 @@ mProperty_mInitializationList () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListInitializationMap_2E_element::~ GGS_staticListInitializationMap_2E_element (void) {
+GGS_staticListInitializationMap_2E_element::GGS_staticListInitializationMap_2E_element (const GGS_staticListInitializationMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mInitializationList (inSource.mProperty_mInitializationList) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticListInitializationMap_2E_element & GGS_staticListInitializationMap_2E_element::operator = (const GGS_staticListInitializationMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mInitializationList = inSource.mProperty_mInitializationList ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -4205,9 +5024,7 @@ void GGS_staticListInitializationMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListInitializationMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInitializationMap_2E_element ("staticListInitializationMap.element",
@@ -4327,9 +5144,7 @@ void GGS_staticListInitializationMap_2E_element_3F_::description (String & ioStr
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListInitializationMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInitializationMap_2E_element_3F_ ("staticListInitializationMap.element?",
@@ -4377,7 +5192,17 @@ mProperty_mInvokedFunctionSet () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListInvokedFunctionSetMap_2E_element::~ GGS_staticListInvokedFunctionSetMap_2E_element (void) {
+GGS_staticListInvokedFunctionSetMap_2E_element::GGS_staticListInvokedFunctionSetMap_2E_element (const GGS_staticListInvokedFunctionSetMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mInvokedFunctionSet (inSource.mProperty_mInvokedFunctionSet) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_staticListInvokedFunctionSetMap_2E_element & GGS_staticListInvokedFunctionSetMap_2E_element::operator = (const GGS_staticListInvokedFunctionSetMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mInvokedFunctionSet = inSource.mProperty_mInvokedFunctionSet ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -4448,9 +5273,7 @@ void GGS_staticListInvokedFunctionSetMap_2E_element::description (String & ioStr
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListInvokedFunctionSetMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInvokedFunctionSetMap_2E_element ("staticListInvokedFunctionSetMap.element",
@@ -4570,9 +5393,7 @@ void GGS_staticListInvokedFunctionSetMap_2E_element_3F_::description (String & i
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @staticListInvokedFunctionSetMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_staticListInvokedFunctionSetMap_2E_element_3F_ ("staticListInvokedFunctionSetMap.element?",
@@ -4627,7 +5448,31 @@ mProperty_mAutoStart () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_taskListAST_2E_element::~ GGS_taskListAST_2E_element (void) {
+GGS_taskListAST_2E_element::GGS_taskListAST_2E_element (const GGS_taskListAST_2E_element & inSource) :
+mProperty_mTaskName (inSource.mProperty_mTaskName),
+mProperty_mLowerPriorityTaskList (inSource.mProperty_mLowerPriorityTaskList),
+mProperty_mStackSize (inSource.mProperty_mStackSize),
+mProperty_mTaskSetupListAST (inSource.mProperty_mTaskSetupListAST),
+mProperty_mTaskActivateListAST (inSource.mProperty_mTaskActivateListAST),
+mProperty_mTaskDeactivateListAST (inSource.mProperty_mTaskDeactivateListAST),
+mProperty_mGuardedCommandList (inSource.mProperty_mGuardedCommandList),
+mProperty_mEndOfTaskDeclaration (inSource.mProperty_mEndOfTaskDeclaration),
+mProperty_mAutoStart (inSource.mProperty_mAutoStart) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskListAST_2E_element & GGS_taskListAST_2E_element::operator = (const GGS_taskListAST_2E_element & inSource) {
+  mProperty_mTaskName = inSource.mProperty_mTaskName ;
+  mProperty_mLowerPriorityTaskList = inSource.mProperty_mLowerPriorityTaskList ;
+  mProperty_mStackSize = inSource.mProperty_mStackSize ;
+  mProperty_mTaskSetupListAST = inSource.mProperty_mTaskSetupListAST ;
+  mProperty_mTaskActivateListAST = inSource.mProperty_mTaskActivateListAST ;
+  mProperty_mTaskDeactivateListAST = inSource.mProperty_mTaskDeactivateListAST ;
+  mProperty_mGuardedCommandList = inSource.mProperty_mGuardedCommandList ;
+  mProperty_mEndOfTaskDeclaration = inSource.mProperty_mEndOfTaskDeclaration ;
+  mProperty_mAutoStart = inSource.mProperty_mAutoStart ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -4761,9 +5606,7 @@ void GGS_taskListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskListAST_2E_element ("taskListAST.element",
@@ -4811,7 +5654,17 @@ mProperty_mDependanceList () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_taskSetupListAST_2E_element::~ GGS_taskSetupListAST_2E_element (void) {
+GGS_taskSetupListAST_2E_element::GGS_taskSetupListAST_2E_element (const GGS_taskSetupListAST_2E_element & inSource) :
+mProperty_mName (inSource.mProperty_mName),
+mProperty_mDependanceList (inSource.mProperty_mDependanceList) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskSetupListAST_2E_element & GGS_taskSetupListAST_2E_element::operator = (const GGS_taskSetupListAST_2E_element & inSource) {
+  mProperty_mName = inSource.mProperty_mName ;
+  mProperty_mDependanceList = inSource.mProperty_mDependanceList ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -4882,9 +5735,7 @@ void GGS_taskSetupListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskSetupListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskSetupListAST_2E_element ("taskSetupListAST.element",
@@ -4932,7 +5783,17 @@ mProperty_mTaskType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_taskMap_2E_element::~ GGS_taskMap_2E_element (void) {
+GGS_taskMap_2E_element::GGS_taskMap_2E_element (const GGS_taskMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mTaskType (inSource.mProperty_mTaskType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap_2E_element & GGS_taskMap_2E_element::operator = (const GGS_taskMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mTaskType = inSource.mProperty_mTaskType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -5003,9 +5864,7 @@ void GGS_taskMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMap_2E_element ("taskMap.element",
@@ -5125,9 +5984,7 @@ void GGS_taskMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMap_2E_element_3F_ ("taskMap.element?",
@@ -5182,7 +6039,31 @@ mProperty_mActivate () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_taskMapIR_2E_element::~ GGS_taskMapIR_2E_element (void) {
+GGS_taskMapIR_2E_element::GGS_taskMapIR_2E_element (const GGS_taskMapIR_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mTaskType (inSource.mProperty_mTaskType),
+mProperty_mPriority (inSource.mProperty_mPriority),
+mProperty_mStackSize (inSource.mProperty_mStackSize),
+mProperty_mSetupOrderedList (inSource.mProperty_mSetupOrderedList),
+mProperty_mActivateOrderedList (inSource.mProperty_mActivateOrderedList),
+mProperty_mDeactivateOrderedList (inSource.mProperty_mDeactivateOrderedList),
+mProperty_mTaskNameStringIndex (inSource.mProperty_mTaskNameStringIndex),
+mProperty_mActivate (inSource.mProperty_mActivate) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMapIR_2E_element & GGS_taskMapIR_2E_element::operator = (const GGS_taskMapIR_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mTaskType = inSource.mProperty_mTaskType ;
+  mProperty_mPriority = inSource.mProperty_mPriority ;
+  mProperty_mStackSize = inSource.mProperty_mStackSize ;
+  mProperty_mSetupOrderedList = inSource.mProperty_mSetupOrderedList ;
+  mProperty_mActivateOrderedList = inSource.mProperty_mActivateOrderedList ;
+  mProperty_mDeactivateOrderedList = inSource.mProperty_mDeactivateOrderedList ;
+  mProperty_mTaskNameStringIndex = inSource.mProperty_mTaskNameStringIndex ;
+  mProperty_mActivate = inSource.mProperty_mActivate ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -5316,9 +6197,7 @@ void GGS_taskMapIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskMapIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR_2E_element ("taskMapIR.element",
@@ -5438,9 +6317,7 @@ void GGS_taskMapIR_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @taskMapIR.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMapIR_2E_element_3F_ ("taskMapIR.element?",
@@ -5493,7 +6370,27 @@ mProperty_mFunctionMode () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineMapForContext_2E_element::~ GGS_routineMapForContext_2E_element (void) {
+GGS_routineMapForContext_2E_element::GGS_routineMapForContext_2E_element (const GGS_routineMapForContext_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mIsPublic (inSource.mProperty_mIsPublic),
+mProperty_mSignature (inSource.mProperty_mSignature),
+mProperty_mReturnTypeProxy (inSource.mProperty_mReturnTypeProxy),
+mProperty_mModeDictionary (inSource.mProperty_mModeDictionary),
+mProperty_mIsExported (inSource.mProperty_mIsExported),
+mProperty_mFunctionMode (inSource.mProperty_mFunctionMode) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineMapForContext_2E_element & GGS_routineMapForContext_2E_element::operator = (const GGS_routineMapForContext_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mIsPublic = inSource.mProperty_mIsPublic ;
+  mProperty_mSignature = inSource.mProperty_mSignature ;
+  mProperty_mReturnTypeProxy = inSource.mProperty_mReturnTypeProxy ;
+  mProperty_mModeDictionary = inSource.mProperty_mModeDictionary ;
+  mProperty_mIsExported = inSource.mProperty_mIsExported ;
+  mProperty_mFunctionMode = inSource.mProperty_mFunctionMode ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -5609,9 +6506,7 @@ void GGS_routineMapForContext_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineMapForContext.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContext_2E_element ("routineMapForContext.element",
@@ -5731,9 +6626,7 @@ void GGS_routineMapForContext_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineMapForContext.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineMapForContext_2E_element_3F_ ("routineMapForContext.element?",
@@ -5784,7 +6677,23 @@ mProperty_mEndOfProcLocation () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_requiredFunctionDeclarationListAST_2E_element::~ GGS_requiredFunctionDeclarationListAST_2E_element (void) {
+GGS_requiredFunctionDeclarationListAST_2E_element::GGS_requiredFunctionDeclarationListAST_2E_element (const GGS_requiredFunctionDeclarationListAST_2E_element & inSource) :
+mProperty_mName (inSource.mProperty_mName),
+mProperty_mExecutionMode (inSource.mProperty_mExecutionMode),
+mProperty_mIsExported (inSource.mProperty_mIsExported),
+mProperty_mFormalArgumentList (inSource.mProperty_mFormalArgumentList),
+mProperty_mEndOfProcLocation (inSource.mProperty_mEndOfProcLocation) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_requiredFunctionDeclarationListAST_2E_element & GGS_requiredFunctionDeclarationListAST_2E_element::operator = (const GGS_requiredFunctionDeclarationListAST_2E_element & inSource) {
+  mProperty_mName = inSource.mProperty_mName ;
+  mProperty_mExecutionMode = inSource.mProperty_mExecutionMode ;
+  mProperty_mIsExported = inSource.mProperty_mIsExported ;
+  mProperty_mFormalArgumentList = inSource.mProperty_mFormalArgumentList ;
+  mProperty_mEndOfProcLocation = inSource.mProperty_mEndOfProcLocation ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -5882,9 +6791,7 @@ void GGS_requiredFunctionDeclarationListAST_2E_element::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @requiredFunctionDeclarationListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_requiredFunctionDeclarationListAST_2E_element ("requiredFunctionDeclarationListAST.element",
@@ -6004,9 +6911,7 @@ void GGS_externProcedureMapIR_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @externProcedureMapIR.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_externProcedureMapIR_2E_element_3F_ ("externProcedureMapIR.element?",
@@ -6056,7 +6961,21 @@ mProperty_mMode () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_interruptMapIR_2E_element::~ GGS_interruptMapIR_2E_element (void) {
+GGS_interruptMapIR_2E_element::GGS_interruptMapIR_2E_element (const GGS_interruptMapIR_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mSelfType (inSource.mProperty_mSelfType),
+mProperty_mDriverName (inSource.mProperty_mDriverName),
+mProperty_mMode (inSource.mProperty_mMode) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_interruptMapIR_2E_element & GGS_interruptMapIR_2E_element::operator = (const GGS_interruptMapIR_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mSelfType = inSource.mProperty_mSelfType ;
+  mProperty_mDriverName = inSource.mProperty_mDriverName ;
+  mProperty_mMode = inSource.mProperty_mMode ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6145,9 +7064,7 @@ void GGS_interruptMapIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @interruptMapIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptMapIR_2E_element ("interruptMapIR.element",
@@ -6267,9 +7184,7 @@ void GGS_interruptMapIR_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @interruptMapIR.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_interruptMapIR_2E_element_3F_ ("interruptMapIR.element?",
@@ -6316,7 +7231,15 @@ mProperty_base () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_guardKind_2E_convenienceGuard::~ GGS_guardKind_2E_convenienceGuard (void) {
+GGS_guardKind_2E_convenienceGuard::GGS_guardKind_2E_convenienceGuard (const GGS_guardKind_2E_convenienceGuard & inSource) :
+mProperty_base (inSource.mProperty_base) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardKind_2E_convenienceGuard & GGS_guardKind_2E_convenienceGuard::operator = (const GGS_guardKind_2E_convenienceGuard & inSource) {
+  mProperty_base = inSource.mProperty_base ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6378,9 +7301,7 @@ void GGS_guardKind_2E_convenienceGuard::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardKind.convenienceGuard generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardKind_2E_convenienceGuard ("guardKind.convenienceGuard",
@@ -6500,9 +7421,7 @@ void GGS_guardKind_2E_convenienceGuard_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardKind.convenienceGuard? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardKind_2E_convenienceGuard_3F_ ("guardKind.convenienceGuard?",
@@ -6553,7 +7472,23 @@ mProperty_mImplementationRoutineLLVMName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_guardMapForContext_2E_element::~ GGS_guardMapForContext_2E_element (void) {
+GGS_guardMapForContext_2E_element::GGS_guardMapForContext_2E_element (const GGS_guardMapForContext_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mIsPublic (inSource.mProperty_mIsPublic),
+mProperty_mSignature (inSource.mProperty_mSignature),
+mProperty_mUserRoutineLLVMName (inSource.mProperty_mUserRoutineLLVMName),
+mProperty_mImplementationRoutineLLVMName (inSource.mProperty_mImplementationRoutineLLVMName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardMapForContext_2E_element & GGS_guardMapForContext_2E_element::operator = (const GGS_guardMapForContext_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mIsPublic = inSource.mProperty_mIsPublic ;
+  mProperty_mSignature = inSource.mProperty_mSignature ;
+  mProperty_mUserRoutineLLVMName = inSource.mProperty_mUserRoutineLLVMName ;
+  mProperty_mImplementationRoutineLLVMName = inSource.mProperty_mImplementationRoutineLLVMName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6651,9 +7586,7 @@ void GGS_guardMapForContext_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardMapForContext.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext_2E_element ("guardMapForContext.element",
@@ -6773,9 +7706,7 @@ void GGS_guardMapForContext_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @guardMapForContext.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_guardMapForContext_2E_element_3F_ ("guardMapForContext.element?",
@@ -6825,7 +7756,21 @@ mProperty_mFormalArgumentName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineFormalArgumentListAST_2E_element::~ GGS_routineFormalArgumentListAST_2E_element (void) {
+GGS_routineFormalArgumentListAST_2E_element::GGS_routineFormalArgumentListAST_2E_element (const GGS_routineFormalArgumentListAST_2E_element & inSource) :
+mProperty_mFormalArgumentPassingMode (inSource.mProperty_mFormalArgumentPassingMode),
+mProperty_mSelector (inSource.mProperty_mSelector),
+mProperty_mFormalArgumentTypeName (inSource.mProperty_mFormalArgumentTypeName),
+mProperty_mFormalArgumentName (inSource.mProperty_mFormalArgumentName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineFormalArgumentListAST_2E_element & GGS_routineFormalArgumentListAST_2E_element::operator = (const GGS_routineFormalArgumentListAST_2E_element & inSource) {
+  mProperty_mFormalArgumentPassingMode = inSource.mProperty_mFormalArgumentPassingMode ;
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  mProperty_mFormalArgumentTypeName = inSource.mProperty_mFormalArgumentTypeName ;
+  mProperty_mFormalArgumentName = inSource.mProperty_mFormalArgumentName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -6914,9 +7859,7 @@ void GGS_routineFormalArgumentListAST_2E_element::description (String & ioString
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineFormalArgumentListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgumentListAST_2E_element ("routineFormalArgumentListAST.element",
@@ -6966,7 +7909,21 @@ mProperty_mFormalArgumentName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineTypedSignature_2E_element::~ GGS_routineTypedSignature_2E_element (void) {
+GGS_routineTypedSignature_2E_element::GGS_routineTypedSignature_2E_element (const GGS_routineTypedSignature_2E_element & inSource) :
+mProperty_mFormalArgumentPassingMode (inSource.mProperty_mFormalArgumentPassingMode),
+mProperty_mSelector (inSource.mProperty_mSelector),
+mProperty_mTypeProxy (inSource.mProperty_mTypeProxy),
+mProperty_mFormalArgumentName (inSource.mProperty_mFormalArgumentName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineTypedSignature_2E_element & GGS_routineTypedSignature_2E_element::operator = (const GGS_routineTypedSignature_2E_element & inSource) {
+  mProperty_mFormalArgumentPassingMode = inSource.mProperty_mFormalArgumentPassingMode ;
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  mProperty_mTypeProxy = inSource.mProperty_mTypeProxy ;
+  mProperty_mFormalArgumentName = inSource.mProperty_mFormalArgumentName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7074,9 +8031,7 @@ void GGS_routineTypedSignature_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineTypedSignature.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineTypedSignature_2E_element ("routineTypedSignature.element",
@@ -7125,7 +8080,19 @@ mProperty_mFormalArgumentName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineFormalArgumentListIR_2E_element::~ GGS_routineFormalArgumentListIR_2E_element (void) {
+GGS_routineFormalArgumentListIR_2E_element::GGS_routineFormalArgumentListIR_2E_element (const GGS_routineFormalArgumentListIR_2E_element & inSource) :
+mProperty_mFormalArgumentKind (inSource.mProperty_mFormalArgumentKind),
+mProperty_mFormalArgumentType (inSource.mProperty_mFormalArgumentType),
+mProperty_mFormalArgumentName (inSource.mProperty_mFormalArgumentName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineFormalArgumentListIR_2E_element & GGS_routineFormalArgumentListIR_2E_element::operator = (const GGS_routineFormalArgumentListIR_2E_element & inSource) {
+  mProperty_mFormalArgumentKind = inSource.mProperty_mFormalArgumentKind ;
+  mProperty_mFormalArgumentType = inSource.mProperty_mFormalArgumentType ;
+  mProperty_mFormalArgumentName = inSource.mProperty_mFormalArgumentName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7205,9 +8172,7 @@ void GGS_routineFormalArgumentListIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineFormalArgumentListIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineFormalArgumentListIR_2E_element ("routineFormalArgumentListIR.element",
@@ -7256,7 +8221,19 @@ mProperty_mFormalInputArgument () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_allocaList_2E_element::~ GGS_allocaList_2E_element (void) {
+GGS_allocaList_2E_element::GGS_allocaList_2E_element (const GGS_allocaList_2E_element & inSource) :
+mProperty_mVarLLVMName (inSource.mProperty_mVarLLVMName),
+mProperty_mLLVMType (inSource.mProperty_mLLVMType),
+mProperty_mFormalInputArgument (inSource.mProperty_mFormalInputArgument) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_allocaList_2E_element & GGS_allocaList_2E_element::operator = (const GGS_allocaList_2E_element & inSource) {
+  mProperty_mVarLLVMName = inSource.mProperty_mVarLLVMName ;
+  mProperty_mLLVMType = inSource.mProperty_mLLVMType ;
+  mProperty_mFormalInputArgument = inSource.mProperty_mFormalInputArgument ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7336,9 +8313,7 @@ void GGS_allocaList_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @allocaList.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_allocaList_2E_element ("allocaList.element",
@@ -7385,7 +8360,15 @@ mProperty_lkey () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_panicRoutinePriorityMap_2E_element::~ GGS_panicRoutinePriorityMap_2E_element (void) {
+GGS_panicRoutinePriorityMap_2E_element::GGS_panicRoutinePriorityMap_2E_element (const GGS_panicRoutinePriorityMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_panicRoutinePriorityMap_2E_element & GGS_panicRoutinePriorityMap_2E_element::operator = (const GGS_panicRoutinePriorityMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7447,9 +8430,7 @@ void GGS_panicRoutinePriorityMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @panicRoutinePriorityMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap_2E_element ("panicRoutinePriorityMap.element",
@@ -7569,9 +8550,7 @@ void GGS_panicRoutinePriorityMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @panicRoutinePriorityMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_panicRoutinePriorityMap_2E_element_3F_ ("panicRoutinePriorityMap.element?",
@@ -7619,7 +8598,17 @@ mProperty_mConverter () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_implicitConversionToBooleanMap_2E_element::~ GGS_implicitConversionToBooleanMap_2E_element (void) {
+GGS_implicitConversionToBooleanMap_2E_element::GGS_implicitConversionToBooleanMap_2E_element (const GGS_implicitConversionToBooleanMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mConverter (inSource.mProperty_mConverter) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_implicitConversionToBooleanMap_2E_element & GGS_implicitConversionToBooleanMap_2E_element::operator = (const GGS_implicitConversionToBooleanMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mConverter = inSource.mProperty_mConverter ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7690,9 +8679,7 @@ void GGS_implicitConversionToBooleanMap_2E_element::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @implicitConversionToBooleanMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element ("implicitConversionToBooleanMap.element",
@@ -7812,9 +8799,7 @@ void GGS_implicitConversionToBooleanMap_2E_element_3F_::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @implicitConversionToBooleanMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element_3F_ ("implicitConversionToBooleanMap.element?",
@@ -7863,7 +8848,19 @@ mProperty_mExpressionLocation () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_integerSliceFieldListAST_2E_element::~ GGS_integerSliceFieldListAST_2E_element (void) {
+GGS_integerSliceFieldListAST_2E_element::GGS_integerSliceFieldListAST_2E_element (const GGS_integerSliceFieldListAST_2E_element & inSource) :
+mProperty_mSliceWidth (inSource.mProperty_mSliceWidth),
+mProperty_mExpression (inSource.mProperty_mExpression),
+mProperty_mExpressionLocation (inSource.mProperty_mExpressionLocation) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_integerSliceFieldListAST_2E_element & GGS_integerSliceFieldListAST_2E_element::operator = (const GGS_integerSliceFieldListAST_2E_element & inSource) {
+  mProperty_mSliceWidth = inSource.mProperty_mSliceWidth ;
+  mProperty_mExpression = inSource.mProperty_mExpression ;
+  mProperty_mExpressionLocation = inSource.mProperty_mExpressionLocation ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -7943,9 +8940,7 @@ void GGS_integerSliceFieldListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @integerSliceFieldListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_integerSliceFieldListAST_2E_element ("integerSliceFieldListAST.element",
@@ -7994,7 +8989,19 @@ mProperty_mExpressionLocation () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_registerIntegerFieldListAST_2E_element::~ GGS_registerIntegerFieldListAST_2E_element (void) {
+GGS_registerIntegerFieldListAST_2E_element::GGS_registerIntegerFieldListAST_2E_element (const GGS_registerIntegerFieldListAST_2E_element & inSource) :
+mProperty_mFieldName (inSource.mProperty_mFieldName),
+mProperty_mExpression (inSource.mProperty_mExpression),
+mProperty_mExpressionLocation (inSource.mProperty_mExpressionLocation) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_registerIntegerFieldListAST_2E_element & GGS_registerIntegerFieldListAST_2E_element::operator = (const GGS_registerIntegerFieldListAST_2E_element & inSource) {
+  mProperty_mFieldName = inSource.mProperty_mFieldName ;
+  mProperty_mExpression = inSource.mProperty_mExpression ;
+  mProperty_mExpressionLocation = inSource.mProperty_mExpressionLocation ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -8074,9 +9081,7 @@ void GGS_registerIntegerFieldListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @registerIntegerFieldListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_registerIntegerFieldListAST_2E_element ("registerIntegerFieldListAST.element",
@@ -8123,7 +9128,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_primaryInExpressionAccessAST_2E_property::~ GGS_primaryInExpressionAccessAST_2E_property (void) {
+GGS_primaryInExpressionAccessAST_2E_property::GGS_primaryInExpressionAccessAST_2E_property (const GGS_primaryInExpressionAccessAST_2E_property & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_primaryInExpressionAccessAST_2E_property & GGS_primaryInExpressionAccessAST_2E_property::operator = (const GGS_primaryInExpressionAccessAST_2E_property & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -8185,9 +9198,7 @@ void GGS_primaryInExpressionAccessAST_2E_property::description (String & ioStrin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.property generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_property ("primaryInExpressionAccessAST.property",
@@ -8307,9 +9318,7 @@ void GGS_primaryInExpressionAccessAST_2E_property_3F_::description (String & ioS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.property? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_property_3F_ ("primaryInExpressionAccessAST.property?",
@@ -8357,7 +9366,17 @@ mProperty_high () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_primaryInExpressionAccessAST_2E_integerSlice::~ GGS_primaryInExpressionAccessAST_2E_integerSlice (void) {
+GGS_primaryInExpressionAccessAST_2E_integerSlice::GGS_primaryInExpressionAccessAST_2E_integerSlice (const GGS_primaryInExpressionAccessAST_2E_integerSlice & inSource) :
+mProperty_low (inSource.mProperty_low),
+mProperty_high (inSource.mProperty_high) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_primaryInExpressionAccessAST_2E_integerSlice & GGS_primaryInExpressionAccessAST_2E_integerSlice::operator = (const GGS_primaryInExpressionAccessAST_2E_integerSlice & inSource) {
+  mProperty_low = inSource.mProperty_low ;
+  mProperty_high = inSource.mProperty_high ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -8428,9 +9447,7 @@ void GGS_primaryInExpressionAccessAST_2E_integerSlice::description (String & ioS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.integerSlice generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_integerSlice ("primaryInExpressionAccessAST.integerSlice",
@@ -8550,9 +9567,7 @@ void GGS_primaryInExpressionAccessAST_2E_integerSlice_3F_::description (String &
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.integerSlice? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_integerSlice_3F_ ("primaryInExpressionAccessAST.integerSlice?",
@@ -8601,7 +9616,19 @@ mProperty_endOfArguments () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_primaryInExpressionAccessAST_2E_funcCall::~ GGS_primaryInExpressionAccessAST_2E_funcCall (void) {
+GGS_primaryInExpressionAccessAST_2E_funcCall::GGS_primaryInExpressionAccessAST_2E_funcCall (const GGS_primaryInExpressionAccessAST_2E_funcCall & inSource) :
+mProperty_methodName (inSource.mProperty_methodName),
+mProperty_arguments (inSource.mProperty_arguments),
+mProperty_endOfArguments (inSource.mProperty_endOfArguments) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_primaryInExpressionAccessAST_2E_funcCall & GGS_primaryInExpressionAccessAST_2E_funcCall::operator = (const GGS_primaryInExpressionAccessAST_2E_funcCall & inSource) {
+  mProperty_methodName = inSource.mProperty_methodName ;
+  mProperty_arguments = inSource.mProperty_arguments ;
+  mProperty_endOfArguments = inSource.mProperty_endOfArguments ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -8681,9 +9708,7 @@ void GGS_primaryInExpressionAccessAST_2E_funcCall::description (String & ioStrin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.funcCall generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_funcCall ("primaryInExpressionAccessAST.funcCall",
@@ -8803,9 +9828,7 @@ void GGS_primaryInExpressionAccessAST_2E_funcCall_3F_::description (String & ioS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @primaryInExpressionAccessAST.funcCall? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_primaryInExpressionAccessAST_2E_funcCall_3F_ ("primaryInExpressionAccessAST.funcCall?",
@@ -8853,7 +9876,17 @@ mProperty_mExpression () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_functionCallEffectiveParameterListAST_2E_element::~ GGS_functionCallEffectiveParameterListAST_2E_element (void) {
+GGS_functionCallEffectiveParameterListAST_2E_element::GGS_functionCallEffectiveParameterListAST_2E_element (const GGS_functionCallEffectiveParameterListAST_2E_element & inSource) :
+mProperty_mSelector (inSource.mProperty_mSelector),
+mProperty_mExpression (inSource.mProperty_mExpression) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_functionCallEffectiveParameterListAST_2E_element & GGS_functionCallEffectiveParameterListAST_2E_element::operator = (const GGS_functionCallEffectiveParameterListAST_2E_element & inSource) {
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  mProperty_mExpression = inSource.mProperty_mExpression ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -8924,9 +9957,7 @@ void GGS_functionCallEffectiveParameterListAST_2E_element::description (String &
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @functionCallEffectiveParameterListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_functionCallEffectiveParameterListAST_2E_element ("functionCallEffectiveParameterListAST.element",
@@ -8975,7 +10006,19 @@ mProperty_mOperatorUsage () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_infixOperatorMap_2E_element::~ GGS_infixOperatorMap_2E_element (void) {
+GGS_infixOperatorMap_2E_element::GGS_infixOperatorMap_2E_element (const GGS_infixOperatorMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mResultType (inSource.mProperty_mResultType),
+mProperty_mOperatorUsage (inSource.mProperty_mOperatorUsage) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_infixOperatorMap_2E_element & GGS_infixOperatorMap_2E_element::operator = (const GGS_infixOperatorMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mResultType = inSource.mProperty_mResultType ;
+  mProperty_mOperatorUsage = inSource.mProperty_mOperatorUsage ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -9055,9 +10098,7 @@ void GGS_infixOperatorMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @infixOperatorMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_2E_element ("infixOperatorMap.element",
@@ -9177,9 +10218,7 @@ void GGS_infixOperatorMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @infixOperatorMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_infixOperatorMap_2E_element_3F_ ("infixOperatorMap.element?",
@@ -9229,7 +10268,21 @@ mProperty_mOperator () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_prefixOperatorMap_2E_element::~ GGS_prefixOperatorMap_2E_element (void) {
+GGS_prefixOperatorMap_2E_element::GGS_prefixOperatorMap_2E_element (const GGS_prefixOperatorMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mReceiverType (inSource.mProperty_mReceiverType),
+mProperty_mResultType (inSource.mProperty_mResultType),
+mProperty_mOperator (inSource.mProperty_mOperator) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_prefixOperatorMap_2E_element & GGS_prefixOperatorMap_2E_element::operator = (const GGS_prefixOperatorMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mReceiverType = inSource.mProperty_mReceiverType ;
+  mProperty_mResultType = inSource.mProperty_mResultType ;
+  mProperty_mOperator = inSource.mProperty_mOperator ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -9318,9 +10371,7 @@ void GGS_prefixOperatorMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @prefixOperatorMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2E_element ("prefixOperatorMap.element",
@@ -9440,9 +10491,7 @@ void GGS_prefixOperatorMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @prefixOperatorMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_prefixOperatorMap_2E_element_3F_ ("prefixOperatorMap.element?",
@@ -9490,7 +10539,17 @@ mProperty_mSliceKind () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sliceAssignmentListAST_2E_element::~ GGS_sliceAssignmentListAST_2E_element (void) {
+GGS_sliceAssignmentListAST_2E_element::GGS_sliceAssignmentListAST_2E_element (const GGS_sliceAssignmentListAST_2E_element & inSource) :
+mProperty_mSliceWidth (inSource.mProperty_mSliceWidth),
+mProperty_mSliceKind (inSource.mProperty_mSliceKind) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceAssignmentListAST_2E_element & GGS_sliceAssignmentListAST_2E_element::operator = (const GGS_sliceAssignmentListAST_2E_element & inSource) {
+  mProperty_mSliceWidth = inSource.mProperty_mSliceWidth ;
+  mProperty_mSliceKind = inSource.mProperty_mSliceKind ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -9561,9 +10620,7 @@ void GGS_sliceAssignmentListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceAssignmentListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceAssignmentListAST_2E_element ("sliceAssignmentListAST.element",
@@ -9610,7 +10667,15 @@ mProperty_varName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sliceTargetAST_2E_varDeclaration::~ GGS_sliceTargetAST_2E_varDeclaration (void) {
+GGS_sliceTargetAST_2E_varDeclaration::GGS_sliceTargetAST_2E_varDeclaration (const GGS_sliceTargetAST_2E_varDeclaration & inSource) :
+mProperty_varName (inSource.mProperty_varName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceTargetAST_2E_varDeclaration & GGS_sliceTargetAST_2E_varDeclaration::operator = (const GGS_sliceTargetAST_2E_varDeclaration & inSource) {
+  mProperty_varName = inSource.mProperty_varName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -9672,9 +10737,7 @@ void GGS_sliceTargetAST_2E_varDeclaration::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.varDeclaration generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_varDeclaration ("sliceTargetAST.varDeclaration",
@@ -9794,9 +10857,7 @@ void GGS_sliceTargetAST_2E_varDeclaration_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.varDeclaration? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_varDeclaration_3F_ ("sliceTargetAST.varDeclaration?",
@@ -9843,7 +10904,15 @@ mProperty_letName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sliceTargetAST_2E_letDeclaration::~ GGS_sliceTargetAST_2E_letDeclaration (void) {
+GGS_sliceTargetAST_2E_letDeclaration::GGS_sliceTargetAST_2E_letDeclaration (const GGS_sliceTargetAST_2E_letDeclaration & inSource) :
+mProperty_letName (inSource.mProperty_letName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceTargetAST_2E_letDeclaration & GGS_sliceTargetAST_2E_letDeclaration::operator = (const GGS_sliceTargetAST_2E_letDeclaration & inSource) {
+  mProperty_letName = inSource.mProperty_letName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -9905,9 +10974,7 @@ void GGS_sliceTargetAST_2E_letDeclaration::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.letDeclaration generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_letDeclaration ("sliceTargetAST.letDeclaration",
@@ -10027,9 +11094,7 @@ void GGS_sliceTargetAST_2E_letDeclaration_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.letDeclaration? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_letDeclaration_3F_ ("sliceTargetAST.letDeclaration?",
@@ -10076,7 +11141,15 @@ mProperty_target () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sliceTargetAST_2E_lValue::~ GGS_sliceTargetAST_2E_lValue (void) {
+GGS_sliceTargetAST_2E_lValue::GGS_sliceTargetAST_2E_lValue (const GGS_sliceTargetAST_2E_lValue & inSource) :
+mProperty_target (inSource.mProperty_target) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sliceTargetAST_2E_lValue & GGS_sliceTargetAST_2E_lValue::operator = (const GGS_sliceTargetAST_2E_lValue & inSource) {
+  mProperty_target = inSource.mProperty_target ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -10138,9 +11211,7 @@ void GGS_sliceTargetAST_2E_lValue::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.lValue generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_lValue ("sliceTargetAST.lValue",
@@ -10260,9 +11331,7 @@ void GGS_sliceTargetAST_2E_lValue_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @sliceTargetAST.lValue? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_sliceTargetAST_2E_lValue_3F_ ("sliceTargetAST.lValue?",
@@ -10311,7 +11380,19 @@ mProperty_mParameterType () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_procEffectiveParameterList_2E_element::~ GGS_procEffectiveParameterList_2E_element (void) {
+GGS_procEffectiveParameterList_2E_element::GGS_procEffectiveParameterList_2E_element (const GGS_procEffectiveParameterList_2E_element & inSource) :
+mProperty_mEffectiveParameterPassingMode (inSource.mProperty_mEffectiveParameterPassingMode),
+mProperty_mSelector (inSource.mProperty_mSelector),
+mProperty_mParameterType (inSource.mProperty_mParameterType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_procEffectiveParameterList_2E_element & GGS_procEffectiveParameterList_2E_element::operator = (const GGS_procEffectiveParameterList_2E_element & inSource) {
+  mProperty_mEffectiveParameterPassingMode = inSource.mProperty_mEffectiveParameterPassingMode ;
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  mProperty_mParameterType = inSource.mProperty_mParameterType ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -10391,9 +11472,7 @@ void GGS_procEffectiveParameterList_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @procEffectiveParameterList.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_procEffectiveParameterList_2E_element ("procEffectiveParameterList.element",
@@ -10440,7 +11519,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_accessInAssignmentAST_2E_property::~ GGS_accessInAssignmentAST_2E_property (void) {
+GGS_accessInAssignmentAST_2E_property::GGS_accessInAssignmentAST_2E_property (const GGS_accessInAssignmentAST_2E_property & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_property & GGS_accessInAssignmentAST_2E_property::operator = (const GGS_accessInAssignmentAST_2E_property & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -10502,9 +11589,7 @@ void GGS_accessInAssignmentAST_2E_property::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @accessInAssignmentAST.property generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_property ("accessInAssignmentAST.property",
@@ -10624,9 +11709,7 @@ void GGS_accessInAssignmentAST_2E_property_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @accessInAssignmentAST.property? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_property_3F_ ("accessInAssignmentAST.property?",
@@ -10674,7 +11757,17 @@ mProperty_next () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_LValueOperandAST_2E_property::~ GGS_LValueOperandAST_2E_property (void) {
+GGS_LValueOperandAST_2E_property::GGS_LValueOperandAST_2E_property (const GGS_LValueOperandAST_2E_property & inSource) :
+mProperty_name (inSource.mProperty_name),
+mProperty_next (inSource.mProperty_next) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_property & GGS_LValueOperandAST_2E_property::operator = (const GGS_LValueOperandAST_2E_property & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  mProperty_next = inSource.mProperty_next ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -10758,9 +11851,7 @@ void GGS_LValueOperandAST_2E_property::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @LValueOperandAST.property generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueOperandAST_2E_property ("LValueOperandAST.property",
@@ -10897,9 +11988,7 @@ void GGS_LValueOperandAST_2E_property_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @LValueOperandAST.property? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_LValueOperandAST_2E_property_3F_ ("LValueOperandAST.property?",
@@ -10946,7 +12035,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_effectiveArgumentPassingModeAST_2E_input::~ GGS_effectiveArgumentPassingModeAST_2E_input (void) {
+GGS_effectiveArgumentPassingModeAST_2E_input::GGS_effectiveArgumentPassingModeAST_2E_input (const GGS_effectiveArgumentPassingModeAST_2E_input & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_input & GGS_effectiveArgumentPassingModeAST_2E_input::operator = (const GGS_effectiveArgumentPassingModeAST_2E_input & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -11008,9 +12105,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_input::description (String & ioStrin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.input generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_input ("effectiveArgumentPassingModeAST.input",
@@ -11130,9 +12225,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_input_3F_::description (String & ioS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.input? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_input_3F_ ("effectiveArgumentPassingModeAST.input?",
@@ -11181,7 +12274,19 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_effectiveArgumentPassingModeAST_2E_inputWithType::~ GGS_effectiveArgumentPassingModeAST_2E_inputWithType (void) {
+GGS_effectiveArgumentPassingModeAST_2E_inputWithType::GGS_effectiveArgumentPassingModeAST_2E_inputWithType (const GGS_effectiveArgumentPassingModeAST_2E_inputWithType & inSource) :
+mProperty_constant (inSource.mProperty_constant),
+mProperty_typeName (inSource.mProperty_typeName),
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_inputWithType & GGS_effectiveArgumentPassingModeAST_2E_inputWithType::operator = (const GGS_effectiveArgumentPassingModeAST_2E_inputWithType & inSource) {
+  mProperty_constant = inSource.mProperty_constant ;
+  mProperty_typeName = inSource.mProperty_typeName ;
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -11261,9 +12366,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_inputWithType::description (String &
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.inputWithType generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_inputWithType ("effectiveArgumentPassingModeAST.inputWithType",
@@ -11383,9 +12486,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_::description (Stri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.inputWithType? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_ ("effectiveArgumentPassingModeAST.inputWithType?",
@@ -11432,7 +12533,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_effectiveArgumentPassingModeAST_2E_outputInput::~ GGS_effectiveArgumentPassingModeAST_2E_outputInput (void) {
+GGS_effectiveArgumentPassingModeAST_2E_outputInput::GGS_effectiveArgumentPassingModeAST_2E_outputInput (const GGS_effectiveArgumentPassingModeAST_2E_outputInput & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_outputInput & GGS_effectiveArgumentPassingModeAST_2E_outputInput::operator = (const GGS_effectiveArgumentPassingModeAST_2E_outputInput & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -11494,9 +12603,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_outputInput::description (String & i
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.outputInput generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_outputInput ("effectiveArgumentPassingModeAST.outputInput",
@@ -11616,9 +12723,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_outputInput_3F_::description (String
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.outputInput? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_outputInput_3F_ ("effectiveArgumentPassingModeAST.outputInput?",
@@ -11665,7 +12770,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable::~ GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable (void) {
+GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable::GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable (const GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable & GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable::operator = (const GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -11727,9 +12840,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable::description
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.outputInputSelfVariable generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable ("effectiveArgumentPassingModeAST.outputInputSelfVariable",
@@ -11849,9 +12960,7 @@ void GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable_3F_::descrip
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentPassingModeAST.outputInputSelfVariable? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable_3F_ ("effectiveArgumentPassingModeAST.outputInputSelfVariable?",
@@ -11899,7 +13008,17 @@ mProperty_mSelector () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_effectiveArgumentListAST_2E_element::~ GGS_effectiveArgumentListAST_2E_element (void) {
+GGS_effectiveArgumentListAST_2E_element::GGS_effectiveArgumentListAST_2E_element (const GGS_effectiveArgumentListAST_2E_element & inSource) :
+mProperty_mEffectiveParameterKind (inSource.mProperty_mEffectiveParameterKind),
+mProperty_mSelector (inSource.mProperty_mSelector) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentListAST_2E_element & GGS_effectiveArgumentListAST_2E_element::operator = (const GGS_effectiveArgumentListAST_2E_element & inSource) {
+  mProperty_mEffectiveParameterKind = inSource.mProperty_mEffectiveParameterKind ;
+  mProperty_mSelector = inSource.mProperty_mSelector ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -11970,9 +13089,7 @@ void GGS_effectiveArgumentListAST_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @effectiveArgumentListAST.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_effectiveArgumentListAST_2E_element ("effectiveArgumentListAST.element",
@@ -12020,7 +13137,17 @@ mProperty_llvmName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_reference::~ GGS_objectIR_2E_reference (void) {
+GGS_objectIR_2E_reference::GGS_objectIR_2E_reference (const GGS_objectIR_2E_reference & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_llvmName (inSource.mProperty_llvmName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_reference & GGS_objectIR_2E_reference::operator = (const GGS_objectIR_2E_reference & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_llvmName = inSource.mProperty_llvmName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -12104,9 +13231,7 @@ void GGS_objectIR_2E_reference::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.reference generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_reference ("objectIR.reference",
@@ -12243,9 +13368,7 @@ void GGS_objectIR_2E_reference_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.reference? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_reference_3F_ ("objectIR.reference?",
@@ -12292,7 +13415,15 @@ mProperty_type () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_null::~ GGS_objectIR_2E_null (void) {
+GGS_objectIR_2E_null::GGS_objectIR_2E_null (const GGS_objectIR_2E_null & inSource) :
+mProperty_type (inSource.mProperty_type) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_null & GGS_objectIR_2E_null::operator = (const GGS_objectIR_2E_null & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -12364,9 +13495,7 @@ void GGS_objectIR_2E_null::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.null generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_null ("objectIR.null",
@@ -12503,9 +13632,7 @@ void GGS_objectIR_2E_null_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.null? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_null_3F_ ("objectIR.null?",
@@ -12553,7 +13680,17 @@ mProperty_llvmName () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmNamedValue::~ GGS_objectIR_2E_llvmNamedValue (void) {
+GGS_objectIR_2E_llvmNamedValue::GGS_objectIR_2E_llvmNamedValue (const GGS_objectIR_2E_llvmNamedValue & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_llvmName (inSource.mProperty_llvmName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmNamedValue & GGS_objectIR_2E_llvmNamedValue::operator = (const GGS_objectIR_2E_llvmNamedValue & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_llvmName = inSource.mProperty_llvmName ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -12637,9 +13774,7 @@ void GGS_objectIR_2E_llvmNamedValue::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmNamedValue generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmNamedValue ("objectIR.llvmNamedValue",
@@ -12776,9 +13911,7 @@ void GGS_objectIR_2E_llvmNamedValue_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmNamedValue? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmNamedValue_3F_ ("objectIR.llvmNamedValue?",
@@ -12826,7 +13959,17 @@ mProperty_value () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_literalInteger::~ GGS_objectIR_2E_literalInteger (void) {
+GGS_objectIR_2E_literalInteger::GGS_objectIR_2E_literalInteger (const GGS_objectIR_2E_literalInteger & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_value (inSource.mProperty_value) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_literalInteger & GGS_objectIR_2E_literalInteger::operator = (const GGS_objectIR_2E_literalInteger & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_value = inSource.mProperty_value ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -12910,9 +14053,7 @@ void GGS_objectIR_2E_literalInteger::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.literalInteger generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_literalInteger ("objectIR.literalInteger",
@@ -13049,9 +14190,7 @@ void GGS_objectIR_2E_literalInteger_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.literalInteger? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_literalInteger_3F_ ("objectIR.literalInteger?",
@@ -13099,7 +14238,17 @@ mProperty_values () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmStructureValue::~ GGS_objectIR_2E_llvmStructureValue (void) {
+GGS_objectIR_2E_llvmStructureValue::GGS_objectIR_2E_llvmStructureValue (const GGS_objectIR_2E_llvmStructureValue & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_values (inSource.mProperty_values) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmStructureValue & GGS_objectIR_2E_llvmStructureValue::operator = (const GGS_objectIR_2E_llvmStructureValue & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_values = inSource.mProperty_values ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -13183,9 +14332,7 @@ void GGS_objectIR_2E_llvmStructureValue::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmStructureValue generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmStructureValue ("objectIR.llvmStructureValue",
@@ -13322,9 +14469,7 @@ void GGS_objectIR_2E_llvmStructureValue_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmStructureValue? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmStructureValue_3F_ ("objectIR.llvmStructureValue?",
@@ -13371,7 +14516,15 @@ mProperty_type () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_zero::~ GGS_objectIR_2E_zero (void) {
+GGS_objectIR_2E_zero::GGS_objectIR_2E_zero (const GGS_objectIR_2E_zero & inSource) :
+mProperty_type (inSource.mProperty_type) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_zero & GGS_objectIR_2E_zero::operator = (const GGS_objectIR_2E_zero & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -13443,9 +14596,7 @@ void GGS_objectIR_2E_zero::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.zero generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_zero ("objectIR.zero",
@@ -13582,9 +14733,7 @@ void GGS_objectIR_2E_zero_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.zero? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_zero_3F_ ("objectIR.zero?",
@@ -13633,7 +14782,19 @@ mProperty_index () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmArrayStaticValues::~ GGS_objectIR_2E_llvmArrayStaticValues (void) {
+GGS_objectIR_2E_llvmArrayStaticValues::GGS_objectIR_2E_llvmArrayStaticValues (const GGS_objectIR_2E_llvmArrayStaticValues & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_values (inSource.mProperty_values),
+mProperty_index (inSource.mProperty_index) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmArrayStaticValues & GGS_objectIR_2E_llvmArrayStaticValues::operator = (const GGS_objectIR_2E_llvmArrayStaticValues & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_values = inSource.mProperty_values ;
+  mProperty_index = inSource.mProperty_index ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -13729,9 +14890,7 @@ void GGS_objectIR_2E_llvmArrayStaticValues::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayStaticValues generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayStaticValues ("objectIR.llvmArrayStaticValues",
@@ -13868,9 +15027,7 @@ void GGS_objectIR_2E_llvmArrayStaticValues_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayStaticValues? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayStaticValues_3F_ ("objectIR.llvmArrayStaticValues?",
@@ -13918,7 +15075,17 @@ mProperty_values () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmArrayDynamicValues::~ GGS_objectIR_2E_llvmArrayDynamicValues (void) {
+GGS_objectIR_2E_llvmArrayDynamicValues::GGS_objectIR_2E_llvmArrayDynamicValues (const GGS_objectIR_2E_llvmArrayDynamicValues & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_values (inSource.mProperty_values) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmArrayDynamicValues & GGS_objectIR_2E_llvmArrayDynamicValues::operator = (const GGS_objectIR_2E_llvmArrayDynamicValues & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_values = inSource.mProperty_values ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -14002,9 +15169,7 @@ void GGS_objectIR_2E_llvmArrayDynamicValues::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayDynamicValues generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayDynamicValues ("objectIR.llvmArrayDynamicValues",
@@ -14141,9 +15306,7 @@ void GGS_objectIR_2E_llvmArrayDynamicValues_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayDynamicValues? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayDynamicValues_3F_ ("objectIR.llvmArrayDynamicValues?",
@@ -14193,7 +15356,21 @@ mProperty_index () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmArrayRepeatedStaticValue::~ GGS_objectIR_2E_llvmArrayRepeatedStaticValue (void) {
+GGS_objectIR_2E_llvmArrayRepeatedStaticValue::GGS_objectIR_2E_llvmArrayRepeatedStaticValue (const GGS_objectIR_2E_llvmArrayRepeatedStaticValue & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_arraySize (inSource.mProperty_arraySize),
+mProperty_value (inSource.mProperty_value),
+mProperty_index (inSource.mProperty_index) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmArrayRepeatedStaticValue & GGS_objectIR_2E_llvmArrayRepeatedStaticValue::operator = (const GGS_objectIR_2E_llvmArrayRepeatedStaticValue & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_arraySize = inSource.mProperty_arraySize ;
+  mProperty_value = inSource.mProperty_value ;
+  mProperty_index = inSource.mProperty_index ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -14301,9 +15478,7 @@ void GGS_objectIR_2E_llvmArrayRepeatedStaticValue::description (String & ioStrin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayRepeatedStaticValue generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayRepeatedStaticValue ("objectIR.llvmArrayRepeatedStaticValue",
@@ -14440,9 +15615,7 @@ void GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::description (String & ioS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayRepeatedStaticValue? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ ("objectIR.llvmArrayRepeatedStaticValue?",
@@ -14491,7 +15664,19 @@ mProperty_value () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_objectIR_2E_llvmArrayRepeatedDynamicValue::~ GGS_objectIR_2E_llvmArrayRepeatedDynamicValue (void) {
+GGS_objectIR_2E_llvmArrayRepeatedDynamicValue::GGS_objectIR_2E_llvmArrayRepeatedDynamicValue (const GGS_objectIR_2E_llvmArrayRepeatedDynamicValue & inSource) :
+mProperty_type (inSource.mProperty_type),
+mProperty_arraySize (inSource.mProperty_arraySize),
+mProperty_value (inSource.mProperty_value) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR_2E_llvmArrayRepeatedDynamicValue & GGS_objectIR_2E_llvmArrayRepeatedDynamicValue::operator = (const GGS_objectIR_2E_llvmArrayRepeatedDynamicValue & inSource) {
+  mProperty_type = inSource.mProperty_type ;
+  mProperty_arraySize = inSource.mProperty_arraySize ;
+  mProperty_value = inSource.mProperty_value ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -14587,9 +15772,7 @@ void GGS_objectIR_2E_llvmArrayRepeatedDynamicValue::description (String & ioStri
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayRepeatedDynamicValue generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayRepeatedDynamicValue ("objectIR.llvmArrayRepeatedDynamicValue",
@@ -14726,9 +15909,7 @@ void GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_::description (String & io
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @objectIR.llvmArrayRepeatedDynamicValue? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_ ("objectIR.llvmArrayRepeatedDynamicValue?",
@@ -14776,7 +15957,17 @@ mProperty_mBaseAddresses () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupArrayList_2E_element::~ GGS_controlRegisterGroupArrayList_2E_element (void) {
+GGS_controlRegisterGroupArrayList_2E_element::GGS_controlRegisterGroupArrayList_2E_element (const GGS_controlRegisterGroupArrayList_2E_element & inSource) :
+mProperty_mGroupName (inSource.mProperty_mGroupName),
+mProperty_mBaseAddresses (inSource.mProperty_mBaseAddresses) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_controlRegisterGroupArrayList_2E_element & GGS_controlRegisterGroupArrayList_2E_element::operator = (const GGS_controlRegisterGroupArrayList_2E_element & inSource) {
+  mProperty_mGroupName = inSource.mProperty_mGroupName ;
+  mProperty_mBaseAddresses = inSource.mProperty_mBaseAddresses ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -14847,9 +16038,7 @@ void GGS_controlRegisterGroupArrayList_2E_element::description (String & ioStrin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @controlRegisterGroupArrayList.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_controlRegisterGroupArrayList_2E_element ("controlRegisterGroupArrayList.element",
@@ -14896,7 +16085,15 @@ mProperty_mRoutine () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineListIR_2E_element::~ GGS_routineListIR_2E_element (void) {
+GGS_routineListIR_2E_element::GGS_routineListIR_2E_element (const GGS_routineListIR_2E_element & inSource) :
+mProperty_mRoutine (inSource.mProperty_mRoutine) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineListIR_2E_element & GGS_routineListIR_2E_element::operator = (const GGS_routineListIR_2E_element & inSource) {
+  mProperty_mRoutine = inSource.mProperty_mRoutine ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -14958,9 +16155,7 @@ void GGS_routineListIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineListIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineListIR_2E_element ("routineListIR.element",
@@ -15008,7 +16203,17 @@ mProperty_mAccessibleRoutineSet () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_routineAccessibilityIR_2E_element::~ GGS_routineAccessibilityIR_2E_element (void) {
+GGS_routineAccessibilityIR_2E_element::GGS_routineAccessibilityIR_2E_element (const GGS_routineAccessibilityIR_2E_element & inSource) :
+mProperty_mRoutine (inSource.mProperty_mRoutine),
+mProperty_mAccessibleRoutineSet (inSource.mProperty_mAccessibleRoutineSet) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_routineAccessibilityIR_2E_element & GGS_routineAccessibilityIR_2E_element::operator = (const GGS_routineAccessibilityIR_2E_element & inSource) {
+  mProperty_mRoutine = inSource.mProperty_mRoutine ;
+  mProperty_mAccessibleRoutineSet = inSource.mProperty_mAccessibleRoutineSet ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -15079,9 +16284,7 @@ void GGS_routineAccessibilityIR_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @routineAccessibilityIR.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_routineAccessibilityIR_2E_element ("routineAccessibilityIR.element",
@@ -15128,7 +16331,15 @@ mProperty_lkey () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_ctCheckMap_2E_element::~ GGS_ctCheckMap_2E_element (void) {
+GGS_ctCheckMap_2E_element::GGS_ctCheckMap_2E_element (const GGS_ctCheckMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_ctCheckMap_2E_element & GGS_ctCheckMap_2E_element::operator = (const GGS_ctCheckMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -15190,9 +16401,7 @@ void GGS_ctCheckMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @ctCheckMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctCheckMap_2E_element ("ctCheckMap.element",
@@ -15312,9 +16521,7 @@ void GGS_ctCheckMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @ctCheckMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctCheckMap_2E_element_3F_ ("ctCheckMap.element?",
@@ -15362,7 +16569,17 @@ mProperty_mValue () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_ctMap_2E_element::~ GGS_ctMap_2E_element (void) {
+GGS_ctMap_2E_element::GGS_ctMap_2E_element (const GGS_ctMap_2E_element & inSource) :
+mProperty_lkey (inSource.mProperty_lkey),
+mProperty_mValue (inSource.mProperty_mValue) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_ctMap_2E_element & GGS_ctMap_2E_element::operator = (const GGS_ctMap_2E_element & inSource) {
+  mProperty_lkey = inSource.mProperty_lkey ;
+  mProperty_mValue = inSource.mProperty_mValue ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -15433,9 +16650,7 @@ void GGS_ctMap_2E_element::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @ctMap.element generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctMap_2E_element ("ctMap.element",
@@ -15555,9 +16770,7 @@ void GGS_ctMap_2E_element_3F_::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @ctMap.element? generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_ctMap_2E_element_3F_ ("ctMap.element?",
@@ -15604,7 +16817,15 @@ mProperty_name () {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_genericFormalParameter_2E_constant::~ GGS_genericFormalParameter_2E_constant (void) {
+GGS_genericFormalParameter_2E_constant::GGS_genericFormalParameter_2E_constant (const GGS_genericFormalParameter_2E_constant & inSource) :
+mProperty_name (inSource.mProperty_name) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_genericFormalParameter_2E_constant & GGS_genericFormalParameter_2E_constant::operator = (const GGS_genericFormalParameter_2E_constant & inSource) {
+  mProperty_name = inSource.mProperty_name ;
+  return *this ;
 }
 
 //---Synthetized initializer -----------------------------------------------------------------------
@@ -15676,9 +16897,7 @@ void GGS_genericFormalParameter_2E_constant::description (String & ioString,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //     @genericFormalParameter.constant generic code implementation
-//
 //--------------------------------------------------------------------------------------------------
 
 const C_galgas_type_descriptor kTypeDescriptor_GALGAS_genericFormalParameter_2E_constant ("genericFormalParameter.constant",
@@ -15712,1755 +16931,6 @@ GGS_genericFormalParameter_2E_constant GGS_genericFormalParameter_2E_constant::e
       result = *p ;
     }else{
       inCompiler->castError ("genericFormalParameter.constant", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @genericFormalParameter_2E_constant_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_constant_3F_::GGS_genericFormalParameter_2E_constant_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_constant_3F_::GGS_genericFormalParameter_2E_constant_3F_ (const GGS_genericFormalParameter_2E_constant & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_constant_3F_ GGS_genericFormalParameter_2E_constant_3F_::init_nil (void) {
-  GGS_genericFormalParameter_2E_constant_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_genericFormalParameter_2E_constant_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_genericFormalParameter_2E_constant_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_constant_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_genericFormalParameter_2E_constant () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_genericFormalParameter_2E_constant_3F_::objectCompare (const GGS_genericFormalParameter_2E_constant_3F_ & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mState < inOperand.mState) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mState > inOperand.mState) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else if (mState == OptionalState::valuated) {
-      result = mValue.objectCompare (inOperand.mValue) ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_constant_3F_::description (String & ioString,
-                                                              const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @genericFormalParameter.constant? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_genericFormalParameter_2E_constant_3F_ ("genericFormalParameter.constant?",
-                                                                                              nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_genericFormalParameter_2E_constant_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_genericFormalParameter_2E_constant_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_genericFormalParameter_2E_constant_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_genericFormalParameter_2E_constant_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_constant_3F_ GGS_genericFormalParameter_2E_constant_3F_::extractObject (const GGS_object & inObject,
-                                                                                                      Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_genericFormalParameter_2E_constant_3F_ result ;
-  const GGS_genericFormalParameter_2E_constant_3F_ * p = (const GGS_genericFormalParameter_2E_constant_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_genericFormalParameter_2E_constant_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("genericFormalParameter.constant?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type::GGS_genericFormalParameter_2E_type (void) :
-mProperty_name () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type::~ GGS_genericFormalParameter_2E_type (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type GGS_genericFormalParameter_2E_type::init_21_ (const GGS_lstring & in_name,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_genericFormalParameter_2E_type result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_type::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type::GGS_genericFormalParameter_2E_type (const GGS_lstring & inOperand0) :
-mProperty_name (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type GGS_genericFormalParameter_2E_type::class_func_new (const GGS_lstring & in_name,
-                                                                                       Compiler * inCompiler
-                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_genericFormalParameter_2E_type result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_genericFormalParameter_2E_type::objectCompare (const GGS_genericFormalParameter_2E_type & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_name.objectCompare (inOperand.mProperty_name) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_genericFormalParameter_2E_type::isValid (void) const {
-  return mProperty_name.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_type::drop (void) {
-  mProperty_name.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_type::description (String & ioString,
-                                                      const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @genericFormalParameter.type:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_name.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @genericFormalParameter.type generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_genericFormalParameter_2E_type ("genericFormalParameter.type",
-                                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_genericFormalParameter_2E_type::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_genericFormalParameter_2E_type ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_genericFormalParameter_2E_type::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_genericFormalParameter_2E_type (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type GGS_genericFormalParameter_2E_type::extractObject (const GGS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_genericFormalParameter_2E_type result ;
-  const GGS_genericFormalParameter_2E_type * p = (const GGS_genericFormalParameter_2E_type *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_genericFormalParameter_2E_type *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("genericFormalParameter.type", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @genericFormalParameter_2E_type_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type_3F_::GGS_genericFormalParameter_2E_type_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type_3F_::GGS_genericFormalParameter_2E_type_3F_ (const GGS_genericFormalParameter_2E_type & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type_3F_ GGS_genericFormalParameter_2E_type_3F_::init_nil (void) {
-  GGS_genericFormalParameter_2E_type_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_genericFormalParameter_2E_type_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_genericFormalParameter_2E_type_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_type_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_genericFormalParameter_2E_type () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_genericFormalParameter_2E_type_3F_::objectCompare (const GGS_genericFormalParameter_2E_type_3F_ & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mState < inOperand.mState) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mState > inOperand.mState) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else if (mState == OptionalState::valuated) {
-      result = mValue.objectCompare (inOperand.mValue) ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GGS_genericFormalParameter_2E_type_3F_::description (String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @genericFormalParameter.type? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_genericFormalParameter_2E_type_3F_ ("genericFormalParameter.type?",
-                                                                                          nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_genericFormalParameter_2E_type_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_genericFormalParameter_2E_type_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_genericFormalParameter_2E_type_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_genericFormalParameter_2E_type_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameter_2E_type_3F_ GGS_genericFormalParameter_2E_type_3F_::extractObject (const GGS_object & inObject,
-                                                                                              Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GGS_genericFormalParameter_2E_type_3F_ result ;
-  const GGS_genericFormalParameter_2E_type_3F_ * p = (const GGS_genericFormalParameter_2E_type_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_genericFormalParameter_2E_type_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("genericFormalParameter.type?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable::GGS_llvmStringDefinitionElement_2E_variable (void) :
-mProperty_name () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable::~ GGS_llvmStringDefinitionElement_2E_variable (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable GGS_llvmStringDefinitionElement_2E_variable::init_21_ (const GGS_lstring & in_name,
-                                                                                                   Compiler * inCompiler
-                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_variable result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_variable::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable::GGS_llvmStringDefinitionElement_2E_variable (const GGS_lstring & inOperand0) :
-mProperty_name (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable GGS_llvmStringDefinitionElement_2E_variable::class_func_new (const GGS_lstring & in_name,
-                                                                                                         Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_variable result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_llvmStringDefinitionElement_2E_variable::objectCompare (const GGS_llvmStringDefinitionElement_2E_variable & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_name.objectCompare (inOperand.mProperty_name) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_variable::isValid (void) const {
-  return mProperty_name.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_variable::drop (void) {
-  mProperty_name.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_variable::description (String & ioString,
-                                                               const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @llvmStringDefinitionElement.variable:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_name.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmStringDefinitionElement.variable generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_variable ("llvmStringDefinitionElement.variable",
-                                                                                               nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmStringDefinitionElement_2E_variable::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_variable ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmStringDefinitionElement_2E_variable::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmStringDefinitionElement_2E_variable (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable GGS_llvmStringDefinitionElement_2E_variable::extractObject (const GGS_object & inObject,
-                                                                                                        Compiler * inCompiler
-                                                                                                        COMMA_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_variable result ;
-  const GGS_llvmStringDefinitionElement_2E_variable * p = (const GGS_llvmStringDefinitionElement_2E_variable *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmStringDefinitionElement_2E_variable *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmStringDefinitionElement.variable", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @llvmStringDefinitionElement_2E_variable_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable_3F_::GGS_llvmStringDefinitionElement_2E_variable_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable_3F_::GGS_llvmStringDefinitionElement_2E_variable_3F_ (const GGS_llvmStringDefinitionElement_2E_variable & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable_3F_ GGS_llvmStringDefinitionElement_2E_variable_3F_::init_nil (void) {
-  GGS_llvmStringDefinitionElement_2E_variable_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_variable_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_variable_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_variable_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_llvmStringDefinitionElement_2E_variable () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_llvmStringDefinitionElement_2E_variable_3F_::objectCompare (const GGS_llvmStringDefinitionElement_2E_variable_3F_ & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mState < inOperand.mState) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mState > inOperand.mState) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else if (mState == OptionalState::valuated) {
-      result = mValue.objectCompare (inOperand.mValue) ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_variable_3F_::description (String & ioString,
-                                                                   const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmStringDefinitionElement.variable? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_variable_3F_ ("llvmStringDefinitionElement.variable?",
-                                                                                                   nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmStringDefinitionElement_2E_variable_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_variable_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmStringDefinitionElement_2E_variable_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmStringDefinitionElement_2E_variable_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_variable_3F_ GGS_llvmStringDefinitionElement_2E_variable_3F_::extractObject (const GGS_object & inObject,
-                                                                                                                Compiler * inCompiler
-                                                                                                                COMMA_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_variable_3F_ result ;
-  const GGS_llvmStringDefinitionElement_2E_variable_3F_ * p = (const GGS_llvmStringDefinitionElement_2E_variable_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmStringDefinitionElement_2E_variable_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmStringDefinitionElement.variable?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string::GGS_llvmStringDefinitionElement_2E_string (void) :
-mProperty_value () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string::~ GGS_llvmStringDefinitionElement_2E_string (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string GGS_llvmStringDefinitionElement_2E_string::init_21_ (const GGS_lstring & in_value,
-                                                                                               Compiler * inCompiler
-                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_string result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_value = in_value ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_string::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string::GGS_llvmStringDefinitionElement_2E_string (const GGS_lstring & inOperand0) :
-mProperty_value (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string GGS_llvmStringDefinitionElement_2E_string::class_func_new (const GGS_lstring & in_value,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_string result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_value = in_value ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_llvmStringDefinitionElement_2E_string::objectCompare (const GGS_llvmStringDefinitionElement_2E_string & inOperand) const {
-   ComparisonResult result = ComparisonResult::operandEqual ;
-  if (result == ComparisonResult::operandEqual) {
-    result = mProperty_value.objectCompare (inOperand.mProperty_value) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_string::isValid (void) const {
-  return mProperty_value.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_string::drop (void) {
-  mProperty_value.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_string::description (String & ioString,
-                                                             const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @llvmStringDefinitionElement.string:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_value.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmStringDefinitionElement.string generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_string ("llvmStringDefinitionElement.string",
-                                                                                             nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmStringDefinitionElement_2E_string::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_string ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmStringDefinitionElement_2E_string::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmStringDefinitionElement_2E_string (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string GGS_llvmStringDefinitionElement_2E_string::extractObject (const GGS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_string result ;
-  const GGS_llvmStringDefinitionElement_2E_string * p = (const GGS_llvmStringDefinitionElement_2E_string *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmStringDefinitionElement_2E_string *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmStringDefinitionElement.string", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @llvmStringDefinitionElement_2E_string_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string_3F_::GGS_llvmStringDefinitionElement_2E_string_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string_3F_::GGS_llvmStringDefinitionElement_2E_string_3F_ (const GGS_llvmStringDefinitionElement_2E_string & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string_3F_ GGS_llvmStringDefinitionElement_2E_string_3F_::init_nil (void) {
-  GGS_llvmStringDefinitionElement_2E_string_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_string_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmStringDefinitionElement_2E_string_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_string_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_llvmStringDefinitionElement_2E_string () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_llvmStringDefinitionElement_2E_string_3F_::objectCompare (const GGS_llvmStringDefinitionElement_2E_string_3F_ & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    if (mState < inOperand.mState) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (mState > inOperand.mState) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else if (mState == OptionalState::valuated) {
-      result = mValue.objectCompare (inOperand.mValue) ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmStringDefinitionElement_2E_string_3F_::description (String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmStringDefinitionElement.string? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_string_3F_ ("llvmStringDefinitionElement.string?",
-                                                                                                 nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmStringDefinitionElement_2E_string_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmStringDefinitionElement_2E_string_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmStringDefinitionElement_2E_string_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmStringDefinitionElement_2E_string_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinitionElement_2E_string_3F_ GGS_llvmStringDefinitionElement_2E_string_3F_::extractObject (const GGS_object & inObject,
-                                                                                                            Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_llvmStringDefinitionElement_2E_string_3F_ result ;
-  const GGS_llvmStringDefinitionElement_2E_string_3F_ * p = (const GGS_llvmStringDefinitionElement_2E_string_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmStringDefinitionElement_2E_string_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmStringDefinitionElement.string?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::GGS_assignmentOperatorMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mOperatorUsage () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::~ GGS_assignmentOperatorMap_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element GGS_assignmentOperatorMap_2E_element::init_21__21_ (const GGS_lstring & in_lkey,
-                                                                                         const GGS_abstractAssignmentOperatorUsage & in_mOperatorUsage,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mOperatorUsage = in_mOperatorUsage ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::GGS_assignmentOperatorMap_2E_element (const GGS_lstring & inOperand0,
-                                                                            const GGS_abstractAssignmentOperatorUsage & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mOperatorUsage (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element GGS_assignmentOperatorMap_2E_element::class_func_new (const GGS_lstring & in_lkey,
-                                                                                           const GGS_abstractAssignmentOperatorUsage & in_mOperatorUsage,
-                                                                                           Compiler * inCompiler
-                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mOperatorUsage = in_mOperatorUsage ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mOperatorUsage.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mOperatorUsage.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::description (String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @assignmentOperatorMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mOperatorUsage.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assignmentOperatorMap.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element ("assignmentOperatorMap.element",
-                                                                                        nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_assignmentOperatorMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_assignmentOperatorMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_assignmentOperatorMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element GGS_assignmentOperatorMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                          Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element result ;
-  const GGS_assignmentOperatorMap_2E_element * p = (const GGS_assignmentOperatorMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_assignmentOperatorMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentOperatorMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @assignmentOperatorMap_2E_element_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_::GGS_assignmentOperatorMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_::GGS_assignmentOperatorMap_2E_element_3F_ (const GGS_assignmentOperatorMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_ GGS_assignmentOperatorMap_2E_element_3F_::init_nil (void) {
-  GGS_assignmentOperatorMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_assignmentOperatorMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element_3F_::description (String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assignmentOperatorMap.element? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element_3F_ ("assignmentOperatorMap.element?",
-                                                                                            nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_assignmentOperatorMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_assignmentOperatorMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_assignmentOperatorMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_ GGS_assignmentOperatorMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                  Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element_3F_ result ;
-  const GGS_assignmentOperatorMap_2E_element_3F_ * p = (const GGS_assignmentOperatorMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_assignmentOperatorMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentOperatorMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol::GGS_llvmGenerationInstructionElement_2E_symbol (void) :
-mProperty_name () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol::~ GGS_llvmGenerationInstructionElement_2E_symbol (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol GGS_llvmGenerationInstructionElement_2E_symbol::init_21_ (const GGS_lstring & in_name,
-                                                                                                         Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_symbol result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_symbol::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol::GGS_llvmGenerationInstructionElement_2E_symbol (const GGS_lstring & inOperand0) :
-mProperty_name (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol GGS_llvmGenerationInstructionElement_2E_symbol::class_func_new (const GGS_lstring & in_name,
-                                                                                                               Compiler * inCompiler
-                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_symbol result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_symbol::isValid (void) const {
-  return mProperty_name.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_symbol::drop (void) {
-  mProperty_name.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_symbol::description (String & ioString,
-                                                                  const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @llvmGenerationInstructionElement.symbol:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_name.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmGenerationInstructionElement.symbol generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_symbol ("llvmGenerationInstructionElement.symbol",
-                                                                                                  nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmGenerationInstructionElement_2E_symbol::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_symbol ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmGenerationInstructionElement_2E_symbol::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmGenerationInstructionElement_2E_symbol (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol GGS_llvmGenerationInstructionElement_2E_symbol::extractObject (const GGS_object & inObject,
-                                                                                                              Compiler * inCompiler
-                                                                                                              COMMA_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_symbol result ;
-  const GGS_llvmGenerationInstructionElement_2E_symbol * p = (const GGS_llvmGenerationInstructionElement_2E_symbol *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmGenerationInstructionElement_2E_symbol *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmGenerationInstructionElement.symbol", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @llvmGenerationInstructionElement_2E_symbol_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol_3F_::GGS_llvmGenerationInstructionElement_2E_symbol_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol_3F_::GGS_llvmGenerationInstructionElement_2E_symbol_3F_ (const GGS_llvmGenerationInstructionElement_2E_symbol & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol_3F_ GGS_llvmGenerationInstructionElement_2E_symbol_3F_::init_nil (void) {
-  GGS_llvmGenerationInstructionElement_2E_symbol_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_symbol_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_symbol_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_symbol_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_llvmGenerationInstructionElement_2E_symbol () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_symbol_3F_::description (String & ioString,
-                                                                      const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmGenerationInstructionElement.symbol? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_symbol_3F_ ("llvmGenerationInstructionElement.symbol?",
-                                                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmGenerationInstructionElement_2E_symbol_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_symbol_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmGenerationInstructionElement_2E_symbol_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmGenerationInstructionElement_2E_symbol_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_symbol_3F_ GGS_llvmGenerationInstructionElement_2E_symbol_3F_::extractObject (const GGS_object & inObject,
-                                                                                                                      Compiler * inCompiler
-                                                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_symbol_3F_ result ;
-  const GGS_llvmGenerationInstructionElement_2E_symbol_3F_ * p = (const GGS_llvmGenerationInstructionElement_2E_symbol_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmGenerationInstructionElement_2E_symbol_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmGenerationInstructionElement.symbol?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type::GGS_llvmGenerationInstructionElement_2E_type (void) :
-mProperty_name () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type::~ GGS_llvmGenerationInstructionElement_2E_type (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type GGS_llvmGenerationInstructionElement_2E_type::init_21_ (const GGS_lstring & in_name,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_type result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_type::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type::GGS_llvmGenerationInstructionElement_2E_type (const GGS_lstring & inOperand0) :
-mProperty_name (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type GGS_llvmGenerationInstructionElement_2E_type::class_func_new (const GGS_lstring & in_name,
-                                                                                                           Compiler * inCompiler
-                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_type result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_type::isValid (void) const {
-  return mProperty_name.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_type::drop (void) {
-  mProperty_name.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_type::description (String & ioString,
-                                                                const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @llvmGenerationInstructionElement.type:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_name.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmGenerationInstructionElement.type generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_type ("llvmGenerationInstructionElement.type",
-                                                                                                nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmGenerationInstructionElement_2E_type::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_type ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmGenerationInstructionElement_2E_type::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmGenerationInstructionElement_2E_type (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type GGS_llvmGenerationInstructionElement_2E_type::extractObject (const GGS_object & inObject,
-                                                                                                          Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_type result ;
-  const GGS_llvmGenerationInstructionElement_2E_type * p = (const GGS_llvmGenerationInstructionElement_2E_type *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmGenerationInstructionElement_2E_type *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmGenerationInstructionElement.type", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Optional @llvmGenerationInstructionElement_2E_type_3F_
-//
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type_3F_::GGS_llvmGenerationInstructionElement_2E_type_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type_3F_::GGS_llvmGenerationInstructionElement_2E_type_3F_ (const GGS_llvmGenerationInstructionElement_2E_type & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type_3F_ GGS_llvmGenerationInstructionElement_2E_type_3F_::init_nil (void) {
-  GGS_llvmGenerationInstructionElement_2E_type_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_type_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_llvmGenerationInstructionElement_2E_type_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_type_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_llvmGenerationInstructionElement_2E_type () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_llvmGenerationInstructionElement_2E_type_3F_::description (String & ioString,
-                                                                    const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @llvmGenerationInstructionElement.type? generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_type_3F_ ("llvmGenerationInstructionElement.type?",
-                                                                                                    nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_llvmGenerationInstructionElement_2E_type_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_llvmGenerationInstructionElement_2E_type_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_llvmGenerationInstructionElement_2E_type_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_llvmGenerationInstructionElement_2E_type_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmGenerationInstructionElement_2E_type_3F_ GGS_llvmGenerationInstructionElement_2E_type_3F_::extractObject (const GGS_object & inObject,
-                                                                                                                  Compiler * inCompiler
-                                                                                                                  COMMA_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_type_3F_ result ;
-  const GGS_llvmGenerationInstructionElement_2E_type_3F_ * p = (const GGS_llvmGenerationInstructionElement_2E_type_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_llvmGenerationInstructionElement_2E_type_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("llvmGenerationInstructionElement.type?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element::GGS_assignmentGenerationVarMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mValue () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element::~ GGS_assignmentGenerationVarMap_2E_element (void) {
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element GGS_assignmentGenerationVarMap_2E_element::init_21__21_ (const GGS_lstring & in_lkey,
-                                                                                                   const GGS_string & in_mValue,
-                                                                                                   Compiler * inCompiler
-                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentGenerationVarMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mValue = in_mValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentGenerationVarMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element::GGS_assignmentGenerationVarMap_2E_element (const GGS_lstring & inOperand0,
-                                                                                      const GGS_string & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mValue (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element GGS_assignmentGenerationVarMap_2E_element::class_func_new (const GGS_lstring & in_lkey,
-                                                                                                     const GGS_string & in_mValue,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentGenerationVarMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mValue = in_mValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentGenerationVarMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentGenerationVarMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mValue.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentGenerationVarMap_2E_element::description (String & ioString,
-                                                             const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @assignmentGenerationVarMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mValue.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//     @assignmentGenerationVarMap.element generic code implementation
-//
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignmentGenerationVarMap_2E_element ("assignmentGenerationVarMap.element",
-                                                                                             nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const C_galgas_type_descriptor * GGS_assignmentGenerationVarMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentGenerationVarMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_assignmentGenerationVarMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_assignmentGenerationVarMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentGenerationVarMap_2E_element GGS_assignmentGenerationVarMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_assignmentGenerationVarMap_2E_element result ;
-  const GGS_assignmentGenerationVarMap_2E_element * p = (const GGS_assignmentGenerationVarMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_assignmentGenerationVarMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentGenerationVarMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;
