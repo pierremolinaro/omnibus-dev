@@ -606,15 +606,15 @@ override method @syncInstructionIR enterAccessibleEntities
       [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
     case sync (* guardMangledName guardInstructionGenerationList *) :
       [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-      ioInvokedRoutineSet += !guardMangledName
+      ioInvokedRoutineSet ++= guardMangledName
     case boolAndSync (* instructionGenerationList * guardMangledName guardInstructionGenerationList *) :
       [instructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
       [guardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-      ioInvokedRoutineSet += !guardMangledName
+      ioInvokedRoutineSet ++= guardMangledName
     end
   end
   if not [option omnibus_options.noPanicGeneration value] then
-    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mSelectInstructionLocation)
+    ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mSelectInstructionLocation)
   end
 }
 

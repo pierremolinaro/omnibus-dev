@@ -60,7 +60,7 @@ override method @copyFromReferencesIR enterAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!self.mTarget.type !self.mTarget.type)
-  ioInvokedRoutineSet += !assignmentFunctionLLVMName
+  ioInvokedRoutineSet ++= assignmentFunctionLLVMName
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

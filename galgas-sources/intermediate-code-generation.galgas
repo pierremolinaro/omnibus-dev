@@ -6,11 +6,11 @@
 
 struct @intermediateCodeStruct {
   public var @staticEntityMap mStaticEntityMap = @()
-  public var @interruptMapIR mInterruptMapIR = @[]
-  public var @externProcedureMapIR mExternProcedureMapIR = @[]
+  public var @interruptMapIR mInterruptMapIR = @()
+  public var @externProcedureMapIR mExternProcedureMapIR = @()
   public var @panicSortedListIR mPanicSetupListIR = @[]
   public var @panicSortedListIR mPanicLoopListIR = @[]
-  public var @taskMapIR mTaskMapIR = @[]
+  public var @taskMapIR mTaskMapIR = @()
   public var @globalTaskVariableList mGlobalTaskVariableList = @[]
   public var @uint mMaxBranchOfOnInstructions = 0
   public var @targetParameters mTargetParameters = @{
@@ -47,8 +47,8 @@ struct @intermediateCodeStruct {
     !["" nowhere]
   }
   public var @driverListIR mDriverList = @[]
-  public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate = @[]
-  public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap = @[]
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate = @()
+  public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap = @()
   public var @controlRegisterGroupArrayList mControlRegisterGroupArrayList = @[]
   public var @routineListIR mRoutineListIR = @[]
 }

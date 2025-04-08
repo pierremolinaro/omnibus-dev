@@ -230,7 +230,7 @@ void extensionMethod_externProcedureSemanticAnalysis (const GGS_externFunctionDe
   ioArgument_ioIntermediateCodeStruct.mProperty_mExternProcedureMapIR.setter_insertKey (temp_6.readProperty_mRoutineNameForGeneration (), var_formalArguments_5153, var_returnType_5354, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 145)) ;
   }
   const GGS_externFunctionDeclarationListAST_2E_element temp_7 = inObject ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssign_operation (GGS_externRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21_ (temp_7.readProperty_mRoutineNameForGeneration (), GGS_bool (false), GGS_bool (false), var_formalArguments_5153, var_returnType_5354, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mRoutineListIR.addAssignOperation (GGS_externRoutineIR::init_21__21_isRequired_21_warnsIfUnused_21__21_ (temp_7.readProperty_mRoutineNameForGeneration (), GGS_bool (false), GGS_bool (false), var_formalArguments_5153, var_returnType_5354, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 150)) ;
 }
 
 
@@ -2031,6 +2031,17 @@ GGS_callInstructionAST::GGS_callInstructionAST (void) :
 GGS_instructionAST () {
 }
 
+
+void cPtr_callInstructionAST::
+callInstructionAST_init_21__21__21_ (const GGS_location & in_mInstructionLocation,
+                                     const GGS_effectiveArgumentListAST & in_mArguments,
+                                     const GGS_location & in_mEndOfArguments,
+                                     Compiler * /* inCompiler */) {
+  mProperty_mInstructionLocation = in_mInstructionLocation ;
+  mProperty_mArguments = in_mArguments ;
+  mProperty_mEndOfArguments = in_mEndOfArguments ;
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_callInstructionAST::GGS_callInstructionAST (const cPtr_callInstructionAST * inSourcePtr) :
@@ -2801,10 +2812,10 @@ GGS_lstring extensionGetter_routineSignature (const GGS_effectiveArgumentListAST
   const GGS_effectiveArgumentListAST temp_0 = inObject ;
   UpEnumerator_effectiveArgumentListAST enumerator_8409 (temp_0) ;
   while (enumerator_8409.hasCurrentObject ()) {
-    var_key_8380.plusAssign_operation(extensionGetter_matchingFormalArgument (enumerator_8409.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8409.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
+    var_key_8380.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_8409.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8409.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
     enumerator_8409.gotoNextObject () ;
   }
-  var_key_8380.plusAssign_operation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 219)) ;
+  var_key_8380.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 219)) ;
   result_result = GGS_lstring::init_21__21_ (var_key_8380, constinArgument_inRoutineNameLocation, inCompiler COMMA_HERE) ;
 //---
   return result_result ;
@@ -3781,9 +3792,7 @@ GGS_panicAST GGS_panicAST::extractObject (const GGS_object & inObject,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Extension method '@panicAST noteTypesInPrecedenceGraph'
-//
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_panicAST::method_noteTypesInPrecedenceGraph (GGS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
@@ -3801,9 +3810,10 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (cPtr_panicAST * inObject,
                                                      COMMA_LOCATION_ARGS) {
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_panicAST) ;
-    inObject->method_noteTypesInPrecedenceGraph  (io_ioGraph, inCompiler COMMA_THERE) ;
+    inObject->method_noteTypesInPrecedenceGraph (io_ioGraph, inCompiler COMMA_THERE) ;
   }
 }
+
 //--------------------------------------------------------------------------------------------------
 // @decoratedPanicRoutine reference class
 //--------------------------------------------------------------------------------------------------
@@ -9160,9 +9170,7 @@ GGS_primaryInExpressionAST GGS_primaryInExpressionAST::extractObject (const GGS_
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Extension method '@primaryInExpressionAST analyzePrimaryExpressionNoSelf'
-//
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const GGS_omnibusType constinArgument_inSelfType,
@@ -9296,13 +9304,12 @@ void callExtensionMethod_analyzePrimaryExpressionNoSelf (cPtr_primaryInExpressio
   out_outResult.drop () ;
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_primaryInExpressionAST) ;
-    inObject->method_analyzePrimaryExpressionNoSelf  (constin_inSelfType, constin_inRoutineAttributes, constin_inOptionalTargetType, constin_inContext, constin_inMode, io_ioTemporaries, io_ioStaticEntityMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, out_outResult, inCompiler COMMA_THERE) ;
+    inObject->method_analyzePrimaryExpressionNoSelf (constin_inSelfType, constin_inRoutineAttributes, constin_inOptionalTargetType, constin_inContext, constin_inMode, io_ioTemporaries, io_ioStaticEntityMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, out_outResult, inCompiler COMMA_THERE) ;
   }
 }
+
 //--------------------------------------------------------------------------------------------------
-//
 //Extension method '@primaryInExpressionAST analyzePrimaryExpressionWithSelf'
-//
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionWithSelf (const GGS_omnibusType constinArgument_inSelfType,
@@ -9401,9 +9408,10 @@ void callExtensionMethod_analyzePrimaryExpressionWithSelf (cPtr_primaryInExpress
   out_outResult.drop () ;
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_primaryInExpressionAST) ;
-    inObject->method_analyzePrimaryExpressionWithSelf  (constin_inSelfType, constin_inRoutineAttributes, constin_inOptionalTargetType, constin_inContext, constin_inMode, io_ioTemporaries, io_ioStaticEntityMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, out_outResult, inCompiler COMMA_THERE) ;
+    inObject->method_analyzePrimaryExpressionWithSelf (constin_inSelfType, constin_inRoutineAttributes, constin_inOptionalTargetType, constin_inContext, constin_inMode, io_ioTemporaries, io_ioStaticEntityMap, io_ioUniversalMap, io_ioAllocaList, io_ioInstructionGenerationList, out_outResult, inCompiler COMMA_THERE) ;
   }
 }
+
 //--------------------------------------------------------------------------------------------------
 // @standaloneFunctionInExpressionAST reference class
 //--------------------------------------------------------------------------------------------------
@@ -10538,9 +10546,7 @@ GGS_compileTimeInfixOperatorUsage GGS_compileTimeInfixOperatorUsage::extractObje
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Extension method '@compileTimeInfixOperatorUsage eval'
-//
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_compileTimeInfixOperatorUsage::method_eval (const GGS_objectIR constinArgument_inLeftOperand,
@@ -10554,18 +10560,17 @@ void cPtr_compileTimeInfixOperatorUsage::method_eval (const GGS_objectIR constin
   GGS_bigint var_rightValue_10594 ;
   GGS_omnibusType joker_10578_1 ; // Joker input parameter
   constinArgument_inRightOperand.method_extractLiteralInteger (joker_10578_1, var_rightValue_10594, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 274)) ;
-  GGS_ctMap temp_0 = GGS_ctMap::init (inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 275)) ;
-  GGS_ctMap var_varMap_10619 = temp_0 ;
+  GGS_ctMap var_varMap_10619 = GGS_ctMap::init (inCompiler COMMA_HERE) ;
+  {
+  const GGS_compileTimeInfixOperatorUsage temp_0 = this ;
+  var_varMap_10619.setter_insertKey (temp_0.readProperty_mLeftOperandName (), var_leftValue_10527, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
+  }
   {
   const GGS_compileTimeInfixOperatorUsage temp_1 = this ;
-  var_varMap_10619.setter_insertKey (temp_1.readProperty_mLeftOperandName (), var_leftValue_10527, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
+  var_varMap_10619.setter_insertKey (temp_1.readProperty_mRightOperandName (), var_rightValue_10594, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
   }
-  {
   const GGS_compileTimeInfixOperatorUsage temp_2 = this ;
-  var_varMap_10619.setter_insertKey (temp_2.readProperty_mRightOperandName (), var_rightValue_10594, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
-  }
-  const GGS_compileTimeInfixOperatorUsage temp_3 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_3.readProperty_mExpression ().ptr (), var_varMap_10619, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mExpression ().ptr (), var_varMap_10619, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10579,9 +10584,10 @@ void callExtensionMethod_eval (cPtr_compileTimeInfixOperatorUsage * inObject,
   out_outResult.drop () ;
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_compileTimeInfixOperatorUsage) ;
-    inObject->method_eval  (constin_inLeftOperand, constin_inRightOperand, out_outResult, inCompiler COMMA_THERE) ;
+    inObject->method_eval (constin_inLeftOperand, constin_inRightOperand, out_outResult, inCompiler COMMA_THERE) ;
   }
 }
+
 //--------------------------------------------------------------------------------------------------
 // @compileTimeInfixInfEqualOperatorUsage reference class
 //--------------------------------------------------------------------------------------------------

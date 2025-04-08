@@ -109,9 +109,7 @@ class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5
 
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @configurationDeclarationAST_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_configurationDeclarationAST_2E_weak : public GGS_abstractDeclarationAST_2E_weak {
@@ -187,6 +185,7 @@ class GGS_configurationDeclarationAST_2E_weak : public GGS_abstractDeclarationAS
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
@@ -584,9 +583,7 @@ class GGS_omnibusType callExtensionGetter_definition (const cPtr_unifiedTypeMapE
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolImplicitConverterToBoolean reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolImplicitConverterToBoolean : public GGS_abstractImplicitConverterToBoolean {
@@ -627,6 +624,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean : public GGS_abstractImplici
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -637,9 +635,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean : public GGS_abstractImplici
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImplicitConverterToBoolean ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @compileTimeBoolImplicitConverterToBoolean class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImplicitConverterToBoolean {
@@ -683,9 +679,7 @@ class cPtr_compileTimeBoolImplicitConverterToBoolean : public cPtr_abstractImpli
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolImplicitConverterToBoolean_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak : public GGS_abstractImplicitConverterToBoolean_2E_weak {
@@ -762,6 +756,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak : public GGS_abstrac
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -772,9 +767,7 @@ class GGS_compileTimeBoolImplicitConverterToBoolean_2E_weak : public GGS_abstrac
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolImplicitConverterToBoolean_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolNotOperator reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolNotOperator : public GGS_prefixOperatorUsage {
@@ -815,6 +808,7 @@ class GGS_compileTimeBoolNotOperator : public GGS_prefixOperatorUsage {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -825,9 +819,7 @@ class GGS_compileTimeBoolNotOperator : public GGS_prefixOperatorUsage {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotOperator ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @compileTimeBoolNotOperator class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
@@ -873,9 +865,7 @@ class cPtr_compileTimeBoolNotOperator : public cPtr_prefixOperatorUsage {
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolNotOperator_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolNotOperator_2E_weak : public GGS_prefixOperatorUsage_2E_weak {
@@ -952,6 +942,7 @@ class GGS_compileTimeBoolNotOperator_2E_weak : public GGS_prefixOperatorUsage_2E
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -962,9 +953,7 @@ class GGS_compileTimeBoolNotOperator_2E_weak : public GGS_prefixOperatorUsage_2E
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolNotOperator_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolEqualOperator reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolEqualOperator : public GGS_omnibusInfixOperatorUsage {
@@ -1005,6 +994,7 @@ class GGS_compileTimeBoolEqualOperator : public GGS_omnibusInfixOperatorUsage {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1015,9 +1005,7 @@ class GGS_compileTimeBoolEqualOperator : public GGS_omnibusInfixOperatorUsage {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqualOperator ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @compileTimeBoolEqualOperator class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage {
@@ -1063,9 +1051,7 @@ class cPtr_compileTimeBoolEqualOperator : public cPtr_omnibusInfixOperatorUsage 
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @compileTimeBoolEqualOperator_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_compileTimeBoolEqualOperator_2E_weak : public GGS_omnibusInfixOperatorUsage_2E_weak {
@@ -1142,6 +1128,7 @@ class GGS_compileTimeBoolEqualOperator_2E_weak : public GGS_omnibusInfixOperator
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1152,9 +1139,7 @@ class GGS_compileTimeBoolEqualOperator_2E_weak : public GGS_omnibusInfixOperator
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_compileTimeBoolEqualOperator_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @fixedSizeArrayAssignmentOperatorUsage reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_fixedSizeArrayAssignmentOperatorUsage : public GGS_abstractAssignmentOperatorUsage {
@@ -1210,6 +1195,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage : public GGS_abstractAssignmentO
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1220,9 +1206,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage : public GGS_abstractAssignmentO
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssignmentOperatorUsage ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @fixedSizeArrayAssignmentOperatorUsage class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorUsage {
@@ -1279,9 +1263,7 @@ class cPtr_fixedSizeArrayAssignmentOperatorUsage : public cPtr_abstractAssignmen
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @fixedSizeArrayAssignmentOperatorUsage_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak : public GGS_abstractAssignmentOperatorUsage_2E_weak {
@@ -1358,6 +1340,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak : public GGS_abstractAss
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1368,9 +1351,7 @@ class GGS_fixedSizeArrayAssignmentOperatorUsage_2E_weak : public GGS_abstractAss
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_fixedSizeArrayAssignmentOperatorUsage_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @assignRepeatedValueToFixedSizeArrayElementsFunctionIR reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GGS_abstractRoutineIR {
@@ -1432,6 +1413,7 @@ class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GGS_abs
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -1442,9 +1424,7 @@ class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public GGS_abs
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @assignRepeatedValueToFixedSizeArrayElementsFunctionIR class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_abstractRoutineIR {
@@ -1502,9 +1482,7 @@ class cPtr_assignRepeatedValueToFixedSizeArrayElementsFunctionIR : public cPtr_a
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak : public GGS_abstractRoutineIR_2E_weak {
@@ -1580,6 +1558,7 @@ class GGS_assignRepeatedValueToFixedSizeArrayElementsFunctionIR_2E_weak : public
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

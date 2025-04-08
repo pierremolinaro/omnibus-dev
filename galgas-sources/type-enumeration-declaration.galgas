@@ -93,7 +93,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #---------------- Build constant map
-  var @constantMap enumConstantMap = @[]
+  var @constantMap enumConstantMap = @()
   var @bigint maxValue = 0
   for (name value) in self.mCaseNameList do
     [!?enumConstantMap insertKey !name !value !self.mEnumerationName]

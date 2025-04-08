@@ -187,7 +187,7 @@ override method @integerDeclarationAST enterInContext
     !"ctpop"
   }
 #--------------------------------------- Class constant map
-  var @constantMap constantMap = @[]
+  var @constantMap constantMap = @()
   [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
   [!?ioContext.mTypeConstantMap insertKey
@@ -195,7 +195,7 @@ override method @integerDeclarationAST enterInContext
     !constantMap
   ]
 #--------------------------------------- Constructor map
-  var @constructorMap constructorMap = @[] 
+  var @constructorMap constructorMap = @() 
   [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 #--------------------------------------- Enter in type map
@@ -405,8 +405,8 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
   ioLLVMcode += " (" + self.mLLVMTypeName + " %value)\n"
   ioLLVMcode += "  ret " + self.mLLVMTypeName + " %result\n"
   ioLLVMcode += "}\n\n"
-  ioGenerationAdds.mExternFunctionDeclarationSet +=
-    !self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName + " (" + self.mLLVMTypeName + ")"
+  ioGenerationAdds.mExternFunctionDeclarationSet ++=
+    self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName + " (" + self.mLLVMTypeName + ")"
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

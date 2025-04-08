@@ -3,9 +3,9 @@
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @universalValuedObjectMap {
-  public var @flatValuedObjectMap mInternalPropertyAndRoutineMap = @[]
-  public var @scopeStack mScopeStack = @[]
-  public var @lstringlist mLocalObjectList = @[]
+  public var @flatValuedObjectMap mInternalPropertyAndRoutineMap = @()
+  public var @scopeStack mScopeStack = @()
+  public var @lstringlist mLocalObjectList = @()
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -384,7 +384,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
 #·······················································································································
 
 setter @universalValuedObjectMap openOverrideForSelectBlock {
-  var @referenceStateMap initialStateMap = @[]
+  var @referenceStateMap initialStateMap = @()
   for entry in self.mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
     case task (*) :
@@ -397,14 +397,14 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
     end
   end
-  self.mScopeStack += !.selectScope !true !initialStateMap !@[] !self.mLocalObjectList
-  self.mLocalObjectList = @[]
+  self.mScopeStack += !.selectScope !true !initialStateMap !@() !self.mLocalObjectList
+  self.mLocalObjectList = @()
 }
 
 #·······················································································································
 
 setter @universalValuedObjectMap openOverrideForRepeatBlock {
-  var @referenceStateMap initialStateMap = @[]
+  var @referenceStateMap initialStateMap = @()
   for entry in self.mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
     case task (*) :
@@ -417,8 +417,8 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
       [!?initialStateMap insertKey !entry.lkey !entry.mObjectState]
     end
   end
-  self.mScopeStack += !.repeatScope !true !initialStateMap ! @[] !self.mLocalObjectList
-  self.mLocalObjectList = @[]
+  self.mScopeStack += !.repeatScope !true !initialStateMap ! @() !self.mLocalObjectList
+  self.mLocalObjectList = @()
 }
 
 #·······················································································································
@@ -435,7 +435,7 @@ setter @universalValuedObjectMap openBranch {
 setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
   [!?self.mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?var referenceStateMap ?let localObjectList]
   if firstBranch then
-    var @referenceStateMap newReferenceStateMap = @[]
+    var @referenceStateMap newReferenceStateMap = @()
     for entry in self.mInternalPropertyAndRoutineMap do
       switch entry.mValuedObject
       case task (*) :

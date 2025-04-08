@@ -69,7 +69,7 @@ override method @binaryOperationIR enterAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
   if not [option omnibus_options.noPanicGeneration value] then
-    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mLocation)
+    ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mLocation)
   end
 }
 
@@ -96,7 +96,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelName + ".noovf:\n"
   ioLLVMcode += "  " + [self.mTarget llvmName] + " = extractvalue {" + llvmType + ", i1} " + [self.mTarget llvmName] + ".r, 0\n"
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"{" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
+  ioGenerationAdds.mExternFunctionDeclarationSet ++= "{" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow."
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 

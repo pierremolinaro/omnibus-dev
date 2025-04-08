@@ -287,7 +287,7 @@ override method @systemRoutineDeclarationAST enterInContext
 #--- Attributes
   var @stringset attributeSet = @[]
   for attribute in self.mAttributeList do
-    attributeSet += !attribute.mValue.string
+    attributeSet ++= attribute.mValue.string
   end
 #---
   let @routineKind routineKind
@@ -554,7 +554,7 @@ override method @systemUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !self.mMangledImplementationName
+  ioInvokedRoutineSet ++= self.mMangledImplementationName
 }
 
 #·······················································································································

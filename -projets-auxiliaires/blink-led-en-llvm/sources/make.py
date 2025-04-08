@@ -31,42 +31,42 @@ def processorCount () :
 #----------------------------------------------------------------------------------------------------------------------*
 
 def BLACK () :
-  return '\033[90m'
+  return '\033[30m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def RED () :
-  return '\033[91m'
+  return '\033[31m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def GREEN () :
-  return '\033[92m'
+  return '\033[32m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def YELLOW () :
-  return '\033[93m'
+  return '\033[33m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def BLUE () :
-  return '\033[94m'
+  return '\033[34m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def MAGENTA () :
-  return '\033[95m'
+  return '\033[35m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def CYAN () :
-  return '\033[96m'
+  return '\033[36m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
 def WHITE () :
-  return '\033[97m'
+  return '\033[37m'
 
 #----------------------------------------------------------------------------------------------------------------------*
 
@@ -221,7 +221,7 @@ class Job:
   mReturnCode = None
   mPriority = 0
   mState = 0 # 0: waiting for execution
-  
+
   #--------------------------------------------------------------------------*
 
   def __init__ (self, target, requiredFiles, command, postCommands, priority, title):
@@ -281,7 +281,7 @@ class Rule:
   mTitle = ""
   mPostCommands = []
   mPriority = 0
-  
+
   #--------------------------------------------------------------------------*
 
   def __init__ (self, target, title = ""):
@@ -295,7 +295,7 @@ class Rule:
       self.mTitle = "Building " + target
     else:
       self.mTitle = copy.deepcopy (title)
-  
+
   #--------------------------------------------------------------------------*
 
   def enterSecondaryDependanceFile (self, secondaryDependanceFile):
@@ -320,7 +320,7 @@ class Rule:
             if self.mSecondaryMostRecentModificationDate < modifDate :
               self.mSecondaryMostRecentModificationDate = modifDate
               #print BOLD_BLUE () + str (modifDate) + ENDC ()
-    
+
 #----------------------------------------------------------------------------------------------------------------------*
 #   class Make                                                                                                         *
 #----------------------------------------------------------------------------------------------------------------------*
@@ -358,7 +358,7 @@ class Make:
           s += " \"" + cmd + "\""
         print s
         print "  Its title: '" + title + "'"
-        
+
     print BOLD_BLUE () + "--- End of print rule ---" + ENDC ()
 
   #--------------------------------------------------------------------------*
@@ -423,7 +423,7 @@ class Make:
       if len (ruleList) > 0:
         self.mErrorCount = self.mErrorCount + 1
         print BOLD_RED () + "Check rules error; circulary dependances between:" + ENDC ()
-        for aRule in ruleList: 
+        for aRule in ruleList:
           print BOLD_RED () + "  - '" + aRule.mTarget + "', depends from:" + ENDC ()
           for dep in aRule.mDependences:
             print BOLD_RED () + "      '" + dep + "'" + ENDC ()
@@ -624,7 +624,7 @@ class Make:
       for target in targetList:
         print "  Target: '" + target + "'"
       print "  Message: '" + message + "'"
-        
+
     print BOLD_BLUE () + "--- End of print goals ---" + ENDC ()
 
   #--------------------------------------------------------------------------*

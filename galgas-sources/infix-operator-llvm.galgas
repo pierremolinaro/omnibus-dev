@@ -207,10 +207,10 @@ override method @llvmInfixOperatorAST enterInContext
       !self.mInstructionList
     }
     [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
-    var @assignmentGenerationVarMap varMap = @[]
+    var @assignmentGenerationVarMap varMap = @()
     [!?varMap insertKey !self.mLeftOperandName !"%" + self.mLeftOperandName]
     [!?varMap insertKey !self.mRightOperandName !"%" + self.mRightOperandName]
-    var @assignmentGenerationVarMap typeMap = @[]
+    var @assignmentGenerationVarMap typeMap = @()
     if not [leftType isCompileTimeType] then
       [!?typeMap insertKey !self.mLeftOperandName ![leftType llvmTypeName]]
     end
@@ -329,11 +329,11 @@ override method @llvmInlineInfixOperatorUsage generateCode
   ]  
 #--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  var @assignmentGenerationVarMap varMap = @[]
+  var @assignmentGenerationVarMap varMap = @()
   [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
   [!?varMap insertKey !self.mRightOperandName ![rightOperand llvmName]]
   [!?varMap insertKey !["result" nowhere] ![outResultValue llvmName]]
-  var @assignmentGenerationVarMap typeMap = @[]
+  var @assignmentGenerationVarMap typeMap = @()
   if not [[leftOperand type] isCompileTimeType] then
     [!?typeMap insertKey !self.mLeftOperandName ![[leftOperand type] llvmTypeName]]
   end

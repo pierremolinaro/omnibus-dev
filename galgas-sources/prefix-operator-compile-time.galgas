@@ -132,7 +132,7 @@ override method @compiletimePrefixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = @[]
+  var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
@@ -173,7 +173,7 @@ override method @compileTimePrefixOperatorUsage generateCode
   !@objectIR outResultValue
 {
   [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
-  var @ctMap varMap = @[]
+  var @ctMap varMap = @()
   [!?varMap insertKey !self.mReceiverOperandName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
   outResultValue = .literalInteger {!type: inResultType !value: result}

@@ -45,9 +45,7 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_panicAST * inObj
                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @convertInstructionIR reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_convertInstructionIR : public GGS_abstractInstructionIR {
@@ -103,6 +101,7 @@ class GGS_convertInstructionIR : public GGS_abstractInstructionIR {
 
 //--------------------------------- Read subscripts
 
+
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;
  
@@ -113,9 +112,7 @@ class GGS_convertInstructionIR : public GGS_abstractInstructionIR {
 extern const C_galgas_type_descriptor kTypeDescriptor_GALGAS_convertInstructionIR ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 2: pointer class for @convertInstructionIR class
-//
 //--------------------------------------------------------------------------------------------------
 
 class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
@@ -172,9 +169,7 @@ class cPtr_convertInstructionIR : public cPtr_abstractInstructionIR {
 } ;
 
 //--------------------------------------------------------------------------------------------------
-//
 // Phase 1: @convertInstructionIR_2E_weak weak reference class
-//
 //--------------------------------------------------------------------------------------------------
 
 class GGS_convertInstructionIR_2E_weak : public GGS_abstractInstructionIR_2E_weak {
@@ -250,6 +245,7 @@ class GGS_convertInstructionIR_2E_weak : public GGS_abstractInstructionIR_2E_wea
 //--------------------------------- Getters
 
 //--------------------------------- Read subscripts
+
 
 //--------------------------------- Introspection
   public: VIRTUAL_IN_DEBUG const C_galgas_type_descriptor * staticTypeDescriptor (void) const override ;

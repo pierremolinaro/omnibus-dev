@@ -135,7 +135,7 @@ proc buildGlobalConstantMapHTMLFile
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
     var @stringset firstLetterSet = @[]
     for (lkey *) in inGlobalConstantMap do
-      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+      firstLetterSet ++= [[lkey.string characterAtIndex!0] string]
     end
     var @string tableOfTypeString = ""
     var @char currentFirstLetter = ' '

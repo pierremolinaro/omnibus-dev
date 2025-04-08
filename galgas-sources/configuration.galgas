@@ -387,7 +387,7 @@ override method @configurationDeclarationAST enterInContext
       if [panicCodeSet hasKey !s] then
         error value : "duplicate interrupt code"
       end
-      panicCodeSet += !s
+      panicCodeSet ++= s
     end
   end
 }

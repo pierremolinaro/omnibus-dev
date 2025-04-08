@@ -42,10 +42,10 @@ abstract method @abstractDecoratedDeclaration semanticAnalysis
 
 struct @semanticTemporariesStruct {
   public var @uint mTemporaryIndex = 0
-  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = @[]
-  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = @[]
-  public var @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries = @[]
-  public var @stringset mInitializedDriverSet = @[]
+  public var @panicRoutinePriorityMap mPanicSetupRoutinePriorityMap = @()
+  public var @panicRoutinePriorityMap mPanicLoopRoutinePriorityMap = @()
+  public var @staticListInvokedFunctionSetMap mStaticArrayMapForTemporaries = @()
+  public var @stringset mInitializedDriverSet = @()
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

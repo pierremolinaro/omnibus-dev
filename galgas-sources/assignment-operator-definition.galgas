@@ -23,9 +23,9 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #func buildAssignmentOperatorDeclaration ?let @string inTypeName -> @abstractDeclarationAST {
-#  @llvmGenerationInstructionList llvmInstructionList = @[]
+#  @llvmGenerationInstructionList llvmInstructionList = @()
 #  llvmInstructionList += !@llvmVarInstruction.new {!["LOADED" nowhere]}
-#  @llvmGenerationInstructionElementList instructionElements = @[]
+#  @llvmGenerationInstructionElementList instructionElements = @()
 #  instructionElements += !.symbol {!name: ["LOADED" nowhere]}
 #  instructionElements += !.string {!string: " = load "}
 #  instructionElements += !.type {!name: ["SRC" nowhere]}
@@ -34,7 +34,7 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #  instructionElements += !.string {!string: "* "}
 #  instructionElements += !.symbol {!name: ["SRC" nowhere]}
 #  llvmInstructionList += !@llvmGenerationInstruction.new {!{instructionElements}}
-#  instructionElements = @[]
+#  instructionElements = @()
 #  instructionElements += !.string {!string: "store "}
 #  instructionElements += !.type {!name: ["SRC" nowhere]}
 #  instructionElements += !.string {!string: " "}
@@ -48,10 +48,10 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #    !["" nowhere]
 #    !["TGT" nowhere]
 #    ![inTypeName nowhere]
-#    !@[]
+#    !@()
 #    !["SRC" nowhere]
 #    ![inTypeName nowhere]
-#    !@[]
+#    !@()
 #    !@ctTrueExpressionAST.new
 #    !llvmInstructionList
 #  }
@@ -60,8 +60,8 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 #func buildAssignmentOperatorFrom_ctInt ?let @string inTypeName -> @abstractDeclarationAST {
-#  @llvmGenerationInstructionList llvmInstructionList = @[]
-#  @llvmGenerationInstructionElementList instructionElements = @[]
+#  @llvmGenerationInstructionList llvmInstructionList = @()
+#  @llvmGenerationInstructionElementList instructionElements = @()
 #  instructionElements += !.string {!string: "store "}
 #  instructionElements += !.type {!name: ["TGT" nowhere]}
 #  instructionElements += !.string {!string: " "}
@@ -75,10 +75,10 @@ override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling 
 #    !["" nowhere]
 #    !["TGT" nowhere]
 #    ![inTypeName nowhere]
-#    !@[]
+#    !@()
 #    !["SRC" nowhere]
 #    ![ctIntegerTypeName () nowhere]
-#    !@[]
+#    !@()
 #    !@ctTrueExpressionAST.new
 #    !llvmInstructionList
 #  }
@@ -216,7 +216,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Build formal generic constant parameter map
-  var @ctCheckMap formalGenericConstantParameterMap = @[]
+  var @ctCheckMap formalGenericConstantParameterMap = @()
   [self.mTargetGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
   [self.mSourceGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
@@ -253,14 +253,14 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
    && ([self.mSourceGenericFormalParameterList count] == 0)
    && not [sourceType.kind isCompileTimeInteger]
    && not [sourceType.kind isCompileTimeBool] then
-    var @assignmentGenerationVarMap varMap = @[]
+    var @assignmentGenerationVarMap varMap = @()
     [!?varMap insertKey !self.mTargetVariableName !"%" + self.mTargetVariableName]
     [!?varMap insertKey !self.mSourceVariableName !"%" + self.mSourceVariableName]
-    var @assignmentGenerationVarMap typeMap = @[]
+    var @assignmentGenerationVarMap typeMap = @()
     [!?typeMap insertKey !self.mTargetVariableName ![targetType llvmTypeName]]
     [!?typeMap insertKey !self.mSourceVariableName ![sourceType llvmTypeName]]
-    var @stringlist generatedInstructions = @[]
-    var @allocaList allocaList = @[]
+    var @stringlist generatedInstructions = @()
+    var @allocaList allocaList = @()
     var @uint temporaryIndex = 0
     [self.mLLVMInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?temporaryIndex !?allocaList]
     let routine = @assignmentRoutineIR {
@@ -316,16 +316,16 @@ override method @llvmAssignmentOperatorUsage generateCode
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[llvmRoutineName]]
     else
     [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName: let srcLLVMName]
-    var @assignmentGenerationVarMap varMap = @[]
+    var @assignmentGenerationVarMap varMap = @()
     [!?varMap insertKey !self.mTargetVarName !inTargetLLVMName]
     [!?varMap insertKey !self.mSourceVarName !srcLLVMName]
-    var @assignmentGenerationVarMap typeMap = @[]
+    var @assignmentGenerationVarMap typeMap = @()
     [!?typeMap insertKey !self.mTargetVarName ![inTargetType llvmTypeName]]
     [!?typeMap insertKey !self.mSourceVarName ! [sourceType llvmTypeName]]
-    var @stringlist generatedInstructions = @[]
+    var @stringlist generatedInstructions = @()
     [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
     for (str) in generatedInstructions do
-     [!?ioInstructionListIR appendInstructionAsFreeString !str !@[]]
+     [!?ioInstructionListIR appendInstructionAsFreeString !str !@()]
     end
   end
 }
@@ -344,7 +344,7 @@ setter @instructionListIR appendAssignmentIR
 {
   let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
   [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
-  var @instructionListIR instructions = @[]
+  var @instructionListIR instructions = @()
   [operatorUsage generateCode
     !?ioTemporaries
     !?instructions
@@ -435,12 +435,12 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
     getNewTempValue (!inTargetType !?ioTemporaries ?sourceValue)
     let s = [sourceValue llvmName] + " = load " + [inTargetType llvmTypeName] + ", "
           + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName]
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+    [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
   end
 #--- Perfom store
   let s = "store " + [inTargetType llvmTypeName] + " " + [sourceValue llvmName] 
         + ", " + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
-  [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+  [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

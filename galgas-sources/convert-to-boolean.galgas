@@ -133,7 +133,7 @@ override method @compileTimeConvertToBooleanAST enterInContext
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = @[]
+  var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
 #--- Enter in infix operator map  
@@ -226,7 +226,7 @@ override method @compileTimeImplicitConverterToBoolean generateConvertToBooleanC
   !@implicitBooleanConversionResult outResult
 {
   [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
-  var @ctMap varMap = @[]
+  var @ctMap varMap = @()
   [!?varMap insertKey !self.mReceiverName !receiverValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: let result]
   outResult = .compileTime {!value: result != 0}
@@ -253,13 +253,13 @@ override method @llvmImplicitConverterToBoolean generateConvertToBooleanCode
   if [self.mInstructionList count] == 0 then
     outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
   else
-    var @assignmentGenerationVarMap varMap = @[]
+    var @assignmentGenerationVarMap varMap = @()
     [!?varMap insertKey !self.mReceiverName ![inReceiverOperand llvmName]]
     let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
     [!?varMap insertKey !["result" nowhere] !resultLLVMName]
   
-    var @assignmentGenerationVarMap typeMap = @[]
+    var @assignmentGenerationVarMap typeMap = @()
     [!?typeMap insertKey !self.mReceiverName ![self.mReceiverType llvmTypeName]]
   
     var @stringlist generatedInstructions = @[]

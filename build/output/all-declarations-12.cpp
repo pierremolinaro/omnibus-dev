@@ -432,9 +432,7 @@ GGS_controlRegisterBitSlice_2E_unusedBits GGS_controlRegisterBitSlice_2E_unusedB
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterBitSlice_2E_unusedBits_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterBitSlice_2E_unusedBits_3F_::GGS_controlRegisterBitSlice_2E_unusedBits_3F_ (void) :
@@ -681,9 +679,7 @@ GGS_controlRegisterBitSlice_2E_namedBit GGS_controlRegisterBitSlice_2E_namedBit:
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterBitSlice_2E_namedBit_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterBitSlice_2E_namedBit_3F_::GGS_controlRegisterBitSlice_2E_namedBit_3F_ (void) :
@@ -918,9 +914,7 @@ GGS_controlRegisterGroupKindAST_2E_single GGS_controlRegisterGroupKindAST_2E_sin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterGroupKindAST_2E_single_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterGroupKindAST_2E_single_3F_::GGS_controlRegisterGroupKindAST_2E_single_3F_ (void) :
@@ -1284,9 +1278,7 @@ GGS_controlRegisterUserAccesMapAST_2E_element GGS_controlRegisterUserAccesMapAST
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterUserAccesMapAST_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterUserAccesMapAST_2E_element_3F_::GGS_controlRegisterUserAccesMapAST_2E_element_3F_ (void) :
@@ -1545,9 +1537,7 @@ GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::e
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterFieldMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterFieldMap_2E_element_3F_::GGS_controlRegisterFieldMap_2E_element_3F_ (void) :
@@ -1818,9 +1808,7 @@ GGS_sliceMap_2E_element GGS_sliceMap_2E_element::extractObject (const GGS_object
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @sliceMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceMap_2E_element_3F_::GGS_sliceMap_2E_element_3F_ (void) :
@@ -2175,9 +2163,7 @@ GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::extractObje
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterMap_2E_element_3F_::GGS_controlRegisterMap_2E_element_3F_ (void) :
@@ -2436,9 +2422,7 @@ GGS_controlRegisterGroupMap_2E_element GGS_controlRegisterGroupMap_2E_element::e
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @controlRegisterGroupMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterGroupMap_2E_element_3F_::GGS_controlRegisterGroupMap_2E_element_3F_ (void) :
@@ -2697,9 +2681,7 @@ GGS_globalSyncInstanceMap_2E_element GGS_globalSyncInstanceMap_2E_element::extra
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @globalSyncInstanceMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_globalSyncInstanceMap_2E_element_3F_::GGS_globalSyncInstanceMap_2E_element_3F_ (void) :
@@ -2817,9 +2799,7 @@ GGS_globalSyncInstanceMap_2E_element_3F_ GGS_globalSyncInstanceMap_2E_element_3F
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @globalSyncInstanceMapIR_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_globalSyncInstanceMapIR_2E_element_3F_::GGS_globalSyncInstanceMapIR_2E_element_3F_ (void) :
@@ -3441,9 +3421,7 @@ GGS_driverInstanciationArgumentMap_2E_element GGS_driverInstanciationArgumentMap
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @driverInstanciationArgumentMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_driverInstanciationArgumentMap_2E_element_3F_::GGS_driverInstanciationArgumentMap_2E_element_3F_ (void) :
@@ -3690,9 +3668,7 @@ GGS_instanciedDriverMap_2E_element GGS_instanciedDriverMap_2E_element::extractOb
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @instanciedDriverMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_instanciedDriverMap_2E_element_3F_::GGS_instanciedDriverMap_2E_element_3F_ (void) :
@@ -3927,9 +3903,7 @@ GGS_staticListPropertyTypeAST_2E_valueType GGS_staticListPropertyTypeAST_2E_valu
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @staticListPropertyTypeAST_2E_valueType_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticListPropertyTypeAST_2E_valueType_3F_::GGS_staticListPropertyTypeAST_2E_valueType_3F_ (void) :
@@ -4188,9 +4162,7 @@ GGS_staticListPropertyTypeAST_2E_function GGS_staticListPropertyTypeAST_2E_funct
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @staticListPropertyTypeAST_2E_function_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticListPropertyTypeAST_2E_function_3F_::GGS_staticListPropertyTypeAST_2E_function_3F_ (void) :
@@ -4566,9 +4538,7 @@ GGS_extendStaticListExpressionAST_2E_function GGS_extendStaticListExpressionAST_
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @extendStaticListExpressionAST_2E_function_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_extendStaticListExpressionAST_2E_function_3F_::GGS_extendStaticListExpressionAST_2E_function_3F_ (void) :
@@ -4815,9 +4785,7 @@ GGS_staticlistMap_2E_element GGS_staticlistMap_2E_element::extractObject (const 
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @staticlistMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticlistMap_2E_element_3F_::GGS_staticlistMap_2E_element_3F_ (void) :
@@ -5064,9 +5032,7 @@ GGS_staticListInitializationMap_2E_element GGS_staticListInitializationMap_2E_el
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @staticListInitializationMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticListInitializationMap_2E_element_3F_::GGS_staticListInitializationMap_2E_element_3F_ (void) :
@@ -5313,9 +5279,7 @@ GGS_staticListInvokedFunctionSetMap_2E_element GGS_staticListInvokedFunctionSetM
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @staticListInvokedFunctionSetMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_staticListInvokedFunctionSetMap_2E_element_3F_::GGS_staticListInvokedFunctionSetMap_2E_element_3F_ (void) :
@@ -5904,9 +5868,7 @@ GGS_taskMap_2E_element GGS_taskMap_2E_element::extractObject (const GGS_object &
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @taskMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_taskMap_2E_element_3F_::GGS_taskMap_2E_element_3F_ (void) :
@@ -6237,9 +6199,7 @@ GGS_taskMapIR_2E_element GGS_taskMapIR_2E_element::extractObject (const GGS_obje
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @taskMapIR_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_taskMapIR_2E_element_3F_::GGS_taskMapIR_2E_element_3F_ (void) :
@@ -6546,9 +6506,7 @@ GGS_routineMapForContext_2E_element GGS_routineMapForContext_2E_element::extract
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @routineMapForContext_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_routineMapForContext_2E_element_3F_::GGS_routineMapForContext_2E_element_3F_ (void) :
@@ -6831,9 +6789,7 @@ GGS_requiredFunctionDeclarationListAST_2E_element GGS_requiredFunctionDeclaratio
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @externProcedureMapIR_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_externProcedureMapIR_2E_element_3F_::GGS_externProcedureMapIR_2E_element_3F_ (void) :
@@ -7104,9 +7060,7 @@ GGS_interruptMapIR_2E_element GGS_interruptMapIR_2E_element::extractObject (cons
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @interruptMapIR_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_interruptMapIR_2E_element_3F_::GGS_interruptMapIR_2E_element_3F_ (void) :
@@ -7341,9 +7295,7 @@ GGS_guardKind_2E_convenienceGuard GGS_guardKind_2E_convenienceGuard::extractObje
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @guardKind_2E_convenienceGuard_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_guardKind_2E_convenienceGuard_3F_::GGS_guardKind_2E_convenienceGuard_3F_ (void) :
@@ -7626,9 +7578,7 @@ GGS_guardMapForContext_2E_element GGS_guardMapForContext_2E_element::extractObje
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @guardMapForContext_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_guardMapForContext_2E_element_3F_::GGS_guardMapForContext_2E_element_3F_ (void) :
@@ -8470,9 +8420,7 @@ GGS_panicRoutinePriorityMap_2E_element GGS_panicRoutinePriorityMap_2E_element::e
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @panicRoutinePriorityMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_panicRoutinePriorityMap_2E_element_3F_::GGS_panicRoutinePriorityMap_2E_element_3F_ (void) :
@@ -8719,9 +8667,7 @@ GGS_implicitConversionToBooleanMap_2E_element GGS_implicitConversionToBooleanMap
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @implicitConversionToBooleanMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_implicitConversionToBooleanMap_2E_element_3F_::GGS_implicitConversionToBooleanMap_2E_element_3F_ (void) :
@@ -9238,9 +9184,7 @@ GGS_primaryInExpressionAccessAST_2E_property GGS_primaryInExpressionAccessAST_2E
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @primaryInExpressionAccessAST_2E_property_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_primaryInExpressionAccessAST_2E_property_3F_::GGS_primaryInExpressionAccessAST_2E_property_3F_ (void) :
@@ -9487,9 +9431,7 @@ GGS_primaryInExpressionAccessAST_2E_integerSlice GGS_primaryInExpressionAccessAS
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @primaryInExpressionAccessAST_2E_integerSlice_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_primaryInExpressionAccessAST_2E_integerSlice_3F_::GGS_primaryInExpressionAccessAST_2E_integerSlice_3F_ (void) :
@@ -9748,9 +9690,7 @@ GGS_primaryInExpressionAccessAST_2E_funcCall GGS_primaryInExpressionAccessAST_2E
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @primaryInExpressionAccessAST_2E_funcCall_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_primaryInExpressionAccessAST_2E_funcCall_3F_::GGS_primaryInExpressionAccessAST_2E_funcCall_3F_ (void) :
@@ -10138,9 +10078,7 @@ GGS_infixOperatorMap_2E_element GGS_infixOperatorMap_2E_element::extractObject (
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @infixOperatorMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_infixOperatorMap_2E_element_3F_::GGS_infixOperatorMap_2E_element_3F_ (void) :
@@ -10411,9 +10349,7 @@ GGS_prefixOperatorMap_2E_element GGS_prefixOperatorMap_2E_element::extractObject
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @prefixOperatorMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_prefixOperatorMap_2E_element_3F_::GGS_prefixOperatorMap_2E_element_3F_ (void) :
@@ -10777,9 +10713,7 @@ GGS_sliceTargetAST_2E_varDeclaration GGS_sliceTargetAST_2E_varDeclaration::extra
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @sliceTargetAST_2E_varDeclaration_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceTargetAST_2E_varDeclaration_3F_::GGS_sliceTargetAST_2E_varDeclaration_3F_ (void) :
@@ -11014,9 +10948,7 @@ GGS_sliceTargetAST_2E_letDeclaration GGS_sliceTargetAST_2E_letDeclaration::extra
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @sliceTargetAST_2E_letDeclaration_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceTargetAST_2E_letDeclaration_3F_::GGS_sliceTargetAST_2E_letDeclaration_3F_ (void) :
@@ -11251,9 +11183,7 @@ GGS_sliceTargetAST_2E_lValue GGS_sliceTargetAST_2E_lValue::extractObject (const 
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @sliceTargetAST_2E_lValue_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceTargetAST_2E_lValue_3F_::GGS_sliceTargetAST_2E_lValue_3F_ (void) :
@@ -11629,9 +11559,7 @@ GGS_accessInAssignmentAST_2E_property GGS_accessInAssignmentAST_2E_property::ext
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @accessInAssignmentAST_2E_property_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_accessInAssignmentAST_2E_property_3F_::GGS_accessInAssignmentAST_2E_property_3F_ (void) :
@@ -11891,9 +11819,7 @@ GGS_LValueOperandAST_2E_property GGS_LValueOperandAST_2E_property::extractObject
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @LValueOperandAST_2E_property_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_LValueOperandAST_2E_property_3F_::GGS_LValueOperandAST_2E_property_3F_ (void) :
@@ -12145,9 +12071,7 @@ GGS_effectiveArgumentPassingModeAST_2E_input GGS_effectiveArgumentPassingModeAST
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @effectiveArgumentPassingModeAST_2E_input_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_input_3F_::GGS_effectiveArgumentPassingModeAST_2E_input_3F_ (void) :
@@ -12406,9 +12330,7 @@ GGS_effectiveArgumentPassingModeAST_2E_inputWithType GGS_effectiveArgumentPassin
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @effectiveArgumentPassingModeAST_2E_inputWithType_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_::GGS_effectiveArgumentPassingModeAST_2E_inputWithType_3F_ (void) :
@@ -12643,9 +12565,7 @@ GGS_effectiveArgumentPassingModeAST_2E_outputInput GGS_effectiveArgumentPassingM
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @effectiveArgumentPassingModeAST_2E_outputInput_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_outputInput_3F_::GGS_effectiveArgumentPassingModeAST_2E_outputInput_3F_ (void) :
@@ -12880,9 +12800,7 @@ GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable GGS_effectiveArgu
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @effectiveArgumentPassingModeAST_2E_outputInputSelfVariable_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable_3F_::GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable_3F_ (void) :
@@ -13271,9 +13189,7 @@ GGS_objectIR_2E_reference GGS_objectIR_2E_reference::extractObject (const GGS_ob
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_reference_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_reference_3F_::GGS_objectIR_2E_reference_3F_ (void) :
@@ -13535,9 +13451,7 @@ GGS_objectIR_2E_null GGS_objectIR_2E_null::extractObject (const GGS_object & inO
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_null_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_null_3F_::GGS_objectIR_2E_null_3F_ (void) :
@@ -13814,9 +13728,7 @@ GGS_objectIR_2E_llvmNamedValue GGS_objectIR_2E_llvmNamedValue::extractObject (co
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmNamedValue_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmNamedValue_3F_::GGS_objectIR_2E_llvmNamedValue_3F_ (void) :
@@ -14093,9 +14005,7 @@ GGS_objectIR_2E_literalInteger GGS_objectIR_2E_literalInteger::extractObject (co
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_literalInteger_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_literalInteger_3F_::GGS_objectIR_2E_literalInteger_3F_ (void) :
@@ -14372,9 +14282,7 @@ GGS_objectIR_2E_llvmStructureValue GGS_objectIR_2E_llvmStructureValue::extractOb
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmStructureValue_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmStructureValue_3F_::GGS_objectIR_2E_llvmStructureValue_3F_ (void) :
@@ -14636,9 +14544,7 @@ GGS_objectIR_2E_zero GGS_objectIR_2E_zero::extractObject (const GGS_object & inO
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_zero_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_zero_3F_::GGS_objectIR_2E_zero_3F_ (void) :
@@ -14930,9 +14836,7 @@ GGS_objectIR_2E_llvmArrayStaticValues GGS_objectIR_2E_llvmArrayStaticValues::ext
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmArrayStaticValues_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayStaticValues_3F_::GGS_objectIR_2E_llvmArrayStaticValues_3F_ (void) :
@@ -15209,9 +15113,7 @@ GGS_objectIR_2E_llvmArrayDynamicValues GGS_objectIR_2E_llvmArrayDynamicValues::e
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmArrayDynamicValues_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayDynamicValues_3F_::GGS_objectIR_2E_llvmArrayDynamicValues_3F_ (void) :
@@ -15518,9 +15420,7 @@ GGS_objectIR_2E_llvmArrayRepeatedStaticValue GGS_objectIR_2E_llvmArrayRepeatedSt
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmArrayRepeatedStaticValue_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_::GGS_objectIR_2E_llvmArrayRepeatedStaticValue_3F_ (void) :
@@ -15812,9 +15712,7 @@ GGS_objectIR_2E_llvmArrayRepeatedDynamicValue GGS_objectIR_2E_llvmArrayRepeatedD
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @objectIR_2E_llvmArrayRepeatedDynamicValue_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_::GGS_objectIR_2E_llvmArrayRepeatedDynamicValue_3F_ (void) :
@@ -16441,9 +16339,7 @@ GGS_ctCheckMap_2E_element GGS_ctCheckMap_2E_element::extractObject (const GGS_ob
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @ctCheckMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_ctCheckMap_2E_element_3F_::GGS_ctCheckMap_2E_element_3F_ (void) :
@@ -16690,9 +16586,7 @@ GGS_ctMap_2E_element GGS_ctMap_2E_element::extractObject (const GGS_object & inO
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Optional @ctMap_2E_element_3F_
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_ctMap_2E_element_3F_::GGS_ctMap_2E_element_3F_ (void) :

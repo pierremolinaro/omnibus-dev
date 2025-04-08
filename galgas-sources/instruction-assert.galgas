@@ -124,7 +124,7 @@ override method @assertInstructionIR enterAccessibleEntities
   ?!@uint ioMaxBranchOfOnInstructions
 {
   [self.mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mAssertInstructionLocation)
+  ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mAssertInstructionLocation)
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -37,7 +37,7 @@ override method @getComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !self.mLLVMGetterName
+  ioInvokedRoutineSet ++= self.mLLVMGetterName
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

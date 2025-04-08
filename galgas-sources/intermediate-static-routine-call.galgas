@@ -42,7 +42,7 @@ override method @standaloneRoutineCallIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {
-  ioInvokedRoutineSet += !self.mFunctionNameForGeneration
+  ioInvokedRoutineSet ++= self.mFunctionNameForGeneration
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

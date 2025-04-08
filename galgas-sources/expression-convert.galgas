@@ -156,7 +156,7 @@ override method @convertInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mLocation)
+  ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mLocation)
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

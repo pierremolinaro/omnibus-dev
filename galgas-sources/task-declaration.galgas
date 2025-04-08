@@ -209,7 +209,7 @@ method @taskListAST enterInContext
     if [candidateTaskList count] > 0 then
       continue = true
       for task in candidateTaskList do
-        handledTaskSet += !task.mTaskName.string
+        handledTaskSet ++= task.mTaskName.string
       end
       sortedTaskList += candidateTaskList
     end
@@ -366,7 +366,7 @@ private proc analyzeOrderedTaskRoutines
         end
         if allPrecedenceDefined then
           outSetupOrderedList += !name.string
-          precedenceSet += !name.string
+          precedenceSet ++= name.string
           continue = true
           [!?taskSetupListAST removeAtIndex ?2* !idx]
         else

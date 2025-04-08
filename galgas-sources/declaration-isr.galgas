@@ -162,7 +162,7 @@ method @interruptMapIR interruptCodeGeneration
 #--- Generate interrupt routines
   var @stringset definedInterrupts = @[]
   for interrupt in self do
-    definedInterrupts += !interrupt.lkey.string
+    definedInterrupts ++= interrupt.lkey.string
     let interruptImplementationName = if interrupt.mMode == .serviceMode then
       llvmNameForServiceInterrupt (!interrupt.lkey).string
     else

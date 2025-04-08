@@ -289,7 +289,7 @@ override method @staticListAST enterInContext
       if [propertyNameSet hasKey !propertyName] then
         error propertyName : "duplicated property name"
       else
-        propertyNameSet += !propertyName
+        propertyNameSet ++= propertyName
         propertyList += !propertyName !propertyType
         [!?ioContext insertGetter
           !omnibusTypeName: omnibusNameForStaticListElementType (!self.mStaticListName)
@@ -517,7 +517,7 @@ override method @decoratedStaticList semanticAnalysis
           !functionName
           !formalArgs
         )
-        invokedFunctionSet += !routineMangledName
+        invokedFunctionSet ++= routineMangledName
       end
     end
   end

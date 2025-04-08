@@ -72,7 +72,7 @@ override method @testArrayIndexIR enterAccessibleEntities
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
   if not [option omnibus_options.noPanicGeneration value] then
-    ioInvokedRoutineSet += !panicRoutineNameForLocationFile (!self.mErrorLocation)
+    ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mErrorLocation)
   end
 }
 

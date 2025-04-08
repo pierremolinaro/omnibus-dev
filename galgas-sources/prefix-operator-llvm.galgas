@@ -214,9 +214,9 @@ override method @llvmPrefixOperatorAST enterInContext
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
 #--- Generation routine
-  var @assignmentGenerationVarMap varMap = @[]
+  var @assignmentGenerationVarMap varMap = @()
   [!?varMap insertKey !self.mReceiverName !"%" + self.mReceiverName]
-  var @assignmentGenerationVarMap typeMap = @[]
+  var @assignmentGenerationVarMap typeMap = @()
   [!?typeMap insertKey !self.mReceiverName ![receiverType llvmTypeName]]
   [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
   var @llvmGenerationInstructionList instructionList = @[]

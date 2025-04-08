@@ -388,7 +388,7 @@ proc buildTypeMapHTMLFile
   if [option omnibus_options.emitTypeMap value] then
     var @stringset firstLetterSet = @[]
     for (lkey *) in inTypeMap do
-      firstLetterSet += ![[lkey.string characterAtIndex!0] string]
+      firstLetterSet ++= [[lkey.string characterAtIndex!0] string]
     end
     var @string tableOfTypeString = ""
     var @char currentFirstLetter = ' '

@@ -311,7 +311,7 @@ override method @fileSpecificPanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !llvmNameForSectionCall (!panicRoutineName ())
+  ioInvokedRoutineSet ++= llvmNameForSectionCall (!panicRoutineName ())
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -358,7 +358,7 @@ override method @universalModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !llvmNameForSectionImplementation (!panicRoutineName ())
+  ioInvokedRoutineSet ++= llvmNameForSectionImplementation (!panicRoutineName ())
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -406,10 +406,10 @@ override method @sectionModePanicRoutineIR enterAccessibleEntities
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
   for (priority) in self.mPanicSetupListIR do
-    ioInvokedRoutineSet += !"panic.setup." + priority
+    ioInvokedRoutineSet ++= "panic.setup." + priority
   end
   for (priority) in self.mPanicLoopListIR do
-    ioInvokedRoutineSet += !"panic.loop." + priority
+    ioInvokedRoutineSet ++= "panic.loop." + priority
   end
 }
 

@@ -128,7 +128,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
       if [usedEnumerationValues hasKey !caseIdf] then
         error caseIdf : "duplicated enumeration constant" fixit { remove }
       end
-      usedEnumerationValues += !caseIdf
+      usedEnumerationValues ++= caseIdf
     end
     var @instructionListIR instructionGenerationList = @[]
     [instructionList analyzeBranchInstructionList

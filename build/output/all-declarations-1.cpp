@@ -148,9 +148,7 @@ GGS_interruptionPanicCode GGS_interruptionPanicCode::extractObject (const GGS_ob
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@interruptionConfigurationList' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_interruptionConfigurationList : public cCollectionElement {
@@ -243,9 +241,8 @@ GGS_interruptionConfigurationList GGS_interruptionConfigurationList::init (Compi
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_interruptionConfigurationList::enterElement (const GGS_interruptionConfigurationList_2E_element & inValue,
-                                                      Compiler * /* inCompiler */
-                                                      COMMA_LOCATION_ARGS) {
+void GGS_interruptionConfigurationList::plusPlusAssignOperation (const GGS_interruptionConfigurationList_2E_element & inValue
+                                                                 COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_interruptionConfigurationList (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -284,9 +281,9 @@ void GGS_interruptionConfigurationList::makeAttributesFromObjects (capCollection
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_interruptionConfigurationList::addAssign_operation (const GGS_lstring & inOperand0,
-                                                             const GGS_interruptionPanicCode & inOperand1
-                                                             COMMA_LOCATION_ARGS) {
+void GGS_interruptionConfigurationList::addAssignOperation (const GGS_lstring & inOperand0,
+                                                            const GGS_interruptionPanicCode & inOperand1
+                                                            COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_interruptionConfigurationList (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -476,9 +473,9 @@ GGS_interruptionConfigurationList GGS_interruptionConfigurationList::getter_subL
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_interruptionConfigurationList::plusAssign_operation (const GGS_interruptionConfigurationList inOperand,
-                                                              Compiler * /* inCompiler */
-                                                              COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_interruptionConfigurationList::plusAssignOperation (const GGS_interruptionConfigurationList inOperand,
+                                                             Compiler * /* inCompiler */
+                                                             COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -681,6 +678,11 @@ GGS_abstractDeclarationAST::GGS_abstractDeclarationAST (void) :
 AC_GALGAS_reference_class () {
 }
 
+
+void cPtr_abstractDeclarationAST::
+abstractDeclarationAST_init (Compiler * /* inCompiler */) {
+}
+
 //--------------------------------------------------------------------------------------------------
 
 GGS_abstractDeclarationAST::GGS_abstractDeclarationAST (const cPtr_abstractDeclarationAST * inSourcePtr) :
@@ -858,9 +860,7 @@ GGS_abstractDeclarationAST_2E_weak GGS_abstractDeclarationAST_2E_weak::extractOb
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@declarationListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_declarationListAST : public cCollectionElement {
@@ -947,9 +947,8 @@ GGS_declarationListAST GGS_declarationListAST::init (Compiler * COMMA_UNUSED_LOC
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_declarationListAST::enterElement (const GGS_declarationListAST_2E_element & inValue,
-                                           Compiler * /* inCompiler */
-                                           COMMA_LOCATION_ARGS) {
+void GGS_declarationListAST::plusPlusAssignOperation (const GGS_declarationListAST_2E_element & inValue
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_declarationListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -985,8 +984,8 @@ void GGS_declarationListAST::makeAttributesFromObjects (capCollectionElement & o
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_declarationListAST::addAssign_operation (const GGS_abstractDeclarationAST & inOperand0
-                                                  COMMA_LOCATION_ARGS) {
+void GGS_declarationListAST::addAssignOperation (const GGS_abstractDeclarationAST & inOperand0
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_declarationListAST (inOperand0 COMMA_THERE)) ;
@@ -1159,9 +1158,9 @@ GGS_declarationListAST GGS_declarationListAST::getter_subListToIndex (const GGS_
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_declarationListAST::plusAssign_operation (const GGS_declarationListAST inOperand,
-                                                   Compiler * /* inCompiler */
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_declarationListAST::plusAssignOperation (const GGS_declarationListAST inOperand,
+                                                  Compiler * /* inCompiler */
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -1384,9 +1383,8 @@ readSubscript__3F_ (const class GGS_string & inKey,
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_extendStaticArrayDeclarationDictAST::enterElement (const GGS_extendStaticArrayDeclarationDictAST_2E_element & inValue,
-                                                            Compiler * /* inCompiler */
-                                                            COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_extendStaticArrayDeclarationDictAST::plusPlusAssignOperation (const GGS_extendStaticArrayDeclarationDictAST_2E_element & inValue
+                                                                       COMMA_UNUSED_LOCATION_ARGS) {
   if (isValid () && inValue.mProperty_key.isValid ()) {
     mDictionary [inValue.mProperty_key] = inValue ;
   }
@@ -1394,10 +1392,10 @@ void GGS_extendStaticArrayDeclarationDictAST::enterElement (const GGS_extendStat
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_extendStaticArrayDeclarationDictAST::addAssign_operation (const GGS_string & inKey,
-                                                                   const GGS_staticListValueListAST & inArgument0,
-                                                                   Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_extendStaticArrayDeclarationDictAST::addAssignOperation (const GGS_string & inKey,
+                                                                  const GGS_staticListValueListAST & inArgument0,
+                                                                  Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   GGS_extendStaticArrayDeclarationDictAST_2E_element newElement (inKey, inArgument0) ;
   if (isValid () && inKey.isValid ()) {
     mDictionary [inKey] = newElement ;
@@ -1573,9 +1571,7 @@ GGS_extendStaticArrayDeclarationDictAST GGS_extendStaticArrayDeclarationDictAST:
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@requiredFunctionDeclarationListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_requiredFunctionDeclarationListAST : public cCollectionElement {
@@ -1686,9 +1682,8 @@ GGS_requiredFunctionDeclarationListAST GGS_requiredFunctionDeclarationListAST::i
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_requiredFunctionDeclarationListAST::enterElement (const GGS_requiredFunctionDeclarationListAST_2E_element & inValue,
-                                                           Compiler * /* inCompiler */
-                                                           COMMA_LOCATION_ARGS) {
+void GGS_requiredFunctionDeclarationListAST::plusPlusAssignOperation (const GGS_requiredFunctionDeclarationListAST_2E_element & inValue
+                                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_requiredFunctionDeclarationListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -1736,12 +1731,12 @@ void GGS_requiredFunctionDeclarationListAST::makeAttributesFromObjects (capColle
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_requiredFunctionDeclarationListAST::addAssign_operation (const GGS_lstring & inOperand0,
-                                                                  const GGS_mode & inOperand1,
-                                                                  const GGS_bool & inOperand2,
-                                                                  const GGS_routineFormalArgumentListAST & inOperand3,
-                                                                  const GGS_location & inOperand4
-                                                                  COMMA_LOCATION_ARGS) {
+void GGS_requiredFunctionDeclarationListAST::addAssignOperation (const GGS_lstring & inOperand0,
+                                                                 const GGS_mode & inOperand1,
+                                                                 const GGS_bool & inOperand2,
+                                                                 const GGS_routineFormalArgumentListAST & inOperand3,
+                                                                 const GGS_location & inOperand4
+                                                                 COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_requiredFunctionDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
@@ -1982,9 +1977,9 @@ GGS_requiredFunctionDeclarationListAST GGS_requiredFunctionDeclarationListAST::g
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_requiredFunctionDeclarationListAST::plusAssign_operation (const GGS_requiredFunctionDeclarationListAST inOperand,
-                                                                   Compiler * /* inCompiler */
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_requiredFunctionDeclarationListAST::plusAssignOperation (const GGS_requiredFunctionDeclarationListAST inOperand,
+                                                                  Compiler * /* inCompiler */
+                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -2297,9 +2292,7 @@ GGS_requiredFunctionDeclarationListAST GGS_requiredFunctionDeclarationListAST::e
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@externFunctionDeclarationListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_externFunctionDeclarationListAST : public cCollectionElement {
@@ -2422,9 +2415,8 @@ GGS_externFunctionDeclarationListAST GGS_externFunctionDeclarationListAST::init 
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_externFunctionDeclarationListAST::enterElement (const GGS_externFunctionDeclarationListAST_2E_element & inValue,
-                                                         Compiler * /* inCompiler */
-                                                         COMMA_LOCATION_ARGS) {
+void GGS_externFunctionDeclarationListAST::plusPlusAssignOperation (const GGS_externFunctionDeclarationListAST_2E_element & inValue
+                                                                    COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_externFunctionDeclarationListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -2478,14 +2470,14 @@ void GGS_externFunctionDeclarationListAST::makeAttributesFromObjects (capCollect
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_externFunctionDeclarationListAST::addAssign_operation (const GGS_lstring & inOperand0,
-                                                                const GGS_mode & inOperand1,
-                                                                const GGS_lstringlist & inOperand2,
-                                                                const GGS_routineFormalArgumentListAST & inOperand3,
-                                                                const GGS_lstring & inOperand4,
-                                                                const GGS_lstring & inOperand5,
-                                                                const GGS_location & inOperand6
-                                                                COMMA_LOCATION_ARGS) {
+void GGS_externFunctionDeclarationListAST::addAssignOperation (const GGS_lstring & inOperand0,
+                                                               const GGS_mode & inOperand1,
+                                                               const GGS_lstringlist & inOperand2,
+                                                               const GGS_routineFormalArgumentListAST & inOperand3,
+                                                               const GGS_lstring & inOperand4,
+                                                               const GGS_lstring & inOperand5,
+                                                               const GGS_location & inOperand6
+                                                               COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_externFunctionDeclarationListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6 COMMA_THERE)) ;
@@ -2760,9 +2752,9 @@ GGS_externFunctionDeclarationListAST GGS_externFunctionDeclarationListAST::gette
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_externFunctionDeclarationListAST::plusAssign_operation (const GGS_externFunctionDeclarationListAST inOperand,
-                                                                 Compiler * /* inCompiler */
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_externFunctionDeclarationListAST::plusAssignOperation (const GGS_externFunctionDeclarationListAST inOperand,
+                                                                Compiler * /* inCompiler */
+                                                                COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -3165,9 +3157,7 @@ GGS_externFunctionDeclarationListAST GGS_externFunctionDeclarationListAST::extra
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@taskListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_taskListAST : public cCollectionElement {
@@ -3302,9 +3292,8 @@ GGS_taskListAST GGS_taskListAST::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_taskListAST::enterElement (const GGS_taskListAST_2E_element & inValue,
-                                    Compiler * /* inCompiler */
-                                    COMMA_LOCATION_ARGS) {
+void GGS_taskListAST::plusPlusAssignOperation (const GGS_taskListAST_2E_element & inValue
+                                               COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_taskListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -3364,16 +3353,16 @@ void GGS_taskListAST::makeAttributesFromObjects (capCollectionElement & outAttri
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_taskListAST::addAssign_operation (const GGS_lstring & inOperand0,
-                                           const GGS_lstringlist & inOperand1,
-                                           const GGS_lbigint & inOperand2,
-                                           const GGS_taskSetupListAST & inOperand3,
-                                           const GGS_taskSetupListAST & inOperand4,
-                                           const GGS_taskSetupListAST & inOperand5,
-                                           const GGS_syncInstructionBranchListAST & inOperand6,
-                                           const GGS_location & inOperand7,
-                                           const GGS_bool & inOperand8
-                                           COMMA_LOCATION_ARGS) {
+void GGS_taskListAST::addAssignOperation (const GGS_lstring & inOperand0,
+                                          const GGS_lstringlist & inOperand1,
+                                          const GGS_lbigint & inOperand2,
+                                          const GGS_taskSetupListAST & inOperand3,
+                                          const GGS_taskSetupListAST & inOperand4,
+                                          const GGS_taskSetupListAST & inOperand5,
+                                          const GGS_syncInstructionBranchListAST & inOperand6,
+                                          const GGS_location & inOperand7,
+                                          const GGS_bool & inOperand8
+                                          COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_taskListAST (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4, inOperand5, inOperand6, inOperand7, inOperand8 COMMA_THERE)) ;
@@ -3682,9 +3671,9 @@ GGS_taskListAST GGS_taskListAST::getter_subListToIndex (const GGS_uint & inIndex
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_taskListAST::plusAssign_operation (const GGS_taskListAST inOperand,
-                                            Compiler * /* inCompiler */
-                                            COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_taskListAST::plusAssignOperation (const GGS_taskListAST inOperand,
+                                           Compiler * /* inCompiler */
+                                           COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -4177,9 +4166,7 @@ GGS_taskListAST GGS_taskListAST::extractObject (const GGS_object & inObject,
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@checkTargetListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_checkTargetListAST : public cCollectionElement {
@@ -4272,9 +4259,8 @@ GGS_checkTargetListAST GGS_checkTargetListAST::init (Compiler * COMMA_UNUSED_LOC
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_checkTargetListAST::enterElement (const GGS_checkTargetListAST_2E_element & inValue,
-                                           Compiler * /* inCompiler */
-                                           COMMA_LOCATION_ARGS) {
+void GGS_checkTargetListAST::plusPlusAssignOperation (const GGS_checkTargetListAST_2E_element & inValue
+                                                      COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_checkTargetListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -4313,9 +4299,9 @@ void GGS_checkTargetListAST::makeAttributesFromObjects (capCollectionElement & o
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_checkTargetListAST::addAssign_operation (const GGS_location & inOperand0,
-                                                  const GGS_lstringlist & inOperand1
-                                                  COMMA_LOCATION_ARGS) {
+void GGS_checkTargetListAST::addAssignOperation (const GGS_location & inOperand0,
+                                                 const GGS_lstringlist & inOperand1
+                                                 COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_checkTargetListAST (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -4505,9 +4491,9 @@ GGS_checkTargetListAST GGS_checkTargetListAST::getter_subListToIndex (const GGS_
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_checkTargetListAST::plusAssign_operation (const GGS_checkTargetListAST inOperand,
-                                                   Compiler * /* inCompiler */
-                                                   COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_checkTargetListAST::plusAssignOperation (const GGS_checkTargetListAST inOperand,
+                                                  Compiler * /* inCompiler */
+                                                  COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -4685,9 +4671,7 @@ GGS_checkTargetListAST GGS_checkTargetListAST::extractObject (const GGS_object &
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@driverDeclarationListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_driverDeclarationListAST : public cCollectionElement {
@@ -4774,9 +4758,8 @@ GGS_driverDeclarationListAST GGS_driverDeclarationListAST::init (Compiler * COMM
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverDeclarationListAST::enterElement (const GGS_driverDeclarationListAST_2E_element & inValue,
-                                                 Compiler * /* inCompiler */
-                                                 COMMA_LOCATION_ARGS) {
+void GGS_driverDeclarationListAST::plusPlusAssignOperation (const GGS_driverDeclarationListAST_2E_element & inValue
+                                                            COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_driverDeclarationListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -4812,8 +4795,8 @@ void GGS_driverDeclarationListAST::makeAttributesFromObjects (capCollectionEleme
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverDeclarationListAST::addAssign_operation (const GGS_driverDeclarationAST & inOperand0
-                                                        COMMA_LOCATION_ARGS) {
+void GGS_driverDeclarationListAST::addAssignOperation (const GGS_driverDeclarationAST & inOperand0
+                                                       COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_driverDeclarationListAST (inOperand0 COMMA_THERE)) ;
@@ -4986,9 +4969,9 @@ GGS_driverDeclarationListAST GGS_driverDeclarationListAST::getter_subListToIndex
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverDeclarationListAST::plusAssign_operation (const GGS_driverDeclarationListAST inOperand,
-                                                         Compiler * /* inCompiler */
-                                                         COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_driverDeclarationListAST::plusAssignOperation (const GGS_driverDeclarationListAST inOperand,
+                                                        Compiler * /* inCompiler */
+                                                        COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -5121,9 +5104,7 @@ GGS_driverDeclarationListAST GGS_driverDeclarationListAST::extractObject (const 
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@driverInstanciationListAST' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_driverInstanciationListAST : public cCollectionElement {
@@ -5216,9 +5197,8 @@ GGS_driverInstanciationListAST GGS_driverInstanciationListAST::init (Compiler * 
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverInstanciationListAST::enterElement (const GGS_driverInstanciationListAST_2E_element & inValue,
-                                                   Compiler * /* inCompiler */
-                                                   COMMA_LOCATION_ARGS) {
+void GGS_driverInstanciationListAST::plusPlusAssignOperation (const GGS_driverInstanciationListAST_2E_element & inValue
+                                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_driverInstanciationListAST (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -5257,9 +5237,9 @@ void GGS_driverInstanciationListAST::makeAttributesFromObjects (capCollectionEle
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverInstanciationListAST::addAssign_operation (const GGS_lstring & inOperand0,
-                                                          const GGS_driverInstanciationArgumentListAST & inOperand1
-                                                          COMMA_LOCATION_ARGS) {
+void GGS_driverInstanciationListAST::addAssignOperation (const GGS_lstring & inOperand0,
+                                                         const GGS_driverInstanciationArgumentListAST & inOperand1
+                                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_driverInstanciationListAST (inOperand0, inOperand1 COMMA_THERE)) ;
@@ -5449,9 +5429,9 @@ GGS_driverInstanciationListAST GGS_driverInstanciationListAST::getter_subListToI
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_driverInstanciationListAST::plusAssign_operation (const GGS_driverInstanciationListAST inOperand,
-                                                           Compiler * /* inCompiler */
-                                                           COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_driverInstanciationListAST::plusAssignOperation (const GGS_driverInstanciationListAST inOperand,
+                                                          Compiler * /* inCompiler */
+                                                          COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -5736,50 +5716,6 @@ GGS_controlRegisterUserAccesMapAST GGS_controlRegisterUserAccesMapAST::getter_ov
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_controlRegisterUserAccesMapAST::enterElement (const GGS_controlRegisterUserAccesMapAST_2E_element & inValue,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterUserAccesMapAST * p = nullptr ;
-  macroMyNew (p, cMapElement_controlRegisterUserAccesMapAST (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@controlRegisterUserAccesMapAST insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterUserAccesMapAST::addAssign_operation (const GGS_lstring & inKey,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterUserAccesMapAST * p = nullptr ;
-  macroMyNew (p, cMapElement_controlRegisterUserAccesMapAST (inKey COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@controlRegisterUserAccesMapAST insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterUserAccesMapAST GGS_controlRegisterUserAccesMapAST::add_operation (const GGS_controlRegisterUserAccesMapAST & inOperand,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  GGS_controlRegisterUserAccesMapAST result = *this ;
-  UpEnumerator_controlRegisterUserAccesMapAST enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_controlRegisterUserAccesMapAST::setter_insertKey (GGS_lstring inKey,
                                                            Compiler * inCompiler
                                                            COMMA_LOCATION_ARGS) {
@@ -5926,9 +5862,7 @@ GGS_location callExtensionGetter_locationForErrorSignaling (const cPtr_abstractD
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Extension method '@abstractDeclarationAST enterExtension'
-//
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_abstractDeclarationAST::method_enterExtension (GGS_extendStaticArrayDeclarationDictAST & /* ioArgument_ioExtendStaticArrayDeclarationAST */,
@@ -5949,9 +5883,10 @@ void callExtensionMethod_enterExtension (cPtr_abstractDeclarationAST * inObject,
   out_outNewDeclaration.drop () ;
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractDeclarationAST) ;
-    inObject->method_enterExtension  (io_ioExtendStaticArrayDeclarationAST, out_outNewDeclaration, inCompiler COMMA_THERE) ;
+    inObject->method_enterExtension (io_ioExtendStaticArrayDeclarationAST, out_outNewDeclaration, inCompiler COMMA_THERE) ;
   }
 }
+
 //--------------------------------------------------------------------------------------------------
 //  Enum routineKind
 //--------------------------------------------------------------------------------------------------
@@ -6227,53 +6162,6 @@ GGS_flatValuedObjectMap GGS_flatValuedObjectMap::getter_overriddenMap (Compiler 
                                                                        COMMA_LOCATION_ARGS) const {
   GGS_flatValuedObjectMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_flatValuedObjectMap::enterElement (const GGS_flatValuedObjectMap_2E_element & inValue,
-                                            Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) {
-  cMapElement_flatValuedObjectMap * p = nullptr ;
-  macroMyNew (p, cMapElement_flatValuedObjectMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@flatValuedObjectMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_flatValuedObjectMap::addAssign_operation (const GGS_lstring & inKey,
-                                                   const GGS_valuedObjectState & inArgument0,
-                                                   const GGS_bool & inArgument1,
-                                                   const GGS_valuedObject & inArgument2,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  cMapElement_flatValuedObjectMap * p = nullptr ;
-  macroMyNew (p, cMapElement_flatValuedObjectMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@flatValuedObjectMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_flatValuedObjectMap GGS_flatValuedObjectMap::add_operation (const GGS_flatValuedObjectMap & inOperand,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  GGS_flatValuedObjectMap result = *this ;
-  UpEnumerator_flatValuedObjectMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mObjectState (HERE), enumerator.current_mObjectShouldBeValuedAtEndOfScope (HERE), enumerator.current_mValuedObject (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -6584,9 +6472,7 @@ GGS_flatValuedObjectMap GGS_flatValuedObjectMap::extractObject (const GGS_object
 }
 
 //--------------------------------------------------------------------------------------------------
-//
 //Class for element of '@scopeStack' list
-//
 //--------------------------------------------------------------------------------------------------
 
 class cCollectionElement_scopeStack : public cCollectionElement {
@@ -6697,9 +6583,8 @@ GGS_scopeStack GGS_scopeStack::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_scopeStack::enterElement (const GGS_scopeStack_2E_element & inValue,
-                                   Compiler * /* inCompiler */
-                                   COMMA_LOCATION_ARGS) {
+void GGS_scopeStack::plusPlusAssignOperation (const GGS_scopeStack_2E_element & inValue
+                                              COMMA_LOCATION_ARGS) {
   cCollectionElement * p = nullptr ;
   macroMyNew (p, cCollectionElement_scopeStack (inValue COMMA_THERE)) ;
   capCollectionElement attributes ;
@@ -6747,12 +6632,12 @@ void GGS_scopeStack::makeAttributesFromObjects (capCollectionElement & outAttrib
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_scopeStack::addAssign_operation (const GGS_scopeKind & inOperand0,
-                                          const GGS_bool & inOperand1,
-                                          const GGS_referenceStateMap & inOperand2,
-                                          const GGS_referenceStateMap & inOperand3,
-                                          const GGS_lstringlist & inOperand4
-                                          COMMA_LOCATION_ARGS) {
+void GGS_scopeStack::addAssignOperation (const GGS_scopeKind & inOperand0,
+                                         const GGS_bool & inOperand1,
+                                         const GGS_referenceStateMap & inOperand2,
+                                         const GGS_referenceStateMap & inOperand3,
+                                         const GGS_lstringlist & inOperand4
+                                         COMMA_LOCATION_ARGS) {
   if (isValid ()) {
     cCollectionElement * p = nullptr ;
     macroMyNew (p, cCollectionElement_scopeStack (inOperand0, inOperand1, inOperand2, inOperand3, inOperand4 COMMA_THERE)) ;
@@ -6993,9 +6878,9 @@ GGS_scopeStack GGS_scopeStack::getter_subListToIndex (const GGS_uint & inIndex,
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_scopeStack::plusAssign_operation (const GGS_scopeStack inOperand,
-                                           Compiler * /* inCompiler */
-                                           COMMA_UNUSED_LOCATION_ARGS) {
+void GGS_scopeStack::plusAssignOperation (const GGS_scopeStack inOperand,
+                                          Compiler * /* inCompiler */
+                                          COMMA_UNUSED_LOCATION_ARGS) {
   appendList (inOperand) ;
 }
 
@@ -8335,51 +8220,6 @@ GGS_referenceStateMap GGS_referenceStateMap::getter_overriddenMap (Compiler * in
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_referenceStateMap::enterElement (const GGS_referenceStateMap_2E_element & inValue,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  cMapElement_referenceStateMap * p = nullptr ;
-  macroMyNew (p, cMapElement_referenceStateMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@referenceStateMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_referenceStateMap::addAssign_operation (const GGS_lstring & inKey,
-                                                 const GGS_valuedObjectState & inArgument0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_referenceStateMap * p = nullptr ;
-  macroMyNew (p, cMapElement_referenceStateMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@referenceStateMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_referenceStateMap GGS_referenceStateMap::add_operation (const GGS_referenceStateMap & inOperand,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GGS_referenceStateMap result = *this ;
-  UpEnumerator_referenceStateMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mState (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_referenceStateMap::setter_insertKey (GGS_lstring inKey,
                                               GGS_valuedObjectState inArgument0,
                                               Compiler * inCompiler
@@ -8598,9 +8438,7 @@ GGS_string extensionGetter_string (const GGS_valuedObjectState & inObject,
 
 
 //--------------------------------------------------------------------------------------------------
-//
 //'@semanticTypePrecedenceGraph' graph
-//
 //--------------------------------------------------------------------------------------------------
 
 GGS_semanticTypePrecedenceGraph::GGS_semanticTypePrecedenceGraph (void) :
@@ -9192,50 +9030,6 @@ GGS_panicRoutinePriorityMap GGS_panicRoutinePriorityMap::getter_overriddenMap (C
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_panicRoutinePriorityMap::enterElement (const GGS_panicRoutinePriorityMap_2E_element & inValue,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  cMapElement_panicRoutinePriorityMap * p = nullptr ;
-  macroMyNew (p, cMapElement_panicRoutinePriorityMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@panicRoutinePriorityMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_panicRoutinePriorityMap::addAssign_operation (const GGS_lstring & inKey,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_panicRoutinePriorityMap * p = nullptr ;
-  macroMyNew (p, cMapElement_panicRoutinePriorityMap (inKey COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@panicRoutinePriorityMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_panicRoutinePriorityMap GGS_panicRoutinePriorityMap::add_operation (const GGS_panicRoutinePriorityMap & inOperand,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  GGS_panicRoutinePriorityMap result = *this ;
-  UpEnumerator_panicRoutinePriorityMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_panicRoutinePriorityMap::setter_insertSetupKey (GGS_lstring inKey,
                                                          Compiler * inCompiler
                                                          COMMA_LOCATION_ARGS) {
@@ -9554,56 +9348,6 @@ GGS_routineMapForContext GGS_routineMapForContext::getter_overriddenMap (Compile
                                                                          COMMA_LOCATION_ARGS) const {
   GGS_routineMapForContext result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineMapForContext::enterElement (const GGS_routineMapForContext_2E_element & inValue,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
-  cMapElement_routineMapForContext * p = nullptr ;
-  macroMyNew (p, cMapElement_routineMapForContext (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@routineMapForContext insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineMapForContext::addAssign_operation (const GGS_lstring & inKey,
-                                                    const GGS_bool & inArgument0,
-                                                    const GGS_routineTypedSignature & inArgument1,
-                                                    const GGS_unifiedTypeMapEntry & inArgument2,
-                                                    const GGS_routineLLVMNameDict & inArgument3,
-                                                    const GGS_bool & inArgument4,
-                                                    const GGS_mode & inArgument5,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  cMapElement_routineMapForContext * p = nullptr ;
-  macroMyNew (p, cMapElement_routineMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3, inArgument4, inArgument5 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@routineMapForContext insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineMapForContext GGS_routineMapForContext::add_operation (const GGS_routineMapForContext & inOperand,
-                                                                  Compiler * inCompiler
-                                                                  COMMA_LOCATION_ARGS) const {
-  GGS_routineMapForContext result = *this ;
-  UpEnumerator_routineMapForContext enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIsPublic (HERE), enumerator.current_mSignature (HERE), enumerator.current_mReturnTypeProxy (HERE), enumerator.current_mModeDictionary (HERE), enumerator.current_mIsExported (HERE), enumerator.current_mFunctionMode (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -10176,54 +9920,6 @@ GGS_guardMapForContext GGS_guardMapForContext::getter_overriddenMap (Compiler * 
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_guardMapForContext::enterElement (const GGS_guardMapForContext_2E_element & inValue,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-  cMapElement_guardMapForContext * p = nullptr ;
-  macroMyNew (p, cMapElement_guardMapForContext (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@guardMapForContext insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_guardMapForContext::addAssign_operation (const GGS_lstring & inKey,
-                                                  const GGS_bool & inArgument0,
-                                                  const GGS_routineTypedSignature & inArgument1,
-                                                  const GGS_lstring & inArgument2,
-                                                  const GGS_lstring & inArgument3,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_guardMapForContext * p = nullptr ;
-  macroMyNew (p, cMapElement_guardMapForContext (inKey, inArgument0, inArgument1, inArgument2, inArgument3 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@guardMapForContext insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_guardMapForContext GGS_guardMapForContext::add_operation (const GGS_guardMapForContext & inOperand,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  GGS_guardMapForContext result = *this ;
-  UpEnumerator_guardMapForContext enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mIsPublic (HERE), enumerator.current_mSignature (HERE), enumerator.current_mUserRoutineLLVMName (HERE), enumerator.current_mImplementationRoutineLLVMName (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_guardMapForContext::setter_insertKey (GGS_lstring inKey,
                                                GGS_bool inArgument0,
                                                GGS_routineTypedSignature inArgument1,
@@ -10677,52 +10373,6 @@ GGS_controlRegisterGroupMap GGS_controlRegisterGroupMap::getter_overriddenMap (C
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_controlRegisterGroupMap::enterElement (const GGS_controlRegisterGroupMap_2E_element & inValue,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterGroupMap * p = nullptr ;
-  macroMyNew (p, cMapElement_controlRegisterGroupMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@controlRegisterGroupMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap::addAssign_operation (const GGS_lstring & inKey,
-                                                       const GGS_registerGroupKind & inArgument0,
-                                                       const GGS_controlRegisterMap & inArgument1,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_controlRegisterGroupMap * p = nullptr ;
-  macroMyNew (p, cMapElement_controlRegisterGroupMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@controlRegisterGroupMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap GGS_controlRegisterGroupMap::add_operation (const GGS_controlRegisterGroupMap & inOperand,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) const {
-  GGS_controlRegisterGroupMap result = *this ;
-  UpEnumerator_controlRegisterGroupMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mGroupKind (HERE), enumerator.current_mControlRegisterMap (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_controlRegisterGroupMap::setter_insertKey (GGS_lstring inKey,
                                                     GGS_registerGroupKind inArgument0,
                                                     GGS_controlRegisterMap inArgument1,
@@ -11070,51 +10720,6 @@ GGS_globalConstantMap GGS_globalConstantMap::getter_overriddenMap (Compiler * in
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_globalConstantMap::enterElement (const GGS_globalConstantMap_2E_element & inValue,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  cMapElement_globalConstantMap * p = nullptr ;
-  macroMyNew (p, cMapElement_globalConstantMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@globalConstantMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalConstantMap::addAssign_operation (const GGS_lstring & inKey,
-                                                 const GGS_objectIR & inArgument0,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_globalConstantMap * p = nullptr ;
-  macroMyNew (p, cMapElement_globalConstantMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@globalConstantMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalConstantMap GGS_globalConstantMap::add_operation (const GGS_globalConstantMap & inOperand,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GGS_globalConstantMap result = *this ;
-  UpEnumerator_globalConstantMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mValue (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_globalConstantMap::setter_insertKey (GGS_lstring inKey,
                                               GGS_objectIR inArgument0,
                                               Compiler * inCompiler
@@ -11416,52 +11021,6 @@ GGS_globalSyncInstanceMap GGS_globalSyncInstanceMap::getter_overriddenMap (Compi
                                                                            COMMA_LOCATION_ARGS) const {
   GGS_globalSyncInstanceMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalSyncInstanceMap::enterElement (const GGS_globalSyncInstanceMap_2E_element & inValue,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_globalSyncInstanceMap * p = nullptr ;
-  macroMyNew (p, cMapElement_globalSyncInstanceMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@globalSyncInstanceMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_globalSyncInstanceMap::addAssign_operation (const GGS_lstring & inKey,
-                                                     const GGS_omnibusType & inArgument0,
-                                                     const GGS_objectIR & inArgument1,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_globalSyncInstanceMap * p = nullptr ;
-  macroMyNew (p, cMapElement_globalSyncInstanceMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@globalSyncInstanceMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_globalSyncInstanceMap GGS_globalSyncInstanceMap::add_operation (const GGS_globalSyncInstanceMap & inOperand,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GGS_globalSyncInstanceMap result = *this ;
-  UpEnumerator_globalSyncInstanceMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_type (HERE), enumerator.current_initialValue (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -11814,51 +11373,6 @@ GGS_staticlistMap GGS_staticlistMap::getter_overriddenMap (Compiler * inCompiler
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_staticlistMap::enterElement (const GGS_staticlistMap_2E_element & inValue,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) {
-  cMapElement_staticlistMap * p = nullptr ;
-  macroMyNew (p, cMapElement_staticlistMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@staticlistMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_staticlistMap::addAssign_operation (const GGS_lstring & inKey,
-                                             const GGS_propertyList & inArgument0,
-                                             Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) {
-  cMapElement_staticlistMap * p = nullptr ;
-  macroMyNew (p, cMapElement_staticlistMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@staticlistMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_staticlistMap GGS_staticlistMap::add_operation (const GGS_staticlistMap & inOperand,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) const {
-  GGS_staticlistMap result = *this ;
-  UpEnumerator_staticlistMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mStaticListPropertyList (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_staticlistMap::setter_insertKey (GGS_lstring inKey,
                                           GGS_propertyList inArgument0,
                                           Compiler * inCompiler
@@ -12135,51 +11649,6 @@ GGS_unifiedTypeMap GGS_unifiedTypeMap::getter_overriddenMap (Compiler * inCompil
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_unifiedTypeMap::enterElement (const GGS_unifiedTypeMap_2E_element & inValue,
-                                       Compiler * inCompiler
-                                       COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedTypeMap * p = nullptr ;
-  macroMyNew (p, cMapElement_unifiedTypeMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@unifiedTypeMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_unifiedTypeMap::addAssign_operation (const GGS_lstring & inKey,
-                                              const GGS_unifiedTypeMapElementClass & inArgument0,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_unifiedTypeMap * p = nullptr ;
-  macroMyNew (p, cMapElement_unifiedTypeMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@unifiedTypeMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_unifiedTypeMap GGS_unifiedTypeMap::add_operation (const GGS_unifiedTypeMap & inOperand,
-                                                      Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) const {
-  GGS_unifiedTypeMap result = *this ;
-  UpEnumerator_unifiedTypeMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mElement (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_unifiedTypeMap::setter_internalInsertKey (GGS_lstring inKey,
                                                    GGS_unifiedTypeMapElementClass inArgument0,
                                                    Compiler * inCompiler
@@ -12451,51 +11920,6 @@ GGS_typeConstantMap GGS_typeConstantMap::getter_overriddenMap (Compiler * inComp
                                                                COMMA_LOCATION_ARGS) const {
   GGS_typeConstantMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typeConstantMap::enterElement (const GGS_typeConstantMap_2E_element & inValue,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-  cMapElement_typeConstantMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typeConstantMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typeConstantMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typeConstantMap::addAssign_operation (const GGS_lstring & inKey,
-                                               const GGS_constantMap & inArgument0,
-                                               Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) {
-  cMapElement_typeConstantMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typeConstantMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typeConstantMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typeConstantMap GGS_typeConstantMap::add_operation (const GGS_typeConstantMap & inOperand,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) const {
-  GGS_typeConstantMap result = *this ;
-  UpEnumerator_typeConstantMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mConstantMap (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -12799,51 +12223,6 @@ GGS_typeConstructorMap GGS_typeConstructorMap::getter_overriddenMap (Compiler * 
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_typeConstructorMap::enterElement (const GGS_typeConstructorMap_2E_element & inValue,
-                                           Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) {
-  cMapElement_typeConstructorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typeConstructorMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typeConstructorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typeConstructorMap::addAssign_operation (const GGS_lstring & inKey,
-                                                  const GGS_constructorMap & inArgument0,
-                                                  Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) {
-  cMapElement_typeConstructorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typeConstructorMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typeConstructorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typeConstructorMap GGS_typeConstructorMap::add_operation (const GGS_typeConstructorMap & inOperand,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  GGS_typeConstructorMap result = *this ;
-  UpEnumerator_typeConstructorMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mConstructorMap (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_typeConstructorMap::setter_insertKey (GGS_lstring inKey,
                                                GGS_constructorMap inArgument0,
                                                Compiler * inCompiler
@@ -13137,51 +12516,6 @@ GGS_typePropertySetterMap GGS_typePropertySetterMap::getter_overriddenMap (Compi
                                                                            COMMA_LOCATION_ARGS) const {
   GGS_typePropertySetterMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typePropertySetterMap::enterElement (const GGS_typePropertySetterMap_2E_element & inValue,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_typePropertySetterMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typePropertySetterMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typePropertySetterMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typePropertySetterMap::addAssign_operation (const GGS_lstring & inKey,
-                                                     const GGS_propertySetterMap & inArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_typePropertySetterMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typePropertySetterMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typePropertySetterMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typePropertySetterMap GGS_typePropertySetterMap::add_operation (const GGS_typePropertySetterMap & inOperand,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GGS_typePropertySetterMap result = *this ;
-  UpEnumerator_typePropertySetterMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mSetterMap (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -13498,51 +12832,6 @@ GGS_typePropertyGetterMap GGS_typePropertyGetterMap::getter_overriddenMap (Compi
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_typePropertyGetterMap::enterElement (const GGS_typePropertyGetterMap_2E_element & inValue,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_typePropertyGetterMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typePropertyGetterMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typePropertyGetterMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_typePropertyGetterMap::addAssign_operation (const GGS_lstring & inKey,
-                                                     const GGS_propertyGetterMap & inArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_typePropertyGetterMap * p = nullptr ;
-  macroMyNew (p, cMapElement_typePropertyGetterMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@typePropertyGetterMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typePropertyGetterMap GGS_typePropertyGetterMap::add_operation (const GGS_typePropertyGetterMap & inOperand,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GGS_typePropertyGetterMap result = *this ;
-  UpEnumerator_typePropertyGetterMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mGetterMap (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_typePropertyGetterMap::setter_insertKey (GGS_lstring inKey,
                                                   GGS_propertyGetterMap inArgument0,
                                                   Compiler * inCompiler
@@ -13854,51 +13143,6 @@ GGS_availableInterruptMap GGS_availableInterruptMap::getter_overriddenMap (Compi
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_availableInterruptMap::enterElement (const GGS_availableInterruptMap_2E_element & inValue,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_availableInterruptMap * p = nullptr ;
-  macroMyNew (p, cMapElement_availableInterruptMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@availableInterruptMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_availableInterruptMap::addAssign_operation (const GGS_lstring & inKey,
-                                                     const GGS_interruptionPanicCode & inArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_availableInterruptMap * p = nullptr ;
-  macroMyNew (p, cMapElement_availableInterruptMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@availableInterruptMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_availableInterruptMap GGS_availableInterruptMap::add_operation (const GGS_availableInterruptMap & inOperand,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GGS_availableInterruptMap result = *this ;
-  UpEnumerator_availableInterruptMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mInterruptionPanicCode (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_availableInterruptMap::setter_insertKey (GGS_lstring inKey,
                                                   GGS_interruptionPanicCode inArgument0,
                                                   Compiler * inCompiler
@@ -14200,52 +13444,6 @@ GGS_infixOperatorMap GGS_infixOperatorMap::getter_overriddenMap (Compiler * inCo
                                                                  COMMA_LOCATION_ARGS) const {
   GGS_infixOperatorMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_infixOperatorMap::enterElement (const GGS_infixOperatorMap_2E_element & inValue,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
-  cMapElement_infixOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_infixOperatorMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@infixOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_infixOperatorMap::addAssign_operation (const GGS_lstring & inKey,
-                                                const GGS_omnibusType & inArgument0,
-                                                const GGS_omnibusInfixOperatorUsage & inArgument1,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  cMapElement_infixOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_infixOperatorMap (inKey, inArgument0, inArgument1 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@infixOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_infixOperatorMap GGS_infixOperatorMap::add_operation (const GGS_infixOperatorMap & inOperand,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  GGS_infixOperatorMap result = *this ;
-  UpEnumerator_infixOperatorMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mResultType (HERE), enumerator.current_mOperatorUsage (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -14609,53 +13807,6 @@ GGS_prefixOperatorMap GGS_prefixOperatorMap::getter_overriddenMap (Compiler * in
                                                                    COMMA_LOCATION_ARGS) const {
   GGS_prefixOperatorMap result ;
   getOverridenMap (result, inCompiler COMMA_THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_prefixOperatorMap::enterElement (const GGS_prefixOperatorMap_2E_element & inValue,
-                                          Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) {
-  cMapElement_prefixOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_prefixOperatorMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@prefixOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_prefixOperatorMap::addAssign_operation (const GGS_lstring & inKey,
-                                                 const GGS_omnibusType & inArgument0,
-                                                 const GGS_omnibusType & inArgument1,
-                                                 const GGS_prefixOperatorUsage & inArgument2,
-                                                 Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) {
-  cMapElement_prefixOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_prefixOperatorMap (inKey, inArgument0, inArgument1, inArgument2 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@prefixOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_prefixOperatorMap GGS_prefixOperatorMap::add_operation (const GGS_prefixOperatorMap & inOperand,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GGS_prefixOperatorMap result = *this ;
-  UpEnumerator_prefixOperatorMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mReceiverType (HERE), enumerator.current_mResultType (HERE), enumerator.current_mOperator (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
   return result ;
 }
 
@@ -15057,51 +14208,6 @@ GGS_assignmentOperatorMap GGS_assignmentOperatorMap::getter_overriddenMap (Compi
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_assignmentOperatorMap::enterElement (const GGS_assignmentOperatorMap_2E_element & inValue,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_assignmentOperatorMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@assignmentOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap::addAssign_operation (const GGS_lstring & inKey,
-                                                     const GGS_abstractAssignmentOperatorUsage & inArgument0,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  cMapElement_assignmentOperatorMap * p = nullptr ;
-  macroMyNew (p, cMapElement_assignmentOperatorMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@assignmentOperatorMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap GGS_assignmentOperatorMap::add_operation (const GGS_assignmentOperatorMap & inOperand,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) const {
-  GGS_assignmentOperatorMap result = *this ;
-  UpEnumerator_assignmentOperatorMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mOperatorUsage (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_assignmentOperatorMap::setter_insertKey (GGS_lstring inKey,
                                                   GGS_abstractAssignmentOperatorUsage inArgument0,
                                                   Compiler * inCompiler
@@ -15400,51 +14506,6 @@ GGS_implicitConversionToBooleanMap GGS_implicitConversionToBooleanMap::getter_ov
 
 //--------------------------------------------------------------------------------------------------
 
-void GGS_implicitConversionToBooleanMap::enterElement (const GGS_implicitConversionToBooleanMap_2E_element & inValue,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  cMapElement_implicitConversionToBooleanMap * p = nullptr ;
-  macroMyNew (p, cMapElement_implicitConversionToBooleanMap (inValue COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@implicitConversionToBooleanMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap::addAssign_operation (const GGS_lstring & inKey,
-                                                              const GGS_abstractImplicitConverterToBoolean & inArgument0,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) {
-  cMapElement_implicitConversionToBooleanMap * p = nullptr ;
-  macroMyNew (p, cMapElement_implicitConversionToBooleanMap (inKey, inArgument0 COMMA_HERE)) ;
-  capCollectionElement attributes ;
-  attributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-  const char * kInsertErrorMessage = "@implicitConversionToBooleanMap insert error: '%K' already in map" ;
-  const char * kShadowErrorMessage = "" ;
-  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap GGS_implicitConversionToBooleanMap::add_operation (const GGS_implicitConversionToBooleanMap & inOperand,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) const {
-  GGS_implicitConversionToBooleanMap result = *this ;
-  UpEnumerator_implicitConversionToBooleanMap enumerator (inOperand) ;
-  while (enumerator.hasCurrentObject ()) {
-    result.addAssign_operation (enumerator.current_lkey (HERE), enumerator.current_mConverter (HERE), inCompiler COMMA_THERE) ;
-    enumerator.gotoNextObject () ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 void GGS_implicitConversionToBooleanMap::setter_insertKey (GGS_lstring inKey,
                                                            GGS_abstractImplicitConverterToBoolean inArgument0,
                                                            Compiler * inCompiler
@@ -15622,6 +14683,1088 @@ GGS_implicitConversionToBooleanMap GGS_implicitConversionToBooleanMap::extractOb
       result = *p ;
     }else{
       inCompiler->castError ("implicitConversionToBooleanMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cMapElement_taskMap::cMapElement_taskMap (const GGS_taskMap_2E_element & inValue
+                                          COMMA_LOCATION_ARGS) :
+cMapElement (inValue.mProperty_lkey COMMA_THERE),
+mProperty_mTaskType (inValue.mProperty_mTaskType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cMapElement_taskMap::cMapElement_taskMap (const GGS_lstring & inKey,
+                                          const GGS_omnibusType & in_mTaskType
+                                          COMMA_LOCATION_ARGS) :
+cMapElement (inKey COMMA_THERE),
+mProperty_mTaskType (in_mTaskType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool cMapElement_taskMap::isValid (void) const {
+  return mProperty_lkey.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cMapElement * cMapElement_taskMap::copy (void) {
+  cMapElement * result = nullptr ;
+  macroMyNew (result, cMapElement_taskMap (mProperty_lkey, mProperty_mTaskType COMMA_HERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cMapElement_taskMap::description (String & ioString, const int32_t inIndentation) const {
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendCString ("mTaskType" ":") ;
+  mProperty_mTaskType.description (ioString, inIndentation) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap::GGS_taskMap (void) :
+AC_GALGAS_map () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap::GGS_taskMap (const GGS_taskMap & inSource) :
+AC_GALGAS_map (inSource) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap & GGS_taskMap::operator = (const GGS_taskMap & inSource) {
+  * ((AC_GALGAS_map *) this) = inSource ;
+  return * this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap GGS_taskMap::init (Compiler * COMMA_LOCATION_ARGS) {
+  GGS_taskMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap GGS_taskMap::class_func_emptyMap (LOCATION_ARGS) {
+  GGS_taskMap result ;
+  result.makeNewEmptyMap (THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap_2E_element_3F_ GGS_taskMap
+::readSubscript__3F_ (const class GGS_string & inKey,
+                            Compiler * /* inCompiler */
+                            COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_taskMap_2E_element_3F_ result ;
+  if (isValid () && inKey.isValid ()) {
+    cMapElement_taskMap * p = (cMapElement_taskMap *) searchForKey (inKey) ;
+    if (nullptr == p) {
+      result = GGS_taskMap_2E_element_3F_::init_nil () ;
+    }else{
+      GGS_taskMap_2E_element element ;
+      element.mProperty_lkey = p->mProperty_lkey ;
+      element.mProperty_mTaskType = p->mProperty_mTaskType ;
+      result = element ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap GGS_taskMap::class_func_mapWithMapToOverride (const GGS_taskMap & inMapToOverride
+                                                          COMMA_LOCATION_ARGS) {
+  GGS_taskMap result ;
+  result.makeNewEmptyMapWithMapToOverride (inMapToOverride COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap GGS_taskMap::getter_overriddenMap (Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  GGS_taskMap result ;
+  getOverridenMap (result, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_taskMap::setter_insertKey (GGS_lstring inKey,
+                                    GGS_omnibusType inArgument0,
+                                    Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) {
+  cMapElement_taskMap * p = nullptr ;
+  macroMyNew (p, cMapElement_taskMap (inKey, inArgument0 COMMA_HERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  const char * kInsertErrorMessage = "the '%K' task is already declared in %L" ;
+  const char * kShadowErrorMessage = "" ;
+  performInsert (attributes, inCompiler, kInsertErrorMessage, kShadowErrorMessage COMMA_THERE) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const char * kSearchErrorMessage_taskMap_searchKey = "there is no '%K' task" ;
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_taskMap::method_searchKey (GGS_lstring inKey,
+                                    GGS_omnibusType & outArgument0,
+                                    Compiler * inCompiler
+                                    COMMA_LOCATION_ARGS) const {
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) performSearch (inKey,
+                                                                               inCompiler,
+                                                                               kSearchErrorMessage_taskMap_searchKey
+                                                                               COMMA_THERE) ;
+  if (nullptr == p) {
+    outArgument0.drop () ;
+  }else{
+    macroValidSharedObject (p, cMapElement_taskMap) ;
+    outArgument0 = p->mProperty_mTaskType ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_omnibusType GGS_taskMap::getter_mTaskTypeForKey (const GGS_string & inKey,
+                                                     Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) const {
+  const cCollectionElement * attributes = searchForReadingAttribute (inKey, inCompiler COMMA_THERE) ;
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) attributes ;
+  GGS_omnibusType result ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cMapElement_taskMap) ;
+    result = p->mProperty_mTaskType ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_taskMap::setter_setMTaskTypeForKey (GGS_omnibusType inAttributeValue,
+                                             GGS_string inKey,
+                                             Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) {
+  cCollectionElement * attributes = searchForReadWriteAttribute (inKey, true, inCompiler COMMA_THERE) ;
+  cMapElement_taskMap * p = (cMapElement_taskMap *) attributes ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cMapElement_taskMap) ;
+    p->mProperty_mTaskType = inAttributeValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cMapElement_taskMap * GGS_taskMap::readWriteAccessForWithInstruction (Compiler * inCompiler,
+                                                                      const GGS_string & inKey
+                                                                      COMMA_LOCATION_ARGS) {
+  cMapElement_taskMap * result = (cMapElement_taskMap *) searchForReadWriteAttribute (inKey, false, inCompiler COMMA_THERE) ;
+  macroNullOrValidSharedObject (result, cMapElement_taskMap) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//  Down Enumerator for @taskMap
+//--------------------------------------------------------------------------------------------------
+
+DownEnumerator_taskMap::DownEnumerator_taskMap (const GGS_taskMap & inEnumeratedObject) :
+cGenericAbstractEnumerator (EnumerationOrder::Down) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap_2E_element DownEnumerator_taskMap::current (LOCATION_ARGS) const {
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskMap) ;
+  return GGS_taskMap_2E_element (p->mProperty_lkey, p->mProperty_mTaskType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_lstring DownEnumerator_taskMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_omnibusType DownEnumerator_taskMap::current_mTaskType (LOCATION_ARGS) const {
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskMap) ;
+  return p->mProperty_mTaskType ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//  Up Enumerator for @taskMap
+//--------------------------------------------------------------------------------------------------
+
+UpEnumerator_taskMap::UpEnumerator_taskMap (const GGS_taskMap & inEnumeratedObject) :
+cGenericAbstractEnumerator (EnumerationOrder::Up) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap_2E_element UpEnumerator_taskMap::current (LOCATION_ARGS) const {
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskMap) ;
+  return GGS_taskMap_2E_element (p->mProperty_lkey, p->mProperty_mTaskType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_lstring UpEnumerator_taskMap::current_lkey (LOCATION_ARGS) const {
+  const cMapElement * p = (const cMapElement *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement) ;
+  return p->mProperty_lkey ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_omnibusType UpEnumerator_taskMap::current_mTaskType (LOCATION_ARGS) const {
+  const cMapElement_taskMap * p = (const cMapElement_taskMap *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cMapElement_taskMap) ;
+  return p->mProperty_mTaskType ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//     @taskMap generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_taskMap ("taskMap",
+                                                               nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_taskMap::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_taskMap ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_taskMap::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_taskMap (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_taskMap GGS_taskMap::extractObject (const GGS_object & inObject,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) {
+  GGS_taskMap result ;
+  const GGS_taskMap * p = (const GGS_taskMap *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_taskMap *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("taskMap", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Class for element of '@globalTaskVariableList' list
+//--------------------------------------------------------------------------------------------------
+
+class cCollectionElement_globalTaskVariableList : public cCollectionElement {
+  public: GGS_globalTaskVariableList_2E_element mObject ;
+
+//--- Class functions
+  public: cCollectionElement_globalTaskVariableList (const GGS_string & in_mTaskName,
+                                                     const GGS_string & in_mTaskTypeName,
+                                                     const GGS_objectIR & in_mInitialValue
+                                                     COMMA_LOCATION_ARGS) ;
+  public: cCollectionElement_globalTaskVariableList (const GGS_globalTaskVariableList_2E_element & inElement COMMA_LOCATION_ARGS) ;
+
+//--- Virtual method for comparing elements
+
+//--- Virtual method that checks that all attributes are valid
+  public: virtual bool isValid (void) const ;
+
+//--- Virtual method that returns a copy of current object
+  public: virtual cCollectionElement * copy (void) ;
+
+//--- Description
+  public: virtual void description (String & ioString, const int32_t inIndentation) const ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement_globalTaskVariableList::cCollectionElement_globalTaskVariableList (const GGS_string & in_mTaskName,
+                                                                                      const GGS_string & in_mTaskTypeName,
+                                                                                      const GGS_objectIR & in_mInitialValue
+                                                                                      COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (in_mTaskName, in_mTaskTypeName, in_mInitialValue) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement_globalTaskVariableList::cCollectionElement_globalTaskVariableList (const GGS_globalTaskVariableList_2E_element & inElement COMMA_LOCATION_ARGS) :
+cCollectionElement (THERE),
+mObject (inElement.mProperty_mTaskName, inElement.mProperty_mTaskTypeName, inElement.mProperty_mInitialValue) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool cCollectionElement_globalTaskVariableList::isValid (void) const {
+  return true ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cCollectionElement * cCollectionElement_globalTaskVariableList::copy (void) {
+  cCollectionElement * result = nullptr ;
+  macroMyNew (result, cCollectionElement_globalTaskVariableList (mObject.mProperty_mTaskName, mObject.mProperty_mTaskTypeName, mObject.mProperty_mInitialValue COMMA_HERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cCollectionElement_globalTaskVariableList::description (String & ioString, const int32_t inIndentation) const {
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendCString ("mTaskName" ":") ;
+  mObject.mProperty_mTaskName.description (ioString, inIndentation) ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendCString ("mTaskTypeName" ":") ;
+  mObject.mProperty_mTaskTypeName.description (ioString, inIndentation) ;
+  ioString.appendNewLine () ;
+  ioString.appendStringMultiple ("| ", inIndentation) ;
+  ioString.appendCString ("mInitialValue" ":") ;
+  mObject.mProperty_mInitialValue.description (ioString, inIndentation) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList::GGS_globalTaskVariableList (void) :
+AC_GALGAS_list () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList::GGS_globalTaskVariableList (const capCollectionElementArray & inSharedArray) :
+AC_GALGAS_list (inSharedArray) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
+  return GGS_globalTaskVariableList (capCollectionElementArray ()) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
+  return GGS_globalTaskVariableList (capCollectionElementArray ()) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::plusPlusAssignOperation (const GGS_globalTaskVariableList_2E_element & inValue
+                                                          COMMA_LOCATION_ARGS) {
+  cCollectionElement * p = nullptr ;
+  macroMyNew (p, cCollectionElement_globalTaskVariableList (inValue COMMA_THERE)) ;
+  capCollectionElement attributes ;
+  attributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+  appendObject (attributes) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::class_func_listWithValue (const GGS_string & inOperand0,
+                                                                                 const GGS_string & inOperand1,
+                                                                                 const GGS_objectIR & inOperand2
+                                                                                 COMMA_LOCATION_ARGS) {
+  GGS_globalTaskVariableList result ;
+  if (inOperand0.isValid () && inOperand1.isValid () && inOperand2.isValid ()) {
+    result = GGS_globalTaskVariableList (capCollectionElementArray ()) ;
+    capCollectionElement attributes ;
+    GGS_globalTaskVariableList::makeAttributesFromObjects (attributes, inOperand0, inOperand1, inOperand2 COMMA_THERE) ;
+    result.appendObject (attributes) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::makeAttributesFromObjects (capCollectionElement & outAttributes,
+                                                            const GGS_string & in_mTaskName,
+                                                            const GGS_string & in_mTaskTypeName,
+                                                            const GGS_objectIR & in_mInitialValue
+                                                            COMMA_LOCATION_ARGS) {
+  cCollectionElement_globalTaskVariableList * p = nullptr ;
+  macroMyNew (p, cCollectionElement_globalTaskVariableList (in_mTaskName,
+                                                            in_mTaskTypeName,
+                                                            in_mInitialValue COMMA_THERE)) ;
+  outAttributes.setPointer (p) ;
+  macroDetachSharedObject (p) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::addAssignOperation (const GGS_string & inOperand0,
+                                                     const GGS_string & inOperand1,
+                                                     const GGS_objectIR & inOperand2
+                                                     COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement_globalTaskVariableList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_append (const GGS_string inOperand0,
+                                                const GGS_string inOperand1,
+                                                const GGS_objectIR inOperand2,
+                                                Compiler * /* inCompiler */
+                                                COMMA_LOCATION_ARGS) {
+  if (isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement_globalTaskVariableList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    appendObject (attributes) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_insertAtIndex (const GGS_string inOperand0,
+                                                       const GGS_string inOperand1,
+                                                       const GGS_objectIR inOperand2,
+                                                       const GGS_uint inInsertionIndex,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  if (isValid () && inInsertionIndex.isValid ()) {
+    cCollectionElement * p = nullptr ;
+    macroMyNew (p, cCollectionElement_globalTaskVariableList (inOperand0, inOperand1, inOperand2 COMMA_THERE)) ;
+    capCollectionElement attributes ;
+    attributes.setPointer (p) ;
+    macroDetachSharedObject (p) ;
+    insertObjectAtIndex (attributes, inInsertionIndex.uintValue (), inCompiler COMMA_THERE) ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_removeAtIndex (GGS_string & outOperand0,
+                                                       GGS_string & outOperand1,
+                                                       GGS_objectIR & outOperand2,
+                                                       const GGS_uint inRemoveIndex,
+                                                       Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) {
+  outOperand0.drop () ;
+  outOperand1.drop () ;
+  outOperand2.drop () ;
+  if (isValid () && inRemoveIndex.isValid ()) {
+    capCollectionElement attributes ;
+    removeObjectAtIndex (attributes, inRemoveIndex.uintValue (), inCompiler COMMA_THERE) ;
+    cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+    if (nullptr == p) {
+      drop () ;
+    }else{
+      macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+      outOperand0 = p->mObject.mProperty_mTaskName ;
+      outOperand1 = p->mObject.mProperty_mTaskTypeName ;
+      outOperand2 = p->mObject.mProperty_mInitialValue ;
+    }
+  }else{
+    drop () ;    
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_popFirst (GGS_string & outOperand0,
+                                                  GGS_string & outOperand1,
+                                                  GGS_objectIR & outOperand2,
+                                                  Compiler * inCompiler
+                                                  COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeFirstObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mTaskTypeName ;
+    outOperand2 = p->mObject.mProperty_mInitialValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_popLast (GGS_string & outOperand0,
+                                                 GGS_string & outOperand1,
+                                                 GGS_objectIR & outOperand2,
+                                                 Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) {
+  capCollectionElement attributes ;
+  removeLastObject (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mTaskTypeName ;
+    outOperand2 = p->mObject.mProperty_mInitialValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::method_first (GGS_string & outOperand0,
+                                               GGS_string & outOperand1,
+                                               GGS_objectIR & outOperand2,
+                                               Compiler * inCompiler
+                                               COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readFirst (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mTaskTypeName ;
+    outOperand2 = p->mObject.mProperty_mInitialValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::method_last (GGS_string & outOperand0,
+                                              GGS_string & outOperand1,
+                                              GGS_objectIR & outOperand2,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes ;
+  readLast (attributes, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  if (nullptr == p) {
+    outOperand0.drop () ;
+    outOperand1.drop () ;
+    outOperand2.drop () ;
+  }else{
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    outOperand0 = p->mObject.mProperty_mTaskName ;
+    outOperand1 = p->mObject.mProperty_mTaskTypeName ;
+    outOperand2 = p->mObject.mProperty_mInitialValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::add_operation (const GGS_globalTaskVariableList & inOperand,
+                                                                      Compiler * /* inCompiler */
+                                                                      COMMA_UNUSED_LOCATION_ARGS) const {
+  GGS_globalTaskVariableList result ;
+  if (isValid () && inOperand.isValid ()) {
+    result = *this ;
+    result.appendList (inOperand) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::getter_subListWithRange (const GGS_range & inRange,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
+  GGS_globalTaskVariableList result = GGS_globalTaskVariableList::class_func_emptyList (THERE) ;
+  subListWithRange (result, inRange, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::getter_subListFromIndex (const GGS_uint & inIndex,
+                                                                                Compiler * inCompiler
+                                                                                COMMA_LOCATION_ARGS) const {
+  GGS_globalTaskVariableList result = GGS_globalTaskVariableList::class_func_emptyList (THERE) ;
+  subListFromIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::getter_subListToIndex (const GGS_uint & inIndex,
+                                                                              Compiler * inCompiler
+                                                                              COMMA_LOCATION_ARGS) const {
+  GGS_globalTaskVariableList result = GGS_globalTaskVariableList::class_func_emptyList (THERE) ;
+  subListToIndex (result, inIndex, inCompiler COMMA_THERE) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::plusAssignOperation (const GGS_globalTaskVariableList inOperand,
+                                                      Compiler * /* inCompiler */
+                                                      COMMA_UNUSED_LOCATION_ARGS) {
+  appendList (inOperand) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_setMTaskNameAtIndex (GGS_string inOperand,
+                                                             GGS_uint inIndex,
+                                                             Compiler * inCompiler
+                                                             COMMA_LOCATION_ARGS) {
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mTaskName = inOperand ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string GGS_globalTaskVariableList::getter_mTaskNameAtIndex (const GGS_uint & inIndex,
+                                                                Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  GGS_string result ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    result = p->mObject.mProperty_mTaskName ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_setMTaskTypeNameAtIndex (GGS_string inOperand,
+                                                                 GGS_uint inIndex,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mTaskTypeName = inOperand ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string GGS_globalTaskVariableList::getter_mTaskTypeNameAtIndex (const GGS_uint & inIndex,
+                                                                    Compiler * inCompiler
+                                                                    COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  GGS_string result ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    result = p->mObject.mProperty_mTaskTypeName ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_globalTaskVariableList::setter_setMInitialValueAtIndex (GGS_objectIR inOperand,
+                                                                 GGS_uint inIndex,
+                                                                 Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) {
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) uniquelyReferencedPointerAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    macroUniqueSharedObject (p) ;
+    p->mObject.mProperty_mInitialValue = inOperand ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR GGS_globalTaskVariableList::getter_mInitialValueAtIndex (const GGS_uint & inIndex,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) const {
+  capCollectionElement attributes = readObjectAtIndex (inIndex, inCompiler COMMA_THERE) ;
+  cCollectionElement_globalTaskVariableList * p = (cCollectionElement_globalTaskVariableList *) attributes.ptr () ;
+  GGS_objectIR result ;
+  if (nullptr != p) {
+    macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+    result = p->mObject.mProperty_mInitialValue ;
+  }
+  return result ;
+}
+
+
+
+//--------------------------------------------------------------------------------------------------
+// Down Enumerator for @globalTaskVariableList
+//--------------------------------------------------------------------------------------------------
+
+DownEnumerator_globalTaskVariableList::DownEnumerator_globalTaskVariableList (const GGS_globalTaskVariableList & inEnumeratedObject) :
+cGenericAbstractEnumerator (EnumerationOrder::Down) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList_2E_element DownEnumerator_globalTaskVariableList::current (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string DownEnumerator_globalTaskVariableList::current_mTaskName (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mTaskName ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string DownEnumerator_globalTaskVariableList::current_mTaskTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mTaskTypeName ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR DownEnumerator_globalTaskVariableList::current_mInitialValue (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mInitialValue ;
+}
+
+
+
+//--------------------------------------------------------------------------------------------------
+// Up Enumerator for @globalTaskVariableList
+//--------------------------------------------------------------------------------------------------
+
+UpEnumerator_globalTaskVariableList::UpEnumerator_globalTaskVariableList (const GGS_globalTaskVariableList & inEnumeratedObject) :
+cGenericAbstractEnumerator (EnumerationOrder::Up) {
+  inEnumeratedObject.populateEnumerationArray (mEnumerationArray) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList_2E_element UpEnumerator_globalTaskVariableList::current (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string UpEnumerator_globalTaskVariableList::current_mTaskName (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mTaskName ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_string UpEnumerator_globalTaskVariableList::current_mTaskTypeName (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mTaskTypeName ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR UpEnumerator_globalTaskVariableList::current_mInitialValue (LOCATION_ARGS) const {
+  const cCollectionElement_globalTaskVariableList * p = (const cCollectionElement_globalTaskVariableList *) currentObjectPtr (THERE) ;
+  macroValidSharedObject (p, cCollectionElement_globalTaskVariableList) ;
+  return p->mObject.mProperty_mInitialValue ;
+}
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//     @globalTaskVariableList generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_globalTaskVariableList ("globalTaskVariableList",
+                                                                              nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_globalTaskVariableList::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_globalTaskVariableList ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_globalTaskVariableList::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_globalTaskVariableList (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_globalTaskVariableList GGS_globalTaskVariableList::extractObject (const GGS_object & inObject,
+                                                                      Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) {
+  GGS_globalTaskVariableList result ;
+  const GGS_globalTaskVariableList * p = (const GGS_globalTaskVariableList *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_globalTaskVariableList *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("globalTaskVariableList", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// @abstractDecoratedDeclaration reference class
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_abstractDecoratedDeclaration::objectCompare (const GGS_abstractDecoratedDeclaration & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration::GGS_abstractDecoratedDeclaration (void) :
+AC_GALGAS_reference_class () {
+}
+
+
+void cPtr_abstractDecoratedDeclaration::
+abstractDecoratedDeclaration_init (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration::GGS_abstractDecoratedDeclaration (const cPtr_abstractDecoratedDeclaration * inSourcePtr) :
+AC_GALGAS_reference_class (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_abstractDecoratedDeclaration) ;
+}
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @abstractDecoratedDeclaration class
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_abstractDecoratedDeclaration::cPtr_abstractDecoratedDeclaration (Compiler * inCompiler
+                                                                      COMMA_LOCATION_ARGS) :
+acStrongPtr_class (inCompiler COMMA_THERE) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_abstractDecoratedDeclaration::printNonNullClassInstanceProperties (void) const {
+    acStrongPtr_class::printNonNullClassInstanceProperties () ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+//     @abstractDecoratedDeclaration generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDecoratedDeclaration ("abstractDecoratedDeclaration",
+                                                                                    nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_abstractDecoratedDeclaration::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_abstractDecoratedDeclaration::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_abstractDecoratedDeclaration (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration GGS_abstractDecoratedDeclaration::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_abstractDecoratedDeclaration result ;
+  const GGS_abstractDecoratedDeclaration * p = (const GGS_abstractDecoratedDeclaration *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_abstractDecoratedDeclaration *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("abstractDecoratedDeclaration", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_abstractDecoratedDeclaration_2E_weak::objectCompare (const GGS_abstractDecoratedDeclaration_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration_2E_weak::GGS_abstractDecoratedDeclaration_2E_weak (void) :
+AC_GALGAS_weak_reference () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration_2E_weak & GGS_abstractDecoratedDeclaration_2E_weak::operator = (const GGS_abstractDecoratedDeclaration & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration_2E_weak::GGS_abstractDecoratedDeclaration_2E_weak (const GGS_abstractDecoratedDeclaration & inSource) :
+AC_GALGAS_weak_reference (inSource) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration_2E_weak GGS_abstractDecoratedDeclaration_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_abstractDecoratedDeclaration_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration GGS_abstractDecoratedDeclaration_2E_weak::bang_abstractDecoratedDeclaration_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_abstractDecoratedDeclaration result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_abstractDecoratedDeclaration) ;
+      result = GGS_abstractDecoratedDeclaration ((cPtr_abstractDecoratedDeclaration *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @abstractDecoratedDeclaration.weak generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor kTypeDescriptor_GALGAS_abstractDecoratedDeclaration_2E_weak ("abstractDecoratedDeclaration.weak",
+                                                                                            nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const C_galgas_type_descriptor * GGS_abstractDecoratedDeclaration_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_abstractDecoratedDeclaration_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_abstractDecoratedDeclaration_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_abstractDecoratedDeclaration_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_abstractDecoratedDeclaration_2E_weak GGS_abstractDecoratedDeclaration_2E_weak::extractObject (const GGS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_abstractDecoratedDeclaration_2E_weak result ;
+  const GGS_abstractDecoratedDeclaration_2E_weak * p = (const GGS_abstractDecoratedDeclaration_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_abstractDecoratedDeclaration_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("abstractDecoratedDeclaration.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

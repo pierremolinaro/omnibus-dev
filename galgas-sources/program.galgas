@@ -52,7 +52,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
       if [targetNameSet hasKey !targetName.string] then
         error targetName : "Duplicated target"
       end
-      targetNameSet += !targetName.string
+      targetNameSet ++= targetName.string
     end
   end
 #--- Compile project for every target
@@ -167,7 +167,7 @@ private proc compileProject
 #------------------------------------------------------------ Semantic context
   var @semanticContext semanticContext = @{}
   var @staticEntityMap globalLiteralStringMap = @{}
-  var @staticListInitializationMap staticListValueMap = @[]
+  var @staticListInitializationMap staticListValueMap = @()
   ast.mDeclarationListAST = orderedDeclarationListAST
   var @declarationDecorationList decoratedDeclarationList = @[]
   var @decoratedRegularRoutineList decoratedRoutineList = @[]
@@ -302,7 +302,7 @@ private proc recursiveImportFileSystemTargetFiles
     let absolutePath = inTargetDirectory + "/" + path.string
     if [absolutePath fileExists] then
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
-        ioImportedFileAbsolutePathSet += !absolutePath
+        ioImportedFileAbsolutePathSet ++= absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
           grammar omnibus_grammar (
             !?ioAST
@@ -351,7 +351,7 @@ private proc recursiveImportEmbeddedTargetFiles
     if [fw fileExistsAtPath !fullPath] then
       let embeddedPath = ":" + fullPath
       if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
-        ioImportedFileAbsolutePathSet += !embeddedPath
+        ioImportedFileAbsolutePathSet ++= embeddedPath
         grammar omnibus_grammar (
           !?ioAST
           ?importClauseList:let importedFileList
@@ -382,7 +382,7 @@ private proc recursiveImportFiles
     let absolutePath = [path.string absolutePathFromPath !inCurrentDirectory]
     if [absolutePath fileExists] then # Exists in file system ?
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
-        ioImportedFileAbsolutePathSet += !absolutePath
+        ioImportedFileAbsolutePathSet ++= absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
           grammar omnibus_grammar (
             !?ioAST
@@ -416,7 +416,7 @@ private proc recursiveImportFiles
       if [fw fileExistsAtPath !path.string] then
         let embeddedPath = ":" + path
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
-          ioImportedFileAbsolutePathSet += !embeddedPath
+          ioImportedFileAbsolutePathSet ++= embeddedPath
           if [path pathExtension] == "omnibus-import" then
             grammar omnibus_grammar (
               !?ioAST

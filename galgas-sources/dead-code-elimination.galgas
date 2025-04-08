@@ -34,9 +34,9 @@ proc codeOptimization
     [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
     allRoutineSet += accessibleRoutineSet
-    definedRoutineSet += !routine.mRoutine.mRoutineMangledName
+    definedRoutineSet ++= routine.mRoutine.mRoutineMangledName
     if routine.mRoutine.isRequired then
-      exploreRoutineSet += !routine.mRoutine.mRoutineMangledName
+      exploreRoutineSet ++= routine.mRoutine.mRoutineMangledName
     end
   end
   if [option omnibus_options.printPasses value] then
@@ -65,7 +65,7 @@ proc codeOptimization
       for routine in routineAccessibilityIR do
         let routineMangledName = routine.mRoutine.mRoutineMangledName
         if [currentSet hasKey !routineMangledName] & not [usefulRoutineSet hasKey !routineMangledName] then
-          usefulRoutineSet += !routineMangledName
+          usefulRoutineSet ++= routineMangledName
           exploreRoutineSet += routine.mAccessibleRoutineSet
         end
       end
@@ -113,8 +113,8 @@ private proc displayInvocationGraph
   var @stringset definedRoutines = @[]
   var @stringset allRoutines = @[]
   for (routine) in inRoutineListIR do
-    definedRoutines += !routine.mRoutineMangledName
-    allRoutines += !routine.mRoutineMangledName
+    definedRoutines ++= routine.mRoutineMangledName
+    allRoutines ++= routine.mRoutineMangledName
     var @stringset accessibleRoutineSet = @[]
     [routine enterAccessibleEntities !?accessibleRoutineSet !? %from 0]
     allRoutines += accessibleRoutineSet

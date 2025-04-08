@@ -120,7 +120,7 @@ override method @typeOpaqueDeclarationAST enterInContext
   if not [sizeExpressionIR isLiteralInteger] then
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
-    var @constructorMap constructorMap = @[]
+    var @constructorMap constructorMap = @()
     if [opaqueTypeAttributes contains !.instanciable] then
       [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]

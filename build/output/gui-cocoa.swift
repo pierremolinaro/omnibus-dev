@@ -70,31 +70,25 @@ fileprivate let gPopUpData_0_omnibus_5F_lexique : [[UInt16]] = [
   
 class SWIFT_Tokenizer_0_omnibus_lexique : SWIFT_Lexique_omnibus_lexique, SWIFT_Tokenizer_Protocol {
 
-//- (NSUInteger) textMacroCount ;
-
-//- (NSString *) textMacroTitleAtIndex: (const UInt32) inIndex ;
-
-//- (NSString *) textMacroContentAtIndex: (const UInt32) inIndex ;
-
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func popupListData () -> [[UInt16]] {
     return gPopUpData_0_omnibus_5F_lexique
   }
 
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func tabItemTitle () -> String {
     return "Source"
   }
 
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   
   func blockComment () -> String {
     return "//"
   }
 
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
   func attributes (fromStyleIndex inStyleIndex : UInt8) -> [NSAttributedString.Key : Any] {
     let fontManager = NSFontManager.shared
@@ -113,7 +107,7 @@ class SWIFT_Tokenizer_0_omnibus_lexique : SWIFT_Lexique_omnibus_lexique, SWIFT_T
     return result
   }
 
-  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 }
 

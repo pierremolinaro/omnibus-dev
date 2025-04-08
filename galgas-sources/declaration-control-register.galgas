@@ -445,8 +445,8 @@ private proc buildControlRegisterSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
 #--- Build bit slice map
-  outRegisterFieldMap = @[]
-  outRegisterBitSliceMap = @[]
+  outRegisterFieldMap = @()
+  outRegisterBitSliceMap = @()
   outControlRegisterFieldList = @[] # Used for HTML file
   if [inRegisterBitSliceList count] > 0 then
     var @uint shiftCount = 0
@@ -593,7 +593,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  var @controlRegisterMap regMap = @[]
+  var @controlRegisterMap regMap = @()
   for reg in self.mRegisters do
     [reg buildControlRegisterMapForGroup
       !?context:ioContext

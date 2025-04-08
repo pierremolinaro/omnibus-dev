@@ -163,7 +163,7 @@ override method @typeDynamicArrayDeclarationAST enterInContext
       !insertFunctionMangledName
     }
   #-------------------------------------------- Constructor map
-    var @constructorMap constructorMap = @[]
+    var @constructorMap constructorMap = @()
     [!?constructorMap insertKey !["()" nowhere] !@[] !.null]
     [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
   #-------------------------------------------- Type attributes
@@ -336,7 +336,7 @@ override method @dynArrayAppendFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !self.mInsertFunctionMangledName
+  ioInvokedRoutineSet ++= self.mInsertFunctionMangledName
 }
 
 #·······················································································································
@@ -396,7 +396,7 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
   let assignRoutineLLVMName = assignmentOperatorFuncName (![self.mElementTypeProxy type] ![self.mElementTypeProxy type])
-  ioInvokedRoutineSet += !assignRoutineLLVMName
+  ioInvokedRoutineSet ++= assignRoutineLLVMName
 }
 
 #·······················································································································

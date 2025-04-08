@@ -525,7 +525,7 @@ override method @guardUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
-  ioInvokedRoutineSet += !self.mMangledImplementationGuardName
+  ioInvokedRoutineSet ++= self.mMangledImplementationGuardName
 }
 
 #·······················································································································
@@ -674,8 +674,8 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     ioLLVMcode += "  ret i1 false\n"
     ioLLVMcode += "}\n\n"
   end
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"void @accept.guard ()"
-  ioGenerationAdds.mExternFunctionDeclarationSet += !"i1 @xtr.user.result ()"
+  ioGenerationAdds.mExternFunctionDeclarationSet ++= "void @accept.guard ()"
+  ioGenerationAdds.mExternFunctionDeclarationSet ++= "i1 @xtr.user.result ()"
 }
 
 #·······················································································································
@@ -688,7 +688,7 @@ override method @guardImplementationRoutineIR enterAccessibleEntities
   switch self.mGuardKindGenerationIR
   case baseGuard :
   case convenienceGuard (* baseGuardInstructionGenerationList baseGuardImplementationMangledName *) :
-    ioInvokedRoutineSet += !baseGuardImplementationMangledName
+    ioInvokedRoutineSet ++= baseGuardImplementationMangledName
     [baseGuardInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
   end
 }

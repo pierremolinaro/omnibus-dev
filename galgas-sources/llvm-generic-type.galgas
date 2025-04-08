@@ -191,7 +191,7 @@ override method @llvmGenericType enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
 #--- Build formal generic constant parameter map
-  var @ctCheckMap formalGenericConstantParameterMap = @[]
+  var @ctCheckMap formalGenericConstantParameterMap = @()
   [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
 #--- Check Where clause
   [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]

@@ -3,17 +3,17 @@
 #—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @ast {
-  public var @declarationListAST mDeclarationListAST = @[]
+  public var @declarationListAST mDeclarationListAST = @()
   public var @extendStaticArrayDeclarationDictAST mExtendStaticArrayDeclarationAST = @()
-  public var @requiredFunctionDeclarationListAST mRequiredFunctionListAST = @[]
-  public var @externFunctionDeclarationListAST mExternFunctionListAST = @[]
-  public var @lstringlist mTargetListAST = @[]
-  public var @taskListAST mTaskListAST = @[]
-  public var @checkTargetListAST mCheckTargetListAST = @[]
-  public var @driverDeclarationListAST mDriverDeclarationListAST = @[]
-  public var @driverInstanciationListAST mRequiredDriverListAST = @[]
+  public var @requiredFunctionDeclarationListAST mRequiredFunctionListAST = @()
+  public var @externFunctionDeclarationListAST mExternFunctionListAST = @()
+  public var @lstringlist mTargetListAST = @()
+  public var @taskListAST mTaskListAST = @()
+  public var @checkTargetListAST mCheckTargetListAST = @()
+  public var @driverDeclarationListAST mDriverDeclarationListAST = @()
+  public var @driverInstanciationListAST mRequiredDriverListAST = @()
   public var @uint mTypeDeclarationIndex = 0
-  public var @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST = @[]
+  public var @controlRegisterUserAccesMapAST mControlRegisterUserAccesMapAST = @()
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

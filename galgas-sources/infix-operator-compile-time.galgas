@@ -219,7 +219,7 @@ override method @compileTimeInfixOperatorAST enterInContext
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 #--- Check native operator expression
-  var @ctCheckMap ctCheckMap = @[]
+  var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mLeftOperandName]
   [!?ctCheckMap insertKey !self.mRightOperandName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
@@ -272,7 +272,7 @@ method @compileTimeInfixOperatorUsage eval
 {
   [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
   [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
-  var @ctMap varMap = @[]
+  var @ctMap varMap = @()
   [!?varMap insertKey !self.mLeftOperandName !leftValue]
   [!?varMap insertKey !self.mRightOperandName !rightValue]
   [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]

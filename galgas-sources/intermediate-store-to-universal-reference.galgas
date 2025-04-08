@@ -32,14 +32,14 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   case llvmStructureValue (* *) :
   case llvmArrayRepeatedDynamicValue (* * value) :
     let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
-    ioInvokedRoutineSet += !llvmAssignRoutineName
+    ioInvokedRoutineSet ++= llvmAssignRoutineName
   case llvmArrayRepeatedStaticValue (4*) :
   case llvmArrayStaticValues (3*) :
   case llvmArrayDynamicValues (* @operandIRList operands) :
     for (value) in operands do
       if not [value isStatic] then
         let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
-        ioInvokedRoutineSet += !llvmAssignRoutineName
+        ioInvokedRoutineSet ++= llvmAssignRoutineName
       end
     end
   case literalString  (* *) :

@@ -579,7 +579,7 @@ override method @structureDeclarationAST enterInContext
   end
   constructorKey += ")"
 #---------------------------------------- Constructor map
-  var @constructorMap constructorMap = @[]
+  var @constructorMap constructorMap = @()
   [!?constructorMap insertKey
     ! @{!constructorKey !self.mReceiverTypeName.location}
     !constructorSignature

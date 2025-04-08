@@ -177,13 +177,13 @@ private proc generateCodeFiles
   let sourceDirectory = inProductDirectory + "/sources"
 #----------------------------------------- Add dynamic array extern routines
   if inTargetParameters.mHandleDynamicArray then
-    generationAdds.mExternFunctionDeclarationSet += !"void @arc.retain (%ptrtype %inPtr)"
-    generationAdds.mExternFunctionDeclarationSet += !"void @arc.release (%ptrtype %inPtr)"
-    generationAdds.mExternFunctionDeclarationSet += !"%ptrtype @arc.insulate (%ptrtype %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet ++= "void @arc.retain (%ptrtype %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet ++= "void @arc.release (%ptrtype %inPtr)"
+    generationAdds.mExternFunctionDeclarationSet ++= "%ptrtype @arc.insulate (%ptrtype %inPtr)"
     let insertFunction = "%ptrtype @arc.insert.at.index "
                        + "(%ptrtype %inPointer, i32 %inIndex, i32 %inElementSize, %ptrtype* %outElementPtr)"
-    generationAdds.mExternFunctionDeclarationSet += !insertFunction
-    generationAdds.mExternFunctionDeclarationSet += !"i32 @arc.length (%ptrtype %inPointer)"
+    generationAdds.mExternFunctionDeclarationSet ++= insertFunction
+    generationAdds.mExternFunctionDeclarationSet ++= "i32 @arc.length (%ptrtype %inPointer)"
   end
 #----------------------------------------- Include assembler specific file
   var asCode = asTitleComment (!"Target specific code")
@@ -261,8 +261,8 @@ private proc generateCodeFiles
       !llvmNameForServiceCall (!waitForGuardChange)
       !llvmNameForServiceImplementation (!waitForGuardChange)
       !true # A (boolean) value is returned
-    generationAdds.mExternFunctionDeclarationSet +=
-      !"i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
+    generationAdds.mExternFunctionDeclarationSet ++=
+      "i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
 #----------------------------------------- Routine list
   var @sectionIRlist sectionIRlist = @[]

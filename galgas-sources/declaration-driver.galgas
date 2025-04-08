@@ -242,9 +242,9 @@ proc retainRequiredDrivers ?!@ast ioAST {
     end
   end
 #--- Build instancied driver map
-  var @instanciedDriverMap instanciedDriverMap = @[]
+  var @instanciedDriverMap instanciedDriverMap = @()
   for (driverName args) in ioAST.mRequiredDriverListAST do
-     var @driverInstanciationArgumentMap driverInstanciationArgumentMap = @[]
+     var @driverInstanciationArgumentMap driverInstanciationArgumentMap = @()
      for (selector expression) in args do
        [!?driverInstanciationArgumentMap insertKey !selector !expression]
      end
@@ -253,7 +253,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
 #--- Append required drivers to declaration list AST (and init list AST)
   var @stringset validDriverNames = @[] # For checking all required drivers have been declared
   for (declaration) in ioAST.mDriverDeclarationListAST do
-    validDriverNames += !declaration.mDriverName.string
+    validDriverNames ++= declaration.mDriverName.string
     let driverIsInstancied = [instanciedDriverMap hasKey !declaration.mDriverName.string]
   #--- Build driver instanciation property list
     var @structurePropertyListAST driverPropertyListAST = @[]
@@ -266,11 +266,11 @@ proc retainRequiredDrivers ?!@ast ioAST {
         switch propertyKind 
         case uninitializedStoredProperty :
           [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
-          validArgumentSet += !propertyName.string
+          validArgumentSet ++= propertyName.string
           driverPropertyKind = .initializedStoredProperty {!initExpression:initExpression}
         case uninitializedConstantProperty :
           [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
-          validArgumentSet += !propertyName.string
+          validArgumentSet ++= propertyName.string
           driverPropertyKind = .initializedConstantProperty {!initExpression:initExpression}
         case initializedStoredProperty (*) :
           driverPropertyKind = propertyKind
@@ -407,7 +407,7 @@ override method @decoratedRequiredDriver semanticAnalysis
     !driverType
     !initialValueList
 #--- Build initialized driver set
-  ioTemporaries.mInitializedDriverSet += !self.mDriverName.string
+  ioTemporaries.mInitializedDriverSet ++= self.mDriverName.string
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

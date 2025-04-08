@@ -108,7 +108,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       ]
     else
     #-------------------------------------------- Class method map : add "count" constructor
-      var @constantMap constantMap = @[]
+      var @constantMap constantMap = @()
       [!?constantMap insertKey ! @{!"count" !self.mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
       [!?ioContext.mTypeConstantMap insertKey
         !omnibusTypeDescriptionName
@@ -122,16 +122,16 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
     #-------------------------------------------- Constructor map
-      var @constructorMap constructorMap = @[]
+      var @constructorMap constructorMap = @()
     #--- Constructor (!repeated)
-      [!?constructorMap insertKey !["(!repeated)" nowhere] !@[] !.arrayValue {!elementType:elementType !size:arraySize}]
+      [!?constructorMap insertKey !["(!repeated)" nowhere] !@() !.arrayValue {!elementType:elementType !size:arraySize}]
     #--- Constructor (!!!!)
       var constructorName = "("
       for * in 0 ..< [arraySize uint] do
         constructorName += "!"
       end
       constructorName += ")"
-      [!?constructorMap insertKey ![constructorName nowhere] !@[] !.arrayValue {!elementType:elementType !size:arraySize}]
+      [!?constructorMap insertKey ![constructorName nowhere] !@() !.arrayValue {!elementType:elementType !size:arraySize}]
       [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
     #-------------------------------------------- Type attributes
       let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
@@ -242,9 +242,9 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
       [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
       s = "store " + elementTypeName + " " + [sourceValue llvmName] + ", " + elementTypeName + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]    
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]    
     end
   case llvmArrayStaticValues (1* @operandIRList values 1*) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
@@ -252,9 +252,9 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     for (value) in values do (idx)
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
       s = "store " + elementTypeName + " " + [value llvmName] + ", " + elementTypeName + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]    
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]    
     end
   case llvmArrayRepeatedStaticValue (3* @uint idx) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
@@ -334,7 +334,7 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   let llvmTypeName = [self.mFixedSizeArrayType llvmTypeName]
-  let arcAssignmentList = [self.mFixedSizeArrayType arcList !@[]]
+  let arcAssignmentList = [self.mFixedSizeArrayType arcList !@()]
   ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
   ioLLVMcode += " (" + llvmTypeName + " * %inTarget, " + llvmTypeName + "* %inSource) nounwind optsize {\n"
   ioLLVMcode += ";--- Handle ARC properties\n"
