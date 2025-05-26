@@ -85,7 +85,7 @@ func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
   if [inLocation isNowhere] then
     result = "raise.panic.nofile"
   else
-    result = "raise.panic.file." + [[[inLocation file] lastPathComponent] stringByDeletingPathExtension]
+    result = "raise.panic.file." + [[[inLocation file] lastPathComponent] deletingPathExtension]
   end
 }
 
@@ -95,7 +95,7 @@ func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
   if inFilePath == "" then
     result = "raise.panic.nofile"
   else
-    result = "raise.panic.file." + [[inFilePath lastPathComponent] stringByDeletingPathExtension]
+    result = "raise.panic.file." + [[inFilePath lastPathComponent] deletingPathExtension]
   end
 }
 
@@ -289,7 +289,7 @@ override method @fileSpecificPanicRoutineIR llvmCodeGeneration
     + [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %in.LINE, "
     + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE, "
     + "i8* %in.FILE)"
-  let fileBaseName = [[self.inFilePath lastPathComponent] stringByDeletingPathExtension]
+  let fileBaseName = [[self.inFilePath lastPathComponent] deletingPathExtension]
   
   [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
     !fileBaseName

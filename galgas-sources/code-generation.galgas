@@ -100,7 +100,7 @@ proc codeGeneration
 #--- Create source directory (if does not exist)
   let productDirectory = homeDir
     + if [option omnibus_options.noPanicGeneration value] then "no-panic" else "" end
-    + [[inSourceFileName stringByDeletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+    + [[inSourceFileName deletingPathExtension] stringByReplacingStringByString !"/" !"+"]
   let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 #--- Generate target files
