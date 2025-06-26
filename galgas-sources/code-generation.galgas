@@ -374,52 +374,52 @@ private proc generateCodeFiles
 #----------------------------------------- Write C++ file
   [cppCode writeToFileWhenDifferentContents !sourceDirectory + "/src.cpp" ?*]
 #----------------------------------------- Write JSON file with stack features
-  var json = "{\n"
+  var jsonStr = "{\n"
 #--- System stack size
-  json += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
-  json += "  \"stacked-register-size-on-user-stack\" : "
+  jsonStr += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
+  jsonStr += "  \"stacked-register-size-on-user-stack\" : "
        + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
-  json += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
-  json += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
+  jsonStr += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
+  jsonStr += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
 #--- Tasks
-  json += "  \"tasks\" : {"
+  jsonStr += "  \"tasks\" : {"
   for task in inIntermediateCodeStruct.mTaskMapIR
-    do json += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
-    between json += ","
+    do jsonStr += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
+    between jsonStr += ","
   end
-  json += "\n"
-  json += "  },\n"
+  jsonStr += "\n"
+  jsonStr += "  },\n"
 #--- Services
-  json += "  \"services\" : ["
+  jsonStr += "  \"services\" : ["
   for (* serviceImplementation *) in primitiveAndServiceList
-    do json += "\n    \"" + serviceImplementation + "\""
-    between json += ","
-    after json += "\n"
+    do jsonStr += "\n    \"" + serviceImplementation + "\""
+    between jsonStr += ","
+    after jsonStr += "\n"
   end
-  json += "  ],\n"
+  jsonStr += "  ],\n"
 #--- sections
-  json += "  \"sections\" : ["
+  jsonStr += "  \"sections\" : ["
   for section in sectionIRlist
-    do json += "\n    \"" + section.mSectionImplementationName + "\""
-    between json += ","
-    after json += "\n"
+    do jsonStr += "\n    \"" + section.mSectionImplementationName + "\""
+    between jsonStr += ","
+    after jsonStr += "\n"
   end
-  json += "  ],\n"
+  jsonStr += "  ],\n"
 #--- isr
-  json += "  \"isr\" : ["
+  jsonStr += "  \"isr\" : ["
   var first = true
   for (interruptName 2* mMode) in inIntermediateCodeStruct.mInterruptMapIR do
     if first then
       first = false
     else
-      json += ","
+      jsonStr += ","
     end
     let interruptImplementationName = if mMode == .serviceMode then
       llvmNameForServiceInterrupt (!interruptName).string
     else
       llvmNameForSectionInterrupt (!interruptName.string)
     end
-    json += "\n    \"" + interruptImplementationName + "\""
+    jsonStr += "\n    \"" + interruptImplementationName + "\""
   end
   if not [option omnibus_options.noPanicGeneration value] then
     for (lkey panicCode) in inAvailableInterruptMap do
@@ -430,17 +430,17 @@ private proc generateCodeFiles
           if first then
             first = false
           else
-            json += ","
+            jsonStr += ","
           end
-          json += "\n    \"" + llvmNameForSectionInterrupt (!lkey.string) + "\""
+          jsonStr += "\n    \"" + llvmNameForSectionInterrupt (!lkey.string) + "\""
         end
       end
     end
   end
-  json += "\n  ]\n"
+  jsonStr += "\n  ]\n"
 #--- Write file
-  json += "}\n"
-  [json writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
+  jsonStr += "}\n"
+  [jsonStr writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

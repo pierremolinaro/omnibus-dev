@@ -31,7 +31,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName ! @{!staticStringTypeName () !inConstantName.location}]
+  [!?ioGraph addEdge !from: inConstantName !to: @{!staticStringTypeName () !inConstantName.location}]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

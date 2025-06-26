@@ -46,7 +46,7 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !self.mTypeName]
+  [!?ioGraph addEdge !from: inConstantName !to: self.mTypeName]
   
   for (* mExpression) in self.mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]

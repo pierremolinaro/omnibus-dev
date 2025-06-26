@@ -63,7 +63,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount += 1 ;
     maxValue = maxValue / 2
   end
-  [!?ioGraph addEdge !self.mEnumerationName !["u" + representationBitCount nowhere]]
+  [!?ioGraph addEdge !from: self.mEnumerationName !to: ["u" + representationBitCount nowhere]]
 }
 
 #·······················································································································

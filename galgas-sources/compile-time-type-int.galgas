@@ -20,7 +20,7 @@ override method @compileTimeIntAST enterInPrecedenceGraph
 {
   let nodeName = [ctIntegerTypeName () nowhere]
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································

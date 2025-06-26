@@ -34,7 +34,7 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !self.mStandaloneFunctionName]
+  [!?ioGraph addEdge !from: inConstantName !to: self.mStandaloneFunctionName]
   for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):

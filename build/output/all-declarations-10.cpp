@@ -9186,18 +9186,18 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
                                                                          GGS_objectIR & outArgument_outResult,
                                                                          Compiler * inCompiler
                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_valuedObject var_entity_9437 ;
+  GGS_valuedObject var_entity_9447 ;
   const GGS_primaryInExpressionAST temp_0 = this ;
-  extensionMethod_searchEntity (ioArgument_ioUniversalMap, temp_0.readProperty_mReceiverName (), var_entity_9437, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 232)) ;
-  switch (var_entity_9437.enumValue ()) {
+  extensionMethod_searchEntity (ioArgument_ioUniversalMap, temp_0.readProperty_mReceiverName (), var_entity_9447, inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 232)) ;
+  switch (var_entity_9447.enumValue ()) {
   case GGS_valuedObject::Enumeration::invalid:
     break ;
   case GGS_valuedObject::Enumeration::enum_task:
     {
-      GGS_omnibusType extractedValue_9474_type_0 ;
-      var_entity_9437.getAssociatedValuesFor_task (extractedValue_9474_type_0) ;
+      GGS_omnibusType extractedValue_9484_type_0 ;
+      var_entity_9447.getAssociatedValuesFor_task (extractedValue_9484_type_0) ;
       const GGS_primaryInExpressionAST temp_1 = this ;
-      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_9474_type_0, function_llvmNameForGlobalVariable (temp_1.readProperty_mReceiverName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 235))  COMMA_SOURCE_FILE ("expression-primary.galgas", 235)) ;
+      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_9484_type_0, function_llvmNameForGlobalVariable (temp_1.readProperty_mReceiverName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 235))  COMMA_SOURCE_FILE ("expression-primary.galgas", 235)) ;
       {
       const GGS_primaryInExpressionAST temp_2 = this ;
       routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_2.readProperty_mAccessList (), outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 236)) ;
@@ -9206,12 +9206,12 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
     break ;
   case GGS_valuedObject::Enumeration::enum_driver:
     {
-      GGS_omnibusType extractedValue_10049_type_0 ;
-      GGS_bool extractedValue_10054_instancied_1 ;
-      var_entity_9437.getAssociatedValuesFor_driver (extractedValue_10049_type_0, extractedValue_10054_instancied_1) ;
+      GGS_omnibusType extractedValue_10059_type_0 ;
+      GGS_bool extractedValue_10064_instancied_1 ;
+      var_entity_9447.getAssociatedValuesFor_driver (extractedValue_10059_type_0, extractedValue_10064_instancied_1) ;
       GalgasBool test_3 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_3) {
-        test_3 = extractedValue_10054_instancied_1.operator_not (SOURCE_FILE ("expression-primary.galgas", 251)).boolEnum () ;
+        test_3 = extractedValue_10064_instancied_1.operator_not (SOURCE_FILE ("expression-primary.galgas", 251)).boolEnum () ;
         if (GalgasBool::boolTrue == test_3) {
           const GGS_primaryInExpressionAST temp_4 = this ;
           TC_Array <FixItDescription> fixItArray5 ;
@@ -9219,7 +9219,7 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
         }
       }
       const GGS_primaryInExpressionAST temp_6 = this ;
-      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_10049_type_0, function_llvmNameForGlobalVariable (temp_6.readProperty_mReceiverName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 254))  COMMA_SOURCE_FILE ("expression-primary.galgas", 254)) ;
+      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_10059_type_0, function_llvmNameForGlobalVariable (temp_6.readProperty_mReceiverName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 254))  COMMA_SOURCE_FILE ("expression-primary.galgas", 254)) ;
       {
       const GGS_primaryInExpressionAST temp_7 = this ;
       routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_7.readProperty_mAccessList (), outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 255)) ;
@@ -9228,9 +9228,9 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
     break ;
   case GGS_valuedObject::Enumeration::enum_globalConstant:
     {
-      GGS_objectIR extractedValue_10755_objectIR_0 ;
-      var_entity_9437.getAssociatedValuesFor_globalConstant (extractedValue_10755_objectIR_0) ;
-      outArgument_outResult = extractedValue_10755_objectIR_0 ;
+      GGS_objectIR extractedValue_10765_objectIR_0 ;
+      var_entity_9447.getAssociatedValuesFor_globalConstant (extractedValue_10765_objectIR_0) ;
+      outArgument_outResult = extractedValue_10765_objectIR_0 ;
       {
       const GGS_primaryInExpressionAST temp_8 = this ;
       routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_8.readProperty_mAccessList (), outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 271)) ;
@@ -9239,15 +9239,15 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
     break ;
   case GGS_valuedObject::Enumeration::enum_localConstant:
     {
-      GGS_omnibusType extractedValue_11280_type_0 ;
-      GGS_lstring extractedValue_11294_omnibusName_1 ;
-      GGS_bool extractedValue_11306__2 ;
-      var_entity_9437.getAssociatedValuesFor_localConstant (extractedValue_11280_type_0, extractedValue_11294_omnibusName_1, extractedValue_11306__2) ;
+      GGS_omnibusType extractedValue_11290_type_0 ;
+      GGS_lstring extractedValue_11304_omnibusName_1 ;
+      GGS_bool extractedValue_11316__2 ;
+      var_entity_9447.getAssociatedValuesFor_localConstant (extractedValue_11290_type_0, extractedValue_11304_omnibusName_1, extractedValue_11316__2) ;
       {
       const GGS_primaryInExpressionAST temp_9 = this ;
       extensionSetter_readAccess (ioArgument_ioUniversalMap, temp_9.readProperty_mReceiverName (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 286)) ;
       }
-      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_11280_type_0, function_llvmNameForLocalVariable (extractedValue_11294_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 287))  COMMA_SOURCE_FILE ("expression-primary.galgas", 287)) ;
+      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_11290_type_0, function_llvmNameForLocalVariable (extractedValue_11304_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 287))  COMMA_SOURCE_FILE ("expression-primary.galgas", 287)) ;
       {
       const GGS_primaryInExpressionAST temp_10 = this ;
       routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_10.readProperty_mAccessList (), outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 288)) ;
@@ -9256,10 +9256,10 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
     break ;
   case GGS_valuedObject::Enumeration::enum_localVariable:
     {
-      GGS_omnibusType extractedValue_11943_type_0 ;
-      GGS_lstring extractedValue_11957_omnibusName_1 ;
-      var_entity_9437.getAssociatedValuesFor_localVariable (extractedValue_11943_type_0, extractedValue_11957_omnibusName_1) ;
-      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_11943_type_0, function_llvmNameForLocalVariable (extractedValue_11957_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 303))  COMMA_SOURCE_FILE ("expression-primary.galgas", 303)) ;
+      GGS_omnibusType extractedValue_11953_type_0 ;
+      GGS_lstring extractedValue_11967_omnibusName_1 ;
+      var_entity_9447.getAssociatedValuesFor_localVariable (extractedValue_11953_type_0, extractedValue_11967_omnibusName_1) ;
+      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_11953_type_0, function_llvmNameForLocalVariable (extractedValue_11967_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 303))  COMMA_SOURCE_FILE ("expression-primary.galgas", 303)) ;
       {
       const GGS_primaryInExpressionAST temp_11 = this ;
       extensionSetter_readAccess (ioArgument_ioUniversalMap, temp_11.readProperty_mReceiverName (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 304)) ;
@@ -9272,10 +9272,10 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionNoSelf (const G
     break ;
   case GGS_valuedObject::Enumeration::enum_globalSyncInstance:
     {
-      GGS_omnibusType extractedValue_12610_type_0 ;
-      GGS_lstring extractedValue_12624_omnibusName_1 ;
-      var_entity_9437.getAssociatedValuesFor_globalSyncInstance (extractedValue_12610_type_0, extractedValue_12624_omnibusName_1) ;
-      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_12610_type_0, function_llvmNameForGlobalSyncInstance (extractedValue_12624_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 320))  COMMA_SOURCE_FILE ("expression-primary.galgas", 320)) ;
+      GGS_omnibusType extractedValue_12620_type_0 ;
+      GGS_lstring extractedValue_12634_omnibusName_1 ;
+      var_entity_9447.getAssociatedValuesFor_globalSyncInstance (extractedValue_12620_type_0, extractedValue_12634_omnibusName_1) ;
+      outArgument_outResult = GGS_objectIR::class_func_reference (extractedValue_12620_type_0, function_llvmNameForGlobalSyncInstance (extractedValue_12634_omnibusName_1.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 320))  COMMA_SOURCE_FILE ("expression-primary.galgas", 320)) ;
       {
       const GGS_primaryInExpressionAST temp_13 = this ;
       routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, temp_13.readProperty_mAccessList (), outArgument_outResult, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 321)) ;
@@ -9327,65 +9327,65 @@ void cPtr_primaryInExpressionAST::method_analyzePrimaryExpressionWithSelf (const
                                                                            COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult = GGS_objectIR::class_func_reference (constinArgument_inSelfType, function_llvmNameForSelf (inCompiler COMMA_SOURCE_FILE ("expression-primary.galgas", 432))  COMMA_SOURCE_FILE ("expression-primary.galgas", 432)) ;
   const GGS_primaryInExpressionAST temp_0 = this ;
-  UpEnumerator_primaryInExpressionAccessListAST enumerator_16731 (temp_0.readProperty_mAccessList ()) ;
-  while (enumerator_16731.hasCurrentObject ()) {
-    switch (enumerator_16731.current_mAccess (HERE).enumValue ()) {
+  UpEnumerator_primaryInExpressionAccessListAST enumerator_16741 (temp_0.readProperty_mAccessList ()) ;
+  while (enumerator_16741.hasCurrentObject ()) {
+    switch (enumerator_16741.current_mAccess (HERE).enumValue ()) {
     case GGS_primaryInExpressionAccessAST::Enumeration::invalid:
       break ;
     case GGS_primaryInExpressionAccessAST::Enumeration::enum_integerSlice:
       {
-        GGS_lbigint extractedValue_16812_low_0 ;
-        GGS_lbigint extractedValue_16825_high_1 ;
-        enumerator_16731.current_mAccess (HERE).getAssociatedValuesFor_integerSlice (extractedValue_16812_low_0, extractedValue_16825_high_1) ;
+        GGS_lbigint extractedValue_16822_low_0 ;
+        GGS_lbigint extractedValue_16835_high_1 ;
+        enumerator_16741.current_mAccess (HERE).getAssociatedValuesFor_integerSlice (extractedValue_16822_low_0, extractedValue_16835_high_1) ;
         {
-        routine_handleSliceInExpression_3F_context_26__3F__3F__26_temporary_26_instructionListIR (constinArgument_inContext, outArgument_outResult, extractedValue_16812_low_0, extractedValue_16825_high_1, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 437)) ;
+        routine_handleSliceInExpression_3F_context_26__3F__3F__26_temporary_26_instructionListIR (constinArgument_inContext, outArgument_outResult, extractedValue_16822_low_0, extractedValue_16835_high_1, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 437)) ;
         }
       }
       break ;
     case GGS_primaryInExpressionAccessAST::Enumeration::enum_property:
       {
-        GGS_lstring extractedValue_17068_propertyName_0 ;
-        enumerator_16731.current_mAccess (HERE).getAssociatedValuesFor_property (extractedValue_17068_propertyName_0) ;
+        GGS_lstring extractedValue_17078_propertyName_0 ;
+        enumerator_16741.current_mAccess (HERE).getAssociatedValuesFor_property (extractedValue_17078_propertyName_0) ;
         {
-        routine_handlePropertyAccessInExpression_3F_context_26__3F__3F__26_temporary_26_alloca_26_instructionListIR (constinArgument_inContext, outArgument_outResult, extractedValue_17068_propertyName_0, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 446)) ;
+        routine_handlePropertyAccessInExpression_3F_context_26__3F__3F__26_temporary_26_alloca_26_instructionListIR (constinArgument_inContext, outArgument_outResult, extractedValue_17078_propertyName_0, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 446)) ;
         }
       }
       break ;
     case GGS_primaryInExpressionAccessAST::Enumeration::enum_arrayAccess:
       {
-        GGS_expressionAST extractedValue_17377_indexExpression_0 ;
-        GGS_location extractedValue_17403_endOfIndex_1 ;
-        GGS_bool extractedValue_17414_checkIndexExpression_2 ;
-        enumerator_16731.current_mAccess (HERE).getAssociatedValuesFor_arrayAccess (extractedValue_17377_indexExpression_0, extractedValue_17403_endOfIndex_1, extractedValue_17414_checkIndexExpression_2) ;
+        GGS_expressionAST extractedValue_17387_indexExpression_0 ;
+        GGS_location extractedValue_17413_endOfIndex_1 ;
+        GGS_bool extractedValue_17424_checkIndexExpression_2 ;
+        enumerator_16741.current_mAccess (HERE).getAssociatedValuesFor_arrayAccess (extractedValue_17387_indexExpression_0, extractedValue_17413_endOfIndex_1, extractedValue_17424_checkIndexExpression_2) ;
         {
-        routine_handleArrayAccessInExpression_26__3F__3F__3F__3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR (outArgument_outResult, extractedValue_17377_indexExpression_0, extractedValue_17403_endOfIndex_1, extractedValue_17414_checkIndexExpression_2, constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 456)) ;
+        routine_handleArrayAccessInExpression_26__3F__3F__3F__3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR (outArgument_outResult, extractedValue_17387_indexExpression_0, extractedValue_17413_endOfIndex_1, extractedValue_17424_checkIndexExpression_2, constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inOptionalTargetType, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 456)) ;
         }
       }
       break ;
     case GGS_primaryInExpressionAccessAST::Enumeration::enum_funcCall:
       {
-        GGS_lstring extractedValue_17977_methodName_0 ;
-        GGS_effectiveArgumentListAST extractedValue_18014_arguments_1 ;
-        GGS_location extractedValue_18034_errorLocation_2 ;
-        enumerator_16731.current_mAccess (HERE).getAssociatedValuesFor_funcCall (extractedValue_17977_methodName_0, extractedValue_18014_arguments_1, extractedValue_18034_errorLocation_2) ;
+        GGS_lstring extractedValue_17987_methodName_0 ;
+        GGS_effectiveArgumentListAST extractedValue_18024_arguments_1 ;
+        GGS_location extractedValue_18044_errorLocation_2 ;
+        enumerator_16741.current_mAccess (HERE).getAssociatedValuesFor_funcCall (extractedValue_17987_methodName_0, extractedValue_18024_arguments_1, extractedValue_18044_errorLocation_2) ;
         GalgasBool test_1 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_1) {
           test_1 = constinArgument_inRoutineAttributes.getter_contains (GGS_routineAttributes::class_func_isGuard (SOURCE_FILE ("expression-primary.galgas", 473)) COMMA_SOURCE_FILE ("expression-primary.galgas", 473)).boolEnum () ;
           if (GalgasBool::boolTrue == test_1) {
             TC_Array <FixItDescription> fixItArray2 ;
-            inCompiler->emitSemanticError (extractedValue_18034_errorLocation_2, GGS_string ("a method cannot be called in guard"), fixItArray2  COMMA_SOURCE_FILE ("expression-primary.galgas", 474)) ;
+            inCompiler->emitSemanticError (extractedValue_18044_errorLocation_2, GGS_string ("a method cannot be called in guard"), fixItArray2  COMMA_SOURCE_FILE ("expression-primary.galgas", 474)) ;
             outArgument_outResult.drop () ; // Release error dropped variable
           }
         }
         if (GalgasBool::boolFalse == test_1) {
           {
-          routine_handleFunctionCallInExpression_3F__26__3F_self_3F_context_3F_mode_3F_routineAttributes_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__26_ (extractedValue_17977_methodName_0, outArgument_outResult, constinArgument_inSelfType, constinArgument_inContext, constinArgument_inMode, constinArgument_inRoutineAttributes, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_18014_arguments_1, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 476)) ;
+          routine_handleFunctionCallInExpression_3F__26__3F_self_3F_context_3F_mode_3F_routineAttributes_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__26_ (extractedValue_17987_methodName_0, outArgument_outResult, constinArgument_inSelfType, constinArgument_inContext, constinArgument_inMode, constinArgument_inRoutineAttributes, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_18024_arguments_1, ioArgument_ioInstructionGenerationList, inCompiler  COMMA_SOURCE_FILE ("expression-primary.galgas", 476)) ;
           }
         }
       }
       break ;
     }
-    enumerator_16731.gotoNextObject () ;
+    enumerator_16741.gotoNextObject () ;
   }
 }
 
@@ -10554,23 +10554,23 @@ void cPtr_compileTimeInfixOperatorUsage::method_eval (const GGS_objectIR constin
                                                       GGS_bigint & outArgument_outResult,
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bigint var_leftValue_10527 ;
-  GGS_omnibusType joker_10511_1 ; // Joker input parameter
-  constinArgument_inLeftOperand.method_extractLiteralInteger (joker_10511_1, var_leftValue_10527, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 273)) ;
-  GGS_bigint var_rightValue_10594 ;
-  GGS_omnibusType joker_10578_1 ; // Joker input parameter
-  constinArgument_inRightOperand.method_extractLiteralInteger (joker_10578_1, var_rightValue_10594, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 274)) ;
-  GGS_ctMap var_varMap_10619 = GGS_ctMap::init (inCompiler COMMA_HERE) ;
+  GGS_bigint var_leftValue_10567 ;
+  GGS_omnibusType joker_10551_1 ; // Joker input parameter
+  constinArgument_inLeftOperand.method_extractLiteralInteger (joker_10551_1, var_leftValue_10567, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 273)) ;
+  GGS_bigint var_rightValue_10634 ;
+  GGS_omnibusType joker_10618_1 ; // Joker input parameter
+  constinArgument_inRightOperand.method_extractLiteralInteger (joker_10618_1, var_rightValue_10634, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 274)) ;
+  GGS_ctMap var_varMap_10659 = GGS_ctMap::init (inCompiler COMMA_HERE) ;
   {
   const GGS_compileTimeInfixOperatorUsage temp_0 = this ;
-  var_varMap_10619.setter_insertKey (temp_0.readProperty_mLeftOperandName (), var_leftValue_10527, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
+  var_varMap_10659.setter_insertKey (temp_0.readProperty_mLeftOperandName (), var_leftValue_10567, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 276)) ;
   }
   {
   const GGS_compileTimeInfixOperatorUsage temp_1 = this ;
-  var_varMap_10619.setter_insertKey (temp_1.readProperty_mRightOperandName (), var_rightValue_10594, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
+  var_varMap_10659.setter_insertKey (temp_1.readProperty_mRightOperandName (), var_rightValue_10634, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 277)) ;
   }
   const GGS_compileTimeInfixOperatorUsage temp_2 = this ;
-  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mExpression ().ptr (), var_varMap_10619, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
+  callExtensionMethod_computeCompileTimeExpression ((cPtr_ctExpressionAST *) temp_2.readProperty_mExpression ().ptr (), var_varMap_10659, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("infix-operator-compile-time.galgas", 278)) ;
 }
 
 //--------------------------------------------------------------------------------------------------

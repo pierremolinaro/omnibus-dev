@@ -99,9 +99,9 @@ override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
-  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
-  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName ]
+  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
+  [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
 }
 
 #·······················································································································

@@ -107,7 +107,7 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !self.mRegisterGroupName]
+  [!?ioGraph addEdge !from: inConstantName !to: self.mRegisterGroupName]
   switch self.mGroupIndex
   case noIndex :
   case index (@expressionAST indexExpression * *) :

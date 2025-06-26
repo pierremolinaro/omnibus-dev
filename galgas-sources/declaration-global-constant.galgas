@@ -67,11 +67,11 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
   [!?ioGraph addNode !self.mConstantName !self]
 #--- Add dependency from constant type name
   if self.mConstantTypeName.string != "" then
-    [!?ioGraph addEdge !self.mConstantName !self.mConstantTypeName]
+    [!?ioGraph addEdge !from: self.mConstantName !to: self.mConstantTypeName]
   end
 #--- Add dependency from source expression
   [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mConstantName !?ioGraph]
-  [!?ioGraph addEdge !self.mConstantName !compileTimeDeclarationBarrier ()]
+  [!?ioGraph addEdge !from: self.mConstantName !to: compileTimeDeclarationBarrier ()]
 }
 
 #·······················································································································

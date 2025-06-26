@@ -159,7 +159,7 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
   s += ")"
   let nodeName = @lstring {!s !self.mFunctionName.location}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
+  [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
 #---
   for (* * formalArgumentTypeName *) in self.mFunctionFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]

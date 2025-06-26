@@ -41,7 +41,7 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName !self.mControlRegisterLValue.mRegisterGroupName]
+  [!?ioGraph addEdge !from: inConstantName !to: self.mControlRegisterLValue.mRegisterGroupName]
   [self.mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 

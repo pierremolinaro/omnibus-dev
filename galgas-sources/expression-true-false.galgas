@@ -38,7 +38,7 @@ override method @literalBooleanInExpressionAST addDependenceEdgeForStaticExpress
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: inConstantName !to: [ctBoolTypeName () nowhere]]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

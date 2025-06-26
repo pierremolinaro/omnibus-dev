@@ -178,18 +178,18 @@ override method @staticListAST enterExtension
 override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 #--- Add node
   [!?ioGraph addNode !self.mStaticListName !self]
-  [!?ioGraph addEdge !self.mStaticListName !compileTimeDeclarationBarrier ()]
+  [!?ioGraph addEdge !from: self.mStaticListName !to: compileTimeDeclarationBarrier ()]
 #--- Add dependency edges for type declaration
   for (* type) in self.mPropertyList do
     switch type
     case valueType (@lstring propertyTypeName) :
-      [!?ioGraph addEdge !self.mStaticListName !propertyTypeName]
+      [!?ioGraph addEdge !from: self.mStaticListName !to: propertyTypeName]
     case function (* @routineFormalArgumentListAST formalArgs @lstring returnType) :
       for (* * formalArgumentTypeName *) in formalArgs do
         [!?ioGraph noteNode !formalArgumentTypeName]
       end
       if returnType.string != "" then
-        [!?ioGraph addEdge !self.mStaticListName !returnType]
+        [!?ioGraph addEdge !from: self.mStaticListName !to: returnType]
       end
     end
   end

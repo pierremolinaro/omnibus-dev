@@ -31,7 +31,7 @@ override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpress
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  [!?ioGraph addEdge !inConstantName ![ctIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !from: inConstantName !to: [ctIntegerTypeName () nowhere]]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

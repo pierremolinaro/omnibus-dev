@@ -182,11 +182,11 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [self.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   if self.mReceiverTypeName.string != "" then
     [!?ioGraph noteNode !self.mReceiverTypeName]
-    [!?ioGraph addEdge !nodeKey !self.mReceiverTypeName]
+    [!?ioGraph addEdge !from: nodeKey !to: self.mReceiverTypeName]
   end
   if self.mReturnTypeName.string != "" then
     [!?ioGraph noteNode !self.mReturnTypeName]
-    [!?ioGraph addEdge !nodeKey !self.mReturnTypeName]
+    [!?ioGraph addEdge !from: nodeKey !to: self.mReturnTypeName]
   end
 }
 

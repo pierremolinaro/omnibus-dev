@@ -45,7 +45,7 @@ syntax extension omnibus_syntax {
 override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mSyncInstanceName !self]
   if self.mSyncTypeName.string != "" then
-    [!?ioGraph addEdge !self.mSyncInstanceName !self.mSyncTypeName]
+    [!?ioGraph addEdge !from: self.mSyncInstanceName !to: self.mSyncTypeName]
   end
   [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mSyncInstanceName !?ioGraph]
 }

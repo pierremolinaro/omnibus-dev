@@ -103,7 +103,7 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   if self.mReceiverName.string != "" then
-    [!?ioGraph addEdge !inConstantName !self.mReceiverName]
+    [!?ioGraph addEdge !from: inConstantName !to: self.mReceiverName]
   end
   for (access) in self.mAccessList do
     switch access

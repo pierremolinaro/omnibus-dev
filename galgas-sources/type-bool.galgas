@@ -26,7 +26,7 @@ override method @boolTypeAST enterInPrecedenceGraph
 {
   let nodeName = [boolTypeName () nowhere]
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································

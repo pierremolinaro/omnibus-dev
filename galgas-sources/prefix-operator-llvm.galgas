@@ -173,8 +173,8 @@ override method @llvmPrefixOperatorAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
-  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
 }
 
 #·······················································································································

@@ -2962,11 +2962,11 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const GGS_controlRegi
     break ;
   case GGS_registerGroupIndexAST::Enumeration::enum_index:
     {
-      GGS_expressionAST extractedValue_4280_indexExpression_0 ;
-      GGS_location extractedValue_4296__1 ;
-      GGS_bool extractedValue_4298__2 ;
-      temp_1.readProperty_mGroupIndex ().getAssociatedValuesFor_index (extractedValue_4280_indexExpression_0, extractedValue_4296__1, extractedValue_4298__2) ;
-      callExtensionMethod_addDependenceEdgeForStaticExpression ((cPtr_expressionAST *) extractedValue_4280_indexExpression_0.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 114)) ;
+      GGS_expressionAST extractedValue_4290_indexExpression_0 ;
+      GGS_location extractedValue_4306__1 ;
+      GGS_bool extractedValue_4308__2 ;
+      temp_1.readProperty_mGroupIndex ().getAssociatedValuesFor_index (extractedValue_4290_indexExpression_0, extractedValue_4306__1, extractedValue_4308__2) ;
+      callExtensionMethod_addDependenceEdgeForStaticExpression ((cPtr_expressionAST *) extractedValue_4290_indexExpression_0.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 114)) ;
     }
     break ;
   }
@@ -2978,11 +2978,11 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const GGS_controlRegi
     break ;
   case GGS_registerIndexAST::Enumeration::enum_index:
     {
-      GGS_expressionAST extractedValue_4469_indexExpression_0 ;
-      GGS_location extractedValue_4485__1 ;
-      GGS_bool extractedValue_4487__2 ;
-      temp_2.readProperty_mRegisterIndex ().getAssociatedValuesFor_index (extractedValue_4469_indexExpression_0, extractedValue_4485__1, extractedValue_4487__2) ;
-      callExtensionMethod_addDependenceEdgeForStaticExpression ((cPtr_expressionAST *) extractedValue_4469_indexExpression_0.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 119)) ;
+      GGS_expressionAST extractedValue_4479_indexExpression_0 ;
+      GGS_location extractedValue_4495__1 ;
+      GGS_bool extractedValue_4497__2 ;
+      temp_2.readProperty_mRegisterIndex ().getAssociatedValuesFor_index (extractedValue_4479_indexExpression_0, extractedValue_4495__1, extractedValue_4497__2) ;
+      callExtensionMethod_addDependenceEdgeForStaticExpression ((cPtr_expressionAST *) extractedValue_4479_indexExpression_0.ptr (), constinArgument_inConstantName, ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 119)) ;
     }
     break ;
   }
@@ -3016,22 +3016,22 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
   outArgument_outRegisterTypeBitCount.drop () ; // Release 'out' argument
   outArgument_outSliceMap.drop () ; // Release 'out' argument
   outArgument_outllvmRegisterAddressName.drop () ; // Release 'out' argument
-  GGS_registerGroupKind var_groupKind_5791 ;
-  GGS_controlRegisterMap var_controlRegisterMap_5806 ;
+  GGS_registerGroupKind var_groupKind_5801 ;
+  GGS_controlRegisterMap var_controlRegisterMap_5816 ;
   const GGS_controlRegisterLValueAST temp_0 = inObject ;
-  constinArgument_inContext.readProperty_mControlRegisterGroupMap ().method_searchKey (temp_0.readProperty_mRegisterGroupName (), var_groupKind_5791, var_controlRegisterMap_5806, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 144)) ;
-  GGS_bool var_readOnly_5961 ;
-  GGS_bool var_userAccess_5985 ;
-  GGS_bigint var_addressOffset_6037 ;
-  GGS_uint var_registerArraySize_6102 ;
-  GGS_uint var_registerElementSize_6155 ;
+  constinArgument_inContext.readProperty_mControlRegisterGroupMap ().method_searchKey (temp_0.readProperty_mRegisterGroupName (), var_groupKind_5801, var_controlRegisterMap_5816, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 144)) ;
+  GGS_bool var_readOnly_5971 ;
+  GGS_bool var_userAccess_5995 ;
+  GGS_bigint var_addressOffset_6047 ;
+  GGS_uint var_registerArraySize_6112 ;
+  GGS_uint var_registerElementSize_6165 ;
   const GGS_controlRegisterLValueAST temp_1 = inObject ;
-  GGS_controlRegisterFieldMap joker_6017 ; // Joker input parameter
-  GGS_controlRegisterFieldList joker_6055 ; // Joker input parameter
-  var_controlRegisterMap_5806.method_searchKey (temp_1.readProperty_mRegisterName (), outArgument_outRegisterType, var_readOnly_5961, var_userAccess_5985, outArgument_outSliceMap, joker_6017, var_addressOffset_6037, joker_6055, outArgument_outRegisterTypeBitCount, var_registerArraySize_6102, var_registerElementSize_6155, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 146)) ;
+  GGS_controlRegisterFieldMap joker_6027 ; // Joker input parameter
+  GGS_controlRegisterFieldList joker_6065 ; // Joker input parameter
+  var_controlRegisterMap_5816.method_searchKey (temp_1.readProperty_mRegisterName (), outArgument_outRegisterType, var_readOnly_5971, var_userAccess_5995, outArgument_outSliceMap, joker_6027, var_addressOffset_6047, joker_6065, outArgument_outRegisterTypeBitCount, var_registerArraySize_6112, var_registerElementSize_6165, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 146)) ;
   GalgasBool test_2 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_2) {
-    test_2 = constinArgument_inWriteAccess.operator_and (var_readOnly_5961 COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 160)).boolEnum () ;
+    test_2 = constinArgument_inWriteAccess.operator_and (var_readOnly_5971 COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 160)).boolEnum () ;
     if (GalgasBool::boolTrue == test_2) {
       const GGS_controlRegisterLValueAST temp_3 = inObject ;
       TC_Array <FixItDescription> fixItArray4 ;
@@ -3041,7 +3041,7 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
   if (GalgasBool::boolFalse == test_2) {
     GalgasBool test_5 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_5) {
-      GGS_bool test_6 = var_userAccess_5985.operator_not (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
+      GGS_bool test_6 = var_userAccess_5995.operator_not (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
       if (GalgasBool::boolTrue == test_6.boolEnum ()) {
         GGS_bool test_7 = constinArgument_inMode.getter_isUserMode (SOURCE_FILE ("lvalue-control-register.galgas", 163)) ;
         if (GalgasBool::boolTrue != test_7.boolEnum ()) {
@@ -3057,14 +3057,14 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
       }
     }
   }
-  GGS_string var_registerAddress_6596 ;
-  switch (var_groupKind_5791.enumValue ()) {
+  GGS_string var_registerAddress_6606 ;
+  switch (var_groupKind_5801.enumValue ()) {
   case GGS_registerGroupKind::Enumeration::invalid:
     break ;
   case GGS_registerGroupKind::Enumeration::enum_single:
     {
-      GGS_bigint extractedValue_6654_baseAddress_0 ;
-      var_groupKind_5791.getAssociatedValuesFor_single (extractedValue_6654_baseAddress_0) ;
+      GGS_bigint extractedValue_6664_baseAddress_0 ;
+      var_groupKind_5801.getAssociatedValuesFor_single (extractedValue_6664_baseAddress_0) ;
       GalgasBool test_10 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_10) {
         const GGS_controlRegisterLValueAST temp_11 = inObject ;
@@ -3073,23 +3073,23 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
           const GGS_controlRegisterLValueAST temp_12 = inObject ;
           TC_Array <FixItDescription> fixItArray13 ;
           inCompiler->emitSemanticError (temp_12.readProperty_mRegisterGroupName ().readProperty_location (), GGS_string ("subscripting not allowed, group is not an array"), fixItArray13  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 171)) ;
-          var_registerAddress_6596.drop () ; // Release error dropped variable
+          var_registerAddress_6606.drop () ; // Release error dropped variable
         }
       }
       if (GalgasBool::boolFalse == test_10) {
         const GGS_controlRegisterLValueAST temp_14 = inObject ;
         const GGS_controlRegisterLValueAST temp_15 = inObject ;
-        GGS_string var_regName_6833 = temp_14.readProperty_mRegisterGroupName ().readProperty_string ().add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)).add_operation (temp_15.readProperty_mRegisterName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)) ;
+        GGS_string var_regName_6843 = temp_14.readProperty_mRegisterGroupName ().readProperty_string ().add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)).add_operation (temp_15.readProperty_mRegisterName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 173)) ;
         {
-        extensionSetter_appendEnterRegisterAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_registerAddress_6596, extractedValue_6654_baseAddress_0, var_addressOffset_6037, var_regName_6833, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 174)) ;
+        extensionSetter_appendEnterRegisterAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_registerAddress_6606, extractedValue_6664_baseAddress_0, var_addressOffset_6047, var_regName_6843, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 174)) ;
         }
       }
     }
     break ;
   case GGS_registerGroupKind::Enumeration::enum_arrayGroup:
     {
-      GGS_lbigintlist extractedValue_7128_baseAddresses_0 ;
-      var_groupKind_5791.getAssociatedValuesFor_arrayGroup (extractedValue_7128_baseAddresses_0) ;
+      GGS_lbigintlist extractedValue_7138_baseAddresses_0 ;
+      var_groupKind_5801.getAssociatedValuesFor_arrayGroup (extractedValue_7138_baseAddresses_0) ;
       const GGS_controlRegisterLValueAST temp_16 = inObject ;
       switch (temp_16.readProperty_mGroupIndex ().enumValue ()) {
       case GGS_registerGroupIndexAST::Enumeration::invalid:
@@ -3099,22 +3099,22 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
           const GGS_controlRegisterLValueAST temp_17 = inObject ;
           TC_Array <FixItDescription> fixItArray18 ;
           inCompiler->emitSemanticError (temp_17.readProperty_mRegisterGroupName ().readProperty_location (), GGS_string ("subscripting required, group is an array"), fixItArray18  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 185)) ;
-          var_registerAddress_6596.drop () ; // Release error dropped variable
+          var_registerAddress_6606.drop () ; // Release error dropped variable
         }
         break ;
       case GGS_registerGroupIndexAST::Enumeration::enum_index:
         {
-          GGS_expressionAST extractedValue_7307_indexExpression_0 ;
-          GGS_location extractedValue_7323_endOfIndex_1 ;
-          GGS_bool extractedValue_7334_checkIndexExpression_2 ;
-          temp_16.readProperty_mGroupIndex ().getAssociatedValuesFor_index (extractedValue_7307_indexExpression_0, extractedValue_7323_endOfIndex_1, extractedValue_7334_checkIndexExpression_2) ;
-          GGS_objectIR var_groupIndexIR_7876 ;
+          GGS_expressionAST extractedValue_7317_indexExpression_0 ;
+          GGS_location extractedValue_7333_endOfIndex_1 ;
+          GGS_bool extractedValue_7344_checkIndexExpression_2 ;
+          temp_16.readProperty_mGroupIndex ().getAssociatedValuesFor_index (extractedValue_7317_indexExpression_0, extractedValue_7333_endOfIndex_1, extractedValue_7344_checkIndexExpression_2) ;
+          GGS_objectIR var_groupIndexIR_7886 ;
           {
-          routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_7307_indexExpression_0, extractedValue_7323_endOfIndex_1, extractedValue_7334_checkIndexExpression_2, extractedValue_7128_baseAddresses_0.getter_count (SOURCE_FILE ("lvalue-control-register.galgas", 199)).getter_bigint (SOURCE_FILE ("lvalue-control-register.galgas", 199)), outArgument_outRegisterType, ioArgument_ioInstructionGenerationList, var_groupIndexIR_7876, inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 187)) ;
+          routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_7317_indexExpression_0, extractedValue_7333_endOfIndex_1, extractedValue_7344_checkIndexExpression_2, extractedValue_7138_baseAddresses_0.getter_count (SOURCE_FILE ("lvalue-control-register.galgas", 199)).getter_bigint (SOURCE_FILE ("lvalue-control-register.galgas", 199)), outArgument_outRegisterType, ioArgument_ioInstructionGenerationList, var_groupIndexIR_7886, inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 187)) ;
           }
           {
           const GGS_controlRegisterLValueAST temp_19 = inObject ;
-          extensionSetter_appendEnterRegisterGroupSubscriptedAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_registerAddress_6596, temp_19.readProperty_mRegisterGroupName ().readProperty_string (), extractedValue_7128_baseAddresses_0.getter_count (SOURCE_FILE ("lvalue-control-register.galgas", 208)), var_groupIndexIR_7876, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 204)) ;
+          extensionSetter_appendEnterRegisterGroupSubscriptedAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, var_registerAddress_6606, temp_19.readProperty_mRegisterGroupName ().readProperty_string (), extractedValue_7138_baseAddresses_0.getter_count (SOURCE_FILE ("lvalue-control-register.galgas", 208)), var_groupIndexIR_7886, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 204)) ;
           }
         }
         break ;
@@ -3130,9 +3130,9 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
     {
       GalgasBool test_21 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_21) {
-        test_21 = GGS_bool (ComparisonKind::equal, var_registerArraySize_6102.objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
+        test_21 = GGS_bool (ComparisonKind::equal, var_registerArraySize_6112.objectCompare (GGS_uint (uint32_t (0U)))).boolEnum () ;
         if (GalgasBool::boolTrue == test_21) {
-          outArgument_outllvmRegisterAddressName = var_registerAddress_6596 ;
+          outArgument_outllvmRegisterAddressName = var_registerAddress_6606 ;
         }
       }
       if (GalgasBool::boolFalse == test_21) {
@@ -3145,16 +3145,16 @@ void extensionMethod_controlRegisterLValueSemanticAnalysis (const GGS_controlReg
     break ;
   case GGS_registerIndexAST::Enumeration::enum_index:
     {
-      GGS_expressionAST extractedValue_8455_indexExpression_0 ;
-      GGS_location extractedValue_8471_endOfIndex_1 ;
-      GGS_bool extractedValue_8482_checkIndexExpression_2 ;
-      temp_20.readProperty_mRegisterIndex ().getAssociatedValuesFor_index (extractedValue_8455_indexExpression_0, extractedValue_8471_endOfIndex_1, extractedValue_8482_checkIndexExpression_2) ;
-      GGS_objectIR var_indexIR_8988 ;
+      GGS_expressionAST extractedValue_8465_indexExpression_0 ;
+      GGS_location extractedValue_8481_endOfIndex_1 ;
+      GGS_bool extractedValue_8492_checkIndexExpression_2 ;
+      temp_20.readProperty_mRegisterIndex ().getAssociatedValuesFor_index (extractedValue_8465_indexExpression_0, extractedValue_8481_endOfIndex_1, extractedValue_8492_checkIndexExpression_2) ;
+      GGS_objectIR var_indexIR_8998 ;
       {
-      routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_8455_indexExpression_0, extractedValue_8471_endOfIndex_1, extractedValue_8482_checkIndexExpression_2, var_registerArraySize_6102.getter_bigint (SOURCE_FILE ("lvalue-control-register.galgas", 234)), outArgument_outRegisterType, ioArgument_ioInstructionGenerationList, var_indexIR_8988, inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 222)) ;
+      routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__3F__3F__3F_arraySize_3F_elementType_26__21_ (constinArgument_inSelfType, constinArgument_inRoutineAttributes, constinArgument_inContext, constinArgument_inMode, ioArgument_ioTemporaries, ioArgument_ioStaticEntityMap, ioArgument_ioUniversalMap, ioArgument_ioAllocaList, extractedValue_8465_indexExpression_0, extractedValue_8481_endOfIndex_1, extractedValue_8492_checkIndexExpression_2, var_registerArraySize_6112.getter_bigint (SOURCE_FILE ("lvalue-control-register.galgas", 234)), outArgument_outRegisterType, ioArgument_ioInstructionGenerationList, var_indexIR_8998, inCompiler  COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 222)) ;
       }
       {
-      extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, outArgument_outllvmRegisterAddressName, var_indexIR_8988, var_registerAddress_6596, var_registerElementSize_6155, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 239)) ;
+      extensionSetter_appendComputeSubscriptedVolatileRegisterAddress (ioArgument_ioInstructionGenerationList, ioArgument_ioTemporaries, outArgument_outllvmRegisterAddressName, var_indexIR_8998, var_registerAddress_6606, var_registerElementSize_6165, inCompiler COMMA_SOURCE_FILE ("lvalue-control-register.galgas", 239)) ;
       }
     }
     break ;

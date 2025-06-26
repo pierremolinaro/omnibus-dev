@@ -311,9 +311,9 @@ func %once isrSlotTypeName -> @string {
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
-  [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
-  [!?ioGraph addEdge !rootNode !self.mPanicCodeTypeName]
-  [!?ioGraph addEdge !rootNode ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
+  [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
+  [!?ioGraph addEdge !from: rootNode !to: [ctBoolTypeName () nowhere]]
 }
 
 #·······················································································································

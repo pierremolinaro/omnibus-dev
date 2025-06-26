@@ -86,7 +86,7 @@ override method @compileTimeConvertToBooleanAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
 }
 
 #·······················································································································
@@ -102,7 +102,7 @@ override method @llvmConvertToBooleanAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mReceiverTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
 }
 
 #·······················································································································

@@ -182,10 +182,10 @@ override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mLeftTypeName]
-  [!?ioGraph addEdge !nodeName !self.mRightTypeName]
-  [!?ioGraph addEdge !nodeName !self.mResultTypeName]
-  [!?ioGraph addEdge !compileTimeDeclarationBarrier () !nodeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mLeftTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mRightTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
+  [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
 }
 
 #·······················································································································

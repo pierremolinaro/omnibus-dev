@@ -47,7 +47,7 @@ override method @typeAliasDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !self.mAliasTypeName !self]
-  [!?ioGraph addEdge !self.mAliasTypeName !self.mOriginalTypeName]
+  [!?ioGraph addEdge !from: self.mAliasTypeName !to: self.mOriginalTypeName]
 }
 
 #·······················································································································

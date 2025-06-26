@@ -295,7 +295,7 @@ map @sliceMap {
 method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for reg in self.mRegisters do
     [!?ioGraph noteNode !reg.mRegisterTypeName]
-    [!?ioGraph addEdge !compileTimeDeclarationBarrier () !reg.mRegisterTypeName]
+    [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: reg.mRegisterTypeName]
   end
 }
 
@@ -320,15 +320,15 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
 #--- Add dependence definitions
   for reg in self.mRegisters do
   #--- Add dependency from type name
-    [!?ioGraph addEdge !nodeName !reg.mRegisterTypeName]
-    [!?ioGraph addEdge !nodeName !compileTimeDeclarationBarrier ()]
+    [!?ioGraph addEdge !from: nodeName !to: reg.mRegisterTypeName]
+    [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
   #--- Add dependency from the number of integer type name (i.e. $u32 --> $u5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"u"]
     if ([split count] == 2) && ([split mValueAtIndex !0] == "") && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
       if n > 0 then
         let bitSizeTypeName = @lstring {!"u" + [n-1 significantBitCount] !reg.mRegisterTypeName}
-        [!?ioGraph addEdge !nodeName !bitSizeTypeName]
+        [!?ioGraph addEdge !from: nodeName !to: bitSizeTypeName]
       end
     end
   #--- Add integer type corresponding to slices
@@ -343,7 +343,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
     end
   #--- Add dependency from config node
     let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
-    [!?ioGraph addEdge !nodeName !rootNode]
+    [!?ioGraph addEdge !from: nodeName !to: rootNode]
   #--- Add dependency from source expression
     for register in reg.mRegisterArrayList do
       switch register.mControlRegisterKind

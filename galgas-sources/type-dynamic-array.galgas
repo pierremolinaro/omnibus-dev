@@ -34,9 +34,9 @@ syntax extension omnibus_syntax {
 
 override method @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mDynamicArrayTypeName !self]
-  [!?ioGraph addEdge !self.mDynamicArrayTypeName !self.mElementTypeName]
+  [!?ioGraph addEdge !from: self.mDynamicArrayTypeName !to: self.mElementTypeName]
   let rootNode = @lstring {!configurationNodeNameForPrecedenceGraph () !self.mDynamicArrayTypeName.location}
-  [!?ioGraph addEdge !self.mDynamicArrayTypeName !rootNode]
+  [!?ioGraph addEdge !from: self.mDynamicArrayTypeName !to: rootNode]
 }
 
 #·······················································································································

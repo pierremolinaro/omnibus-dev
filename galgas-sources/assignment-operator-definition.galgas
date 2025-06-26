@@ -147,8 +147,8 @@ override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
 {
   let nodeName = @lstring {!self.mTargetTypeName.string + " = " + self.mSourceTypeName !self.mOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName !self.mTargetTypeName]
-  [!?ioGraph addEdge !nodeName !self.mSourceTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mTargetTypeName]
+  [!?ioGraph addEdge !from: nodeName !to: self.mSourceTypeName]
 }
 
 #·······················································································································

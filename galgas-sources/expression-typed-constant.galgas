@@ -43,7 +43,7 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   if self.mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !inConstantName !self.mOptionalTypeName]
+    [!?ioGraph addEdge !from: inConstantName !to: self.mOptionalTypeName]
   end
   for (access) in self.mAccessList do
     switch access

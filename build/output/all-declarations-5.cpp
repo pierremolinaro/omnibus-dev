@@ -2589,10 +2589,10 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_compileTime:
     {
-      GGS_bool extractedValue_8930_value_0 ;
-      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8930_value_0) ;
+      GGS_bool extractedValue_8950_value_0 ;
+      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8950_value_0) ;
       GGS_bigint temp_1 ;
-      const GalgasBool test_2 = extractedValue_8930_value_0.boolEnum () ;
+      const GalgasBool test_2 = extractedValue_8950_value_0.boolEnum () ;
       if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
       }else if (GalgasBool::boolFalse == test_2) {
@@ -2603,9 +2603,9 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_llvmVariable:
     {
-      GGS_string extractedValue_9004_name_0 ;
-      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9004_name_0) ;
-      result_result = extractedValue_9004_name_0 ;
+      GGS_string extractedValue_9024_name_0 ;
+      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9024_name_0) ;
+      result_result = extractedValue_9024_name_0 ;
     }
     break ;
   }
@@ -2873,11 +2873,11 @@ void extensionMethod_generateConvertToBooleanCode (const GGS_implicitConversionT
                                                    Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult.drop () ; // Release 'out' argument
-  GGS_lstring var_key_12813 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
-  GGS_abstractImplicitConverterToBoolean var_converter_12923 ;
+  GGS_lstring var_key_12833 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
+  GGS_abstractImplicitConverterToBoolean var_converter_12943 ;
   const GGS_implicitConversionToBooleanMap temp_0 = inObject ;
-  temp_0.method_searchKey (var_key_12813, var_converter_12923, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 285)) ;
-  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12923.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 286)) ;
+  temp_0.method_searchKey (var_key_12833, var_converter_12943, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 285)) ;
+  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12943.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 286)) ;
 }
 
 

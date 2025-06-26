@@ -28,9 +28,9 @@ override method @integerDeclarationAST enterInPrecedenceGraph
 {
   let nodeName = [[self typeName] nowhere]
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !nodeName ![ctIntegerTypeName () nowhere]]
-  [!?ioGraph addEdge !nodeName ![boolTypeName () nowhere]]
-  [!?ioGraph addEdge !nodeName ![ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: [ctIntegerTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: [boolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————

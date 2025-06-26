@@ -62,7 +62,7 @@ override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph 
  }
  [!?ioGraph addNode !nodeName !self]
   let configNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPriority.location}
- [!?ioGraph addEdge !nodeName !configNode]
+ [!?ioGraph addEdge !from: nodeName !to: configNode]
 }
 
 #·······················································································································

@@ -44,10 +44,10 @@ syntax extension omnibus_syntax {
 
 override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mFixedSizeArrayType !self]
-  [!?ioGraph addEdge !self.mFixedSizeArrayType !self.mElementTypeName]
+  [!?ioGraph addEdge !from: self.mFixedSizeArrayType !to: self.mElementTypeName]
   [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mFixedSizeArrayType !?ioGraph]
   let rootNode = @lstring {!configurationNodeNameForPrecedenceGraph () !self.mFixedSizeArrayType.location}
-  [!?ioGraph addEdge !self.mFixedSizeArrayType !rootNode]
+  [!?ioGraph addEdge !from: self.mFixedSizeArrayType !to: rootNode]
 }
 
 #·······················································································································

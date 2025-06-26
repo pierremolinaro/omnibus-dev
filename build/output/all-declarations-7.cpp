@@ -8088,12 +8088,12 @@ void extensionSetter_appendAssignmentIR (GGS_instructionListIR & ioObject,
                                          const GGS_bool constinArgument_inTargetIsInitialized,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_lstring var_key_15745 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
-  GGS_abstractAssignmentOperatorUsage var_operatorUsage_15887 ;
-  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15745, var_operatorUsage_15887, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
-  GGS_instructionListIR var_instructions_15927 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
-  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15887.ptr (), ioArgument_ioTemporaries, var_instructions_15927, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
-  ioObject.plusAssignOperation(var_instructions_15927, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
+  GGS_lstring var_key_15765 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
+  GGS_abstractAssignmentOperatorUsage var_operatorUsage_15907 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15765, var_operatorUsage_15907, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
+  GGS_instructionListIR var_instructions_15947 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
+  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15907.ptr (), ioArgument_ioTemporaries, var_instructions_15947, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
+  ioObject.plusAssignOperation(var_instructions_15947, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
 }
 
 
