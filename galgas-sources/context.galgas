@@ -165,6 +165,7 @@ map @typePropertyGetterMap {
   public var @propertyGetterMap mGetterMap
   insert insertKey error message "the $%K type is already declared"
   search searchKey error message "there is no $%K type"
+  replace replaceKey error message "there is no $%K type"
   insert or replace
 }
 
@@ -174,20 +175,28 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
                                      ?let @lstring inGetterName
                                      ?let @propertyVisibility inVisibility
                                      ?let @propertyGetterKind inAccess {
-  with inTypeName.string in !?self.mTypePropertyGetterMap do
-    [!?mGetterMap insertKey !inGetterName !inVisibility !inAccess]
+  if var entry =  self.mTypePropertyGetterMap @[inTypeName.string] then
+    [!?entry.mGetterMap insertKey !inGetterName !inVisibility !inAccess]
+    [!?self.mTypePropertyGetterMap replaceKey !with: entry]
   else
     var @propertyGetterMap getterMap = @()
     [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
     [!?self.mTypePropertyGetterMap insertKey !inTypeName !getterMap]
   end
+//  with inTypeName.string in !?self.mTypePropertyGetterMap do
+//    [!?mGetterMap insertKey !inGetterName !inVisibility !inAccess]
+//  else
+//    var @propertyGetterMap getterMap = @()
+//    [!?getterMap insertKey !inGetterName !inVisibility !inAccess]
+//    [!?self.mTypePropertyGetterMap insertKey !inTypeName !getterMap]
+//  end
 }
 
 #·······················································································································
 
 getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
-  with inType.omnibusTypeDescriptionName in self.mTypePropertyGetterMap do
-    result = mGetterMap
+  if let entry = self.mTypePropertyGetterMap @[inType.omnibusTypeDescriptionName] then
+    result = entry.mGetterMap
   else
     result = @()
   end
@@ -242,6 +251,7 @@ map @propertyGetterMap {
   public var @propertyGetterKind mAccess
   insert insertKey error message "the '%K' property is already declared"
   search searchKey error message "there is no '%K' property"
+  replace replaceKey error message "there is no '%K' property"
 }
 
 #—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -252,6 +262,7 @@ map @typePropertySetterMap {
   public var @propertySetterMap mSetterMap
   insert insertKey error message "the $%K type is already declared"
   search searchKey error message "there is no $%K type"
+  replace replaceKey error message "there is no '%K' property"
   insert or replace
 }
 
@@ -261,20 +272,28 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
                                              ?let @lstring inSetterName
                                              ?let @propertyVisibility inVisibility
                                              ?let @propertySetterKind inAccess {
-  with inTypeName.string in !?self.mTypePropertySetterMap do
-    [!?mSetterMap insertKey !inSetterName !inVisibility !inAccess]
+  if var entry = self.mTypePropertySetterMap @[inTypeName.string] then
+    [!?entry.mSetterMap insertKey !inSetterName !inVisibility !inAccess]
+    [!?self.mTypePropertySetterMap replaceKey !with: entry]
   else
     var @propertySetterMap setterMap = @()
     [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
     [!?self.mTypePropertySetterMap insertKey !inTypeName !setterMap]
   end
+//  with inTypeName.string in !?self.mTypePropertySetterMap do
+//    [!?mSetterMap insertKey !inSetterName !inVisibility !inAccess]
+//  else
+//    var @propertySetterMap setterMap = @()
+//    [!?setterMap insertKey !inSetterName !inVisibility !inAccess]
+//    [!?self.mTypePropertySetterMap insertKey !inTypeName !setterMap]
+//  end
 }
 
 #·······················································································································
 
 getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
-  with inType.omnibusTypeDescriptionName in self.mTypePropertySetterMap do
-    result = mSetterMap
+  if let entry = self.mTypePropertySetterMap @[inType.omnibusTypeDescriptionName] then
+    result = entry.mSetterMap
   else
     result = @()
   end

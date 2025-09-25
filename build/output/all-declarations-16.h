@@ -10,375 +10,203 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'memoryAllocSectionName'
+//Function 'infixOperatorFunctionName'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_memoryAllocSectionName (class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+class GGS_string function_infixOperatorFunctionName (const class GGS_omnibusType & constinArgument0,
+                                                     const class GGS_omnibusInfixOperator & constinArgument1,
+                                                     const class GGS_omnibusType & constinArgument2,
+                                                     class Compiler * inCompiler
+                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'memoryFreeSectionName'
+//Function 'prefixOperatorFunctionName'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_memoryFreeSectionName (class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GGS_string function_prefixOperatorFunctionName (const class GGS_omnibusType & constinArgument0,
+                                                      const class GGS_prefixOperator & constinArgument1,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'codeOptimization?&intermediateCode'
+//Routine 'handleArrayAccessInAssignment?self&&?routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&pendingStoreComputedPropertyList????'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_codeOptimization_3F__26_intermediateCode (const class GGS_string constinArgument0,
-                                                       class GGS_intermediateCodeStruct & ioArgument1,
-                                                       class Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
+void routine_handleArrayAccessInAssignment_3F_self_26__26__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_pendingStoreComputedPropertyList_3F__3F__3F__3F_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                                      class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                                                                                      class GGS_string & ioArgument2,
+                                                                                                                                                                                                                                      const class GGS_routineAttributes constinArgument3,
+                                                                                                                                                                                                                                      const class GGS_semanticContext constinArgument4,
+                                                                                                                                                                                                                                      const class GGS_mode constinArgument5,
+                                                                                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument6,
+                                                                                                                                                                                                                                      class GGS_staticEntityMap & ioArgument7,
+                                                                                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument8,
+                                                                                                                                                                                                                                      class GGS_allocaList & ioArgument9,
+                                                                                                                                                                                                                                      class GGS_instructionListIR & ioArgument10,
+                                                                                                                                                                                                                                      class GGS_instructionListListIR & ioArgument11,
+                                                                                                                                                                                                                                      const class GGS_expressionAST constinArgument12,
+                                                                                                                                                                                                                                      const class GGS_location constinArgument13,
+                                                                                                                                                                                                                                      const class GGS_bool constinArgument14,
+                                                                                                                                                                                                                                      const class GGS_LValueOperandAST constinArgument15,
+                                                                                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'displayInvocationGraph??'
+//Routine 'handlePropertyAccessInAssignment?self&&?routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&pendingStoreComputedPropertyList??'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_displayInvocationGraph_3F__3F_ (const class GGS_routineListIR constinArgument0,
-                                             const class GGS_string constinArgument1,
-                                             class Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
+void routine_handlePropertyAccessInAssignment_3F_self_26__26__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_pendingStoreComputedPropertyList_3F__3F_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                                 class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                                                                                 class GGS_string & ioArgument2,
+                                                                                                                                                                                                                                 const class GGS_routineAttributes constinArgument3,
+                                                                                                                                                                                                                                 const class GGS_semanticContext constinArgument4,
+                                                                                                                                                                                                                                 const class GGS_mode constinArgument5,
+                                                                                                                                                                                                                                 class GGS_semanticTemporariesStruct & ioArgument6,
+                                                                                                                                                                                                                                 class GGS_staticEntityMap & ioArgument7,
+                                                                                                                                                                                                                                 class GGS_universalValuedObjectMap & ioArgument8,
+                                                                                                                                                                                                                                 class GGS_allocaList & ioArgument9,
+                                                                                                                                                                                                                                 class GGS_instructionListIR & ioArgument10,
+                                                                                                                                                                                                                                 class GGS_instructionListListIR & ioArgument11,
+                                                                                                                                                                                                                                 const class GGS_lstring constinArgument12,
+                                                                                                                                                                                                                                 const class GGS_LValueOperandAST constinArgument13,
+                                                                                                                                                                                                                                 class Compiler * inCompiler
+                                                                                                                                                                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'asSeparatorLine'
+//Routine 'handleNextOperandInAssignment?self&&??routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&pendingStoreComputedPropertyList'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_asSeparatorLine (class Compiler * inCompiler
+void routine_handleNextOperandInAssignment_3F_self_26__26__3F__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_pendingStoreComputedPropertyList (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                          class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                                                                          class GGS_string & ioArgument2,
+                                                                                                                                                                                                                          const class GGS_LValueOperandAST constinArgument3,
+                                                                                                                                                                                                                          const class GGS_routineAttributes constinArgument4,
+                                                                                                                                                                                                                          const class GGS_semanticContext constinArgument5,
+                                                                                                                                                                                                                          const class GGS_mode constinArgument6,
+                                                                                                                                                                                                                          class GGS_semanticTemporariesStruct & ioArgument7,
+                                                                                                                                                                                                                          class GGS_staticEntityMap & ioArgument8,
+                                                                                                                                                                                                                          class GGS_universalValuedObjectMap & ioArgument9,
+                                                                                                                                                                                                                          class GGS_allocaList & ioArgument10,
+                                                                                                                                                                                                                          class GGS_instructionListIR & ioArgument11,
+                                                                                                                                                                                                                          class GGS_instructionListListIR & ioArgument12,
+                                                                                                                                                                                                                          class Compiler * inCompiler
+                                                                                                                                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'enter_NOP_function&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enter_5F_NOP_5F_function_26_ (class GGS_declarationListAST & ioArgument0,
+                                           class Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'asTitleComment'
+//Routine 'analyzeGuardCall?self?routineAttributes?receiver?guardName?effective?context?requiredMode&temporary&staticEntityMap&variableMap&alloca&instructionListIR!effectiveIR!guardMangledName'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_asTitleComment (const class GGS_string & constinArgument0,
-                                          class Compiler * inCompiler
-                                          COMMA_LOCATION_ARGS) ;
+void routine_analyzeGuardCall_3F_self_3F_routineAttributes_3F_receiver_3F_guardName_3F_effective_3F_context_3F_requiredMode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_21_effectiveIR_21_guardMangledName (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                                              const class GGS_routineAttributes constinArgument1,
+                                                                                                                                                                                                                                              const class GGS_objectIR constinArgument2,
+                                                                                                                                                                                                                                              const class GGS_lstring constinArgument3,
+                                                                                                                                                                                                                                              const class GGS_effectiveArgumentListAST constinArgument4,
+                                                                                                                                                                                                                                              const class GGS_semanticContext constinArgument5,
+                                                                                                                                                                                                                                              const class GGS_mode constinArgument6,
+                                                                                                                                                                                                                                              class GGS_semanticTemporariesStruct & ioArgument7,
+                                                                                                                                                                                                                                              class GGS_staticEntityMap & ioArgument8,
+                                                                                                                                                                                                                                              class GGS_universalValuedObjectMap & ioArgument9,
+                                                                                                                                                                                                                                              class GGS_allocaList & ioArgument10,
+                                                                                                                                                                                                                                              class GGS_instructionListIR & ioArgument11,
+                                                                                                                                                                                                                                              class GGS_procCallEffectiveParameterListIR & outArgument12,
+                                                                                                                                                                                                                                              class GGS_lstring & outArgument13,
+                                                                                                                                                                                                                                              class Compiler * inCompiler
+                                                                                                                                                                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'codeGeneration?currentDir?outputFile?eof?intermediateCode?userDefinedTypes?target?panicCodeType?panicLineType?interrupts?staticlistValues?targetParameters'
+//Function 'waitForGuardChangeFunctionName'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GGS_string constinArgument0,
-                                                                                                                                                                                                          const class GGS_string constinArgument1,
-                                                                                                                                                                                                          const class GGS_location constinArgument2,
-                                                                                                                                                                                                          const class GGS_intermediateCodeStruct constinArgument3,
-                                                                                                                                                                                                          const class GGS_userLLVMTypeDefinitionListIR constinArgument4,
-                                                                                                                                                                                                          const class GGS_lstring constinArgument5,
-                                                                                                                                                                                                          const class GGS_omnibusType constinArgument6,
-                                                                                                                                                                                                          const class GGS_omnibusType constinArgument7,
-                                                                                                                                                                                                          const class GGS_availableInterruptMap constinArgument8,
-                                                                                                                                                                                                          const class GGS_staticListInitializationMap constinArgument9,
-                                                                                                                                                                                                          const class GGS_targetParameters constinArgument10,
-                                                                                                                                                                                                          class Compiler * inCompiler
-                                                                                                                                                                                                          COMMA_LOCATION_ARGS) ;
+class GGS_string function_waitForGuardChangeFunctionName (class Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateCodeFiles?currentDir?productDir?intermediateCode?userDefinedTypes?target?panicCodeType?panicLineType?interrupts?staticlistValues?targetParameters'
+//Routine 'handleArrayAccess?self&&?routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR????'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateCodeFiles_3F_currentDir_3F_productDir_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GGS_string constinArgument0,
-                                                                                                                                                                                                      const class GGS_string constinArgument1,
-                                                                                                                                                                                                      const class GGS_intermediateCodeStruct constinArgument2,
-                                                                                                                                                                                                      const class GGS_userLLVMTypeDefinitionListIR constinArgument3,
-                                                                                                                                                                                                      const class GGS_lstring constinArgument4,
-                                                                                                                                                                                                      const class GGS_omnibusType constinArgument5,
-                                                                                                                                                                                                      const class GGS_omnibusType constinArgument6,
-                                                                                                                                                                                                      const class GGS_availableInterruptMap constinArgument7,
-                                                                                                                                                                                                      const class GGS_staticListInitializationMap constinArgument8,
-                                                                                                                                                                                                      const class GGS_targetParameters constinArgument9,
-                                                                                                                                                                                                      class Compiler * inCompiler
-                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
+void routine_handleArrayAccess_3F_self_26__26__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__3F__3F__3F_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                      class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                                      class GGS_string & ioArgument2,
+                                                                                                                                                                                      const class GGS_routineAttributes constinArgument3,
+                                                                                                                                                                                      const class GGS_semanticContext constinArgument4,
+                                                                                                                                                                                      const class GGS_mode constinArgument5,
+                                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument6,
+                                                                                                                                                                                      class GGS_staticEntityMap & ioArgument7,
+                                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument8,
+                                                                                                                                                                                      class GGS_allocaList & ioArgument9,
+                                                                                                                                                                                      class GGS_instructionListIR & ioArgument10,
+                                                                                                                                                                                      const class GGS_expressionAST constinArgument11,
+                                                                                                                                                                                      const class GGS_location constinArgument12,
+                                                                                                                                                                                      const class GGS_bool constinArgument13,
+                                                                                                                                                                                      const class GGS_LValueOperandAST constinArgument14,
+                                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateTarget?currentDir?productDirectory?targetName?targetParameters'
+//Routine 'handlePropertyAccess?self&&?routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR??'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateTarget_3F_currentDir_3F_productDirectory_3F_targetName_3F_targetParameters (const class GGS_string constinArgument0,
-                                                                                                 const class GGS_string constinArgument1,
-                                                                                                 const class GGS_lstring constinArgument2,
-                                                                                                 const class GGS_targetParameters constinArgument3,
-                                                                                                 class Compiler * inCompiler
-                                                                                                 COMMA_LOCATION_ARGS) ;
+void routine_handlePropertyAccess_3F_self_26__26__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__3F_ (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                 class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                                 class GGS_string & ioArgument2,
+                                                                                                                                                                                 const class GGS_routineAttributes constinArgument3,
+                                                                                                                                                                                 const class GGS_semanticContext constinArgument4,
+                                                                                                                                                                                 const class GGS_mode constinArgument5,
+                                                                                                                                                                                 class GGS_semanticTemporariesStruct & ioArgument6,
+                                                                                                                                                                                 class GGS_staticEntityMap & ioArgument7,
+                                                                                                                                                                                 class GGS_universalValuedObjectMap & ioArgument8,
+                                                                                                                                                                                 class GGS_allocaList & ioArgument9,
+                                                                                                                                                                                 class GGS_instructionListIR & ioArgument10,
+                                                                                                                                                                                 const class GGS_lstring constinArgument11,
+                                                                                                                                                                                 const class GGS_LValueOperandAST constinArgument12,
+                                                                                                                                                                                 class Compiler * inCompiler
+                                                                                                                                                                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper 'targetTemplates'
+//Routine 'handleNextOperand?self&&??routineAttributes?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR'
 //
 //--------------------------------------------------------------------------------------------------
 
-extern const char * gWrapperFileContent_4_targetTemplates ;
-extern const char * gWrapperFileContent_5_targetTemplates ;
-extern const char * gWrapperFileContent_3_targetTemplates ;
-extern const char * gWrapperFileContent_10_targetTemplates ;
-extern const char * gWrapperFileContent_11_targetTemplates ;
-extern const char * gWrapperFileContent_24_targetTemplates ;
-extern const char * gWrapperFileContent_31_targetTemplates ;
-extern const char * gWrapperFileContent_9_targetTemplates ;
-extern const char * gWrapperFileContent_20_targetTemplates ;
-extern const char * gWrapperFileContent_21_targetTemplates ;
-extern const char * gWrapperFileContent_16_targetTemplates ;
-extern const char * gWrapperFileContent_17_targetTemplates ;
-extern const char * gWrapperFileContent_8_targetTemplates ;
-extern const char * gWrapperFileContent_7_targetTemplates ;
-extern const char * gWrapperFileContent_26_targetTemplates ;
-extern const char * gWrapperFileContent_6_targetTemplates ;
-extern const char * gWrapperFileContent_15_targetTemplates ;
-extern const char * gWrapperFileContent_2_targetTemplates ;
-extern const char * gWrapperFileContent_25_targetTemplates ;
-extern const char * gWrapperFileContent_23_targetTemplates ;
-extern const char * gWrapperFileContent_0_targetTemplates ;
-extern const char * gWrapperFileContent_1_targetTemplates ;
-extern const char * gWrapperFileContent_13_targetTemplates ;
-extern const char * gWrapperFileContent_32_targetTemplates ;
-extern const char * gWrapperFileContent_33_targetTemplates ;
-extern const char * gWrapperFileContent_18_targetTemplates ;
-extern const char * gWrapperFileContent_28_targetTemplates ;
-extern const char * gWrapperFileContent_22_targetTemplates ;
-extern const char * gWrapperFileContent_30_targetTemplates ;
-extern const char * gWrapperFileContent_29_targetTemplates ;
-extern const char * gWrapperFileContent_19_targetTemplates ;
-extern const char * gWrapperFileContent_27_targetTemplates ;
-extern const char * gWrapperFileContent_14_targetTemplates ;
-extern const char * gWrapperFileContent_12_targetTemplates ;
-extern const char * gWrapperFileContent_43_targetTemplates ;
-extern const char * gWrapperFileContent_54_targetTemplates ;
-extern const char * gWrapperFileContent_55_targetTemplates ;
-extern const char * gWrapperFileContent_57_targetTemplates ;
-extern const char * gWrapperFileContent_48_targetTemplates ;
-extern const char * gWrapperFileContent_56_targetTemplates ;
-extern const char * gWrapperFileContent_44_targetTemplates ;
-extern const char * gWrapperFileContent_40_targetTemplates ;
-extern const char * gWrapperFileContent_51_targetTemplates ;
-extern const char * gWrapperFileContent_36_targetTemplates ;
-extern const char * gWrapperFileContent_39_targetTemplates ;
-extern const char * gWrapperFileContent_53_targetTemplates ;
-extern const char * gWrapperFileContent_50_targetTemplates ;
-extern const char * gWrapperFileContent_35_targetTemplates ;
-extern const char * gWrapperFileContent_42_targetTemplates ;
-extern const char * gWrapperFileContent_49_targetTemplates ;
-extern const char * gWrapperFileContent_46_targetTemplates ;
-extern const char * gWrapperFileContent_47_targetTemplates ;
-extern const char * gWrapperFileContent_45_targetTemplates ;
-extern const char * gWrapperFileContent_34_targetTemplates ;
-extern const char * gWrapperFileContent_38_targetTemplates ;
-extern const char * gWrapperFileContent_37_targetTemplates ;
-extern const char * gWrapperFileContent_52_targetTemplates ;
-extern const char * gWrapperFileContent_41_targetTemplates ;
-extern const char * gWrapperFileContent_73_targetTemplates ;
-extern const char * gWrapperFileContent_61_targetTemplates ;
-extern const char * gWrapperFileContent_62_targetTemplates ;
-extern const char * gWrapperFileContent_63_targetTemplates ;
-extern const char * gWrapperFileContent_64_targetTemplates ;
-extern const char * gWrapperFileContent_68_targetTemplates ;
-extern const char * gWrapperFileContent_66_targetTemplates ;
-extern const char * gWrapperFileContent_58_targetTemplates ;
-extern const char * gWrapperFileContent_69_targetTemplates ;
-extern const char * gWrapperFileContent_71_targetTemplates ;
-extern const char * gWrapperFileContent_74_targetTemplates ;
-extern const char * gWrapperFileContent_72_targetTemplates ;
-extern const char * gWrapperFileContent_59_targetTemplates ;
-extern const char * gWrapperFileContent_65_targetTemplates ;
-extern const char * gWrapperFileContent_70_targetTemplates ;
-extern const char * gWrapperFileContent_67_targetTemplates ;
-extern const char * gWrapperFileContent_60_targetTemplates ;
-extern const char * gWrapperFileContent_82_targetTemplates ;
-extern const char * gWrapperFileContent_79_targetTemplates ;
-extern const char * gWrapperFileContent_83_targetTemplates ;
-extern const char * gWrapperFileContent_87_targetTemplates ;
-extern const char * gWrapperFileContent_76_targetTemplates ;
-extern const char * gWrapperFileContent_81_targetTemplates ;
-extern const char * gWrapperFileContent_86_targetTemplates ;
-extern const char * gWrapperFileContent_85_targetTemplates ;
-extern const char * gWrapperFileContent_84_targetTemplates ;
-extern const char * gWrapperFileContent_75_targetTemplates ;
-extern const char * gWrapperFileContent_80_targetTemplates ;
-extern const char * gWrapperFileContent_78_targetTemplates ;
-extern const char * gWrapperFileContent_77_targetTemplates ;
-extern const char * gWrapperFileContent_95_targetTemplates ;
-extern const char * gWrapperFileContent_98_targetTemplates ;
-extern const char * gWrapperFileContent_96_targetTemplates ;
-extern const char * gWrapperFileContent_105_targetTemplates ;
-extern const char * gWrapperFileContent_107_targetTemplates ;
-extern const char * gWrapperFileContent_112_targetTemplates ;
-extern const char * gWrapperFileContent_111_targetTemplates ;
-extern const char * gWrapperFileContent_90_targetTemplates ;
-extern const char * gWrapperFileContent_114_targetTemplates ;
-extern const char * gWrapperFileContent_117_targetTemplates ;
-extern const char * gWrapperFileContent_116_targetTemplates ;
-extern const char * gWrapperFileContent_115_targetTemplates ;
-extern const char * gWrapperFileContent_93_targetTemplates ;
-extern const char * gWrapperFileContent_102_targetTemplates ;
-extern const char * gWrapperFileContent_94_targetTemplates ;
-extern const char * gWrapperFileContent_109_targetTemplates ;
-extern const char * gWrapperFileContent_89_targetTemplates ;
-extern const char * gWrapperFileContent_99_targetTemplates ;
-extern const char * gWrapperFileContent_108_targetTemplates ;
-extern const char * gWrapperFileContent_104_targetTemplates ;
-extern const char * gWrapperFileContent_110_targetTemplates ;
-extern const char * gWrapperFileContent_101_targetTemplates ;
-extern const char * gWrapperFileContent_106_targetTemplates ;
-extern const char * gWrapperFileContent_113_targetTemplates ;
-extern const char * gWrapperFileContent_100_targetTemplates ;
-extern const char * gWrapperFileContent_103_targetTemplates ;
-extern const char * gWrapperFileContent_88_targetTemplates ;
-extern const char * gWrapperFileContent_97_targetTemplates ;
-extern const char * gWrapperFileContent_92_targetTemplates ;
-extern const char * gWrapperFileContent_91_targetTemplates ;
-extern const char * gWrapperFileContent_118_targetTemplates ;
-extern const char * gWrapperFileContent_119_targetTemplates ;
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cRegularFileWrapper gWrapperFile_0_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_1_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_2_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_3_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_4_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_5_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_6_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_7_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_8_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_9_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_10_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_11_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_12_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_23_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_30_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_31_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_32_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_33_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_34_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_35_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_36_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_37_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_38_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_39_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_40_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_41_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_42_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_43_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_44_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_45_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_46_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_47_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_48_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_49_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_50_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_51_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_52_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_53_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_54_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_55_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_56_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_57_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_58_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_59_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_60_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_61_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_62_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_63_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_64_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_65_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_66_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_67_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_68_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_69_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_70_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_71_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_72_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_73_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_74_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_75_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_76_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_77_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_78_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_79_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_80_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_81_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_82_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_83_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_84_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_85_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_86_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_87_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_88_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_89_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_90_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_91_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_92_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_93_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_94_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_95_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_96_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_97_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_98_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_99_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_100_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_101_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_102_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_103_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_104_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_105_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_106_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_107_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_108_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_109_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_110_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_111_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_112_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_113_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_114_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_115_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_116_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_117_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_118_targetTemplates ;
-extern const cRegularFileWrapper gWrapperFile_119_targetTemplates ;
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cDirectoryWrapper gWrapperDirectory_0_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
-extern const cDirectoryWrapper gWrapperDirectory_6_targetTemplates ;
+void routine_handleNextOperand_3F_self_26__26__3F__3F_routineAttributes_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                          class GGS_omnibusType & ioArgument1,
+                                                                                                                                                                          class GGS_string & ioArgument2,
+                                                                                                                                                                          const class GGS_LValueOperandAST constinArgument3,
+                                                                                                                                                                          const class GGS_routineAttributes constinArgument4,
+                                                                                                                                                                          const class GGS_semanticContext constinArgument5,
+                                                                                                                                                                          const class GGS_mode constinArgument6,
+                                                                                                                                                                          class GGS_semanticTemporariesStruct & ioArgument7,
+                                                                                                                                                                          class GGS_staticEntityMap & ioArgument8,
+                                                                                                                                                                          class GGS_universalValuedObjectMap & ioArgument9,
+                                                                                                                                                                          class GGS_allocaList & ioArgument10,
+                                                                                                                                                                          class GGS_instructionListIR & ioArgument11,
+                                                                                                                                                                          class Compiler * inCompiler
+                                                                                                                                                                          COMMA_LOCATION_ARGS) ;
 

@@ -10,537 +10,697 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'instantiableAttribute'
+//Extension setter '@semanticContext insertGetter'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_instantiableAttribute (class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertGetter (class GGS_semanticContext & ioObject,
+                                   const class GGS_lstring constin_inTypeName,
+                                   const class GGS_lstring constin_inGetterName,
+                                   const class GGS_propertyVisibility constin_inVisibility,
+                                   const class GGS_propertyGetterKind constin_inAccess,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'registerGroupNameFromOmnibusName'
+//Extension setter '@semanticContext addComputedPropertyGetter'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lstring function_registerGroupNameFromOmnibusName (const class GGS_lstring & constinArgument0,
-                                                             class Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+void extensionSetter_addComputedPropertyGetter (class GGS_semanticContext & ioObject,
+                                                const class GGS_lstring constin_inTypeName,
+                                                const class GGS_string constin_inLLVMBaseTypeName,
+                                                const class GGS_lstring constin_inPropertyName,
+                                                const class GGS_mode constin_inMode,
+                                                const class GGS_propertyVisibility constin_inVisibility,
+                                                const class GGS_unifiedTypeMapEntry constin_inResultTypeProxy,
+                                                class GGS_lstring & out_outRoutineLLVMName,
+                                                class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper 'controlRegisterDumpGenerationTemplate'
+//Function 'getterLLVMName'
 //
 //--------------------------------------------------------------------------------------------------
 
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cDirectoryWrapper gWrapperDirectory_0_controlRegisterDumpGenerationTemplate ;
+class GGS_string function_getterLLVMName (const class GGS_string & constinArgument0,
+                                          const class GGS_string & constinArgument1,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByName'
+//Extension setter '@semanticContext insertPropertySetter'
 //
 //--------------------------------------------------------------------------------------------------
 
-GGS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByName (class Compiler * inCompiler,
-                                                                                 const class GGS_string & in_PROJECT_5F_NAME,
-                                                                                 const class GGS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                 const class GGS_controlRegisterByName & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_NAME
-                                                                                 COMMA_LOCATION_ARGS) ;
+void extensionSetter_insertPropertySetter (class GGS_semanticContext & ioObject,
+                                           const class GGS_lstring constin_inTypeName,
+                                           const class GGS_lstring constin_inSetterName,
+                                           const class GGS_propertyVisibility constin_inVisibility,
+                                           const class GGS_propertySetterKind constin_inAccess,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper template 'controlRegisterDumpGenerationTemplate dumpByAddress'
+//Extension getter '@semanticContext propertySetterMap' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
-GGS_string filewrapperTemplate_controlRegisterDumpGenerationTemplate_dumpByAddress (class Compiler * inCompiler,
-                                                                                    const class GGS_string & in_PROJECT_5F_NAME,
-                                                                                    const class GGS_uint & in_CONTROL_5F_REGISTER_5F_COUNT,
-                                                                                    const class GGS_controlRegisterByAddress & in_CONTROL_5F_REGISTER_5F_SORTED_5F_BY_5F_ADDRESS
-                                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'buildControlRegisterMaps???&&&'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_buildControlRegisterMaps_3F__3F__3F__26__26__26_ (const class GGS_controlRegisterMap constinArgument0,
-                                                               const class GGS_bigint constinArgument1,
-                                                               const class GGS_string constinArgument2,
-                                                               class GGS_controlRegisterByAddress & ioArgument3,
-                                                               class GGS_controlRegisterByName & ioArgument4,
-                                                               class GGS_uint & ioArgument5,
+class GGS_propertySetterMap extensionGetter_propertySetterMap (const class GGS_semanticContext & inObject,
+                                                               const class GGS_omnibusType & constinArgument0,
                                                                class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'arrayIndexListFor'
+//Extension getter '@semanticContext booleanType' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_uintlist function_arrayIndexListFor (const class GGS_uint & constinArgument0,
-                                               class Compiler * inCompiler
-                                               COMMA_LOCATION_ARGS) ;
+class GGS_omnibusType extensionGetter_booleanType (const class GGS_semanticContext & inObject,
+                                                   const class GGS_location & constinArgument0,
+                                                   class Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'fieldIndexColumns'
+//Function 'boolTypeName'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_fieldIndexColumns (const class GGS_uint & constinArgument0,
+class GGS_string function_boolTypeName (class Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@structurePropertyListAST.element enterPropertyInContext'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_enterPropertyInContext (const class GGS_structurePropertyListAST_2E_element inObject,
+                                             class GGS_semanticContext & io_ioContext,
+                                             class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                             const class GGS_lstring constin_inReceiverTypeName,
+                                             const class GGS_lstring constin_inOmnibusTypeSpecificName,
+                                             const class GGS_string constin_inReceiverLLVMBaseTypeName,
+                                             class GGS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
+                                             class GGS_propertyList & io_ioPropertyList,
+                                             class GGS_sortedOperandIRList & io_sortedOperandIRList,
+                                             class GGS_constructorSignature & io_constructorSignature,
+                                             class GGS_string & io_ioConstructorKey,
+                                             class GGS_bool & io_canBeCopied,
                                              class Compiler * inCompiler
                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper 'constantDumpGenerationTemplate'
+//Function 'boolType'
 //
 //--------------------------------------------------------------------------------------------------
 
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------------------------
-
-extern const cDirectoryWrapper gWrapperDirectory_0_constantDumpGenerationTemplate ;
+class GGS_omnibusType function_boolType (class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Filewrapper template 'constantDumpGenerationTemplate dump'
+//Function 'setterLLVMName'
 //
 //--------------------------------------------------------------------------------------------------
 
-GGS_string filewrapperTemplate_constantDumpGenerationTemplate_dump (class Compiler * inCompiler,
-                                                                    const class GGS_string & in_PROJECT_5F_NAME,
-                                                                    const class GGS_globalConstantMap & in_GLOBAL_5F_CONSTANT_5F_MAP,
-                                                                    const class GGS_stringset & in_FIRST_5F_LETTER_5F_SET,
-                                                                    const class GGS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING
-                                                                    COMMA_LOCATION_ARGS) ;
+class GGS_string function_setterLLVMName (const class GGS_string & constinArgument0,
+                                          const class GGS_string & constinArgument1,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'linkForGlobalConstant'
+//Function 'voidType'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_linkForGlobalConstant (const class GGS_string & constinArgument0,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
+class GGS_omnibusType function_voidType (class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'retainRequiredDrivers&'
+//Routine 'computeStaticExpression&context&staticEntityMap?expression?errorLocation?optionalContextualTypeName!result'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_retainRequiredDrivers_26_ (class GGS_ast & ioArgument0,
-                                        class Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) ;
+void routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (class GGS_semanticContext & ioArgument0,
+                                                                                                                                           class GGS_staticEntityMap & ioArgument1,
+                                                                                                                                           const class GGS_expressionAST constinArgument2,
+                                                                                                                                           const class GGS_location constinArgument3,
+                                                                                                                                           const class GGS_lstring constinArgument4,
+                                                                                                                                           class GGS_objectIR & outArgument5,
+                                                                                                                                           class Compiler * inCompiler
+                                                                                                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'omnibusNameForStaticListType'
+//Extension method '@controlRegisterDeclarationList.element buildControlRegisterMapForGroup'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lstring function_omnibusNameForStaticListType (const class GGS_lstring & constinArgument0,
-                                                         class Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'llvmNameForStaticListType'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstring function_llvmNameForStaticListType (const class GGS_lstring & constinArgument0,
+void extensionMethod_buildControlRegisterMapForGroup (const class GGS_controlRegisterDeclarationList_2E_element inObject,
+                                                      class GGS_semanticContext & io_ioContext,
+                                                      class GGS_controlRegisterMap & io_ioControlRegisterMap,
+                                                      class GGS_staticEntityMap & io_ioStaticEntityMap,
                                                       class Compiler * inCompiler
                                                       COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'omnibusNameForStaticListElementType'
+//Routine 'buildControlRegisterSliceMap??&context&type?bitCount!!!'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lstring function_omnibusNameForStaticListElementType (const class GGS_lstring & constinArgument0,
-                                                                class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
+void routine_buildControlRegisterSliceMap_3F__3F__26_context_26_type_3F_bitCount_21__21__21_ (const class GGS_controlRegisterBitSliceList constinArgument0,
+                                                                                              const class GGS_location constinArgument1,
+                                                                                              class GGS_semanticContext & ioArgument2,
+                                                                                              class GGS_omnibusType & ioArgument3,
+                                                                                              const class GGS_uint constinArgument4,
+                                                                                              class GGS_controlRegisterFieldMap & outArgument5,
+                                                                                              class GGS_sliceMap & outArgument6,
+                                                                                              class GGS_controlRegisterFieldList & outArgument7,
+                                                                                              class Compiler * inCompiler
+                                                                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'checkModeAndReturnsRoutineLLVMName'
+//Routine 'controlRegisterType?&context!type!bitCount'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_checkModeAndReturnsRoutineLLVMName (const class GGS_routineLLVMNameDict & constinArgument0,
-                                                              const class GGS_mode & constinArgument1,
-                                                              const class GGS_lstring & constinArgument2,
-                                                              class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
+void routine_controlRegisterType_3F__26_context_21_type_21_bitCount (const class GGS_lstring constinArgument0,
+                                                                     class GGS_semanticContext & ioArgument1,
+                                                                     class GGS_omnibusType & outArgument2,
+                                                                     class GGS_uint & outArgument3,
+                                                                     class Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'noUnusedWarningAttribute'
+//Extension method '@globalSyncInstanceMapIR.element generateLLVM'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_noUnusedWarningAttribute (class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
+void extensionMethod_generateLLVM (const class GGS_globalSyncInstanceMapIR_2E_element inObject,
+                                   class GGS_string & io_ioLLVMcode,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'systemUserMangledNameFromAST'
+//Extension method '@driverListIR.element generateLLVMDriverVariableDefinition'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lstring function_systemUserMangledNameFromAST (const class GGS_string & constinArgument0,
-                                                         const class GGS_routineKind & constinArgument1,
-                                                         const class GGS_lstring & constinArgument2,
-                                                         const class GGS_routineFormalArgumentListAST & constinArgument3,
-                                                         class Compiler * inCompiler
-                                                         COMMA_LOCATION_ARGS) ;
+void extensionMethod_generateLLVMDriverVariableDefinition (const class GGS_driverListIR_2E_element inObject,
+                                                           class GGS_string & io_ioLLVMcode,
+                                                           class Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'systemImplementationMangledNameFromAST'
+//Extension method '@decoratedTaskList.element taskSemanticAnalysis'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_lstring function_systemImplementationMangledNameFromAST (const class GGS_string & constinArgument0,
-                                                                   const class GGS_routineKind & constinArgument1,
-                                                                   const class GGS_lstring & constinArgument2,
-                                                                   const class GGS_routineFormalArgumentListAST & constinArgument3,
-                                                                   class Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) ;
+void extensionMethod_taskSemanticAnalysis (const class GGS_decoratedTaskList_2E_element inObject,
+                                           const class GGS_semanticContext constin_inContext,
+                                           const class GGS_uint constin_inPriority,
+                                           class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GGS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'llvmFunctionPrototype'
+//Routine 'analyzeOrderedTaskRoutines?!'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_llvmFunctionPrototype (const class GGS_string & constinArgument0,
-                                                 const class GGS_string & constinArgument1,
-                                                 const class GGS_omnibusType & constinArgument2,
-                                                 const class GGS_routineFormalArgumentListIR & constinArgument3,
+void routine_analyzeOrderedTaskRoutines_3F__21_ (const class GGS_taskSetupListAST constinArgument0,
+                                                 class GGS_stringlist & outArgument1,
                                                  class Compiler * inCompiler
                                                  COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generateSectionDispatcher???targetParameters&?'
+//Extension method '@externProcedureMapIR.element llvmPrototypeGeneration'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generateSectionDispatcher_3F__3F__3F_targetParameters_26__3F_ (const class GGS_string constinArgument0,
-                                                                            const class GGS_string constinArgument1,
-                                                                            const class GGS_targetParameters constinArgument2,
-                                                                            class GGS_string & ioArgument3,
-                                                                            const class GGS_sectionIRlist constinArgument4,
-                                                                            class Compiler * inCompiler
-                                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'getTargetTextFile'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_getTargetTextFile (const class GGS_string & constinArgument0,
-                                             const class GGS_string & constinArgument1,
-                                             class Compiler * inCompiler
-                                             COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'generatePrimitiveAndServiceDispatcher??&??targetParameters'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_generatePrimitiveAndServiceDispatcher_3F__3F__26__3F__3F_targetParameters (const class GGS_string constinArgument0,
-                                                                                        const class GGS_string constinArgument1,
-                                                                                        class GGS_string & ioArgument2,
-                                                                                        const class GGS_primitiveAndServiceIRlist constinArgument3,
-                                                                                        const class GGS_targetParameters constinArgument4,
-                                                                                        class Compiler * inCompiler
-                                                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'routineTypedSignature2??!'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_routineTypedSignature_32__3F__3F__21_ (const class GGS_unifiedTypeMap constinArgument0,
-                                                    const class GGS_routineFormalArgumentListAST constinArgument1,
-                                                    class GGS_routineTypedSignature & outArgument2,
-                                                    class Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'guardImplementationLLVMName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstring function_guardImplementationLLVMName (const class GGS_string & constinArgument0,
-                                                        const class GGS_lstring & constinArgument1,
-                                                        const class GGS_routineFormalArgumentListAST & constinArgument2,
-                                                        class Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'guardUserLLVMName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_lstring function_guardUserLLVMName (const class GGS_string & constinArgument0,
-                                              const class GGS_lstring & constinArgument1,
-                                              const class GGS_routineFormalArgumentListAST & constinArgument2,
+void extensionMethod_llvmPrototypeGeneration (const class GGS_externProcedureMapIR_2E_element inObject,
+                                              class GGS_string & io_ioLLVMcode,
                                               class Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'acceptVariableOmnibusName'
+//Abstract extension method '@callInstructionAST baseGuardAnalyze'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_acceptVariableOmnibusName (class Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) ;
+void callExtensionMethod_baseGuardAnalyze (class cPtr_callInstructionAST * inObject,
+                                           const class GGS_omnibusType constin_inSelfType,
+                                           const class GGS_routineAttributes constin_inRoutineAttributes,
+                                           const class GGS_semanticContext constin_inContext,
+                                           const class GGS_mode constin_inMode,
+                                           class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                           class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                           class GGS_universalValuedObjectMap & io_ioUniversalMap,
+                                           class GGS_guardKindGenerationIR & out_outConvenienceGuardGenerationIR,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'analyzeEffectiveParameters?self?routineAttributes?formal?effective?errorLocation?context?requiredMode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&effectiveIR'
+//Function 'functionResultVariableName'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_analyzeEffectiveParameters_3F_self_3F_routineAttributes_3F_formal_3F_effective_3F_errorLocation_3F_context_3F_requiredMode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_effectiveIR (const class GGS_omnibusType constinArgument0,
-                                                                                                                                                                                                                                      const class GGS_routineAttributes constinArgument1,
-                                                                                                                                                                                                                                      const class GGS_routineTypedSignature constinArgument2,
-                                                                                                                                                                                                                                      const class GGS_effectiveArgumentListAST constinArgument3,
-                                                                                                                                                                                                                                      const class GGS_location constinArgument4,
-                                                                                                                                                                                                                                      const class GGS_semanticContext constinArgument5,
-                                                                                                                                                                                                                                      const class GGS_mode constinArgument6,
-                                                                                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument7,
-                                                                                                                                                                                                                                      class GGS_staticEntityMap & ioArgument8,
-                                                                                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument9,
-                                                                                                                                                                                                                                      class GGS_allocaList & ioArgument10,
-                                                                                                                                                                                                                                      class GGS_instructionListIR & ioArgument11,
-                                                                                                                                                                                                                                      class GGS_procCallEffectiveParameterListIR & ioArgument12,
-                                                                                                                                                                                                                                      class Compiler * inCompiler
-                                                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
+class GGS_string function_functionResultVariableName (class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicRoutineNameForFilePath'
+//Routine 'println?'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_panicRoutineNameForFilePath (const class GGS_string & constinArgument0,
+void routine_println_3F_ (const class GGS_string constinArgument0,
+                          class Compiler * inCompiler
+                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'print?'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_print_3F_ (const class GGS_string constinArgument0,
+                        class Compiler * inCompiler
+                        COMMA_LOCATION_ARGS) ;
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//                               Bool options                                                    
+//
+//--------------------------------------------------------------------------------------------------
+
+extern BoolCommandLineOption gOption_omnibus_5F_option_5F_not_5F_appearing_5F_in_5F_cocoa_performFlashing ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//                               UInt options                                                    
+//
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+//
+//                              String options                                                   
+//
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+//
+//                              String List options                                              
+//
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'configurationNodeNameForPrecedenceGraph'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_configurationNodeNameForPrecedenceGraph (class Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'ctBoolTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_ctBoolTypeName (class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'routineMangledNameFromCall'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lstring function_routineMangledNameFromCall (const class GGS_string & constinArgument0,
+                                                       const class GGS_lstring & constinArgument1,
+                                                       const class GGS_effectiveArgumentListAST & constinArgument2,
                                                        class Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicModeName'
+//Routine 'appendUnsignedOperatorsTo?&'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_panicModeName (class Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) ;
+void routine_appendUnsignedOperatorsTo_3F__26_ (const class GGS_string constinArgument0,
+                                                class GGS_semanticTypePrecedenceGraph & ioArgument1,
+                                                class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Routine 'generatePanicCode&?generationContext&generationAdds'
+//Routine 'appendInfixOperatorDeclaration????&'
 //
 //--------------------------------------------------------------------------------------------------
 
-void routine_generatePanicCode_26__3F_generationContext_26_generationAdds (class GGS_string & ioArgument0,
-                                                                           const class GGS_generationContext constinArgument1,
-                                                                           class GGS_generationAdds & ioArgument2,
+void routine_appendInfixOperatorDeclaration_3F__3F__3F__3F__26_ (const class GGS_omnibusInfixOperator constinArgument0,
+                                                                 const class GGS_string constinArgument1,
+                                                                 const class GGS_string constinArgument2,
+                                                                 const class GGS_string constinArgument3,
+                                                                 class GGS_semanticTypePrecedenceGraph & ioArgument4,
+                                                                 class Compiler * inCompiler
+                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'appendPrefixOperatorDeclaration_bitWiseComplement?&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_appendPrefixOperatorDeclaration_5F_bitWiseComplement_3F__26_ (const class GGS_string constinArgument0,
+                                                                           class GGS_semanticTypePrecedenceGraph & ioArgument1,
                                                                            class Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'llvmNameForSectionImplementation'
+//Routine 'appendSignedOperatorsTo?&'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_llvmNameForSectionImplementation (const class GGS_string & constinArgument0,
-                                                            class Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
+void routine_appendSignedOperatorsTo_3F__26_ (const class GGS_string constinArgument0,
+                                              class GGS_semanticTypePrecedenceGraph & ioArgument1,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicRoutineName'
+//Routine 'appendPrefixOperatorDeclaration_minus?&'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_string function_panicRoutineName (class Compiler * inCompiler
-                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'llvmNameForSectionCall'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_llvmNameForSectionCall (const class GGS_string & constinArgument0,
-                                                  class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForAssertViolation'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForAssertViolation (class Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForUnsignedAdditionOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForUnsignedAdditionOverflow (class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForSignedAdditionOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForSignedAdditionOverflow (class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForUnsignedSubtractOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForUnsignedSubtractOverflow (class Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForSignedSubtractOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForSignedSubtractOverflow (class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForUnsignedMultiplicationOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForUnsignedMultiplicationOverflow (class Compiler * inCompiler
-                                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForSignedMultiplicationOverflow'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForSignedMultiplicationOverflow (class Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForUnsignedDivisionByZero'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForUnsignedDivisionByZero (class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForSignedDivisionByZero'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForSignedDivisionByZero (class Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'panicCodeForUnsignedRemainderByZero'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_bigint function_panicCodeForUnsignedRemainderByZero (class Compiler * inCompiler
+void routine_appendPrefixOperatorDeclaration_5F_minus_3F__26_ (const class GGS_string constinArgument0,
+                                                               class GGS_semanticTypePrecedenceGraph & ioArgument1,
+                                                               class Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForSignedRemainderByZero'
+//Routine 'buildOrderedDeclarationList?ast?sourceFile?endOfSourceFile!orderedDeclarationList'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_bigint function_panicCodeForSignedRemainderByZero (class Compiler * inCompiler
-                                                             COMMA_LOCATION_ARGS) ;
+void routine_buildOrderedDeclarationList_3F_ast_3F_sourceFile_3F_endOfSourceFile_21_orderedDeclarationList (const class GGS_ast constinArgument0,
+                                                                                                            const class GGS_string constinArgument1,
+                                                                                                            const class GGS_location constinArgument2,
+                                                                                                            class GGS_declarationListAST & outArgument3,
+                                                                                                            class Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForConvertOverflow'
+//Routine 'buildSemanticContext?sourceFile?ast&staticEntityMap&staticlistValues!context!!!!'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_bigint function_panicCodeForConvertOverflow (class Compiler * inCompiler
+void routine_buildSemanticContext_3F_sourceFile_3F_ast_26_staticEntityMap_26_staticlistValues_21_context_21__21__21__21_ (const class GGS_lstring constinArgument0,
+                                                                                                                          const class GGS_ast constinArgument1,
+                                                                                                                          class GGS_staticEntityMap & ioArgument2,
+                                                                                                                          class GGS_staticListInitializationMap & ioArgument3,
+                                                                                                                          class GGS_semanticContext & outArgument4,
+                                                                                                                          class GGS_declarationDecorationList & outArgument5,
+                                                                                                                          class GGS_decoratedRegularRoutineList & outArgument6,
+                                                                                                                          class GGS_routineListIR & outArgument7,
+                                                                                                                          class GGS_userLLVMTypeDefinitionListIR & outArgument8,
+                                                                                                                          class Compiler * inCompiler
+                                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildControlRegisterMapHTMLFile??sourceFile'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildControlRegisterMapHTMLFile_3F__3F_sourceFile (const class GGS_controlRegisterGroupMap constinArgument0,
+                                                                const class GGS_lstring constinArgument1,
+                                                                class Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildGlobalConstantMapHTMLFile??sourceFile'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildGlobalConstantMapHTMLFile_3F__3F_sourceFile (const class GGS_globalConstantMap constinArgument0,
+                                                               const class GGS_lstring constinArgument1,
+                                                               class Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildTypeMapHTMLFile??????sourceFile'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildTypeMapHTMLFile_3F__3F__3F__3F__3F__3F_sourceFile (const class GGS_unifiedTypeMap constinArgument0,
+                                                                     const class GGS_routineMapForContext constinArgument1,
+                                                                     const class GGS_infixOperatorMap constinArgument2,
+                                                                     const class GGS_prefixOperatorMap constinArgument3,
+                                                                     const class GGS_assignmentOperatorMap constinArgument4,
+                                                                     const class GGS_lstring constinArgument5,
+                                                                     class Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeIntegerType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_compileTimeIntegerType (class Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForNegativeArrayIndex'
+//Function 'ctIntegerTypeName'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_bigint function_panicCodeForNegativeArrayIndex (class Compiler * inCompiler
+class GGS_string function_ctIntegerTypeName (class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeBoolType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_compileTimeBoolType (class Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'staticStringTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_staticStringTypeName (class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper 'typeDumpGenerationTemplate'
+//
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_typeDumpGenerationTemplate ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper template 'typeDumpGenerationTemplate dump'
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class Compiler * inCompiler,
+                                                                const class GGS_string & in_PROJECT_5F_NAME,
+                                                                const class GGS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
+                                                                const class GGS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                const class GGS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
+                                                                const class GGS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
+                                                                const class GGS_infixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
+                                                                const class GGS_prefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
+                                                                const class GGS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'linkForHTMLTypeMap'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_linkForHTMLTypeMap (const class GGS_string & constinArgument0,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'declareLLVMTypes?&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_declareLLVMTypes_3F__26_ (const class GGS_userLLVMTypeDefinitionListIR constinArgument0,
+                                       class GGS_string & ioArgument1,
+                                       class Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'getNewTempReference?&!'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_getNewTempReference_3F__26__21_ (const class GGS_omnibusType constinArgument0,
+                                              class GGS_semanticTemporariesStruct & ioArgument1,
+                                              class GGS_objectIR & outArgument2,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'semanticAnalysis?sourceFile?ast?allSourceFilePaths?decoratedDeclarationList?decoratedRoutineList?routineListIR?context?endOfSourceFile?staticEntityMap!intermediateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_semanticAnalysis_3F_sourceFile_3F_ast_3F_allSourceFilePaths_3F_decoratedDeclarationList_3F_decoratedRoutineList_3F_routineListIR_3F_context_3F_endOfSourceFile_3F_staticEntityMap_21_intermediateCode (const class GGS_string constinArgument0,
+                                                                                                                                                                                                                    const class GGS_ast constinArgument1,
+                                                                                                                                                                                                                    const class GGS_stringset constinArgument2,
+                                                                                                                                                                                                                    const class GGS_declarationDecorationList constinArgument3,
+                                                                                                                                                                                                                    const class GGS_decoratedRegularRoutineList constinArgument4,
+                                                                                                                                                                                                                    const class GGS_routineListIR constinArgument5,
+                                                                                                                                                                                                                    const class GGS_semanticContext constinArgument6,
+                                                                                                                                                                                                                    const class GGS_location constinArgument7,
+                                                                                                                                                                                                                    const class GGS_staticEntityMap constinArgument8,
+                                                                                                                                                                                                                    class GGS_intermediateCodeStruct & outArgument9,
+                                                                                                                                                                                                                    class Compiler * inCompiler
+                                                                                                                                                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'appendPanicRoutines?allSourceFilePaths&intermediateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_appendPanicRoutines_3F_allSourceFilePaths_26_intermediateCode (const class GGS_stringset constinArgument0,
+                                                                            class GGS_intermediateCodeStruct & ioArgument1,
+                                                                            class Compiler * inCompiler
+                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'checkRequiredProcedures?ast?context?endOfSourceFile'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_checkRequiredProcedures_3F_ast_3F_context_3F_endOfSourceFile (const class GGS_ast constinArgument0,
+                                                                           const class GGS_semanticContext constinArgument1,
+                                                                           const class GGS_location constinArgument2,
+                                                                           class Compiler * inCompiler
+                                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'assignmentOperatorFuncName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_assignmentOperatorFuncName (const class GGS_omnibusType & constinArgument0,
+                                                      const class GGS_omnibusType & constinArgument1,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'assignValueToFixedSizeArrayElements_functionName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_assignValueToFixedSizeArrayElements_5F_functionName (const class GGS_omnibusType & constinArgument0,
+                                                                               class Compiler * inCompiler
+                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'addIntegerInfixOperator???&?'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_addIntegerInfixOperator_3F__3F__3F__26__3F_ (const class GGS_omnibusInfixOperator constinArgument0,
+                                                          const class GGS_omnibusType constinArgument1,
+                                                          const class GGS_string constinArgument2,
+                                                          class GGS_infixOperatorMap & ioArgument3,
+                                                          const class GGS_omnibusType constinArgument4,
+                                                          class Compiler * inCompiler
                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForTooLargeArrayIndex'
+//Function 'copyableAttribute'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_bigint function_panicCodeForTooLargeArrayIndex (class Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) ;
+class GGS_string function_copyableAttribute (class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Function 'panicCodeForClosedSync'
+//Function 'minValueForInteger'
 //
 //--------------------------------------------------------------------------------------------------
 
-class GGS_bigint function_panicCodeForClosedSync (class Compiler * inCompiler
-                                                  COMMA_LOCATION_ARGS) ;
+class GGS_bigint function_minValueForInteger (const class GGS_bool & constinArgument0,
+                                              const class GGS_uint & constinArgument1,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'maxValueForInteger'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_bigint function_maxValueForInteger (const class GGS_bool & constinArgument0,
+                                              const class GGS_uint & constinArgument1,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
 
