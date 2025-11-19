@@ -2967,7 +2967,7 @@ void routine_analyzeOrderedTaskRoutines_3F__21_ (const GGS_taskSetupListAST cons
             inCompiler->loopRunTimeVariantError (SOURCE_FILE ("task-declaration.galgas", 359)) ;
           }
           if (loop_13467) {
-            variant_13467 -- ;
+            variant_13467 -= 1 ;
             var_continue_13447 = GGS_bool (false) ;
             GGS_bigint var_idx_13588 = GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 361)) ;
             UpEnumerator_taskSetupListAST enumerator_13612 (var_taskSetupListAST_13360) ;

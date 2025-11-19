@@ -2347,7 +2347,7 @@ void routine_codeOptimization_3F__26_intermediateCode (const GGS_string constinA
           inCompiler->loopRunTimeVariantError (SOURCE_FILE ("dead-code-elimination.galgas", 62)) ;
         }
         if (loop_3013) {
-          variant_3013 -- ;
+          variant_3013 -= 1 ;
           GGS_stringset var_currentSet_3121 = var_exploreRoutineSet_1457 ;
           GGS_stringset temp_11 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas", 64)) ;
           var_exploreRoutineSet_1457 = temp_11 ;

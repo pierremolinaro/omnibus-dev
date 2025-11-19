@@ -13013,7 +13013,7 @@ void extensionMethod_enterInContext (const GGS_taskListAST inObject,
         inCompiler->loopRunTimeVariantError (SOURCE_FILE ("task-declaration.galgas", 178)) ;
       }
       if (loop_6367) {
-        variant_6367 -- ;
+        variant_6367 -= 1 ;
         var_continue_6349 = GGS_bool (false) ;
         GGS_taskListAST temp_4 = GGS_taskListAST::init (inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 180)) ;
         GGS_taskListAST var_candidateTaskList_6477 = temp_4 ;

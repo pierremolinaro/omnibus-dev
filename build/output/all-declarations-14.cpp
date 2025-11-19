@@ -8953,7 +8953,7 @@ void cPtr_enumerationDeclarationAST::method_enterInPrecedenceGraph (GGS_semantic
         inCompiler->loopRunTimeVariantError (SOURCE_FILE ("type-enumeration-declaration.galgas", 62)) ;
       }
       if (loop_2425) {
-        variant_2425 -- ;
+        variant_2425 -= 1 ;
         var_representationBitCount_2396.plusAssignOperation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 63)) ;
         var_maxValue_2264 = var_maxValue_2264.divide_operation (GGS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 64)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 64)) ;
       }
@@ -9047,7 +9047,7 @@ void cPtr_enumerationDeclarationAST::method_enterInContext (GGS_semanticContext 
         inCompiler->loopRunTimeVariantError (SOURCE_FILE ("type-enumeration-declaration.galgas", 110)) ;
       }
       if (loop_4565) {
-        variant_4565 -- ;
+        variant_4565 -= 1 ;
         var_representationBitCount_4536.plusAssignOperation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 111)) ;
         var_maxValue_4186 = var_maxValue_4186.divide_operation (GGS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 112)), inCompiler COMMA_SOURCE_FILE ("type-enumeration-declaration.galgas", 112)) ;
       }
