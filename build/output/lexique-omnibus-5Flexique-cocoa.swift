@@ -607,10 +607,10 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
     self.mLexicalAttribute_tokenString = ""
     var tokenCode : UInt16 = 0
     let startLocation = self.currentLocation
-    if scanningOk && (self.testForCharWithFunction (isUnicodeLetter)) {
+    if scanningOk && (self.testForChar_isUnicodeLetter ()) {
       while (loop && scanningOk) {
         scanner_cocoa_routine_enterCharacterIntoString (&scanningOk, &self.mLexicalAttribute_tokenString, self.previousChar)
-        if scanningOk && (self.testForCharWithFunction (isUnicodeLetter) || self.testForInputChar (95) || self.testForInputFromChar (48, toChar:57)) {
+        if scanningOk && (self.testForChar_isUnicodeLetter () || self.testForInputChar (95) || self.testForInputFromChar (48, toChar:57)) {
         }else{
           loop = false
         }
@@ -623,10 +623,10 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
         tokenCode = omnibus_lexique_1_identifier ;
       }
     }else if scanningOk && (self.testForInputChar (64)) {
-      if scanningOk && (self.testForCharWithFunction (isUnicodeLetter) || self.testForInputFromChar (48, toChar:57)) {
+      if scanningOk && (self.testForChar_isUnicodeLetter () || self.testForInputFromChar (48, toChar:57)) {
         while (loop && scanningOk) {
           scanner_cocoa_routine_enterCharacterIntoString (&scanningOk, &self.mLexicalAttribute_tokenString, self.previousChar)
-          if scanningOk && (self.testForCharWithFunction (isUnicodeLetter) || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (46)) {
+          if scanningOk && (self.testForChar_isUnicodeLetter () || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (46)) {
           }else{
             loop = false
           }
@@ -921,10 +921,10 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
         tokenCode = omnibus_lexique_1__21_selector_3A_
       }
     }else if scanningOk && (self.testForInputChar (36)) {
-      if scanningOk && (self.testForCharWithFunction (isUnicodeLetter)) {
+      if scanningOk && (self.testForChar_isUnicodeLetter ()) {
         while (loop && scanningOk) {
           scanner_cocoa_routine_enterCharacterIntoString (&scanningOk, &self.mLexicalAttribute_tokenString, self.previousChar)
-          if scanningOk && (self.testForCharWithFunction (isUnicodeLetter) || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (95)) {
+          if scanningOk && (self.testForChar_isUnicodeLetter () || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (95)) {
           }else{
             loop = false
           }
@@ -935,10 +935,10 @@ class SWIFT_Lexique_omnibus_lexique : SWIFT_Lexique {
       }
       tokenCode = omnibus_lexique_1__24_type
     }else if scanningOk && (self.testForInputChar (169)) {
-      if scanningOk && (self.testForCharWithFunction (isUnicodeLetter)) {
+      if scanningOk && (self.testForChar_isUnicodeLetter ()) {
         while (loop && scanningOk) {
           scanner_cocoa_routine_enterCharacterIntoString (&scanningOk, &self.mLexicalAttribute_tokenString, self.previousChar)
-          if scanningOk && (self.testForCharWithFunction (isUnicodeLetter) || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (95)) {
+          if scanningOk && (self.testForChar_isUnicodeLetter () || self.testForInputFromChar (48, toChar:57) || self.testForInputChar (95)) {
           }else{
             loop = false
           }

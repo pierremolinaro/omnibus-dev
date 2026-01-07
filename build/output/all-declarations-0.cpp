@@ -628,7 +628,7 @@ GGS__32_lstringlist GGS__32_lstringlist::extractObject (const GGS_object & inObj
 //
 //--------------------------------------------------------------------------------------------------
 
-#include "unicode_character_cpp.h"
+#include "utf32.h"
 #include "scanner_actions.h"
 #include "LexiqueIntrospection.h"
 
@@ -812,839 +812,839 @@ String Lexique_omnibus_5F_lexique::getMessageForTerminal (const int32_t inTermin
 
 //--- Unicode string for '$!%$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__21__25_ = {
-  TO_UNICODE ('!'),
-  TO_UNICODE ('%'),
+  utf32 ('!'),
+  utf32 ('%'),
 } ;
 
 //--- Unicode string for '$!%=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__21__25__3D_ = {
-  TO_UNICODE ('!'),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('='),
+  utf32 ('!'),
+  utf32 ('%'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$!/$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__21__2F_ = {
-  TO_UNICODE ('!'),
-  TO_UNICODE ('/'),
+  utf32 ('!'),
+  utf32 ('/'),
 } ;
 
 //--- Unicode string for '$!/=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__21__2F__3D_ = {
-  TO_UNICODE ('!'),
-  TO_UNICODE ('/'),
-  TO_UNICODE ('='),
+  utf32 ('!'),
+  utf32 ('/'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$%$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__25_ = {
-  TO_UNICODE ('%'),
+  utf32 ('%'),
 } ;
 
 //--- Unicode string for '$%=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__25__3D_ = {
-  TO_UNICODE ('%'),
-  TO_UNICODE ('='),
+  utf32 ('%'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$&$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__26_ = {
-  TO_UNICODE ('&'),
+  utf32 ('&'),
 } ;
 
 //--- Unicode string for '$&&$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__26__26_ = {
-  TO_UNICODE ('&'),
-  TO_UNICODE ('&'),
+  utf32 ('&'),
+  utf32 ('&'),
 } ;
 
 //--- Unicode string for '$&=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__26__3D_ = {
-  TO_UNICODE ('&'),
-  TO_UNICODE ('='),
+  utf32 ('&'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$($'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__28_ = {
-  TO_UNICODE ('('),
+  utf32 ('('),
 } ;
 
 //--- Unicode string for '$)$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__29_ = {
-  TO_UNICODE (')'),
+  utf32 (')'),
 } ;
 
 //--- Unicode string for '$*$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2A_ = {
-  TO_UNICODE ('*'),
+  utf32 ('*'),
 } ;
 
 //--- Unicode string for '$*%$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2A__25_ = {
-  TO_UNICODE ('*'),
-  TO_UNICODE ('%'),
+  utf32 ('*'),
+  utf32 ('%'),
 } ;
 
 //--- Unicode string for '$*%=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2A__25__3D_ = {
-  TO_UNICODE ('*'),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('='),
+  utf32 ('*'),
+  utf32 ('%'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$*=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2A__3D_ = {
-  TO_UNICODE ('*'),
-  TO_UNICODE ('='),
+  utf32 ('*'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$+$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2B_ = {
-  TO_UNICODE ('+'),
+  utf32 ('+'),
 } ;
 
 //--- Unicode string for '$+%$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2B__25_ = {
-  TO_UNICODE ('+'),
-  TO_UNICODE ('%'),
+  utf32 ('+'),
+  utf32 ('%'),
 } ;
 
 //--- Unicode string for '$+%=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2B__25__3D_ = {
-  TO_UNICODE ('+'),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('='),
+  utf32 ('+'),
+  utf32 ('%'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$+=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2B__3D_ = {
-  TO_UNICODE ('+'),
-  TO_UNICODE ('='),
+  utf32 ('+'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$,$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2C_ = {
-  TO_UNICODE (','),
+  utf32 (','),
 } ;
 
 //--- Unicode string for '$-$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2D_ = {
-  TO_UNICODE ('-'),
+  utf32 ('-'),
 } ;
 
 //--- Unicode string for '$-%$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2D__25_ = {
-  TO_UNICODE ('-'),
-  TO_UNICODE ('%'),
+  utf32 ('-'),
+  utf32 ('%'),
 } ;
 
 //--- Unicode string for '$-%=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2D__25__3D_ = {
-  TO_UNICODE ('-'),
-  TO_UNICODE ('%'),
-  TO_UNICODE ('='),
+  utf32 ('-'),
+  utf32 ('%'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$-=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2D__3D_ = {
-  TO_UNICODE ('-'),
-  TO_UNICODE ('='),
+  utf32 ('-'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$->$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2D__3E_ = {
-  TO_UNICODE ('-'),
-  TO_UNICODE ('>'),
+  utf32 ('-'),
+  utf32 ('>'),
 } ;
 
 //--- Unicode string for '$.$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2E_ = {
-  TO_UNICODE ('.'),
+  utf32 ('.'),
 } ;
 
 //--- Unicode string for '$...$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2E__2E__2E_ = {
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
+  utf32 ('.'),
+  utf32 ('.'),
+  utf32 ('.'),
 } ;
 
 //--- Unicode string for '$..<$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2E__2E__3C_ = {
-  TO_UNICODE ('.'),
-  TO_UNICODE ('.'),
-  TO_UNICODE ('<'),
+  utf32 ('.'),
+  utf32 ('.'),
+  utf32 ('<'),
 } ;
 
 //--- Unicode string for '$/$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2F_ = {
-  TO_UNICODE ('/'),
+  utf32 ('/'),
 } ;
 
 //--- Unicode string for '$//$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2F__2F_ = {
-  TO_UNICODE ('/'),
-  TO_UNICODE ('/'),
+  utf32 ('/'),
+  utf32 ('/'),
 } ;
 
 //--- Unicode string for '$//!$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2F__2F__21_ = {
-  TO_UNICODE ('/'),
-  TO_UNICODE ('/'),
-  TO_UNICODE ('!'),
+  utf32 ('/'),
+  utf32 ('/'),
+  utf32 ('!'),
 } ;
 
 //--- Unicode string for '$/=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2F__3D_ = {
-  TO_UNICODE ('/'),
-  TO_UNICODE ('='),
+  utf32 ('/'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$0b$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__30_b = {
-  TO_UNICODE ('0'),
-  TO_UNICODE ('b'),
+  utf32 ('0'),
+  utf32 ('b'),
 } ;
 
 //--- Unicode string for '$0x$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__30_x = {
-  TO_UNICODE ('0'),
-  TO_UNICODE ('x'),
+  utf32 ('0'),
+  utf32 ('x'),
 } ;
 
 //--- Unicode string for '$:$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3A_ = {
-  TO_UNICODE (':'),
+  utf32 (':'),
 } ;
 
 //--- Unicode string for '$<$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3C_ = {
-  TO_UNICODE ('<'),
+  utf32 ('<'),
 } ;
 
 //--- Unicode string for '$<<$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3C__3C_ = {
-  TO_UNICODE ('<'),
-  TO_UNICODE ('<'),
+  utf32 ('<'),
+  utf32 ('<'),
 } ;
 
 //--- Unicode string for '$<<=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3C__3C__3D_ = {
-  TO_UNICODE ('<'),
-  TO_UNICODE ('<'),
-  TO_UNICODE ('='),
+  utf32 ('<'),
+  utf32 ('<'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3D_ = {
-  TO_UNICODE ('='),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$==$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3D__3D_ = {
-  TO_UNICODE ('='),
-  TO_UNICODE ('='),
+  utf32 ('='),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$>$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3E_ = {
-  TO_UNICODE ('>'),
+  utf32 ('>'),
 } ;
 
 //--- Unicode string for '$>>$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3E__3E_ = {
-  TO_UNICODE ('>'),
-  TO_UNICODE ('>'),
+  utf32 ('>'),
+  utf32 ('>'),
 } ;
 
 //--- Unicode string for '$>>=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__3E__3E__3D_ = {
-  TO_UNICODE ('>'),
-  TO_UNICODE ('>'),
-  TO_UNICODE ('='),
+  utf32 ('>'),
+  utf32 ('>'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$[$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5B_ = {
-  TO_UNICODE ('['),
+  utf32 ('['),
 } ;
 
 //--- Unicode string for '$\\\"$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5C__22_ = {
-  TO_UNICODE ('\\'),
-  TO_UNICODE ('\"'),
+  utf32 ('\\'),
+  utf32 ('\"'),
 } ;
 
 //--- Unicode string for '$]$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5D_ = {
-  TO_UNICODE (']'),
+  utf32 (']'),
 } ;
 
 //--- Unicode string for '$]!$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5D__21_ = {
-  TO_UNICODE (']'),
-  TO_UNICODE ('!'),
+  utf32 (']'),
+  utf32 ('!'),
 } ;
 
 //--- Unicode string for '$^$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5E_ = {
-  TO_UNICODE ('^'),
+  utf32 ('^'),
 } ;
 
 //--- Unicode string for '$^=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5E__3D_ = {
-  TO_UNICODE ('^'),
-  TO_UNICODE ('='),
+  utf32 ('^'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$_$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__5F_ = {
-  TO_UNICODE ('_'),
+  utf32 ('_'),
 } ;
 
 //--- Unicode string for '$addressof$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_addressof = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('d'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('f'),
+  utf32 ('a'),
+  utf32 ('d'),
+  utf32 ('d'),
+  utf32 ('r'),
+  utf32 ('e'),
+  utf32 ('s'),
+  utf32 ('s'),
+  utf32 ('o'),
+  utf32 ('f'),
 } ;
 
 //--- Unicode string for '$assert$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_assert = {
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
+  utf32 ('a'),
+  utf32 ('s'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$boot$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_boot = {
-  TO_UNICODE ('b'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
+  utf32 ('b'),
+  utf32 ('o'),
+  utf32 ('o'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$case$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_case = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
+  utf32 ('c'),
+  utf32 ('a'),
+  utf32 ('s'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$compiletime$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_compiletime = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('e'),
+  utf32 ('c'),
+  utf32 ('o'),
+  utf32 ('m'),
+  utf32 ('p'),
+  utf32 ('i'),
+  utf32 ('l'),
+  utf32 ('e'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('m'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$convert$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_convert = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
+  utf32 ('c'),
+  utf32 ('o'),
+  utf32 ('n'),
+  utf32 ('v'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$ctAssert$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_ctAssert = {
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('A'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
+  utf32 ('c'),
+  utf32 ('t'),
+  utf32 ('A'),
+  utf32 ('s'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$driver$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_driver = {
-  TO_UNICODE ('d'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
+  utf32 ('d'),
+  utf32 ('r'),
+  utf32 ('i'),
+  utf32 ('v'),
+  utf32 ('e'),
+  utf32 ('r'),
 } ;
 
 //--- Unicode string for '$else$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_else = {
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
+  utf32 ('e'),
+  utf32 ('l'),
+  utf32 ('s'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$enum$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_enum = {
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('m'),
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('u'),
+  utf32 ('m'),
 } ;
 
 //--- Unicode string for '$event$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_event = {
-  TO_UNICODE ('e'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
+  utf32 ('e'),
+  utf32 ('v'),
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$extend$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_extend = {
-  TO_UNICODE ('e'),
-  TO_UNICODE ('x'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('d'),
+  utf32 ('e'),
+  utf32 ('x'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('n'),
+  utf32 ('d'),
 } ;
 
 //--- Unicode string for '$extern$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_extern = {
-  TO_UNICODE ('e'),
-  TO_UNICODE ('x'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('n'),
+  utf32 ('e'),
+  utf32 ('x'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('n'),
 } ;
 
 //--- Unicode string for '$for$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_for = {
-  TO_UNICODE ('f'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
+  utf32 ('f'),
+  utf32 ('o'),
+  utf32 ('r'),
 } ;
 
 //--- Unicode string for '$func$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_func = {
-  TO_UNICODE ('f'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
+  utf32 ('f'),
+  utf32 ('u'),
+  utf32 ('n'),
+  utf32 ('c'),
 } ;
 
 //--- Unicode string for '$guard$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_guard = {
-  TO_UNICODE ('g'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('d'),
+  utf32 ('g'),
+  utf32 ('u'),
+  utf32 ('a'),
+  utf32 ('r'),
+  utf32 ('d'),
 } ;
 
 //--- Unicode string for '$if$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_if = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('f'),
+  utf32 ('i'),
+  utf32 ('f'),
 } ;
 
 //--- Unicode string for '$import$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_import = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
+  utf32 ('i'),
+  utf32 ('m'),
+  utf32 ('p'),
+  utf32 ('o'),
+  utf32 ('r'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$in$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_in = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
+  utf32 ('i'),
+  utf32 ('n'),
 } ;
 
 //--- Unicode string for '$interrupt$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_interrupt = {
-  TO_UNICODE ('i'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('t'),
+  utf32 ('i'),
+  utf32 ('n'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('r'),
+  utf32 ('u'),
+  utf32 ('p'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$let$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_let = {
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
+  utf32 ('l'),
+  utf32 ('e'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$llvm$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_llvm = {
-  TO_UNICODE ('l'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('m'),
+  utf32 ('l'),
+  utf32 ('l'),
+  utf32 ('v'),
+  utf32 ('m'),
 } ;
 
 //--- Unicode string for '$no$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_no = {
-  TO_UNICODE ('n'),
-  TO_UNICODE ('o'),
+  utf32 ('n'),
+  utf32 ('o'),
 } ;
 
 //--- Unicode string for '$not$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_not = {
-  TO_UNICODE ('n'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('t'),
+  utf32 ('n'),
+  utf32 ('o'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$opaque$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_opaque = {
-  TO_UNICODE ('o'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('q'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('e'),
+  utf32 ('o'),
+  utf32 ('p'),
+  utf32 ('a'),
+  utf32 ('q'),
+  utf32 ('u'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$option$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_option = {
-  TO_UNICODE ('o'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
+  utf32 ('o'),
+  utf32 ('p'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('o'),
+  utf32 ('n'),
 } ;
 
 //--- Unicode string for '$panic$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_panic = {
-  TO_UNICODE ('p'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('c'),
+  utf32 ('p'),
+  utf32 ('a'),
+  utf32 ('n'),
+  utf32 ('i'),
+  utf32 ('c'),
 } ;
 
 //--- Unicode string for '$primitive$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_primitive = {
-  TO_UNICODE ('p'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('m'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('e'),
+  utf32 ('p'),
+  utf32 ('r'),
+  utf32 ('i'),
+  utf32 ('m'),
+  utf32 ('i'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('v'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$public$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_public = {
-  TO_UNICODE ('p'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('b'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('c'),
+  utf32 ('p'),
+  utf32 ('u'),
+  utf32 ('b'),
+  utf32 ('l'),
+  utf32 ('i'),
+  utf32 ('c'),
 } ;
 
 //--- Unicode string for '$registers$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_registers = {
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('s'),
+  utf32 ('r'),
+  utf32 ('e'),
+  utf32 ('g'),
+  utf32 ('i'),
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('s'),
 } ;
 
 //--- Unicode string for '$required$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_required = {
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('q'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('d'),
+  utf32 ('r'),
+  utf32 ('e'),
+  utf32 ('q'),
+  utf32 ('u'),
+  utf32 ('i'),
+  utf32 ('r'),
+  utf32 ('e'),
+  utf32 ('d'),
 } ;
 
 //--- Unicode string for '$safe$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_safe = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('f'),
-  TO_UNICODE ('e'),
+  utf32 ('s'),
+  utf32 ('a'),
+  utf32 ('f'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$section$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_section = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('n'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('c'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('o'),
+  utf32 ('n'),
 } ;
 
 //--- Unicode string for '$self$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_self = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('f'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('l'),
+  utf32 ('f'),
 } ;
 
 //--- Unicode string for '$service$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_service = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('v'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('e'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('v'),
+  utf32 ('i'),
+  utf32 ('c'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$sizeof$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_sizeof = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('z'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('o'),
-  TO_UNICODE ('f'),
+  utf32 ('s'),
+  utf32 ('i'),
+  utf32 ('z'),
+  utf32 ('e'),
+  utf32 ('o'),
+  utf32 ('f'),
 } ;
 
 //--- Unicode string for '$startup$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_startup = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('p'),
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('r'),
+  utf32 ('t'),
+  utf32 ('u'),
+  utf32 ('p'),
 } ;
 
 //--- Unicode string for '$staticArray$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_staticArray = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('A'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('y'),
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('c'),
+  utf32 ('A'),
+  utf32 ('r'),
+  utf32 ('r'),
+  utf32 ('a'),
+  utf32 ('y'),
 } ;
 
 //--- Unicode string for '$struct$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_struct = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('t'),
+  utf32 ('s'),
+  utf32 ('t'),
+  utf32 ('r'),
+  utf32 ('u'),
+  utf32 ('c'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$switch$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_switch = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('w'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('h'),
+  utf32 ('s'),
+  utf32 ('w'),
+  utf32 ('i'),
+  utf32 ('t'),
+  utf32 ('c'),
+  utf32 ('h'),
 } ;
 
 //--- Unicode string for '$sync$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_sync = {
-  TO_UNICODE ('s'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
+  utf32 ('s'),
+  utf32 ('y'),
+  utf32 ('n'),
+  utf32 ('c'),
 } ;
 
 //--- Unicode string for '$target$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_target = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('g'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('t'),
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('r'),
+  utf32 ('g'),
+  utf32 ('e'),
+  utf32 ('t'),
 } ;
 
 //--- Unicode string for '$task$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_task = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('k'),
+  utf32 ('t'),
+  utf32 ('a'),
+  utf32 ('s'),
+  utf32 ('k'),
 } ;
 
 //--- Unicode string for '$truncate$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_truncate = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('c'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('e'),
+  utf32 ('t'),
+  utf32 ('r'),
+  utf32 ('u'),
+  utf32 ('n'),
+  utf32 ('c'),
+  utf32 ('a'),
+  utf32 ('t'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$typealias$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_typealias = {
-  TO_UNICODE ('t'),
-  TO_UNICODE ('y'),
-  TO_UNICODE ('p'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('s'),
+  utf32 ('t'),
+  utf32 ('y'),
+  utf32 ('p'),
+  utf32 ('e'),
+  utf32 ('a'),
+  utf32 ('l'),
+  utf32 ('i'),
+  utf32 ('a'),
+  utf32 ('s'),
 } ;
 
 //--- Unicode string for '$until$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_until = {
-  TO_UNICODE ('u'),
-  TO_UNICODE ('n'),
-  TO_UNICODE ('t'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('l'),
+  utf32 ('u'),
+  utf32 ('n'),
+  utf32 ('t'),
+  utf32 ('i'),
+  utf32 ('l'),
 } ;
 
 //--- Unicode string for '$user$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_user = {
-  TO_UNICODE ('u'),
-  TO_UNICODE ('s'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
+  utf32 ('u'),
+  utf32 ('s'),
+  utf32 ('e'),
+  utf32 ('r'),
 } ;
 
 //--- Unicode string for '$var$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_var = {
-  TO_UNICODE ('v'),
-  TO_UNICODE ('a'),
-  TO_UNICODE ('r'),
+  utf32 ('v'),
+  utf32 ('a'),
+  utf32 ('r'),
 } ;
 
 //--- Unicode string for '$when$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_when = {
-  TO_UNICODE ('w'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('n'),
+  utf32 ('w'),
+  utf32 ('h'),
+  utf32 ('e'),
+  utf32 ('n'),
 } ;
 
 //--- Unicode string for '$where$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_where = {
-  TO_UNICODE ('w'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('r'),
-  TO_UNICODE ('e'),
+  utf32 ('w'),
+  utf32 ('h'),
+  utf32 ('e'),
+  utf32 ('r'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$while$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_while = {
-  TO_UNICODE ('w'),
-  TO_UNICODE ('h'),
-  TO_UNICODE ('i'),
-  TO_UNICODE ('l'),
-  TO_UNICODE ('e'),
+  utf32 ('w'),
+  utf32 ('h'),
+  utf32 ('i'),
+  utf32 ('l'),
+  utf32 ('e'),
 } ;
 
 //--- Unicode string for '$yes$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique_yes = {
-  TO_UNICODE ('y'),
-  TO_UNICODE ('e'),
-  TO_UNICODE ('s'),
+  utf32 ('y'),
+  utf32 ('e'),
+  utf32 ('s'),
 } ;
 
 //--- Unicode string for '${$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7B_ = {
-  TO_UNICODE ('{'),
+  utf32 ('{'),
 } ;
 
 //--- Unicode string for '$|$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7C_ = {
-  TO_UNICODE ('|'),
+  utf32 ('|'),
 } ;
 
 //--- Unicode string for '$|=$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7C__3D_ = {
-  TO_UNICODE ('|'),
-  TO_UNICODE ('='),
+  utf32 ('|'),
+  utf32 ('='),
 } ;
 
 //--- Unicode string for '$||$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7C__7C_ = {
-  TO_UNICODE ('|'),
-  TO_UNICODE ('|'),
+  utf32 ('|'),
+  utf32 ('|'),
 } ;
 
 //--- Unicode string for '$}$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7D_ = {
-  TO_UNICODE ('}'),
+  utf32 ('}'),
 } ;
 
 //--- Unicode string for '$~$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__7E_ = {
-  TO_UNICODE ('~'),
+  utf32 ('~'),
 } ;
 
 //--- Unicode string for '$\xE2""\x89""\xA0""$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2260_ = {
-  TO_UNICODE (8800),
+  utf32 (8800),
 } ;
 
 //--- Unicode string for '$\xE2""\x89""\xA4""$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2264_ = {
-  TO_UNICODE (8804),
+  utf32 (8804),
 } ;
 
 //--- Unicode string for '$\xE2""\x89""\xA5""$'
 static const std::initializer_list <utf32> kUnicodeString_omnibus_5F_lexique__2265_ = {
-  TO_UNICODE (8805),
+  utf32 (8805),
 } ;
 
 //--------------------------------------------------------------------------------------------------
@@ -1795,614 +1795,614 @@ String Lexique_omnibus_5F_lexique::getCurrentTokenString (const cToken * inToken
       s.appendCString ("$$") ;
       break ;
     case kToken_identifier:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("identifier") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__40_attribute:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("@attribute") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_integer:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("integer") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_bigInteger.decimalString ()) ;
       break ;
     case kToken__22_string_22_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("\"string\"") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_comment:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("comment") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_commentMark:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("commentMark") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3F_selector_3A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("\?selector:") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__3F__21_selector_3A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("\?!selector:") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21_selector_3A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!selector:") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__21__3F_selector_3A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!\?selector:") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__24_type:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("$type") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken__A9_group:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("©group") ;
-      s.appendChar (TO_UNICODE ('$')) ;
-      s.appendChar (TO_UNICODE (' ')) ;
+      s.appendChar (utf32 ('$')) ;
+      s.appendChar (utf32 (' ')) ;
       s.appendStringAsCLiteralStringConstant (ptr->mLexicalAttribute_tokenString) ;
       break ;
     case kToken_addressof:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("addressof") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_assert:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("assert") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_boot:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("boot") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_case:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("case") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_convert:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("convert") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_ctAssert:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("ctAssert") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_compiletime:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("compiletime") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_driver:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("driver") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_else:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("else") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_enum:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("enum") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_event:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("event") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_extend:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("extend") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_extern:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("extern") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_for:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("for") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_func:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("func") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_guard:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("guard") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_if:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("if") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_import:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("import") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_in:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("in") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_interrupt:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("interrupt") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_let:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("let") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_llvm:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("llvm") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_no:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("no") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_not:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("not") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_opaque:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("opaque") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_option:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("option") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_panic:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("panic") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_primitive:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("primitive") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_public:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("public") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_registers:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("registers") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_required:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("required") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_safe:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("safe") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_section:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("section") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_self:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("self") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_service:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("service") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_sizeof:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("sizeof") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_startup:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("startup") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_struct:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("struct") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_staticArray:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("staticArray") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_switch:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("switch") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_sync:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("sync") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_target:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("target") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_task:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("task") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_truncate:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("truncate") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_typealias:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("typealias") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_var:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("var") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_until:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("until") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_user:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("user") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_where:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("where") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_when:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("when") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_while:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("while") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken_yes:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("yes") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (":") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (".") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (",") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7B_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("{") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("}") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__28_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("(") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__29_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (")") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5F_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("_") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3D__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("==") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2260_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("≠") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("<") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2264_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("≤") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (">") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2265_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("≥") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5B_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("[") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("]") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5D__21_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("]!") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3C__3C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("<<") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3E__3E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (">>") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("~") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7C__7C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("||") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__26__26_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("&&") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2D__3E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("->") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2E__2E__3C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("..<") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2E__2E__2E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("...") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7C_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("|") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__7C__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("|=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__26_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("&") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__26__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("&=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5E_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("^") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__5E__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("^=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2B_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("+") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2B__25_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("+%") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2B__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("+=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2B__25__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("+%=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("-") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2D__25_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("-%") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2D__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("-=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2D__25__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("-%=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2A_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("*") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2A__25_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("*%") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2A__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("*=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2A__25__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("*%=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2F_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("/") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__21__2F_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!/") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__2F__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("/=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__21__2F__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!/=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__25_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("%") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__21__25_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!%") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__25__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("%=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__21__25__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("!%=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3C__3C__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString ("<<=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     case kToken__3E__3E__3D_:
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       s.appendCString (">>=") ;
-      s.appendChar (TO_UNICODE ('$')) ;
+      s.appendChar (utf32 ('$')) ;
       break ;
     default:
       break ;
@@ -2436,10 +2436,10 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
   token.mLexicalAttribute_tokenString.removeAllKeepingCapacity () ;
   mTokenStartLocation = mCurrentLocation ;
   try{
-    if (testForCharWithFunction (isUnicodeLetter)) {
+    if (testForChar_isUnicodeLetter ()) {
       do {
         ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-        if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32Char (TO_UNICODE ('_')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+        if (testForChar_isUnicodeLetter () || testForInputUTF32Char (utf32 ('_')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
         }else{
           loop = false ;
         }
@@ -2452,11 +2452,11 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
         token.mTokenCode = kToken_identifier ;
       }
       enterToken (token) ;
-    }else if (testForInputUTF32Char (TO_UNICODE ('@'))) {
-      if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+    }else if (testForInputUTF32Char (utf32 ('@'))) {
+      if (testForChar_isUnicodeLetter () || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('.'))) {
+          if (testForChar_isUnicodeLetter () || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('.'))) {
           }else{
             loop = false ;
           }
@@ -2469,18 +2469,18 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       enterToken (token) ;
     }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__30_b, true)) {
       do {
-        if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+        if (testForInputUTF32Char (utf32 ('_'))) {
         }else{
           loop = false ;
         }
       }while (loop) ;
       loop = true ;
-      if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('1'))) {
+      if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('1'))) {
         ::scanner_routine_enterBinaryDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
         do {
-          if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('1'))) {
+          if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('1'))) {
             ::scanner_routine_enterBinaryDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
-          }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+          }else if (testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
@@ -2493,18 +2493,18 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       }
     }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__30_x, true)) {
       do {
-        if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+        if (testForInputUTF32Char (utf32 ('_'))) {
         }else{
           loop = false ;
         }
       }while (loop) ;
       loop = true ;
-      if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
+      if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32CharRange (utf32 ('a'), utf32 ('f')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('F'))) {
         ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
         do {
-          if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('f')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('F'))) {
+          if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32CharRange (utf32 ('a'), utf32 ('f')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('F'))) {
             ::scanner_routine_enterHexDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
-          }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+          }else if (testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
@@ -2515,12 +2515,12 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       }else{
         lexicalError (gLexicalMessage_omnibus_5F_lexique_hexDigitError COMMA_LINE_AND_SOURCE_FILE) ;
       }
-    }else if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+    }else if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
       ::scanner_routine_enterDecimalDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
       do {
-        if (testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+        if (testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
           ::scanner_routine_enterDecimalDigitIntoBigInt (*this, previousChar (), token.mLexicalAttribute_bigInteger, gLexicalMessage_omnibus_5F_lexique_internalError) ;
-        }else if (testForInputUTF32Char (TO_UNICODE ('_'))) {
+        }else if (testForInputUTF32Char (utf32 ('_'))) {
         }else{
           loop = false ;
         }
@@ -2528,18 +2528,18 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       loop = true ;
       token.mTokenCode = kToken_integer ;
       enterToken (token) ;
-    }else if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
+    }else if (testForInputUTF32Char (utf32 ('\"'))) {
       do {
         if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__5C__22_, true)) {
-          ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, TO_UNICODE ('\"')) ;
-        }else if (testForInputUTF32Char (TO_UNICODE (' ')) || testForInputUTF32Char (TO_UNICODE ('!')) || testForInputUTF32CharRange (TO_UNICODE ('#'), TO_UNICODE (65533))) {
+          ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, utf32 ('\"')) ;
+        }else if (testForInputUTF32Char (utf32 (' ')) || testForInputUTF32Char (utf32 ('!')) || testForInputUTF32CharRange (utf32 ('#'), utf32 (65533))) {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
         }else{
           loop = false ;
         }
       }while (loop) ;
       loop = true ;
-      if (testForInputUTF32Char (TO_UNICODE ('\"'))) {
+      if (testForInputUTF32Char (utf32 ('\"'))) {
         token.mTokenCode = kToken__22_string_22_ ;
         enterToken (token) ;
       }else{
@@ -2547,7 +2547,7 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       }
     }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__2F__2F__21_, true)) {
       do {
-        if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
+        if (testForInputUTF32CharRange (utf32 (1), utf32 ('\t')) || testForInputUTF32Char (utf32 ('\v')) || testForInputUTF32Char (utf32 ('\f')) || testForInputUTF32CharRange (utf32 (14), utf32 (65533))) {
         }else{
           loop = false ;
         }
@@ -2556,7 +2556,7 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       enterDroppedTerminal (kToken_commentMark) ;
     }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__2F__2F_, true)) {
       do {
-        if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE ('\t')) || testForInputUTF32Char (TO_UNICODE ('\v')) || testForInputUTF32Char (TO_UNICODE ('\f')) || testForInputUTF32CharRange (TO_UNICODE (14), TO_UNICODE (65533))) {
+        if (testForInputUTF32CharRange (utf32 (1), utf32 ('\t')) || testForInputUTF32Char (utf32 ('\v')) || testForInputUTF32Char (utf32 ('\f')) || testForInputUTF32CharRange (utf32 (14), utf32 (65533))) {
         }else{
           loop = false ;
         }
@@ -2725,24 +2725,24 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
     }else if (testForInputUTF32String (kUnicodeString_omnibus_5F_lexique__25_, true)) {
       token.mTokenCode = kToken__25_ ;
       enterToken (token) ;
-    }else if (testForInputUTF32Char (TO_UNICODE ('\?'))) {
+    }else if (testForInputUTF32Char (utf32 ('\?'))) {
       const LocationInSource currentLocationForTag_onlyInterrogationMark = mCurrentLocation ;
       const LocationInSource endLocationForTag_onlyInterrogationMark = mTokenEndLocation ;
       const utf32 currentCharForTag_onlyInterrogationMark = mCurrentChar ;
-      if (testForInputUTF32Char (TO_UNICODE ('!'))) {
+      if (testForInputUTF32Char (utf32 ('!'))) {
         const LocationInSource currentLocationForTag_onlyExclamationInterrogationMark = mCurrentLocation ;
         const LocationInSource endLocationForTag_onlyExclamationInterrogationMark = mTokenEndLocation ;
         const utf32 currentCharForTag_onlyExclamationInterrogationMark = mCurrentChar ;
-        if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+        if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
           do {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-            if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+            if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
             }else{
               loop = false ;
             }
           }while (loop) ;
           loop = true ;
-          if (testForInputUTF32Char (TO_UNICODE (':'))) {
+          if (testForInputUTF32Char (utf32 (':'))) {
             token.mTokenCode = kToken__3F__21_selector_3A_ ;
             enterToken (token) ;
           }else{
@@ -2757,16 +2757,16 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
           token.mTokenCode = kToken__3F__21_selector_3A_ ;
           enterToken (token) ;
         }
-      }else if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+      }else if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+          if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
         }while (loop) ;
         loop = true ;
-        if (testForInputUTF32Char (TO_UNICODE (':'))) {
+        if (testForInputUTF32Char (utf32 (':'))) {
           token.mTokenCode = kToken__3F_selector_3A_ ;
           enterToken (token) ;
         }else{
@@ -2781,24 +2781,24 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
         token.mTokenCode = kToken__3F_selector_3A_ ;
         enterToken (token) ;
       }
-    }else if (testForInputUTF32Char (TO_UNICODE ('!'))) {
+    }else if (testForInputUTF32Char (utf32 ('!'))) {
       const LocationInSource currentLocationForTag_onlyExclamationMark = mCurrentLocation ;
       const LocationInSource endLocationForTag_onlyExclamationMark = mTokenEndLocation ;
       const utf32 currentCharForTag_onlyExclamationMark = mCurrentChar ;
-      if (testForInputUTF32Char (TO_UNICODE ('\?'))) {
+      if (testForInputUTF32Char (utf32 ('\?'))) {
         const LocationInSource currentLocationForTag_onlyInterrogationExclamationMark = mCurrentLocation ;
         const LocationInSource endLocationForTag_onlyInterrogationExclamationMark = mTokenEndLocation ;
         const utf32 currentCharForTag_onlyInterrogationExclamationMark = mCurrentChar ;
-        if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+        if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
           do {
             ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-            if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+            if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
             }else{
               loop = false ;
             }
           }while (loop) ;
           loop = true ;
-          if (testForInputUTF32Char (TO_UNICODE (':'))) {
+          if (testForInputUTF32Char (utf32 (':'))) {
             token.mTokenCode = kToken__21__3F_selector_3A_ ;
             enterToken (token) ;
           }else{
@@ -2813,16 +2813,16 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
           token.mTokenCode = kToken__21__3F_selector_3A_ ;
           enterToken (token) ;
         }
-      }else if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9'))) {
+      }else if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9'))) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          if (testForInputUTF32CharRange (TO_UNICODE ('a'), TO_UNICODE ('z')) || testForInputUTF32CharRange (TO_UNICODE ('A'), TO_UNICODE ('Z')) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+          if (testForInputUTF32CharRange (utf32 ('a'), utf32 ('z')) || testForInputUTF32CharRange (utf32 ('A'), utf32 ('Z')) || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
         }while (loop) ;
         loop = true ;
-        if (testForInputUTF32Char (TO_UNICODE (':'))) {
+        if (testForInputUTF32Char (utf32 (':'))) {
           token.mTokenCode = kToken__21_selector_3A_ ;
           enterToken (token) ;
         }else{
@@ -2837,11 +2837,11 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
         token.mTokenCode = kToken__21_selector_3A_ ;
         enterToken (token) ;
       }
-    }else if (testForInputUTF32Char (TO_UNICODE ('$'))) {
-      if (testForCharWithFunction (isUnicodeLetter)) {
+    }else if (testForInputUTF32Char (utf32 ('$'))) {
+      if (testForChar_isUnicodeLetter ()) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+          if (testForChar_isUnicodeLetter () || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
@@ -2852,11 +2852,11 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       }
       token.mTokenCode = kToken__24_type ;
       enterToken (token) ;
-    }else if (testForInputUTF32Char (TO_UNICODE (169))) {
-      if (testForCharWithFunction (isUnicodeLetter)) {
+    }else if (testForInputUTF32Char (utf32 (169))) {
+      if (testForChar_isUnicodeLetter ()) {
         do {
           ::scanner_routine_enterCharacterIntoString (*this, token.mLexicalAttribute_tokenString, previousChar ()) ;
-          if (testForCharWithFunction (isUnicodeLetter) || testForInputUTF32CharRange (TO_UNICODE ('0'), TO_UNICODE ('9')) || testForInputUTF32Char (TO_UNICODE ('_'))) {
+          if (testForChar_isUnicodeLetter () || testForInputUTF32CharRange (utf32 ('0'), utf32 ('9')) || testForInputUTF32Char (utf32 ('_'))) {
           }else{
             loop = false ;
           }
@@ -2867,8 +2867,8 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
       }
       token.mTokenCode = kToken__A9_group ;
       enterToken (token) ;
-    }else if (testForInputUTF32CharRange (TO_UNICODE (1), TO_UNICODE (' '))) {
-    }else if (testForInputUTF32Char (TO_UNICODE ('\0'))) { // End of source text ? 
+    }else if (testForInputUTF32CharRange (utf32 (1), utf32 (' '))) {
+    }else if (testForInputUTF32Char (utf32 ('\0'))) { // End of source text ? 
       token.mTokenCode = kToken_ ; // Empty string code
     }else{ // Unknown input character
       unknownCharacterLexicalError (LINE_AND_SOURCE_FILE) ;
@@ -2888,10 +2888,10 @@ void Lexique_omnibus_5F_lexique::internalParseLexicalToken (cTokenFor_omnibus_5F
 bool Lexique_omnibus_5F_lexique::parseLexicalToken (void) {
   cTokenFor_omnibus_5F_lexique token ;
   token.mTokenCode = -1 ;
-  while ((token.mTokenCode < 0) && (UNICODE_VALUE (mCurrentChar) != '\0')) {
+  while ((token.mTokenCode < 0) && (mCurrentChar.u32 () != '\0')) {
     internalParseLexicalToken (token) ;
   }
-  if (UNICODE_VALUE (mCurrentChar) == '\0') {
+  if (mCurrentChar.u32 () == '\0') {
     token.mTokenCode = 0 ;
     enterToken (token) ;
   }
@@ -13742,6 +13742,607 @@ void cParser_omnibus_5F_syntax::rule_omnibus_5F_syntax_llvm_5F_instruction_i143_
     }
     if (select_omnibus_5F_syntax_140 (inCompiler) == 2) {
       inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2B_ COMMA_SOURCE_FILE ("llvm-instructions.galgas", 93)) ;
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+}
+
+
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_ (const GGS_string constinArgument_inKey,
+                                                                                                                             Lexique_omnibus_5F_lexique * inCompiler) {
+  GGS_lstring var_key_3267 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  GalgasBool test_0 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_0) {
+    test_0 = GGS_bool (ComparisonKind::notEqual, var_key_3267.readProperty_string ().objectCompare (constinArgument_inKey)).boolEnum () ;
+    if (GalgasBool::boolTrue == test_0) {
+      GenericArray <FixItDescription> fixItArray1 ;
+      appendFixItActions (fixItArray1, EnumFixItKind::fixItReplace, constinArgument_inKey) ;
+      inCompiler->emitSemanticError (var_key_3267.readProperty_location (), GGS_string ("invalid key (found '").add_operation (var_key_3267.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GGS_string ("', required '"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (constinArgument_inKey, inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)).add_operation (GGS_string ("'"), inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 84)), fixItArray1  COMMA_SOURCE_FILE ("configuration.galgas", 84)) ;
+    }
+  }
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_parse (Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 82)) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__3A_ COMMA_SOURCE_FILE ("configuration.galgas", 86)) ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_ (GGS__32_lstringlist & outArgument_outPythonUtilityToolList,
+                                                                                                                                          Lexique_omnibus_5F_lexique * inCompiler) {
+  outArgument_outPythonUtilityToolList.drop () ; // Release 'out' argument
+  nt_configuration_5F_key_ (GGS_string ("PYTHON_UTILITIES"), inCompiler) ;
+  GGS__32_lstringlist temp_0 = GGS__32_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 93)) ;
+  outArgument_outPythonUtilityToolList = temp_0 ;
+  bool repeatFlag_1 = true ;
+  while (repeatFlag_1) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
+      GGS_lstring var_relativePath_3749 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      GGS_lstring var_destinationFile_3795 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+      outArgument_outPythonUtilityToolList.addAssignOperation (var_relativePath_3749, var_destinationFile_3795  COMMA_SOURCE_FILE ("configuration.galgas", 99)) ;
+    }else{
+      repeatFlag_1 = false ;
+    }
+  }
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_parse (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+  inCompiler->resetTemplateString () ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_0 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 96)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 97)) ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 98)) ;
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_ (GGS_ast & ioArgument_ioAST,
+                                                                                                                                         GGS_lstringlist & outArgument_outImportedFileList,
+                                                                                                                                         GGS_location & outArgument_outEndOfSourceFile,
+                                                                                                                                         Lexique_omnibus_5F_lexique * inCompiler) {
+  outArgument_outImportedFileList.drop () ; // Release 'out' argument
+  outArgument_outEndOfSourceFile.drop () ; // Release 'out' argument
+  GGS_location var_loc_4181 = GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 110)) ;
+  GGS__32_lstringlist var_python_5F_utilityToolList_4238 ;
+  nt_python_5F_utility_5F_tool_5F_list_ (var_python_5F_utilityToolList_4238, inCompiler) ;
+  nt_configuration_5F_key_ (GGS_string ("PYTHON_BUILD"), inCompiler) ;
+  GGS_lstring var_python_5F_build_4321 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  nt_configuration_5F_key_ (GGS_string ("LINKER_SCRIPT"), inCompiler) ;
+  GGS_lstring var_linkerScript_4395 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  nt_configuration_5F_key_ (GGS_string ("PANIC_CODE_TYPE_NAME"), inCompiler) ;
+  GGS_lstring var_panicCodeTypeName_4474 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  nt_configuration_5F_key_ (GGS_string ("PANIC_LINE_TYPE_NAME"), inCompiler) ;
+  GGS_lstring var_panicLineTypeName_4559 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  nt_configuration_5F_key_ (GGS_string ("POINTER_BIT_COUNT"), inCompiler) ;
+  GGS_lbigint var_pointerSize_4641 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  nt_configuration_5F_key_ (GGS_string ("DYNAMIC_ARRAY"), inCompiler) ;
+  GGS_bool var_handleDynamicArray_4708 ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+    var_handleDynamicArray_4708 = GGS_bool (true) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+    var_handleDynamicArray_4708 = GGS_bool (false) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_ (GGS_string ("SYSTEM_STACK_SIZE"), inCompiler) ;
+  GGS_lbigint var_systemStackSize_4905 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  nt_configuration_5F_key_ (GGS_string ("NOP"), inCompiler) ;
+  GGS_lstring var_nopInstructionStringInLLVM_4972 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  nt_configuration_5F_key_ (GGS_string ("BIT_BAND"), inCompiler) ;
+  GGS_lbigint var_bitbandRegisterBaseAddress_5052 ;
+  GGS_lbigint var_bitbandRegisterEndAddress_5096 ;
+  GGS_lbigint var_bitbandRegisterRelocationAddress_5139 ;
+  GGS_lbigint var_bitbandRegisterOffsetMultiplier_5189 ;
+  GGS_lbigint var_bitbandRegisterBitMultiplier_5238 ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+    var_bitbandRegisterBaseAddress_5052 = GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 143)), inCompiler COMMA_HERE) ;
+    var_bitbandRegisterEndAddress_5096 = GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 144)), inCompiler COMMA_HERE) ;
+    var_bitbandRegisterRelocationAddress_5139 = GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 145)), inCompiler COMMA_HERE) ;
+    var_bitbandRegisterOffsetMultiplier_5189 = GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 146)), inCompiler COMMA_HERE) ;
+    var_bitbandRegisterBitMultiplier_5238 = GGS_lbigint::init_21__21_ (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 147)), inCompiler COMMA_HERE) ;
+  } break ;
+  case 2: {
+    var_bitbandRegisterBaseAddress_5052 = inCompiler->synthetizedAttribute_bigInteger () ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    var_bitbandRegisterEndAddress_5096 = inCompiler->synthetizedAttribute_bigInteger () ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    var_bitbandRegisterRelocationAddress_5139 = inCompiler->synthetizedAttribute_bigInteger () ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    var_bitbandRegisterOffsetMultiplier_5189 = inCompiler->synthetizedAttribute_bigInteger () ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    var_bitbandRegisterBitMultiplier_5238 = inCompiler->synthetizedAttribute_bigInteger () ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_HANDLER"), inCompiler) ;
+  GGS_lstring var_serviceHandler_5851 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_SYSTEM_STACK_SIZE"), inCompiler) ;
+  GGS_lbigint var_servicePushedRegisterByteSize_5938 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_DISPATCHER_HEADER"), inCompiler) ;
+  GGS_lstring var_serviceDispatcherHeader_6041 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_DISPATCHER_ENTRY"), inCompiler) ;
+  GGS_lstring var_serviceDispatcherEntry_6137 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_ENTRY_NO_RETURNED_VALUE"), inCompiler) ;
+  GGS_lstring var_serviceEntryNoReturnedValue_6239 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  nt_configuration_5F_key_ (GGS_string ("SERVICE_ENTRY_WITH_RETURNED_VALUE"), inCompiler) ;
+  GGS_lstring var_serviceEntryReturnValue_6348 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_HANDLER"), inCompiler) ;
+  GGS_lstring var_sectionHandler_6435 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_SYSTEM_STACK_SIZE"), inCompiler) ;
+  GGS_lbigint var_sectionPushedRegisterByteSize_6522 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_DISPATCHER_HEADER"), inCompiler) ;
+  GGS_lstring var_sectionDispatcherHeader_6625 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_DISPATCHER_ENTRY"), inCompiler) ;
+  GGS_lstring var_sectionDispatcherEntry_6721 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_ENTRY_FROM_UNKNOWN_MODE"), inCompiler) ;
+  GGS_lstring var_sectionDispatcherInvocationFromAnyMode_6823 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  nt_configuration_5F_key_ (GGS_string ("SECTION_ENTRY_FROM_USER_MODE"), inCompiler) ;
+  GGS_lstring var_sectionDispatcherInvocationFromUserMode_6938 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  nt_configuration_5F_key_ (GGS_string ("INTERRUPT_HANDLER"), inCompiler) ;
+  GGS_lstring var_xtrInterruptHandler_7043 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  nt_configuration_5F_key_ (GGS_string ("INTERRUPT_USER_STACK_SIZE"), inCompiler) ;
+  GGS_lbigint var_stackedUserRegisterOnInterruptByteSize_7135 = inCompiler->synthetizedAttribute_bigInteger () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  nt_configuration_5F_key_ (GGS_string ("UNUSED_INTERRUPT"), inCompiler) ;
+  GGS_lstring var_undefinedInterruptHandler_7238 = inCompiler->synthetizedAttribute_tokenString () ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  nt_configuration_5F_key_ (GGS_string ("CPP_FILES"), inCompiler) ;
+  GGS_lstringlist temp_0 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 186)) ;
+  GGS_lstringlist var_C_5F_definitionFiles_7322 = temp_0 ;
+  bool repeatFlag_1 = true ;
+  while (repeatFlag_1) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
+      GGS_lstring var_fileRelativePath_7389 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+      var_C_5F_definitionFiles_7322.addAssignOperation (var_fileRelativePath_7389  COMMA_SOURCE_FILE ("configuration.galgas", 190)) ;
+    }else{
+      repeatFlag_1 = false ;
+    }
+  }
+  nt_configuration_5F_key_ (GGS_string ("S_FILES"), inCompiler) ;
+  GGS_lstringlist temp_2 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 193)) ;
+  GGS_lstringlist var_S_5F_definitionFiles_7515 = temp_2 ;
+  bool repeatFlag_3 = true ;
+  while (repeatFlag_3) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
+      GGS_lstring var_fileRelativePath_7582 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+      var_S_5F_definitionFiles_7515.addAssignOperation (var_fileRelativePath_7582  COMMA_SOURCE_FILE ("configuration.galgas", 197)) ;
+    }else{
+      repeatFlag_3 = false ;
+    }
+  }
+  nt_configuration_5F_key_ (GGS_string ("LL_FILES"), inCompiler) ;
+  GGS_lstringlist temp_4 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 200)) ;
+  GGS_lstringlist var_LL_5F_definitionFiles_7709 = temp_4 ;
+  bool repeatFlag_5 = true ;
+  while (repeatFlag_5) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
+      GGS_lstring var_fileRelativePath_7777 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+      var_LL_5F_definitionFiles_7709.addAssignOperation (var_fileRelativePath_7777  COMMA_SOURCE_FILE ("configuration.galgas", 204)) ;
+    }else{
+      repeatFlag_5 = false ;
+    }
+  }
+  GGS_lstringlist temp_6 = GGS_lstringlist::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 206)) ;
+  outArgument_outImportedFileList = temp_6 ;
+  nt_configuration_5F_key_ (GGS_string ("OMNIBUS_FILES"), inCompiler) ;
+  bool repeatFlag_7 = true ;
+  while (repeatFlag_7) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
+      GGS_lstring var_relativeFilePath_7962 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+      outArgument_outImportedFileList.addAssignOperation (var_relativeFilePath_7962  COMMA_SOURCE_FILE ("configuration.galgas", 211)) ;
+    }else{
+      repeatFlag_7 = false ;
+    }
+  }
+  GGS_interruptionConfigurationList var_interruptionConfigurationList_8065 ;
+  GGS_enumerationConstantList var_interruptConstantList_8100 ;
+  nt_interruptConfigList_ (var_interruptionConfigurationList_8065, var_interruptConstantList_8100, inCompiler) ;
+  GGS_uint var_ptrSize_8136 ;
+  GalgasBool test_8 = GalgasBool::boolTrue ;
+  if (GalgasBool::boolTrue == test_8) {
+    test_8 = GGS_bool (ComparisonKind::equal, var_pointerSize_4641.readProperty_bigint ().objectCompare (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 215)))).boolEnum () ;
+    if (GalgasBool::boolTrue == test_8) {
+      GenericArray <FixItDescription> fixItArray9 ;
+      inCompiler->emitSemanticError (var_pointerSize_4641.readProperty_location (), GGS_string ("zero size pointer is invalid"), fixItArray9  COMMA_SOURCE_FILE ("configuration.galgas", 216)) ;
+      var_ptrSize_8136.drop () ; // Release error dropped variable
+    }
+  }
+  if (GalgasBool::boolFalse == test_8) {
+    var_ptrSize_8136 = var_pointerSize_4641.readProperty_bigint ().getter_uint (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 218)) ;
+  }
+  GGS_targetParameters var_parameters_8314 = GGS_targetParameters::init_21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21__21_ (var_loc_4181, var_python_5F_utilityToolList_4238, var_python_5F_build_4321, var_linkerScript_4395, var_ptrSize_8136, var_handleDynamicArray_4708, var_systemStackSize_4905, var_stackedUserRegisterOnInterruptByteSize_7135, var_nopInstructionStringInLLVM_4972, var_bitbandRegisterBaseAddress_5052, var_bitbandRegisterEndAddress_5096, var_bitbandRegisterRelocationAddress_5139, var_bitbandRegisterOffsetMultiplier_5189, var_bitbandRegisterBitMultiplier_5238, var_sectionHandler_6435, var_sectionPushedRegisterByteSize_6522, var_sectionDispatcherHeader_6625, var_sectionDispatcherEntry_6721, var_sectionDispatcherInvocationFromAnyMode_6823, var_sectionDispatcherInvocationFromUserMode_6938, var_C_5F_definitionFiles_7322, var_S_5F_definitionFiles_7515, var_LL_5F_definitionFiles_7709, var_xtrInterruptHandler_7043, var_undefinedInterruptHandler_7238, var_serviceHandler_5851, var_servicePushedRegisterByteSize_5938, var_serviceDispatcherEntry_6137, var_serviceDispatcherHeader_6041, var_serviceEntryNoReturnedValue_6239, var_serviceEntryReturnValue_6348, inCompiler COMMA_HERE) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssignOperation (GGS_configurationDeclarationAST::init_21__21__21__21_ (var_panicCodeTypeName_4474, var_panicLineTypeName_4559, var_parameters_8314, var_interruptionConfigurationList_8065, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 253)) ;
+  outArgument_outEndOfSourceFile = GGS_location::class_func_here (inCompiler  COMMA_SOURCE_FILE ("configuration.galgas", 259)) ;
+  ioArgument_ioAST.mProperty_mDeclarationListAST.addAssignOperation (GGS_enumerationDeclarationAST::init_21__21_ (GGS_lstring::init_21__21_ (function_isrSlotTypeName (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 261)), var_xtrInterruptHandler_7043.readProperty_location (), inCompiler COMMA_HERE), var_interruptConstantList_8100, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("configuration.galgas", 260)) ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_parse (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_python_5F_utility_5F_tool_5F_list_parse (inCompiler) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_1 = true ;
+  while (repeatFlag_1) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+    }else{
+      repeatFlag_1 = false ;
+    }
+  }
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_2 = true ;
+  while (repeatFlag_2) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+    }else{
+      repeatFlag_2 = false ;
+    }
+  }
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_3 = true ;
+  while (repeatFlag_3) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+    }else{
+      repeatFlag_3 = false ;
+    }
+  }
+  nt_interruptConfigList_parse (inCompiler) ;
+  inCompiler->resetTemplateString () ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_python_5F_utility_5F_tool_5F_list_indexing (inCompiler) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 113)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 115)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 117)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__24_type COMMA_SOURCE_FILE ("configuration.galgas", 119)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 121)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_1 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_yes COMMA_SOURCE_FILE ("configuration.galgas", 125)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 128)) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 132)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 134)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  switch (select_omnibus_5F_target_5F_specific_5F_syntax_2 (inCompiler)) {
+  case 1: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_no COMMA_SOURCE_FILE ("configuration.galgas", 142)) ;
+  } break ;
+  case 2: {
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 149)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 150)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 151)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 152)) ;
+    inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 153)) ;
+  } break ;
+  default:
+    break ;
+  }
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 156)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 158)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 160)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 162)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 164)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 166)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 168)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 170)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 172)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 174)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 176)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 178)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 180)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 182)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 184)) ;
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_3 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 189)) ;
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_1 = true ;
+  while (repeatFlag_1) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_4 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 196)) ;
+    }else{
+      repeatFlag_1 = false ;
+    }
+  }
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_2 = true ;
+  while (repeatFlag_2) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_5 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 203)) ;
+    }else{
+      repeatFlag_2 = false ;
+    }
+  }
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_3 = true ;
+  while (repeatFlag_3) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_6 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__22_string_22_ COMMA_SOURCE_FILE ("configuration.galgas", 210)) ;
+    }else{
+      repeatFlag_3 = false ;
+    }
+  }
+  nt_interruptConfigList_indexing (inCompiler) ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_ (GGS_interruptionConfigurationList & outArgument_interruptionConfigurationList,
+                                                                                                                            GGS_enumerationConstantList & outArgument_outEnumerationConstantList,
+                                                                                                                            Lexique_omnibus_5F_lexique * inCompiler) {
+  outArgument_interruptionConfigurationList.drop () ; // Release 'out' argument
+  outArgument_outEnumerationConstantList.drop () ; // Release 'out' argument
+  GGS_interruptionConfigurationList temp_0 = GGS_interruptionConfigurationList::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 272)) ;
+  outArgument_interruptionConfigurationList = temp_0 ;
+  GGS_enumerationConstantList temp_1 = GGS_enumerationConstantList::init (inCompiler COMMA_SOURCE_FILE ("configuration.galgas", 273)) ;
+  outArgument_outEnumerationConstantList = temp_1 ;
+  nt_configuration_5F_key_ (GGS_string ("INTERRUPTS"), inCompiler) ;
+  bool repeatFlag_2 = true ;
+  while (repeatFlag_2) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
+      GGS_lstring var_interruptName_10101 = inCompiler->synthetizedAttribute_tokenString () ;
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      GGS_interruptionPanicCode var_interruptionPanicCode_10148 ;
+      switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
+      case 1: {
+        var_interruptionPanicCode_10148 = GGS_interruptionPanicCode::class_func_noCode (SOURCE_FILE ("configuration.galgas", 280)) ;
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        GGS_lbigint var_panicCode_10268 = inCompiler->synthetizedAttribute_bigInteger () ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+        var_interruptionPanicCode_10148 = GGS_interruptionPanicCode::class_func_code (var_panicCode_10268  COMMA_SOURCE_FILE ("configuration.galgas", 284)) ;
+        outArgument_outEnumerationConstantList.addAssignOperation (var_interruptName_10101, var_panicCode_10268.readProperty_bigint ()  COMMA_SOURCE_FILE ("configuration.galgas", 285)) ;
+      } break ;
+      default:
+        break ;
+      }
+      outArgument_interruptionConfigurationList.addAssignOperation (var_interruptName_10101, var_interruptionPanicCode_10148  COMMA_SOURCE_FILE ("configuration.galgas", 287)) ;
+    }else{
+      repeatFlag_2 = false ;
+    }
+  }
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_configuration_5F_key_parse (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
+      case 1: {
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+      } break ;
+      default:
+        break ;
+      }
+    }else{
+      repeatFlag_0 = false ;
+    }
+  }
+  inCompiler->resetTemplateString () ;
+}
+
+//------------------------------------------------------------------------------------------------
+
+void cParser_omnibus_5F_target_5F_specific_5F_syntax::rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_indexing (Lexique_omnibus_5F_lexique * inCompiler) {
+  nt_configuration_5F_key_indexing (inCompiler) ;
+  bool repeatFlag_0 = true ;
+  while (repeatFlag_0) {
+    if (select_omnibus_5F_target_5F_specific_5F_syntax_7 (inCompiler) == 2) {
+      inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_identifier COMMA_SOURCE_FILE ("configuration.galgas", 277)) ;
+      switch (select_omnibus_5F_target_5F_specific_5F_syntax_8 (inCompiler)) {
+      case 1: {
+      } break ;
+      case 2: {
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken__2D__3E_ COMMA_SOURCE_FILE ("configuration.galgas", 282)) ;
+        inCompiler->acceptTerminal (Lexique_omnibus_5F_lexique::kToken_integer COMMA_SOURCE_FILE ("configuration.galgas", 283)) ;
+      } break ;
+      default:
+        break ;
+      }
     }else{
       repeatFlag_0 = false ;
     }

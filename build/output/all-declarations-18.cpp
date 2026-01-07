@@ -6993,7 +6993,7 @@ static void routine_before (Compiler * inCompiler
                 if (GalgasBool::boolTrue == test_2) {
                   GGS_string var_targetName_1502 = enumerator_1399.current_mValue (HERE).getter_stringByDeletingLastPathComponent (SOURCE_FILE ("target-generation.galgas", 33)).getter_subStringFromIndex (GGS_uint (uint32_t (1U)) COMMA_SOURCE_FILE ("target-generation.galgas", 33)) ;
                   {
-                  routine_print_3F_ (GGS_string ("  ").add_operation (var_targetName_1502, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 34)).add_operation (GGS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 34)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 34)) ;
+                  routine_print_3F_ (GGS_string ("  ").add_operation (var_targetName_1502, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 34)).add_operation (GGS_char (utf32 (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 34)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 34)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 34)) ;
                   }
                 }
               }
@@ -7016,7 +7016,7 @@ static void routine_before (Compiler * inCompiler
               test_4 = GGS_bool (ComparisonKind::equal, enumerator_1933.current_mValue (HERE).getter_lastPathComponent (SOURCE_FILE ("target-generation.galgas", 42)).objectCompare (GGS_string ("+config.omnibus-target"))).boolEnum () ;
               if (GalgasBool::boolTrue == test_4) {
                 {
-                routine_print_3F_ (GGS_string ("  ").add_operation (enumerator_1933.current_mValue (HERE).getter_stringByDeletingLastPathComponent (SOURCE_FILE ("target-generation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)).add_operation (GGS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 43)) ;
+                routine_print_3F_ (GGS_string ("  ").add_operation (enumerator_1933.current_mValue (HERE).getter_stringByDeletingLastPathComponent (SOURCE_FILE ("target-generation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)).add_operation (GGS_char (utf32 (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 43)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 43)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 43)) ;
                 }
               }
             }
@@ -7035,7 +7035,7 @@ static void routine_before (Compiler * inCompiler
         while (enumerator_2304.hasCurrentObject ()) {
           GGS_string var_filePath_2337 = var_path_2166.add_operation (enumerator_2304.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 53)) ;
           {
-          routine_print_3F_ (GGS_string ("  ").add_operation (var_filePath_2337, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)).add_operation (GGS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 54)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 54)) ;
+          routine_print_3F_ (GGS_string ("  ").add_operation (var_filePath_2337, inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)).add_operation (GGS_char (utf32 (10)).getter_string (SOURCE_FILE ("target-generation.galgas", 54)), inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 54)), inCompiler  COMMA_SOURCE_FILE ("target-generation.galgas", 54)) ;
           }
           GGS_string var_dir_2405 = var_filePath_2337.getter_stringByDeletingLastPathComponent (SOURCE_FILE ("target-generation.galgas", 55)) ;
           var_dir_2405.method_makeDirectory (inCompiler COMMA_SOURCE_FILE ("target-generation.galgas", 56)) ;
@@ -7060,7 +7060,7 @@ static void routine_before (Compiler * inCompiler
         UpEnumerator_stringlist enumerator_747 (var_files_668) ;
         while (enumerator_747.hasCurrentObject ()) {
           {
-          routine_print_3F_ (GGS_string ("  ").add_operation (enumerator_747.current_mValue (HERE).getter_subStringFromIndex (GGS_uint (uint32_t (1U)) COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GGS_char (TO_UNICODE (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
+          routine_print_3F_ (GGS_string ("  ").add_operation (enumerator_747.current_mValue (HERE).getter_subStringFromIndex (GGS_uint (uint32_t (1U)) COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)).add_operation (GGS_char (utf32 (10)).getter_string (SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)), inCompiler  COMMA_SOURCE_FILE ("embedded-sample-code.galgas", 19)) ;
           }
           enumerator_747.gotoNextObject () ;
         }

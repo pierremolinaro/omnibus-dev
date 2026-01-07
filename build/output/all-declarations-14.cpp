@@ -6215,7 +6215,7 @@ void routine_buildTypeMapHTMLFile_3F__3F__3F__3F__3F__3F_sourceFile (const GGS_u
         enumerator_15775.gotoNextObject () ;
       }
       GGS_string var_tableOfTypeString_15885 = GGS_string::makeEmptyString () ;
-      GGS_char var_currentFirstLetter_15922 = GGS_char (TO_UNICODE (32)) ;
+      GGS_char var_currentFirstLetter_15922 = GGS_char (utf32 (32)) ;
       UpEnumerator_unifiedTypeMap enumerator_15966 (constinArgument_inTypeMap) ;
       while (enumerator_15966.hasCurrentObject ()) {
         GalgasBool test_2 = GalgasBool::boolTrue ;
