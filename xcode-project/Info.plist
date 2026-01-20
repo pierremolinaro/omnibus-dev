@@ -17,7 +17,7 @@
  <key>CFBundlePackageType</key>
  <string>APPL</string>
  <key>LSMinimumSystemVersion</key>
- <string>10.15</string>
+ <string>14.6</string>
  <key>CFBundleShortVersionString</key>
  <string>1.0.0</string>
  <key>NSMainNibFile</key>
@@ -41,8 +41,6 @@
       <array>
         <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus</string>
       </array>
-      <key>NSDocumentClass</key>
-      <string>OC_GGS_Document</string>
   </dict>
   <dict>
 			<key>CFBundleTypeIconFile</key>
@@ -59,8 +57,6 @@
       <array>
         <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus-import</string>
       </array>
-      <key>NSDocumentClass</key>
-      <string>OC_GGS_Document</string>
   </dict>
   <dict>
 			<key>CFBundleTypeIconFile</key>
@@ -77,8 +73,6 @@
       <array>
         <string>$(PRODUCT_BUNDLE_IDENTIFIER).omnibus-target</string>
       </array>
-      <key>NSDocumentClass</key>
-      <string>OC_GGS_Document</string>
   </dict>
 
  </array>
